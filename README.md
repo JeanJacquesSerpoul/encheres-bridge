@@ -112,7 +112,9 @@ Le client se suffit à lui-même : le moteur tourne dans le navigateur (`cli/bid
 2. compile `cli/bids.wasm` et `cli/wasm_exec.js` avec [build-wasm.sh](build-wasm.sh), car ces deux fichiers sont ignorés par git et n'existent pas dans le dépôt ;
 3. vérifie qu'aucun fichier de `cli/` ne manque, puis publie le dossier.
 
-Le site est servi sous `https://<compte>.github.io/encheres-bridge/`. Tous les chemins du client sont relatifs, ce sous-répertoire ne demande donc aucun réglage.
+Le site est servi sous **<https://jeanjacquesserpoul.github.io/encheres-bridge/>**. Tous les chemins du client sont relatifs, ce sous-répertoire ne demande donc aucun réglage.
+
+**À faire une fois**, sur un nouveau dépôt : activer Pages dans *Paramètres > Pages*, avec **Source : GitHub Actions**. Le workflow ne peut pas s'en charger — créer le site demande des droits d'administration que le `GITHUB_TOKEN` n'a pas, et l'étape `configure-pages` échoue alors sur « Resource not accessible by integration ».
 
 **Ce qu'un bon hébergeur statique apporte**, et qu'il faut vérifier ailleurs que sur Pages :
 

@@ -39,6 +39,9 @@ jobs:
         with:
           # La version vient de go.mod : une seule source de vérité.
           go-version-file: go.mod
+          # Le module n'a aucune dépendance, donc pas de go.sum : le cache
+          # n'aurait rien à restaurer et se contenterait d'avertir.
+          cache: false
 
       # Le moteur WebAssembly EST le code Go. Un test rouge signifie des
       # enchères fausses : autant ne rien publier.
@@ -65,11 +68,12 @@ jobs:
           echo "cli/ complet :"
           du -h cli/* | sort -h
 
-      # enablement: active Pages sur le dépôt si ce n'est pas déjà fait, ce qui
-      # évite d'avoir à le régler à la main dans les paramètres.
+      # Pas d'`enablement: true` ici : créer le site Pages demande des droits
+      # d'administration sur le dépôt, que le GITHUB_TOKEN du workflow n'a pas
+      # — l'étape échouait sur « Resource not accessible by integration ».
+      # Pages s'active une fois pour toutes, dans Paramètres > Pages, avec
+      # « Source : GitHub Actions ».
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:

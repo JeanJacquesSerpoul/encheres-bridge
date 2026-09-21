@@ -117,6 +117,17 @@ h1 { font-size: 1.25rem; margin: 0; }
   gap: 6px;
   cursor: pointer;
 }
+
+/* Option IA décochée — le cas courant : la pastille du serveur IA est masquée
+   et la case reste seule sur sa ligne, accrochée à la colonne de droite. Elle
+   démarrait alors bien après le « Tester » du dessus, sans rien à sa gauche
+   pour justifier ce décalage. Faute de voisine, elle prend toute la largeur et
+   se centre sous le bloc. La grille à deux colonnes reprend ses droits dès que
+   l'option est cochée, la case retrouvant sa pastille en vis-à-vis. */
+.app-version:has(#ia-health-check.hidden) .feature-toggle {
+  grid-column: 1 / -1;
+  justify-content: center;
+}
 .feature-toggle input { cursor: pointer; margin: 0; flex: none; }
 
 .dot {

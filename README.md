@@ -164,19 +164,6 @@ PORT=9415 ./build-docker.sh -r                 # publie la vérification sur un 
 
 L'image est construite en deux étapes (compilation `golang:1.26-alpine`, exécution `alpine` avec un utilisateur non root). Le client (`cli/`) est compilé dans le binaire via `//go:embed` — aucune dépendance au répertoire de travail à l'exécution ; `SERVE_CLI=false` le désactive. Un `HEALTHCHECK` interroge `/ready` toutes les 30 s (rejoue une donne de référence dans le moteur, pas seulement un ping process).
 
-### Image de production sans chaîne de build
-
-Le dossier [prod/](prod/) déploie l'application sur un serveur qui n'a **ni Go ni build Docker** : son [Dockerfile](prod/Dockerfile) ne compile rien, il empaquette un binaire Linux déjà compilé.
-
-```bash
-./build-server.sh -o linux     # produit server/bids-linux
-cp server/bids-linux prod/     # le binaire que prod/Dockerfile empaquette
-# recopier prod/ sur le serveur, puis, depuis ce dossier :
-docker compose up -d --build
-```
-
-L'image pose `SERVE_CLI=false` par défaut (API seule), mais [prod/docker-compose.yml](prod/docker-compose.yml) le remet à `true` : le déploiement de référence sert donc le client, et il suffit de retirer cette ligne pour n'exposer que `/health`, `/ready`, `/version`, `/bid` et `/bids`. Le binaire `prod/bids-linux` n'est pas versionné.
-
 ### Derrière un reverse proxy (Caddy)
 
 Le binaire sert **tout** sur son port : l'API (`/health`, `/ready`, `/version`, `/bid`, `/bids`) **et** le client embarqué à `/`, tant que `SERVE_CLI` ≠ `false`. En local, `http://localhost:9015` suffit donc. En production, Caddy n'a qu'à renvoyer un préfixe vers le conteneur — inutile de déployer une copie disque du client.
@@ -207,7 +194,7 @@ handle_path /aiproxy* {
 }
 ```
 
-- Lancer le conteneur avec `SERVE_CLI=true` (déjà le cas dans [prod/docker-compose.yml](prod/docker-compose.yml)).
+- Laisser le conteneur servir le client : c'est le comportement par défaut, seul `SERVE_CLI=false` le désactive.
 - Dans le client servi sous `https://<domaine>/bridgequizz/`, choisir **Serveur → Distant** et saisir `https://<domaine>/bridgequizz` (ou `https://<domaine>/api/bidings` si ce bloc est conservé). Les appels sont alors *same-origin* — aucun réglage CORS — et le mode comme l'URL sont mémorisés (`localStorage`).
 - Pour la reconnaissance des cartes, cocher l'option **Serveur IA de reconnaissance des cartes**, choisir **Serveur IA → Distant** et saisir `https://<domaine>/aiproxy`. Le serveur IA est facultatif : sans lui, l'option reste décochée et rien du reste ne change.
 - Le bouton **Calcul du PAR** (solveur double-mort WASM) exige l'isolation cross-origine : le serveur pose `Cross-Origin-Opener-Policy: same-origin` et `Cross-Origin-Embedder-Policy: require-corp`, `reverse_proxy` les relaie et Caddy sert en HTTPS (contexte sécurisé) — rien à ajouter. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) n'est qu'un repli pour les hébergements qui retirent ces en-têtes.
@@ -545,7 +532,6 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 | `server/` | Exécutables prêts à l'emploi (binaires non versionnés) et leur mode d'emploi |
 | `Dockerfile`, `docker-compose.yml` | Conteneurisation (build multi-étapes, healthcheck sur `/ready`) |
 | `build-docker.sh`, `build-docker.ps1` | Build de l'image avec injection de la révision Git, vérification `/ready` optionnelle |
-| `prod/` | Image de production à partir d'un binaire Linux pré-compilé, pour un serveur sans chaîne de build |
 
 ## Exemple complet
 

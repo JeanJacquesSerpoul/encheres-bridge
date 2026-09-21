@@ -9,7 +9,6 @@ docs/
 *.sh
 *.ps1
 server/
-prod/
 server_ai/
 cli/bids.wasm
 cli/wasm_exec.js

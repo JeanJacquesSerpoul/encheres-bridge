@@ -6,6 +6,45 @@
   <title>Bridge Bidding</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23245438'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
+  <!-- Styles du voile de démarrage, en ligne et non dans style.css : sur un
+       hébergement lent, la feuille est une requête de plus, et le voile doit
+       s'afficher au premier octet du HTML — pas après elle. -->
+  <style>
+    #boot-loading {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #f4f5f0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: #1d2b1f;
+    }
+    #boot-loading .boot-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 34em;
+      font-size: .95rem;
+      text-align: left;
+    }
+    #boot-loading .boot-spinner {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #d8ddd4;
+      border-top-color: #1f6f43;
+      border-radius: 50%;
+      animation: boot-spin .8s linear infinite;
+    }
+    @keyframes boot-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      #boot-loading .boot-spinner { animation: boot-pulse 1.6s ease-in-out infinite; }
+      @keyframes boot-pulse { 50% { opacity: .35; } }
+    }
+  </style>
   <!-- Le solveur double-mort (bouton « Calcul du PAR ») tourne en WebAssembly
        avec des threads : il lui faut l'isolation cross-origine (SharedArrayBuffer).
        Le serveur Go pose déjà les en-têtes COOP/COEP ; ce service worker n'est
@@ -15,6 +54,35 @@
   <script src="coi-serviceworker.js"></script>
 </head>
 <body>
+  <!-- Voile de démarrage, affiché dès le premier octet du HTML et retiré par
+       app.js une fois l'interface prête. Sans lui, tout le temps d'arrivée de
+       style.css et app.js se passe devant une page blanche — plusieurs
+       secondes sur un hébergement lent, où l'on croit l'application en panne.
+       Distinct de #engine-loading, qui ne couvre que le chargement du moteur
+       au premier calcul. -->
+  <div id="boot-loading" role="status" aria-live="polite">
+    <div class="boot-box">
+      <span class="boot-spinner" aria-hidden="true"></span>
+      <span id="boot-text">Chargement de l'application…</span>
+    </div>
+  </div>
+  <script>
+    // Garde-fou : si les scripts n'arrivent jamais, le voile masquerait la page
+    // indéfiniment. Au bout de 40 s on le retire en le disant, plutôt que de
+    // laisser tourner un disque sans fin devant une application inaccessible.
+    setTimeout(function () {
+      var el = document.getElementById("boot-loading");
+      if (!el) return;
+      var txt = document.getElementById("boot-text");
+      if (txt) {
+        txt.textContent =
+          "Le serveur met anormalement longtemps à répondre. " +
+          "L'application s'affiche, mais elle peut être incomplète — rechargez la page.";
+      }
+      setTimeout(function () { el.remove(); }, 6000);
+    }, 40000);
+  </script>
+
   <header>
     <div class="header-inner">
       <h1>♠ Bridge Bidding</h1>

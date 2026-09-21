@@ -457,8 +457,8 @@ function readIaRemote() {
 
 // Le mode (navigateur, local ou distant) est mémorisé de la même façon ; à
 // défaut, le client calcule les enchères lui-même, n'ayant alors besoin de
-// rien ni de personne. pickInitialMode retombe sur le serveur local quand le
-// moteur WebAssembly n'est pas servi.
+// rien ni de personne. Si le moteur n'est pas servi, c'est son échec de
+// chargement qui le dira, et la barre du serveur repararaîtra.
 function readMode() {
   const mode = readStored(MODE_KEY, "wasm");
   return mode === "remote" || mode === "local" ? mode : "wasm";
@@ -2381,7 +2381,11 @@ async function checkHealth(force) {
   // donc de vérifier qu'il est *servi*, par une requête HEAD : il sera chargé
   // au premier calcul, voile d'attente à l'appui (voir onBidsEngineLoad).
   if (wasmMode() && !force && !bidsLocal.loaded()) {
-    healthState = (await bidsLocal.available()) ? "idle" : "offline";
+    // Sans aucune requête : sonder bids.wasm, même en HEAD, coûte une latence
+    // complète sur un hébergement statique lent, pour n'apprendre qu'une chose
+    // que le premier calcul établira de toute façon. On dit donc simplement ce
+    // que l'on sait — le moteur n'est pas encore là.
+    healthState = "idle";
     renderServerHint();
     renderHealth();
     return;
@@ -2464,23 +2468,16 @@ async function checkIaHealth() {
   renderIaHealth();
 }
 
-// Le mode par défaut étant « navigateur », il reste à vérifier que le moteur
-// est bien là : ouvert en file://, ou servi par un binaire compilé sans
-// build-wasm.sh, le client retombe sur le serveur local plutôt que d'annoncer
-// un moteur absent. Une simple requête HEAD suffit — instancier le module ici
-// retarderait l'affichage pour rien, checkHealth s'en charge juste après.
+// Le mode par défaut étant « navigateur », on a longtemps sondé bids.wasm en
+// HEAD à l'ouverture pour retomber sur le serveur local quand le moteur n'est
+// pas servi (ouvert en file://, ou binaire compilé sans build-wasm.sh).
 //
-// Le repli n'est pas mémorisé : le moteur compilé plus tard doit reprendre la
-// main de lui-même à la visite suivante. Un mode choisi à la main, lui, prime
-// et ne se sonde pas.
-async function pickInitialMode() {
-  if (readStored(MODE_KEY, "") !== "") return;
-  // HEAD seulement : on veut savoir si le moteur est servi, pas le charger.
-  if (await bidsLocal.available()) return;
-  serverModeSelect.value = "local";
-  syncServerField();
-  renderServerHint();
-}
+// Cette sonde a été retirée : sur un hébergement statique lent, chaque requête
+// coûte sa latence complète — mesurée à plusieurs secondes — et celle-ci ne
+// servait qu'à choisir un mode par avance. Le repli se fait désormais quand il
+// se justifie vraiment, c'est-à-dire si le moteur refuse de se charger : le
+// message d'erreur s'affiche et renderHealth fait réapparaître la barre du
+// serveur, qui laisse en viser un.
 
 // Reads/validates the PBN textarea and asks the server for the full
 // bidding sequence. Throws with a user-facing message on failure.
@@ -2799,10 +2796,18 @@ $("#pbn").value = DEFAULT_PBN;
 refreshDealSelector(true);
 applyLang();
 $("#pbn-details").open = false;
-// Le mode navigateur par défaut dès que le module est là : le client se suffit
-// alors à lui-même, sans serveur à lancer. Un mode déjà choisi prime, d'où la
-// sonde seulement quand rien n'est mémorisé.
-pickInitialMode().then(() => checkHealth(false));
+// Aucune sonde réseau ici : checkHealth se contente d'annoncer que le moteur
+// n'est pas encore chargé (voir plus haut). Le mode navigateur reste celui par
+// défaut, un mode déjà choisi primant toujours.
+checkHealth(false);
 // applyIaFeature affiche ou masque tout le bloc IA selon l'option (OFF par
 // défaut) et ne sonde le serveur IA que lorsqu'elle est active.
 applyIaFeature();
+
+// L'interface est en place : le voile de démarrage posé par index.html n'a
+// plus lieu d'être. Il est retiré ici, en toute fin d'initialisation, pour ne
+// découvrir qu'une page déjà remplie et non un squelette à moitié construit.
+(() => {
+  const boot = document.getElementById("boot-loading");
+  if (boot) boot.remove();
+})();

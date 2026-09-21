@@ -125,11 +125,6 @@
     // Le module est-il déjà instancié ? app.js s'en sert pour ne pas
     // déclencher 4,5 Mo de téléchargement à seule fin d'allumer une pastille.
     loaded: () => loaded,
-    // Le module est-il seulement servi ? Une requête HEAD suffit à le savoir
-    // sans rien télécharger : c'est tout ce dont l'ouverture de la page a
-    // besoin, le moteur lui-même attendant le premier calcul.
-    available: () =>
-      fetch(WASM_URL, { method: "HEAD" }).then((r) => r.ok, () => false),
     // Rejoue la donne de référence de /ready : la pastille d'état dit la même
     // chose dans les deux modes.
     selfCheck: () => loadModule().then((api) => api.selfCheck().ok === true),

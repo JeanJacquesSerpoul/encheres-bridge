@@ -191,8 +191,9 @@ function renderIaHint() {
 
 // Donne affichée au démarrage, le temps d'en charger ou d'en générer une :
 // une manche à SA par Stayman.
-const DEFAULT_PBN = `[Dealer "N"]
-[Deal "N:AKQ.KJ4.AQ54.J32 J9.AT63.K762.Q98 8762.Q987.93.A76 T543.52.JT8.KT54"]`;
+const DEFAULT_PBN = `[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]`;
 
 // Vrai quand la donne affichée vient d'un fichier : c'est lui qui dit qui
 // donne et qui est vulnérable, les sélecteurs le recopient et se verrouillent.

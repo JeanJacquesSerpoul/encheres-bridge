@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="docs/img.png" alt="Client embarqué : composition de la donne (quatre mains, bornes de points, cartes non affectées) avant le calcul des enchères ou le questionnaire" width="900">
+  <img src="docs/donne.png" alt="Composition de la donne : les quatre mains, leurs bornes de points et la zone des cartes non affectées, avant le calcul des enchères ou le questionnaire" width="900">
+</p>
+
+<p align="center">
+  <img src="docs/resultat.png" alt="Résultat : contrat et déclarant, les quatre mains autour du tapis, la séquence d'enchères, son commentaire enchère par enchère et le tableau des levées double-mort" width="900">
 </p>
 
 # Bridge Bidding Server

@@ -278,6 +278,17 @@
         <tbody id="par-body"></tbody>
       </table>
       <p class="muted par-hint hidden" id="par-hint" data-i18n="parLeadHint">Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.</p>
+      <!-- Attribution du solveur, apparue et masquée avec le tableau qu'elle
+           crédite (voir renderTable dans par.js). Le nom du projet reste hors
+           des libellés traduits : applyLang pose du textContent sur les
+           [data-i18n] et effacerait le lien qu'ils contiendraient. Voir
+           THIRD-PARTY-NOTICES.md pour les termes de la licence. -->
+      <p class="muted par-credit hidden" id="par-credit">
+        <span data-i18n="parCredit">Levées double-mort calculées par</span>
+        <a href="https://github.com/dds-bridge/dds" target="_blank" rel="noopener noreferrer">DDS — Double Dummy Solver</a>
+        <span data-i18n="parCreditAuthors">de Bo Haglund et Søren Hein — licence</span>
+        <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer">Apache 2.0</a>.
+      </p>
     </section>
   </main>
 

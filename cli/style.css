@@ -553,7 +553,8 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 #result-panel .comments { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
 #result-panel h2,
 #result-panel h3,
-#result-panel .par-hint { text-align: center; }
+#result-panel .par-hint,
+#result-panel .par-credit { text-align: center; }
 #result-panel .par-row { justify-content: center; }
 
 /* Questionnaire : même centrage que le résultat pour le titre et la séquence. */
@@ -591,6 +592,16 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   box-shadow: inset 0 0 0 2px var(--accent);
 }
 .par-hint { font-size: .85rem; margin: -6px 0 12px; }
+
+/* Attribution du solveur DDS, sous l'indication d'entame : plus discrète
+   qu'elle, mais lisible — c'est une mention de licence autant qu'un
+   remerciement (voir THIRD-PARTY-NOTICES.md). Le lien se souligne au survol
+   seulement : dans une ligne déjà grise, un soulignement permanent tirerait
+   l'œil plus que le tableau qu'elle crédite. */
+.par-credit { font-size: .78rem; margin: -6px 0 12px; }
+.par-credit a { color: inherit; text-decoration: none; }
+.par-credit a:hover,
+.par-credit a:focus-visible { text-decoration: underline; }
 
 .par-tip {
   position: fixed;

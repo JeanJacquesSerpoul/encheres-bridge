@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bridge Bidding</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23245438'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <!-- Le solveur double-mort (bouton « Calcul du PAR ») tourne en WebAssembly
+       avec des threads : il lui faut l'isolation cross-origine (SharedArrayBuffer).
+       Le serveur Go pose déjà les en-têtes COOP/COEP ; ce service worker n'est
+       qu'un repli pour les hôtes qui les retirent, et ne fait rien quand
+       l'isolation est déjà acquise. Repris de dds-fork/web/dds_web.html. -->
+  <script>window.coi = { coepCredentialless: () => false };</script>
+  <script src="coi-serviceworker.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>♠ Bridge Bidding</h1>
+      <!-- Les deux serveurs interrogés, l'un sous l'autre : celui des enchères
+           (obligatoire) et celui de l'IA (reconnaissance des cartes par photo,
+           facultatif). Chacun garde son mode et son URL. -->
+      <div class="server-bars">
+        <!-- Masquée quand le moteur tourne dans la page : il n'y a alors
+             aucun serveur à choisir. « ?serveur=1 » dans l'URL la rappelle
+             (voir syncServerField dans app.js). -->
+        <div class="server-bar" id="bids-server-bar">
+          <label for="server-mode" data-i18n="server">Serveur</label>
+          <select id="server-mode">
+            <option value="local" data-i18n="serverLocal">Local</option>
+            <option value="remote" data-i18n="serverRemote">Distant (production)</option>
+            <!-- Les enchères calculées sur place par bids.wasm, le moteur Go
+                 compilé en WebAssembly : aucun serveur n'est interrogé. Voir
+                 bids-wasm.js : sans le module, l'option reste offerte et
+                 dit ce qu'il manque. -->
+            <option value="wasm" selected data-i18n="serverWasm">Navigateur (hors ligne)</option>
+          </select>
+          <input id="server" type="text" spellcheck="false">
+          <span id="server-hint" class="server-hint hidden"></span>
+        </div>
+        <div class="server-bar" id="ia-server-bar">
+          <label for="ia-mode" data-i18n="serverIa">Serveur IA</label>
+          <select id="ia-mode">
+            <option value="local" selected data-i18n="serverLocal">Local</option>
+            <option value="remote" data-i18n="serverRemote">Distant (production)</option>
+          </select>
+          <input id="ia-server" type="text" spellcheck="false">
+          <span id="ia-hint" class="server-hint hidden"></span>
+        </div>
+      </div>
+      <div class="lang-bar">
+        <label for="lang" data-i18n="language">Langue</label>
+        <select id="lang">
+          <option value="fr" selected>fr</option>
+          <option value="en">en</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="input-panel">
+      <h2><span data-i18n="dealPanel">Donne (PBN)</span> <span id="file-name" class="file-name"></span></h2>
+      <div class="row" id="deal-actions">
+        <label class="file-btn">
+          <span data-i18n="fileLoad">Charger un fichier .pbn</span>
+          <input id="file" type="file" accept=".pbn,.txt,text/plain">
+        </label>
+        <button id="random-btn" type="button" data-i18n="randomDeal">Donne aléatoire</button>
+        <button id="save-btn" type="button" data-i18n="fileSave">Sauver le PBN</button>
+        <!-- Photo des quatre mains : le serveur IA y lit les cartes et remplit
+             la donne (voir la section « reconnaissance » de app.js). Libellé et
+             état posés par renderPhotoButtons ; le champ fichier, unique, est
+             partagé avec les boutons par main. -->
+        <button id="deal-photo-btn" type="button" class="icon-btn hidden" data-photo="deal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </button>
+        <span id="photo-status" class="muted hidden"></span>
+        <input id="photo-input" type="file" accept="image/*" capture="environment" class="hidden">
+        <!-- Donneur et vulnérabilité se replient en bloc : groupés, ils ne se
+             séparent jamais au fil des largeurs d'écran. -->
+        <span class="field-group">
+          <span class="field">
+            <label for="dealer" data-i18n="dealer">Donneur</label>
+            <!-- Libellés des options et infobulle posés par applyLang/syncTagSelects. -->
+            <select id="dealer">
+              <option value="" selected data-i18n="optRandom">Aléatoire</option>
+              <option value="N">Nord</option>
+              <option value="E">Est</option>
+              <option value="S">Sud</option>
+              <option value="W">Ouest</option>
+            </select>
+          </span>
+          <span class="field">
+            <label for="vul" data-i18n="vulnerability">Vulnérabilité</label>
+            <select id="vul">
+              <option value="" selected data-i18n="optRandom">Aléatoire</option>
+              <option value="None">Personne</option>
+              <option value="NS">N-S</option>
+              <option value="EW">E-O</option>
+              <option value="All">Tous</option>
+            </select>
+          </span>
+        </span>
+      </div>
+      <details id="pbn-details" class="pbn-details">
+        <summary data-i18n="pbnToggle">Afficher / masquer le texte PBN</summary>
+        <textarea id="pbn" rows="6" spellcheck="false" placeholder='[Dealer "N"]&#10;[Deal "N:AKQ.KJ4.AQ54.J32 J9.AT63.K762.Q98 8762.Q987.93.A76 T543.52.JT8.KT54"]'></textarea>
+      </details>
+      <div class="row hidden" id="deal-select-row">
+        <label for="deal-select" data-i18n="dealToUse">Donne à utiliser</label>
+        <select id="deal-select"></select>
+      </div>
+
+      <div class="constraints" id="constraints">
+        <div class="table-layout cons-layout">
+          <div class="hand cons-hand seat-n" id="cons-N"></div>
+          <div class="hand cons-hand seat-w" id="cons-W"></div>
+          <div class="table-center seat-c cons-center" id="cons-center"></div>
+          <div class="hand cons-hand seat-e" id="cons-E"></div>
+          <div class="hand cons-hand seat-s" id="cons-S"></div>
+        </div>
+        <div class="row">
+          <button id="cons-clear-btn" type="button"></button>
+          <button id="cons-fill-btn" type="button" class="primary hidden"></button>
+          <button id="cons-reset-btn" type="button"></button>
+          <span id="cons-error" class="error"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="bid-btn" type="button" class="primary" data-i18n="runAuction">Afficher les enchères</button>
+        <span class="spacer"></span>
+        <label for="seat" data-i18n="yourHand">Votre main</label>
+        <select id="seat">
+          <option value="N">Nord</option>
+          <option value="E">Est</option>
+          <option value="S" selected>Sud</option>
+          <option value="W">Ouest</option>
+        </select>
+        <button id="quiz-btn" type="button" class="primary" data-i18n="startQuiz">Commencer le questionnaire</button>
+        <span id="error" class="error"></span>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="quiz-panel">
+      <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
+      <div id="quiz-turn" class="quiz-turn"></div>
+
+      <div class="table-layout">
+        <div id="qhand-N" class="hand seat-n"></div>
+        <div id="qhand-W" class="hand seat-w"></div>
+        <div class="table-center seat-c" id="qtable-center"></div>
+        <div id="qhand-E" class="hand seat-e"></div>
+        <div id="qhand-S" class="hand seat-s"></div>
+      </div>
+
+      <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
+      <table class="auction" id="quiz-auction-table">
+        <thead><tr id="quiz-auction-head"></tr></thead>
+        <tbody id="quiz-auction-body"></tbody>
+      </table>
+
+      <div id="bidding-box" class="bidding-box hidden"></div>
+
+      <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+
+      <div class="row">
+        <button id="quiz-continue-btn" type="button" class="primary hidden" data-i18n="continue">Continuer</button>
+      </div>
+
+      <div id="quiz-score" class="quiz-score hidden"></div>
+    </section>
+
+    <section class="panel hidden" id="result-panel">
+      <h2 data-i18n="result">Résultat</h2>
+      <div id="summary" class="summary"></div>
+
+      <div class="table-layout">
+        <div id="hand-N" class="hand seat-n"></div>
+        <div id="hand-W" class="hand seat-w"></div>
+        <div class="table-center seat-c" id="table-center"></div>
+        <div id="hand-E" class="hand seat-e"></div>
+        <div id="hand-S" class="hand seat-s"></div>
+      </div>
+
+      <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
+      <table class="auction" id="auction-table">
+        <thead><tr id="auction-head"></tr></thead>
+        <tbody id="auction-body"></tbody>
+      </table>
+
+      <h3 data-i18n="comments">Séquence commentée</h3>
+      <ol class="comments" id="comments"></ol>
+
+      <!-- « PAR » de la donne : les levées double-mort de chaque camp dans
+           chaque couleur, calculées à la demande par le solveur DDS en WASM
+           (voir par.js). Sur le modèle du tableau de dds-fork/web/dds_web.html. -->
+      <div class="row par-row">
+        <button id="par-btn" type="button" class="primary" data-i18n="parCompute">Calcul du PAR</button>
+        <span id="par-status" class="muted"></span>
+        <span id="par-error" class="error"></span>
+      </div>
+      <table class="par-table hidden" id="par-table">
+        <thead><tr id="par-head"></tr></thead>
+        <tbody id="par-body"></tbody>
+      </table>
+      <p class="muted par-hint hidden" id="par-hint" data-i18n="parLeadHint">Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.</p>
+    </section>
+  </main>
+
+  <!-- Pied de page : quels serveurs répondent, et quel binaire sert les
+       enchères. Discret, hors du bandeau, parce qu'on ne le consulte qu'en cas
+       de surprise. -->
+  <!-- Une grille de deux colonnes, un serveur par ligne : les boutons « Tester »
+       et les noms tombent les uns sous les autres, quelle que soit la longueur
+       de l'état affiché. -->
+  <footer class="app-version">
+    <span class="server-check">
+      <button id="health-btn" type="button" data-i18n="serverTest">Tester</button>
+      <!-- Pastille d'état : couleur et infobulle posées par renderHealth. -->
+      <span id="health-dot" class="dot"></span>
+      <span id="health-text" class="muted"></span>
+    </span>
+    <span id="app-version"></span>
+    <!-- État du serveur IA, sous celui des enchères : c'est lui qui autorise
+         les boutons photo (voir renderIaHealth). Masqué tant que l'option
+         générale « Serveur IA de reconnaissance des cartes » est décochée. -->
+    <span class="server-check hidden" id="ia-health-check">
+      <button id="ia-health-btn" type="button" data-i18n="serverTest">Tester</button>
+      <span id="ia-health-dot" class="dot"></span>
+      <span id="ia-health-text" class="muted"></span>
+    </span>
+    <!-- Option générale, par défaut OFF : tant qu'elle n'est pas cochée, rien
+         de la reconnaissance des cartes par photo n'apparaît — ni la barre du
+         serveur IA, ni les boutons appareil photo, ni l'état ci-contre (voir
+         applyIaFeature dans app.js). Elle tient ici le rôle du nom du serveur,
+         dont elle reprend le libellé : une fonction facultative que l'on active
+         une fois n'a rien à faire dans le bandeau. -->
+    <label class="feature-toggle">
+      <input id="ia-enabled" type="checkbox">
+      <span data-i18n="iaFeature">Serveur IA de reconnaissance des cartes</span>
+    </label>
+  </footer>
+
+  <!-- Éditeur de la photo, entre la prise de vue et l'envoi au serveur IA :
+       quarts de tour et recadrage. Le modèle lit d'autant mieux qu'on lui
+       épargne le décor autour des cartes, et une photo prise de travers se
+       redresse ici quand l'orientation relevée par l'appareil n'a pas suffi.
+       Voir la section « éditeur de photo » de app.js. -->
+  <div id="photo-editor" class="photo-editor hidden" role="dialog" aria-modal="true"
+       aria-labelledby="photo-edit-title">
+    <div class="photo-editor-box">
+      <h2 id="photo-edit-title" data-i18n="photoEditTitle">Recadrer et pivoter la photo</h2>
+      <!-- Le cadre épouse exactement le canevas affiché : le rectangle de
+           recadrage, posé en pourcentages, s'y superpose donc au pixel. -->
+      <div class="photo-edit-frame" id="photo-edit-frame">
+        <canvas id="photo-edit-canvas"></canvas>
+        <div class="photo-crop" id="photo-crop">
+          <span class="photo-handle" data-handle="nw"></span>
+          <span class="photo-handle" data-handle="n"></span>
+          <span class="photo-handle" data-handle="ne"></span>
+          <span class="photo-handle" data-handle="w"></span>
+          <span class="photo-handle" data-handle="e"></span>
+          <span class="photo-handle" data-handle="sw"></span>
+          <span class="photo-handle" data-handle="s"></span>
+          <span class="photo-handle" data-handle="se"></span>
+        </div>
+      </div>
+      <p class="muted photo-edit-hint" data-i18n="photoEditHint">Faites glisser sur l'image pour choisir la zone à lire ; les poignées ajustent le cadre.</p>
+      <div class="row photo-editor-actions">
+        <button id="photo-rot-left" type="button" class="icon-btn"
+                data-i18n-title="photoRotateLeft">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10a5 5 0 0 1 5 5v1"/>
+            <path d="M7 4 3 8l4 4"/>
+          </svg>
+        </button>
+        <button id="photo-rot-right" type="button" class="icon-btn"
+                data-i18n-title="photoRotateRight">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 8H11a5 5 0 0 0-5 5v1"/>
+            <path d="m17 4 4 4-4 4"/>
+          </svg>
+        </button>
+        <button id="photo-crop-reset" type="button" data-i18n="photoCropReset">Image entière</button>
+        <span class="spacer"></span>
+        <button id="photo-cancel" type="button" data-i18n="photoCancel">Annuler</button>
+        <button id="photo-confirm" type="button" class="primary" data-i18n="photoConfirm">Lire les cartes</button>
+      </div>
+      <span id="photo-edit-error" class="error"></span>
+    </div>
+  </div>
+
+  <!-- Infobulle d'entame du tableau du PAR (par.js la remplit). Hors du
+       tableau et en position fixe : ni la cellule ni le panneau ne peuvent la
+       rogner, et elle devient un bandeau bas sur mobile. -->
+  <div id="par-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
+  <div id="auction-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
+
+  <!-- Solveur double-mort (DDS) compilé en WebAssembly, repris tel quel de
+       dds-fork/web : dds_web_wasm_bin.js porte les octets .wasm en base64,
+       dds_web_wasm.js expose createDdsModule(). Exploités par par.js. -->
+  <script src="dds_web_wasm_bin.js"></script>
+  <script src="dds_web_wasm.js"></script>
+
+  <!-- Moteur d'enchères compilé en WebAssembly (build-wasm.sh) : wasm_exec.js
+       est la glue fournie par la distribution Go et définit Go, dont
+       bids-wasm.js a besoin ; celui-ci vient avant app.js, dont la fin appelle
+       checkHealth() — qui passe par window.bidsLocal en mode navigateur. -->
+  <script src="wasm_exec.js"></script>
+  <script src="bids-wasm.js"></script>
+  <script src="app.js"></script>
+  <script src="par.js"></script>
+</body>
+</html>

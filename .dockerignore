@@ -1,0 +1,15 @@
+bids.exe
+bids
+testdata/
+docs/
+*.md
+.git/
+.claude/
+*_test.go
+*.sh
+*.ps1
+server/
+prod/
+server_ai/
+cli/bids.wasm
+cli/wasm_exec.js

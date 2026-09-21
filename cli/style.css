@@ -1,0 +1,918 @@
+:root {
+  --bg: #f4f5f0;
+  --panel: #ffffff;
+  --ink: #1d2b1f;
+  --muted: #6b7a6e;
+  --felt: #2e6b46;
+  --felt-dark: #245438;
+  --accent: #1f6f43;
+  --red: #c0392b;
+  --gold: #e0a30c;
+  --border: #d8ddd4;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+header {
+  background: var(--felt-dark);
+  color: #fff;
+  padding: 14px 24px;
+}
+
+.header-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 32px;
+}
+
+h1 { font-size: 1.25rem; margin: 0; }
+
+/* Les deux barres serveur, l'une sous l'autre : le bloc, lui, se comporte dans
+   le bandeau comme la barre unique d'avant. */
+.server-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 320px;
+  max-width: 620px;
+  /* Colonnes communes aux deux barres. Figées, et non dictées par le contenu :
+     « Serveur » et « Serveur IA » n'ont pas la même largeur, et le libellé du
+     mode change avec l'URL mémorisée — les deux lignes se décalaient donc
+     l'une par rapport à l'autre. */
+  --srv-label: 5rem;
+  --srv-mode: 11.5rem;
+}
+
+/* Une grille de trois colonnes — libellé, mode, adresse — plutôt qu'une rangée
+   souple : les deux barres s'alignent alors au pixel, dans les deux langues et
+   quel que soit le mode affiché. */
+.server-bar {
+  display: grid;
+  grid-template-columns: var(--srv-label) var(--srv-mode) minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.server-bar input {
+  width: 100%;
+  min-width: 0;
+  max-width: 360px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-family: Consolas, monospace;
+}
+
+/* Message d'invite du champ d'URL : sur sa propre ligne, sous la barre, plutôt
+   que serré dans une colonne. */
+.server-hint {
+  grid-column: 1 / -1;
+  color: var(--gold);
+  font-size: .85rem;
+}
+
+.server-bar select, .lang-bar select {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+}
+/* L'option « Local » porte l'hôte visé, qui peut être long : la colonne étant
+   figée pour aligner les deux barres, le texte s'abrège plutôt que de la
+   déborder — la liste déroulante, elle, le montre en entier, et l'adresse
+   complète est de toute façon dans le champ voisin. */
+.server-bar select { text-overflow: ellipsis; }
+
+/* Le choix de la langue vit dans le bandeau, à côté de l'état du serveur :
+   c'est un réglage de la page entière, pas de la donne. Il garde sa propre
+   boîte pour échapper au flex:1 de la barre serveur, qui l'écraserait. */
+.lang-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Option générale « Serveur IA de reconnaissance des cartes », au pied de page
+   dans la colonne des noms de serveurs : c'est le nom du sien, et une fonction
+   facultative que l'on active une fois n'a pas sa place dans le bandeau. La
+   colonne est imposée plutôt que laissée au placement automatique, qui ferait
+   remonter l'option à gauche dès que la ligne d'état du serveur IA — masquée
+   tant que l'option est décochée — libère sa cellule. */
+.feature-toggle {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.feature-toggle input { cursor: pointer; margin: 0; flex: none; }
+
+.dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #999;
+  display: inline-block;
+}
+.dot.ok { background: #4cd964; }
+.dot.ko { background: #ff5252; }
+
+main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
+
+.app-version {
+  max-width: 1060px;
+  margin: 0 auto 20px;
+  padding: 0 16px;
+  /* Une ligne par serveur — les enchères, puis l'IA —, deux colonnes : le test
+     d'état et le nom. Le bloc entier reste centré sous la page. */
+  display: grid;
+  grid-template-columns: auto minmax(0, max-content);
+  justify-content: center;
+  align-items: center;
+  gap: 5px 12px;
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+/* Le test de connexion vit dans le pied, à côté de la version, pas dans le
+   bandeau : c'est une vérification ponctuelle, pas une commande de tous les
+   instants. */
+.server-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.server-check button {
+  font-size: .75rem;
+  padding: 3px 10px;
+  min-height: 0;
+}
+.server-check .dot { width: 9px; height: 9px; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.panel h2 { margin-top: 0; font-size: 1.05rem; }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+.spacer { flex: 1; }
+/* Un libellé et son champ, insécables : quand la ligne se replie, ils passent
+   ensemble à la suivante. */
+.field { display: inline-flex; align-items: center; gap: 8px; }
+/* Les champs d'une même ligne se replient en bloc plutôt qu'un par un, sans
+   quoi le dernier se retrouve seul sous la rangée de boutons. */
+.field-group { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+textarea {
+  width: 100%;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .9rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.pbn-details { margin: 10px 0; }
+.pbn-details summary {
+  cursor: pointer;
+  font-size: .9rem;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 4px 0;
+  user-select: none;
+}
+.pbn-details summary:hover { text-decoration: underline; }
+.pbn-details textarea { margin-top: 8px; }
+
+/* Marks the deal selected via #deal-select within the raw PBN text
+   (see highlightSelectedDeal in app.js). */
+#pbn::selection { background: var(--gold); color: var(--ink); }
+
+button, .file-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: .9rem;
+  touch-action: manipulation;
+  transition: background .15s;
+}
+button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+button:hover, .file-btn:hover { background: #f0f3ee; }
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+button.primary:hover { background: #18603a; }
+button:disabled { opacity: .6; cursor: wait; }
+
+/* Bouton réduit à son icône : le dessin de l'appareil photo dit ce qu'il fait,
+   l'infobulle le nomme et, quand il est éteint, dit pourquoi (voir
+   renderPhotoButtons) — d'où le curseur d'interdit plutôt que d'attente. */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  line-height: 0;
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn:disabled { cursor: not-allowed; }
+/* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que
+   lorsqu'il a quelque chose à dire. */
+#photo-status:empty { display: none; }
+
+.file-btn { display: inline-block; }
+.file-btn input { display: none; }
+
+.file-name { color: var(--muted); font-size: .9rem; font-weight: normal; margin-left: 8px; }
+
+select { padding: 7px 8px; border: 1px solid var(--border); border-radius: 6px; background: #fff; }
+/* Verrouillé : la donne chargée impose la valeur (voir syncTagSelects). */
+select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed; }
+.field:has(select:disabled) label { color: var(--muted); }
+
+.error { color: var(--red); font-size: .9rem; }
+.muted { color: var(--muted); }
+.hidden { display: none; }
+
+/* Summary */
+.summary {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.summary .chip {
+  background: #eef3ec;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: .9rem;
+}
+.summary .chip b { font-size: 1.05rem; }
+.summary .chip.contract { background: var(--felt); color: #fff; border-color: var(--felt-dark); }
+
+/* Table layout */
+.table-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    ". n ."
+    "w c e"
+    ". s .";
+  gap: 10px;
+  background: var(--felt);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 8px;
+}
+.table-layout .seat-n { grid-area: n; }
+.table-layout .seat-w { grid-area: w; }
+.table-layout .seat-c { grid-area: c; }
+.table-layout .seat-e { grid-area: e; }
+.table-layout .seat-s { grid-area: s; }
+
+.table-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #eaf5ec;
+  text-align: center;
+  font-size: .9rem;
+  gap: 4px;
+}
+.table-center .big { font-size: 1.6rem; font-weight: 700; }
+/* Info secondaire du centre de table : présente, mais en retrait du contrat. */
+.table-center .vul-line { font-size: .8rem; opacity: .85; }
+
+.hand {
+  background: #fdfdf9;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .95rem;
+  min-height: 120px;
+}
+.hand .seat-name {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.hand .seat-name .pts { text-align: right; }
+.hand .seat-name .pts {
+  font-weight: 400;
+  font-size: .8rem;
+  color: var(--muted);
+}
+.hand .suitline { line-height: 1.45; white-space: nowrap; }
+.hand .suitline .void { color: #b9c0b4; }
+.red { color: var(--red); }
+
+/* Honour-point bounds (mini / maxi per hand) */
+.constraints { margin: 14px 0 4px; }
+
+/* Same seat placement as the result table, but on the panel background. */
+.cons-layout { background: transparent; padding: 0; gap: 12px; }
+
+.cons-hand {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  min-height: 0;
+}
+.cons-hand:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(31, 111, 67, .25);
+}
+
+.cons-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  padding: 6px 10px;
+  background: var(--gold);
+  color: #fff;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+}
+.cons-chips { display: flex; align-items: center; gap: 6px; }
+
+/* Poubelle et appareil photo de chaque main : posés sur le bandeau doré, ils
+   restent des icônes, pas des boutons de pleine taille. */
+.cons-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .22);
+  color: #fff;
+  line-height: 0;
+}
+.cons-btn svg { width: 13px; height: 13px; }
+.cons-btn:hover:not(:disabled) { background: rgba(255, 255, 255, .45); }
+.cons-btn:disabled { opacity: .45; cursor: not-allowed; }
+.cons-chip {
+  background: rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  padding: 1px 9px;
+  font-size: .75rem;
+  white-space: nowrap;
+}
+/* Hand outside its bounds. */
+.cons-chip.off { background: var(--red); }
+
+.cons-bounds {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  background: #f6f7f3;
+  border-bottom: 1px solid var(--border);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .85rem;
+}
+.cons-ph { font-weight: 600; color: var(--muted); }
+.cons-bound { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.cons-input {
+  width: 58px;
+  padding: 5px 6px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.cons-cards { padding: 8px 10px; }
+/* Cards wrap: a full suit plus its symbol can outgrow a narrow column. */
+.cons-cards .suitline { white-space: normal; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+.cons-cards .suitsym { width: 1em; text-align: center; }
+
+/* Neutral zone: the cards that belong to no hand yet, in the table centre. */
+.cons-center {
+  display: block;
+  color: var(--ink);
+  text-align: left;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .95rem;
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cons-center.filled { border-style: solid; }
+.cons-center .cons-head { background: var(--felt); }
+.neutral-hint {
+  padding: 10px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+/* ---------- moving cards around ---------- */
+
+.card {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 1px 4px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none; /* le glisser prime sur le défilement tactile */
+}
+.card:hover { border-color: var(--accent); background: #eef3ec; }
+.card.picked { border-color: var(--accent); background: #eef3ec; box-shadow: 0 0 0 2px rgba(31, 111, 67, .3); }
+.card.dragging { opacity: .35; }
+
+/* Carte suivant le pointeur pendant le glisser. */
+.card-ghost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: -18px 0 0 -18px;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: #fff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+
+/* Zone survolée pendant le glisser : accepte / refuse la carte. */
+[data-zone].drop-ok { outline: 2px solid var(--accent); outline-offset: 1px; }
+[data-zone].drop-no { outline: 2px solid var(--red); outline-offset: 1px; }
+
+/* Auction */
+.auction {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 520px;
+  margin-bottom: 8px;
+}
+.auction th, .auction td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: center;
+  font-size: .95rem;
+  width: 25%;
+}
+.auction th { background: #eef3ec; }
+.auction td.bid-cell { font-weight: 600; cursor: default; }
+/* Enchère commentée : son commentaire s'ouvre en infobulle (app.js,
+   auctionTip), avec le même signal de survol que les cases du PAR. */
+.auction td.bid-cell.has-tip { cursor: help; }
+.auction td.bid-cell.has-tip:hover,
+.auction td.bid-cell.has-tip:focus,
+.auction td.bid-cell.has-tip.is-open {
+  background: #eef3ec;
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.auction td .red { color: var(--red); }
+
+.comments { font-size: .9rem; padding-left: 22px; }
+.comments li { margin: 3px 0; }
+/* Largeur fixe : sans elle, la largeur propre à chaque lettre de siège (N/E/S/O)
+   décale le tiret et le texte qui le suit d'une ligne à l'autre. */
+.comments .who { font-weight: 700; display: inline-block; min-width: 1.1em; }
+/* Enchère sans commentaire : présente pour que la séquence se lise dans
+   l'ordre, effacée pour que l'œil aille aux enchères qui disent quelque
+   chose. */
+.comments li.silent { color: var(--muted); }
+
+/* Résultat : titres, séquence, commentaires, bouton et PAR centrés dans le
+   panneau. La liste se réduit à sa largeur et garde son texte aligné à gauche. */
+#result-panel .auction,
+#result-panel .par-table { margin-left: auto; margin-right: auto; }
+#result-panel .comments { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+#result-panel h2,
+#result-panel h3,
+#result-panel .par-hint { text-align: center; }
+#result-panel .par-row { justify-content: center; }
+
+/* Questionnaire : même centrage que le résultat pour le titre et la séquence. */
+#quiz-panel .auction { margin-left: auto; margin-right: auto; }
+#quiz-panel h2,
+#quiz-panel h3 { text-align: center; }
+
+/* PAR (levées double-mort) — tableau sur le modèle dds_web. */
+#par-status { font-size: .9rem; }
+.par-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 520px;
+  margin-bottom: 12px;
+}
+.par-table th, .par-table td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: center;
+  font-size: .95rem;
+}
+.par-table thead th { background: #eef3ec; }
+.par-table tbody th { background: #f6f8f5; font-weight: 700; }
+.par-table td { font-weight: 600; }
+.par-table .red { color: var(--red); }
+
+/* Chaque case porte son entame en infobulle (par.js) : le curseur l'annonce,
+   le fond suit le survol comme le focus clavier. */
+.par-table td.par-cell { cursor: help; }
+.par-table td.par-cell:hover,
+.par-table td.par-cell:focus,
+.par-table td.par-cell.is-open {
+  background: #eef3ec;
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.par-hint { font-size: .85rem; margin: -6px 0 12px; }
+
+.par-tip {
+  position: fixed;
+  z-index: 60;
+  max-width: 280px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .16);
+  font-size: .9rem;
+  line-height: 1.35;
+  /* Elle suit la souris de case en case : elle ne doit jamais s'interposer
+     entre le pointeur et le tableau. */
+  pointer-events: none;
+}
+.par-tip-head {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.par-tip-lead { font-weight: 600; }
+.par-tip-suit { white-space: nowrap; margin-right: 8px; }
+.par-tip-alt, .par-tip-wait { font-size: .85rem; }
+.par-tip-err { color: var(--red); }
+
+/* Écran étroit ou tactile : le doigt masque la case et ses voisines, l'entame
+   s'affiche donc en bandeau, toujours au même endroit. */
+.par-tip.sheet {
+  left: 8px;
+  right: 8px;
+  top: auto;
+  bottom: 8px;
+  max-width: none;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+  header { padding: 12px 16px; gap: 10px; }
+  h1 { font-size: 1.1rem; }
+
+  /* Les barres serveur prennent toute la largeur : la langue remonterait seule
+     sur une ligne de plus, alors qu'elle tient à côté du titre. */
+  .server-bars { min-width: 0; max-width: none; flex: 1 1 100%; order: 1; }
+  .server-bar input { max-width: none; min-width: 0; }
+
+  main { margin: 16px auto; }
+  .panel { padding: 14px 14px; margin-bottom: 16px; }
+
+  /* Table: center info on top, N full width, W/E side by side, S full width. */
+  .table-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "c c"
+      "n n"
+      "w e"
+      "s s";
+    padding: 10px;
+    gap: 8px;
+  }
+  .table-center {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding: 4px 2px;
+  }
+  .table-center .big { font-size: 1.25rem; }
+
+  .hand { min-height: 0; }
+
+  /* Bound cards stay full width: the Mini/Maxi line needs the room.
+     Colonne flex plutôt que grille : un élément « sticky » est confiné à son
+     bloc conteneur, or la zone de grille d'un item ne couvre qu'une seule
+     rangée — la zone neutre ne pourrait s'y épingler que sur sa propre
+     hauteur. En colonne flex, son bloc conteneur devient toute la liste des
+     mains, ce qui lui permet de rester à l'écran d'un bout à l'autre. */
+  .cons-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* La zone « Cartes non affectées » reste visible pendant qu'on fait défiler
+     les quatre mains : sans cela, retirer une carte de Sud oblige à remonter
+     en haut de la page avant de pouvoir la déposer, et le glisser devient
+     impossible puisque source et destination ne tiennent pas ensemble à
+     l'écran. */
+  .cons-layout .cons-center {
+    order: -1;
+    position: sticky;
+    top: 6px;
+    z-index: 5;
+    /* Plafonnée : « Vider » renvoie les 52 cartes ici, et une zone épinglée
+       qui grandit sans limite masquerait les mains qu'elle sert à remplir. */
+    max-height: 38vh;
+    overflow: auto;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+  }
+  /* Titre et compteur restent lisibles quand les cartes défilent à
+     l'intérieur de la zone épinglée. */
+  .cons-layout .cons-center .cons-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  header { padding: 10px 12px; }
+  /* Le libellé et le choix du serveur sur une ligne, son adresse -- que l'on
+     ne touche presque jamais -- sur la suivante. */
+  .server-bar { grid-template-columns: var(--srv-label) minmax(0, 1fr); }
+  .server-bar input { grid-column: 1 / -1; font-size: .85rem; }
+
+  main { padding: 0 10px; }
+  .panel { padding: 12px 10px; border-radius: 8px; }
+  .row { gap: 8px; }
+
+  /* Ligne d'actions de la donne : au fil du repli, les trois boutons et les
+     deux champs s'entremêlaient — « Sauver le PBN » finissait à côté de
+     « Donneur », comme s'ils allaient ensemble. Une grille de deux colonnes
+     leur rend des blocs nets : le bouton de chargement en pleine largeur, les
+     deux autres côte à côte, puis les deux champs, libellé au-dessus. */
+  #deal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  #deal-actions .file-btn { grid-column: 1 / -1; justify-content: center; }
+  #deal-actions button { width: 100%; }
+  /* Le bouton photo est seul de son espèce : sur une grille à deux colonnes il
+     laisserait une case vide à côté de lui. Il prend donc la ligne entière,
+     mais reste à sa taille, centré : étiré, un bouton d'une seule icône n'est
+     qu'un grand cadre vide. */
+  #deal-actions .icon-btn {
+    grid-column: 1 / -1;
+    width: auto;
+    justify-self: center;
+    padding: 8px 28px;
+  }
+  #deal-actions #photo-status { grid-column: 1 / -1; text-align: center; }
+  #deal-actions .field-group {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  #deal-actions .field {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+  }
+  #deal-actions .field label { font-size: .8rem; color: var(--muted); }
+  #deal-actions select { width: 100%; }
+
+  /* Primary actions become full-width, easy to tap. */
+  .row button.primary { flex: 1 1 100%; }
+  .row .spacer { display: none; }
+
+  .hand { font-size: .82rem; padding: 8px; }
+  .hand .seat-name { font-size: .85rem; }
+
+  .auction th, .auction td { padding: 5px 4px; font-size: .9rem; }
+
+  .bb-row { gap: 3px; }
+  .bb-btn { font-size: .85rem; padding: 6px 2px; }
+  .bb-row.bb-special { max-width: none; }
+}
+
+/* Quiz */
+.quiz-turn {
+  background: #eef3ec;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.hand .hidden-hand {
+  color: var(--muted);
+  letter-spacing: 2px;
+  padding: 6px 0;
+}
+
+.auction td.bid-cell.correct { background: #e3f6e6; color: var(--accent); }
+.auction td.bid-cell.incorrect { background: #fbeaea; color: var(--red); }
+/* Mauvaise réponse : l'enchère jouée reste barrée en rouge, la bonne
+   s'affiche à côté dans la couleur du verdict correct. */
+.auction td.bid-cell.incorrect .expected { color: var(--accent); margin-left: 2px; }
+
+.bidding-box { margin: 14px 0; }
+.bb-grid { display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px; }
+.bb-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.bb-row.bb-special { grid-template-columns: repeat(3, 1fr); max-width: 320px; }
+
+/* Bigger tap targets on touch screens. */
+@media (pointer: coarse) {
+  /* Le test de connexion reste discret, mais assez haut pour le doigt. */
+  .server-check button { min-height: 32px; padding: 6px 14px; }
+  .bb-btn { min-height: 44px; }
+  button, .file-btn, select { min-height: 40px; }
+  /* Les icônes des en-têtes de main s'élargissent pour le doigt, mais restent
+     dans leur bandeau : la hauteur commune des boutons le ferait doubler. */
+  .cons-btn { width: 30px; height: 30px; min-height: 0; }
+  /* Cartes plus grasses au doigt, sans casser la ligne de 13 cartes. */
+  .card { min-width: 1.8em; padding: 5px 4px; }
+  .cons-cards .suitline { gap: 4px; }
+}
+
+.bb-btn {
+  padding: 8px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+}
+.bb-btn:hover:not(:disabled) { background: #eef3ec; border-color: var(--accent); }
+.bb-btn:disabled { opacity: .35; cursor: not-allowed; }
+.bb-btn .red { color: var(--red); }
+.bb-btn.bb-pass { color: var(--muted); }
+.bb-btn.bb-x { color: var(--red); }
+.bb-btn.bb-xx { color: var(--red); }
+
+.quiz-feedback {
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: .92rem;
+}
+.quiz-feedback.correct { background: #e3f6e6; border: 1px solid #bfe6c6; }
+.quiz-feedback.incorrect { background: #fbeaea; border: 1px solid #f0c4c0; }
+.quiz-feedback .verdict { font-weight: 700; display: block; margin-bottom: 4px; }
+
+.quiz-score {
+  background: var(--felt);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 10px;
+}
+.quiz-score .score-big { font-size: 1.6rem; font-weight: 700; }
+.quiz-score button { margin-top: 10px; }
+
+/* ---------- éditeur de photo : recadrage et rotation ---------- */
+
+/* Modal plein écran : tant qu'une photo est en cours de cadrage, rien d'autre
+   n'est cliquable — la lecture des cartes part de cette image-là. */
+.photo-editor {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  padding: 16px;
+  background: rgba(29, 43, 31, .72);
+}
+
+/* Le display n'est posé que sur l'état visible. Écrit sur `.photo-editor` tout
+   court, il viendrait après `.hidden` dans la feuille, à spécificité égale, et
+   l'emporterait : le dialogue resterait affiché en permanence, cadre vide et
+   rectangle de recadrage effondré dans un coin. */
+.photo-editor:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-editor-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: min(920px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 14px 16px 16px;
+  background: var(--panel);
+  border-radius: var(--radius);
+}
+
+.photo-editor-box h2 { margin: 0; font-size: 1.05rem; }
+.photo-edit-hint { margin: 0; font-size: .85rem; }
+.photo-editor-actions { margin: 0; }
+
+/* Le cadre épouse le canevas au pixel : posé en pourcentages, le rectangle de
+   recadrage se superpose donc exactement à l'image affichée, quelle que soit la
+   taille à laquelle elle a été réduite. */
+.photo-edit-frame {
+  position: relative;
+  align-self: center;
+  max-width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  /* Sans quoi le navigateur ferait défiler la page au lieu de laisser tirer le
+     rectangle au doigt. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+
+#photo-edit-canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 60vh;
+}
+
+/* L'ombre portée démesurée assombrit tout ce qui n'est pas retenu ; le cadre,
+   qui la rogne, la borne à l'image. */
+.photo-crop {
+  position: absolute;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .45);
+  cursor: move;
+}
+
+/* Poignées posées à l'intérieur du rectangle : sur les bords, le cadre les
+   rognerait de moitié dès que le recadrage touche l'image entière. */
+.photo-handle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 1px solid var(--felt-dark);
+  border-radius: 3px;
+}
+.photo-handle[data-handle="nw"] { left: 0; top: 0; cursor: nwse-resize; }
+.photo-handle[data-handle="ne"] { right: 0; top: 0; cursor: nesw-resize; }
+.photo-handle[data-handle="sw"] { left: 0; bottom: 0; cursor: nesw-resize; }
+.photo-handle[data-handle="se"] { right: 0; bottom: 0; cursor: nwse-resize; }
+.photo-handle[data-handle="n"] { left: calc(50% - 9px); top: 0; cursor: ns-resize; }
+.photo-handle[data-handle="s"] { left: calc(50% - 9px); bottom: 0; cursor: ns-resize; }
+.photo-handle[data-handle="w"] { top: calc(50% - 9px); left: 0; cursor: ew-resize; }
+.photo-handle[data-handle="e"] { top: calc(50% - 9px); right: 0; cursor: ew-resize; }

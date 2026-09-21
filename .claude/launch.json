@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bids-server",
+      "runtimeExecutable": "go",
+      "runtimeArgs": ["run", "."],
+      "port": 9015,
+      "autoPort": true
+    },
+    {
+      "name": "cli",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "cli"],
+      "port": 8123
+    }
+  ]
+}

@@ -1,0 +1,457 @@
+<title>Enchères contre le par</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#eff2ee; --surface:#fff; --surface-2:#f7f9f6; --raise:#e8ede8;
+  --ink:#161a17; --ink-2:#4a534d; --ink-3:#7b857e;
+  --rule:#d4dbd5; --rule-2:#e4e9e4;
+  --accent:#1a5c46; --accent-soft:#e0ebe4; --accent-mid:#6a9c86;
+  --red:#a8262c;
+  --warn:#8a6410; --warn-soft:#f4ecd9;
+  --alert:#8c2f39; --alert-soft:#f7e5e5;
+  --disp:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"Public Sans","Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#10130f; --surface:#171c18; --surface-2:#1c221d; --raise:#232a24;
+    --ink:#e9ede9; --ink-2:#a8b2ab; --ink-3:#7a847d;
+    --rule:#2b332d; --rule-2:#222922;
+    --accent:#63c199; --accent-soft:#1b2b24; --accent-mid:#3f7c65;
+    --red:#e28187;
+    --warn:#d7a851; --warn-soft:#2b2517;
+    --alert:#e08d95; --alert-soft:#2e1d20;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10130f; --surface:#171c18; --surface-2:#1c221d; --raise:#232a24;
+  --ink:#e9ede9; --ink-2:#a8b2ab; --ink-3:#7a847d;
+  --rule:#2b332d; --rule-2:#222922;
+  --accent:#63c199; --accent-soft:#1b2b24; --accent-mid:#3f7c65;
+  --red:#e28187;
+  --warn:#d7a851; --warn-soft:#2b2517;
+  --alert:#e08d95; --alert-soft:#2e1d20;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding:40px 24px 72px}
+h1,h2,h3{font-family:var(--disp);font-weight:700;text-wrap:balance;margin:0}
+.suit{font-variant-emoji:text;font-family:var(--body),"Segoe UI Symbol",serif}
+.r{color:var(--red)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+header{display:flex;flex-direction:column;gap:14px;padding-bottom:22px;
+  border-bottom:2px solid var(--ink);margin-bottom:30px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-size:clamp(30px,5.4vw,46px);line-height:1.04;letter-spacing:-.022em}
+.lede{max-width:64ch;color:var(--ink-2);font-size:16px;margin:0}
+.spec{display:flex;flex-wrap:wrap;gap:6px 0;font-family:var(--mono);font-size:12px;
+  color:var(--ink-2);border-top:1px solid var(--rule-2);padding-top:12px}
+.spec div{padding:0 15px;border-left:1px solid var(--rule)}
+.spec div:first-child{padding-left:0;border-left:0}
+.spec b{color:var(--ink);font-weight:600}
+
+section{margin-bottom:40px}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.sec-h h2{font-size:21px;letter-spacing:-.012em}
+.sec-h span{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(174px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.tile{background:var(--surface);padding:14px 16px 16px}
+.tile .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:7px}
+.tile .v{font-family:var(--disp);font-size:29px;font-weight:700;line-height:1;
+  font-variant-numeric:tabular-nums;letter-spacing:-.025em}
+.tile .s{font-size:12.5px;color:var(--ink-2);margin-top:6px;line-height:1.4}
+
+.panes{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;margin-top:22px}
+@media (max-width:840px){.panes{grid-template-columns:1fr}}
+.pane{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:16px 18px 18px}
+.pane h3{font-size:14.5px;letter-spacing:-.005em}
+.pane p.cap{font-size:12.5px;color:var(--ink-3);margin:3px 0 14px}
+
+.bars{display:grid;grid-template-columns:40px 1fr;gap:6px 10px;align-items:center}
+.bars .lab{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
+.pair{display:flex;flex-direction:column;gap:3px}
+.bar{display:flex;align-items:center;gap:7px;height:11px}
+.bar i{display:block;height:100%;border-radius:1px}
+.bar.sim i{background:var(--ink-2)}
+.bar.par i{background:var(--accent)}
+.bar b{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:18px;margin-top:14px;font-size:12px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:1px;display:block}
+
+.meter{display:flex;height:36px;border-radius:2px;overflow:hidden;border:1px solid var(--rule)}
+.meter div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:12px;font-weight:600;color:#fff}
+.mkey{display:grid;grid-template-columns:1fr auto;gap:3px 12px;margin-top:13px;
+  font-size:12.5px;color:var(--ink-2)}
+.mkey b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);
+  font-weight:600;text-align:right}
+.mkey span{display:flex;align-items:center;gap:8px}
+.mkey i{width:9px;height:9px;border-radius:50%;display:block;flex:none}
+
+nav.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+@media (max-width:760px){nav.cats{grid-template-columns:1fr}}
+nav.cats button{appearance:none;border:0;background:var(--surface);text-align:left;
+  padding:13px 15px 14px;cursor:pointer;font:inherit;color:var(--ink);
+  display:flex;flex-direction:column;gap:3px;border-left:3px solid transparent}
+nav.cats button:hover{background:var(--surface-2)}
+nav.cats button[aria-pressed="true"]{background:var(--accent-soft);border-left-color:var(--accent)}
+nav.cats button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+nav.cats .cn{font-size:13.5px;font-weight:600;line-height:1.25}
+nav.cats .cc{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+nav.cats button[aria-pressed="true"] .cc{color:var(--accent);font-weight:600}
+
+.rule-note{margin:18px 0 12px;padding:11px 15px;background:var(--surface-2);
+  border-left:3px solid var(--accent);font-size:13.5px;color:var(--ink-2);max-width:88ch}
+.rule-note b{color:var(--ink);font-weight:600}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+table.main{border-collapse:collapse;width:100%;font-size:13.5px}
+table.main thead th{position:sticky;top:0;background:var(--surface);z-index:1;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;text-align:left;padding:10px 12px;
+  border-bottom:1px solid var(--ink-3);white-space:nowrap}
+table.main tbody td{padding:7px 12px;border-bottom:1px solid var(--rule-2);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover{background:var(--surface-2)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ctr{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.chip{display:inline-block;padding:1px 7px;border-radius:2px;font-family:var(--mono);
+  font-size:11.5px;font-weight:600;white-space:nowrap}
+.chip.ok{background:var(--accent-soft);color:var(--accent)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--alert-soft);color:var(--alert)}
+.chip.mute{background:var(--raise);color:var(--ink-2)}
+.dnum{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
+.more{display:block;width:100%;margin-top:12px;padding:11px;background:var(--surface);
+  border:1px solid var(--rule);border-radius:3px;cursor:pointer;font:inherit;
+  font-size:13px;color:var(--ink-2)}
+.more:hover{background:var(--surface-2);color:var(--ink)}
+.more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+tr.detail td{background:var(--surface-2);padding:20px 16px 22px;border-bottom:1px solid var(--rule)}
+.dgrid{display:grid;grid-template-columns:minmax(300px,1fr) minmax(190px,.7fr) auto;
+  gap:28px;align-items:start}
+@media (max-width:920px){.dgrid{grid-template-columns:1fr}}
+.dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin-bottom:9px}
+.compass{display:grid;grid-template-columns:auto auto auto;gap:8px;
+  font-family:var(--mono);font-size:12.5px;justify-content:start}
+.hand{background:var(--surface);border:1px solid var(--rule);border-radius:2px;
+  padding:7px 10px;min-width:118px}
+.hand .hs{font-family:var(--body);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin-bottom:3px}
+.hand div.l{white-space:nowrap;line-height:1.5}
+.hand .void{color:var(--ink-3)}
+.c-n{grid-column:2;grid-row:1}
+.c-w{grid-column:1;grid-row:2}
+.c-e{grid-column:3;grid-row:2}
+.c-s{grid-column:2;grid-row:3}
+.c-mid{grid-column:2;grid-row:2;display:flex;flex-direction:column;justify-content:center;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-3);line-height:1.5;padding:0 4px}
+table.auc{border-collapse:collapse;font-family:var(--mono);font-size:12.5px;width:100%;max-width:270px}
+table.auc th{font-family:var(--body);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;text-align:left;padding:2px 9px 4px;
+  border-bottom:1px solid var(--rule)}
+table.auc td{padding:2px 9px;border-bottom:1px solid var(--rule-2)}
+table.auc td.p{color:var(--ink-3)}
+table.ddt{border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+table.ddt th{font-size:11px;color:var(--ink-3);font-weight:600;padding:3px 9px;text-align:center}
+table.ddt th.s{text-align:right;padding-right:11px}
+table.ddt td{padding:3px 9px;text-align:center;border-top:1px solid var(--rule-2);
+  font-variant-numeric:tabular-nums}
+table.ddt td.hi{background:var(--accent-soft);color:var(--accent);font-weight:600}
+table.ddt td.hip{box-shadow:inset 0 0 0 1.5px var(--ink-3)}
+.dnote{font-size:11.5px;color:var(--ink-3);margin-top:9px;max-width:24ch;line-height:1.45}
+footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--rule);
+  font-size:12.5px;color:var(--ink-3);max-width:74ch}
+footer p{margin:0 0 10px}
+footer code{font-family:var(--mono);font-size:12px;background:var(--raise);
+  color:var(--ink-2);padding:1px 5px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Moteur d'enchères &middot; audit double-mort</div>
+  <h1>Enchères contre le par</h1>
+  <p class="lede">Des donnes tirées au hasard, l'enchère complète jouée par le moteur, puis le
+    contrat du par calculé en double-mort par le solveur DDS. Les six écarts demandés sont
+    isolés donne par donne, chacun ouvrable sur le diagramme, la séquence et la table de levées.</p>
+  <div class="spec">
+    <div><b id="m-deals">&mdash;</b> donnes</div>
+    <div>graine <b id="m-seed">&mdash;</b></div>
+    <div id="m-eng-row">moteur <b id="m-eng">&mdash;</b></div>
+    <div>donneur et vulnérabilité en <b>rotation de 16 étuis</b></div>
+    <div>par : <b>DDS</b> WebAssembly</div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-h"><h2>Vue d'ensemble</h2><span id="m-scope">&mdash;</span></div>
+  <div class="tiles" id="tiles"></div>
+  <div class="panes">
+    <div class="pane">
+      <h3>Palier final : moteur contre par</h3>
+      <p class="cap">Nombre de donnes par palier du dernier contrat annoncé.</p>
+      <div class="bars" id="levels"></div>
+      <div class="legend">
+        <span><i style="background:var(--ink-2)"></i>enchère simulée</span>
+        <span><i style="background:var(--accent)"></i>contrat du par</span>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>Écart au par</h3>
+      <p class="cap">Différence de marque entre le contrat joué et le par, convertie en IMP.</p>
+      <div class="meter" id="meter"></div>
+      <div class="mkey" id="mkey"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h"><h2>Les six écarts</h2><span id="flagged">&mdash;</span></div>
+  <nav class="cats" id="cats"></nav>
+  <p class="rule-note" id="note"></p>
+  <div class="tbl-wrap">
+    <table class="main">
+      <thead><tr>
+        <th>Donne</th><th>Vuln.</th><th>Contrat joué</th><th>Double&nbsp;mort</th>
+        <th>Contrat du par</th><th>Score par</th><th>&Delta; IMP</th><th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <button class="more" id="more" hidden></button>
+</section>
+
+<footer>
+  <p>Le par est calculé palier par palier : chaque camp, à son tour, fait l'enchère la moins chère
+  qui améliore sa marque &mdash; contrat jouable en double-mort, ou sacrifice qui coûte moins que le
+  contrat adverse. Les défenseurs contrent tout contrat qui chute, jamais un contrat qui passe.
+  Le score du par est vu de NS ; <code>&Delta; IMP</code> compare la marque réellement obtenue à
+  celle du par, du même point de vue &mdash; un écart positif signifie que NS a fait mieux que le
+  par, faute de compétition adverse.</p>
+  <p>Les levées double-mort viennent du solveur DDS compilé en WebAssembly, celui qu'embarque déjà
+  <code>cli/par.js</code>. Les enchères sont produites par <code>NewEngine(d).Run()</code> sur des
+  donnes tirées par <code>randomDeal</code>, donneur et vulnérabilité imposés par le numéro d'étui.</p>
+</footer>
+</div>
+
+<script id="data" type="application/json">__PAYLOAD__</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("data").textContent);
+var S=D.stats,DEALS=D.deals,M=D.meta;
+var STR=["♣","♦","♥","♠","SA"];
+var SEAT=["N","E","S","O"];
+var SIDE=["NS","EO"];
+var DDS_STRAIN=[3,2,1,0,4];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function suit(i){return i===4?'<span class="mono">SA</span>'
+  :'<span class="suit'+(i===1||i===2?" r":"")+'">'+STR[i]+'</span>';}
+function contract(lv,st,dbl){return lv===0?'<span class="chip mute">passe général</span>'
+  :'<span class="ctr">'+lv+suit(st)+(dbl?"×":"")+'</span>';}
+
+var fmt=function(n){return String(n).replace(/\B(?=(\d{3})+$)/g," ");};
+document.getElementById("m-deals").textContent=fmt(S.total);
+document.getElementById("m-seed").textContent=M.seed;
+if(M.engine) document.getElementById("m-eng").textContent=M.engine;
+else document.getElementById("m-eng-row").hidden=true;
+document.getElementById("m-scope").textContent="les "+fmt(S.total)+" donnes";
+document.getElementById("flagged").textContent=
+  S.flagged+" donnes concernées sur "+fmt(S.total);
+
+var tiles=[
+ ["Contrats tenus",S.made,"sur "+(S.total-S.passout)+" contrats joués, réussis en double-mort"],
+ ["Marque égale au par",S.parEqual,"l'enchère a trouvé exactement la marque du par"],
+ ["Écart moyen",S.meanImp.toFixed(2),"IMP d'écart absolu au par, par donne"],
+ ["Même camp, même couleur",S.sameSideSameStrain,"contrat final et par dans la même dénomination"],
+ ["Par = sacrifice",S.parSacrifice,"le par est un contrat contré qui chute volontairement"]
+];
+document.getElementById("tiles").innerHTML=tiles.map(function(t){
+ return '<div class="tile"><span class="k">'+t[0]+'</span><div class="v">'+t[1]+
+        '</div><div class="s">'+t[2]+'</div></div>';}).join("");
+
+var maxL=Math.max.apply(null,S.levels.concat(S.parLevels))||1;
+document.getElementById("levels").innerHTML=S.levels.map(function(v,i){
+  var p=S.parLevels[i];
+  var lab=i===0?"passe":i+"·";
+  function bar(cls,n){return '<div class="bar '+cls+'"><i style="width:'+
+     (n?Math.max(1.5,n/maxL*100):0)+'%"></i><b>'+n+'</b></div>';}
+  return '<div class="lab">'+lab+'</div><div class="pair">'+bar("sim",v)+bar("par",p)+'</div>';
+}).join("");
+
+var buckets=[["0 IMP — marque du par",S.imp0,"var(--accent)"],
+  ["1 à 3 IMP",S.imp1_3,"var(--accent-mid)"],
+  ["4 à 9 IMP",S.imp4_9,"var(--warn)"],
+  ["10 IMP et plus",S.imp10,"var(--alert)"]];
+document.getElementById("meter").innerHTML=buckets.map(function(b){
+ return '<div style="width:'+(b[1]/S.total*100)+'%;background:'+b[2]+'">'+
+   (b[1]/S.total>0.13?b[1]:"")+'</div>';}).join("");
+document.getElementById("mkey").innerHTML=buckets.map(function(b){
+ return '<span><i style="background:'+b[2]+'"></i>'+b[0]+'</span><b>'+b[1]+'</b>';}).join("")+
+ '<span style="color:var(--ink-3);padding-left:17px">NS au-dessus / en dessous du par</span><b>'+
+ S.nsAbove+" / "+S.nsBelow+'</b>';
+
+var CATS=[
+ [1,"Camp déclarant inversé","Le contrat final est joué par un camp, celui du par par l'autre. Une partie de ces donnes est saine : le par est souvent un <b>sacrifice</b> adverse, que le moteur n'a aucune raison d'annoncer."],
+ [2,"Couleur différente du par","La dénomination du dernier contrat annoncé diffère de celle du contrat du par, quel que soit le camp qui le joue."],
+ [3,"Chelem demandé, impossible","Un contrat au palier de 6 ou de 7 a été annoncé alors qu'il chute en double-mort."],
+ [4,"Chelem manqué","L'enchère s'est arrêtée sous le palier de 6 alors qu'un camp encaisse <b>douze levées</b> en double-mort."],
+ [5,"Manche demandée, impossible","Une manche &mdash; 3SA, 4 en majeure, 5 en mineure &mdash; a été annoncée et chute en double-mort."],
+ [6,"Manche manquée","L'enchère s'est arrêtée sous la manche alors qu'un camp réalise une manche en double-mort."]
+];
+var cur=1,shown=0,PAGE=120,list=[];
+document.getElementById("cats").innerHTML=CATS.map(function(c){
+ return '<button type="button" data-c="'+c[0]+'" aria-pressed="'+(c[0]===cur)+'">'+
+   '<span class="cn">'+c[1]+'</span><span class="cc">'+S.counts[c[0]]+' donnes</span></button>';}).join("");
+
+function parLabel(d){
+  if(!d.pl) return '<span class="chip mute">passe général</span>';
+  var down=d.pl+6-d.pt;
+  return '<span class="ctr">'+d.pl+suit(d.ps)+(d.pm?"":"×")+'</span> '+
+    '<span class="mono" style="color:var(--ink-3)">'+SIDE[d.pd]+(d.pm?"":" −"+down)+'</span>';
+}
+function resChip(d){
+  if(d.lv===0) return '<span class="chip mute">—</span>';
+  if(d.rs>0) return '<span class="chip ok">+'+d.rs+'</span>';
+  if(d.rs===0) return '<span class="chip ok">=</span>';
+  return '<span class="chip bad">−'+(-d.rs)+'</span>';
+}
+function impCell(d){
+  var a=Math.abs(d.im);
+  var cls=a===0?"mute":a<=3?"ok":a<=9?"warn":"bad";
+  return '<span class="chip '+cls+'">'+(d.im>0?"+":"")+d.im+'</span>';
+}
+function handHTML(name,ranks){
+  var order=[3,2,1,0];
+  return '<div class="hand"><div class="hs">'+name+'</div>'+order.map(function(st,i){
+    return '<div class="l">'+suit(st)+" "+
+      (ranks[i]?esc(ranks[i]):'<span class="void">—</span>')+'</div>';}).join("")+'</div>';
+}
+var CODE={T:0,K:1,C:2,P:3};
+function callHTML(tok){
+  if(tok==="Passe") return '<span class="p">passe</span>';
+  if(tok==="Contre") return "<b>contre</b>";
+  if(tok==="Surcontre") return "<b>surcontre</b>";
+  var lv=tok.charAt(0),rest=tok.slice(1);
+  var st=rest==="SA"?4:CODE[rest];
+  return lv+(st===undefined?esc(rest):suit(st));
+}
+function auctionHTML(d){
+  var toks=d.a?d.a.split(" "):[];
+  var start=["N","E","S","W"].indexOf(d.d);
+  var cells=[],i;
+  for(i=0;i<start;i++) cells.push("");
+  toks.forEach(function(t){cells.push(callHTML(t.split(":")[1]));});
+  while(cells.length%4) cells.push("");
+  var rows="";
+  for(i=0;i<cells.length;i+=4){
+    rows+="<tr>"+cells.slice(i,i+4).map(function(c){
+      return "<td>"+(c||"")+"</td>";}).join("")+"</tr>";
+  }
+  return '<table class="auc"><thead><tr><th>N</th><th>E</th><th>S</th><th>O</th></tr></thead><tbody>'+
+    rows+"</tbody></table>";
+}
+function ddHTML(d){
+  var h='<table class="ddt"><tr><th class="s"></th>'+[0,1,2,3,4].map(function(st){
+    return "<th>"+suit(st)+"</th>";}).join("")+"</tr>";
+  for(var seat=0;seat<4;seat++){
+    h+='<tr><th class="s">'+SEAT[seat]+"</th>"+[0,1,2,3,4].map(function(st){
+      var v=d.t[DDS_STRAIN[st]*4+seat],cls="";
+      if(d.lv>0&&seat===d.dc&&st===d.st) cls="hi";
+      else if(d.pl&&st===d.ps&&seat%2===d.pd&&v===d.pt) cls="hip";
+      return "<td"+(cls?' class="'+cls+'"':"")+">"+v+"</td>";}).join("")+"</tr>";
+  }
+  return h+"</table>";
+}
+function detailHTML(d){
+  var hands=d.p.slice(2).split(" ").map(function(h){return h.split(".");});
+  var facts=[];
+  if(d.cs[0]||d.cs[1]) facts.push("chelem possible : "+(d.cs[0]?"NS":"")+(d.cs[0]&&d.cs[1]?" et ":"")+(d.cs[1]?"EO":""));
+  else if(d.cg[0]||d.cg[1]) facts.push("manche possible : "+(d.cg[0]?"NS":"")+(d.cg[0]&&d.cg[1]?" et ":"")+(d.cg[1]?"EO":""));
+  else facts.push("ni manche ni chelem");
+  facts.push("marque réelle "+(d.sc>0?"+":"")+d.sc+" NS");
+  facts.push("par "+(d.pv>0?"+":"")+d.pv+" NS");
+  return '<div class="dgrid">'+
+    "<div>"+'<div class="dt">Donne '+d.b+" · donneur "+SEAT[["N","E","S","W"].indexOf(d.d)]+
+      " · vuln. "+esc(d.v==="None"?"personne":d.v==="All"?"tous":d.v==="EW"?"EO":d.v)+"</div>"+
+      '<div class="compass">'+
+        '<div class="c-n">'+handHTML("Nord",hands[0])+"</div>"+
+        '<div class="c-w">'+handHTML("Ouest",hands[3])+"</div>"+
+        '<div class="c-mid">'+facts.map(esc).join("<br>")+"</div>"+
+        '<div class="c-e">'+handHTML("Est",hands[1])+"</div>"+
+        '<div class="c-s">'+handHTML("Sud",hands[2])+"</div>"+
+      "</div></div>"+
+    "<div>"+'<div class="dt">Enchères</div>'+auctionHTML(d)+"</div>"+
+    "<div>"+'<div class="dt">Levées double-mort</div>'+ddHTML(d)+
+      '<div class="dnote">Fond vert : le contrat effectivement joué. Encadré : la case du contrat du par.</div></div>'+
+  "</div>";
+}
+function rowHTML(d){
+  return '<tr class="row" data-b="'+d.b+'">'+
+    '<td class="n">'+d.b+"</td>"+
+    '<td class="n" style="color:var(--ink-3)">'+
+      esc(d.v==="None"?"—":d.v==="All"?"tous":d.v==="EW"?"EO":d.v)+"</td>"+
+    "<td>"+contract(d.lv,d.st,d.db)+
+      (d.lv?' <span class="mono" style="color:var(--ink-3)">'+SEAT[d.dc]+"</span>":"")+"</td>"+
+    "<td>"+resChip(d)+"</td>"+
+    "<td>"+parLabel(d)+"</td>"+
+    '<td class="n dnum">'+(d.pv>0?"+":"")+d.pv+"</td>"+
+    "<td>"+impCell(d)+"</td>"+
+    '<td style="color:var(--ink-3);font-size:11.5px">détail</td></tr>';
+}
+var rowsEl=document.getElementById("rows"),moreEl=document.getElementById("more");
+function render(reset){
+  if(reset){shown=0;rowsEl.innerHTML="";}
+  var next=list.slice(shown,shown+PAGE);
+  rowsEl.insertAdjacentHTML("beforeend",next.map(rowHTML).join(""));
+  shown+=next.length;
+  if(shown<list.length){
+    moreEl.hidden=false;
+    moreEl.textContent="Afficher "+Math.min(PAGE,list.length-shown)+
+      " donnes de plus · "+shown+" / "+list.length;
+  } else moreEl.hidden=true;
+}
+function select(c){
+  cur=c;
+  var btns=document.querySelectorAll("nav.cats button");
+  for(var i=0;i<btns.length;i++) btns[i].setAttribute("aria-pressed",String(+btns[i].dataset.c===c));
+  var meta;
+  CATS.forEach(function(x){if(x[0]===c) meta=x;});
+  document.getElementById("note").innerHTML="<b>"+meta[1]+".</b> "+meta[2];
+  list=DEALS.filter(function(d){return d.c.indexOf(c)>=0;})
+            .sort(function(a,b){return Math.abs(b.im)-Math.abs(a.im)||a.b-b.b;});
+  render(true);
+}
+document.getElementById("cats").addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(b) select(+b.dataset.c);
+});
+moreEl.addEventListener("click",function(){render(false);});
+rowsEl.addEventListener("click",function(e){
+  var tr=e.target.closest("tr.row"); if(!tr) return;
+  var nx=tr.nextElementSibling;
+  if(nx&&nx.className==="detail"){nx.remove();return;}
+  var d;
+  DEALS.forEach(function(x){if(x.b===+tr.dataset.b) d=x;});
+  var det=document.createElement("tr");
+  det.className="detail";
+  det.innerHTML='<td colspan="8">'+detailHTML(d)+"</td>";
+  tr.parentNode.insertBefore(det,tr.nextSibling);
+});
+select(1);
+})();
+</script>

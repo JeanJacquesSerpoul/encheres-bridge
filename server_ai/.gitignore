@@ -1,0 +1,5 @@
+.env
+dist/
+server_ai
+server_ai.exe
+*.log

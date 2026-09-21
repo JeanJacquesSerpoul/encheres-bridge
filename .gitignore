@@ -1,0 +1,14 @@
+bids
+bids.exe
+bids-linux
+bids-windows.exe
+tools/par/out/
+.env
+.env.*
+!.env.example
+
+# Moteur compilé en WebAssembly et sa glue, produits par build-wasm.sh :
+# reconstruits à chaque build, et bien trop gros pour l'historique.
+cli/bids.wasm
+cli/bids_wasm_bin.js
+cli/wasm_exec.js

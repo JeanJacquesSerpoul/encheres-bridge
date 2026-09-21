@@ -1,0 +1,23 @@
+# Production : le dossier prod/ est autonome (binaire pré-compilé par
+# build-prod.ps1 + client web). Sur le serveur Linux, depuis ce dossier :
+#   docker compose up -d --build
+services:
+  bids:
+    build: .
+    image: bridge-bids:prod
+    container_name: bridge-bids-prod
+    ports:
+      - "${PORT:-9015}:9015"
+    restart: unless-stopped
+    environment:
+      SERVE_CLI: "true"
+      CORS_ORIGINS: "${CORS_ORIGINS:-*}"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: "1.0"

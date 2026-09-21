@@ -1,0 +1,22 @@
+% PBN 2.1
+% Drury : reponse 2T (ou 2SA) du repondant deja passe
+% face a une ouverture majeure de troisieme ou quatrieme.
+
+[Event "Exemples Drury"]
+[Board "1"]
+[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:K72.A65.Q9843.76 T95.Q87.A62.KT53 AQJ63.KJ2.J5.984 84.T943.KT7.AQJ2"]
+[Description "2T Drury, ouverture minimale : Sud repete 2P, on s'arrete"]
+
+[Board "2"]
+[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:K72.A65.Q9843.76 T95.QJ4.K72.T542 AQJ63.K72.A5.983 84.T983.JT6.AKQJ"]
+[Description "2T Drury, ambition de manche : 2K demande le soutien, 2P = 3 cartes, 4P"]
+
+[Board "3"]
+[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:K872.A65.Q9843.6 T9.Q87.AK5.JT432 AQJ63.KJ2.J76.98 54.T943.T2.AKQ75"]
+[Description "2SA Drury : fit quatrieme + singleton ; ouverture minimale, arret a 3P"]

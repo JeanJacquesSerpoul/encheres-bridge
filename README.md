@@ -4,7 +4,11 @@
 
 # Bridge Bidding Server
 
+**L'application est en ligne : <https://jeanjacquesserpoul.github.io/encheres-bridge/>**
+
 Serveur HTTP en Go qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), à partir d'un fichier **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
+
+Le moteur y tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique-github-pages)).
 
 Le dépôt contient quatre morceaux, dont seul le premier est indispensable :
 
@@ -228,7 +232,7 @@ Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) 
 node tools/wasm-parity.js               # compare les deux chemins sur testdata/*.pbn
 ```
 
-La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur. Sans `cli/bids.wasm`, le client part sur **Local** de lui-même et ne perd rien ; l'option reste dans la liste et dit ce qui manque si on la choisit quand même.
+La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur. Sans `cli/bids.wasm`, rien n'est sondé à l'ouverture : le client reste sur **Navigateur** et ne découvre l'absence du moteur qu'au premier calcul. Il le dit alors clairement et ramène la barre du serveur, qui laisse en viser un.
 
 Tant que le moteur répond, la barre du serveur disparaît de l'en-tête : il n'y a personne à choisir. Pour viser un serveur alors que tout fonctionne — la production, un autre port, ou simplement comparer les deux chemins — ouvrez le client avec **`?serveur=1`** :
 

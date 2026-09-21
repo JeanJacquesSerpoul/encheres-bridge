@@ -189,6 +189,17 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
   flex-wrap: wrap;
 }
 .spacer { flex: 1; }
+
+/* Une rangée de commandes centrée sous ce qu'elle commande, plutôt qu'alignée
+   à gauche d'un panneau large : les boutons se retrouvent sous la donne, non
+   à l'autre bout de l'écran. flex-wrap vient de .row, les lignes de repli
+   restent donc centrées elles aussi. */
+.row-centered { justify-content: center; }
+
+/* Sans message, le span d'erreur reste un élément de la rangée : large de
+   rien, mais précédé de son gap, il décalait le centrage de quelques pixels
+   vers la gauche. Il ne reparaît qu'une fois rempli. */
+.row-centered .error:empty { display: none; }
 /* Un libellé et son champ, insécables : quand la ligne se replie, ils passent
    ensemble à la suivante. */
 .field { display: inline-flex; align-items: center; gap: 8px; }

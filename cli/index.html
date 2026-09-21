@@ -177,7 +177,7 @@
       </div>
       <details id="pbn-details" class="pbn-details">
         <summary data-i18n="pbnToggle">Afficher / masquer le texte PBN</summary>
-        <textarea id="pbn" rows="6" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
+        <textarea id="pbn" rows="4" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
       </details>
       <div class="row hidden" id="deal-select-row">
         <label for="deal-select" data-i18n="dealToUse">Donne à utiliser</label>
@@ -192,17 +192,23 @@
           <div class="hand cons-hand seat-e" id="cons-E"></div>
           <div class="hand cons-hand seat-s" id="cons-S"></div>
         </div>
-        <div class="row">
+        <!-- Les commandes de la donne, centrées sur une ligne : vider la
+             donne, effacer les bornes, puis lancer le calcul. « Afficher les
+             enchères » les rejoint bien qu'il n'appartienne pas aux contraintes
+             — c'est l'action qui clôt la composition, sa place est à leur
+             droite. -->
+        <div class="row row-centered">
           <button id="cons-clear-btn" type="button"></button>
           <button id="cons-fill-btn" type="button" class="primary hidden"></button>
           <button id="cons-reset-btn" type="button"></button>
+          <button id="bid-btn" type="button" class="primary" data-i18n="runAuction">Afficher les enchères</button>
           <span id="cons-error" class="error"></span>
         </div>
       </div>
 
-      <div class="row">
-        <button id="bid-btn" type="button" class="primary" data-i18n="runAuction">Afficher les enchères</button>
-        <span class="spacer"></span>
+      <!-- Le questionnaire et le siège qu'il fait jouer, centrés sous les
+           commandes : ils vont ensemble, et rien ne les sépare plus. -->
+      <div class="row row-centered">
         <label for="seat" data-i18n="yourHand">Votre main</label>
         <select id="seat">
           <option value="N">Nord</option>

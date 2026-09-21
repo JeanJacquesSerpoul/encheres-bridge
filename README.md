@@ -22,6 +22,24 @@ Les règles réellement appliquées par le moteur sont décrites, une par une et
 ## Démarrage
 
 ```bash
+./run.sh            # compile ce qu'il faut, lance le serveur, ouvre le navigateur
+```
+
+```powershell
+.\run.ps1           # équivalent PowerShell
+```
+
+[run.sh](run.sh)/[run.ps1](run.ps1) produisent le moteur WebAssembly s'il manque, compilent le serveur dans `./bids` (ignoré par git), attendent que `/ready` réponde puis ouvrent la page. `Ctrl+C` arrête le serveur. Un serveur déjà en écoute sur le port est détecté : la page est alors simplement ouverte.
+
+```bash
+./run.sh -p 9200    # autre port
+./run.sh -n         # ne pas ouvrir le navigateur
+./run.sh -f         # recompiler cli/bids.wasm au passage
+```
+
+À la main, si l'on préfère :
+
+```bash
 ./build-wasm.sh     # une fois : le moteur en WebAssembly pour le client
 go run .            # ou : go build -o bids.exe . && ./bids.exe
 ```
@@ -193,7 +211,7 @@ Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://local
 
 ### Le mode navigateur
 
-Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le charge au démarrage ([cli/bids-wasm.js](cli/bids-wasm.js)) et calcule alors les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
+Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le charge au premier calcul, sous un voile d'attente ([cli/bids-wasm.js](cli/bids-wasm.js)), et calcule alors les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
 
 ```bash
 node tools/wasm-parity.js               # compare les deux chemins sur testdata/*.pbn
@@ -495,6 +513,7 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 | `response.go` | Formes JSON de l'API, estampille de version et encodeur partagés par le serveur et la cible WebAssembly |
 | `main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (artefacts non versionnés) |
+| `run.sh`, `run.ps1` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
 | `tools/wasm-parity.js` | Vérifie que le moteur WebAssembly et `/bid` rendent les mêmes octets |
 | `server_ai/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `build-server.sh`, `build-server.ps1` | Compilation des exécutables Linux et Windows dans `server/` |

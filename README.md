@@ -233,7 +233,7 @@ Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://local
 
 ### Le mode navigateur
 
-Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le charge au premier calcul, sous un voile d'attente ([cli/bids-wasm.js](cli/bids-wasm.js)), et calcule alors les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
+Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
 
 ```bash
 node tools/wasm-parity.js               # compare les deux chemins sur testdata/*.pbn

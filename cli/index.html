@@ -58,8 +58,7 @@
        app.js une fois l'interface prête. Sans lui, tout le temps d'arrivée de
        style.css et app.js se passe devant une page blanche — plusieurs
        secondes sur un hébergement lent, où l'on croit l'application en panne.
-       Distinct de #engine-loading, qui ne couvre que le chargement du moteur
-       au premier calcul. -->
+       Distinct de #engine-loading, qui ne couvre que l'attente du moteur. -->
   <div id="boot-loading" role="status" aria-live="polite">
     <div class="boot-box">
       <span class="boot-spinner" aria-hidden="true"></span>
@@ -367,11 +366,12 @@
     </div>
   </div>
 
-  <!-- Voile d'attente du moteur d'enchères. bids.wasm (4,5 Mo) n'est plus
-       téléchargé à l'ouverture de la page mais au premier calcul : sur un lien
-       lent, ce voile est la seule chose qui dise que l'attente a une raison.
-       Posé et retiré par onBidsEngineLoad dans app.js ; le libellé est traduit
-       par applyLang comme le reste de l'interface. -->
+  <!-- Voile d'attente du moteur d'enchères. bids.wasm est préchargé dès
+       l'ouverture de la page : ce voile ne paraît donc que si l'on demande un
+       calcul avant la fin de ce préchargement, sur un lien lent. Il est alors
+       la seule chose qui dise que l'attente a une raison. Posé et retiré par
+       onBidsEngineLoad dans app.js ; le libellé est traduit par applyLang
+       comme le reste de l'interface. -->
   <div id="engine-loading" class="engine-loading hidden" role="status" aria-live="polite">
     <div class="engine-loading-box">
       <span class="spinner" aria-hidden="true"></span>

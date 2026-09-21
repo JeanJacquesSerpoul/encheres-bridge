@@ -64,13 +64,48 @@
     return "N:" + DIR_ORDER.map(oneSeat).join(" ");
   }
 
-  function loadModule() {
+  // Les deux fichiers du solveur pèsent 915 Ko à eux seuls. Les charger depuis
+  // index.html les imposait à chaque ouverture de page, alors qu'ils ne
+  // servent qu'au bouton « Calcul du PAR » : on les injecte ici, au premier
+  // calcul, une fois pour toutes.
+  //
+  // L'ordre n'est pas négociable : dds_web_wasm.js lit ddsWebWasmBytes, que
+  // dds_web_wasm_bin.js définit — d'où la chaîne séquentielle plutôt qu'un
+  // Promise.all.
+  const DDS_SCRIPTS = ["dds_web_wasm_bin.js", "dds_web_wasm.js"];
+  let scriptsPromise = null;
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      el.src = src;
+      el.onload = () => resolve();
+      el.onerror = () => reject(new Error(tr("parUnavailable")));
+      document.head.appendChild(el);
+    });
+  }
+
+  // La promesse est oubliée en cas d'échec : un nouveau clic réessaie, au lieu
+  // de resservir l'erreur indéfiniment (même règle que modulePromise).
+  function loadScripts() {
+    if (!scriptsPromise) {
+      scriptsPromise = DDS_SCRIPTS
+        .reduce((chain, src) => chain.then(() => loadScript(src)), Promise.resolve())
+        .catch((err) => { scriptsPromise = null; throw err; });
+    }
+    return scriptsPromise;
+  }
+
+  async function loadModule() {
+    // Vérifié avant le téléchargement : sans isolation cross-origine le
+    // solveur ne pourra pas démarrer, autant ne pas tirer 915 Ko pour rien.
+    if (typeof SharedArrayBuffer === "undefined") {
+      throw new Error(tr("parNoIsolation"));
+    }
+    await loadScripts();
     if (typeof createDdsModule !== "function" ||
         typeof ddsWebWasmBytes !== "function") {
-      return Promise.reject(new Error(tr("parUnavailable")));
-    }
-    if (typeof SharedArrayBuffer === "undefined") {
-      return Promise.reject(new Error(tr("parNoIsolation")));
+      throw new Error(tr("parUnavailable"));
     }
     if (!modulePromise) {
       modulePromise = createDdsModule({ wasmBinary: ddsWebWasmBytes() })
@@ -430,9 +465,14 @@
     const err = $("#par-error");
     const status = $("#par-status");
     if (err) err.textContent = "";
-    if (status) status.textContent = tr("parComputing");
     if (btn) btn.disabled = true;
     try {
+      // Au tout premier clic le solveur est encore à télécharger : on le dit,
+      // plutôt que d'annoncer un calcul qui n'a pas commencé. Les appels
+      // suivants passent directement à « Calcul en cours ».
+      if (status && !modulePromise) status.textContent = tr("parLoading");
+      await loadModule();
+      if (status) status.textContent = tr("parComputing");
       lastTable = await calcTable(pbnFromHands(dealHands));
       renderTable();
     } catch (e) {

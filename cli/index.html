@@ -299,17 +299,27 @@
     </div>
   </div>
 
+  <!-- Voile d'attente du moteur d'enchères. bids.wasm (4,5 Mo) n'est plus
+       téléchargé à l'ouverture de la page mais au premier calcul : sur un lien
+       lent, ce voile est la seule chose qui dise que l'attente a une raison.
+       Posé et retiré par onBidsEngineLoad dans app.js ; le libellé est traduit
+       par applyLang comme le reste de l'interface. -->
+  <div id="engine-loading" class="engine-loading hidden" role="status" aria-live="polite">
+    <div class="engine-loading-box">
+      <span class="spinner" aria-hidden="true"></span>
+      <span data-i18n="engineLoading">Chargement du moteur d'enchères…</span>
+    </div>
+  </div>
+
   <!-- Infobulle d'entame du tableau du PAR (par.js la remplit). Hors du
        tableau et en position fixe : ni la cellule ni le panneau ne peuvent la
        rogner, et elle devient un bandeau bas sur mobile. -->
   <div id="par-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
   <div id="auction-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
 
-  <!-- Solveur double-mort (DDS) compilé en WebAssembly, repris tel quel de
-       dds-fork/web : dds_web_wasm_bin.js porte les octets .wasm en base64,
-       dds_web_wasm.js expose createDdsModule(). Exploités par par.js. -->
-  <script src="dds_web_wasm_bin.js"></script>
-  <script src="dds_web_wasm.js"></script>
+  <!-- Le solveur double-mort (DDS) ne se charge plus ici : ses deux fichiers
+       pèsent 915 Ko, et seul le bouton « Calcul du PAR » s'en sert. par.js les
+       injecte au premier calcul (voir loadScripts). -->
 
   <!-- Moteur d'enchères compilé en WebAssembly (build-wasm.sh) : wasm_exec.js
        est la glue fournie par la distribution Go et définit Go, dont

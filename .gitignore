@@ -12,3 +12,6 @@ tools/par/out/
 cli/bids.wasm
 cli/bids_wasm_bin.js
 cli/wasm_exec.js
+
+# Verrou local de session Claude Code (sessionId/pid propres à la machine)
+.claude/scheduled_tasks.lock

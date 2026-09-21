@@ -127,6 +127,68 @@ func compressible(name string) bool {
 	return false
 }
 
+// compressAsset gzips raw and derives the ETag from the *uncompressed* bytes,
+// so the tag identifies the file's content rather than this build's choice of
+// compression level.
+func compressAsset(raw []byte) cachedAsset {
+	var buf bytes.Buffer
+	zw, _ := gzip.NewWriterLevel(&buf, gzip.BestCompression)
+	_, _ = zw.Write(raw)
+	_ = zw.Close()
+	sum := sha256.Sum256(raw)
+	return cachedAsset{
+		gz:   buf.Bytes(),
+		etag: `"` + hex.EncodeToString(sum[:8]) + `"`,
+	}
+}
+
+// warmGzipCache compresses every embedded asset up front, in a goroutine at
+// startup. BestCompression over a multi-megabyte cli/bids.wasm takes a
+// noticeable fraction of a second; computed lazily, that cost lands on the
+// first visitor after each restart — who is already the one waiting on the
+// largest download. Startup is where it belongs.
+func warmGzipCache(root fs.FS) {
+	start := time.Now()
+	var files, rawBytes, gzBytes int
+	_ = fs.WalkDir(root, ".", func(name string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() || !compressible(name) {
+			return nil
+		}
+		raw, err := fs.ReadFile(root, name)
+		if err != nil {
+			return nil
+		}
+		a := compressAsset(raw)
+		gzipCache.Store(name, a)
+		files++
+		rawBytes += len(raw)
+		gzBytes += len(a.gz)
+		return nil
+	})
+	logger.Info("static assets pre-compressed",
+		"files", files, "raw_bytes", rawBytes, "gzip_bytes", gzBytes,
+		"duration_ms", time.Since(start).Milliseconds())
+}
+
+// cacheControl decides how long a browser may reuse an asset without asking.
+//
+// The file names carry no content hash, so a long max-age would leave a
+// client running yesterday's app.js against today's server. index.html is
+// therefore always revalidated — it is small, and a 304 costs a single round
+// trip — while the bulky assets it pulls in get a short window: long enough
+// that a browsing session stops re-checking every file on each navigation,
+// short enough that a deploy reaches everyone within minutes.
+//
+// Without this, the assets had no freshness information at all: embed.FS
+// reports a zero modification time, so there was no Last-Modified either, and
+// the browser revalidated all of them on every single page load.
+func cacheControl(name string) string {
+	if name == "" || path.Ext(name) == ".html" {
+		return "no-cache"
+	}
+	return "public, max-age=300"
+}
+
 // gzipStatic serves the bulky cli/ assets compressed, which http.FileServer
 // never does: cli/bids.wasm is megabytes of Go code and shrinks by more than
 // a factor of three. The gzip bytes and the ETag are computed on first request
@@ -140,7 +202,14 @@ func compressible(name string) bool {
 func gzipStatic(root fs.FS, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		name := strings.TrimPrefix(r.URL.Path, "/")
-		if name == "" || !compressible(name) ||
+		// Naming index.html explicitly lets the page itself be served gzipped
+		// and with an ETag; FileServer's directory handling would otherwise
+		// send it raw and untagged.
+		if r.URL.Path == "/" {
+			name = "index.html"
+		}
+		w.Header().Set("Cache-Control", cacheControl(name))
+		if !compressible(name) ||
 			!strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
 			next.ServeHTTP(w, r)
 			return
@@ -152,15 +221,7 @@ func gzipStatic(root fs.FS, next http.Handler) http.Handler {
 				next.ServeHTTP(w, r) // 404s, redirects, directories: FileServer's job
 				return
 			}
-			var buf bytes.Buffer
-			zw, _ := gzip.NewWriterLevel(&buf, gzip.BestCompression)
-			_, _ = zw.Write(raw)
-			_ = zw.Close()
-			sum := sha256.Sum256(raw)
-			v, _ = gzipCache.LoadOrStore(name, cachedAsset{
-				gz:   buf.Bytes(),
-				etag: `"` + hex.EncodeToString(sum[:8]) + `"`,
-			})
+			v, _ = gzipCache.LoadOrStore(name, compressAsset(raw))
 		}
 		a := v.(cachedAsset)
 
@@ -473,6 +534,9 @@ func main() {
 			mux.HandleFunc("/", accessLog(cors(notFoundHandler)))
 		} else {
 			mux.Handle("/", crossOriginIsolated(gzipStatic(cliRoot, http.FileServer(http.FS(cliRoot)))))
+			// In the background: serving can start immediately, and any
+			// request that beats the warm-up just compresses its own file.
+			go warmGzipCache(cliRoot)
 			logger.Info("test client served from embedded ./cli at /")
 		}
 	}

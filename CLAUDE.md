@@ -4,3 +4,5 @@
 - Ne jamais exécuter `git add` sur ces fichiers.
 - Ne jamais afficher ou recopier leur contenu.
 - Utiliser uniquement `.env.example` comme fichier pouvant être versionné.
+## PR
+Créer une PR pour toute modification de code, même mineure.

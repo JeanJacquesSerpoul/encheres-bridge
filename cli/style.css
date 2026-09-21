@@ -916,3 +916,59 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .photo-handle[data-handle="s"] { left: calc(50% - 9px); bottom: 0; cursor: ns-resize; }
 .photo-handle[data-handle="w"] { top: calc(50% - 9px); left: 0; cursor: ew-resize; }
 .photo-handle[data-handle="e"] { top: calc(50% - 9px); right: 0; cursor: ew-resize; }
+
+/* ---------- voile d'attente du moteur d'enchères ---------- */
+
+/* bids.wasm pèse 4,5 Mo et n'est téléchargé qu'au premier calcul (voir
+   bids-wasm.js) : sur un lien lent l'attente se compte en secondes, et ce
+   voile est le seul signe que quelque chose se passe. Posé et retiré par
+   onBidsEngineLoad dans app.js.
+
+   Même construction que .photo-editor : le display n'est posé que sur l'état
+   visible, faute de quoi il viendrait après `.hidden` à spécificité égale et
+   le voile ne se retirerait jamais. Au-dessus de l'éditeur de photo (50) et
+   des infobulles (60), sous la carte glissée (100), qui ne peut de toute
+   façon pas coexister avec lui. */
+.engine-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  padding: 16px;
+  background: rgba(29, 43, 31, .72);
+}
+
+.engine-loading:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.engine-loading-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  font-size: .95rem;
+}
+
+.spinner {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Un disque qui tourne sans fin est exactement ce que fuient ceux qui règlent
+   leur système sur « moins d'animations ». On garde un repère vivant — la
+   pastille respire — plutôt que de la figer, ce qui ferait croire à un blocage. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .35; } }
+}

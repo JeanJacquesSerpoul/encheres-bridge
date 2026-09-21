@@ -22,6 +22,18 @@
   const WASM_URL = "bids.wasm";
 
   let modulePromise = null;
+  let loaded = false;
+
+  // Le module pèse plusieurs mégaoctets : sur un lien lent son arrivée prend
+  // des secondes, pendant lesquelles un bouton grisé ne dit rien. On prévient
+  // l'interface, qui pose un voile d'attente (voir onBidsEngineLoad dans
+  // app.js). Un simple crochet plutôt qu'une dépendance : ce fichier n'a pas
+  // à connaître le DOM du client.
+  function notify(state) {
+    if (typeof window.onBidsEngineLoad === "function") {
+      window.onBidsEngineLoad(state);
+    }
+  }
 
   function tr(key) {
     const sel = q("#lang");
@@ -41,10 +53,19 @@
       return Promise.reject(new Error(tr("wasmMissingExec")));
     }
     if (!modulePromise) {
-      modulePromise = instantiate().catch((err) => {
-        modulePromise = null;
-        throw err;
-      });
+      notify("start");
+      modulePromise = instantiate().then(
+        (api) => {
+          loaded = true;
+          notify("done");
+          return api;
+        },
+        (err) => {
+          modulePromise = null;
+          notify("done");
+          throw err;
+        }
+      );
     }
     return modulePromise;
   }
@@ -101,6 +122,14 @@
     bid: (pbn, lang) => call("bid", pbn, lang).then(JSON.parse),
     bids: (pbn, lang) => call("bids", pbn, lang).then(JSON.parse),
     version: () => loadModule().then((api) => JSON.parse(api.version)),
+    // Le module est-il déjà instancié ? app.js s'en sert pour ne pas
+    // déclencher 4,5 Mo de téléchargement à seule fin d'allumer une pastille.
+    loaded: () => loaded,
+    // Le module est-il seulement servi ? Une requête HEAD suffit à le savoir
+    // sans rien télécharger : c'est tout ce dont l'ouverture de la page a
+    // besoin, le moteur lui-même attendant le premier calcul.
+    available: () =>
+      fetch(WASM_URL, { method: "HEAD" }).then((r) => r.ok, () => false),
     // Rejoue la donne de référence de /ready : la pastille d'état dit la même
     // chose dans les deux modes.
     selfCheck: () => loadModule().then((api) => api.selfCheck().ok === true),

@@ -102,6 +102,28 @@ occupé, SmartScreen, pare-feu).
 
 Les binaires produits ne sont pas versionnés (voir [.gitignore](.gitignore)) : ils se recompilent à la demande.
 
+## Hébergement statique (GitHub Pages)
+
+Le client se suffit à lui-même : le moteur tourne dans le navigateur (`cli/bids.wasm`), aucun service n'est interrogé. `cli/` est donc publiable tel quel sur n'importe quel hébergeur de fichiers statiques — sans serveur Go, sans base, sans configuration.
+
+[.github/workflows/pages.yml](.github/workflows/pages.yml) le publie sur **GitHub Pages** à chaque poussée sur `main`, et à la demande depuis l'onglet *Actions*. Le workflow :
+
+1. lance `go test ./...` — le moteur WebAssembly *est* ce code Go, un test rouge signifierait des enchères fausses ;
+2. compile `cli/bids.wasm` et `cli/wasm_exec.js` avec [build-wasm.sh](build-wasm.sh), car ces deux fichiers sont ignorés par git et n'existent pas dans le dépôt ;
+3. vérifie qu'aucun fichier de `cli/` ne manque, puis publie le dossier.
+
+Le site est servi sous `https://<compte>.github.io/encheres-bridge/`. Tous les chemins du client sont relatifs, ce sous-répertoire ne demande donc aucun réglage.
+
+**Ce qu'un bon hébergeur statique apporte**, et qu'il faut vérifier ailleurs que sur Pages :
+
+| Attendu | Pourquoi |
+|---|---|
+| `Content-Type: application/wasm` sur `.wasm` | Sans lui, `WebAssembly.instantiateStreaming` est refusé et le client retombe sur `arrayBuffer()`, plus lent et plus gourmand en mémoire |
+| Compression (`gzip`/`br`) sur `.wasm` | 4,5 Mo bruts contre ~1,2 Mo compressés |
+| `Cache-Control` sur les assets | Sans lui, chaque visite revalide tous les fichiers |
+
+Un point reste hors de portée sur Pages, qui ne permet pas d'en-têtes personnalisés : `COOP`/`COEP`, nécessaires à `SharedArrayBuffer` donc au bouton **Calcul du PAR**. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) les fournit à sa place, au prix d'**un rechargement de page à la première visite**. C'est précisément ce pour quoi il est là.
+
 ## Docker
 
 ```bash
@@ -514,6 +536,7 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 | `main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (artefacts non versionnés) |
 | `run.sh`, `run.ps1` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
+| `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `tools/wasm-parity.js` | Vérifie que le moteur WebAssembly et `/bid` rendent les mêmes octets |
 | `server_ai/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `build-server.sh`, `build-server.ps1` | Compilation des exécutables Linux et Windows dans `server/` |

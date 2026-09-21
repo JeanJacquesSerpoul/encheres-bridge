@@ -1,0 +1,87 @@
+# Publication du client sur GitHub Pages.
+#
+# cli/ est une application entièrement statique : le moteur d'enchères tourne
+# dans le navigateur (cli/bids.wasm, compilé depuis les mêmes sources Go que le
+# serveur), aucun service n'est interrogé. Rien d'autre que des fichiers n'est
+# donc nécessaire pour la servir.
+#
+# cli/bids.wasm et cli/wasm_exec.js sont ignorés par git : ils ne sont pas dans
+# le dépôt et sont produits ici, à chaque déploiement, par build-wasm.sh. Le
+# site publié reflète donc toujours l'état des sources de main.
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Permet de republier sans nouveau commit, depuis l'onglet Actions.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois. cancel-in-progress reste à false : interrompre
+# une publication en cours laisserait le site dans un état indéterminé, mieux
+# vaut faire la queue.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Compiler le moteur et préparer le site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          # La version vient de go.mod : une seule source de vérité.
+          go-version-file: go.mod
+
+      # Le moteur WebAssembly EST le code Go. Un test rouge signifie des
+      # enchères fausses : autant ne rien publier.
+      - name: Tests du moteur
+        run: go test ./...
+
+      # Produit cli/bids.wasm et cli/wasm_exec.js. Le script passe au passage
+      # `go vet` sur la cible js/wasm — seul garde-fou contre une faute dans
+      # main_js.go, qu'aucun test ne compile.
+      - name: Compiler le moteur en WebAssembly
+        run: ./build-wasm.sh
+
+      # Un fichier manquant ne casserait rien au déploiement mais donnerait un
+      # site à moitié mort, découvert par le premier visiteur. On vérifie ici.
+      - name: Vérifier que cli/ est complet
+        run: |
+          for f in index.html style.css app.js par.js bids-wasm.js wasm_exec.js \
+                   bids.wasm coi-serviceworker.js dds_web_wasm.js dds_web_wasm_bin.js; do
+            if [ ! -s "cli/$f" ]; then
+              echo "::error::cli/$f est manquant ou vide"
+              exit 1
+            fi
+          done
+          echo "cli/ complet :"
+          du -h cli/* | sort -h
+
+      # enablement: active Pages sur le dépôt si ce n'est pas déjà fait, ce qui
+      # évite d'avoir à le régler à la main dans les paramètres.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: cli
+
+  deploy:
+    name: Publier
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

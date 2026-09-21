@@ -12,7 +12,7 @@
 
 Serveur HTTP en Go qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), à partir d'un fichier **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
 
-Le moteur y tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique-github-pages)).
+Le moteur y tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique)).
 
 Le dépôt contient quatre morceaux, dont seul le premier est indispensable :
 
@@ -110,9 +110,11 @@ occupé, SmartScreen, pare-feu).
 
 Les binaires produits ne sont pas versionnés (voir [.gitignore](.gitignore)) : ils se recompilent à la demande.
 
-## Hébergement statique (GitHub Pages)
+## Hébergement statique
 
 Le client se suffit à lui-même : le moteur tourne dans le navigateur (`cli/bids.wasm`), aucun service n'est interrogé. `cli/` est donc publiable tel quel sur n'importe quel hébergeur de fichiers statiques — sans serveur Go, sans base, sans configuration.
+
+### GitHub Pages
 
 [.github/workflows/pages.yml](.github/workflows/pages.yml) le publie sur **GitHub Pages** à chaque poussée sur `main`, et à la demande depuis l'onglet *Actions*. Le workflow :
 
@@ -133,6 +135,103 @@ Le site est servi sous **<https://jeanjacquesserpoul.github.io/encheres-bridge/>
 | `Cache-Control` sur les assets | Sans lui, chaque visite revalide tous les fichiers |
 
 Un point reste hors de portée sur Pages, qui ne permet pas d'en-têtes personnalisés : `COOP`/`COEP`, nécessaires à `SharedArrayBuffer` donc au bouton **Calcul du PAR**. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) les fournit à sa place, au prix d'**un rechargement de page à la première visite**. C'est précisément ce pour quoi il est là.
+
+### Un autre hébergeur statique
+
+Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers convient — Netlify, Cloudflare Pages, un nginx, un Apache mutualisé, un bucket S3 derrière un CDN.
+
+**1. Produire les deux fichiers manquants.** `cli/bids.wasm` et `cli/wasm_exec.js` sont ignorés par git : ils ne sont pas dans le dépôt et doivent être compilés avant toute copie.
+
+```bash
+./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows
+```
+
+**2. Copier `cli/` en entier.** Ces dix fichiers, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
+
+| Fichier | Taille | gzip | |
+|---|---:|---:|---|
+| `index.html` | 20 Ko | 6 Ko | |
+| `style.css` | 30 Ko | 9 Ko | |
+| `app.js` | 105 Ko | 34 Ko | l'interface |
+| `par.js` | 19 Ko | 7 Ko | le tableau du PAR |
+| `bids-wasm.js` | 6 Ko | 3 Ko | charge le moteur |
+| `coi-serviceworker.js` | 6 Ko | 2 Ko | repli COOP/COEP |
+| `bids.wasm` | **4,3 Mo** | **1,2 Mo** | **généré** — le moteur d'enchères |
+| `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
+| `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
+| `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
+
+Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
+
+**3. Vérifier trois réglages du serveur.** Ils ne cassent rien s'ils manquent, mais le coût est net — les chiffres ci-dessous viennent d'un hébergement réel où ils manquaient tous les trois.
+
+| Réglage | Sans lui |
+|---|---|
+| `Content-Type: application/wasm` sur `.wasm` | `WebAssembly.instantiateStreaming` est refusé ; le client retombe sur `arrayBuffer()`, plus lent et plus gourmand en mémoire |
+| Compression `gzip`/`br` sur `.wasm` | 4,3 Mo transmis au lieu de 1,2 Mo |
+| `Cache-Control` sur les fichiers | chaque visite revalide les dix fichiers, une requête complète chacun |
+
+**4. Servir en HTTPS.** Un service worker n'est enregistré que dans un contexte sécurisé (HTTPS, ou `localhost`). En `http://` ou en `file://`, `coi-serviceworker.js` ne démarre pas : tout fonctionne, sauf le bouton **Calcul du PAR**, qui exige `SharedArrayBuffer`.
+
+**5. Facultatif — poser `COOP`/`COEP`.** Si vous maîtrisez les en-têtes, ces deux lignes rendent le service worker inutile et **évitent le rechargement de page à la première visite** :
+
+```
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+#### Exemples de configuration
+
+```nginx
+# nginx
+location / {
+    root /var/www/bridge;          # le contenu de cli/
+    types { application/wasm wasm; }   # inutile depuis nginx 1.21.5
+    gzip_static on;                # sert bids.wasm.gz au lieu de comprimer
+    add_header Cache-Control "public, max-age=300";
+    add_header Cross-Origin-Opener-Policy   "same-origin";
+    add_header Cross-Origin-Embedder-Policy "require-corp";
+}
+```
+
+`gzip_static` veut un fichier déjà comprimé à côté de l'original — à préparer une fois, au déploiement. Comprimer 4,3 Mo à chaque requête coûterait plus cher que l'économie :
+
+```bash
+gzip -9 -k /var/www/bridge/bids.wasm   # produit bids.wasm.gz
+```
+
+```apache
+# Apache — .htaccess déposé dans le dossier
+AddType application/wasm .wasm
+AddOutputFilterByType DEFLATE application/wasm application/javascript text/css text/html
+Header set Cache-Control "public, max-age=300"
+Header set Cross-Origin-Opener-Policy   "same-origin"
+Header set Cross-Origin-Embedder-Policy "require-corp"
+```
+
+```caddy
+# Caddy — compression et type MIME sont déjà corrects par défaut
+bridge.exemple.net {
+    root * /var/www/bridge
+    file_server
+    encode gzip zstd
+    header Cross-Origin-Opener-Policy   "same-origin"
+    header Cross-Origin-Embedder-Policy "require-corp"
+}
+```
+
+#### Vérifier un déploiement
+
+```bash
+# Le type MIME et la compression du moteur
+curl -sI -H 'Accept-Encoding: gzip' https://exemple.net/bids.wasm | grep -i 'content-type\|content-encoding\|cache-control'
+# Attendu : application/wasm, gzip (ou br), et un Cache-Control
+
+# L'isolation cross-origine, si vous avez posé les en-têtes
+curl -sI https://exemple.net/ | grep -i cross-origin
+```
+
+Dans la page, la console dit le reste : `COOP/COEP Service Worker registered` puis `Reloading page…` signale que le repli a dû s'enclencher, donc que les en-têtes manquent.
 
 ## Docker
 

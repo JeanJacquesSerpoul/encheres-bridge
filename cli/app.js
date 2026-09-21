@@ -227,6 +227,10 @@ const UI_TEXT = {
     versionModified: "compilé sur un dépôt modifié",
     online: "en ligne",
     offline: "injoignable",
+    // Mode navigateur : le moteur est bien servi, mais pas encore téléchargé
+    // — il l'est au premier calcul (voir checkHealth).
+    idle: "moteur non chargé",
+    engineLoading: "Chargement du moteur d'enchères…",
     dealPanel: "Donne (PBN)",
     fileLoad: "Charger un fichier .pbn",
     randomDeal: "Donne aléatoire",
@@ -273,6 +277,7 @@ const UI_TEXT = {
     parCompute: "Calcul du PAR",
     parContracts: "Contrats",
     parComputing: "Calcul en cours…",
+    parLoading: "Chargement du solveur…",
     parUnavailable: "Solveur double-mort (WASM) introuvable.",
     parNoIsolation: "Isolation cross-origine requise (SharedArrayBuffer) ; rechargez la page.",
     parLeadHint: "Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.",
@@ -306,6 +311,8 @@ const UI_TEXT = {
     versionModified: "built from a modified tree",
     online: "online",
     offline: "unreachable",
+    idle: "engine not loaded",
+    engineLoading: "Loading the bidding engine…",
     dealPanel: "Deal (PBN)",
     fileLoad: "Load a .pbn file",
     randomDeal: "Random deal",
@@ -352,6 +359,7 @@ const UI_TEXT = {
     parCompute: "Compute the par",
     parContracts: "Contracts",
     parComputing: "Computing…",
+    parLoading: "Loading the solver…",
     parUnavailable: "Double-dummy solver (WASM) not found.",
     parNoIsolation: "Cross-origin isolation required (SharedArrayBuffer); reload the page.",
     parLeadHint: "Hover a cell — or tap it — to see the lead that holds declarer to that many tricks.",
@@ -2350,12 +2358,34 @@ async function fetchVersion() {
   renderVersion();
 }
 
-async function checkHealth() {
+// Voile d'attente du moteur, posé et retiré par les crochets de bids-wasm.js.
+// Sans lui, le premier calcul en mode navigateur laissait l'interface inerte
+// le temps que 4,5 Mo arrivent — bouton grisé, rien d'autre.
+window.onBidsEngineLoad = function (state) {
+  $("#engine-loading").classList.toggle("hidden", state !== "start");
+  // Le moteur en place, la pastille peut dire mieux que « non chargé » : on
+  // relance la sonde, qui rejoue cette fois la donne de référence pour de bon.
+  if (state === "done" && wasmMode() && bidsLocal.loaded()) checkHealth(true);
+};
+
+// force : sonder le moteur pour de bon, quitte à le télécharger. C'est ce que
+// demande le bouton « Tester » ; l'appel automatique au chargement de la page,
+// lui, s'en abstient (voir ci-dessous).
+async function checkHealth(force) {
   healthState = null;
   renderHealth();
   // En mode navigateur, l'équivalent de /ready : le moteur rejoue sa donne de
-  // référence. Cela instancie le module au passage, donc dès le chargement de
-  // la page — la première séquence demandée est ainsi immédiate.
+  // référence. Mais cela instancie le module — 4,5 Mo — et le faire à
+  // l'ouverture de la page mettait tout ce poids sur le chemin critique, pour
+  // n'allumer qu'une pastille. Tant que le module n'est pas là, on se contente
+  // donc de vérifier qu'il est *servi*, par une requête HEAD : il sera chargé
+  // au premier calcul, voile d'attente à l'appui (voir onBidsEngineLoad).
+  if (wasmMode() && !force && !bidsLocal.loaded()) {
+    healthState = (await bidsLocal.available()) ? "idle" : "offline";
+    renderServerHint();
+    renderHealth();
+    return;
+  }
   if (wasmMode()) {
     $("#health-text").textContent = "…";
     try {
@@ -2445,12 +2475,8 @@ async function checkIaHealth() {
 // et ne se sonde pas.
 async function pickInitialMode() {
   if (readStored(MODE_KEY, "") !== "") return;
-  try {
-    const resp = await fetch("bids.wasm", { method: "HEAD" });
-    if (resp.ok) return;
-  } catch (err) {
-    // pas de moteur : on prend le serveur.
-  }
+  // HEAD seulement : on veut savoir si le moteur est servi, pas le charger.
+  if (await bidsLocal.available()) return;
   serverModeSelect.value = "local";
   syncServerField();
   renderServerHint();
@@ -2762,7 +2788,7 @@ $("#bidding-box").addEventListener("click", (ev) => {
 });
 $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 
-$("#health-btn").addEventListener("click", checkHealth);
+$("#health-btn").addEventListener("click", () => checkHealth(true));
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);
@@ -2776,7 +2802,7 @@ $("#pbn-details").open = false;
 // Le mode navigateur par défaut dès que le module est là : le client se suffit
 // alors à lui-même, sans serveur à lancer. Un mode déjà choisi prime, d'où la
 // sonde seulement quand rien n'est mémorisé.
-pickInitialMode().then(checkHealth);
+pickInitialMode().then(() => checkHealth(false));
 // applyIaFeature affiche ou masque tout le bloc IA selon l'option (OFF par
 // défaut) et ne sonde le serveur IA que lorsqu'elle est active.
 applyIaFeature();

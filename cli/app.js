@@ -227,9 +227,6 @@ const UI_TEXT = {
     versionModified: "compilé sur un dépôt modifié",
     online: "en ligne",
     offline: "injoignable",
-    // Mode navigateur : le moteur est bien servi, mais pas encore téléchargé
-    // — il l'est au premier calcul (voir checkHealth).
-    idle: "moteur non chargé",
     engineLoading: "Chargement du moteur d'enchères…",
     dealPanel: "Donne (PBN)",
     fileLoad: "Charger un fichier .pbn",
@@ -311,7 +308,6 @@ const UI_TEXT = {
     versionModified: "built from a modified tree",
     online: "online",
     offline: "unreachable",
-    idle: "engine not loaded",
     engineLoading: "Loading the bidding engine…",
     dealPanel: "Deal (PBN)",
     fileLoad: "Load a .pbn file",
@@ -2359,37 +2355,24 @@ async function fetchVersion() {
 }
 
 // Voile d'attente du moteur, posé et retiré par les crochets de bids-wasm.js.
-// Sans lui, le premier calcul en mode navigateur laissait l'interface inerte
-// le temps que 4,5 Mo arrivent — bouton grisé, rien d'autre.
+// Le module étant préchargé dès l'ouverture, ce voile ne paraît que si l'on
+// demande un calcul avant la fin de ce préchargement : bids-wasm.js ne signale
+// que l'attente réelle, jamais le téléchargement lui-même (voir awaitModule).
 window.onBidsEngineLoad = function (state) {
   $("#engine-loading").classList.toggle("hidden", state !== "start");
-  // Le moteur en place, la pastille peut dire mieux que « non chargé » : on
-  // relance la sonde, qui rejoue cette fois la donne de référence pour de bon.
-  if (state === "done" && wasmMode() && bidsLocal.loaded()) checkHealth(true);
 };
 
-// force : sonder le moteur pour de bon, quitte à le télécharger. C'est ce que
-// demande le bouton « Tester » ; l'appel automatique au chargement de la page,
-// lui, s'en abstient (voir ci-dessous).
-async function checkHealth(force) {
+async function checkHealth() {
   healthState = null;
   renderHealth();
   // En mode navigateur, l'équivalent de /ready : le moteur rejoue sa donne de
-  // référence. Mais cela instancie le module — 4,5 Mo — et le faire à
-  // l'ouverture de la page mettait tout ce poids sur le chemin critique, pour
-  // n'allumer qu'une pastille. Tant que le module n'est pas là, on se contente
-  // donc de vérifier qu'il est *servi*, par une requête HEAD : il sera chargé
-  // au premier calcul, voile d'attente à l'appui (voir onBidsEngineLoad).
-  if (wasmMode() && !force && !bidsLocal.loaded()) {
-    // Sans aucune requête : sonder bids.wasm, même en HEAD, coûte une latence
-    // complète sur un hébergement statique lent, pour n'apprendre qu'une chose
-    // que le premier calcul établira de toute façon. On dit donc simplement ce
-    // que l'on sait — le moteur n'est pas encore là.
-    healthState = "idle";
-    renderServerHint();
-    renderHealth();
-    return;
-  }
+  // référence. Cela instancie le module au passage, donc dès l'ouverture de la
+  // page — le premier calcul est ainsi immédiat.
+  //
+  // Ce préchargement a un temps été différé au premier calcul, quand
+  // l'hébergement mettait ~9 s à répondre à la moindre requête. Sur GitHub
+  // Pages, bids.wasm arrive compressé (1,3 Mo) en moins d'une seconde, hors du
+  // chemin critique de l'affichage : le coût ne justifie plus l'attente.
   if (wasmMode()) {
     $("#health-text").textContent = "…";
     try {
@@ -2785,7 +2768,7 @@ $("#bidding-box").addEventListener("click", (ev) => {
 });
 $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 
-$("#health-btn").addEventListener("click", () => checkHealth(true));
+$("#health-btn").addEventListener("click", checkHealth);
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);
@@ -2796,10 +2779,10 @@ $("#pbn").value = DEFAULT_PBN;
 refreshDealSelector(true);
 applyLang();
 $("#pbn-details").open = false;
-// Aucune sonde réseau ici : checkHealth se contente d'annoncer que le moteur
-// n'est pas encore chargé (voir plus haut). Le mode navigateur reste celui par
-// défaut, un mode déjà choisi primant toujours.
-checkHealth(false);
+// Sonde l'état et, en mode navigateur, instancie le moteur au passage : le
+// premier calcul demandé est alors immédiat. Le mode navigateur reste celui
+// par défaut, un mode déjà choisi primant toujours.
+checkHealth();
 // applyIaFeature affiche ou masque tout le bloc IA selon l'option (OFF par
 // défaut) et ne sonde le serveur IA que lorsqu'elle est active.
 applyIaFeature();

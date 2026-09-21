@@ -7,8 +7,11 @@
 // main.go), et absent tant que ce script n'a pas été lancé : dans ce cas le
 // client le dit et les modes Local et Distant continuent de fonctionner.
 //
-// Même forme que par.js (le solveur DDS) : une instanciation paresseuse, une
-// seule pour la page, et un message clair quand le module manque.
+// Une seule instanciation pour la page, lancée dès l'ouverture par le
+// selfCheck de checkHealth, et un message clair quand le module manque. Le
+// solveur DDS de par.js, lui, reste paresseux : il ne sert qu'au bouton
+// « Calcul du PAR », quand celui-ci est commandé des enchères on ne peut se
+// passer.
 //
 // Chargé APRÈS wasm_exec.js, qui définit Go, et AVANT app.js, dont la fin
 // appelle checkHealth() — lequel passe par window.bidsLocal en mode
@@ -53,21 +56,33 @@
       return Promise.reject(new Error(tr("wasmMissingExec")));
     }
     if (!modulePromise) {
-      notify("start");
       modulePromise = instantiate().then(
         (api) => {
           loaded = true;
-          notify("done");
           return api;
         },
         (err) => {
           modulePromise = null;
-          notify("done");
           throw err;
         }
       );
     }
     return modulePromise;
+  }
+
+  // Le voile d'attente ne suit pas le téléchargement mais l'attente : le
+  // module est préchargé en silence à l'ouverture de la page, et rien ne doit
+  // s'afficher tant que personne ne patiente. Un clic qui arrive avant la fin
+  // du préchargement, lui, est bien une attente — d'où ce détour plutôt
+  // qu'un signal posé dans loadModule.
+  async function awaitModule() {
+    if (loaded) return modulePromise;
+    notify("start");
+    try {
+      return await loadModule();
+    } finally {
+      notify("done");
+    }
   }
 
   async function instantiate() {
@@ -106,7 +121,7 @@
   // d'événements le temps du calcul : on rend la main une fois avant, pour que
   // le bouton grisé et le message d'attente s'affichent d'abord.
   async function call(name, pbn, lang) {
-    const api = await loadModule();
+    const api = await awaitModule();
     await new Promise((resolve) => setTimeout(resolve, 0));
     const res = api[name](pbn, lang || "en");
     if (!res || !res.ok) {
@@ -122,11 +137,10 @@
     bid: (pbn, lang) => call("bid", pbn, lang).then(JSON.parse),
     bids: (pbn, lang) => call("bids", pbn, lang).then(JSON.parse),
     version: () => loadModule().then((api) => JSON.parse(api.version)),
-    // Le module est-il déjà instancié ? app.js s'en sert pour ne pas
-    // déclencher 4,5 Mo de téléchargement à seule fin d'allumer une pastille.
-    loaded: () => loaded,
     // Rejoue la donne de référence de /ready : la pastille d'état dit la même
-    // chose dans les deux modes.
+    // chose dans les deux modes. C'est aussi ce qui instancie le module à
+    // l'ouverture de la page, en silence — loadModule et non awaitModule :
+    // personne n'attend encore, rien à afficher.
     selfCheck: () => loadModule().then((api) => api.selfCheck().ok === true),
   };
 })();

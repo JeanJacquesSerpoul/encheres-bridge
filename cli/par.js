@@ -183,6 +183,7 @@
     const head = $("#par-head");
     const body = $("#par-body");
     const hint = $("#par-hint");
+    const credit = $("#par-credit");
     if (!table || !head || !body) return;
     hideTip();
     if (!lastTable) {
@@ -190,6 +191,7 @@
       head.innerHTML = "";
       body.innerHTML = "";
       if (hint) hint.classList.add("hidden");
+      if (credit) credit.classList.add("hidden");
       return;
     }
     const lang = dealLang;
@@ -217,6 +219,7 @@
 
     table.classList.remove("hidden");
     if (hint) hint.classList.remove("hidden");
+    if (credit) credit.classList.remove("hidden");
   }
 
   // ---------- infobulle d'entame ----------

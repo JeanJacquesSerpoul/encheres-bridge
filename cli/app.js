@@ -278,6 +278,10 @@ const UI_TEXT = {
     parUnavailable: "Solveur double-mort (WASM) introuvable.",
     parNoIsolation: "Isolation cross-origine requise (SharedArrayBuffer) ; rechargez la page.",
     parLeadHint: "Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.",
+    // Encadre le lien vers le projet DDS : son nom n'est pas traduit, et
+    // applyLang ne peut pas poser de lien dans un [data-i18n].
+    parCredit: "Levées double-mort calculées par",
+    parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
     parLeadComputing: "Recherche de l'entame…",
     parLeadVerb: "entame",
     parLeadAny: "ce qu'il veut",
@@ -359,6 +363,8 @@ const UI_TEXT = {
     parUnavailable: "Double-dummy solver (WASM) not found.",
     parNoIsolation: "Cross-origin isolation required (SharedArrayBuffer); reload the page.",
     parLeadHint: "Hover a cell — or tap it — to see the lead that holds declarer to that many tricks.",
+    parCredit: "Double dummy tricks computed by",
+    parCreditAuthors: "from Bo Haglund and Søren Hein — license",
     parLeadComputing: "Solving the lead…",
     parLeadVerb: "leads",
     parLeadAny: "anything",

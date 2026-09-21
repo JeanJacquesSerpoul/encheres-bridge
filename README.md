@@ -520,6 +520,7 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 | `score.go` | Barème de marque, utilisé pour les décisions de sacrifice |
 | `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
+| `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
 | `*_test.go` | ~140 fichiers : couche HTTP, parseur, et une convention par fichier |
 | `audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
 | `testdata/` | Donnes PBN d'exemple |
@@ -549,3 +550,11 @@ EOF
 # Simuler les enchères en français
 curl -s -X POST "http://localhost:9015/bid?lang=fr" -F "pbn=@donne.pbn" | jq .
 ```
+
+---
+
+## Licence
+
+Ce projet est distribué sous la **licence publique générale GNU, version 3** (GPL-3.0) — voir [LICENSE](LICENSE).
+
+Il redistribue un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client à l'appui du bouton « Calcul du PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.

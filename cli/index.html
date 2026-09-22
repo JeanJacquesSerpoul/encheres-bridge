@@ -384,6 +384,18 @@
       <input id="ia-enabled" type="checkbox">
       <span data-i18n="iaFeature">Serveur IA de reconnaissance des cartes</span>
     </label>
+    <!-- Licence de l'application et son code source. Même découpe que
+         l'attribution du solveur DDS, sous le tableau du PAR : applyLang pose
+         du textContent sur les [data-i18n] et effacerait un lien qu'ils
+         contiendraient, d'où les libellés posés autour des ancres et non
+         autour du tout. Le nom du projet n'est pas traduit. -->
+    <p class="app-credit">
+      <span data-i18n="appLicence">Bridge Bidding — licence</span>
+      <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">GPL-3.0</a>
+      <span class="app-credit-sep" aria-hidden="true">·</span>
+      <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge" target="_blank"
+         rel="noopener noreferrer" data-i18n="appSource">Code source sur GitHub</a>
+    </p>
   </footer>
 
   <!-- Éditeur de la photo, entre la prise de vue et l'envoi au serveur IA :

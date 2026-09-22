@@ -248,6 +248,28 @@ h1 { font-size: 1.25rem; margin: 0; }
 }
 .feature-toggle input { cursor: pointer; margin: 0; flex: none; }
 
+/* Licence et code source, sur toute la largeur du pied de page et sous le
+   reste : on ne les consulte qu'une fois, ils ferment la marche.
+
+   Ces deux liens-là sont soulignés au repos, contrairement à ceux de
+   l'attribution du solveur : sans soulignement, ils ne se distinguent du
+   texte que par le survol, qu'un doigt ne produit pas et qu'un œil ne
+   devine pas. Ils sont là pour être suivis, il faut donc les voir. Le trait
+   est décalé et de la couleur du texte : présent sans peser. */
+.app-credit {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  text-align: center;
+}
+.app-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.app-credit a:hover,
+.app-credit a:focus-visible { color: var(--accent); }
+.app-credit-sep { margin: 0 4px; }
+
 .dot {
   width: 12px; height: 12px;
   border-radius: 50%;

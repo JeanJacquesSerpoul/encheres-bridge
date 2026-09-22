@@ -314,6 +314,10 @@ const UI_TEXT = {
     parLeadHint: "Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.",
     // Encadre le lien vers le projet DDS : son nom n'est pas traduit, et
     // applyLang ne peut pas poser de lien dans un [data-i18n].
+    // Licence de l'application et lien vers son code, au pied de page.
+    // Même découpe que parCredit ci-dessous, pour la même raison.
+    appLicence: "Bridge Bidding — licence",
+    appSource: "Code source sur GitHub",
     parCredit: "Levées double-mort calculées par",
     parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
     parLeadComputing: "Recherche de l'entame…",
@@ -424,6 +428,10 @@ const UI_TEXT = {
     parUnavailable: "Double-dummy solver (WASM) not found.",
     parNoIsolation: "Cross-origin isolation required (SharedArrayBuffer); reload the page.",
     parLeadHint: "Hover a cell — or tap it — to see the lead that holds declarer to that many tricks.",
+    // « license » et non « licence » : c'est l'orthographe que l'attribution
+    // du solveur emploie déjà en anglais, quelques lignes plus bas.
+    appLicence: "Bridge Bidding — license",
+    appSource: "Source code on GitHub",
     parCredit: "Double dummy tricks computed by",
     parCreditAuthors: "from Bo Haglund and Søren Hein — license",
     parLeadComputing: "Solving the lead…",

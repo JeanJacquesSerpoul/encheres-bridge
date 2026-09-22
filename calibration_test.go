@@ -33,9 +33,13 @@ func TestStrongHandBidsGameOverPreempt(t *testing.T) {
 // 9754.T652.T43.JT J86.AQ43.AK2.A63) no longer reaches the ask at all: North
 // held nothing but a five-card club suit opposite an 18-19 notrump rebid, and
 // [S-0] now sends that hand to 3NT instead of opening a fitless slam probe.
+// North's spades were KJ in a later version, which the ladder reading of the
+// economic order [S-2b] now cues at 3S: the extra step handed the ask to
+// South and the answer no longer landed on five of the trump. J8 opposite the
+// same values keeps the exchange -- and the case under test -- intact.
 func TestKeycardSignoffNotBumpedIntoSlam(t *testing.T) {
 	pbn := `[Dealer "S"]
-[Deal "S:AQ954.973.AJ84.6 T732.AKT.762.T73 KJ.QJ8652.K9.AKQ 86.4.QT53.J98542"]`
+[Deal "S:AQ954.973.AJ84.6 T732.AKT.762.T73 J8.QJ8652.KQ.AKQ K6.4.T953.J98542"]`
 	d, err := ParsePBN([]byte(pbn))
 	if err != nil {
 		t.Fatalf("bad deal: %v", err)

@@ -8,8 +8,9 @@ import (
 // TestSuperAcceptStartsControls replays a reported auction: 1NT-2D-3H, the
 // super-accept (four trumps, maximum), and West KT5.KJ943.9.AQJ6 (17 HLD)
 // signed off in 4H -- 34 combined with every keycard in the pair. With a slam
-// in view the super-accept is where controls start [N-8]: West cues 4C, and
-// the exchange reaches the heart slam.
+// in view the super-accept is where controls start [N-8]: West cues his
+// cheapest control, the spade king at 3S [S-2b], and the exchange reaches the
+// heart slam.
 func TestSuperAcceptStartsControls(t *testing.T) {
 	pbn := `[Dealer "N"]
 [Vulnerable "None"]
@@ -30,7 +31,7 @@ func TestSuperAcceptStartsControls(t *testing.T) {
 		{"1SA", "15-17"},
 		{"2K", "Texas"},
 		{"3C", "rectification à saut"},
-		{"4T", "enchère de contrôle"},
+		{"3P", "enchère de contrôle"},
 	}
 	if len(bids) < len(want) {
 		t.Fatalf("auction too short\nauction: %s", formatAuction(calls))

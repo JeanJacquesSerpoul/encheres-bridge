@@ -127,12 +127,14 @@ func TestControlRelayAnsweredPositively(t *testing.T) {
 	}
 }
 
-// TestControlRelaySpadesOnHeartFit reproduces the document's ideal sequence:
-// on a heart fit a spade control can never be shown by a natural cue (4S is
-// already past 4H), so 3S is the only bid that can ask for it, and it must be
-// asked before the exchange climbs. 1C / 1H - 3H / 3S - 3NT / 4C - 4D / 4NT:
-// "en deux temps toutes les informations utiles sont recueillies".
-func TestControlRelaySpadesOnHeartFit(t *testing.T) {
+// TestNoSpadeRelayOnHeartFit guards the correction of the spade "relais": on
+// a heart fit 3S is simply the cheapest control bid of the rotation, so it
+// SHOWS the spade control and never asks for it. South here holds J3 and has
+// no spade control to show, so the exchange opens at 4C -- and the step it
+// stepped over denies the spade control, which is exactly what partner needs
+// to read. (Deal of the document's ideal sequence, whose 3S ask this test
+// used to assert.)
+func TestNoSpadeRelayOnHeartFit(t *testing.T) {
 	pbn := `[Dealer "N"]
 [Deal "N:AQ85.Q954.A.A765 K97.J62.KQJT.Q83 J3.AKT873.95.KJ2 T642..876432.T94"]`
 	d, err := ParsePBN([]byte(pbn))
@@ -141,20 +143,20 @@ func TestControlRelaySpadesOnHeartFit(t *testing.T) {
 	}
 	calls := NewEngine(d).Run()
 
-	ask, ok := nthCallBy(calls, seatS, 1)
-	if !ok || ask.Call.Format("fr") != "3P" {
-		t.Fatalf("South's rebid = %s, want 3P (relais contrôle Pique)\nauction: %s",
-			ask.Call.Format("fr"), formatAuction(calls))
+	for _, sc := range calls {
+		if sc.M.ctrlRelay && sc.M.ctrlRelaySuit == Spades {
+			t.Fatalf("3S is a control bid on a heart fit, never a relay\nauction: %s", formatAuction(calls))
+		}
 	}
-	if !strings.Contains(ask.M.fr, "relais contrôle") || !strings.Contains(ask.M.fr, "Pique") {
-		t.Fatalf("comment %q is not the spade control relay", ask.M.fr)
+	cue, ok := nthCallBy(calls, seatS, 1)
+	if !ok || cue.Call.Format("fr") != "4T" {
+		t.Fatalf("South's rebid = %s, want 4T (le contrôle le moins cher qu'il détient)\nauction: %s",
+			cue.Call.Format("fr"), formatAuction(calls))
 	}
-	ans, ok := nthCallBy(calls, seatN, 2)
-	if !ok || ans.Call.Format("fr") != "3SA" {
-		t.Fatalf("North's answer = %s, want 3SA (contrôle à Pique)\nauction: %s",
-			ans.Call.Format("fr"), formatAuction(calls))
+	if !cue.M.deniedCtrl[Spades] {
+		t.Fatalf("stepping over 3S must deny the spade control\nauction: %s", formatAuction(calls))
 	}
-	if !strings.Contains(ans.M.fr, "positive") {
-		t.Fatalf("comment %q is not the positive relay answer", ans.M.fr)
+	if !strings.Contains(cue.M.fr, "sans contrôle à Pique") {
+		t.Fatalf("comment %q does not spell out the denied spade control", cue.M.fr)
 	}
 }

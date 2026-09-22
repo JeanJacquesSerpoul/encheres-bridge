@@ -7,10 +7,10 @@ import (
 
 // TestControlBidEndToEnd replays a full, naturally-generated auction where a
 // fit is found on opener's second suit (hearts, after a 1S opening), and the
-// combined side explores slam through control bids. Cueing spades would
-// already cross the 4H game level, so West (32 combined HLD, no more room
-// for cues) moves to Blackwood instead and, holding four of the five
-// keycards, bids the small slam (docs/addon_4.md).
+// combined side explores slam through control bids. Economic order is read on
+// the ladder: over 3H the cheapest control bid is 3S, so West starts there
+// with the spade ace [S-2b]. The exchange then runs 4C - 4D, East is out of
+// room below 4H and asks, and the pair bids the small slam (docs/addon_4.md).
 func TestControlBidEndToEnd(t *testing.T) {
 	const north, east, south, west = 0, 1, 2, 3
 	d := &Deal{
@@ -34,11 +34,12 @@ func TestControlBidEndToEnd(t *testing.T) {
 		{east, 0, "2T", ""},             // 2C
 		{west, 1, "2C", ""},             // 2H
 		{east, 1, "3C", ""},             // 3H
-		{west, 2, "4T", "l'As"},         // 4C control bid, the ace
-		{east, 2, "4K", "le Roi"},       // 4D control bid, the king
-		{west, 3, "4SA", "Blackwood"},   // no cue room left below 4H: keycard ask
-		{east, 3, "5K", "cartes clefs"}, // 5D: 1 or 4 keycards
-		{west, 4, "6C", "chelem"},       // 6H, four of five keycards
+		{west, 2, "3P", "l'As"},         // 3S: the cheapest control bid, the ace
+		{east, 2, "4T", "le Roi"},       // 4C control bid, the king
+		{west, 3, "4K", "l'As"},         // 4D control bid, the ace
+		{east, 3, "4SA", "Blackwood"},   // no cue room left below 4H: keycard ask
+		{west, 4, "5T", "cartes clefs"}, // 5C: 0 or 3 keycards
+		{east, 4, "6C", "chelem"},       // 6H, once the controls are located
 	}
 	for _, w := range want {
 		n := 0

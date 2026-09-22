@@ -1577,6 +1577,14 @@ const PLAY_SVG = `${SVG_OPEN}
   <path d="m10 8.5 6 3.5-6 3.5z"/>
 </svg>`;
 
+// Un tableau de trois rangées sur quatre colonnes : celui des levées
+// double-mort, que le PAR remplit.
+const PAR_SVG = `${SVG_OPEN}
+  <rect x="3" y="4" width="18" height="16" rx="2"/>
+  <path d="M3 9.5h18"/><path d="M3 14.8h18"/>
+  <path d="M9 4v16"/><path d="M15 4v16"/>
+</svg>`;
+
 // Une feuille qui entre : on charge un fichier.
 const IMPORT_SVG = `${SVG_OPEN}
   <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
@@ -1711,6 +1719,7 @@ function renderBoundsCards() {
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction);
+  setCommandButton("#cons-par-btn", PAR_SVG, UI_TEXT[lang].parCompute);
   setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
@@ -3344,8 +3353,18 @@ async function fetchBid(lang) {
   return body;
 }
 
-async function simulate() {
-  const btn = $("#bid-btn");
+// Le PAR ne dépend que de la donne, mais son tableau vit dans le panneau du
+// résultat : on l'ouvre, puis on lance le calcul et l'on descend jusqu'à lui.
+// Même bouton que celui du panneau, pour que l'attente et les erreurs se
+// disent au même endroit.
+function computeParOfResult() {
+  $("#par-btn").click();
+  $("#par-btn").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// withPar : appelé par le bouton PAR de la donne, qui enchaîne sur le calcul.
+async function simulate(withPar = false) {
+  const btn = withPar ? $("#cons-par-btn") : $("#bid-btn");
   // Le message va dans #cons-error, qui est sur la même ligne que le bouton.
   // Il partait dans #error, une rangée plus bas, à côté du questionnaire :
   // une donne incomplète produisait un refus qu'on ne voyait pas, et le clic
@@ -3358,10 +3377,14 @@ async function simulate() {
   try {
     const body = await fetchBid(lang);
     renderResult(body);
-    // Le panneau s'ouvre sous le pli : sans cela, rien ne bouge à l'écran et
-    // le calcul semble n'avoir rien donné. Même geste qu'en fin de
-    // questionnaire et au lancement de celui-ci.
-    $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (withPar) {
+      computeParOfResult();
+    } else {
+      // Le panneau s'ouvre sous le pli : sans cela, rien ne bouge à l'écran et
+      // le calcul semble n'avoir rien donné. Même geste qu'en fin de
+      // questionnaire et au lancement de celui-ci.
+      $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   } catch (err) {
     setError(errEl, err.message);
     $("#result-panel").classList.add("hidden");
@@ -3674,6 +3697,7 @@ function finishQuiz() {
       <button type="button" id="quiz-replay-btn">${esc(t.quizReplay)}</button>
       <button type="button" id="quiz-new-deal-btn">${esc(t.quizNewDeal)}</button>
       <button type="button" id="quiz-show-detail-btn">${esc(t.quizShowDetail)}</button>
+      <button type="button" id="quiz-par-btn">${esc(t.parCompute)}</button>
     </div>`;
   scoreEl.classList.remove("hidden");
   // La donne n'a pas bougé : la redemander la rejoue à l'identique.
@@ -3691,6 +3715,10 @@ function finishQuiz() {
   $("#quiz-show-detail-btn").addEventListener("click", () => {
     renderResult(quiz.result);
     $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("#quiz-par-btn").addEventListener("click", () => {
+    renderResult(quiz.result);
+    computeParOfResult();
   });
 }
 
@@ -3727,7 +3755,8 @@ $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 
 $("#health-btn").addEventListener("click", checkHealth);
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
-$("#bid-btn").addEventListener("click", simulate);
+$("#bid-btn").addEventListener("click", () => simulate());
+$("#cons-par-btn").addEventListener("click", () => simulate(true));
 $("#quiz-btn").addEventListener("click", startQuiz);
 
 // Prefill with the default deal and ping the server on load.

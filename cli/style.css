@@ -217,16 +217,26 @@ textarea {
   resize: vertical;
 }
 
+/* Repli du texte PBN. En vert et en gras, il se lisait comme une commande de
+   premier plan alors qu'il n'en est pas une : le débutant compose sa donne
+   sans jamais l'ouvrir. Il est donc rendu à sa discrétion — gris, léger, et
+   large de son seul libellé pour ne plus barrer le panneau d'un bout à
+   l'autre — tout en restant à portée de clic pour qui en a l'usage. Le
+   `display: list-item` d'origine est conservé : il porte le triangle qui dit
+   si le repli est ouvert ou fermé. */
 .pbn-details { margin: 10px 0; }
 .pbn-details summary {
+  width: fit-content;
   cursor: pointer;
-  font-size: .9rem;
-  color: var(--accent);
-  font-weight: 600;
+  font-size: .85rem;
+  color: var(--muted);
   padding: 4px 0;
   user-select: none;
 }
-.pbn-details summary:hover { text-decoration: underline; }
+.pbn-details summary:hover { color: var(--accent); text-decoration: underline; }
+/* Une phrase pour celui qui a ouvert le repli sans savoir ce qu'il y
+   trouverait : elle précède la zone de texte et ne s'affiche qu'avec elle. */
+.pbn-note { margin: 6px 0 0; color: var(--muted); font-size: .85rem; }
 .pbn-details textarea { margin-top: 8px; }
 
 /* Marks the deal selected via #deal-select within the raw PBN text

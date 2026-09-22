@@ -1686,6 +1686,18 @@ le Cœur est le seul contrôle inconnu, donc **4♦**.
 contrôle sauté est dénié**. En revanche, les contrôles situés **sous** la
 marche de départ ne sont pas déniés : dans l'exemple, 4♦ ne dit rien du Trèfle.
 
+**« Le moins cher » se lit sur l'échelle des enchères, pas sur l'ordre des
+couleurs.** Après un soutien à 3♥, l'enchère de contrôle la moins chère est
+**3♠** — elle est sous 3SA, donc sous 4♣ : c'est elle qui se nomme en premier,
+et une main sans contrôle à Pique la saute, ce qui le **dénie**. Après un
+soutien à 3♠, rien ne passe sous 4♣ et l'ordre des couleurs et celui de
+l'échelle coïncident.
+
+`1♦ – 1♥ – 3♥` avec ♠DV8 ♥AV96 ♦96 ♣ADV3 en Sud : pas de contrôle à Pique,
+donc **4♣** (l'As), qui dénie le Pique du même coup. Le partenaire — ici
+chicane à Pique — n'en est pas gêné, et il sait à quoi s'en tenir. 3♠ aurait
+dit l'inverse : « j'ai le contrôle à Pique ».
+
 L'ordre économique prime sans exception : le contrôle le moins cher se nomme
 en premier, **même** s'il s'agit d'une courte dans la couleur du partenaire.
 Un singleton dans sa longueur reste un contrôle de deuxième tour — le taire
@@ -1710,35 +1722,37 @@ plus « la manche » :
 `1♥ – 1♠ – 4♠ – 5♣ – 5♦ – 5♠ – 6♥ – 6♠` avec ♠AV98 ♥74 ♦DV42 ♣AR8 en Sud :
 5♠ montre l'As d'atout sans contrôle à Cœur, et Nord (♥ARD) cue 6♥.
 
-### [S-2c] Les deux « relais contrôle » (soutien **non forcing** au palier de 3)
-Certains contrôles ne peuvent être demandés par aucune enchère naturelle : sur
-un fit **Cœur**, le contrôle à Pique ne peut jamais être montré sous 4♥ (4♠ est
-déjà au-delà de la manche) ; et le Trèfle est sous tous les autres cue-bids.
-D'où deux enchères conventionnelles :
+### [S-2c] Le « relais contrôle » 3SA (soutien **non forcing** au palier de 3)
+Le Trèfle est sous tous les cue-bids : une main qui n'y a pas de contrôle n'a
+aucune enchère naturelle pour en demander un — 4♣ prétendrait le détenir, et
+ouvrir à 4♦ ne dit rien du Trèfle [S-2b]. D'où une enchère conventionnelle :
 
 | Enchère | Demande | Disponible |
 |---|---|---|
-| **3♠** | le contrôle à **Pique** | fit Cœur uniquement |
 | **3SA** | le contrôle à **Trèfle** | fit Cœur et fit Pique |
 
-Le Pique prime sur le Trèfle : c'est le seul qu'aucun cue ne rattrapera.
 Un contrôle à **Carreau** manquant n'a besoin d'aucune convention — 4♣ le
 demande.
 
-**Réponse positive** : l'enchère immédiatement supérieure (3♠ → **3SA**,
-3SA → **4♣**). **Réponse négative** : on saute la marche — ce qui **dénie** le
-contrôle demandé — et on nomme ses propres contrôles dans l'ordre économique
-(4♦, puis 4♥…), ou l'on conclut à la manche s'il n'y en a aucun.
+**Réponse positive** : l'enchère immédiatement supérieure (3SA → **4♣**).
+**Réponse négative** : on saute la marche — ce qui **dénie** le contrôle
+demandé — et on nomme ses propres contrôles dans l'ordre économique (4♦, puis
+4♥…), ou l'on conclut à la manche s'il n'y en a aucun.
 
-Séquence idéale du document, reproduite par le moteur :
+⚠ **Le document donne un second relais, 3♠ sur fit Cœur, demandant le contrôle
+à Pique ; le moteur ne l'implémente pas.** Il contredit le principe des
+contrôles, qui est plus fort que lui : sur fit Cœur 3♠ est simplement
+l'enchère de contrôle **la moins chère** [S-2b], donc elle **montre** le
+contrôle à Pique. Le lire comme une demande obligerait une main sans contrôle
+à Pique à l'annoncer, et priverait celle qui l'a du moyen de le dire. Rien
+n'est perdu : la main qui n'a pas ce contrôle saute la marche, ce qui le
+dénie — l'information que la demande cherchait, obtenue sans enchère
+conventionnelle.
 
-| S | O | N | E |
-|---|---|---|---|
-| | | **1♣** | – |
-| **1♥** | – | **3♥** | – |
-| **3♠** | – | **3SA** | – |
-| **4♣** | – | **4♦** | – |
-| **4SA** | | | |
+Un fit Cœur teinte donc aussi le relais : **3SA saute 3♠**, et dénie par là le
+contrôle à Pique. Une main qui le détient nomme 3♠ au lieu de relayer, et
+l'ordre économique de la réponse du partenaire placera le Trèfle de toute
+façon.
 
 ### [S-2d] Le 3SA « oui mais » (soutien **forcing** au palier de 3)
 Face au soutien **forcing**, l'ouvreur a trois attitudes : **non** (il nomme la
@@ -1793,6 +1807,14 @@ Depuis l'échange de contrôles, et **selon ce que la question coûte** :
 - dans les deux cas, une main de **20 HLD** dont le camp contrôle **toutes**
   les couleurs annexes demande quand même : sur ces jeux distributionnels ce
   sont les contrôles, pas les points, qui décident.
+- **Avec un fit mineur, la main qui n'a plus rien à découvrir demande avant de
+  cue-bidder.** La manche y est au-dessus de 4SA : quel que soit le contrôle
+  qu'elle nomme, le partenaire peut conclure à 5m et enterrer la demande, sans
+  retour possible. Une main qui détient — ou dont le partenaire a montré — un
+  contrôle dans **chaque** couleur annexe n'apprendrait rien de l'échange :
+  elle pose la question tant qu'elle est là. Tant qu'une couleur reste
+  inconnue, le cue garde la priorité : le Blackwood compte les clefs, pas les
+  contrôles de deuxième tour [S-3].
 - une grosse main (**20 HLD**) qui voit **les cinq clefs** chez elle ou
   révélées par les contrôles du partenaire peut demander à **32 combinés**, un
   point sous la zone : le chelem tient alors à la Dame d'atout et aux Rois,

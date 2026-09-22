@@ -1434,12 +1434,33 @@ func (e *Engine) sideHasCued(p *playerState) bool {
 	return false
 }
 
+// economicOrder ranks the four suits by what a cue-bid in each would cost
+// from here: the order of the *calls on the ladder*, which is not the order
+// of the suit indexes. Over a 3H raise the spade cue is 3S -- cheaper than
+// 4C -- so spades come first; over 3S nothing fits below 4C and the two
+// orders coincide. "Le contrôle le moins cher se nomme en premier" [S-2b] is
+// a statement about the ladder, so every rotation follows this order.
+func economicOrder(last Call) [4]Suit {
+	var order [4]Suit
+	n := 0
+	for _, above := range [2]bool{true, false} {
+		for s := Clubs; s <= Spades; s++ {
+			if (s.Strain() > last.Strain) == above {
+				order[n] = s
+				n++
+			}
+		}
+	}
+	return order
+}
+
 // urgentControl returns the control it is most urgent to hear about: the
 // cheapest side suit where this hand holds nothing and partner has shown
-// nothing either. ok is false once every side suit is accounted for.
-func (e *Engine) urgentControl(p *playerState, trump Suit) (Suit, bool) {
+// nothing either. Cheapest on the ladder, so the caller passes the rotation
+// economicOrder built. ok is false once every side suit is accounted for.
+func (e *Engine) urgentControl(p *playerState, trump Suit, order [4]Suit) (Suit, bool) {
 	partner := e.ps[partnerOf(p.seat)]
-	for s := Clubs; s <= Spades; s++ {
+	for _, s := range order {
 		if s == trump || partner.ctrlShown[s] {
 			continue
 		}
@@ -1451,6 +1472,15 @@ func (e *Engine) urgentControl(p *playerState, trump Suit) (Suit, bool) {
 	return 0, false
 }
 
+// needsControl reports whether some side suit is still unaccounted for: a
+// control this hand does not hold and partner has not shown. When none is
+// left the cue-bid exchange has nothing to discover for this hand.
+func (e *Engine) needsControl(p *playerState, trump Suit) bool {
+	// Only whether one is left, not which: any rotation answers that.
+	_, ok := e.urgentControl(p, trump, [4]Suit{Clubs, Diamonds, Hearts, Spades})
+	return ok
+}
+
 // controlBid names one control below the trump game level.
 //
 // The player who opens the exchange starts where he likes: he names the
@@ -1460,8 +1490,8 @@ func (e *Engine) urgentControl(p *playerState, trump Suit) (Suit, bool) {
 // à partir de laquelle le principe de l'ordre économique est rétabli et
 // incontournable. Tout contrôle sauté est alors dénié.") Controls *below* that
 // starting step are therefore NOT denied — only suits skipped from the start
-// onward are. Every later bid of the exchange starts from clubs, so economic
-// order is mandatory from then on.
+// onward are. Every later bid of the exchange starts from the cheapest step
+// on the ladder (economicOrder), economic order being mandatory from then on.
 //
 // The sequence never crosses the trump game level: signing off in the fit
 // stays unambiguous.
@@ -1488,23 +1518,31 @@ func (e *Engine) controlBid(p *playerState, trump Suit) (Call, meaning, bool) {
 	// control immediately below the one he urgently needs, so partner's
 	// cheapest answer is exactly that control; everything below the starting
 	// step stays unsaid rather than denied. Later bids always restart from
-	// clubs, economic order being mandatory from the first step onward.
-	start := Clubs
+	// the cheapest step, economic order being mandatory from the first step
+	// onward.
+	order := economicOrder(last)
+	start := 0
 	if !e.sideHasCued(p) {
-		if u, ok := e.urgentControl(p, trump); ok {
-			for s := u - 1; s >= Clubs; s-- {
-				if s == trump {
+		if u, ok := e.urgentControl(p, trump, order); ok {
+			ui := 0
+			for i, s := range order {
+				if s == u {
+					ui = i
+				}
+			}
+			for i := ui - 1; i >= 0; i-- {
+				if order[i] == trump {
 					continue
 				}
-				if _, _, _, _, held := controlKind(h, s, trump); held {
-					start = s
+				if _, _, _, _, held := controlKind(h, order[i], trump); held {
+					start = i
 					break
 				}
 			}
 		}
 	}
 	var denied [4]bool
-	for s := start; s <= Spades; s++ {
+	for _, s := range order[start:] {
 		// Suits already cue-bid by either player are settled: move on instead
 		// of jumping to repeat the same strain a level higher.
 		if p.ctrlShown[s] || p.ctrlDenied[s] || partner.ctrlShown[s] {
@@ -1539,6 +1577,13 @@ func (e *Engine) controlBid(p *playerState, trump Suit) (Call, meaning, bool) {
 		if !keycard && h.Len(s) <= 1 && p.shortShown[s] {
 			continue
 		}
+		// Every suit stepped over on the way here is denied, and saying so
+		// is the whole point of the economic order: partner must be able to
+		// read the skip. On a heart fit 4C is such a bid -- 3S was there and
+		// was not taken, so it denies the spade control.
+		if dFR, dEN := deniedNames(denied); dFR != "" {
+			fr, en = fr+", sans contrôle à "+dFR, en+", no "+dEN+" control"
+		}
 		mn := m(p.shownMin+bump, -1, fr, en).withLen(trump, h.Len(trump)).asForcing()
 		mn.keycardShown = keycard
 		if aboveGame && 33-partner.shownMin > mn.minPts {
@@ -1560,27 +1605,29 @@ func (e *Engine) controlBid(p *playerState, trump Suit) (Call, meaning, bool) {
 	return Call{}, meaning{}, false
 }
 
-// nextStep is the bid immediately above c on the auction ladder (3S -> 3NT,
-// 3NT -> 4C). The "relais contrôle" answers are always this one step.
+// nextStep is the bid immediately above c on the auction ladder (3NT -> 4C).
+// The "relais contrôle" answer is always this one step.
 func nextStep(c Call) Call {
 	n := c.steps() + 1
 	return Call{Kind: KindBid, Level: n/5 + 1, Strain: Strain(n % 5)}
 }
 
-// controlRelayAsk implements the two "relais contrôle" bids available after
-// partner's non-forcing three-level raise of a major fit.
+// controlRelayAsk implements the "relais contrôle", the conventional 3SA
+// available after partner's non-forcing three-level raise of a major fit.
 //
-// The control one needs to hear about may sit below every control one holds,
-// leaving no economic bid able to ask for it: over 1S - 3S there is no way to
-// ask for clubs, and over 1H - 3H none for clubs nor for spades. Two
-// conventional bids fill the gap:
+// Clubs sit below every other cue-bid, so a hand with no club control has no
+// natural way to ask for it: opening the exchange at 4D says nothing about
+// clubs, and 4C would claim the very control it lacks. 3SA fills that gap --
+// it asks for the CLUB control, on either major fit.
 //
-//   - 3SA asks for the CLUB control, on either major fit;
-//   - 3S asks for the SPADE control, on a heart fit only.
+// There is no such gap in spades. On a heart fit 3S is simply the cheapest
+// control bid of the rotation, so it SHOWS the spade control [S-2b]; it never
+// asks for it. A hand holding that control names it here rather than relaying,
+// and a 3SA relay on a heart fit therefore denies it: it skipped the step.
 //
-// The positive answer is the immediately higher step (3S -> 3SA, 3SA -> 4C).
-// Without the control the step is skipped, which denies it, and the hand names
-// its own controls in economic order instead (controlRelayAnswer).
+// The positive answer is the immediately higher step (3SA -> 4C). Without the
+// control the step is skipped, which denies it, and the hand names its own
+// controls in economic order instead (controlRelayAnswer).
 func (e *Engine) controlRelayAsk(p *playerState, trump Suit) (Call, meaning, bool) {
 	if !trump.IsMajor() || e.sideHasCued(p) {
 		return Call{}, meaning{}, false
@@ -1593,48 +1640,57 @@ func (e *Engine) controlRelayAsk(p *playerState, trump Suit) (Call, meaning, boo
 		partner.lastM == nil || partner.lastM.forcing {
 		return Call{}, meaning{}, false
 	}
-	unknown := func(s Suit) bool {
+	held := func(s Suit) bool {
 		if partner.ctrlShown[s] {
-			return false
+			return true
 		}
-		_, _, _, _, held := controlKind(p.hand, s, trump)
-		return !held
+		_, _, _, _, ok := controlKind(p.hand, s, trump)
+		return ok
 	}
-	// Priority goes to the control that no natural cue could ever reach.
-	// On a heart fit a spade control can never be shown below 4H (4S is
-	// already past the game), so 3S is the only way to ask for it — and it
-	// must be asked first, before the exchange climbs. Clubs sit below every
-	// other cue, so hearing about them needs 3SA. A missing diamond control
-	// needs no convention at all: bidding 4C asks for it.
-	var c Call
-	var asked Suit
-	switch {
-	case trump == Hearts && unknown(Spades):
-		c, asked = bid(3, SSpades), Spades
-	case unknown(Clubs):
-		c, asked = bid(3, SNoTrump), Clubs
-	default:
+	// Only clubs need the convention: a missing diamond control is asked for
+	// by bidding 4C, and on a heart fit the spade control is shown by 3S.
+	if held(Clubs) {
 		return Call{}, meaning{}, false
 	}
+	asked := Clubs
+	var denied [4]bool
+	if trump == Hearts && !partner.ctrlShown[Spades] {
+		if _, _, _, _, ok := controlKind(p.hand, Spades, trump); ok {
+			// 3S is cheaper than 3NT and the hand holds it: the rotation
+			// starts there. Partner's answer then places the clubs by
+			// economic order, so nothing is lost by not relaying.
+			return Call{}, meaning{}, false
+		}
+		denied[Spades] = true
+	}
+	c := bid(3, SNoTrump)
 	if !e.legal(p.seat, c) {
 		return Call{}, meaning{}, false
 	}
-	mn := m(p.shownMin, -1,
-		"relais contrôle, demande le contrôle à "+suitNameFR[asked],
-		"control relay, asks for the "+suitNameEN[asked]+" control").
+	fr := "relais contrôle, demande le contrôle à " + suitNameFR[asked]
+	en := "control relay, asks for the " + suitNameEN[asked] + " control"
+	if denied[Spades] {
+		fr += ", sans contrôle à Pique"
+		en += ", denies the spade control"
+	}
+	mn := m(p.shownMin, -1, fr, en).
 		withLen(trump, p.hand.Len(trump)).asForcing()
 	mn.ctrlRelay = true
 	mn.ctrlRelaySuit = asked
+	mn.deniedCtrl = denied
 	return c, mn, true
 }
 
-// controlRelayAnswer answers a "relais contrôle": the immediately higher step
-// with the control asked for, otherwise the cheapest control above it -- and
-// skipping the relay step denies the control it asked for.
+// controlRelayAnswer answers the "relais contrôle": the immediately higher
+// step with the control asked for, otherwise the cheapest control above it --
+// and skipping the relay step denies the control it asked for.
 func (e *Engine) controlRelayAnswer(p *playerState, trump, asked Suit) (Call, meaning) {
 	last, _, _ := e.lastBid()
 	game := gameOfTrump(trump)
 	mk := func(c Call, s Suit, fr, en string, bump int, keycard bool, denied [4]bool) (Call, meaning) {
+		if dFR, dEN := deniedNames(denied); dFR != "" {
+			fr, en = fr+", sans contrôle à "+dFR, en+", no "+dEN+" control"
+		}
 		mn := m(p.shownMin+bump, -1, fr, en).withLen(trump, p.hand.Len(trump)).asForcing()
 		mn.controlBid, mn.controlSuit = true, s
 		mn.keycardShown = keycard
@@ -1845,14 +1901,28 @@ func (e *Engine) expressFit(ctx *concludeCtx) (Call, meaning, bool) {
 		withLen(fit, p.hand.Len(fit)).asForcing(), true
 }
 
-// initiateControls opens the slam exploration below the trump game: one of the
-// two "relais contrôle" bids when the control that is needed cannot be asked
-// for economically, otherwise an ordinary control bid.
+// initiateControls opens the slam exploration below the trump game: the
+// "relais contrôle" when the club control cannot be asked for economically,
+// otherwise an ordinary control bid.
 func (e *Engine) initiateControls(p *playerState, trump Suit) (Call, meaning, bool) {
 	if c, mn, ok := e.controlRelayAsk(p, trump); ok {
 		return c, mn, true
 	}
 	c, mn, ok := e.controlBid(p, trump)
+	if ok && !trump.IsMajor() && !c.higherThan(bid(4, SNoTrump)) && !e.needsControl(p, trump) {
+		// With a minor the game itself sits above 4SA, so whatever this side
+		// cues, partner's sign-off in the fit buries the ask: 5m answers a
+		// 4H cue as readily as a 5C one, and there is no way back down to the
+		// question. A hand with no control left to hear about -- every side
+		// suit accounted for here or by partner -- would be spending that
+		// room on an exchange that can teach it nothing, so it puts the
+		// question while the question is still there. As long as a suit is
+		// unaccounted for the cue keeps its place: Blackwood counts keycards,
+		// not the second-round controls the exchange is after [S-3].
+		if ac, amn, aok := e.askRatherThanCue(p, trump); aok {
+			return ac, amn, true
+		}
+	}
 	if ok && !trump.IsMajor() && c.higherThan(bid(4, SNoTrump)) {
 		// Opening the exchange above 4SA strands the pair over the ask: the
 		// answer to a control past Blackwood can only be another control, and
@@ -2046,6 +2116,21 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) 
 		return c, m(-1, -1, "plus de contrôle à montrer, retour à l'atout", "no further control to show, back to the trump suit").withLen(trump, p.hand.Len(trump))
 	}
 	return passCall, noInfo()
+}
+
+// deniedNames spells out the suits a control bid has stepped over, joined for
+// the explanation ("Pique", "Trèfle ni à Carreau").
+func deniedNames(denied [4]bool) (fr, en string) {
+	for s := Clubs; s <= Spades; s++ {
+		if !denied[s] {
+			continue
+		}
+		if fr != "" {
+			fr, en = fr+" ni à ", en+" or "
+		}
+		fr, en = fr+suitNameFR[s], en+suitNameEN[s]
+	}
+	return fr, en
 }
 
 // missingSideControls lists the side suits where neither hand has shown a

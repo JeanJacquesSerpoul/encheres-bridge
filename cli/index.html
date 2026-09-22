@@ -175,8 +175,14 @@
           </span>
         </span>
       </div>
+      <!-- Le texte PBN est un repli d'initié : le débutant compose sa donne
+           avec les boutons et le tableau de cartes, et n'a jamais besoin de
+           l'ouvrir. Le résumé reste donc une mention discrète, et la note qui
+           suit explique en une phrase ce qu'on y trouve à ceux qui l'ouvrent
+           par curiosité. -->
       <details id="pbn-details" class="pbn-details">
-        <summary data-i18n="pbnToggle">Afficher / masquer le texte PBN</summary>
+        <summary data-i18n="pbnToggle" data-i18n-title="pbnToggleTitle">Texte de la donne (format PBN)</summary>
+        <p class="pbn-note" data-i18n="pbnNote">Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.</p>
         <textarea id="pbn" rows="4" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
       </details>
       <div class="row hidden" id="deal-select-row">

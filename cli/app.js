@@ -3123,7 +3123,16 @@ function renderHealth() {
   dot.className =
     healthState === "online" ? "dot ok" : healthState === "offline" ? "dot ko" : "dot";
   dot.title = healthState ? t[healthState] : t.healthUnknown;
+  // Rempli mais jamais vu : le libellé est réservé aux lecteurs d'écran (la
+  // pastille et son infobulle portent l'état pour l'œil), et il se réécrit
+  // quand même à chaque changement de langue.
   $("#health-text").textContent = healthState ? t[healthState] : "";
+  // En mode navigateur, le moteur est dans la page : « Tester » ne sonderait
+  // personne et ne ferait que rejouer le contrôle du chargement, déjà fait à
+  // l'ouverture. Le bouton ne garde donc sa place qu'en mode serveur, où il
+  // dit lequel répond. C'est ici, et non à l'initialisation, parce que la
+  // bascule de mode repasse par renderHealth.
+  $("#health-btn").classList.toggle("hidden", wasmMode());
   // Moteur en panne (module absent, navigateur sans WebAssembly...) : la barre
   // revient, faute de quoi le client resterait bloqué sur un mode qui ne
   // calcule rien, sans aucun moyen de viser un serveur.
@@ -3249,6 +3258,8 @@ function renderIaHealth() {
   dot.className =
     iaHealthState === "online" ? "dot ok" : iaHealthState === "offline" ? "dot ko" : "dot";
   dot.title = iaHealthState ? t[iaHealthState] : t.healthUnknown;
+  // Même libellé invisible que pour les enchères : l'état se lit à la couleur
+  // de la pastille, et les lecteurs d'écran gardent les mots.
   $("#ia-health-text").textContent = iaHealthState ? t[iaHealthState] : "";
   renderPhotoButtons();
 }

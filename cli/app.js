@@ -2845,23 +2845,20 @@ function renderResult(r) {
     $("#hand-" + seat).innerHTML = handHTML(seat, r.hands[seat], lang);
   }
 
-  // Center of the table + summary chips.
+  // Centre de la table : le contrat et son déclarant d'abord — c'est la
+  // réponse, tout le reste n'est que le contexte qui la date. Donneur et
+  // vulnérabilité suivent, en retrait. Rien n'est repris dans une rangée de
+  // pastilles au-dessus du tableau : elle répétait mot pour mot ce qui se lit
+  // ici, et « Contré » y figurait en clair alors que le contrat porte son X.
   const passedOut = isPass(r.contract);
   const contractHTML = passedOut
     ? esc(r.contract)
     : bidHTML(r.contract, lang) + (r.doubled ? " X" : "");
   $("#table-center").innerHTML = `
-    <div>${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
-    <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>
     <div class="big">${contractHTML}</div>
-    <div>${passedOut ? "" : (lang === "fr" ? "par " : "by ") + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
-
-  $("#summary").innerHTML = `
-    <span class="chip contract">${withColon(lang === "fr" ? "Contrat" : "Contract", lang)} <b>${contractHTML}</b></span>
-    <span class="chip">${withColon(lang === "fr" ? "Déclarant" : "Declarer", lang)} <b>${passedOut ? "—" : esc(SEAT_SHORT[lang][r.declarer])}</b></span>
-    <span class="chip">${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></span>
-    <span class="chip">${vulHTML(r.vulnerable, lang)}</span>
-    <span class="chip">${withColon(lang === "fr" ? "Contré" : "Doubled", lang)} <b>${r.doubled ? (lang === "fr" ? "oui" : "yes") : (lang === "fr" ? "non" : "no")}</b></span>`;
+    <div>${passedOut ? "" : (lang === "fr" ? "par " : "by ") + esc(SEAT_SHORT[lang][r.declarer])}</div>
+    <div>${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
+    <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>`;
 
   // Auction grid: columns W N E S, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de

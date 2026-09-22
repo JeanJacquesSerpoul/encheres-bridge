@@ -682,23 +682,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .muted { color: var(--muted); }
 .hidden { display: none; }
 
-/* Summary */
-.summary {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-.summary .chip {
-  background: var(--tint);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: .9rem;
-}
-.summary .chip b { font-size: 1.05rem; }
-.summary .chip.contract { background: var(--felt); color: var(--on-accent); border-color: var(--felt-dark); }
-
 /* Table layout */
 .table-layout {
   display: grid;
@@ -1018,9 +1001,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #result-panel h3,
 #result-panel .par-hint,
 #result-panel .par-credit { text-align: center; }
-/* Deux rangées souples, centrées comme le reste : le résumé du contrat était
-   le seul élément du panneau resté calé à gauche. */
-#result-panel .summary,
+/* Rangée souple, centrée comme le reste du panneau : elle était à gauche
+   quand le reste était centré. */
 #result-panel .par-row { justify-content: center; }
 
 /* Questionnaire : même centrage que le résultat pour le titre et la séquence. */

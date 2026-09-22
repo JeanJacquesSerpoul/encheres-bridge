@@ -672,7 +672,44 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   user-select: none;
   touch-action: none; /* le glisser prime sur le défilement tactile */
 }
+/* Réservé aux lecteurs d'écran : présent dans l'arbre, absent de l'image.
+   `clip-path` plutôt que `display: none`, qui l'ôterait aussi de l'arbre. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .card:hover { border-color: var(--accent); background: var(--tint); }
+/* Le focus d'une carte doit se voir davantage qu'un survol : c'est le seul
+   repère de qui se déplace aux flèches, et les cartes sont petites et serrées.
+
+   `:focus` et non `:focus-visible`, contrairement au reste de la feuille. Ici
+   les flèches déplacent le focus par un appel de code, et chaque dépôt le
+   repose après un redessin complet : `:focus-visible` dépend alors d'une
+   heuristique de modalité que le navigateur doit maintenir à travers la
+   destruction de l'élément. Si elle lâche, l'utilisateur se déplace sans voir
+   où il en est — un échec entier, contre un simple anneau de trop pour qui
+   clique. C'est le motif attendu d'un composant à tabindex tournant, où la
+   position est tenue par le code et non par le navigateur. */
+.card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background: var(--tint);
+}
+/* Une main vide : son corps est la cible, il doit donc se signaler. */
+.cons-cards[role="button"]:focus,
+.neutral-hint[role="button"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.cons-cards[role="button"], .neutral-hint[role="button"] { cursor: pointer; }
 .card.picked { border-color: var(--accent); background: var(--tint); box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .3); }
 .card.dragging { opacity: .35; }
 

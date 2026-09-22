@@ -1064,6 +1064,21 @@ const CONS_TEXT = {
     errNoFill: "Impossible de distribuer les cartes restantes avec ces bornes : élargissez-les.",
     errIncomplete: "Chaque main doit contenir 13 cartes : distribuez les cartes non affectées.",
     errNoPbn: "Saisissez ou chargez une donne PBN.",
+    // Noms parlés des cartes : « R » et « ♠ » ne se lisent pas à voix haute.
+    // Seules les honneurs ont un nom ; les chiffres se lisent d'eux-mêmes.
+    rankName: { A: "As", K: "Roi", Q: "Dame", J: "Valet", T: "10" },
+    suitName: { spades: "pique", hearts: "cœur", diamonds: "carreau", clubs: "trèfle" },
+    cardLabel: (rank, suit, zone) => `${rank} de ${suit}, ${zone}`,
+    emptyZoneLabel: (zone) => `${zone}, aucune carte`,
+    // Annoncés dans la zone de politesse, à chaque geste au clavier.
+    cardHeld: (card) => `${card} : pris. Allez à la destination, puis Entrée.`,
+    cardDropped: (card, zone) => `${card} : déposé dans ${zone}.`,
+    cardReleased: (card) => `${card} : reposé.`,
+    cardsHelp:
+      "Tableau des quatre mains. Tabulation pour passer d'une main à l'autre, " +
+      "flèches gauche et droite pour parcourir ses cartes, haut et bas pour " +
+      "changer de couleur. Entrée ou Espace prend une carte, puis la dépose " +
+      "sur la main où vous êtes. Échap la repose.",
   },
   en: {
     ph: "HCP", min: "Min", max: "Max",
@@ -1085,6 +1100,17 @@ const CONS_TEXT = {
     errNoFill: "The remaining cards cannot be dealt within these bounds: widen them.",
     errIncomplete: "Every hand must hold 13 cards: deal the unassigned ones.",
     errNoPbn: "Type in or load a PBN deal.",
+    rankName: { A: "Ace", K: "King", Q: "Queen", J: "Jack", T: "10" },
+    suitName: { spades: "spades", hearts: "hearts", diamonds: "diamonds", clubs: "clubs" },
+    cardLabel: (rank, suit, zone) => `${rank} of ${suit}, ${zone}`,
+    emptyZoneLabel: (zone) => `${zone}, no cards`,
+    cardHeld: (card) => `${card}: picked up. Go to the destination, then press Enter.`,
+    cardDropped: (card, zone) => `${card}: dropped in ${zone}.`,
+    cardReleased: (card) => `${card}: put back.`,
+    cardsHelp:
+      "Table of the four hands. Tab moves between hands, left and right arrows " +
+      "walk through a hand's cards, up and down change suit. Enter or Space " +
+      "picks a card up, then drops it on the hand you are on. Escape puts it back.",
   },
 };
 
@@ -1105,6 +1131,35 @@ let dealZones = emptyZones();
 // Carte désignée par un simple clic, en attente d'une zone de destination
 // (voir le glisser-déposer plus bas).
 let selectedCard = null;
+
+// ---------- le clavier ----------
+// Une carte par zone porte le tabindex ; c'est celle-ci. Mémorisée par zone,
+// elle survit aux redessins, qui réécrivent tout l'innerHTML du tableau.
+const rovingByZone = {};
+// La carte à refocaliser juste après le prochain redessin. Sans elle, chaque
+// geste renverrait le focus au début du document.
+let refocusCard = null;
+
+// La carte de `zone` qui doit porter le tabindex : celle retenue si elle y est
+// encore, la première sinon.
+function rovingCardOf(zone) {
+  const list = zoneCardList(zone);
+  if (!list.length) return null;
+  const kept = rovingByZone[zone];
+  if (kept && list.some((c) => c.suit === kept.suit && c.rank === kept.rank)) return kept;
+  return list[0];
+}
+
+// Les cartes d'une zone, dans l'ordre où elles s'affichent : ♠ ♥ ♦ ♣, chaque
+// couleur de l'as au 2. C'est l'ordre que suivent les flèches.
+function zoneCardList(zone) {
+  const hand = dealZones[zone];
+  const out = [];
+  for (const suit of SUIT_KEYS) {
+    for (const rank of (hand[suit] || "").split("")) out.push({ zone, suit, rank });
+  }
+  return out;
+}
 // Vrai pendant que l'on réécrit nous-mêmes le textarea PBN : l'événement
 // `input` doit alors être ignoré, sinon la zone neutre serait vidée.
 let writingPbn = false;
@@ -1282,9 +1337,22 @@ function boundsInputHTML(seat, kind, label) {
     </label>`;
 }
 
+// Nom parlé d'une carte : « Roi de pique, Nord ». Le glyphe affiché — « R »,
+// « ♠ » — ne veut rien dire à voix haute.
+function cardLabel(card, lang) {
+  const t = CONS_TEXT[lang];
+  const rank = t.rankName[card.rank] || card.rank;
+  const zone = card.zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][card.zone];
+  return t.cardLabel(rank, t.suitName[card.suit], zone);
+}
+
 // One line per suit, in ♠ ♥ ♦ ♣ order, each rank its own draggable chip.
+// Au clavier, une seule carte par zone porte le tabindex : la tabulation passe
+// de main en main, les flèches parcourent la main. Cinquante-deux arrêts de
+// tabulation seraient intraversables.
 function zoneCardsHTML(zone, lang) {
   const hand = dealZones[zone];
+  const roving = rovingCardOf(zone);
   return SUIT_KEYS.map((suit) => {
     const cls = RED_SUITS.has(suit) ? " red" : "";
     const ranks = hand[suit];
@@ -1292,14 +1360,28 @@ function zoneCardsHTML(zone, lang) {
       ? ranks
           .split("")
           .map((rank) => {
-            const sel = sameCard(selectedCard, { zone, suit, rank }) ? " picked" : "";
+            const card = { zone, suit, rank };
+            const held = sameCard(selectedCard, card);
+            const sel = held ? " picked" : "";
+            const tab = roving && roving.suit === suit && roving.rank === rank ? 0 : -1;
             return `<span class="card${cls}${sel}" data-owner="${zone}" data-suit="${suit}" ` +
-              `data-rank="${rank}">${rankHTML(rank, lang)}</span>`;
+              `data-rank="${rank}" role="button" tabindex="${tab}" ` +
+              `aria-pressed="${held}" aria-label="${esc(cardLabel(card, lang))}">` +
+              `${rankHTML(rank, lang)}</span>`;
           })
           .join("")
-      : '<span class="void">—</span>';
-    return `<div class="suitline"><span class="suitsym${cls}">${SUIT_SYMBOLS[suit]}</span>${cards}</div>`;
+      : '<span class="void" aria-hidden="true">—</span>';
+    return `<div class="suitline"><span class="suitsym${cls}" aria-hidden="true">${SUIT_SYMBOLS[suit]}</span>${cards}</div>`;
   }).join("");
+}
+
+// Une zone vide n'a aucune carte à focaliser, et serait donc impossible à
+// viser au clavier — or c'est précisément là qu'on veut déposer. Son corps
+// devient alors la cible.
+function emptyDropHTML(zone, lang) {
+  const t = CONS_TEXT[lang];
+  const name = zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][zone];
+  return `tabindex="0" role="button" aria-label="${esc(t.emptyZoneLabel(name))}"`;
 }
 
 // Dessins des deux icônes des en-têtes de main, et du bouton photo de la
@@ -1354,7 +1436,7 @@ function boundsCardHTML(seat, lang) {
       ${boundsInputHTML(seat, "min", t.min)}
       ${boundsInputHTML(seat, "max", t.max)}
     </div>
-    <div class="cons-cards">${zoneCardsHTML(seat, lang)}</div>`;
+    <div class="cons-cards"${handLength(hand) ? "" : " " + emptyDropHTML(seat, lang)}>${zoneCardsHTML(seat, lang)}</div>`;
 }
 
 // The centre of the table holds the cards that belong to no hand yet.
@@ -1363,7 +1445,7 @@ function neutralZoneHTML(lang) {
   const count = zoneCount(UNASSIGNED);
   const body = count
     ? `<div class="cons-cards">${zoneCardsHTML(UNASSIGNED, lang)}</div>`
-    : `<div class="neutral-hint">${esc(t.neutralHint)}</div>`;
+    : `<div class="neutral-hint" ${emptyDropHTML(UNASSIGNED, lang)}>${esc(t.neutralHint)}</div>`;
   return `
     <div class="cons-head">
       <span class="cons-seat">${esc(t.neutral)}</span>
@@ -1380,6 +1462,9 @@ function renderBoundsCards() {
   const t = CONS_TEXT[lang];
   $("#cons-reset-btn").textContent = t.reset;
   $("#cons-clear-btn").textContent = t.clear;
+  // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
+  // texte appartient au panneau des contraintes, donc à CONS_TEXT.
+  $("#cards-help").textContent = t.cardsHelp;
   const fillBtn = $("#cons-fill-btn");
   fillBtn.textContent = t.fill;
   fillBtn.classList.toggle("hidden", zoneCount(UNASSIGNED) === 0);
@@ -1393,6 +1478,22 @@ function renderBoundsCards() {
   center.classList.toggle("filled", zoneCount(UNASSIGNED) > 0);
   center.innerHTML = neutralZoneHTML(lang);
   renderPhotoButtons(); // les boutons des mains viennent d'être recréés
+  restoreCardFocus();
+}
+
+// Le redessin ci-dessus remplace tout le tableau : l'élément qui avait le
+// focus n'existe plus. Sans cette reprise, chaque carte déplacée au clavier
+// renverrait le focus en tête de document, et le suivi serait impraticable.
+// On ne reprend le focus que s'il était déjà dans le tableau, pour ne pas
+// l'arracher à qui tape dans un champ de bornes.
+function restoreCardFocus() {
+  const want = refocusCard;
+  refocusCard = null;
+  if (!want) return;
+  const el = cardElement(want);
+  if (!el) return;
+  el.tabIndex = 0;
+  el.focus({ preventScroll: true });
 }
 
 // Cheap update used while typing: refreshes the out-of-bounds highlight
@@ -1455,6 +1556,67 @@ function clearDropHints() {
 function zoneAccepts(zone, card) {
   if (zone === card.zone) return false;
   return zone === UNASSIGNED || zoneCount(zone) < HAND_SIZE;
+}
+
+// Zone de politesse : ce qui vient d'être fait, pour qui ne voit pas l'écran.
+function announce(msg) {
+  const el = $("#cards-live");
+  // Vidée puis remplie : deux annonces identiques d'affilée — deux cartes du
+  // même rang déposées au même endroit — ne seraient pas relues autrement.
+  el.textContent = "";
+  el.textContent = msg;
+}
+
+// Prendre une carte, ou déposer celle qu'on tient sur la main de celle-ci.
+// C'est ce que fait un clic simple, et c'est ce que fait Entrée : le geste est
+// écrit une fois pour les deux, sans quoi les deux finiraient par diverger.
+// Dépose la carte tenue dans `zone`. `fallback` est la carte à refocaliser si
+// le dépôt est refusé — celle sur laquelle on se trouvait.
+//
+// Un refus — la main est pleine — laisse la carte dans la main : on la tient
+// toujours, et on peut viser ailleurs sans la reprendre. Elle était reposée
+// jusqu'ici, y compris à la souris, ce qui obligeait à recommencer.
+function dropHeld(zone, fallback) {
+  const lang = $("#lang").value;
+  const t = CONS_TEXT[lang];
+  const held = selectedCard;
+  const name = cardLabel(held, lang);
+  const zoneName = zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][zone];
+  if (!zoneAccepts(zone, held)) {
+    $("#cons-error").textContent = t.errFull(zoneName);
+    announce(t.errFull(zoneName));
+    refocusCard = fallback;
+    renderBoundsCards();
+    return;
+  }
+  selectedCard = null;
+  dropCard(held, zone);
+  refocusCard = { zone, suit: held.suit, rank: held.rank };
+  rovingByZone[zone] = { suit: held.suit, rank: held.rank };
+  announce(t.cardDropped(name, zoneName));
+  renderBoundsCards();
+}
+
+function activateCard(card) {
+  const lang = $("#lang").value;
+  const t = CONS_TEXT[lang];
+  if (selectedCard && selectedCard.zone !== card.zone) {
+    dropHeld(card.zone, card);
+    return;
+  }
+  const wasHeld = sameCard(selectedCard, card);
+  selectedCard = wasHeld ? null : card;
+  refocusCard = card;
+  rovingByZone[card.zone] = { suit: card.suit, rank: card.rank };
+  announce(wasHeld ? t.cardReleased(cardLabel(card, lang)) : t.cardHeld(cardLabel(card, lang)));
+  renderBoundsCards();
+}
+
+// Déposer la carte tenue dans une zone visée directement — le fond d'une main,
+// ou une main vide, qui n'a aucune carte sur laquelle cliquer.
+function activateZone(zone) {
+  if (!selectedCard) return;
+  dropHeld(zone, selectedCard);
 }
 
 function dropCard(card, zone) {
@@ -1544,24 +1706,106 @@ window.addEventListener("pointerup", (ev) => {
 
   // Simple click: pick a card up, then click its destination. Clicking a card
   // of another zone drops the held one there — handy on touch screens, where
-  // an empty spot can be hard to aim at.
-  if (st.card) {
-    if (selectedCard && selectedCard.zone !== st.card.zone) {
-      const card = selectedCard;
-      selectedCard = null;
-      dropCard(card, st.card.zone);
-      return;
-    }
-    selectedCard = sameCard(selectedCard, st.card) ? null : st.card;
-    renderBoundsCards();
-  } else if (selectedCard && st.zone) {
-    const card = selectedCard;
-    selectedCard = null;
-    dropCard(card, st.zone);
-  }
+  // an empty spot can be hard to aim at. Le clavier passe par les mêmes deux
+  // fonctions : un seul modèle pour les deux entrées.
+  if (st.card) activateCard(st.card);
+  else if (st.zone) activateZone(st.zone);
 });
 
 window.addEventListener("pointercancel", endDrag);
+
+// Déplace le focus d'une carte à l'autre à l'intérieur d'une main, et déplace
+// le tabindex avec lui : la main se souvient de l'endroit où on l'a quittée.
+function focusCardAt(zone, index) {
+  const list = zoneCardList(zone);
+  if (!list.length) return;
+  const card = list[Math.max(0, Math.min(index, list.length - 1))];
+  rovingByZone[zone] = { suit: card.suit, rank: card.rank };
+  const el = cardElement(card);
+  if (!el) return;
+  for (const other of $(`[data-zone="${zone}"]`).querySelectorAll(".card")) {
+    other.tabIndex = -1;
+  }
+  el.tabIndex = 0;
+  el.focus();
+}
+
+function cardElement(card) {
+  return document.querySelector(
+    `.card[data-owner="${card.zone}"][data-suit="${card.suit}"][data-rank="${card.rank}"]`
+  );
+}
+
+$("#constraints").addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape" && selectedCard) {
+    const lang = $("#lang").value;
+    const card = selectedCard;
+    selectedCard = null;
+    refocusCard = card;
+    announce(CONS_TEXT[lang].cardReleased(cardLabel(card, lang)));
+    renderBoundsCards();
+    ev.preventDefault();
+    return;
+  }
+
+  const cardEl = ev.target.closest(".card");
+  // Une main vide : son corps porte le tabindex, et Entrée y dépose.
+  if (!cardEl) {
+    const dropEl = ev.target.closest("[role='button'][tabindex='0']");
+    const zoneEl = dropEl && dropEl.closest("[data-zone]");
+    if (zoneEl && (ev.key === "Enter" || ev.key === " ")) {
+      ev.preventDefault();
+      activateZone(zoneEl.dataset.zone);
+    }
+    return;
+  }
+
+  const card = cardFromEl(cardEl);
+  const list = zoneCardList(card.zone);
+  const at = list.findIndex((c) => c.suit === card.suit && c.rank === card.rank);
+
+  switch (ev.key) {
+    case "Enter":
+    case " ":
+      ev.preventDefault();
+      activateCard(card);
+      return;
+    case "ArrowRight":
+      ev.preventDefault();
+      focusCardAt(card.zone, at + 1);
+      return;
+    case "ArrowLeft":
+      ev.preventDefault();
+      focusCardAt(card.zone, at - 1);
+      return;
+    case "Home":
+      ev.preventDefault();
+      focusCardAt(card.zone, 0);
+      return;
+    case "End":
+      ev.preventDefault();
+      focusCardAt(card.zone, list.length - 1);
+      return;
+    case "ArrowDown":
+    case "ArrowUp": {
+      // D'une couleur à l'autre, sur la première carte de la suivante qui en
+      // a : sauter sur une chicane laisserait le focus nulle part.
+      ev.preventDefault();
+      const step = ev.key === "ArrowDown" ? 1 : -1;
+      const from = SUIT_KEYS.indexOf(card.suit);
+      for (let i = from + step; i >= 0 && i < SUIT_KEYS.length; i += step) {
+        const next = list.findIndex((c) => c.suit === SUIT_KEYS[i]);
+        if (next !== -1) {
+          // Vers le haut, on vise la dernière carte de la couleur atteinte.
+          const last = list.reduce((acc, c, j) => (c.suit === SUIT_KEYS[i] ? j : acc), next);
+          focusCardAt(card.zone, step === 1 ? next : last);
+          return;
+        }
+      }
+      return;
+    }
+  }
+});
 
 // Deals the neutral zone at random over the seats that still have room,
 // redrawing until every hand's honour-point count fits its bounds.

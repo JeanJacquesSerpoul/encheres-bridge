@@ -1150,8 +1150,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
      négatif garde la suite alignée sous la première carte, et non sous le
      symbole de la couleur. Simple habillage de texte, et non une grille
      flexible comme dans l'éditeur : là-bas chaque carte est un jeton, ici la
-     ligne n'est qu'un symbole suivi de rangs séparés par des espaces. */
-  .hand .suitline {
+     ligne n'est qu'un symbole suivi de rangs séparés par des espaces.
+     L'éditeur en est donc exclu — `:not(.cons-hand)`. Il porte lui aussi la
+     classe `.hand`, et `text-indent` s'hérite : chaque jeton `.card` recevait
+     l'indentation de la ligne, son rang se dessinant dès 2 px à gauche de sa
+     pastille et laissant 15 px de vide à droite. Le défaut ne se voyait que
+     sous 720 px, seuil de cette règle. */
+  .hand:not(.cons-hand) .suitline {
     white-space: normal;
     padding-left: 1.3em;
     text-indent: -1.3em;
@@ -1230,7 +1235,12 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .row button.primary { flex: 1 1 100%; }
   .row .spacer { display: none; }
 
-  .hand { font-size: .82rem; padding: 8px; }
+  .hand { font-size: .82rem; }
+  /* Même fuite que pour les lignes de couleur : le retrait ne décollait pas
+     que le texte, il s'appliquait aussi à `.cons-hand`, dont le bandeau doré
+     se détachait alors du bord de 8 px — à fleur sur les écrans plus larges
+     et dans les mains de lecture à toutes les largeurs. */
+  .hand:not(.cons-hand) { padding: 8px; }
   .hand .seat-name { font-size: .85rem; }
 
   .auction th, .auction td { padding: 5px 4px; font-size: .9rem; }

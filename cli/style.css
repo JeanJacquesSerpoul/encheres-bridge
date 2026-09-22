@@ -457,6 +457,173 @@ button:disabled { opacity: .6; cursor: wait; }
   line-height: 0;
 }
 .icon-btn svg { width: 18px; height: 18px; }
+
+/* ---------- les commandes de la donne, en icônes ----------
+
+   Trois utilitaires et deux actions, tous carrés, tous de la même famille.
+   La hiérarchie ne passe plus par la longueur du libellé — il n'y en a plus —
+   mais par le remplissage : les utilitaires sont creux et bordés, les deux
+   actions sont pleines et vertes. On voit d'un coup d'œil lesquelles font
+   avancer la donne. */
+.cmd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s, transform .1s;
+}
+.cmd-btn svg { width: 21px; height: 21px; }
+.cmd-btn:hover:not(:disabled) {
+  background: var(--tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+/* Un enfoncement d'un pixel : le bouton répond au doigt comme à la souris,
+   là où un simple changement de fond passe inaperçu sous la main. */
+.cmd-btn:active:not(:disabled) { transform: translateY(1px); }
+.cmd-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* Les deux actions : pleines et vertes, mais de la même taille que les
+   autres. Plus grandes, elles rompaient l'alignement de la rangée pour un
+   gain de lisibilité nul — le remplissage suffit à les distinguer. */
+.cmd-primary {
+  border-color: var(--accent-bg);
+  background: var(--accent-bg);
+  color: var(--on-accent);
+}
+.cmd-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+/* L'infobulle d'un bouton tient en une ligne : elle n'a pas besoin de la
+   largeur d'un commentaire d'enchère. */
+.hint-tip {
+  max-width: 220px;
+  font-size: .85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- lancer le questionnaire ----------
+
+   Un encadré à part, et non la suite des commandes de la donne : le
+   questionnaire n'agit pas sur la donne, il ouvre un entraînement où l'on
+   répond à la place d'un siège. Le trait et le fond le disent avant le titre,
+   et la marge au-dessus coupe franchement avec la rangée d'icônes. */
+.quiz-launch {
+  margin: 26px auto 0;
+  padding: 14px 18px 16px;
+  width: fit-content;
+  max-width: 100%;
+  /* Le vert clair des survols plutôt qu'un gris : sur le blanc du panneau, un
+     gris à 1,08 de contraste ne se voyait pas, et c'est la seule chose qui
+     sépare l'entraînement des commandes de la donne. Teinté, l'encadré
+     s'annonce de lui-même. */
+  border: 1px solid var(--success-border);
+  border-radius: var(--radius);
+  background: var(--tint);
+}
+.quiz-launch-title {
+  margin: 0 0 10px;
+  font-size: .9rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+}
+.quiz-launch-row {
+  display: flex;
+  /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende
+     au-dessus des pastilles, si bien qu'un centrage posait le bouton une
+     demi-légende plus haut qu'elles. Par le bas, il retrouve leur ligne. */
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Les quatre sièges en bandeau. Le compas en croix disait bien la place de
+   chacun, mais il coûtait trois rangées de hauteur pour quatre choix — cher,
+   sous une rangée d'icônes qui en tient une seule. Un fieldset sans bordure :
+   sa légende sert de titre, et les boutons radio qu'il contient font circuler
+   les flèches d'eux-mêmes. */
+.seat-pills {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.seat-pills-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Le bouton radio lui-même est retiré de l'image mais reste focalisable : la
+   pastille qui l'habille prend sa place. Même masquage que le champ fichier,
+   pour la même raison. */
+.seat-pick input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.seat-pick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.seat-pick:hover { border-color: var(--accent); color: var(--accent); }
+.seat-pick.is-picked {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  color: var(--on-accent);
+}
+/* Le focus se pose sur le champ caché : c'est la pastille qui doit le
+   montrer, sans quoi il n'y aurait rien à voir. */
+.seat-pick:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le bouton qui lance l'entraînement prend la hauteur des pastilles qu'il
+   suit : il appartient à la même rangée, et le carré de 44 px de la rangée
+   du dessus la dépassait d'un cran. */
+.quiz-launch .cmd-btn {
+  width: 34px;
+  height: 34px;
+}
+.quiz-launch .cmd-btn svg { width: 19px; height: 19px; }
+
+/* Au doigt, la pastille et le bouton gagnent la hauteur des autres cibles. La
+   règle est ici et non dans le bloc « pointer: coarse » plus haut : à
+   spécificité égale, c'est la dernière écrite qui l'emporte. */
+@media (pointer: coarse) {
+  .seat-pick { min-height: 42px; }
+  .quiz-launch .cmd-btn { width: 42px; height: 42px; }
+}
+}
 .icon-btn:disabled { cursor: not-allowed; }
 /* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que
    lorsqu'il a quelque chose à dire. */

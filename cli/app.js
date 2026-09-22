@@ -276,6 +276,7 @@ const UI_TEXT = {
     dealerWord: "donneur",
     runAuction: "Afficher les enchères",
     yourHand: "Votre main",
+    seatTip: (seat) => `Votre main est en ${seat}`,
     startQuiz: "Commencer le questionnaire",
     quizPanel: "Questionnaire d'enchères",
     auctionSeq: "Séquence d'enchères",
@@ -401,6 +402,7 @@ const UI_TEXT = {
     dealerWord: "dealer",
     runAuction: "Run the auction",
     yourHand: "Your hand",
+    seatTip: (seat) => `Your hand is ${seat}`,
     startQuiz: "Start the quiz",
     quizPanel: "Bidding quiz",
     auctionSeq: "Auction",
@@ -593,10 +595,9 @@ function applyLang() {
   relabelQuizContinue();
   renderServerHint(); // messages du champ d'URL et libellé de l'option locale
   renderIaHint();
-  for (const sel of [$("#seat"), $("#dealer")]) {
-    for (const opt of sel.options) {
-      if (opt.value) opt.textContent = SEAT_LABEL[lang][opt.value];
-    }
+  renderSeatCompass();
+  for (const opt of $("#dealer").options) {
+    if (opt.value) opt.textContent = SEAT_LABEL[lang][opt.value];
   }
   for (const opt of $("#vul").options) {
     if (opt.value) opt.textContent = capitalize(VUL_LABEL[lang][opt.value]);
@@ -1467,6 +1468,51 @@ function emptyDropHTML(zone, lang) {
   return `tabindex="0" role="button" aria-label="${esc(t.emptyZoneLabel(name))}"`;
 }
 
+// Les icônes des commandes de la donne. Toutes au même gabarit que celles des
+// en-têtes de main : 24 unités, au trait, sans remplissage, la couleur venant
+// du texte. Elles vont par paires de sens contraire — rassembler les cartes au
+// centre, les redistribuer aux mains — pour que le geste se lise avant le mot.
+const SVG_OPEN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">`;
+
+// Quatre flèches qui rentrent : les cartes reviennent au centre.
+const GATHER_SVG = `${SVG_OPEN}
+  <path d="M9 3v6H3"/><path d="m3 3 6 6"/>
+  <path d="M15 3v6h6"/><path d="m21 3-6 6"/>
+  <path d="M9 21v-6H3"/><path d="m3 21 6-6"/>
+  <path d="M15 21v-6h6"/><path d="m21 21-6-6"/>
+</svg>`;
+
+// Quatre flèches qui sortent : les cartes partent vers les mains.
+const DEAL_SVG = `${SVG_OPEN}
+  <path d="M3 9V3h6"/><path d="m3 3 6 6"/>
+  <path d="M21 9V3h-6"/><path d="m21 3-6 6"/>
+  <path d="M3 15v6h6"/><path d="m3 21 6-6"/>
+  <path d="M21 15v6h-6"/><path d="m21 21-6-6"/>
+</svg>`;
+
+// Une gomme posée de biais : les bornes s'effacent.
+const ERASER_SVG = `${SVG_OPEN}
+  <path d="m5 16 7-7 6 6-4 4H8z"/>
+  <path d="M12 9 16 5a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-4 4"/>
+  <path d="M4 21h16"/>
+</svg>`;
+
+// Une flèche de lecture : la séquence se déroule.
+const PLAY_SVG = `${SVG_OPEN}
+  <circle cx="12" cy="12" r="9"/>
+  <path d="m10 8.5 6 3.5-6 3.5z"/>
+</svg>`;
+
+// Une toque d'étudiant : on s'entraîne. Un point d'interrogation disait bien
+// « questionnaire », mais c'est le dessin de l'aide partout ailleurs, et rien
+// ne le distinguait d'un bouton « au secours ».
+const QUIZ_SVG = `${SVG_OPEN}
+  <path d="M2 9.2 12 4.4l10 4.8-10 4.8z"/>
+  <path d="M6.5 11.4V16c0 1.4 2.5 2.6 5.5 2.6s5.5-1.2 5.5-2.6v-4.6"/>
+  <path d="M21.4 9.5v4.6"/>
+</svg>`;
+
 // Dessins des deux icônes des en-têtes de main, et du bouton photo de la
 // donne : une poubelle et un appareil photo, repris de l'application
 // bridgeteacher.
@@ -1540,17 +1586,33 @@ function neutralZoneHTML(lang) {
 // Full redraw of the four bound cards + the neutral zone. Rebuilds the inputs,
 // so only call it when the deal, the language or the bounds state changes as a
 // whole — not on every keystroke (see refreshBoundsFlags).
+// Un bouton sans texte : le dessin dedans, le nom dans l'infobulle et dans
+// l'étiquette que lit un lecteur d'écran. Les trois viennent ensemble, sinon
+// l'un des trois finit par manquer.
+function setCommandButton(sel, svg, name) {
+  const btn = $(sel);
+  btn.innerHTML = svg;
+  btn.setAttribute("aria-label", name);
+  btn.dataset.tip = name;
+}
+
 function renderBoundsCards() {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
-  $("#cons-reset-btn").textContent = t.reset;
-  $("#cons-clear-btn").textContent = t.clear;
+  setCommandButton("#cons-reset-btn", ERASER_SVG, t.reset);
+  setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
+  setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
+  setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction);
+  setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
   $("#cards-help").textContent = t.cardsHelp;
+  // Désactivé plutôt que masqué : un bouton qui disparaît décale la rangée à
+  // chaque carte déplacée, et l'on ne peut pas apprendre ce qu'il fait tant
+  // qu'on ne l'a jamais vu. Éteint, il reste là et se laisse interroger.
   const fillBtn = $("#cons-fill-btn");
-  fillBtn.textContent = t.fill;
-  fillBtn.classList.toggle("hidden", zoneCount(UNASSIGNED) === 0);
+  fillBtn.classList.remove("hidden");
+  fillBtn.disabled = zoneCount(UNASSIGNED) === 0;
   for (const seat of SEATS) {
     const el = $("#cons-" + seat);
     el.dataset.zone = seat;
@@ -2731,6 +2793,98 @@ function renderResult(r) {
 // .par-tip), même conduite — survol à la souris, tape au doigt (une deuxième
 // referme), focus au clavier, Échap ; bandeau en bas d'écran quand l'écran est
 // étroit ou sans survol.
+// La position d'une infobulle, et son repli en bandeau bas quand il n'y a pas
+// de survol — un doigt n'en a pas. Partagé par l'infobulle des enchères et
+// celle des boutons, qui la plaçaient sinon deux fois du même code.
+function tipSheetMode() {
+  const noHover = !!(window.matchMedia && window.matchMedia("(hover: none)").matches);
+  return noHover || window.innerWidth <= 720;
+}
+
+function placeTip(tip, anchor) {
+  if (tipSheetMode()) {
+    tip.classList.add("sheet");
+    tip.style.left = "";
+    tip.style.top = "";
+    return;
+  }
+  tip.classList.remove("sheet");
+  const r = anchor.getBoundingClientRect();
+  const w = tip.offsetWidth;
+  const h = tip.offsetHeight;
+  const left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+  let top = r.bottom + 8;
+  if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+  tip.style.left = Math.round(left) + "px";
+  tip.style.top = Math.round(top) + "px";
+}
+
+// Les commandes de la donne n'ont plus de texte : leur nom est dans cette
+// infobulle, comme le commentaire d'une enchère est dans la sienne. Le titre
+// natif ne suffisait pas — il tarde, il ne se montre pas au doigt, et il
+// disparaît au clavier.
+const buttonTip = {
+  open: null,
+
+  el() { return $("#hint-tip"); },
+
+  targetOf(node) {
+    return (node && node.closest) ? node.closest("[data-tip]") : null;
+  },
+
+  show(btn) {
+    const tip = this.el();
+    const text = btn && btn.dataset.tip;
+    if (!tip || !text || this.open === btn) return;
+    this.hide();
+    this.open = btn;
+    tip.textContent = text;
+    tip.classList.remove("hidden");
+    placeTip(tip, btn);
+  },
+
+  hide() {
+    this.open = null;
+    const tip = this.el();
+    if (!tip) return;
+    tip.classList.add("hidden");
+    tip.textContent = "";
+  },
+
+  bind() {
+    document.addEventListener("pointerover", (e) => {
+      if (e.pointerType && e.pointerType !== "mouse") return;
+      const btn = this.targetOf(e.target);
+      if (btn) this.show(btn);
+    });
+    document.addEventListener("pointerout", (e) => {
+      if (e.pointerType && e.pointerType !== "mouse") return;
+      const btn = this.targetOf(e.target);
+      if (btn && btn === this.open && !btn.contains(e.relatedTarget)) this.hide();
+    });
+    // Au clavier, l'infobulle suit le focus : c'est le seul moyen de savoir
+    // sur quel bouton on se trouve quand il n'a pas de texte.
+    document.addEventListener("focusin", (e) => {
+      const btn = this.targetOf(e.target);
+      if (btn) this.show(btn);
+      else this.hide();
+    });
+    // Le clic fait l'action : l'infobulle n'a plus lieu d'être, et elle
+    // masquerait le message qui suit.
+    document.addEventListener("click", (e) => {
+      if (this.targetOf(e.target)) this.hide();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") this.hide();
+    });
+    window.addEventListener("scroll", () => {
+      if (!tipSheetMode()) this.hide();
+    }, { passive: true });
+    window.addEventListener("resize", () => this.hide());
+  },
+};
+buttonTip.bind();
+
 const auctionTip = {
   calls: [],
   lang: "fr",
@@ -2743,28 +2897,9 @@ const auctionTip = {
     return (node && node.closest) ? node.closest("#auction-body td.has-tip") : null;
   },
 
-  sheetMode() {
-    const noHover = !!(window.matchMedia && window.matchMedia("(hover: none)").matches);
-    return noHover || window.innerWidth <= 720;
-  },
+  sheetMode() { return tipSheetMode(); },
 
-  place(tip, cell) {
-    if (this.sheetMode()) {
-      tip.classList.add("sheet");
-      tip.style.left = "";
-      tip.style.top = "";
-      return;
-    }
-    tip.classList.remove("sheet");
-    const r = cell.getBoundingClientRect();
-    const w = tip.offsetWidth;
-    const h = tip.offsetHeight;
-    const left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
-    let top = r.bottom + 8;
-    if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
-    tip.style.left = Math.round(left) + "px";
-    tip.style.top = Math.round(top) + "px";
-  },
+  place(tip, cell) { placeTip(tip, cell); },
 
   show(cell) {
     const tip = this.el();
@@ -3116,6 +3251,43 @@ async function simulate() {
   }
 }
 
+// ---------- le siège du questionnaire ----------
+
+// Le siège retenu. Un bouton radio est toujours coché — celui de Nord au
+// départ — donc ce repli ne sert qu'à se garder d'un document à moitié bâti.
+function chosenSeat() {
+  const picked = document.querySelector('input[name="seat"]:checked');
+  return picked ? picked.value : "N";
+}
+
+// Nomme les quatre sièges. En bandeau, la pastille porte le nom entier plutôt
+// que son initiale : la place ne manque plus, et « Ouest » se lit sans avoir à
+// deviner ce que « O » désigne.
+function renderSeatCompass() {
+  const lang = $("#lang").value;
+  const t = UI_TEXT[lang];
+  for (const input of document.querySelectorAll('input[name="seat"]')) {
+    const seat = input.value;
+    const name = SEAT_LABEL[lang][seat];
+    input.setAttribute("aria-label", name);
+    input.nextElementSibling.textContent = name;
+    const pick = input.closest(".seat-pick");
+    // L'infobulle dit la phrase entière — « Votre main est en Nord » — là où
+    // le bandeau ne montre que les quatre noms. C'est elle qui porte ce que
+    // le libellé « Votre main » disait avant. L'étiquette entière la porte :
+    // la cible du survol est la pastille, pas le bouton radio qu'elle cache.
+    pick.dataset.tip = t.seatTip(name);
+    // La pastille retenue porte une classe, et non un `:has(input:checked)` :
+    // ce sélecteur-là n'est pas toujours réévalué quand la case est cochée
+    // par le code, et la marque restait sur le siège précédent.
+    pick.classList.toggle("is-picked", input.checked);
+  }
+}
+
+document.addEventListener("change", (ev) => {
+  if (ev.target.name === "seat") renderSeatCompass();
+});
+
 // ---------- quiz mode: guess your own seat's calls ----------
 
 let quiz = null; // { result, seat, lang, calls, idx, correctCount, totalUser }
@@ -3408,7 +3580,7 @@ async function startQuiz() {
   setError(errEl, "");
   $("#result-panel").classList.add("hidden");
   const lang = $("#lang").value;
-  const seat = $("#seat").value;
+  const seat = chosenSeat();
   btn.disabled = true;
   try {
     const result = await fetchBid(lang);

@@ -276,6 +276,7 @@ const UI_TEXT = {
     dealerWord: "donneur",
     runAuction: "Afficher les enchères",
     yourHand: "Votre main",
+    seatTip: (seat) => `Votre main est en ${seat}`,
     startQuiz: "Commencer le questionnaire",
     quizPanel: "Questionnaire d'enchères",
     auctionSeq: "Séquence d'enchères",
@@ -401,6 +402,7 @@ const UI_TEXT = {
     dealerWord: "dealer",
     runAuction: "Run the auction",
     yourHand: "Your hand",
+    seatTip: (seat) => `Your hand is ${seat}`,
     startQuiz: "Start the quiz",
     quizPanel: "Bidding quiz",
     auctionSeq: "Auction",
@@ -2799,6 +2801,9 @@ function tipSheetMode() {
   return noHover || window.innerWidth <= 720;
 }
 
+// `data-tip-above` demande la bulle au-dessus de son ancre plutôt qu'en
+// dessous. Les pastilles des sièges s'en servent : la bulle y remplace un
+// libellé qui se lisait au-dessus d'elles, et elle en garde la place.
 function placeTip(tip, anchor) {
   if (tipSheetMode()) {
     tip.classList.add("sheet");
@@ -2811,8 +2816,12 @@ function placeTip(tip, anchor) {
   const w = tip.offsetWidth;
   const h = tip.offsetHeight;
   const left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
-  let top = r.bottom + 8;
-  if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+  const above = anchor.hasAttribute("data-tip-above");
+  let top = above ? r.top - h - 8 : r.bottom + 8;
+  // Le côté demandé peut manquer de place : on bascule de l'autre plutôt que
+  // de laisser la bulle sortir de l'écran.
+  if (above && top < 8) top = Math.min(r.bottom + 8, window.innerHeight - h - 8);
+  if (!above && top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
   tip.style.left = Math.round(left) + "px";
   tip.style.top = Math.round(top) + "px";
 }
@@ -3263,12 +3272,19 @@ function chosenSeat() {
 // deviner ce que « O » désigne.
 function renderSeatCompass() {
   const lang = $("#lang").value;
+  const t = UI_TEXT[lang];
   for (const input of document.querySelectorAll('input[name="seat"]')) {
     const seat = input.value;
     const name = SEAT_LABEL[lang][seat];
     input.setAttribute("aria-label", name);
     input.nextElementSibling.textContent = name;
     const pick = input.closest(".seat-pick");
+    // L'infobulle dit la phrase entière — « Votre main est en Nord » — là où
+    // le bandeau ne montre que les quatre noms. C'est elle qui porte ce que
+    // le libellé « Votre main » disait au-dessus d'eux. L'étiquette entière la
+    // porte : la cible du survol est la pastille, pas le bouton radio caché.
+    pick.dataset.tip = t.seatTip(name);
+    pick.setAttribute("data-tip-above", "");
     // La pastille retenue porte une classe, et non un `:has(input:checked)` :
     // ce sélecteur-là n'est pas toujours réévalué quand la case est cochée
     // par le code, et la marque restait sur le siège précédent.

@@ -268,7 +268,11 @@
                rangées de hauteur pour quatre choix. Ce sont toujours des
                boutons radio, donc les flèches y circulent d'elles-mêmes. -->
           <fieldset class="seat-pills">
-            <legend data-i18n="yourHand">Votre main</legend>
+            <!-- Le libellé ne s'affiche plus : les quatre noms se suffisent,
+                 et l'infobulle de chaque pastille dit la phrase entière. Il
+                 reste néanmoins dans l'arbre, car c'est lui qui nomme le
+                 groupe de boutons radio à un lecteur d'écran. -->
+            <legend class="sr-only" data-i18n="yourHand">Votre main</legend>
             <div class="seat-pills-row">
               <label class="seat-pick"><input type="radio" name="seat" value="N"><span></span></label>
               <label class="seat-pick"><input type="radio" name="seat" value="E"><span></span></label>

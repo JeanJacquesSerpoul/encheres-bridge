@@ -564,14 +564,6 @@ button:disabled { opacity: .6; cursor: wait; }
   padding: 0;
   min-width: 0;
 }
-.seat-pills legend {
-  padding: 0;
-  margin-bottom: 5px;
-  width: 100%;
-  text-align: center;
-  color: var(--muted);
-  font-size: .8rem;
-}
 .seat-pills-row { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* Le bouton radio lui-même est retiré de l'image mais reste focalisable : la

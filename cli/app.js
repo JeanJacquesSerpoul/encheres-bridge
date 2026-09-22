@@ -1040,10 +1040,18 @@ function esc(s) {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 }
 
+// Un intitulé suivi de son deux-points. Le français demande une espace avant,
+// l'anglais n'en veut pas : les gabarits partagés écrivaient « Contract : 3NT »
+// là où il faut « Contract: 3NT ». L'espace française est insécable, pour que
+// le deux-points ne parte jamais seul à la ligne suivante.
+function withColon(label, lang) {
+  return lang === "fr" ? `${label}\u00a0:` : `${label}:`;
+}
+
 // « Vulnérabilité : N-S », à poser dans une puce ou au centre de la table.
 function vulHTML(vul, lang) {
   const label = VUL_LABEL[lang][vul] || vul;
-  return `${lang === "fr" ? "Vulnérabilité" : "Vulnerable"} : <b>${esc(label)}</b>`;
+  return `${withColon(lang === "fr" ? "Vulnérabilité" : "Vulnerable", lang)} <b>${esc(label)}</b>`;
 }
 
 // Turns "4P" / "3NT" / "Passe" into HTML with suit symbols.
@@ -2656,17 +2664,17 @@ function renderResult(r) {
     ? esc(r.contract)
     : bidHTML(r.contract, lang) + (r.doubled ? " X" : "");
   $("#table-center").innerHTML = `
-    <div>${lang === "fr" ? "Donneur" : "Dealer"} : <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
+    <div>${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
     <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>
     <div class="big">${contractHTML}</div>
     <div>${passedOut ? "" : (lang === "fr" ? "par " : "by ") + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
 
   $("#summary").innerHTML = `
-    <span class="chip contract">${lang === "fr" ? "Contrat" : "Contract"} : <b>${contractHTML}</b></span>
-    <span class="chip">${lang === "fr" ? "Déclarant" : "Declarer"} : <b>${passedOut ? "—" : esc(SEAT_SHORT[lang][r.declarer])}</b></span>
-    <span class="chip">${lang === "fr" ? "Donneur" : "Dealer"} : <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></span>
+    <span class="chip contract">${withColon(lang === "fr" ? "Contrat" : "Contract", lang)} <b>${contractHTML}</b></span>
+    <span class="chip">${withColon(lang === "fr" ? "Déclarant" : "Declarer", lang)} <b>${passedOut ? "—" : esc(SEAT_SHORT[lang][r.declarer])}</b></span>
+    <span class="chip">${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></span>
     <span class="chip">${vulHTML(r.vulnerable, lang)}</span>
-    <span class="chip">${lang === "fr" ? "Contré" : "Doubled"} : <b>${r.doubled ? (lang === "fr" ? "oui" : "yes") : (lang === "fr" ? "non" : "no")}</b></span>`;
+    <span class="chip">${withColon(lang === "fr" ? "Contré" : "Doubled", lang)} <b>${r.doubled ? (lang === "fr" ? "oui" : "yes") : (lang === "fr" ? "non" : "no")}</b></span>`;
 
   // Auction grid: columns W N E S, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de
@@ -2695,7 +2703,7 @@ function renderResult(r) {
       const head = `<span class="who">${esc(SEAT_SHORT[lang][a.player])}</span> - ` +
         bidHTML(a.bid, lang);
       return a.comment && !isPass(a.bid)
-        ? `<li>${head} : ${esc(a.comment)}</li>`
+        ? `<li>${withColon(head, lang)} ${esc(a.comment)}</li>`
         : `<li class="silent">${head}</li>`;
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;
@@ -3246,7 +3254,7 @@ function renderQuizStep() {
   const entry = quiz.result.auction[quiz.idx];
   const seatName = SEAT_LABEL[lang][entry.player];
   $("#qtable-center").innerHTML = `
-    <div>${esc(t.dealerCap)} : <b>${esc(SEAT_SHORT[lang][quiz.result.dealer])}</b></div>
+    <div>${withColon(esc(t.dealerCap), lang)} <b>${esc(SEAT_SHORT[lang][quiz.result.dealer])}</b></div>
     <div class="vul-line">${vulHTML(quiz.result.vulnerable, lang)}</div>
     <div class="big">${esc(SEAT_SHORT[lang][entry.player])}</div>`;
 
@@ -3304,7 +3312,7 @@ function chooseBid(bidText) {
   const verdict = esc(isCorrect ? t.quizCorrect : t.quizWrong);
   const refLine = isCorrect
     ? ""
-    : `<div>${esc(t.quizExpected)} : <b>${bidHTML(entry.bid, lang)}</b></div>`;
+    : `<div>${withColon(esc(t.quizExpected), lang)} <b>${bidHTML(entry.bid, lang)}</b></div>`;
   const commentLine = entry.comment
     ? `<div class="muted">${esc(entry.comment)}</div>`
     : "";
@@ -3338,7 +3346,7 @@ function finishQuiz() {
   const passedOut = isPass(r.contract);
   const contractHTML = passedOut ? esc(r.contract) : bidHTML(r.contract, lang) + (r.doubled ? " X" : "");
   $("#qtable-center").innerHTML = `
-    <div>${esc(t.dealerCap)} : <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
+    <div>${withColon(esc(t.dealerCap), lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
     <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>
     <div class="big">${contractHTML}</div>
     <div>${passedOut ? "" : esc(t.byWord) + " " + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
@@ -3354,8 +3362,8 @@ function finishQuiz() {
   // jusqu'aux commandes de la donne. Les deux suites naturelles — refaire
   // celle-ci, en tirer une autre — sont offertes ici, avec le détail.
   scoreEl.innerHTML = `
-    <div class="score-big">${esc(t.quizScore)} : ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
-    <div>${esc(t.quizFinalContract)} : <b>${contractHTML}</b></div>
+    <div class="score-big">${withColon(esc(t.quizScore), lang)} ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
+    <div>${withColon(esc(t.quizFinalContract), lang)} <b>${contractHTML}</b></div>
     <div class="quiz-score-actions">
       <button type="button" id="quiz-replay-btn">${esc(t.quizReplay)}</button>
       <button type="button" id="quiz-new-deal-btn">${esc(t.quizNewDeal)}</button>

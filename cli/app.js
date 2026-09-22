@@ -3256,26 +3256,22 @@ function chosenSeat() {
   return picked ? picked.value : "S";
 }
 
-// Nomme les quatre sièges et rappelle celui qui est retenu au centre du
-// compas. La lettre affichée reste celle de la langue — « O » pour Ouest en
-// français, « W » en anglais — comme partout ailleurs dans l'application.
+// Nomme les quatre sièges. En bandeau, la pastille porte le nom entier plutôt
+// que son initiale : la place ne manque plus, et « Ouest » se lit sans avoir à
+// deviner ce que « O » désigne.
 function renderSeatCompass() {
   const lang = $("#lang").value;
   for (const input of document.querySelectorAll('input[name="seat"]')) {
     const seat = input.value;
     const name = SEAT_LABEL[lang][seat];
     input.setAttribute("aria-label", name);
-    input.nextElementSibling.textContent = SEAT_SHORT[lang][seat];
-    // L'étiquette entière porte l'infobulle : la cible du survol est la
-    // pastille, pas le bouton radio qu'elle cache.
+    input.nextElementSibling.textContent = name;
     const pick = input.closest(".seat-pick");
-    pick.dataset.tip = name;
     // La pastille retenue porte une classe, et non un `:has(input:checked)` :
     // ce sélecteur-là n'est pas toujours réévalué quand la case est cochée
     // par le code, et la marque restait sur le siège précédent.
     pick.classList.toggle("is-picked", input.checked);
   }
-  $("#seat-centre").textContent = SEAT_LABEL[lang][chosenSeat()];
 }
 
 document.addEventListener("change", (ev) => {

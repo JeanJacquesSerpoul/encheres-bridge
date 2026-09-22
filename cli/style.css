@@ -493,17 +493,14 @@ button:disabled { opacity: .6; cursor: wait; }
   cursor: not-allowed;
 }
 
-/* Les deux actions : pleines, vertes, et d'un cran plus grandes. Elles
-   ferment chacune leur rangée, et rien ne doit les confondre avec les
-   utilitaires qui les précèdent. */
+/* Les deux actions : pleines et vertes, mais de la même taille que les
+   autres. Plus grandes, elles rompaient l'alignement de la rangée pour un
+   gain de lisibilité nul — le remplissage suffit à les distinguer. */
 .cmd-primary {
-  width: 52px;
-  height: 52px;
   border-color: var(--accent-bg);
   background: var(--accent-bg);
   color: var(--on-accent);
 }
-.cmd-primary svg { width: 25px; height: 25px; }
 .cmd-primary:hover:not(:disabled) {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
@@ -519,42 +516,62 @@ button:disabled { opacity: .6; cursor: wait; }
   text-align: center;
 }
 
-/* ---------- le compas du siège ----------
+/* ---------- lancer le questionnaire ----------
 
-   Les quatre sièges à leur place autour du tapis, comme partout ailleurs
-   dans l'application. Un fieldset sans bordure : sa légende sert de titre, et
-   les boutons radio qu'il contient font circuler les flèches d'eux-mêmes. */
-.seat-compass {
+   Un encadré à part, et non la suite des commandes de la donne : le
+   questionnaire n'agit pas sur la donne, il ouvre un entraînement où l'on
+   répond à la place d'un siège. Le trait et le fond le disent avant le titre,
+   et la marge au-dessus coupe franchement avec la rangée d'icônes. */
+.quiz-launch {
+  margin: 26px auto 0;
+  padding: 14px 18px 16px;
+  width: fit-content;
+  max-width: 100%;
+  /* Le vert clair des survols plutôt qu'un gris : sur le blanc du panneau, un
+     gris à 1,08 de contraste ne se voyait pas, et c'est la seule chose qui
+     sépare l'entraînement des commandes de la donne. Teinté, l'encadré
+     s'annonce de lui-même. */
+  border: 1px solid var(--success-border);
+  border-radius: var(--radius);
+  background: var(--tint);
+}
+.quiz-launch-title {
+  margin: 0 0 10px;
+  font-size: .9rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+}
+.quiz-launch-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Les quatre sièges en bandeau. Le compas en croix disait bien la place de
+   chacun, mais il coûtait trois rangées de hauteur pour quatre choix — cher,
+   sous une rangée d'icônes qui en tient une seule. Un fieldset sans bordure :
+   sa légende sert de titre, et les boutons radio qu'il contient font circuler
+   les flèches d'eux-mêmes. */
+.seat-pills {
   border: 0;
   margin: 0;
   padding: 0;
   min-width: 0;
 }
-.seat-compass legend {
+.seat-pills legend {
   padding: 0;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   color: var(--muted);
-  font-size: .85rem;
-  text-align: center;
-  width: 100%;
+  font-size: .8rem;
 }
-.seat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 34px);
-  grid-template-rows: repeat(3, 34px);
-  gap: 4px;
-  align-items: center;
-  justify-items: center;
-}
-.seat-grid .seat-n { grid-area: 1 / 2; }
-.seat-grid .seat-w { grid-area: 2 / 1; }
-.seat-grid .seat-centre { grid-area: 2 / 2; }
-.seat-grid .seat-e { grid-area: 2 / 3; }
-.seat-grid .seat-s { grid-area: 3 / 2; }
+.seat-pills-row { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* Le bouton radio lui-même est retiré de l'image mais reste focalisable : la
-   pastille qui l'habille prend sa place, et `:has` la peint selon son état.
-   Même masquage que le champ fichier, pour la même raison. */
+   pastille qui l'habille prend sa place. Même masquage que le champ fichier,
+   pour la même raison. */
 .seat-pick input {
   position: absolute;
   width: 1px;
@@ -568,15 +585,15 @@ button:disabled { opacity: .6; cursor: wait; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  min-height: 34px;
+  padding: 0 14px;
   border: 1px solid var(--border);
-  border-radius: 50%;
+  border-radius: 999px;
   background: var(--panel);
   color: var(--muted);
   font-family: "Segoe UI", system-ui, sans-serif;
   font-size: .85rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: background .15s, border-color .15s, color .15s;
 }
@@ -593,31 +610,12 @@ button:disabled { opacity: .6; cursor: wait; }
   outline-offset: 2px;
 }
 
-/* Le tapis, au centre : il ne se clique pas, il rappelle le siège retenu. */
-.seat-centre {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--felt);
-  color: var(--on-accent);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: .58rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  text-align: center;
-  line-height: 1.05;
-}
-
-/* Au doigt, la pastille et le tapis passent à 42 px, et la grille avec eux.
-   La règle est ici et non dans le bloc « pointer: coarse » plus haut : à
-   spécificité égale, c'est la dernière écrite qui l'emporte. */
+/* Au doigt, la pastille gagne la hauteur des autres cibles. La règle est ici
+   et non dans le bloc « pointer: coarse » plus haut : à spécificité égale,
+   c'est la dernière écrite qui l'emporte. */
 @media (pointer: coarse) {
-  .seat-grid { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
-  .seat-pick, .seat-centre { width: 42px; height: 42px; }
-  .seat-centre { font-size: .62rem; }
+  .seat-pick { min-height: 42px; }
+}
 }
 .icon-btn:disabled { cursor: not-allowed; }
 /* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que

@@ -12,7 +12,119 @@
   --red: #c0392b;
   --gold: #e0a30c;
   --border: #d8ddd4;
+
+  /* Couleurs qui vivaient en dur dans la feuille. Elles portent ici le rôle
+     qu'elles tenaient, et non la teinte : « --tint », et non « --vert-clair ».
+     Sans quoi le bloc sombre plus bas mentirait sur chacune. */
+  --tint: #eef3ec;          /* survols et en-têtes de tableau — 9 emplois */
+  --surface-2: #fdfdf9;     /* fond d'une main */
+  --surface-3: #f6f7f3;     /* bandeaux de second rang */
+  --hover: #f0f3ee;         /* survol d'un bouton ordinaire */
+  --disabled-bg: #f0f0ec;   /* champ ou sélecteur verrouillé */
+  --on-accent: #ffffff;     /* texte posé sur une surface foncée */
+  --on-felt: #eaf5ec;       /* texte de second rang sur le tapis */
+  --gold-soft: #ffd166;     /* invite d'URL sur le vert de l'en-tête */
+  --idle: #7a8a7d;          /* pastille : état inconnu */
+  --ok: #1f8a3f;            /* pastille : en ligne */
+  --ko: #d93a3a;            /* pastille : injoignable */
+  --success-bg: #e3f6e6;
+  --success-border: #bfe6c6;
+  --error-bg: #fbeaea;
+  --error-border: #f0c4c0;
+  --overlay: rgba(29, 43, 31, .72);   /* voile des fenêtres modales */
+
+  /* Deux couleurs se dédoublent, parce qu'elles tenaient deux rôles à la
+     fois. En clair les deux moitiés sont identiques — rien ne bouge — mais
+     en sombre elles divergent : une couleur qui sert de texte sur fond
+     sombre doit s'éclaircir, une couleur qui sert de fond sous du texte
+     blanc doit rester foncée. Les confondre rendrait l'une des deux
+     illisibles. */
+  --accent-bg: #1f6f43;     /* fond du bouton principal */
+  --accent-hover: #18603a;
+  --red-bg: #c0392b;        /* fond de la pastille hors bornes */
+  /* L'encre du bandeau doré. Elle vaut --ink en clair, mais ne le suit pas en
+     sombre : le doré est une couleur du bridge, il ne s'assombrit pas, et une
+     encre devenue claire y retomberait à 1,86 — exactement le défaut corrigé
+     en remontant ce bandeau de 2,23 à 6,64. */
+  --on-gold: #1d2b1f;
+
+  /* En composantes, pour les voiles d'accent qui en tirent deux opacités. */
+  --accent-rgb: 31, 111, 67;
+
+  /* Les trois ombres portées de la feuille, reprises telles quelles. */
+  --shadow-sticky: 0 2px 10px rgba(0, 0, 0, .18);
+  --shadow-pop: 0 4px 12px rgba(0, 0, 0, .25);
+  --shadow-modal: 0 6px 18px rgba(0, 0, 0, .16);
+
   --radius: 10px;
+
+  /* Les contrôles natifs — sélecteurs, champs, zones de texte — se rendent
+     d'eux-mêmes selon ce réglage. Sans lui, un système en sombre les peignait
+     sombres au milieu d'une page claire. */
+  color-scheme: light dark;
+}
+
+/* ---------- thème sombre ----------
+
+   Rien d'autre que la palette n'est redéfini : tout le reste de la feuille
+   passe par les variables ci-dessus, et suit donc de lui-même. Trois couleurs
+   ne s'inversent pas, parce qu'elles disent quelque chose du bridge plutôt
+   que de l'habillage : le vert du tapis, le doré des bandeaux de main, et le
+   rouge des couleurs — ce dernier s'éclaircit sans changer de famille, faute
+   de quoi les cœurs et les carreaux deviendraient illisibles sur fond sombre.
+
+   Les rapports de contraste donnés en commentaire sont mesurés sur les
+   couleurs rendues, comme ceux du thème clair. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151a16;
+    --panel: #1d241e;
+    --ink: #e7ece6;          /* 13,25 sur --panel */
+    --muted: #9fae9f;        /* 6,82 sur --panel, 5,93 sur --surface-3 */
+    --border: #445146;
+
+    --tint: #263228;
+    --surface-2: #212822;
+    --surface-3: #272f28;
+    --hover: #2b342d;
+    --disabled-bg: #242a25;
+
+    /* Le tapis garde son vert ; l'en-tête s'assombrit un peu pour ne pas
+       éclairer le haut de la page à lui seul. */
+    --felt: #2e6b46;
+    --felt-dark: #1e4a31;
+    --on-felt: #dceede;      /* 5,24 sur --felt */
+
+    /* L'accent se dédouble ici : clair quand il fait du texte ou une bordure
+       sur fond sombre, foncé quand il porte du blanc. */
+    --accent: #5cc389;       /* 7,27 sur --panel */
+    --accent-bg: #23794a;    /* blanc dessus : 5,38 */
+    --accent-hover: #2b8f58;
+    --accent-rgb: 92, 195, 137;
+
+    /* Même dédoublement pour le rouge. */
+    --red: #ef8b80;          /* 6,56 sur --panel, 6,24 sur une main */
+    --red-bg: #a8332a;       /* blanc dessus : 6,62 */
+
+    /* Le doré ne bouge pas, ni l'encre qu'il porte. */
+    --gold-soft: #ffd166;    /* 7,01 sur --felt-dark */
+
+    --idle: #8b9a8d;         /* 5,96 sur --bg — le seuil d'un témoin est 3 */
+    --ok: #4cc97a;           /* 8,35 */
+    --ko: #ff6b6b;           /* 6,35 */
+
+    --success-bg: #17301f;   /* --accent dessus : 6,51 */
+    --success-border: #2c5a39;
+    --error-bg: #34191a;     /* --red dessus : 6,67 */
+    --error-border: #63312f;
+
+    /* Sur fond sombre une ombre portée ne se voit plus : elle doit être plus
+       noire et plus large pour détacher encore une fenêtre de son fond. */
+    --overlay: rgba(0, 0, 0, .74);
+    --shadow-sticky: 0 2px 10px rgba(0, 0, 0, .55);
+    --shadow-pop: 0 4px 14px rgba(0, 0, 0, .65);
+    --shadow-modal: 0 8px 24px rgba(0, 0, 0, .6);
+  }
 }
 
 * { box-sizing: border-box; }
@@ -26,7 +138,7 @@ body {
 
 header {
   background: var(--felt-dark);
-  color: #fff;
+  color: var(--on-accent);
   padding: 14px 24px;
 }
 
@@ -86,7 +198,7 @@ h1 { font-size: 1.25rem; margin: 0; }
   /* Un doré éclairci : var(--gold) ne tenait que 3,92 sur le vert de
      l'en-tête. Celui-ci en tient 6,07 sans quitter la famille dorée, à qui
      revient de signaler l'invite au milieu du blanc du bandeau. */
-  color: #ffd166;
+  color: var(--gold-soft);
   font-size: .85rem;
 }
 
@@ -142,11 +254,11 @@ h1 { font-size: 1.25rem; margin: 0; }
   /* Teintes assombries : à #4cd964 / #ff5252 / #999 les pastilles tenaient
      1,68, 2,91 et 2,60 sur le fond de page, sous le seuil de 3:1 des
      composants non textuels. Elles tiennent maintenant 4,02, 4,15 et 3,33. */
-  background: #7a8a7d;
+  background: var(--idle);
   display: inline-block;
 }
-.dot.ok { background: #1f8a3f; }
-.dot.ko { background: #d93a3a; }
+.dot.ok { background: var(--ok); }
+.dot.ko { background: var(--ko); }
 
 main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 
@@ -234,6 +346,11 @@ textarea {
   border-radius: 6px;
   padding: 10px;
   resize: vertical;
+  /* Posés explicitement : sans eux le champ prenait ceux du navigateur —
+     invisible en clair, illisible en sombre, où il se peignait noir sur noir
+     pendant que la page restait claire. */
+  background: var(--panel);
+  color: var(--ink);
 }
 
 /* Repli du texte PBN. En vert et en gras, il se lisait comme une commande de
@@ -260,13 +377,13 @@ textarea {
 
 /* Marks the deal selected via #deal-select within the raw PBN text
    (see highlightSelectedDeal in app.js). */
-#pbn::selection { background: var(--gold); color: var(--ink); }
+#pbn::selection { background: var(--gold); color: var(--on-gold); }
 
 button, .file-btn {
   padding: 8px 16px;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--panel);
   cursor: pointer;
   font-size: .9rem;
   touch-action: manipulation;
@@ -276,14 +393,14 @@ button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-
   outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
-button:hover, .file-btn:hover { background: #f0f3ee; }
+button:hover, .file-btn:hover { background: var(--hover); }
 button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  color: var(--on-accent);
   font-weight: 600;
 }
-button.primary:hover { background: #18603a; }
+button.primary:hover { background: var(--accent-hover); }
 button:disabled { opacity: .6; cursor: wait; }
 
 /* Bouton réduit à son icône : le dessin de l'appareil photo dit ce qu'il fait,
@@ -326,9 +443,9 @@ button:disabled { opacity: .6; cursor: wait; }
 
 .file-name { color: var(--muted); font-size: .9rem; font-weight: normal; margin-left: 8px; }
 
-select { padding: 7px 8px; border: 1px solid var(--border); border-radius: 6px; background: #fff; }
+select { padding: 7px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); color: var(--ink); }
 /* Verrouillé : la donne chargée impose la valeur (voir syncTagSelects). */
-select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed; }
+select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: not-allowed; }
 .field:has(select:disabled) label { color: var(--muted); }
 
 .error { color: var(--red); font-size: .9rem; }
@@ -343,14 +460,14 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   margin-bottom: 18px;
 }
 .summary .chip {
-  background: #eef3ec;
+  background: var(--tint);
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 6px 14px;
   font-size: .9rem;
 }
 .summary .chip b { font-size: 1.05rem; }
-.summary .chip.contract { background: var(--felt); color: #fff; border-color: var(--felt-dark); }
+.summary .chip.contract { background: var(--felt); color: var(--on-accent); border-color: var(--felt-dark); }
 
 /* Table layout */
 .table-layout {
@@ -377,7 +494,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #eaf5ec;
+  color: var(--on-felt);
   text-align: center;
   font-size: .9rem;
   gap: 4px;
@@ -387,7 +504,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .table-center .vul-line { font-size: .8rem; opacity: .85; }
 
 .hand {
-  background: #fdfdf9;
+  background: var(--surface-2);
   border-radius: 8px;
   padding: 10px 12px;
   font-family: Consolas, "Courier New", monospace;
@@ -426,13 +543,13 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .cons-hand {
   padding: 0;
   overflow: hidden;
-  background: #fff;
+  background: var(--panel);
   border: 1px solid var(--border);
   min-height: 0;
 }
 .cons-hand:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(31, 111, 67, .25);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .25);
 }
 
 .cons-head {
@@ -446,7 +563,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   /* Le blanc ne tenait que 2,23 sur le doré, et 1,77 sur les pastilles qui
      l'éclaircissent encore. L'encre du reste de la page en tient 6,64, et les
      pastilles et icônes qui en héritent passent à 5,16 et 5,42. */
-  color: var(--ink);
+  color: var(--on-gold);
   font-family: "Segoe UI", system-ui, sans-serif;
   font-weight: 700;
 }
@@ -466,7 +583,10 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   padding: 0;
   border: none;
   border-radius: 5px;
-  /* Voile sombre et non plus clair. `color` est posé explicitement : un
+  /* Voile sombre et non plus clair. Il reste écrit en noir littéral, et non
+     en variable : il se compose sur le doré du bandeau, lequel ne change pas
+     d'un thème à l'autre — c'est une couleur du bridge, pas d'habillage.
+     `color` est posé explicitement : un
      bouton ne tient pas la couleur de son parent, il prend celle du
      navigateur — l'icône virait au noir au lieu de l'encre du bandeau. */
   background: rgba(0, 0, 0, .10);
@@ -485,7 +605,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 }
 /* Hand outside its bounds. Le blanc est réaffirmé : sur le rouge il tient
    5,44, là où l'encre héritée du bandeau retomberait à 2,72. */
-.cons-chip.off { background: var(--red); color: #fff; }
+.cons-chip.off { background: var(--red-bg); color: var(--on-accent); }
 
 .cons-bounds {
   display: flex;
@@ -493,7 +613,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   gap: 8px;
   flex-wrap: wrap;
   padding: 8px 10px;
-  background: #f6f7f3;
+  background: var(--surface-3);
   border-bottom: 1px solid var(--border);
   font-family: "Segoe UI", system-ui, sans-serif;
   font-size: .85rem;
@@ -506,7 +626,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   text-align: center;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--panel);
   color: var(--ink);
   font: inherit;
 }
@@ -522,7 +642,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   text-align: left;
   font-family: Consolas, "Courier New", monospace;
   font-size: .95rem;
-  background: #fff;
+  background: var(--panel);
   border: 1px dashed var(--border);
   border-radius: 8px;
   overflow: hidden;
@@ -530,7 +650,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .cons-center.filled { border-style: solid; }
 /* Le bandeau de la zone neutre est vert et non doré : le blanc y tient 6,35,
    il est donc réaffirmé après le passage de .cons-head à l'encre. */
-.cons-center .cons-head { background: var(--felt); color: #fff; }
+.cons-center .cons-head { background: var(--felt); color: var(--on-accent); }
 .neutral-hint {
   padding: 10px;
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -546,14 +666,14 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   padding: 1px 4px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: #fff;
+  background: var(--panel);
   text-align: center;
   cursor: grab;
   user-select: none;
   touch-action: none; /* le glisser prime sur le défilement tactile */
 }
-.card:hover { border-color: var(--accent); background: #eef3ec; }
-.card.picked { border-color: var(--accent); background: #eef3ec; box-shadow: 0 0 0 2px rgba(31, 111, 67, .3); }
+.card:hover { border-color: var(--accent); background: var(--tint); }
+.card.picked { border-color: var(--accent); background: var(--tint); box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .3); }
 .card.dragging { opacity: .35; }
 
 /* Carte suivant le pointeur pendant le glisser. */
@@ -570,10 +690,10 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   padding: 4px 8px;
   border: 1px solid var(--accent);
   border-radius: 6px;
-  background: #fff;
+  background: var(--panel);
   font-family: Consolas, "Courier New", monospace;
   font-size: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+  box-shadow: var(--shadow-pop);
 }
 
 /* Zone survolée pendant le glisser : accepte / refuse la carte. */
@@ -594,7 +714,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   font-size: .95rem;
   width: 25%;
 }
-.auction th { background: #eef3ec; }
+.auction th { background: var(--tint); }
 .auction td.bid-cell { font-weight: 600; cursor: default; }
 /* Enchère commentée : son commentaire s'ouvre en infobulle (app.js,
    auctionTip), avec le même signal de survol que les cases du PAR. */
@@ -602,7 +722,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .auction td.bid-cell.has-tip:hover,
 .auction td.bid-cell.has-tip:focus,
 .auction td.bid-cell.has-tip.is-open {
-  background: #eef3ec;
+  background: var(--tint);
   /* Un contour transparent plutôt qu'aucun : en mode contraste élevé de
      Windows les box-shadow ne sont pas rendues, et le focus disparaîtrait de
      ce tableau. Le contour, lui, y est forcé à une couleur visible. */
@@ -652,8 +772,8 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   text-align: center;
   font-size: .95rem;
 }
-.par-table thead th { background: #eef3ec; }
-.par-table tbody th { background: #f6f8f5; font-weight: 700; }
+.par-table thead th { background: var(--tint); }
+.par-table tbody th { background: var(--surface-3); font-weight: 700; }
 .par-table td { font-weight: 600; }
 .par-table .red { color: var(--red); }
 
@@ -663,7 +783,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .par-table td.par-cell:hover,
 .par-table td.par-cell:focus,
 .par-table td.par-cell.is-open {
-  background: #eef3ec;
+  background: var(--tint);
   /* Un contour transparent plutôt qu'aucun : en mode contraste élevé de
      Windows les box-shadow ne sont pas rendues, et le focus disparaîtrait de
      ce tableau. Le contour, lui, y est forcé à une couleur visible. */
@@ -691,7 +811,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .16);
+  box-shadow: var(--shadow-modal);
   font-size: .9rem;
   line-height: 1.35;
   /* Elle suit la souris de case en case : elle ne doit jamais s'interposer
@@ -793,7 +913,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
     max-height: 38vh;
     overflow: auto;
     padding: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+    box-shadow: var(--shadow-sticky);
   }
   /* Titre et compteur restent lisibles quand les cartes défilent à
      l'intérieur de la zone épinglée. */
@@ -868,7 +988,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 
 /* Quiz */
 .quiz-turn {
-  background: #eef3ec;
+  background: var(--tint);
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 8px 14px;
@@ -882,8 +1002,8 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   padding: 6px 0;
 }
 
-.auction td.bid-cell.correct { background: #e3f6e6; color: var(--accent); }
-.auction td.bid-cell.incorrect { background: #fbeaea; color: var(--red); }
+.auction td.bid-cell.correct { background: var(--success-bg); color: var(--accent); }
+.auction td.bid-cell.incorrect { background: var(--error-bg); color: var(--red); }
 /* Mauvaise réponse : l'enchère jouée reste barrée en rouge, la bonne
    s'affiche à côté dans la couleur du verdict correct. */
 .auction td.bid-cell.incorrect .expected { color: var(--accent); margin-left: 2px; }
@@ -914,12 +1034,12 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   padding: 8px 4px;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--panel);
   cursor: pointer;
   font-weight: 600;
   font-size: .95rem;
 }
-.bb-btn:hover:not(:disabled) { background: #eef3ec; border-color: var(--accent); }
+.bb-btn:hover:not(:disabled) { background: var(--tint); border-color: var(--accent); }
 .bb-btn:disabled { opacity: .35; cursor: not-allowed; }
 .bb-btn .red { color: var(--red); }
 .bb-btn.bb-pass { color: var(--muted); }
@@ -932,13 +1052,13 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   margin-bottom: 10px;
   font-size: .92rem;
 }
-.quiz-feedback.correct { background: #e3f6e6; border: 1px solid #bfe6c6; }
-.quiz-feedback.incorrect { background: #fbeaea; border: 1px solid #f0c4c0; }
+.quiz-feedback.correct { background: var(--success-bg); border: 1px solid var(--success-border); }
+.quiz-feedback.incorrect { background: var(--error-bg); border: 1px solid var(--error-border); }
 .quiz-feedback .verdict { font-weight: 700; display: block; margin-bottom: 4px; }
 
 .quiz-score {
   background: var(--felt);
-  color: #fff;
+  color: var(--on-accent);
   border-radius: var(--radius);
   padding: 16px 20px;
   margin-top: 10px;
@@ -987,7 +1107,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   inset: 0;
   z-index: 50;
   padding: 16px;
-  background: rgba(29, 43, 31, .72);
+  background: var(--overlay);
 }
 
 /* Le display n'est posé que sur l'état visible. Écrit sur `.photo-editor` tout
@@ -1043,6 +1163,9 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
    qui la rogne, la borne à l'image. */
 .photo-crop {
   position: absolute;
+  /* Blanc littéral, comme la poignée plus bas et le voile qui les entoure :
+     ces trois-là se posent sur la photographie de l'utilisateur, jamais sur
+     une surface de l'application. Un thème n'a pas à les suivre. */
   border: 2px solid #fff;
   box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .45);
   cursor: move;
@@ -1054,6 +1177,10 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   position: absolute;
   width: 18px;
   height: 18px;
+  /* Blanc littéral, comme le cadre qu'elle ajuste : elle se pose sur la
+     photographie, pas sur une surface de l'application. En var(--panel) elle
+     virait au sombre en thème sombre, sur une image restée la même, et le
+     cadre blanc se serait retrouvé flanqué de poignées noires. */
   background: #fff;
   border: 1px solid var(--felt-dark);
   border-radius: 3px;
@@ -1084,7 +1211,7 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   inset: 0;
   z-index: 70;
   padding: 16px;
-  background: rgba(29, 43, 31, .72);
+  background: var(--overlay);
 }
 
 .engine-loading:not(.hidden) {

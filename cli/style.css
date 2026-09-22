@@ -150,6 +150,16 @@ h1 { font-size: 1.25rem; margin: 0; }
 
 main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 
+/* La phrase qui dit à quoi sert la page : présente sans peser, elle se lit
+   une fois puis s'oublie. */
+.panel-intro {
+  margin: -4px 0 14px;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
 .app-version {
   max-width: 1060px;
   margin: 0 auto 20px;
@@ -293,7 +303,26 @@ button:disabled { opacity: .6; cursor: wait; }
 #photo-status:empty { display: none; }
 
 .file-btn { display: inline-block; }
-.file-btn input { display: none; }
+/* Masqué à l'œil, mais toujours dans l'ordre de tabulation : en
+   `display: none` le champ en sortait, et comme un <label> n'y entre jamais,
+   « Charger un fichier .pbn » était inatteignable au clavier — la tabulation
+   sautait de la langue à « Donne aléatoire ». */
+.file-btn input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* Le champ étant invisible, c'est au bouton qui l'enveloppe de porter le
+   focus — la règle :focus-visible ci-dessus ne vise que les contrôles. */
+.file-btn:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
 
 .file-name { color: var(--muted); font-size: .9rem; font-weight: normal; margin-left: 8px; }
 
@@ -724,6 +753,19 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   .table-center .big { font-size: 1.25rem; }
 
   .hand { min-height: 0; }
+  /* Est et Ouest se partagent ici une rangée de deux colonnes : à 375 px de
+     large, chacune reçoit 137 px. Une couleur de huit cartes en occupe 130,
+     mais au-delà le `nowrap` poussait le texte hors de sa colonne et faisait
+     défiler la page en travers. Les cartes passent donc à la ligne. Le retrait
+     négatif garde la suite alignée sous la première carte, et non sous le
+     symbole de la couleur. Simple habillage de texte, et non une grille
+     flexible comme dans l'éditeur : là-bas chaque carte est un jeton, ici la
+     ligne n'est qu'un symbole suivi de rangs séparés par des espaces. */
+  .hand .suitline {
+    white-space: normal;
+    padding-left: 1.3em;
+    text-indent: -1.3em;
+  }
 
   /* Bound cards stay full width: the Mini/Maxi line needs the room.
      Colonne flex plutôt que grille : un élément « sticky » est confiné à son

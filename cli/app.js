@@ -259,6 +259,9 @@ const UI_TEXT = {
     lockedTitle: "Donné par le fichier PBN chargé. Générez une donne pour reprendre la main.",
     optRandom: "Aléatoire",
     language: "Langue",
+    intro:
+      "Composez une donne — l'application déroule les enchères du système " +
+      "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
     pbnToggleTitle: "Réservé aux initiés : la donne se compose très bien sans ouvrir ce repli.",
     pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
@@ -346,6 +349,9 @@ const UI_TEXT = {
     lockedTitle: "Set by the loaded PBN file. Generate a deal to take over.",
     optRandom: "Random",
     language: "Language",
+    intro:
+      "Build a deal — the application runs the French system's auction and " +
+      "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
     pbnToggleTitle: "For the initiated: a deal is built just fine without ever opening this.",
     pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
@@ -554,7 +560,9 @@ function defaultPbnName(lang) {
 // est bien ce que la page affiche. Un fichier chargé garde son nom.
 $("#save-btn").addEventListener("click", () => {
   const lang = $("#lang").value;
-  const errEl = $("#error");
+  // #cons-error et non #error : celui-ci vit tout en bas du panneau, à côté
+  // du questionnaire. Un message sur la donne se lit près de la donne.
+  const errEl = $("#cons-error");
   const text = $("#pbn").value.trim();
   if (!text) {
     errEl.textContent = CONS_TEXT[lang].errNoPbn;
@@ -978,7 +986,12 @@ const CONS_TEXT = {
     ph: "PH", min: "Mini", max: "Maxi",
     reset: "Effacer les bornes",
     neutral: "Cartes non affectées",
-    neutralHint: "Glissez ici les cartes à retirer d'une main.",
+    // Le clic-puis-clic existe depuis toujours (voir le gestionnaire
+    // pointerup) mais n'était annoncé nulle part : sur écran tactile, viser
+    // une case vide au glissé est ingrat, et personne ne devinait le repli.
+    neutralHint:
+      "Glissez une carte d'une main à l'autre, ou ici pour la retirer. " +
+      "Au clic : touchez la carte, puis sa destination.",
     clear: "Retirer toutes les cartes",
     clearHand: "Retirer les cartes de cette main",
     photoHand: (seat) =>
@@ -998,7 +1011,9 @@ const CONS_TEXT = {
     ph: "HCP", min: "Min", max: "Max",
     reset: "Clear bounds",
     neutral: "Unassigned cards",
-    neutralHint: "Drag cards here to take them out of a hand.",
+    neutralHint:
+      "Drag a card from one hand to another, or here to take it out. " +
+      "By click: tap the card, then its destination.",
     clear: "Take out every card",
     clearHand: "Take this hand's cards out",
     photoHand: (seat) => `Photograph ${seat}'s hand`,
@@ -2510,7 +2525,11 @@ async function fetchBid(lang) {
 
 async function simulate() {
   const btn = $("#bid-btn");
-  const errEl = $("#error");
+  // Le message va dans #cons-error, qui est sur la même ligne que le bouton.
+  // Il partait dans #error, une rangée plus bas, à côté du questionnaire :
+  // une donne incomplète produisait un refus qu'on ne voyait pas, et le clic
+  // paraissait sans effet.
+  const errEl = $("#cons-error");
   errEl.textContent = "";
   resetQuiz();
   const lang = $("#lang").value;
@@ -2518,6 +2537,10 @@ async function simulate() {
   try {
     const body = await fetchBid(lang);
     renderResult(body);
+    // Le panneau s'ouvre sous le pli : sans cela, rien ne bouge à l'écran et
+    // le calcul semble n'avoir rien donné. Même geste qu'en fin de
+    // questionnaire et au lancement de celui-ci.
+    $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
     errEl.textContent = err.message;
     $("#result-panel").classList.add("hidden");

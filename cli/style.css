@@ -264,6 +264,18 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 
 /* La phrase qui dit à quoi sert la page : présente sans peser, elle se lit
    une fois puis s'oublie. */
+/* Le haut du panneau de la donne, centré comme son bas l'est déjà : les
+   commandes des contraintes et la ligne du questionnaire passent par
+   .row-centered, mais le titre, la phrase d'accueil et le repli du texte PBN
+   restaient calés à gauche. Les deux rangées de boutons, elles, ont reçu dans
+   le HTML la classe qui existait pour cela. */
+#input-panel h2,
+#input-panel .panel-intro,
+#input-panel .pbn-note { text-align: center; }
+/* Le résumé du repli est large de son seul libellé : le centrer demande des
+   marges automatiques, et non un text-align. */
+#input-panel .pbn-details summary { margin-left: auto; margin-right: auto; }
+
 /* Pas de largeur maximale : une mesure de 62 caractères repliait la phrase
    en plein milieu — « du système / français » — alors que le panneau était
    deux fois plus large. Une seule phrase supporte sa longueur ; elle se

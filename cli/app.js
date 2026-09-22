@@ -3413,13 +3413,14 @@ let quiz = null; // { result, seat, lang, calls, idx, correctCount, totalUser }
 
 // Enchaînement des enchères adverses. Sans lui, chaque tour de table coûte
 // trois clics « Révéler » qui n'apprennent rien : on les subit pour revenir à
-// sa propre enchère. Le réglage est mémorisé comme la langue, et décoché par
-// défaut — le rythme d'origine reste celui de qui n'y touche pas.
+// sa propre enchère. Le réglage est mémorisé comme la langue, et coché par
+// défaut : qui veut encore révéler chaque enchère à la main le décoche, et ce
+// choix-là est retenu.
 const AUTO_REVEAL_KEY = "bids.quizAuto";
 // Assez long pour lire qui vient de parler, assez court pour ne pas attendre.
 const AUTO_REVEAL_MS = 700;
 const autoRevealToggle = $("#quiz-auto");
-autoRevealToggle.checked = readStored(AUTO_REVEAL_KEY, "") === "1";
+autoRevealToggle.checked = readStored(AUTO_REVEAL_KEY, "") !== "0";
 autoRevealToggle.addEventListener("change", () => {
   saveStored(AUTO_REVEAL_KEY, autoRevealToggle.checked ? "1" : "0");
   // Cocher la case en plein questionnaire doit valoir tout de suite : si l'on

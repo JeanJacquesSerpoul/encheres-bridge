@@ -343,11 +343,11 @@
     <section class="panel hidden" id="quiz-panel">
       <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
       <div id="quiz-turn" class="quiz-turn"></div>
-      <!-- Décochée par défaut : le rythme d'origine — un clic par enchère
-           adverse — reste celui de qui ne touche à rien. Le réglage est
-           mémorisé comme la langue. -->
+      <!-- Cochée par défaut : les enchères adverses s'enchaînent sans un clic
+           chacune. Le réglage est mémorisé comme la langue ; app.js coche la
+           case tant qu'on ne l'a pas décochée soi-même. -->
       <label class="quiz-auto">
-        <input id="quiz-auto" type="checkbox">
+        <input id="quiz-auto" type="checkbox" checked>
         <span data-i18n="quizAutoReveal" data-i18n-title="quizAutoRevealTitle">Enchaîner les enchères adverses</span>
       </label>
 

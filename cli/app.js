@@ -245,10 +245,11 @@ const UI_TEXT = {
     photoRead: (n) => `${n} carte${n > 1 ? "s" : ""} reconnue${n > 1 ? "s" : ""}.`,
     photoDropped: (n) => ` ${n} écartée${n > 1 ? "s" : ""} (doublon ou main pleine).`,
     photoEditTitle: "Recadrer et pivoter la photo",
-    photoEditHint: "Faites glisser sur l'image pour choisir la zone à lire ; les poignées ajustent le cadre.",
+    photoEditHint: "Faites glisser sur l'image pour choisir la zone à lire ; les poignées ajustent le cadre. Au clavier : flèches pour déplacer le cadre, Maj + flèches pour le redimensionner.",
     photoRotateLeft: "Pivoter d'un quart de tour à gauche",
     photoRotateRight: "Pivoter d'un quart de tour à droite",
     photoCropReset: "Image entière",
+    photoCropLabel: "Zone à lire : flèches pour la déplacer, Maj + flèches pour la redimensionner.",
     photoCancel: "Annuler",
     photoConfirm: "Lire les cartes",
     photoCropTooSmall: "Zone de recadrage trop petite.",
@@ -358,10 +359,11 @@ const UI_TEXT = {
     photoRead: (n) => `${n} card${n > 1 ? "s" : ""} recognised.`,
     photoDropped: (n) => ` ${n} discarded (duplicate or full hand).`,
     photoEditTitle: "Crop and rotate the photo",
-    photoEditHint: "Drag on the image to choose the area to read; the handles adjust the frame.",
+    photoEditHint: "Drag on the image to choose the area to read; the handles adjust the frame. By keyboard: arrows move the frame, Shift + arrows resize it.",
     photoRotateLeft: "Rotate a quarter turn to the left",
     photoRotateRight: "Rotate a quarter turn to the right",
     photoCropReset: "Whole image",
+    photoCropLabel: "Area to read: arrows move it, Shift + arrows resize it.",
     photoCancel: "Cancel",
     photoConfirm: "Read the cards",
     photoCropTooSmall: "The crop area is too small.",
@@ -560,6 +562,11 @@ function applyLang() {
   }
   for (const el of document.querySelectorAll("[data-i18n-title]")) {
     el.title = t[el.dataset.i18nTitle];
+  }
+  // Un bouton qui n'a qu'une icône n'a pas de texte à lire : son nom vient
+  // d'ici. Le `title` seul y suppléait, mais il dépend d'un survol.
+  for (const el of document.querySelectorAll("[data-i18n-label]")) {
+    el.setAttribute("aria-label", t[el.dataset.i18nLabel]);
   }
   relabelQuizContinue();
   renderServerHint(); // messages du champ d'URL et libellé de l'option locale
@@ -2275,6 +2282,18 @@ function isFullCrop() {
 
 // Prépare la photo et ouvre l'éditeur. L'échec de lecture du fichier se dit à
 // l'endroit habituel, dans la barre d'état sous les boutons.
+// Le bouton qui a ouvert l'éditeur : le focus lui revient à la fermeture,
+// sans quoi il repartirait en tête de document.
+let photoOpener = null;
+
+// Les éléments focalisables de la boîte, dans l'ordre. Recalculé à chaque
+// tabulation : le bouton photo d'une main peut apparaître ou disparaître.
+function photoEditorStops() {
+  return [...$("#photo-editor").querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  )].filter((el) => el.offsetParent !== null && !el.disabled);
+}
+
 async function openPhotoEditor(file) {
   const t = UI_TEXT[$("#lang").value];
   try {
@@ -2283,8 +2302,13 @@ async function openPhotoEditor(file) {
     photoEditTurns = 0;
     photoCrop = { ...FULL_CROP };
     setError($("#photo-edit-error"), "");
+    photoOpener = document.activeElement;
     $("#photo-editor").classList.remove("hidden");
     renderPhotoImage();
+    // Le focus entre dans la boîte : aria-modal la déclare modale, mais ne
+    // déplace rien de lui-même. Sans cela le focus restait derrière le voile,
+    // sur une page que l'on ne peut plus voir ni atteindre.
+    $("#photo-crop").focus();
     showPhotoStatus("", false);
   } catch (err) {
     closePhotoEditor();
@@ -2296,6 +2320,10 @@ function closePhotoEditor() {
   $("#photo-editor").classList.add("hidden");
   photoEditImage = null;
   cropDrag = null;
+  // Rendre le focus à son point de départ : c'est de là qu'on est parti, et
+  // c'est là qu'on reprend.
+  if (photoOpener && document.contains(photoOpener)) photoOpener.focus();
+  photoOpener = null;
 }
 
 // Redessine le canevas dans son orientation courante, puis replace le cadre.
@@ -2341,9 +2369,70 @@ $("#photo-editor").addEventListener("click", (ev) => {
   if (ev.target === $("#photo-editor")) closePhotoEditor();
 });
 
+// Déplace ou redimensionne le rectangle de recadrage, en fractions du cadre.
+// Les mêmes bornes qu'au pointeur : jamais hors de l'image, jamais plus petit
+// que CROP_MIN.
+const CROP_STEP = .02;
+
+function nudgeCrop(dx, dy, resize) {
+  const c = photoCrop;
+  if (resize) {
+    photoCrop = {
+      x: c.x,
+      y: c.y,
+      w: Math.min(1 - c.x, Math.max(CROP_MIN, c.w + dx)),
+      h: Math.min(1 - c.y, Math.max(CROP_MIN, c.h + dy)),
+    };
+  } else {
+    photoCrop = {
+      x: Math.min(1 - c.w, Math.max(0, c.x + dx)),
+      y: Math.min(1 - c.h, Math.max(0, c.y + dy)),
+      w: c.w,
+      h: c.h,
+    };
+  }
+  renderPhotoCrop();
+}
+
+// Le rectangle au clavier : les flèches le déplacent, Maj + flèches le
+// redimensionnent. Les huit poignées restent au pointeur — les rendre
+// focalisables ferait huit arrêts de tabulation pour un seul rectangle, et
+// deux touches suffisent à faire le même travail.
+$("#photo-crop").addEventListener("keydown", (ev) => {
+  if (!photoEditImage) return;
+  const map = {
+    ArrowLeft: [-CROP_STEP, 0],
+    ArrowRight: [CROP_STEP, 0],
+    ArrowUp: [0, -CROP_STEP],
+    ArrowDown: [0, CROP_STEP],
+  };
+  const d = map[ev.key];
+  if (!d) return;
+  ev.preventDefault();
+  nudgeCrop(d[0], d[1], ev.shiftKey);
+});
+
 document.addEventListener("keydown", (ev) => {
-  if (ev.key === "Escape" && !$("#photo-editor").classList.contains("hidden")) {
+  const editor = $("#photo-editor");
+  if (editor.classList.contains("hidden")) return;
+  if (ev.key === "Escape") {
     closePhotoEditor();
+    return;
+  }
+  // Le piège : la tabulation tourne dans la boîte. Sans lui, elle en sortait
+  // vers une page que le voile rend inatteignable — on tabulait à l'aveugle.
+  if (ev.key !== "Tab") return;
+  const stops = photoEditorStops();
+  if (!stops.length) return;
+  const premier = stops[0];
+  const dernier = stops[stops.length - 1];
+  const actif = document.activeElement;
+  if (ev.shiftKey && (actif === premier || !editor.contains(actif))) {
+    ev.preventDefault();
+    dernier.focus();
+  } else if (!ev.shiftKey && (actif === dernier || !editor.contains(actif))) {
+    ev.preventDefault();
+    premier.focus();
   }
 });
 

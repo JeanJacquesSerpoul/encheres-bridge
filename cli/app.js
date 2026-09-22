@@ -623,10 +623,10 @@ $("#save-btn").addEventListener("click", () => {
   const errEl = $("#cons-error");
   const text = $("#pbn").value.trim();
   if (!text) {
-    errEl.textContent = CONS_TEXT[lang].errNoPbn;
+    setError(errEl, CONS_TEXT[lang].errNoPbn);
     return;
   }
-  errEl.textContent = "";
+  setError(errEl, "");
   const url = URL.createObjectURL(new Blob([text + "\n"], { type: "text/plain" }));
   const a = document.createElement("a");
   a.href = url;
@@ -713,11 +713,11 @@ function randomPBN(dealer, vul) {
 $("#random-btn").addEventListener("click", () => {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
-  errEl.textContent = validateBounds(lang);
+  setError(errEl, validateBounds(lang));
   if (errEl.textContent) return;
   const pbn = randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
   if (!pbn) {
-    errEl.textContent = CONS_TEXT[lang].errNoDeal;
+    setError(errEl, CONS_TEXT[lang].errNoDeal);
     return;
   }
   loadPbn(pbn);
@@ -1517,13 +1517,13 @@ $("#constraints").addEventListener("input", (ev) => {
   const value = raw === "" ? null : Number.parseInt(raw, 10);
   hcpBounds[input.dataset.seat][input.dataset.bound] =
     value === null || Number.isNaN(value) ? null : value;
-  $("#cons-error").textContent = validateBounds($("#lang").value);
+  setError($("#cons-error"), validateBounds($("#lang").value));
   refreshBoundsFlags();
 });
 
 $("#cons-reset-btn").addEventListener("click", () => {
   for (const seat of SEATS) hcpBounds[seat] = { min: null, max: null };
-  $("#cons-error").textContent = "";
+  setError($("#cons-error"), "");
   renderBoundsCards();
 });
 
@@ -1558,14 +1558,55 @@ function zoneAccepts(zone, card) {
   return zone === UNASSIGNED || zoneCount(zone) < HAND_SIZE;
 }
 
-// Zone de politesse : ce qui vient d'être fait, pour qui ne voit pas l'écran.
-function announce(msg) {
-  const el = $("#cards-live");
-  // Vidée puis remplie : deux annonces identiques d'affilée — deux cartes du
-  // même rang déposées au même endroit — ne seraient pas relues autrement.
+// ---------- ce qui est dit à voix haute ----------
+//
+// Les messages de l'application sont écrits dans des éléments que la feuille
+// masque tant qu'ils sont vides, ou que le JS masque par `.hidden`. Or un
+// élément en display:none est hors de l'arbre d'accessibilité : la zone
+// vivante n'y est pas enregistrée, et le message arrive sans être annoncé.
+// Les deux zones ci-dessous, elles, ne sont jamais masquées — chaque message
+// y est recopié. Voir leur commentaire dans index.html.
+
+function writeLive(id, msg) {
+  const el = $(id);
+  // Vidée puis remplie : deux messages identiques d'affilée — deux cartes du
+  // même rang déposées au même endroit — ne seraient pas relus autrement.
   el.textContent = "";
   el.textContent = msg;
 }
+
+// Ce qui avance : une carte déposée, un calcul en cours. N'interrompt pas.
+function announce(msg) {
+  writeLive("#live-polite", msg);
+}
+
+// Ce qui bloque. Interrompt, à juste titre : il faut l'avoir lu pour
+// continuer.
+function announceAlert(msg) {
+  writeLive("#live-alert", msg);
+}
+
+// Écrit un message d'erreur là où il s'affiche, et le fait annoncer.
+//
+// Un message inchangé n'est pas réannoncé : les bornes sont revalidées à
+// chaque carte déplacée, et la même phrase serait répétée à chaque geste.
+function setError(el, msg) {
+  const changed = el.textContent !== msg;
+  el.textContent = msg;
+  if (msg && changed) announceAlert(msg);
+}
+
+// Même chose pour ce qui n'est pas une erreur, sur le ton poli.
+function setStatus(el, msg) {
+  const changed = el.textContent !== msg;
+  el.textContent = msg;
+  if (msg && changed) announce(msg);
+}
+
+// par.js est un module à part et n'a pas accès à ce qui précède, comme il
+// n'avait pas accès à $ ni à UI_TEXT (voir window.parSetDeal).
+window.a11ySetError = setError;
+window.a11ySetStatus = setStatus;
 
 // Prendre une carte, ou déposer celle qu'on tient sur la main de celle-ci.
 // C'est ce que fait un clic simple, et c'est ce que fait Entrée : le geste est
@@ -1583,8 +1624,9 @@ function dropHeld(zone, fallback) {
   const name = cardLabel(held, lang);
   const zoneName = zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][zone];
   if (!zoneAccepts(zone, held)) {
-    $("#cons-error").textContent = t.errFull(zoneName);
-    announce(t.errFull(zoneName));
+    // setError annonce lui-même : un announce() de plus ferait dire deux fois
+    // la même phrase, une fois poliment et une fois en interrompant.
+    setError($("#cons-error"), t.errFull(zoneName));
     refocusCard = fallback;
     renderBoundsCards();
     return;
@@ -1626,11 +1668,11 @@ function dropCard(card, zone) {
   }
   const lang = $("#lang").value;
   if (!zoneAccepts(zone, card)) {
-    $("#cons-error").textContent = CONS_TEXT[lang].errFull(SEAT_LABEL[lang][zone]);
+    setError($("#cons-error"), CONS_TEXT[lang].errFull(SEAT_LABEL[lang][zone]));
     renderBoundsCards();
     return;
   }
-  $("#cons-error").textContent = validateBounds(lang);
+  setError($("#cons-error"), validateBounds(lang));
   moveCard(card, zone);
   commitZones();
 }
@@ -1812,7 +1854,7 @@ $("#constraints").addEventListener("keydown", (ev) => {
 $("#cons-fill-btn").addEventListener("click", () => {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
-  errEl.textContent = validateBounds(lang);
+  setError(errEl, validateBounds(lang));
   if (errEl.textContent) return;
 
   const pool = zoneCards(UNASSIGNED);
@@ -1822,7 +1864,7 @@ $("#cons-fill-btn").addEventListener("click", () => {
     for (let i = zoneCount(seat); i < HAND_SIZE; i++) slots.push(seat);
   }
   if (slots.length < pool.length) {
-    errEl.textContent = CONS_TEXT[lang].errNoFill;
+    setError(errEl, CONS_TEXT[lang].errNoFill);
     return;
   }
 
@@ -1847,7 +1889,7 @@ $("#cons-fill-btn").addEventListener("click", () => {
       return;
     }
     if (attempt % 256 === 0 && Date.now() > deadline) {
-      errEl.textContent = CONS_TEXT[lang].errNoFill;
+      setError(errEl, CONS_TEXT[lang].errNoFill);
       return;
     }
   }
@@ -1858,7 +1900,7 @@ $("#cons-clear-btn").addEventListener("click", () => {
   for (const seat of SEATS) {
     for (const card of zoneCards(seat)) moveCard({ ...card, zone: seat }, UNASSIGNED);
   }
-  $("#cons-error").textContent = "";
+  setError($("#cons-error"), "");
   selectedCard = null;
   commitZones();
 });
@@ -1869,7 +1911,7 @@ $("#constraints").addEventListener("click", (ev) => {
   const btn = ev.target.closest("[data-clear-hand]");
   if (!btn) return;
   emptyHandToNeutral(btn.dataset.clearHand);
-  $("#cons-error").textContent = "";
+  setError($("#cons-error"), "");
   selectedCard = null;
   commitZones();
 });
@@ -1970,7 +2012,10 @@ $("#photo-input").addEventListener("change", (ev) => {
 
 function showPhotoStatus(text, isError) {
   const el = $("#photo-status");
-  el.textContent = text;
+  // Le même élément porte les deux tons : « Lecture des cartes… » n'est pas
+  // une erreur, « Aucune carte reconnue » en est une. Chacun son annonce.
+  if (isError) setError(el, text);
+  else setStatus(el, text);
   el.classList.toggle("error", !!isError);
   el.classList.toggle("muted", !isError);
 }
@@ -2072,7 +2117,7 @@ function applyPhotoHand(seat, data) {
     dealZones[seat][card.suit] = sortRanks(dealZones[seat][card.suit] + card.rank);
   }
   selectedCard = null;
-  $("#cons-error").textContent = "";
+  setError($("#cons-error"), "");
   commitZones();
   return { read: kept.length, dropped };
 }
@@ -2110,7 +2155,7 @@ function applyPhotoDeal(data) {
   }
   dealZones = zones;
   selectedCard = null;
-  $("#cons-error").textContent = "";
+  setError($("#cons-error"), "");
   commitZones();
   return { read, dropped };
 }
@@ -2237,7 +2282,7 @@ async function openPhotoEditor(file) {
     photoEditImage = await loadImage(await shrinkImage(await readDataURL(file), photoAngle));
     photoEditTurns = 0;
     photoCrop = { ...FULL_CROP };
-    $("#photo-edit-error").textContent = "";
+    setError($("#photo-edit-error"), "");
     $("#photo-editor").classList.remove("hidden");
     renderPhotoImage();
     showPhotoStatus("", false);
@@ -2263,7 +2308,7 @@ function renderPhotoImage() {
 
 function renderPhotoCrop() {
   // Le reproche fait au cadre ne survit pas au geste qui le corrige.
-  $("#photo-edit-error").textContent = "";
+  setError($("#photo-edit-error"), "");
   const box = $("#photo-crop");
   box.style.left = `${photoCrop.x * 100}%`;
   box.style.top = `${photoCrop.y * 100}%`;
@@ -2397,7 +2442,7 @@ $("#photo-confirm").addEventListener("click", () => {
   // Un rectangle réduit à rien ne porterait aucune carte : on le dit plutôt que
   // d'envoyer une image vide et de laisser le modèle répondre à côté.
   if (sw < 32 || sh < 32) {
-    $("#photo-edit-error").textContent = t.photoCropTooSmall;
+    setError($("#photo-edit-error"), t.photoCropTooSmall);
     return;
   }
   const out = document.createElement("canvas");
@@ -2415,7 +2460,7 @@ $("#lang").addEventListener("change", () => {
   applyLang();
   renderVersion();
   renderBoundsCards();
-  if (err) $("#cons-error").textContent = validateBounds($("#lang").value);
+  if (err) setError($("#cons-error"), validateBounds($("#lang").value));
   renderHealth();
   renderIaHealth();
   // Le résultat affiché a été calculé dans l'autre langue : on le redemande,
@@ -2832,7 +2877,7 @@ async function simulate() {
   // une donne incomplète produisait un refus qu'on ne voyait pas, et le clic
   // paraissait sans effet.
   const errEl = $("#cons-error");
-  errEl.textContent = "";
+  setError(errEl, "");
   resetQuiz();
   const lang = $("#lang").value;
   btn.disabled = true;
@@ -2844,7 +2889,7 @@ async function simulate() {
     // questionnaire et au lancement de celui-ci.
     $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
-    errEl.textContent = err.message;
+    setError(errEl, err.message);
     $("#result-panel").classList.add("hidden");
   } finally {
     btn.disabled = false;
@@ -3140,7 +3185,7 @@ function finishQuiz() {
 async function startQuiz() {
   const btn = $("#quiz-btn");
   const errEl = $("#error");
-  errEl.textContent = "";
+  setError(errEl, "");
   $("#result-panel").classList.add("hidden");
   const lang = $("#lang").value;
   const seat = $("#seat").value;
@@ -3154,7 +3199,7 @@ async function startQuiz() {
     renderQuizStep();
     $("#quiz-panel").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
-    errEl.textContent = err.message;
+    setError(errEl, err.message);
     $("#quiz-panel").classList.add("hidden");
   } finally {
     btn.disabled = false;

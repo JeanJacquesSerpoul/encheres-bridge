@@ -316,7 +316,7 @@ const UI_TEXT = {
     // applyLang ne peut pas poser de lien dans un [data-i18n].
     // Licence de l'application et lien vers son code, au pied de page.
     // Même découpe que parCredit ci-dessous, pour la même raison.
-    appLicence: "Bridge Bidding — licence",
+    appLicence: "Bridge Bidding de Jean-Jacques Serpoul — licence",
     appSource: "Code source sur GitHub",
     parCredit: "Levées double-mort calculées par",
     parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
@@ -430,7 +430,7 @@ const UI_TEXT = {
     parLeadHint: "Hover a cell — or tap it — to see the lead that holds declarer to that many tricks.",
     // « license » et non « licence » : c'est l'orthographe que l'attribution
     // du solveur emploie déjà en anglais, quelques lignes plus bas.
-    appLicence: "Bridge Bidding — license",
+    appLicence: "Bridge Bidding by Jean-Jacques Serpoul — license",
     appSource: "Source code on GitHub",
     parCredit: "Double dummy tricks computed by",
     parCreditAuthors: "from Bo Haglund and Søren Hein — license",

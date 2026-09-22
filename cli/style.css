@@ -544,7 +544,10 @@ button:disabled { opacity: .6; cursor: wait; }
 }
 .quiz-launch-row {
   display: flex;
-  align-items: center;
+  /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende
+     au-dessus des pastilles, si bien qu'un centrage posait le bouton une
+     demi-légende plus haut qu'elles. Par le bas, il retrouve leur ligne. */
+  align-items: flex-end;
   justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
@@ -564,6 +567,8 @@ button:disabled { opacity: .6; cursor: wait; }
 .seat-pills legend {
   padding: 0;
   margin-bottom: 5px;
+  width: 100%;
+  text-align: center;
   color: var(--muted);
   font-size: .8rem;
 }
@@ -610,11 +615,21 @@ button:disabled { opacity: .6; cursor: wait; }
   outline-offset: 2px;
 }
 
-/* Au doigt, la pastille gagne la hauteur des autres cibles. La règle est ici
-   et non dans le bloc « pointer: coarse » plus haut : à spécificité égale,
-   c'est la dernière écrite qui l'emporte. */
+/* Le bouton qui lance l'entraînement prend la hauteur des pastilles qu'il
+   suit : il appartient à la même rangée, et le carré de 44 px de la rangée
+   du dessus la dépassait d'un cran. */
+.quiz-launch .cmd-btn {
+  width: 34px;
+  height: 34px;
+}
+.quiz-launch .cmd-btn svg { width: 19px; height: 19px; }
+
+/* Au doigt, la pastille et le bouton gagnent la hauteur des autres cibles. La
+   règle est ici et non dans le bloc « pointer: coarse » plus haut : à
+   spécificité égale, c'est la dernière écrite qui l'emporte. */
 @media (pointer: coarse) {
   .seat-pick { min-height: 42px; }
+  .quiz-launch .cmd-btn { width: 42px; height: 42px; }
 }
 }
 .icon-btn:disabled { cursor: not-allowed; }

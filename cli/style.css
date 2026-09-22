@@ -272,6 +272,7 @@ h1 { font-size: 1.25rem; margin: 0; }
 .app-credit a:focus-visible { color: var(--accent); }
 /* La seconde ligne se serre contre la première : elles forment un bloc. */
 .app-credit-source { margin-top: 1px; }
+.app-credit-sep { margin: 0 4px; }
 
 .dot {
   width: 12px; height: 12px;

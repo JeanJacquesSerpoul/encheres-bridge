@@ -230,6 +230,13 @@
     <section class="panel hidden" id="quiz-panel">
       <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
       <div id="quiz-turn" class="quiz-turn"></div>
+      <!-- Décochée par défaut : le rythme d'origine — un clic par enchère
+           adverse — reste celui de qui ne touche à rien. Le réglage est
+           mémorisé comme la langue. -->
+      <label class="quiz-auto">
+        <input id="quiz-auto" type="checkbox">
+        <span data-i18n="quizAutoReveal" data-i18n-title="quizAutoRevealTitle">Enchaîner les enchères adverses</span>
+      </label>
 
       <div class="table-layout">
         <div id="qhand-N" class="hand seat-n"></div>
@@ -250,7 +257,10 @@
       <div id="quiz-feedback" class="quiz-feedback hidden"></div>
 
       <div class="row">
-        <button id="quiz-continue-btn" type="button" class="primary hidden" data-i18n="continue">Continuer</button>
+        <!-- Sans data-i18n : ce bouton porte deux libellés selon ce qu'il
+             fait, et c'est renderQuizStep qui les pose. applyLang le relit
+             par relabelQuizContinue. -->
+        <button id="quiz-continue-btn" type="button" class="primary hidden">Continuer</button>
       </div>
 
       <div id="quiz-score" class="quiz-score hidden"></div>

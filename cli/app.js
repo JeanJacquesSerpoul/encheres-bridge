@@ -272,6 +272,29 @@ const UI_TEXT = {
     quizPanel: "Questionnaire d'enchères",
     auctionSeq: "Séquence d'enchères",
     continue: "Continuer",
+    // Le questionnaire, jusqu'ici écrit en ternaires dans renderQuizStep,
+    // chooseBid et finishQuiz. « Passe », « Contre » et « Surcontre » restent
+    // hors d'ici à dessein : parseBidToken s'en sert comme jetons de
+    // comparaison, les déplacer découplerait l'affichage de la valeur.
+    quizYourTurn: (seat) => `À vous de parler (${seat}) — choisissez votre enchère.`,
+    quizAboutToBid: (seat) => `${seat} va annoncer.`,
+    // Même élision que photoHand : « d'Ouest », « d'Est », mais « de Nord ».
+    quizReveal: (seat) =>
+      `Révéler l'enchère ${/^[AEIOU]/.test(seat) ? "d'" : "de "}${seat}`,
+    quizAutoReveal: "Enchaîner les enchères adverses",
+    quizAutoRevealTitle: "Les enchères des trois autres sièges se dévoilent d'elles-mêmes ; la boîte à enchères revient dès que c'est à vous.",
+    quizCorrect: "✓ Correct !",
+    quizWrong: "✗ Différent du système SEF",
+    quizExpected: "Enchère attendue",
+    quizDone: "Questionnaire terminé.",
+    quizScore: "Score",
+    quizFinalContract: "Contrat final",
+    quizShowDetail: "Afficher le détail complet",
+    quizReplay: "Rejouer cette donne",
+    quizNewDeal: "Nouvelle donne",
+    hiddenHand: "main cachée",
+    dealerCap: "Donneur",
+    byWord: "par",
     result: "Résultat",
     comments: "Séquence commentée",
     parCompute: "Calcul du PAR",
@@ -359,6 +382,23 @@ const UI_TEXT = {
     quizPanel: "Bidding quiz",
     auctionSeq: "Auction",
     continue: "Continue",
+    quizYourTurn: (seat) => `Your turn to bid (${seat}) — choose your call.`,
+    quizAboutToBid: (seat) => `${seat} is about to bid.`,
+    quizReveal: (seat) => `Reveal ${seat}'s call`,
+    quizAutoReveal: "Play the opponents' calls through",
+    quizAutoRevealTitle: "The other three seats reveal their calls on their own; the bidding box comes back as soon as it is your turn.",
+    quizCorrect: "✓ Correct!",
+    quizWrong: "✗ Not what the SEF system bids",
+    quizExpected: "Expected call",
+    quizDone: "Quiz complete.",
+    quizScore: "Score",
+    quizFinalContract: "Final contract",
+    quizShowDetail: "Show full detail",
+    quizReplay: "Replay this deal",
+    quizNewDeal: "New deal",
+    hiddenHand: "hidden hand",
+    dealerCap: "Dealer",
+    byWord: "by",
     result: "Result",
     comments: "Annotated auction",
     parCompute: "Compute the par",
@@ -488,6 +528,23 @@ function capitalize(s) {
 // Réécrit toute l'interface dans la langue choisie. Le questionnaire en cours
 // garde la sienne : il a été construit avec les commentaires que le serveur a
 // renvoyés à son démarrage, et le relancer effacerait la progression.
+// Le bouton du questionnaire porte deux libellés — « Continuer » après une
+// réponse, « Révéler l'enchère de X » avant celle d'un adversaire — et c'est
+// renderQuizStep qui les pose, pas un [data-i18n]. Il en portait pourtant un,
+// et applyLang écrasait donc le second par le premier : changer de langue en
+// plein questionnaire affichait « Continuer » sur un bouton qui révélait une
+// enchère. Le libellé est relu ici, dans la langue du questionnaire en cours
+// — lui ne change pas de langue en route (voir le gestionnaire de #lang).
+function relabelQuizContinue() {
+  const btn = $("#quiz-continue-btn");
+  if (btn.classList.contains("hidden")) return;
+  const t = UI_TEXT[quiz ? quiz.lang : $("#lang").value];
+  const seat = btn.dataset.seat;
+  btn.textContent = btn.dataset.mode === "reveal" && seat
+    ? t.quizReveal(SEAT_LABEL[quiz ? quiz.lang : $("#lang").value][seat])
+    : t.continue;
+}
+
 function applyLang() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
@@ -498,6 +555,7 @@ function applyLang() {
   for (const el of document.querySelectorAll("[data-i18n-title]")) {
     el.title = t[el.dataset.i18nTitle];
   }
+  relabelQuizContinue();
   renderServerHint(); // messages du champ d'URL et libellé de l'option locale
   renderIaHint();
   for (const sel of [$("#seat"), $("#dealer")]) {
@@ -2530,8 +2588,36 @@ async function simulate() {
 
 let quiz = null; // { result, seat, lang, calls, idx, correctCount, totalUser }
 
+// Enchaînement des enchères adverses. Sans lui, chaque tour de table coûte
+// trois clics « Révéler » qui n'apprennent rien : on les subit pour revenir à
+// sa propre enchère. Le réglage est mémorisé comme la langue, et décoché par
+// défaut — le rythme d'origine reste celui de qui n'y touche pas.
+const AUTO_REVEAL_KEY = "bids.quizAuto";
+// Assez long pour lire qui vient de parler, assez court pour ne pas attendre.
+const AUTO_REVEAL_MS = 700;
+const autoRevealToggle = $("#quiz-auto");
+autoRevealToggle.checked = readStored(AUTO_REVEAL_KEY, "") === "1";
+autoRevealToggle.addEventListener("change", () => {
+  saveStored(AUTO_REVEAL_KEY, autoRevealToggle.checked ? "1" : "0");
+  // Cocher la case en plein questionnaire doit valoir tout de suite : si l'on
+  // attend devant un « Révéler », l'enchère s'enchaîne sans le clic.
+  if (quiz && $("#quiz-continue-btn").dataset.mode === "reveal") renderQuizStep();
+});
+
+// Le minuteur de l'enchaînement, gardé à part pour pouvoir l'annuler : un
+// questionnaire relancé ou abandonné ne doit pas voir une enchère surgir
+// après coup.
+let autoRevealTimer = null;
+
+function cancelAutoReveal() {
+  if (autoRevealTimer === null) return;
+  clearTimeout(autoRevealTimer);
+  autoRevealTimer = null;
+}
+
 // Clears any quiz in progress, e.g. when a different PBN is loaded.
 function resetQuiz() {
+  cancelAutoReveal();
   quiz = null;
   $("#quiz-panel").classList.add("hidden");
 }
@@ -2545,7 +2631,7 @@ function hiddenHandHTML(seat, lang) {
   return `
     <div class="seat-name">
       <span>${esc(SEAT_LABEL[lang][seat])}</span>
-      <span class="pts muted">${lang === "fr" ? "main cachée" : "hidden hand"}</span>
+      <span class="pts muted">${esc(UI_TEXT[lang].hiddenHand)}</span>
     </div>
     <div class="hidden-hand">🂠 🂠 🂠 🂠</div>`;
 }
@@ -2633,11 +2719,15 @@ function renderQuizAuction() {
 }
 
 function renderQuizStep() {
+  // Un enchaînement pouvait être en attente : le clic qui nous amène ici
+  // l'a devancé, il ne doit pas se déclencher une seconde fois.
+  cancelAutoReveal();
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
   renderQuizAuction();
 
   const lang = quiz.lang;
+  const t = UI_TEXT[lang];
   if (quiz.idx >= quiz.result.auction.length) {
     finishQuiz();
     return;
@@ -2646,28 +2736,38 @@ function renderQuizStep() {
   const entry = quiz.result.auction[quiz.idx];
   const seatName = SEAT_LABEL[lang][entry.player];
   $("#qtable-center").innerHTML = `
-    <div>${lang === "fr" ? "Donneur" : "Dealer"} : <b>${esc(SEAT_SHORT[lang][quiz.result.dealer])}</b></div>
+    <div>${esc(t.dealerCap)} : <b>${esc(SEAT_SHORT[lang][quiz.result.dealer])}</b></div>
     <div class="vul-line">${vulHTML(quiz.result.vulnerable, lang)}</div>
     <div class="big">${esc(SEAT_SHORT[lang][entry.player])}</div>`;
 
   if (entry.player === quiz.seat) {
-    $("#quiz-turn").textContent =
-      lang === "fr"
-        ? `À vous de parler (${seatName}) — choisissez votre enchère.`
-        : `Your turn to bid (${seatName}) — choose your call.`;
+    $("#quiz-turn").textContent = t.quizYourTurn(seatName);
     const legal = computeLegalCalls(quiz.calls, quiz.seat, lang);
     const box = $("#bidding-box");
     box.innerHTML = buildBiddingBoxHTML(lang, legal);
     box.classList.remove("hidden");
   } else {
-    $("#quiz-turn").textContent =
-      lang === "fr" ? `${seatName} va annoncer.` : `${seatName} is about to bid.`;
+    $("#quiz-turn").textContent = t.quizAboutToBid(seatName);
     $("#bidding-box").classList.add("hidden");
     const btn = $("#quiz-continue-btn");
-    btn.textContent =
-      lang === "fr" ? `Révéler l'enchère de ${seatName}` : `Reveal ${seatName}'s call`;
+    btn.textContent = t.quizReveal(seatName);
     btn.dataset.mode = "reveal";
+    // Le siège est gardé sur le bouton : applyLang en a besoin pour réécrire
+    // ce libellé-là, qu'aucun [data-i18n] ne porte.
+    btn.dataset.seat = entry.player;
     btn.classList.remove("hidden");
+    // Le bouton reste offert même quand l'enchaînement est coché : qui ne
+    // veut pas attendre les 700 ms clique, et renderQuizStep annule alors le
+    // minuteur en tête de son prochain passage.
+    if (autoRevealToggle.checked) {
+      const pending = quiz;
+      autoRevealTimer = setTimeout(() => {
+        autoRevealTimer = null;
+        // Le questionnaire a pu être relancé ou abandonné pendant l'attente.
+        if (quiz !== pending) return;
+        onQuizContinue();
+      }, AUTO_REVEAL_MS);
+    }
   }
 }
 
@@ -2688,14 +2788,13 @@ function chooseBid(bidText) {
   renderQuizAuction();
 
   const lang = quiz.lang;
+  const t = UI_TEXT[lang];
   const fb = $("#quiz-feedback");
   fb.className = "quiz-feedback " + (isCorrect ? "correct" : "incorrect");
-  const verdict = isCorrect
-    ? (lang === "fr" ? "✓ Correct !" : "✓ Correct!")
-    : (lang === "fr" ? "✗ Différent du système SEF" : "✗ Not what the SEF system bids");
+  const verdict = esc(isCorrect ? t.quizCorrect : t.quizWrong);
   const refLine = isCorrect
     ? ""
-    : `<div>${lang === "fr" ? "Enchère attendue" : "Expected call"} : <b>${bidHTML(entry.bid, lang)}</b></div>`;
+    : `<div>${esc(t.quizExpected)} : <b>${bidHTML(entry.bid, lang)}</b></div>`;
   const commentLine = entry.comment
     ? `<div class="muted">${esc(entry.comment)}</div>`
     : "";
@@ -2703,8 +2802,11 @@ function chooseBid(bidText) {
   fb.classList.remove("hidden");
 
   const btn = $("#quiz-continue-btn");
-  btn.textContent = lang === "fr" ? "Continuer" : "Continue";
+  btn.textContent = t.continue;
   btn.dataset.mode = "next";
+  // Le verdict se lit : l'enchaînement ne s'applique qu'aux enchères des
+  // autres, jamais au sien.
+  delete btn.dataset.seat;
   btn.classList.remove("hidden");
 }
 
@@ -2721,27 +2823,47 @@ function onQuizContinue() {
 function finishQuiz() {
   renderQuizHands(true);
   const lang = quiz.lang;
+  const t = UI_TEXT[lang];
   const r = quiz.result;
   const passedOut = isPass(r.contract);
   const contractHTML = passedOut ? esc(r.contract) : bidHTML(r.contract, lang) + (r.doubled ? " X" : "");
   $("#qtable-center").innerHTML = `
-    <div>${lang === "fr" ? "Donneur" : "Dealer"} : <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
+    <div>${esc(t.dealerCap)} : <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
     <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>
     <div class="big">${contractHTML}</div>
-    <div>${passedOut ? "" : (lang === "fr" ? "par " : "by ") + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
+    <div>${passedOut ? "" : esc(t.byWord) + " " + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
 
-  $("#quiz-turn").textContent = lang === "fr" ? "Questionnaire terminé." : "Quiz complete.";
+  $("#quiz-turn").textContent = t.quizDone;
   $("#bidding-box").classList.add("hidden");
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
 
   const pct = quiz.totalUser ? Math.round((100 * quiz.correctCount) / quiz.totalUser) : 0;
   const scoreEl = $("#quiz-score");
+  // Le score fermait la marche : pour rejouer, il fallait remonter la page
+  // jusqu'aux commandes de la donne. Les deux suites naturelles — refaire
+  // celle-ci, en tirer une autre — sont offertes ici, avec le détail.
   scoreEl.innerHTML = `
-    <div class="score-big">${lang === "fr" ? "Score" : "Score"} : ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
-    <div>${lang === "fr" ? "Contrat final" : "Final contract"} : <b>${contractHTML}</b></div>
-    <button type="button" id="quiz-show-detail-btn">${lang === "fr" ? "Afficher le détail complet" : "Show full detail"}</button>`;
+    <div class="score-big">${esc(t.quizScore)} : ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
+    <div>${esc(t.quizFinalContract)} : <b>${contractHTML}</b></div>
+    <div class="quiz-score-actions">
+      <button type="button" id="quiz-replay-btn">${esc(t.quizReplay)}</button>
+      <button type="button" id="quiz-new-deal-btn">${esc(t.quizNewDeal)}</button>
+      <button type="button" id="quiz-show-detail-btn">${esc(t.quizShowDetail)}</button>
+    </div>`;
   scoreEl.classList.remove("hidden");
+  // La donne n'a pas bougé : la redemander la rejoue à l'identique.
+  $("#quiz-replay-btn").addEventListener("click", startQuiz);
+  $("#quiz-new-deal-btn").addEventListener("click", () => {
+    $("#random-btn").click();
+    // Le tirage refuse quand les bornes ne laissent aucune donne, et le dit
+    // dans #cons-error : on ne lance pas un questionnaire sur la donne d'avant.
+    if ($("#cons-error").textContent) {
+      $("#cons-error").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    startQuiz();
+  });
   $("#quiz-show-detail-btn").addEventListener("click", () => {
     renderResult(quiz.result);
     $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });

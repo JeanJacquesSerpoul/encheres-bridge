@@ -242,6 +242,10 @@
           <button id="cons-fill-btn" type="button" class="primary hidden"></button>
           <button id="cons-reset-btn" type="button"></button>
           <button id="bid-btn" type="button" class="primary" data-i18n="runAuction">Afficher les enchères</button>
+          <!-- L'attente des deux tirages. Distincte de #cons-error : un
+               tirage en cours n'est pas un refus, et le ton de l'annonce
+               n'est pas le même. -->
+          <span id="cons-busy" class="muted"></span>
           <span id="cons-error" class="error"></span>
         </div>
       </div>

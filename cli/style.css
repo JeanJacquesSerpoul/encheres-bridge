@@ -334,6 +334,8 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
    rien, mais précédé de son gap, il décalait le centrage de quelques pixels
    vers la gauche. Il ne reparaît qu'une fois rempli. */
 .row-centered .error:empty { display: none; }
+/* Même raison pour le message d'attente : vide, il décalerait le centrage. */
+#cons-busy:empty { display: none; }
 /* Un libellé et son champ, insécables : quand la ligne se replie, ils passent
    ensemble à la suivante. */
 .field { display: inline-flex; align-items: center; gap: 8px; }

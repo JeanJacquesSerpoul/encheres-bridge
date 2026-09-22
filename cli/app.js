@@ -670,6 +670,39 @@ function handString(cards) {
 // deals rare, so we give up rather than freeze the page.
 const RANDOM_DEAL_BUDGET_MS = 1500;
 
+// Les deux tirages — une donne entière, ou les cartes qui manquent — sont des
+// boucles qui redessinent jusqu'à tomber sur un résultat dans les bornes. Avec
+// des bornes serrées elles vont au bout de leur budget, une seconde et demie
+// pendant laquelle la page était entièrement figée : ni le bouton grisé, ni le
+// moindre message ne pouvaient s'afficher, puisque rien n'était peint.
+//
+// Elles rendent maintenant la main au navigateur de temps en temps. Le pas est
+// court — l'œil ne voit pas 40 ms — et il ne coûte qu'un tour de boucle
+// d'événements toutes les quelques centaines d'essais.
+const YIELD_EVERY_MS = 40;
+
+async function breathe(since) {
+  if (Date.now() - since < YIELD_EVERY_MS) return since;
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  return Date.now();
+}
+
+// Sous ce seuil, l'attente ne se fait pas sentir : un message qui paraît et
+// disparaît dans le même souffle n'est que du clignotement.
+const BUSY_AFTER_MS = 200;
+
+// Grise le bouton, et n'annonce l'attente que si elle dure. Rend une fonction
+// à appeler quand c'est fini, dans un `finally`.
+function showBusy(btn, message) {
+  btn.disabled = true;
+  const timer = setTimeout(() => setStatus($("#cons-busy"), message), BUSY_AFTER_MS);
+  return () => {
+    clearTimeout(timer);
+    setStatus($("#cons-busy"), "");
+    btn.disabled = false;
+  };
+}
+
 // Valeurs du tag PBN [Vulnerable] que le serveur reconnaît (voir VulString).
 const VULS = ["None", "NS", "EW", "All"];
 
@@ -693,10 +726,11 @@ function chosenVul() {
 // shuffled cards dealt 13 each, hands listed clockwise from the dealer as
 // required by the PBN format. Deals are redrawn until every seat's honour-point
 // count fits its bounds; returns null if none was found within the time budget.
-function randomPBN(dealer, vul) {
+async function randomPBN(dealer, vul) {
   const startIdx = SEATS.indexOf(dealer);
   const order = [0, 1, 2, 3].map((i) => SEATS[(startIdx + i) % 4]);
   const deadline = Date.now() + RANDOM_DEAL_BUDGET_MS;
+  let souffle = Date.now();
 
   for (let attempt = 1; ; attempt++) {
     const deck = shuffledDeck();
@@ -706,21 +740,29 @@ function randomPBN(dealer, vul) {
       const dealStr = order.map((seat) => handString(hands[seat])).join(" ");
       return `[Dealer "${dealer}"]\n[Vulnerable "${vul}"]\n[Deal "${dealer}:${dealStr}"]`;
     }
-    if (attempt % 256 === 0 && Date.now() > deadline) return null;
+    if (attempt % 256 === 0) {
+      if (Date.now() > deadline) return null;
+      souffle = await breathe(souffle);
+    }
   }
 }
 
-$("#random-btn").addEventListener("click", () => {
+$("#random-btn").addEventListener("click", async () => {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
   setError(errEl, validateBounds(lang));
   if (errEl.textContent) return;
-  const pbn = randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
-  if (!pbn) {
-    setError(errEl, CONS_TEXT[lang].errNoDeal);
-    return;
+  const fini = showBusy($("#random-btn"), CONS_TEXT[lang].busyDeal);
+  try {
+    const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
+    if (!pbn) {
+      setError(errEl, CONS_TEXT[lang].errNoDeal);
+      return;
+    }
+    loadPbn(pbn);
+  } finally {
+    fini();
   }
-  loadPbn(pbn);
 });
 
 $("#dealer").addEventListener("change", () => {
@@ -1059,6 +1101,8 @@ const CONS_TEXT = {
     errOrder: (seat) => `${seat} : le mini dépasse le maxi.`,
     errSumMin: (lo) => `La somme des minis (${lo}) dépasse les ${TOTAL_HCP} PH du jeu.`,
     errSumMax: (hi) => `La somme des maxis (${hi}) n'atteint pas les ${TOTAL_HCP} PH du jeu.`,
+    busyDeal: "Tirage en cours…",
+    busyFill: "Distribution en cours…",
     errNoDeal: "Aucune donne trouvée avec ces bornes : élargissez-les.",
     errFull: (seat) => `${seat} a déjà 13 cartes.`,
     errNoFill: "Impossible de distribuer les cartes restantes avec ces bornes : élargissez-les.",
@@ -1095,6 +1139,8 @@ const CONS_TEXT = {
     errOrder: (seat) => `${seat}: min is greater than max.`,
     errSumMin: (lo) => `Minimums add up to ${lo}, more than the ${TOTAL_HCP} HCP in play.`,
     errSumMax: (hi) => `Maximums add up to ${hi}, less than the ${TOTAL_HCP} HCP in play.`,
+    busyDeal: "Drawing a deal…",
+    busyFill: "Dealing the cards…",
     errNoDeal: "No deal matches these bounds: widen them.",
     errFull: (seat) => `${seat} already holds 13 cards.`,
     errNoFill: "The remaining cards cannot be dealt within these bounds: widen them.",
@@ -1591,6 +1637,7 @@ function announceAlert(msg) {
 // Un message inchangé n'est pas réannoncé : les bornes sont revalidées à
 // chaque carte déplacée, et la même phrase serait répétée à chaque geste.
 function setError(el, msg) {
+  msg = msg || "";
   const changed = el.textContent !== msg;
   el.textContent = msg;
   if (msg && changed) announceAlert(msg);
@@ -1598,6 +1645,7 @@ function setError(el, msg) {
 
 // Même chose pour ce qui n'est pas une erreur, sur le ton poli.
 function setStatus(el, msg) {
+  msg = msg || "";
   const changed = el.textContent !== msg;
   el.textContent = msg;
   if (msg && changed) announce(msg);
@@ -1851,7 +1899,7 @@ $("#constraints").addEventListener("keydown", (ev) => {
 
 // Deals the neutral zone at random over the seats that still have room,
 // redrawing until every hand's honour-point count fits its bounds.
-$("#cons-fill-btn").addEventListener("click", () => {
+$("#cons-fill-btn").addEventListener("click", async () => {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
   setError(errEl, validateBounds(lang));
@@ -1871,27 +1919,36 @@ $("#cons-fill-btn").addEventListener("click", () => {
   const base = {};
   for (const seat of SEATS) base[seat] = handHCP(dealZones[seat]);
   const deadline = Date.now() + RANDOM_DEAL_BUDGET_MS;
-  for (let attempt = 1; ; attempt++) {
-    shuffle(slots);
-    const added = { N: 0, E: 0, S: 0, W: 0 };
-    pool.forEach((card, i) => { added[slots[i]] += HONOUR_POINTS[card.rank] || 0; });
-    if (SEATS.every((seat) => isWithinBounds(base[seat] + added[seat], hcpBounds[seat]))) {
-      pool.forEach((card, i) => moveCard({ ...card, zone: UNASSIGNED }, slots[i]));
-      commitZones();
-      // Une distribution partielle vaut génération : donneur et vulnérabilité
-      // choisis s'appliquent aussi ici, et « Aléatoire » les tire. Sur une
-      // donne chargée, en revanche, on ne redistribue que les cartes : ses
-      // tags sont ceux du fichier.
-      if (!dealFromFile) {
-        setBlockDealer(chosenDealer() || pickRandom(SEATS));
-        setBlockVul(chosenVul() || pickRandom(VULS));
+  let souffle = Date.now();
+  const fini = showBusy($("#cons-fill-btn"), CONS_TEXT[lang].busyFill);
+  try {
+    for (let attempt = 1; ; attempt++) {
+      shuffle(slots);
+      const added = { N: 0, E: 0, S: 0, W: 0 };
+      pool.forEach((card, i) => { added[slots[i]] += HONOUR_POINTS[card.rank] || 0; });
+      if (SEATS.every((seat) => isWithinBounds(base[seat] + added[seat], hcpBounds[seat]))) {
+        pool.forEach((card, i) => moveCard({ ...card, zone: UNASSIGNED }, slots[i]));
+        commitZones();
+        // Une distribution partielle vaut génération : donneur et vulnérabilité
+        // choisis s'appliquent aussi ici, et « Aléatoire » les tire. Sur une
+        // donne chargée, en revanche, on ne redistribue que les cartes : ses
+        // tags sont ceux du fichier.
+        if (!dealFromFile) {
+          setBlockDealer(chosenDealer() || pickRandom(SEATS));
+          setBlockVul(chosenVul() || pickRandom(VULS));
+        }
+        return;
       }
-      return;
+      if (attempt % 256 === 0) {
+        if (Date.now() > deadline) {
+          setError(errEl, CONS_TEXT[lang].errNoFill);
+          return;
+        }
+        souffle = await breathe(souffle);
+      }
     }
-    if (attempt % 256 === 0 && Date.now() > deadline) {
-      setError(errEl, CONS_TEXT[lang].errNoFill);
-      return;
-    }
+  } finally {
+    fini();
   }
 });
 

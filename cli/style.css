@@ -1057,6 +1057,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #quiz-panel .auction { margin-left: auto; margin-right: auto; }
 #quiz-panel h2,
 #quiz-panel h3 { text-align: center; }
+/* « Révéler l'enchère… », « Continuer », puis la rangée spéciale de la boîte
+   à enchères et le bilan de fin : centrés sous la séquence qu'ils font
+   avancer, et non plus calés à gauche d'un panneau où tout le reste l'est. */
+#quiz-panel .row { justify-content: center; }
+#quiz-panel .bb-row.bb-special { margin-left: auto; margin-right: auto; }
+#quiz-panel .quiz-score { text-align: center; }
+#quiz-panel .quiz-score-actions { justify-content: center; }
 
 /* PAR (levées double-mort) — tableau sur le modèle dds_web. */
 #par-status { font-size: .9rem; }

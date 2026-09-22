@@ -858,9 +858,11 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .cons-bounds {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  padding: 8px 10px;
+  /* Serré : sur tablette, Mini et Maxi passaient sur deux lignes dans les
+     colonnes d'Ouest et d'Est, larges d'environ 240 px. */
+  padding: 5px 10px;
   background: var(--surface-3);
   border-bottom: 1px solid var(--border);
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -869,7 +871,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .cons-ph { font-weight: 600; color: var(--muted); }
 .cons-bound { display: flex; align-items: center; gap: 6px; color: var(--muted); }
 .cons-input {
-  width: 58px;
+  width: 48px;
   padding: 5px 6px;
   text-align: center;
   border: 1px solid var(--border);
@@ -1197,14 +1199,14 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
      l'écran. */
   .cons-layout .cons-center {
     order: -1;
-    position: sticky;
-    top: 6px;
     padding: 0;
   }
   /* Épinglée seulement quand elle porte des cartes : vide, elle masquait 130 px
      des mains pour ne rien offrir. Déplacer une carte d'une main à l'autre se
      fait alors sans elle, et elle se réépingle dès qu'une carte y tombe. */
   .cons-layout .cons-center.filled {
+    position: sticky;
+    top: 6px;
     z-index: 5;
     /* Plafonnée : « Vider » renvoie les 52 cartes ici, et une zone épinglée
        qui grandit sans limite masquerait les mains qu'elle sert à remplir. */
@@ -1212,8 +1214,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
     overflow: auto;
     box-shadow: var(--shadow-sticky);
   }
-  /* Titre et compteur restent lisibles quand les cartes défilent à
-     l'intérieur de la zone épinglée. */
   /* Vide, elle se réduit à son bandeau. L'aide quitte l'image mais reste
      focalisable — c'est la cible de dépôt au clavier — et reparaît au focus. */
   .cons-layout .cons-center:not(.filled) .neutral-hint:not(:focus) {
@@ -1225,6 +1225,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
     clip-path: inset(50%);
     white-space: nowrap;
   }
+  /* Titre et compteur restent lisibles quand les cartes défilent à
+     l'intérieur de la zone épinglée. */
   .cons-layout .cons-center .cons-head {
     position: sticky;
     top: 0;
@@ -1335,10 +1337,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .cons-btn { width: 30px; height: 30px; min-height: 0; }
   /* La règle ci-dessus vise button, .file-btn et select : les champs de
      bornes, eux, restaient à leur hauteur de souris. */
-  .cons-input { min-height: 40px; }
-  /* Cartes plus grasses au doigt, sans casser la ligne de 13 cartes. */
-  .card { min-width: 1.8em; padding: 5px 4px; }
-  .cons-cards .suitline { gap: 4px; }
+  .cons-input { min-height: 36px; }
+  /* Cartes plus grasses au doigt, sans casser la ligne de 13 cartes. Un peu
+     moins qu'avant toutefois : les quatre mains empilées d'un téléphone
+     s'étiraient sur trois écrans, et 30 px de haut restent loin au-dessus du
+     minimum de 24 px d'une cible (WCAG 2.2 SC 2.5.8). */
+  .card { min-width: 1.8em; padding: 4px 4px; }
+  .cons-cards .suitline { gap: 3px; }
 }
 
 .bb-btn {

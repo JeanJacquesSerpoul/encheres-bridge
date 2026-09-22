@@ -1042,6 +1042,17 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    quand le reste était centré. */
 #result-panel .par-row { justify-content: center; }
 
+/* Séquence et commentaires côte à côte dès que la place le permet : chacun
+   garde son centrage dans sa colonne. En dessous, ils restent empilés. */
+@media (min-width: 900px) {
+  .result-seqs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+    align-items: start;
+  }
+}
+
 /* Questionnaire : même centrage que le résultat pour le titre et la séquence. */
 #quiz-panel .auction { margin-left: auto; margin-right: auto; }
 #quiz-panel h2,
@@ -1293,6 +1304,11 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .hand .seat-name { font-size: .85rem; }
 
   .auction th, .auction td { padding: 5px 4px; font-size: .9rem; }
+
+  /* Les quatre pastilles et le bouton du questionnaire sur une ligne : le
+     bouton, seul sur la suivante, semblait détaché des sièges qu'il lance. */
+  .quiz-launch-row { flex-wrap: nowrap; gap: 10px; }
+  .seat-pick { padding: 0 10px; }
 
   .bb-row { gap: 3px; }
   .bb-btn { font-size: .85rem; padding: 6px 2px; }

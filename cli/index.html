@@ -390,14 +390,22 @@
         <div id="hand-S" class="hand seat-s"></div>
       </div>
 
-      <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
-      <table class="auction" id="auction-table">
-        <thead><tr id="auction-head"></tr></thead>
-        <tbody id="auction-body"></tbody>
-      </table>
-
-      <h3 data-i18n="comments">Séquence commentée</h3>
-      <ol class="comments" id="comments"></ol>
+      <!-- La séquence et ses commentaires, côte à côte sur grand écran : l'un
+           se lit en regard de l'autre, et empilés ils laissaient les deux
+           tiers du panneau vides. L'un sous l'autre sur écran étroit. -->
+      <div class="result-seqs">
+        <div>
+          <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
+          <table class="auction" id="auction-table">
+            <thead><tr id="auction-head"></tr></thead>
+            <tbody id="auction-body"></tbody>
+          </table>
+        </div>
+        <div>
+          <h3 data-i18n="comments">Séquence commentée</h3>
+          <ol class="comments" id="comments"></ol>
+        </div>
+      </div>
 
       <!-- « PAR » de la donne : les levées double-mort de chaque camp dans
            chaque couleur, calculées à la demande par le solveur DDS en WASM

@@ -145,17 +145,28 @@
            sans que rien ne dise à quoi elle sert. -->
       <p class="panel-intro" data-i18n="intro">Composez une donne — l'application déroule les enchères du système français et les commente, enchère par enchère.</p>
       <div class="row row-centered" id="deal-actions">
-        <label class="file-btn">
-          <span data-i18n="fileLoad">Charger un fichier .pbn</span>
+        <!-- Charger, tirer, sauver : mêmes icônes que les commandes du bas du
+             panneau, et même infobulle. Le libellé de « Charger un fichier »
+             reste dans l'arbre, masqué à l'œil seulement : c'est lui qui nomme
+             le champ fichier que ce <label> enveloppe. Le dessin, le nom parlé
+             et l'infobulle viennent de renderDealActions. -->
+        <label class="file-btn cmd-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 3v5h5"/>
+            <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
+          </svg>
+          <span class="sr-only" data-i18n="fileLoad">Charger un fichier .pbn</span>
           <input id="file" type="file" accept=".pbn,.txt,text/plain">
         </label>
-        <button id="random-btn" type="button" data-i18n="randomDeal">Donne aléatoire</button>
-        <button id="save-btn" type="button" data-i18n="fileSave">Sauver le PBN</button>
+        <button id="random-btn" type="button" class="cmd-btn"></button>
+        <button id="save-btn" type="button" class="cmd-btn"></button>
         <!-- Photo des quatre mains : le serveur IA y lit les cartes et remplit
              la donne (voir la section « reconnaissance » de app.js). Libellé et
              état posés par renderPhotoButtons ; le champ fichier, unique, est
              partagé avec les boutons par main. -->
-        <button id="deal-photo-btn" type="button" class="icon-btn hidden" data-photo="deal">
+        <button id="deal-photo-btn" type="button" class="cmd-btn hidden" data-photo="deal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>

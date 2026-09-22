@@ -593,6 +593,7 @@ function applyLang() {
     el.setAttribute("aria-label", t[el.dataset.i18nLabel]);
   }
   relabelQuizContinue();
+  renderDealActions();
   renderServerHint(); // messages du champ d'URL et libellé de l'option locale
   renderIaHint();
   renderSeatCompass();
@@ -1504,6 +1505,27 @@ const PLAY_SVG = `${SVG_OPEN}
   <path d="m10 8.5 6 3.5-6 3.5z"/>
 </svg>`;
 
+// Une feuille qui entre : on charge un fichier.
+const IMPORT_SVG = `${SVG_OPEN}
+  <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+  <path d="M14 3v5h5"/>
+  <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
+</svg>`;
+
+// Un dé : la donne est tirée au sort.
+const DICE_SVG = `${SVG_OPEN}
+  <rect x="3" y="3" width="18" height="18" rx="3"/>
+  <path d="M8 8h.01"/><path d="M16 8h.01"/>
+  <path d="M12 12h.01"/>
+  <path d="M8 16h.01"/><path d="M16 16h.01"/>
+</svg>`;
+
+// Une flèche vers le bas au-dessus d'un plateau : le fichier est téléchargé.
+const EXPORT_SVG = `${SVG_OPEN}
+  <path d="M12 3v11"/><path d="m8 10 4 4 4-4"/>
+  <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+</svg>`;
+
 // Une toque d'étudiant : on s'entraîne. Un point d'interrogation disait bien
 // « questionnaire », mais c'est le dessin de l'aide partout ailleurs, et rien
 // ne le distinguait d'un bouton « au secours ».
@@ -1594,6 +1616,20 @@ function setCommandButton(sel, svg, name) {
   btn.innerHTML = svg;
   btn.setAttribute("aria-label", name);
   btn.dataset.tip = name;
+}
+
+// Les trois commandes du haut du panneau : charger, tirer, sauver. Même
+// traitement que celles du bas — un dessin, un nom parlé, une infobulle.
+// « Charger un fichier » est un <label> et non un <button> : son texte reste
+// dans l'arbre, masqué à l'œil, car c'est lui qui nomme le champ fichier
+// qu'il enveloppe.
+function renderDealActions() {
+  const lang = $("#lang").value;
+  const t = UI_TEXT[lang];
+  const load = $(".file-btn");
+  load.dataset.tip = t.fileLoad;
+  setCommandButton("#random-btn", DICE_SVG, t.randomDeal);
+  setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
 }
 
 function renderBoundsCards() {
@@ -2140,6 +2176,9 @@ function renderPhotoButtons() {
       ? (iaHealthState === "offline" ? t.photoOffline : t.photoUnknown)
       : name;
     btn.setAttribute("aria-label", name);
+    // La même infobulle que ses voisins, et le même repli en bandeau bas :
+    // le `title` natif ne se montre pas au doigt.
+    btn.dataset.tip = btn.title;
   }
 }
 

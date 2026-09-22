@@ -480,6 +480,14 @@ button:disabled { opacity: .6; cursor: wait; }
   transition: background .15s, border-color .15s, color .15s, transform .1s;
 }
 .cmd-btn svg { width: 21px; height: 21px; }
+
+/* Donneur et vulnérabilité voisinent avec ces boutons dans la même rangée :
+   à 33 px contre 44, ils flottaient au milieu. Ils prennent leur hauteur et
+   leur arrondi — la rangée se lit alors d'un trait. */
+#deal-actions select {
+  min-height: 44px;
+  border-radius: 12px;
+}
 .cmd-btn:hover:not(:disabled) {
   background: var(--tint);
   border-color: var(--accent);
@@ -629,7 +637,6 @@ button:disabled { opacity: .6; cursor: wait; }
    lorsqu'il a quelque chose à dire. */
 #photo-status:empty { display: none; }
 
-.file-btn { display: inline-block; }
 /* Masqué à l'œil, mais toujours dans l'ordre de tabulation : en
    `display: none` le champ en sortait, et comme un <label> n'y entre jamais,
    « Charger un fichier .pbn » était inatteignable au clavier — la tabulation
@@ -1185,31 +1192,15 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .panel { padding: 12px 10px; border-radius: 8px; }
   .row { gap: 8px; }
 
-  /* Ligne d'actions de la donne : au fil du repli, les trois boutons et les
-     deux champs s'entremêlaient — « Sauver le PBN » finissait à côté de
-     « Donneur », comme s'ils allaient ensemble. Une grille de deux colonnes
-     leur rend des blocs nets : le bouton de chargement en pleine largeur, les
-     deux autres côte à côte, puis les deux champs, libellé au-dessus. */
-  #deal-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-  }
-  #deal-actions .file-btn { grid-column: 1 / -1; justify-content: center; }
-  #deal-actions button { width: 100%; }
-  /* Le bouton photo est seul de son espèce : sur une grille à deux colonnes il
-     laisserait une case vide à côté de lui. Il prend donc la ligne entière,
-     mais reste à sa taille, centré : étiré, un bouton d'une seule icône n'est
-     qu'un grand cadre vide. */
-  #deal-actions .icon-btn {
-    grid-column: 1 / -1;
-    width: auto;
-    justify-self: center;
-    padding: 8px 28px;
-  }
-  #deal-actions #photo-status { grid-column: 1 / -1; text-align: center; }
+  /* Les commandes de la donne sont devenues des icônes : les quatre tiennent
+     sur une ligne, même à 320 px, et la grille de deux colonnes qui les
+     remettait en ordre n'a plus d'objet — elle existait parce que « Sauver le
+     PBN » finissait à côté de « Donneur », comme s'ils allaient ensemble.
+     Restent les deux champs, qu'on envoie sous les boutons pour la même
+     raison, libellé au-dessus. */
+  #deal-actions #photo-status { flex-basis: 100%; text-align: center; }
   #deal-actions .field-group {
-    grid-column: 1 / -1;
+    flex-basis: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;

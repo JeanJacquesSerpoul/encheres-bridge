@@ -234,6 +234,15 @@ h1 { font-size: 1.25rem; margin: 0; }
   align-items: center;
   gap: 8px;
 }
+/* Les réglages se calent à droite du bandeau, titre à gauche. C'était jusqu'ici
+   l'effet du flex:1 des barres serveur ; masquées, elles ne le font plus. */
+.lang-bar { margin-left: auto; }
+
+/* Sans barre visible — mode navigateur, option IA décochée : le cas courant —
+   le bloc réservait encore ses 320 px et renvoyait le thème sur une seconde
+   ligne. renderHealth peut réafficher la barre du moteur en cas de panne : le
+   bloc reparaît alors avec elle. */
+.server-bars:not(:has(> .server-bar:not(.hidden))) { display: none; }
 
 /* Option générale « Serveur IA de reconnaissance des cartes », au pied de page
    dans la colonne des noms de serveurs : c'est le nom du sien, et une fonction
@@ -1210,6 +1219,20 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
 @media (max-width: 480px) {
   header { padding: 10px 12px; }
+  /* Titre, langue et thème sur une seule ligne : le bandeau en prenait deux,
+     soit 130 px sur 812. Les libellés quittent l'image, non l'arbre — ce sont
+     eux qui nomment les deux sélecteurs à un lecteur d'écran. */
+  .header-inner { gap: 8px 10px; }
+  .lang-bar label, .theme-bar label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .lang-bar select, .theme-bar select { padding: 5px 6px; }
   /* Le libellé et le choix du serveur sur une ligne, son adresse -- que l'on
      ne touche presque jamais -- sur la suivante. */
   .server-bar { grid-template-columns: var(--srv-label) minmax(0, 1fr); }

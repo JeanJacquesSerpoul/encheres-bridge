@@ -4,30 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Annoncé ici et non dans style.css seulement : le navigateur s'en sert
-       dès le premier octet, avant que la feuille n'arrive. « light » seul, et
-       non « light dark » : le thème de la page est celui que l'utilisateur
-       choisit, et le clair est le défaut. Un système en sombre ne doit donc
-       pas peindre la page en sombre avant qu'elle ait pu dire son choix ; le
-       script ci-dessous retourne cet indice quand le choix mémorisé est le
-       sombre. -->
-  <meta name="color-scheme" content="light">
-  <!-- Le thème mémorisé est posé ici, avant tout rendu. La feuille n'est pas
-       encore arrivée : sans ce script, l'utilisateur du thème sombre verrait
-       un éclair clair — voile de démarrage compris, qui est peint au premier
-       octet — le temps qu'elle vienne. app.js repose le même attribut ensuite
-       (voir applyTheme), et c'est lui qui fait foi ; la clé de stockage est
-       reprise telle quelle, faute de pouvoir lire un script qui n'est pas
+       dès le premier octet, avant que la feuille n'arrive. « light dark »,
+       parce que le mode automatique — celui dont la page s'ouvre par défaut —
+       suit la préférence du système, et que cette préférence est justement ce
+       qui est connu avant tout script : le script ci-dessous resserre aussitôt
+       cet indice sur le thème résolu. -->
+  <meta name="color-scheme" content="light dark">
+  <!-- Le thème est posé ici, avant tout rendu. La feuille n'est pas encore
+       arrivée : sans ce script, l'utilisateur du thème sombre — celui qu'il a
+       choisi, comme celui de son système en mode automatique — verrait un
+       éclair clair, voile de démarrage compris, qui est peint au premier
+       octet. app.js repose le même attribut ensuite (voir applyTheme), et
+       c'est lui qui fait foi ; la clé de stockage et les valeurs de choix sont
+       reprises telles quelles, faute de pouvoir lire un script qui n'est pas
        encore chargé. -->
   <script>
     (function () {
-      var theme = "light";
+      var choice = "auto";
       try {
-        if (localStorage.getItem("bids.theme") === "dark") theme = "dark";
-      } catch (err) { /* stockage refusé : le clair, qui est le défaut */ }
-      if (theme !== "dark") return;
-      document.documentElement.setAttribute("data-theme", "dark");
+        var saved = localStorage.getItem("bids.theme");
+        if (saved === "light" || saved === "dark") choice = saved;
+      } catch (err) { /* stockage refusé : le mode automatique, par défaut */ }
+      // Le mode automatique suit le système ; un navigateur sans matchMedia
+      // suit le clair, qui est le défaut de la feuille.
+      var dark = choice === "dark" ||
+        (choice === "auto" && !!(window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches));
+      var theme = dark ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
       var meta = document.querySelector('meta[name="color-scheme"]');
-      if (meta) meta.setAttribute("content", "dark");
+      if (meta) meta.setAttribute("content", theme);
     })();
   </script>
   <title>Bridge Bidding</title>
@@ -159,14 +165,16 @@
         </select>
       </div>
       <!-- Même bandeau que la langue, et mêmes raisons : le thème vaut pour
-           toute la page, pas pour la donne. Deux choix seulement — le clair,
-           qui est celui par défaut, et le sombre — et le choix se retrouve à
-           la visite suivante (voir applyTheme dans app.js ; l'attribut qu'il
-           pose est celui que lit style.css). -->
+           toute la page, pas pour la donne. Trois choix — automatique, qui
+           suit le système et dont la page s'ouvre par défaut, puis le clair et
+           le sombre, qui le forcent — et le choix se retrouve à la visite
+           suivante (voir applyTheme dans app.js ; l'attribut qu'il pose est
+           celui que lit style.css). -->
       <div class="theme-bar">
         <label for="theme" data-i18n="theme">Thème</label>
-        <select id="theme">
-          <option value="light" selected data-i18n="themeLight">Clair</option>
+        <select id="theme" data-i18n-title="themeTitle">
+          <option value="auto" selected data-i18n="themeAuto">Automatique</option>
+          <option value="light" data-i18n="themeLight">Clair</option>
           <option value="dark" data-i18n="themeDark">Sombre</option>
         </select>
       </div>

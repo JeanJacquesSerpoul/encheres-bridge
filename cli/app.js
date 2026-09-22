@@ -265,6 +265,8 @@ const UI_TEXT = {
     optRandom: "Aléatoire",
     language: "Langue",
     theme: "Thème",
+    themeTitle: "Thème du système — c'est le choix par défaut — ou thème imposé à la page.",
+    themeAuto: "Automatique",
     themeLight: "Clair",
     themeDark: "Sombre",
     intro:
@@ -394,6 +396,8 @@ const UI_TEXT = {
     optRandom: "Random",
     language: "Language",
     theme: "Theme",
+    themeTitle: "Use the system theme — the default — or force one for the page.",
+    themeAuto: "Automatic",
     themeLight: "Light",
     themeDark: "Dark",
     intro:
@@ -513,39 +517,67 @@ function saveStored(key, value) {
   }
 }
 
-// Le thème de la page — clair ou sombre — choisi dans le bandeau et mémorisé
-// comme la langue. À défaut de choix, la page s'ouvre en clair : c'est le
-// défaut de l'application, et non la préférence du système, qui ne décide plus
-// rien ici. Un thème subi se remarque, un thème choisi se retrouve.
+// Le thème de la page, choisi dans le bandeau et mémorisé comme la langue.
+// Trois choix : « auto », celui par défaut, qui suit la préférence du système,
+// puis « light » et « dark », qui la forcent. C'est le choix qui est conservé ;
+// l'attribut posé sur <html>, lui, dit toujours un thème résolu — clair ou
+// sombre — car c'est de lui que style.css tire sa palette entière, et que
+// celle-ci n'est écrite qu'une fois.
 const THEME_KEY = "bids.theme";
+const THEME_CHOICES = ["auto", "light", "dark"];
 
-function readTheme() {
-  return readStored(THEME_KEY, "light") === "dark" ? "dark" : "light";
+function readThemeChoice() {
+  const saved = readStored(THEME_KEY, "auto");
+  return THEME_CHOICES.includes(saved) ? saved : "auto";
 }
 
-function saveTheme(theme) {
-  saveStored(THEME_KEY, theme);
+function saveTheme(choice) {
+  saveStored(THEME_KEY, choice);
+}
+
+// Ce que le système préfère ; un navigateur sans matchMedia — ou qui n'en dit
+// rien — préfère le clair, qui est le défaut de la feuille.
+function systemTheme() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+// Le thème effectivement affiché, résolu en clair ou en sombre.
+function activeTheme() {
+  const choice = readThemeChoice();
+  return choice === "auto" ? systemTheme() : choice;
 }
 
 // Le thème vit sur <html data-theme="…">, dont style.css tire sa palette
 // entière et son color-scheme. Le script en tête de index.html a déjà posé
-// l'attribut, lu du même stockage, pour que la page ne s'ouvre pas en clair
-// chez qui a choisi le sombre ; ici, on ne fait que suivre le sélecteur.
-// L'indice color-scheme du <head> est reposé avec lui : il ne sert qu'avant
-// l'arrivée de la feuille — c'est la règle CSS qui décide ensuite — mais le
-// laisser mentir sur le thème affiché serait une tromperie de plus à relire.
+// l'attribut, lu du même stockage, pour que la page s'ouvre sur le bon thème
+// dès le premier rendu ; ici, on ne fait que suivre le sélecteur. L'indice
+// color-scheme du <head> est reposé avec lui : il ne sert qu'avant l'arrivée
+// de la feuille — c'est la règle CSS qui décide ensuite — mais le laisser
+// mentir sur le thème affiché serait une tromperie de plus à relire.
 function applyTheme() {
-  const theme = readTheme();
+  const theme = activeTheme();
   document.documentElement.dataset.theme = theme;
   const meta = document.querySelector('meta[name="color-scheme"]');
   if (meta) meta.setAttribute("content", theme);
-  $("#theme").value = theme;
+  $("#theme").value = readThemeChoice();
 }
 
 $("#theme").addEventListener("change", () => {
   saveTheme($("#theme").value);
   applyTheme();
 });
+
+// En mode automatique, le thème suit le système d'un changement à l'autre :
+// basculer le mode sombre de Windows ne doit pas demander un rechargement. Le
+// choix est relu à chaque fois — un thème forcé n'a rien à suivre — et
+// applyTheme se charge du reste.
+if (window.matchMedia) {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (readThemeChoice() === "auto") applyTheme();
+  });
+}
 
 // URL des serveurs. Faute de valeur retenue, le serveur local retombe sur son
 // port d'écoute par défaut ; le distant sur une chaîne vide, qui force la

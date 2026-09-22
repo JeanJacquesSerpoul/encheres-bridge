@@ -3253,11 +3253,11 @@ async function simulate() {
 
 // ---------- le siège du questionnaire ----------
 
-// Le siège retenu. Un bouton radio est toujours coché — celui de Sud au
+// Le siège retenu. Un bouton radio est toujours coché — celui de Nord au
 // départ — donc ce repli ne sert qu'à se garder d'un document à moitié bâti.
 function chosenSeat() {
   const picked = document.querySelector('input[name="seat"]:checked');
-  return picked ? picked.value : "S";
+  return picked ? picked.value : "N";
 }
 
 // Nomme les quatre sièges. En bandeau, la pastille porte le nom entier plutôt

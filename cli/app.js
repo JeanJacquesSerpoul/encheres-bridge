@@ -1577,13 +1577,10 @@ const PLAY_SVG = `${SVG_OPEN}
   <path d="m10 8.5 6 3.5-6 3.5z"/>
 </svg>`;
 
-// Un tableau de trois rangées sur quatre colonnes : celui des levées
-// double-mort, que le PAR remplit.
-const PAR_SVG = `${SVG_OPEN}
-  <rect x="3" y="4" width="18" height="16" rx="2"/>
-  <path d="M3 9.5h18"/><path d="M3 14.8h18"/>
-  <path d="M9 4v16"/><path d="M15 4v16"/>
-</svg>`;
+// Le PAR n'a pas de dessin qui le dise : un tableau passait pour une
+// grille quelconque, et le bouton pour absent. Il porte donc son nom, en
+// toutes lettres dans le carré — « PAR » se lit dans les deux langues.
+const PAR_LABEL = `<span class="cmd-text" aria-hidden="true">PAR</span>`;
 
 // Une feuille qui entre : on charge un fichier.
 const IMPORT_SVG = `${SVG_OPEN}
@@ -1719,7 +1716,7 @@ function renderBoundsCards() {
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction);
-  setCommandButton("#cons-par-btn", PAR_SVG, UI_TEXT[lang].parCompute);
+  setCommandButton("#cons-par-btn", PAR_LABEL, UI_TEXT[lang].parCompute);
   setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.

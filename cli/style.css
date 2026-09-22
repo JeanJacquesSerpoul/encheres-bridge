@@ -529,6 +529,8 @@ button:disabled { opacity: .6; cursor: wait; }
   transition: background .15s, border-color .15s, color .15s, transform .1s;
 }
 .cmd-btn svg { width: 21px; height: 21px; }
+/* Un mot à la place du dessin, quand aucun dessin ne dit la commande. */
+.cmd-btn .cmd-text { font-size: .8rem; font-weight: 700; letter-spacing: .02em; }
 
 /* Donneur et vulnérabilité voisinent avec ces boutons dans la même rangée :
    à 33 px contre 44, ils flottaient au milieu. Ils prennent leur hauteur et

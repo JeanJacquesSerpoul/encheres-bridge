@@ -210,6 +210,10 @@ const UI_TEXT = {
     serverLocal: "Local",
     serverRemote: "Distant (production)",
     serverRemoteHint: "Saisissez l'URL du serveur distant.",
+    errNoServer: "Aucun serveur visé : saisissez l'URL du serveur distant, ou repassez en mode Navigateur.",
+    errTimeout: "Le serveur n'a pas répondu à temps. Vérifiez son URL, ou repassez en mode Navigateur.",
+    errUnreachable: "Serveur injoignable. Vérifiez son URL, ou repassez en mode Navigateur.",
+    errNotJson: "Réponse inattendue : ce n'est pas un serveur d'enchères. Vérifiez son URL.",
     serverRemotePlaceholder: "https://exemple.net/api/bidings",
     serverWasm: "Navigateur (hors ligne)",
     wasmMissing: "Moteur d'enchères (WASM) introuvable — lancez build-wasm.sh.",
@@ -324,6 +328,10 @@ const UI_TEXT = {
     serverLocal: "Local",
     serverRemote: "Remote (production)",
     serverRemoteHint: "Enter the remote server URL.",
+    errNoServer: "No server to call: enter the remote server URL, or switch back to In-browser mode.",
+    errTimeout: "The server did not answer in time. Check its URL, or switch back to In-browser mode.",
+    errUnreachable: "Server unreachable. Check its URL, or switch back to In-browser mode.",
+    errNotJson: "Unexpected answer: this is not a bidding server. Check its URL.",
     serverRemotePlaceholder: "https://example.net/api/bidings",
     serverWasm: "In-browser (offline)",
     wasmMissing: "Bidding engine (WASM) not found — run build-wasm.sh.",
@@ -2041,7 +2049,7 @@ async function recognizePhoto(image) {
   renderPhotoButtons();
   showPhotoStatus(t.photoBusy, false);
   try {
-    const resp = await fetch(iaURL() + "/api/chat", {
+    const resp = await fetchWithTimeout(iaURL() + "/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -2049,7 +2057,7 @@ async function recognizePhoto(image) {
         model: IA_MODEL,
         image,
       }),
-    });
+    }, TIMEOUT_VISION);
     let body;
     try {
       body = await resp.json();
@@ -2753,6 +2761,36 @@ function serverURL() {
   return $("#server").value.trim().replace(/\/+$/, "");
 }
 
+// Un fetch qui renonce. Sans cela, un serveur qui accepte la connexion puis se
+// tait laisse le bouton grisé indéfiniment : rien ne revient, ni réponse ni
+// erreur, et l'application reste en attente jusqu'au rechargement de la page.
+//
+// Les délais diffèrent selon ce qu'on attend : une sonde doit répondre tout de
+// suite, un calcul d'enchères prend le temps qu'il faut, et le modèle de vision
+// du serveur IA met des dizaines de secondes à lire une photo.
+const TIMEOUT_PROBE = 8000;
+const TIMEOUT_BID = 20000;
+const TIMEOUT_VISION = 90000;
+
+async function fetchWithTimeout(url, options, ms = TIMEOUT_PROBE) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...options, signal: ctrl.signal });
+  } catch (err) {
+    // Le renoncement se lit comme une erreur d'abandon : on la retraduit,
+    // « The user aborted a request » n'apprenant rien à personne.
+    const t = UI_TEXT[$("#lang").value];
+    if (err && err.name === "AbortError") throw new Error(t.errTimeout);
+    // Un échec réseau arrive en TypeError, dont le message — « Failed to
+    // fetch » — ne dit rien à qui ne lit pas l'anglais des navigateurs.
+    if (err instanceof TypeError) throw new Error(t.errUnreachable);
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // Dernier état connu du serveur, gardé pour le réafficher tel quel quand la
 // langue change, sans le redemander.
 let healthState = null; // "online", "offline", ou null tant qu'on ne sait pas
@@ -2806,7 +2844,7 @@ async function fetchVersion() {
       const body = await bidsLocal.version();
       serverVersion = body && body.revision ? body : null;
     } else {
-      const resp = await fetch(serverURL() + "/version");
+      const resp = await fetchWithTimeout(serverURL() + "/version", {}, TIMEOUT_PROBE);
       const body = await resp.json();
       serverVersion = resp.ok && body.revision ? body : null;
     }
@@ -2859,7 +2897,7 @@ async function checkHealth() {
   }
   $("#health-text").textContent = "…";
   try {
-    const resp = await fetch(serverURL() + "/health");
+    const resp = await fetchWithTimeout(serverURL() + "/health", {}, TIMEOUT_PROBE);
     const body = await resp.json();
     healthState = resp.ok && body.status === "ok" ? "online" : "offline";
   } catch (err) {
@@ -2904,7 +2942,7 @@ async function checkIaHealth() {
   }
   $("#ia-health-text").textContent = "…";
   try {
-    const resp = await fetch(iaURL() + "/health");
+    const resp = await fetchWithTimeout(iaURL() + "/health", {}, TIMEOUT_PROBE);
     const body = await resp.json();
     iaHealthState = resp.ok && body.status === "ok" ? "online" : "offline";
   } catch (err) {
@@ -2946,13 +2984,27 @@ async function fetchBid(lang) {
   if (wasmMode()) {
     return bidsLocal.bid(pbn, lang);
   }
+  // Sans URL, fetch() résoudrait « /bid » contre l'origine de la page : la
+  // réponse serait le HTML d'un 404, et resp.json() échouerait sur un message
+  // du moteur JavaScript — « Unexpected token '<' » — que personne ne peut
+  // comprendre. checkHealth a ce garde-fou depuis toujours ; il manquait ici.
+  if (!serverURL()) {
+    throw new Error(UI_TEXT[lang].errNoServer);
+  }
   const fd = new FormData();
   fd.append("pbn", new Blob([pbn], { type: "text/plain" }), "deal.pbn");
-  const resp = await fetch(`${serverURL()}/bid?lang=${lang}`, {
+  const resp = await fetchWithTimeout(`${serverURL()}/bid?lang=${lang}`, {
     method: "POST",
     body: fd,
-  });
-  const body = await resp.json();
+  }, TIMEOUT_BID);
+  let body;
+  try {
+    body = await resp.json();
+  } catch (err) {
+    // L'URL répond, mais pas en JSON : ce n'est pas un serveur d'enchères.
+    // Le 404 d'un hébergeur statique donnait « Unexpected token '<' ».
+    throw new Error(UI_TEXT[lang].errNotJson);
+  }
   if (!resp.ok) {
     throw new Error(body.error || `HTTP ${resp.status}`);
   }

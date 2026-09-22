@@ -238,10 +238,16 @@
              — c'est l'action qui clôt la composition, sa place est à leur
              droite. -->
         <div class="row row-centered">
-          <button id="cons-clear-btn" type="button"></button>
-          <button id="cons-fill-btn" type="button" class="primary hidden"></button>
-          <button id="cons-reset-btn" type="button"></button>
-          <button id="bid-btn" type="button" class="primary" data-i18n="runAuction">Afficher les enchères</button>
+          <!-- Les commandes de la donne, en icônes. Leur nom n'est plus
+               écrit à côté : il est dans l'infobulle, posée par buttonTip sur
+               tout élément qui porte data-tip — la même que celle des enchères
+               commentées, bandeau bas compris quand il n'y a pas de survol.
+               Dessin, aria-label et infobulle viennent de renderBoundsCards,
+               qui a la langue sous la main. -->
+          <button id="cons-clear-btn" type="button" class="cmd-btn"></button>
+          <button id="cons-fill-btn" type="button" class="cmd-btn"></button>
+          <button id="cons-reset-btn" type="button" class="cmd-btn"></button>
+          <button id="bid-btn" type="button" class="cmd-btn cmd-primary"></button>
           <!-- L'attente des deux tirages. Distincte de #cons-error : un
                tirage en cours n'est pas un refus, et le ton de l'annonce
                n'est pas le même. -->
@@ -253,14 +259,25 @@
       <!-- Le questionnaire et le siège qu'il fait jouer, centrés sous les
            commandes : ils vont ensemble, et rien ne les sépare plus. -->
       <div class="row row-centered">
-        <label for="seat" data-i18n="yourHand">Votre main</label>
-        <select id="seat">
-          <option value="N">Nord</option>
-          <option value="E">Est</option>
-          <option value="S" selected>Sud</option>
-          <option value="W">Ouest</option>
-        </select>
-        <button id="quiz-btn" type="button" class="primary" data-i18n="startQuiz">Commencer le questionnaire</button>
+        <!-- Le siège que le questionnaire fait jouer. Un compas plutôt qu'un
+             sélecteur déroulant : toute l'application dispose déjà les quatre
+             mains ainsi — Nord en haut, Sud en bas, Ouest à gauche, Est à
+             droite — et un menu déroulant demandait de traduire un nom en
+             position. Ce sont des boutons radio : les flèches y circulent
+             d'elles-mêmes, sans une ligne de JavaScript. -->
+        <fieldset class="seat-compass">
+          <legend data-i18n="yourHand">Votre main</legend>
+          <div class="seat-grid">
+            <label class="seat-pick seat-n"><input type="radio" name="seat" value="N"><span>N</span></label>
+            <label class="seat-pick seat-w"><input type="radio" name="seat" value="W"><span>O</span></label>
+            <!-- Le centre n'est pas cliquable : c'est le tapis, et il rappelle
+                 le siège retenu en toutes lettres. -->
+            <span class="seat-centre" id="seat-centre"></span>
+            <label class="seat-pick seat-e"><input type="radio" name="seat" value="E"><span>E</span></label>
+            <label class="seat-pick seat-s"><input type="radio" name="seat" value="S" checked><span>S</span></label>
+          </div>
+        </fieldset>
+        <button id="quiz-btn" type="button" class="cmd-btn cmd-primary"></button>
         <span id="error" class="error"></span>
       </div>
     </section>
@@ -475,6 +492,9 @@
        rogner, et elle devient un bandeau bas sur mobile. -->
   <div id="par-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
   <div id="auction-tip" class="par-tip hidden" role="tooltip" aria-live="polite"></div>
+  <!-- Le nom des commandes en icônes. Même habillage que les deux ci-dessus,
+       et même repli en bandeau bas sur un écran sans survol. -->
+  <div id="hint-tip" class="par-tip hint-tip hidden" role="tooltip" aria-live="polite"></div>
 
   <!-- Le solveur double-mort (DDS) ne se charge plus ici : ses deux fichiers
        pèsent 915 Ko, et seul le bouton « Calcul du PAR » s'en sert. par.js les

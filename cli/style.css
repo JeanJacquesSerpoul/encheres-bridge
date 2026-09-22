@@ -457,6 +457,168 @@ button:disabled { opacity: .6; cursor: wait; }
   line-height: 0;
 }
 .icon-btn svg { width: 18px; height: 18px; }
+
+/* ---------- les commandes de la donne, en icônes ----------
+
+   Trois utilitaires et deux actions, tous carrés, tous de la même famille.
+   La hiérarchie ne passe plus par la longueur du libellé — il n'y en a plus —
+   mais par le remplissage : les utilitaires sont creux et bordés, les deux
+   actions sont pleines et vertes. On voit d'un coup d'œil lesquelles font
+   avancer la donne. */
+.cmd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s, transform .1s;
+}
+.cmd-btn svg { width: 21px; height: 21px; }
+.cmd-btn:hover:not(:disabled) {
+  background: var(--tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+/* Un enfoncement d'un pixel : le bouton répond au doigt comme à la souris,
+   là où un simple changement de fond passe inaperçu sous la main. */
+.cmd-btn:active:not(:disabled) { transform: translateY(1px); }
+.cmd-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* Les deux actions : pleines, vertes, et d'un cran plus grandes. Elles
+   ferment chacune leur rangée, et rien ne doit les confondre avec les
+   utilitaires qui les précèdent. */
+.cmd-primary {
+  width: 52px;
+  height: 52px;
+  border-color: var(--accent-bg);
+  background: var(--accent-bg);
+  color: var(--on-accent);
+}
+.cmd-primary svg { width: 25px; height: 25px; }
+.cmd-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+/* L'infobulle d'un bouton tient en une ligne : elle n'a pas besoin de la
+   largeur d'un commentaire d'enchère. */
+.hint-tip {
+  max-width: 220px;
+  font-size: .85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- le compas du siège ----------
+
+   Les quatre sièges à leur place autour du tapis, comme partout ailleurs
+   dans l'application. Un fieldset sans bordure : sa légende sert de titre, et
+   les boutons radio qu'il contient font circuler les flèches d'eux-mêmes. */
+.seat-compass {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.seat-compass legend {
+  padding: 0;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: .85rem;
+  text-align: center;
+  width: 100%;
+}
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 34px);
+  grid-template-rows: repeat(3, 34px);
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+}
+.seat-grid .seat-n { grid-area: 1 / 2; }
+.seat-grid .seat-w { grid-area: 2 / 1; }
+.seat-grid .seat-centre { grid-area: 2 / 2; }
+.seat-grid .seat-e { grid-area: 2 / 3; }
+.seat-grid .seat-s { grid-area: 3 / 2; }
+
+/* Le bouton radio lui-même est retiré de l'image mais reste focalisable : la
+   pastille qui l'habille prend sa place, et `:has` la peint selon son état.
+   Même masquage que le champ fichier, pour la même raison. */
+.seat-pick input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.seat-pick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--muted);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.seat-pick:hover { border-color: var(--accent); color: var(--accent); }
+.seat-pick.is-picked {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  color: var(--on-accent);
+}
+/* Le focus se pose sur le champ caché : c'est la pastille qui doit le
+   montrer, sans quoi il n'y aurait rien à voir. */
+.seat-pick:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Le tapis, au centre : il ne se clique pas, il rappelle le siège retenu. */
+.seat-centre {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--felt);
+  color: var(--on-accent);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-align: center;
+  line-height: 1.05;
+}
+
+/* Au doigt, la pastille et le tapis passent à 42 px, et la grille avec eux.
+   La règle est ici et non dans le bloc « pointer: coarse » plus haut : à
+   spécificité égale, c'est la dernière écrite qui l'emporte. */
+@media (pointer: coarse) {
+  .seat-grid { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
+  .seat-pick, .seat-centre { width: 42px; height: 42px; }
+  .seat-centre { font-size: .62rem; }
+}
 .icon-btn:disabled { cursor: not-allowed; }
 /* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que
    lorsqu'il a quelque chose à dire. */

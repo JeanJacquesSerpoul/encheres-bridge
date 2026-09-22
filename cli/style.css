@@ -680,7 +680,6 @@ button:disabled { opacity: .6; cursor: wait; }
   .seat-pick { min-height: 42px; }
   .quiz-launch .cmd-btn { width: 42px; height: 42px; }
 }
-}
 .icon-btn:disabled { cursor: not-allowed; }
 /* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que
    lorsqu'il a quelque chose à dire. */

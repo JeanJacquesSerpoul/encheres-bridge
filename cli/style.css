@@ -264,9 +264,12 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 
 /* La phrase qui dit à quoi sert la page : présente sans peser, elle se lit
    une fois puis s'oublie. */
+/* Pas de largeur maximale : une mesure de 62 caractères repliait la phrase
+   en plein milieu — « du système / français » — alors que le panneau était
+   deux fois plus large. Une seule phrase supporte sa longueur ; elle se
+   replie d'elle-même quand la fenêtre se resserre. */
 .panel-intro {
   margin: -4px 0 14px;
-  max-width: 62ch;
   color: var(--muted);
   font-size: .9rem;
   line-height: 1.5;
@@ -788,6 +791,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #result-panel h3,
 #result-panel .par-hint,
 #result-panel .par-credit { text-align: center; }
+/* Deux rangées souples, centrées comme le reste : le résumé du contrat était
+   le seul élément du panneau resté calé à gauche. */
+#result-panel .summary,
 #result-panel .par-row { justify-content: center; }
 
 /* Questionnaire : même centrage que le résultat pour le titre et la séquence. */

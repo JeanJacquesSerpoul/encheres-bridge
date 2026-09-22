@@ -249,12 +249,13 @@ h1 { font-size: 1.25rem; margin: 0; }
   cursor: pointer;
 }
 
-/* Option IA décochée — le cas courant : la pastille du serveur IA est masquée
-   et la case reste seule sur sa ligne, accrochée à la colonne de droite. Elle
-   démarrait alors bien après le « Tester » du dessus, sans rien à sa gauche
-   pour justifier ce décalage. Faute de voisine, elle prend toute la largeur et
-   se centre sous le bloc. La grille à deux colonnes reprend ses droits dès que
-   l'option est cochée, la case retrouvant sa pastille en vis-à-vis. */
+/* Option IA décochée — le cas courant : la case reste seule sur sa ligne, sans
+   pastille en vis-à-vis. Accrochée à la seconde colonne, elle tomberait après
+   la première, vide et large seulement de ce que le moteur demande, donc à
+   droite du centre du bloc. Faute de voisine, elle prend toute la largeur et
+   se centre sous la ligne du moteur. La grille à deux colonnes reprend ses
+   droits dès que l'option est cochée, la case retrouvant sa pastille en
+   vis-à-vis. */
 .app-version:has(#ia-health-check.hidden) .feature-toggle {
   grid-column: 1 / -1;
   justify-content: center;
@@ -330,15 +331,39 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
   max-width: 1060px;
   margin: 0 auto 20px;
   padding: 0 16px;
-  /* Une ligne par serveur — les enchères, puis l'IA —, deux colonnes : le test
-     d'état et le nom. Le bloc entier reste centré sous la page. */
+  /* Une ligne par serveur. La grille ne sert plus qu'à la ligne du serveur IA,
+     dont le test et le libellé de l'option se font vis-à-vis ; la ligne du
+     moteur, elle, s'étale sur les deux colonnes et se centre dans cette
+     largeur (voir .server-line). */
   display: grid;
   grid-template-columns: auto minmax(0, max-content);
   justify-content: center;
   align-items: center;
-  gap: 5px 12px;
+  /* L'écart d'une colonne à l'autre est plus serré que celui qui sépare le
+     bouton « Tester » de la pastille : la pastille ouvre le nom qu'elle
+     qualifie, elle ne ferme pas le bouton qui la teste. */
+  gap: 5px 5px;
   font-size: .75rem;
   color: var(--muted);
+}
+
+/* La ligne du moteur : sa pastille d'état et son nom, centrés ensemble. Elle
+   occupe toute la largeur de la grille, car les lignes voisines — l'option IA,
+   la licence — sont plus larges qu'elle. Dans une seule des deux colonnes, elle
+   serait large de son seul contenu et se tiendrait au bord gauche d'une
+   colonne élargie par ces voisines : la paire pastille + nom, plus étroite que
+   le bloc, décollait alors vers la gauche pendant que les crédits, eux,
+   restaient centrés.
+
+   C'est aussi ce qui garde la pastille collée au nom quel que soit le mode :
+   sans bouton « Tester » à sa gauche, elle reste le premier élément de la
+   ligne, à 5 px du nom. */
+.server-line {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 /* Le test de connexion vit dans le pied, à côté de la version, pas dans le
@@ -347,7 +372,9 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 .server-check {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  /* Le bouton s'écarte de la pastille, qui appartient au nom du serveur : sans
+     cet écart, tout se lirait comme une seule phrase. */
+  gap: 12px;
 }
 .server-check button {
   font-size: .75rem;

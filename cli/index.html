@@ -429,24 +429,40 @@
   <!-- Pied de page : quels serveurs répondent, et quel binaire sert les
        enchères. Discret, hors du bandeau, parce qu'on ne le consulte qu'en cas
        de surprise. -->
-  <!-- Une grille de deux colonnes, un serveur par ligne : les boutons « Tester »
-       et les noms tombent les uns sous les autres, quelle que soit la longueur
-       de l'état affiché. -->
+  <!-- Une ligne par serveur, chacune centrée sous la page. Seule la ligne du
+       serveur IA passe par la grille : sa case et le libellé de l'option se
+       font vis-à-vis. Celle du moteur occupe toute la largeur, car les lignes
+       voisines — l'option IA, la licence — sont plus larges qu'elle : une
+       colonne partagée la laisserait collée à leur bord gauche, donc à gauche
+       du centre, au lieu de se centrer. -->
   <footer class="app-version">
-    <span class="server-check">
-      <button id="health-btn" type="button" data-i18n="serverTest">Tester</button>
-      <!-- Pastille d'état : couleur et infobulle posées par renderHealth. -->
-      <span id="health-dot" class="dot"></span>
-      <span id="health-text" class="muted"></span>
+    <span class="server-line">
+      <span class="server-check">
+        <!-- Masqué en mode navigateur par renderHealth : le moteur tourne dans
+             la page, il n'y a aucun serveur à tester. -->
+        <button id="health-btn" type="button" data-i18n="serverTest">Tester</button>
+        <!-- Pastille d'état : couleur et infobulle posées par renderHealth. Elle
+             touche le nom du moteur qui la suit — c'est lui qu'elle qualifie,
+             et non le bouton qui la précède. -->
+        <span id="health-dot" class="dot"></span>
+        <!-- Le libellé de l'état — « en ligne », « hors ligne » — n'est plus
+             affiché : la pastille le dit en couleur et son infobulle en mots,
+             qui se suffisent l'une l'autre sur une ligne de pied de page. Il
+             reste dans l'arbre, réservé aux lecteurs d'écran, pour qui une
+             pastille verte ne dit rien. -->
+        <span id="health-text" class="sr-only"></span>
+      </span>
+      <span id="app-version"></span>
     </span>
-    <span id="app-version"></span>
     <!-- État du serveur IA, sous celui des enchères : c'est lui qui autorise
          les boutons photo (voir renderIaHealth). Masqué tant que l'option
          générale « Serveur IA de reconnaissance des cartes » est décochée. -->
     <span class="server-check hidden" id="ia-health-check">
       <button id="ia-health-btn" type="button" data-i18n="serverTest">Tester</button>
+      <!-- Même découpe que la pastille des enchères : elle touche le libellé
+           de l'option, et son état ne s'écrit plus qu'en couleur. -->
       <span id="ia-health-dot" class="dot"></span>
-      <span id="ia-health-text" class="muted"></span>
+      <span id="ia-health-text" class="sr-only"></span>
     </span>
     <!-- Option générale, par défaut OFF : tant qu'elle n'est pas cochée, rien
          de la reconnaissance des cartes par photo n'apparaît — ni la barre du

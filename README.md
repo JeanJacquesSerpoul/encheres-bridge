@@ -335,7 +335,7 @@ Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) 
 node tools/wasm-parity.js               # compare les deux chemins sur testdata/*.pbn
 ```
 
-La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur. Sans `cli/bids.wasm`, rien n'est sondé à l'ouverture : le client reste sur **Navigateur** et ne découvre l'absence du moteur qu'au premier calcul. Il le dit alors clairement et ramène la barre du serveur, qui laisse en viser un.
+La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur — il n'y a personne à tester, le bouton **Tester** y disparaît donc, et la couleur de la pastille suffit à dire l'état. Sans `cli/bids.wasm`, rien n'est sondé à l'ouverture : le client reste sur **Navigateur** et ne découvre l'absence du moteur qu'au premier calcul. Il le dit alors clairement et ramène la barre du serveur, qui laisse en viser un.
 
 Tant que le moteur répond, la barre du serveur disparaît de l'en-tête : il n'y a personne à choisir. Pour viser un serveur alors que tout fonctionne — la production, un autre port, ou simplement comparer les deux chemins — ouvrez le client avec **`?serveur=1`** :
 

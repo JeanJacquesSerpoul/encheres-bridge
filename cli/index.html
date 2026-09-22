@@ -395,7 +395,12 @@
            recadrage, posé en pourcentages, s'y superpose donc au pixel. -->
       <div class="photo-edit-frame" id="photo-edit-frame">
         <canvas id="photo-edit-canvas"></canvas>
-        <div class="photo-crop" id="photo-crop">
+        <!-- Focalisable : les flèches le déplacent, Maj + flèches le
+             redimensionnent. Les huit poignées restent au pointeur — huit
+             arrêts de tabulation pour un seul rectangle n'apprendraient rien
+             de plus. -->
+        <div class="photo-crop" id="photo-crop" tabindex="0" role="group"
+             data-i18n-label="photoCropLabel">
           <span class="photo-handle" data-handle="nw"></span>
           <span class="photo-handle" data-handle="n"></span>
           <span class="photo-handle" data-handle="ne"></span>
@@ -409,7 +414,7 @@
       <p class="muted photo-edit-hint" data-i18n="photoEditHint">Faites glisser sur l'image pour choisir la zone à lire ; les poignées ajustent le cadre.</p>
       <div class="row photo-editor-actions">
         <button id="photo-rot-left" type="button" class="icon-btn"
-                data-i18n-title="photoRotateLeft">
+                data-i18n-title="photoRotateLeft" data-i18n-label="photoRotateLeft">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 8h10a5 5 0 0 1 5 5v1"/>
@@ -417,7 +422,7 @@
           </svg>
         </button>
         <button id="photo-rot-right" type="button" class="icon-btn"
-                data-i18n-title="photoRotateRight">
+                data-i18n-title="photoRotateRight" data-i18n-label="photoRotateRight">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 8H11a5 5 0 0 0-5 5v1"/>

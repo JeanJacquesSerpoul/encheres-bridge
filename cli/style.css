@@ -1216,6 +1216,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
 /* Poignées posées à l'intérieur du rectangle : sur les bords, le cadre les
    rognerait de moitié dès que le recadrage touche l'image entière. */
+/* Le rectangle porte le focus au clavier : il doit se voir, et son contour
+   blanc ne suffit pas sur une photographie claire. */
+.photo-crop:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .photo-handle {
   position: absolute;
   width: 18px;

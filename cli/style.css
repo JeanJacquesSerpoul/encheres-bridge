@@ -60,9 +60,9 @@
 
   /* Les contrôles natifs — sélecteurs, champs, zones de texte — se rendent
      d'eux-mêmes selon ce réglage. Sans lui, un système en sombre les peignait
-     sombres au milieu d'une page claire. Il suit désormais le thème de la
-     page, et non plus la préférence du système : c'est le bloc sombre plus
-     bas qui le bascule. */
+     sombres au milieu d'une page claire. Le clair est le point de départ ; le
+     bloc sombre plus bas le bascule, l'attribut de <html> portant toujours un
+     thème résolu — clair ou sombre — jamais « auto ». */
   color-scheme: light;
 }
 
@@ -75,11 +75,14 @@
    rouge des couleurs — ce dernier s'éclaircit sans changer de famille, faute
    de quoi les cœurs et les carreaux deviendraient illisibles sur fond sombre.
 
-   Le thème est un choix de l'utilisateur, porté par l'attribut
-   `data-theme="dark"` de `<html>` : la page s'ouvre donc en clair quel que
-   soit le système — c'est le défaut — et ne s'assombrit que sur décision du
-   sélecteur du bandeau. L'attribut est posé avant le premier rendu par le
-   script en tête de index.html, puis tenu à jour par applyTheme (app.js).
+   Le thème est porté par l'attribut `data-theme` de `<html>` : le clair est
+   ci-dessus, le sombre ici. Cet attribut dit toujours un thème résolu —
+   « light » ou « dark », jamais « auto » — parce que la palette sombre n'est
+   écrite qu'une fois : la redire dans une requête de média pour le mode
+   automatique la ferait diverger à la première retouche de l'une des deux.
+   C'est donc app.js qui résout le choix, « automatique » suivant la
+   préférence du système (voir applyTheme), et le script en tête de index.html
+   qui pose l'attribut avant le premier rendu.
 
    Les rapports de contraste donnés en commentaire sont mesurés sur les
    couleurs rendues, comme ceux du thème clair. */

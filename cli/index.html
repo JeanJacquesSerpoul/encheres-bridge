@@ -209,9 +209,21 @@
            énonce les touches. Sans elle, rien n'indiquerait qu'on peut y faire
            autre chose que regarder. -->
       <p id="cards-help" class="sr-only"></p>
-      <!-- Zone de politesse : chaque prise et chaque dépôt y sont annoncés.
-           Vide à l'écran, elle n'existe que pour les lecteurs d'écran. -->
-      <p id="cards-live" class="sr-only" role="status" aria-live="polite"></p>
+      <!-- Les deux zones vivantes de l'application, vides à l'écran : elles
+           n'existent que pour les lecteurs d'écran.
+
+           Pourquoi doubler les messages qui sont déjà affichés ? Parce que
+           les éléments qui les portent sont masqués tant qu'ils sont vides —
+           par `.error:empty` ou par la classe `.hidden`. Un élément en
+           `display: none` est hors de l'arbre d'accessibilité : la zone
+           vivante n'y est jamais enregistrée, et le message y arrive sans
+           être annoncé. Ces deux-là, elles, ne sont jamais masquées.
+
+           Polie pour ce qui avance — une carte déposée, un calcul en cours —
+           et pressante pour ce qui bloque : un refus interrompt, à juste
+           titre, puisqu'il faut le lire pour continuer. -->
+      <p id="live-polite" class="sr-only" role="status" aria-live="polite"></p>
+      <p id="live-alert" class="sr-only" role="alert"></p>
       <div class="constraints" id="constraints" role="group" aria-describedby="cards-help">
         <div class="table-layout cons-layout">
           <div class="hand cons-hand seat-n" id="cons-N"></div>

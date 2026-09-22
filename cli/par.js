@@ -116,6 +116,12 @@
 
   async function calcTable(pbn) {
     const module = await loadModule();
+    // Le solveur est synchrone et tient la boucle d'événements le temps du
+    // calcul : on rend la main une fois avant, pour que « Calcul en cours… »
+    // s'affiche — et s'annonce — d'abord. Sans cela le message est écrit puis
+    // le fil est saisi dans la foulée, et il n'atteint ni l'écran ni le
+    // lecteur. Même précaution que dans bids-wasm.js, pour la même raison.
+    await new Promise((resolve) => setTimeout(resolve, 0));
     const outPtr = module._malloc(20 * 4);
     try {
       const rc = module.ccall(
@@ -136,6 +142,9 @@
   // de levées du camp qui entame, donc de la défense.
   async function calcLeads(pbn, trump, first) {
     const module = await loadModule();
+    // Même raison qu'au-dessus : « Recherche de l'entame… » doit paraître
+    // avant que le fil ne soit pris.
+    await new Promise((resolve) => setTimeout(resolve, 0));
     const outPtr = module._malloc((1 + 13 * 3) * 4);
     try {
       const rc = module.ccall(
@@ -448,6 +457,15 @@
     window.addEventListener("resize", hideTip);
   }
 
+  // Les messages du PAR sont recopiés dans les zones vivantes de la page :
+  // #par-error et #par-status sont vides la plupart du temps, donc masqués,
+  // donc hors de l'arbre d'accessibilité — rien n'y serait annoncé. app.js
+  // pose les deux aides sur window, comme il y pose déjà parSetDeal.
+  const setErr = (el, msg) =>
+    window.a11ySetError ? window.a11ySetError(el, msg) : (el.textContent = msg);
+  const setStat = (el, msg) =>
+    window.a11ySetStatus ? window.a11ySetStatus(el, msg) : (el.textContent = msg);
+
   // Appelé par renderResult() : nouvelle donne affichée, on repart de zéro.
   window.parSetDeal = function (hands, lang) {
     dealHands = hands || null;
@@ -457,8 +475,8 @@
     leadPending.clear();
     const err = $("#par-error");
     const status = $("#par-status");
-    if (err) err.textContent = "";
-    if (status) status.textContent = "";
+    if (err) setErr(err, "");
+    if (status) setStat(status, "");
     renderTable();
   };
 
@@ -467,23 +485,23 @@
     const btn = $("#par-btn");
     const err = $("#par-error");
     const status = $("#par-status");
-    if (err) err.textContent = "";
+    if (err) setErr(err, "");
     if (btn) btn.disabled = true;
     try {
       // Au tout premier clic le solveur est encore à télécharger : on le dit,
       // plutôt que d'annoncer un calcul qui n'a pas commencé. Les appels
       // suivants passent directement à « Calcul en cours ».
-      if (status && !modulePromise) status.textContent = tr("parLoading");
+      if (status && !modulePromise) setStat(status, tr("parLoading"));
       await loadModule();
-      if (status) status.textContent = tr("parComputing");
+      if (status) setStat(status, tr("parComputing"));
       lastTable = await calcTable(pbnFromHands(dealHands));
       renderTable();
     } catch (e) {
       lastTable = null;
       renderTable();
-      if (err) err.textContent = (e && e.message) ? e.message : String(e);
+      if (err) setErr(err, (e && e.message) ? e.message : String(e));
     } finally {
-      if (status) status.textContent = "";
+      if (status) setStat(status, "");
       if (btn) btn.disabled = false;
     }
   }

@@ -205,7 +205,14 @@
         <select id="deal-select"></select>
       </div>
 
-      <div class="constraints" id="constraints">
+      <!-- Le tableau des mains est un groupe : sa description, lue à l'entrée,
+           énonce les touches. Sans elle, rien n'indiquerait qu'on peut y faire
+           autre chose que regarder. -->
+      <p id="cards-help" class="sr-only"></p>
+      <!-- Zone de politesse : chaque prise et chaque dépôt y sont annoncés.
+           Vide à l'écran, elle n'existe que pour les lecteurs d'écran. -->
+      <p id="cards-live" class="sr-only" role="status" aria-live="polite"></p>
+      <div class="constraints" id="constraints" role="group" aria-describedby="cards-help">
         <div class="table-layout cons-layout">
           <div class="hand cons-hand seat-n" id="cons-N"></div>
           <div class="hand cons-hand seat-w" id="cons-W"></div>

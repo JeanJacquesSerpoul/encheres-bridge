@@ -4,8 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Annoncé ici et non dans style.css seulement : le navigateur s'en sert
-       dès le premier octet, avant que la feuille n'arrive. -->
-  <meta name="color-scheme" content="light dark">
+       dès le premier octet, avant que la feuille n'arrive. « light » seul, et
+       non « light dark » : le thème de la page est celui que l'utilisateur
+       choisit, et le clair est le défaut. Un système en sombre ne doit donc
+       pas peindre la page en sombre avant qu'elle ait pu dire son choix ; le
+       script ci-dessous retourne cet indice quand le choix mémorisé est le
+       sombre. -->
+  <meta name="color-scheme" content="light">
+  <!-- Le thème mémorisé est posé ici, avant tout rendu. La feuille n'est pas
+       encore arrivée : sans ce script, l'utilisateur du thème sombre verrait
+       un éclair clair — voile de démarrage compris, qui est peint au premier
+       octet — le temps qu'elle vienne. app.js repose le même attribut ensuite
+       (voir applyTheme), et c'est lui qui fait foi ; la clé de stockage est
+       reprise telle quelle, faute de pouvoir lire un script qui n'est pas
+       encore chargé. -->
+  <script>
+    (function () {
+      var theme = "light";
+      try {
+        if (localStorage.getItem("bids.theme") === "dark") theme = "dark";
+      } catch (err) { /* stockage refusé : le clair, qui est le défaut */ }
+      if (theme !== "dark") return;
+      document.documentElement.setAttribute("data-theme", "dark");
+      var meta = document.querySelector('meta[name="color-scheme"]');
+      if (meta) meta.setAttribute("content", "dark");
+    })();
+  </script>
   <title>Bridge Bidding</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23245438'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white'%3E%E2%99%A0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
@@ -49,13 +73,12 @@
     }
     /* Le voile recopie ses couleurs faute de pouvoir lire les variables de
        style.css, qui n'est pas encore arrivée : il lui faut donc aussi sa
-       propre version sombre. Sans elle, un système en sombre ouvre la page
-       sur un éclair blanc avant que la feuille ne prenne la main. Les valeurs
-       sont celles du bloc sombre de style.css. */
-    @media (prefers-color-scheme: dark) {
-      #boot-loading { background: #151a16; color: #e7ece6; }
-      #boot-loading .boot-spinner { border-color: #445146; border-top-color: #5cc389; }
-    }
+       propre version sombre. Sans elle, un utilisateur du thème sombre ouvre
+       la page sur un éclair blanc avant que la feuille ne prenne la main. Les
+       valeurs sont celles du bloc sombre de style.css, et l'attribut est
+       celui que le script ci-dessus vient de poser. */
+    :root[data-theme="dark"] #boot-loading { background: #151a16; color: #e7ece6; }
+    :root[data-theme="dark"] #boot-loading .boot-spinner { border-color: #445146; border-top-color: #5cc389; }
   </style>
   <!-- Le solveur double-mort (bouton « Calcul du PAR ») tourne en WebAssembly
        avec des threads : il lui faut l'isolation cross-origine (SharedArrayBuffer).
@@ -133,6 +156,18 @@
         <select id="lang">
           <option value="fr" selected>fr</option>
           <option value="en">en</option>
+        </select>
+      </div>
+      <!-- Même bandeau que la langue, et mêmes raisons : le thème vaut pour
+           toute la page, pas pour la donne. Deux choix seulement — le clair,
+           qui est celui par défaut, et le sombre — et le choix se retrouve à
+           la visite suivante (voir applyTheme dans app.js ; l'attribut qu'il
+           pose est celui que lit style.css). -->
+      <div class="theme-bar">
+        <label for="theme" data-i18n="theme">Thème</label>
+        <select id="theme">
+          <option value="light" selected data-i18n="themeLight">Clair</option>
+          <option value="dark" data-i18n="themeDark">Sombre</option>
         </select>
       </div>
     </div>

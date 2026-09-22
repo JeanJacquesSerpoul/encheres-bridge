@@ -264,6 +264,9 @@ const UI_TEXT = {
     lockedTitle: "Donné par le fichier PBN chargé. Générez une donne pour reprendre la main.",
     optRandom: "Aléatoire",
     language: "Langue",
+    theme: "Thème",
+    themeLight: "Clair",
+    themeDark: "Sombre",
     intro:
       "Composez une donne — l'application déroule les enchères du système " +
       "français et les commente, enchère par enchère.",
@@ -390,6 +393,9 @@ const UI_TEXT = {
     lockedTitle: "Set by the loaded PBN file. Generate a deal to take over.",
     optRandom: "Random",
     language: "Language",
+    theme: "Theme",
+    themeLight: "Light",
+    themeDark: "Dark",
     intro:
       "Build a deal — the application runs the French system's auction and " +
       "comments on it, call by call.",
@@ -506,6 +512,40 @@ function saveStored(key, value) {
     /* rien à faire : le réglage vaudra pour cette session seulement */
   }
 }
+
+// Le thème de la page — clair ou sombre — choisi dans le bandeau et mémorisé
+// comme la langue. À défaut de choix, la page s'ouvre en clair : c'est le
+// défaut de l'application, et non la préférence du système, qui ne décide plus
+// rien ici. Un thème subi se remarque, un thème choisi se retrouve.
+const THEME_KEY = "bids.theme";
+
+function readTheme() {
+  return readStored(THEME_KEY, "light") === "dark" ? "dark" : "light";
+}
+
+function saveTheme(theme) {
+  saveStored(THEME_KEY, theme);
+}
+
+// Le thème vit sur <html data-theme="…">, dont style.css tire sa palette
+// entière et son color-scheme. Le script en tête de index.html a déjà posé
+// l'attribut, lu du même stockage, pour que la page ne s'ouvre pas en clair
+// chez qui a choisi le sombre ; ici, on ne fait que suivre le sélecteur.
+// L'indice color-scheme du <head> est reposé avec lui : il ne sert qu'avant
+// l'arrivée de la feuille — c'est la règle CSS qui décide ensuite — mais le
+// laisser mentir sur le thème affiché serait une tromperie de plus à relire.
+function applyTheme() {
+  const theme = readTheme();
+  document.documentElement.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="color-scheme"]');
+  if (meta) meta.setAttribute("content", theme);
+  $("#theme").value = theme;
+}
+
+$("#theme").addEventListener("change", () => {
+  saveTheme($("#theme").value);
+  applyTheme();
+});
 
 // URL des serveurs. Faute de valeur retenue, le serveur local retombe sur son
 // port d'écoute par défaut ; le distant sur une chaîne vide, qui force la
@@ -3651,6 +3691,7 @@ $("#quiz-btn").addEventListener("click", startQuiz);
 
 // Prefill with the default deal and ping the server on load.
 $("#lang").value = initialLang();
+applyTheme();
 $("#pbn").value = DEFAULT_PBN;
 refreshDealSelector(true);
 applyLang();

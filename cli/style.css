@@ -60,8 +60,10 @@
 
   /* Les contrôles natifs — sélecteurs, champs, zones de texte — se rendent
      d'eux-mêmes selon ce réglage. Sans lui, un système en sombre les peignait
-     sombres au milieu d'une page claire. */
-  color-scheme: light dark;
+     sombres au milieu d'une page claire. Il suit désormais le thème de la
+     page, et non plus la préférence du système : c'est le bloc sombre plus
+     bas qui le bascule. */
+  color-scheme: light;
 }
 
 /* ---------- thème sombre ----------
@@ -73,58 +75,66 @@
    rouge des couleurs — ce dernier s'éclaircit sans changer de famille, faute
    de quoi les cœurs et les carreaux deviendraient illisibles sur fond sombre.
 
+   Le thème est un choix de l'utilisateur, porté par l'attribut
+   `data-theme="dark"` de `<html>` : la page s'ouvre donc en clair quel que
+   soit le système — c'est le défaut — et ne s'assombrit que sur décision du
+   sélecteur du bandeau. L'attribut est posé avant le premier rendu par le
+   script en tête de index.html, puis tenu à jour par applyTheme (app.js).
+
    Les rapports de contraste donnés en commentaire sont mesurés sur les
    couleurs rendues, comme ceux du thème clair. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #151a16;
-    --panel: #1d241e;
-    --ink: #e7ece6;          /* 13,25 sur --panel */
-    --muted: #9fae9f;        /* 6,82 sur --panel, 5,93 sur --surface-3 */
-    --border: #445146;
+:root[data-theme="dark"] {
+  /* Les contrôles natifs doivent s'assombrir avec la page, sinon un sélecteur
+     ou un champ resterait clair, éclairé de l'intérieur, au milieu d'elle. */
+  color-scheme: dark;
 
-    --tint: #263228;
-    --surface-2: #212822;
-    --surface-3: #272f28;
-    --hover: #2b342d;
-    --disabled-bg: #242a25;
+  --bg: #151a16;
+  --panel: #1d241e;
+  --ink: #e7ece6;          /* 13,25 sur --panel */
+  --muted: #9fae9f;        /* 6,82 sur --panel, 5,93 sur --surface-3 */
+  --border: #445146;
 
-    /* Le tapis garde son vert ; l'en-tête s'assombrit un peu pour ne pas
-       éclairer le haut de la page à lui seul. */
-    --felt: #2e6b46;
-    --felt-dark: #1e4a31;
-    --on-felt: #dceede;      /* 5,24 sur --felt */
+  --tint: #263228;
+  --surface-2: #212822;
+  --surface-3: #272f28;
+  --hover: #2b342d;
+  --disabled-bg: #242a25;
 
-    /* L'accent se dédouble ici : clair quand il fait du texte ou une bordure
-       sur fond sombre, foncé quand il porte du blanc. */
-    --accent: #5cc389;       /* 7,27 sur --panel */
-    --accent-bg: #23794a;    /* blanc dessus : 5,38 */
-    --accent-hover: #2b8f58;
-    --accent-rgb: 92, 195, 137;
+  /* Le tapis garde son vert ; l'en-tête s'assombrit un peu pour ne pas
+     éclairer le haut de la page à lui seul. */
+  --felt: #2e6b46;
+  --felt-dark: #1e4a31;
+  --on-felt: #dceede;      /* 5,24 sur --felt */
 
-    /* Même dédoublement pour le rouge. */
-    --red: #ef8b80;          /* 6,56 sur --panel, 6,24 sur une main */
-    --red-bg: #a8332a;       /* blanc dessus : 6,62 */
+  /* L'accent se dédouble ici : clair quand il fait du texte ou une bordure
+     sur fond sombre, foncé quand il porte du blanc. */
+  --accent: #5cc389;       /* 7,27 sur --panel */
+  --accent-bg: #23794a;    /* blanc dessus : 5,38 */
+  --accent-hover: #2b8f58;
+  --accent-rgb: 92, 195, 137;
 
-    /* Le doré ne bouge pas, ni l'encre qu'il porte. */
-    --gold-soft: #ffd166;    /* 7,01 sur --felt-dark */
+  /* Même dédoublement pour le rouge. */
+  --red: #ef8b80;          /* 6,56 sur --panel, 6,24 sur une main */
+  --red-bg: #a8332a;       /* blanc dessus : 6,62 */
 
-    --idle: #8b9a8d;         /* 5,96 sur --bg — le seuil d'un témoin est 3 */
-    --ok: #4cc97a;           /* 8,35 */
-    --ko: #ff6b6b;           /* 6,35 */
+  /* Le doré ne bouge pas, ni l'encre qu'il porte. */
+  --gold-soft: #ffd166;    /* 7,01 sur --felt-dark */
 
-    --success-bg: #17301f;   /* --accent dessus : 6,51 */
-    --success-border: #2c5a39;
-    --error-bg: #34191a;     /* --red dessus : 6,67 */
-    --error-border: #63312f;
+  --idle: #8b9a8d;         /* 5,96 sur --bg — le seuil d'un témoin est 3 */
+  --ok: #4cc97a;           /* 8,35 */
+  --ko: #ff6b6b;           /* 6,35 */
 
-    /* Sur fond sombre une ombre portée ne se voit plus : elle doit être plus
-       noire et plus large pour détacher encore une fenêtre de son fond. */
-    --overlay: rgba(0, 0, 0, .74);
-    --shadow-sticky: 0 2px 10px rgba(0, 0, 0, .55);
-    --shadow-pop: 0 4px 14px rgba(0, 0, 0, .65);
-    --shadow-modal: 0 8px 24px rgba(0, 0, 0, .6);
-  }
+  --success-bg: #17301f;   /* --accent dessus : 6,51 */
+  --success-border: #2c5a39;
+  --error-bg: #34191a;     /* --red dessus : 6,67 */
+  --error-border: #63312f;
+
+  /* Sur fond sombre une ombre portée ne se voit plus : elle doit être plus
+     noire et plus large pour détacher encore une fenêtre de son fond. */
+  --overlay: rgba(0, 0, 0, .74);
+  --shadow-sticky: 0 2px 10px rgba(0, 0, 0, .55);
+  --shadow-pop: 0 4px 14px rgba(0, 0, 0, .65);
+  --shadow-modal: 0 8px 24px rgba(0, 0, 0, .6);
 }
 
 * { box-sizing: border-box; }
@@ -202,7 +212,7 @@ h1 { font-size: 1.25rem; margin: 0; }
   font-size: .85rem;
 }
 
-.server-bar select, .lang-bar select {
+.server-bar select, .lang-bar select, .theme-bar select {
   padding: 6px 10px;
   border: none;
   border-radius: 6px;
@@ -213,10 +223,10 @@ h1 { font-size: 1.25rem; margin: 0; }
    complète est de toute façon dans le champ voisin. */
 .server-bar select { text-overflow: ellipsis; }
 
-/* Le choix de la langue vit dans le bandeau, à côté de l'état du serveur :
-   c'est un réglage de la page entière, pas de la donne. Il garde sa propre
-   boîte pour échapper au flex:1 de la barre serveur, qui l'écraserait. */
-.lang-bar {
+/* La langue et le thème vivent dans le bandeau, à côté de l'état du serveur :
+   ce sont des réglages de la page entière, pas de la donne. Chacun garde sa
+   propre boîte pour échapper au flex:1 de la barre serveur, qui l'écraserait. */
+.lang-bar, .theme-bar {
   display: flex;
   align-items: center;
   gap: 8px;

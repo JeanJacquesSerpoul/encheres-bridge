@@ -2,7 +2,10 @@
   --bg: #f4f5f0;
   --panel: #ffffff;
   --ink: #1d2b1f;
-  --muted: #6b7a6e;
+  /* Assombri : à #6b7a6e il tombait à 4,14 sur --bg et à 4,21 sur le bandeau
+     des bornes, sous le seuil AA de 4,5. Il tient maintenant 5,15 sur le fond
+     de page, 5,64 sur un panneau et 5,24 sur le bandeau. */
+  --muted: #5c6b5f;
   --felt: #2e6b46;
   --felt-dark: #245438;
   --accent: #1f6f43;
@@ -80,7 +83,10 @@ h1 { font-size: 1.25rem; margin: 0; }
    que serré dans une colonne. */
 .server-hint {
   grid-column: 1 / -1;
-  color: var(--gold);
+  /* Un doré éclairci : var(--gold) ne tenait que 3,92 sur le vert de
+     l'en-tête. Celui-ci en tient 6,07 sans quitter la famille dorée, à qui
+     revient de signaler l'invite au milieu du blanc du bandeau. */
+  color: #ffd166;
   font-size: .85rem;
 }
 
@@ -133,11 +139,14 @@ h1 { font-size: 1.25rem; margin: 0; }
 .dot {
   width: 12px; height: 12px;
   border-radius: 50%;
-  background: #999;
+  /* Teintes assombries : à #4cd964 / #ff5252 / #999 les pastilles tenaient
+     1,68, 2,91 et 2,60 sur le fond de page, sous le seuil de 3:1 des
+     composants non textuels. Elles tiennent maintenant 4,02, 4,15 et 3,33. */
+  background: #7a8a7d;
   display: inline-block;
 }
-.dot.ok { background: #4cd964; }
-.dot.ko { background: #ff5252; }
+.dot.ok { background: #1f8a3f; }
+.dot.ko { background: #d93a3a; }
 
 main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 
@@ -374,7 +383,9 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   color: var(--muted);
 }
 .hand .suitline { line-height: 1.45; white-space: nowrap; }
-.hand .suitline .void { color: #b9c0b4; }
+/* La chicane n'est pas un ornement : elle dit qu'une couleur est vide.
+   À #b9c0b4 elle tenait 1,86 sur blanc ; var(--muted) en tient 5,64. */
+.hand .suitline .void { color: var(--muted); }
 .red { color: var(--red); }
 
 /* Honour-point bounds (mini / maxi per hand) */
@@ -403,7 +414,10 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   gap: 4px 8px;
   padding: 6px 10px;
   background: var(--gold);
-  color: #fff;
+  /* Le blanc ne tenait que 2,23 sur le doré, et 1,77 sur les pastilles qui
+     l'éclaircissent encore. L'encre du reste de la page en tient 6,64, et les
+     pastilles et icônes qui en héritent passent à 5,16 et 5,42. */
+  color: var(--ink);
   font-family: "Segoe UI", system-ui, sans-serif;
   font-weight: 700;
 }
@@ -415,28 +429,34 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  /* 24 px, et non 22 : c'est le minimum qu'une cible doit mesurer selon la
+     règle WCAG 2.2 SC 2.5.8, et le bandeau ne grandit pas pour autant. */
+  width: 24px;
+  height: 24px;
   min-height: 0;
   padding: 0;
   border: none;
   border-radius: 5px;
-  background: rgba(255, 255, 255, .22);
-  color: #fff;
+  /* Voile sombre et non plus clair. `color` est posé explicitement : un
+     bouton ne tient pas la couleur de son parent, il prend celle du
+     navigateur — l'icône virait au noir au lieu de l'encre du bandeau. */
+  background: rgba(0, 0, 0, .10);
+  color: inherit;
   line-height: 0;
 }
 .cons-btn svg { width: 13px; height: 13px; }
-.cons-btn:hover:not(:disabled) { background: rgba(255, 255, 255, .45); }
+.cons-btn:hover:not(:disabled) { background: rgba(0, 0, 0, .20); }
 .cons-btn:disabled { opacity: .45; cursor: not-allowed; }
 .cons-chip {
-  background: rgba(255, 255, 255, .28);
+  background: rgba(0, 0, 0, .12);
   border-radius: 999px;
   padding: 1px 9px;
   font-size: .75rem;
   white-space: nowrap;
 }
-/* Hand outside its bounds. */
-.cons-chip.off { background: var(--red); }
+/* Hand outside its bounds. Le blanc est réaffirmé : sur le rouge il tient
+   5,44, là où l'encre héritée du bandeau retomberait à 2,72. */
+.cons-chip.off { background: var(--red); color: #fff; }
 
 .cons-bounds {
   display: flex;
@@ -479,7 +499,9 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   overflow: hidden;
 }
 .cons-center.filled { border-style: solid; }
-.cons-center .cons-head { background: var(--felt); }
+/* Le bandeau de la zone neutre est vert et non doré : le blanc y tient 6,35,
+   il est donc réaffirmé après le passage de .cons-head à l'encre. */
+.cons-center .cons-head { background: var(--felt); color: #fff; }
 .neutral-hint {
   padding: 10px;
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -552,7 +574,11 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .auction td.bid-cell.has-tip:focus,
 .auction td.bid-cell.has-tip.is-open {
   background: #eef3ec;
-  outline: none;
+  /* Un contour transparent plutôt qu'aucun : en mode contraste élevé de
+     Windows les box-shadow ne sont pas rendues, et le focus disparaîtrait de
+     ce tableau. Le contour, lui, y est forcé à une couleur visible. */
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   box-shadow: inset 0 0 0 2px var(--accent);
 }
 .auction td .red { color: var(--red); }
@@ -609,7 +635,11 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
 .par-table td.par-cell:focus,
 .par-table td.par-cell.is-open {
   background: #eef3ec;
-  outline: none;
+  /* Un contour transparent plutôt qu'aucun : en mode contraste élevé de
+     Windows les box-shadow ne sont pas rendues, et le focus disparaîtrait de
+     ce tableau. Le contour, lui, y est forcé à une couleur visible. */
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   box-shadow: inset 0 0 0 2px var(--accent);
 }
 .par-hint { font-size: .85rem; margin: -6px 0 12px; }
@@ -830,6 +860,9 @@ select:disabled { background: #f0f0ec; color: var(--muted); cursor: not-allowed;
   /* Les icônes des en-têtes de main s'élargissent pour le doigt, mais restent
      dans leur bandeau : la hauteur commune des boutons le ferait doubler. */
   .cons-btn { width: 30px; height: 30px; min-height: 0; }
+  /* La règle ci-dessus vise button, .file-btn et select : les champs de
+     bornes, eux, restaient à leur hauteur de souris. */
+  .cons-input { min-height: 40px; }
   /* Cartes plus grasses au doigt, sans casser la ligne de 13 cartes. */
   .card { min-width: 1.8em; padding: 5px 4px; }
   .cons-cards .suitline { gap: 4px; }

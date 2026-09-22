@@ -248,8 +248,10 @@ h1 { font-size: 1.25rem; margin: 0; }
 }
 .feature-toggle input { cursor: pointer; margin: 0; flex: none; }
 
-/* Licence et code source, sur toute la largeur du pied de page et sous le
-   reste : on ne les consulte qu'une fois, ils ferment la marche.
+/* Licence et code source, chacun sur sa ligne, sur toute la largeur du pied
+   de page et sous le reste : on ne les consulte qu'une fois, ils ferment la
+   marche. Deux paragraphes plutôt qu'un <br> : chacun est une rangée de la
+   grille du pied de page, et se centre de lui-même.
 
    Ces deux liens-là sont soulignés au repos, contrairement à ceux de
    l'attribution du solveur : sans soulignement, ils ne se distinguent du
@@ -268,7 +270,8 @@ h1 { font-size: 1.25rem; margin: 0; }
 }
 .app-credit a:hover,
 .app-credit a:focus-visible { color: var(--accent); }
-.app-credit-sep { margin: 0 4px; }
+/* La seconde ligne se serre contre la première : elles forment un bloc. */
+.app-credit-source { margin-top: 1px; }
 
 .dot {
   width: 12px; height: 12px;

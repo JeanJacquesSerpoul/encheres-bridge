@@ -1398,27 +1398,25 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 .quiz-score-actions button { margin: 0; }
 
-/* La case de l'enchaînement, sous la phrase de tour : discrète, elle ne
-   dispute pas la vedette à la boîte à enchères. */
-.quiz-auto {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  color: var(--muted);
-  font-size: .85rem;
-  cursor: pointer;
+/* L'enchère adverse qui vient de s'enchaîner : elle surgit dans la grille
+   puis son surlignage s'éteint, avant que la suivante ne prenne le relais
+   700 ms plus tard. */
+.auction td.bid-cell.just-revealed {
+  animation: bid-reveal .6s ease-out;
 }
-/* Le rembourrage ne sert qu'à la zone de clic : une case à cocher fait 13 px
-   de haut, et c'est le libellé qui doit offrir la cible. */
-.quiz-auto { padding: 6px 0; }
-.quiz-auto input { cursor: pointer; margin: 0; flex: none; }
-.quiz-auto:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
-/* Au doigt, la cible passe à 40 px. La règle est ici et non dans le bloc
-   « pointer: coarse » plus haut : à spécificité égale, c'est la dernière
-   écrite qui l'emporte, et celle-ci vient après. */
-@media (pointer: coarse) {
-  .quiz-auto { padding: 11px 0; }
+@keyframes bid-reveal {
+  from {
+    transform: scale(1.35);
+    background: var(--accent);
+    color: var(--bg);
+  }
+}
+/* Sans mouvement, le surlignage seul marque l'enchère. */
+@media (prefers-reduced-motion: reduce) {
+  .auction td.bid-cell.just-revealed { animation-name: bid-reveal-fade; }
+  @keyframes bid-reveal-fade {
+    from { background: var(--accent); color: var(--bg); }
+  }
 }
 
 /* ---------- éditeur de photo : recadrage et rotation ---------- */

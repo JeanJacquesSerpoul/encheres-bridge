@@ -295,8 +295,6 @@ const UI_TEXT = {
     // Même élision que photoHand : « d'Ouest », « d'Est », mais « de Nord ».
     quizReveal: (seat) =>
       `Révéler l'enchère ${/^[AEIOU]/.test(seat) ? "d'" : "de "}${seat}`,
-    quizAutoReveal: "Enchaîner les enchères adverses",
-    quizAutoRevealTitle: "Les enchères des trois autres sièges se dévoilent d'elles-mêmes ; la boîte à enchères revient dès que c'est à vous.",
     quizCorrect: "✓ Correct !",
     quizWrong: "✗ Différent du système SEF",
     quizExpected: "Enchère attendue",
@@ -420,8 +418,6 @@ const UI_TEXT = {
     quizYourTurn: (seat) => `Your turn to bid (${seat}) — choose your call.`,
     quizAboutToBid: (seat) => `${seat} is about to bid.`,
     quizReveal: (seat) => `Reveal ${seat}'s call`,
-    quizAutoReveal: "Play the opponents' calls through",
-    quizAutoRevealTitle: "The other three seats reveal their calls on their own; the bidding box comes back as soon as it is your turn.",
     quizCorrect: "✓ Correct!",
     quizWrong: "✗ Not what the SEF system bids",
     quizExpected: "Expected call",
@@ -3411,22 +3407,11 @@ document.addEventListener("change", (ev) => {
 
 let quiz = null; // { result, seat, lang, calls, idx, correctCount, totalUser }
 
-// Enchaînement des enchères adverses. Sans lui, chaque tour de table coûte
-// trois clics « Révéler » qui n'apprennent rien : on les subit pour revenir à
-// sa propre enchère. Le réglage est mémorisé comme la langue, et coché par
-// défaut : qui veut encore révéler chaque enchère à la main le décoche, et ce
-// choix-là est retenu.
-const AUTO_REVEAL_KEY = "bids.quizAuto";
+// Enchaînement des enchères adverses, toujours actif. Sans lui, chaque tour
+// de table coûtait trois clics « Révéler » qui n'apprennent rien : on les
+// subissait pour revenir à sa propre enchère.
 // Assez long pour lire qui vient de parler, assez court pour ne pas attendre.
 const AUTO_REVEAL_MS = 700;
-const autoRevealToggle = $("#quiz-auto");
-autoRevealToggle.checked = readStored(AUTO_REVEAL_KEY, "") !== "0";
-autoRevealToggle.addEventListener("change", () => {
-  saveStored(AUTO_REVEAL_KEY, autoRevealToggle.checked ? "1" : "0");
-  // Cocher la case en plein questionnaire doit valoir tout de suite : si l'on
-  // attend devant un « Révéler », l'enchère s'enchaîne sans le clic.
-  if (quiz && $("#quiz-continue-btn").dataset.mode === "reveal") renderQuizStep();
-});
 
 // Le minuteur de l'enchaînement, gardé à part pour pouvoir l'annuler : un
 // questionnaire relancé ou abandonné ne doit pas voir une enchère surgir
@@ -3528,9 +3513,13 @@ function renderQuizHands(revealAll) {
 }
 
 function renderQuizAuction() {
+  // La dernière enchère adverse vient d'apparaître d'elle-même : un effet la
+  // signale, faute de quoi elle se glisserait dans la grille sans qu'on la voie.
+  const last = quiz.calls[quiz.calls.length - 1];
   const grid = auctionGridHTML(quiz.result.dealer, quiz.calls, quiz.lang, (c) => {
     let cls = "bid-cell";
     if (c.isUser) cls += c.isCorrect ? " correct" : " incorrect";
+    else if (c === last) cls += " just-revealed";
     // Mauvaise réponse : l'enchère jouée est barrée, la bonne s'affiche à
     // côté plutôt que dans le seul texte de la rétroaction en dessous.
     const content = c.expected
@@ -3580,18 +3569,16 @@ function renderQuizStep() {
     // ce libellé-là, qu'aucun [data-i18n] ne porte.
     btn.dataset.seat = entry.player;
     btn.classList.remove("hidden");
-    // Le bouton reste offert même quand l'enchaînement est coché : qui ne
-    // veut pas attendre les 700 ms clique, et renderQuizStep annule alors le
-    // minuteur en tête de son prochain passage.
-    if (autoRevealToggle.checked) {
-      const pending = quiz;
-      autoRevealTimer = setTimeout(() => {
-        autoRevealTimer = null;
-        // Le questionnaire a pu être relancé ou abandonné pendant l'attente.
-        if (quiz !== pending) return;
-        onQuizContinue();
-      }, AUTO_REVEAL_MS);
-    }
+    // Le bouton reste offert malgré l'enchaînement : qui ne veut pas
+    // attendre les 700 ms clique, et renderQuizStep annule alors le minuteur
+    // en tête de son prochain passage.
+    const pending = quiz;
+    autoRevealTimer = setTimeout(() => {
+      autoRevealTimer = null;
+      // Le questionnaire a pu être relancé ou abandonné pendant l'attente.
+      if (quiz !== pending) return;
+      onQuizContinue();
+    }, AUTO_REVEAL_MS);
   }
 }
 

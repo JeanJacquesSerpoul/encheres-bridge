@@ -453,6 +453,36 @@ textarea {
 .pbn-note { margin: 6px 0 0; color: var(--muted); font-size: .85rem; }
 .pbn-details textarea { margin-top: 8px; }
 
+/* La zone de texte porte son bouton « Copier » en bas à droite. Il s'écarte du
+   coin, où se trouve la poignée de redimensionnement, et le texte garde une
+   marge à droite pour ne pas passer dessous. */
+.pbn-box { position: relative; }
+.pbn-box textarea { padding-right: 46px; }
+.pbn-copy-btn {
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+.pbn-copy-btn svg { width: 16px; height: 16px; }
+.pbn-copy-btn:hover {
+  background: var(--tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.pbn-copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+
 /* Marks the deal selected via #deal-select within the raw PBN text
    (see highlightSelectedDeal in app.js). */
 #pbn::selection { background: var(--gold); color: var(--on-gold); }

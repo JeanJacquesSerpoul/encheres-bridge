@@ -251,7 +251,12 @@
            qu'on y trouve à ceux qui l'ouvrent par curiosité. -->
       <div id="pbn-details" class="pbn-details" hidden>
         <p class="pbn-note" data-i18n="pbnNote">Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.</p>
-        <textarea id="pbn" rows="4" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
+        <!-- Le bouton « Copier » est posé sur la zone de texte, en bas à droite
+             (voir .pbn-copy-btn) ; dessin, nom et infobulle par renderDealActions. -->
+        <div class="pbn-box">
+          <textarea id="pbn" rows="4" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
+          <button id="pbn-copy-btn" type="button" class="pbn-copy-btn"></button>
+        </div>
       </div>
       <div class="row row-centered hidden" id="deal-select-row">
         <label for="deal-select" data-i18n="dealToUse">Donne à utiliser</label>
@@ -544,7 +549,7 @@
         <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
         <p>À la première visite, la table est vide : les 52 cartes attendent au centre. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
         <ul class="help-icons">
-          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque la donne en texte, sous les boutons. On peut y coller une donne reçue par courriel.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque la donne en texte, sous les boutons. On peut y coller une donne reçue par courriel, ou la copier avec la petite icône en bas à droite du texte.</span></li>
         </ul>
 
         <h3>2. Composer la donne à la main</h3>
@@ -610,7 +615,7 @@
         <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
         <p>On your first visit the table is empty: all 52 cards wait in the centre. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
         <ul class="help-icons">
-          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides the deal as text, below the buttons. Paste a deal received by e-mail there.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides the deal as text, below the buttons. Paste a deal received by e-mail there, or copy it with the small icon at the bottom right of the text.</span></li>
         </ul>
 
         <h3>2. Building the deal by hand</h3>

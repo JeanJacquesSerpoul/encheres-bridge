@@ -659,8 +659,19 @@ func init() {
 			name: "answer-fourth-suit-forcing",
 			fr:   "le partenaire a nommé la quatrième couleur (forcing) : se décrire",
 			en:   "partner bid the fourth suit (forcing): describe the hand",
+			// Except with the slam already counted. The answers below are all
+			// descriptions for a game decision, and the one that names the
+			// stopper settles in 3SA "15H et plus" -- a floor partner adds to
+			// his own and passes whenever the sum falls one short. A hand
+			// that, facing partner's shown minimum (18 HL after a reverse),
+			// already holds 33 has nothing to describe: the slam is there,
+			// and the notrump slam road (4SA for aces, then 6SA or 7SA) takes
+			// over. 1T - 1P - 2C - 2P - 3K with AQ982 Q4 KQT96 K facing the
+			// reverse: 16 + 18 = 34, twelve tricks -- the answer used to be
+			// 3SA, and partner's 17 passed it.
 			when: func(e *Engine, ctx *concludeCtx) bool {
-				return ctx.pm != nil && ctx.pm.fourthSuit && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
+				return ctx.pm != nil && ctx.pm.fourthSuit && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) &&
+					!(!ctx.hasFit && ctx.cMinNT >= 33)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				c, mn := e.fourthSuitAnswer(ctx.p, ctx.pm.fourthSuitSuit, ctx.tr)
@@ -1764,6 +1775,10 @@ func init() {
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, own, last, ours := ctx.p, ctx.own, ctx.last, ctx.ours
 				tr := ctx.tr
+				if ctx.pm != nil && ctx.pm.fourthSuit {
+					tr.note("le partenaire demande par la quatrième couleur, mais le chelem est déjà compté : plus rien à décrire",
+						"partner asks with the fourth suit, but the slam is already counted: nothing left to describe")
+				}
 				tr.check(true, "zone de chelem", "slam zone", fmt.Sprintf("%d H + %d = %d", own, ctx.partner.shownMin, ctx.cMin))
 				if !e.bw[ctx.side].asked && !p.answeredAces {
 					c := bid(4, SNoTrump)

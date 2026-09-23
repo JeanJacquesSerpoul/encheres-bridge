@@ -270,3 +270,39 @@ func TestFourthSuitAnswerShapes(t *testing.T) {
 		})
 	}
 }
+
+// TestFourthSuitSlamZone: facing the reverse (18 HL at least), a responder
+// with 16 H already counts 34 when the fourth suit asks him to describe: the
+// slam is there, so he goes the notrump slam road -- 4SA for aces, then 6SA --
+// instead of the 3SA "stopper, 15H and up" his partner's 17 would pass.
+func TestFourthSuitSlamZone(t *testing.T) {
+	d, err := ParsePBN([]byte("[Dealer \"N\"]\n[Vulnerable \"None\"]\n" +
+		"[Deal \"N:K5.AK63.J8.AQ652 T7643.92.A543.73 AQ982.Q4.KQT96.K J.JT875.72.JT984\"]\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	calls := NewEngine(d).Run()
+	var seq []string
+	for _, sc := range calls {
+		seq = append(seq, sc.Call.Format("fr"))
+	}
+	want := []string{"1T", "Passe", "1P", "Passe", "2C", "Passe", "2P", "Passe", "3K", "Passe", "4SA", "Passe", "5C", "Passe", "6SA"}
+	for i, w := range want {
+		if i >= len(seq) || seq[i] != w {
+			t.Fatalf("séquence %v, attendu %v", seq, want)
+		}
+	}
+	ask := calls[10]
+	if !heldTest(ask.Trace, "zone de chelem") {
+		t.Errorf("le 4SA de Sud devait tenir le test de la zone de chelem\n%v", ask.Trace)
+	}
+	found := false
+	for _, s := range ask.Trace {
+		if s.note && strings.Contains(s.fr, "quatrième couleur") {
+			found = true
+		}
+	}
+	if !found {
+		t.Errorf("la trace du 4SA devait expliquer l'abandon de la quatrième couleur\n%v", ask.Trace)
+	}
+}

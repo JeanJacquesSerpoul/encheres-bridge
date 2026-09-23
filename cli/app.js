@@ -198,6 +198,9 @@ const UI_TEXT = {
       "Composez une donne — l'application déroule les enchères du système " +
       "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
+    pbnCopy: "Copier le texte PBN",
+    pbnCopied: "Texte PBN copié",
+    pbnCopyFailed: "Copie impossible : sélectionnez le texte et copiez-le à la main.",
     pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
     dealToUse: "Donne à utiliser",
     dealWord: "Donne",
@@ -330,6 +333,9 @@ const UI_TEXT = {
       "Build a deal — the application runs the French system's auction and " +
       "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
+    pbnCopy: "Copy the PBN text",
+    pbnCopied: "PBN text copied",
+    pbnCopyFailed: "Could not copy: select the text and copy it by hand.",
     pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
     dealToUse: "Deal to use",
     dealWord: "Deal",
@@ -1516,6 +1522,16 @@ const CODE_SVG = `${SVG_OPEN}
   <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/>
 </svg>`;
 
+// Deux feuilles décalées : copier. Puis la coche qui la remplace un instant,
+// une fois la copie faite.
+const COPY_SVG = `${SVG_OPEN}
+  <rect x="9" y="9" width="12" height="12" rx="2"/>
+  <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
+</svg>`;
+const CHECK_SVG = `${SVG_OPEN}
+  <path d="M5 12.5 10 17 19 7"/>
+</svg>`;
+
 // Une flèche vers le bas au-dessus d'un plateau : le fichier est téléchargé.
 const EXPORT_SVG = `${SVG_OPEN}
   <path d="M12 3v11"/><path d="m8 10 4 4 4-4"/>
@@ -1628,7 +1644,47 @@ function renderDealActions() {
   setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal);
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
   setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle);
+  setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
 }
+
+// Copie tout le texte PBN. Le presse-papiers moderne exige un contexte sûr
+// (https ou localhost) et peut être refusé : l'ancienne commande de copie, sur
+// le texte sélectionné, prend alors le relais.
+async function copyPbn() {
+  const t = UI_TEXT[$("#lang").value];
+  const btn = $("#pbn-copy-btn");
+  const textarea = $("#pbn");
+  let ok = false;
+  try {
+    await navigator.clipboard.writeText(textarea.value);
+    ok = true;
+  } catch (err) {
+    textarea.focus();
+    textarea.select();
+    try {
+      ok = document.execCommand("copy");
+    } catch (err2) {
+      ok = false;
+    }
+  }
+  if (!ok) {
+    btn.dataset.tip = t.pbnCopyFailed;
+    announceAlert(t.pbnCopyFailed);
+    return;
+  }
+  announce(t.pbnCopied);
+  // La coche dit que c'est fait, puis le bouton redevient lui-même.
+  btn.innerHTML = CHECK_SVG;
+  btn.dataset.tip = t.pbnCopied;
+  btn.classList.add("copied");
+  clearTimeout(copyPbn.timer);
+  copyPbn.timer = setTimeout(() => {
+    btn.classList.remove("copied");
+    renderDealActions();
+  }, 1500);
+}
+
+$("#pbn-copy-btn").addEventListener("click", copyPbn);
 
 // Affiche ou masque le texte PBN sous la rangée du haut. Le bouton dit son
 // état par aria-expanded, que style.css rend aussi visible (bouton enfoncé).

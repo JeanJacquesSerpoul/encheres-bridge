@@ -1912,7 +1912,10 @@ func (e *Engine) expressFit(ctx *concludeCtx) (Call, meaning, bool) {
 		// has already established that a slam is in view.
 		c = bid(3, fit.Strain())
 	}
-	if c.Level >= game || !e.legal(p.seat, c) || e.reservedByOffer(p, c) {
+	cFR, cEN := callSym(c)
+	if !ctx.tr.check(!(c.Level >= game || !e.legal(p.seat, c) || e.reservedByOffer(p, c)),
+		"soutien forcing sous la manche, au moins au palier de 3 → "+cFR,
+		"forcing raise below game, at least at the three level → "+cEN, cards(p.hand, fit)) {
 		// A raise that lands on the call partner's rebid has just reserved for
 		// a convention -- a checkback, a relay -- says nothing about the trump:
 		// he would answer the question he offered. The fit stays unexpressed
@@ -1928,11 +1931,20 @@ func (e *Engine) expressFit(ctx *concludeCtx) (Call, meaning, bool) {
 // initiateControls opens the slam exploration below the trump game: the
 // "relais contrôle" when the club control cannot be asked for economically,
 // otherwise an ordinary control bid.
-func (e *Engine) initiateControls(p *playerState, trump Suit) (Call, meaning, bool) {
-	if c, mn, ok := e.controlRelayAsk(p, trump); ok {
+func (e *Engine) initiateControls(p *playerState, trump Suit, tr *tracer) (Call, meaning, bool) {
+	if c, mn, ok := e.controlRelayAsk(p, trump); tr.check(ok,
+		"le contrôle à Trèfle ne peut pas être demandé économiquement → relais contrôle",
+		"the club control cannot be asked for economically → control relay", callOrEmpty(c, ok)) {
 		return c, mn, true
 	}
 	c, mn, ok := e.controlBid(p, trump)
+	ctrlFR, ctrlEN := "un contrôle à montrer sous le plafond (As, Roi, singleton ou chicane), dans l'ordre économique",
+		"a control to show below the ceiling (ace, king, singleton or void), in economic order"
+	if ok {
+		cFR, cEN := callSym(c)
+		ctrlFR, ctrlEN = ctrlFR+" → "+cFR, ctrlEN+" → "+cEN
+	}
+	tr.check(ok, ctrlFR, ctrlEN, "")
 	if ok && !trump.IsMajor() && !c.higherThan(bid(4, SNoTrump)) && !e.needsControl(p, trump) {
 		// With a minor the game itself sits above 4SA, so whatever this side
 		// cues, partner's sign-off in the fit buries the ask: 5m answers a
@@ -1944,6 +1956,8 @@ func (e *Engine) initiateControls(p *playerState, trump Suit) (Call, meaning, bo
 		// unaccounted for the cue keeps its place: Blackwood counts keycards,
 		// not the second-round controls the exchange is after [S-3].
 		if ac, amn, aok := e.askRatherThanCue(p, trump); aok {
+			tr.note("atout mineur, plus aucun contrôle à apprendre : demander les clefs (4SA) tant que c'est possible",
+				"minor trumps, no control left to learn about: ask for keycards (4NT) while it is still possible")
 			return ac, amn, true
 		}
 	}
@@ -1955,6 +1969,8 @@ func (e *Engine) initiateControls(p *playerState, trump Suit) (Call, meaning, bo
 		// once the exchange is under way. A major fit is left alone: its game
 		// sits under 4SA, so a control above the ask there is a deliberate
 		// run past it -- the road taken when Blackwood is barred outright.
+		tr.note("atout mineur : le contrôle dépasserait 4SA → demander les clefs maintenant",
+			"minor trumps: the control would go past 4NT → ask for keycards now")
 		return e.askRatherThanCue(p, trump)
 	}
 	if ok && e.reservedByOffer(p, c) {
@@ -2010,7 +2026,7 @@ func (e *Engine) allSideSuitsControlled(p *playerState, trump Suit) bool {
 // if one remains, transition to Blackwood once 4SA is still reachable and
 // the combined values are promising, or sign off in the agreed trump suit
 // once neither is possible (docs/addon_4.md, "mécanisme des contrôles").
-func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) {
+func (e *Engine) continueControlBid(p *playerState, trump Suit, tr *tracer) (Call, meaning) {
 	side := sideOf(p.seat)
 	partner := e.ps[partnerOf(p.seat)]
 	own := p.hand.HLD(trump)
@@ -2069,16 +2085,29 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) 
 		(askZone || strongAllControls || keysDecide) && e.trumpAgreed(p, trump) &&
 		fourNT.higherThan(last) && e.legal(p.seat, fourNT)
 
-	if c, mn, ok := e.controlBid(p, trump); ok {
+	tr.note("le partenaire a fait une enchère de contrôle (atout "+suitSymbol[trump]+") : poursuivre l'exploration du chelem",
+		"partner made a control bid ("+suitSymbol[trump]+" trumps): carry on the slam exploration")
+	cb, cbMn, cbOk := e.controlBid(p, trump)
+	ctrlFR, ctrlEN := "un contrôle à montrer sous le plafond, dans l'ordre économique",
+		"a control to show below the ceiling, in economic order"
+	if cbOk {
+		cFR, cEN := callSym(cb)
+		ctrlFR, ctrlEN = ctrlFR+" → "+cFR, ctrlEN+" → "+cEN
+	}
+	if tr.check(cbOk, ctrlFR, ctrlEN, "") {
 		// A control bid that climbs past the trump game (or beyond 4NT) would
 		// strand the pair above Blackwood. When the ask is still available and
 		// slam is plausible, prefer to ask now rather than cue past it.
-		pastGame := !gameOfTrump(trump).higherThan(c)
-		if !(blackwoodAvailable && (pastGame || !fourNT.higherThan(c))) {
-			return c, mn
+		pastGame := !gameOfTrump(trump).higherThan(cb)
+		if !(blackwoodAvailable && (pastGame || !fourNT.higherThan(cb))) {
+			return cb, cbMn
 		}
+		tr.note("mais ce contrôle dépasserait la manche ou 4SA", "but that control would go past game or 4NT")
 	}
-	if blackwoodAvailable {
+	if tr.check(blackwoodAvailable,
+		"Blackwood : 33 HLD combinés (ou 20 HLD et tous les contrôles, ou le seul As manquant repéré), atout convenu, 4SA disponible → 4SA",
+		"Blackwood: 33 HLD combined (or 20 HLD and every control, or the one missing ace located), trump agreed, 4NT available → 4NT",
+		fmt.Sprintf("%d HLD + %d = %d", own, partner.shownMin, cMin)) {
 		st, mn := e.blackwoodAsk(p, trump, own)
 		e.bw[side] = st
 		return fourNT, mn
@@ -2097,10 +2126,16 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) 
 		// When cue-bids above game have pushed the landing spot to the six
 		// level, the exchange has in fact located a control in every side
 		// suit: name the slam for what it is.
-		if c.Level >= 6 && cMin >= 33 && e.allSideSuitsControlled(p, trump) {
+		if c.Level >= 6 && tr.check(cMin >= 33 && e.allSideSuitsControlled(p, trump),
+			"au palier de 6, 33 HLD et tous les contrôles réunis → le petit chelem",
+			"at the six level, 33 HLD and every control located → the small slam", pts(cMin, "HLD")) {
+			cFR, cEN := callSym(c)
+			tr.note("→ "+cFR, "→ "+cEN)
 			return c, m(-1, -1, "petit chelem, tous les contrôles réunis", "small slam, every side suit controlled").withLen(trump, p.hand.Len(trump))
 		}
 		if c == game {
+			gFR, gEN := callSym(game)
+			tr.note("plus de contrôle à montrer → la manche : "+gFR, "no further control to show → game: "+gEN)
 			return c, m(-1, -1, "plus de contrôle à montrer, je nomme la manche", "no further control to show, naming the game").withLen(trump, p.hand.Len(trump))
 		}
 		// Past the game the fit is no longer "the game", and the trump suit
@@ -2115,9 +2150,13 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) 
 				fr, en = "pas de contrôle à "+deniedFR, "no "+deniedEN+" control"
 			}
 			lvl := string(rune('0' + last.Level))
+			tr.note("le partenaire a montré le contrôle d'atout et demande le contrôle manquant, que je n'ai pas → Passe",
+				"partner showed the trump control and asks for the missing one, which I lack → Pass")
 			return passCall, m(-1, -1, fr+", arrêt au palier de "+lvl, en+", stopping at the "+lvl+" level")
 		}
-		if fr, en, bump, keycard, held := controlKind(p.hand, trump, trump); held && c.Level == 5 && cMin >= 33 {
+		if fr, en, bump, keycard, held := controlKind(p.hand, trump, trump); tr.check(held && c.Level == 5 && cMin >= 33,
+			"contrôle d'atout au palier de 5 et 33 HLD → invitation au chelem",
+			"trump control at the five level and 33 HLD → slam try", pts(cMin, "HLD")) {
 			// The side controls are all shown, the slam is in view, and the
 			// trump honour is what is left to say: it invites the slam and
 			// hands partner the decision on the suit this hand could not cue.
@@ -2137,6 +2176,7 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit) (Call, meaning) 
 			mn.deniedCtrl = missing
 			return c, mn
 		}
+		tr.note("plus de contrôle à montrer → retour à l'atout", "no further control to show → back to the trump suit")
 		return c, m(-1, -1, "plus de contrôle à montrer, retour à l'atout", "no further control to show, back to the trump suit").withLen(trump, p.hand.Len(trump))
 	}
 	return passCall, noInfo()

@@ -7,8 +7,8 @@ import (
 )
 
 // TestBlackwoodAndInvitationTrace: over random deals, every answer to a
-// keycard or ace ask, and every answer to a game invitation, carries a trace
-// whose conclusion is the call actually made.
+// keycard or ace ask, every answer to a game invitation and every step of a
+// slam exploration carries a trace whose conclusion is the call actually made.
 func TestBlackwoodAndInvitationTrace(t *testing.T) {
 	rng := rand.New(rand.NewSource(7))
 	seen := map[string]int{}
@@ -51,10 +51,22 @@ func TestBlackwoodAndInvitationTrace(t *testing.T) {
 				}
 			case strings.Contains(first, "demande de clefs a reçu sa réponse"):
 				seen["suite de Blackwood"]++
+			case strings.Contains(first, "contrôle") || strings.Contains(first, "zone de chelem") ||
+				strings.Contains(first, "le soutenir d'abord"):
+				seen["exploration du chelem"]++
+				// The call is named by the last test that held or by the
+				// closing note (a Blackwood ask, a control, the game).
+				named := strings.HasSuffix(lastHeld, "→ "+callFR) || strings.HasSuffix(lastHeld, ": "+callFR) ||
+					strings.Contains(lastHeld, "Blackwood") && callFR == "4SA" ||
+					strings.Contains(lastHeld, "relais contrôle") ||
+					end.note && (strings.HasSuffix(end.fr, callFR) || strings.Contains(end.fr, "4SA") && callFR == "4SA")
+				if sc.Call.IsBid() && !named {
+					t.Errorf("%s : la trace ne conclut pas sur l'enchère\n%v", callFR, sc.Trace)
+				}
 			}
 		}
 	}
-	for _, k := range []string{"réponse Blackwood", "réponse à la proposition", "suite de Blackwood"} {
+	for _, k := range []string{"réponse Blackwood", "réponse à la proposition", "suite de Blackwood", "exploration du chelem"} {
 		if seen[k] == 0 {
 			t.Errorf("aucune %s tracée sur l'échantillon", k)
 		}

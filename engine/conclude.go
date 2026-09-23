@@ -834,11 +834,13 @@ func init() {
 			// Continue a control-bid slam exploration started by partner
 			// (docs/addon_4.md).
 			name: "continue-control-bid",
+			fr:   "exploration du chelem par les contrôles",
+			en:   "slam exploration through control bids",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.controlBid && ctx.hasFit && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				c, mn := e.continueControlBid(ctx.p, ctx.fit)
+				c, mn := e.continueControlBid(ctx.p, ctx.fit, ctx.tr)
 				return c, mn, true
 			},
 		},
@@ -1037,6 +1039,8 @@ func init() {
 			// and let the exchange start one round later on a suit both
 			// partners have shown.
 			name: "express-fit-before-controls",
+			fr:   "chelem en vue (29-32 HLD combinés) mais le partenaire n'a jamais entendu l'atout de ma part : le soutenir d'abord, forcing",
+			en:   "slam in view (29-32 HLD combined) but partner never heard the trump from me: raise it first, forcing",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return e.slamProbeArmed(ctx) && !e.trumpNamedByBoth(ctx.p, ctx.fit)
 			},
@@ -1065,6 +1069,8 @@ func init() {
 			// unless notrump is not a playable game anyway, in which case 5m
 			// is the game and the probe costs nothing.
 			name: "control-bid-slam-try",
+			fr:   "fit nommé par les deux mains, chelem en vue (29-32 HLD combinés) : ouvrir les enchères de contrôle",
+			en:   "fit named by both hands, slam in view (29-32 HLD combined): open the control bids",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				// The fit must have been *expressed*, not merely computed from
 				// partner's promise plus this hand's own length [S-0]: a suit
@@ -1075,7 +1081,7 @@ func init() {
 				return e.slamProbeArmed(ctx) && e.trumpNamedByBoth(ctx.p, ctx.fit)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				if c, mn, ok := e.initiateControls(ctx.p, ctx.fit); ok {
+				if c, mn, ok := e.initiateControls(ctx.p, ctx.fit, ctx.tr); ok {
 					return c, mn, true
 				}
 				return Call{}, meaning{}, false
@@ -1433,6 +1439,8 @@ func init() {
 			// does the auction stop in game (docs/addon_4.md, "mécanisme des
 			// contrôles").
 			name: "slam-explore-with-fit",
+			fr:   "fit et zone de chelem : 33 HLD combinés (sans l'appoint des courtes face aux longues du partenaire), ou 32 et les 5 cartes clefs",
+			en:   "fit and slam zone: 33 HLD combined (without shortness facing partner's length), or 32 and all 5 keycards",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				// p.bids > 0: see the identical guard on control-bid-slam-try --
 				// the fit must be agreed through bidding, not just computed from
@@ -1466,13 +1474,16 @@ func init() {
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, fit, own, cMin, last, pm := ctx.p, ctx.fit, ctx.own, ctx.cMin, ctx.last, ctx.pm
+				tr := ctx.tr
+				tr.check(true, "zone de chelem", "slam zone", pts(ctx.cMinSlam, "HLD"))
 				// Keycard Blackwood counts the trump king and the trump queen:
 				// it can only be asked once the trump suit is one partner can
 				// name too. A fit merely computed from the opening's promise
 				// plus this hand's own length is not that -- answering "two
 				// keycards and the trump queen" would be answering about a suit
 				// nobody agreed. Show the suit first; the ask comes later.
-				if !e.trumpAgreed(p, fit) {
+				if !tr.check(e.trumpAgreed(p, fit), "atout convenu par la séquence ("+fitSym(fit)+")",
+					"trump agreed by the auction ("+fitSym(fit)+")", "") {
 					// Name the suit instead: a jump when there is room, so the
 					// bid carries the values that reached the slam zone rather
 					// than reading as a mere preference.
@@ -1481,7 +1492,10 @@ func init() {
 						if up := bid(c.Level+1, fit.Strain()); up.Level <= 4 && e.legal(p.seat, up) {
 							c = up
 						}
-						if c.Level <= 4 && e.legal(p.seat, c) {
+						cFR, cEN := callSym(c)
+						if tr.check(c.Level <= 4 && e.legal(p.seat, c),
+							"couleur de 5 cartes pas encore nommée → la nommer (avec saut si possible) : "+cFR,
+							"five-card suit not yet bid → bid it (jumping if possible): "+cEN, cards(p.hand, fit)) {
 							mn := m(own, 40, "couleur longue, propose l'atout avant toute demande", "long suit, proposes the trump before any ask").withLen(fit, p.hand.Len(fit)).asForcing()
 							return c, mn, true
 						}
@@ -1494,16 +1508,22 @@ func init() {
 					// the conclusion the same call would be one rung higher.
 					if partner := ctx.partner; partner.shownLens[fit] > 0 && p.hand.Len(fit) >= 3 {
 						c := e.cheapestCall(fit.Strain())
-						if gameOfTrump(fit).higherThan(c) && e.legal(p.seat, c) {
+						cFR, cEN := callSym(c)
+						if tr.check(gameOfTrump(fit).higherThan(c) && e.legal(p.seat, c),
+							"soutenir la couleur du partenaire sous la manche, forcing : "+cFR,
+							"raise partner's suit below game, forcing: "+cEN, cards(p.hand, fit)) {
 							mn := m(own, 40, "soutien forcing, propose l'atout avant toute demande", "forcing raise, proposes the trump before any ask").withLen(fit, p.hand.Len(fit)).asForcing()
 							return c, mn, true
 						}
 					}
 					return Call{}, meaning{}, false
 				}
-				if !e.uncontrolledSideSuit(p, fit) {
+				if !tr.check(e.uncontrolledSideSuit(p, fit),
+					"une couleur annexe sans contrôle connu (deux perdantes rapides possibles)",
+					"a side suit with no known control (two fast losers possible)", "") {
 					c := bid(4, SNoTrump)
-					if e.legal(p.seat, c) {
+					if tr.check(e.legal(p.seat, c), "toutes les couleurs couvertes → Blackwood 4SA",
+						"every suit covered → 4NT Blackwood", "") {
 						st, mn := e.blackwoodAsk(p, fit, own)
 						e.bw[ctx.side] = st
 						return c, mn, true
@@ -1512,7 +1532,8 @@ func init() {
 					// is past it): keep describing with control bids instead of
 					// giving up -- the exchange finds the slam or signs off on
 					// its own.
-					if c, mn, ok := e.controlBid(p, fit); ok {
+					if c, mn, ok := e.controlBid(p, fit); tr.check(ok,
+						"4SA déjà dépassé → continuer par les contrôles", "4NT already passed → carry on with control bids", callOrEmpty(c, ok)) {
 						return c, mn, true
 					}
 				} else {
@@ -1533,7 +1554,9 @@ func init() {
 					// even when he alone has shown its length: a raise is not
 					// the only way to agree a trump, and demanding one here
 					// left the slam hand with nothing but the game to bid.
-					if belowGame || cushion {
+					if tr.check(belowGame || cushion,
+						"sous la manche (ou 36 HLD et un partenaire limité) → sonder par les contrôles plutôt que Blackwood",
+						"below game (or 36 HLD and a limited partner) → probe with control bids rather than Blackwood", "") {
 						// [S-0] again, at the other door into the control
 						// machinery. trumpAgreed above was enough to ask
 						// Blackwood -- the answers name a suit our side has
@@ -1551,7 +1574,7 @@ func init() {
 								return c, mn, true
 							}
 						}
-						if c, mn, ok := e.initiateControls(p, fit); ok {
+						if c, mn, ok := e.initiateControls(p, fit, ctx.tr); ok {
 							return c, mn, true
 						}
 					}
@@ -1577,6 +1600,8 @@ func init() {
 			// floor left out. Over a sign-off, and only there, it corrects
 			// [S-10b].
 			name: "slam-explore-no-fit-notrump",
+			fr:   "sans fit, 33 H combinés : zone de chelem à Sans-Atout",
+			en:   "no fit, 33 H combined: notrump slam zone",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				if ctx.p.answeredAces {
 					return !ctx.hasFit && ctx.cMin >= 33 &&
@@ -1586,9 +1611,12 @@ func init() {
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, own, last, ours := ctx.p, ctx.own, ctx.last, ctx.ours
+				tr := ctx.tr
+				tr.check(true, "zone de chelem", "slam zone", fmt.Sprintf("%d H + %d = %d", own, ctx.partner.shownMin, ctx.cMin))
 				if !e.bw[ctx.side].asked && !p.answeredAces {
 					c := bid(4, SNoTrump)
-					if e.legal(p.seat, c) && (!ours || last.steps() < c.steps()) {
+					if tr.check(e.legal(p.seat, c) && (!ours || last.steps() < c.steps()),
+						"4SA encore disponible → Blackwood (demande des As)", "4NT still available → Blackwood (ace ask)", "") {
 						st := bwState{asked: true, asker: p.seat, noTrump: true}
 						var mn meaning
 						if e.isKingAsk(p) {
@@ -1607,7 +1635,8 @@ func init() {
 					}
 				}
 				c := bid(6, SNoTrump)
-				if e.legal(p.seat, c) && (!ours || last.steps() < c.steps()) {
+				if tr.check(e.legal(p.seat, c) && (!ours || last.steps() < c.steps()),
+					"→ petit chelem à Sans-Atout : 6SA", "→ small slam in notrump: 6NT", "") {
 					return c, m(own, -1, "conclusion au petit chelem à Sans-Atout (33HL+)", "small slam in notrump on combined values (33+)"), true
 				}
 				return Call{}, meaning{}, false

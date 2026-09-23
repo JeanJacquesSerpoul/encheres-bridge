@@ -59,32 +59,30 @@ seul — d'où le refus de compiler quand il manque.
    .\server\bids-windows.exe
    ```
 
-2. **Ouvrir [`cli/index.html`](../cli/index.html)** dans un navigateur, par
-   simple double-clic. Ouvert de cette façon, le client vise **Local** par
-   défaut, c'est-à-dire `http://localhost:9015` : rien à saisir ni à
-   configurer tant que le serveur écoute sur ce port.
+2. **Ouvrir http://localhost:9015/** dans un navigateur. Le serveur sert le
+   client à sa racine, et le client calcule les enchères lui-même avec le
+   moteur WebAssembly compilé dans le binaire : rien à saisir ni à configurer.
 
 Pour arrêter le serveur : `Ctrl+C` dans sa fenêtre.
 
 ### Variantes
 
-Le serveur sert aussi le client à sa racine : **http://localhost:9015/** affiche
-la même application sans passer par le fichier local — et, là, elle calcule les
-enchères elle-même, avec le moteur WebAssembly servi par le binaire : c'est le
-mode **Navigateur (hors ligne)**, choisi par défaut. Le fichier ouvert en
-`file://`, lui, n'a pas accès à ce moteur et s'en tient au serveur.
+Ouvrir [`cli/index.html`](../cli/index.html) par double-clic (`file://`) ne
+suffit pas : le navigateur refuse alors de charger le moteur WebAssembly. Le
+client le signale et fait reparaître la barre du serveur ; choisir **Local**
+fait alors calculer les enchères par le serveur lancé à l'étape 1.
 
-N'ayant alors aucun serveur à choisir, le client n'affiche plus de barre de
-serveur dans son en-tête. Pour l'y ramener — viser la production, un autre
-port, comparer les deux chemins — ouvrez-le avec **`?serveur=1`** :
+Servi par le binaire, le client calcule toujours sur place et n'affiche pas de
+barre de serveur. Pour l'y ramener — viser la production, un autre port,
+comparer les deux chemins — ouvrez-le avec **`?serveur=1`** :
 
 ```
 http://localhost:9015/?serveur=1
 ```
 
-Le mode sélectionné est mémorisé comme d'habitude : les visites suivantes se
-passent du paramètre, la barre restant visible tant que le mode n'est pas
-revenu à « Navigateur ». « `?serveur=0` » la referme.
+Le choix fait dans cette barre n'est repris qu'avec `?serveur=1` : sans le
+paramètre, le client revient au calcul dans la page. « `?serveur=0` » referme
+la barre.
 
 Si 9015 est déjà pris, lancez-le sur un autre port : **http://localhost:9415/**
 sert alors le même client, qui n'a rien à savoir de ce port puisqu'il calcule
@@ -98,10 +96,9 @@ PORT=9415 ./server/bids-linux
 $env:PORT="9415"; .\server\bids-windows.exe
 ```
 
-Ouvert en `file://`, le client ne peut pas deviner ce port : sélectionnez alors
-**Distant** dans l'en-tête — qu'il affiche, faute de moteur — et saisissez
-`http://localhost:9415`. Servi par le binaire, c'est `?serveur=1` qui ramène
-ce choix.
+Ouvert en `file://`, le client ne peut pas deviner ce port : dans la barre du
+serveur — qu'il affiche, faute de moteur — sélectionnez **Local** et corrigez
+l'URL en `http://localhost:9415`.
 
 Les autres variables d'environnement (`CORS_ORIGINS`, `SERVE_CLI`, `LOG_LEVEL`,
 `LOG_FORMAT`) sont décrites dans le [README](../README.md).

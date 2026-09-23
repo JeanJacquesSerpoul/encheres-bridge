@@ -47,7 +47,9 @@ echo "Compilation de cli/bids.wasm (js/wasm, revision $revision)..."
 # La taille gzip est le chiffre utile : c'est ce que le serveur transmet
 # (voir gzipStatic dans main.go). Un bond au-delà de ~2 Mo signalerait qu'une
 # dépendance serveur a fui dans la cible, donc un //go:build mal posé.
-raw=$(stat -c%s "$root/cli/bids.wasm")
+# `wc -c` et non `stat -c%s` : cette option est propre à GNU, le stat de
+# macOS la refuse et, sous `set -e`, arrêtait le script après la compilation.
+raw=$(wc -c < "$root/cli/bids.wasm" | tr -d " ")
 gz=$(gzip -9 -c "$root/cli/bids.wasm" | wc -c)
 awk -v r="$raw" -v g="$gz" 'BEGIN { printf "  cli/bids.wasm (%.1f Mo, %.1f Mo gzip)\n", r / 1048576, g / 1048576 }'
-echo "  cli/wasm_exec.js ($(stat -c%s "$root/cli/wasm_exec.js") octets, repris de $goroot)"
+echo "  cli/wasm_exec.js ($(wc -c < "$root/cli/wasm_exec.js" | tr -d " ") octets, repris de $goroot)"

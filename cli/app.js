@@ -329,6 +329,8 @@ const UI_TEXT = {
     quizFinalContract: "Contrat final",
     quizShowDetail: "Afficher le détail complet",
     quizDealHidden: "Donne masquée.",
+    quizMode: "Mode questionnaire",
+    quizModeHint: "La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.",
     quizShowDeal: "Afficher la donne",
     quizCancel: "Annuler",
     quizReplay: "Rejouer cette donne",
@@ -457,6 +459,8 @@ const UI_TEXT = {
     quizFinalContract: "Final contract",
     quizShowDetail: "Show full detail",
     quizDealHidden: "Deal hidden.",
+    quizMode: "Quiz mode",
+    quizModeHint: "The deal stays hidden as soon as it is drawn or loaded: you bid without knowing it.",
     quizShowDeal: "Show the deal",
     quizCancel: "Cancel",
     quizReplay: "Replay this deal",
@@ -719,6 +723,7 @@ function loadPbn(text, fileName) {
   }
   dealFromFile = !!fileName;
   resetQuiz();
+  hideNewDealInQuizMode();
   hideResult();
   refreshDealSelector(true);
   setPbnOpen(false);
@@ -1109,6 +1114,7 @@ function normalizeVul(value) {
 $("#deal-select").addEventListener("change", () => {
   selectedGameIdx = +$("#deal-select").value;
   resetQuiz();
+  hideNewDealInQuizMode();
   hideResult();
   syncTagSelects();
   syncZonesFromPbn();
@@ -3502,8 +3508,35 @@ function resetQuiz() {
   cancelAutoReveal();
   quiz = null;
   $("#quiz-panel").classList.add("hidden");
-  setDealHidden(false);
+  // En mode questionnaire, la donne garde l'état où elle est : masquée tant
+  // qu'on ne l'a pas demandée, affichée si on l'a fait.
+  if (!quizMode()) setDealHidden(false);
 }
+
+// Mode questionnaire : chaque nouvelle donne arrive masquée, pour enchérir sur
+// une donne que l'on ne connaît pas. Mémorisé comme la langue.
+const QUIZ_MODE_KEY = "bids.quizMode";
+
+function quizMode() {
+  return $("#quiz-mode").checked;
+}
+
+// Une donne vient d'arriver (tirage, exemple, fichier, choix dans un fichier,
+// démarrage) : en mode questionnaire, elle se cache avant d'avoir été vue.
+// Déplacer une carte n'en est pas une : on ne re-masque pas une donne que
+// l'on est en train de composer.
+function hideNewDealInQuizMode() {
+  if (quizMode()) setDealHidden(true);
+}
+
+$("#quiz-mode").checked = readStored(QUIZ_MODE_KEY, "") === "1";
+$("#quiz-mode").addEventListener("change", () => {
+  saveStored(QUIZ_MODE_KEY, quizMode() ? "1" : "0");
+  // Activé : la donne affichée se cache aussitôt. Désactivé : elle revient,
+  // sauf pendant un questionnaire, qui la masque de toute façon.
+  if (quizMode()) setDealHidden(true);
+  else if (!quiz) setDealHidden(false);
+});
 
 // Le questionnaire cache les mains adverses : la donne composée au-dessus les
 // montrerait toutes, et son texte PBN aussi. Elles sont masquées pendant qu'on
@@ -3852,6 +3885,7 @@ refreshDealSelector(true);
 gatherMissingCards();
 renderBoundsCards();
 renderHelpIcons();
+hideNewDealInQuizMode();
 applyLang();
 setPbnOpen(false);
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le

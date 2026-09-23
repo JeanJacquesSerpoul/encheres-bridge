@@ -361,6 +361,17 @@
         <button id="quiz-btn" type="button" class="cmd-btn cmd-primary"></button>
         <span id="error" class="error"></span>
       </div>
+      <!-- Mode questionnaire : toute nouvelle donne arrive masquée, pour
+           s'entraîner sur une donne que l'on ne connaît pas. Mémorisé comme la
+           langue (voir QUIZ_MODE_KEY dans app.js). Une case à cocher, rendue
+           en interrupteur par style.css ; role="switch" le dit aux lecteurs
+           d'écran. -->
+      <label class="switch" id="quiz-mode-label">
+        <input type="checkbox" id="quiz-mode" role="switch">
+        <span class="switch-track" aria-hidden="true"></span>
+        <span data-i18n="quizMode">Mode questionnaire</span>
+      </label>
+      <p class="quiz-mode-hint" data-i18n="quizModeHint">La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.</p>
     </section>
 
     <section class="panel hidden" id="quiz-panel">
@@ -583,6 +594,7 @@
         <ul class="help-icons">
           <li><span data-help-icon="quiz"></span><span>Choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>.</span></li>
         </ul>
+        <p>Activez le <b>Mode questionnaire</b> pour vous entraîner sur des donnes inconnues : chaque nouvelle donne (tirée, exemple ou chargée) reste masquée. Le réglage est retenu d'une visite à l'autre.</p>
         <ul>
           <li>Seule votre main est visible : la donne composée au-dessus est masquée, et le reste une fois le questionnaire terminé : le lien <b>Afficher la donne</b> la montre. Les enchères des autres joueurs s'affichent d'elles-mêmes.</li>
           <li>À votre tour, la <b>boîte à enchères</b> ne propose que les enchères permises. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication.</li>
@@ -647,6 +659,7 @@
         <ul class="help-icons">
           <li><span data-help-icon="quiz"></span><span>Pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>.</span></li>
         </ul>
+        <p>Turn on <b>Quiz mode</b> to practise on unknown deals: every new deal (random, example or loaded) stays hidden. The setting is remembered between visits.</p>
         <ul>
           <li>Only your hand is shown: the deal built above is hidden, and stays hidden once the quiz is over: the <b>Show the deal</b> link shows it. The other players' calls appear on their own.</li>
           <li>On your turn, the <b>bidding box</b> only offers legal calls. You see at once whether yours matches the SEF, and if not, the expected call and why.</li>

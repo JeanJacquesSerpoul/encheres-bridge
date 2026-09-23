@@ -170,23 +170,20 @@ func warmGzipCache(root fs.FS) {
 		"duration_ms", time.Since(start).Milliseconds())
 }
 
-// cacheControl decides how long a browser may reuse an asset without asking.
+// cacheControl tells the browser to revalidate every asset on each load.
 //
-// The file names carry no content hash, so a long max-age would leave a
-// client running yesterday's app.js against today's server. index.html is
-// therefore always revalidated — it is small, and a 304 costs a single round
-// trip — while the bulky assets it pulls in get a short window: long enough
-// that a browsing session stops re-checking every file on each navigation,
-// short enough that a deploy reaches everyone within minutes.
+// The file names carry no content hash, so any freshness window leaves a
+// client running yesterday's app.js against today's server: with the former
+// five-minute max-age, rebuilding through run.ps1 and reloading the page
+// still showed the previous client. Revalidation is cheap — every cli/ asset
+// goes through gzipStatic, which tags it with an ETag, so an unchanged file
+// costs a single 304 round trip, bids.wasm included.
 //
-// Without this, the assets had no freshness information at all: embed.FS
-// reports a zero modification time, so there was no Last-Modified either, and
-// the browser revalidated all of them on every single page load.
-func cacheControl(name string) string {
-	if name == "" || path.Ext(name) == ".html" {
-		return "no-cache"
-	}
-	return "public, max-age=300"
+// Without any header, the assets had no freshness information at all:
+// embed.FS reports a zero modification time, so there was no Last-Modified
+// either.
+func cacheControl(string) string {
+	return "no-cache"
 }
 
 // gzipStatic serves the bulky cli/ assets compressed, which http.FileServer

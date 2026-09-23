@@ -4,16 +4,16 @@
 FROM golang:1.26-alpine AS build
 WORKDIR /src
 ARG REVISION=docker
-COPY go.mod ./
-COPY *.go ./
+COPY go.mod cli.go ./
+COPY engine ./engine
 COPY cli ./cli
 # Le moteur en WebAssembly d'abord : //go:embed all:cli le fige dans le binaire
 # à l'étape suivante, l'ordre n'est donc pas négociable. build-wasm.sh n'est pas
 # utilisable ici (.dockerignore exclut *.sh), d'où les deux commandes en clair.
 RUN cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" ./cli/wasm_exec.js \
  && GOOS=js GOARCH=wasm CGO_ENABLED=0 go build -trimpath \
-      -ldflags="-s -w -X main.buildRevision=${REVISION}" -o ./cli/bids.wasm .
-RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w -X main.buildRevision=${REVISION}" -o /out/bids .
+      -ldflags="-s -w -X main.buildRevision=${REVISION}" -o ./cli/bids.wasm ./engine
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w -X main.buildRevision=${REVISION}" -o /out/bids ./engine
 
 # ---- runtime ----
 # The cli/ test client is compiled into the binary via //go:embed, so the

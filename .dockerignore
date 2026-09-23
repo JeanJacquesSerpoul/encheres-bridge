@@ -1,11 +1,11 @@
 bids.exe
 bids
-testdata/
+engine/testdata/
 docs/
 *.md
 .git/
 .claude/
-*_test.go
+**/*_test.go
 *.sh
 *.ps1
 server/

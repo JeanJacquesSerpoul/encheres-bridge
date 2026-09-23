@@ -109,7 +109,7 @@ echo "Compilation de $(basename "$bin") (revision $revision)..."
 (
     cd "$root"
     CGO_ENABLED=0 go build -trimpath \
-        -ldflags="-s -w -X main.buildRevision=$revision" -o "$bin" .
+        -ldflags="-s -w -X main.buildRevision=$revision" -o "$bin" ./engine
 )
 
 # Le serveur garde le premier plan : Ctrl+C lui parvient directement et il

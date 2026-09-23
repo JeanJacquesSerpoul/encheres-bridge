@@ -71,7 +71,7 @@ Write-Host "Compilation de bids.exe (revision $revision)..."
 Push-Location $root
 try {
     $env:CGO_ENABLED = "0"
-    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o $bin .
+    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o $bin ./engine
     if ($LASTEXITCODE -ne 0) { throw "go build a échoué (code $LASTEXITCODE)" }
 }
 finally {

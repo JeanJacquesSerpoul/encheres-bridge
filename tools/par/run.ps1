@@ -27,7 +27,7 @@ if (-not $?) { $env:PAR_AUDIT_ENGINE = "" }
 Write-Host "1/2  $Deals donnes, graine $Seed : enchères du moteur"
 Push-Location $root
 try {
-    go test -run TestParAuditDump -count=1 . | Out-Null
+    go test -run TestParAuditDump -count=1 ./engine | Out-Null
     if ($LASTEXITCODE -ne 0) { throw "go test a échoué (code $LASTEXITCODE)" }
 } finally {
     Pop-Location

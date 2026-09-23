@@ -4,7 +4,7 @@ const $ = (sel) => document.querySelector(sel);
 
 // ---------- configuration ----------
 
-// Serveur local (go run . / docker run, voir server_bids/README.md) et serveur
+// Serveur local (go run ./engine / docker run, voir server_bids/README.md) et serveur
 // de production (proxifié par Caddy sous /api/bidings, voir front/app/src/api.js).
 //
 // Le serveur local écoute par défaut sur le port 9015 ; un PORT=9415... ou un

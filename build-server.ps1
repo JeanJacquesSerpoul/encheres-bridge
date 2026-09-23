@@ -73,7 +73,7 @@ try {
     foreach ($b in $builds) {
         $env:GOOS = $b.GOOS
         Write-Host "Compilation de server\$($b.Name) ($($b.GOOS)/$Arch, revision $revision)..."
-        go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o (Join-Path $out $b.Name) .
+        go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o (Join-Path $out $b.Name) ./engine
         if ($LASTEXITCODE -ne 0) { throw "go build a échoué pour $($b.GOOS) (code $LASTEXITCODE)" }
         $bin = Get-Item (Join-Path $out $b.Name)
         Write-Host ("  server\{0} ({1:N1} Mo)" -f $bin.Name, ($bin.Length / 1MB))
@@ -92,5 +92,4 @@ Write-Host "  1. lancer l'exécutable de votre système (server\bids-windows.exe
 Write-Host "     server/bids-linux) — il écoute sur le port 9015 ;"
 Write-Host "  2. http://localhost:9015/ dans un navigateur."
 Write-Host "Le client calcule les enchères dans le navigateur (cli\bids.wasm) dès la"
-Write-Host "première visite ; le sélecteur de l'en-tête permet de viser le serveur à la"
-Write-Host "place. Rien à configurer dans les deux cas."
+Write-Host "première visite, comme sur une copie statique de cli/. Rien à configurer."

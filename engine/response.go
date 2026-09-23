@@ -1,10 +1,7 @@
-// Everything both builds of the engine share: the JSON shapes the API answers
-// with, the build stamp, and the one encoder they both go through. main.go
-// carries the HTTP server and is compiled out of the WebAssembly build, so
-// anything it and main_js.go both need lives here rather than in either of
-// them.
+// The JSON the engine answers with (see api.go), the build stamp, and the one
+// encoder every response goes through.
 
-package main
+package engine
 
 import (
 	"bytes"
@@ -13,17 +10,15 @@ import (
 	"runtime/debug"
 )
 
-// buildRevision identifies the running binary; override at build time with
-// -ldflags "-X main.buildRevision=<sha>". The build-server and build-docker
-// scripts both pass `git rev-parse --short HEAD` — the latter through the
-// Dockerfile's REVISION build arg, which defaults to "docker" when the image
-// is built by hand. Left alone, it falls back to the VCS stamp the Go
-// toolchain embeds, so an ordinary `go build` still reports the commit it was
-// built from; only `go run`, which does not stamp, falls through to "dev".
+// buildRevision identifies the engine build; override at build time with
+// -ldflags "-X bids/engine.buildRevision=<sha>", as build-wasm.sh does with
+// `git rev-parse --short HEAD`. Left alone, it falls back to the VCS stamp the
+// Go toolchain embeds, so an ordinary build still reports the commit it was
+// built from; only `go run` and tests, which do not stamp, fall through to
+// "dev".
 var buildRevision = ""
 
-// buildInfo is the version the /version endpoint serves, resolved once at
-// startup.
+// buildInfo is the version VersionJSON reports, resolved once at startup.
 var buildInfo = resolveBuildInfo()
 
 type versionInfo struct {
@@ -169,10 +164,8 @@ func finalContract(calls []SeatCall) (Call, int, bool) {
 	return contract, contractSeat, doubled
 }
 
-// referencePBN is a fixed, known-good deal used by the /ready endpoint and by
-// the WebAssembly module's self-check to exercise the full parse-and-bid path
-// without depending on testdata/ being present alongside the binary in
-// production.
+// referencePBN is a fixed, known-good deal used by SelfCheck to exercise the
+// full parse-and-bid path without depending on testdata/.
 const referencePBN = `[Dealer "N"]
 [Deal "N:AKQ.KJ4.AQ54.J32 J9.AT63.K762.Q98 8762.Q987.93.A76 T543.52.JT8.KT54"]`
 

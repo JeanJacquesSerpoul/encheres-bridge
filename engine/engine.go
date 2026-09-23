@@ -1,4 +1,4 @@
-package main
+package engine
 
 // plannedFn is a deferred decision evaluated when the player's turn comes back.
 type plannedFn func() (Call, meaning)

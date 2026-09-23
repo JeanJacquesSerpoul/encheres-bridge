@@ -1,9 +1,8 @@
 ﻿# build-wasm.ps1 — compile le moteur d'enchères en WebAssembly dans cli\.
-# Produit cli\bids.wasm (le moteur, tagué js && wasm dans main_js.go) et
+# Produit cli\bids.wasm (le moteur engine\, par son point d'entrée wasm\) et
 # cli\wasm_exec.js (la glue de la distribution Go, copiée telle quelle). Les
-# deux sont ignorés par git et embarqués dans le binaire du serveur par
-# //go:embed all:cli : ce script doit donc tourner AVANT build-server.ps1 et
-# build-docker.ps1, qui s'en chargent eux-mêmes.
+# deux sont versionnés ; le workflow wasm.yml les recompile sur main à chaque
+# modification des sources Go.
 #
 # Usage : .\build-wasm.ps1
 param()
@@ -42,13 +41,13 @@ try {
 
     # Aucun test ne compile le fichier tagué « js && wasm » : ce vet est le seul
     # garde-fou contre une faute de frappe dans main_js.go.
-    go vet ./engine
+    go vet ./wasm ./engine
     if ($LASTEXITCODE -ne 0) { throw "go vet a échoué pour js/wasm (code $LASTEXITCODE)" }
 
     Copy-Item $execJs (Join-Path $root "cli\wasm_exec.js") -Force
 
     Write-Host "Compilation de cli\bids.wasm (js/wasm, revision $revision)..."
-    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o (Join-Path $root "cli\bids.wasm") ./engine
+    go build -trimpath -ldflags="-s -w -X bids/engine.buildRevision=$revision" -o (Join-Path $root "cli\bids.wasm") ./wasm
     if ($LASTEXITCODE -ne 0) { throw "go build a échoué pour js/wasm (code $LASTEXITCODE)" }
 }
 finally {
@@ -58,9 +57,9 @@ finally {
     $env:CGO_ENABLED = $old.CGO_ENABLED
 }
 
-# La taille gzip est le chiffre utile : c'est ce que le serveur transmet (voir
-# gzipStatic dans engine/main.go). Un bond au-delà de ~2 Mo signalerait qu'une
-# dépendance serveur a fui dans la cible, donc un //go:build mal posé.
+# La taille gzip est le chiffre utile : c'est ce que l'hébergeur transmet. Un
+# bond au-delà de ~2 Mo signalerait qu'une dépendance lourde (net/http...) a
+# fui dans le moteur.
 $wasm = Get-Item (Join-Path $root "cli\bids.wasm")
 $buffer = New-Object System.IO.MemoryStream
 # leaveOpen = $true : sans lui, Dispose fermerait aussi le MemoryStream et

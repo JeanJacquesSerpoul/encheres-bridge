@@ -126,27 +126,10 @@
   <header>
     <div class="header-inner">
       <h1>♠ Bridge Bidding</h1>
-      <!-- Les deux serveurs interrogés, l'un sous l'autre : celui des enchères
-           (obligatoire) et celui de l'IA (reconnaissance des cartes par photo,
-           facultatif). Chacun garde son mode et son URL. -->
+      <!-- Le serveur IA (reconnaissance des cartes par photo, facultatif) : le
+           seul qui se choisit encore, les enchères étant calculées dans la
+           page. Masqué tant que l'option du pied de page est décochée. -->
       <div class="server-bars">
-        <!-- Masquée quand le moteur tourne dans la page : il n'y a alors
-             aucun serveur à choisir. « ?serveur=1 » dans l'URL la rappelle
-             (voir syncServerField dans app.js). -->
-        <div class="server-bar" id="bids-server-bar">
-          <label for="server-mode" data-i18n="server">Serveur</label>
-          <select id="server-mode">
-            <option value="local" data-i18n="serverLocal">Local</option>
-            <option value="remote" data-i18n="serverRemote">Distant (production)</option>
-            <!-- Les enchères calculées sur place par bids.wasm, le moteur Go
-                 compilé en WebAssembly : aucun serveur n'est interrogé. Voir
-                 bids-wasm.js : sans le module, l'option reste offerte et
-                 dit ce qu'il manque. -->
-            <option value="wasm" selected data-i18n="serverWasm">Navigateur (hors ligne)</option>
-          </select>
-          <input id="server" type="text" spellcheck="false">
-          <span id="server-hint" class="server-hint hidden"></span>
-        </div>
         <div class="server-bar" id="ia-server-bar">
           <label for="ia-mode" data-i18n="serverIa">Serveur IA</label>
           <select id="ia-mode">
@@ -476,12 +459,9 @@
   <footer class="app-version">
     <span class="server-line">
       <span class="server-check">
-        <!-- Masqué en mode navigateur par renderHealth : le moteur tourne dans
-             la page, il n'y a aucun serveur à tester. -->
-        <button id="health-btn" type="button" data-i18n="serverTest">Tester</button>
-        <!-- Pastille d'état : couleur et infobulle posées par renderHealth. Elle
-             touche le nom du moteur qui la suit — c'est lui qu'elle qualifie,
-             et non le bouton qui la précède. -->
+        <!-- Pastille d'état du moteur : couleur et infobulle posées par
+             renderHealth. Elle touche le nom du moteur qui la suit : c'est lui
+             qu'elle qualifie. -->
         <span id="health-dot" class="dot"></span>
         <!-- Le libellé de l'état — « en ligne », « hors ligne » — n'est plus
              affiché : la pastille le dit en couleur et son infobulle en mots,
@@ -492,6 +472,9 @@
       </span>
       <span id="app-version"></span>
     </span>
+    <!-- Pourquoi le moteur ne s'est pas chargé, le cas échéant (voir
+         checkHealth) : masqué tant qu'il est vide (voir style.css). -->
+    <span id="engine-error" class="error" role="alert"></span>
     <!-- État du serveur IA, sous celui des enchères : c'est lui qui autorise
          les boutons photo (voir renderIaHealth). Masqué tant que l'option
          générale « Serveur IA de reconnaissance des cartes » est décochée. -->

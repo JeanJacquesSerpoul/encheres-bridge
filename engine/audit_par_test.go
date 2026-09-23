@@ -1,4 +1,4 @@
-package main
+package engine
 
 // Dump half of the par audit (see tools/par/): a batch of seeded random
 // boards, each with the auction the engine produces and the contract it

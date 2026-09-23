@@ -603,6 +603,25 @@ button:disabled { opacity: .6; cursor: wait; }
    entraînement où l'on répond à la place d'un siège. Titre centré, comme
    celui de la donne. */
 .quiz-launch h2 { text-align: center; }
+/* Pendant le questionnaire, la rangée de lancement laisse la place au
+   déroulement, sous le même titre. */
+.quiz-launch.quiz-running .quiz-launch-controls { display: none; }
+
+/* Récapitulatif des erreurs, en fin de questionnaire. */
+.quiz-recap {
+  max-width: 560px;
+  margin: 12px auto;
+  text-align: left;
+}
+.quiz-recap h3 { margin: 0 0 6px; font-size: .95rem; text-align: center; }
+.quiz-recap ol { margin: 0; padding-left: 1.4em; }
+.quiz-recap li { margin: 6px 0; }
+.quiz-recap .recap-bids { margin-right: 8px; white-space: nowrap; }
+.quiz-recap .muted { font-size: .9rem; }
+.quiz-recap-none { margin: 10px 0; color: var(--accent); }
+
+/* Retour vers la donne, en tête du Résultat. */
+.back-to-deal { margin: -6px 0 10px; text-align: center; font-size: .9rem; }
 .quiz-launch-row {
   display: flex;
   /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende
@@ -862,7 +881,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    5,44, là où l'encre héritée du bandeau retomberait à 2,72. */
 .cons-chip.off { background: var(--red-bg); color: var(--on-accent); }
 
-.cons-bounds {
+/* Repliées par défaut : visibles quand le bouton des bornes les ouvre. */
+.cons-bounds { display: none; }
+.constraints.show-bounds .cons-bounds {
   display: flex;
   align-items: center;
   gap: 6px;

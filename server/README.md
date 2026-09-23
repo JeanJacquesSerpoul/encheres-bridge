@@ -29,8 +29,8 @@ moteur d'enchères en WebAssembly compris.
 
 Les deux scripts commencent par appeler [build-wasm.sh](../build-wasm.sh) /
 [build-wasm.ps1](../build-wasm.ps1), qui compilent le moteur d'enchères en
-WebAssembly dans `cli/` (`bids.wasm` et `wasm_exec.js`, non versionnés eux
-aussi). L'ordre n'est pas négociable : `//go:embed` fige le contenu de `cli/`
+WebAssembly dans `cli/` (`bids.wasm` et `wasm_exec.js`, versionnés et tenus
+à jour sur `main` par le workflow wasm.yml). L'ordre n'est pas négociable : `//go:embed` fige le contenu de `cli/`
 au moment où le serveur est compilé, le moteur doit donc exister avant. Sans
 lui, le binaire servirait un client incapable de calculer les enchères tout
 seul — d'où le refus de compiler quand il manque.

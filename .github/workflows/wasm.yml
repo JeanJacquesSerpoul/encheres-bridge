@@ -1,0 +1,61 @@
+# Tient à jour le moteur WebAssembly versionné dans cli/.
+#
+# cli/bids.wasm et cli/wasm_exec.js sont dans le dépôt pour qu'une simple copie
+# de cli/ depuis GitHub suffise à faire tourner l'application. Ils sont compilés
+# depuis les sources Go de la racine : dès que celles-ci changent sur main, ce
+# workflow les recompile et commite le résultat s'il diffère.
+#
+# Le commit est poussé avec le GITHUB_TOKEN, qui ne déclenche aucun autre
+# workflow : pas de boucle, et pages.yml ne republie pas pour autant (il
+# recompile de toute façon le moteur de son côté).
+name: Moteur WebAssembly de cli/
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.go"
+      - go.mod
+      - build-wasm.sh
+      - .github/workflows/wasm.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Deux fusions rapprochées : seule la dernière compte, la précédente
+# pousserait un moteur déjà dépassé.
+concurrency:
+  group: wasm
+  cancel-in-progress: true
+
+jobs:
+  wasm:
+    name: Recompiler et commiter cli/bids.wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      # Un moteur dont les tests échouent ne doit pas remplacer celui du dépôt.
+      - name: Tests du moteur
+        run: go test ./...
+
+      - name: Compiler le moteur en WebAssembly
+        run: ./build-wasm.sh
+
+      - name: Commiter le moteur s'il a changé
+        run: |
+          if git diff --quiet -- cli/bids.wasm cli/wasm_exec.js; then
+            echo "Moteur inchangé."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cli/bids.wasm cli/wasm_exec.js
+          git commit -m "Mettre à jour le moteur WebAssembly de cli/ ($(git rev-parse --short HEAD))"
+          git push

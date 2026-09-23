@@ -128,6 +128,15 @@ func (e *Engine) conclude(p *playerState) (Call, meaning) {
 	return e.concludeFrom(p, nil)
 }
 
+// concludeHandoff hands a decision to conclude with the trace kept: the tests
+// already recorded are the route that led here, and conclude's own decision
+// follows them.
+func (e *Engine) concludeHandoff(p *playerState) (Call, meaning) {
+	e.tr.note("→ décision de la suite de l'enchère", "→ later-auction decision")
+	e.tr.in()
+	return e.concludeFrom(p, e.tr)
+}
+
 // concludeFrom is conclude with its own decision trace: decide passes the
 // engine's tracer when conclude is the decision itself. Reached from another
 // decision (a response that lets the fit be valued directly...), conclude

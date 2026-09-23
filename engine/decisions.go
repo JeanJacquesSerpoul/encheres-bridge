@@ -409,6 +409,8 @@ func (e *Engine) respond(p *playerState) (Call, meaning) {
 	case oc == bid(2, SNoTrump):
 		return e.respondNT(p, 2, 20)
 	case oc == bid(2, SClubs):
+		e.tr.check(true, "ouverture 2♣ forte du partenaire → relais 2♦ obligatoire, quelle que soit la main",
+			"partner's strong 2♣ opening → forced 2♦ relay, whatever the hand", "")
 		p.planned = func() (Call, meaning) { return e.respondAfter2C(p) }
 		mn := m(0, 40, "2K relais obligatoire", "2D, forced relay").asForcing()
 		mn.relay = true
@@ -433,13 +435,18 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 	hl := h.HL()
 	sup := h.Len(M)
 	hld := h.HLD(M)
+	tr := e.tr
+	sym := suitSymbol[M]
 
 	// A four-card spade suit over 1H takes priority only without a genuine
 	// fit: three-card support is already enough for the sup >= 3 block below
 	// to value properly (new suit before support when strong, 13HLD and up;
 	// a direct raise otherwise) -- there is no reason to delay a known fit
 	// by detouring through spades first.
-	if M == Hearts && h.Len(Spades) >= 4 && hl >= 6 && sup < 3 {
+	if M == Hearts && tr.check(h.Len(Spades) >= 4 && hl >= 6 && sup < 3,
+		"sur 1♥ : 4 ♠ et 6 HL, sans fit à 3 cartes → 1♠ [RM-1]",
+		"over 1♥: 4 ♠ and 6 HL, no three-card fit → 1♠ [RM-1]",
+		cards(h, Spades)+", "+cards(h, Hearts)+", "+pts(hl, "HL")) {
 		return bid(1, SSpades), m(6, 40, "changement de couleur 1 sur 1, 4 cartes et plus, forcing", "one-over-one response, 4+ cards, forcing").withLen(Spades, 4).asForcing()
 	}
 	// Rencontre after a prior pass (docs/addon_6.md, section V): having
@@ -447,14 +454,23 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 	// suit rather than its usual unlimited meaning. There is no rencontre in
 	// a direct (non-passed) response to a one-major opening.
 	if sup >= 4 && e.passedBeforeOpening(p.seat) {
+		tr.check(true, "main déjà passée avec 4 atouts → enchère de rencontre envisagée [RM-2]",
+			"passed hand with four trumps → meeting bid considered [RM-2]", cards(h, M))
+		tr.in()
 		for _, cand := range []Suit{Clubs, Diamonds, Hearts, Spades} {
 			if cand == M {
 				continue
 			}
 			if c, mn, ok := e.tryRencontre(p, M, cand, 4, 1); ok {
+				tr.check(true, "belle cinquième à "+suitSymbol[cand]+", 8-11 H → rencontre",
+					"good five cards in "+suitSymbol[cand]+", 8-11 H → meeting bid", cards(h, cand))
+				tr.out()
 				return c, mn
 			}
 		}
+		tr.check(false, "aucune couleur de rencontre (belle cinquième, 8-11 H)",
+			"no meeting suit (good five cards, 8-11 H)", pts(h.H(), "H"))
+		tr.out()
 	}
 	// Drury [RM-2b]: having passed, the hand facing a third- or
 	// fourth-seat major opening cannot know whether that opening holds real
@@ -463,13 +479,24 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 	// says the same with four trumps and a singleton. The rencontre above
 	// keeps its priority: it shows the fit *and* a source of tricks in one
 	// bid, which the artificial ask cannot.
-	if c, mn, ok := e.druryAsk(p, M); ok {
-		return c, mn
+	if e.passedBeforeOpening(p.seat) {
+		if c, mn, ok := e.druryAsk(p, M); tr.check(ok,
+			"main déjà passée, fit et 11 HLD et plus → Drury [RM-2b]",
+			"passed hand, fit and 11+ HLD → Drury [RM-2b]", cards(h, M)+", "+pts(hld, "HLD")) {
+			return c, mn
+		}
 	}
 	// Splinter: 4+ trumps, a singleton or void elsewhere, no good 5-card side
 	// suit, 13-15 HLD (docs/addon_5.md).
-	if sup >= 4 && hld >= 13 && hld <= 15 {
-		if short, ok := splinterSuit(h, M); ok {
+	if tr.check(sup >= 4 && hld >= 13 && hld <= 15,
+		"4 atouts et 13-15 HLD → splinter envisagé [RM-3]",
+		"four trumps and 13-15 HLD → splinter considered [RM-3]", cards(h, M)+", "+pts(hld, "HLD")) {
+		tr.in()
+		short, ok := splinterSuit(h, M)
+		tr.check(ok, "singleton ou chicane, sans belle cinquième à côté → splinter",
+			"singleton or void, no good side five-card suit → splinter", shape(h))
+		tr.out()
+		if ok {
 			c := bid(e.cheapestCall(short.Strain()).Level+2, short.Strain())
 			if e.legal(p.seat, c) {
 				kind := "singleton"
@@ -486,9 +513,15 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			}
 		}
 	}
-	if sup >= 3 {
+	if tr.check(sup >= 3,
+		"3 atouts ou plus : fit "+sym+" [RM-4]",
+		"three or more trumps: "+sym+" fit [RM-4]", cards(h, M)) {
+		tr.in()
+		defer tr.out()
 		switch {
-		case hld >= 13:
+		case tr.check(hld >= 13,
+			"13 HLD et plus → nouvelle couleur avant de soutenir",
+			"13+ HLD → new suit before supporting", pts(hld, "HLD")):
 			if s, lvl, ok := p.bestNewSuit(M); ok {
 				p.planned = nil
 				// bestNewSuit may fall back on a three-card minor: record only
@@ -499,22 +532,37 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			// Every side suit is too short to name honestly (a hand built
 			// around long trumps): let the generic engine value the fit
 			// directly -- invitation, game or slam try on the combined count.
+			tr.note("aucune couleur annexe à nommer : le fit est évalué directement (manche ou chelem)",
+				"no side suit worth naming: the fit is valued directly (game or slam)")
 			if c, mn := e.conclude(p); c.Kind != KindPass {
 				return c, mn
 			}
 			return bidSuit(3, M), m(11, 12, "soutien à saut", "jump raise").withLen(M, min(4, sup)).asInvite()
-		case hld >= 11 && sup == 3:
+		case tr.check(hld >= 11 && sup == 3,
+			"11-12 HLD avec 3 atouts → 2SA fitté",
+			"11-12 HLD with three trumps → conventional 2NT", pts(hld, "HLD")):
 			mn := m(11, 12, "2SA fitté : 3 atouts, 11-12HLD, proposition de manche", "conventional 2NT: 3-card support, 11-12 HLD, game try").withLen(M, 3).asForcing()
 			return bid(2, SNoTrump), mn
-		case hld >= 11:
+		case tr.check(hld >= 11,
+			"11-12 HLD avec 4 atouts → soutien à saut",
+			"11-12 HLD with four trumps → jump raise", pts(hld, "HLD")):
 			return bidSuit(3, M), m(11, 12, "soutien à saut, 4 atouts, 11-12HLD", "jump raise, 4 trumps, 11-12 HLD").withLen(M, 4).asInvite()
-		case hld >= 6:
+		case tr.check(hld >= 6,
+			"6-10 HLD → soutien simple",
+			"6-10 HLD → single raise", pts(hld, "HLD")):
 			return bidSuit(2, M), m(6, 10, "soutien simple, 6-10HLD", "single raise, 6-10 HLD").withLen(M, 3)
 		}
+		tr.note("moins de 6 HLD → Passe", "fewer than 6 HLD → Pass")
 		return passCall, m(0, 5, "moins de 6 points", "fewer than 6 points")
 	}
-	if hl >= 11 {
-		if s, lvl, ok := p.bestNewSuit(M); ok {
+	if tr.check(hl >= 11,
+		"sans fit, 11 HL et plus → changement de couleur à 2 [RM-5]",
+		"no fit, 11+ HL → two-level new suit [RM-5]", pts(hl, "HL")) {
+		s, lvl, ok := p.bestNewSuit(M)
+		tr.in()
+		tr.check(ok, "une couleur à nommer au palier de 2", "a suit to name at the two level", shape(h))
+		tr.out()
+		if ok {
 			// A hand that has already passed cannot commit the side to game:
 			// its own pass caps it at 11 [E-1b], and the opening it faces is
 			// a third- or fourth-seat one that may itself be light [O-7b].
@@ -523,7 +571,9 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			// play, and the opening -- which knows whether it was light --
 			// is free to pass it there. Drury [RM-2b] is the one question a
 			// passed hand still gets to ask, and it asks it with a fit.
-			if p.passedOpening {
+			if tr.check(p.passedOpening,
+				"main déjà passée : le 2 sur 1 n'est pas forcing [RM-1b]",
+				"passed hand: the two-over-one is not forcing [RM-1b]", "") {
 				mn := m(11, 11, "changement de couleur 2 sur 1, main déjà passée : non forcing", "two-over-one by a passed hand: not forcing")
 				return bidSuit(lvl, s), mn.withLen(s, min(4, h.Len(s)))
 			}
@@ -533,9 +583,12 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			return bidSuit(lvl, s), m(11, 40, "changement de couleur 2 sur 1, 11HL et plus, forcing de manche", "two-over-one response, 11+ HL, game forcing").withLen(s, min(4, h.Len(s))).asForcing()
 		}
 	}
-	if hl >= 6 {
+	if tr.check(hl >= 6,
+		"sans fit, 6-10 HL → 1SA [RM-6]",
+		"no fit, 6-10 HL → 1NT [RM-6]", pts(hl, "HL")) {
 		return bid(1, SNoTrump), m(6, 10, "1SA \"poubelle\", 6-10HL sans fit", "1NT response, 6-10 HL, no fit")
 	}
+	tr.note("moins de 6 HL → Passe", "fewer than 6 HL → Pass")
 	return passCall, m(0, 5, "moins de 6 points", "fewer than 6 points")
 }
 
@@ -831,12 +884,16 @@ func (e *Engine) druryShortAnswer(p *playerState, os Suit) (Call, meaning) {
 func (e *Engine) respondMinor(p *playerState, ms Suit) (Call, meaning) {
 	h := p.hand
 	hl := h.HL()
-	if hl < 6 {
+	tr := e.tr
+	if tr.check(hl < 6, "moins de 6 HL → Passe", "fewer than 6 HL → Pass", pts(hl, "HL")) {
 		return passCall, m(0, 5, "moins de 6 points", "fewer than 6 points")
 	}
 	// Majors first ("balayer les couleurs quatrièmes").
 	lh, ls := h.Len(Hearts), h.Len(Spades)
-	if lh >= 4 || ls >= 4 {
+	if tr.check(lh >= 4 || ls >= 4,
+		"une majeure quatrième → 1 à la majeure (la plus longue, ♥ à 4-4)",
+		"a four-card major → one of the major (the longer, ♥ with 4-4)",
+		cards(h, Hearts)+", "+cards(h, Spades)) {
 		var s Suit
 		switch {
 		case lh >= 5 || ls >= 5:
@@ -858,21 +915,30 @@ func (e *Engine) respondMinor(p *playerState, ms Suit) (Call, meaning) {
 	if ms == Diamonds {
 		other = Clubs
 	}
-	if c, mn, ok := e.rencontreCall(p, ms, other, 4, 1); ok {
+	if c, mn, ok := e.rencontreCall(p, ms, other, 4, 1); tr.check(ok,
+		"4 atouts et belle cinquième dans l'autre mineure, 8-11 H → rencontre",
+		"four trumps and a good five cards in the other minor, 8-11 H → meeting bid",
+		cards(h, ms)+", "+cards(h, other)) {
 		return c, mn
 	}
-	if ms == Clubs && h.Len(Diamonds) >= 4 {
+	if ms == Clubs && tr.check(h.Len(Diamonds) >= 4,
+		"sur 1♣ : 4 ♦ et plus → 1♦", "over 1♣: 4+ ♦ → 1♦", cards(h, Diamonds)) {
 		return bid(1, SDiamonds), m(6, 40, "réponse de 1K, 4 cartes et plus, forcing", "1D response, 4+ cards, forcing").withLen(Diamonds, 4).asForcing()
 	}
-	if h.IsRegular() {
+	if tr.check(h.IsRegular(), "main régulière → réponse à Sans-Atout selon la force",
+		"balanced hand → notrump response by strength", shape(h)) {
+		tr.in()
 		switch {
-		case hl <= 10:
+		case tr.check(hl <= 10, "6-10 HL → 1SA", "6-10 HL → 1NT", pts(hl, "HL")):
 			return bid(1, SNoTrump), m(6, 10, "1SA, 6-10HL régulier sans majeure", "1NT, 6-10 HL, balanced, no four-card major")
-		case hl <= 12:
+		case tr.check(hl <= 12, "11-12 HL → 2SA", "11-12 HL → 2NT", pts(hl, "HL")):
 			return bid(2, SNoTrump), m(11, 12, "2SA, 11-12HL régulier", "2NT, 11-12 HL, balanced").asInvite()
-		case hl <= 15:
+		case tr.check(hl <= 15, "13-15 HL → 3SA", "13-15 HL → 3NT", pts(hl, "HL")):
 			return bid(3, SNoTrump), m(13, 15, "3SA, 13-15HL régulier", "3NT, 13-15 HL, balanced")
 		}
+		// Au-delà de 15 HL, la main régulière poursuit plus bas : les tests
+		// suivants ne sont plus des sous-cas de celui-ci.
+		tr.out()
 	}
 	hld := h.HLD(ms)
 	sup := h.Len(ms)
@@ -880,11 +946,15 @@ func (e *Engine) respondMinor(p *playerState, ms Suit) (Call, meaning) {
 	if ms == Diamonds {
 		minSup = 4
 	}
-	if hl >= 13 {
+	if tr.check(hl >= 13, "13 HL et plus → main de manche", "13+ HL → game-going hand", pts(hl, "HL")) {
+		tr.in()
 		// A forcing change of suit needs a genuine suit: opener supports it
 		// with four trumps, so naming a 2-3 card holding can strand the side
 		// in a 4-2 "fit". (Over 1C, four diamonds were already bid above.)
-		if h.Len(other) >= 4 {
+		if tr.check(h.Len(other) >= 4,
+			"4 cartes dans l'autre mineure → changement de couleur forcing",
+			"four cards in the other minor → forcing new suit", cards(h, other)) {
+			tr.out()
 			lvl := 1
 			if other.Strain() <= ms.Strain() {
 				lvl = 2
@@ -901,29 +971,39 @@ func (e *Engine) respondMinor(p *playerState, ms Suit) (Call, meaning) {
 					break
 				}
 			}
-			if stopped {
+			if tr.check(stopped, "13-18 HL, toutes les couleurs gardées → 3SA",
+				"13-18 HL, every suit stopped → 3NT", pts(hl, "HL")) {
+				tr.out()
 				return bid(3, SNoTrump), m(13, 18, "3SA, 13-18HL, sans majeure ni couleur annonçable", "3NT, 13-18 HL, no major and no biddable suit")
 			}
 		}
 		// Otherwise let the generic engine place the contract from the
 		// combined count (fit raise, notrump game or slam try).
+		tr.note("le contrat se cherche sur la force combinée (fit, Sans-Atout ou chelem)",
+			"the contract is sought on the combined strength (fit, notrump or slam)")
+		tr.out()
 		if c, mn := e.conclude(p); c.Kind != KindPass {
 			return c, mn
 		}
 	}
-	if sup >= minSup {
-		if hld >= 11 {
+	if tr.check(sup >= minSup,
+		fmt.Sprintf("%d atouts ou plus dans la mineure → soutien", minSup),
+		fmt.Sprintf("%d+ trumps in the minor → raise", minSup), cards(h, ms)) {
+		if tr.check(hld >= 11, "11-12 HLD → soutien à 3", "11-12 HLD → limit raise", pts(hld, "HLD")) {
 			return bidSuit(3, ms), m(11, 12, "soutien à 3, 11-12HLD", "limit raise, 11-12 HLD").withLen(ms, sup).asInvite()
 		}
 		return bidSuit(2, ms), m(6, 10, "soutien simple, 6-10HLD, dénie une majeure", "single raise, 6-10 HLD, denies a major").withLen(ms, sup)
 	}
-	if hl >= 11 && h.Len(other) >= 4 {
+	if tr.check(hl >= 11 && h.Len(other) >= 4,
+		"11 HL et 4 cartes dans l'autre mineure → changement de couleur forcing",
+		"11 HL and four cards in the other minor → forcing new suit", cards(h, other)) {
 		lvl := 1
 		if other.Strain() <= ms.Strain() {
 			lvl = 2
 		}
 		return bidSuit(lvl, other), m(11, 40, "changement de couleur, forcing", "forcing change of suit").withLen(other, 4).asForcing()
 	}
+	tr.note("aucune autre réponse ne s'applique → 1SA", "no other response applies → 1NT")
 	return bid(1, SNoTrump), m(6, 10, "1SA, 6-10HL", "1NT, 6-10 HL")
 }
 
@@ -932,11 +1012,15 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 	h := p.hand
 	hp := h.H()
 	lh, ls := h.Len(Hearts), h.Len(Spades)
+	tr := e.tr
+	majors := cards(h, Hearts) + ", " + cards(h, Spades)
 
 	// Transfers with a five-card major: a genuine single-suiter only. A
 	// four-five (or five-four) two-suited major hand goes through Stayman
 	// instead, so it can explore either fit (docs/bidings.md, "chassé-croisé").
-	if (lh >= 5 && ls < 4) || (ls >= 5 && lh < 4) {
+	if tr.check((lh >= 5 && ls < 4) || (ls >= 5 && lh < 4),
+		"une majeure cinquième, sans 4 cartes dans l'autre → Texas",
+		"a five-card major without four in the other → transfer", majors) {
 		var M Suit
 		if ls >= lh {
 			M = Spades
@@ -948,7 +1032,10 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 		// suggests opposite an ordinary 1NT, but a Texas transfer would just
 		// sign off below game with no way to describe the shape. Route
 		// through Stayman instead to locate a nine-card fit first.
-		if base == 1 && hp >= 7 && hp <= 8 && hasMisereDoreeSingleton(h, M) {
+		if base == 1 && tr.check(hp >= 7 && hp <= 8 && hasMisereDoreeSingleton(h, M),
+			"7-8 H avec un singleton (« misère dorée ») → Stayman plutôt que Texas",
+			"7-8 H with a singleton (« misère dorée ») → Stayman rather than a transfer",
+			pts(hp, "H")+", "+shape(h)) {
 			c := bid(2, SClubs)
 			mn := m(7, 8, "Stayman, demande les majeures quatrièmes", "Stayman, asking for four-card majors").asForcing()
 			mn.relay = true
@@ -980,7 +1067,9 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 	if base == 2 {
 		need = 4
 	}
-	if (lh >= 4 || ls >= 4) && hp >= need {
+	if tr.check((lh >= 4 || ls >= 4) && hp >= need,
+		fmt.Sprintf("une majeure quatrième et %d H et plus → Stayman", need),
+		fmt.Sprintf("a four-card major and %d+ H → Stayman", need), majors+", "+pts(hp, "H")) {
 		var c Call
 		if base == 1 {
 			c = bid(2, SClubs)
@@ -995,7 +1084,10 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 	// Minor-suit Texas (1NT only): docs/bidings.md, "TEXAS MINEURS", "théorie
 	// du singleton".
 	if base == 1 {
-		if c, mn, ok := e.minorTexas(p); ok {
+		if c, mn, ok := e.minorTexas(p); tr.check(ok,
+			"longue mineure (6 cartes, ou 5-5) → Texas mineur",
+			"long minor (six cards, or 5-5) → minor transfer",
+			cards(h, Diamonds)+", "+cards(h, Clubs)) {
 			return c, mn
 		}
 	}
@@ -1003,7 +1095,10 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 	// rebid of a 2C/2D strong opening): show it through the minor Texas so a
 	// minor slam can be found instead of settling for 3NT.
 	if base == 2 {
-		if c, mn, ok := e.strongMinorTwoSuiter(p); ok {
+		if c, mn, ok := e.strongMinorTwoSuiter(p); tr.check(ok,
+			"longue mineure ou bicolore mineur, 11 HL et plus → Texas mineur",
+			"long minor or minor two-suiter, 11+ HL → minor transfer",
+			cards(h, Diamonds)+", "+cards(h, Clubs)) {
 			return c, mn
 		}
 	}
@@ -1089,19 +1184,23 @@ func (e *Engine) afterStrongMinorTexas(p *playerState, twoSuited bool) (Call, me
 func (e *Engine) ntResponseLadder(p *playerState, base int) (Call, meaning) {
 	h := p.hand
 	hp := h.H()
+	tr := e.tr
+	v := pts(hp, "H")
 	if base == 1 {
+		tr.note("sans majeure à montrer : réponse selon les points", "no major to show: response by points")
 		switch {
-		case hp <= 7:
+		case tr.check(hp <= 7, "0-7 H → Passe", "0-7 H → Pass", v):
 			return passCall, m(0, 7, "0-8H, pas d'espoir de manche", "0-8 points, no game interest")
-		case hp <= 9:
+		case tr.check(hp <= 9, "8-9 H → 2SA, proposition de manche", "8-9 H → 2NT, game invitation", v):
 			return bid(2, SNoTrump), m(8, 9, "2SA, 8-9H, proposition de manche", "2NT, 8-9, game invitation").asInvite()
-		case hp <= 15:
+		case tr.check(hp <= 15, "10-15 H → 3SA", "10-15 H → 3NT", v):
 			return bid(3, SNoTrump), m(10, 15, "3SA, 10-15H", "3NT, 10-15")
-		case hp <= 17:
+		case tr.check(hp <= 17, "16-17 H → 4SA quantitatif", "16-17 H → quantitative 4NT", v):
 			mn := m(16, 17, "4SA quantitatif, proposition de petit chelem", "quantitative 4NT, small slam try")
 			mn.slamInvite = true
 			return bid(4, SNoTrump), mn
 		default:
+			tr.check(true, "18 H et plus → 6SA", "18+ H → 6NT", v)
 			return bid(6, SNoTrump), m(18, 19, "6SA, 18-19H", "6NT, 18-19")
 		}
 	}
@@ -1115,18 +1214,25 @@ func (e *Engine) ntResponseLadder(p *playerState, base int) (Call, meaning) {
 	// open (the 2K forcing-to-game floor of 24), the ceiling proves nothing
 	// and the try belongs to the hand that knows its own.
 	partner := e.ps[partnerOf(p.seat)]
+	tr.note("sans majeure à montrer : réponse selon la force combinée", "no major to show: response by combined strength")
+	sum := fmt.Sprintf("%d + %d-%d", hp, partner.shownMin, partner.shownMax)
 	switch {
-	case hp <= 3:
+	case tr.check(hp <= 3, "0-3 H → Passe", "0-3 H → Pass", v):
 		return passCall, m(0, 3, "jeu trop faible", "too weak to respond")
-	case hp+partner.shownMin >= 33:
+	case tr.check(hp+partner.shownMin >= 33,
+		"33 H assurés avec le minimum du partenaire → recherche de chelem",
+		"33 H guaranteed with partner's minimum → slam search", sum):
 		// The slam zone is already reached: hand over to the generic
 		// machinery, which asks for keycards [S-8] instead of closing.
 		return e.conclude(p)
-	case hp+partner.shownMax >= 33 && partner.shownMax-partner.shownMin <= 7:
+	case tr.check(hp+partner.shownMax >= 33 && partner.shownMax-partner.shownMin <= 7,
+		"33 H possibles avec le maximum du partenaire → 4SA quantitatif",
+		"33 H possible with partner's maximum → quantitative 4NT", sum):
 		mn := m(hp, 40, "4SA quantitatif, proposition de petit chelem", "quantitative 4NT, small slam try")
 		mn.slamInvite = true
 		return bid(4, SNoTrump), mn
 	default:
+		tr.check(true, "sinon → 3SA", "otherwise → 3NT", sum)
 		return bid(3, SNoTrump), m(4, 32-partner.shownMin, "3SA sur la force combinée", "3NT on combined strength")
 	}
 }
@@ -1405,6 +1511,7 @@ func (e *Engine) afterStaymanDenial(p *playerState, base, askLevel int) (Call, m
 	if c, mn, ok := e.staymanNewMinor(p, askLevel); ok {
 		return c, mn
 	}
+	e.tr.note("après le Stayman, pas de fit majeur à jouer : réponse selon les points", "after Stayman, no major fit to play: response by points")
 	return e.ntResponseLadder(p, base)
 }
 
@@ -1540,6 +1647,7 @@ func (e *Engine) afterStaymanOneMajor(p *playerState, base, askLevel int, M Suit
 	if c, mn, ok := e.staymanNewMinor(p, askLevel); ok {
 		return c, mn
 	}
+	e.tr.note("après le Stayman, pas de fit majeur à jouer : réponse selon les points", "after Stayman, no major fit to play: response by points")
 	return e.ntResponseLadder(p, base)
 }
 
@@ -1602,6 +1710,7 @@ func (e *Engine) afterStaymanBothMajors(p *playerState, base, askLevel int) (Cal
 			return c, mn
 		}
 	}
+	e.tr.note("après le Stayman, pas de fit majeur à jouer : réponse selon les points", "after Stayman, no major fit to play: response by points")
 	return e.ntResponseLadder(p, base)
 }
 
@@ -1699,6 +1808,7 @@ func (e *Engine) respondAfter2C(p *playerState) (Call, meaning) {
 	op := e.ps[partnerOf(p.seat)]
 	sc, _ := e.lastCallBy(op.seat)
 	if sc.Call == bid(2, SNoTrump) {
+		e.tr.note("2♣ fort puis 2SA du partenaire (22-23 H) : on répond comme à une ouverture de 2SA", "strong 2♣ then 2NT from partner (22-23 H): respond as to a 2NT opening")
 		return e.respondNT(p, 2, 22)
 	}
 	if sc.Call.IsBid() && sc.Call.Strain <= SSpades {

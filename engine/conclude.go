@@ -460,6 +460,8 @@ func init() {
 			// cheapest four-card major, else show a stopper in the opponents'
 			// suit.
 			name: "answer-cuebid",
+			fr:   "le partenaire fait un cue-bid : nommer une majeure quatrième ou un arrêt",
+			en:   "partner cue-bids: bid a four-card major or show a stopper",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.cuebid && !ctx.pm.overcallAsk && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -469,6 +471,7 @@ func init() {
 					if p.hand.Len(s) >= 4 {
 						c := e.cheapestCall(s.Strain())
 						if c.Level <= 3 && e.legal(p.seat, c) {
+							ctx.tr.check(true, "majeure quatrième → la moins chère", "a four-card major → the cheapest", cards(p.hand, s))
 							return c, m(-1, -1, "majeure quatrième la moins chère", "cheapest four-card major").withLen(s, 4), true
 						}
 					}
@@ -476,6 +479,7 @@ func init() {
 				if e.openCall.Strain <= SSpades && p.hand.Stopper(Suit(e.openCall.Strain)) {
 					c := e.cheapestCall(SNoTrump)
 					if c.Level <= 3 && e.legal(p.seat, c) {
+						ctx.tr.check(true, "sans majeure quatrième, arrêt dans leur couleur → Sans-Atout", "no four-card major, a stopper in their suit → notrump", "")
 						return c, m(-1, -1, "arrêt dans la couleur adverse, sans majeure quatrième", "stopper in the opponents' suit, no four-card major"), true
 					}
 				}
@@ -561,6 +565,8 @@ func init() {
 			// answers are the responder's, and both must come before any
 			// generic valuation -- 2D is not a diamond suit to raise.
 			name: "answer-drury-game-try",
+			fr:   "réponse à l'essai de manche du Drury",
+			en:   "answer to the Drury game try",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.druryGameTry && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -698,13 +704,16 @@ func init() {
 			// that, the generic path below bids the game, and the brake has
 			// cost nothing.
 			name: "answer-reverse-brake",
+			fr:   "le partenaire freine par 2SA (5-7 H) sur mon bicolore cher",
+			en:   "partner brakes with 2NT (5-7 H) over my reverse",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.reverseBrake && ctx.ours &&
 					ctx.lastSeat == partnerOf(ctx.p.seat) && ctx.p.seat == e.opener
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p := ctx.p
-				if ctx.cMax >= gameThresholdFor(ctx.fit, ctx.hasFit, ctx.ntOK) {
+				if !ctx.tr.check(ctx.cMax < gameThresholdFor(ctx.fit, ctx.hasFit, ctx.ntOK), "même son maximum n'atteint pas la manche → repli",
+					"even partner's maximum does not reach game → retreat", fmt.Sprint(ctx.cMax)) {
 					return Call{}, meaning{}, false
 				}
 				best, n := Clubs, 0
@@ -739,18 +748,22 @@ func init() {
 			// level as the rebid and never as a jump. With both majors covered,
 			// bid notrump directly.
 			name: "opener-minor-rebid-stopper-ask",
+			fr:   "le partenaire a répété sa mineure : chercher 3SA",
+			en:   "partner repeated the minor: look for 3NT",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.openerMinorRebid && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, last := ctx.p, ctx.last
-				if p.hand.H() < p.shownMin+2 {
+				tr := ctx.tr
+				if !tr.check(p.hand.H() >= p.shownMin+2, "pas un minimum", "not a minimum", pts(p.hand.H(), "H")) {
 					return Call{}, meaning{}, false
 				}
 				for _, M := range []Suit{Hearts, Spades} {
 					if !p.hand.Stopper(M) {
 						c := bid(last.Level, M.Strain())
 						if e.legal(p.seat, c) {
+							tr.check(true, "pas d'arrêt à "+suitSymbol[M]+" → le demander", "no stopper in "+suitSymbol[M]+" → ask for it", cards(p.hand, M))
 							mn := m(-1, -1, "demande d'arrêt à "+suitNameFR[M]+" pour jouer Sans-Atout", "asks for a stopper in "+suitNameEN[M]+" to play notrump").asForcing()
 							mn.minorStopperAsk = true
 							return c, mn, true
@@ -759,6 +772,7 @@ func init() {
 				}
 				c := bid(last.Level, SNoTrump)
 				if e.legal(p.seat, c) {
+					tr.check(true, "arrêts dans les deux majeures → Sans-Atout", "both majors stopped → notrump", "")
 					return c, m(-1, -1, "Sans-Atout, arrêts dans les deux majeures", "notrump, both majors stopped"), true
 				}
 				return Call{}, meaning{}, false
@@ -769,13 +783,16 @@ func init() {
 			// level; without it, deny by returning to the opening minor at the
 			// cheapest level rather than guess notrump unguarded.
 			name: "answer-stopper-ask",
+			fr:   "le partenaire demande un arrêt pour jouer Sans-Atout",
+			en:   "partner asks for a stopper to play notrump",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.minorStopperAsk && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, last := ctx.p, ctx.last
 				asked := Suit(last.Strain)
-				if p.hand.Stopper(asked) {
+				tr := ctx.tr
+				if tr.check(p.hand.Stopper(asked), "arrêt à "+suitSymbol[asked]+" → Sans-Atout", "a stopper in "+suitSymbol[asked]+" → notrump", cards(p.hand, asked)) {
 					c := bid(last.Level, SNoTrump)
 					if e.legal(p.seat, c) {
 						return c, m(-1, -1, "arrêt à "+suitNameFR[asked]+", Sans-Atout", "stopper in "+suitNameEN[asked]+", notrump").withStopper(asked), true
@@ -784,6 +801,7 @@ func init() {
 				os := Suit(e.openCall.Strain)
 				c := e.cheapestCall(os.Strain())
 				if e.legal(p.seat, c) {
+					tr.note("pas d'arrêt → retour à la mineure", "no stopper → back to the minor")
 					mn := m(-1, -1, "pas d'arrêt à "+suitNameFR[asked]+", retour à "+suitNameFR[os], "no stopper in "+suitNameEN[asked]+", back to "+suitNameEN[os])
 					mn.minorStopperDenied = true
 					return c, mn, true
@@ -796,24 +814,28 @@ func init() {
 			// contract in the minor from the combined count alone
 			// (docs/addon_10.md) -- pass, bid the game, or try the small slam.
 			name: "stopper-ask-denied",
+			fr:   "le partenaire n'a pas l'arrêt demandé : jouer dans la mineure",
+			en:   "partner lacks the stopper asked for: play in the minor",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.minorStopperDenied && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, last, own, cMin := ctx.p, ctx.last, ctx.own, ctx.cMin
 				os := Suit(last.Strain)
-				if cMin >= 33 {
+				tr := ctx.tr
+				if tr.check(cMin >= 33, "33 réunis → petit chelem", "33 together → small slam", pts(cMin, "HLD")) {
 					c := bidSuit(6, os)
 					if e.legal(p.seat, c) {
 						return c, m(own, -1, "conclusion au petit chelem", "small slam on combined values"), true
 					}
 				}
-				if cMin >= gameThreshold(os, true) {
+				if tr.check(cMin >= gameThreshold(os, true), "30 réunis → la manche en mineure", "30 together → the minor game", pts(cMin, "HLD")) {
 					c := bidSuit(5, os)
 					if e.legal(p.seat, c) {
 						return c, m(own, -1, "conclusion à la manche", "bidding game"), true
 					}
 				}
+				tr.note("pas assez pour la manche → Passe", "not enough for game → Pass")
 				return passCall, m(-1, -1, "pas assez pour la manche, arrêt", "not enough for game, staying"), true
 			},
 		},
@@ -879,6 +901,8 @@ func init() {
 			// Rectify partner's game-proposing transfer after Stayman confirmed
 			// both majors (docs/bidings.md, "Les transferts").
 			name: "rectify-stayman-both-majors",
+			fr:   "le partenaire rectifie après le Stayman aux deux majeures : choisir la majeure",
+			en:   "partner's transfer after Stayman showed both majors: choose the major",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.staymanBothMajorsRelay && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -940,6 +964,8 @@ func init() {
 			// (5-level) when neither extreme is certain (docs/addon_4.md, "4SA
 			// quantitatif").
 			name: "answer-slam-invite",
+			fr:   "le partenaire propose le chelem : accepter, accepter à moitié ou refuser",
+			en:   "partner invites slam: accept, half-accept or decline",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.slamInvite && ctx.partnerJustActed && ctx.ours
 			},
@@ -955,13 +981,16 @@ func init() {
 				// nothing about whether 33 [E-9] is there, and the pair ends
 				// up in six on twenty-nine points. What decides is our own
 				// count added to what the asker has promised.
+				tr := ctx.tr
 				switch {
-				case own+partner.shownMin >= 33:
+				case tr.check(own+partner.shownMin >= 33, "33 réunis avec son minimum → petit chelem",
+					"33 together with partner's minimum → small slam", fmt.Sprintf("%d + %d", own, partner.shownMin)):
 					c := bid(6, strain)
 					if e.legal(p.seat, c) {
 						return c, m(own, own, "accepte la proposition de chelem, le compte y est", "accepts the slam try, the count is there"), true
 					}
-				case own+partner.shownMax >= 33:
+				case tr.check(own+partner.shownMax >= 33, "33 seulement avec son maximum → palier de 5, au partenaire de décider",
+					"33 only with partner's maximum → five level, partner decides", fmt.Sprintf("%d + %d", own, partner.shownMax)):
 					c := bid(5, strain)
 					if e.legal(p.seat, c) {
 						mn := m(own, own, "accepte partiellement, laisse la décision au partenaire", "partial acceptance, leaves the final decision to partner")
@@ -969,6 +998,7 @@ func init() {
 						return c, mn, true
 					}
 				}
+				tr.note("le compte n'y est pas → Passe", "the count falls short → Pass")
 				return passCall, m(own, own, "refuse la proposition de chelem, le compte n'y est pas", "declines the slam try, the count falls short"), true
 			},
 		},
@@ -1016,6 +1046,8 @@ func init() {
 			// 5-of-the-fit): the original asker decides from their own
 			// promised range.
 			name: "after-partial-slam-accept",
+			fr:   "le partenaire a accepté à moitié ma proposition de chelem",
+			en:   "partner half-accepted my slam try",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.partialSlamAccept && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -1024,14 +1056,16 @@ func init() {
 				// The partial acceptance pinned partner's count exactly, so
 				// the last word is a subtraction: the slam needs 33 combined
 				// [E-9], whatever end of our own band we sit at.
-				if own+partner.shownMin < 33 {
+				tr := ctx.tr
+				if tr.check(own+partner.shownMin < 33, "moins de 33 réunis → Passe", "under 33 together → Pass", fmt.Sprintf("%d + %d", own, partner.shownMin)) {
 					return passCall, m(-1, -1, "le compte combiné n'atteint pas le chelem, arrêt", "the combined count falls short of the slam, staying"), true
 				}
-				if own <= p.shownMin {
+				if tr.check(own <= p.shownMin, "minimum de ma proposition → Passe", "the minimum of my try → Pass", fmt.Sprint(own)) {
 					return passCall, m(-1, -1, "minimum de la proposition, arrêt", "minimum of the range shown, staying"), true
 				}
 				c := bid(6, last.Strain)
 				if e.legal(p.seat, c) {
+					tr.note("pas minimum → le petit chelem", "not minimum → the small slam")
 					return c, m(-1, -1, "pas minimum, conclusion au petit chelem", "not minimum, bids the small slam"), true
 				}
 				return passCall, noInfo(), true
@@ -1239,13 +1273,16 @@ func init() {
 			// the game is there -- and the five-card suit the réveil promised
 			// is the source of tricks 3SA plays for. Below that he passes.
 			name: "answer-reopening-2nt",
+			fr:   "le partenaire répond 2SA à mon réveil (13-15 H) : proposition de manche",
+			en:   "partner answered my reopening with 2NT (13-15 H): game invitation",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.reopenNTInvite && ctx.partnerJustActed && ctx.ours &&
 					ctx.p.lastM != nil && ctx.p.lastM.reopen
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p := ctx.p
-				if p.hand.HL() < 11 {
+				if !ctx.tr.check(p.hand.HL() >= 11, "11 HL et plus, le haut du réveil → 3SA", "11+ HL, the top of the reopening → 3NT", pts(p.hand.HL(), "HL")) {
+					ctx.tr.note("minimum du réveil → Passe", "minimum reopening → Pass")
 					return passCall, m(-1, -1,
 						"minimum du réveil, la manche n'y est pas",
 						"minimum for the réveil, the game is not there"), true
@@ -1768,6 +1805,8 @@ func init() {
 			// jumping in front of him buys the small slam where his own king
 			// ask found the grand.
 			name: "quantitative-4nt",
+			fr:   "sans fit, le chelem à Sans-Atout dépend du haut ou du bas de la zone du partenaire",
+			en:   "no fit, a notrump slam depends on the top or bottom of partner's range",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				p, partner := ctx.p, ctx.partner
 				return !ctx.hasFit && ctx.ntOK && ctx.cMin >= 28 && ctx.cMin < 33 && ctx.cMax >= 33 &&
@@ -1778,7 +1817,8 @@ func init() {
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				partner := ctx.partner
 				c := bid(4, SNoTrump)
-				if e.legal(ctx.p.seat, c) {
+				if ctx.tr.check(e.legal(ctx.p.seat, c), "28-32 réunis au minimum, 33 au maximum, main régulière → 4SA quantitatif",
+					"28-32 together at the minimum, 33 at the maximum, balanced → quantitative 4NT", fmt.Sprintf("%d-%d", ctx.cMin, ctx.cMax)) {
 					mn := m(max(0, 33-partner.shownMax), 32-partner.shownMin, "4SA quantitatif, propose le petit chelem", "quantitative 4NT, small slam try")
 					mn.slamInvite = true
 					return c, mn, true
@@ -1848,6 +1888,8 @@ func init() {
 			// in the game zone (cMin >= 25) to justify forcing the auction up
 			// -- the "bicolore cher" case.
 			name: "responder-second-major",
+			fr:   "répondant avec deux majeures, sans fit : nommer la seconde",
+			en:   "responder with both majors, no fit: bid the second one",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				p := ctx.p
 				return !ctx.hasFit && p.seat != e.opener && sideOf(p.seat) == sideOf(e.opener) &&
@@ -1909,6 +1951,10 @@ func init() {
 							lo = reverseLo
 						}
 					}
+					cFR, cEN := callSym(c)
+					ctx.tr.check(true, "seconde majeure quatrième, non nommée, à une carte de la première → "+cFR+", forcing",
+						"an unbid second four-card major, within a card of the first → "+cEN+", forcing",
+						cards(p.hand, firstSuit)+", "+cards(p.hand, s))
 					mn := m(lo, 40, "bicolore du répondant, forcing", "responder's second suit, forcing").asForcing()
 					mn = mn.withLen(s, p.hand.Len(s)).withLen(firstSuit, p.hand.Len(firstSuit))
 					return c, mn, true
@@ -1931,6 +1977,8 @@ func init() {
 			// double one of a suit named twice: with partner's suit running
 			// there is no hold-up to play, and no lead to hand back.
 			name: "notrump-over-partner-long-suit",
+			fr:   "le partenaire a nommé une couleur longue au palier de 3 en compétition",
+			en:   "partner bid a long suit at the three level in competition",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) &&
 					ctx.last.Strain <= SSpades && ctx.last.Level >= 3 &&
@@ -1939,13 +1987,16 @@ func init() {
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, partner := ctx.p, ctx.partner
 				s := Suit(ctx.last.Strain)
-				if partner.shownLens[s] < 6 || p.hand.Len(s) < 2 {
+				tr := ctx.tr
+				if !tr.check(partner.shownLens[s] >= 6 && p.hand.Len(s) >= 2, "sa couleur est sixième et j'y ai 2 cartes",
+					"partner's suit is six cards long and I hold two", cards(p.hand, s)) {
 					return Call{}, meaning{}, false
 				}
 				if ctx.hasFit && ctx.fit.IsMajor() {
 					return Call{}, meaning{}, false // a major game is the better shot
 				}
-				if p.hand.H()+partner.shownMin < 20 {
+				if !tr.check(p.hand.H()+partner.shownMin >= 20, "20 H réunis au moins", "at least 20 H between the hands",
+					fmt.Sprintf("%d + %d", p.hand.H(), partner.shownMin)) {
 					return Call{}, meaning{}, false
 				}
 				for _, os := range e.opponentSuits(p) {
@@ -1957,6 +2008,7 @@ func init() {
 				if e.cheapestCall(SNoTrump) != c || !e.legal(p.seat, c) {
 					return Call{}, meaning{}, false
 				}
+				tr.check(true, "arrêt dans chacune de leurs couleurs → 3SA", "a stopper in each of their suits → 3NT", "")
 				mn := m(p.hand.H(), 40, "3SA : arrêt dans leur couleur et fit dans la couleur longue du partenaire", "3NT: their suit stopped and a fit for partner's long suit")
 				for _, os := range e.opponentSuits(p) {
 					mn.stops[os] = true
@@ -2079,6 +2131,8 @@ func init() {
 			// playing tricks headed by a long suit, so a strong hand bids the
 			// obvious game itself instead of adding up to a partscore.
 			name: "raise-partner-preempt-to-game",
+			fr:   "le partenaire a fait un barrage et j'ai 16 H et plus",
+			en:   "partner preempted and I hold 16+ H",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.partner.shownMax <= 10 && ctx.p.hand.H() >= 16 && !e.bw[ctx.side].asked
 			},
@@ -2093,7 +2147,8 @@ func init() {
 				if preLen < 6 {
 					return Call{}, meaning{}, false
 				}
-				if pre.IsMajor() && p.hand.Len(pre) >= 2 {
+				tr := ctx.tr
+				if pre.IsMajor() && tr.check(p.hand.Len(pre) >= 2, "barrage en majeure et 2 cartes → la manche", "a major preempt and two cards → game", cards(p.hand, pre)) {
 					c := bidSuit(4, pre)
 					if c.higherThan(last) && e.legal(p.seat, c) {
 						return c, m(-1, -1, "conclusion à la manche sur le barrage, main forte", "raises the preempt to game, strong hand").withLen(pre, p.hand.Len(pre)), true
@@ -2107,7 +2162,7 @@ func init() {
 							break
 						}
 					}
-					if stopped {
+					if tr.check(stopped, "barrage en mineure, arrêts partout ailleurs → 3SA", "a minor preempt, stoppers everywhere else → 3NT", "") {
 						c := bid(3, SNoTrump)
 						if c.higherThan(last) && e.legal(p.seat, c) {
 							return c, m(-1, -1, "3SA sur le barrage, main forte avec tenues", "3NT over the preempt, strong hand with stoppers"), true

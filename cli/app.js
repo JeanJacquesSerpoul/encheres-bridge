@@ -630,11 +630,16 @@ function readIaRemote() {
   return readStored(IA_REMOTE_KEY, "");
 }
 
-// Le mode (navigateur, local ou distant) est mémorisé de la même façon ; à
-// défaut, le client calcule les enchères lui-même, n'ayant alors besoin de
-// rien ni de personne. Si le moteur n'est pas servi, c'est son échec de
-// chargement qui le dira, et la barre du serveur repararaîtra.
+// Le moteur d'enchères tourne toujours dans la page : que l'on ouvre
+// index.html directement ou que run.ps1 / run.sh la serve, le client se
+// comporte de la même façon. Un mode local ou distant mémorisé lors d'une
+// visite précédente n'est repris que par la porte de service « ?serveur=1 » —
+// sans quoi, sur localhost:9015, un ancien choix « Local » ramenait la barre
+// du serveur et détournait les calculs vers le binaire Go. Si le moteur n'est
+// pas servi, c'est son échec de chargement qui le dira, et la barre du
+// serveur reparaîtra.
 function readMode() {
+  if (!SERVER_BAR_FORCED) return "wasm";
   const mode = readStored(MODE_KEY, "wasm");
   return mode === "remote" || mode === "local" ? mode : "wasm";
 }

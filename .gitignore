@@ -7,11 +7,10 @@ tools/par/out/
 .env.*
 !.env.example
 
-# Moteur compilé en WebAssembly et sa glue, produits par build-wasm.sh :
-# reconstruits à chaque build, et bien trop gros pour l'historique.
-cli/bids.wasm
+# cli/bids.wasm et cli/wasm_exec.js sont versionnés : une copie de cli/
+# depuis GitHub doit suffire à faire tourner l'application. Le workflow
+# wasm.yml les recompile à chaque modification des sources Go sur main.
 cli/bids_wasm_bin.js
-cli/wasm_exec.js
 
 # Verrou local de session Claude Code (sessionId/pid propres à la machine)
 .claude/scheduled_tasks.lock

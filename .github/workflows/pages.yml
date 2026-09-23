@@ -5,9 +5,10 @@
 # serveur), aucun service n'est interrogé. Rien d'autre que des fichiers n'est
 # donc nécessaire pour la servir.
 #
-# cli/bids.wasm et cli/wasm_exec.js sont ignorés par git : ils ne sont pas dans
-# le dépôt et sont produits ici, à chaque déploiement, par build-wasm.sh. Le
-# site publié reflète donc toujours l'état des sources de main.
+# cli/bids.wasm et cli/wasm_exec.js sont versionnés (pour qu'une copie de cli/
+# soit complète), mais ils sont tout de même recompilés ici, à chaque
+# déploiement, par build-wasm.sh : le site publié reflète toujours l'état des
+# sources de main, sans dépendre du commit que wasm.yml ajoute après coup.
 name: Déploiement GitHub Pages
 
 on:

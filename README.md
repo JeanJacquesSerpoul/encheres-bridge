@@ -120,7 +120,7 @@ Le client se suffit à lui-même : le moteur tourne dans le navigateur (`cli/bid
 [.github/workflows/pages.yml](.github/workflows/pages.yml) le publie sur **GitHub Pages** à chaque poussée sur `main`, et à la demande depuis l'onglet *Actions*. Le workflow :
 
 1. lance `go test ./...` — le moteur WebAssembly *est* ce code Go, un test rouge signifierait des enchères fausses ;
-2. compile `cli/bids.wasm` et `cli/wasm_exec.js` avec [build-wasm.sh](build-wasm.sh), car ces deux fichiers sont ignorés par git et n'existent pas dans le dépôt ;
+2. recompile `cli/bids.wasm` et `cli/wasm_exec.js` avec [build-wasm.sh](build-wasm.sh) : ils sont versionnés, mais le site publié ne dépend ainsi que des sources Go de `main` ;
 3. vérifie qu'aucun fichier de `cli/` ne manque, puis publie le dossier.
 
 Le site est servi sous **<https://jeanjacquesserpoul.github.io/encheres-bridge/>**. Tous les chemins du client sont relatifs, ce sous-répertoire ne demande donc aucun réglage.
@@ -141,7 +141,7 @@ Un point reste hors de portée sur Pages, qui ne permet pas d'en-têtes personna
 
 Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers convient — Netlify, Cloudflare Pages, un nginx, un Apache mutualisé, un bucket S3 derrière un CDN.
 
-**1. Produire les deux fichiers manquants.** `cli/bids.wasm` et `cli/wasm_exec.js` sont ignorés par git : ils ne sont pas dans le dépôt et doivent être compilés avant toute copie.
+**1. Rien à compiler.** `cli/bids.wasm` et `cli/wasm_exec.js` sont versionnés : une copie de `cli/` depuis GitHub est complète. Le workflow [wasm.yml](.github/workflows/wasm.yml) les recompile et les recommite dès que les sources Go changent sur `main`. Pour un moteur tiré de sources locales modifiées, recompilez-les vous-même :
 
 ```bash
 ./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows

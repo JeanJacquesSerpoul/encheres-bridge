@@ -386,10 +386,9 @@
       <div id="quiz-feedback" class="quiz-feedback hidden"></div>
 
       <div class="row">
-        <!-- Sans data-i18n : ce bouton porte deux libellés selon ce qu'il
-             fait, et c'est renderQuizStep qui les pose. applyLang le relit
-             par relabelQuizContinue. -->
-        <button id="quiz-continue-btn" type="button" class="primary hidden">Continuer</button>
+        <!-- Après le verdict de sa propre enchère : les enchères des autres
+             sièges, elles, s'enchaînent seules. -->
+        <button id="quiz-continue-btn" type="button" class="primary hidden" data-i18n="continue">Continuer</button>
         <!-- Abandonner le questionnaire à tout moment : il se referme et la
              donne composée revient (voir cancelQuiz). Masqué une fois le
              questionnaire terminé, où le score offre ses propres suites. -->
@@ -585,7 +584,7 @@
           <li><span data-help-icon="quiz"></span><span>Choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>.</span></li>
         </ul>
         <ul>
-          <li>Seule votre main est visible : la donne composée au-dessus est masquée jusqu'à la fin (le lien <b>Afficher la donne</b> la montre quand même). Les enchères des autres joueurs s'affichent d'elles-mêmes ; le bouton <b>Révéler</b> permet de ne pas attendre.</li>
+          <li>Seule votre main est visible : la donne composée au-dessus est masquée jusqu'à la fin (le lien <b>Afficher la donne</b> la montre quand même). Les enchères des autres joueurs s'affichent d'elles-mêmes.</li>
           <li>À votre tour, la <b>boîte à enchères</b> ne propose que les enchères permises. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication.</li>
           <li><b>Annuler</b> arrête le questionnaire à tout moment et revient à la donne.</li>
           <li>À la fin : votre <b>score</b>, le contrat final, et le choix de <b>rejouer</b> la donne, d'en tirer une <b>nouvelle</b> ou d'<b>afficher le détail complet</b>.</li>
@@ -649,7 +648,7 @@
           <li><span data-help-icon="quiz"></span><span>Pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>.</span></li>
         </ul>
         <ul>
-          <li>Only your hand is shown: the deal built above is hidden until the end (the <b>Show the deal</b> link shows it anyway). The other players' calls appear on their own; the <b>Reveal</b> button skips the wait.</li>
+          <li>Only your hand is shown: the deal built above is hidden until the end (the <b>Show the deal</b> link shows it anyway). The other players' calls appear on their own.</li>
           <li>On your turn, the <b>bidding box</b> only offers legal calls. You see at once whether yours matches the SEF, and if not, the expected call and why.</li>
           <li><b>Cancel</b> stops the quiz at any time and goes back to the deal.</li>
           <li>At the end: your <b>score</b>, the final contract, and the choice to <b>replay</b> the deal, draw a <b>new</b> one or <b>show the full detail</b>.</li>

@@ -321,9 +321,6 @@ const UI_TEXT = {
     // comparaison, les déplacer découplerait l'affichage de la valeur.
     quizYourTurn: (seat) => `À vous de parler (${seat}) — choisissez votre enchère.`,
     quizAboutToBid: (seat) => `${seat} va annoncer.`,
-    // Même élision que photoHand : « d'Ouest », « d'Est », mais « de Nord ».
-    quizReveal: (seat) =>
-      `Révéler l'enchère ${/^[AEIOU]/.test(seat) ? "d'" : "de "}${seat}`,
     quizCorrect: "✓ Correct !",
     quizWrong: "✗ Différent du système SEF",
     quizExpected: "Enchère attendue",
@@ -452,7 +449,6 @@ const UI_TEXT = {
     continue: "Continue",
     quizYourTurn: (seat) => `Your turn to bid (${seat}) — choose your call.`,
     quizAboutToBid: (seat) => `${seat} is about to bid.`,
-    quizReveal: (seat) => `Reveal ${seat}'s call`,
     quizCorrect: "✓ Correct!",
     quizWrong: "✗ Not what the SEF system bids",
     quizExpected: "Expected call",
@@ -671,22 +667,8 @@ function capitalize(s) {
 // Réécrit toute l'interface dans la langue choisie. Le questionnaire en cours
 // garde la sienne : il a été construit avec les commentaires que le serveur a
 // renvoyés à son démarrage, et le relancer effacerait la progression.
-// Le bouton du questionnaire porte deux libellés — « Continuer » après une
-// réponse, « Révéler l'enchère de X » avant celle d'un adversaire — et c'est
-// renderQuizStep qui les pose, pas un [data-i18n]. Il en portait pourtant un,
-// et applyLang écrasait donc le second par le premier : changer de langue en
-// plein questionnaire affichait « Continuer » sur un bouton qui révélait une
-// enchère. Le libellé est relu ici, dans la langue du questionnaire en cours
-// — lui ne change pas de langue en route (voir le gestionnaire de #lang).
-function relabelQuizContinue() {
-  const btn = $("#quiz-continue-btn");
-  if (btn.classList.contains("hidden")) return;
-  const t = UI_TEXT[quiz ? quiz.lang : $("#lang").value];
-  const seat = btn.dataset.seat;
-  btn.textContent = btn.dataset.mode === "reveal" && seat
-    ? t.quizReveal(SEAT_LABEL[quiz ? quiz.lang : $("#lang").value][seat])
-    : t.continue;
-}
+// Ses boutons (« Continuer », « Annuler »), eux, suivent la langue de la page
+// comme le reste des libellés fixes.
 
 function applyLang() {
   const lang = $("#lang").value;
@@ -708,7 +690,6 @@ function applyLang() {
   for (const el of document.querySelectorAll("[data-help-lang]")) {
     el.hidden = el.dataset.helpLang !== lang;
   }
-  relabelQuizContinue();
   renderDealActions();
   renderServerHint(); // messages du champ d'URL et libellé de l'option locale
   renderIaHint();
@@ -3680,22 +3661,13 @@ function renderQuizStep() {
   } else {
     $("#quiz-turn").textContent = t.quizAboutToBid(seatName);
     $("#bidding-box").classList.add("hidden");
-    const btn = $("#quiz-continue-btn");
-    btn.textContent = t.quizReveal(seatName);
-    btn.dataset.mode = "reveal";
-    // Le siège est gardé sur le bouton : applyLang en a besoin pour réécrire
-    // ce libellé-là, qu'aucun [data-i18n] ne porte.
-    btn.dataset.seat = entry.player;
-    btn.classList.remove("hidden");
-    // Le bouton reste offert malgré l'enchaînement : qui ne veut pas
-    // attendre les 700 ms clique, et renderQuizStep annule alors le minuteur
-    // en tête de son prochain passage.
+    // Aucun bouton : l'enchère des autres sièges s'affiche d'elle-même.
     const pending = quiz;
     autoRevealTimer = setTimeout(() => {
       autoRevealTimer = null;
       // Le questionnaire a pu être relancé ou abandonné pendant l'attente.
       if (quiz !== pending) return;
-      onQuizContinue();
+      revealOpponentCall();
     }, AUTO_REVEAL_MS);
   }
 }
@@ -3730,21 +3702,21 @@ function chooseBid(bidText) {
   fb.innerHTML = `<span class="verdict">${verdict}</span>${refLine}${commentLine}`;
   fb.classList.remove("hidden");
 
-  const btn = $("#quiz-continue-btn");
-  btn.textContent = t.continue;
-  btn.dataset.mode = "next";
   // Le verdict se lit : l'enchaînement ne s'applique qu'aux enchères des
-  // autres, jamais au sien.
-  delete btn.dataset.seat;
-  btn.classList.remove("hidden");
+  // autres, jamais au sien, d'où ce bouton.
+  $("#quiz-continue-btn").classList.remove("hidden");
 }
 
+// L'enchère d'un autre siège, jouée par le moteur, entre dans la séquence.
+function revealOpponentCall() {
+  const entry = quiz.result.auction[quiz.idx];
+  quiz.calls.push({ player: entry.player, bid: entry.bid, isUser: false });
+  quiz.idx++;
+  renderQuizStep();
+}
+
+// « Continuer », après le verdict de sa propre enchère.
 function onQuizContinue() {
-  const btn = $("#quiz-continue-btn");
-  if (btn.dataset.mode === "reveal") {
-    const entry = quiz.result.auction[quiz.idx];
-    quiz.calls.push({ player: entry.player, bid: entry.bid, isUser: false });
-  }
   quiz.idx++;
   renderQuizStep();
 }

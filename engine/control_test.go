@@ -81,7 +81,7 @@ func TestControlBidNoneLeft(t *testing.T) {
 func TestContinueControlBidToBlackwood(t *testing.T) {
 	south := hand("AKQJ2", "432", "432", "432") // no more controls to show
 	e := scaffoldControlEngine(south, hand("543", "876", "876", "8765"), 22)
-	c, mn := e.continueControlBid(e.ps[2], Spades)
+	c, mn := e.continueControlBid(e.ps[2], Spades, nil)
 	if got := c.Format("fr"); got != "4SA" {
 		t.Fatalf("call = %s, want 4SA (Blackwood)", got)
 	}
@@ -95,7 +95,7 @@ func TestContinueControlBidToBlackwood(t *testing.T) {
 func TestContinueControlBidSignsOff(t *testing.T) {
 	south := hand("AKQJ2", "432", "432", "432")
 	e := scaffoldControlEngine(south, hand("543", "876", "876", "8765"), 8)
-	c, mn := e.continueControlBid(e.ps[2], Spades)
+	c, mn := e.continueControlBid(e.ps[2], Spades, nil)
 	if got := c.Format("fr"); got != "4P" {
 		t.Fatalf("call = %s, want 4P (sign-off in the agreed trump)", got)
 	}

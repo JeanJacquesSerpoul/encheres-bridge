@@ -1402,7 +1402,7 @@ func (e *Engine) afterTransfer(p *playerState, M Suit, oMin int, completion Call
 		// Blackwood by itself once the controls are out [S-4].
 		partner := e.ps[partnerOf(p.seat)]
 		if cMin, cMax := h.HLD(M)+partner.shownMin, h.HLD(M)+partner.shownMax; cMin >= 29 && (cMax >= 33 || cMin >= 31) {
-			if c, mn, ok := e.initiateControls(p, M); ok {
+			if c, mn, ok := e.initiateControls(p, M, nil); ok {
 				return c, mn
 			}
 			if c, mn := e.conclude(p); c.Kind != KindPass {

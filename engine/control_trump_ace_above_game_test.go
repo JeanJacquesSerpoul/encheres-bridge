@@ -72,7 +72,7 @@ func scaffoldFiveLevelControls(south, north *Hand) *Engine {
 // without calling it the game or pretending to show a control.
 func TestTrumpAboveGameWithoutHonourIsNotTheGame(t *testing.T) {
 	e := scaffoldFiveLevelControls(hand("5432", "74", "QJ42", "AK8"), hand("KQJ7", "AQT93", "T", "T9"))
-	c, mn := e.continueControlBid(e.ps[2], Spades)
+	c, mn := e.continueControlBid(e.ps[2], Spades, nil)
 	if got := c.Format("fr"); got != "5P" {
 		t.Fatalf("call = %s, want 5P", got)
 	}
@@ -86,13 +86,13 @@ func TestTrumpAboveGameWithoutHonourIsNotTheGame(t *testing.T) {
 // passes 5S instead of bidding a slam with two quick losers.
 func TestTrumpControlAboveGamePassedWithoutMissingControl(t *testing.T) {
 	e := scaffoldFiveLevelControls(hand("AJ98", "74", "QJ42", "AK8"), hand("KQ76", "JT9832", "T", "T"))
-	c, mn := e.continueControlBid(e.ps[2], Spades)
+	c, mn := e.continueControlBid(e.ps[2], Spades, nil)
 	if got := c.Format("fr"); got != "5P" || !mn.controlBid || mn.controlSuit != Spades {
 		t.Fatalf("South: call = %s (%q), want 5P as the trump control", got, mn.fr)
 	}
 	e.record(2, c, mn)
 	e.calls = append(e.calls, SeatCall{Seat: 3, Call: passCall})
-	c, mn = e.continueControlBid(e.ps[0], Spades)
+	c, mn = e.continueControlBid(e.ps[0], Spades, nil)
 	if c.Kind != KindPass || !strings.Contains(mn.fr, "pas de contrôle à Cœur") {
 		t.Fatalf("North: call = %s (%q), want a pass without the heart control", c.Format("fr"), mn.fr)
 	}

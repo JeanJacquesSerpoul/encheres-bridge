@@ -228,6 +228,11 @@ const UI_TEXT = {
     quizModeHint: "La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.",
     quizShowDeal: "Afficher la donne",
     quizCancel: "Annuler",
+    welcomeTitle: "Bienvenue",
+    welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
+    welcomeHelp: "Consulter l'aide",
+    welcomeSkip: "Continuer sans l'aide",
+    welcomeNote: "L'aide reste accessible à tout moment par le bouton ? en haut de la page.",
     quizReplay: "Rejouer cette donne",
     quizNewDeal: "Nouvelle donne",
     hiddenHand: "main cachée",
@@ -351,6 +356,11 @@ const UI_TEXT = {
     quizModeHint: "The deal stays hidden as soon as it is drawn or loaded: you bid without knowing it.",
     quizShowDeal: "Show the deal",
     quizCancel: "Cancel",
+    welcomeTitle: "Welcome",
+    welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
+    welcomeHelp: "Read the guide",
+    welcomeSkip: "Continue without the guide",
+    welcomeNote: "The guide is always available from the ? button at the top of the page.",
     quizReplay: "Replay this deal",
     quizNewDeal: "New deal",
     hiddenHand: "hidden hand",
@@ -3632,17 +3642,44 @@ function renderHelpIcons() {
 }
 
 const helpDialog = $("#help-dialog");
-$("#help-btn").addEventListener("click", () => {
+function openHelp() {
   helpDialog.showModal();
   // Le texte repart du haut à chaque ouverture, pas de là où on l'a quitté.
   helpDialog.querySelector(".help-box").scrollTop = 0;
-});
+}
+$("#help-btn").addEventListener("click", openHelp);
 $("#help-close").addEventListener("click", () => helpDialog.close());
 // Un clic sur le voile referme : il atteint le <dialog> lui-même, alors que
 // tout son contenu est dans .help-box.
 helpDialog.addEventListener("click", (ev) => {
   if (ev.target === helpDialog) helpDialog.close();
 });
+
+// ---------- écran d'accueil ----------
+
+// Au premier lancement, un écran propose le mode d'emploi, sans l'imposer. Le
+// choix, quel qu'il soit — Échap compris —, est retenu : l'écran ne revient
+// plus. Un navigateur qui a déjà une donne retenue n'en est pas à son premier
+// lancement : l'écran est apparu après lui, et l'y montrer serait une gêne.
+const WELCOME_KEY = "bids.welcomed";
+const welcomeDialog = $("#welcome-dialog");
+// Retenu au moment même du choix, et non sur l'événement « close » : celui-ci
+// n'arrive qu'après coup, et une page rechargée entre-temps rouvrait l'écran.
+function dismissWelcome() {
+  saveStored(WELCOME_KEY, "1");
+  welcomeDialog.close();
+}
+$("#welcome-skip-btn").addEventListener("click", dismissWelcome);
+$("#welcome-help-btn").addEventListener("click", () => {
+  dismissWelcome();
+  openHelp();
+});
+// Échap ferme l'écran lui aussi : c'est un choix de passer l'aide.
+welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));
+
+// Lu avant que la donne restaurée ne soit réécrite : c'est son absence qui
+// signe une première visite.
+const firstLaunch = !readStored(WELCOME_KEY, "") && !readStored(LAST_DEAL_KEY, "");
 
 // Reprend la dernière donne complète, ou la donne vide à la première visite,
 // puis sonde le serveur.
@@ -3671,3 +3708,6 @@ applyIaFeature();
   const boot = document.getElementById("boot-loading");
   if (boot) boot.remove();
 })();
+
+// Sur une page désormais visible, pas sous le voile de démarrage.
+if (firstLaunch) welcomeDialog.showModal();

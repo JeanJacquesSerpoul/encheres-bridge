@@ -1489,6 +1489,39 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   font-size: .8rem;
 }
 
+/* ---------- écran d'accueil ---------- */
+
+.welcome-dialog {
+  width: min(460px, calc(100vw - 32px));
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow-modal);
+}
+.welcome-dialog::backdrop { background: var(--overlay); }
+.welcome-box {
+  padding: 22px 24px 18px;
+  text-align: center;
+  line-height: 1.5;
+}
+.welcome-box h2 { margin: 0 0 10px; font-size: 1.25rem; }
+.welcome-box p { margin: 0 0 16px; }
+.welcome-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.welcome-actions button { margin: 0; }
+.welcome-box .welcome-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
 /* ---------- mode d'emploi ---------- */
 
 /* Le bouton « ? » du bandeau : une icône claire sur le vert, sans cadre, comme

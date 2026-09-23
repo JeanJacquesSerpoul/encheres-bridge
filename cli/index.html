@@ -594,7 +594,7 @@
         <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire. Les cartes non reconnues attendent au centre.</p>
 
         <h3>6. Réglages</h3>
-        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans le bandeau. Ils sont retenus d'une visite à l'autre, comme le mode questionnaire et votre dernière donne complète. Le bouton <b>?</b> ouvre ce mode d'emploi.</p>
+        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans le bandeau. Ils sont retenus d'une visite à l'autre, comme le mode questionnaire et votre dernière donne complète. Le bouton <b>?</b> ouvre ce mode d'emploi, que l'écran d'accueil propose aussi au premier lancement.</p>
       </div>
 
       <div class="help-body" data-help-lang="en" lang="en" hidden>
@@ -660,8 +660,23 @@
         <p>Before sending, rotate the photo and draw the frame around the cards to read. Unrecognised cards wait in the centre.</p>
 
         <h3>6. Settings</h3>
-        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the top bar. Both are remembered between visits, like quiz mode and your last complete deal. The <b>?</b> button opens this guide.</p>
+        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the top bar. Both are remembered between visits, like quiz mode and your last complete deal. The <b>?</b> button opens this guide, which the welcome screen also offers on first launch.</p>
       </div>
+    </div>
+  </dialog>
+
+  <!-- Écran d'accueil, au premier lancement seulement (voir WELCOME_KEY dans
+       app.js) : proposer le mode d'emploi à qui découvre l'application, sans
+       l'imposer. Même construction que le mode d'emploi, un <dialog> natif. -->
+  <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
+    <div class="welcome-box">
+      <h2 id="welcome-title" data-i18n="welcomeTitle">Bienvenue</h2>
+      <p data-i18n="welcomeText">Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.</p>
+      <div class="welcome-actions">
+        <button id="welcome-help-btn" type="button" class="primary" data-i18n="welcomeHelp">Consulter l'aide</button>
+        <button id="welcome-skip-btn" type="button" data-i18n="welcomeSkip">Continuer sans l'aide</button>
+      </div>
+      <p class="welcome-note" data-i18n="welcomeNote">L'aide reste accessible à tout moment par le bouton ? en haut de la page.</p>
     </div>
   </dialog>
 

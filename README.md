@@ -361,46 +361,64 @@ handle_path /aiproxy* {
 
 ## Le client web
 
-Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://localhost:9015/**. Il ne dépend que de l'API — aucune étape de build, aucun paquet npm.
+Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm — calcule les enchères **dans le navigateur** (voir [Le mode navigateur](#le-mode-navigateur)). Il est servi à la racine par le serveur Go (**http://localhost:9015/**) ou publié tel quel sur un hébergeur statique : il se comporte à l'identique dans les deux cas (voir [Démarrage](#démarrage)).
 
-**L'en-tête** choisit le serveur interrogé et la langue (`fr`/`en`, mémorisée, initialisée d'après le navigateur). **Navigateur (hors ligne)** n'interroge personne : les enchères sont calculées sur place (voir plus bas). C'est le mode par défaut, et la barre du serveur disparaît alors de l'en-tête — il n'y a aucun serveur à choisir ; elle revient d'elle-même quand le moteur fait défaut, et sur demande avec `?serveur=1` (voir plus bas). **Local** vise `http://localhost:9015` par défaut ; sur un autre port ou un autre hôte, on corrige l'URL une fois et elle est mémorisée (`localStorage`). **Distant** n'a pas d'URL prédéfinie : elle dépend du déploiement, le client invite donc à la saisir, puis la mémorise de la même façon. L'API envoie les en-têtes CORS nécessaires pour piloter le serveur depuis une autre origine (`file://`, autre port...). Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page où elle tient lieu de nom pour ce serveur (voir plus bas) ; tant qu'elle est décochée, ni la barre du serveur IA dans l'en-tête, ni les boutons appareil photo, ni son état n'apparaissent.
-
-**Mode d'emploi** : le bouton **?** du bandeau ouvre une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons.
+**Le bandeau** porte la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre) et le bouton **?** du **mode d'emploi** : une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons. Aucun serveur n'y est à choisir : la barre du serveur n'apparaît que si le moteur fait défaut, ou sur demande avec `?serveur=1` (voir plus bas). Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
 ### Composer la donne
 
-- **Charger un fichier .pbn**, ou coller le texte PBN dans la zone qu'affiche le bouton **Texte de la donne (format PBN)** (icône `</>`). Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
-- **Donne aléatoire** tire une donne complète ; donneur et vulnérabilité se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
-- **À la souris** : chaque carte se glisse d'une main à l'autre, ou vers la zone **Cartes non affectées** au centre de la table ; le tag `[Deal]` est réécrit à chaque déplacement.
-- Chaque main porte deux **bornes de points d'honneur** (mini/maxi). Elles contraignent le tirage aléatoire et signalent les mains hors bornes sur la donne courante.
-- Trois boutons : **Compléter les mains** (visible tant qu'il reste des cartes non affectées) les répartit entre les mains incomplètes en respectant les bornes, **Retirer toutes les cartes** vide la table, **Effacer les bornes** remet les mini/maxi à vide. L'en-tête de chaque main porte une **poubelle** qui renvoie ses seules cartes dans la zone non affectée.
-- **Sauver le PBN** télécharge la donne composée.
+- La rangée du haut, en icônes (le nom de chacune est dans son infobulle) : **Charger un fichier .pbn**, **Donne aléatoire**, **Donne exemple**, **Sauver le PBN** et **Texte de la donne (format PBN)** (icône `</>`), qui affiche ou masque la donne en texte — on peut y coller une donne reçue par courriel. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
+- **Donne aléatoire** tire une donne complète ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
+- **À la première visite**, la table est vide : les 52 cartes attendent dans la zone **Cartes non affectées**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple, qui n'est qu'à un clic.
+- **Composer à la main** : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
+- Chaque main porte deux **bornes de points d'honneur** (mini/maxi). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
+- Sous la table : **Retirer toutes les cartes** vide la table, **Compléter les mains** répartit les cartes non affectées entre les mains incomplètes en respectant les bornes (grisé quand il n'y a rien à distribuer), **Effacer les bornes** remet les mini/maxi à vide, **Afficher les enchères** lance le calcul. L'en-tête de chaque main porte une **poubelle** qui renvoie ses seules cartes au centre.
 
 ### Voir les enchères
 
-**Afficher les enchères** appelle `POST /bid` — ou le moteur embarqué, en mode navigateur — et affiche les quatre mains autour de la table, la grille d'enchères (survolez une enchère pour lire sa signification), la liste des commentaires et le JSON brut.
+**Afficher les enchères** calcule la séquence — dans la page, ou par `POST /bid` quand un serveur est visé — et affiche les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
 
 ### Le mode navigateur
 
-Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](engine/response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
+Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, versionné, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](engine/response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
 
 ```bash
 node tools/wasm-parity.js               # compare les deux chemins sur engine/testdata/*.pbn
 ```
 
-La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur — il n'y a personne à tester, le bouton **Tester** y disparaît donc, et la couleur de la pastille suffit à dire l'état. Sans `cli/bids.wasm`, rien n'est sondé à l'ouverture : le client reste sur **Navigateur** et ne découvre l'absence du moteur qu'au premier calcul. Il le dit alors clairement et ramène la barre du serveur, qui laisse en viser un.
+C'est **toujours** ce mode qui est utilisé, que la page soit servie par `run.ps1` / `run.sh` ou copiée sur un hébergeur statique. La pastille d'état du pied de page rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et nomme le moteur au lieu du serveur — il n'y a personne à tester, le bouton **Tester** y disparaît donc. Si le moteur ne se charge pas (fichier absent, navigateur sans WebAssembly), le client le dit clairement et fait reparaître la barre du serveur, qui laisse en viser un.
 
-Tant que le moteur répond, la barre du serveur disparaît de l'en-tête : il n'y a personne à choisir. Pour viser un serveur alors que tout fonctionne — la production, un autre port, ou simplement comparer les deux chemins — ouvrez le client avec **`?serveur=1`** :
+Pour viser malgré tout un serveur alors que tout fonctionne — la production, un autre port, ou simplement comparer les deux chemins — ouvrez le client avec **`?serveur=1`** :
 
 ```
 http://localhost:9015/?serveur=1
 ```
 
-`?serveur=0` la referme, de sorte qu'un signet puisse porter l'une ou l'autre forme sans ambiguïté. Le mode sélectionné est mémorisé comme les autres : les visites suivantes se passent du paramètre, la barre restant visible tant que le mode n'est pas revenu à **Navigateur**.
+La barre du serveur reparaît alors dans le bandeau : **Local** vise `http://localhost:9015` (une autre URL saisie est mémorisée), **Distant** attend l'URL du déploiement. Le choix fait ainsi n'est repris qu'avec `?serveur=1` : sans le paramètre, le client revient au mode navigateur. `?serveur=0` referme la barre, de sorte qu'un signet puisse porter l'une ou l'autre forme sans ambiguïté. L'API envoie les en-têtes CORS nécessaires pour être pilotée depuis une autre origine.
 
 ### Le questionnaire
 
-**Votre main** choisit un siège, **Commencer le questionnaire** lance l'entraînement : les trois autres mains restent cachées, l'enchère se déroule pas à pas et, à chaque tour du siège choisi, une boîte à enchères n'ouvre que les enchères **légales** (palier suffisant, contre et surcontre selon le camp du dernier appelant). La réponse est comparée à celle du moteur : verdict, enchère attendue et son commentaire SEF. À la fin, les mains sont dévoilées, le score s'affiche (`n / total`, en pourcentage) avec le contrat final, et **Afficher le détail complet** ouvre la vue normale de la donne.
+Le panneau **Questionnaire d'enchères**, sous celui de la donne, choisit **votre main** (Nord, Est, Sud ou Ouest) et lance l'entraînement sur la donne composée.
+
+- **Seule votre main est visible.** La donne composée au-dessus — les quatre mains, le texte PBN et les boutons sous la table — est masquée, remplacée par la ligne « Donne masquée. **Afficher la donne** » ; ce lien la montre à tout moment.
+- Les enchères des trois autres sièges **s'enchaînent d'elles-mêmes** (une toutes les 0,7 s), chacune brièvement surlignée à son arrivée dans la grille.
+- À votre tour, une **boîte à enchères** n'ouvre que les enchères **légales** (palier suffisant, contre et surcontre selon le camp du dernier appelant). La réponse est comparée à celle du moteur : verdict, enchère attendue et son commentaire SEF, puis **Continuer**.
+- **Annuler** arrête le questionnaire à tout moment et revient au panneau de la donne.
+- À la fin, les mains sont dévoilées dans le questionnaire, le score s'affiche (`n / total`, en pourcentage) avec le contrat final, et trois suites sont offertes : **Rejouer cette donne**, **Nouvelle donne**, **Afficher le détail complet**. La donne composée, elle, **reste masquée** : le lien **Afficher la donne** la rend.
+
+**Mode questionnaire** : un interrupteur sous le choix de la main, mémorisé dans le navigateur. Activé, il fait arriver **masquée** chaque nouvelle donne — tirage, donne exemple, fichier, choix dans un fichier multi-donnes, donne retrouvée à l'ouverture de la page — pour s'entraîner sur une donne que l'on ne connaît pas. **Afficher la donne** la montre ; déplacer ensuite une carte ne la re-masque pas. Désactivé, la donne s'affiche normalement et n'est masquée que pendant un questionnaire.
+
+### Ce que le navigateur retient
+
+Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du navigateur, propre à chaque adresse (une copie sur GitHub Pages et `localhost:9015` ne partagent donc rien).
+
+| Clé | Contenu |
+|---|---|
+| `bids.lang`, `bids.theme` | Langue et thème |
+| `bids.quizMode` | Mode questionnaire activé ou non |
+| `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |
+| `ia.enabled`, `ia.mode`, `ia.local`, `ia.remote` | Option de reconnaissance par photo et serveur IA visé |
+| `bids.mode`, `bids.local`, `bids.remote` | Serveur d'enchères choisi — pris en compte seulement avec `?serveur=1` |
 
 ### Le PAR
 

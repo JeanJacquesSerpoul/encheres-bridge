@@ -199,6 +199,10 @@ const UI_TEXT = {
       "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
     pbnCopy: "Copier le texte PBN",
+    shareLink: "Copier le lien de cette donne",
+    shareCopied: "Lien de la donne copié",
+    shareFailed: "Copie impossible : le lien n'a pas pu être placé dans le presse-papiers.",
+    printResult: "Imprimer le résultat",
     pbnCopied: "Texte PBN copié",
     pbnCopyFailed: "Copie impossible : sélectionnez le texte et copiez-le à la main.",
     pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
@@ -338,6 +342,10 @@ const UI_TEXT = {
       "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
     pbnCopy: "Copy the PBN text",
+    shareLink: "Copy a link to this deal",
+    shareCopied: "Deal link copied",
+    shareFailed: "Could not copy: the link could not be put on the clipboard.",
+    printResult: "Print the result",
     pbnCopied: "PBN text copied",
     pbnCopyFailed: "Could not copy: select the text and copy it by hand.",
     pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
@@ -591,6 +599,7 @@ function applyLang() {
 // Loads a PBN text into the textarea and resets everything that depends on
 // the previous deal (quiz in progress, displayed result, deal picker).
 function loadPbn(text, fileName) {
+  pushUndo();
   $("#pbn").value = text;
   // Quitter une donne chargée remet les sélecteurs sur « Aléatoire » : ce
   // qu'ils affichaient venait du fichier, ce n'était pas une préférence de
@@ -606,6 +615,7 @@ function loadPbn(text, fileName) {
   refreshDealSelector(true);
   setPbnOpen(false);
   $("#file-name").textContent = fileName || "";
+  settlePbn();
 }
 
 $("#file").addEventListener("change", (ev) => {
@@ -1119,6 +1129,8 @@ const CONS_TEXT = {
     ph: "PH", min: "Mini", max: "Maxi",
     reset: "Effacer les bornes",
     boundsToggle: "Bornes de points (PH mini/maxi)",
+    undo: "Annuler la dernière action (Ctrl+Z)",
+    undone: "Dernière action annulée.",
     neutral: "Cartes non affectées",
     // Le clic-puis-clic existe depuis toujours (voir le gestionnaire
     // pointerup) mais n'était annoncé nulle part : sur écran tactile, viser
@@ -1162,6 +1174,8 @@ const CONS_TEXT = {
     ph: "HCP", min: "Min", max: "Max",
     reset: "Clear bounds",
     boundsToggle: "Point bounds (min/max HCP)",
+    undo: "Undo the last action (Ctrl+Z)",
+    undone: "Last action undone.",
     neutral: "Unassigned cards",
     neutralHint:
       "Drag a card from one hand to another, or here to take it out. " +
@@ -1340,10 +1354,100 @@ function writeZonesToPbn() {
   replaceSelectedBlock(newBlock);
 }
 
+// ---------- annuler ----------
+//
+// Chaque action qui change la donne — carte déplacée, poubelle, table vidée ou
+// complétée, photo, nouvelle donne tirée, exemple ou fichier — retient d'abord
+// l'état d'avant. Le texte PBN suffit à le décrire : les cartes qu'il ne cite
+// pas sont celles du centre (voir gatherMissingCards).
+const UNDO_LIMIT = 50;
+const undoStack = [];
+
+function undoSnapshot() {
+  return {
+    pbn: $("#pbn").value,
+    idx: selectedGameIdx,
+    fromFile: dealFromFile,
+    fileName: $("#file-name").textContent,
+  };
+}
+
+function pushUndo() {
+  const snap = undoSnapshot();
+  const last = undoStack[undoStack.length - 1];
+  // Deux instantanés identiques de suite n'annuleraient rien.
+  if (last && last.pbn === snap.pbn && last.idx === snap.idx) return;
+  undoStack.push(snap);
+  if (undoStack.length > UNDO_LIMIT) undoStack.shift();
+  renderUndoButton();
+}
+
+function renderUndoButton() {
+  $("#cons-undo-btn").disabled = undoStack.length === 0;
+}
+
+function undo() {
+  const snap = undoStack.pop();
+  if (!snap) return;
+  $("#pbn").value = snap.pbn;
+  selectedGameIdx = snap.idx;
+  dealFromFile = snap.fromFile;
+  $("#file-name").textContent = snap.fileName;
+  refreshDealSelector(false);
+  gatherMissingCards();
+  selectedCard = null;
+  renderBoundsCards();
+  resetQuiz();
+  hideResult();
+  setError($("#cons-error"), "");
+  settlePbn();
+  renderUndoButton();
+  announce(CONS_TEXT[$("#lang").value].undone);
+}
+
+$("#cons-undo-btn").addEventListener("click", undo);
+
+// Ctrl+Z (Cmd+Z sur Mac) hors des champs de saisie, qui gardent leur propre
+// annuler — celui du texte PBN notamment. Rien quand la donne est masquée :
+// on changerait une donne que l'on ne voit pas.
+document.addEventListener("keydown", (ev) => {
+  if (!(ev.ctrlKey || ev.metaKey) || ev.shiftKey || ev.altKey) return;
+  if (ev.key !== "z" && ev.key !== "Z") return;
+  const target = ev.target;
+  if (target.closest && target.closest("input, textarea, select, [contenteditable]")) return;
+  if (document.querySelector("dialog[open]")) return;
+  if ($("#input-panel").classList.contains("quiz-running")) return;
+  if (!undoStack.length) return;
+  ev.preventDefault();
+  undo();
+});
+
+// La saisie directe dans le texte PBN n'appelle ni commitZones ni loadPbn.
+// L'état « posé » — celui qu'a laissé la dernière action, ou le démarrage — est
+// donc tenu à jour à part, et empilé quand on quitte le champ après l'avoir
+// modifié.
+let settledPbn = null;
+
+function settlePbn() {
+  settledPbn = undoSnapshot();
+}
+
+$("#pbn").addEventListener("change", () => {
+  if (!settledPbn || settledPbn.pbn === $("#pbn").value) return;
+  undoStack.push(settledPbn);
+  if (undoStack.length > UNDO_LIMIT) undoStack.shift();
+  settlePbn();
+  renderUndoButton();
+});
+
 // Applies a change made in the constraints panel: PBN text, display, and any
 // result computed from the previous cards, which no longer describes the deal.
 function commitZones() {
+  // Le texte PBN décrit encore la donne d'avant ce changement : c'est lui que
+  // l'on retient pour pouvoir l'annuler.
+  pushUndo();
   writeZonesToPbn();
+  settlePbn();
   renderBoundsCards();
   resetQuiz();
   hideResult();
@@ -1509,6 +1613,12 @@ const ERASER_SVG = `${SVG_OPEN}
   <path d="M4 21h16"/>
 </svg>`;
 
+// Une flèche qui revient sur elle-même : annuler.
+const UNDO_SVG = `${SVG_OPEN}
+  <path d="M9 14 4 9l5-5"/>
+  <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>
+</svg>`;
+
 // Trois curseurs : les bornes de points de chaque main.
 const BOUNDS_SVG = `${SVG_OPEN}
   <path d="M4 6h9"/><path d="M17 6h3"/><circle cx="15" cy="6" r="2"/>
@@ -1546,6 +1656,19 @@ const BOOK_SVG = `${SVG_OPEN}
 // Deux chevrons : la donne sous sa forme de texte (PBN).
 const CODE_SVG = `${SVG_OPEN}
   <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/>
+</svg>`;
+
+// Deux maillons : le lien de partage.
+const LINK_SVG = `${SVG_OPEN}
+  <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/>
+  <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>
+</svg>`;
+
+// Une imprimante : imprimer le résultat.
+const PRINT_SVG = `${SVG_OPEN}
+  <path d="M6 9V3h12v6"/>
+  <rect x="3" y="9" width="18" height="8" rx="2"/>
+  <path d="M6 14h12v7H6z"/>
 </svg>`;
 
 // Deux feuilles décalées : copier. Puis la coche qui la remplace un instant,
@@ -1671,44 +1794,117 @@ function renderDealActions() {
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
   setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle);
   setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
+  setCommandButton("#share-btn", LINK_SVG, t.shareLink);
+  setCommandButton("#print-btn", PRINT_SVG, t.printResult);
 }
 
-// Copie tout le texte PBN. Le presse-papiers moderne exige un contexte sûr
-// (https ou localhost) et peut être refusé : l'ancienne commande de copie, sur
-// le texte sélectionné, prend alors le relais.
-async function copyPbn() {
-  const t = UI_TEXT[$("#lang").value];
-  const btn = $("#pbn-copy-btn");
-  const textarea = $("#pbn");
-  let ok = false;
+// Place un texte dans le presse-papiers. Le presse-papiers moderne exige un
+// contexte sûr (https ou localhost) et peut être refusé : l'ancienne commande
+// de copie prend alors le relais, sur un champ temporaire hors de la vue.
+async function copyToClipboard(text) {
   try {
-    await navigator.clipboard.writeText(textarea.value);
-    ok = true;
+    await navigator.clipboard.writeText(text);
+    return true;
   } catch (err) {
-    textarea.focus();
-    textarea.select();
+    const tmp = document.createElement("textarea");
+    tmp.value = text;
+    tmp.setAttribute("readonly", "");
+    tmp.style.position = "fixed";
+    tmp.style.opacity = "0";
+    document.body.appendChild(tmp);
+    tmp.select();
+    let ok = false;
     try {
       ok = document.execCommand("copy");
     } catch (err2) {
       ok = false;
     }
+    tmp.remove();
+    return ok;
   }
+}
+
+// Le retour d'un bouton de copie : une coche 1,5 s et l'annonce en cas de
+// réussite, le message d'échec dans l'infobulle et en alerte sinon.
+function flashCopied(btn, ok, okMsg, failMsg) {
   if (!ok) {
-    btn.dataset.tip = t.pbnCopyFailed;
-    announceAlert(t.pbnCopyFailed);
+    btn.dataset.tip = failMsg;
+    announceAlert(failMsg);
     return;
   }
-  announce(t.pbnCopied);
-  // La coche dit que c'est fait, puis le bouton redevient lui-même.
+  announce(okMsg);
   btn.innerHTML = CHECK_SVG;
-  btn.dataset.tip = t.pbnCopied;
+  btn.dataset.tip = okMsg;
   btn.classList.add("copied");
-  clearTimeout(copyPbn.timer);
-  copyPbn.timer = setTimeout(() => {
+  clearTimeout(btn.copyTimer);
+  btn.copyTimer = setTimeout(() => {
     btn.classList.remove("copied");
     renderDealActions();
   }, 1500);
 }
+
+// Copie tout le texte PBN.
+async function copyPbn() {
+  const t = UI_TEXT[$("#lang").value];
+  const ok = await copyToClipboard($("#pbn").value);
+  flashCopied($("#pbn-copy-btn"), ok, t.pbnCopied, t.pbnCopyFailed);
+}
+
+// ---------- partage ----------
+//
+// Le lien porte la donne sélectionnée dans son fragment (#pbn=…) : le fragment
+// n'est jamais envoyé au serveur, et le lien marche aussi bien sur GitHub Pages
+// que dans un sous-répertoire ou en local.
+const SHARE_PREFIX = "#pbn=";
+
+function shareURL() {
+  const block = pbnGames[selectedGameIdx] || $("#pbn").value.trim();
+  return location.href.split("#")[0] + SHARE_PREFIX + encodeURIComponent(block);
+}
+
+$("#share-btn").addEventListener("click", async () => {
+  const t = UI_TEXT[$("#lang").value];
+  const ok = await copyToClipboard(shareURL());
+  flashCopied($("#share-btn"), ok, t.shareCopied, t.shareFailed);
+});
+
+// La donne d'un lien de partage, ou null si l'adresse n'en porte pas — ou en
+// porte une illisible, qui est alors ignorée plutôt que d'effacer la donne.
+function sharedPbnFromHash() {
+  if (!location.hash.startsWith(SHARE_PREFIX)) return null;
+  let text;
+  try {
+    text = decodeURIComponent(location.hash.slice(SHARE_PREFIX.length));
+  } catch (err) {
+    return null;
+  }
+  return parseDealHands(text) ? text : null;
+}
+
+// Une fois lue, la donne quitte l'adresse : un rechargement ne doit pas écraser
+// ce que l'on a fait depuis, et l'adresse affichée redevient celle de la page.
+function clearShareHash() {
+  history.replaceState(null, "", location.href.split("#")[0]);
+}
+
+// Un lien collé dans l'onglet déjà ouvert.
+window.addEventListener("hashchange", () => {
+  const shared = sharedPbnFromHash();
+  if (!shared) return;
+  loadPbn(shared);
+  clearShareHash();
+  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// ---------- impression ----------
+//
+// Le Résultat s'imprime seul (voir @media print dans style.css), et toujours
+// en thème clair : un fond sombre coûterait de l'encre pour rien.
+$("#print-btn").addEventListener("click", () => window.print());
+window.addEventListener("beforeprint", () => {
+  document.documentElement.dataset.theme = "light";
+});
+window.addEventListener("afterprint", applyTheme);
 
 $("#pbn-copy-btn").addEventListener("click", copyPbn);
 
@@ -1726,6 +1922,7 @@ $("#pbn-toggle-btn").addEventListener("click", () => {
 function renderBoundsCards() {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
+  setCommandButton("#cons-undo-btn", UNDO_SVG, t.undo);
   setCommandButton("#cons-reset-btn", ERASER_SVG, t.reset);
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
@@ -3762,7 +3959,7 @@ $("#quiz-btn").addEventListener("click", startQuiz);
 // une fois, au démarrage, depuis les mêmes constantes.
 const HELP_ICONS = {
   file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
-  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
+  pbn: CODE_SVG, link: LINK_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, undo: UNDO_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
   quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
 };
 
@@ -3817,12 +4014,16 @@ const firstLaunch = !readStored(WELCOME_KEY, "") && !readStored(LAST_DEAL_KEY, "
 // puis sonde le serveur.
 $("#lang").value = initialLang();
 applyTheme();
-$("#pbn").value = readStored(LAST_DEAL_KEY, "") || EMPTY_PBN;
+// Un lien de partage (#pbn=…) l'emporte sur la dernière donne retenue.
+const sharedAtLoad = sharedPbnFromHash();
+if (sharedAtLoad) clearShareHash();
+$("#pbn").value = sharedAtLoad || readStored(LAST_DEAL_KEY, "") || EMPTY_PBN;
 refreshDealSelector(true);
 gatherMissingCards();
 renderBoundsCards();
 renderHelpIcons();
 hideNewDealInQuizMode();
+settlePbn();
 applyLang();
 setPbnOpen(false);
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le

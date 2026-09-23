@@ -42,13 +42,13 @@ try {
 
     # Aucun test ne compile le fichier tagué « js && wasm » : ce vet est le seul
     # garde-fou contre une faute de frappe dans main_js.go.
-    go vet .
+    go vet ./engine
     if ($LASTEXITCODE -ne 0) { throw "go vet a échoué pour js/wasm (code $LASTEXITCODE)" }
 
     Copy-Item $execJs (Join-Path $root "cli\wasm_exec.js") -Force
 
     Write-Host "Compilation de cli\bids.wasm (js/wasm, revision $revision)..."
-    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o (Join-Path $root "cli\bids.wasm") .
+    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o (Join-Path $root "cli\bids.wasm") ./engine
     if ($LASTEXITCODE -ne 0) { throw "go build a échoué pour js/wasm (code $LASTEXITCODE)" }
 }
 finally {
@@ -59,7 +59,7 @@ finally {
 }
 
 # La taille gzip est le chiffre utile : c'est ce que le serveur transmet (voir
-# gzipStatic dans main.go). Un bond au-delà de ~2 Mo signalerait qu'une
+# gzipStatic dans engine/main.go). Un bond au-delà de ~2 Mo signalerait qu'une
 # dépendance serveur a fui dans la cible, donc un //go:build mal posé.
 $wasm = Get-Item (Join-Path $root "cli\bids.wasm")
 $buffer = New-Object System.IO.MemoryStream

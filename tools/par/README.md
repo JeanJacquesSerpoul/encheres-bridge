@@ -28,7 +28,7 @@ le même rapport : deux révisions du moteur se comparent ligne à ligne.
 ## Les deux moitiés
 
 **Les enchères** viennent de `TestParAuditDump` (voir
-[`audit_par_test.go`](../../audit_par_test.go)), un harnais et non une
+[`audit_par_test.go`](../../engine/audit_par_test.go)), un harnais et non une
 assertion : il est ignoré tant que `PAR_AUDIT_OUT` ne désigne pas un fichier, si
 bien que `go test ./...` n'en voit rien. Les donnes sortent de `randomDeal`, le
 donneur et la vulnérabilité du numéro d'étui (rotation de seize), l'enchère de

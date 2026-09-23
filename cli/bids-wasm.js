@@ -4,7 +4,7 @@
 // sont calculées dans le navigateur, sans aucun appel réseau, avec le même
 // code et le même encodeur JSON que /bid — donc les mêmes octets. Produit par
 // build-wasm.sh, servi par le serveur Go (gzip + ETag, voir gzipStatic dans
-// main.go), et absent tant que ce script n'a pas été lancé : dans ce cas le
+// engine/main.go), et absent tant que ce script n'a pas été lancé : dans ce cas le
 // client le dit et les modes Local et Distant continuent de fonctionner.
 //
 // Une seule instanciation pour la page, lancée dès l'ouverture par le

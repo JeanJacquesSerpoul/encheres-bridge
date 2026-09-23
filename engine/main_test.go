@@ -7,6 +7,7 @@
 package main
 
 import (
+	client "bids"
 	"bytes"
 	"encoding/json"
 	"io/fs"
@@ -207,7 +208,7 @@ func TestResolveBuildInfo(t *testing.T) {
 }
 
 func TestEmbeddedCLIAssets(t *testing.T) {
-	sub, err := fs.Sub(cliFS, "cli")
+	sub, err := fs.Sub(client.CLI, "cli")
 	if err != nil {
 		t.Fatalf("fs.Sub: %v", err)
 	}

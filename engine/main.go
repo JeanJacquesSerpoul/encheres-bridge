@@ -7,12 +7,12 @@
 package main
 
 import (
+	client "bids"
 	"bytes"
 	"compress/gzip"
 	"context"
 	"crypto/rand"
 	"crypto/sha256"
-	"embed"
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -33,13 +33,10 @@ import (
 	"time"
 )
 
-// The test client, including cli/bids.wasm when build-wasm.sh has produced
-// it. This directive must stay in this file: an untagged copy of it would
-// also land in the WebAssembly build, which would then embed itself and
-// double in size on every rebuild.
-//
-//go:embed all:cli
-var cliFS embed.FS
+// The test client (cli/, including cli/bids.wasm when build-wasm.sh has
+// produced it) is embedded by the root package bids (cli.go, imported as
+// client: a local variable here is already called bids): //go:embed
+// cannot reach a parent directory, so the directive cannot live here.
 
 var logger = newLogger()
 
@@ -525,7 +522,7 @@ func main() {
 	if os.Getenv("SERVE_CLI") == "false" {
 		mux.HandleFunc("/", accessLog(cors(notFoundHandler)))
 	} else {
-		cliRoot, err := fs.Sub(cliFS, "cli")
+		cliRoot, err := fs.Sub(client.CLI, "cli")
 		if err != nil {
 			logger.Error("cannot mount embedded cli assets", "error", err)
 			mux.HandleFunc("/", accessLog(cors(notFoundHandler)))

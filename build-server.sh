@@ -70,7 +70,7 @@ build() {
     (
         cd "$root"
         GOOS="$goos" GOARCH="$arch" CGO_ENABLED=0 go build -trimpath \
-            -ldflags="-s -w -X main.buildRevision=$revision" -o "$out/$name" .
+            -ldflags="-s -w -X main.buildRevision=$revision" -o "$out/$name" ./engine
     )
     local mo
     mo=$(awk -v b="$(wc -c < "$out/$name" | tr -d " ")" 'BEGIN { printf "%.1f", b / 1048576 }')
@@ -87,6 +87,5 @@ Terminé. Pour utiliser l'application :
      server\bids-windows.exe) — il écoute sur le port 9015 ;
   2. http://localhost:9015/ dans un navigateur.
 Le client calcule les enchères dans le navigateur (cli/bids.wasm) dès la
-première visite ; le sélecteur de l'en-tête permet de viser le serveur à la
-place. Rien à configurer dans les deux cas.
+première visite, comme sur une copie statique de cli/. Rien à configurer.
 MSG

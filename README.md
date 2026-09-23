@@ -75,7 +75,7 @@ Le script :
 
 ```bash
 ./build-wasm.sh     # seulement après une modification du code Go (ou .\build-wasm.ps1)
-go run .            # ou : go build -o bids.exe . && ./bids.exe
+go run ./engine     # ou : go build -o bids.exe ./engine && ./bids.exe
 ```
 
 `//go:embed` fige le contenu de `cli/` au moment où le serveur est compilé : le moteur WebAssembly doit donc exister avant, ce que les scripts garantissent.
@@ -83,8 +83,8 @@ go run .            # ou : go build -o bids.exe . && ./bids.exe
 Pour changer de port :
 
 ```bash
-PORT=8080 go run .            # Linux / macOS
-$env:PORT="8080"; go run .    # PowerShell
+PORT=8080 go run ./engine            # Linux / macOS
+$env:PORT="8080"; go run ./engine    # PowerShell
 ```
 
 > ⚠️ Si un autre service occupe déjà le port 9015 (conteneur Docker/WSL par exemple), lancez le serveur sur un autre port avec la variable `PORT`.
@@ -382,10 +382,10 @@ Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://local
 
 ### Le mode navigateur
 
-Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
+Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](engine/response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
 
 ```bash
-node tools/wasm-parity.js               # compare les deux chemins sur testdata/*.pbn
+node tools/wasm-parity.js               # compare les deux chemins sur engine/testdata/*.pbn
 ```
 
 La pastille d'état rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et le pied de page nomme le moteur au lieu du serveur — il n'y a personne à tester, le bouton **Tester** y disparaît donc, et la couleur de la pastille suffit à dire l'état. Sans `cli/bids.wasm`, rien n'est sondé à l'ouverture : le client reste sur **Navigateur** et ne découvre l'absence du moteur qu'au premier calcul. Il le dit alors clairement et ramène la barre du serveur, qui laisse en viser un.
@@ -426,7 +426,7 @@ Le serveur IA se choisit dans l'en-tête, sous celui des enchères, avec les mê
 go test ./...
 ```
 
-Environ 140 fichiers de tests couvrent le parseur PBN (rotation des mains, validation des 13 cartes, doublons), la couche HTTP (handlers, middlewares, fuzz) et, surtout, les règles du moteur convention par convention — un fichier par sujet (`drury_test.go`, `landy_test.go`, `reveil_test.go`, `fourth_suit_forcing_test.go`...). Un test de cohérence soumet 2 000 donnes aléatoires au moteur pour vérifier que chaque séquence est légale (enchères suffisantes, contres valides, rotation des joueurs) et se termine. Des donnes d'exemple sont fournies dans [testdata/](testdata/).
+Environ 140 fichiers de tests couvrent le parseur PBN (rotation des mains, validation des 13 cartes, doublons), la couche HTTP (handlers, middlewares, fuzz) et, surtout, les règles du moteur convention par convention — un fichier par sujet (`drury_test.go`, `landy_test.go`, `reveil_test.go`, `fourth_suit_forcing_test.go`...). Un test de cohérence soumet 2 000 donnes aléatoires au moteur pour vérifier que chaque séquence est légale (enchères suffisantes, contres valides, rotation des joueurs) et se termine. Des donnes d'exemple sont fournies dans [engine/testdata/](engine/testdata/).
 
 Trois fichiers ne sont pas des assertions mais des **harnais** : `audit_soft_test.go` et `audit_detail_test.go` publient des statistiques (manches manquées, chelems minces, trous par forme d'enchère) sans jamais échouer, et `audit_par_test.go` alimente l'audit ci-dessous.
 
@@ -486,7 +486,7 @@ Identifie le binaire en cours d'exécution.
 {"revision": "a1b2c3d", "time": "2026-08-24T12:57:57Z", "modified": false, "go": "go1.26.0"}
 ```
 
-`revision` est le SHA court du commit. Il vient de `-ldflags "-X main.buildRevision=..."` quand le binaire est compilé par [build-server.sh](build-server.sh)/[build-server.ps1](build-server.ps1) ou par `docker build --build-arg REVISION=$(git rev-parse --short HEAD)` (ce que font les scripts `build-docker`) ; à défaut, du marquage VCS que la chaîne Go inscrit elle-même dans le binaire, si bien qu'un simple `go build` s'identifie correctement. Il ne vaut `dev` que si aucune des deux sources n'est disponible — sous `go run .`, qui ne marque pas.
+`revision` est le SHA court du commit. Il vient de `-ldflags "-X main.buildRevision=..."` quand le binaire est compilé par [build-server.sh](build-server.sh)/[build-server.ps1](build-server.ps1) ou par `docker build --build-arg REVISION=$(git rev-parse --short HEAD)` (ce que font les scripts `build-docker`) ; à défaut, du marquage VCS que la chaîne Go inscrit elle-même dans le binaire, si bien qu'un simple `go build` s'identifie correctement. Il ne vaut `dev` que si aucune des deux sources n'est disponible — sous `go run ./engine`, qui ne marque pas.
 
 `time` est la date du commit et `modified` indique un binaire compilé sur un dépôt modifié : la révision seule prétendrait alors correspondre à un commit qu'elle ne reflète pas. Le client affiche cette version discrètement en bas de page, avec une étoile quand `modified` est vrai.
 
@@ -650,13 +650,13 @@ Le moteur fait enchérir les quatre joueurs à tour de rôle, chacun avec sa seu
 | **Redemandes de l'ouvreur** | 1SA/2SA/3SA par zones, soutiens 12-16 / 17-19 / 20+ HLD, bicolores économique / à saut / **cher** (18 HL et plus, auto-forcing), répétitions simple et à saut, rectifications des Texas, suites de 2♣ et 2♦, réveil de l'ouvreur | [§7](docs/regles_moteur.md#7-redemandes-de-louvreur) |
 | **Conventions du camp de l'ouvreur** | Checkback, Roudi à trois paliers, demande d'arrêt après répétition d'une mineure, Rubensohl, essai « couleur nécessitant un appui », **quatrième couleur forcing** (avec le 2♠ « impossible » au palier de 1) et **troisième couleur forcing** (la « collante » de l'ouverture) | [§8](docs/regles_moteur.md#8-conventions-du-camp-de-louvreur) |
 | **Défense** | interventions naturelles, 1SA d'intervention 16-18, contre d'appel 12-17 et contre « toutes distributions » à partir de 18, Michaels, Landy, règle des trois zones sur le contre, cue-bid de force de l'avancée, **le réveil** et ses réponses | [§9](docs/regles_moteur.md#9-le-camp-de-la-défense) |
-| **Compétition** | loi des levées totales (soutien et bataille de partielle), surenchère, sacrifice calculé sur le barème exact ([score.go](score.go)), contre punitif | [§10](docs/regles_moteur.md#10-la-compétition) |
+| **Compétition** | loi des levées totales (soutien et bataille de partielle), surenchère, sacrifice calculé sur le barème exact ([score.go](engine/score.go)), contre punitif | [§10](docs/regles_moteur.md#10-la-compétition) |
 | **Chelem** | enchères de contrôle, Blackwood 4SA « cinq clefs », appel aux Rois, 4SA quantitatif, déclenchement par le compte (29-32 par contrôles, 33 direct) ou par les clefs vues | [§11](docs/regles_moteur.md#11-la-zone-de-chelem) |
 | **Conclusion** | chaque joueur additionne ses points et ceux promis par le partenaire pour viser le bon palier — manche à 25 HL (SA), 27 HLD (majeure), 30 HLD (mineure), chelem à 33 — ou proposer en zone intermédiaire | [§12](docs/regles_moteur.md#12-la-décision-générique-de-fin-denchères) |
 
 ### Ce que le moteur ne fait pas
 
-- **La vulnérabilité** (tag `[Vulnerable]`, exposée dans la réponse) n'entre que dans les décisions de sacrifice compétitif ([score.go](score.go)) ; elle ne pèse nulle part ailleurs dans l'arbre de décision.
+- **La vulnérabilité** (tag `[Vulnerable]`, exposée dans la réponse) n'entre que dans les décisions de sacrifice compétitif ([score.go](engine/score.go)) ; elle ne pèse nulle part ailleurs dans l'arbre de décision.
 - **Les contres** sont essentiellement d'appel. Le punitif n'apparaît que dans deux situations précises : le contre d'un sacrifice adverse [L-4], et le passe qui convertit en punitif le contre Rubensohl du partenaire (arrêt et 17 H et plus) [C-17]. Il n'y a notamment **pas de contre punitif de 1SA**.
 - Le moteur implémente un **sous-ensemble raisonné** du SEF, et assume des écarts. Ils sont recensés, avec ce qu'ils coûtent, dans [§14 « Points à discuter en priorité »](docs/regles_moteur.md#14-points-à-discuter-en-priorité) ; les rattrapages qui masquent un trou plutôt qu'une règle de bridge sont isolés dans [§13 « Filets de sécurité »](docs/regles_moteur.md#13-filets-de-sécurité) — leur déclenchement signale un vrai bug.
 
@@ -664,26 +664,29 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 
 ## Structure du projet
 
+Tout le code Go du moteur et du serveur est dans [engine/](engine/), avec ses tests et [engine/testdata/](engine/testdata/). À la racine ne restent que `go.mod` et [cli.go](cli.go), une dizaine de lignes qui embarquent `cli/` dans le serveur : `//go:embed` ne peut pas remonter dans un dossier parent, la directive ne peut donc pas vivre dans `engine/`. On compile et on teste depuis la racine : `go build ./engine`, `go test ./...`.
+
 | Fichier | Rôle |
 |---------|------|
-| `main.go` | Serveur HTTP, middlewares (CORS, COOP/COEP, gzip des assets, limitation de charge, recover) |
-| `pbn.go` | Parseur PBN (`Board`, `Dealer`, `Vulnerable`, `Deal`) |
-| `cards.go` | Mains et évaluation (H/HL/HLD, types, arrêts) |
-| `calls.go` | Enchères, significations, notation `en`/`fr` |
-| `engine.go` | Boucle d'enchères, rôles, mémoire des enchères, Blackwood |
-| `decisions.go` | Règles SEF (ouvertures, réponses, redemandes, interventions, réveil) |
-| `conclude.go` | Conclusion de l'enchère : table de handlers par convention, puis décision générique (manche/proposition/chelem) |
-| `score.go` | Barème de marque, utilisé pour les décisions de sacrifice |
+| `cli.go` | Paquet racine `bids` : embarque `cli/` (`//go:embed all:cli`) pour le serveur |
+| `engine/main.go` | Serveur HTTP, middlewares (CORS, COOP/COEP, gzip des assets, limitation de charge, recover) |
+| `engine/pbn.go` | Parseur PBN (`Board`, `Dealer`, `Vulnerable`, `Deal`) |
+| `engine/cards.go` | Mains et évaluation (H/HL/HLD, types, arrêts) |
+| `engine/calls.go` | Enchères, significations, notation `en`/`fr` |
+| `engine/engine.go` | Boucle d'enchères, rôles, mémoire des enchères, Blackwood |
+| `engine/decisions.go` | Règles SEF (ouvertures, réponses, redemandes, interventions, réveil) |
+| `engine/conclude.go` | Conclusion de l'enchère : table de handlers par convention, puis décision générique (manche/proposition/chelem) |
+| `engine/score.go` | Barème de marque, utilisé pour les décisions de sacrifice |
 | `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
 | `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
-| `*_test.go` | ~140 fichiers : couche HTTP, parseur, et une convention par fichier |
-| `audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
-| `testdata/` | Donnes PBN d'exemple |
+| `engine/*_test.go` | ~140 fichiers : couche HTTP, parseur, et une convention par fichier |
+| `engine/audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
+| `engine/testdata/` | Donnes PBN d'exemple |
 | `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
 | `cli/` | Client web embarqué dans le binaire (`//go:embed`), servi à `/` — `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
-| `response.go` | Formes JSON de l'API, estampille de version et encodeur partagés par le serveur et la cible WebAssembly |
-| `main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
+| `engine/response.go` | Formes JSON de l'API, estampille de version et encodeur partagés par le serveur et la cible WebAssembly |
+| `engine/main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |

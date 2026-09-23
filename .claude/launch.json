@@ -4,7 +4,7 @@
     {
       "name": "bids-server",
       "runtimeExecutable": "go",
-      "runtimeArgs": ["run", "."],
+      "runtimeArgs": ["run", "./engine"],
       "port": 9015,
       "autoPort": true
     },

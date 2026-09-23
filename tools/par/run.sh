@@ -20,7 +20,7 @@ export PAR_AUDIT_ENGINE="$(git -C "$root" rev-parse --short HEAD 2>/dev/null || 
 mkdir -p "$out"
 
 echo "1/2  $PAR_AUDIT_DEALS donnes, graine $PAR_AUDIT_SEED : enchères du moteur"
-(cd "$root" && go test -run TestParAuditDump -count=1 . >/dev/null)
+(cd "$root" && go test -run TestParAuditDump -count=1 ./engine >/dev/null)
 
 echo "2/2  levées double-mort et par"
 node "$here/audit.js" "$PAR_AUDIT_OUT" "$out"

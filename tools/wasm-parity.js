@@ -13,9 +13,9 @@
 // réponse du serveur et celle du module — le texte brut, sans le reparser, ce
 // qui viderait la comparaison de son sens.
 //
-// Sans fichier, il prend tout testdata/*.pbn. Sortie : une ligne par cas, et
+// Sans fichier, il prend tout engine/testdata/*.pbn. Sortie : une ligne par cas, et
 // un code de retour non nul au premier écart. Le serveur doit tourner
-// (go run .) ; --dump s'en passe et n'écrit que le JSON du module.
+// (go run ./engine) ; --dump s'en passe et n'écrit que le JSON du module.
 //
 // Le module se charge comme la page le fait : wasm_exec.js dans le contexte
 // global (il y pose Go), puis instanciation et attente du crochet que main()
@@ -89,7 +89,7 @@ function firstDiff(a, b) {
 
 function pbnFiles(args) {
   if (args.length > 0) return args;
-  const dir = path.join(ROOT, "testdata");
+  const dir = path.join(ROOT, "engine", "testdata");
   return fs.readdirSync(dir).filter((f) => f.endsWith(".pbn")).map((f) => path.join(dir, f));
 }
 

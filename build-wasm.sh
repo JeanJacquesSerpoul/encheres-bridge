@@ -33,7 +33,7 @@ revision="$(git -C "$root" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 # Aucun test ne compile le fichier tagué « js && wasm » : ce vet est le seul
 # garde-fou contre une faute de frappe dans main_js.go.
-(cd "$root" && GOOS=js GOARCH=wasm go vet .)
+(cd "$root" && GOOS=js GOARCH=wasm go vet ./engine)
 
 cp "$exec_js" "$root/cli/wasm_exec.js"
 
@@ -41,11 +41,11 @@ echo "Compilation de cli/bids.wasm (js/wasm, revision $revision)..."
 (
     cd "$root"
     GOOS=js GOARCH=wasm CGO_ENABLED=0 go build -trimpath \
-        -ldflags="-s -w -X main.buildRevision=$revision" -o "$root/cli/bids.wasm" .
+        -ldflags="-s -w -X main.buildRevision=$revision" -o "$root/cli/bids.wasm" ./engine
 )
 
 # La taille gzip est le chiffre utile : c'est ce que le serveur transmet
-# (voir gzipStatic dans main.go). Un bond au-delà de ~2 Mo signalerait qu'une
+# (voir gzipStatic dans engine/main.go). Un bond au-delà de ~2 Mo signalerait qu'une
 # dépendance serveur a fui dans la cible, donc un //go:build mal posé.
 # `wc -c` et non `stat -c%s` : cette option est propre à GNU, le stat de
 # macOS la refuse et, sous `set -e`, arrêtait le script après la compilation.

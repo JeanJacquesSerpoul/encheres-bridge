@@ -26,13 +26,14 @@ type traceStep struct {
 }
 
 type tracer struct {
-	steps []traceStep
-	depth int
+	steps   []traceStep
+	depth   int
+	dropped bool // the decision was handed to untraced code: see drop
 }
 
 // check records a test and returns its outcome unchanged.
 func (t *tracer) check(ok bool, fr, en, value string) bool {
-	if t != nil {
+	if t != nil && !t.dropped {
 		t.steps = append(t.steps, traceStep{fr: fr, en: en, value: value, ok: ok, depth: t.depth})
 	}
 	return ok
@@ -41,9 +42,25 @@ func (t *tracer) check(ok bool, fr, en, value string) bool {
 // note records an informative line: a safety net that replaced the call, a
 // call planned on an earlier turn.
 func (t *tracer) note(fr, en string) {
-	if t != nil {
+	if t != nil && !t.dropped {
 		t.steps = append(t.steps, traceStep{fr: fr, en: en, note: true, depth: t.depth})
 	}
+}
+
+// drop discards the trace: the decision was finally taken by code that is not
+// instrumented yet, and a path stopping before the real decision would mislead
+// more than it explains. With no test left, the page shows no link.
+func (t *tracer) drop() {
+	if t != nil {
+		t.steps, t.dropped = nil, true
+	}
+}
+
+// untraced passes a decision through unchanged and drops the trace — for the
+// calls handed to code not yet instrumented: return e.untraced(e.conclude(p)).
+func (e *Engine) untraced(c Call, mn meaning) (Call, meaning) {
+	e.tr.drop()
+	return c, mn
 }
 
 // in and out nest the tests of a branch under the test that opened it.

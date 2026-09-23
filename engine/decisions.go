@@ -2713,7 +2713,7 @@ func (e *Engine) lightOpenerRebid(p *playerState) (Call, meaning, bool) {
 func (e *Engine) openerRebid(p *playerState) (Call, meaning) {
 	if p.lightOpen {
 		if c, mn, ok := e.lightOpenerRebid(p); ok {
-			return c, mn
+			return e.untraced(c, mn)
 		}
 	}
 	resp := e.ps[partnerOf(p.seat)]
@@ -2724,51 +2724,57 @@ func (e *Engine) openerRebid(p *playerState) (Call, meaning) {
 	// The negative double is a bid, not a penalty: it must be answered
 	// before any of the natural rebid machinery [RC-6].
 	if rm != nil && rm.spoutnik && hasResp && rsc.Call.Kind == KindDouble {
-		return e.answerSpoutnik(p, rm.spoutnikSuits)
+		return e.untraced(e.answerSpoutnik(p, rm.spoutnikSuits))
 	}
 
 	switch {
 	case oc == bid(1, SNoTrump) || oc == bid(2, SNoTrump):
 		if rm != nil && rm.relay && rsc.Call.IsBid() {
+			e.tr.note("le partenaire a demandé Stayman : montrer ses majeures quatrièmes",
+				"partner asked Stayman: show the four-card majors")
 			return e.staymanAnswer(p, oc.Level)
 		}
 		if rm != nil && rm.hasTexas {
 			if rm.texas.IsMajor() {
+				e.tr.note("le partenaire a fait un Texas : rectifier dans sa majeure",
+					"partner transferred: complete into his major")
 				return e.transferAnswer(p, rm.texas)
 			}
-			return e.minorTransferAnswer(p, rm.texas)
+			return e.untraced(e.minorTransferAnswer(p, rm.texas))
 		}
 		if rm != nil && rm.rubensohlDouble {
-			return e.rubensohlDoubleAnswer(p)
+			return e.untraced(e.rubensohlDoubleAnswer(p))
 		}
 		if rm != nil && rm.rubensohlAsk {
-			return e.rubensohlAskAnswer(p)
+			return e.untraced(e.rubensohlAskAnswer(p))
 		}
 		if rm != nil && rm.rubensohlStopperAsk {
-			return e.rubensohlStopperAskAnswer(p)
+			return e.untraced(e.rubensohlStopperAskAnswer(p))
 		}
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	case oc == bid(2, SClubs):
 		if hasResp && rsc.Call == bid(2, SDiamonds) {
+			e.tr.note("2♣ fort, relais 2♦ du partenaire : décrire la main",
+				"strong 2♣, partner's 2♦ relay: describe the hand")
 			return e.strongRebid(p)
 		}
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	case oc == bid(2, SDiamonds):
-		return e.gfRebid(p)
+		return e.untraced(e.gfRebid(p))
 	case oc == bid(3, SNoTrump):
 		if hasResp && rsc.Call.IsBid() && rsc.Call.Strain <= SDiamonds {
-			return e.affranchieRebid(p)
+			return e.untraced(e.affranchieRebid(p))
 		}
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	case oc.Level == 2 && (oc.Strain == SHearts || oc.Strain == SSpades):
 		if hasResp && rsc.Call == bid(2, SNoTrump) {
-			return e.weak2Feature(p, Suit(oc.Strain))
+			return e.untraced(e.weak2Feature(p, Suit(oc.Strain)))
 		}
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	case oc.Level == 1 && oc.Strain <= SSpades:
 		return e.naturalRebid(p, rsc, hasResp)
 	}
-	return e.conclude(p)
+	return e.untraced(e.conclude(p))
 }
 
 func (e *Engine) staymanAnswer(p *playerState, base int) (Call, meaning) {
@@ -2777,26 +2783,30 @@ func (e *Engine) staymanAnswer(p *playerState, base int) (Call, meaning) {
 	// Standard scheme (docs/bidings.md, "LE STAYMAN"): the suit one step above
 	// the ask denies both majors, then 2H/2S (3H/3S over 2SA) show one major
 	// without the other, and 2SA/3SA show both.
+	tr := e.tr
+	majors := cards(h, Hearts) + ", " + cards(h, Spades)
 	if base == 1 {
 		switch {
-		case h4 && s4:
+		case tr.check(h4 && s4, "4 ♥ et 4 ♠ → 2SA", "4 ♥ and 4 ♠ → 2NT", majors):
 			return bid(2, SNoTrump), m(-1, -1, "4 cartes à Cœur et 4 cartes à Pique", "four hearts and four spades").withLen(Hearts, 4).withLen(Spades, 4)
-		case h4:
+		case tr.check(h4, "4 ♥ sans 4 ♠ → 2♥", "4 ♥ without 4 ♠ → 2♥", majors):
 			return bid(2, SHearts), m(-1, -1, "4 cartes à Cœur sans 4 cartes à Pique", "four hearts, not four spades").withLen(Hearts, 4)
-		case s4:
+		case tr.check(s4, "4 ♠ sans 4 ♥ → 2♠", "4 ♠ without 4 ♥ → 2♠", majors):
 			return bid(2, SSpades), m(-1, -1, "4 cartes à Pique sans 4 cartes à Cœur", "four spades, not four hearts").withLen(Spades, 4)
 		default:
+			tr.check(true, "pas de majeure quatrième → 2♦", "no four-card major → 2♦", majors)
 			return bid(2, SDiamonds), m(-1, -1, "pas de majeure quatrième", "no four-card major")
 		}
 	}
 	switch {
-	case h4 && s4:
+	case tr.check(h4 && s4, "4 ♥ et 4 ♠ → 3SA", "4 ♥ and 4 ♠ → 3NT", majors):
 		return bid(3, SNoTrump), m(-1, -1, "4 cartes à Cœur et 4 cartes à Pique", "four hearts and four spades").withLen(Hearts, 4).withLen(Spades, 4)
-	case h4:
+	case tr.check(h4, "4 ♥ sans 4 ♠ → 3♥", "4 ♥ without 4 ♠ → 3♥", majors):
 		return bid(3, SHearts), m(-1, -1, "4 cartes à Cœur sans 4 cartes à Pique", "four hearts, not four spades").withLen(Hearts, 4)
-	case s4:
+	case tr.check(s4, "4 ♠ sans 4 ♥ → 3♠", "4 ♠ without 4 ♥ → 3♠", majors):
 		return bid(3, SSpades), m(-1, -1, "4 cartes à Pique sans 4 cartes à Cœur", "four spades, not four hearts").withLen(Spades, 4)
 	default:
+		tr.check(true, "pas de majeure quatrième → 3♦", "no four-card major → 3♦", majors)
 		return bid(3, SDiamonds), m(-1, -1, "pas de majeure quatrième", "no four-card major")
 	}
 }
@@ -2804,32 +2814,40 @@ func (e *Engine) staymanAnswer(p *playerState, base int) (Call, meaning) {
 func (e *Engine) transferAnswer(p *playerState, t Suit) (Call, meaning) {
 	h := p.hand
 	c := e.cheapestCall(t.Strain())
-	if t.IsMajor() && h.Len(t) >= 4 && p.shownMin+2 <= p.hand.H() && c.Level <= 2 {
+	if e.tr.check(t.IsMajor() && h.Len(t) >= 4 && p.shownMin+2 <= p.hand.H() && c.Level <= 2,
+		"4 atouts et un maximum → rectification à saut",
+		"four trumps and a maximum → super-accept", cards(h, t)+", "+pts(h.H(), "H")) {
 		// super-accept with four trumps and a maximum
 		return bid(c.Level+1, t.Strain()), m(p.shownMin+2, p.shownMax, "rectification à saut : 4 atouts, maximum", "super-accept: four trumps, maximum").withLen(t, 4)
 	}
+	e.tr.note("sinon → rectification simple", "otherwise → plain completion")
 	return c, m(-1, -1, "rectification du Texas", "completing the transfer").withLen(t, 0)
 }
 
 func (e *Engine) strongRebid(p *playerState) (Call, meaning) {
 	h := p.hand
 	hp := h.H()
+	tr := e.tr
 	for _, s := range []Suit{Spades, Hearts} {
-		if h.Len(s) >= 6 || (h.Len(s) >= 5 && hp >= 21) {
+		if tr.check(h.Len(s) >= 6 || (h.Len(s) >= 5 && hp >= 21),
+			"6 "+suitSymbol[s]+", ou 5 avec 21 H → 2"+suitSymbol[s],
+			"six "+suitSymbol[s]+", or five with 21 H → 2"+suitSymbol[s], cards(h, s)+", "+pts(hp, "H")) {
 			return bidSuit(2, s), m(18, 23, "6 cartes et 18-21H ou 5 cartes et 21-22H, forcing", "six cards 18-21 or five cards 21-22, forcing").withLen(s, 5).asForcing()
 		}
 	}
 	// The 2NT rebid genuinely shows 22-23: an 18-21 hand that opened 2C on
 	// its six-card suit (a semi-regular 6-3-2-2 included) must name the suit,
 	// not inflate its strength behind a "balanced" 2NT.
-	if (h.IsRegular() || h.IsSemiRegular()) && hp >= 22 {
+	if tr.check((h.IsRegular() || h.IsSemiRegular()) && hp >= 22,
+		"22-23 H, régulière ou semi-régulière → 2SA", "22-23 H, balanced → 2NT", pts(hp, "H")+", "+shape(h)) {
 		return bid(2, SNoTrump), m(22, 23, "22-23H, jeu (semi-)régulier", "22-23 balanced")
 	}
 	long := h.Longest()
-	if h.Len(long) >= 6 {
+	if tr.check(h.Len(long) >= 6, "couleur sixième → 3 à la couleur", "six-card suit → three of the suit", cards(h, long)) {
 		return bidSuit(3, long), m(18, 23, "belle couleur longue, forcing", "long strong suit, forcing").withLen(long, 6).asForcing()
 	}
-	if h.Len(long) >= 5 {
+	if tr.check(h.Len(long) >= 5, "couleur cinquième, main irrégulière → 3 à la couleur",
+		"five-card suit, unbalanced → three of the suit", cards(h, long)) {
 		// Unbalanced with a five-card minor (a 5-5 two-suiter or 5-4-4-0):
 		// name it rather than hide a possible void behind a "balanced" 2NT
 		// that the transfer machinery would then trust for a doubleton fit.
@@ -2838,6 +2856,7 @@ func (e *Engine) strongRebid(p *playerState) (Call, meaning) {
 	// No five-card suit at all: a 4-4-4-1 three-suiter has no long suit to
 	// name, so a 3-level suit rebid would lie about the holding. Rebid 2NT on
 	// strength instead.
+	tr.note("sans couleur longue → 2SA", "no long suit → 2NT")
 	return bid(2, SNoTrump), m(22, 23, "22-23H, sans couleur longue", "22-23, no long suit")
 }
 
@@ -2956,12 +2975,13 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 	rm := resp.lastM
 
 	if !hasResp || rsc.Call.Kind == KindPass {
-		return e.openerReopen(p, os)
+		return e.untraced(e.openerReopen(p, os))
 	}
 	rc := rsc.Call
 	if rc.Kind != KindBid {
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	}
+	tr := e.tr
 
 	// Drury [RM-2b]: the ask is artificial, so nothing below may
 	// read 2T as a club suit or 2SA as a natural notrump raise. Interference
@@ -2972,12 +2992,12 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 			// Interference cancelled the scheme; whatever happens next, 2T is
 			// not a club suit to raise, so the generic machinery -- which
 			// reads the fit from the promised lengths -- takes over.
-			return e.conclude(p)
+			return e.untraced(e.conclude(p))
 		}
 		if rm.drury {
-			return e.druryRebid(p, os)
+			return e.untraced(e.druryRebid(p, os))
 		}
-		return e.druryShortRebid(p, os)
+		return e.untraced(e.druryShortRebid(p, os))
 	}
 
 	// Splinter and control-bid responses: the fit (and short suit) are
@@ -2985,11 +3005,13 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 	// generic slam engine takes over rather than rebidOverNewSuit, which
 	// would misread the named suit as a natural one to support.
 	if rm != nil && (rm.splinter || rm.controlBid) {
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	}
 
 	// Conventional 2NT raise over a major (3 trumps, 11-12 HLD).
-	if os.IsMajor() && rc == bid(2, SNoTrump) && rm != nil && rm.lens[os] >= 3 {
+	if os.IsMajor() && rc == bid(2, SNoTrump) && rm != nil && tr.check(rm.lens[os] >= 3,
+		"2SA fitté du partenaire (3 atouts, 11-12 HLD) → accepter ou refuser la manche",
+		"partner's conventional 2NT (three trumps, 11-12 HLD) → accept or decline game", "") {
 		// Value the hand for acceptance by HL plus genuine shortness only. A
 		// doubleton in an otherwise balanced 5-3-3-2 adds a distributional
 		// point that does not become a playing trick opposite a limited
@@ -3008,38 +3030,51 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 				val += 2
 			}
 		}
+		tr.in()
+		defer tr.out()
 		switch {
-		case val <= 13:
+		case tr.check(val <= 13, "13 points au plus (HL, singleton +2, chicane +3) → refus : 3 de la majeure",
+			"13 points at most (HL, singleton +2, void +3) → decline: three of the major", fmt.Sprintf("%d", val)):
 			return bidSuit(3, os), m(12, 13, "jeu minimal, refus de la proposition", "minimum, declining the game try").withLen(os, 5)
 		default:
+			tr.check(true, "14 points et plus → manche", "14 points or more → game", fmt.Sprintf("%d", val))
 			return bidSuit(4, os), m(14, 23, "accepte la proposition de manche", "accepting the game try").withLen(os, 5)
 		}
 	}
 	// Invitations and conventional strong responses are settled generically.
 	if rm != nil && (rm.invite || rm.slamInvite) {
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	}
 	// Raise of the opened suit.
-	if rc.Strain == os.Strain() {
+	if tr.check(rc.Strain == os.Strain(),
+		"le partenaire soutient la couleur d'ouverture", "partner raises the opened suit", "") {
 		hld := e.hldAgainstTheirBidding(p, os)
+		tr.in()
+		defer tr.out()
 		switch rc.Level {
 		case 2:
 			switch {
 			// Direct game only when it stands even opposite the floor of the
 			// 6-10 raise (22 + 6 = 28 ≥ 27): with less, partner may hold a
 			// bare 6 and the hand must go through a game try instead.
-			case hld >= 22 && os.IsMajor():
+			case os.IsMajor() && tr.check(hld >= 22, "22 HLD et plus → manche directe",
+				"22+ HLD → game directly", pts(hld, "HLD")):
 				return bidSuit(4, os), m(22, 23, "conclusion à la manche", "bidding game")
-			case hld >= 17 && os.IsMajor():
+			case os.IsMajor() && tr.check(hld >= 17, "17-21 HLD → essai de manche",
+				"17-21 HLD → game try", pts(hld, "HLD")):
 				// Facing a simple raise, the bare rebid of the trump suit is a
 				// barrage (docs/bidings.md, "EN FACE D'UN SOUTIEN MAJEUR
 				// SIMPLE"): a real game try must go through a new suit needing
 				// help, or failing that a generalized 2NT try.
-				if c, mn, ok := e.helpSuitGameTry(p, os); ok {
+				tr.in()
+				if c, mn, ok := e.helpSuitGameTry(p, os); tr.check(ok,
+					"une couleur annexe qui a besoin d'aide → essai dans cette couleur",
+					"a side suit needing help → help-suit game try", shape(h)) {
 					p.invited = true
 					return c, mn
 				}
-				if c := bid(2, SNoTrump); e.legal(p.seat, c) {
+				if c := bid(2, SNoTrump); tr.check(e.legal(p.seat, c), "sinon → essai généralisé 2SA",
+					"otherwise → generalized 2NT try", "") {
 					p.invited = true
 					return c, m(17, 21, "essai de manche généralisé", "generalized game try").asInvite()
 				}
@@ -3052,12 +3087,14 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 				if c := e.cheapestCall(os.Strain()); e.legal(p.seat, c) {
 					return c, m(17, 21, "conclusion à la manche, plus de place pour un essai", "bidding game outright, no room left to try")
 				}
-				return e.conclude(p)
-			case hld >= 17:
+				return e.untraced(e.conclude(p))
+			case tr.check(hld >= 17, "17 HLD et plus → essai à 3", "17+ HLD → three-level try", pts(hld, "HLD")):
 				return bidSuit(3, os), m(17, 21, "enchère d'essai pour la manche", "game try").asInvite()
-			case os.IsMajor() && h.Len(os) >= 6:
+			case os.IsMajor() && tr.check(h.Len(os) >= 6, "6 cartes dans la majeure → barrage à 3",
+				"six cards in the major → preemptive three", cards(h, os)):
 				return bidSuit(3, os), m(12, 16, "barrage, prolongement du soutien", "preemptive raise, extending the fit").withLen(os, 6)
 			default:
+				tr.note("12-16 HLD : la manche est hors d'atteinte → Passe", "12-16 HLD: game is out of reach → Pass")
 				return passCall, m(12, 16, "", "")
 			}
 		case 3:
@@ -3068,29 +3105,39 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 			// machinery gets the call -- blasting the game here would throw
 			// away the one moment the decision can be taken.
 			if hld+resp.shownMin >= 29 {
-				return e.conclude(p)
+				return e.untraced(e.conclude(p))
 			}
 			// The jump raise's own floor, not a fixed 11: the same shape --
 			// three of the opened suit -- is also what the law of total
 			// tricks bids in a partscore battle [L-1b], on trump length
 			// alone and promising nothing. Reading that one as an invitation
 			// turns a fit shown to protect a partscore into a game.
-			if hld+resp.shownMin >= 27 && os.IsMajor() {
+			if os.IsMajor() && tr.check(hld+resp.shownMin >= 27,
+				"soutien à saut : 27 points ensemble avec le minimum du partenaire → manche",
+				"jump raise: 27 points together with partner's minimum → game",
+				fmt.Sprintf("%d + %d", hld, resp.shownMin)) {
 				return bidSuit(4, os), m(15, 23, "accepte l'invitation", "accepting the invitation")
 			}
-			return e.conclude(p)
+			return e.untraced(e.conclude(p))
 		default:
-			return e.conclude(p)
+			return e.untraced(e.conclude(p))
 		}
 	}
 	// Notrump responses.
-	if rc.Strain == SNoTrump && rc.Level == 1 {
+	if tr.check(rc.Strain == SNoTrump && rc.Level == 1, "le partenaire répond 1SA (6-10 HL, sans fit)",
+		"partner answers 1NT (6-10 HL, no fit)", "") {
+		tr.in()
+		defer tr.out()
 		return e.rebidOverOneNT(p, os)
 	}
 	if rc.Strain == SNoTrump {
-		return e.conclude(p)
+		return e.untraced(e.conclude(p))
 	}
 	// New suit by responder (forcing): describe the hand.
+	tr.note("le partenaire nomme une nouvelle couleur (forcing) : décrire la main",
+		"partner names a new suit (forcing): describe the hand")
+	tr.in()
+	defer tr.out()
 	return e.rebidOverNewSuit(p, os, Suit(rc.Strain), rc.Level)
 }
 
@@ -3103,8 +3150,11 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 	// a singleton — must instead show its shape naturally, so gate the notrump
 	// rebids on the same balanced test used for the new-suit rebid below.
 	balanced := (h.IsRegular() || h.IsSemiRegular()) && h.Len(h.Longest()) <= 5
+	tr := e.tr
 	switch {
-	case os.IsMajor() && h.Len(os) >= 7 && h.HLD(os)+e.ps[partnerOf(p.seat)].shownMin >= gameThreshold(os, true):
+	case os.IsMajor() && tr.check(h.Len(os) >= 7 && h.HLD(os)+e.ps[partnerOf(p.seat)].shownMin >= gameThreshold(os, true),
+		"majeure septième qui vaut la manche avec le minimum du partenaire → 4 de la majeure",
+		"seven-card major worth game with partner's minimum → four of the major", cards(h, os)):
 		// A self-sufficient seven-card major is worth game on its own playing
 		// strength even opposite the 6-10 notrump response: counted as trump,
 		// its length and side shortness (e.g. a void) add distribution the bare
@@ -3113,11 +3163,12 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 		// non-forcing jump rebid below — which partner may pass with a maximum,
 		// the fit in the long suit being unknown to him.
 		return bidSuit(4, os), m(18, 21, "conclusion à la manche, bel unicolore auto-suffisant", "bidding game, self-sufficient one-suiter").withLen(os, 7)
-	case balanced && hp >= 18:
+	case tr.check(balanced && hp >= 18, "régulière, 18-19 H → 3SA", "balanced, 18-19 H → 3NT", pts(hp, "H")+", "+shape(h)):
 		return bid(3, SNoTrump), m(18, 19, "18-19H, conclusion", "18-19, bidding game")
-	case balanced && hp >= 17:
+	case tr.check(balanced && hp >= 17, "régulière, 17 H → 2SA, proposition", "balanced, 17 H → 2NT, invitation", pts(hp, "H")+", "+shape(h)):
 		return bid(2, SNoTrump), m(17, 18, "17-18H régulier, proposition", "17-18 balanced, invitation").asInvite()
-	case h.Len(os) >= 6 && h.HL() >= 17:
+	case tr.check(h.Len(os) >= 6 && h.HL() >= 17, "6 cartes et 17 HL → répétition à saut",
+		"six cards and 17 HL → jump rebid", cards(h, os)+", "+pts(h.HL(), "HL")):
 		// Strong irregular one-suiter: too good for the 13-16 simple rebid, and
 		// unable to bid 2SA (not balanced). The jump repetition shows 17-19HL
 		// and a good six-card suit, non-forcing (docs/bidings.md, "la
@@ -3125,7 +3176,7 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 		mn := m(17, 19, "répétition à saut, bel unicolore", "jump rebid, good six-card suit").withLen(os, 6).asInvite()
 		mn.openerMinorRebid = !os.IsMajor()
 		return bidSuit(3, os), mn
-	case h.Len(os) >= 6:
+	case tr.check(h.Len(os) >= 6, "6 cartes → répétition au palier de 2", "six cards → two-level rebid", cards(h, os)):
 		mn := m(13, 16, "répétition, 6 cartes", "rebid, six-card suit").withLen(os, 6)
 		mn.openerMinorRebid = !os.IsMajor()
 		return bidSuit(2, os), mn
@@ -3140,13 +3191,17 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 		if !h.IsRegular() {
 			for s := Spades; s >= Clubs; s-- {
 				if s != os && h.Len(s) >= 4 && s.Strain() < os.Strain() {
+					tr.check(true, "main irrégulière, 4 cartes dans une couleur moins chère → bicolore économique",
+						"unbalanced, four cards in a cheaper suit → economical two-suiter", cards(h, s))
 					return e.cheapSecondSuit(p, s, bidSuit(2, s), h.HL())
 				}
 			}
 		}
-		if h.Len(os) >= 5 && !h.IsRegular() {
+		if tr.check(h.Len(os) >= 5 && !h.IsRegular(), "main irrégulière, 5 cartes → répétition par défaut",
+			"unbalanced, five cards → default rebid", cards(h, os)+", "+shape(h)) {
 			return bidSuit(2, os), m(12, 14, "répétition par défaut", "default rebid").withLen(os, 5)
 		}
+		tr.note("main régulière minimale : 1SA est le bon contrat → Passe", "minimum balanced hand: 1NT is the right contract → Pass")
 		return passCall, m(12, 14, "jeu régulier minimal", "minimum balanced hand")
 	}
 }
@@ -3282,9 +3337,13 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 	hp := h.H()
 	hl := h.HL()
 	sup := h.Len(rs)
+	tr := e.tr
 
-	if sup >= 4 {
+	if tr.check(sup >= 4, "4 cartes dans la couleur du partenaire → soutien",
+		"four cards in partner's suit → raise", cards(h, rs)) {
 		hld := h.HLD(rs)
+		tr.in()
+		defer tr.out()
 		base := respLevel + 1
 		// A jump raise of responder's minor after a two-over-one lands at
 		// the four level and bypasses 3NT, which with a minor fit is almost
@@ -3296,21 +3355,25 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 		// below 3NT with a widened range.
 		minorPast3NT := !rs.IsMajor() && base+1 >= 4
 		switch {
-		case hld >= 20 && rs.IsMajor():
+		case rs.IsMajor() && tr.check(hld >= 20, "20 HLD et plus → manche", "20+ HLD → game", pts(hld, "HLD")):
 			return bidSuit(4, rs), m(20, 23, "soutien à la manche, 20HLD et plus", "raise to game, 20+ HLD").withLen(rs, 4)
-		case minorPast3NT && hld >= 22:
+		case minorPast3NT && tr.check(hld >= 22, "22 HLD : saut au-delà de 3SA, ambition de chelem",
+			"22 HLD: jump past 3NT, slam ambition", pts(hld, "HLD")):
 			return bidSuit(base+1, rs), m(22, 23, "soutien à saut au-delà de 3SA, ambition de chelem", "jump raise past 3NT, slam ambition").withLen(rs, 4).asForcing()
-		case hld >= 17 && !minorPast3NT:
+		case !minorPast3NT && tr.check(hld >= 17, "17-19 HLD → soutien à saut", "17-19 HLD → jump raise", pts(hld, "HLD")):
 			return bidSuit(base+1, rs), m(17, 19, "soutien à saut, 17-19HLD", "jump raise, 17-19 HLD").withLen(rs, 4).asInvite()
 		case minorPast3NT:
+			tr.check(true, "soutien sans sauter, pour garder 3SA", "raise without jumping, keeping 3NT", pts(hld, "HLD"))
 			return bidSuit(base, rs), m(12, 21, "soutien, palier de 3SA préservé", "raise, keeping 3NT available").withLen(rs, 4)
 		default:
+			tr.check(true, "12-16 HLD → soutien simple", "12-16 HLD → single raise", pts(hld, "HLD"))
 			return bidSuit(base, rs), m(12, 16, "soutien simple, 12-16HLD", "single raise, 12-16 HLD").withLen(rs, 4)
 		}
 	}
 
 	balanced := (h.IsRegular() || h.IsSemiRegular()) && h.Len(h.Longest()) <= 5
-	if balanced && hp >= 18 && hp <= 19 {
+	if tr.check(balanced && hp >= 18 && hp <= 19, "régulière, 18-19 H → 2SA", "balanced, 18-19 H → 2NT",
+		pts(hp, "H")+", "+shape(h)) {
 		mn := m(18, 19, "2SA, 18-19H régulier", "2NT, 18-19 balanced")
 		// After a minor opening and a one-level major response, the jump to
 		// 2NT denies four cards in responder's major but may hold four in the
@@ -3323,12 +3386,14 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 		}
 		return bid(2, SNoTrump), mn
 	}
-	if balanced && hp <= 14 && respLevel == 1 {
+	if respLevel == 1 && tr.check(balanced && hp <= 14, "régulière, 12-14 H → redemande à Sans-Atout",
+		"balanced, 12-14 H → notrump rebid", pts(hp, "H")+", "+shape(h)) {
 		// In the opponents' silence the balanced minimum rebids 1NT. Once
 		// interference has taken that call away, the same hand can only show
 		// itself at 2NT, which additionally promises a stopper in the enemy
 		// suit (docs/bidings.md). Without a stopper, fall through to a suit rebid.
 		if c := bid(1, SNoTrump); e.legal(p.seat, c) {
+			tr.check(true, "1SA est encore possible → 1SA", "1NT is still available → 1NT", "")
 			mn := m(12, 14, "redemande à 1SA, 12-14H régulier", "1NT rebid, 12-14 balanced")
 			// In the quiet sequences 1m - 1M - 1SA and 1H - 1S - 1SA,
 			// responder's 2C Roudi applies over this rebid to check the 5-3
@@ -3348,7 +3413,8 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 				break
 			}
 		}
-		if stopped {
+		if tr.check(stopped, "intervention : arrêt dans la couleur adverse → 2SA",
+			"interference: stopper in the enemy suit → 2NT", "") {
 			if c := bid(2, SNoTrump); e.legal(p.seat, c) {
 				mn := m(12, 14, "redemande à 2SA, 12-14H régulier avec arrêt dans la couleur adverse", "2NT rebid, 12-14 balanced, stopper in the enemy suit")
 				for _, adv := range e.opponentSuits(p) {
@@ -3363,7 +3429,9 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 	// stopper in the intervention suit just as it does after a 1-level
 	// response -- doubly so once the intervener's partner has also raised,
 	// confirming real length there rather than a bare overcall.
-	if balanced && hp <= 14 && respLevel == 2 && e.ntSafe(p) {
+	if respLevel == 2 && tr.check(balanced && hp <= 14 && e.ntSafe(p),
+		"réponse au palier de 2 : régulière, 12-14 H, couleurs gardées → 2SA",
+		"two-level response: balanced, 12-14 H, suits guarded → 2NT", pts(hp, "H")+", "+shape(h)) {
 		mn := m(12, 14, "redemande à 2SA, 12-14H", "2NT rebid, 12-14")
 		for _, adv := range e.opponentSuits(p) {
 			mn = mn.withStopper(adv)
@@ -3383,7 +3451,9 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 	// and the auction is forced: the raise lands at the three level, so the
 	// simple one needs no more than the opening itself, and the jump is the
 	// game.
-	if sup == 3 && rs.IsMajor() && respLevel == 2 && !e.uncontested(p.seat) {
+	if sup == 3 && rs.IsMajor() && respLevel == 2 && tr.check(!e.uncontested(p.seat),
+		"en compétition, 3 cartes dans la majeure du partenaire → soutien sur fit 4-3 [RO-18b]",
+		"in competition, three cards in partner's major → raise on the 4-3 fit [RO-18b]", cards(h, rs)) {
 		hld := e.hldAgainstTheirBidding(p, rs)
 		switch {
 		case hld >= 17 && e.legal(p.seat, bidSuit(4, rs)):
@@ -3393,7 +3463,9 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 		}
 	}
 
-	if sup == 3 && rs.IsMajor() && respLevel == 1 && !e.uncontested(p.seat) {
+	if sup == 3 && rs.IsMajor() && respLevel == 1 && tr.check(!e.uncontested(p.seat),
+		"en compétition, 3 cartes dans la majeure du partenaire → soutien sur fit 4-3 [RO-18b]",
+		"in competition, three cards in partner's major → raise on the 4-3 fit [RO-18b]", cards(h, rs)) {
 		hld := e.hldAgainstTheirBidding(p, rs)
 		base := respLevel + 1 // simple raise level (2)
 		switch {
@@ -3414,6 +3486,8 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 		}
 		c := e.cheapestCall(s.Strain())
 		if c.Level == 1 {
+			tr.check(true, "4 cartes à "+suitSymbol[s]+", nommable au palier de 1 → nouvelle couleur",
+				"four "+suitSymbol[s]+", biddable at the one level → new suit", cards(h, s))
 			// A second suit named at the one level (1C-1H-1S) shows the shape
 			// and denies a jump or a reverse, but says nothing about the point
 			// level -- opener clarifies his strength next round. Only a
@@ -3422,6 +3496,8 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			return c, m(-1, -1, "changement de couleur au palier de 1", "new suit at the one level").withLen(s, 4)
 		}
 		if c.Level == 2 && s.Strain() < os.Strain() {
+			tr.check(true, "4 cartes à "+suitSymbol[s]+", moins chère que l'ouverture → bicolore économique [RO-19]",
+				"four "+suitSymbol[s]+", cheaper than the opening → economical two-suiter [RO-19]", cards(h, s))
 			// The cheap second suit is a minimum bid partner is free to pass,
 			// so it cannot also carry the hands that want to hear from him:
 			// its ceiling is 17 [RO-19]. From 18 the same two suits are shown
@@ -3436,7 +3512,9 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			// announced there carries no ceiling, the bid limiting nothing.
 			return e.cheapSecondSuit(p, s, c, hl)
 		}
-		if hl >= 18 && c.Level <= 2 {
+		if tr.check(hl >= 18 && c.Level <= 2,
+			"4 cartes à "+suitSymbol[s]+", plus chère, 18 HL et plus → bicolore cher (forcing)",
+			"four "+suitSymbol[s]+", higher-ranking, 18+ HL → reverse (forcing)", pts(hl, "HL")) {
 			// The reverse names its second suit above the first, so the first
 			// is at least as long: four cards there, not the bare three a
 			// minor opening promises [RO-19]. Recording it matters -- without
@@ -3448,16 +3526,19 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			mn.reverse = true
 			return c, mn
 		}
-		if hl >= 20 && c.Level <= 3 {
+		if tr.check(hl >= 20 && c.Level <= 3, "20 HL et plus → bicolore à saut, forcing de manche",
+			"20+ HL → jump shift, game forcing", pts(hl, "HL")) {
 			e.gameForce[sideOf(p.seat)] = true
 			return bid(c.Level, s.Strain()), m(20, 23, "bicolore à saut, forcing de manche", "jump shift, game forcing").withLen(s, 4).asForcing()
 		}
 	}
-	if h.Len(os) >= 6 && hl >= 17 {
+	if tr.check(h.Len(os) >= 6 && hl >= 17, "6 cartes et 17 HL → répétition à saut",
+		"six cards and 17 HL → jump rebid", cards(h, os)+", "+pts(hl, "HL")) {
 		c := e.cheapestCall(os.Strain())
 		return bid(c.Level+1, os.Strain()), m(17, 19, "répétition à saut, bel unicolore", "jump rebid, good six-card suit").withLen(os, 6)
 	}
-	if h.Len(os) >= 5 {
+	if tr.check(h.Len(os) >= 5, "5 cartes et plus dans la couleur d'ouverture → répétition",
+		"five or more cards in the opened suit → rebid it", cards(h, os)) {
 		c := e.cheapestCall(os.Strain())
 		if c.Level <= 2 || respLevel >= 2 {
 			// The two-level repetition normally shows six cards, but the
@@ -3485,9 +3566,11 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 		}
 	}
 	c := e.cheapestCall(SNoTrump)
-	if c.Level <= 2 && e.ntSafe(p) {
+	if tr.check(c.Level <= 2 && e.ntSafe(p), "sinon, couleurs gardées → Sans-Atout par défaut",
+		"otherwise, suits guarded → default notrump", "") {
 		return c, m(12, 14, "redemande par défaut à Sans-Atout", "default notrump rebid")
 	}
+	tr.note("aucune redemande ne s'applique → Passe", "no rebid applies → Pass")
 	return passCall, noInfo()
 }
 

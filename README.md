@@ -37,6 +37,8 @@ Les règles réellement appliquées par le moteur sont décrites, une par une et
 .\run.ps1           # équivalent PowerShell
 ```
 
+Sur **macOS**, double-cliquez sur [run-macos.command](run-macos.command) dans le Finder : une fenêtre du Terminal s'ouvre, compile, lance le serveur et ouvre le navigateur. Il délègue à `run.sh` et en accepte les options depuis un terminal (`./run-macos.command -p 9200`). Prérequis : Go (<https://go.dev/dl/> ou `brew install go`). Au premier lancement, macOS peut bloquer un script téléchargé : clic droit › **Ouvrir**, puis confirmer. Si le fichier a perdu son droit d'exécution (archive ZIP), `chmod +x run-macos.command` le lui rend.
+
 [run.sh](run.sh)/[run.ps1](run.ps1) produisent le moteur WebAssembly s'il manque, compilent le serveur dans `./bids` (ignoré par git), attendent que `/ready` réponde puis ouvrent la page. `Ctrl+C` arrête le serveur. Un serveur déjà en écoute sur le port est détecté : la page est alors simplement ouverte.
 
 ```bash

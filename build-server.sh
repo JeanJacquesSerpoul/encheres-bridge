@@ -73,7 +73,7 @@ build() {
             -ldflags="-s -w -X main.buildRevision=$revision" -o "$out/$name" .
     )
     local mo
-    mo=$(awk -v b="$(stat -c%s "$out/$name")" 'BEGIN { printf "%.1f", b / 1048576 }')
+    mo=$(awk -v b="$(wc -c < "$out/$name" | tr -d " ")" 'BEGIN { printf "%.1f", b / 1048576 }')
     echo "  server/$name (${mo} Mo)"
 }
 

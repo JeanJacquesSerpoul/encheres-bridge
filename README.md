@@ -6,20 +6,20 @@
   <img src="docs/resultat.png" alt="Résultat : contrat et déclarant, les quatre mains autour du tapis, la séquence d'enchères, son commentaire enchère par enchère et le tableau des levées double-mort" width="900">
 </p>
 
-# Bridge Bidding Server
+# Bridge Bidding
 
 **L'application est en ligne : <https://jeanjacquesserpoul.github.io/encheres-bridge/>**
 
-Serveur HTTP en Go qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), à partir d'un fichier **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
+Application web qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), et la commente enchère par enchère ; un questionnaire permet de s'entraîner à enchérir à la place d'un joueur. Les donnes s'échangent au format **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
 
-Le moteur y tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique)).
+Le moteur d'enchères, écrit en Go, est compilé en **WebAssembly** et tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique)).
 
-Le dépôt contient quatre morceaux, dont seul le premier est indispensable :
+Le dépôt contient quatre morceaux :
 
 | | Quoi | Où |
 |---|------|-----|
-| **Le moteur et son API** | un binaire Go sans dépendance : `POST /bid`, `POST /bids`, plus `/health`, `/ready`, `/version` | racine du dépôt |
-| **Le client web** | composition de la donne, affichage des enchères commentées, questionnaire, calcul du PAR — compilé **dans** le binaire (`//go:embed`) et servi à `/`, avec un mode qui calcule les enchères sans serveur | [cli/](cli/) |
+| **Le moteur d'enchères** | bibliothèque Go sans dépendance, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
+| **Le client web** | composition de la donne, enchères commentées, questionnaire, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [server_ai/](server_ai/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
@@ -33,9 +33,9 @@ Il y a deux façons d'utiliser l'application. Dans les deux cas, c'est **la mêm
 
 | | 1. En local avec `run.ps1` / `run.sh` | 2. Copie de `cli/` sur un hébergeur statique |
 |---|---|---|
-| **Pour qui** | développer, tester une modification du moteur, utiliser l'API | mettre l'application en ligne, ou l'utiliser sans rien installer |
+| **Pour qui** | développer, tester une modification du moteur ou du client | mettre l'application en ligne, ou l'utiliser sans rien installer |
 | **Prérequis** | [Go](https://go.dev/dl/) et une copie du dépôt | aucun : un hébergeur de fichiers (GitHub Pages, Netlify…) |
-| **Ce qui tourne** | le serveur Go, qui sert la page sur `http://localhost:9015/` et expose l'API (`/bid`, `/health`…) | rien d'autre que des fichiers statiques |
+| **Ce qui tourne** | un mini-serveur de fichiers ([serve/](serve/)) qui sert `cli/` sur `http://localhost:9015/` | rien d'autre que des fichiers statiques |
 | **Moteur utilisé** | compilé depuis vos sources locales | celui versionné dans `cli/`, tenu à jour sur `main` |
 
 L'application publiée par ce dépôt suit la méthode 2 : **<https://jeanjacquesserpoul.github.io/encheres-bridge/>**.
@@ -57,11 +57,11 @@ cd encheres-bridge
 
 Le script :
 
-1. compile le moteur WebAssembly (`cli/bids.wasm`) **s'il manque** — il est versionné, ce n'est donc utile qu'avec `-f` après une modification du code Go ;
-2. compile le serveur dans `./bids` ou `./bids.exe` (ignorés par git), le client étant embarqué dedans (`//go:embed`) ;
-3. le lance, attend que `/ready` réponde, puis ouvre **http://localhost:9015/** dans le navigateur.
+1. recompile le moteur WebAssembly (`cli/bids.wasm`) **s'il manque**, ou avec `-f` — il est versionné, ce n'est donc utile qu'après une modification du code Go ;
+2. compile le mini-serveur [serve/](serve/) dans `./bids` ou `./bids.exe` (ignorés par git) : un simple serveur de fichiers, qui pose en plus les en-têtes COOP/COEP qu'attend le calcul du PAR ;
+3. le lance sur `cli/`, attend que la page réponde, puis ouvre **http://localhost:9015/** dans le navigateur.
 
-`Ctrl+C` arrête le serveur. Si un serveur répond déjà sur le port, la page est simplement ouverte.
+`Ctrl+C` arrête le serveur. Si un serveur répond déjà sur le port, la page est simplement ouverte. Les fichiers de `cli/` sont lus sur le disque à chaque requête : une modification du client se voit en rechargeant la page.
 
 ```bash
 ./run.sh -p 9200    # autre port            (.\run.ps1 -Port 9200)
@@ -74,22 +74,10 @@ Le script :
 À la main, sans les scripts :
 
 ```bash
-./build-wasm.sh     # seulement après une modification du code Go (ou .\build-wasm.ps1)
-go run ./engine     # ou : go build -o bids.exe ./engine && ./bids.exe
+./build-wasm.sh              # seulement après une modification du code Go (ou .\build-wasm.ps1)
+go run ./serve               # sert cli/ sur http://localhost:9015/
+go run ./serve -port 8080    # autre port (ou PORT=8080)
 ```
-
-`//go:embed` fige le contenu de `cli/` au moment où le serveur est compilé : le moteur WebAssembly doit donc exister avant, ce que les scripts garantissent.
-
-Pour changer de port :
-
-```bash
-PORT=8080 go run ./engine            # Linux / macOS
-$env:PORT="8080"; go run ./engine    # PowerShell
-```
-
-> ⚠️ Si un autre service occupe déjà le port 9015 (conteneur Docker/WSL par exemple), lancez le serveur sur un autre port avec la variable `PORT`.
-
-Pour distribuer le serveur sans Go chez l'utilisateur, voir les [exécutables prêts à l'emploi](#exécutables-prêts-à-lemploi) (compilés une fois, puis autonomes) et l'[image Docker](#docker).
 
 ### Méthode 2 — Copie de `cli/` sur un hébergeur statique
 
@@ -114,52 +102,6 @@ python -m http.server 8123 --directory cli   # puis http://localhost:8123/
 > ⚠️ Ouvrir `cli/index.html` par un double-clic (`file://`) ne suffit pas : le navigateur refuse alors de charger le moteur WebAssembly. Il faut passer par un serveur, même local.
 
 Les réglages recommandés du serveur (type MIME du `.wasm`, compression, cache) et des exemples de configuration nginx, Apache et Caddy sont détaillés dans [Hébergement statique](#hébergement-statique).
-
-### Variables d'environnement
-
-| Variable | Défaut | Rôle |
-|----------|--------|------|
-| `PORT` | `9015` | Port d'écoute HTTP |
-| `CORS_ORIGINS` | `*` | Valeur de `Access-Control-Allow-Origin` |
-| `SERVE_CLI` | *(vide → client servi)* | `false` désactive le client embarqué à `/` (404 JSON à la place) |
-| `LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARN` ou `ERROR` |
-| `LOG_FORMAT` | `json` | `text` pour des logs lisibles en développement |
-
-## Exécutables prêts à l'emploi
-
-Pour utiliser l'application sans chaîne Go ni Docker sur la machine cible,
-[build-server.sh](build-server.sh)/[build-server.ps1](build-server.ps1) compilent
-les binaires Linux et Windows dans [server/](server/) :
-
-```bash
-./build-server.sh                 # server/bids-linux et server/bids-windows.exe
-./build-server.sh -o linux        # une seule cible
-./build-server.sh -a arm64        # Raspberry Pi, Mac ARM...
-```
-
-```powershell
-.\build-server.ps1 [-Targets linux|windows|both] [-Arch amd64|arm64]
-```
-
-Ensuite, il suffit de deux gestes :
-
-1. **lancer l'exécutable de son système** (`./server/bids-linux` ou
-   `.\server\bids-windows.exe`) — il écoute sur le port 9015 ;
-2. **ouvrir http://localhost:9015** dans un navigateur.
-
-Le client calcule toujours les enchères dans le navigateur, le moteur
-WebAssembly étant compilé dans le binaire lui aussi : servi par `run.ps1` /
-`run.sh` ou ouvert depuis `cli/index.html`, il se comporte à l'identique, sans
-rien à saisir ni à configurer. Pour viser malgré tout un serveur (tests),
-ajoutez `?serveur=1` à l'URL : le sélecteur de l'en-tête reparaît — **Local**
-vise `http://localhost:9015`, et une autre URL saisie est mémorisée
-(`localStorage`), comme l'URL **Distant**. Les binaires
-sont autonomes — le client est compilé dedans via `//go:embed`, si bien que
-**http://localhost:9015/** affiche la même application sans passer par le
-fichier local. Voir [server/README.md](server/README.md) pour les détails (port
-occupé, SmartScreen, pare-feu).
-
-Les binaires produits ne sont pas versionnés (voir [.gitignore](.gitignore)) : ils se recompilent à la demande.
 
 ## Hébergement statique
 
@@ -284,86 +226,11 @@ curl -sI https://exemple.net/ | grep -i cross-origin
 
 Dans la page, la console dit le reste : `COOP/COEP Service Worker registered` puis `Reloading page…` signale que le repli a dû s'enclencher, donc que les en-têtes manquent.
 
-## Docker
-
-```bash
-docker compose up -d --build      # construit l'image et démarre le serveur sur le port 9015
-PORT=9415 docker compose up -d    # publie sur un autre port hôte (le conteneur écoute toujours sur 9015)
-```
-
-ou sans compose :
-
-```bash
-docker build -t bridge-bids .
-docker run -d -p 9015:9015 bridge-bids
-```
-
-[build-docker.sh](build-docker.sh)/[build-docker.ps1](build-docker.ps1) automatisent ce build : ils injectent la révision Git dans le binaire (`--build-arg REVISION`, sinon `/version` renvoie `docker`), avertissent si le dépôt est modifié et affichent la taille de l'image.
-
-```bash
-./build-docker.sh                              # construit bridge-bids:latest
-./build-docker.sh -r                           # ...puis démarre le conteneur et attend /ready
-./build-docker.sh -t bridge-bids:1.0 -p linux/arm64 -n
-PORT=9415 ./build-docker.sh -r                 # publie la vérification sur un autre port hôte
-```
-
-```powershell
-.\build-docker.ps1                             # équivalent PowerShell
-.\build-docker.ps1 -Run
-.\build-docker.ps1 -Image bridge-bids:1.0 -Platform linux/arm64 -NoCache
-```
-
-| Option | PowerShell | Rôle |
-|--------|------------|------|
-| `-t nom:tag` | `-Image` | Nom de l'image (défaut `bridge-bids:latest`) |
-| `-p plateforme` | `-Platform` | Plateforme cible (`linux/amd64`, `linux/arm64`) |
-| `-n` | `-NoCache` | Build sans cache |
-| `-r` | `-Run` | Démarre un conteneur `bridge-bids-check`, sonde `/ready` 30 s puis affiche `/version` ; en cas d'échec, affiche les journaux et supprime le conteneur |
-
-L'image est construite en deux étapes (compilation `golang:1.26-alpine`, exécution `alpine` avec un utilisateur non root). Le client (`cli/`) est compilé dans le binaire via `//go:embed` — aucune dépendance au répertoire de travail à l'exécution ; `SERVE_CLI=false` le désactive. Un `HEALTHCHECK` interroge `/ready` toutes les 30 s (rejoue une donne de référence dans le moteur, pas seulement un ping process).
-
-### Derrière un reverse proxy (Caddy)
-
-Le binaire sert **tout** sur son port : l'API (`/health`, `/ready`, `/version`, `/bid`, `/bids`) **et** le client embarqué à `/`, tant que `SERVE_CLI` ≠ `false`. En local, `http://localhost:9015` suffit donc. En production, Caddy n'a qu'à renvoyer un préfixe vers le conteneur — inutile de déployer une copie disque du client.
-
-```caddy
-# Ajoute le / final : sinon les chemins relatifs de index.html
-# (style.css, app.js, dds_web_wasm*.js...) se résolvent un cran trop haut.
-redir /bridgequizz /bridgequizz/ 308
-
-# Client embarqué + API, servis par le serveur Go.
-# handle_path retire le préfixe : /bridgequizz/ -> /, /bridgequizz/app.js
-# -> /app.js, /bridgequizz/health -> /health, etc.
-handle_path /bridgequizz* {
-    reverse_proxy localhost:9015
-}
-
-# Optionnel : à garder seulement si un autre client (front/...) vise
-# déjà cette route. Même backend, mêmes routes après handle_path.
-handle_path /api/bidings* {
-    reverse_proxy localhost:9015
-}
-
-# Serveur IA (server_ai/), pour la reconnaissance des cartes par photo.
-# Sur la même origine que le client : aucun réglage CORS, et rien à
-# ajouter pour l'isolation cross-origine.
-handle_path /aiproxy* {
-    reverse_proxy localhost:9009
-}
-```
-
-- Laisser le conteneur servir le client : c'est le comportement par défaut, seul `SERVE_CLI=false` le désactive.
-- Dans le client servi sous `https://<domaine>/bridgequizz/`, choisir **Serveur → Distant** et saisir `https://<domaine>/bridgequizz` (ou `https://<domaine>/api/bidings` si ce bloc est conservé). Les appels sont alors *same-origin* — aucun réglage CORS — et le mode comme l'URL sont mémorisés (`localStorage`).
-- Pour la reconnaissance des cartes, cocher l'option **Serveur IA de reconnaissance des cartes**, choisir **Serveur IA → Distant** et saisir `https://<domaine>/aiproxy`. Le serveur IA est facultatif : sans lui, l'option reste décochée et rien du reste ne change.
-- Le bouton **Calcul du PAR** (solveur double-mort WASM) exige l'isolation cross-origine : le serveur pose `Cross-Origin-Opener-Policy: same-origin` et `Cross-Origin-Embedder-Policy: require-corp`, `reverse_proxy` les relaie et Caddy sert en HTTPS (contexte sécurisé) — rien à ajouter. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) n'est qu'un repli pour les hébergements qui retirent ces en-têtes.
-
----
-
 ## Le client web
 
-Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm — calcule les enchères **dans le navigateur** (voir [Le mode navigateur](#le-mode-navigateur)). Il est servi à la racine par le serveur Go (**http://localhost:9015/**) ou publié tel quel sur un hébergeur statique : il se comporte à l'identique dans les deux cas (voir [Démarrage](#démarrage)).
+Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm — calcule les enchères **dans le navigateur** (voir [Le moteur dans la page](#le-moteur-dans-la-page)). Il est servi en local par `run.ps1` / `run.sh` (**http://localhost:9015/**) ou publié tel quel sur un hébergeur statique : il se comporte à l'identique dans les deux cas (voir [Démarrage](#démarrage)).
 
-**Le bandeau** porte la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre) et le bouton **?** du **mode d'emploi** : une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons. Aucun serveur n'y est à choisir : la barre du serveur n'apparaît que si le moteur fait défaut, ou sur demande avec `?serveur=1` (voir plus bas). Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
+**Le bandeau** porte la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre) et le bouton **?** du **mode d'emploi** : une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons. Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
 ### Composer la donne
 
@@ -376,25 +243,13 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 ### Voir les enchères
 
-**Afficher les enchères** calcule la séquence — dans la page, ou par `POST /bid` quand un serveur est visé — et affiche les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
+**Afficher les enchères** calcule la séquence dans la page et affiche les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
 
-### Le mode navigateur
+### Le moteur dans la page
 
-Le moteur est aussi compilé en **WebAssembly** ([build-wasm.sh](build-wasm.sh) → `cli/bids.wasm`, versionné, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères dans la page : plus aucune requête, et l'application continue de fonctionner serveur éteint. C'est le même code Go que `/bid` — même parseur PBN, même moteur, même encodeur JSON (`encodeJSON`, [response.go](engine/response.go)) — donc la réponse est la même **octet pour octet** ; [tools/wasm-parity.js](tools/wasm-parity.js) le vérifie :
+Le moteur Go ([engine/](engine/)) est compilé en **WebAssembly** par [build-wasm.sh](build-wasm.sh) : son point d'entrée [wasm/main.go](wasm/main.go) produit `cli/bids.wasm` (versionné, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères sur place : aucune requête, et l'application fonctionne hors ligne une fois chargée.
 
-```bash
-node tools/wasm-parity.js               # compare les deux chemins sur engine/testdata/*.pbn
-```
-
-C'est **toujours** ce mode qui est utilisé, que la page soit servie par `run.ps1` / `run.sh` ou copiée sur un hébergeur statique. La pastille d'état du pied de page rejoue la donne de référence de `/ready` au lieu de sonder `/health`, et nomme le moteur au lieu du serveur — il n'y a personne à tester, le bouton **Tester** y disparaît donc. Si le moteur ne se charge pas (fichier absent, navigateur sans WebAssembly), le client le dit clairement et fait reparaître la barre du serveur, qui laisse en viser un.
-
-Pour viser malgré tout un serveur alors que tout fonctionne — la production, un autre port, ou simplement comparer les deux chemins — ouvrez le client avec **`?serveur=1`** :
-
-```
-http://localhost:9015/?serveur=1
-```
-
-La barre du serveur reparaît alors dans le bandeau : **Local** vise `http://localhost:9015` (une autre URL saisie est mémorisée), **Distant** attend l'URL du déploiement. Le choix fait ainsi n'est repris qu'avec `?serveur=1` : sans le paramètre, le client revient au mode navigateur. `?serveur=0` referme la barre, de sorte qu'un signet puisse porter l'une ou l'autre forme sans ambiguïté. L'API envoie les en-têtes CORS nécessaires pour être pilotée depuis une autre origine.
+La pastille d'état du pied de page rejoue une donne de référence au chargement et nomme la révision du moteur (une étoile signale un moteur compilé sur un dépôt modifié). Si le moteur ne se charge pas — fichier absent, page ouverte en `file://`, navigateur sans WebAssembly —, la raison s'affiche au pied de page : sans lui, rien ne peut être calculé.
 
 ### Le questionnaire
 
@@ -418,7 +273,6 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 | `bids.quizMode` | Mode questionnaire activé ou non |
 | `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |
 | `ia.enabled`, `ia.mode`, `ia.local`, `ia.remote` | Option de reconnaissance par photo et serveur IA visé |
-| `bids.mode`, `bids.local`, `bids.remote` | Serveur d'enchères choisi — pris en compte seulement avec `?serveur=1` |
 
 ### Le PAR
 
@@ -444,7 +298,7 @@ Le serveur IA se choisit dans l'en-tête, sous celui des enchères, avec les mê
 go test ./...
 ```
 
-Environ 140 fichiers de tests couvrent le parseur PBN (rotation des mains, validation des 13 cartes, doublons), la couche HTTP (handlers, middlewares, fuzz) et, surtout, les règles du moteur convention par convention — un fichier par sujet (`drury_test.go`, `landy_test.go`, `reveil_test.go`, `fourth_suit_forcing_test.go`...). Un test de cohérence soumet 2 000 donnes aléatoires au moteur pour vérifier que chaque séquence est légale (enchères suffisantes, contres valides, rotation des joueurs) et se termine. Des donnes d'exemple sont fournies dans [engine/testdata/](engine/testdata/).
+Environ 140 fichiers de tests couvrent le parseur PBN (rotation des mains, validation des 13 cartes, doublons, fuzz), le JSON que le moteur rend à la page ([engine/api_test.go](engine/api_test.go)) et, surtout, les règles du moteur convention par convention — un fichier par sujet (`drury_test.go`, `landy_test.go`, `reveil_test.go`, `fourth_suit_forcing_test.go`...). Un test de cohérence soumet 2 000 donnes aléatoires au moteur pour vérifier que chaque séquence est légale (enchères suffisantes, contres valides, rotation des joueurs) et se termine. Des donnes d'exemple sont fournies dans [engine/testdata/](engine/testdata/).
 
 Trois fichiers ne sont pas des assertions mais des **harnais** : `audit_soft_test.go` et `audit_detail_test.go` publient des statistiques (manches manquées, chelems minces, trous par forme d'enchère) sans jamais échouer, et `audit_par_test.go` alimente l'audit ci-dessous.
 
@@ -468,70 +322,20 @@ Le rapport (`tools/par/out/rapport.html`) donne la vue d'ensemble — contrats t
 
 ---
 
-## API
+## Format de la réponse du moteur
 
-Toute réponse porte un en-tête `X-Request-ID` (repris tel quel si le client en envoie un), utile pour retrouver une requête dans les logs du serveur.
+Le moteur expose à la page une petite API ([engine/api.go](engine/api.go)), que [wasm/main.go](wasm/main.go) installe sous `window.bidsWasm` et que [cli/bids-wasm.js](cli/bids-wasm.js) enveloppe dans `window.bidsLocal` :
 
-### `GET /health`
+| Fonction | Rôle |
+|---|---|
+| `bid(pbn, lang)` | Enchères d'une donne : l'objet JSON décrit ci-dessous |
+| `bids(pbn, lang)` | Même chose pour chaque donne d'un fichier de tournoi : un tableau de ces objets |
+| `selfCheck()` | Rejoue une donne de référence (pastille d'état du pied de page) |
+| `version()` | Révision du moteur, date du commit, version de Go |
 
-Vérifie que le serveur est en ligne et donne quelques compteurs internes.
+`lang` vaut `en` (défaut) ou `fr`. Un PBN invalide ou une langue inconnue renvoient une erreur au lieu de la réponse.
 
-**Réponse 200**
-
-```json
-{
-  "status": "ok",
-  "uptime_s": 3600,
-  "requests_total": 128,
-  "errors_total": 2,
-  "bids_run_total": 130
-}
-```
-
-### `GET /ready`
-
-Rejoue une donne de référence dans le moteur complet (parsing + enchères) : détecte un moteur cassé, pas seulement un process vivant. C'est cet endpoint qu'interroge le `HEALTHCHECK` Docker.
-
-**Réponse 200** : `{"status": "ready"}` — **503** si le moteur panique ou ne produit aucune enchère.
-
-### `GET /version`
-
-Identifie le binaire en cours d'exécution.
-
-**Réponse 200**
-
-```json
-{"revision": "a1b2c3d", "time": "2026-08-24T12:57:57Z", "modified": false, "go": "go1.26.0"}
-```
-
-`revision` est le SHA court du commit. Il vient de `-ldflags "-X main.buildRevision=..."` quand le binaire est compilé par [build-server.sh](build-server.sh)/[build-server.ps1](build-server.ps1) ou par `docker build --build-arg REVISION=$(git rev-parse --short HEAD)` (ce que font les scripts `build-docker`) ; à défaut, du marquage VCS que la chaîne Go inscrit elle-même dans le binaire, si bien qu'un simple `go build` s'identifie correctement. Il ne vaut `dev` que si aucune des deux sources n'est disponible — sous `go run ./engine`, qui ne marque pas.
-
-`time` est la date du commit et `modified` indique un binaire compilé sur un dépôt modifié : la révision seule prétendrait alors correspondre à un commit qu'elle ne reflète pas. Le client affiche cette version discrètement en bas de page, avec une étoile quand `modified` est vrai.
-
----
-
-### `POST /bid`
-
-Simule la séquence d'enchères complète à partir d'un fichier PBN à une seule donne.
-
-#### Paramètres
-
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `pbn` | fichier (multipart) **ou** corps brut | Oui | Contenu PBN (`[Deal "..."]` et `[Dealer "..."]`) — en champ multipart `pbn`, ou directement comme corps de la requête (tout `Content-Type` autre que `multipart/form-data`) |
-| `lang` | query string | Non | Langue de sortie : `en` (défaut) ou `fr` |
-
-Le corps de la requête est limité à 1 Mio, et la requête à 5 secondes (20 s pour `/bids`).
-
-#### Exemple de requête
-
-```bash
-curl -X POST "http://localhost:9015/bid?lang=fr" -F "pbn=@ma_donne.pbn"
-# ou, sans multipart :
-curl -X POST "http://localhost:9015/bid?lang=fr" --data-binary @ma_donne.pbn
-```
-
-#### Format PBN minimal attendu
+### Format PBN minimal attendu
 
 Le fichier doit contenir au minimum les tags `Dealer` et `Deal` :
 
@@ -543,7 +347,7 @@ Le fichier doit contenir au minimum les tags `Dealer` et `Deal` :
 Le tag `Deal` suit le format PBN standard :
 `"<premier>:<main1> <main2> <main3> <main4>"` — les quatre mains dans le sens des aiguilles d'une montre à partir du siège `<premier>` (N, E, S ou W). Chaque main est donnée dans l'ordre `♠.♥.♦.♣` (rangs en ordre quelconque à l'import, `T` pour le 10, couleur vide pour une chicane). Les quatre mains sont obligatoires (pas de main `-`) et les 52 cartes doivent être présentes une seule fois.
 
-#### Réponse 200
+### Réponse
 
 Exemple réel (donne ci-dessus, `lang=fr`) :
 
@@ -584,7 +388,7 @@ Exemple réel (donne ci-dessus, `lang=fr`) :
 }
 ```
 
-#### Champs de la réponse
+### Champs de la réponse
 
 | Champ | Description |
 |-------|-------------|
@@ -603,52 +407,12 @@ Exemple réel (donne ci-dessus, `lang=fr`) :
 | `declarer` | Déclarant : premier joueur du camp gagnant à avoir nommé la dénomination du contrat (vide si donne passée) |
 | `doubled` | `true` si le contrat final est contré (ou surcontré) |
 
-#### Notation des enchères
+### Notation des enchères
 
 | | Trèfle | Carreau | Cœur | Pique | Sans-Atout | Passe | Contre | Surcontre |
 |---|---|---|---|---|---|---|---|---|
 | `en` | `C` | `D` | `H` | `S` | `NT` | `Pass` | `X` | `XX` |
 | `fr` | `T` | `K` | `C` | `P` | `SA` | `Passe` | `Contre` | `Surcontre` |
-
-#### Codes d'erreur
-
-| Code | Cas |
-|------|-----|
-| 405 | Méthode différente de POST |
-| 400 | Corps invalide (multipart mal formé, champ `pbn` manquant, corps vide, `lang` inconnu, corps de requête trop volumineux) |
-| 422 | Fichier PBN invalide (tag manquant, main incomplète, carte en double...) |
-| 503 | Serveur momentanément saturé, ou requête ayant dépassé le délai maximal |
-
-```json
-{"error": "missing field 'pbn' (multipart file)"}
-```
-
----
-
-### `POST /bids`
-
-Variante multi-donnes : accepte un fichier PBN de tournoi (plusieurs groupes `[Board]`/`[Dealer]`/`[Vulnerable]`/`[Deal]`) et renvoie un tableau de réponses, une par donne, dans le même format que `POST /bid`.
-
-#### Paramètres
-
-Identiques à `POST /bid` (champ multipart `pbn` ou corps brut, `lang`).
-
-#### Exemple de requête
-
-```bash
-curl -X POST "http://localhost:9015/bids?lang=fr" -F "pbn=@tournoi.pbn"
-```
-
-#### Réponse 200
-
-```json
-[
-  { "board": "1", "dealer": "N", "vulnerable": "None", "...": "..." },
-  { "board": "2", "dealer": "E", "vulnerable": "NS",   "...": "..." }
-]
-```
-
-Les codes d'erreur sont les mêmes que pour `POST /bid` ; un fichier sans aucune donne complète (`[Dealer]`/`[Deal]`) renvoie 422.
 
 ---
 
@@ -682,12 +446,11 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 
 ## Structure du projet
 
-Tout le code Go du moteur et du serveur est dans [engine/](engine/), avec ses tests et [engine/testdata/](engine/testdata/). À la racine ne restent que `go.mod` et [cli.go](cli.go), une dizaine de lignes qui embarquent `cli/` dans le serveur : `//go:embed` ne peut pas remonter dans un dossier parent, la directive ne peut donc pas vivre dans `engine/`. On compile et on teste depuis la racine : `go build ./engine`, `go test ./...`.
+Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racine) : [engine/](engine/), le moteur et ses tests ; [wasm/](wasm/), son point d'entrée WebAssembly ; [serve/](serve/), le mini-serveur de fichiers du lancement local. On compile et on teste depuis la racine : `go test ./...`, `./build-wasm.sh`, `go run ./serve`.
 
 | Fichier | Rôle |
 |---------|------|
-| `cli.go` | Paquet racine `bids` : embarque `cli/` (`//go:embed all:cli`) pour le serveur |
-| `engine/main.go` | Serveur HTTP, middlewares (CORS, COOP/COEP, gzip des assets, limitation de charge, recover) |
+| `engine/api.go` | API du moteur rendue à la page : `BidJSON`, `BidsJSON`, `SelfCheck`, `VersionJSON` |
 | `engine/pbn.go` | Parseur PBN (`Board`, `Dealer`, `Vulnerable`, `Deal`) |
 | `engine/cards.go` | Mains et évaluation (H/HL/HLD, types, arrêts) |
 | `engine/calls.go` | Enchères, significations, notation `en`/`fr` |
@@ -695,40 +458,22 @@ Tout le code Go du moteur et du serveur est dans [engine/](engine/), avec ses te
 | `engine/decisions.go` | Règles SEF (ouvertures, réponses, redemandes, interventions, réveil) |
 | `engine/conclude.go` | Conclusion de l'enchère : table de handlers par convention, puis décision générique (manche/proposition/chelem) |
 | `engine/score.go` | Barème de marque, utilisé pour les décisions de sacrifice |
+| `engine/response.go` | Forme JSON de la réponse, estampille de version, encodeur |
+| `engine/*_test.go` | ~140 fichiers : parseur, API JSON, et une convention par fichier |
+| `engine/audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
+| `engine/testdata/` | Donnes PBN d'exemple |
+| `wasm/main.go` | Point d'entrée WebAssembly (`js && wasm`) : l'API du moteur exposée à la page |
+| `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
+| `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
+| `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
+| `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
+| `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
+| `.github/workflows/wasm.yml` | Recompile et recommite `cli/bids.wasm` quand les sources Go changent sur `main` |
+| `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
+| `server_ai/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
 | `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
-| `engine/*_test.go` | ~140 fichiers : couche HTTP, parseur, et une convention par fichier |
-| `engine/audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
-| `engine/testdata/` | Donnes PBN d'exemple |
-| `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
-| `cli/` | Client web embarqué dans le binaire (`//go:embed`), servi à `/` — `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
-| `engine/response.go` | Formes JSON de l'API, estampille de version et encodeur partagés par le serveur et la cible WebAssembly |
-| `engine/main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
-| `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
-| `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
-| `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
-| `tools/wasm-parity.js` | Vérifie que le moteur WebAssembly et `/bid` rendent les mêmes octets |
-| `server_ai/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
-| `build-server.sh`, `build-server.ps1` | Compilation des exécutables Linux et Windows dans `server/` |
-| `server/` | Exécutables prêts à l'emploi (binaires non versionnés) et leur mode d'emploi |
-| `Dockerfile`, `docker-compose.yml` | Conteneurisation (build multi-étapes, healthcheck sur `/ready`) |
-| `build-docker.sh`, `build-docker.ps1` | Build de l'image avec injection de la révision Git, vérification `/ready` optionnelle |
-
-## Exemple complet
-
-```bash
-# Créer un fichier PBN minimal
-cat > donne.pbn << 'EOF'
-[Dealer "N"]
-[Deal "N:AKQ.KJ4.AQ54.J32 J9.AT63.K762.Q98 8762.Q987.93.A76 T543.52.JT8.KT54"]
-EOF
-
-# Simuler les enchères en français
-curl -s -X POST "http://localhost:9015/bid?lang=fr" -F "pbn=@donne.pbn" | jq .
-```
-
----
 
 ## Licence
 

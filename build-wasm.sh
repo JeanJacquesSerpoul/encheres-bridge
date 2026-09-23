@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 # build-wasm.sh — compile le moteur d'enchères en WebAssembly dans cli/.
-# Produit cli/bids.wasm (le moteur, tagué js && wasm dans main_js.go) et
+# Produit cli/bids.wasm (le moteur engine/, par son point d'entrée wasm/) et
 # cli/wasm_exec.js (la glue de la distribution Go, copiée telle quelle). Les
-# deux sont ignorés par git et embarqués dans le binaire du serveur par
-# //go:embed all:cli : ce script doit donc tourner AVANT build-server.sh et
-# build-docker.sh, qui s'en chargent eux-mêmes.
+# deux sont versionnés ; le workflow wasm.yml les recompile sur main à chaque
+# modification des sources Go.
 #
 # Usage : ./build-wasm.sh [-h]
 set -euo pipefail
@@ -33,7 +32,7 @@ revision="$(git -C "$root" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 # Aucun test ne compile le fichier tagué « js && wasm » : ce vet est le seul
 # garde-fou contre une faute de frappe dans main_js.go.
-(cd "$root" && GOOS=js GOARCH=wasm go vet ./engine)
+(cd "$root" && GOOS=js GOARCH=wasm go vet ./wasm ./engine)
 
 cp "$exec_js" "$root/cli/wasm_exec.js"
 
@@ -41,12 +40,12 @@ echo "Compilation de cli/bids.wasm (js/wasm, revision $revision)..."
 (
     cd "$root"
     GOOS=js GOARCH=wasm CGO_ENABLED=0 go build -trimpath \
-        -ldflags="-s -w -X main.buildRevision=$revision" -o "$root/cli/bids.wasm" ./engine
+        -ldflags="-s -w -X bids/engine.buildRevision=$revision" -o "$root/cli/bids.wasm" ./wasm
 )
 
-# La taille gzip est le chiffre utile : c'est ce que le serveur transmet
-# (voir gzipStatic dans engine/main.go). Un bond au-delà de ~2 Mo signalerait qu'une
-# dépendance serveur a fui dans la cible, donc un //go:build mal posé.
+# La taille gzip est le chiffre utile : c'est ce que l'hébergeur transmet. Un
+# bond au-delà de ~2 Mo signalerait qu'une dépendance lourde (net/http...) a
+# fui dans le moteur.
 # `wc -c` et non `stat -c%s` : cette option est propre à GNU, le stat de
 # macOS la refuse et, sous `set -e`, arrêtait le script après la compilation.
 raw=$(wc -c < "$root/cli/bids.wasm" | tr -d " ")

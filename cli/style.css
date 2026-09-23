@@ -238,10 +238,8 @@ h1 { font-size: 1.25rem; margin: 0; }
    l'effet du flex:1 des barres serveur ; masquées, elles ne le font plus. */
 .lang-bar { margin-left: auto; }
 
-/* Sans barre visible — mode navigateur, option IA décochée : le cas courant —
-   le bloc réservait encore ses 320 px et renvoyait le thème sur une seconde
-   ligne. renderHealth peut réafficher la barre du moteur en cas de panne : le
-   bloc reparaît alors avec elle. */
+/* Sans barre visible — option IA décochée, le cas courant — le bloc réservait
+   encore ses 320 px et renvoyait le thème sur une seconde ligne. */
 .server-bars:not(:has(> .server-bar:not(.hidden))) { display: none; }
 
 /* Option générale « Serveur IA de reconnaissance des cartes », au pied de page
@@ -690,6 +688,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .field:has(select:disabled) label { color: var(--muted); }
 
 .error { color: var(--red); font-size: .9rem; }
+/* Pourquoi le moteur ne s'est pas chargé (voir checkHealth) : absent du pied
+   de page tant qu'il n'y a rien à dire. */
+#engine-error:empty { display: none; }
 .muted { color: var(--muted); }
 .hidden { display: none; }
 

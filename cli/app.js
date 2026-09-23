@@ -4,115 +4,17 @@ const $ = (sel) => document.querySelector(sel);
 
 // ---------- configuration ----------
 
-// Serveur local (go run ./engine / docker run, voir server_bids/README.md) et serveur
-// de production (proxifié par Caddy sous /api/bidings, voir front/app/src/api.js).
-//
-// Le serveur local écoute par défaut sur le port 9015 ; un PORT=9415... ou un
-// hôte distinct se saisit dans le champ et se mémorise (voir readLocal), comme
-// l'URL distante. Celle-ci n'a pas de valeur par défaut : la figer ferait
-// pointer n'importe quelle copie du client vers un serveur qui n'est pas le
-// sien (voir readRemote).
-const DEFAULT_LOCAL_SERVER = "http://localhost:9015";
-const LOCAL_KEY = "bids.local";
-const REMOTE_KEY = "bids.remote";
-const MODE_KEY = "bids.mode";
-
-// Porte de service : « ?serveur=1 » dans l'URL garde la barre du serveur
-// visible même quand le moteur tourne dans la page, où elle disparaît faute
-// d'avoir un serveur à choisir. Sans elle, le client de test n'aurait plus
-// aucun moyen de viser la production ou un autre port. « ?serveur=0 » la
-// referme, pour pouvoir l'écrire dans un signet sans se demander laquelle des
-// deux formes l'emporte.
-//
-// Déclarée avant le premier syncServerField, quelques lignes plus bas : un
-// const lu avant sa déclaration lèverait.
-const SERVER_BAR_FORCED = (() => {
-  try {
-    const v = new URLSearchParams(location.search).get("serveur");
-    return v !== null && v !== "0";
-  } catch (err) {
-    return false;
-  }
-})();
-
-const serverModeSelect = $("#server-mode");
-serverModeSelect.value = readMode();
-syncServerField();
-serverModeSelect.addEventListener("change", applyServerMode);
-
-// L'URL saisie est mémorisée dans le mode courant : la retaper à chaque
-// visite serait pénible et, pour le distant, le client ne peut pas la deviner.
-$("#server").addEventListener("change", () => {
-  if (serverModeSelect.value === "remote") saveRemote(serverURL());
-  else saveLocal(serverURL());
-  renderServerHint();
-  checkHealth();
-});
-
-// En mode « navigateur », les enchères sont calculées sur place par
-// bids-wasm.js : il n'y a aucun serveur à viser, donc aucune URL à saisir.
-function wasmMode() {
-  return serverModeSelect.value === "wasm";
-}
-
-// Met l'en-tête en accord avec le mode. En mode navigateur, toute la barre
-// disparaît — champ d'URL comme sélecteur : il n'y a aucun serveur à viser,
-// donc rien à choisir. renderHealth la ramène si le moteur fait défaut, seul
-// cas où il reste quelque chose à décider.
-function syncServerField() {
-  const wasm = wasmMode();
-  const field = $("#server");
-  field.disabled = wasm;
-  field.classList.toggle("hidden", wasm);
-  if (!wasm) {
-    field.value = serverModeSelect.value === "remote" ? readRemote() : readLocal();
-  }
-  // healthState n'est pas lisible ici : cette fonction tourne dès le haut du
-  // script, avant sa déclaration. On masque donc sur le seul mode, et c'est
-  // renderHealth qui révèle la barre en cas de panne du moteur.
-  $("#bids-server-bar").classList.toggle("hidden", wasm && !SERVER_BAR_FORCED);
-}
-
-// Bascule le champ d'URL sur le mode choisi. En distant, l'URL n'est pas connue
-// d'avance : on restitue celle déjà saisie, sinon on prévient qu'il faut la
-// renseigner au lieu de sonder une adresse vide.
-function applyServerMode() {
-  const mode = serverModeSelect.value;
-  saveMode(mode);
-  syncServerField();
-  renderServerHint();
-  // Sans URL, checkHealth s'abstient de sonder et l'état retombe à
-  // « inconnu » : le laisser sur son verdict précédent annoncerait en ligne un
-  // serveur que l'on n'a pas contacté.
-  if (mode === "remote" && !serverURL()) $("#server").focus();
-  checkHealth();
-}
-
-// Le message n'a de sens qu'en distant tant que l'URL manque : ailleurs, le
-// champ se suffit à lui-même, et en mode navigateur l'option choisie dit déjà
-// que rien n'est interrogé. Le bandeau reste libre pour les erreurs du moteur
-// (voir checkHealth).
-function renderServerHint() {
-  const t = UI_TEXT[$("#lang").value];
-  const remote = serverModeSelect.value === "remote";
-  const missing = remote && !serverURL();
-  const hint = $("#server-hint");
-  hint.textContent = missing ? t.serverRemoteHint : "";
-  hint.classList.toggle("hidden", !hint.textContent);
-  $("#server").placeholder = remote ? t.serverRemotePlaceholder : "";
-  // L'option « Local » porte l'hôte réellement visé : celui qui est mémorisé,
-  // ou localhost:9015 par défaut (voir readLocal). On le rafraîchit ici car il
-  // est désormais modifiable.
-  $("#server-mode").querySelector('option[value="local"]').textContent =
-    `${t.serverLocal} (${readLocal().replace(/^https?:\/\//, "")})`;
-}
+// Les enchères sont toujours calculées dans la page, par le moteur Go compilé
+// en WebAssembly (bids-wasm.js) : il n'y a aucun serveur d'enchères à viser.
+// Seul le serveur IA, facultatif, se choisit encore (voir plus bas).
 
 // Le serveur d'IA (aiproxy) prête son /api/chat à la lecture des cartes sur une
 // photo. Il est facultatif : sans lui tout le reste du client fonctionne, seuls
 // les boutons photo s'éteignent (voir renderPhotoButtons). En local il écoute
 // sur 9009 ; en production il est proxifié sous un préfixe propre au
-// déploiement, d'où l'absence de valeur par défaut en distant — même raison
-// que pour le serveur d'enchères.
+// déploiement, d'où l'absence de valeur par défaut en distant : la figer ferait
+// pointer n'importe quelle copie du client vers un serveur qui n'est pas le
+// sien.
 const DEFAULT_LOCAL_IA = "http://localhost:9009";
 const IA_LOCAL_KEY = "ia.local";
 const IA_REMOTE_KEY = "ia.remote";
@@ -232,16 +134,11 @@ let dealFromFile = false;
 // SEAT_LABEL et VUL_LABEL plutôt que redits ici. Voir applyLang.
 const UI_TEXT = {
   fr: {
-    server: "Serveur",
     serverLocal: "Local",
     serverRemote: "Distant (production)",
     serverRemoteHint: "Saisissez l'URL du serveur distant.",
-    errNoServer: "Aucun serveur visé : saisissez l'URL du serveur distant, ou repassez en mode Navigateur.",
-    errTimeout: "Le serveur n'a pas répondu à temps. Vérifiez son URL, ou repassez en mode Navigateur.",
-    errUnreachable: "Serveur injoignable. Vérifiez son URL, ou repassez en mode Navigateur.",
-    errNotJson: "Réponse inattendue : ce n'est pas un serveur d'enchères. Vérifiez son URL.",
-    serverRemotePlaceholder: "https://exemple.net/api/bidings",
-    serverWasm: "Navigateur (hors ligne)",
+    errTimeout: "Le serveur n'a pas répondu à temps. Vérifiez son URL.",
+    errUnreachable: "Serveur injoignable. Vérifiez son URL.",
     wasmMissing: "Moteur d'enchères (WASM) introuvable — lancez build-wasm.sh.",
     wasmMissingExec: "wasm_exec.js absent — lancez build-wasm.sh pour le moteur du navigateur.",
     wasmFailed: "Le moteur d'enchères n'a pas répondu.",
@@ -251,9 +148,7 @@ const UI_TEXT = {
     iaFeature: "Serveur IA de reconnaissance des cartes",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
-    version: "Serveur enchères",
     versionWasm: "Moteur d'enchères",
-    versionTitle: "Version du serveur interrogé",
     versionWasmTitle: "Version du moteur exécuté dans la page",
     versionModified: "compilé sur un dépôt modifié",
     online: "en ligne",
@@ -366,16 +261,11 @@ const UI_TEXT = {
     parLeadThose: "Avec ces cartes",
   },
   en: {
-    server: "Server",
     serverLocal: "Local",
     serverRemote: "Remote (production)",
     serverRemoteHint: "Enter the remote server URL.",
-    errNoServer: "No server to call: enter the remote server URL, or switch back to In-browser mode.",
-    errTimeout: "The server did not answer in time. Check its URL, or switch back to In-browser mode.",
-    errUnreachable: "Server unreachable. Check its URL, or switch back to In-browser mode.",
-    errNotJson: "Unexpected answer: this is not a bidding server. Check its URL.",
-    serverRemotePlaceholder: "https://example.net/api/bidings",
-    serverWasm: "In-browser (offline)",
+    errTimeout: "The server did not answer in time. Check its URL.",
+    errUnreachable: "Server unreachable. Check its URL.",
     wasmMissing: "Bidding engine (WASM) not found — run build-wasm.sh.",
     wasmMissingExec: "wasm_exec.js is missing — run build-wasm.sh for the in-browser engine.",
     wasmFailed: "The bidding engine did not answer.",
@@ -385,9 +275,7 @@ const UI_TEXT = {
     iaFeature: "AI card-recognition server",
     serverTest: "Test",
     healthUnknown: "unknown state",
-    version: "Bidding server",
     versionWasm: "Bidding engine",
-    versionTitle: "Version of the server being queried",
     versionWasmTitle: "Version of the engine running in the page",
     versionModified: "built from a modified tree",
     online: "online",
@@ -613,49 +501,14 @@ if (window.matchMedia) {
   });
 }
 
-// URL des serveurs. Faute de valeur retenue, le serveur local retombe sur son
-// port d'écoute par défaut ; le distant sur une chaîne vide, qui force la
-// saisie.
-function readLocal() {
-  return readStored(LOCAL_KEY, DEFAULT_LOCAL_SERVER);
-}
-
-function saveLocal(url) {
-  saveStored(LOCAL_KEY, url);
-}
-
-function readRemote() {
-  return readStored(REMOTE_KEY, "");
-}
-
-function saveRemote(url) {
-  saveStored(REMOTE_KEY, url);
-}
-
+// URL du serveur IA. Faute de valeur retenue, le local retombe sur son port
+// d'écoute par défaut ; le distant sur une chaîne vide, qui force la saisie.
 function readIaLocal() {
   return readStored(IA_LOCAL_KEY, DEFAULT_LOCAL_IA);
 }
 
 function readIaRemote() {
   return readStored(IA_REMOTE_KEY, "");
-}
-
-// Le moteur d'enchères tourne toujours dans la page : que l'on ouvre
-// index.html directement ou que run.ps1 / run.sh la serve, le client se
-// comporte de la même façon. Un mode local ou distant mémorisé lors d'une
-// visite précédente n'est repris que par la porte de service « ?serveur=1 » —
-// sans quoi, sur localhost:9015, un ancien choix « Local » ramenait la barre
-// du serveur et détournait les calculs vers le binaire Go. Si le moteur n'est
-// pas servi, c'est son échec de chargement qui le dira, et la barre du
-// serveur reparaîtra.
-function readMode() {
-  if (!SERVER_BAR_FORCED) return "wasm";
-  const mode = readStored(MODE_KEY, "wasm");
-  return mode === "remote" || mode === "local" ? mode : "wasm";
-}
-
-function saveMode(mode) {
-  saveStored(MODE_KEY, mode);
 }
 
 function readIaMode() {
@@ -695,7 +548,6 @@ function applyLang() {
     el.hidden = el.dataset.helpLang !== lang;
   }
   renderDealActions();
-  renderServerHint(); // messages du champ d'URL et libellé de l'option locale
   renderIaHint();
   renderSeatCompass();
   for (const opt of $("#dealer").options) {
@@ -3152,21 +3004,16 @@ const auctionTip = {
 };
 auctionTip.bind();
 
-// ---------- server calls ----------
-
-function serverURL() {
-  return $("#server").value.trim().replace(/\/+$/, "");
-}
+// ---------- appels réseau (serveur IA) ----------
 
 // Un fetch qui renonce. Sans cela, un serveur qui accepte la connexion puis se
 // tait laisse le bouton grisé indéfiniment : rien ne revient, ni réponse ni
 // erreur, et l'application reste en attente jusqu'au rechargement de la page.
 //
 // Les délais diffèrent selon ce qu'on attend : une sonde doit répondre tout de
-// suite, un calcul d'enchères prend le temps qu'il faut, et le modèle de vision
-// du serveur IA met des dizaines de secondes à lire une photo.
+// suite, alors que le modèle de vision du serveur IA met des dizaines de
+// secondes à lire une photo.
 const TIMEOUT_PROBE = 8000;
-const TIMEOUT_BID = 20000;
 const TIMEOUT_VISION = 90000;
 
 async function fetchWithTimeout(url, options, ms = TIMEOUT_PROBE) {
@@ -3188,7 +3035,7 @@ async function fetchWithTimeout(url, options, ms = TIMEOUT_PROBE) {
   }
 }
 
-// Dernier état connu du serveur, gardé pour le réafficher tel quel quand la
+// Dernier état connu du moteur, gardé pour le réafficher tel quel quand la
 // langue change, sans le redemander.
 let healthState = null; // "online", "offline", ou null tant qu'on ne sait pas
 
@@ -3202,60 +3049,39 @@ function renderHealth() {
   // pastille et son infobulle portent l'état pour l'œil), et il se réécrit
   // quand même à chaque changement de langue.
   $("#health-text").textContent = healthState ? t[healthState] : "";
-  // En mode navigateur, le moteur est dans la page : « Tester » ne sonderait
-  // personne et ne ferait que rejouer le contrôle du chargement, déjà fait à
-  // l'ouverture. Le bouton ne garde donc sa place qu'en mode serveur, où il
-  // dit lequel répond. C'est ici, et non à l'initialisation, parce que la
-  // bascule de mode repasse par renderHealth.
-  $("#health-btn").classList.toggle("hidden", wasmMode());
-  // Moteur en panne (module absent, navigateur sans WebAssembly...) : la barre
-  // revient, faute de quoi le client resterait bloqué sur un mode qui ne
-  // calcule rien, sans aucun moyen de viser un serveur.
-  if (wasmMode() && healthState === "offline") {
-    $("#bids-server-bar").classList.remove("hidden");
-  }
 }
 
-// Version du serveur, telle que /version la renvoie. null tant qu'on ne l'a
-// pas obtenue : le pied de page nomme alors le serveur sans lui prêter une
+// Version du moteur, telle que bids-wasm.js la renvoie. null tant qu'on ne l'a
+// pas obtenue : le pied de page nomme alors le moteur sans lui prêter une
 // révision qu'il ne connaît pas.
-let serverVersion = null;
+let engineVersion = null;
 
 function renderVersion() {
   const el = $("#app-version");
   const t = UI_TEXT[$("#lang").value];
-  // En mode navigateur, nommer « serveur » ce qui tourne dans la page ferait
-  // croire à un serveur que l'on ne contacte pas.
-  const label = wasmMode() ? t.versionWasm : t.version;
-  // Le nom du serveur reste affiché même sans version : il dit à quelle ligne
+  // Le nom du moteur reste affiché même sans version : il dit à quelle ligne
   // du pied de page appartient la pastille d'état (l'autre étant celle de l'IA).
-  if (!serverVersion) {
-    el.textContent = label;
+  if (!engineVersion) {
+    el.textContent = t.versionWasm;
     el.removeAttribute("title");
     return;
   }
-  // L'étoile signale un binaire compilé sur un dépôt modifié : la révision
+  // L'étoile signale un moteur compilé sur un dépôt modifié : la révision
   // seule prétendrait alors correspondre à un commit qu'il ne reflète pas.
-  el.textContent = `${label} ${serverVersion.revision}${serverVersion.modified ? " *" : ""}`;
-  const parts = [wasmMode() ? t.versionWasmTitle : t.versionTitle];
-  if (serverVersion.time) parts.push(serverVersion.time);
-  if (serverVersion.go) parts.push(serverVersion.go);
-  if (serverVersion.modified) parts.push(t.versionModified);
+  el.textContent = `${t.versionWasm} ${engineVersion.revision}${engineVersion.modified ? " *" : ""}`;
+  const parts = [t.versionWasmTitle];
+  if (engineVersion.time) parts.push(engineVersion.time);
+  if (engineVersion.go) parts.push(engineVersion.go);
+  if (engineVersion.modified) parts.push(t.versionModified);
   el.title = parts.join(" · ");
 }
 
 async function fetchVersion() {
   try {
-    if (wasmMode()) {
-      const body = await bidsLocal.version();
-      serverVersion = body && body.revision ? body : null;
-    } else {
-      const resp = await fetchWithTimeout(serverURL() + "/version", {}, TIMEOUT_PROBE);
-      const body = await resp.json();
-      serverVersion = resp.ok && body.revision ? body : null;
-    }
+    const body = await bidsLocal.version();
+    engineVersion = body && body.revision ? body : null;
   } catch (err) {
-    serverVersion = null;
+    engineVersion = null;
   }
   renderVersion();
 }
@@ -3268,46 +3094,29 @@ window.onBidsEngineLoad = function (state) {
   $("#engine-loading").classList.toggle("hidden", state !== "start");
 };
 
+// Contrôle du moteur au chargement : il rejoue sa donne de référence. Cela
+// instancie le module au passage, donc dès l'ouverture de la page — le premier
+// calcul est ainsi immédiat.
+//
+// Ce préchargement a un temps été différé au premier calcul, quand
+// l'hébergement mettait ~9 s à répondre à la moindre requête. Sur GitHub
+// Pages, bids.wasm arrive compressé (1,3 Mo) en moins d'une seconde, hors du
+// chemin critique de l'affichage : le coût ne justifie plus l'attente.
+//
+// S'il ne se charge pas (fichier absent, page ouverte en file://, navigateur
+// sans WebAssembly), la raison s'affiche au pied de page : sans moteur, rien
+// ne peut être calculé.
 async function checkHealth() {
   healthState = null;
   renderHealth();
-  // En mode navigateur, l'équivalent de /ready : le moteur rejoue sa donne de
-  // référence. Cela instancie le module au passage, donc dès l'ouverture de la
-  // page — le premier calcul est ainsi immédiat.
-  //
-  // Ce préchargement a un temps été différé au premier calcul, quand
-  // l'hébergement mettait ~9 s à répondre à la moindre requête. Sur GitHub
-  // Pages, bids.wasm arrive compressé (1,3 Mo) en moins d'une seconde, hors du
-  // chemin critique de l'affichage : le coût ne justifie plus l'attente.
-  if (wasmMode()) {
-    $("#health-text").textContent = "…";
-    try {
-      healthState = (await bidsLocal.selfCheck()) ? "online" : "offline";
-      renderServerHint();
-    } catch (err) {
-      healthState = "offline";
-      const hint = $("#server-hint");
-      hint.textContent = err.message;
-      hint.classList.remove("hidden");
-    }
-    renderHealth();
-    fetchVersion();
-    return;
-  }
-  // Sans URL, fetch() résoudrait « /health » contre l'origine de la page, donc
-  // contre le serveur local : le distant serait annoncé en ligne sans avoir
-  // jamais été contacté. On s'en tient à l'état inconnu.
-  if (!serverURL()) {
-    renderServerHint();
-    return;
-  }
+  const errEl = $("#engine-error");
+  errEl.textContent = "";
   $("#health-text").textContent = "…";
   try {
-    const resp = await fetchWithTimeout(serverURL() + "/health", {}, TIMEOUT_PROBE);
-    const body = await resp.json();
-    healthState = resp.ok && body.status === "ok" ? "online" : "offline";
+    healthState = (await bidsLocal.selfCheck()) ? "online" : "offline";
   } catch (err) {
     healthState = "offline";
+    errEl.textContent = err.message;
   }
   renderHealth();
   fetchVersion();
@@ -3359,18 +3168,7 @@ async function checkIaHealth() {
   renderIaHealth();
 }
 
-// Le mode par défaut étant « navigateur », on a longtemps sondé bids.wasm en
-// HEAD à l'ouverture pour retomber sur le serveur local quand le moteur n'est
-// pas servi (ouvert en file://, ou binaire compilé sans build-wasm.sh).
-//
-// Cette sonde a été retirée : sur un hébergement statique lent, chaque requête
-// coûte sa latence complète — mesurée à plusieurs secondes — et celle-ci ne
-// servait qu'à choisir un mode par avance. Le repli se fait désormais quand il
-// se justifie vraiment, c'est-à-dire si le moteur refuse de se charger : le
-// message d'erreur s'affiche et renderHealth fait réapparaître la barre du
-// serveur, qui laisse en viser un.
-
-// Reads/validates the PBN textarea and asks the server for the full
+// Reads/validates the deal and asks the in-page engine for the full
 // bidding sequence. Throws with a user-facing message on failure.
 async function fetchBid(lang) {
   // The zones are the authoritative view of the deal, and they already track
@@ -3387,36 +3185,7 @@ async function fetchBid(lang) {
   if (!pbn) {
     throw new Error(CONS_TEXT[lang].errNoPbn);
   }
-  // Seul le transport change : les vérifications ci-dessus valent pour les
-  // deux modes, et le moteur WebAssembly rend exactement le même JSON que /bid.
-  if (wasmMode()) {
-    return bidsLocal.bid(pbn, lang);
-  }
-  // Sans URL, fetch() résoudrait « /bid » contre l'origine de la page : la
-  // réponse serait le HTML d'un 404, et resp.json() échouerait sur un message
-  // du moteur JavaScript — « Unexpected token '<' » — que personne ne peut
-  // comprendre. checkHealth a ce garde-fou depuis toujours ; il manquait ici.
-  if (!serverURL()) {
-    throw new Error(UI_TEXT[lang].errNoServer);
-  }
-  const fd = new FormData();
-  fd.append("pbn", new Blob([pbn], { type: "text/plain" }), "deal.pbn");
-  const resp = await fetchWithTimeout(`${serverURL()}/bid?lang=${lang}`, {
-    method: "POST",
-    body: fd,
-  }, TIMEOUT_BID);
-  let body;
-  try {
-    body = await resp.json();
-  } catch (err) {
-    // L'URL répond, mais pas en JSON : ce n'est pas un serveur d'enchères.
-    // Le 404 d'un hébergeur statique donnait « Unexpected token '<' ».
-    throw new Error(UI_TEXT[lang].errNotJson);
-  }
-  if (!resp.ok) {
-    throw new Error(body.error || `HTTP ${resp.status}`);
-  }
-  return body;
+  return bidsLocal.bid(pbn, lang);
 }
 
 async function simulate() {
@@ -3841,7 +3610,6 @@ $("#bidding-box").addEventListener("click", (ev) => {
 });
 $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 
-$("#health-btn").addEventListener("click", checkHealth);
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);

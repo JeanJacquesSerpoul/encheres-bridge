@@ -1,4 +1,4 @@
-package main
+package engine
 
 // Suit indexes follow the bidding ladder: clubs lowest, spades highest.
 type Suit int

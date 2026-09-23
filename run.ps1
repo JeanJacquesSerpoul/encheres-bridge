@@ -1,12 +1,11 @@
-﻿# run.ps1 — compile puis lance le serveur, et ouvre l'application dans le
-# navigateur sur http://localhost:<port>/ .
+﻿# run.ps1 — sert cli\ sur http://localhost:<port>/ et ouvre l'application dans
+# le navigateur.
 #
-# Le client de test (cli\) est embarqué dans le binaire par //go:embed : le
-# moteur en WebAssembly doit donc exister AVANT la compilation du serveur, ce
-# script le produit au besoin via build-wasm.ps1.
-#
-# Le binaire est écrit dans .\bids.exe (ignoré par git) et conservé : le
-# lancement suivant repart de là. Ctrl+C arrête le serveur.
+# Les enchères sont calculées dans la page par le moteur WebAssembly
+# (cli\bids.wasm, versionné) : il n'y a qu'à servir des fichiers. Le
+# mini-serveur serve\ s'en charge, avec les en-têtes COOP/COEP qu'attend le
+# calcul du PAR. Il est compilé dans .\bids.exe (ignoré par git) et conservé :
+# le lancement suivant repart de là. Ctrl+C l'arrête.
 #
 # Si un serveur répond déjà sur le port, la page est simplement ouverte.
 #
@@ -26,13 +25,12 @@ $root = $PSScriptRoot
 $url = "http://localhost:$Port/"
 $bin = Join-Path $root "bids.exe"
 
-# /ready ne répond qu'une fois le moteur capable de rejouer une donne de
-# référence : c'est le signal à attendre avant d'ouvrir la page, plutôt qu'un
-# délai au jugé. -UseBasicParsing : sans lui, PowerShell 5.1 passe par le
-# moteur d'Internet Explorer, absent des installations récentes.
+# La page elle-même : c'est le signal à attendre avant de l'ouvrir, plutôt
+# qu'un délai au jugé. -UseBasicParsing : sans lui, PowerShell 5.1 passe par
+# le moteur d'Internet Explorer, absent des installations récentes.
 function Test-Ready {
     try {
-        $r = Invoke-WebRequest -Uri "http://localhost:$Port/ready" -TimeoutSec 2 -UseBasicParsing
+        $r = Invoke-WebRequest -Uri "http://localhost:$Port/index.html" -TimeoutSec 2 -UseBasicParsing
         return $r.StatusCode -eq 200
     } catch {
         return $false
@@ -51,27 +49,20 @@ if (-not (Get-Command go -ErrorAction SilentlyContinue)) {
     throw "Go est introuvable dans le PATH."
 }
 
-# //go:embed all:cli fige le contenu de cli\ à la compilation : sans ce
-# fichier, le mode « navigateur » du client répondrait 404 sur bids.wasm.
+# Le moteur est versionné ; -ForceWasm le recompile depuis les sources Go
+# locales, après une modification du moteur.
 if ($ForceWasm -or -not (Test-Path (Join-Path $root "cli\bids.wasm"))) {
     & (Join-Path $root "build-wasm.ps1")
-}
-
-try {
-    $revision = (git -C $root rev-parse --short HEAD 2>$null)
-    if (-not $revision) { $revision = "unknown" }
-} catch {
-    $revision = "unknown"
 }
 
 # Les variables d'environnement sont restaurées ensuite, le script pouvant être
 # lancé depuis une session PowerShell que l'on ne veut pas laisser modifiée.
 $old = @{ CGO_ENABLED = $env:CGO_ENABLED; PORT = $env:PORT }
-Write-Host "Compilation de bids.exe (revision $revision)..."
+Write-Host "Compilation de bids.exe..."
 Push-Location $root
 try {
     $env:CGO_ENABLED = "0"
-    go build -trimpath -ldflags="-s -w -X main.buildRevision=$revision" -o $bin ./engine
+    go build -trimpath -o $bin ./serve
     if ($LASTEXITCODE -ne 0) { throw "go build a échoué (code $LASTEXITCODE)" }
 }
 finally {
@@ -79,14 +70,13 @@ finally {
     $env:CGO_ENABLED = $old.CGO_ENABLED
 }
 
-Write-Host "Démarrage du serveur sur $url (Ctrl+C pour arrêter)"
 $env:PORT = "$Port"
 $proc = $null
 try {
     # -PassThru pour garder la main sur le processus : Ctrl+C interrompt ce
     # script, et le bloc finally arrête alors le serveur au lieu de le laisser
     # orphelin, port occupé et console rendue.
-    $proc = Start-Process -FilePath $bin -NoNewWindow -PassThru
+    $proc = Start-Process -FilePath $bin -ArgumentList "-dir", (Join-Path $root "cli") -NoNewWindow -PassThru
     if (-not $NoBrowser) {
         $deadline = (Get-Date).AddSeconds(60)
         $ready = $false

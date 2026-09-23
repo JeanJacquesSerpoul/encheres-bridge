@@ -1,7 +1,6 @@
+# Le mini-serveur compilé par run.sh / run.ps1.
 bids
 bids.exe
-bids-linux
-bids-windows.exe
 tools/par/out/
 .env
 .env.*

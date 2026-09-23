@@ -1,11 +1,10 @@
 "use strict";
 
 // Le moteur d'enchères Go compilé en WebAssembly (bids.wasm) : les séquences
-// sont calculées dans le navigateur, sans aucun appel réseau, avec le même
-// code et le même encodeur JSON que /bid — donc les mêmes octets. Produit par
-// build-wasm.sh, servi par le serveur Go (gzip + ETag, voir gzipStatic dans
-// engine/main.go), et absent tant que ce script n'a pas été lancé : dans ce cas le
-// client le dit et les modes Local et Distant continuent de fonctionner.
+// sont calculées dans le navigateur, sans aucun appel réseau : c'est le seul
+// moteur de l'application. Produit par build-wasm.sh (point d'entrée wasm/,
+// moteur engine/) et versionné dans cli/ ; s'il ne se charge pas, le client
+// le dit au pied de page, et rien ne peut être calculé.
 //
 // Une seule instanciation pour la page, lancée dès l'ouverture par le
 // selfCheck de checkHealth, et un message clair quand le module manque. Le
@@ -14,8 +13,7 @@
 // passer.
 //
 // Chargé APRÈS wasm_exec.js, qui définit Go, et AVANT app.js, dont la fin
-// appelle checkHealth() — lequel passe par window.bidsLocal en mode
-// « navigateur ». Les références à UI_TEXT ne sont résolues qu'à l'appel, donc
+// appelle checkHealth() — lequel passe par window.bidsLocal. Les références à UI_TEXT ne sont résolues qu'à l'appel, donc
 // bien après app.js : les scripts classiques partagent la même portée globale.
 
 (function () {
@@ -100,8 +98,9 @@
       window.__bidsWasmReady = resolve;
     });
 
-    // instantiateStreaming exige un Content-Type application/wasm ; le serveur
-    // Go le pose, mais file:// et certains hébergements non, d'où le repli.
+    // instantiateStreaming exige un Content-Type application/wasm ; le
+    // mini-serveur de run.* et GitHub Pages le posent, mais certains
+    // hébergements non, d'où le repli.
     const type = resp.headers.get("content-type") || "";
     const streamable =
       typeof WebAssembly.instantiateStreaming === "function" &&
@@ -131,9 +130,6 @@
   }
 
   window.bidsLocal = {
-    // Le JSON brut, tel que le serveur le met sur le fil : c'est lui que l'on
-    // compare octet à octet avec /bid (voir tools/wasm-parity.mjs).
-    bidRaw: (pbn, lang) => call("bid", pbn, lang),
     bid: (pbn, lang) => call("bid", pbn, lang).then(JSON.parse),
     bids: (pbn, lang) => call("bids", pbn, lang).then(JSON.parse),
     version: () => loadModule().then((api) => JSON.parse(api.version)),

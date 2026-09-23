@@ -1,4 +1,4 @@
-package main
+package engine
 
 // Duplicate-bridge scoring, as needed by the competitive sacrifice logic:
 // the value of the opponents' contract if it makes exactly, against the

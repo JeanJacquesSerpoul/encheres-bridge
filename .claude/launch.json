@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "bids-server",
+      "name": "serve",
       "runtimeExecutable": "go",
-      "runtimeArgs": ["run", "./engine"],
+      "runtimeArgs": ["run", "./serve"],
       "port": 9015,
       "autoPort": true
     },

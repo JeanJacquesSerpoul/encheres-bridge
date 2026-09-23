@@ -369,7 +369,7 @@ Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://local
 
 ### Composer la donne
 
-- **Charger un fichier .pbn**, ou coller le texte PBN dans la zone dépliable. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
+- **Charger un fichier .pbn**, ou coller le texte PBN dans la zone qu'affiche le bouton **Texte de la donne (format PBN)** (icône `</>`). Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
 - **Donne aléatoire** tire une donne complète ; donneur et vulnérabilité se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la souris** : chaque carte se glisse d'une main à l'autre, ou vers la zone **Cartes non affectées** au centre de la table ; le tag `[Deal]` est réécrit à chaque déplacement.
 - Chaque main porte deux **bornes de points d'honneur** (mini/maxi). Elles contraignent le tirage aléatoire et signalent les mains hors bornes sur la donne courante.

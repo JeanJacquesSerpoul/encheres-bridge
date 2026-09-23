@@ -263,7 +263,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 ### Voir les enchères
 
-**Afficher les enchères** calcule la séquence dans la page et affiche, dans le panneau **Résultat** placé juste sous la donne (**Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
+**Afficher les enchères** calcule la séquence dans la page et affiche, dans le panneau **Résultat** placé juste sous la donne (**Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée, dont chaque ligne porte à gauche une icône qui déplie l'**arbre de décision** de l'enchère (voir le champ `trace` ci-dessous).
 
 ### Le moteur dans la page
 

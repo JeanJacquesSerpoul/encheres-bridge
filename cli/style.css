@@ -665,7 +665,7 @@ button:disabled { opacity: .6; cursor: wait; }
   .panel { border: none; box-shadow: none; padding: 0; margin: 0 0 12px; }
   main:has(#result-panel:not(.hidden)) > section:not(#result-panel) { display: none !important; }
   .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
-  .comments li { break-inside: avoid; }
+  .comments > li { break-inside: avoid; }
 }
 .quiz-launch-row {
   display: flex;
@@ -1093,14 +1093,38 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .auction td .red { color: var(--red); }
 
 .comments { font-size: .9rem; padding-left: 22px; }
-.comments li { margin: 3px 0; }
+.comments > li { margin: 3px 0; }
 /* Largeur fixe : sans elle, la largeur propre à chaque lettre de siège (N/E/S/O)
    décale le tiret et le texte qui le suit d'une ligne à l'autre. */
 .comments .who { font-weight: 700; display: inline-block; min-width: 1.1em; }
 /* Enchère sans commentaire : présente pour que la séquence se lise dans
    l'ordre, effacée pour que l'œil aille aux enchères qui disent quelque
    chose. */
-.comments li.silent { color: var(--muted); }
+.comments > li.silent { color: var(--muted); }
+/* Icône de l'arbre de décision, à gauche de chaque ligne ; une ligne sans
+   arbre garde la même place vide, pour que les sièges restent alignés. */
+.comments .tree-icon,
+.comments .tree-icon-gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.comments .tree-icon {
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.comments .tree-icon:hover,
+.comments .tree-icon:focus-visible { color: var(--accent); border-color: var(--border); }
+.comments .tree-icon[aria-expanded="true"] { color: var(--accent); }
+.comments .decision-tree { margin: 4px 0 10px 28px; max-width: 38em; font-size: .85rem; }
 
 /* Résultat : titres, séquence, commentaires, bouton et PAR centrés dans le
    panneau. La liste se réduit à sa largeur et garde son texte aligné à gauche. */

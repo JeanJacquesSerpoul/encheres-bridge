@@ -303,7 +303,6 @@ const UI_TEXT = {
       "Composez une donne — l'application déroule les enchères du système " +
       "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
-    pbnToggleTitle: "Réservé aux initiés : la donne se compose très bien sans ouvrir ce repli.",
     pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
     dealToUse: "Donne à utiliser",
     dealWord: "Donne",
@@ -436,7 +435,6 @@ const UI_TEXT = {
       "Build a deal — the application runs the French system's auction and " +
       "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
-    pbnToggleTitle: "For the initiated: a deal is built just fine without ever opening this.",
     pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
     dealToUse: "Deal to use",
     dealWord: "Deal",
@@ -736,7 +734,7 @@ function loadPbn(text, fileName) {
   resetQuiz();
   hideResult();
   refreshDealSelector(true);
-  $("#pbn-details").open = false;
+  setPbnOpen(false);
   $("#file-name").textContent = fileName || "";
 }
 
@@ -993,7 +991,7 @@ function highlightSelectedDeal(reveal) {
   const text = textarea.value;
   const { start, end } = range;
   if (reveal) {
-    $("#pbn-details").open = true;
+    setPbnOpen(true);
     textarea.focus({ preventScroll: true });
   }
   textarea.setSelectionRange(start, end);
@@ -1658,6 +1656,11 @@ const BOOK_SVG = `${SVG_OPEN}
   <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>
 </svg>`;
 
+// Deux chevrons : la donne sous sa forme de texte (PBN).
+const CODE_SVG = `${SVG_OPEN}
+  <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/>
+</svg>`;
+
 // Une flèche vers le bas au-dessus d'un plateau : le fichier est téléchargé.
 const EXPORT_SVG = `${SVG_OPEN}
   <path d="M12 3v11"/><path d="m8 10 4 4 4-4"/>
@@ -1769,7 +1772,19 @@ function renderDealActions() {
   setCommandButton("#random-btn", DICE_SVG, t.randomDeal);
   setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal);
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
+  setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle);
 }
+
+// Affiche ou masque le texte PBN sous la rangée du haut. Le bouton dit son
+// état par aria-expanded, que style.css rend aussi visible (bouton enfoncé).
+function setPbnOpen(open) {
+  $("#pbn-details").hidden = !open;
+  $("#pbn-toggle-btn").setAttribute("aria-expanded", String(open));
+}
+
+$("#pbn-toggle-btn").addEventListener("click", () => {
+  setPbnOpen($("#pbn-details").hidden);
+});
 
 function renderBoundsCards() {
   const lang = $("#lang").value;
@@ -3794,7 +3809,7 @@ $("#quiz-btn").addEventListener("click", startQuiz);
 // une fois, au démarrage, depuis les mêmes constantes.
 const HELP_ICONS = {
   file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
-  gather: GATHER_SVG, deal: DEAL_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
+  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
   quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
 };
 
@@ -3828,7 +3843,7 @@ gatherMissingCards();
 renderBoundsCards();
 renderHelpIcons();
 applyLang();
-$("#pbn-details").open = false;
+setPbnOpen(false);
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le
 // premier calcul demandé est alors immédiat. Le mode navigateur reste celui
 // par défaut, un mode déjà choisi primant toujours.

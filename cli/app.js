@@ -331,6 +331,8 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Contrat final",
     quizShowDetail: "Afficher le détail complet",
+    quizDealHidden: "Donne masquée pendant le questionnaire.",
+    quizShowDeal: "Afficher la donne",
     quizReplay: "Rejouer cette donne",
     quizNewDeal: "Nouvelle donne",
     hiddenHand: "main cachée",
@@ -457,6 +459,8 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Final contract",
     quizShowDetail: "Show full detail",
+    quizDealHidden: "Deal hidden during the quiz.",
+    quizShowDeal: "Show the deal",
     quizReplay: "Replay this deal",
     quizNewDeal: "New deal",
     hiddenHand: "hidden hand",
@@ -3515,7 +3519,21 @@ function resetQuiz() {
   cancelAutoReveal();
   quiz = null;
   $("#quiz-panel").classList.add("hidden");
+  setDealHidden(false);
 }
+
+// Le questionnaire cache les mains adverses : la donne composée au-dessus les
+// montrerait toutes, et son texte PBN aussi. Elles sont masquées pendant qu'on
+// enchérit, et reviennent à la fin, quand on change de donne, ou à la demande.
+function setDealHidden(hidden) {
+  $("#input-panel").classList.toggle("quiz-running", hidden);
+  // Ouvrir le texte PBN ne montrerait rien — il est masqué lui aussi — et le
+  // bouton resterait enfoncé sur un panneau invisible : il s'éteint.
+  $("#pbn-toggle-btn").disabled = hidden;
+  if (hidden) setPbnOpen(false);
+}
+
+$("#quiz-show-deal-btn").addEventListener("click", () => setDealHidden(false));
 
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
 function hideResult() {
@@ -3719,6 +3737,8 @@ function onQuizContinue() {
 
 function finishQuiz() {
   renderQuizHands(true);
+  // Les mains sont dévoilées dans le questionnaire : la donne peut revenir.
+  setDealHidden(false);
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const r = quiz.result;
@@ -3780,6 +3800,7 @@ async function startQuiz() {
     quiz = { result, seat, lang, calls: [], idx: 0, correctCount: 0, totalUser: 0 };
     $("#quiz-panel").classList.remove("hidden");
     $("#quiz-score").classList.add("hidden");
+    setDealHidden(true);
     renderQuizHands();
     renderQuizStep();
     $("#quiz-panel").scrollIntoView({ behavior: "smooth", block: "start" });

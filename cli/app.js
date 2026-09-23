@@ -200,15 +200,24 @@ const EMPTY_PBN = `[Dealer "N"]
 [Vulnerable "None"]
 [Deal "N:... ... ... ..."]`;
 
-// La dernière donne complète — quatre mains de 13 cartes — est retenue d'une
-// visite à l'autre, et c'est elle qui revient au chargement suivant. Une donne
-// en cours de composition ne l'écrase pas : on retrouve la dernière jouable.
+// La dernière donne complète de l'utilisateur — quatre mains de 13 cartes —
+// est retenue d'une visite à l'autre, et c'est elle qui revient au chargement
+// suivant. Une donne en cours de composition ne l'écrase pas, la donne
+// exemple non plus : elle n'est qu'à un clic, et la retenir ferait perdre la
+// donne de l'utilisateur. Déplacer une de ses cartes en fait, elle, une donne
+// de l'utilisateur.
 const LAST_DEAL_KEY = "bids.lastDeal";
+
+function dealTagOf(block) {
+  const m = block.match(/\[Deal\s+"([^"]*)"\]/i);
+  return m ? m[1].trim().toUpperCase() : "";
+}
 
 function rememberCompleteDeal() {
   const block = pbnGames[selectedGameIdx];
   if (!block || zoneCount(UNASSIGNED) > 0) return;
   if (SEATS.some((seat) => zoneCount(seat) !== HAND_SIZE)) return;
+  if (dealTagOf(block) === dealTagOf(EXAMPLE_PBN)) return;
   saveStored(LAST_DEAL_KEY, block);
 }
 

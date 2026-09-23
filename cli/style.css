@@ -1217,12 +1217,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
      l'écran. */
   .cons-layout .cons-center {
     order: -1;
-    padding: 0;
-  }
-  /* Épinglée seulement quand elle porte des cartes : vide, elle masquait 130 px
-     des mains pour ne rien offrir. Déplacer une carte d'une main à l'autre se
-     fait alors sans elle, et elle se réépingle dès qu'une carte y tombe. */
-  .cons-layout .cons-center.filled {
     position: sticky;
     top: 6px;
     z-index: 5;
@@ -1230,18 +1224,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
        qui grandit sans limite masquerait les mains qu'elle sert à remplir. */
     max-height: 38vh;
     overflow: auto;
-    box-shadow: var(--shadow-sticky);
-  }
-  /* Vide, elle se réduit à son bandeau. L'aide quitte l'image mais reste
-     focalisable — c'est la cible de dépôt au clavier — et reparaît au focus. */
-  .cons-layout .cons-center:not(.filled) .neutral-hint:not(:focus) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
     padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+    box-shadow: var(--shadow-sticky);
   }
   /* Titre et compteur restent lisibles quand les cartes défilent à
      l'intérieur de la zone épinglée. */

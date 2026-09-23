@@ -3125,13 +3125,23 @@ function renderResult(r) {
   // pour faux. Un passe reste en gris, sans texte : le moteur lui donne
   // désormais toujours un commentaire (ne serait-ce que « pas de quoi
   // intervenir »), mais l'afficher noierait la liste sous des banalités.
+  // Chaque ligne porte à gauche l'icône de son arbre de décision, quand le
+  // moteur en a tracé un ; l'arbre se déplie sous la ligne (commentsTree).
+  commentsTree.auction = r.auction;
+  commentsTree.hands = r.hands;
+  commentsTree.lang = lang;
+  const tip = UI_TEXT[lang].treeShow;
   $("#comments").innerHTML = r.auction
-    .map((a) => {
+    .map((a, i) => {
+      const icon = a.trace && a.trace.length
+        ? `<button type="button" class="tree-icon" data-i="${i}" data-tip="${esc(tip)}" ` +
+          `aria-label="${esc(tip)}" aria-expanded="false">${TREE_ICON}</button>`
+        : `<span class="tree-icon-gap" aria-hidden="true"></span>`;
       const head = `<span class="who">${esc(SEAT_SHORT[lang][a.player])}</span> - ` +
         bidHTML(a.bid, lang);
       return a.comment && !isPass(a.bid)
-        ? `<li>${withColon(head, lang)} ${esc(a.comment)}</li>`
-        : `<li class="silent">${head}</li>`;
+        ? `<li>${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
+        : `<li class="silent">${icon}${head}</li>`;
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;
 
@@ -3810,9 +3820,9 @@ function decisionTreeToggleHTML(entry, lang) {
     <div class="decision-tree" hidden>${decisionTreeHTML(entry, lang)}</div>`;
 }
 
-function decisionTreeHTML(entry, lang) {
+function decisionTreeHTML(entry, lang, hands = quiz && quiz.result.hands) {
   const t = UI_TEXT[lang];
-  const hand = quiz && quiz.result.hands[entry.player];
+  const hand = hands && hands[entry.player];
   const handLine = hand
     ? t.treeHand(
       SEAT_LABEL[lang][entry.player], hand.h_points, hand.hl_points,
@@ -3846,6 +3856,40 @@ document.addEventListener("click", (ev) => {
   tree.hidden = !open;
   btn.setAttribute("aria-expanded", String(open));
   btn.textContent = UI_TEXT[quiz ? quiz.lang : $("#lang").value][open ? "treeHide" : "treeShow"];
+});
+
+// L'icône d'arbre de la séquence commentée : un embranchement, lu comme
+// « le chemin qui a mené à cette enchère ».
+const TREE_ICON = `<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="none" ` +
+  `stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">` +
+  `<circle cx="8" cy="3" r="1.7"/><circle cx="3.5" cy="13" r="1.7"/><circle cx="12.5" cy="13" r="1.7"/>` +
+  `<path d="M8 4.7V8M3.5 11.3V8h9v3.3"/></svg>`;
+
+// La donne affichée dans la séquence commentée, pour construire un arbre à la
+// demande : il n'est calculé qu'au premier clic sur son icône.
+const commentsTree = { auction: [], hands: null, lang: "fr" };
+
+document.addEventListener("click", (ev) => {
+  const btn = ev.target.closest && ev.target.closest(".tree-icon");
+  if (!btn) return;
+  const li = btn.closest("li");
+  const t = UI_TEXT[commentsTree.lang];
+  let tree = li.querySelector(".decision-tree");
+  if (!tree) {
+    const entry = commentsTree.auction[Number(btn.dataset.i)];
+    if (!entry) return;
+    tree = document.createElement("div");
+    tree.className = "decision-tree";
+    tree.hidden = true;
+    tree.innerHTML = decisionTreeHTML(entry, commentsTree.lang, commentsTree.hands);
+    li.appendChild(tree);
+  }
+  const open = tree.hidden;
+  tree.hidden = !open;
+  const label = open ? t.treeHide : t.treeShow;
+  btn.setAttribute("aria-expanded", String(open));
+  btn.setAttribute("aria-label", label);
+  btn.dataset.tip = label;
 });
 
 function chooseBid(bidText) {

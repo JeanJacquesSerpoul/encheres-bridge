@@ -47,12 +47,12 @@ func (t *tracer) note(fr, en string) {
 	}
 }
 
-// drop discards the trace: the decision was finally taken by code that is not
-// instrumented yet, and a path stopping before the real decision would mislead
+// drop discards the trace (the steps stay, for rewind, but none is shown): the
+// decision was finally taken by code that is not instrumented yet, and a path stopping before the real decision would mislead
 // more than it explains. With no test left, the page shows no link.
 func (t *tracer) drop() {
 	if t != nil {
-		t.steps, t.dropped = nil, true
+		t.dropped = true
 	}
 }
 
@@ -61,6 +61,31 @@ func (t *tracer) drop() {
 func (e *Engine) untraced(c Call, mn meaning) (Call, meaning) {
 	e.tr.drop()
 	return c, mn
+}
+
+// traceMark is a point in the trace to come back to: see mark and rewind.
+type traceMark struct {
+	n, depth int
+	dropped  bool
+}
+
+// mark and rewind undo what a rule recorded when it finally did not decide
+// the call and the next rule is tried instead.
+func (t *tracer) mark() traceMark {
+	if t == nil {
+		return traceMark{}
+	}
+	return traceMark{len(t.steps), t.depth, t.dropped}
+}
+
+func (t *tracer) rewind(m traceMark) {
+	if t == nil {
+		return
+	}
+	if m.n <= len(t.steps) {
+		t.steps = t.steps[:m.n]
+	}
+	t.depth, t.dropped = m.depth, m.dropped
 }
 
 // in and out nest the tests of a branch under the test that opened it.
@@ -79,7 +104,7 @@ func (t *tracer) out() {
 // hasTests reports whether at least one real test was recorded: a trace made
 // only of notes explains nothing, and the page shows no link for it.
 func (t *tracer) hasTests() bool {
-	if t == nil {
+	if t == nil || t.dropped {
 		return false
 	}
 	for _, s := range t.steps {

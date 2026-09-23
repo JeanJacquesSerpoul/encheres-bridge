@@ -103,7 +103,7 @@ func TestUntracedDrop(t *testing.T) {
 	}
 	e.tr.check(true, "après", "after", "")
 	e.tr.note("note", "note")
-	if e.tr.hasTests() || len(e.tr.steps) != 0 {
+	if e.tr.hasTests() {
 		t.Fatalf("la trace devait être vide après drop : %+v", e.tr.steps)
 	}
 }

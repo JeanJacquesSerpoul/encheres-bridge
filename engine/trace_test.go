@@ -128,7 +128,7 @@ func TestNilTracer(t *testing.T) {
 }
 
 // TestBidJSONTrace: the opening carries its trace in the JSON, in the
-// requested language; a call of a situation not yet traced carries none.
+// requested language, and so does a later call of the auction.
 func TestBidJSONTrace(t *testing.T) {
 	pbn, err := os.ReadFile("testdata/d1.pbn")
 	if err != nil {
@@ -161,15 +161,19 @@ func TestBidJSONTrace(t *testing.T) {
 			t.Fatalf("[%s] test retenu = %q, attendu %q", lang, held, want)
 		}
 		// East's pass is an overcall decision: traced. North's last pass,
-		// after 3NT, is taken by the generic late-auction logic (conclude),
-		// not traced yet: no trace at all.
+		// after 3NT, is the generic late-auction decision (conclude): traced
+		// down to "nothing more to say".
 		if len(resp.Auction[1].Trace) == 0 {
 			t.Fatalf("[%s] le passe d'Est (intervention) devait porter sa trace", lang)
 		}
 		last := resp.Auction[8]
-		if last.Player != "N" || len(last.Trace) != 0 {
-			t.Fatalf("[%s] enchère 9 = %s %s, trace %+v ; attendu le dernier passe de Nord, sans trace",
-				lang, last.Player, last.Bid, last.Trace)
+		if last.Player != "N" || len(last.Trace) == 0 {
+			t.Fatalf("[%s] enchère 9 = %s %s ; attendu le dernier passe de Nord, avec sa trace", lang, last.Player, last.Bid)
+		}
+		end := last.Trace[len(last.Trace)-1]
+		wantEnd := map[string]string{"fr": "rien à ajouter", "en": "nothing more to say"}[lang]
+		if !end.Note || !strings.Contains(end.Label, wantEnd) {
+			t.Fatalf("[%s] fin de trace = %+v, attendu %q", lang, end, wantEnd)
 		}
 	}
 }

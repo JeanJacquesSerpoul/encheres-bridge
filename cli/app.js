@@ -328,7 +328,7 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Contrat final",
     quizShowDetail: "Afficher le détail complet",
-    quizDealHidden: "Donne masquée pendant le questionnaire.",
+    quizDealHidden: "Donne masquée.",
     quizShowDeal: "Afficher la donne",
     quizCancel: "Annuler",
     quizReplay: "Rejouer cette donne",
@@ -456,7 +456,7 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Final contract",
     quizShowDetail: "Show full detail",
-    quizDealHidden: "Deal hidden during the quiz.",
+    quizDealHidden: "Deal hidden.",
     quizShowDeal: "Show the deal",
     quizCancel: "Cancel",
     quizReplay: "Replay this deal",
@@ -3508,8 +3508,8 @@ function resetQuiz() {
 // Le questionnaire cache les mains adverses : la donne composée au-dessus les
 // montrerait toutes, et son texte PBN aussi. Elles sont masquées pendant qu'on
 // enchérit, avec les commandes qui modifient la donne sous la table (voir
-// style.css), et reviennent à la fin, quand on change de donne, ou à la
-// demande.
+// style.css), et le restent une fois le questionnaire terminé. Elles
+// reviennent quand on l'annule, quand on change de donne, ou à la demande.
 function setDealHidden(hidden) {
   $("#input-panel").classList.toggle("quiz-running", hidden);
   // Ouvrir le texte PBN ne montrerait rien — il est masqué lui aussi — et le
@@ -3723,8 +3723,8 @@ function onQuizContinue() {
 
 function finishQuiz() {
   renderQuizHands(true);
-  // Les mains sont dévoilées dans le questionnaire : la donne peut revenir.
-  setDealHidden(false);
+  // La donne composée reste masquée : les mains se lisent dans le
+  // questionnaire, et le lien « Afficher la donne » la rend à la demande.
   // Plus rien à annuler : le score propose ses propres suites.
   $("#quiz-cancel-btn").classList.add("hidden");
   const lang = quiz.lang;

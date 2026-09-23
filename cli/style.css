@@ -1419,8 +1419,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
 /* ---------- donne masquée pendant le questionnaire ---------- */
 
-/* Voir setDealHidden : les quatre mains et le texte PBN disparaissent, une
-   ligne en tient lieu. Les commandes sous la table restent là. */
+/* Voir setDealHidden : les quatre mains, le texte PBN et les commandes qui
+   modifient la donne sous la table disparaissent ; une ligne en tient lieu. */
 .quiz-hidden-note { display: none; }
 #input-panel.quiz-running .quiz-hidden-note {
   display: flex;
@@ -1436,7 +1436,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   font-size: .9rem;
 }
 #input-panel.quiz-running .cons-layout,
-#input-panel.quiz-running #pbn-details { display: none; }
+#input-panel.quiz-running #pbn-details,
+#input-panel.quiz-running #cons-actions { display: none; }
 
 /* Un bouton qui se lit comme un lien : l'action est secondaire. */
 .link-btn {

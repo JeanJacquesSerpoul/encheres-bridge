@@ -3526,7 +3526,9 @@ function resetQuiz() {
 
 // Le questionnaire cache les mains adverses : la donne composée au-dessus les
 // montrerait toutes, et son texte PBN aussi. Elles sont masquées pendant qu'on
-// enchérit, et reviennent à la fin, quand on change de donne, ou à la demande.
+// enchérit, avec les commandes qui modifient la donne sous la table (voir
+// style.css), et reviennent à la fin, quand on change de donne, ou à la
+// demande.
 function setDealHidden(hidden) {
   $("#input-panel").classList.toggle("quiz-running", hidden);
   // Ouvrir le texte PBN ne montrerait rien — il est masqué lui aussi — et le

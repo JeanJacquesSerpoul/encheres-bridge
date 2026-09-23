@@ -230,6 +230,8 @@ Dans la page, la console dit le reste : `COOP/COEP Service Worker registered` pu
 
 Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm — calcule les enchères **dans le navigateur** (voir [Le moteur dans la page](#le-moteur-dans-la-page)). Il est servi en local par `run.ps1` / `run.sh` (**http://localhost:9015/**) ou publié tel quel sur un hébergeur statique : il se comporte à l'identique dans les deux cas (voir [Démarrage](#démarrage)).
 
+**Au premier lancement**, un écran d'accueil propose de **consulter l'aide** ou de **continuer sans l'aide** ; il ne revient plus ensuite.
+
 **Le bandeau** porte la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre) et le bouton **?** du **mode d'emploi** : une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons. Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
 ### Composer la donne
@@ -272,6 +274,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 | `bids.lang`, `bids.theme` | Langue et thème |
 | `bids.quizMode` | Mode questionnaire activé ou non |
 | `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |
+| `bids.welcomed` | Écran d'accueil déjà vu : il ne s'affiche qu'au premier lancement |
 | `ia.enabled`, `ia.mode`, `ia.local`, `ia.remote` | Option de reconnaissance par photo et serveur IA visé |
 
 ### Le PAR

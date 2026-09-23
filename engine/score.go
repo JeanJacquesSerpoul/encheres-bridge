@@ -1,5 +1,7 @@
 package engine
 
+import "fmt"
+
 // Duplicate-bridge scoring, as needed by the competitive sacrifice logic:
 // the value of the opponents' contract if it makes exactly, against the
 // penalty our own doubled sacrifice would concede.
@@ -87,21 +89,28 @@ func doubledPenalty(down int, vul bool) int {
 // path, which never reaches conclude.
 func (e *Engine) competitiveSacrifice(ctx *concludeCtx) (Call, meaning, bool) {
 	p, partner, fit, last, cMin := ctx.p, ctx.partner, ctx.fit, ctx.last, ctx.cMin
+	tr := ctx.tr
 	sac := e.cheapestCall(fit.Strain())
-	if sac.Level > 5 || !e.legal(p.seat, sac) {
+	sacFR, sacEN := callSym(sac)
+	if !tr.check(!(sac.Level > 5 || !e.legal(p.seat, sac)), "enchère dans notre fit possible, au plus au palier de 5 : "+sacFR,
+		"a bid in our fit is available, at most at the five level: "+sacEN, "") {
 		return Call{}, meaning{}, false
 	}
 	extra := sac.Level - gameOfTrump(fit).Level
 	if extra < 0 {
 		extra = 0
 	}
-	if cMin >= gameThreshold(fit, true)+3*extra {
+	if tr.check(cMin >= gameThreshold(fit, true)+3*extra,
+		fmt.Sprintf("force pour le gagner : %d HLD combinés, plus 3 par palier au-dessus de la manche", gameThreshold(fit, true)+3*extra),
+		fmt.Sprintf("strength to make it: %d HLD combined, plus 3 per level above game", gameThreshold(fit, true)+3*extra),
+		pts(cMin, "HLD")) {
 		if extra == 0 {
 			// Bidding our own game over theirs on real values is the
 			// generic game decision's job, with its usual meaning -- not a
 			// sacrifice.
 			return Call{}, meaning{}, false
 		}
+		tr.note("→ surenchère : "+sacFR, "→ outbid them: "+sacEN)
 		mn := m(-1, -1, "surenchère en compétition, le contrat reste probable", "competitive raise beyond game, the contract remains likely").withLen(fit, p.hand.Len(fit))
 		return sac, mn, true
 	}
@@ -109,22 +118,25 @@ func (e *Engine) competitiveSacrifice(ctx *concludeCtx) (Call, meaning, bool) {
 	// are favourites to make: their combined shown floor must reach the game
 	// zone.
 	oppMin := e.ps[(p.seat+1)%4].shownMin + e.ps[(p.seat+3)%4].shownMin
-	if oppMin < 23 {
+	if !tr.check(oppMin >= 23, "leur manche est probable : au moins 23 H montrés par les deux adversaires",
+		"their game is likely: at least 23 H shown by the two opponents", pts(oppMin, "H")) {
 		return Call{}, meaning{}, false
 	}
 	// The law gives one total for the deal, and this fit has already spent
 	// its share: the same trumps cannot buy a second level. Without this the
 	// side keeps re-pricing the same nine cards one rung higher each round,
 	// until the doubled penalty passes the contract it was buying out.
-	if e.lawAlreadySpent(p.seat, fit) {
+	if !tr.check(!e.lawAlreadySpent(p.seat, fit), "la loi des levées totales n'a pas déjà servi pour ce fit",
+		"the law of total tricks has not already been used for this fit", "") {
 		return Call{}, meaning{}, false
 	}
 	trumps := p.hand.Len(fit) + partner.shownLens[fit]
-	if trumps < 9 {
+	if !tr.check(trumps >= 9, "9 atouts et plus", "9+ trumps", fmt.Sprintf("%d + %d %s", p.hand.Len(fit), partner.shownLens[fit], suitSymbol[fit])) {
 		return Call{}, meaning{}, false
 	}
 	down := sac.Level + 6 - trumps
-	if down <= 0 {
+	if tr.check(down <= 0, "la loi promet les levées du contrat → "+sacFR, "the law promises the tricks the contract needs → "+sacEN,
+		fmt.Sprintf("%d %s", trumps, suitSymbol[fit])) {
 		// The law credits us with as many tricks as the contract needs:
 		// compete on the fit alone.
 		mn := m(-1, -1, "soutien loi des levées totales, le fit couvre le palier", "law of total tricks raise, the fit covers the level").withLen(fit, p.hand.Len(fit)).asLawBid(fit)
@@ -137,12 +149,15 @@ func (e *Engine) competitiveSacrifice(ctx *concludeCtx) (Call, meaning, bool) {
 	// -- it must still cost less than their contract when it goes down one
 	// more than the law promised.
 	priced := down + 1
-	if priced > 3 {
+	if !tr.check(priced <= 3, "chute estimée (loi des levées, moins une levée) : 3 au plus",
+		"expected down (law of total tricks, one trick worse): 3 at most", fmt.Sprint(-priced)) {
 		return Call{}, meaning{}, false
 	}
 	penalty := doubledPenalty(priced, e.vul[ctx.side])
 	oppScore := contractScore(last, e.vul[1-ctx.side])
-	if penalty >= oppScore {
+	if !tr.check(penalty < oppScore, "la chute contrée coûte moins que leur contrat (vulnérabilité comprise) → sacrifice : "+sacFR,
+		"the doubled penalty costs less than their contract (vulnerability included) → sacrifice: "+sacEN,
+		fmt.Sprintf("%d < %d", penalty, oppScore)) {
 		return Call{}, meaning{}, false
 	}
 	mn := m(-1, -1, "sacrifice : la chute contrée coûte moins que leur contrat (loi des levées totales)", "sacrifice: the doubled penalty costs less than their contract (law of total tricks)").withLen(fit, p.hand.Len(fit)).asLawBid(fit)

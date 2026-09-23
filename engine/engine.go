@@ -728,16 +728,19 @@ func (e *Engine) checkbackMajors(seat int) (myM, otherM Suit, ok bool) {
 // checkbackAsk bids 3C over the jump 2NT rebid when responder holds a
 // five-card major or four cards in the other major (game is on facing 18-19,
 // the ask locates the right fit first).
-func (e *Engine) checkbackAsk(p *playerState) (Call, meaning, bool) {
+func (e *Engine) checkbackAsk(p *playerState, tr *tracer) (Call, meaning, bool) {
 	myM, otherM, ok := e.checkbackMajors(p.seat)
 	if !ok {
 		return Call{}, meaning{}, false
 	}
 	partner := e.ps[partnerOf(p.seat)]
-	if p.hand.HL()+partner.shownMin >= 33 { // slam zone: keep the generic road
+	if !tr.check(p.hand.HL()+partner.shownMin < 33, "sous la zone de chelem (33)", "below the slam zone (33)",
+		fmt.Sprintf("%d HL + %d = %d", p.hand.HL(), partner.shownMin, p.hand.HL()+partner.shownMin)) { // slam zone: keep the generic road
 		return Call{}, meaning{}, false
 	}
-	if p.hand.Len(myM) < 5 && p.hand.Len(otherM) < 4 {
+	if !tr.check(!(p.hand.Len(myM) < 5 && p.hand.Len(otherM) < 4),
+		"majeure cinquième, ou 4 cartes dans l'autre majeure → Checkback 3♣",
+		"five-card major, or four cards in the other major → 3♣ checkback", cards(p.hand, myM)+", "+cards(p.hand, otherM)) {
 		return Call{}, meaning{}, false
 	}
 	c := bid(3, SClubs)
@@ -753,13 +756,15 @@ func (e *Engine) checkbackAsk(p *playerState) (Call, meaning, bool) {
 }
 
 // checkbackAnswer describes opener's majors over the 3C checkback.
-func (e *Engine) checkbackAnswer(p *playerState) (Call, meaning) {
+func (e *Engine) checkbackAnswer(p *playerState, tr *tracer) (Call, meaning) {
 	myM, otherM, ok := e.checkbackMajors(partnerOf(p.seat))
 	if !ok {
 		return passCall, noInfo()
 	}
 	has3 := p.hand.Len(myM) >= 3
 	has4 := p.hand.Len(otherM) >= 4
+	tr.check(has3, "3 cartes dans sa majeure ("+suitSymbol[myM]+")", "three cards in partner's major ("+suitSymbol[myM]+")", cards(p.hand, myM))
+	tr.check(has4, "4 cartes dans l'autre majeure ("+suitSymbol[otherM]+")", "four cards in the other major ("+suitSymbol[otherM]+")", cards(p.hand, otherM))
 	var c Call
 	var mn meaning
 	switch {
@@ -779,6 +784,9 @@ func (e *Engine) checkbackAnswer(p *playerState) (Call, meaning) {
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()
 	}
+	cFR, cEN := callSym(c)
+	tr.note("réponse : 3♦ les deux, 3 dans sa majeure la répéter, 4 dans l'autre la nommer, sinon 3SA → "+cFR,
+		"answer: 3♦ both, three in partner's major repeat it, four in the other bid it, else 3NT → "+cEN)
 	return c, mn
 }
 
@@ -786,13 +794,17 @@ func (e *Engine) checkbackAnswer(p *playerState) (Call, meaning) {
 func (e *Engine) afterCheckback(p *playerState, myM, otherM Suit) (Call, meaning) {
 	op := e.ps[partnerOf(p.seat)]
 	last, _, _ := e.lastBid()
-	if op.shownLens[myM] >= 3 && p.hand.Len(myM) >= 5 {
+	tr := e.tr
+	tr.note("l'ouvreur a répondu au Checkback : choisir la manche", "opener answered the checkback: choose the game")
+	if tr.check(op.shownLens[myM] >= 3 && p.hand.Len(myM) >= 5, "fit 5-3 dans ma majeure → 4"+suitSymbol[myM],
+		"5-3 fit in my major → 4"+suitSymbol[myM], cards(p.hand, myM)) {
 		c := bidSuit(4, myM)
 		if e.legal(p.seat, c) {
 			return c, m(-1, -1, "conclusion à la manche dans le fit 5-3", "game in the 5-3 major fit").withLen(myM, 5)
 		}
 	}
-	if op.shownLens[otherM] >= 4 && p.hand.Len(otherM) >= 4 {
+	if tr.check(op.shownLens[otherM] >= 4 && p.hand.Len(otherM) >= 4, "fit 4-4 dans l'autre majeure → 4"+suitSymbol[otherM],
+		"4-4 fit in the other major → 4"+suitSymbol[otherM], cards(p.hand, otherM)) {
 		c := bidSuit(4, otherM)
 		if e.legal(p.seat, c) {
 			return c, m(-1, -1, "conclusion à la manche dans le fit 4-4", "game in the 4-4 major fit").withLen(otherM, 4)
@@ -800,8 +812,10 @@ func (e *Engine) afterCheckback(p *playerState, myM, otherM Suit) (Call, meaning
 	}
 	c := bid(3, SNoTrump)
 	if last == c || !e.legal(p.seat, c) {
+		tr.note("pas de fit majeur, 3SA déjà dit → Passe", "no major fit, 3NT already bid → Pass")
 		return passCall, m(-1, -1, "pas de fit majeur", "no major-suit fit")
 	}
+	tr.note("pas de fit majeur → 3SA", "no major fit → 3NT")
 	return c, m(-1, -1, "pas de fit majeur, conclusion à 3SA", "no major-suit fit, 3NT to play")
 }
 
@@ -811,16 +825,18 @@ func (e *Engine) afterCheckback(p *playerState, myM, otherM Suit) (Call, meaning
 // five cards in the major he answered and at least 11H: game (or slam) is in
 // sight and the convention locates the 5-3 fit and opener's exact zone before
 // choosing between the major and notrump.
-func (e *Engine) roudiAsk(p *playerState) (Call, meaning, bool) {
+func (e *Engine) roudiAsk(p *playerState, tr *tracer) (Call, meaning, bool) {
 	myM, _, ok := e.checkbackMajors(p.seat)
 	if !ok {
 		return Call{}, meaning{}, false
 	}
-	if p.hand.Len(myM) != 5 || p.hand.H() < 11 {
+	if !tr.check(p.hand.Len(myM) == 5 && p.hand.H() >= 11, "exactement 5 cartes dans ma majeure et 11 H et plus",
+		"exactly five cards in my major and 11+ H", cards(p.hand, myM)+", "+pts(p.hand.H(), "H")) {
 		return Call{}, meaning{}, false
 	}
 	partner := e.ps[partnerOf(p.seat)]
-	if p.hand.HL()+partner.shownMin >= 33 { // slam zone: keep the generic road
+	if !tr.check(p.hand.HL()+partner.shownMin < 33, "sous la zone de chelem (33) → Roudi 2♣", "below the slam zone (33) → 2♣ Roudi",
+		fmt.Sprintf("%d HL + %d = %d", p.hand.HL(), partner.shownMin, p.hand.HL()+partner.shownMin)) { // slam zone: keep the generic road
 		return Call{}, meaning{}, false
 	}
 	c := bid(2, SClubs)
@@ -839,7 +855,7 @@ func (e *Engine) roudiAsk(p *playerState) (Call, meaning, bool) {
 // scale: 2D = two cards in responder's major and a minimum (12H), 2H = three
 // cards and a minimum, 2S = three cards and a maximum (13-14H), 2NT = two
 // cards and a maximum.
-func (e *Engine) roudiAnswer(p *playerState) (Call, meaning) {
+func (e *Engine) roudiAnswer(p *playerState, tr *tracer) (Call, meaning) {
 	myM, _, ok := e.checkbackMajors(partnerOf(p.seat))
 	if !ok {
 		return passCall, noInfo()
@@ -849,7 +865,7 @@ func (e *Engine) roudiAnswer(p *playerState) (Call, meaning) {
 	var c Call
 	var mn meaning
 	switch {
-	case !fit3:
+	case !tr.check(fit3, "3 cartes dans sa majeure (sinon 2♦)", "three cards in partner's major (else 2♦)", cards(p.hand, myM)):
 		// Three steps, not four: without the third card the answer is 2D
 		// whatever the strength. Splitting it would spend a step on a
 		// distinction that no longer decides anything -- there is no fit to
@@ -857,7 +873,7 @@ func (e *Engine) roudiAnswer(p *playerState) (Call, meaning) {
 		// which the responder can invite into.
 		c = bid(2, SDiamonds)
 		mn = m(-1, -1, "2K Roudi : 2 cartes dans votre majeure, minimum ou maximum", "2D Roudi: two cards in your major, minimum or maximum")
-	case weak:
+	case tr.check(weak, "minimum, 12 H → 2♥ (sinon 2♠)", "minimum, 12 H → 2♥ (else 2♠)", pts(p.hand.H(), "H")):
 		c = bid(2, SHearts)
 		mn = m(-1, 12, "2C Roudi : 3 cartes dans votre majeure et jeu faible (12H)", "2H Roudi: three-card support, minimum (12)").withLen(myM, 3)
 	default:
@@ -867,6 +883,8 @@ func (e *Engine) roudiAnswer(p *playerState) (Call, meaning) {
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()
 	}
+	cFR, cEN := callSym(c)
+	tr.note("réponse → "+cFR, "answer → "+cEN)
 	return c, mn
 }
 
@@ -878,21 +896,31 @@ func (e *Engine) afterRoudi(p *playerState, myM Suit) (Call, meaning) {
 	last, _, _ := e.lastBid()
 	fit := op.shownLens[myM] >= 3
 	strongOpener := op.shownMin >= 13
+	tr := e.tr
+	tr.note("l'ouvreur a répondu au Roudi : choisir le contrat", "opener answered the Roudi: choose the contract")
+	tr.check(fit, "fit 5-3 dans ma majeure", "5-3 fit in my major", "")
+	tr.check(strongOpener, "ouvreur maximum (13-14 H)", "maximum opener (13-14 H)", "")
 	// The 2D answer denies the fit without disclosing the zone: 11 H facing an
 	// opener still worth 12 to 14 is an invitation, not a sign-off. 2NT lets
 	// him pass on the minimum and bid the game on the maximum.
-	if !fit && !strongOpener && op.shownMax >= 13 && p.hand.H() <= 11 {
+	if tr.check(!fit && !strongOpener && op.shownMax >= 13 && p.hand.H() <= 11,
+		"pas de fit, zone de l'ouvreur inconnue, 11 H → proposer 2SA", "no fit, opener's range unknown, 11 H → invite with 2NT",
+		pts(p.hand.H(), "H")) {
 		c := bid(2, SNoTrump)
 		if c.higherThan(last) && e.legal(p.seat, c) {
 			return c, m(11, 11, "2SA : proposition, l'ouvreur n'a pas dévoilé sa zone", "2NT: invitation, opener has not disclosed his range").asInvite()
 		}
 	}
-	if p.hand.H() <= 11 && !strongOpener {
+	if tr.check(p.hand.H() <= 11 && !strongOpener, "11 H face à un ouvreur minimum → arrêt au palier de 2",
+		"11 H facing a minimum opener → stop at the two level", pts(p.hand.H(), "H")) {
 		c := bidSuit(2, myM)
+		cFR, cEN := callSym(c)
 		if last == c {
+			tr.note("l'ouvreur a déjà dit "+cFR+" → Passe", "opener already bid "+cEN+" → Pass")
 			return passCall, m(11, 11, "ouvreur minimum, arrêt au palier de 2", "minimum opener, stopping at the two level")
 		}
 		if c.higherThan(last) && e.legal(p.seat, c) {
+			tr.note("répéter la majeure → "+cFR, "repeat the major → "+cEN)
 			return c, m(11, 11, "arrêt : répétition de la majeure au minimum", "stopping: repeats the major at the lowest level").withLen(myM, 5)
 		}
 		return passCall, noInfo()
@@ -900,11 +928,13 @@ func (e *Engine) afterRoudi(p *playerState, myM Suit) (Call, meaning) {
 	if fit {
 		c := bidSuit(4, myM)
 		if e.legal(p.seat, c) {
+			tr.note("manche dans le fit 5-3 → 4"+suitSymbol[myM], "game in the 5-3 fit → 4"+suitSymbol[myM])
 			return c, m(-1, -1, "conclusion à la manche dans le fit majeur 5-3", "game in the 5-3 major fit").withLen(myM, 5)
 		}
 	}
 	c := bid(3, SNoTrump)
 	if e.legal(p.seat, c) {
+		tr.note("pas de fit 5-3 → 3SA", "no 5-3 fit → 3NT")
 		return c, m(-1, -1, "pas de fit majeur troisième, conclusion à 3SA", "no three-card fit, 3NT to play")
 	}
 	return passCall, noInfo()

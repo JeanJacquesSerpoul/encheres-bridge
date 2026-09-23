@@ -219,7 +219,7 @@ func TestRoudiNotWithSixCards(t *testing.T) {
 		{Seat: 2, Call: bid(1, SNoTrump)},
 		{Seat: 3, Call: passCall},
 	}
-	if _, _, ok := e.roudiAsk(p); ok {
+	if _, _, ok := e.roudiAsk(p, nil); ok {
 		t.Fatalf("roudiAsk accepted a six-card major; the convention requires exactly five")
 	}
 }

@@ -473,18 +473,22 @@ func init() {
 			// 18-19), responder's 3C asks for three-card support and the other
 			// major.
 			name: "checkback-offer",
+			fr:   "l'ouvreur a redemandé 2SA (18-19) : Checkback 3♣ pour chercher le fit majeur",
+			en:   "opener rebid 2NT (18-19): 3♣ checkback to look for the major fit",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.checkbackOffer && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) && ctx.last == bid(2, SNoTrump)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, partner := ctx.p, ctx.partner
-				if c, mn, ok := e.checkbackAsk(p); ok {
+				if c, mn, ok := e.checkbackAsk(p, ctx.tr); ok {
 					return c, mn, true
 				}
 				// No major-suit shape for the checkback: a balanced hand around
 				// 14 HL may still try a quantitative 4SA rather than settle for
 				// game (docs/addon_4.md, "4SA quantitatif").
-				if p.hand.HL() >= 14 && p.hand.HL()+partner.shownMin < 33 && (p.hand.IsRegular() || p.hand.IsSemiRegular()) {
+				if ctx.tr.check(p.hand.HL() >= 14 && p.hand.HL()+partner.shownMin < 33 && (p.hand.IsRegular() || p.hand.IsSemiRegular()),
+					"main régulière, 14 HL et plus sous la zone de chelem → 4SA quantitatif",
+					"balanced, 14+ HL below the slam zone → quantitative 4NT", pts(p.hand.HL(), "HL")+", "+shape(p.hand)) {
 					c := bid(4, SNoTrump)
 					if e.legal(p.seat, c) {
 						mn := m(14, 19, "4SA quantitatif, propose le petit chelem", "quantitative 4NT, small slam try")
@@ -497,11 +501,13 @@ func init() {
 		},
 		{
 			name: "answer-checkback",
+			fr:   "le partenaire demande par Checkback 3♣ : 3 cartes dans sa majeure ? 4 dans l'autre ?",
+			en:   "partner asks with the 3♣ checkback: three cards in partner's major? four in the other?",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.checkback && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				c, mn := e.checkbackAnswer(ctx.p)
+				c, mn := e.checkbackAnswer(ctx.p, ctx.tr)
 				return c, mn, true
 			},
 		},
@@ -510,11 +516,13 @@ func init() {
 			// responder's 2C asks for the 5-3 major fit and opener's exact zone
 			// (docs/addon_9.md).
 			name: "roudi-offer",
+			fr:   "l'ouvreur a redemandé 1SA (12-14) : Roudi 2♣ pour chercher le fit 5-3 et sa zone",
+			en:   "opener rebid 1NT (12-14): 2♣ Roudi to look for the 5-3 fit and opener's range",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.roudiOffer && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) && ctx.last == bid(1, SNoTrump)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				if c, mn, ok := e.roudiAsk(ctx.p); ok {
+				if c, mn, ok := e.roudiAsk(ctx.p, ctx.tr); ok {
 					return c, mn, true
 				}
 				return Call{}, meaning{}, false
@@ -559,11 +567,13 @@ func init() {
 		},
 		{
 			name: "answer-roudi",
+			fr:   "le partenaire demande par Roudi 2♣ : 3 cartes dans sa majeure ? minimum ou maximum ?",
+			en:   "partner asks with the 2♣ Roudi: three cards in partner's major? minimum or maximum?",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.roudi && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				c, mn := e.roudiAnswer(ctx.p)
+				c, mn := e.roudiAnswer(ctx.p, ctx.tr)
 				return c, mn, true
 			},
 		},
@@ -1159,14 +1169,20 @@ func init() {
 			// shortness), not just being in the upper half of the shown point
 			// range (docs/bidings.md, "EN FACE D'UN SOUTIEN MAJEUR SIMPLE").
 			name: "help-suit-try-answer",
+			fr:   "le partenaire fait un essai de manche dans une couleur d'aide : accepter avec de l'aide dans cette couleur",
+			en:   "partner makes a help-suit game try: accept with help in that suit",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.helpSuitTry && ctx.partnerJustActed && ctx.ours
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
 				p, fit, hasFit, last := ctx.p, ctx.fit, ctx.hasFit, ctx.last
-				if hasFit && e.hasHelp(p, ctx.pm.helpSuit) {
+				tr := ctx.tr
+				if hasFit && tr.check(e.hasHelp(p, ctx.pm.helpSuit),
+					"aide dans la couleur d'essai : As ou Roi, Dame troisième, ou deux cartes au plus",
+					"help in the try suit: ace or king, queen third, or two cards at most", cards(p.hand, ctx.pm.helpSuit)) {
 					gc := bidSuit(4, fit)
-					if e.legal(p.seat, gc) {
+					gcFR, gcEN := callSym(gc)
+					if tr.check(e.legal(p.seat, gc), "→ la manche : "+gcFR, "→ game: "+gcEN, "") {
 						return gc, m(p.shownMin, p.shownMax, "accepte l'essai, aide dans la couleur demandée", "accepts the try, help in the asked suit"), true
 					}
 				}
@@ -1175,10 +1191,13 @@ func init() {
 					if !c.higherThan(last) {
 						c = bid(last.Level+1, fit.Strain())
 					}
-					if e.legal(p.seat, c) {
+					cFR, cEN := callSym(c)
+					if tr.check(e.legal(p.seat, c), "refuser : revenir dans le fit au plus bas → "+cFR,
+						"decline: back to the fit at the lowest level → "+cEN, "") {
 						if c.Level <= 3 {
 							return c, m(-1, -1, "refuse l'essai, pas d'aide dans la couleur", "declines the try, no help in the suit"), true
 						}
+						tr.note("l'essai ne laissait pas la place de refuser sous la manche", "the try left no room to decline below game")
 						// The try was named above three of the trump, so there
 						// is no room left to decline: the return is forced.
 						// Passing would leave the pair playing the try itself,
@@ -1187,6 +1206,7 @@ func init() {
 						return c, m(-1, -1, "pas d'aide, mais l'essai ne laissait pas la place de refuser : retour forcé dans notre couleur", "no help, but the try left no room to decline: forced back to our suit"), true
 					}
 				}
+				tr.note("refuser → Passe", "decline → Pass")
 				return passCall, m(-1, -1, "refuse l'essai, pas d'aide dans la couleur", "declines the try, no help in the suit"), true
 			},
 		},
@@ -1928,6 +1948,8 @@ func init() {
 			//    would score for their contract, vulnerability of each side
 			//    taken into account.
 			name: "competitive-sacrifice",
+			fr:   "les adversaires ont demandé la manche et nous avons un fit : surenchérir, sacrifier ou les laisser jouer",
+			en:   "the opponents bid game and we hold a fit: outbid them, sacrifice or let them play",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				// Their bid must be a contract they mean to play. The slam
 				// machinery lands at the game level too -- control cue-bids,
@@ -1954,6 +1976,8 @@ func init() {
 			// the scoring table promises: undoubled, their two-down save
 			// costs them 100 where our vulnerable game was worth 620.
 			name: "penalty-double-of-sacrifice",
+			fr:   "notre manche a été dépassée par les adversaires : sacrifice ou contrat sérieux ?",
+			en:   "the opponents outbid our game: a sacrifice or a real contract?",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				if !ctx.hasBid || ctx.ours || !e.legal(ctx.p.seat, doubleCall) {
 					return false
@@ -1977,7 +2001,8 @@ func init() {
 				// their own: a genuinely strong side may still make it, and
 				// the double would only inflate their score.
 				oppMin := e.ps[(p.seat+1)%4].shownMin + e.ps[(p.seat+3)%4].shownMin
-				if oppMin >= 23 {
+				if !ctx.tr.check(oppMin < 23, "moins de 23 H montrés par les deux adversaires : c'est un sacrifice → contre punitif",
+					"under 23 H shown by the two opponents: it is a sacrifice → penalty double", pts(oppMin, "H")) {
 					return Call{}, meaning{}, false
 				}
 				return doubleCall, m(-1, -1, "contre punitif du sacrifice", "penalty double of the sacrifice"), true

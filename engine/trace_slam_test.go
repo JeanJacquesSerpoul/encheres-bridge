@@ -51,6 +51,14 @@ func TestBlackwoodAndInvitationTrace(t *testing.T) {
 				}
 			case strings.Contains(first, "demande de clefs a reçu sa réponse"):
 				seen["suite de Blackwood"]++
+			case strings.Contains(first, "sacrifier") || strings.Contains(first, "contrat sérieux") ||
+				strings.Contains(first, "couleur d'aide") || strings.Contains(first, "Checkback") ||
+				strings.Contains(first, "Roudi") || strings.Contains(first, "décidée dès le tour précédent") &&
+				len(sc.Trace) > 1 && (strings.Contains(sc.Trace[1].fr, "Checkback") || strings.Contains(sc.Trace[1].fr, "Roudi")):
+				seen["sacrifice, essai, Checkback, Roudi"]++
+				if !namesCall(sc.Trace, callFR) {
+					t.Errorf("%s : la trace ne conclut pas sur l'enchère\n%v", callFR, sc.Trace)
+				}
 			case strings.Contains(first, "contrôle") || strings.Contains(first, "zone de chelem") ||
 				strings.Contains(first, "le soutenir d'abord"):
 				seen["exploration du chelem"]++
@@ -66,10 +74,25 @@ func TestBlackwoodAndInvitationTrace(t *testing.T) {
 			}
 		}
 	}
-	for _, k := range []string{"réponse Blackwood", "réponse à la proposition", "suite de Blackwood", "exploration du chelem"} {
+	for _, k := range []string{"réponse Blackwood", "réponse à la proposition", "suite de Blackwood", "exploration du chelem", "sacrifice, essai, Checkback, Roudi"} {
 		if seen[k] == 0 {
 			t.Errorf("aucune %s tracée sur l'échantillon", k)
 		}
 	}
 	t.Logf("%v", seen)
+}
+
+// namesCall reports whether a held test or a note of the trace concludes on
+// the call: the call follows the last arrow of its label.
+func namesCall(trace []traceStep, callFR string) bool {
+	for _, s := range trace {
+		if !s.ok && !s.note {
+			continue
+		}
+		if i := strings.LastIndex(s.fr, "→"); i >= 0 &&
+			strings.Contains(strings.ToLower(s.fr[i:]), strings.ToLower(callFR)) {
+			return true
+		}
+	}
+	return false
 }

@@ -205,6 +205,9 @@
              setPbnOpen. -->
         <button id="pbn-toggle-btn" type="button" class="cmd-btn"
                 aria-expanded="false" aria-controls="pbn-details"></button>
+        <!-- Lien de partage : la donne encodée dans l'adresse (#pbn=…), copiée
+             dans le presse-papiers. Voir « partage » dans app.js. -->
+        <button id="share-btn" type="button" class="cmd-btn"></button>
         <!-- Photo des quatre mains : le serveur IA y lit les cartes et remplit
              la donne (voir la section « reconnaissance » de app.js). Libellé et
              état posés par renderPhotoButtons ; le champ fichier, unique, est
@@ -309,6 +312,9 @@
                commentées, bandeau bas compris quand il n'y a pas de survol.
                Dessin, aria-label et infobulle viennent de renderBoundsCards,
                qui a la langue sous la main. -->
+          <!-- Annuler la dernière action sur la donne (voir « annuler » dans
+               app.js) : grisé tant qu'il n'y a rien à défaire. -->
+          <button id="cons-undo-btn" type="button" class="cmd-btn" disabled></button>
           <button id="cons-clear-btn" type="button" class="cmd-btn"></button>
           <button id="cons-fill-btn" type="button" class="cmd-btn"></button>
           <!-- Bornes de points : les champs Mini/Maxi des quatre mains, repliés
@@ -329,7 +335,10 @@
 
     <section class="panel hidden" id="result-panel">
       <h2 data-i18n="result">Résultat</h2>
-      <p class="back-to-deal"><button id="back-to-deal-btn" type="button" class="link-btn" data-i18n="backToDeal">Revenir à la donne</button></p>
+      <p class="back-to-deal">
+        <button id="back-to-deal-btn" type="button" class="link-btn" data-i18n="backToDeal">Revenir à la donne</button>
+        <button id="print-btn" type="button" class="mini-btn"></button>
+      </p>
 
       <div class="table-layout">
         <div id="hand-N" class="hand seat-n"></div>
@@ -555,6 +564,7 @@
           <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir plus bas).</span></li>
           <li><span data-help-icon="book"></span><span><b>Donne exemple</b> : une donne toute prête pour découvrir l'application.</span></li>
           <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne affichée dans un fichier .pbn.</span></li>
+          <li><span data-help-icon="link"></span><span><b>Copier le lien</b> : copie une adresse qui contient la donne. Qui l'ouvre retrouve cette donne (masquée s'il a activé le mode questionnaire).</span></li>
         </ul>
         <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
         <p>À la première visite, la table est vide : les 52 cartes attendent au centre. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
@@ -574,6 +584,7 @@
         <p>Chaque main affiche ses <b>points d'honneur (PH)</b> et son nombre de cartes (<i>13/13</i>).</p>
         <p>Sous la table :</p>
         <ul class="help-icons">
+          <li><span data-help-icon="undo"></span><span><b>Annuler</b> (ou <b>Ctrl+Z</b>) : revient sur la dernière action qui a changé la donne — carte déplacée, main vidée, table vidée ou complétée, nouvelle donne tirée ou chargée.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Retirer toutes les cartes</b> : vide les quatre mains.</span></li>
           <li><span data-help-icon="deal"></span><span><b>Compléter les mains</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Bornes de points</b> : affiche les champs <b>Mini</b> et <b>Maxi</b> de chaque main, qui bornent ses PH. Les tirages et la distribution automatique les respectent, et le compteur passe en rouge si la main en sort.</span></li>
@@ -583,7 +594,7 @@
 
         <h3>3. Lire le résultat</h3>
         <ul>
-          <li>Les quatre mains autour de la table, et au centre le <b>contrat</b> final avec son déclarant. Le panneau s'affiche juste sous la donne ; <b>Revenir à la donne</b> y remonte.</li>
+          <li>Les quatre mains autour de la table, et au centre le <b>contrat</b> final avec son déclarant. Le panneau s'affiche juste sous la donne ; <b>Revenir à la donne</b> y remonte, et l'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou touchez-la) pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF.</li>
           <li><b>Calcul du PAR</b> : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
@@ -623,6 +634,7 @@
           <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see below).</span></li>
           <li><span data-help-icon="book"></span><span><b>Example deal</b>: a ready-made deal to discover the app.</span></li>
           <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal on screen as a .pbn file.</span></li>
+          <li><span data-help-icon="link"></span><span><b>Copy the link</b>: copies an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
         </ul>
         <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
         <p>On your first visit the table is empty: all 52 cards wait in the centre. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
@@ -642,6 +654,7 @@
         <p>Each hand shows its <b>high-card points (HCP)</b> and card count (<i>13/13</i>).</p>
         <p>Below the table:</p>
         <ul class="help-icons">
+          <li><span data-help-icon="undo"></span><span><b>Undo</b> (or <b>Ctrl+Z</b>): reverts the last action that changed the deal — a card moved, a hand or the whole table emptied or filled, a new deal drawn or loaded.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Take out every card</b>: empties the four hands.</span></li>
           <li><span data-help-icon="deal"></span><span><b>Fill the hands</b>: deals the unassigned cards, within the bounds.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Point bounds</b>: shows each hand's <b>Min</b> and <b>Max</b> fields, which bound its HCP. Random draws and automatic dealing respect them, and the counter turns red when the hand falls outside.</span></li>
@@ -651,7 +664,7 @@
 
         <h3>3. Reading the result</h3>
         <ul>
-          <li>The four hands around the table, and in the middle the final <b>contract</b> with its declarer. The panel appears right below the deal; <b>Back to the deal</b> scrolls back up.</li>
+          <li>The four hands around the table, and in the middle the final <b>contract</b> with its declarer. The panel appears right below the deal; <b>Back to the deal</b> scrolls back up, and the printer icon prints it (hands, auction, comments and the par if computed).</li>
           <li><b>Auction</b>: hover over a call (or tap it) to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF.</li>
           <li><b>Compute the par</b>: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>

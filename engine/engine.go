@@ -1,5 +1,7 @@
 package engine
 
+import "fmt"
+
 // plannedFn is a deferred decision evaluated when the player's turn comes back.
 type plannedFn func() (Call, meaning)
 
@@ -2225,25 +2227,29 @@ func (e *Engine) blackwoodAsk(p *playerState, trump Suit, own int) (bwState, mea
 // trump queen (the fifth key). The step ladder mirrors keycard Blackwood, but
 // the trump queen is already folded into the count, so the two 5H/5S queen
 // steps collapse into a single 5H.
-func (e *Engine) kingAnswer(p *playerState, trump Suit) (Call, meaning) {
+func (e *Engine) kingAnswer(p *playerState, trump Suit, tr *tracer) (Call, meaning) {
 	keys := p.hand.KingKeys(trump)
 	side := sideOf(p.seat)
 	var c Call
 	var fr, en string
-	switch keys {
-	case 0, 3:
+	v := fmt.Sprint(keys)
+	switch {
+	case tr.check(keys == 0 || keys == 3, "0 ou 3 clefs (les Rois et la Dame d'atout) → 5♣",
+		"0 or 3 king-keys (the kings and the trump queen) → 5♣", v):
 		c, fr, en = bid(5, SClubs), "0 ou 3 clefs (Rois + Dame d'atout)", "0 or 3 king-keys"
 		e.bw[side].keyStep = 0
-	case 1, 4:
+	case tr.check(keys == 1 || keys == 4, "1 ou 4 clefs → 5♦", "1 or 4 king-keys → 5♦", v):
 		c, fr, en = bid(5, SDiamonds), "1 ou 4 clefs (Rois + Dame d'atout)", "1 or 4 king-keys"
 		e.bw[side].keyStep = 1
 	default: // 2 or 5
+		tr.check(true, "2 ou 5 clefs → 5♥", "2 or 5 king-keys → 5♥", v)
 		c, fr, en = bid(5, SHearts), "2 ou 5 clefs (Rois + Dame d'atout)", "2 or 5 king-keys"
 		e.bw[side].keyStep = 2
 	}
 	mn := m(-1, -1, fr, en)
 	mn.keyResp = true
 	if !e.legal(p.seat, c) {
+		tr.note("réponse impossible au palier de 5 → Passe", "no room for the answer at the five level → Pass")
 		return passCall, noInfo()
 	}
 	return c, mn
@@ -2252,7 +2258,7 @@ func (e *Engine) kingAnswer(p *playerState, trump Suit) (Call, meaning) {
 // afterKings places the contract once responder has shown its king-keys. All
 // five keys (the four kings and the trump queen) make the grand slam; short of
 // that the aces are known present, so the small slam is safe.
-func (e *Engine) afterKings(p *playerState) (Call, meaning) {
+func (e *Engine) afterKings(p *playerState, tr *tracer) (Call, meaning) {
 	side := sideOf(p.seat)
 	trump := e.bw[side].trump
 	ownKeys := p.hand.KingKeys(trump)
@@ -2279,14 +2285,25 @@ func (e *Engine) afterKings(p *playerState) (Call, meaning) {
 	// grand on overwhelming combined strength (aces are all known present, so
 	// the missing king is usually covered by shortness or discards), otherwise
 	// the small slam is the limit.
+	tr.note("le partenaire a répondu à ma demande des Rois : As connus, petit chelem au moins",
+		"partner answered my king-ask: aces known, at least the small slam")
 	target := 6
-	if total == 5 || (total == 4 && cMin >= 37) {
+	if tr.check(total == 5 || (total == 4 && cMin >= 37),
+		"les 5 clefs (4 Rois + Dame d'atout), ou 4 et 37 HLD combinés → grand chelem",
+		"all 5 king-keys (4 kings + trump queen), or 4 and 37 HLD combined → grand slam",
+		fmt.Sprintf("%d + %d = %d ; %d HLD", ownKeys, partnerKeys, total, cMin)) {
 		target = 7
 	}
 	c := bidSuit(target, trump)
+	aimed := target
 	for !c.higherThan(last) && target < 7 {
 		target++
 		c = bidSuit(target, trump)
+	}
+	if target != aimed {
+		cFR, cEN := callSym(c)
+		tr.note(fmt.Sprintf("le palier de %d est déjà dépassé → ", aimed)+cFR,
+			fmt.Sprintf("the %d level is already passed → ", aimed)+cEN)
 	}
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()
@@ -2305,7 +2322,7 @@ func (e *Engine) afterKings(p *playerState) (Call, meaning) {
 // a 2D opening): the four aces are already located, so it simply counts kings.
 // The answered count is recorded in the Blackwood state for the asker to read
 // back -- the ladder is unambiguous (5C..5NT = 0..4 kings).
-func (e *Engine) kingAnswerNT(p *playerState) (Call, meaning) {
+func (e *Engine) kingAnswerNT(p *playerState, tr *tracer) (Call, meaning) {
 	kings := p.hand.Kings()
 	var c Call
 	var fr, en string
@@ -2321,6 +2338,9 @@ func (e *Engine) kingAnswerNT(p *playerState) (Call, meaning) {
 	default:
 		c, fr, en = bid(5, SNoTrump), "4 Rois, tous les Rois", "4 kings, all kings held"
 	}
+	cFR, cEN := callSym(c)
+	tr.check(true, "nombre de Rois, de 5♣ (0) à 5SA (4) → "+cFR,
+		"number of kings, from 5♣ (0) to 5NT (4) → "+cEN, fmt.Sprint(kings))
 	mn := m(-1, -1, fr, en)
 	mn.keyResp = true
 	if !e.legal(p.seat, c) {
@@ -2337,7 +2357,7 @@ func (e *Engine) kingAnswerNT(p *playerState) (Call, meaning) {
 // from hands whose partner has shown little more than an ace, and a
 // disappointing answer must be allowed to stop in 5SA rather than force a
 // slam the count never reached.
-func (e *Engine) afterKingsNT(p *playerState) (Call, meaning) {
+func (e *Engine) afterKingsNT(p *playerState, tr *tracer) (Call, meaning) {
 	side := sideOf(p.seat)
 	partner := e.ps[partnerOf(p.seat)]
 	// Partner's king count comes from the answered step, never from the
@@ -2354,17 +2374,30 @@ func (e *Engine) afterKingsNT(p *playerState) (Call, meaning) {
 	cMin := p.hand.H() + floor
 	last, _, _ := e.lastBid()
 
+	tr.note("le partenaire a répondu à ma demande des Rois (As déjà connus)",
+		"partner answered my king-ask (aces already known)")
 	target := 6
+	kv := fmt.Sprintf("%d + %d = %d", p.hand.Kings(), e.bw[side].keyStep, total)
 	switch {
-	case total == 4 || (total == 3 && cMin >= 37):
+	case tr.check(total == 4 || (total == 3 && cMin >= 37),
+		"les 4 Rois, ou 3 et 37 H combinés → grand chelem à Sans-Atout",
+		"all 4 kings, or 3 and 37 H combined → grand slam in notrump", kv+fmt.Sprintf(" ; %d H", cMin)):
 		target = 7
-	case cMin < 33:
+	case tr.check(cMin < 33, "moins de 33 H combinés → arrêt à 5SA", "under 33 H combined → stop in 5NT", pts(cMin, "H")):
 		target = 5
+	default:
+		tr.note("sinon → petit chelem à Sans-Atout", "otherwise → small slam in notrump")
 	}
 	c := bid(target, SNoTrump)
+	aimed := target
 	for !c.higherThan(last) && target < 7 {
 		target++
 		c = bid(target, SNoTrump)
+	}
+	if target != aimed {
+		cFR, cEN := callSym(c)
+		tr.note(fmt.Sprintf("le palier de %d est déjà dépassé → ", aimed)+cFR,
+			fmt.Sprintf("the %d level is already passed → ", aimed)+cEN)
 	}
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()
@@ -2378,29 +2411,34 @@ func (e *Engine) afterKingsNT(p *playerState) (Call, meaning) {
 	return c, m(-1, -1, "petit chelem à Sans-Atout, un Roi manquant", "small slam in notrump, a king missing")
 }
 
-func (e *Engine) keycardAnswer(p *playerState, trump Suit) (Call, meaning) {
+func (e *Engine) keycardAnswer(p *playerState, trump Suit, tr *tracer) (Call, meaning) {
 	keys := p.hand.Keycards(trump)
 	hasQ := p.hand.HasCard(trump, 'Q')
 	side := sideOf(p.seat)
 	var c Call
 	var fr, en string
+	v := fmt.Sprint(keys)
+	tr.note("le partenaire demande les cartes clefs (Blackwood, atout "+suitSymbol[trump]+") : les 4 As et le Roi d'atout",
+		"partner asks for keycards (Blackwood, "+suitSymbol[trump]+" trumps): the 4 aces and the trump king")
 	switch {
-	case keys == 0 || keys == 3:
+	case tr.check(keys == 0 || keys == 3, "0 ou 3 cartes clefs → 5♣", "0 or 3 keycards → 5♣", v):
 		c, fr, en = bid(5, SClubs), "0 ou 3 cartes clefs", "0 or 3 keycards"
 		e.bw[side].keyStep = 0
-	case keys == 1 || keys == 4:
+	case tr.check(keys == 1 || keys == 4, "1 ou 4 cartes clefs → 5♦", "1 or 4 keycards → 5♦", v):
 		c, fr, en = bid(5, SDiamonds), "1 ou 4 cartes clefs", "1 or 4 keycards"
 		e.bw[side].keyStep = 1
-	case !hasQ:
+	case tr.check(!hasQ, "2 cartes clefs sans la Dame d'atout → 5♥", "2 keycards without the trump queen → 5♥", v):
 		c, fr, en = bid(5, SHearts), "2 cartes clefs sans la Dame d'atout", "2 keycards without the trump queen"
 		e.bw[side].keyStep = 2
 	default:
+		tr.check(true, "2 cartes clefs et la Dame d'atout → 5♠", "2 keycards with the trump queen → 5♠", v)
 		c, fr, en = bid(5, SSpades), "2 cartes clefs et la Dame d'atout", "2 keycards with the trump queen"
 		e.bw[side].keyStep = 3
 	}
 	mn := m(-1, -1, fr, en)
 	mn.keyResp = true
 	if !e.legal(p.seat, c) {
+		tr.note("réponse impossible au palier de 5 → Passe", "no room for the answer at the five level → Pass")
 		return passCall, noInfo()
 	}
 	return c, mn
@@ -2461,7 +2499,7 @@ func deniedSideAces(h *Hand, partner *playerState, trump Suit) int {
 	return n
 }
 
-func (e *Engine) afterKeycards(p *playerState) (Call, meaning) {
+func (e *Engine) afterKeycards(p *playerState, tr *tracer) (Call, meaning) {
 	side := sideOf(p.seat)
 	trump := e.bw[side].trump
 	partner := e.ps[partnerOf(p.seat)]
@@ -2515,11 +2553,18 @@ func (e *Engine) afterKeycards(p *playerState) (Call, meaning) {
 	missingIsSideAce := (p.hand.HasCard(trump, 'A') && p.hand.HasCard(trump, 'K')) ||
 		(partner.ctrlShown[trump] && (p.hand.HasCard(trump, 'A') || p.hand.HasCard(trump, 'K'))) ||
 		(denied == 1 && partnerKeys == 5-ownKeys-denied)
+	tr.note("le partenaire a répondu à ma demande de cartes clefs (atout "+suitSymbol[trump]+")",
+		"partner answered my keycard ask ("+suitSymbol[trump]+" trumps)")
+	keyVal := fmt.Sprintf("%d + %d = %d", ownKeys, partnerKeys, total)
 	target := 5
-	if total >= 5 || (total == 4 && (cMin >= 33 || (missingIsSideAce && e.allSideSuitsControlled(p, trump)))) {
+	if tr.check(total >= 5 || (total == 4 && (cMin >= 33 || (missingIsSideAce && e.allSideSuitsControlled(p, trump)))),
+		"5 cartes clefs, ou 4 avec 33 HLD combinés ou l'As manquant dans une couleur contrôlée → petit chelem",
+		"5 keycards, or 4 with 33 HLD combined or the missing ace in a controlled suit → small slam",
+		keyVal+fmt.Sprintf(" ; %d HLD", cMin)) {
 		target = 6
 	}
-	if total == 5 && cMin >= 37 {
+	if tr.check(total == 5 && cMin >= 37, "les 5 cartes clefs et 37 HLD combinés → grand chelem",
+		"all 5 keycards and 37 HLD combined → grand slam", keyVal+fmt.Sprintf(" ; %d HLD", cMin)) {
 		target = 7
 	}
 	c := bidSuit(target, trump)
@@ -2527,11 +2572,19 @@ func (e *Engine) afterKeycards(p *playerState) (Call, meaning) {
 		// The keycard answer already occupies five of the trump suit:
 		// passing it is the only sign-off left — bumping the level would
 		// turn the stop into the very slam it declines.
+		tr.note("la réponse est déjà à 5 dans l'atout : s'y arrêter → Passe",
+			"the answer already sits at the five level in trumps: stop there → Pass")
 		return passCall, m(-1, -1, "arrêt sur la réponse, cartes clefs insuffisantes", "passes the answer, not enough keycards")
 	}
+	aimed := target
 	for !c.higherThan(last) && target < 7 {
 		target++
 		c = bidSuit(target, trump)
+	}
+	if target != aimed {
+		cFR, cEN := callSym(c)
+		tr.note(fmt.Sprintf("le palier de %d est déjà dépassé → ", aimed)+cFR,
+			fmt.Sprintf("the %d level is already passed → ", aimed)+cEN)
 	}
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()
@@ -2550,7 +2603,7 @@ func (e *Engine) afterKeycards(p *playerState) (Call, meaning) {
 // agreed: plain ace count (0-4), no trump king/queen refinement possible.
 // The answered count is recorded in the Blackwood state for the asker to
 // read back -- the ladder is unambiguous (5C..5NT = 0..4 aces).
-func (e *Engine) keycardAnswerNT(p *playerState) (Call, meaning) {
+func (e *Engine) keycardAnswerNT(p *playerState, tr *tracer) (Call, meaning) {
 	aces := p.hand.Aces()
 	var c Call
 	var fr, en string
@@ -2566,6 +2619,9 @@ func (e *Engine) keycardAnswerNT(p *playerState) (Call, meaning) {
 	default:
 		c, fr, en = bid(5, SNoTrump), "4 As, tous les As", "4 aces, all aces held"
 	}
+	cFR, cEN := callSym(c)
+	tr.note("le partenaire demande les As (Blackwood sans atout désigné)", "partner asks for aces (Blackwood, no trump suit agreed)")
+	tr.check(true, "nombre d'As, de 5♣ (0) à 5SA (4) → "+cFR, "number of aces, from 5♣ (0) to 5NT (4) → "+cEN, fmt.Sprint(aces))
 	mn := m(-1, -1, fr, en)
 	mn.keyResp = true
 	if !e.legal(p.seat, c) {
@@ -2578,7 +2634,7 @@ func (e *Engine) keycardAnswerNT(p *playerState) (Call, meaning) {
 // afterKeycardsNT concludes a notrump keycard sequence: with no trump suit,
 // only the four aces are at stake, so at most one may be missing for a
 // small slam, and all four (plus enough combined strength) for a grand one.
-func (e *Engine) afterKeycardsNT(p *playerState) (Call, meaning) {
+func (e *Engine) afterKeycardsNT(p *playerState, tr *tracer) (Call, meaning) {
 	side := sideOf(p.seat)
 	partner := e.ps[partnerOf(p.seat)]
 	// Partner's ace count comes from the answered step, never from the
@@ -2588,17 +2644,26 @@ func (e *Engine) afterKeycardsNT(p *playerState) (Call, meaning) {
 	cMin := own + partner.shownMin
 	last, _, _ := e.lastBid()
 
+	tr.note("le partenaire a répondu à ma demande d'As", "partner answered my ace ask")
+	aceVal := fmt.Sprintf("%d + %d = %d", p.hand.Aces(), e.bw[side].keyStep, total)
 	target := 5
-	if total >= 3 {
+	if tr.check(total >= 3, "3 As et plus → petit chelem à Sans-Atout", "3+ aces → small slam in notrump", aceVal) {
 		target = 6
 	}
-	if total == 4 && cMin >= 37 {
+	if tr.check(total == 4 && cMin >= 37, "les 4 As et 37 H combinés → grand chelem", "all 4 aces and 37 H combined → grand slam",
+		aceVal+fmt.Sprintf(" ; %d H", cMin)) {
 		target = 7
 	}
 	c := bid(target, SNoTrump)
+	aimed := target
 	for !c.higherThan(last) && target < 7 {
 		target++
 		c = bid(target, SNoTrump)
+	}
+	if target != aimed {
+		cFR, cEN := callSym(c)
+		tr.note(fmt.Sprintf("le palier de %d est déjà dépassé → ", aimed)+cFR,
+			fmt.Sprintf("the %d level is already passed → ", aimed)+cEN)
 	}
 	if !e.legal(p.seat, c) {
 		return passCall, noInfo()

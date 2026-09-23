@@ -199,6 +199,8 @@ func init() {
 		},
 		{
 			name: "answer-blackwood",
+			fr:   "le partenaire a demandé les clefs (Blackwood) : répondre",
+			en:   "partner asked for keycards (Blackwood): answer",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.blackwood && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -206,22 +208,24 @@ func init() {
 				p := ctx.p
 				switch {
 				case e.bw[ctx.side].kingAsk && e.bw[ctx.side].noTrump:
-					c, mn := e.kingAnswerNT(p)
+					c, mn := e.kingAnswerNT(p, ctx.tr)
 					return c, mn, true
 				case e.bw[ctx.side].kingAsk:
-					c, mn := e.kingAnswer(p, e.bw[ctx.side].trump)
+					c, mn := e.kingAnswer(p, e.bw[ctx.side].trump, ctx.tr)
 					return c, mn, true
 				case e.bw[ctx.side].noTrump:
-					c, mn := e.keycardAnswerNT(p)
+					c, mn := e.keycardAnswerNT(p, ctx.tr)
 					return c, mn, true
 				default:
-					c, mn := e.keycardAnswer(p, e.bw[ctx.side].trump)
+					c, mn := e.keycardAnswer(p, e.bw[ctx.side].trump, ctx.tr)
 					return c, mn, true
 				}
 			},
 		},
 		{
 			name: "continue-after-my-blackwood",
+			fr:   "ma demande de clefs a reçu sa réponse : fixer le contrat",
+			en:   "my keycard ask has been answered: place the contract",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return e.bw[ctx.side].asked && e.bw[ctx.side].asker == ctx.p.seat && ctx.pm != nil && ctx.pm.keyResp
 			},
@@ -229,16 +233,16 @@ func init() {
 				p := ctx.p
 				switch {
 				case e.bw[ctx.side].kingAsk && e.bw[ctx.side].noTrump:
-					c, mn := e.afterKingsNT(p)
+					c, mn := e.afterKingsNT(p, ctx.tr)
 					return c, mn, true
 				case e.bw[ctx.side].kingAsk:
-					c, mn := e.afterKings(p)
+					c, mn := e.afterKings(p, ctx.tr)
 					return c, mn, true
 				case e.bw[ctx.side].noTrump:
-					c, mn := e.afterKeycardsNT(p)
+					c, mn := e.afterKeycardsNT(p, ctx.tr)
 					return c, mn, true
 				default:
-					c, mn := e.afterKeycards(p)
+					c, mn := e.afterKeycards(p, ctx.tr)
 					return c, mn, true
 				}
 			},
@@ -1211,6 +1215,8 @@ func init() {
 		{
 			// Game invitation from partner.
 			name: "game-invitation-answer",
+			fr:   "le partenaire propose la manche : accepter ou refuser",
+			en:   "partner invites game: accept or decline",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.invite && ctx.partnerJustActed && ctx.ours
 			},
@@ -1298,6 +1304,17 @@ func init() {
 					threshold = mid
 				}
 				accept := acceptVal >= threshold
+				tr := ctx.tr
+				acceptV := pts(acceptVal, "H")
+				if bonus := acceptVal - p.hand.HL(); hasFit {
+					acceptV = fmt.Sprintf("%d HL + %d", p.hand.HL(), bonus)
+				} else if bonus := acceptVal - p.hand.H(); bonus > 0 {
+					acceptV = fmt.Sprintf("%d H + %d", p.hand.H(), bonus)
+				}
+				acceptFR := fmt.Sprintf("haut de la fourchette annoncée (%d-%d) : %d et plus → accepter",
+					p.shownMin, p.shownMax, threshold)
+				acceptEN := fmt.Sprintf("top of the announced range (%d-%d): %d or more → accept",
+					p.shownMin, p.shownMax, threshold)
 				if len(e.opponentSuits(p)) > 0 {
 					// In a contested auction the invitation is a competitive
 					// raise with a wide but honest floor, so accept only when
@@ -1325,6 +1342,10 @@ func init() {
 						v = e.hldAgainstTheirBidding(p, fit)
 					}
 					accept = partner.shownMin+v >= gameThresholdFor(fit, hasFit, ntOK)
+					g := gameThresholdFor(fit, hasFit, ntOK)
+					acceptFR = fmt.Sprintf("enchères disputées : minimum combiné au seuil de la manche (%d) → accepter", g)
+					acceptEN = fmt.Sprintf("contested auction: combined minimum at the game threshold (%d) → accept", g)
+					acceptV = fmt.Sprintf("%d + %d = %d", v, partner.shownMin, partner.shownMin+v)
 				}
 				// The answer to a takeout double with no jump available (2H
 				// over 1S) covers the weak and the middle zone at once, and
@@ -1335,13 +1356,17 @@ func init() {
 				// same wide zone.
 				if p.wideDouble && hasFit && fit == p.wideDoubleFit && p.hand.H() >= 8 {
 					accept = true
+					acceptFR = "réponse au contre qui couvrait deux zones, 8 H et plus, fit → accepter"
+					acceptEN = "answer to the double covering two zones, 8+ H, fit → accept"
+					acceptV = pts(p.hand.H(), "H")
 				}
-				if accept {
+				if tr.check(accept, acceptFR, acceptEN, acceptV) {
 					gc, ok := gameCall(fit, hasFit, 99, 99, ntOK) // force game choice
 					if hasFit && fit.IsMajor() {
 						gc, ok = bidSuit(4, fit), true
 					}
-					if ok && e.legal(p.seat, gc) {
+					gcFR, gcEN := callSym(gc)
+					if tr.check(ok && e.legal(p.seat, gc), "→ la manche : "+gcFR, "→ game: "+gcEN, "") {
 						// In a contested auction the acceptance rests on the
 						// combined count, not on clearing the threshold: never
 						// promise more than the value that actually accepted.
@@ -1365,7 +1390,8 @@ func init() {
 					if !c.higherThan(last) {
 						c = bid(last.Level+1, fit.Strain())
 					}
-					if c.Level <= 3 && e.legal(p.seat, c) {
+					if tr.check(c.Level <= 3 && e.legal(p.seat, c),
+						"refuser : revenir dans la couleur du fit, au plus bas", "decline: back to the fit, at the lowest level", fitSym(fit)) {
 						return c, m(-1, declineMax, "refuse, retour dans la couleur fittée", "declines, signs off in the fit"), true
 					}
 				}
@@ -1385,11 +1411,14 @@ func init() {
 						if !c.higherThan(last) {
 							c = bid(last.Level+1, long.Strain())
 						}
-						if c.Level <= 3 && e.legal(p.seat, c) {
+						if tr.check(c.Level <= 3 && e.legal(p.seat, c),
+							"chicane dans sa couleur : refuser en revenant à sa propre sixième",
+							"void in partner's suit: decline by going back to the own six-card suit", cards(p.hand, long)) {
 							return c, m(-1, declineMax, "refuse la proposition, chicane dans la couleur du partenaire, retour à sa couleur", "declines the invitation, void in partner's suit, retreats to own suit").withLen(long, p.hand.Len(long)), true
 						}
 					}
 				}
+				tr.note("refuser → Passe", "decline → Pass")
 				return passCall, m(-1, declineMax, "refuse la proposition, minimum", "declines the invitation, minimum"), true
 			},
 		},
@@ -2519,3 +2548,6 @@ func topHonours(h *Hand, s Suit) int {
 	}
 	return n
 }
+
+// fitSym shows a trump suit in the trace: "♠".
+func fitSym(s Suit) string { return suitSymbol[s] }

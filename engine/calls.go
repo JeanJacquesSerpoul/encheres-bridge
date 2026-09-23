@@ -197,7 +197,8 @@ func (mn meaning) asLandy() meaning {
 
 // SeatCall is a call as recorded in the auction.
 type SeatCall struct {
-	Seat int
-	Call Call
-	M    meaning
+	Seat  int
+	Call  Call
+	M     meaning
+	Trace []traceStep // the decision's path, when that situation is traced (see trace.go)
 }

@@ -1454,6 +1454,45 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .quiz-feedback.correct { background: var(--success-bg); border: 1px solid var(--success-border); }
 .quiz-feedback.incorrect { background: var(--error-bg); border: 1px solid var(--error-border); }
 .quiz-feedback .verdict { font-weight: 700; display: block; margin-bottom: 4px; }
+.quiz-feedback .tree-toggle { margin-top: 6px; }
+
+/* Arbre de décision : son propre fond, lisible sous le verdict (fond rouge
+   pâle) comme dans le récapitulatif (tapis vert). */
+.decision-tree {
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  text-align: left;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.tree-head { margin-bottom: 6px; }
+.tree-head .muted { margin-left: 6px; }
+.tree-steps { list-style: none; margin: 0; padding: 0; }
+.tree-steps li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 0 2px calc(var(--depth, 0) * 1.4em);
+}
+.tree-mark { flex: none; width: 1em; font-weight: 700; }
+.tree-steps li.ok .tree-mark { color: var(--accent); }
+.tree-steps li.ko .tree-mark { color: var(--red); }
+.tree-steps li.ko .tree-label { color: var(--muted); }
+.tree-steps li.ok .tree-label { font-weight: 600; }
+.tree-steps li.note .tree-label { font-style: italic; }
+.tree-value {
+  margin-left: auto;
+  padding-left: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.tree-end { margin-top: 6px; }
+.quiz-recap .tree-toggle { color: inherit; margin-left: 6px; font-size: .85rem; }
 
 .quiz-score {
   background: var(--felt);

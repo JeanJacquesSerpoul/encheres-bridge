@@ -64,9 +64,19 @@ type handJSON struct {
 }
 
 type auctionJSON struct {
-	Player  string `json:"player"`
-	Bid     string `json:"bid"`
-	Comment string `json:"comment"`
+	Player  string      `json:"player"`
+	Bid     string      `json:"bid"`
+	Comment string      `json:"comment"`
+	Trace   []traceJSON `json:"trace,omitempty"` // decision path, when traced (see trace.go)
+}
+
+// traceJSON is one step of a call's decision path, in the response language.
+type traceJSON struct {
+	Label string `json:"label"`
+	Value string `json:"value,omitempty"`
+	Ok    bool   `json:"ok"`
+	Note  bool   `json:"note,omitempty"`
+	Depth int    `json:"depth,omitempty"`
 }
 
 type bidResponse struct {
@@ -121,10 +131,19 @@ func buildResponse(deal *Deal, calls []SeatCall, lang string) bidResponse {
 		if lang == "fr" {
 			comment = sc.M.fr
 		}
+		var trace []traceJSON
+		for _, st := range sc.Trace {
+			label := st.en
+			if lang == "fr" {
+				label = st.fr
+			}
+			trace = append(trace, traceJSON{Label: label, Value: st.value, Ok: st.ok, Note: st.note, Depth: st.depth})
+		}
 		resp.Auction = append(resp.Auction, auctionJSON{
 			Player:  seatNames[sc.Seat],
 			Bid:     sc.Call.Format(lang),
 			Comment: comment,
+			Trace:   trace,
 		})
 	}
 	contract, declarer, doubled := finalContract(calls)

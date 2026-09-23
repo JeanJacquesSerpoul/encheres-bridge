@@ -333,33 +333,33 @@
         </div>
       </div>
 
-      <!-- Le questionnaire, dans son propre encadré. Il ne prolonge pas les
-           commandes de la donne : il ouvre autre chose, un entraînement où
-           l'on répond à la place d'un siège. Le cadre et le titre le disent
-           avant qu'on ait lu le reste. -->
-      <div class="quiz-launch">
-        <h3 class="quiz-launch-title" data-i18n="quizPanel">Questionnaire d'enchères</h3>
-        <div class="quiz-launch-row">
-          <!-- Le siège que le questionnaire fait jouer, en bandeau : le compas
-               en croix disait bien la place de chacun, mais il coûtait trois
-               rangées de hauteur pour quatre choix. Ce sont toujours des
-               boutons radio, donc les flèches y circulent d'elles-mêmes. -->
-          <fieldset class="seat-pills">
-            <!-- Le libellé ne s'affiche plus : les quatre noms se suffisent,
-                 et l'infobulle de chaque pastille dit la phrase entière. Il
-                 reste néanmoins dans l'arbre, car c'est lui qui nomme le
-                 groupe de boutons radio à un lecteur d'écran. -->
-            <legend class="sr-only" data-i18n="yourHand">Votre main</legend>
-            <div class="seat-pills-row">
-              <label class="seat-pick"><input type="radio" name="seat" value="N" checked><span></span></label>
-              <label class="seat-pick"><input type="radio" name="seat" value="E"><span></span></label>
-              <label class="seat-pick"><input type="radio" name="seat" value="S"><span></span></label>
-              <label class="seat-pick"><input type="radio" name="seat" value="W"><span></span></label>
-            </div>
-          </fieldset>
-          <button id="quiz-btn" type="button" class="cmd-btn cmd-primary"></button>
-          <span id="error" class="error"></span>
-        </div>
+    </section>
+
+    <!-- Le questionnaire, dans son propre panneau, sous celui de la donne. Il
+         ne prolonge pas les commandes de la donne : il ouvre autre chose, un
+         entraînement où l'on répond à la place d'un siège. -->
+    <section class="panel quiz-launch" id="quiz-launch-panel">
+      <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
+      <div class="quiz-launch-row">
+        <!-- Le siège que le questionnaire fait jouer, en bandeau : le compas
+             en croix disait bien la place de chacun, mais il coûtait trois
+             rangées de hauteur pour quatre choix. Ce sont toujours des
+             boutons radio, donc les flèches y circulent d'elles-mêmes. -->
+        <fieldset class="seat-pills">
+          <!-- Le libellé ne s'affiche plus : les quatre noms se suffisent,
+               et l'infobulle de chaque pastille dit la phrase entière. Il
+               reste néanmoins dans l'arbre, car c'est lui qui nomme le
+               groupe de boutons radio à un lecteur d'écran. -->
+          <legend class="sr-only" data-i18n="yourHand">Votre main</legend>
+          <div class="seat-pills-row">
+            <label class="seat-pick"><input type="radio" name="seat" value="N" checked><span></span></label>
+            <label class="seat-pick"><input type="radio" name="seat" value="E"><span></span></label>
+            <label class="seat-pick"><input type="radio" name="seat" value="S"><span></span></label>
+            <label class="seat-pick"><input type="radio" name="seat" value="W"><span></span></label>
+          </div>
+        </fieldset>
+        <button id="quiz-btn" type="button" class="cmd-btn cmd-primary"></button>
+        <span id="error" class="error"></span>
       </div>
     </section>
 

@@ -213,6 +213,22 @@ bridge.exemple.net {
 }
 ```
 
+**Caddy, dans un sous-répertoire d'un site existant.** Pour servir l'application sous `https://<domaine>/bridgequizz/`, à côté d'autres routes du même site, `cli/` est copié tel quel dans `/home/html/bridgequizz`, et ces lignes s'ajoutent au bloc du site dans le Caddyfile :
+
+```caddy
+redir /bridgequizz /bridgequizz/
+
+handle_path /bridgequizz* {
+     root /home/html/bridgequizz
+     try_files {path} /index.html
+     file_server
+}
+```
+
+- **`redir` est indispensable.** `index.html` désigne ses fichiers par des chemins relatifs (`style.css`, `app.js`, `bids.wasm`…). Ouverte en `/bridgequizz` sans `/` final, la page les demanderait à la racine du site — `/style.css` au lieu de `/bridgequizz/style.css` —, hors de ce bloc : ils tomberaient dans une autre route du site, et la page resterait bloquée sur « Chargement de l'application… » (erreurs **502** si cette route est un `reverse_proxy` vers un service arrêté, **404** sinon). La redirection ajoute le `/` avant tout chargement.
+- **`handle_path`** retire le préfixe `/bridgequizz` avant de chercher le fichier : `/bridgequizz/app.js` devient `/home/html/bridgequizz/app.js`.
+- Facultatif, dans le bloc `handle_path` : `encode gzip zstd` pour transmettre `bids.wasm` compressé (1,2 Mo au lieu de 4,3), et les deux en-têtes `Cross-Origin-*` de l'exemple précédent pour épargner à la première visite le rechargement de [cli/coi-serviceworker.js](cli/coi-serviceworker.js).
+
 #### Vérifier un déploiement
 
 ```bash

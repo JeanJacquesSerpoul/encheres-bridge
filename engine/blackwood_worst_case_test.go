@@ -53,13 +53,13 @@ func TestBlackwoodAssumesWorstCaseOnAmbiguousStep(t *testing.T) {
 	e.bw[sideOf(east)] = bwState{asked: true, asker: east, trump: Hearts}
 	e.calls = []SeatCall{{Seat: east, Call: bid(4, SNoTrump)}}
 
-	answerCall, answerMn := e.keycardAnswer(e.ps[west], Hearts)
+	answerCall, answerMn := e.keycardAnswer(e.ps[west], Hearts, nil)
 	if !strings.Contains(answerMn.fr, "0 ou 3") {
 		t.Fatalf("West's answer %q is not the ambiguous 0-or-3 step", answerMn.fr)
 	}
 	e.record(west, answerCall, answerMn)
 
-	c, mn := e.afterKeycards(e.ps[east])
+	c, mn := e.afterKeycards(e.ps[east], nil)
 	if c.higherThan(bidSuit(5, Hearts)) || strings.Contains(mn.fr, "chelem") {
 		t.Fatalf("East continues %s (%s), want a sign-off at the five level rather than a gamble on the favorable reading",
 			c.Format("fr"), mn.fr)

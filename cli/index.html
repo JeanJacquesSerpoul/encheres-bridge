@@ -309,6 +309,9 @@
                commentées, bandeau bas compris quand il n'y a pas de survol.
                Dessin, aria-label et infobulle viennent de renderBoundsCards,
                qui a la langue sous la main. -->
+          <!-- Annuler la dernière action sur la donne (voir « annuler » dans
+               app.js) : grisé tant qu'il n'y a rien à défaire. -->
+          <button id="cons-undo-btn" type="button" class="cmd-btn" disabled></button>
           <button id="cons-clear-btn" type="button" class="cmd-btn"></button>
           <button id="cons-fill-btn" type="button" class="cmd-btn"></button>
           <!-- Bornes de points : les champs Mini/Maxi des quatre mains, repliés
@@ -574,6 +577,7 @@
         <p>Chaque main affiche ses <b>points d'honneur (PH)</b> et son nombre de cartes (<i>13/13</i>).</p>
         <p>Sous la table :</p>
         <ul class="help-icons">
+          <li><span data-help-icon="undo"></span><span><b>Annuler</b> (ou <b>Ctrl+Z</b>) : revient sur la dernière action qui a changé la donne — carte déplacée, main vidée, table vidée ou complétée, nouvelle donne tirée ou chargée.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Retirer toutes les cartes</b> : vide les quatre mains.</span></li>
           <li><span data-help-icon="deal"></span><span><b>Compléter les mains</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Bornes de points</b> : affiche les champs <b>Mini</b> et <b>Maxi</b> de chaque main, qui bornent ses PH. Les tirages et la distribution automatique les respectent, et le compteur passe en rouge si la main en sort.</span></li>
@@ -642,6 +646,7 @@
         <p>Each hand shows its <b>high-card points (HCP)</b> and card count (<i>13/13</i>).</p>
         <p>Below the table:</p>
         <ul class="help-icons">
+          <li><span data-help-icon="undo"></span><span><b>Undo</b> (or <b>Ctrl+Z</b>): reverts the last action that changed the deal — a card moved, a hand or the whole table emptied or filled, a new deal drawn or loaded.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Take out every card</b>: empties the four hands.</span></li>
           <li><span data-help-icon="deal"></span><span><b>Fill the hands</b>: deals the unassigned cards, within the bounds.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Point bounds</b>: shows each hand's <b>Min</b> and <b>Max</b> fields, which bound its HCP. Random draws and automatic dealing respect them, and the counter turns red when the hand falls outside.</span></li>

@@ -591,6 +591,7 @@ function applyLang() {
 // Loads a PBN text into the textarea and resets everything that depends on
 // the previous deal (quiz in progress, displayed result, deal picker).
 function loadPbn(text, fileName) {
+  pushUndo();
   $("#pbn").value = text;
   // Quitter une donne chargée remet les sélecteurs sur « Aléatoire » : ce
   // qu'ils affichaient venait du fichier, ce n'était pas une préférence de
@@ -606,6 +607,7 @@ function loadPbn(text, fileName) {
   refreshDealSelector(true);
   setPbnOpen(false);
   $("#file-name").textContent = fileName || "";
+  settlePbn();
 }
 
 $("#file").addEventListener("change", (ev) => {
@@ -1119,6 +1121,8 @@ const CONS_TEXT = {
     ph: "PH", min: "Mini", max: "Maxi",
     reset: "Effacer les bornes",
     boundsToggle: "Bornes de points (PH mini/maxi)",
+    undo: "Annuler la dernière action (Ctrl+Z)",
+    undone: "Dernière action annulée.",
     neutral: "Cartes non affectées",
     // Le clic-puis-clic existe depuis toujours (voir le gestionnaire
     // pointerup) mais n'était annoncé nulle part : sur écran tactile, viser
@@ -1162,6 +1166,8 @@ const CONS_TEXT = {
     ph: "HCP", min: "Min", max: "Max",
     reset: "Clear bounds",
     boundsToggle: "Point bounds (min/max HCP)",
+    undo: "Undo the last action (Ctrl+Z)",
+    undone: "Last action undone.",
     neutral: "Unassigned cards",
     neutralHint:
       "Drag a card from one hand to another, or here to take it out. " +
@@ -1340,10 +1346,100 @@ function writeZonesToPbn() {
   replaceSelectedBlock(newBlock);
 }
 
+// ---------- annuler ----------
+//
+// Chaque action qui change la donne — carte déplacée, poubelle, table vidée ou
+// complétée, photo, nouvelle donne tirée, exemple ou fichier — retient d'abord
+// l'état d'avant. Le texte PBN suffit à le décrire : les cartes qu'il ne cite
+// pas sont celles du centre (voir gatherMissingCards).
+const UNDO_LIMIT = 50;
+const undoStack = [];
+
+function undoSnapshot() {
+  return {
+    pbn: $("#pbn").value,
+    idx: selectedGameIdx,
+    fromFile: dealFromFile,
+    fileName: $("#file-name").textContent,
+  };
+}
+
+function pushUndo() {
+  const snap = undoSnapshot();
+  const last = undoStack[undoStack.length - 1];
+  // Deux instantanés identiques de suite n'annuleraient rien.
+  if (last && last.pbn === snap.pbn && last.idx === snap.idx) return;
+  undoStack.push(snap);
+  if (undoStack.length > UNDO_LIMIT) undoStack.shift();
+  renderUndoButton();
+}
+
+function renderUndoButton() {
+  $("#cons-undo-btn").disabled = undoStack.length === 0;
+}
+
+function undo() {
+  const snap = undoStack.pop();
+  if (!snap) return;
+  $("#pbn").value = snap.pbn;
+  selectedGameIdx = snap.idx;
+  dealFromFile = snap.fromFile;
+  $("#file-name").textContent = snap.fileName;
+  refreshDealSelector(false);
+  gatherMissingCards();
+  selectedCard = null;
+  renderBoundsCards();
+  resetQuiz();
+  hideResult();
+  setError($("#cons-error"), "");
+  settlePbn();
+  renderUndoButton();
+  announce(CONS_TEXT[$("#lang").value].undone);
+}
+
+$("#cons-undo-btn").addEventListener("click", undo);
+
+// Ctrl+Z (Cmd+Z sur Mac) hors des champs de saisie, qui gardent leur propre
+// annuler — celui du texte PBN notamment. Rien quand la donne est masquée :
+// on changerait une donne que l'on ne voit pas.
+document.addEventListener("keydown", (ev) => {
+  if (!(ev.ctrlKey || ev.metaKey) || ev.shiftKey || ev.altKey) return;
+  if (ev.key !== "z" && ev.key !== "Z") return;
+  const target = ev.target;
+  if (target.closest && target.closest("input, textarea, select, [contenteditable]")) return;
+  if (document.querySelector("dialog[open]")) return;
+  if ($("#input-panel").classList.contains("quiz-running")) return;
+  if (!undoStack.length) return;
+  ev.preventDefault();
+  undo();
+});
+
+// La saisie directe dans le texte PBN n'appelle ni commitZones ni loadPbn.
+// L'état « posé » — celui qu'a laissé la dernière action, ou le démarrage — est
+// donc tenu à jour à part, et empilé quand on quitte le champ après l'avoir
+// modifié.
+let settledPbn = null;
+
+function settlePbn() {
+  settledPbn = undoSnapshot();
+}
+
+$("#pbn").addEventListener("change", () => {
+  if (!settledPbn || settledPbn.pbn === $("#pbn").value) return;
+  undoStack.push(settledPbn);
+  if (undoStack.length > UNDO_LIMIT) undoStack.shift();
+  settlePbn();
+  renderUndoButton();
+});
+
 // Applies a change made in the constraints panel: PBN text, display, and any
 // result computed from the previous cards, which no longer describes the deal.
 function commitZones() {
+  // Le texte PBN décrit encore la donne d'avant ce changement : c'est lui que
+  // l'on retient pour pouvoir l'annuler.
+  pushUndo();
   writeZonesToPbn();
+  settlePbn();
   renderBoundsCards();
   resetQuiz();
   hideResult();
@@ -1507,6 +1603,12 @@ const ERASER_SVG = `${SVG_OPEN}
   <path d="m5 16 7-7 6 6-4 4H8z"/>
   <path d="M12 9 16 5a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-4 4"/>
   <path d="M4 21h16"/>
+</svg>`;
+
+// Une flèche qui revient sur elle-même : annuler.
+const UNDO_SVG = `${SVG_OPEN}
+  <path d="M9 14 4 9l5-5"/>
+  <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>
 </svg>`;
 
 // Trois curseurs : les bornes de points de chaque main.
@@ -1726,6 +1828,7 @@ $("#pbn-toggle-btn").addEventListener("click", () => {
 function renderBoundsCards() {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
+  setCommandButton("#cons-undo-btn", UNDO_SVG, t.undo);
   setCommandButton("#cons-reset-btn", ERASER_SVG, t.reset);
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
@@ -3762,7 +3865,7 @@ $("#quiz-btn").addEventListener("click", startQuiz);
 // une fois, au démarrage, depuis les mêmes constantes.
 const HELP_ICONS = {
   file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
-  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
+  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, undo: UNDO_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
   quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
 };
 
@@ -3823,6 +3926,7 @@ gatherMissingCards();
 renderBoundsCards();
 renderHelpIcons();
 hideNewDealInQuizMode();
+settlePbn();
 applyLang();
 setPbnOpen(false);
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le

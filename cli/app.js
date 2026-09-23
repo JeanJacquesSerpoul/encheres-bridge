@@ -296,6 +296,9 @@ const UI_TEXT = {
     themeAuto: "Automatique",
     themeLight: "Clair",
     themeDark: "Sombre",
+    helpOpen: "Mode d'emploi",
+    helpTitle: "Mode d'emploi",
+    helpClose: "Fermer le mode d'emploi",
     intro:
       "Composez une donne — l'application déroule les enchères du système " +
       "français et les commente, enchère par enchère.",
@@ -426,6 +429,9 @@ const UI_TEXT = {
     themeAuto: "Automatic",
     themeLight: "Light",
     themeDark: "Dark",
+    helpOpen: "How to use",
+    helpTitle: "How to use",
+    helpClose: "Close the guide",
     intro:
       "Build a deal — the application runs the French system's auction and " +
       "comments on it, call by call.",
@@ -692,6 +698,11 @@ function applyLang() {
   // d'ici. Le `title` seul y suppléait, mais il dépend d'un survol.
   for (const el of document.querySelectorAll("[data-i18n-label]")) {
     el.setAttribute("aria-label", t[el.dataset.i18nLabel]);
+  }
+  // Le mode d'emploi est écrit dans les deux langues : seule la sienne se
+  // montre.
+  for (const el of document.querySelectorAll("[data-help-lang]")) {
+    el.hidden = el.dataset.helpLang !== lang;
   }
   relabelQuizContinue();
   renderDealActions();
@@ -3777,6 +3788,36 @@ $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);
 
+// ---------- mode d'emploi ----------
+
+// Les icônes du mode d'emploi sont celles des boutons eux-mêmes : dessinées
+// une fois, au démarrage, depuis les mêmes constantes.
+const HELP_ICONS = {
+  file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
+  gather: GATHER_SVG, deal: DEAL_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
+  quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
+};
+
+function renderHelpIcons() {
+  for (const el of document.querySelectorAll("[data-help-icon]")) {
+    el.className = "help-icon";
+    el.innerHTML = HELP_ICONS[el.dataset.helpIcon] || "";
+  }
+}
+
+const helpDialog = $("#help-dialog");
+$("#help-btn").addEventListener("click", () => {
+  helpDialog.showModal();
+  // Le texte repart du haut à chaque ouverture, pas de là où on l'a quitté.
+  helpDialog.querySelector(".help-box").scrollTop = 0;
+});
+$("#help-close").addEventListener("click", () => helpDialog.close());
+// Un clic sur le voile referme : il atteint le <dialog> lui-même, alors que
+// tout son contenu est dans .help-box.
+helpDialog.addEventListener("click", (ev) => {
+  if (ev.target === helpDialog) helpDialog.close();
+});
+
 // Reprend la dernière donne complète, ou la donne vide à la première visite,
 // puis sonde le serveur.
 $("#lang").value = initialLang();
@@ -3785,6 +3826,7 @@ $("#pbn").value = readStored(LAST_DEAL_KEY, "") || EMPTY_PBN;
 refreshDealSelector(true);
 gatherMissingCards();
 renderBoundsCards();
+renderHelpIcons();
 applyLang();
 $("#pbn-details").open = false;
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le

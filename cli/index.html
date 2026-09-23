@@ -178,6 +178,17 @@
           <option value="dark" data-i18n="themeDark">Sombre</option>
         </select>
       </div>
+      <!-- Le mode d'emploi, au bout du bandeau avec les autres réglages de la
+           page. Nom et infobulle posés par applyLang. -->
+      <button id="help-btn" type="button" class="help-btn"
+              data-i18n-title="helpOpen" data-i18n-label="helpOpen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/>
+          <path d="M12 17h.01"/>
+        </svg>
+      </button>
     </div>
   </header>
 
@@ -492,6 +503,149 @@
          rel="noopener noreferrer" data-i18n="appSource">Code source sur GitHub</a>
     </p>
   </footer>
+
+  <!-- Mode d'emploi, ouvert par le bouton « ? » du bandeau. Un <dialog> natif :
+       showModal donne le voile, le piège du focus et la fermeture par Échap
+       sans une ligne de script. Les deux langues sont écrites ici en entier ;
+       applyLang ne montre que celle de la page. Les icônes (data-help-icon)
+       sont celles des boutons, posées par renderHelpIcons : on reconnaît à
+       l'écran ce qu'on a lu ici. -->
+  <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
+    <div class="help-box">
+      <div class="help-head">
+        <h2 id="help-title" data-i18n="helpTitle">Mode d'emploi</h2>
+        <button id="help-close" type="button" class="icon-btn"
+                data-i18n-title="helpClose" data-i18n-label="helpClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="help-body" data-help-lang="fr" lang="fr">
+        <p class="help-lead">L'application déroule les enchères d'une donne de bridge selon le <b>Système d'Enchères Français (SEF)</b> et les commente, enchère par enchère. Vous pouvez aussi vous entraîner : le questionnaire vous fait enchérir à la place d'un joueur. Tout est calculé dans votre navigateur, sans compte ni serveur.</p>
+
+        <h3>1. Obtenir une donne</h3>
+        <ul class="help-icons">
+          <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît.</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir plus bas).</span></li>
+          <li><span data-help-icon="book"></span><span><b>Donne exemple</b> : une donne toute prête pour découvrir l'application.</span></li>
+          <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne affichée dans un fichier .pbn.</span></li>
+        </ul>
+        <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
+        <p>À la première visite, la table est vide : les 52 cartes attendent au centre. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page.</p>
+        <p>Le repli <b>Texte de la donne (format PBN)</b> montre la donne en texte : on peut y coller une donne reçue par courriel.</p>
+
+        <h3>2. Composer la donne à la main</h3>
+        <ul>
+          <li><b>Glissez</b> une carte d'une main à l'autre, ou vers <b>Cartes non affectées</b> pour la retirer.</li>
+          <li>Sur écran tactile, <b>touchez la carte, puis sa destination</b>.</li>
+          <li>Au <b>clavier</b> : Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend une carte puis la dépose sur la main où vous êtes, Échap la repose.</li>
+        </ul>
+        <ul class="help-icons">
+          <li><span data-help-icon="trash"></span><span>Dans l'en-tête d'une main : renvoie ses cartes au centre.</span></li>
+        </ul>
+        <p>Chaque main affiche ses <b>points d'honneur (PH)</b> et son nombre de cartes (<i>13/13</i>). Les champs <b>Mini</b> et <b>Maxi</b> bornent ses PH : les tirages et la distribution automatique les respectent, et le compteur passe en rouge si la main en sort.</p>
+        <p>Sous la table :</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="gather"></span><span><b>Retirer toutes les cartes</b> : vide les quatre mains.</span></li>
+          <li><span data-help-icon="deal"></span><span><b>Compléter les mains</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
+          <li><span data-help-icon="eraser"></span><span><b>Effacer les bornes</b> : remet tous les Mini/Maxi à vide.</span></li>
+          <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : lance le calcul, une fois les quatre mains complètes.</span></li>
+        </ul>
+
+        <h3>3. Lire le résultat</h3>
+        <ul>
+          <li>Au centre de la table : le <b>contrat</b> final et son déclarant.</li>
+          <li><b>Séquence d'enchères</b> : survolez une enchère (ou touchez-la) pour lire sa signification.</li>
+          <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF.</li>
+          <li><b>Calcul du PAR</b> : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case pour voir les bonnes entames.</li>
+        </ul>
+
+        <h3>4. S'entraîner avec le questionnaire</h3>
+        <ul class="help-icons">
+          <li><span data-help-icon="quiz"></span><span>Choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>.</span></li>
+        </ul>
+        <ul>
+          <li>Seule votre main est visible. Les enchères des autres joueurs s'affichent d'elles-mêmes ; le bouton <b>Révéler</b> permet de ne pas attendre.</li>
+          <li>À votre tour, la <b>boîte à enchères</b> ne propose que les enchères permises. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication.</li>
+          <li>À la fin : votre <b>score</b>, le contrat final, et le choix de <b>rejouer</b> la donne, d'en tirer une <b>nouvelle</b> ou d'<b>afficher le détail complet</b>.</li>
+        </ul>
+
+        <h3>5. Lire les cartes sur une photo (facultatif)</h3>
+        <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> au pied de la page. Il faut un serveur IA en service : sans lui, ces boutons restent grisés.</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="camera"></span><span>Dans la ligne des boutons du haut : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main : une photo de <b>cette seule main</b>.</span></li>
+        </ul>
+        <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire. Les cartes non reconnues attendent au centre.</p>
+
+        <h3>6. Réglages</h3>
+        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans le bandeau. Ils sont retenus d'une visite à l'autre.</p>
+      </div>
+
+      <div class="help-body" data-help-lang="en" lang="en" hidden>
+        <p class="help-lead">The app runs the auction of a bridge deal following the <b>French bidding system (SEF)</b> and explains every call. You can also practise: the quiz has you bid in place of one player. Everything is computed in your browser, with no account and no server.</p>
+
+        <h3>1. Getting a deal</h3>
+        <ul class="help-icons">
+          <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears.</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see below).</span></li>
+          <li><span data-help-icon="book"></span><span><b>Example deal</b>: a ready-made deal to discover the app.</span></li>
+          <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal on screen as a .pbn file.</span></li>
+        </ul>
+        <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
+        <p>On your first visit the table is empty: all 52 cards wait in the centre. After that, your <b>last complete deal</b> comes back each time you open the page.</p>
+        <p>The <b>Deal as text (PBN format)</b> section shows the deal as text: paste a deal received by e-mail there.</p>
+
+        <h3>2. Building the deal by hand</h3>
+        <ul>
+          <li><b>Drag</b> a card from one hand to another, or to <b>Unassigned cards</b> to take it out.</li>
+          <li>On a touch screen, <b>tap the card, then its destination</b>.</li>
+          <li>With the <b>keyboard</b>: Tab moves between hands, the arrows walk through the cards, Enter or Space picks a card up and drops it on the hand you are on, Escape puts it back.</li>
+        </ul>
+        <ul class="help-icons">
+          <li><span data-help-icon="trash"></span><span>In a hand's header: sends its cards back to the centre.</span></li>
+        </ul>
+        <p>Each hand shows its <b>high-card points (HCP)</b> and card count (<i>13/13</i>). The <b>Min</b> and <b>Max</b> fields bound its HCP: random draws and automatic dealing respect them, and the counter turns red when the hand falls outside.</p>
+        <p>Below the table:</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="gather"></span><span><b>Take out every card</b>: empties the four hands.</span></li>
+          <li><span data-help-icon="deal"></span><span><b>Fill the hands</b>: deals the unassigned cards, within the bounds.</span></li>
+          <li><span data-help-icon="eraser"></span><span><b>Clear bounds</b>: empties every Min/Max field.</span></li>
+          <li><span data-help-icon="play"></span><span><b>Run the auction</b>: computes the bidding once all four hands are complete.</span></li>
+        </ul>
+
+        <h3>3. Reading the result</h3>
+        <ul>
+          <li>In the middle of the table: the final <b>contract</b> and its declarer.</li>
+          <li><b>Auction</b>: hover over a call (or tap it) to read its meaning.</li>
+          <li><b>Annotated auction</b>: what each call means in the SEF.</li>
+          <li><b>Compute the par</b>: the tricks each side takes in each strain, all cards visible. Hover over a cell to see the right opening leads.</li>
+        </ul>
+
+        <h3>4. Practising with the quiz</h3>
+        <ul class="help-icons">
+          <li><span data-help-icon="quiz"></span><span>Pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>.</span></li>
+        </ul>
+        <ul>
+          <li>Only your hand is shown. The other players' calls appear on their own; the <b>Reveal</b> button skips the wait.</li>
+          <li>On your turn, the <b>bidding box</b> only offers legal calls. You see at once whether yours matches the SEF, and if not, the expected call and why.</li>
+          <li>At the end: your <b>score</b>, the final contract, and the choice to <b>replay</b> the deal, draw a <b>new</b> one or <b>show the full detail</b>.</li>
+        </ul>
+
+        <h3>5. Reading cards from a photo (optional)</h3>
+        <p>Tick <b>AI card-recognition server</b> at the bottom of the page. An AI server must be running: without it, these buttons stay greyed out.</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="camera"></span><span>In the top row of buttons: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header: a photo of <b>that hand only</b>.</span></li>
+        </ul>
+        <p>Before sending, rotate the photo and draw the frame around the cards to read. Unrecognised cards wait in the centre.</p>
+
+        <h3>6. Settings</h3>
+        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the top bar. Both are remembered between visits.</p>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Éditeur de la photo, entre la prise de vue et l'envoi au serveur IA :
        quarts de tour et recadrage. Le modèle lit d'autant mieux qu'on lui

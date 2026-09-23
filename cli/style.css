@@ -1241,7 +1241,10 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   /* Titre, langue et thème sur une seule ligne : le bandeau en prenait deux,
      soit 130 px sur 812. Les libellés quittent l'image, non l'arbre — ce sont
      eux qui nomment les deux sélecteurs à un lecteur d'écran. */
-  .header-inner { gap: 8px 10px; }
+  /* 6 px et non 10 : titre, langue, thème et bouton d'aide tiennent ensemble
+     sur 375 px (voir aussi .help-btn plus bas). À 10 px, l'aide passait seule
+     sur une seconde ligne. */
+  .header-inner { gap: 8px 6px; }
   .lang-bar label, .theme-bar label {
     position: absolute;
     width: 1px;
@@ -1417,6 +1420,96 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   @keyframes bid-reveal-fade {
     from { background: var(--accent); color: var(--bg); }
   }
+}
+
+/* ---------- mode d'emploi ---------- */
+
+/* Le bouton « ? » du bandeau : une icône claire sur le vert, sans cadre, comme
+   les réglages voisins qui n'en ont pas non plus. */
+.help-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-accent);
+  cursor: pointer;
+}
+.help-btn svg { width: 26px; height: 26px; }
+.help-btn:hover { background: rgba(255, 255, 255, .14); }
+.help-btn:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
+
+/* Le <dialog> ne porte ni marge intérieure ni fond : un clic qui l'atteint
+   directement vient donc du voile (voir app.js). Tout le visible est dans
+   .help-box, qui défile seule quand le texte dépasse l'écran. */
+.help-dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+}
+.help-dialog::backdrop { background: var(--overlay); }
+.help-box {
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-modal);
+  padding: 0 24px 20px;
+  line-height: 1.5;
+}
+/* Titre et bouton de fermeture restent à portée quand le texte défile. */
+.help-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0 10px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.help-head h2 { margin: 0; font-size: 1.2rem; }
+.help-lead { margin-top: 14px; }
+.help-body h3 {
+  margin: 20px 0 8px;
+  font-size: 1rem;
+  color: var(--accent);
+}
+.help-body p { margin: 6px 0; }
+.help-body ul { margin: 6px 0; padding-left: 1.3em; }
+.help-body li { margin: 4px 0; }
+/* Une ligne par bouton : son icône, puis ce qu'il fait. */
+.help-body ul.help-icons { list-style: none; padding-left: 0; }
+.help-icons li { display: flex; align-items: flex-start; gap: 10px; }
+.help-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--accent);
+}
+.help-icon svg { width: 18px; height: 18px; }
+
+@media (max-width: 480px) {
+  .help-box { padding: 0 16px 16px; }
+  /* Réduit pour tenir sur la ligne du bandeau. Écrit ici, après la règle
+     générale : à spécificité égale, c'est la dernière qui l'emporte. */
+  .help-btn { width: 28px; height: 28px; }
+  .help-btn svg { width: 22px; height: 22px; }
 }
 
 /* ---------- éditeur de photo : recadrage et rotation ---------- */

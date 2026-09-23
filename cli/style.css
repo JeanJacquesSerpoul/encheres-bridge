@@ -570,30 +570,11 @@ button:disabled { opacity: .6; cursor: wait; }
 
 /* ---------- lancer le questionnaire ----------
 
-   Un encadré à part, et non la suite des commandes de la donne : le
-   questionnaire n'agit pas sur la donne, il ouvre un entraînement où l'on
-   répond à la place d'un siège. Le trait et le fond le disent avant le titre,
-   et la marge au-dessus coupe franchement avec la rangée d'icônes. */
-.quiz-launch {
-  margin: 26px auto 0;
-  padding: 14px 18px 16px;
-  width: fit-content;
-  max-width: 100%;
-  /* Le vert clair des survols plutôt qu'un gris : sur le blanc du panneau, un
-     gris à 1,08 de contraste ne se voyait pas, et c'est la seule chose qui
-     sépare l'entraînement des commandes de la donne. Teinté, l'encadré
-     s'annonce de lui-même. */
-  border: 1px solid var(--success-border);
-  border-radius: var(--radius);
-  background: var(--tint);
-}
-.quiz-launch-title {
-  margin: 0 0 10px;
-  font-size: .9rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--accent);
-}
+   Un panneau à part, sous celui de la donne, et non la suite de ses
+   commandes : le questionnaire n'agit pas sur la donne, il ouvre un
+   entraînement où l'on répond à la place d'un siège. Titre centré, comme
+   celui de la donne. */
+.quiz-launch h2 { text-align: center; }
 .quiz-launch-row {
   display: flex;
   /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende

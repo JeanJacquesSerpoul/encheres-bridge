@@ -29,34 +29,56 @@ Les règles réellement appliquées par le moteur sont décrites, une par une et
 
 ## Démarrage
 
-```bash
-./run.sh            # compile ce qu'il faut, lance le serveur, ouvre le navigateur
-```
+Il y a deux façons d'utiliser l'application. Dans les deux cas, c'est **la même page** et le moteur d'enchères tourne **dans le navigateur** (`cli/bids.wasm`) : les séquences, les commentaires, le questionnaire et le PAR sont identiques.
 
-```powershell
-.\run.ps1           # équivalent PowerShell
-```
+| | 1. En local avec `run.ps1` / `run.sh` | 2. Copie de `cli/` sur un hébergeur statique |
+|---|---|---|
+| **Pour qui** | développer, tester une modification du moteur, utiliser l'API | mettre l'application en ligne, ou l'utiliser sans rien installer |
+| **Prérequis** | [Go](https://go.dev/dl/) et une copie du dépôt | aucun : un hébergeur de fichiers (GitHub Pages, Netlify…) |
+| **Ce qui tourne** | le serveur Go, qui sert la page sur `http://localhost:9015/` et expose l'API (`/bid`, `/health`…) | rien d'autre que des fichiers statiques |
+| **Moteur utilisé** | compilé depuis vos sources locales | celui versionné dans `cli/`, tenu à jour sur `main` |
 
-Sur **macOS**, double-cliquez sur [run-macos.command](run-macos.command) dans le Finder : une fenêtre du Terminal s'ouvre, compile, lance le serveur et ouvre le navigateur. Il délègue à `run.sh` et en accepte les options depuis un terminal (`./run-macos.command -p 9200`). Prérequis : Go (<https://go.dev/dl/> ou `brew install go`). Au premier lancement, macOS peut bloquer un script téléchargé : clic droit › **Ouvrir**, puis confirmer. Si le fichier a perdu son droit d'exécution (archive ZIP), `chmod +x run-macos.command` le lui rend.
+L'application publiée par ce dépôt suit la méthode 2 : **<https://jeanjacquesserpoul.github.io/encheres-bridge/>**.
 
-[run.sh](run.sh)/[run.ps1](run.ps1) produisent le moteur WebAssembly s'il manque, compilent le serveur dans `./bids` (ignoré par git), attendent que `/ready` réponde puis ouvrent la page. `Ctrl+C` arrête le serveur. Un serveur déjà en écoute sur le port est détecté : la page est alors simplement ouverte.
+### Méthode 1 — En local avec `run.ps1` ou `run.sh`
 
-```bash
-./run.sh -p 9200    # autre port
-./run.sh -n         # ne pas ouvrir le navigateur
-./run.sh -f         # recompiler cli/bids.wasm au passage
-```
-
-À la main, si l'on préfère :
+Récupérez le dépôt, puis lancez le script de votre système depuis sa racine :
 
 ```bash
-./build-wasm.sh     # une fois : le moteur en WebAssembly pour le client
+git clone https://github.com/JeanJacquesSerpoul/encheres-bridge.git
+cd encheres-bridge
+```
+
+| Système | Commande |
+|---|---|
+| **Windows** (PowerShell) | `.\run.ps1` |
+| **Linux**, WSL, Git Bash | `./run.sh` |
+| **macOS** | double-clic sur [run-macos.command](run-macos.command) dans le Finder, ou `./run-macos.command` dans un terminal |
+
+Le script :
+
+1. compile le moteur WebAssembly (`cli/bids.wasm`) **s'il manque** — il est versionné, ce n'est donc utile qu'avec `-f` après une modification du code Go ;
+2. compile le serveur dans `./bids` ou `./bids.exe` (ignorés par git), le client étant embarqué dedans (`//go:embed`) ;
+3. le lance, attend que `/ready` réponde, puis ouvre **http://localhost:9015/** dans le navigateur.
+
+`Ctrl+C` arrête le serveur. Si un serveur répond déjà sur le port, la page est simplement ouverte.
+
+```bash
+./run.sh -p 9200    # autre port            (.\run.ps1 -Port 9200)
+./run.sh -n         # ne pas ouvrir le navigateur   (-NoBrowser)
+./run.sh -f         # recompiler cli/bids.wasm au passage   (-ForceWasm)
+```
+
+**macOS** : `run-macos.command` délègue à `run.sh` et en accepte les options. Prérequis : Go (<https://go.dev/dl/> ou `brew install go`). Au premier lancement, macOS peut bloquer un script téléchargé : clic droit › **Ouvrir**, puis confirmer. Si le fichier a perdu son droit d'exécution (archive ZIP), `chmod +x run-macos.command` le lui rend.
+
+À la main, sans les scripts :
+
+```bash
+./build-wasm.sh     # seulement après une modification du code Go (ou .\build-wasm.ps1)
 go run .            # ou : go build -o bids.exe . && ./bids.exe
 ```
 
-Puis **http://localhost:9015/** dans un navigateur : le client est servi par le serveur lui‑même, il n'y a rien à configurer.
-
-[build-wasm.sh](build-wasm.sh)/[build-wasm.ps1](build-wasm.ps1) produisent `cli/bids.wasm`, qui donne au client son **mode navigateur** (voir plus bas). Ils ne sont pas obligatoires : sans eux, le client interroge le serveur comme avant. Les scripts de compilation et l'image Docker les appellent d'eux-mêmes — `//go:embed` fige le contenu de `cli/` au moment où le serveur est compilé, le moteur WebAssembly doit donc exister avant.
+`//go:embed` fige le contenu de `cli/` au moment où le serveur est compilé : le moteur WebAssembly doit donc exister avant, ce que les scripts garantissent.
 
 Pour changer de port :
 
@@ -66,6 +88,32 @@ $env:PORT="8080"; go run .    # PowerShell
 ```
 
 > ⚠️ Si un autre service occupe déjà le port 9015 (conteneur Docker/WSL par exemple), lancez le serveur sur un autre port avec la variable `PORT`.
+
+Pour distribuer le serveur sans Go chez l'utilisateur, voir les [exécutables prêts à l'emploi](#exécutables-prêts-à-lemploi) (compilés une fois, puis autonomes) et l'[image Docker](#docker).
+
+### Méthode 2 — Copie de `cli/` sur un hébergeur statique
+
+Le dossier [cli/](cli/) est l'application complète : dix fichiers, moteur d'enchères compris. Aucun serveur Go, aucune compilation, aucune configuration.
+
+**1. Récupérer `cli/`** depuis GitHub : bouton **Code › Download ZIP** puis extraire le dossier `cli/`, ou `git clone` comme ci-dessus.
+
+**2. Le publier**, par exemple :
+
+- **GitHub Pages** — c'est ce que fait ce dépôt. Dans votre copie (fork) : *Paramètres › Pages › Source : **GitHub Actions***. Le workflow [pages.yml](.github/workflows/pages.yml) publie alors `cli/` à chaque poussée sur `main`, à l'adresse `https://<compte>.github.io/<dépôt>/`.
+- **Netlify** — sans compte Git : glissez le dossier `cli/` sur <https://app.netlify.com/drop>. Relié au dépôt : *Build command* vide, *Publish directory* `cli`.
+- **Tout autre serveur de fichiers** (Cloudflare Pages, nginx, Apache, S3…) : déposez le contenu de `cli/`, à la racine du site ou dans un sous-répertoire — tous les chemins sont relatifs.
+
+**3. Ouvrir l'adresse du site.** Au premier chargement, la page se recharge une fois d'elle-même : c'est [cli/coi-serviceworker.js](cli/coi-serviceworker.js) qui active ce dont le calcul du PAR a besoin.
+
+Pour essayer la copie sur votre machine, n'importe quel petit serveur web convient :
+
+```bash
+python -m http.server 8123 --directory cli   # puis http://localhost:8123/
+```
+
+> ⚠️ Ouvrir `cli/index.html` par un double-clic (`file://`) ne suffit pas : le navigateur refuse alors de charger le moteur WebAssembly. Il faut passer par un serveur, même local.
+
+Les réglages recommandés du serveur (type MIME du `.wasm`, compression, cache) et des exemples de configuration nginx, Apache et Caddy sont détaillés dans [Hébergement statique](#hébergement-statique).
 
 ### Variables d'environnement
 
@@ -634,8 +682,8 @@ Les séquences produites restent en tout état de cause légales, terminées et 
 | `cli/` | Client web embarqué dans le binaire (`//go:embed`), servi à `/` — `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
 | `response.go` | Formes JSON de l'API, estampille de version et encodeur partagés par le serveur et la cible WebAssembly |
 | `main_js.go` | Point d'entrée WebAssembly (`js && wasm`) : le moteur exposé à la page |
-| `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (artefacts non versionnés) |
-| `run.sh`, `run.ps1` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
+| `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
+| `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, démarrage du serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `tools/wasm-parity.js` | Vérifie que le moteur WebAssembly et `/bid` rendent les mêmes octets |
 | `server_ai/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |

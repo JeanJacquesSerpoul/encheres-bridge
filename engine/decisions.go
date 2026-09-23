@@ -103,19 +103,30 @@ func (e *Engine) interferenceAfterOpening() bool {
 func (e *Engine) opening(p *playerState) (Call, meaning) {
 	h := p.hand
 	hl, hp := h.HL(), h.H()
+	tr := e.tr
+	balanced := h.IsRegular() || h.IsSemiRegular()
 
-	if hl >= 24 {
+	if tr.check(hl >= 24,
+		"24 HL et plus → 2♦ forcing de manche [O-1]",
+		"24+ HL → 2♦ game forcing [O-1]", pts(hl, "HL")) {
 		e.gameForce[sideOf(p.seat)] = true
 		mn := m(24, 40, "ouverture 2K forcing de manche, 24HL et plus", "2D opening, game forcing, 24+ HL").asForcing()
 		return bid(2, SDiamonds), mn
 	}
-	if hp >= 18 && hp <= 23 && (h.sortedLens()[0] >= 6 || hp >= 21) && !(hp <= 21 && (h.IsRegular() || h.IsSemiRegular()) && hp >= 20) {
+	if tr.check(hp >= 18 && hp <= 23 && (h.sortedLens()[0] >= 6 || hp >= 21) && !(hp <= 21 && balanced && hp >= 20),
+		"18-23 H avec une sixième ou 21 H et plus, hors 20-21 H régulière → 2♣ fort [O-2]",
+		"18-23 H with a six-card suit or 21+ H, not a balanced 20-21 → strong 2♣ [O-2]",
+		pts(hp, "H")+", "+shape(h)) {
 		return bid(2, SClubs), m(18, 23, "ouverture 2T fort indéterminé", "strong artificial 2C opening").asForcing()
 	}
-	if hp >= 20 && hp <= 21 && (h.IsRegular() || h.IsSemiRegular()) {
+	if tr.check(hp >= 20 && hp <= 21 && balanced,
+		"20-21 H, régulière ou semi-régulière → 2SA [O-3]",
+		"20-21 H, balanced or semi-balanced → 2NT [O-3]", pts(hp, "H")+", "+shape(h)) {
 		return bid(2, SNoTrump), m(20, 21, "ouverture 2SA, 20-21H régulier", "2NT opening, 20-21 balanced")
 	}
-	if hp >= 15 && hp <= 17 && h.IsRegular() {
+	if tr.check(hp >= 15 && hp <= 17 && h.IsRegular(),
+		"15-17 H, régulière → 1SA [O-4]",
+		"15-17 H, balanced → 1NT [O-4]", pts(hp, "H")+", "+shape(h)) {
 		return bid(1, SNoTrump), m(15, 17, "ouverture 1SA, 15-17H régulier", "1NT opening, 15-17 balanced")
 	}
 	// Solid seven-card minor, no outside strength (docs/bidings.md,
@@ -124,11 +135,17 @@ func (e *Engine) opening(p *playerState) (Call, meaning) {
 	// hl>=13 and be misread as an ordinary one-level opening, or fall into
 	// the plain 7-card barrage at hp<=10 -- both hide the far more precise
 	// description this shape affords.
-	if _, ok := sevenCardSolidMinor(h); ok {
+	if _, ok := sevenCardSolidMinor(h); tr.check(ok,
+		"mineure septième ARD, sans As ni Roi à côté → 3SA [O-5]",
+		"solid seven-card minor (AKQ), no outside ace or king → 3NT [O-5]", "") {
 		return bid(3, SNoTrump), m(9, 12, "ouverture de 3SA, mineure septième affranchie (AKQ et plus), sans force annexe", "3NT opening, solid seven-card minor (AKQ+), no outside strength")
 	}
-	if hp >= 12 || hl >= 13 {
-		s := openingSuit(h)
+	if tr.check(hp >= 12 || hl >= 13,
+		"12 H ou 13 HL → ouverture d'1 à la couleur [O-6]",
+		"12 H or 13 HL → one-level suit opening [O-6]", pts(hp, "H")+", "+pts(hl, "HL")) {
+		tr.in()
+		s := openingSuitT(h, tr)
+		tr.out()
 		min := 5
 		fr, en := "ouverture majeure, 5 cartes et plus, 12-23HL", "major-suit opening, 5+ cards, 12-23 HL"
 		if !s.IsMajor() {
@@ -137,15 +154,24 @@ func (e *Engine) opening(p *playerState) (Call, meaning) {
 		}
 		return bidSuit(1, s), m(12, 23, fr, en).withLen(s, min)
 	}
-	if hp >= 5 && hp <= 11 {
-		if c, mn, ok := e.preemptOpening(h); ok {
+	if tr.check(hp >= 5 && hp <= 11,
+		"5 à 11 H → barrage possible [O-7]",
+		"5 to 11 H → a preempt is possible [O-7]", pts(hp, "H")) {
+		tr.in()
+		c, mn, ok := e.preemptOpening(h)
+		tr.out()
+		if ok {
 			return c, mn
 		}
 	}
-	if c, mn, ok := e.lightOpening(p); ok {
+	tr.in()
+	c, mn, ok := e.lightOpening(p)
+	tr.out()
+	if ok {
 		p.lightOpen = true
 		return c, mn
 	}
+	tr.note("aucune ouverture ne s'applique → Passe [O-8]", "no opening applies → Pass [O-8]")
 	return passCall, m(0, 11, "", "")
 }
 
@@ -175,19 +201,31 @@ func (e *Engine) lightOpening(p *playerState) (Call, meaning, bool) {
 	seat := len(e.calls)
 	h := p.hand
 	hp := h.H()
-	if hp < 10 {
+	tr := e.tr
+	if seat < 2 {
+		return Call{}, meaning{}, false
+	}
+	if !tr.check(hp >= 10,
+		"10 H et plus, en troisième ou quatrième position → ouverture légère [O-7b]",
+		"10+ H, in third or fourth seat → light opening [O-7b]", pts(hp, "H")) {
 		return Call{}, meaning{}, false
 	}
 	s := openingSuit(h)
 	switch seat {
 	case 2:
-		if h.Len(s) < 5 || !h.GoodSuit(s) || h.SuitH(s)*2 < hp {
+		if !tr.check(h.Len(s) >= 5 && h.GoodSuit(s) && h.SuitH(s)*2 >= hp,
+			"troisième : belle couleur cinquième qui porte la moitié des points → 1 à la couleur",
+			"third seat: a good five-card suit holding half the points → one of the suit",
+			cards(h, s)) {
 			return Call{}, meaning{}, false
 		}
 		mn := m(10, 11, "ouverture légère de troisième, belle couleur cinquième, 10-11H, indication d'entame", "light third-seat opening, good five-card suit, 10-11 H, lead-directing")
 		return bidSuit(1, s), mn.withLen(s, 5), true
 	case 3:
-		if hp+h.Len(Spades) < 15 {
+		if !tr.check(hp+h.Len(Spades) >= 15,
+			"quatrième : règle des 15 (H + nombre de ♠ ≥ 15)",
+			"fourth seat: rule of 15 (H + number of ♠ ≥ 15)",
+			fmt.Sprintf("%d + %d = %d", hp, h.Len(Spades), hp+h.Len(Spades))) {
 			return Call{}, meaning{}, false
 		}
 		min := 5
@@ -200,25 +238,36 @@ func (e *Engine) lightOpening(p *playerState) (Call, meaning, bool) {
 	return Call{}, meaning{}, false
 }
 
-func openingSuit(h *Hand) Suit {
+func openingSuit(h *Hand) Suit { return openingSuitT(h, nil) }
+
+// openingSuitT is openingSuit with its tests recorded in tr (nil: untraced).
+func openingSuitT(h *Hand, tr *tracer) Suit {
 	lc, ld, lh, ls := h.Len(Clubs), h.Len(Diamonds), h.Len(Hearts), h.Len(Spades)
-	if ls >= 5 && ls >= lh && ls >= lc && ls >= ld {
-		if ls == 5 && lc == 5 && h.H() >= 14 {
+	if tr.check(ls >= 5 && ls >= lh && ls >= lc && ls >= ld,
+		"5 ♠ ou plus, la couleur la plus longue → 1♠",
+		"5+ ♠, the longest suit → 1♠", cards(h, Spades)) {
+		if tr.check(ls == 5 && lc == 5 && h.H() >= 14,
+			"exactement 5♠-5♣ avec 14 H et plus → 1♣",
+			"exactly 5♠-5♣ with 14+ H → 1♣", cards(h, Clubs)+", "+pts(h.H(), "H")) {
 			return Clubs // 5S-5C: 1C recommended from 14H
 		}
 		return Spades
 	}
-	if lh >= 5 && lh >= ls && lh >= lc && lh >= ld {
+	if tr.check(lh >= 5 && lh >= ls && lh >= lc && lh >= ld,
+		"5 ♥ ou plus, la couleur la plus longue → 1♥",
+		"5+ ♥, the longest suit → 1♥", cards(h, Hearts)) {
 		return Hearts
 	}
+	minors := cards(h, Diamonds) + " / " + cards(h, Clubs)
 	switch {
-	case lc > ld:
+	case tr.check(lc > ld, "♣ plus long que ♦ → 1♣", "♣ longer than ♦ → 1♣", minors):
 		return Clubs
-	case ld > lc:
+	case tr.check(ld > lc, "♦ plus long que ♣ → 1♦", "♦ longer than ♣ → 1♦", minors):
 		return Diamonds
-	case lc == 3:
+	case tr.check(lc == 3, "mineures 3-3 → 1♣", "3-3 in the minors → 1♣", minors):
 		return Clubs // 3-3: open 1C
 	default:
+		tr.check(true, "mineures 4-4 ou 5-5 → 1♦", "4-4 or 5-5 in the minors → 1♦", minors)
 		return Diamonds // 4-4 and 5-5: open 1D
 	}
 }
@@ -307,7 +356,11 @@ func (e *Engine) preemptOpening(h *Hand) (Call, meaning, bool) {
 	// itself: with the points mostly outside (e.g. JT9xxx and seven
 	// scattered points), the hand has too much defence and too weak a suit
 	// to preempt -- it passes.
-	if h.SuitH(long)*2 < h.H() {
+	tr := e.tr
+	if !tr.check(h.SuitH(long)*2 >= h.H(),
+		"la moitié des points au moins dans la couleur longue",
+		"at least half the points in the long suit",
+		fmt.Sprintf("%d H sur %d", h.SuitH(long), h.H())) {
 		return Call{}, meaning{}, false
 	}
 	// No weak two in fourth seat: three passes have gone round, there is
@@ -315,11 +368,20 @@ func (e *Engine) preemptOpening(h *Hand) (Call, meaning, bool) {
 	// pass instead [O-7a].
 	fourthSeat := len(e.calls) == 3
 	switch {
-	case weakTwoShape(h, long) && hp >= 6 && hp <= 11 && !fourthSeat:
+	case tr.check(weakTwoShape(h, long) && hp >= 6 && hp <= 11 && !fourthSeat,
+		"six belles cartes en majeure, 6-11 H, pas en quatrième → 2 majeur faible [O-7a]",
+		"six good cards in a major, 6-11 H, not fourth seat → weak two [O-7a]",
+		cards(h, long)+", "+pts(hp, "H")):
 		return bidSuit(2, long), m(6, 11, "2 majeur faible, 6 belles cartes", "weak two, six good cards").withLen(long, 6), true
-	case n == 7 && hp <= 10 && h.GoodSuit(long) && !otherMajor4:
+	case tr.check(n == 7 && hp <= 10 && h.GoodSuit(long) && !otherMajor4,
+		"belle septième, 10 H au plus, sans 4 cartes dans l'autre majeure → barrage à 3",
+		"good seven-card suit, 10 H at most, no four cards in the other major → three-level preempt",
+		cards(h, long)+", "+pts(hp, "H")):
 		return bidSuit(3, long), m(5, 10, "barrage, 7 cartes", "preempt, seven cards").withLen(long, 7), true
-	case n >= 8 && hp <= 10:
+	case tr.check(n >= 8 && hp <= 10,
+		"huit cartes ou plus, 10 H au plus → barrage à 4",
+		"eight or more cards, 10 H at most → four-level preempt",
+		cards(h, long)+", "+pts(hp, "H")):
 		return bidSuit(4, long), m(5, 10, "barrage, 8 cartes", "preempt, eight cards").withLen(long, 8), true
 	}
 	return Call{}, meaning{}, false

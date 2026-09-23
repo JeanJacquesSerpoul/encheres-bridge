@@ -48,6 +48,7 @@ type Engine struct {
 	bw        [2]bwState // per side (seat%2)
 	gameForce [2]bool
 	vul       [2]bool // vulnerability per side (seat%2), from the PBN Vulnerable tag
+	tr        *tracer // the current decision's trace (see trace.go); nil outside Run
 }
 
 func NewEngine(d *Deal) *Engine {
@@ -70,8 +71,14 @@ func (e *Engine) Run() []SeatCall {
 		if len(e.calls) >= 40 {
 			c, mn = passCall, noInfo() // safety net: a stuck auction ends in passes
 		} else {
+			e.tr = &tracer{}
 			c, mn = e.decide(seat)
+			decided := c
 			c, mn = e.sanitize(seat, c, mn)
+			if c != decided {
+				e.tr.note("enchère retenue non légale ici : remplacée par la plus proche possible",
+					"the chosen call is not legal here: replaced by the nearest one")
+			}
 			// Safety net: a forcing bid by partner, with the right-hand
 			// opponent silent, must never be passed. Whatever hole in the
 			// decision tree produced the pass, keep the auction alive at the
@@ -84,6 +91,8 @@ func (e *Engine) Run() []SeatCall {
 					fit, hasFit := e.fitSuit(p)
 					if c2, mn2 := e.cheapestConstructive(p, fit, hasFit); c2.Kind != KindPass {
 						c, mn = c2, mn2
+						e.tr.note("filet de sécurité : l'enchère forcing du partenaire interdit de passer",
+							"safety net: partner's forcing bid may not be passed")
 					}
 				}
 			}
@@ -92,10 +101,13 @@ func (e *Engine) Run() []SeatCall {
 			if c.Kind == KindPass {
 				if c2, mn2, ok := e.gameForceNet(seat); ok {
 					c, mn = c2, mn2
+					e.tr.note("filet de sécurité : le camp est engagé à la manche, l'enchère ne peut pas mourir",
+						"safety net: the side is committed to game, the auction may not die")
 				}
 			}
 		}
 		e.record(seat, c, mn)
+		e.tr = nil
 		seat = (seat + 1) % 4
 	}
 	return e.calls
@@ -320,7 +332,11 @@ func (e *Engine) record(seat int, c Call, mn meaning) {
 		e.opener = seat
 		e.openCall = c
 	}
-	e.calls = append(e.calls, SeatCall{Seat: seat, Call: c, M: mn})
+	sc := SeatCall{Seat: seat, Call: c, M: mn}
+	if e.tr.hasTests() {
+		sc.Trace = e.tr.steps
+	}
+	e.calls = append(e.calls, sc)
 }
 
 // decide routes to the relevant decision function.
@@ -329,6 +345,7 @@ func (e *Engine) decide(seat int) (Call, meaning) {
 	if p.planned != nil {
 		fn := p.planned
 		p.planned = nil
+		e.tr.note("enchère décidée dès le tour précédent", "call decided on the previous turn")
 		return fn()
 	}
 	if e.opener == -1 {

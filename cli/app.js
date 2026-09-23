@@ -226,6 +226,10 @@ const UI_TEXT = {
     quizCorrect: "✓ Correct !",
     quizWrong: "✗ Différent du système SEF",
     quizExpected: "Enchère attendue",
+    treeShow: "Voir l'arbre de décision",
+    treeHide: "Masquer l'arbre de décision",
+    treeWhy: "Pourquoi",
+    treeHand: (seat, h, hl, shape) => `main de ${seat} : ${h} H, ${hl} HL, ${shape}`,
     quizDone: "Questionnaire terminé.",
     quizScore: "Score",
     quizFinalContract: "Contrat final",
@@ -365,6 +369,10 @@ const UI_TEXT = {
     quizCorrect: "✓ Correct!",
     quizWrong: "✗ Not what the SEF system bids",
     quizExpected: "Expected call",
+    treeShow: "Show the decision tree",
+    treeHide: "Hide the decision tree",
+    treeWhy: "Why",
+    treeHand: (seat, h, hl, shape) => `${seat}'s hand: ${h} H, ${hl} HL, ${shape}`,
     quizDone: "Quiz complete.",
     quizScore: "Score",
     quizFinalContract: "Final contract",
@@ -3787,6 +3795,59 @@ function renderQuizStep() {
   }
 }
 
+// ---------- arbre de décision ----------
+//
+// Le chemin que le moteur a suivi pour une enchère, test par test, évalué sur
+// la main (champ « trace » de la réponse, voir engine/trace.go). Seules les
+// situations déjà instrumentées en portent un : sans trace, pas de lien.
+
+// Le lien qui déplie l'arbre, suivi de l'arbre replié.
+function decisionTreeToggleHTML(entry, lang) {
+  if (!entry.trace || !entry.trace.length) return "";
+  const t = UI_TEXT[lang];
+  return `
+    <button type="button" class="link-btn tree-toggle" aria-expanded="false">${esc(t.treeShow)}</button>
+    <div class="decision-tree" hidden>${decisionTreeHTML(entry, lang)}</div>`;
+}
+
+function decisionTreeHTML(entry, lang) {
+  const t = UI_TEXT[lang];
+  const hand = quiz && quiz.result.hands[entry.player];
+  const handLine = hand
+    ? t.treeHand(
+      SEAT_LABEL[lang][entry.player], hand.h_points, hand.hl_points,
+      [hand.spades, hand.hearts, hand.diamonds, hand.clubs].map((s) => s.length).join("-"))
+    : "";
+  const q = lang === "fr" ? " ?" : "?";
+  const steps = entry.trace.map((s) => {
+    const cls = s.note ? "note" : s.ok ? "ok" : "ko";
+    const mark = s.note ? "•" : s.ok ? "✓" : "✗";
+    return `
+      <li class="${cls}" style="--depth:${s.depth || 0}">
+        <span class="tree-mark" aria-hidden="true">${mark}</span>
+        <span class="tree-label">${esc(s.label)}</span>
+        ${s.value ? `<span class="tree-value">${esc(s.value)}</span>` : ""}
+      </li>`;
+  }).join("");
+  return `
+    <div class="tree-head">${esc(t.treeWhy)} <b>${bidHTML(entry.bid, lang)}</b>${q}
+      ${handLine ? `<span class="muted">(${esc(handLine)})</span>` : ""}</div>
+    <ol class="tree-steps">${steps}</ol>
+    <div class="tree-end">⇒ <b>${bidHTML(entry.bid, lang)}</b></div>`;
+}
+
+// Un seul gestionnaire pour tous les liens : sous le verdict comme dans le
+// récapitulatif, recréés à chaque tour.
+document.addEventListener("click", (ev) => {
+  const btn = ev.target.closest && ev.target.closest(".tree-toggle");
+  if (!btn) return;
+  const tree = btn.nextElementSibling;
+  const open = tree.hidden;
+  tree.hidden = !open;
+  btn.setAttribute("aria-expanded", String(open));
+  btn.textContent = UI_TEXT[quiz ? quiz.lang : $("#lang").value][open ? "treeHide" : "treeShow"];
+});
+
 function chooseBid(bidText) {
   const entry = quiz.result.auction[quiz.idx];
   const isCorrect = bidText === entry.bid;
@@ -3814,7 +3875,8 @@ function chooseBid(bidText) {
   const commentLine = entry.comment
     ? `<div class="muted">${esc(entry.comment)}</div>`
     : "";
-  fb.innerHTML = `<span class="verdict">${verdict}</span>${refLine}${commentLine}`;
+  const treeLine = isCorrect ? "" : decisionTreeToggleHTML(entry, lang);
+  fb.innerHTML = `<span class="verdict">${verdict}</span>${refLine}${commentLine}${treeLine}`;
   fb.classList.remove("hidden");
 
   // Le verdict se lit : l'enchaînement ne s'applique qu'aux enchères des
@@ -3843,11 +3905,13 @@ function quizRecapHTML(t, lang) {
   const misses = [];
   quiz.calls.forEach((c, i) => {
     if (!c.isUser || c.isCorrect) return;
-    const comment = quiz.result.auction[i] && quiz.result.auction[i].comment;
+    const entry = quiz.result.auction[i];
+    const comment = entry && entry.comment;
     misses.push(`
       <li>
         <span class="recap-bids"><s>${bidHTML(c.bid, lang)}</s> → <b>${bidHTML(c.expected, lang)}</b></span>
         ${comment ? `<span class="muted">${esc(comment)}</span>` : ""}
+        ${entry ? decisionTreeToggleHTML(entry, lang) : ""}
       </li>`);
   });
   if (!misses.length) return `<p class="quiz-recap-none">${esc(t.quizRecapNone)}</p>`;

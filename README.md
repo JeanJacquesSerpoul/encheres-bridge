@@ -365,6 +365,8 @@ Le client HTML+JS de [cli/](cli/) est servi à la racine : ouvrez **http://local
 
 **L'en-tête** choisit le serveur interrogé et la langue (`fr`/`en`, mémorisée, initialisée d'après le navigateur). **Navigateur (hors ligne)** n'interroge personne : les enchères sont calculées sur place (voir plus bas). C'est le mode par défaut, et la barre du serveur disparaît alors de l'en-tête — il n'y a aucun serveur à choisir ; elle revient d'elle-même quand le moteur fait défaut, et sur demande avec `?serveur=1` (voir plus bas). **Local** vise `http://localhost:9015` par défaut ; sur un autre port ou un autre hôte, on corrige l'URL une fois et elle est mémorisée (`localStorage`). **Distant** n'a pas d'URL prédéfinie : elle dépend du déploiement, le client invite donc à la saisir, puis la mémorise de la même façon. L'API envoie les en-têtes CORS nécessaires pour piloter le serveur depuis une autre origine (`file://`, autre port...). Tout ce qui touche au serveur IA tient à une case à cocher, **décochée par défaut**, reléguée au pied de page où elle tient lieu de nom pour ce serveur (voir plus bas) ; tant qu'elle est décochée, ni la barre du serveur IA dans l'en-tête, ni les boutons appareil photo, ni son état n'apparaissent.
 
+**Mode d'emploi** : le bouton **?** du bandeau ouvre une aide en ligne, en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons.
+
 ### Composer la donne
 
 - **Charger un fichier .pbn**, ou coller le texte PBN dans la zone dépliable. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.

@@ -1417,6 +1417,40 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   }
 }
 
+/* ---------- donne masquée pendant le questionnaire ---------- */
+
+/* Voir setDealHidden : les quatre mains et le texte PBN disparaissent, une
+   ligne en tient lieu. Les commandes sous la table restent là. */
+.quiz-hidden-note { display: none; }
+#input-panel.quiz-running .quiz-hidden-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+  margin: 12px 0;
+  padding: 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: .9rem;
+}
+#input-panel.quiz-running .cons-layout,
+#input-panel.quiz-running #pbn-details { display: none; }
+
+/* Un bouton qui se lit comme un lien : l'action est secondaire. */
+.link-btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-btn:hover { background: none; text-decoration-thickness: 2px; }
+
 /* ---------- mode d'emploi ---------- */
 
 /* Le bouton « ? » du bandeau : une icône claire sur le vert, sans cadre, comme

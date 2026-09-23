@@ -100,6 +100,18 @@ func pts(n int, unit string) string { return fmt.Sprintf("%d %s", n, unit) }
 // cards formats a suit length: "5 ♠".
 func cards(h *Hand, s Suit) string { return fmt.Sprintf("%d %s", h.Len(s), suitSymbol[s]) }
 
+// callSym writes a bid with suit symbols, in each language: "1♥", "1SA"/"1NT".
+func callSym(c Call) (fr, en string) {
+	if !c.IsBid() {
+		return c.Format("fr"), c.Format("en")
+	}
+	if c.Strain == SNoTrump {
+		return fmt.Sprintf("%dSA", c.Level), fmt.Sprintf("%dNT", c.Level)
+	}
+	s := fmt.Sprintf("%d%s", c.Level, suitSymbol[Suit(c.Strain)])
+	return s, s
+}
+
 // shape formats the hand pattern in ♠-♥-♦-♣ order: "4-3-4-2".
 func shape(h *Hand) string {
 	return fmt.Sprintf("%d-%d-%d-%d", h.Len(Spades), h.Len(Hearts), h.Len(Diamonds), h.Len(Clubs))

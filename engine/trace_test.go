@@ -160,9 +160,16 @@ func TestBidJSONTrace(t *testing.T) {
 		if !strings.Contains(held, want) {
 			t.Fatalf("[%s] test retenu = %q, attendu %q", lang, held, want)
 		}
-		// East's answer is an overcall situation, not traced yet.
-		if len(resp.Auction[1].Trace) != 0 {
-			t.Fatalf("[%s] l'enchère d'Est ne devait pas porter de trace : %+v", lang, resp.Auction[1].Trace)
+		// East's pass is an overcall decision: traced. North's last pass,
+		// after 3NT, is taken by the generic late-auction logic (conclude),
+		// not traced yet: no trace at all.
+		if len(resp.Auction[1].Trace) == 0 {
+			t.Fatalf("[%s] le passe d'Est (intervention) devait porter sa trace", lang)
+		}
+		last := resp.Auction[8]
+		if last.Player != "N" || len(last.Trace) != 0 {
+			t.Fatalf("[%s] enchère 9 = %s %s, trace %+v ; attendu le dernier passe de Nord, sans trace",
+				lang, last.Player, last.Bid, last.Trace)
 		}
 	}
 }

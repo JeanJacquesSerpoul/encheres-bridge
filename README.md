@@ -252,7 +252,8 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 ### Composer la donne
 
-- La rangée du haut, en icônes (le nom de chacune est dans son infobulle) : **Charger un fichier .pbn**, **Donne aléatoire**, **Donne exemple**, **Sauver le PBN** et **Texte de la donne (format PBN)** (icône `</>`), qui affiche ou masque la donne en texte — on peut y coller une donne reçue par courriel, ou la copier d'un clic avec la petite icône en bas à droite du texte. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
+- La rangée du haut, en icônes (le nom de chacune est dans son infobulle) : **Charger un fichier .pbn**, **Donne aléatoire**, **Donne exemple**, **Sauver le PBN**, **Copier le lien** et **Texte de la donne (format PBN)** (icône `</>`), qui affiche ou masque la donne en texte — on peut y coller une donne reçue par courriel, ou la copier d'un clic avec la petite icône en bas à droite du texte. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.
+- **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne — masquée s'il a activé le mode questionnaire —, puis l'adresse redevient celle de la page.
 - **Donne aléatoire** tire une donne complète ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table est vide : les 52 cartes attendent dans la zone **Cartes non affectées**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple, qui n'est qu'à un clic.
 - **Composer à la main** : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
@@ -261,7 +262,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 ### Voir les enchères
 
-**Afficher les enchères** calcule la séquence dans la page et affiche, dans le panneau **Résultat** placé juste sous la donne (**Revenir à la donne** y remonte), les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
+**Afficher les enchères** calcule la séquence dans la page et affiche, dans le panneau **Résultat** placé juste sous la donne (**Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
 
 ### Le moteur dans la page
 

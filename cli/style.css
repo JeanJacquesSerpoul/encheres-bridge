@@ -620,8 +620,53 @@ button:disabled { opacity: .6; cursor: wait; }
 .quiz-recap .muted { font-size: .9rem; }
 .quiz-recap-none { margin: 10px 0; color: var(--accent); }
 
-/* Retour vers la donne, en tête du Résultat. */
-.back-to-deal { margin: -6px 0 10px; text-align: center; font-size: .9rem; }
+/* Retour vers la donne et impression, en tête du Résultat. */
+.back-to-deal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: -6px 0 10px;
+  font-size: .9rem;
+}
+
+/* Petit bouton icône, du gabarit de l'icône « Copier » du texte PBN. */
+.mini-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+.mini-btn svg { width: 16px; height: 16px; }
+.mini-btn:hover {
+  background: var(--tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- impression ----------
+   Le Résultat seul quand il est affiché : mains, séquence, commentaires, PAR.
+   Sinon la page, sans bandeau ni commandes. Le thème clair est imposé par
+   app.js le temps de l'impression. */
+@media print {
+  header, footer, dialog, #boot-loading, #engine-loading,
+  button, select, .file-btn, .switch, .quiz-mode-hint, .pbn-details,
+  #deal-select-row, #cons-actions, .quiz-hidden-note { display: none !important; }
+  body { background: #fff; }
+  main { margin: 0; max-width: none; padding: 0; }
+  .panel { border: none; box-shadow: none; padding: 0; margin: 0 0 12px; }
+  main:has(#result-panel:not(.hidden)) > section:not(#result-panel) { display: none !important; }
+  .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
+  .comments li { break-inside: avoid; }
+}
 .quiz-launch-row {
   display: flex;
   /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende

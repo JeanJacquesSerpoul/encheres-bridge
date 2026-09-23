@@ -55,15 +55,17 @@ func TestTraceRewind(t *testing.T) {
 	nilTr.rewind(nilTr.mark())
 }
 
-// TestTraceEndsOnConclusion: over random deals, no trace stops on a test that
-// failed -- the call would then come with no explanation. The last line is
-// always the test that held, or a note naming the outcome. Every step also
-// carries its label in both languages.
+// TestTraceEndsOnConclusion: over random deals, every call carries its
+// decision tree, and no trace stops on a test that failed -- the call would
+// then come with no explanation. The last line is always the test that held,
+// or a note naming the outcome. Every step also carries its label in both
+// languages.
 func TestTraceEndsOnConclusion(t *testing.T) {
 	rng := rand.New(rand.NewSource(7))
 	for i := 0; i < 1500; i++ {
 		for _, sc := range NewEngine(randomDeal(rng)).Run() {
 			if len(sc.Trace) == 0 {
+				t.Errorf("%s (%s) : aucune trace", sc.Call.Format("fr"), sc.M.fr)
 				continue
 			}
 			for _, s := range sc.Trace {

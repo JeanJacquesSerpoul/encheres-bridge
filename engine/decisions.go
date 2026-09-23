@@ -880,14 +880,14 @@ func (e *Engine) druryGameTryAnswer(p *playerState, os Suit) (Call, meaning) {
 func (e *Engine) druryShortAnswer(p *playerState, os Suit) (Call, meaning) {
 	short, ok := druryShortSuit(p.hand, os)
 	if !ok {
-		return e.conclude(p)
+		return e.concludeHandoff(p)
 	}
 	c := bid(3, short.Strain())
 	if short == Clubs {
 		c = bidSuit(3, os)
 	}
 	if !e.legal(p.seat, c) {
-		return e.conclude(p)
+		return e.concludeHandoff(p)
 	}
 	kind, kindEN := "singleton", "singleton"
 	if p.hand.Len(short) == 0 {
@@ -1180,9 +1180,9 @@ func (e *Engine) strongMinorTwoSuiter(p *playerState) (Call, meaning, bool) {
 func (e *Engine) afterStrongMinorTexas(p *playerState, twoSuited bool) (Call, meaning) {
 	last, lastSeat, ok := e.lastBid()
 	if !ok || lastSeat != partnerOf(p.seat) {
-		return e.conclude(p)
+		return e.concludeHandoff(p)
 	}
-	if twoSuited {
+	if e.tr.check(twoSuited, "bicolore 5-5 dans les mineures → 4♦, forcing de manche", "5-5 in the minors → 4♦, game forcing", shape(p.hand)) {
 		c := bid(4, SDiamonds)
 		if last != c && e.legal(p.seat, c) {
 			mn := m(11, 40, "bicolore 5T-5K, forcing de manche", "5-5 clubs-diamonds two-suiter, game forcing").
@@ -1191,7 +1191,7 @@ func (e *Engine) afterStrongMinorTexas(p *playerState, twoSuited bool) (Call, me
 			return c, mn
 		}
 	}
-	return e.conclude(p)
+	return e.concludeHandoff(p)
 }
 
 // ntResponseLadder is the natural, quantitative notrump ladder used both as
@@ -1353,12 +1353,16 @@ func (e *Engine) minorTransferAnswer(p *playerState, primary Suit) (Call, meanin
 // opener's plain rectification is passed, but a declined club Texas (2SA,
 // good fit) must be corrected back to 3C -- an absolute sign-off.
 func (e *Engine) afterMinorTexasWeak(p *playerState) (Call, meaning) {
-	if last, _, ok := e.lastBid(); ok && last == bid(2, SNoTrump) {
+	tr := e.tr
+	tr.note("Texas mineur avec une main faible : arrêt", "minor transfer with a weak hand: sign-off")
+	if last, _, ok := e.lastBid(); tr.check(ok && last == bid(2, SNoTrump), "l'ouvreur a refusé par 2SA → revenir à 3♣",
+		"opener declined with 2NT → back to 3♣", "") {
 		c := bid(3, SClubs)
 		if e.legal(p.seat, c) {
 			return c, m(0, 7, "revient à 3T, arrêt absolu", "corrects back to 3C, an absolute sign-off")
 		}
 	}
+	tr.note("→ Passe dans la mineure", "→ pass the minor")
 	return passCall, m(0, 7, "arrêt, jeu faible", "sign-off, weak hand")
 }
 
@@ -1369,7 +1373,9 @@ func (e *Engine) afterMinorTexasWeak(p *playerState) (Call, meaning) {
 // minor.
 func (e *Engine) afterMinorTexasGame(p *playerState, primary Suit, twoSuited bool) (Call, meaning) {
 	h := p.hand
-	if twoSuited {
+	tr := e.tr
+	tr.note("Texas mineur avec des valeurs de manche : décrire la forme", "minor transfer with game values: describe the shape")
+	if tr.check(twoSuited, "bicolore 5-5 dans les mineures → 3♦", "5-5 in the minors → 3♦", shape(h)) {
 		c := bid(3, SDiamonds)
 		if e.legal(p.seat, c) {
 			e.gameForce[sideOf(p.seat)] = true
@@ -1377,7 +1383,8 @@ func (e *Engine) afterMinorTexasGame(p *playerState, primary Suit, twoSuited boo
 		}
 	}
 	short, ok := splinterSuit(h, primary)
-	if !ok {
+	if !tr.check(ok, "un singleton ou une chicane à montrer", "a singleton or void to show", shape(h)) {
+		tr.note("→ 3SA", "→ 3NT")
 		c := bid(3, SNoTrump)
 		return c, m(10, 40, "3SA, pas de singleton trouvé", "3NT, no singleton found")
 	}
@@ -1385,6 +1392,8 @@ func (e *Engine) afterMinorTexasGame(p *playerState, primary Suit, twoSuited boo
 	if primary == Diamonds {
 		otherMinor = Clubs
 	}
+	tr.note("la courte, par l'enchère libre la moins chère (3♥ = ♠, 3♠ = ♥, 3SA = l'autre mineure)",
+		"the short suit, by the cheapest free bid (3♥ = ♠, 3♠ = ♥, 3NT = the other minor)")
 	switch short {
 	case Spades:
 		c := bid(3, SHearts)
@@ -1425,10 +1434,14 @@ func (e *Engine) afterTransfer(p *playerState, M Suit, oMin int, completion Call
 		// Blackwood by itself once the controls are out [S-4].
 		partner := e.ps[partnerOf(p.seat)]
 		if cMin, cMax := h.HLD(M)+partner.shownMin, h.HLD(M)+partner.shownMax; cMin >= 29 && (cMax >= 33 || cMin >= 31) {
-			if c, mn, ok := e.initiateControls(p, M, nil); ok {
+			mark := e.tr.mark()
+			e.tr.note("l'ouvreur a rectifié le Texas avec saut, et le chelem est en vue : les contrôles",
+				"opener super-accepted the transfer, and slam is in view: control bids")
+			if c, mn, ok := e.initiateControls(p, M, e.tr); ok {
 				return c, mn
 			}
-			if c, mn := e.conclude(p); c.Kind != KindPass {
+			e.tr.rewind(mark)
+			if c, mn, ok := e.concludeTry(p); ok {
 				return c, mn
 			}
 		}
@@ -1491,7 +1504,7 @@ func (e *Engine) afterStayman(p *playerState, oMin int) (Call, meaning) {
 	}
 	last, lastSeat, _ := e.lastBid()
 	if lastSeat != partnerOf(p.seat) {
-		return e.conclude(p)
+		return e.concludeHandoff(p)
 	}
 	switch last {
 	case bid(askLevel, SDiamonds):
@@ -1503,7 +1516,7 @@ func (e *Engine) afterStayman(p *playerState, oMin int) (Call, meaning) {
 	case bid(askLevel, SNoTrump):
 		return e.afterStaymanBothMajors(p, base, askLevel)
 	}
-	return e.conclude(p)
+	return e.concludeHandoff(p)
 }
 
 // afterStaymanDenial continues after opener denies both four-card majors
@@ -1516,10 +1529,12 @@ func (e *Engine) afterStaymanDenial(p *playerState, base, askLevel int) (Call, m
 	h := p.hand
 	hl := h.HL()
 	lh, ls := h.Len(Hearts), h.Len(Spades)
+	tr := e.tr
+	tr.note("l'ouvreur a nié toute majeure quatrième sur le Stayman (2♦)", "opener denied a four-card major over Stayman (2♦)")
 
-	if hl >= 11 {
+	if tr.check(hl >= 11, "11 HL et plus : la manche", "11+ HL: game", pts(hl, "HL")) {
 		switch {
-		case lh == 4 && ls >= 5:
+		case tr.check(lh == 4 && ls >= 5, "4 ♥ et 5 ♠ → chassé-croisé 3♥", "four ♥ and five ♠ → crisscross 3♥", cards(h, Hearts)+", "+cards(h, Spades)):
 			c := bid(askLevel+1, SHearts)
 			if e.legal(p.seat, c) {
 				mn := m(11, 40, "chassé-croisé : 4 cartes à Cœur et 5 cartes à Pique, forcing de manche",
@@ -1527,7 +1542,7 @@ func (e *Engine) afterStaymanDenial(p *playerState, base, askLevel int) (Call, m
 				e.gameForce[sideOf(p.seat)] = true
 				return c, mn
 			}
-		case ls == 4 && lh >= 5:
+		case tr.check(ls == 4 && lh >= 5, "4 ♠ et 5 ♥ → chassé-croisé 3♠", "four ♠ and five ♥ → crisscross 3♠", cards(h, Spades)+", "+cards(h, Hearts)):
 			c := bid(askLevel+1, SSpades)
 			if e.legal(p.seat, c) {
 				mn := m(11, 40, "chassé-croisé : 4 cartes à Pique et 5 cartes à Cœur, forcing de manche",
@@ -1538,7 +1553,8 @@ func (e *Engine) afterStaymanDenial(p *playerState, base, askLevel int) (Call, m
 		}
 	}
 
-	if c, mn, ok := e.staymanNewMinor(p, askLevel); ok {
+	if c, mn, ok := e.staymanNewMinor(p, askLevel); tr.check(ok, "mineure cinquième avec une courte (ou main de chelem) → la nommer, forcing de manche",
+		"five-card minor with a short suit (or a slam hand) → bid it, game forcing", callOrEmpty(c, ok)) {
 		return c, mn
 	}
 	e.tr.note("après le Stayman, pas de fit majeur à jouer : réponse selon les points", "after Stayman, no major fit to play: response by points")
@@ -2037,7 +2053,11 @@ func (e *Engine) respondMinorAffranchie(p *playerState) (Call, meaning) {
 			break
 		}
 	}
-	if h.H() < 14 || !short {
+	tr := e.tr
+	tr.note("le partenaire a ouvert de 3SA (mineure septième affranchie)", "partner opened 3NT (a solid seven-card minor)")
+	if !tr.check(h.H() >= 14 && short, "14 H et une courte → essai au-delà de 3SA",
+		"14 H and a short suit → try beyond 3NT", pts(h.H(), "H")+", "+shape(h)) {
+		tr.note("→ Passe, 3SA est le meilleur contrat", "→ pass, 3NT is the best contract")
 		return passCall, m(-1, -1, "passe, meilleur contrat", "pass, best contract")
 	}
 	level := 4
@@ -2048,6 +2068,7 @@ func (e *Engine) respondMinorAffranchie(p *playerState) (Call, meaning) {
 	if !e.legal(p.seat, c) {
 		return passCall, m(-1, -1, "passe, meilleur contrat", "pass, best contract")
 	}
+	tr.note("ancre à Trèfle (5♣ dès 17 H), le partenaire rectifie à Carreau", "clubs as the anchor (5♣ from 17 H), partner corrects to diamonds")
 	mn := m(-1, -1,
 		"essai au-delà de 3SA, ancre sur Trèfle : rectifiez à Carreau si c'est votre couleur",
 		"try beyond 3NT, anchored on clubs: correct to diamonds if that is your suit")
@@ -2211,7 +2232,9 @@ func (e *Engine) competitiveRencontre(p *playerState, os Suit, doubled bool, int
 // same 5H floor without a good natural bid available.
 func (e *Engine) respondStrongTwoInterference(p *playerState) (Call, meaning) {
 	h := p.hand
-	if h.H() < 5 {
+	tr := e.tr
+	tr.note("intervention sur l'ouverture forte du partenaire : réponse naturelle", "an overcall of partner's strong opening: natural response")
+	if tr.check(h.H() < 5, "moins de 5 H → Passe", "under 5 H → Pass", pts(h.H(), "H")) {
 		return passCall, m(0, 4, "moins de 5H, pas d'enchère naturelle", "fewer than 5H, no natural bid")
 	}
 	var rho Call
@@ -2227,7 +2250,7 @@ func (e *Engine) respondStrongTwoInterference(p *playerState) (Call, meaning) {
 			best, bestLen = s, h.Len(s)
 		}
 	}
-	if bestLen > 0 {
+	if tr.check(bestLen > 0, "une belle cinquième → la nommer, forcing", "a good five-card suit → bid it, forcing", shape(h)) {
 		c := e.cheapestCall(best.Strain())
 		if e.legal(p.seat, c) {
 			// The opening's own auto-forcing nature carries through: at least
@@ -2235,9 +2258,10 @@ func (e *Engine) respondStrongTwoInterference(p *playerState) (Call, meaning) {
 			return c, m(5, 40, "naturelle, 5 belles cartes et 5H et plus", "natural, five good cards and 5H+").withLen(best, bestLen).asForcing()
 		}
 	}
-	if e.legal(p.seat, doubleCall) {
+	if tr.check(e.legal(p.seat, doubleCall), "sinon, 5 H → contre", "otherwise, 5 H → double", "") {
 		return doubleCall, m(5, 40, "Contre, 5H et plus sans bonne enchère naturelle", "double, 5H+ with no good natural bid").asForcing()
 	}
+	tr.note("→ Passe", "→ Pass")
 	return passCall, m(0, 4, "pas d'enchère naturelle disponible", "no natural bid available")
 }
 
@@ -2712,11 +2736,15 @@ func (e *Engine) respondRubensohl(p *playerState, v Suit) (Call, meaning) {
 // slam try.
 func (e *Engine) afterRubensohlMinorTexas(p *playerState, s Suit) (Call, meaning) {
 	partner := e.ps[partnerOf(p.seat)]
-	if p.hand.HLD(s)+partner.shownMin >= 25 {
-		if c, mn := e.conclude(p); c.Kind != KindPass {
+	tr := e.tr
+	tr.note("le partenaire a rectifié mon Texas mineur (Rubensohl)", "partner completed my minor transfer (Rubensohl)")
+	if tr.check(p.hand.HLD(s)+partner.shownMin >= 25, "25 réunis avec son minimum → la manche",
+		"25 together with partner's minimum → game", fmt.Sprintf("%d + %d", p.hand.HLD(s), partner.shownMin)) {
+		if c, mn, ok := e.concludeTry(p); ok {
 			return c, mn
 		}
 	}
+	tr.note("→ Passe, arrêt au palier de 3", "→ pass, stop at the three level")
 	return passCall, m(-1, -1, "arrêt à trois dans la mineure, jeu limité", "sign-off at three of the minor, limited hand")
 }
 
@@ -4563,7 +4591,9 @@ func (e *Engine) afterLandy(p *playerState) (Call, meaning) {
 	h := p.hand
 	partner := e.ps[partnerOf(p.seat)]
 	if psc, ok := e.lastCallBy(partner.seat); ok && psc.Call == bidSuit(2, Hearts) &&
-		partner.shownLens[Hearts] <= 3 && h.Len(Spades) >= 5 && h.Len(Hearts) == 4 {
+		partner.shownLens[Hearts] <= 3 && e.tr.check(h.Len(Spades) >= 5 && h.Len(Hearts) == 4,
+		"le partenaire a choisi 2♥ sans soutien promis ; 5 ♠ et 4 ♥ seulement → rectifier à 2♠",
+		"partner chose 2♥ without promised support; five ♠ and only four ♥ → correct to 2♠", cards(h, Spades)+", "+cards(h, Hearts)) {
 		c := bidSuit(2, Spades)
 		if e.legal(p.seat, c) {
 			return c, m(-1, -1,
@@ -4571,7 +4601,7 @@ func (e *Engine) afterLandy(p *playerState) (Call, meaning) {
 				"correction to 2S: five spades, only four hearts").withLen(Spades, 5)
 		}
 	}
-	return e.conclude(p)
+	return e.concludeHandoff(p)
 }
 
 // takeoutShape checks the distribution conditions for a takeout double of a

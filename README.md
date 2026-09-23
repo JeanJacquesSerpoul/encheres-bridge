@@ -97,12 +97,13 @@ Ensuite, il suffit de deux gestes :
    `.\server\bids-windows.exe`) — il écoute sur le port 9015 ;
 2. **ouvrir http://localhost:9015** dans un navigateur.
 
-Le client calcule les enchères dans le navigateur dès la première visite, le moteur
-WebAssembly étant compilé dans le binaire lui aussi : rien à saisir ni à configurer.
-Le sélecteur de l'en-tête permet de viser le serveur à la place — **Local** vise
-`http://localhost:9015`. Sur un autre port
-(`PORT=9415`), corrigez l'URL une fois dans l'en-tête — elle est mémorisée pour
-les visites suivantes (`localStorage`), comme l'URL **Distant**. Les binaires
+Le client calcule toujours les enchères dans le navigateur, le moteur
+WebAssembly étant compilé dans le binaire lui aussi : servi par `run.ps1` /
+`run.sh` ou ouvert depuis `cli/index.html`, il se comporte à l'identique, sans
+rien à saisir ni à configurer. Pour viser malgré tout un serveur (tests),
+ajoutez `?serveur=1` à l'URL : le sélecteur de l'en-tête reparaît — **Local**
+vise `http://localhost:9015`, et une autre URL saisie est mémorisée
+(`localStorage`), comme l'URL **Distant**. Les binaires
 sont autonomes — le client est compilé dedans via `//go:embed`, si bien que
 **http://localhost:9015/** affiche la même application sans passer par le
 fichier local. Voir [server/README.md](server/README.md) pour les détails (port

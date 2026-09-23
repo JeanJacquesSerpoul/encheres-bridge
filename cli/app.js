@@ -226,6 +226,10 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Contrat final",
     quizShowDetail: "Afficher le détail complet",
+    quizRecapTitle: "Vos erreurs",
+    quizRecapNone: "Aucune erreur : toutes vos enchères sont celles du SEF.",
+    appTitle: "Enchères au bridge",
+    backToDeal: "Revenir à la donne",
     quizDealHidden: "Donne masquée.",
     quizMode: "Mode questionnaire",
     quizModeHint: "La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.",
@@ -357,6 +361,10 @@ const UI_TEXT = {
     quizScore: "Score",
     quizFinalContract: "Final contract",
     quizShowDetail: "Show full detail",
+    quizRecapTitle: "Your mistakes",
+    quizRecapNone: "No mistakes: every call matches the SEF.",
+    appTitle: "Bridge Bidding",
+    backToDeal: "Back to the deal",
     quizDealHidden: "Deal hidden.",
     quizMode: "Quiz mode",
     quizModeHint: "The deal stays hidden as soon as it is drawn or loaded: you bid without knowing it.",
@@ -563,6 +571,8 @@ function applyLang() {
   for (const el of document.querySelectorAll("[data-help-lang]")) {
     el.hidden = el.dataset.helpLang !== lang;
   }
+  // Le titre de l'onglet suit la langue, comme celui du bandeau ([data-i18n]).
+  document.title = t.appTitle;
   renderDealActions();
   renderIaHint();
   renderSeatCompass();
@@ -748,23 +758,30 @@ async function randomPBN(dealer, vul) {
   }
 }
 
-$("#random-btn").addEventListener("click", async () => {
+// Tire une donne et la charge. Rend vrai une fois la donne en place : « Nouvelle
+// donne », en fin de questionnaire, l'attend avant de relancer — sans cela, le
+// questionnaire partait sur la donne précédente, lue avant l'arrivée de la
+// nouvelle.
+async function drawRandomDeal() {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
-  setError(errEl, validateBounds(lang));
-  if (errEl.textContent) return;
+  setBoundsError(errEl, validateBounds(lang));
+  if (errEl.textContent) return false;
   const fini = showBusy($("#random-btn"), CONS_TEXT[lang].busyDeal);
   try {
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
     if (!pbn) {
-      setError(errEl, CONS_TEXT[lang].errNoDeal);
-      return;
+      setBoundsError(errEl, CONS_TEXT[lang].errNoDeal);
+      return false;
     }
     loadPbn(pbn);
+    return true;
   } finally {
     fini();
   }
-});
+}
+
+$("#random-btn").addEventListener("click", drawRandomDeal);
 
 $("#example-btn").addEventListener("click", () => {
   setError($("#cons-error"), "");
@@ -1101,6 +1118,7 @@ const CONS_TEXT = {
   fr: {
     ph: "PH", min: "Mini", max: "Maxi",
     reset: "Effacer les bornes",
+    boundsToggle: "Bornes de points (PH mini/maxi)",
     neutral: "Cartes non affectées",
     // Le clic-puis-clic existe depuis toujours (voir le gestionnaire
     // pointerup) mais n'était annoncé nulle part : sur écran tactile, viser
@@ -1143,6 +1161,7 @@ const CONS_TEXT = {
   en: {
     ph: "HCP", min: "Min", max: "Max",
     reset: "Clear bounds",
+    boundsToggle: "Point bounds (min/max HCP)",
     neutral: "Unassigned cards",
     neutralHint:
       "Drag a card from one hand to another, or here to take it out. " +
@@ -1490,6 +1509,13 @@ const ERASER_SVG = `${SVG_OPEN}
   <path d="M4 21h16"/>
 </svg>`;
 
+// Trois curseurs : les bornes de points de chaque main.
+const BOUNDS_SVG = `${SVG_OPEN}
+  <path d="M4 6h9"/><path d="M17 6h3"/><circle cx="15" cy="6" r="2"/>
+  <path d="M4 12h3"/><path d="M11 12h9"/><circle cx="9" cy="12" r="2"/>
+  <path d="M4 18h11"/><path d="M19 18h1"/><circle cx="17" cy="18" r="2"/>
+</svg>`;
+
 // Une flèche de lecture : la séquence se déroule.
 const PLAY_SVG = `${SVG_OPEN}
   <circle cx="12" cy="12" r="9"/>
@@ -1703,6 +1729,7 @@ function renderBoundsCards() {
   setCommandButton("#cons-reset-btn", ERASER_SVG, t.reset);
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
+  setCommandButton("#cons-bounds-btn", BOUNDS_SVG, t.boundsToggle);
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction);
   setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
@@ -1766,6 +1793,24 @@ $("#constraints").addEventListener("input", (ev) => {
   setError($("#cons-error"), validateBounds($("#lang").value));
   refreshBoundsFlags();
 });
+
+// Les champs Mini/Maxi des quatre mains, repliés par défaut : ils prenaient une
+// ligne dans chaque main pour une fonction que la plupart n'utilisent pas. Un
+// message d'erreur sur les bornes les rouvre, pour qu'on voie ce qu'il vise.
+function setBoundsOpen(open) {
+  $("#constraints").classList.toggle("show-bounds", open);
+  $("#cons-bounds-btn").setAttribute("aria-expanded", String(open));
+}
+
+$("#cons-bounds-btn").addEventListener("click", () => {
+  setBoundsOpen(!$("#constraints").classList.contains("show-bounds"));
+});
+
+// setError, et rouvre les bornes quand le message les concerne.
+function setBoundsError(errEl, msg) {
+  setError(errEl, msg);
+  if (msg) setBoundsOpen(true);
+}
 
 $("#cons-reset-btn").addEventListener("click", () => {
   for (const seat of SEATS) hcpBounds[seat] = { min: null, max: null };
@@ -2102,7 +2147,7 @@ $("#constraints").addEventListener("keydown", (ev) => {
 $("#cons-fill-btn").addEventListener("click", async () => {
   const lang = $("#lang").value;
   const errEl = $("#cons-error");
-  setError(errEl, validateBounds(lang));
+  setBoundsError(errEl, validateBounds(lang));
   if (errEl.textContent) return;
 
   const pool = zoneCards(UNASSIGNED);
@@ -3343,6 +3388,7 @@ function resetQuiz() {
   cancelAutoReveal();
   quiz = null;
   $("#quiz-panel").classList.add("hidden");
+  $("#quiz-launch-panel").classList.remove("quiz-running");
   // En mode questionnaire, la donne garde l'état où elle est : masquée tant
   // qu'on ne l'a pas demandée, affichée si on l'a fait.
   if (!quizMode()) setDealHidden(false);
@@ -3397,6 +3443,10 @@ function cancelQuiz() {
 }
 
 $("#quiz-cancel-btn").addEventListener("click", cancelQuiz);
+
+$("#back-to-deal-btn").addEventListener("click", () => {
+  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+});
 
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
 function hideResult() {
@@ -3589,12 +3639,36 @@ function onQuizContinue() {
   renderQuizStep();
 }
 
+// Les enchères ratées, relues une à une : la vôtre barrée, l'attendue, et ce
+// qu'elle signifie dans le SEF. quiz.calls suit quiz.result.auction pas à pas,
+// donc un même indice désigne le même tour.
+function quizRecapHTML(t, lang) {
+  const misses = [];
+  quiz.calls.forEach((c, i) => {
+    if (!c.isUser || c.isCorrect) return;
+    const comment = quiz.result.auction[i] && quiz.result.auction[i].comment;
+    misses.push(`
+      <li>
+        <span class="recap-bids"><s>${bidHTML(c.bid, lang)}</s> → <b>${bidHTML(c.expected, lang)}</b></span>
+        ${comment ? `<span class="muted">${esc(comment)}</span>` : ""}
+      </li>`);
+  });
+  if (!misses.length) return `<p class="quiz-recap-none">${esc(t.quizRecapNone)}</p>`;
+  return `
+    <div class="quiz-recap">
+      <h3>${esc(t.quizRecapTitle)}</h3>
+      <ol>${misses.join("")}</ol>
+    </div>`;
+}
+
 function finishQuiz() {
   renderQuizHands(true);
   // La donne composée reste masquée : les mains se lisent dans le
   // questionnaire, et le lien « Afficher la donne » la rend à la demande.
-  // Plus rien à annuler : le score propose ses propres suites.
+  // Plus rien à annuler : le score propose ses propres suites, et la rangée de
+  // lancement revient pour changer de main.
   $("#quiz-cancel-btn").classList.add("hidden");
+  $("#quiz-launch-panel").classList.remove("quiz-running");
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const r = quiz.result;
@@ -3619,6 +3693,7 @@ function finishQuiz() {
   scoreEl.innerHTML = `
     <div class="score-big">${withColon(esc(t.quizScore), lang)} ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
     <div>${withColon(esc(t.quizFinalContract), lang)} <b>${contractHTML}</b></div>
+    ${quizRecapHTML(t, lang)}
     <div class="quiz-score-actions">
       <button type="button" id="quiz-replay-btn">${esc(t.quizReplay)}</button>
       <button type="button" id="quiz-new-deal-btn">${esc(t.quizNewDeal)}</button>
@@ -3627,11 +3702,10 @@ function finishQuiz() {
   scoreEl.classList.remove("hidden");
   // La donne n'a pas bougé : la redemander la rejoue à l'identique.
   $("#quiz-replay-btn").addEventListener("click", startQuiz);
-  $("#quiz-new-deal-btn").addEventListener("click", () => {
-    $("#random-btn").click();
+  $("#quiz-new-deal-btn").addEventListener("click", async () => {
     // Le tirage refuse quand les bornes ne laissent aucune donne, et le dit
     // dans #cons-error : on ne lance pas un questionnaire sur la donne d'avant.
-    if ($("#cons-error").textContent) {
+    if (!(await drawRandomDeal())) {
       $("#cons-error").scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
@@ -3657,10 +3731,12 @@ async function startQuiz() {
     $("#quiz-panel").classList.remove("hidden");
     $("#quiz-score").classList.add("hidden");
     setDealHidden(true);
+    // Un seul questionnaire à l'écran : la rangée de lancement s'efface.
+    $("#quiz-launch-panel").classList.add("quiz-running");
     $("#quiz-cancel-btn").classList.remove("hidden");
     renderQuizHands();
     renderQuizStep();
-    $("#quiz-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("#quiz-launch-panel").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
     setError(errEl, err.message);
     $("#quiz-panel").classList.add("hidden");
@@ -3686,7 +3762,7 @@ $("#quiz-btn").addEventListener("click", startQuiz);
 // une fois, au démarrage, depuis les mêmes constantes.
 const HELP_ICONS = {
   file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
-  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
+  pbn: CODE_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
   quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
 };
 

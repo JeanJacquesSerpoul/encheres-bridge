@@ -256,12 +256,12 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 - **Donne aléatoire** tire une donne complète ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table est vide : les 52 cartes attendent dans la zone **Cartes non affectées**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple, qui n'est qu'à un clic.
 - **Composer à la main** : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
-- Chaque main porte deux **bornes de points d'honneur** (mini/maxi). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
+- Chaque main porte deux **bornes de points d'honneur** (mini/maxi), repliées par défaut : le bouton **Bornes de points** sous la table les affiche (un message d'erreur sur les bornes les rouvre de lui-même). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
 - Sous la table : **Retirer toutes les cartes** vide la table, **Compléter les mains** répartit les cartes non affectées entre les mains incomplètes en respectant les bornes (grisé quand il n'y a rien à distribuer), **Effacer les bornes** remet les mini/maxi à vide, **Afficher les enchères** lance le calcul. L'en-tête de chaque main porte une **poubelle** qui renvoie ses seules cartes au centre.
 
 ### Voir les enchères
 
-**Afficher les enchères** calcule la séquence dans la page et affiche les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
+**Afficher les enchères** calcule la séquence dans la page et affiche, dans le panneau **Résultat** placé juste sous la donne (**Revenir à la donne** y remonte), les quatre mains autour de la table avec le contrat, la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée.
 
 ### Le moteur dans la page
 

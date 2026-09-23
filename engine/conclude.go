@@ -1,6 +1,9 @@
 package engine
 
-import "slices"
+import (
+	"fmt"
+	"slices"
+)
 
 // ---------- conclude: priority-ordered handler table ----------
 //
@@ -46,6 +49,7 @@ type concludeCtx struct {
 	cMinSlam         int // cMin with shortness facing partner's shown length written off: what a slam may lean on
 	cMaxSlam         int // the same discount applied to cMax: the best a slam could count on
 	ntOK             bool
+	tr               *tracer // the decision trace, when conclude decides the call itself (see concludeFrom)
 }
 
 // concludeContext computes the shared state threaded through every handler
@@ -111,20 +115,41 @@ type concludeHandler struct {
 	name string
 	when func(e *Engine, ctx *concludeCtx) bool
 	run  func(e *Engine, ctx *concludeCtx) (Call, meaning, bool)
+	// fr, en name the situation for the decision trace, on the handlers whose
+	// run hands the call to an instrumented decision. The others are not
+	// instrumented yet: a call they make carries no trace.
+	fr, en string
 }
 
 // conclude drives the auction once the descriptive phase is over: it tries
 // every convention-specific rule in concludeHandlers, in priority order, then
 // falls back to the generic value-based endgame.
 func (e *Engine) conclude(p *playerState) (Call, meaning) {
+	return e.concludeFrom(p, nil)
+}
+
+// concludeFrom is conclude with its own decision trace: decide passes the
+// engine's tracer when conclude is the decision itself. Reached from another
+// decision (a response that lets the fit be valued directly...), conclude
+// records nothing of its own, since the caller may still discard its answer.
+func (e *Engine) concludeFrom(p *playerState, tr *tracer) (Call, meaning) {
 	ctx := e.concludeContext(p)
+	ctx.tr = tr
 	for _, h := range concludeHandlers {
 		if !h.when(e, ctx) {
 			continue
 		}
+		mark := tr.mark()
+		if h.fr != "" {
+			tr.note(h.fr, h.en)
+		}
 		if c, mn, ok := h.run(e, ctx); ok {
+			if tr != nil && h.fr == "" {
+				return e.untraced(c, mn)
+			}
 			return c, mn
 		}
+		tr.rewind(mark)
 	}
 	return e.concludeGameDecision(ctx)
 }
@@ -154,6 +179,8 @@ func init() {
 			// (concludeHandlers' "penalty-double-of-sacrifice"), which
 			// partner must be left to pass.
 			name: "answer-partner-double",
+			fr:   "le partenaire a contré (contre forcing) : répondre au contre",
+			en:   "partner doubled (forcing double): answer the double",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				psc, ok := e.lastCallBy(partnerOf(ctx.p.seat))
 				return ok && psc.Call.Kind == KindDouble && psc.M.forcing
@@ -223,6 +250,8 @@ func init() {
 			// major(s) exactly as over a 2NT opening (with none, 3D denies
 			// both).
 			name: "stayman-relay-after-strong-2nt",
+			fr:   "Stayman du partenaire après la redemande 2SA de l'ouverture forte",
+			en:   "partner's Stayman after the strong opening's 2NT rebid",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.relay && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) &&
 					(e.openCall == bid(2, SClubs) || e.openCall == bid(2, SDiamonds)) && ctx.last == bid(3, SClubs)
@@ -258,6 +287,8 @@ func init() {
 			// second call, so a Texas that surfaces later needs the same
 			// rectification here.
 			name: "major-texas-late",
+			fr:   "Texas majeur du partenaire : rectifier",
+			en:   "partner's major transfer: complete it",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.hasTexas && ctx.pm.texas.IsMajor() && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -1981,9 +2012,36 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	side, own := ctx.side, ctx.own
 	cMin, cMax, cMinNT, cMaxNT, ntOK := ctx.cMin, ctx.cMax, ctx.cMinNT, ctx.cMaxNT, ctx.ntOK
 	fit, hasFit := ctx.fit, ctx.hasFit
+	tr := ctx.tr
+
+	// The count the decision rests on, as the trace shows it.
+	unit := "H"
+	fitVal := ""
+	if hasFit {
+		unit = "HLD"
+		fitVal = fmt.Sprintf("%d + %d %s", p.hand.Len(fit), partner.shownLens[fit], suitSymbol[fit])
+	}
+	tr.note("aucune convention en cours : décision sur la force combinée (la main + le minimum-maximum montré par le partenaire)",
+		"no convention under way: decision on combined strength (your hand + the minimum-maximum partner has shown)")
+	tr.check(hasFit, "fit de 8 cartes et plus connu", "known fit of 8+ cards", fitVal)
+	if !(hasFit && fit.IsMajor()) {
+		tr.check(ntOK, "Sans-Atout jouable : arrêt dans chaque couleur adverse",
+			"notrump playable: a stopper in every opposing suit", "")
+	}
 
 	// Game decision.
 	gc, wantGame := gameCall(fit, hasFit, cMin, cMinNT, ntOK)
+	gameVal := fmt.Sprintf("%d %s + %d = %d", own, unit, partner.shownMin, cMin)
+	if hasFit && !fit.IsMajor() {
+		gameVal += fmt.Sprintf(" (SA : %d H + %d = %d)", p.hand.H(), partner.shownMin, cMinNT)
+	}
+	tr.check(wantGame,
+		"minimum combiné suffisant pour une manche : 27 HLD en majeure, 25 H à Sans-Atout, 30 HLD en mineure",
+		"combined minimum enough for game: 27 HLD in a major, 25 H in notrump, 30 HLD in a minor", gameVal)
+	if wantGame {
+		tr.in()
+		defer tr.out()
+	}
 	if wantGame && !(hasFit && fit.IsMajor()) &&
 		!p.hand.IsRegular() && !p.hand.IsSemiRegular() {
 		// An unbalanced hand with a six-card major it has already shown
@@ -1992,6 +2050,8 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		// fit, while a singleton or void makes notrump run off the top.
 		for _, s := range []Suit{Spades, Hearts} {
 			if p.shownLens[s] >= 4 && p.hand.Len(s) >= 6 {
+				tr.check(true, "main irrégulière avec une majeure sixième déjà nommée : la manche dans cette majeure",
+					"unbalanced hand with a six-card major already bid: game in that major", cards(p.hand, s))
 				// Partner's balanced notrump rebid guarantees a doubleton,
 				// so the sixth trump certifies an eight-card fit: revalue
 				// the hand with the trump-fit distribution points. When the
@@ -2011,7 +2071,10 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 							reval -= 1
 						}
 					}
-					if reval+partner.shownMin >= 31 && !e.bw[side].asked {
+					if tr.check(reval+partner.shownMin >= 31 && !e.bw[side].asked,
+						"majeure sixième revalorisée : zone de chelem (31) → enchères de contrôle",
+						"six-card major revalued: slam zone (31) → control bids",
+						fmt.Sprintf("%d HLD + %d = %d", reval, partner.shownMin, reval+partner.shownMin)) {
 						c, mn, ok := e.controlBid(p, s)
 						// The cheapest control can fall on the very call
 						// partner's rebid has reserved for his convention
@@ -2052,10 +2115,13 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		// belongs to the handlers above; here the count only reaches game, so
 		// settle rather than climb.
 		pulls3NT := ours && last == bid(3, SNoTrump) && gc.Level >= 5 && hasFit && !fit.IsMajor()
-		if ours && (last.steps() >= gc.steps() || pulls3NT) {
-			return e.settleAboveGameCall(p, fit, hasFit, last, pm, partnerJustActed)
+		if tr.check(ours && (last.steps() >= gc.steps() || pulls3NT),
+			"notre camp a déjà atteint ce palier (ou le partenaire a choisi 3SA)",
+			"our side already reached that level (or partner chose 3NT)", "") {
+			return e.settleAboveGameCall(p, fit, hasFit, last, pm, partnerJustActed, tr)
 		}
-		if e.legal(p.seat, gc) {
+		gcFR, gcEN := callSym(gc)
+		if tr.check(e.legal(p.seat, gc), "→ la manche : "+gcFR, "→ game: "+gcEN, "") {
 			mn := m(own-1, -1, "conclusion à la manche sur la force combinée", "bids game on combined strength")
 			if hasFit && gc.Kind == KindBid && gc.Strain != SNoTrump {
 				// Record the real trump length so partner can still read
@@ -2065,6 +2131,7 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 			}
 			return gc, mn
 		}
+		tr.note("la manche n'est plus possible → Passe", "game is no longer available → Pass")
 		return passCall, noInfo()
 	}
 
@@ -2094,6 +2161,23 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	// limited himself high enough that the points still missing are really
 	// his to hold.
 	belowInviteZone := own < inviteFloor && cMin < threshold-2
+	inviteZone := tr.check(cMax >= threshold,
+		fmt.Sprintf("maximum combiné au seuil de la manche (%d) → proposition de manche possible", threshold),
+		fmt.Sprintf("combined maximum reaches the game threshold (%d) → game invitation possible", threshold),
+		fmt.Sprintf("%d %s + %d = %d", own, unit, partner.shownMax, cMax))
+	if inviteZone {
+		tr.in()
+		switch {
+		case p.invited:
+			tr.check(false, "pas encore de proposition faite", "no invitation made yet", "")
+		case partner.bids == 0:
+			tr.check(false, "le partenaire a déjà enchéri", "partner has already bid", "")
+		case weakPassedResponder:
+			tr.check(false, "pas un répondant qui a passé faute de 6 H", "not a responder who passed for lack of 6 H", pts(own, unit))
+		case capped:
+			tr.check(false, "main pas encore limitée sous la proposition", "hand not already limited below an invitation", "")
+		}
+	}
 	if cMax >= threshold && !p.invited && partner.bids > 0 && !weakPassedResponder && !capped {
 		var c Call
 		canInvite := true
@@ -2112,13 +2196,15 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		}
 		unbalanced := !p.hand.IsRegular() && !p.hand.IsSemiRegular()
 		switch {
-		case hasFit && fit.IsMajor():
+		case tr.check(hasFit && fit.IsMajor(), "fit majeur → proposer au palier de 3", "major fit → invite at the three level", fitVal):
 			c = bidSuit(3, fit)
-		case hasLongMajor && unbalanced && bidSuit(2, longMajor).higherThan(last):
+		case tr.check(hasLongMajor && unbalanced && bidSuit(2, longMajor).higherThan(last),
+			"main irrégulière, majeure sixième déjà nommée → la répéter à 2",
+			"unbalanced, six-card major already bid → repeat it at the two level", shape(p.hand)):
 			c, raisesTheLevel = bidSuit(2, longMajor), false
-		case ntOK:
+		case tr.check(ntOK, "Sans-Atout jouable → 2SA", "notrump playable → 2NT", ""):
 			c = bid(2, SNoTrump)
-		case hasFit:
+		case tr.check(hasFit, "fit mineur sans arrêt → proposer au palier de 3", "minor fit without stoppers → invite at the three level", fitVal):
 			// Minor fit with notrump unavailable (no stopper in the
 			// opponents' suit): raise the minor to invite rather than pass
 			// out a nine-card fit at partscore.
@@ -2133,12 +2219,19 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		// 1NT rebid invited game on a 22-point maximum (same reasoning as
 		// cMinNT for the game decision above).
 		if canInvite && c.IsBid() && c.Strain == SNoTrump && cMaxNT < threshold {
+			tr.check(false, "le seuil est atteint en points d'honneur seuls (Sans-Atout)",
+				"the threshold is reached on high cards alone (notrump)",
+				fmt.Sprintf("%d H + %d = %d", p.hand.H(), partner.shownMax, cMaxNT))
 			canInvite = false
 		}
 		if canInvite && raisesTheLevel && belowInviteZone {
+			tr.check(false, fmt.Sprintf("la main vaut elle-même une proposition (%d et plus)", inviteFloor),
+				fmt.Sprintf("the hand is itself worth an invitation (%d+)", inviteFloor), pts(own, unit))
 			canInvite = false
 		}
-		if canInvite && c.higherThan(last) && e.legal(p.seat, c) && (ours || pm != nil) {
+		cFR, cEN := callSym(c)
+		if canInvite && tr.check(c.higherThan(last) && e.legal(p.seat, c) && (ours || pm != nil),
+			"→ proposition de manche : "+cFR+" (encore disponible)", "→ game invitation: "+cEN+" (still available)", "") {
 			p.invited = true
 			mn := m(threshold-partner.shownMax, threshold-1-partner.shownMin, "proposition de manche", "game invitation").asInvite()
 			if mn.minPts < 0 {
@@ -2164,9 +2257,14 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 			return c, mn
 		}
 	}
+	if inviteZone {
+		tr.out()
+	}
 
 	// Forced to bid?
-	if pm != nil && pm.forcing && partnerJustActed && ours {
+	if tr.check(pm != nil && pm.forcing && partnerJustActed && ours,
+		"le partenaire vient de faire une enchère forcing → enchère au plus bas palier",
+		"partner has just made a forcing bid → cheapest constructive call", "") {
 		return e.cheapestConstructive(p, fit, hasFit)
 	}
 
@@ -2178,32 +2276,54 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		if hasFit && fit.IsMajor() {
 			gc, ok = bidSuit(4, fit), true
 		}
-		if ok && gc.higherThan(last) && e.legal(p.seat, gc) {
+		if tr.check(ok && gc.higherThan(last) && e.legal(p.seat, gc),
+			"séquence forcing de manche pas encore conclue → la manche",
+			"game-forcing auction not yet at game → bid game", "") {
 			return gc, m(-1, -1, "conclusion à la manche, forcing de manche engagé", "bids game, the auction is game forcing")
 		}
 	}
 
 	// Nothing left to bid for value -- but a six-card major of our own is a
 	// playable strain the arithmetic never sees.
-	if c, mn, ok := e.ownLongMajorSignoff(ctx); ok {
+	if c, mn, ok := e.ownLongMajorSignoff(ctx); tr.check(ok,
+		"majeure sixième à nous, sous la zone de proposition → s'y retirer au palier de 2",
+		"a six-card major of our own, below the invitation zone → retreat into it at the two level", callOrEmpty(c, ok)) {
 		return c, mn
 	}
 	// Below the invitational zone the fit still has to be shown: the simple
 	// raise is the bid that hand was always meant to make.
-	if c, mn, ok := e.supportRaise(ctx); ok {
+	if c, mn, ok := e.supportRaise(ctx); tr.check(ok,
+		fmt.Sprintf("fit pas encore montré, 6-%d %s → soutien simple", inviteFloor-1, "HLD"),
+		fmt.Sprintf("fit not shown yet, 6-%d %s → simple raise", inviteFloor-1, "HLD"), callOrEmpty(c, ok)) {
 		return c, mn
 	}
 	// Nothing left to bid for value -- but the fit may still have something
 	// to say in a partscore battle.
-	if c, mn, ok := e.competitivePartscore(ctx); ok {
+	if c, mn, ok := e.competitivePartscore(ctx); tr.check(ok,
+		"loi des levées totales : 9 atouts valent le palier de 3, 10 le palier de 4 → ne pas leur laisser la partielle",
+		"law of total tricks: 9 trumps are worth the three level, 10 the four level → don't leave them the partscore",
+		callOrEmpty(c, ok)) {
 		return c, mn
 	}
 	// Before passing out partner's non-forcing two-suiter, take back his
 	// first suit when it is the better strain.
-	if c, mn, ok := e.preferenceBack(ctx); ok {
+	if c, mn, ok := e.preferenceBack(ctx); tr.check(ok,
+		"bicolore non forcing du partenaire, sa première couleur est le meilleur fit → préférence",
+		"partner's non-forcing two-suiter, whose first suit is the better fit → preference", callOrEmpty(c, ok)) {
 		return c, mn
 	}
+	tr.note("rien à ajouter → Passe", "nothing more to say → Pass")
 	return passCall, noInfo()
+}
+
+// callOrEmpty shows the call a rule produced, for the trace: nothing when the
+// rule did not apply.
+func callOrEmpty(c Call, ok bool) string {
+	if !ok {
+		return ""
+	}
+	fr, _ := callSym(c)
+	return fr
 }
 
 // supportRaise shows the fit when the count has just declined to invite.

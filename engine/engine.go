@@ -356,13 +356,13 @@ func (e *Engine) decide(seat int) (Call, meaning) {
 			if p.bids == 1 {
 				return e.openerRebid(p)
 			}
-			return e.conclude(p)
+			return e.concludeFrom(p, e.tr)
 		}
 		if !p.responded {
 			p.responded = true
 			return e.respond(p)
 		}
-		return e.conclude(p)
+		return e.concludeFrom(p, e.tr)
 	}
 	// defending side
 	partner := e.ps[partnerOf(seat)]
@@ -372,7 +372,7 @@ func (e *Engine) decide(seat int) (Call, meaning) {
 	if p.bids == 0 && partner.bids > 0 {
 		return e.advance(p)
 	}
-	return e.conclude(p)
+	return e.concludeFrom(p, e.tr)
 }
 
 // ---------- generic late-auction logic ----------
@@ -609,8 +609,8 @@ func isGame(c Call) bool {
 // settleAboveGameCall decides what to do with game values when our side has
 // already outbid the natural game call (typically a forcing 4m below 3NT):
 // raise a known fit to game, keep a forcing auction alive, else pass.
-func (e *Engine) settleAboveGameCall(p *playerState, fit Suit, hasFit bool, last Call, pm *meaning, partnerJustActed bool) (Call, meaning) {
-	if isGame(last) {
+func (e *Engine) settleAboveGameCall(p *playerState, fit Suit, hasFit bool, last Call, pm *meaning, partnerJustActed bool, tr *tracer) (Call, meaning) {
+	if tr.check(isGame(last), "la manche est déjà atteinte → Passe", "game is already reached → Pass", "") {
 		return passCall, noInfo()
 	}
 	if hasFit {
@@ -619,13 +619,18 @@ func (e *Engine) settleAboveGameCall(p *playerState, fit Suit, hasFit bool, last
 			lvl = 5
 		}
 		c := bidSuit(lvl, fit)
-		if c.higherThan(last) && e.legal(p.seat, c) {
+		cFR, cEN := callSym(c)
+		if tr.check(c.higherThan(last) && e.legal(p.seat, c),
+			"fit connu → la manche dans le fit : "+cFR, "known fit → game in the fit: "+cEN, "") {
 			return c, m(-1, -1, "conclusion à la manche dans le fit", "raises the fit to game").withLen(fit, p.hand.Len(fit))
 		}
 	}
-	if pm != nil && pm.forcing && partnerJustActed {
+	if tr.check(pm != nil && pm.forcing && partnerJustActed,
+		"le partenaire vient de faire une enchère forcing → enchère au plus bas palier",
+		"partner has just made a forcing bid → cheapest constructive call", "") {
 		return e.cheapestConstructive(p, fit, hasFit)
 	}
+	tr.note("rien à ajouter → Passe", "nothing more to say → Pass")
 	return passCall, noInfo()
 }
 

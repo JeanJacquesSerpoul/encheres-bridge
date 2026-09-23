@@ -189,11 +189,28 @@ function renderIaHint() {
     `${t.serverLocal} (${readIaLocal().replace(/^https?:\/\//, "")})`;
 }
 
-// Donne affichée au démarrage, le temps d'en charger ou d'en générer une :
-// une manche à SA par Stayman.
-const DEFAULT_PBN = `[Dealer "S"]
+// La donne exemple, rappelée par son bouton : une manche à SA par Stayman.
+const EXAMPLE_PBN = `[Dealer "S"]
 [Vulnerable "All"]
 [Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]`;
+
+// La donne du tout premier chargement : aucune carte en main, les 52 au
+// centre, prêtes à être distribuées.
+const EMPTY_PBN = `[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:... ... ... ..."]`;
+
+// La dernière donne complète — quatre mains de 13 cartes — est retenue d'une
+// visite à l'autre, et c'est elle qui revient au chargement suivant. Une donne
+// en cours de composition ne l'écrase pas : on retrouve la dernière jouable.
+const LAST_DEAL_KEY = "bids.lastDeal";
+
+function rememberCompleteDeal() {
+  const block = pbnGames[selectedGameIdx];
+  if (!block || zoneCount(UNASSIGNED) > 0) return;
+  if (SEATS.some((seat) => zoneCount(seat) !== HAND_SIZE)) return;
+  saveStored(LAST_DEAL_KEY, block);
+}
 
 // Vrai quand la donne affichée vient d'un fichier : c'est lui qui dit qui
 // donne et qui est vulnérable, les sélecteurs le recopient et se verrouillent.
@@ -236,6 +253,7 @@ const UI_TEXT = {
     dealPanel: "Donne",
     fileLoad: "Charger un fichier .pbn",
     randomDeal: "Donne aléatoire",
+    exampleDeal: "Donne exemple",
     fileSave: "Sauver le PBN",
     fileSaveStem: "donne",
     photoDeal: "Photographier les quatre mains",
@@ -365,6 +383,7 @@ const UI_TEXT = {
     dealPanel: "Deal",
     fileLoad: "Load a .pbn file",
     randomDeal: "Random deal",
+    exampleDeal: "Example deal",
     fileSave: "Save the PBN",
     fileSaveStem: "deal",
     photoDeal: "Photograph the four hands",
@@ -864,6 +883,11 @@ $("#random-btn").addEventListener("click", async () => {
   }
 });
 
+$("#example-btn").addEventListener("click", () => {
+  setError($("#cons-error"), "");
+  loadPbn(EXAMPLE_PBN);
+});
+
 $("#dealer").addEventListener("change", () => {
   const seat = chosenDealer();
   if (!seat) return; // « Aléatoire » : le donneur sera tiré à la génération.
@@ -991,6 +1015,7 @@ function replaceSelectedBlock(newBlock) {
   textarea.value = text.slice(0, range.start) + newBlock + text.slice(range.end);
   writingPbn = false;
   pbnGames[selectedGameIdx] = newBlock;
+  rememberCompleteDeal();
 }
 
 function tagRe(name) {
@@ -1375,6 +1400,20 @@ function syncZonesFromPbn() {
   }
   selectedCard = null;
   renderBoundsCards();
+  rememberCompleteDeal();
+}
+
+// Les cartes qu'aucune main ne tient vont au centre. Utile au démarrage : le
+// [Deal] de la donne vide ne cite aucune carte, et syncZonesFromPbn laisse la
+// zone neutre vide.
+function gatherMissingCards() {
+  for (const suit of SUIT_KEYS) {
+    for (const rank of RANKS) {
+      if (!ZONES.some((zone) => dealZones[zone][suit].includes(rank))) {
+        dealZones[UNASSIGNED][suit] = sortRanks(dealZones[UNASSIGNED][suit] + rank);
+      }
+    }
+  }
 }
 
 // Rewrites the [Deal] tag of the selected game from the current zones and
@@ -1588,6 +1627,12 @@ const DICE_SVG = `${SVG_OPEN}
   <path d="M8 16h.01"/><path d="M16 16h.01"/>
 </svg>`;
 
+// Un livre ouvert : la donne exemple, celle du manuel.
+const BOOK_SVG = `${SVG_OPEN}
+  <path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/>
+  <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>
+</svg>`;
+
 // Une flèche vers le bas au-dessus d'un plateau : le fichier est téléchargé.
 const EXPORT_SVG = `${SVG_OPEN}
   <path d="M12 3v11"/><path d="m8 10 4 4 4-4"/>
@@ -1697,6 +1742,7 @@ function renderDealActions() {
   const load = $(".file-btn");
   load.dataset.tip = t.fileLoad;
   setCommandButton("#random-btn", DICE_SVG, t.randomDeal);
+  setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal);
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
 }
 
@@ -3717,11 +3763,14 @@ $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);
 
-// Prefill with the default deal and ping the server on load.
+// Reprend la dernière donne complète, ou la donne vide à la première visite,
+// puis sonde le serveur.
 $("#lang").value = initialLang();
 applyTheme();
-$("#pbn").value = DEFAULT_PBN;
+$("#pbn").value = readStored(LAST_DEAL_KEY, "") || EMPTY_PBN;
 refreshDealSelector(true);
+gatherMissingCards();
+renderBoundsCards();
 applyLang();
 $("#pbn-details").open = false;
 // Sonde l'état et, en mode navigateur, instancie le moteur au passage : le

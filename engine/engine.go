@@ -1052,7 +1052,7 @@ func (e *Engine) fourthSuitAsk(p *playerState) (Call, meaning, bool) {
 // then the one shape that raises the fourth suit itself, then the stopper
 // that lets notrump be played, and -- holding none of them -- whatever shape
 // is left to show.
-func (e *Engine) fourthSuitAnswer(p *playerState, f Suit) (Call, meaning) {
+func (e *Engine) fourthSuitAnswer(p *playerState, f Suit, tr *tracer) (Call, meaning) {
 	h := p.hand
 	fb, has := e.firstBidBy(partnerOf(p.seat))
 	if !has || fb.Strain > SSpades {
@@ -1065,7 +1065,8 @@ func (e *Engine) fourthSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// A minor first suit is not raised here: there the ask is about the
 	// stopper, and a return to a suit is reserved for the hands that cannot
 	// play notrump at all (rule 4 below).
-	if his.IsMajor() && h.Len(his) >= 3 {
+	if his.IsMajor() && tr.check(h.Len(his) >= 3, "1. 3 cartes dans sa majeure → la soutenir (avec saut dès 17 HLD)",
+		"1. three cards in partner's major → raise it (jumping from 17 HLD)", cards(h, his)) {
 		c := e.cheapestCall(his.Strain())
 		if h.HLD(his) >= 17 {
 			if up := bid(c.Level+1, his.Strain()); !isGame(up) && e.legal(p.seat, up) {
@@ -1086,7 +1087,9 @@ func (e *Engine) fourthSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// singleton makes notrump the wrong contract to offer -- so the hand
 	// says what it really holds and raises the suit nobody bid, which this
 	// one holding makes playable.
-	if h.Len(f) == 3 && h.HasCard(f, 'A') && h.sortedLens()[3] == 1 {
+	if tr.check(h.Len(f) == 3 && h.HasCard(f, 'A') && h.sortedLens()[3] == 1,
+		"2. As troisième dans la 4e couleur et un singleton → soutien conventionnel",
+		"2. ace third in the fourth suit and a singleton → conventional raise", cards(h, f)+", "+shape(h)) {
 		if c := e.cheapestCall(f.Strain()); c.Level <= 3 && e.legal(p.seat, c) {
 			// Conventional, not a proposal to play: the ask may have been
 			// void of the suit. The raise stays forcing so the auction can
@@ -1099,7 +1102,8 @@ func (e *Engine) fourthSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 
 	// 3. The stopper that answers the real question of every fourth suit
 	// with a minor at its origin: notrump is playable, and at which zone.
-	if h.Stopper(f) {
+	if tr.check(h.Stopper(f), "3. arrêt dans la 4e couleur ("+suitSymbol[f]+") → Sans-Atout (3SA dès 15 H)",
+		"3. a stopper in the fourth suit ("+suitSymbol[f]+") → notrump (3NT from 15 H)", cards(h, f)+", "+pts(h.H(), "H")) {
 		strong := h.H() >= 15
 		c := e.cheapestCall(SNoTrump)
 		if strong && c.Level < 3 {
@@ -1130,6 +1134,8 @@ func (e *Engine) fourthSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// turns a possible 6-2 into a real trump suit, was neither bid nor
 	// recorded, and a nine-card fit went unfound.
 	mine := e.suitsBidBy(p.seat)
+	tr.note("4. ni soutien ni arrêt : décrire la forme (5-5, couleur sixième, sinon répéter la première couleur)",
+		"4. neither support nor stopper: describe the shape (5-5, a six-card suit, else repeat the first suit)")
 	if len(mine) >= 2 && h.Len(mine[0]) == 5 && h.Len(mine[1]) >= 5 {
 		if c := e.cheapestCall(mine[1].Strain()); c.Level <= 3 && e.legal(p.seat, c) {
 			return c, m(-1, -1, "bicolore 5-5, sans arrêt à "+suitNameFR[f],
@@ -1307,7 +1313,7 @@ func (e *Engine) thirdSuitAsk(p *playerState) (Call, meaning, bool) {
 // Every answer is made at the three level. The ask is forcing to game, so
 // there is no partscore left below it to protect, and the extra step buys
 // nothing.
-func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
+func (e *Engine) thirdSuitAnswer(p *playerState, f Suit, tr *tracer) (Call, meaning) {
 	h := p.hand
 	fb, has := e.firstBidBy(partnerOf(p.seat))
 	if !has || fb.Strain > SSpades {
@@ -1321,7 +1327,8 @@ func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 
 	// 1. Three cards in the asker's major: the 5-3 fit the whole ask looks
 	// for, and the one answer that ends the auction's search on the spot.
-	if c, ok := answer(his.Strain()); ok && h.Len(his) >= 3 {
+	if c, ok := answer(his.Strain()); ok && tr.check(h.Len(his) >= 3, "1. 3 cartes dans sa majeure → la soutenir au palier de 3",
+		"1. three cards in partner's major → raise it at the three level", cards(h, his)) {
 		return c, m(-1, -1,
 			"3 cartes dans votre majeure",
 			"three-card support for your major").withLen(his, 3)
@@ -1331,7 +1338,8 @@ func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// but it denies nothing either: the responder may well hold four hearts
 	// alongside his five spades, and the 4-4 fit is worth more than the
 	// notrump the stopper would offer.
-	if c, ok := answer(f.Strain()); ok && f.IsMajor() && h.Len(f) >= 4 {
+	if c, ok := answer(f.Strain()); ok && f.IsMajor() && tr.check(h.Len(f) >= 4, "2. 4 cartes dans la troisième couleur, majeure → la soutenir",
+		"2. four cards in the third suit, a major → raise it", cards(h, f)) {
 		return c, m(-1, -1,
 			"pas 3 cartes dans votre majeure, mais 4 cartes à "+suitNameFR[f],
 			"no three-card support, but four cards in "+suitNameEN[f]).withLen(f, h.Len(f))
@@ -1339,7 +1347,8 @@ func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 
 	// 3. The stopper: the second question, and the one that settles the
 	// contract the side will most often play.
-	if c, ok := answer(SNoTrump); ok && h.Stopper(f) {
+	if c, ok := answer(SNoTrump); ok && tr.check(h.Stopper(f), "3. arrêt dans la troisième couleur ("+suitSymbol[f]+") → 3SA",
+		"3. a stopper in the third suit ("+suitSymbol[f]+") → 3NT", cards(h, f)) {
 		return c, m(-1, -1,
 			"pas 3 cartes dans votre majeure, mais l'arrêt à "+suitNameFR[f],
 			"no three-card support, but a stopper in "+suitNameEN[f]).withStopper(f)
@@ -1348,7 +1357,8 @@ func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// 4. Four cards in a minor third suit, without the stopper: not a fit to
 	// play, but the holding the notrump question was about -- partner now
 	// knows the guard has to come from his own hand.
-	if c, ok := answer(f.Strain()); ok && h.Len(f) >= 4 {
+	if c, ok := answer(f.Strain()); ok && tr.check(h.Len(f) >= 4, "4. 4 cartes dans la troisième couleur, sans arrêt → la nommer",
+		"4. four cards in the third suit, no stopper → bid it", cards(h, f)) {
 		mn := m(-1, -1,
 			"4 cartes à "+suitNameFR[f]+", sans l'arrêt",
 			"four cards in "+suitNameEN[f]+", without the stopper").withLen(f, h.Len(f))
@@ -1359,6 +1369,7 @@ func (e *Engine) thirdSuitAnswer(p *playerState, f Suit) (Call, meaning) {
 	// 5. Nothing to offer but the suit already shown twice: no support, no
 	// stopper, and the trick source is where it has always been.
 	minor := Suit(e.openCall.Strain)
+	tr.note("5. ni soutien ni arrêt → répéter la couleur d'ouverture", "5. neither support nor stopper → repeat the opening suit")
 	if c, ok := answer(minor.Strain()); ok {
 		mn := m(-1, -1,
 			"ni soutien ni arrêt à "+suitNameFR[f]+" : répétition de la couleur d'ouverture",
@@ -2384,6 +2395,7 @@ func (e *Engine) afterKings(p *playerState, tr *tracer) (Call, meaning) {
 	case target == 7:
 		return c, m(-1, -1, "grand chelem sur la force combinée, une clef compensée", "grand slam on combined strength, one key covered")
 	default:
+		tr.note("sinon → petit chelem", "otherwise → small slam")
 		return c, m(-1, -1, "petit chelem, une clef manquante", "small slam, a key is missing")
 	}
 }
@@ -2663,8 +2675,12 @@ func (e *Engine) afterKeycards(p *playerState, tr *tracer) (Call, meaning) {
 	case 7:
 		return c, m(-1, -1, "grand chelem, toutes les cartes clefs", "grand slam, all keycards held")
 	case 6:
+		if aimed == 6 {
+			tr.note("→ petit chelem", "→ small slam")
+		}
 		return c, m(-1, -1, "petit chelem", "small slam")
 	default:
+		tr.note("cartes clefs ou points insuffisants → arrêt à 5", "keycards or strength missing → stop at the five level")
 		return c, m(-1, -1, "arrêt à 5, cartes clefs ou points insuffisants", "signs off at the five level, keycards or strength missing")
 	}
 }
@@ -2742,8 +2758,10 @@ func (e *Engine) afterKeycardsNT(p *playerState, tr *tracer) (Call, meaning) {
 	case 7:
 		return c, m(-1, -1, "grand chelem à Sans-Atout, tous les As", "grand slam in notrump, all aces held")
 	case 6:
+		tr.note("→ petit chelem à Sans-Atout", "→ small slam in notrump")
 		return c, m(-1, -1, "petit chelem à Sans-Atout", "small slam in notrump")
 	default:
+		tr.note("au moins deux As manquants → arrêt à 5SA", "at least two aces missing → stop at 5NT")
 		return c, m(-1, -1, "arrêt à 5SA, au moins deux As manquants", "signs off at 5NT, at least two aces missing")
 	}
 }

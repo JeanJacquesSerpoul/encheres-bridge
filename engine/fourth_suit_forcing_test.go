@@ -260,7 +260,7 @@ func TestFourthSuitAnswerShapes(t *testing.T) {
 			e.calls = append(e.calls,
 				SeatCall{Seat: 0, Call: bidSuit(2, Diamonds), M: ask},
 				SeatCall{Seat: 1, Call: passCall})
-			c, mn := e.fourthSuitAnswer(e.ps[2], Diamonds)
+			c, mn := e.fourthSuitAnswer(e.ps[2], Diamonds, nil)
 			if got := c.Format("fr"); got != tc.call {
 				t.Fatalf("answer = %s (%s), want %s", got, mn.fr, tc.call)
 			}

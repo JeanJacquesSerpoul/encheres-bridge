@@ -251,6 +251,7 @@ func openingSuitT(h *Hand, tr *tracer) Suit {
 			"exactly 5♠-5♣ with 14+ H → 1♣", cards(h, Clubs)+", "+pts(h.H(), "H")) {
 			return Clubs // 5S-5C: 1C recommended from 14H
 		}
+		tr.note("sinon → 1♠", "otherwise → 1♠")
 		return Spades
 	}
 	if tr.check(lh >= 5 && lh >= ls && lh >= lc && lh >= ld,
@@ -580,6 +581,7 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			// A two-over-one response commits the partnership to game regardless
 			// of opener's rebid: the auction must not be passed out below game.
 			e.gameForce[sideOf(p.seat)] = true
+			tr.note("→ 2 sur 1, forcing de manche", "→ two-over-one, game forcing")
 			return bidSuit(lvl, s), m(11, 40, "changement de couleur 2 sur 1, 11HL et plus, forcing de manche", "two-over-one response, 11+ HL, game forcing").withLen(s, min(4, h.Len(s))).asForcing()
 		}
 	}
@@ -992,6 +994,7 @@ func (e *Engine) respondMinor(p *playerState, ms Suit) (Call, meaning) {
 		if tr.check(hld >= 11, "11-12 HLD → soutien à 3", "11-12 HLD → limit raise", pts(hld, "HLD")) {
 			return bidSuit(3, ms), m(11, 12, "soutien à 3, 11-12HLD", "limit raise, 11-12 HLD").withLen(ms, sup).asInvite()
 		}
+		tr.note("sinon, 6-10 HLD → soutien simple à 2", "otherwise, 6-10 HLD → single raise to two")
 		return bidSuit(2, ms), m(6, 10, "soutien simple, 6-10HLD, dénie une majeure", "single raise, 6-10 HLD, denies a major").withLen(ms, sup)
 	}
 	if tr.check(hl >= 11 && h.Len(other) >= 4,
@@ -1056,6 +1059,7 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 				c = bid(3, SHearts)
 			}
 		}
+		tr.note("→ Texas pour la majeure cinquième", "→ transfer to the five-card major")
 		mn := m(0, 40, "Texas pour la majeure cinquième", "transfer, five-card major").withLen(M, 5).asForcing()
 		mn.hasTexas, mn.texas = true, M
 		completion := bid(c.Level, M.Strain())
@@ -2168,12 +2172,16 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 	h := p.hand
 	hl := h.HL()
 	oc := e.openCall
+	tr := e.tr
 
 	if oc == bid(1, SNoTrump) {
 		if suits := e.opponentSuits(p); len(suits) == 1 {
-			return e.respondRubensohl(p, suits[0])
+			return e.untraced(e.respondRubensohl(p, suits[0]))
 		}
 	}
+	ocFR, ocEN := callSym(oc)
+	tr.note("les adversaires sont intervenus sur l'ouverture ("+ocFR+") : réponse en compétition",
+		"the opponents came in over the opening ("+ocEN+"): competitive response")
 
 	// An unbid major comes before any support of the opening [Rm-2, RC-1b]:
 	// supporting would deny it, and the fit most often lies there. Five cards
@@ -2192,7 +2200,8 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 			rho := e.calls[n-1]
 			overcalled = rho.Call.IsBid() && rho.Call.Strain <= SSpades && sideOf(rho.Seat) != sideOf(p.seat)
 		}
-		if !(os.IsMajor() && h.Len(os) >= 3) {
+		if !(os.IsMajor() && tr.check(h.Len(os) >= 3, "3 cartes dans la majeure d'ouverture : le fit est déjà connu",
+			"three cards in the opened major: the fit is already known", cards(h, os))) {
 			best, bestLen := Suit(-1), 0
 			for _, s := range []Suit{Spades, Hearts} {
 				c := e.cheapestCall(s.Strain())
@@ -2214,7 +2223,10 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 					best, bestLen = s, h.Len(s)
 				}
 			}
-			if best >= 0 {
+			if tr.check(best >= 0,
+				"majeure libre : 5 cartes (4 sur un contre au palier de 1), 6 HL au palier de 1, 11 au palier de 2 → la nommer, forcing",
+				"free major: five cards (four over a double at the one level), 6 HL at the one level, 11 at the two level → bid it, forcing",
+				cards(h, Spades)+", "+cards(h, Hearts)+", "+pts(hl, "HL")) {
 				c := e.cheapestCall(best.Strain())
 				fr, en, floor := "changement de couleur au palier de 1, forcing", "one-level new suit, forcing", 6
 				if c.Level == 2 {
@@ -2222,7 +2234,10 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 				}
 				return c, m(floor, 40, fr, en).withLen(best, bestLen).asForcing()
 			}
-			if c, mn, ok := e.spoutnikDouble(p, os, oppBid, overcalled); ok {
+			if c, mn, ok := e.spoutnikDouble(p, os, oppBid, overcalled); tr.check(ok,
+				"exactement 4 cartes dans une majeure libre, 6 HL (8 sur un palier de 2) → contre Spoutnik",
+				"exactly four cards in a free major, 6 HL (8 over a two-level bid) → negative double",
+				cards(h, Spades)+", "+cards(h, Hearts)+", "+pts(hl, "HL")) {
 				return c, mn
 			}
 		}
@@ -2234,7 +2249,9 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 			rho = e.calls[len(e.calls)-1].Call
 		}
 		doubled := rho.Kind == KindDouble
-		if c, mn, ok := e.competitiveRencontre(p, Suit(oc.Strain), doubled, rho); ok {
+		if c, mn, ok := e.competitiveRencontre(p, Suit(oc.Strain), doubled, rho); tr.check(ok,
+			"fit et belle couleur annexe → enchère de rencontre en compétition",
+			"fit and a good side suit → competitive fit-showing bid", callOrEmpty(c, ok)) {
 			return c, mn
 		}
 	}
@@ -2246,14 +2263,19 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 		if !os.IsMajor() {
 			minSup = 4
 		}
-		if sup >= minSup {
+		if tr.check(sup >= minSup, fmt.Sprintf("fit : %d cartes et plus dans la couleur d'ouverture", minSup),
+			fmt.Sprintf("fit: %d+ cards in the opened suit", minSup), cards(h, os)) {
 			hld := h.HLD(os)
 			// From 13 HLD game values are known: conclude directly instead of
 			// a limit raise that a minimum opener would pass.
-			if hld >= 13 {
-				if c, mn := e.conclude(p); c.Kind != KindPass {
+			if tr.check(hld >= 13, "13 HLD et plus : la manche est connue → décision sur la force combinée",
+				"13+ HLD: game values are known → decision on combined strength", pts(hld, "HLD")) {
+				mark := tr.mark()
+				tr.in()
+				if c, mn := e.concludeFrom(p, tr); c.Kind != KindPass {
 					return c, mn
 				}
+				tr.rewind(mark)
 			}
 			// Law of total tricks (Jean-René Vernes): the number of tricks
 			// available to both sides combined is approximately the number
@@ -2280,8 +2302,11 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 				return cheapest
 			}
 			byLaw := lawLevel > cheapest.Level
+			tr.check(byLaw, "loi des levées totales : 9 atouts valent le palier de 3, 10 le palier de 4",
+				"law of total tricks: 9 trumps are worth the three level, 10 the four level",
+				fmt.Sprintf("%d + %d %s", sup, partner.shownLens[os], suitSymbol[os]))
 			switch {
-			case hld >= 11:
+			case tr.check(hld >= 11, "11 HLD et plus → soutien en compétition", "11+ HLD → competitive raise", pts(hld, "HLD")):
 				c := raiseTo()
 				if c.Level <= 4 {
 					mn := m(11, 40, "soutien en compétition, 11HLD et plus", "competitive raise, 11+ HLD").withLen(os, sup)
@@ -2292,7 +2317,7 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 					}
 					return c, mn
 				}
-			case hld >= 6:
+			case tr.check(hld >= 6, "6-10 HLD → soutien simple", "6-10 HLD → simple raise", pts(hld, "HLD")):
 				c := raiseTo()
 				if c.Level <= 4 {
 					fr, en := "soutien simple en compétition", "competitive single raise"
@@ -2319,6 +2344,8 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 			}
 			c := e.cheapestCall(s.Strain())
 			if h.Len(s) >= 4 && c.Level == 1 {
+				tr.check(true, "couleur quatrième au palier de 1, 6 HL → la nommer, forcing",
+					"four-card suit at the one level, 6 HL → bid it, forcing", cards(h, s)+", "+pts(hl, "HL"))
 				return c, m(6, 40, "changement de couleur au palier de 1, forcing", "one-level new suit, forcing").withLen(s, 4).asForcing()
 			}
 		}
@@ -2336,19 +2363,23 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 				best, bestLen = s, h.Len(s)
 			}
 		}
-		if bestLen > 0 {
+		if tr.check(bestLen > 0, "couleur cinquième au palier de 2, 11 HL → la plus longue, forcing",
+			"five-card suit at the two level, 11 HL → the longest, forcing", pts(hl, "HL")) {
 			return e.cheapestCall(best.Strain()), m(11, 40, "changement de couleur 2 sur 1, forcing", "two-over-one new suit, forcing").withLen(best, 5).asForcing()
 		}
 	}
-	if hl >= 8 && hl <= 10 && last.IsBid() && last.Strain <= SSpades && h.Stopper(Suit(last.Strain)) {
+	if tr.check(hl >= 8 && hl <= 10 && last.IsBid() && last.Strain <= SSpades && h.Stopper(Suit(last.Strain)),
+		"8-10 HL et un arrêt dans leur couleur → 1SA", "8-10 HL and a stopper in their suit → 1NT", pts(hl, "HL")) {
 		c := e.cheapestCall(SNoTrump)
 		if c.Level == 1 {
 			return c, m(8, 10, "1SA, 8-10HL avec arrêt", "1NT, 8-10 HL with a stopper")
 		}
 	}
-	if hl >= 11 {
-		return e.conclude(p)
+	if tr.check(hl >= 11, "11 HL et plus → décision sur la force combinée", "11+ HL → decision on combined strength", pts(hl, "HL")) {
+		tr.in()
+		return e.concludeFrom(p, tr)
 	}
+	tr.note("aucune réponse ne s'applique → Passe", "no response applies → Pass")
 	// This pass denies 11 HL and nothing less. While 1SA is still available at
 	// the one level, an 8-10 hand with a stopper would have taken it, so the
 	// pass reads as weak and keeps its 0-7 ceiling. Once the intervention has
@@ -2975,7 +3006,7 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 	rm := resp.lastM
 
 	if !hasResp || rsc.Call.Kind == KindPass {
-		return e.untraced(e.openerReopen(p, os))
+		return e.openerReopen(p, os)
 	}
 	rc := rsc.Call
 	if rc.Kind != KindBid {
@@ -3079,12 +3110,14 @@ func (e *Engine) naturalRebid(p *playerState, rsc SeatCall, hasResp bool) (Call,
 					return c, m(17, 21, "essai de manche généralisé", "generalized game try").asInvite()
 				}
 				if c := bidSuit(3, os); e.legal(p.seat, c) {
+					tr.note("2SA déjà dépassé → essai en répétant l'atout au palier de 3", "2NT already passed → try by repeating the trump at the three level")
 					return c, m(17, 21, "enchère d'essai pour la manche", "game try").asInvite()
 				}
 				// The opponents' bidding has taken every spot below game: a
 				// bid of the trump suit here can no longer be a try (it lands
 				// at the game level itself), so call it what it is.
 				if c := e.cheapestCall(os.Strain()); e.legal(p.seat, c) {
+					tr.note("plus de place pour un essai → la manche", "no room left for a try → game")
 					return c, m(17, 21, "conclusion à la manche, plus de place pour un essai", "bidding game outright, no room left to try")
 				}
 				return e.untraced(e.conclude(p))
@@ -3579,18 +3612,26 @@ func (e *Engine) openerReopen(p *playerState, os Suit) (Call, meaning) {
 	h := p.hand
 	hp := h.H()
 	last, lastSeat, hasBid := e.lastBid()
-	if !hasBid || sideOf(lastSeat) == sideOf(p.seat) {
+	tr := e.tr
+	tr.note("le partenaire a passé : réouvrir ou laisser jouer", "partner passed: reopen or let them play")
+	if !tr.check(hasBid && sideOf(lastSeat) != sideOf(p.seat), "les adversaires ont la dernière enchère",
+		"the opponents hold the last bid", "") {
+		tr.note("notre ouverture tient → Passe", "our opening stands → Pass")
 		return passCall, noInfo()
 	}
-	if hp >= 18 && last.Level <= 3 && e.legal(p.seat, doubleCall) {
+	if tr.check(hp >= 18 && last.Level <= 3 && e.legal(p.seat, doubleCall),
+		"18 H et plus, enchère adverse au plus au palier de 3 → contre de réveil",
+		"18+ H, their bid at the three level at most → reopening double", pts(hp, "H")) {
 		return doubleCall, m(18, 23, "contre de réveil, jeu fort", "strong reopening double").asForcing()
 	}
-	if h.Len(os) >= 6 {
+	if tr.check(h.Len(os) >= 6, "6 cartes dans la couleur d'ouverture → la répéter (au plus au palier de 3)",
+		"six cards in the opened suit → rebid it (at most at the three level)", cards(h, os)) {
 		c := e.cheapestCall(os.Strain())
 		if c.Level <= 3 {
 			return c, m(12, 17, "répétition, 6 cartes", "rebid, six cards").withLen(os, 6)
 		}
 	}
+	tr.note("rien à ajouter → Passe", "nothing to add → Pass")
 	return passCall, noInfo()
 }
 
@@ -4660,6 +4701,10 @@ func (e *Engine) advance(p *playerState) (Call, meaning) {
 				}
 			}
 		}
+	}
+	if !psc.Call.IsBid() && psc.Call.Kind != KindDouble {
+		tr.check(false, "le partenaire vient d'enchérir (couleur, Sans-Atout ou contre)",
+			"partner has just bid (a suit, notrump or a double)", "")
 	}
 	tr.note("aucune réponse ne s'applique → Passe", "no advance applies → Pass")
 	return passCall, m(0, 7, "", "")

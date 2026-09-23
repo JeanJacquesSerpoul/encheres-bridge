@@ -1,6 +1,9 @@
 package engine
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 // Nord 1♣ (régulier 14 H), Sud 1♠, Nord 1SA (12-14) : la seconde enchère de
 // Sud est la décision générale de la suite de l'enchère, sur la force
@@ -50,4 +53,27 @@ func TestTraceRewind(t *testing.T) {
 	}
 	var nilTr *tracer
 	nilTr.rewind(nilTr.mark())
+}
+
+// TestTraceEndsOnConclusion: over random deals, no trace stops on a test that
+// failed -- the call would then come with no explanation. The last line is
+// always the test that held, or a note naming the outcome. Every step also
+// carries its label in both languages.
+func TestTraceEndsOnConclusion(t *testing.T) {
+	rng := rand.New(rand.NewSource(7))
+	for i := 0; i < 1500; i++ {
+		for _, sc := range NewEngine(randomDeal(rng)).Run() {
+			if len(sc.Trace) == 0 {
+				continue
+			}
+			for _, s := range sc.Trace {
+				if s.fr == "" || s.en == "" {
+					t.Fatalf("étape sans libellé dans les deux langues : %+v", s)
+				}
+			}
+			if end := sc.Trace[len(sc.Trace)-1]; !end.ok && !end.note {
+				t.Errorf("%s : la trace finit sur un test qui ne tient pas\n%v", sc.Call.Format("fr"), sc.Trace)
+			}
+		}
+	}
 }

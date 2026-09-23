@@ -357,6 +357,8 @@ func init() {
 			// the cheapest level -- nothing else may be read as extra values.
 			// With them, fall through to the descriptive machinery below.
 			name: "answer-overcall-strength-ask",
+			fr:   "le partenaire demande la force de mon intervention par un cue-bid",
+			en:   "partner asks the strength of my overcall with a cue-bid",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && (ctx.pm.overcallAsk || ctx.pm.reopenAsk) && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
@@ -389,7 +391,8 @@ func init() {
 				// HLD would let a wild two-suiter -- 7 H, two singletons --
 				// vault a minimum overcall into the describing branch and
 				// bid a phantom notrump [A-6].
-				if p.hand.HL() < floor {
+				if ctx.tr.check(p.hand.HL() < floor, fmt.Sprintf("moins de %d HL : minimum → retour à ma couleur au plus bas", floor),
+					fmt.Sprintf("under %d HL: minimum → back to my suit at the lowest level", floor), pts(p.hand.HL(), "HL")) {
 					c := e.cheapestCall(own.Strain())
 					if c.Level > 3 || !e.legal(p.seat, c) {
 						return Call{}, meaning{}, false
@@ -415,7 +418,8 @@ func init() {
 						second, secondLen = s, p.hand.Len(s)
 					}
 				}
-				if secondLen >= 4 {
+				if ctx.tr.check(secondLen >= 4, "maximum : une deuxième couleur de 4 cartes → la nommer",
+					"maximum: a second four-card suit → bid it", shape(p.hand)) {
 					c := e.cheapestCall(second.Strain())
 					if c.Level <= 3 && e.legal(p.seat, c) {
 						return c, m(maxLo, maxHi, topFR+", deuxième couleur", topEN+", second suit").withLen(second, secondLen), true
@@ -427,7 +431,7 @@ func init() {
 						stopped = false
 					}
 				}
-				if stopped {
+				if ctx.tr.check(stopped, "maximum : leurs couleurs arrêtées → Sans-Atout", "maximum: their suits stopped → notrump", "") {
 					c := e.cheapestCall(SNoTrump)
 					if c.Level <= 3 && e.legal(p.seat, c) {
 						return c, m(maxLo, maxHi, topFR+", arrêt dans leur couleur", topEN+", their suit held"), true
@@ -435,7 +439,8 @@ func init() {
 				}
 				c := e.cheapestCall(own.Strain())
 				c = bid(c.Level+1, own.Strain())
-				if c.Level <= 4 && e.legal(p.seat, c) {
+				if ctx.tr.check(c.Level <= 4 && e.legal(p.seat, c), "maximum, sinon → saut dans ma couleur",
+					"maximum, otherwise → jump in my suit", "") {
 					return c, m(maxLo, maxHi, topFR+", saut dans ma couleur", topEN+", jump in my suit").withLen(own, ownLen), true
 				}
 				return Call{}, meaning{}, false
@@ -586,11 +591,13 @@ func init() {
 			// The answer comes before any generic valuation: the third suit
 			// is a question, not a suit to raise.
 			name: "answer-third-suit-forcing",
+			fr:   "le partenaire a nommé la troisième couleur (forcing de manche) : 3 cartes dans sa majeure ? arrêt ?",
+			en:   "partner bid the third suit (game forcing): three cards in partner's major? a stopper?",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.thirdSuit && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				c, mn := e.thirdSuitAnswer(ctx.p, ctx.pm.thirdSuitSuit)
+				c, mn := e.thirdSuitAnswer(ctx.p, ctx.pm.thirdSuitSuit, ctx.tr)
 				if c.Kind == KindPass {
 					return Call{}, meaning{}, false
 				}
@@ -605,11 +612,13 @@ func init() {
 			// the full extent of the hand, and must come before any generic
 			// valuation: the fourth suit is not a suit to raise.
 			name: "answer-fourth-suit-forcing",
+			fr:   "le partenaire a nommé la quatrième couleur (forcing) : se décrire",
+			en:   "partner bid the fourth suit (forcing): describe the hand",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.pm != nil && ctx.pm.fourthSuit && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				c, mn := e.fourthSuitAnswer(ctx.p, ctx.pm.fourthSuitSuit)
+				c, mn := e.fourthSuitAnswer(ctx.p, ctx.pm.fourthSuitSuit, ctx.tr)
 				if c.Kind == KindPass {
 					return Call{}, meaning{}, false
 				}
@@ -634,6 +643,8 @@ func init() {
 			// clarifying the strength of his reverse, and the side then knows
 			// whether to settle in a partscore or bid the game.
 			name: "answer-reverse",
+			fr:   "l'ouvreur a fait un bicolore cher (18 HL et plus, forcing)",
+			en:   "opener reversed (18+ HL, forcing)",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				p := ctx.p
 				return ctx.pm != nil && ctx.pm.reverse && ctx.ours &&
@@ -647,14 +658,15 @@ func init() {
 						continue
 					}
 					c := e.cheapestCall(s.Strain())
-					if c.Level <= 3 && e.legal(p.seat, c) {
+					if ctx.tr.check(c.Level <= 3 && e.legal(p.seat, c), "majeure cinquième déjà nommée → la répéter, forcing un tour",
+						"five-card major already bid → repeat it, forcing one round", cards(p.hand, s)) {
 						return c, m(-1, -1,
 							"répétition de la majeure cinquième sur le bicolore cher, forcing un tour",
 							"repeats the five-card major over the reverse, forcing one round").
 							withLen(s, 5).asForcing(), true
 					}
 				}
-				if p.hand.H() <= 7 {
+				if ctx.tr.check(p.hand.H() <= 7, "5-7 H → 2SA modérateur (coup de frein)", "5-7 H → 2NT brake", pts(p.hand.H(), "H")) {
 					c := bid(2, SNoTrump)
 					if c.higherThan(ctx.last) && e.legal(p.seat, c) {
 						mn := m(5, 7,
@@ -1774,11 +1786,16 @@ func init() {
 			// stopper in the suit above his minor -- are cards no count can
 			// guess. Naming that suit asks for them.
 			name: "third-suit-forcing",
+			fr:   "l'ouvreur a répété sa mineure : chercher le fit 5-3 ou l'arrêt",
+			en:   "opener repeated the minor: look for the 5-3 fit or the stopper",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return ctx.partnerJustActed && sideOf(ctx.p.seat) == sideOf(e.opener)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				return e.thirdSuitAsk(ctx.p)
+				c, mn, ok := e.thirdSuitAsk(ctx.p)
+				ctx.tr.check(ok, "majeure cinquième exactement, 11 H, pas de fit majeur → troisième couleur forcing (forcing de manche)",
+					"exactly five cards in my major, 11 H, no major fit → third suit forcing (game forcing)", callOrEmpty(c, ok))
+				return c, mn, ok
 			},
 		},
 		{
@@ -1789,11 +1806,16 @@ func init() {
 			// instead of guessing at notrump without a stopper or at a game
 			// in a fit that may not exist.
 			name: "fourth-suit-forcing",
+			fr:   "trois couleurs nommées sans fit : la quatrième peut servir de question",
+			en:   "three suits bid without a fit: the fourth can be used as a question",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				return !ctx.hasFit && ctx.partnerJustActed && sideOf(ctx.p.seat) == sideOf(e.opener)
 			},
 			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
-				return e.fourthSuitAsk(ctx.p)
+				c, mn, ok := e.fourthSuitAsk(ctx.p)
+				ctx.tr.check(ok, "10 H, pas de fit, majeure cinquième ou pas d'arrêt dans la 4e couleur → quatrième couleur forcing",
+					"10 H, no fit, a five-card major or no stopper in the fourth suit → fourth suit forcing", callOrEmpty(c, ok))
+				return c, mn, ok
 			},
 		},
 		{
@@ -2015,6 +2037,8 @@ func init() {
 			// worse "fit"; with a six-card suit of its own already shown, the
 			// hand corrects to it at the lowest level (never beyond its game).
 			name: "misfit-retreat",
+			fr:   "misfit : un singleton ou une chicane dans la couleur du partenaire, pas de fit septième",
+			en:   "misfit: a singleton or void in partner's suit, no seven-card fit",
 			when: func(e *Engine, ctx *concludeCtx) bool {
 				if !ctx.hasBid || !ctx.ours || ctx.lastSeat != partnerOf(ctx.p.seat) ||
 					ctx.hasFit || ctx.pm == nil || ctx.pm.forcing || ctx.pm.relay || ctx.pm.blackwood ||
@@ -2034,6 +2058,7 @@ func init() {
 					if !c.higherThan(last) || c.steps() > gameOfTrump(s).steps() || !e.legal(p.seat, c) {
 						continue
 					}
+					ctx.tr.check(true, "couleur sixième déjà nommée → y revenir au plus bas", "six-card suit already bid → back to it at the lowest level", cards(p.hand, s))
 					return c, m(-1, -1, "misfit : retour dans la couleur sixième", "misfit: corrects to the six-card suit").withLen(s, p.hand.Len(s)), true
 				}
 				return Call{}, meaning{}, false

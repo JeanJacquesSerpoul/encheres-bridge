@@ -333,6 +333,7 @@ const UI_TEXT = {
     quizShowDetail: "Afficher le détail complet",
     quizDealHidden: "Donne masquée pendant le questionnaire.",
     quizShowDeal: "Afficher la donne",
+    quizCancel: "Annuler",
     quizReplay: "Rejouer cette donne",
     quizNewDeal: "Nouvelle donne",
     hiddenHand: "main cachée",
@@ -461,6 +462,7 @@ const UI_TEXT = {
     quizShowDetail: "Show full detail",
     quizDealHidden: "Deal hidden during the quiz.",
     quizShowDeal: "Show the deal",
+    quizCancel: "Cancel",
     quizReplay: "Replay this deal",
     quizNewDeal: "New deal",
     hiddenHand: "hidden hand",
@@ -3535,6 +3537,16 @@ function setDealHidden(hidden) {
 
 $("#quiz-show-deal-btn").addEventListener("click", () => setDealHidden(false));
 
+// Abandonne le questionnaire en cours : il se referme, la donne composée
+// revient, et la page remonte jusqu'à elle.
+function cancelQuiz() {
+  resetQuiz();
+  setError($("#error"), "");
+  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+$("#quiz-cancel-btn").addEventListener("click", cancelQuiz);
+
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
 function hideResult() {
   $("#result-panel").classList.add("hidden");
@@ -3739,6 +3751,8 @@ function finishQuiz() {
   renderQuizHands(true);
   // Les mains sont dévoilées dans le questionnaire : la donne peut revenir.
   setDealHidden(false);
+  // Plus rien à annuler : le score propose ses propres suites.
+  $("#quiz-cancel-btn").classList.add("hidden");
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const r = quiz.result;
@@ -3801,6 +3815,7 @@ async function startQuiz() {
     $("#quiz-panel").classList.remove("hidden");
     $("#quiz-score").classList.add("hidden");
     setDealHidden(true);
+    $("#quiz-cancel-btn").classList.remove("hidden");
     renderQuizHands();
     renderQuizStep();
     $("#quiz-panel").scrollIntoView({ behavior: "smooth", block: "start" });

@@ -42,7 +42,7 @@ type Config struct {
 
 // Load reads environment variables and returns a validated Config.
 func Load() (*Config, error) {
-	port := getEnvOrDefault("PORT", "9009")
+	port := getEnvOrDefault("PORT", "9013")
 
 	openRouterAPIKey := strings.TrimSpace(os.Getenv("OPENROUTER_API_KEY"))
 	if openRouterAPIKey == "" {

@@ -29,6 +29,6 @@ COPY --from=builder /out/server_ai .
 RUN addgroup -S -g 10001 aiserver && adduser -S -u 10001 -G aiserver aiserver
 USER 10001:10001
 
-EXPOSE 9009
+EXPOSE 9013
 
 ENTRYPOINT ["/app/server_ai"]

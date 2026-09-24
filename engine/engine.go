@@ -1822,12 +1822,17 @@ func (e *Engine) controlRelayAnswer(p *playerState, trump, asked Suit) (Call, me
 // partner's own length has no such failure mode: it is a fact about the fit
 // that no control bid can express, and it stays wrong however strong the rest
 // of the hand is.
+//
+// Except when the singleton is an honour -- the ace, king or queen: it is not
+// waste facing partner's length but a card that fills his suit (♣Q opposite
+// ♣AK542), and the hand is free to start the controls. The reservation stays
+// for the low singletons and the voids (see singletonHonour).
 func (e *Engine) slamDoubtNT(p *playerState, trump Suit) (Call, meaning, bool) {
 	h := p.hand
 	partner := e.ps[partnerOf(p.seat)]
 	short := false
 	for s := Clubs; s <= Spades; s++ {
-		if s != trump && partner.shownLens[s] >= 4 && h.Len(s) <= 1 {
+		if s != trump && partner.shownLens[s] >= 4 && h.Len(s) <= 1 && !singletonHonour(h, s) {
 			short = true
 		}
 	}
@@ -1870,7 +1875,7 @@ func (e *Engine) hldFacingPartner(p *playerState, trump Suit) int {
 	v := p.hand.HLD(trump)
 	partner := e.ps[partnerOf(p.seat)]
 	for s := Clubs; s <= Spades; s++ {
-		if s == trump || partner.shownLens[s] < 4 {
+		if s == trump || partner.shownLens[s] < 4 || singletonHonour(p.hand, s) {
 			continue
 		}
 		switch p.hand.Len(s) {
@@ -1883,6 +1888,15 @@ func (e *Engine) hldFacingPartner(p *playerState, trump Suit) int {
 		}
 	}
 	return v
+}
+
+// singletonHonour reports a singleton ace, king or queen. Facing partner's
+// long suit it is not the waste a low singleton is: it fills the suit (the
+// stiff queen opposite AK542 makes the top three tricks), so neither the slam
+// valuation (hldFacingPartner) nor the 3NT "oui mais" (slamDoubtNT) holds it
+// against the hand.
+func singletonHonour(h *Hand, s Suit) bool {
+	return h.Len(s) == 1 && (h.HasCard(s, 'A') || h.HasCard(s, 'K') || h.HasCard(s, 'Q'))
 }
 
 // slamProbeArmed reports the shared gate of the two slam-probe handlers: a fit,

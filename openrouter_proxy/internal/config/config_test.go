@@ -23,7 +23,7 @@ func TestLoadDefaults(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Load() error = %v", err)
 	}
-	if cfg.Port != "9009" {
+	if cfg.Port != "9013" {
 		t.Fatalf("unexpected port: %q", cfg.Port)
 	}
 	if cfg.DefaultModel != DefaultModel {

@@ -10,7 +10,7 @@ navigateur : le client, lui, n'envoie qu'une image et un prompt.
 
 ```bash
 cp .env.example .env      # puis renseigner OPENROUTER_API_KEY
-go run .                  # écoute sur http://localhost:9009
+go run .                  # écoute sur http://localhost:9013
 ```
 
 ```bash
@@ -18,7 +18,7 @@ docker compose up --build -d
 ```
 
 Le client vise ce port par défaut : dans l'en-tête, **Serveur IA → Local** vaut
-`http://localhost:9009`. Tant que `/health` répond, les boutons appareil photo
+`http://localhost:9013`. Tant que `/health` répond, les boutons appareil photo
 s'allument.
 
 ## Configuration
@@ -29,7 +29,7 @@ Tout passe par l'environnement ; `.env` est lu au démarrage s'il existe.
 |----------------------|---------------------------------|-------------|-------------|
 | `OPENROUTER_API_KEY` | —                               | **Oui**     | Clé d'API OpenRouter |
 | `DEFAULT_MODEL`      | `google/gemini-3.1-flash-lite`  | Non         | Modèle interrogé quand la requête n'en nomme pas |
-| `PORT`               | `9009`                          | Non         | Port d'écoute |
+| `PORT`               | `9013`                          | Non         | Port d'écoute |
 | `MAX_TOKENS`         | `10000`                         | Non         | Plafond de tokens par réponse |
 | `TIMEOUT`            | `60`                            | Non         | Délai d'attente d'OpenRouter, en secondes |
 | `CORS_ORIGINS`       | `*`                             | Non         | Origines autorisées, séparées par des virgules (`CORS_ALLOWED_ORIGINS`, le nom d'aiproxy, est accepté aussi) |
@@ -91,7 +91,7 @@ Corps `application/json`, 10 Mio au plus (la photo y voyage en base64) :
 | `provider` | string | Non         | `OPENROUTER` uniquement ; toléré pour les clients venus d'aiproxy |
 
 ```bash
-curl -X POST http://localhost:9009/api/chat \
+curl -X POST http://localhost:9013/api/chat \
   -H "Content-Type: application/json" \
   -d '{"text": "Combien de cartes vois-tu ?", "image": "data:image/jpeg;base64,..."}'
 ```
@@ -122,7 +122,7 @@ modèle avant de le mettre dans `DEFAULT_MODEL`. La route n'existe que si
 `ENABLE_MODELS_ENDPOINT=true` (sinon `404`).
 
 ```bash
-curl "http://localhost:9009/api/models" | head
+curl "http://localhost:9013/api/models" | head
 ```
 
 Un `?provider=` est toléré s'il vaut `OPENROUTER`.
@@ -141,7 +141,7 @@ le client attend alors l'URL complète dans **Serveur IA → Distant**. Avec Cad
 
 ```caddy
 handle_path /aiproxy* {
-    reverse_proxy localhost:9009
+    reverse_proxy localhost:9013
 }
 ```
 

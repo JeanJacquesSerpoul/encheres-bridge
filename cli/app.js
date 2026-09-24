@@ -11,11 +11,11 @@ const $ = (sel) => document.querySelector(sel);
 // Le serveur d'IA (aiproxy) prête son /api/chat à la lecture des cartes sur une
 // photo. Il est facultatif : sans lui tout le reste du client fonctionne, seuls
 // les boutons photo s'éteignent (voir renderPhotoButtons). En local il écoute
-// sur 9009 ; en production il est proxifié sous un préfixe propre au
+// sur 9013 ; en production il est proxifié sous un préfixe propre au
 // déploiement, d'où l'absence de valeur par défaut en distant : la figer ferait
 // pointer n'importe quelle copie du client vers un serveur qui n'est pas le
 // sien.
-const DEFAULT_LOCAL_IA = "http://localhost:9009";
+const DEFAULT_LOCAL_IA = "http://localhost:9013";
 const IA_LOCAL_KEY = "ia.local";
 const IA_REMOTE_KEY = "ia.remote";
 const IA_MODE_KEY = "ia.mode";

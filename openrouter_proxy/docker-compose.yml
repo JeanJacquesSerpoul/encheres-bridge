@@ -7,11 +7,11 @@ services:
     # Published on loopback only: the reverse proxy (or the local browser)
     # reaches it there. Set BIND_ADDR=0.0.0.0 to expose it on every interface.
     ports:
-      - "${BIND_ADDR:-127.0.0.1}:${PORT:-9009}:${PORT:-9009}"
+      - "${BIND_ADDR:-127.0.0.1}:${PORT:-9013}:${PORT:-9013}"
     env_file:
       - .env
     environment:
-      - PORT=${PORT:-9009}
+      - PORT=${PORT:-9013}
     security_opt:
       - no-new-privileges:true
     cap_drop:
@@ -22,7 +22,7 @@ services:
     mem_limit: 256m
     cpus: "1.0"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:${PORT:-9009}/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:${PORT:-9013}/health"]
       interval: 30s
       timeout: 5s
       retries: 3

@@ -357,6 +357,17 @@
           <div id="hand-E" class="hand seat-e"></div>
           <div id="hand-S" class="hand seat-s"></div>
         </div>
+        <!-- La table du questionnaire : votre main, des dos de cartes pour les
+             autres, et au centre le siège qui parle. Elle prend la place de la
+             donne masquée, à gauche, pour laisser à l'onglet S'entraîner la
+             grille et la boîte à enchères (voir style.css). -->
+        <div class="table-layout quiz-table" id="quiz-table">
+          <div id="qhand-N" class="hand seat-n"></div>
+          <div id="qhand-W" class="hand seat-w"></div>
+          <div class="table-center seat-c" id="qtable-center"></div>
+          <div id="qhand-E" class="hand seat-e"></div>
+          <div id="qhand-S" class="hand seat-s"></div>
+        </div>
         <div class="table-layout cons-layout">
           <div class="hand cons-hand seat-n" id="cons-N"></div>
           <div class="hand cons-hand seat-w" id="cons-W"></div>
@@ -534,13 +545,6 @@
       <div class="hidden" id="quiz-panel">
         <div id="quiz-turn" class="quiz-turn"></div>
 
-        <div class="table-layout">
-          <div id="qhand-N" class="hand seat-n"></div>
-          <div id="qhand-W" class="hand seat-w"></div>
-          <div class="table-center seat-c" id="qtable-center"></div>
-          <div id="qhand-E" class="hand seat-e"></div>
-          <div id="qhand-S" class="hand seat-s"></div>
-        </div>
 
         <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
         <table class="auction" id="quiz-auction-table">
@@ -665,7 +669,8 @@
         <ul>
           <li>Seule votre main est visible : la donne composée et les boutons sous la table sont masqués, et le restent une fois le questionnaire terminé. Le lien <b>Afficher la donne</b> les montre.</li>
           <li>Les enchères des autres joueurs s'affichent d'elles-mêmes, l'une après l'autre, brièvement surlignées.</li>
-          <li>À votre tour, la <b>boîte à enchères</b> ne propose que les enchères permises. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite.</li>
+          <li>Votre main et des dos de cartes pour les autres s'affichent sur la table, à la place de la donne masquée ; l'onglet garde la séquence et la boîte à enchères.</li>
+          <li>À votre tour, la <b>boîte à enchères</b> : choisissez un <b>palier</b> (1 à 7 ; le plus bas encore permis est déjà choisi), puis une <b>dénomination</b> (♣ ♦ ♥ ♠ SA), ou Passe, Contre, Surcontre. Elle ne propose que les enchères permises. Au clavier : un chiffre pour le palier, C D H S N pour la dénomination, P pour passer, X pour contrer. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite.</li>
           <li>Après une mauvaise réponse, <b>Voir l'arbre de décision</b> montre le chemin suivi par le moteur sur votre main : chaque règle examinée, dans l'ordre, avec ✓ ou ✗ et la valeur mesurée (points, longueurs), jusqu'à l'enchère attendue. Toutes les enchères du moteur ont leur arbre.</li>
           <li><b>Annuler</b> arrête le questionnaire à tout moment et revient à la donne (qui reste masquée en mode questionnaire).</li>
           <li>À la fin : les mains dévoilées, votre <b>score</b> (bonnes réponses et pourcentage), la liste de vos erreurs avec l'enchère attendue et son explication, le contrat final, et le choix de <b>rejouer</b> la donne, d'en tirer une <b>nouvelle</b> ou d'<b>afficher le détail complet</b>.</li>
@@ -737,7 +742,8 @@
         <ul>
           <li>Only your hand is shown: the deal built above and the buttons below the table are hidden, and stay hidden once the quiz is over. The <b>Show the deal</b> link shows them.</li>
           <li>The other players' calls appear on their own, one after another, briefly highlighted.</li>
-          <li>On your turn, the <b>bidding box</b> only offers legal calls. You see at once whether yours matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on.</li>
+          <li>Your hand, and card backs for the others, show on the table in place of the hidden deal; the tab keeps the auction and the bidding box.</li>
+          <li>On your turn, the <b>bidding box</b>: pick a <b>level</b> (1 to 7; the lowest one still allowed is already picked), then a <b>strain</b> (♣ ♦ ♥ ♠ NT), or Pass, Double, Redouble. It only offers legal calls. With the keyboard: a digit for the level, C D H S N for the strain, P to pass, X to double. You see at once whether yours matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on.</li>
           <li>After a wrong answer, <b>Show the decision tree</b> displays the path the engine followed on your hand: each rule examined, in order, with ✓ or ✗ and the measured value (points, lengths), down to the expected call. Every call the engine makes has its tree.</li>
           <li><b>Cancel</b> stops the quiz at any time and goes back to the deal (which stays hidden in quiz mode).</li>
           <li>At the end: the hands revealed, your <b>score</b> (right answers and percentage), the list of your mistakes with the expected call and why, the final contract, and the choice to <b>replay</b> the deal, draw a <b>new</b> one or <b>show the full detail</b>.</li>

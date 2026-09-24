@@ -229,6 +229,9 @@ const UI_TEXT = {
     // hors d'ici à dessein : parseBidToken s'en sert comme jetons de
     // comparaison, les déplacer découplerait l'affichage de la valeur.
     quizYourTurn: (seat) => `À vous de parler (${seat}) — choisissez votre enchère.`,
+    bbLevel: "Palier",
+    bbStrain: "Dénomination",
+    bbKeys: "Clavier : 1 à 7 pour le palier, C D H S N pour ♣ ♦ ♥ ♠ SA, P pour passe, X pour contre.",
     quizAboutToBid: (seat) => `${seat} va annoncer.`,
     quizCorrect: "✓ Correct !",
     quizWrong: "✗ Différent du système SEF",
@@ -384,6 +387,9 @@ const UI_TEXT = {
     auctionSeq: "Auction",
     continue: "Continue",
     quizYourTurn: (seat) => `Your turn to bid (${seat}) — choose your call.`,
+    bbLevel: "Level",
+    bbStrain: "Strain",
+    bbKeys: "Keyboard: 1 to 7 for the level, C D H S N for ♣ ♦ ♥ ♠ NT, P to pass, X to double.",
     quizAboutToBid: (seat) => `${seat} is about to bid.`,
     quizCorrect: "✓ Correct!",
     quizWrong: "✗ Not what the SEF system bids",
@@ -2055,8 +2061,10 @@ function renderDealMode() {
     editing ? t.editDone : t.editDeal, true);
   // Terminer sur une donne incomplète ne mènerait nulle part : le bouton dit
   // pourquoi il est éteint.
-  btn.disabled = editing && !dealComplete();
-  btn.title = btn.disabled ? t.editDoneBlocked : "";
+  // Donne masquée (questionnaire) : la modifier la dévoilerait.
+  const hidden = $("#input-panel").classList.contains("quiz-running");
+  btn.disabled = hidden || (editing && !dealComplete());
+  btn.title = btn.disabled && !hidden ? t.editDoneBlocked : "";
 }
 
 $("#edit-btn").addEventListener("click", () => {
@@ -3851,6 +3859,7 @@ function setDealHidden(hidden) {
   // Ouvrir le texte PBN ne montrerait rien — il est masqué lui aussi — et le
   // bouton resterait enfoncé sur un panneau invisible : il s'éteint.
   $("#pbn-toggle-btn").disabled = hidden;
+  renderDealMode();
   if (hidden) setPbnOpen(false);
   else scheduleAutoBid();
 }
@@ -3965,27 +3974,70 @@ function computeLegalCalls(calls, seat, lang) {
   };
 }
 
-function buildBiddingBoxHTML(lang, legal) {
-  const strains = STRAIN_ORDER[lang];
-  const rows = [];
+// La boîte à enchères, à la manière des boîtes de club : on choisit un palier,
+// puis une dénomination. Quinze boutons au lieu de trente-huit, et la boîte
+// tient à l'écran sans défiler. Le palier le plus bas encore permis est
+// présélectionné : l'enchère la moins chère reste à un clic. La légalité vient
+// toujours de computeLegalCalls.
+let bbLegal = null;
+let bbLevel = null;
+
+function lowestLegalLevel(legal) {
   for (let level = 1; level <= 7; level++) {
-    const cells = strains.map((code, strainIdx) => {
-      const rank = level * 5 + strainIdx;
-      const disabled = legal.isBidLegal(rank) ? "" : "disabled";
-      return `<button type="button" class="bb-btn" data-bid="${level}${code}" ${disabled}>${bidHTML(`${level}${code}`, lang)}</button>`;
-    });
-    rows.push(`<div class="bb-row">${cells.join("")}</div>`);
+    if (legal.isBidLegal(level * 5 + 4)) return level;
   }
+  return null;
+}
+
+function buildBiddingBoxHTML(lang, legal) {
+  const t = UI_TEXT[lang];
+  bbLegal = legal;
+  bbLevel = lowestLegalLevel(legal);
+  const levels = [];
+  for (let level = 1; level <= 7; level++) {
+    const disabled = legal.isBidLegal(level * 5 + 4) ? "" : "disabled";
+    levels.push(`<button type="button" class="bb-btn bb-level" data-level="${level}" ` +
+      `aria-pressed="${level === bbLevel}" ${disabled}>${level}</button>`);
+  }
+  const strains = STRAIN_ORDER[lang].map((code, idx) =>
+    `<button type="button" class="bb-btn bb-strain" data-strain="${code}" data-idx="${idx}"></button>`);
   const passText = lang === "fr" ? "Passe" : "Pass";
   const xText = lang === "fr" ? "Contre" : "X";
   const xxText = lang === "fr" ? "Surcontre" : "XX";
-  rows.push(`
-    <div class="bb-row bb-special">
-      <button type="button" class="bb-btn bb-pass" data-bid="${passText}">${esc(passText)}</button>
-      <button type="button" class="bb-btn bb-x" data-bid="${xText}" ${legal.isXLegal ? "" : "disabled"}>${esc(xText)}</button>
-      <button type="button" class="bb-btn bb-xx" data-bid="${xxText}" ${legal.isXXLegal ? "" : "disabled"}>${esc(xxText)}</button>
-    </div>`);
-  return `<div class="bb-grid">${rows.join("")}</div>`;
+  return `
+    <div class="bb-grid">
+      <div class="bb-row bb-levels" role="group" aria-label="${esc(t.bbLevel)}">${levels.join("")}</div>
+      <div class="bb-row bb-strains" role="group" aria-label="${esc(t.bbStrain)}">${strains.join("")}</div>
+      <div class="bb-row bb-special">
+        <button type="button" class="bb-btn bb-pass" data-bid="${passText}">${esc(passText)}</button>
+        <button type="button" class="bb-btn bb-x" data-bid="${xText}" ${legal.isXLegal ? "" : "disabled"}>${esc(xText)}</button>
+        <button type="button" class="bb-btn bb-xx" data-bid="${xxText}" ${legal.isXXLegal ? "" : "disabled"}>${esc(xxText)}</button>
+      </div>
+      <p class="bb-keys muted">${esc(t.bbKeys)}</p>
+    </div>`;
+}
+
+// Pose le palier choisi : les dénominations deviennent les enchères de ce
+// palier, chacune permise ou non.
+function renderBiddingStrains() {
+  const box = $("#bidding-box");
+  const lang = quiz ? quiz.lang : $("#lang").value;
+  for (const b of box.querySelectorAll(".bb-level")) {
+    b.setAttribute("aria-pressed", String(+b.dataset.level === bbLevel));
+  }
+  for (const b of box.querySelectorAll(".bb-strain")) {
+    const code = b.dataset.strain;
+    if (!bbLevel) {
+      b.disabled = true;
+      delete b.dataset.bid;
+      b.innerHTML = bidHTML(`1${code}`, lang).replace(/^1/, "");
+      continue;
+    }
+    const bid = `${bbLevel}${code}`;
+    b.dataset.bid = bid;
+    b.innerHTML = bidHTML(bid, lang);
+    b.disabled = !bbLegal.isBidLegal(bbLevel * 5 + +b.dataset.idx);
+  }
 }
 
 function renderQuizHands(revealAll) {
@@ -4043,6 +4095,7 @@ function renderQuizStep() {
     const legal = computeLegalCalls(quiz.calls, quiz.seat, lang);
     const box = $("#bidding-box");
     box.innerHTML = buildBiddingBoxHTML(lang, legal);
+    renderBiddingStrains();
     box.classList.remove("hidden");
   } else {
     $("#quiz-turn").textContent = t.quizAboutToBid(seatName);
@@ -4294,7 +4347,10 @@ async function startQuiz() {
     $("#quiz-cancel-btn").classList.remove("hidden");
     renderQuizHands();
     renderQuizStep();
-    selectTab("train", true);
+    // La table du questionnaire est dans le panneau de la donne, au-dessus de
+    // l'onglet sur écran étroit : c'est à elle qu'on descend.
+    selectTab("train");
+    revealPane($("#quiz-table"));
   } catch (err) {
     setError(errEl, err.message);
     $("#quiz-panel").classList.add("hidden");
@@ -4304,9 +4360,38 @@ async function startQuiz() {
 }
 
 $("#bidding-box").addEventListener("click", (ev) => {
+  const level = ev.target.closest("button[data-level]");
+  if (level && !level.disabled) {
+    bbLevel = +level.dataset.level;
+    renderBiddingStrains();
+    return;
+  }
   const b = ev.target.closest("button[data-bid]");
   if (!b || b.disabled) return;
   chooseBid(b.dataset.bid);
+});
+
+// Au clavier, tant que la boîte est ouverte : un chiffre choisit le palier,
+// C D H S N la dénomination (♣ ♦ ♥ ♠ SA), P passe, X contre ou surcontre.
+const BB_STRAIN_KEYS = { c: 0, d: 1, h: 2, s: 3, n: 4 };
+document.addEventListener("keydown", (ev) => {
+  const box = $("#bidding-box");
+  if (box.classList.contains("hidden") || !box.querySelector(".bb-grid")) return;
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  if (ev.target.closest && ev.target.closest("input, select, textarea, dialog[open]")) return;
+  if ($("#tabpanel-train").hidden) return;
+  const key = ev.key.toLowerCase();
+  let btn = null;
+  if (/^[1-7]$/.test(key)) btn = box.querySelector(`.bb-level[data-level="${key}"]`);
+  else if (key in BB_STRAIN_KEYS) btn = box.querySelector(`.bb-strain[data-idx="${BB_STRAIN_KEYS[key]}"]`);
+  else if (key === "p") btn = box.querySelector(".bb-pass");
+  else if (key === "x") {
+    const xx = box.querySelector(".bb-xx");
+    btn = xx && !xx.disabled ? xx : box.querySelector(".bb-x");
+  }
+  if (!btn || btn.disabled) return;
+  ev.preventDefault();
+  btn.click();
 });
 $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 

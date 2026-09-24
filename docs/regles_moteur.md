@@ -729,6 +729,20 @@ Si le partenaire est plafonné à 10 et qu'on tient **16 H et plus** : 4M en
 majeure (avec 2 atouts au moins), ou 3SA sur une mineure sixième avec arrêt
 partout.
 
+### [F-6b] Face au barrage à 3 en majeure : 3 atouts → 4M
+Face au barrage à 3 en majeure (7 cartes), **3 atouts et plus** font **10
+atouts** : la **loi des levées totales** place le camp au palier de 4, **quel
+que soit le nombre de points**. Main faible, **4M** prolonge le barrage ; main
+correcte, c'est la manche — la même enchère, comme les 4 atouts sur le 2 faible
+[F-4]. Le compte combiné seul ne la trouve pas : 13 H face à un barrage de 5 à
+10 n'atteignent jamais 27 HLD.
+À partir de **16 H**, ou avec moins de 3 atouts, la règle générale [F-6] et la
+machinerie du chelem reprennent la main.
+`3♠ – Passe – 4♠` avec ♠1054 ♥R ♦A93 ♣AD8752 (13 H) face à ♠ARV9862 ♥1096 ♦6
+♣V9.
+⚠ Les barrages à 3 en **mineure** ne sont pas concernés : 4m par la loi y
+passerait au-dessus de 3SA, que [F-6] propose avec les arrêts.
+
 ---
 
 ## 7. Redemandes de l'ouvreur

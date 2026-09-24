@@ -206,6 +206,7 @@ const UI_TEXT = {
     parEmpty: "Le PAR s'affiche ici pour une donne complète dont les enchères sont calculées.",
     bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
     pbnCopy: "Copier le texte PBN",
+    pbnClose: "Masquer le texte PBN",
     shareLink: "Copier le lien de cette donne",
     shareCopied: "Lien de la donne copié",
     shareFailed: "Copie impossible : le lien n'a pas pu être placé dans le presse-papiers.",
@@ -368,6 +369,7 @@ const UI_TEXT = {
     parEmpty: "The par shows up here for a complete deal whose auction has been computed.",
     bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
     pbnCopy: "Copy the PBN text",
+    pbnClose: "Hide the PBN text",
     shareLink: "Copy a link to this deal",
     shareCopied: "Deal link copied",
     shareFailed: "Could not copy: the link could not be put on the clipboard.",
@@ -1704,6 +1706,11 @@ const PENCIL_SVG = `${SVG_OPEN}
   <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>
 </svg>`;
 
+// Une croix : fermer, replier.
+const CLOSE_SVG = `${SVG_OPEN}
+  <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+</svg>`;
+
 // Une flèche vers le bas : le bouton ouvre un menu.
 const CHEVRON_SVG = `${SVG_OPEN}
   <path d="m6 9 6 6 6-6"/>
@@ -1861,6 +1868,7 @@ function renderDealActions() {
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave, true);
   setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle, true);
   setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
+  setCommandButton("#pbn-close-btn", CLOSE_SVG, t.pbnClose);
   setCommandButton("#share-btn", LINK_SVG, t.shareLink, true);
   setCommandButton("#print-btn", PRINT_SVG, t.printResult);
 }
@@ -1982,6 +1990,11 @@ window.addEventListener("beforeprint", () => {
 window.addEventListener("afterprint", applyTheme);
 
 $("#pbn-copy-btn").addEventListener("click", copyPbn);
+// Le texte disparaît sous le focus : il revient au menu qui l'a ouvert.
+$("#pbn-close-btn").addEventListener("click", () => {
+  setPbnOpen(false);
+  $("#share-menu-btn").focus();
+});
 
 // Affiche ou masque le texte PBN sous la rangée du haut. Le bouton dit son
 // état par aria-expanded, que style.css rend aussi visible (bouton enfoncé).

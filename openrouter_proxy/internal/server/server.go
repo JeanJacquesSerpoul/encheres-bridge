@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -23,15 +24,19 @@ import (
 func Run(cfg *config.Config) error {
 	client := openrouter.NewClient(cfg.OpenRouterAPIKey, cfg.MaxTokens, cfg.Timeout)
 
-	chatHandler := handler.NewChatHandler(client, cfg.DefaultModel)
-	modelsHandler := handler.NewModelsHandler(client)
+	chatHandler := handler.NewChatHandler(client, cfg.DefaultModel, cfg.AllowedModels)
 
 	r := chi.NewRouter()
 
 	r.Use(chimw.RequestID)
-	r.Use(chimw.RealIP)
+	// RealIP believes X-Forwarded-For: only a reverse proxy that rewrites it
+	// may be trusted, or any caller would choose the IP it is limited under.
+	if cfg.TrustProxy {
+		r.Use(chimw.RealIP)
+	}
 	r.Use(chimw.Logger)
 	r.Use(chimw.Recoverer)
+	r.Use(mw.SecurityHeaders)
 	r.Use(mw.NewCORS(cfg.CORSAllowedOrigins))
 
 	// The bridge client polls /health before enabling its photo buttons.
@@ -41,16 +46,26 @@ func Run(cfg *config.Config) error {
 		w.Write([]byte(`{"status":"ok"}`)) //nolint:errcheck
 	})
 
-	r.Post("/api/chat", chatHandler.ServeHTTP)
-	r.Get("/api/models", modelsHandler.ServeHTTP)
+	r.Group(func(r chi.Router) {
+		if cfg.RateLimitPerMin > 0 {
+			r.Use(mw.NewRateLimiter(cfg.RateLimitPerMin, cfg.RateLimitBurst).Handler)
+		}
+		r.Post("/api/chat", chatHandler.ServeHTTP)
+		// The client never lists models; the route only exists on request.
+		if cfg.EnableModelsEndpoint {
+			r.Get("/api/models", handler.NewModelsHandler(client).ServeHTTP)
+		}
+	})
 
 	srv := &http.Server{
 		Addr:    ":" + cfg.Port,
 		Handler: r,
 		// ReadTimeout must be short; WriteTimeout must exceed upstream timeout.
-		ReadTimeout:  15 * time.Second,
-		WriteTimeout: cfg.Timeout + 10*time.Second,
-		IdleTimeout:  120 * time.Second,
+		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       15 * time.Second,
+		WriteTimeout:      cfg.Timeout + 10*time.Second,
+		IdleTimeout:       120 * time.Second,
+		MaxHeaderBytes:    16 << 10,
 	}
 
 	quit := make(chan os.Signal, 1)
@@ -66,6 +81,15 @@ func Run(cfg *config.Config) error {
 		}
 	}()
 
+	for _, o := range cfg.CORSAllowedOrigins {
+		if o == "*" {
+			log.Println("warning: CORS_ORIGINS is *, any web page may call this server; set it to the client's origin in production")
+		}
+	}
+	if cfg.RateLimitPerMin == 0 {
+		log.Println("warning: RATE_LIMIT_PER_MIN is 0, /api/* is not rate-limited")
+	}
+	log.Printf("allowed models: %s", strings.Join(cfg.AllowedModels, ", "))
 	log.Printf("listening on :%s (provider: %s, default model: %s)", cfg.Port, config.Provider, cfg.DefaultModel)
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		return err

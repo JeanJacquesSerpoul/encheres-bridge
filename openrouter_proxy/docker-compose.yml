@@ -4,8 +4,10 @@ services:
     image: bridge-server-ai:latest
     container_name: bridge-server-ai
     restart: unless-stopped
+    # Published on loopback only: the reverse proxy (or the local browser)
+    # reaches it there. Set BIND_ADDR=0.0.0.0 to expose it on every interface.
     ports:
-      - "${PORT:-9009}:${PORT:-9009}"
+      - "${BIND_ADDR:-127.0.0.1}:${PORT:-9009}:${PORT:-9009}"
     env_file:
       - .env
     environment:
@@ -14,6 +16,9 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
     mem_limit: 256m
     cpus: "1.0"
     healthcheck:

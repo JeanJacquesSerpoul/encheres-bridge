@@ -26,6 +26,18 @@ type Config struct {
 	DefaultModel       string   // DEFAULT_MODEL
 	OpenRouterAPIKey   string   // OPENROUTER_API_KEY
 	CORSAllowedOrigins []string // CORS_ORIGINS (or CORS_ALLOWED_ORIGINS), comma-separated
+
+	// AllowedModels bounds what a caller may spend the key on: the default
+	// model is always in it, ALLOWED_MODELS adds the others.
+	AllowedModels []string
+	// RateLimitPerMin caps /api/* requests per client IP; 0 disables it.
+	RateLimitPerMin int // RATE_LIMIT_PER_MIN
+	RateLimitBurst  int // RATE_LIMIT_BURST
+	// TrustProxy lets X-Forwarded-For / X-Real-IP name the client. Only set it
+	// behind a reverse proxy that overwrites them, or any caller picks its IP.
+	TrustProxy bool // TRUST_PROXY
+	// EnableModelsEndpoint exposes GET /api/models, which the client never calls.
+	EnableModelsEndpoint bool // ENABLE_MODELS_ENDPOINT
 }
 
 // Load reads environment variables and returns a validated Config.
@@ -40,6 +52,36 @@ func Load() (*Config, error) {
 	defaultModel := strings.TrimSpace(getEnvOrDefault("DEFAULT_MODEL", DefaultModel))
 	if defaultModel == "" {
 		return nil, errors.New("DEFAULT_MODEL must not be empty")
+	}
+
+	allowedModels := []string{defaultModel}
+	if v := strings.TrimSpace(os.Getenv("ALLOWED_MODELS")); v != "" {
+		for _, m := range parseCSV(v) {
+			if m != defaultModel && m != "*" {
+				allowedModels = append(allowedModels, m)
+			}
+		}
+	}
+
+	rateLimitPerMin, err := getNonNegativeInt("RATE_LIMIT_PER_MIN", 20)
+	if err != nil {
+		return nil, err
+	}
+	rateLimitBurst, err := getNonNegativeInt("RATE_LIMIT_BURST", 5)
+	if err != nil {
+		return nil, err
+	}
+	if rateLimitPerMin > 0 && rateLimitBurst == 0 {
+		return nil, errors.New("RATE_LIMIT_BURST must be greater than 0 when RATE_LIMIT_PER_MIN is set")
+	}
+
+	trustProxy, err := getBool("TRUST_PROXY", false)
+	if err != nil {
+		return nil, err
+	}
+	enableModels, err := getBool("ENABLE_MODELS_ENDPOINT", false)
+	if err != nil {
+		return nil, err
 	}
 
 	maxTokens := 10000
@@ -77,6 +119,12 @@ func Load() (*Config, error) {
 		DefaultModel:       defaultModel,
 		OpenRouterAPIKey:   openRouterAPIKey,
 		CORSAllowedOrigins: parseCSV(corsRaw),
+
+		AllowedModels:        allowedModels,
+		RateLimitPerMin:      rateLimitPerMin,
+		RateLimitBurst:       rateLimitBurst,
+		TrustProxy:           trustProxy,
+		EnableModelsEndpoint: enableModels,
 	}, nil
 }
 
@@ -85,6 +133,33 @@ func getEnvOrDefault(key, def string) string {
 		return v
 	}
 	return def
+}
+
+func getNonNegativeInt(key string, def int) (int, error) {
+	v := os.Getenv(key)
+	if v == "" {
+		return def, nil
+	}
+	parsed, err := strconv.Atoi(v)
+	if err != nil {
+		return 0, fmt.Errorf("%s must be an integer: %w", key, err)
+	}
+	if parsed < 0 {
+		return 0, fmt.Errorf("%s must not be negative", key)
+	}
+	return parsed, nil
+}
+
+func getBool(key string, def bool) (bool, error) {
+	v := os.Getenv(key)
+	if v == "" {
+		return def, nil
+	}
+	parsed, err := strconv.ParseBool(v)
+	if err != nil {
+		return false, fmt.Errorf("%s must be a boolean: %w", key, err)
+	}
+	return parsed, nil
 }
 
 func parseCSV(raw string) []string {

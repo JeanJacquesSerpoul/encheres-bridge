@@ -12,7 +12,7 @@ COPY . .
 
 # Compile statically for Linux/amd64
 RUN mkdir /out && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-    go build -ldflags "-s -w" -o /out/server_ai .
+    go build -ldflags "-s -w" -o /out/openrouter_proxy .
 
 # ── Stage 2: Runtime ────────────────────────────────────────────────────────
 FROM alpine:3.19
@@ -22,7 +22,7 @@ RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 
-COPY --from=builder /out/server_ai .
+COPY --from=builder /out/openrouter_proxy .
 
 # Run as a non-root user, named by UID so that runtimes enforcing
 # runAsNonRoot can check it
@@ -31,4 +31,4 @@ USER 10001:10001
 
 EXPOSE 9013
 
-ENTRYPOINT ["/app/server_ai"]
+ENTRYPOINT ["/app/openrouter_proxy"]

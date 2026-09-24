@@ -1,4 +1,4 @@
-BINARY  = server_ai
+BINARY  = openrouter_proxy
 LDFLAGS = -ldflags "-s -w"
 
 ifeq ($(OS),Windows_NT)
@@ -17,7 +17,7 @@ else
     SET_WIN    = GOOS=windows GOARCH=amd64
 endif
 
-.PHONY: all build tidy test clean docker-build docker-up docker-down
+.PHONY: all build bin tidy test clean docker-build docker-up docker-down
 
 all: tidy build
 
@@ -26,6 +26,11 @@ build:
 	$(MKDIR_DIST)
 	$(SET_LINUX) go build $(LDFLAGS) -o dist/$(BINARY) .
 	$(SET_WIN) go build $(LDFLAGS) -o dist/$(BINARY).exe .
+
+## Rebuild the versioned binaries of bin/ (launched by bin/openrouter_proxy.sh / .ps1)
+bin:
+	$(SET_LINUX) go build -trimpath $(LDFLAGS) -o bin/$(BINARY) .
+	$(SET_WIN) go build -trimpath $(LDFLAGS) -o bin/$(BINARY).exe .
 
 tidy:
 	go mod tidy

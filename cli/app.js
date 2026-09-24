@@ -3248,7 +3248,9 @@ $("#lang").addEventListener("change", () => {
   renderIaHealth();
   // Le résultat affiché a été calculé dans l'autre langue : on le redemande,
   // commentaires et types de mains sont traduits côté serveur.
-  if (!$("#result-panel").classList.contains("hidden")) simulate();
+  // Pas pendant ni après un questionnaire : il garde sa langue, et le calcul le
+  // refermerait, score compris (voir resetQuiz).
+  if (!$("#result-panel").classList.contains("hidden") && !quiz) simulate();
 });
 
 // Builds a W/N/E/S auction grid (head + body rows) from a list of calls,
@@ -4291,11 +4293,12 @@ function finishQuiz() {
   // lancement revient pour changer de main.
   $("#quiz-cancel-btn").classList.add("hidden");
   $("#quiz-launch-panel").classList.remove("quiz-running");
-  // Les mains sont dévoilées : le PAR de la donne jouée n'a plus rien à cacher,
-  // même si la donne composée reste masquée à gauche.
-  if (typeof parSetDeal === "function") parSetDeal(quiz.result.hands, quiz.lang);
-  setParReady(true);
-  if (!$("#tabpanel-par").hidden && typeof parCompute === "function") parCompute();
+  // Les mains sont dévoilées : les enchères commentées et le PAR de la donne
+  // jouée n'ont plus rien à cacher, même si la donne composée reste masquée à
+  // gauche. Leurs onglets se remplissent sans qu'on y soit emmené — le score
+  // reste sous les yeux ; renderResult lance aussi le PAR si son onglet est
+  // ouvert.
+  renderResult(quiz.result);
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const r = quiz.result;

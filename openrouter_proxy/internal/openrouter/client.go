@@ -24,7 +24,7 @@ const (
 // relies on and the optional PDF OpenRouter also accepts.
 type ChatRequest struct {
 	Text  string // prompt
-	Image string // HTTPS URL or base64 data-URI
+	Image string // base64 data-URI
 	PDF   string // base64 data-URI (data:application/pdf;base64,...)
 	Model string // OpenRouter model ID
 }

@@ -13,12 +13,29 @@ import (
 	"server_ai/internal/openrouter"
 )
 
-const maxChatRequestBodyBytes = 20 << 20 // 20 MiB (allows photo and PDF uploads)
+const (
+	// The client shrinks its photos to 2560 px before sending them: a few MiB
+	// once base64-encoded.
+	maxChatRequestBodyBytes = 10 << 20 // 10 MiB
+	// The card prompts are well under a kilobyte; this only bounds abuse.
+	maxTextBytes = 16 << 10 // 16 KiB
+)
+
+// Images must travel inline: a remote URL would have OpenRouter fetch whatever
+// a caller names, on this server's key.
+var allowedImagePrefixes = []string{
+	"data:image/jpeg;base64,",
+	"data:image/png;base64,",
+	"data:image/webp;base64,",
+	"data:image/gif;base64,",
+}
+
+const pdfPrefix = "data:application/pdf;base64,"
 
 // chatRequest is the inbound body of POST /api/chat.
 type chatRequest struct {
 	Text     string `json:"text"`
-	Image    string `json:"image,omitempty"`    // HTTPS URL or base64 data-URI
+	Image    string `json:"image,omitempty"`    // base64 data-URI
 	PDF      string `json:"pdf,omitempty"`      // base64 data-URI (data:application/pdf;base64,...)
 	Model    string `json:"model,omitempty"`    // optional: the configured default model otherwise
 	Provider string `json:"provider,omitempty"` // optional: OPENROUTER only
@@ -42,14 +59,20 @@ type Usage struct {
 
 // ChatHandler handles POST /api/chat.
 type ChatHandler struct {
-	client       aiClient
-	defaultModel string
+	client        aiClient
+	defaultModel  string
+	allowedModels map[string]bool
 }
 
 // NewChatHandler creates a ChatHandler falling back to defaultModel whenever a
-// request leaves the model out.
-func NewChatHandler(client aiClient, defaultModel string) *ChatHandler {
-	return &ChatHandler{client: client, defaultModel: defaultModel}
+// request leaves the model out, and refusing any model outside allowedModels
+// (defaultModel is always allowed).
+func NewChatHandler(client aiClient, defaultModel string, allowedModels []string) *ChatHandler {
+	allowed := map[string]bool{defaultModel: true}
+	for _, m := range allowedModels {
+		allowed[m] = true
+	}
+	return &ChatHandler{client: client, defaultModel: defaultModel, allowedModels: allowed}
 }
 
 // ServeHTTP implements http.Handler.
@@ -68,9 +91,18 @@ func (h *ChatHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	dec.DisallowUnknownFields()
 
 	if err := dec.Decode(&req); err != nil {
+		var tooLarge *http.MaxBytesError
+		if errors.As(err, &tooLarge) {
+			writeJSON(w, http.StatusRequestEntityTooLarge, ChatResponse{
+				Success: false,
+				Error:   "request body too large",
+			})
+			return
+		}
+		log.Printf("chat invalid JSON body: %v", err)
 		writeJSON(w, http.StatusBadRequest, ChatResponse{
 			Success: false,
-			Error:   "invalid JSON body: " + err.Error(),
+			Error:   "invalid JSON body",
 		})
 		return
 	}
@@ -86,6 +118,27 @@ func (h *ChatHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, ChatResponse{Success: false, Error: "text field is required"})
 		return
 	}
+	if len(req.Text) > maxTextBytes {
+		writeJSON(w, http.StatusBadRequest, ChatResponse{
+			Success: false,
+			Error:   fmt.Sprintf("text field exceeds %d bytes", maxTextBytes),
+		})
+		return
+	}
+	if req.Image != "" && !hasAnyPrefix(req.Image, allowedImagePrefixes) {
+		writeJSON(w, http.StatusBadRequest, ChatResponse{
+			Success: false,
+			Error:   "image must be a base64 data-URI (jpeg, png, webp or gif)",
+		})
+		return
+	}
+	if req.PDF != "" && !strings.HasPrefix(req.PDF, pdfPrefix) {
+		writeJSON(w, http.StatusBadRequest, ChatResponse{
+			Success: false,
+			Error:   "pdf must be a base64 data-URI (" + pdfPrefix + "...)",
+		})
+		return
+	}
 	if err := checkProvider(req.Provider); err != nil {
 		writeJSON(w, http.StatusBadRequest, ChatResponse{Success: false, Error: err.Error()})
 		return
@@ -94,6 +147,13 @@ func (h *ChatHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	model := strings.TrimSpace(req.Model)
 	if model == "" {
 		model = h.defaultModel
+	}
+	if !h.allowedModels[model] {
+		writeJSON(w, http.StatusBadRequest, ChatResponse{
+			Success: false,
+			Error:   fmt.Sprintf("model %q is not allowed", model),
+		})
+		return
 	}
 
 	result, err := h.client.Chat(r.Context(), &openrouter.ChatRequest{
@@ -138,4 +198,13 @@ func checkProvider(provider string) error {
 		return nil
 	}
 	return fmt.Errorf("provider %q is not available: this server only serves %s", name, providerName)
+}
+
+func hasAnyPrefix(s string, prefixes []string) bool {
+	for _, p := range prefixes {
+		if strings.HasPrefix(s, p) {
+			return true
+		}
+	}
+	return false
 }

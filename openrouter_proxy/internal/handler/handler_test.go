@@ -15,6 +15,9 @@ import (
 
 const testModel = "google/gemini-3.1-flash-lite"
 
+// testAllowedModels are the models the tests may name besides the default.
+var testAllowedModels = []string{"m1", "openai/gpt-4o"}
+
 type mockAIClient struct {
 	lastRequest *openrouter.ChatRequest
 	chatResult  *openrouter.ChatResult
@@ -38,7 +41,7 @@ func postChat(t *testing.T, c *mockAIClient, body string) *httptest.ResponseReco
 	req := httptest.NewRequest(http.MethodPost, "/api/chat", bytes.NewBufferString(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
-	NewChatHandler(c, testModel).ServeHTTP(rr, req)
+	NewChatHandler(c, testModel, testAllowedModels).ServeHTTP(rr, req)
 	return rr
 }
 
@@ -146,8 +149,78 @@ func TestChatHandlerRejectsLargeBody(t *testing.T) {
 
 	rr := postChat(t, &mockAIClient{}, `{"text":"`+tooLarge+`","model":"m1"}`)
 
+	if rr.Code != http.StatusRequestEntityTooLarge {
+		t.Fatalf("expected status %d, got %d", http.StatusRequestEntityTooLarge, rr.Code)
+	}
+}
+
+// The key must not pay for whatever model a stranger names.
+func TestChatHandlerRejectsModelOutsideAllowList(t *testing.T) {
+	c := &mockAIClient{}
+
+	rr := postChat(t, c, `{"text":"hi","model":"anthropic/claude-opus"}`)
+
 	if rr.Code != http.StatusBadRequest {
 		t.Fatalf("expected status %d, got %d", http.StatusBadRequest, rr.Code)
+	}
+	if c.lastRequest != nil {
+		t.Fatal("refused model still reached the upstream")
+	}
+}
+
+func TestChatHandlerRejectsLongText(t *testing.T) {
+	long := strings.Repeat("a", maxTextBytes+1)
+
+	rr := postChat(t, &mockAIClient{}, `{"text":"`+long+`","model":"m1"}`)
+
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("expected status %d, got %d", http.StatusBadRequest, rr.Code)
+	}
+}
+
+// A remote URL would have OpenRouter fetch any address a caller names.
+func TestChatHandlerRejectsRemoteImage(t *testing.T) {
+	for _, image := range []string{
+		"https://example.com/hand.jpg",
+		"http://169.254.169.254/latest/meta-data",
+		"data:text/html;base64,AAAA",
+	} {
+		rr := postChat(t, &mockAIClient{}, `{"text":"hi","image":"`+image+`"}`)
+
+		if rr.Code != http.StatusBadRequest {
+			t.Fatalf("image %q: expected status %d, got %d", image, http.StatusBadRequest, rr.Code)
+		}
+	}
+}
+
+func TestChatHandlerAcceptsPNGImage(t *testing.T) {
+	c := &mockAIClient{chatResult: &openrouter.ChatResult{Content: "{}", Model: testModel}}
+
+	rr := postChat(t, c, `{"text":"hi","image":"data:image/png;base64,AAAA"}`)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected status %d, got %d", http.StatusOK, rr.Code)
+	}
+}
+
+func TestChatHandlerRejectsNonDataURIPDF(t *testing.T) {
+	rr := postChat(t, &mockAIClient{}, `{"text":"hi","pdf":"https://example.com/a.pdf"}`)
+
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("expected status %d, got %d", http.StatusBadRequest, rr.Code)
+	}
+}
+
+// The decoder's own message names fields and offsets; the client gets a
+// generic one.
+func TestChatHandlerHidesJSONDecodeDetail(t *testing.T) {
+	rr := postChat(t, &mockAIClient{}, `{"text":"hi","secret_field":1}`)
+
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("expected status %d, got %d", http.StatusBadRequest, rr.Code)
+	}
+	if strings.Contains(rr.Body.String(), "secret_field") {
+		t.Fatalf("response leaked decoder detail: %s", rr.Body.String())
 	}
 }
 

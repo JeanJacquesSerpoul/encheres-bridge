@@ -95,3 +95,82 @@ func TestLoadAcceptsAiproxyCORSName(t *testing.T) {
 		t.Fatalf("unexpected origins: %#v", cfg.CORSAllowedOrigins)
 	}
 }
+
+func TestLoadSecurityDefaults(t *testing.T) {
+	setAPIKey(t)
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load() error = %v", err)
+	}
+	if len(cfg.AllowedModels) != 1 || cfg.AllowedModels[0] != DefaultModel {
+		t.Fatalf("unexpected allowed models: %#v", cfg.AllowedModels)
+	}
+	if cfg.RateLimitPerMin != 20 || cfg.RateLimitBurst != 5 {
+		t.Fatalf("unexpected rate limit: %d/min, burst %d", cfg.RateLimitPerMin, cfg.RateLimitBurst)
+	}
+	if cfg.TrustProxy {
+		t.Fatal("TrustProxy must default to false")
+	}
+	if cfg.EnableModelsEndpoint {
+		t.Fatal("EnableModelsEndpoint must default to false")
+	}
+}
+
+func TestLoadParsesAllowedModels(t *testing.T) {
+	setAPIKey(t)
+	t.Setenv("ALLOWED_MODELS", "openai/gpt-4o, "+DefaultModel+", *")
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load() error = %v", err)
+	}
+	// The default comes first, is not repeated, and "*" grants nothing.
+	if len(cfg.AllowedModels) != 2 ||
+		cfg.AllowedModels[0] != DefaultModel ||
+		cfg.AllowedModels[1] != "openai/gpt-4o" {
+		t.Fatalf("unexpected allowed models: %#v", cfg.AllowedModels)
+	}
+}
+
+func TestLoadParsesSecurityFlags(t *testing.T) {
+	setAPIKey(t)
+	t.Setenv("RATE_LIMIT_PER_MIN", "0")
+	t.Setenv("TRUST_PROXY", "true")
+	t.Setenv("ENABLE_MODELS_ENDPOINT", "1")
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load() error = %v", err)
+	}
+	if cfg.RateLimitPerMin != 0 || !cfg.TrustProxy || !cfg.EnableModelsEndpoint {
+		t.Fatalf("unexpected config: %+v", cfg)
+	}
+}
+
+func TestLoadRejectsInvalidSecurityValues(t *testing.T) {
+	for key, value := range map[string]string{
+		"RATE_LIMIT_PER_MIN":     "-1",
+		"RATE_LIMIT_BURST":       "abc",
+		"TRUST_PROXY":            "maybe",
+		"ENABLE_MODELS_ENDPOINT": "yes please",
+	} {
+		t.Run(key, func(t *testing.T) {
+			setAPIKey(t)
+			t.Setenv(key, value)
+
+			if _, err := Load(); err == nil {
+				t.Fatalf("expected error for %s=%s", key, value)
+			}
+		})
+	}
+}
+
+func TestLoadRejectsZeroBurstWithRateLimit(t *testing.T) {
+	setAPIKey(t)
+	t.Setenv("RATE_LIMIT_BURST", "0")
+
+	if _, err := Load(); err == nil {
+		t.Fatal("expected error for RATE_LIMIT_BURST=0 with a rate limit")
+	}
+}

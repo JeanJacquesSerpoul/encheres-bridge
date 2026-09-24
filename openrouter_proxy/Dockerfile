@@ -18,15 +18,16 @@ RUN mkdir /out && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 FROM alpine:3.19
 
 # ca-certificates: required for TLS calls to openrouter.ai
-RUN apk add --no-cache ca-certificates tzdata
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 
 COPY --from=builder /out/server_ai .
 
-# Run as non-root user
-RUN addgroup -S aiserver && adduser -S aiserver -G aiserver
-USER aiserver
+# Run as a non-root user, named by UID so that runtimes enforcing
+# runAsNonRoot can check it
+RUN addgroup -S -g 10001 aiserver && adduser -S -u 10001 -G aiserver aiserver
+USER 10001:10001
 
 EXPOSE 9009
 

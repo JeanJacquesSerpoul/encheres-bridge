@@ -127,7 +127,7 @@ Le site est servi sous **<https://jeanjacquesserpoul.github.io/encheres-bridge/>
 | Compression (`gzip`/`br`) sur `.wasm` | 4,5 Mo bruts contre ~1,2 Mo compressés |
 | `Cache-Control` sur les assets | Sans lui, chaque visite revalide tous les fichiers |
 
-Un point reste hors de portée sur Pages, qui ne permet pas d'en-têtes personnalisés : `COOP`/`COEP`, nécessaires à `SharedArrayBuffer` donc au bouton **Calcul du PAR**. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) les fournit à sa place, au prix d'**un rechargement de page à la première visite**. C'est précisément ce pour quoi il est là.
+Un point reste hors de portée sur Pages, qui ne permet pas d'en-têtes personnalisés : `COOP`/`COEP`, nécessaires à `SharedArrayBuffer` donc à l'onglet **PAR**. [cli/coi-serviceworker.js](cli/coi-serviceworker.js) les fournit à sa place, au prix d'**un rechargement de page à la première visite**. C'est précisément ce pour quoi il est là.
 
 ### Un autre hébergeur statique
 
@@ -164,7 +164,7 @@ Tous les chemins du client sont **relatifs** : le dossier se dépose à la racin
 | Compression `gzip`/`br` sur `.wasm` | 4,3 Mo transmis au lieu de 1,2 Mo |
 | `Cache-Control` sur les fichiers | chaque visite revalide les dix fichiers, une requête complète chacun |
 
-**4. Servir en HTTPS.** Un service worker n'est enregistré que dans un contexte sécurisé (HTTPS, ou `localhost`). En `http://` ou en `file://`, `coi-serviceworker.js` ne démarre pas : tout fonctionne, sauf le bouton **Calcul du PAR**, qui exige `SharedArrayBuffer`.
+**4. Servir en HTTPS.** Un service worker n'est enregistré que dans un contexte sécurisé (HTTPS, ou `localhost`). En `http://` ou en `file://`, `coi-serviceworker.js` ne démarre pas : tout fonctionne, sauf l'onglet **PAR**, qui exige `SharedArrayBuffer`.
 
 **5. Facultatif — poser `COOP`/`COEP`.** Si vous maîtrisez les en-têtes, ces deux lignes rendent le service worker inutile et **évitent le rechargement de page à la première visite** :
 
@@ -300,7 +300,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 
 ### Le PAR
 
-Sous les commentaires, **Calcul du PAR** donne les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
+L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
 
 ### Reconnaissance des cartes par photo (serveur IA)
 
@@ -505,4 +505,4 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 
 Ce projet est distribué sous la **licence publique générale GNU, version 3** (GPL-3.0) — voir [LICENSE](LICENSE).
 
-Il redistribue un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client à l'appui du bouton « Calcul du PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.
+Il redistribue un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client dans l'onglet « PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.

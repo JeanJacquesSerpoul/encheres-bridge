@@ -86,7 +86,7 @@
     :root[data-theme="dark"] #boot-loading { background: #151a16; color: #e7ece6; }
     :root[data-theme="dark"] #boot-loading .boot-spinner { border-color: #445146; border-top-color: #5cc389; }
   </style>
-  <!-- Le solveur double-mort (bouton « Calcul du PAR ») tourne en WebAssembly
+  <!-- Le solveur double-mort (onglet du PAR) tourne en WebAssembly
        avec des threads : il lui faut l'isolation cross-origine (SharedArrayBuffer).
        Le serveur Go pose déjà les en-têtes COOP/COEP ; ce service worker n'est
        qu'un repli pour les hôtes qui les retirent, et ne fait rien quand
@@ -418,6 +418,9 @@
       <div class="tabs" role="tablist" data-i18n-label="tabsLabel">
         <button id="tab-bids" type="button" role="tab" class="tab" data-tab="bids"
                 aria-selected="true" aria-controls="tabpanel-bids" data-i18n="tabBids">Enchères</button>
+        <button id="tab-par" type="button" role="tab" class="tab" data-tab="par"
+                aria-selected="false" aria-controls="tabpanel-par" tabindex="-1"
+                data-i18n="tabPar">PAR</button>
         <button id="tab-train" type="button" role="tab" class="tab" data-tab="train"
                 aria-selected="false" aria-controls="tabpanel-train" tabindex="-1"
                 data-i18n="tabTrain">S'entraîner</button>
@@ -450,6 +453,14 @@
         </div>
       </div>
 
+    </section>
+    </div>
+
+    <!-- Le PAR, dans son onglet : calculé à son ouverture (voir parCompute
+         dans par.js), pour la donne dont les enchères sont affichées. -->
+    <div id="tabpanel-par" class="tabpanel" role="tabpanel" aria-labelledby="tab-par" hidden>
+    <p class="tab-empty" id="par-empty" data-i18n="parEmpty">Le PAR s'affiche ici pour une donne complète dont les enchères sont calculées.</p>
+    <div id="par-content">
       <!-- « PAR » de la donne : les levées double-mort de chaque camp dans
            chaque couleur, calculées à la demande par le solveur DDS en WASM
            (voir par.js). Sur le modèle du tableau de dds-fork/web/dds_web.html. -->
@@ -474,7 +485,7 @@
         <span data-i18n="parCreditAuthors">de Bo Haglund et Søren Hein — licence</span>
         <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer">Apache 2.0</a>.
       </p>
-    </section>
+    </div>
     </div>
 
     <!-- Le questionnaire : un entraînement où l'on répond à la place d'un
@@ -644,7 +655,7 @@
           <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement — sauf en mode questionnaire, pour ne rien dévoiler.</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée sur la table. Un clic amène la ligne à l'écran. Sur téléphone, touchez-la pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère.</li>
-          <li><b>Calcul du PAR</b> : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
+          <li>L'onglet <b>PAR</b>, calculé dès qu'on l'ouvre et à chaque nouvelle donne tant qu'il reste ouvert : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
         </ul>
 
         <h3>4. S'entraîner avec le questionnaire</h3>
@@ -716,7 +727,7 @@
           <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change — except in quiz mode, so as not to give anything away.</li>
           <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled on the table. A click brings the line into view. On a phone, tap it to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call.</li>
-          <li><b>Compute the par</b>: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>
+          <li>The <b>Par</b> tab, computed as soon as you open it and for every new deal while it stays open: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>
         </ul>
 
         <h3>4. Practising with the quiz</h3>
@@ -841,7 +852,7 @@
   <div id="hint-tip" class="par-tip hint-tip hidden" role="tooltip" aria-live="polite"></div>
 
   <!-- Le solveur double-mort (DDS) ne se charge plus ici : ses deux fichiers
-       pèsent 915 Ko, et seul le bouton « Calcul du PAR » s'en sert. par.js les
+       pèsent 915 Ko, et seul l'onglet du PAR s'en sert. par.js les
        injecte au premier calcul (voir loadScripts). -->
 
   <!-- Moteur d'enchères compilé en WebAssembly (build-wasm.sh) : wasm_exec.js

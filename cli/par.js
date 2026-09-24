@@ -195,6 +195,9 @@
     const credit = $("#par-credit");
     if (!table || !head || !body) return;
     hideTip();
+    // Le bouton ne sert qu'à lancer (ou relancer après un échec) le calcul.
+    const btn = $("#par-btn");
+    if (btn) btn.classList.toggle("hidden", !!lastTable);
     if (!lastTable) {
       table.classList.add("hidden");
       head.innerHTML = "";
@@ -480,8 +483,14 @@
     renderTable();
   };
 
+  let computing = false;
+
   async function onCompute() {
-    if (!dealHands) return;
+    if (!dealHands || computing) return;
+    computing = true;
+    // La donne peut changer pendant le calcul (recalcul automatique) : le
+    // résultat ne vaut que pour celle d'où il est parti.
+    const hands = dealHands;
     const btn = $("#par-btn");
     const err = $("#par-error");
     const status = $("#par-status");
@@ -494,8 +503,11 @@
       if (status && !modulePromise) setStat(status, tr("parLoading"));
       await loadModule();
       if (status) setStat(status, tr("parComputing"));
-      lastTable = await calcTable(pbnFromHands(dealHands));
-      renderTable();
+      const result = await calcTable(pbnFromHands(hands));
+      if (hands === dealHands) {
+        lastTable = result;
+        renderTable();
+      }
     } catch (e) {
       lastTable = null;
       renderTable();
@@ -503,8 +515,19 @@
     } finally {
       if (status) setStat(status, "");
       if (btn) btn.disabled = false;
+      computing = false;
     }
+    // Donne changée en cours de route, onglet toujours ouvert : on repart.
+    const tab = $("#tabpanel-par");
+    if (hands !== dealHands && dealHands && tab && !tab.hidden) onCompute();
   }
+
+  // Appelé par app.js à l'ouverture de l'onglet du PAR, et quand la donne
+  // change sous un onglet ouvert : un seul calcul par donne. Le bouton reste
+  // pour relancer après un échec.
+  window.parCompute = function () {
+    if (dealHands && !lastTable) onCompute();
+  };
 
   const btn = $("#par-btn");
   if (btn) btn.addEventListener("click", onCompute);

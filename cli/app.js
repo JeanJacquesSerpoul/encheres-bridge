@@ -96,11 +96,6 @@ const EXAMPLE_PBN = `[Dealer "S"]
 [Vulnerable "All"]
 [Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]`;
 
-// La donne du tout premier chargement : aucune carte en main, les 52 au
-// centre, prêtes à être distribuées.
-const EMPTY_PBN = `[Dealer "N"]
-[Vulnerable "None"]
-[Deal "N:... ... ... ..."]`;
 
 // La dernière donne complète de l'utilisateur — quatre mains de 13 cartes —
 // est retenue d'une visite à l'autre, et c'est elle qui revient au chargement
@@ -198,6 +193,13 @@ const UI_TEXT = {
       "Composez une donne — l'application déroule les enchères du système " +
       "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
+    moreDeals: "Autres façons d'obtenir une donne",
+    shareMenu: "Partager",
+    settings: "Réglages",
+    tabsLabel: "Que faire de la donne",
+    tabBids: "Enchères",
+    tabTrain: "S'entraîner",
+    bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
     pbnCopy: "Copier le texte PBN",
     shareLink: "Copier le lien de cette donne",
     shareCopied: "Lien de la donne copié",
@@ -345,6 +347,13 @@ const UI_TEXT = {
       "Build a deal — the application runs the French system's auction and " +
       "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
+    moreDeals: "Other ways to get a deal",
+    shareMenu: "Share",
+    settings: "Settings",
+    tabsLabel: "What to do with the deal",
+    tabBids: "Auction",
+    tabTrain: "Practise",
+    bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
     pbnCopy: "Copy the PBN text",
     shareLink: "Copy a link to this deal",
     shareCopied: "Deal link copied",
@@ -1151,6 +1160,7 @@ const CONS_TEXT = {
     photoHand: (seat) =>
       `Photographier la main ${/^[AEIOU]/.test(seat) ? "d'" : "de "}${seat}`,
     fill: "Compléter les mains",
+    incomplete: (n) => n === 1 ? "Une main est incomplète." : `${n} mains sont incomplètes.`,
     errRange: (seat) => `${seat} : les bornes doivent être comprises entre 0 et ${MAX_HAND_HCP} PH.`,
     errOrder: (seat) => `${seat} : le mini dépasse le maxi.`,
     errSumMin: (lo) => `La somme des minis (${lo}) dépasse les ${TOTAL_HCP} PH du jeu.`,
@@ -1192,6 +1202,7 @@ const CONS_TEXT = {
     clearHand: "Take this hand's cards out",
     photoHand: (seat) => `Photograph ${seat}'s hand`,
     fill: "Fill the hands",
+    incomplete: (n) => n === 1 ? "One hand is incomplete." : `${n} hands are incomplete.`,
     errRange: (seat) => `${seat}: bounds must be between 0 and ${MAX_HAND_HCP} HCP.`,
     errOrder: (seat) => `${seat}: min is greater than max.`,
     errSumMin: (lo) => `Minimums add up to ${lo}, more than the ${TOTAL_HCP} HCP in play.`,
@@ -1666,6 +1677,17 @@ const CODE_SVG = `${SVG_OPEN}
   <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/>
 </svg>`;
 
+// Une flèche vers le bas : le bouton ouvre un menu.
+const CHEVRON_SVG = `${SVG_OPEN}
+  <path d="m6 9 6 6 6-6"/>
+</svg>`;
+
+// Une boîte d'où sort une flèche : partager la donne hors de la page.
+const SHARE_SVG = `${SVG_OPEN}
+  <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/>
+  <path d="m16 6-4-4-4 4"/><path d="M12 2v13"/>
+</svg>`;
+
 // Deux maillons : le lien de partage.
 const LINK_SVG = `${SVG_OPEN}
   <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/>
@@ -1780,8 +1802,17 @@ function neutralZoneHTML(lang) {
 // Un bouton sans texte : le dessin dedans, le nom dans l'infobulle et dans
 // l'étiquette que lit un lecteur d'écran. Les trois viennent ensemble, sinon
 // l'un des trois finit par manquer.
-function setCommandButton(sel, svg, name) {
+//
+// Avec `labeled`, le nom s'écrit à côté du dessin : il se lit alors sans
+// survol, et ni l'infobulle ni l'étiquette n'ont plus rien à ajouter.
+function setCommandButton(sel, svg, name, labeled) {
   const btn = $(sel);
+  if (labeled) {
+    btn.innerHTML = `${svg}<span class="cmd-label">${esc(name)}</span>`;
+    btn.removeAttribute("aria-label");
+    delete btn.dataset.tip;
+    return;
+  }
   btn.innerHTML = svg;
   btn.setAttribute("aria-label", name);
   btn.dataset.tip = name;
@@ -1795,14 +1826,14 @@ function setCommandButton(sel, svg, name) {
 function renderDealActions() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
-  const load = $(".file-btn");
-  load.dataset.tip = t.fileLoad;
-  setCommandButton("#random-btn", DICE_SVG, t.randomDeal);
-  setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal);
-  setCommandButton("#save-btn", EXPORT_SVG, t.fileSave);
-  setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle);
+  setCommandButton("#random-btn", DICE_SVG, t.randomDeal, true);
+  setCommandButton("#new-deal-more-btn", CHEVRON_SVG, t.moreDeals);
+  setCommandButton("#share-menu-btn", SHARE_SVG, t.shareMenu, true);
+  setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal, true);
+  setCommandButton("#save-btn", EXPORT_SVG, t.fileSave, true);
+  setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle, true);
   setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
-  setCommandButton("#share-btn", LINK_SVG, t.shareLink);
+  setCommandButton("#share-btn", LINK_SVG, t.shareLink, true);
   setCommandButton("#print-btn", PRINT_SVG, t.printResult);
 }
 
@@ -1841,7 +1872,13 @@ function flashCopied(btn, ok, okMsg, failMsg) {
     return;
   }
   announce(okMsg);
-  btn.innerHTML = CHECK_SVG;
+  // Un article de menu disparaît avec son menu : c'est le bouton qui l'a
+  // ouvert qui montre la coche, avec le message à côté.
+  const trigger = btn.closest(".menu")?.querySelector(".menu-trigger");
+  if (trigger) btn = trigger;
+  btn.innerHTML = btn.classList.contains("cmd-labeled")
+    ? `${CHECK_SVG}<span class="cmd-label">${esc(okMsg)}</span>`
+    : CHECK_SVG;
   btn.dataset.tip = okMsg;
   btn.classList.add("copied");
   clearTimeout(btn.copyTimer);
@@ -1901,7 +1938,7 @@ window.addEventListener("hashchange", () => {
   if (!shared) return;
   loadPbn(shared);
   clearShareHash();
-  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  revealPane($("#input-panel"));
 });
 
 // ---------- impression ----------
@@ -1935,7 +1972,7 @@ function renderBoundsCards() {
   setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
   setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
   setCommandButton("#cons-bounds-btn", BOUNDS_SVG, t.boundsToggle);
-  setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction);
+  setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction, true);
   setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
@@ -1957,7 +1994,25 @@ function renderBoundsCards() {
   center.innerHTML = neutralZoneHTML(lang);
   renderPhotoButtons(); // les boutons des mains viennent d'être recréés
   restoreCardFocus();
+  renderBidReady();
 }
+
+// « Afficher les enchères » ne s'allume que sur une donne complète. Éteint, il
+// dit pourquoi à côté de lui, avec le remède à portée de clic : le bouton
+// allumé sur une donne incomplète ne répondait que par un refus.
+function renderBidReady() {
+  const t = CONS_TEXT[$("#lang").value];
+  const incomplete = SEATS.filter((seat) => zoneCount(seat) !== HAND_SIZE).length;
+  const ready = !!pbnGames[selectedGameIdx] && incomplete === 0 && zoneCount(UNASSIGNED) === 0;
+  $("#bid-btn").disabled = !ready;
+  $("#bid-hint").classList.toggle("hidden", ready);
+  $("#bid-hint-text").textContent = ready ? "" : t.incomplete(Math.max(incomplete, 1));
+  const fill = $("#bid-fill-btn");
+  fill.textContent = t.fill;
+  fill.classList.toggle("hidden", zoneCount(UNASSIGNED) === 0);
+}
+
+$("#bid-fill-btn").addEventListener("click", () => $("#cons-fill-btn").click());
 
 // Le redessin ci-dessus remplace tout le tableau : l'élément qui avait le
 // focus n'existe plus. Sans cette reprise, chaque carte déplacée au clavier
@@ -3375,6 +3430,9 @@ function renderHealth() {
   // pastille et son infobulle portent l'état pour l'œil), et il se réécrit
   // quand même à chaque changement de langue.
   $("#health-text").textContent = healthState ? t[healthState] : "";
+  // Rangé dans les réglages, l'état ne se verrait plus : un moteur injoignable
+  // se signale sur le bouton qui y mène.
+  $("#settings-btn").classList.toggle("warn", healthState === "offline");
 }
 
 // Version du moteur, telle que bids-wasm.js la renvoie. null tant qu'on ne l'a
@@ -3528,15 +3586,14 @@ async function simulate() {
   try {
     const body = await fetchBid(lang);
     renderResult(body);
-    // Le panneau s'ouvre sous le pli : sans cela, rien ne bouge à l'écran et
-    // le calcul semble n'avoir rien donné. Même geste qu'en fin de
-    // questionnaire et au lancement de celui-ci.
-    $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    // Sur écran étroit, le panneau est sous la table : on y descend, sans quoi
+    // le calcul semble n'avoir rien donné. Sur grand écran, il est à côté.
+    selectTab("bids", true);
   } catch (err) {
     setError(errEl, err.message);
     $("#result-panel").classList.add("hidden");
   } finally {
-    btn.disabled = false;
+    renderBidReady();
   }
 }
 
@@ -3654,13 +3711,13 @@ $("#quiz-show-deal-btn").addEventListener("click", () => setDealHidden(false));
 function cancelQuiz() {
   resetQuiz();
   setError($("#error"), "");
-  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  revealPane($("#input-panel"));
 }
 
 $("#quiz-cancel-btn").addEventListener("click", cancelQuiz);
 
 $("#back-to-deal-btn").addEventListener("click", () => {
-  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  revealPane($("#input-panel"));
 });
 
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
@@ -4018,7 +4075,7 @@ function finishQuiz() {
   });
   $("#quiz-show-detail-btn").addEventListener("click", () => {
     renderResult(quiz.result);
-    $("#result-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    selectTab("bids", true);
   });
 }
 
@@ -4041,7 +4098,7 @@ async function startQuiz() {
     $("#quiz-cancel-btn").classList.remove("hidden");
     renderQuizHands();
     renderQuizStep();
-    $("#quiz-launch-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    selectTab("train", true);
   } catch (err) {
     setError(errEl, err.message);
     $("#quiz-panel").classList.add("hidden");
@@ -4060,6 +4117,124 @@ $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
 $("#quiz-btn").addEventListener("click", startQuiz);
+
+// ---------- menus ----------
+//
+// Un bouton .menu-trigger ouvre le .menu-pop que nomme son aria-controls. Le
+// menu se referme au clic d'un de ses articles, au clic ailleurs et sur Échap,
+// qui rend le focus au bouton. Les flèches parcourent ses articles. Un seul
+// menu ouvert à la fois.
+function menuItems(pop) {
+  return [...pop.querySelectorAll(".menu-item:not(.hidden):not(:disabled)")];
+}
+
+function closeMenus(except) {
+  for (const trigger of document.querySelectorAll(".menu-trigger[aria-expanded=\"true\"]")) {
+    if (trigger === except) continue;
+    trigger.setAttribute("aria-expanded", "false");
+    document.getElementById(trigger.getAttribute("aria-controls")).hidden = true;
+  }
+}
+
+function openMenu(trigger, focusFirst) {
+  closeMenus(trigger);
+  const pop = document.getElementById(trigger.getAttribute("aria-controls"));
+  trigger.setAttribute("aria-expanded", "true");
+  pop.hidden = false;
+  if (focusFirst) {
+    const first = menuItems(pop)[0] || pop.querySelector("select, input, button");
+    if (first) first.focus();
+  }
+}
+
+for (const trigger of document.querySelectorAll(".menu-trigger")) {
+  trigger.addEventListener("click", (ev) => {
+    if (trigger.getAttribute("aria-expanded") === "true") closeMenus();
+    // Ouvert au clavier (detail === 0), le focus entre dans le menu.
+    else openMenu(trigger, ev.detail === 0);
+  });
+  trigger.addEventListener("keydown", (ev) => {
+    if (ev.key !== "ArrowDown") return;
+    ev.preventDefault();
+    openMenu(trigger, true);
+  });
+}
+
+document.addEventListener("click", (ev) => {
+  const item = ev.target.closest(".menu-item");
+  // Un article agit, puis le menu se retire. Le choix d'un fichier se fait
+  // dans la fenêtre du système : son <label> ferme aussi le menu.
+  if (item) {
+    closeMenus();
+    return;
+  }
+  if (!ev.target.closest(".menu")) closeMenus();
+});
+
+// Le <label> de chargement n'est pas un bouton : Entrée et Espace l'ouvrent.
+$(".file-btn").addEventListener("keydown", (ev) => {
+  if (ev.key !== "Enter" && ev.key !== " ") return;
+  ev.preventDefault();
+  $("#file").click();
+  closeMenus();
+});
+
+document.addEventListener("keydown", (ev) => {
+  const pop = ev.target.closest && ev.target.closest(".menu-pop");
+  if (ev.key === "Escape") {
+    const open = document.querySelector(".menu-trigger[aria-expanded=\"true\"]");
+    if (!open) return;
+    closeMenus();
+    open.focus();
+    return;
+  }
+  if (!pop || (ev.key !== "ArrowDown" && ev.key !== "ArrowUp")) return;
+  const items = menuItems(pop);
+  const i = items.indexOf(ev.target.closest(".menu-item"));
+  if (i < 0) return;
+  ev.preventDefault();
+  const next = (i + (ev.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+  items[next].focus();
+});
+
+// ---------- onglets ----------
+//
+// Le panneau de droite : Enchères et S'entraîner. Sur grand écran il est à
+// côté de la table, sur écran étroit dessous — c'est alors seulement que
+// revealPane fait défiler la page jusqu'à lui.
+const wideLayout = window.matchMedia("(min-width: 1100px)");
+
+function revealPane(el) {
+  if (wideLayout.matches) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function selectTab(name, reveal) {
+  for (const tab of document.querySelectorAll('[role="tab"]')) {
+    const on = tab.dataset.tab === name;
+    tab.setAttribute("aria-selected", String(on));
+    tab.tabIndex = on ? 0 : -1;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = !on;
+  }
+  if (reveal) revealPane($("#side-pane"));
+}
+
+for (const tab of document.querySelectorAll('[role="tab"]')) {
+  tab.addEventListener("click", () => selectTab(tab.dataset.tab));
+  tab.addEventListener("keydown", (ev) => {
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const i = tabs.indexOf(tab);
+    let next = null;
+    if (ev.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+    else if (ev.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+    else if (ev.key === "Home") next = tabs[0];
+    else if (ev.key === "End") next = tabs[tabs.length - 1];
+    if (!next) return;
+    ev.preventDefault();
+    selectTab(next.dataset.tab);
+    next.focus();
+  });
+}
 
 // ---------- mode d'emploi ----------
 
@@ -4080,6 +4255,7 @@ function renderHelpIcons() {
 
 const helpDialog = $("#help-dialog");
 function openHelp() {
+  closeMenus();
   helpDialog.showModal();
   // Le texte repart du haut à chaque ouverture, pas de là où on l'a quitté.
   helpDialog.querySelector(".help-box").scrollTop = 0;
@@ -4118,14 +4294,15 @@ welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));
 // signe une première visite.
 const firstLaunch = !readStored(WELCOME_KEY, "") && !readStored(LAST_DEAL_KEY, "");
 
-// Reprend la dernière donne complète, ou la donne vide à la première visite,
+// Reprend la dernière donne complète, ou la donne exemple à la première
+// visite — une table vide n'apprenait rien à qui découvre l'application —,
 // puis sonde le serveur.
 $("#lang").value = initialLang();
 applyTheme();
 // Un lien de partage (#pbn=…) l'emporte sur la dernière donne retenue.
 const sharedAtLoad = sharedPbnFromHash();
 if (sharedAtLoad) clearShareHash();
-$("#pbn").value = sharedAtLoad || readStored(LAST_DEAL_KEY, "") || EMPTY_PBN;
+$("#pbn").value = sharedAtLoad || readStored(LAST_DEAL_KEY, "") || EXAMPLE_PBN;
 refreshDealSelector(true);
 gatherMissingCards();
 renderBoundsCards();

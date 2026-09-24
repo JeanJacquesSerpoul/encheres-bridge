@@ -156,56 +156,18 @@ header {
 }
 
 .header-inner {
-  max-width: 1060px;
+  max-width: 1408px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px 32px;
+  gap: 8px;
 }
+.header-inner h1 { margin-right: auto; }
 
 h1 { font-size: 1.25rem; margin: 0; }
 
-/* Les deux barres serveur, l'une sous l'autre : le bloc, lui, se comporte dans
-   le bandeau comme la barre unique d'avant. */
-.server-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  min-width: 320px;
-  max-width: 620px;
-  /* Colonnes communes aux deux barres. Figées, et non dictées par le contenu :
-     « Serveur » et « Serveur IA » n'ont pas la même largeur, et le libellé du
-     mode change avec l'URL mémorisée — les deux lignes se décalaient donc
-     l'une par rapport à l'autre. */
-  --srv-label: 5rem;
-  --srv-mode: 11.5rem;
-}
-
-/* Une grille de trois colonnes — libellé, mode, adresse — plutôt qu'une rangée
-   souple : les deux barres s'alignent alors au pixel, dans les deux langues et
-   quel que soit le mode affiché. */
-.server-bar {
-  display: grid;
-  grid-template-columns: var(--srv-label) var(--srv-mode) minmax(0, 1fr);
-  align-items: center;
-  gap: 6px 8px;
-}
-
-.server-bar input {
-  width: 100%;
-  min-width: 0;
-  max-width: 360px;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
-  font-family: Consolas, monospace;
-}
-
-/* Message d'invite du champ d'URL : sur sa propre ligne, sous la barre, plutôt
-   que serré dans une colonne. */
 .server-hint {
   grid-column: 1 / -1;
   /* Un doré éclairci : var(--gold) ne tenait que 3,92 sur le vert de
@@ -214,60 +176,6 @@ h1 { font-size: 1.25rem; margin: 0; }
   color: var(--gold-soft);
   font-size: .85rem;
 }
-
-.server-bar select, .lang-bar select, .theme-bar select {
-  padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
-}
-/* L'option « Local » porte l'hôte visé, qui peut être long : la colonne étant
-   figée pour aligner les deux barres, le texte s'abrège plutôt que de la
-   déborder — la liste déroulante, elle, le montre en entier, et l'adresse
-   complète est de toute façon dans le champ voisin. */
-.server-bar select { text-overflow: ellipsis; }
-
-/* La langue et le thème vivent dans le bandeau, à côté de l'état du serveur :
-   ce sont des réglages de la page entière, pas de la donne. Chacun garde sa
-   propre boîte pour échapper au flex:1 de la barre serveur, qui l'écraserait. */
-.lang-bar, .theme-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-/* Les réglages se calent à droite du bandeau, titre à gauche. C'était jusqu'ici
-   l'effet du flex:1 des barres serveur ; masquées, elles ne le font plus. */
-.lang-bar { margin-left: auto; }
-
-/* Sans barre visible — option IA décochée, le cas courant — le bloc réservait
-   encore ses 320 px et renvoyait le thème sur une seconde ligne. */
-.server-bars:not(:has(> .server-bar:not(.hidden))) { display: none; }
-
-/* Option générale « Serveur IA de reconnaissance des cartes », au pied de page
-   dans la colonne des noms de serveurs : c'est le nom du sien, et une fonction
-   facultative que l'on active une fois n'a pas sa place dans le bandeau. La
-   colonne est imposée plutôt que laissée au placement automatique, qui ferait
-   remonter l'option à gauche dès que la ligne d'état du serveur IA — masquée
-   tant que l'option est décochée — libère sa cellule. */
-.feature-toggle {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-/* Option IA décochée — le cas courant : la case reste seule sur sa ligne, sans
-   pastille en vis-à-vis. Accrochée à la seconde colonne, elle tomberait après
-   la première, vide et large seulement de ce que le moteur demande, donc à
-   droite du centre du bloc. Faute de voisine, elle prend toute la largeur et
-   se centre sous la ligne du moteur. La grille à deux colonnes reprend ses
-   droits dès que l'option est cochée, la case retrouvant sa pastille en
-   vis-à-vis. */
-.app-version:has(#ia-health-check.hidden) .feature-toggle {
-  grid-column: 1 / -1;
-  justify-content: center;
-}
-.feature-toggle input { cursor: pointer; margin: 0; flex: none; }
 
 /* Licence et code source, chacun sur sa ligne, sur toute la largeur du pied
    de page et sous le reste : on ne les consulte qu'une fois, ils ferment la
@@ -308,6 +216,7 @@ h1 { font-size: 1.25rem; margin: 0; }
 .dot.ko { background: var(--ko); }
 
 main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
+main.workspace { max-width: 1440px; }
 
 /* La phrase qui dit à quoi sert la page : présente sans peser, elle se lit
    une fois puis s'oublie. */
@@ -335,18 +244,10 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
   max-width: 1060px;
   margin: 0 auto 20px;
   padding: 0 16px;
-  /* Une ligne par serveur. La grille ne sert plus qu'à la ligne du serveur IA,
-     dont le test et le libellé de l'option se font vis-à-vis ; la ligne du
-     moteur, elle, s'étale sur les deux colonnes et se centre dans cette
-     largeur (voir .server-line). */
-  display: grid;
-  grid-template-columns: auto minmax(0, max-content);
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  /* L'écart d'une colonne à l'autre est plus serré que celui qui sépare le
-     bouton « Tester » de la pastille : la pastille ouvre le nom qu'elle
-     qualifie, elle ne ferme pas le bouton qui la teste. */
-  gap: 5px 5px;
+  gap: 2px;
   font-size: .75rem;
   color: var(--muted);
 }
@@ -363,7 +264,6 @@ main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
    sans bouton « Tester » à sa gauche, elle reste le premier élément de la
    ligne, à 5 px du nom. */
 .server-line {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -659,11 +559,16 @@ button:disabled { opacity: .6; cursor: wait; }
 @media print {
   header, footer, dialog, #boot-loading, #engine-loading,
   button, select, .file-btn, .switch, .quiz-mode-hint, .pbn-details,
-  #deal-select-row, #cons-actions, .quiz-hidden-note { display: none !important; }
+  #deal-select-row, #cons-actions, #bid-row, .tabs, .tab-empty,
+  .quiz-hidden-note { display: none !important; }
+  .tabpanel[hidden] { display: none !important; }
   body { background: #fff; }
   main { margin: 0; max-width: none; padding: 0; }
   .panel { border: none; box-shadow: none; padding: 0; margin: 0 0 12px; }
-  main:has(#result-panel:not(.hidden)) > section:not(#result-panel) { display: none !important; }
+  main { display: block !important; }
+  main:has(#result-panel:not(.hidden)) #input-panel,
+  main:has(#result-panel:not(.hidden)) #tabpanel-train { display: none !important; }
+  main:has(#result-panel:not(.hidden)) #tabpanel-bids { display: block !important; }
   .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
   .comments > li { break-inside: avoid; }
 }
@@ -1249,10 +1154,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   header { padding: 12px 16px; gap: 10px; }
   h1 { font-size: 1.1rem; }
 
-  /* Les barres serveur prennent toute la largeur : la langue remonterait seule
-     sur une ligne de plus, alors qu'elle tient à côté du titre. */
-  .server-bars { min-width: 0; max-width: none; flex: 1 1 100%; order: 1; }
-  .server-bar input { max-width: none; min-width: 0; }
 
   main { margin: 16px auto; }
   .panel { padding: 14px 14px; margin-bottom: 16px; }
@@ -1335,28 +1236,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
 @media (max-width: 480px) {
   header { padding: 10px 12px; }
-  /* Titre, langue et thème sur une seule ligne : le bandeau en prenait deux,
-     soit 130 px sur 812. Les libellés quittent l'image, non l'arbre — ce sont
-     eux qui nomment les deux sélecteurs à un lecteur d'écran. */
-  /* 6 px et non 10 : titre, langue, thème et bouton d'aide tiennent ensemble
-     sur 375 px (voir aussi .help-btn plus bas). À 10 px, l'aide passait seule
-     sur une seconde ligne. */
-  .header-inner { gap: 8px 6px; }
-  .lang-bar label, .theme-bar label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-  .lang-bar select, .theme-bar select { padding: 5px 6px; }
-  /* Le libellé et le choix du serveur sur une ligne, son adresse -- que l'on
-     ne touche presque jamais -- sur la suivante. */
-  .server-bar { grid-template-columns: var(--srv-label) minmax(0, 1fr); }
-  .server-bar input { grid-column: 1 / -1; font-size: .85rem; }
-
   main { padding: 0 10px; }
   .panel { padding: 12px 10px; border-radius: 8px; }
   .row { gap: 8px; }
@@ -1578,7 +1457,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 #input-panel.quiz-running .cons-layout,
 #input-panel.quiz-running #pbn-details,
-#input-panel.quiz-running #cons-actions { display: none; }
+#input-panel.quiz-running #cons-actions,
+#input-panel.quiz-running #bid-row { display: none; }
 
 /* Un bouton qui se lit comme un lien : l'action est secondaire. */
 .link-btn {
@@ -1928,4 +1808,258 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation: pulse 1.6s ease-in-out infinite; }
   @keyframes pulse { 50% { opacity: .35; } }
+}
+
+/* ---------- espace de travail : la table et le panneau à onglets ----------
+
+   Sur grand écran, deux colonnes : la table à gauche, et à droite ce que l'on
+   fait de la donne. Le panneau reste en vue quand la page défile : les
+   enchères se lisent en regard des mains. Sous 1100 px, il passe sous la
+   table. */
+@media (min-width: 1100px) {
+  main.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .side-pane {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+  }
+  /* La table est à côté : rien à rejoindre. */
+  #back-to-deal-btn { display: none; }
+}
+
+/* Les onglets du panneau, en tête : un soulignement pour celui qui est
+   ouvert. */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: -6px 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  padding: 10px 16px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* Les titres « Résultat » et « Questionnaire » redisaient le nom de l'onglet :
+   ils ne restent que pour l'impression et les lecteurs d'écran. */
+.tabpanel > section > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media print { .tabpanel > section > h2 { position: static; width: auto; height: auto; clip-path: none; } }
+
+/* L'onglet Enchères, tant qu'il n'y a rien à montrer. */
+.tab-empty {
+  margin: 8px 0;
+  padding: 28px 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+#tabpanel-bids:has(#result-panel:not(.hidden)) .tab-empty { display: none; }
+
+/* Dans une colonne de 600 px, séquence et commentaires côte à côte se
+   serraient : ils s'empilent. */
+.side-pane .result-seqs { display: block; }
+
+/* ---------- commandes à libellés et menus ---------- */
+
+.cmd-btn.cmd-labeled {
+  width: auto;
+  gap: 8px;
+  padding: 0 14px;
+  font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.cmd-label { line-height: 1.2; }
+
+/* Le bouton qui ouvre un menu à libellé porte sa flèche à droite du nom. */
+.menu-trigger.cmd-labeled::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin: -3px 0 0 2px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.menu { position: relative; display: inline-flex; }
+
+/* Donne aléatoire et sa flèche forment un seul bouton en deux parties. */
+.split-btn .cmd-btn:first-child { border-radius: 12px 0 0 12px; }
+.split-btn .split-caret {
+  width: 34px;
+  margin-left: -1px;
+  border-radius: 0 12px 12px 0;
+}
+.split-btn .split-caret svg { width: 18px; height: 18px; }
+
+.menu-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  min-width: 240px;
+  padding: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-pop);
+  text-align: left;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.menu-item.hidden { display: none; }
+.menu-item svg { width: 18px; height: 18px; flex: none; color: var(--accent); }
+.menu-item:hover:not(:disabled),
+.menu-item:focus-visible { background: var(--tint); outline: none; }
+.menu-item:disabled { opacity: .45; cursor: not-allowed; }
+/* Le texte PBN affiché : l'article le dit par une coche. */
+.menu-item[aria-expanded="true"]::after { content: "✓"; margin-left: auto; color: var(--accent); }
+.menu-item.file-btn input { display: none; }
+
+/* ---------- l'action principale ---------- */
+
+/* Collée au bas de l'écran tant que la table dépasse : l'action principale
+   reste à portée sans avoir à faire défiler les mains. */
+.bid-row {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 -6px;
+  padding: 10px 0 8px;
+  background: var(--panel);
+}
+.cta-btn.cmd-btn {
+  height: 48px;
+  padding: 0 26px;
+  font-size: 1.05rem;
+  border-radius: 24px;
+}
+.bid-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+  text-align: center;
+}
+.bid-hint.hidden { display: none; }
+.bid-hint .link-btn.hidden { display: none; }
+
+/* ---------- réglages ---------- */
+
+.settings-menu .menu-pop {
+  left: auto;
+  right: 0;
+  width: min(360px, calc(100vw - 24px));
+  padding: 14px 16px;
+  font-size: .9rem;
+}
+.settings-pop h2 { margin: 0 0 10px; font-size: 1rem; }
+.settings-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+.settings-pop select,
+.settings-pop input[type="text"] {
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  min-width: 0;
+}
+.feature-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.feature-toggle input { cursor: pointer; margin: 0; flex: none; }
+.settings-pop .server-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.settings-pop .server-bar.hidden { display: none; }
+.settings-pop .server-bar input { grid-column: 1 / -1; width: 100%; font-family: Consolas, monospace; }
+.settings-pop .server-hint { color: var(--red); }
+.settings-pop .server-check { gap: 8px; margin-top: 8px; }
+.settings-pop .server-check.hidden { display: none; }
+.settings-pop .server-line {
+  justify-content: flex-start;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .8rem;
+}
+/* Moteur injoignable : un point rouge sur la roue des réglages. */
+#settings-btn { position: relative; }
+#settings-btn.warn::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ko);
+  border: 2px solid var(--felt-dark);
+}
+
+@media (max-width: 480px) {
+  /* Sur un téléphone, les libellés de la barre restent, mais celui du menu
+     de partage s'efface derrière son icône : la rangée tient sur une ligne. */
+  #share-menu-btn .cmd-label { display: none; }
+  .cmd-btn.cmd-labeled { padding: 0 12px; }
 }

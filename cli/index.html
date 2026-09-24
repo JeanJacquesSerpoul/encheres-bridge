@@ -126,40 +126,70 @@
   <header>
     <div class="header-inner">
       <h1>♠ <span data-i18n="appTitle">Enchères au bridge</span></h1>
-      <!-- Le serveur IA (reconnaissance des cartes par photo, facultatif) : le
-           seul qui se choisit encore, les enchères étant calculées dans la
-           page. Masqué tant que l'option du pied de page est décochée. -->
-      <div class="server-bars">
-        <div class="server-bar" id="ia-server-bar">
-          <label for="ia-mode" data-i18n="serverIa">Serveur IA</label>
-          <select id="ia-mode">
-            <option value="local" selected data-i18n="serverLocal">Local</option>
-            <option value="remote" data-i18n="serverRemote">Distant (production)</option>
-          </select>
-          <input id="ia-server" type="text" spellcheck="false">
-          <span id="ia-hint" class="server-hint hidden"></span>
+      <!-- Les réglages de la page — langue, thème, reconnaissance par photo,
+           état du moteur — dans un seul menu : on les règle une fois, ils
+           n'ont pas à occuper le bandeau. Ouvert et refermé par le script des
+           menus (voir « menus » dans app.js). -->
+      <div class="menu settings-menu">
+        <button id="settings-btn" type="button" class="help-btn menu-trigger"
+                aria-expanded="false" aria-controls="settings-pop"
+                data-i18n-title="settings" data-i18n-label="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div id="settings-pop" class="menu-pop settings-pop" hidden>
+          <h2 data-i18n="settings">Réglages</h2>
+          <div class="settings-grid">
+            <label for="lang" data-i18n="language">Langue</label>
+            <select id="lang">
+              <option value="fr" selected>Français</option>
+              <option value="en">English</option>
+            </select>
+            <!-- Trois choix : automatique, qui suit le système et dont la page
+                 s'ouvre par défaut, puis le clair et le sombre, qui le forcent
+                 (voir applyTheme dans app.js). -->
+            <label for="theme" data-i18n="theme">Thème</label>
+            <select id="theme" data-i18n-title="themeTitle">
+              <option value="auto" selected data-i18n="themeAuto">Automatique</option>
+              <option value="light" data-i18n="themeLight">Clair</option>
+              <option value="dark" data-i18n="themeDark">Sombre</option>
+            </select>
+          </div>
+          <!-- Option générale, par défaut OFF : tant qu'elle n'est pas cochée,
+               rien de la reconnaissance des cartes par photo n'apparaît — ni
+               le choix du serveur IA, ni les boutons appareil photo, ni son
+               état (voir applyIaFeature dans app.js). -->
+          <label class="feature-toggle">
+            <input id="ia-enabled" type="checkbox">
+            <span data-i18n="iaFeature">Serveur IA de reconnaissance des cartes</span>
+          </label>
+          <div class="server-bar" id="ia-server-bar">
+            <label for="ia-mode" data-i18n="serverIa">Serveur IA</label>
+            <select id="ia-mode">
+              <option value="local" selected data-i18n="serverLocal">Local</option>
+              <option value="remote" data-i18n="serverRemote">Distant (production)</option>
+            </select>
+            <input id="ia-server" type="text" spellcheck="false">
+            <span id="ia-hint" class="server-hint hidden"></span>
+          </div>
+          <!-- État du serveur IA : c'est lui qui autorise les boutons photo
+               (voir renderIaHealth). -->
+          <span class="server-check hidden" id="ia-health-check">
+            <span id="ia-health-dot" class="dot"></span>
+            <span id="ia-health-text"></span>
+            <button id="ia-health-btn" type="button" data-i18n="serverTest">Tester</button>
+          </span>
+          <!-- Pastille d'état du moteur et sa version : couleur et infobulle
+               posées par renderHealth, version par renderVersion. -->
+          <p class="server-line">
+            <span id="health-dot" class="dot"></span>
+            <span id="health-text" class="sr-only"></span>
+            <span id="app-version"></span>
+          </p>
         </div>
-      </div>
-      <div class="lang-bar">
-        <label for="lang" data-i18n="language">Langue</label>
-        <select id="lang">
-          <option value="fr" selected>fr</option>
-          <option value="en">en</option>
-        </select>
-      </div>
-      <!-- Même bandeau que la langue, et mêmes raisons : le thème vaut pour
-           toute la page, pas pour la donne. Trois choix — automatique, qui
-           suit le système et dont la page s'ouvre par défaut, puis le clair et
-           le sombre, qui le forcent — et le choix se retrouve à la visite
-           suivante (voir applyTheme dans app.js ; l'attribut qu'il pose est
-           celui que lit style.css). -->
-      <div class="theme-bar">
-        <label for="theme" data-i18n="theme">Thème</label>
-        <select id="theme" data-i18n-title="themeTitle">
-          <option value="auto" selected data-i18n="themeAuto">Automatique</option>
-          <option value="light" data-i18n="themeLight">Clair</option>
-          <option value="dark" data-i18n="themeDark">Sombre</option>
-        </select>
       </div>
       <!-- Le mode d'emploi, au bout du bandeau avec les autres réglages de la
            page. Nom et infobulle posés par applyLang. -->
@@ -175,50 +205,69 @@
     </div>
   </header>
 
-  <main>
+  <!-- Deux colonnes sur grand écran : la table à gauche, et à droite ce que
+       l'on en fait — ses enchères, ou l'entraînement — dans un panneau à
+       onglets. Sur écran étroit, le panneau passe sous la table. -->
+  <main class="workspace">
     <section class="panel" id="input-panel">
       <h2><span data-i18n="dealPanel">Donne</span> <span id="file-name" class="file-name"></span></h2>
       <!-- Une phrase, et une seule : la page s'ouvrait sur un tapis de cartes
            sans que rien ne dise à quoi elle sert. -->
       <p class="panel-intro" data-i18n="intro">Composez une donne — l'application déroule les enchères du système français et les commente, enchère par enchère.</p>
       <div class="row row-centered" id="deal-actions">
-        <!-- Charger, tirer, sauver : mêmes icônes que les commandes du bas du
-             panneau, et même infobulle. Le libellé de « Charger un fichier »
-             reste dans l'arbre, masqué à l'œil seulement : c'est lui qui nomme
-             le champ fichier que ce <label> enveloppe. Le dessin, le nom parlé
-             et l'infobulle viennent de renderDealActions. -->
-        <label class="file-btn cmd-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
-            <path d="M14 3v5h5"/>
-            <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
-          </svg>
-          <span class="sr-only" data-i18n="fileLoad">Charger un fichier .pbn</span>
-          <input id="file" type="file" accept=".pbn,.txt,text/plain">
-        </label>
-        <button id="random-btn" type="button" class="cmd-btn"></button>
-        <button id="example-btn" type="button" class="cmd-btn"></button>
-        <button id="save-btn" type="button" class="cmd-btn"></button>
-        <!-- Bascule du texte PBN, qui s'affiche sous la rangée. Dessin, nom et
-             infobulle posés par renderDealActions ; aria-expanded par
-             setPbnOpen. -->
-        <button id="pbn-toggle-btn" type="button" class="cmd-btn"
-                aria-expanded="false" aria-controls="pbn-details"></button>
-        <!-- Lien de partage : la donne encodée dans l'adresse (#pbn=…), copiée
-             dans le presse-papiers. Voir « partage » dans app.js. -->
-        <button id="share-btn" type="button" class="cmd-btn"></button>
-        <!-- Photo des quatre mains : le serveur IA y lit les cartes et remplit
-             la donne (voir la section « reconnaissance » de app.js). Libellé et
-             état posés par renderPhotoButtons ; le champ fichier, unique, est
-             partagé avec les boutons par main. -->
-        <button id="deal-photo-btn" type="button" class="cmd-btn hidden" data-photo="deal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
-        </button>
+        <!-- Barre de commandes à libellés. La donne aléatoire, l'action la plus
+             fréquente, est à un clic ; les autres façons d'obtenir une donne
+             sont dans le menu de sa flèche. Libellés, dessins et noms posés
+             par renderDealActions ; ouverture des menus par le script des
+             menus (voir « menus » dans app.js). -->
+        <div class="split-btn menu">
+          <button id="random-btn" type="button" class="cmd-btn cmd-labeled"></button>
+          <button id="new-deal-more-btn" type="button" class="cmd-btn menu-trigger split-caret"
+                  aria-expanded="false" aria-controls="new-deal-pop"></button>
+          <div id="new-deal-pop" class="menu-pop" hidden>
+            <button id="example-btn" type="button" class="menu-item"></button>
+            <!-- Un <label> et non un <button> : c'est lui qui ouvre le champ
+                 fichier qu'il enveloppe. -->
+            <label class="file-btn menu-item" tabindex="0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 3v5h5"/>
+                <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
+              </svg>
+              <span class="cmd-label" data-i18n="fileLoad">Charger un fichier .pbn</span>
+              <input id="file" type="file" accept=".pbn,.txt,text/plain" tabindex="-1">
+            </label>
+            <!-- Photo des quatre mains : le serveur IA y lit les cartes et
+                 remplit la donne (voir la section « reconnaissance » de
+                 app.js). État posé par renderPhotoButtons ; le champ fichier,
+                 unique, est partagé avec les boutons par main. -->
+            <button id="deal-photo-btn" type="button" class="menu-item hidden" data-photo="deal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+              <span class="cmd-label" data-i18n="photoDeal">Photographier les quatre mains</span>
+            </button>
+          </div>
+        </div>
+        <!-- Ce que l'on fait de la donne hors de la page : la copier, la
+             sauver, la lire en texte. -->
+        <div class="menu">
+          <button id="share-menu-btn" type="button" class="cmd-btn cmd-labeled menu-trigger"
+                  aria-expanded="false" aria-controls="share-pop"></button>
+          <div id="share-pop" class="menu-pop" hidden>
+            <!-- Lien de partage : la donne encodée dans l'adresse (#pbn=…),
+                 copiée dans le presse-papiers. Voir « partage » dans app.js. -->
+            <button id="share-btn" type="button" class="menu-item"></button>
+            <button id="save-btn" type="button" class="menu-item"></button>
+            <!-- Bascule du texte PBN, qui s'affiche sous la rangée ;
+                 aria-expanded par setPbnOpen. -->
+            <button id="pbn-toggle-btn" type="button" class="menu-item"
+                    aria-expanded="false" aria-controls="pbn-details"></button>
+          </div>
+        </div>
         <span id="photo-status" class="muted hidden"></span>
         <input id="photo-input" type="file" accept="image/*" capture="environment" class="hidden">
         <!-- Donneur et vulnérabilité se replient en bloc : groupés, ils ne se
@@ -322,18 +371,43 @@
           <button id="cons-bounds-btn" type="button" class="cmd-btn"
                   aria-expanded="false" aria-controls="constraints"></button>
           <button id="cons-reset-btn" type="button" class="cmd-btn"></button>
-          <button id="bid-btn" type="button" class="cmd-btn cmd-primary"></button>
           <!-- L'attente des deux tirages. Distincte de #cons-error : un
                tirage en cours n'est pas un refus, et le ton de l'annonce
                n'est pas le même. -->
           <span id="cons-busy" class="muted"></span>
           <span id="cons-error" class="error"></span>
         </div>
+        <!-- L'action qui clôt la composition, sur sa propre ligne et avec son
+             nom : c'est elle que l'on cherche en arrivant. Éteinte tant que la
+             donne est incomplète, avec la raison et le remède à côté (voir
+             renderBidReady). -->
+        <div class="bid-row" id="bid-row">
+          <button id="bid-btn" type="button" class="cmd-btn cmd-primary cmd-labeled cta-btn"></button>
+          <p id="bid-hint" class="bid-hint hidden">
+            <span id="bid-hint-text"></span>
+            <button id="bid-fill-btn" type="button" class="link-btn"></button>
+          </p>
+        </div>
       </div>
 
     </section>
 
-    <section class="panel hidden" id="result-panel">
+    <!-- Le panneau de droite : un onglet par usage de la donne. Onglets à la
+         manière ARIA — flèches pour passer de l'un à l'autre (voir « onglets »
+         dans app.js). -->
+    <div class="panel side-pane" id="side-pane">
+      <div class="tabs" role="tablist" data-i18n-label="tabsLabel">
+        <button id="tab-bids" type="button" role="tab" class="tab" data-tab="bids"
+                aria-selected="true" aria-controls="tabpanel-bids" data-i18n="tabBids">Enchères</button>
+        <button id="tab-train" type="button" role="tab" class="tab" data-tab="train"
+                aria-selected="false" aria-controls="tabpanel-train" tabindex="-1"
+                data-i18n="tabTrain">S'entraîner</button>
+      </div>
+
+    <div id="tabpanel-bids" class="tabpanel" role="tabpanel" aria-labelledby="tab-bids">
+    <!-- Tant qu'aucune enchère n'est calculée, l'onglet dit comment en obtenir. -->
+    <p class="tab-empty" id="bids-empty" data-i18n="bidsEmpty">Composez une donne complète, puis « Afficher les enchères ».</p>
+    <section class="hidden" id="result-panel">
       <h2 data-i18n="result">Résultat</h2>
       <p class="back-to-deal">
         <button id="back-to-deal-btn" type="button" class="link-btn" data-i18n="backToDeal">Revenir à la donne</button>
@@ -390,11 +464,12 @@
         <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer">Apache 2.0</a>.
       </p>
     </section>
+    </div>
 
-    <!-- Le questionnaire, dans son propre panneau, sous celui de la donne. Il
-         ne prolonge pas les commandes de la donne : il ouvre autre chose, un
-         entraînement où l'on répond à la place d'un siège. -->
-    <section class="panel quiz-launch" id="quiz-launch-panel">
+    <!-- Le questionnaire : un entraînement où l'on répond à la place d'un
+         siège, dans son propre onglet. -->
+    <div id="tabpanel-train" class="tabpanel" role="tabpanel" aria-labelledby="tab-train" hidden>
+    <section class="quiz-launch" id="quiz-launch-panel">
       <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
       <div class="quiz-launch-controls">
       <div class="quiz-launch-row">
@@ -468,57 +543,17 @@
         <div id="quiz-score" class="quiz-score hidden"></div>
       </div>
     </section>
+    </div>
+    </div>
 
   </main>
 
-  <!-- Pied de page : quels serveurs répondent, et quel binaire sert les
-       enchères. Discret, hors du bandeau, parce qu'on ne le consulte qu'en cas
-       de surprise. -->
-  <!-- Une ligne par serveur, chacune centrée sous la page. Seule la ligne du
-       serveur IA passe par la grille : sa case et le libellé de l'option se
-       font vis-à-vis. Celle du moteur occupe toute la largeur, car les lignes
-       voisines — l'option IA, la licence — sont plus larges qu'elle : une
-       colonne partagée la laisserait collée à leur bord gauche, donc à gauche
-       du centre, au lieu de se centrer. -->
+  <!-- Pied de page : la licence et, s'il y a lieu, la raison pour laquelle le
+       moteur ne s'est pas chargé. L'état des serveurs est dans les réglages. -->
   <footer class="app-version">
-    <span class="server-line">
-      <span class="server-check">
-        <!-- Pastille d'état du moteur : couleur et infobulle posées par
-             renderHealth. Elle touche le nom du moteur qui la suit : c'est lui
-             qu'elle qualifie. -->
-        <span id="health-dot" class="dot"></span>
-        <!-- Le libellé de l'état — « en ligne », « hors ligne » — n'est plus
-             affiché : la pastille le dit en couleur et son infobulle en mots,
-             qui se suffisent l'une l'autre sur une ligne de pied de page. Il
-             reste dans l'arbre, réservé aux lecteurs d'écran, pour qui une
-             pastille verte ne dit rien. -->
-        <span id="health-text" class="sr-only"></span>
-      </span>
-      <span id="app-version"></span>
-    </span>
     <!-- Pourquoi le moteur ne s'est pas chargé, le cas échéant (voir
          checkHealth) : masqué tant qu'il est vide (voir style.css). -->
     <span id="engine-error" class="error" role="alert"></span>
-    <!-- État du serveur IA, sous celui des enchères : c'est lui qui autorise
-         les boutons photo (voir renderIaHealth). Masqué tant que l'option
-         générale « Serveur IA de reconnaissance des cartes » est décochée. -->
-    <span class="server-check hidden" id="ia-health-check">
-      <button id="ia-health-btn" type="button" data-i18n="serverTest">Tester</button>
-      <!-- Même découpe que la pastille des enchères : elle touche le libellé
-           de l'option, et son état ne s'écrit plus qu'en couleur. -->
-      <span id="ia-health-dot" class="dot"></span>
-      <span id="ia-health-text" class="sr-only"></span>
-    </span>
-    <!-- Option générale, par défaut OFF : tant qu'elle n'est pas cochée, rien
-         de la reconnaissance des cartes par photo n'apparaît — ni la barre du
-         serveur IA, ni les boutons appareil photo, ni l'état ci-contre (voir
-         applyIaFeature dans app.js). Elle tient ici le rôle du nom du serveur,
-         dont elle reprend le libellé : une fonction facultative que l'on active
-         une fois n'a rien à faire dans le bandeau. -->
-    <label class="feature-toggle">
-      <input id="ia-enabled" type="checkbox">
-      <span data-i18n="iaFeature">Serveur IA de reconnaissance des cartes</span>
-    </label>
     <!-- Licence de l'application et son code source. Même découpe que
          l'attribution du solveur DDS, sous le tableau du PAR : applyLang pose
          du textContent sur les [data-i18n] et effacerait un lien qu'ils
@@ -559,6 +594,7 @@
         <p class="help-lead">L'application déroule les enchères d'une donne de bridge selon le <b>Système d'Enchères Français (SEF)</b> et les commente, enchère par enchère. Vous pouvez aussi vous entraîner : le questionnaire vous fait enchérir à la place d'un joueur. Tout est calculé dans votre navigateur, sans compte ni serveur.</p>
 
         <h3>1. Obtenir une donne</h3>
+        <p>Au-dessus de la table, <b>Donne aléatoire</b> tire une donne d'un clic ; sa flèche ouvre les autres façons d'en obtenir une (donne exemple, fichier). Le menu <b>Partager</b> regroupe le lien, la sauvegarde et le texte PBN.</p>
         <ul class="help-icons">
           <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît.</span></li>
           <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir plus bas).</span></li>
@@ -568,7 +604,7 @@
           <li><span data-help-icon="link"></span><span><b>Copier le lien</b> : copie une adresse qui contient la donne. Qui l'ouvre retrouve cette donne (masquée s'il a activé le mode questionnaire).</span></li>
         </ul>
         <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
-        <p>À la première visite, la table est vide : les 52 cartes attendent au centre. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
+        <p>À la première visite, la <b>donne exemple</b> est affichée. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
 
         <h3>2. Composer la donne à la main</h3>
         <ul>
@@ -587,12 +623,12 @@
           <li><span data-help-icon="deal"></span><span><b>Compléter les mains</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Bornes de points</b> : affiche les champs <b>Mini</b> et <b>Maxi</b> de chaque main, qui bornent ses PH. Les tirages et la distribution automatique les respectent, et le compteur passe en rouge si la main en sort.</span></li>
           <li><span data-help-icon="eraser"></span><span><b>Effacer les bornes</b> : remet tous les Mini/Maxi à vide.</span></li>
-          <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : lance le calcul, une fois les quatre mains complètes.</span></li>
+          <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : le grand bouton sous la table, qui reste en vue quand vous faites défiler les mains. Il s'allume une fois les quatre mains complètes ; sinon il dit combien de mains sont incomplètes et propose de les compléter.</span></li>
         </ul>
 
         <h3>3. Lire le résultat</h3>
         <ul>
-          <li>Les quatre mains autour de la table, et au centre le <b>contrat</b> final avec son déclarant. Le panneau s'affiche juste sous la donne ; <b>Revenir à la donne</b> y remonte, et l'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
+          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone (<b>Revenir à la donne</b> y remonte) : les quatre mains, et au centre le <b>contrat</b> final avec son déclarant. L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou touchez-la) pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère.</li>
           <li><b>Calcul du PAR</b> : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
@@ -600,7 +636,7 @@
 
         <h3>4. S'entraîner avec le questionnaire</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Dans le panneau <b>Questionnaire d'enchères</b>, sous la donne, choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>. Il porte sur la donne composée, dont les quatre mains doivent être complètes.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Dans l'onglet <b>S'entraîner</b>, choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>. Il porte sur la donne composée, dont les quatre mains doivent être complètes.</span></li>
         </ul>
         <ul>
           <li>Seule votre main est visible : la donne composée et les boutons sous la table sont masqués, et le restent une fois le questionnaire terminé. Le lien <b>Afficher la donne</b> les montre.</li>
@@ -613,21 +649,22 @@
         <p><b>Mode questionnaire</b> : l'interrupteur sous le choix de la main fait arriver <b>masquée</b> chaque nouvelle donne — tirée, exemple, chargée d'un fichier ou retrouvée à l'ouverture de la page — pour vous entraîner sur une donne que vous ne connaissez pas. Le lien <b>Afficher la donne</b> la montre quand vous le voulez. Le réglage est retenu d'une visite à l'autre.</p>
 
         <h3>5. Lire les cartes sur une photo (facultatif)</h3>
-        <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> au pied de la page. Il faut un serveur IA en service : sans lui, ces boutons restent grisés.</p>
+        <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> dans les <b>Réglages</b> (la roue dentée du bandeau). Il faut un serveur IA en service : sans lui, ces boutons restent grisés.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>Dans la ligne des boutons du haut : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main : une photo de <b>cette seule main</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>Dans le menu de la flèche de <b>Donne aléatoire</b> : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main : une photo de <b>cette seule main</b>.</span></li>
         </ul>
         <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire. Les cartes non reconnues attendent au centre.</p>
 
         <h3>6. Réglages</h3>
-        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans le bandeau. Ils sont retenus d'une visite à l'autre, comme le mode questionnaire et votre dernière donne complète. Le bouton <b>?</b> ouvre ce mode d'emploi, que l'écran d'accueil propose aussi au premier lancement.</p>
-        <p>Au pied de la page, la <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, la raison s'affiche juste en dessous : rechargez la page, ou essayez un autre navigateur.</p>
+        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans les <b>Réglages</b> : la roue dentée du bandeau. Ils sont retenus d'une visite à l'autre, comme le mode questionnaire et votre dernière donne complète. Le bouton <b>?</b> ouvre ce mode d'emploi, que l'écran d'accueil propose aussi au premier lancement.</p>
+        <p>Dans les Réglages, la <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</p>
       </div>
 
       <div class="help-body" data-help-lang="en" lang="en" hidden>
         <p class="help-lead">The app runs the auction of a bridge deal following the <b>French bidding system (SEF)</b> and explains every call. You can also practise: the quiz has you bid in place of one player. Everything is computed in your browser, with no account and no server.</p>
 
         <h3>1. Getting a deal</h3>
+        <p>Above the table, <b>Random deal</b> draws a deal in one click; its arrow opens the other ways to get one (example deal, file). The <b>Share</b> menu holds the link, the download and the PBN text.</p>
         <ul class="help-icons">
           <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears.</span></li>
           <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see below).</span></li>
@@ -637,7 +674,7 @@
           <li><span data-help-icon="link"></span><span><b>Copy the link</b>: copies an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
         </ul>
         <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
-        <p>On your first visit the table is empty: all 52 cards wait in the centre. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
+        <p>On your first visit the <b>example deal</b> is shown. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
 
         <h3>2. Building the deal by hand</h3>
         <ul>
@@ -656,12 +693,12 @@
           <li><span data-help-icon="deal"></span><span><b>Fill the hands</b>: deals the unassigned cards, within the bounds.</span></li>
           <li><span data-help-icon="bounds"></span><span><b>Point bounds</b>: shows each hand's <b>Min</b> and <b>Max</b> fields, which bound its HCP. Random draws and automatic dealing respect them, and the counter turns red when the hand falls outside.</span></li>
           <li><span data-help-icon="eraser"></span><span><b>Clear bounds</b>: empties every Min/Max field.</span></li>
-          <li><span data-help-icon="play"></span><span><b>Run the auction</b>: computes the bidding once all four hands are complete.</span></li>
+          <li><span data-help-icon="play"></span><span><b>Run the auction</b>: the large button below the table, which stays in view while you scroll through the hands. It lights up once all four hands are complete; otherwise it says how many hands are incomplete and offers to fill them.</span></li>
         </ul>
 
         <h3>3. Reading the result</h3>
         <ul>
-          <li>The four hands around the table, and in the middle the final <b>contract</b> with its declarer. The panel appears right below the deal; <b>Back to the deal</b> scrolls back up, and the printer icon prints it (hands, auction, comments and the par if computed).</li>
+          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone (<b>Back to the deal</b> scrolls back up): the four hands, and in the middle the final <b>contract</b> with its declarer. The printer icon prints it (hands, auction, comments and the par if computed).</li>
           <li><b>Auction</b>: hover over a call (or tap it) to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call.</li>
           <li><b>Compute the par</b>: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>
@@ -669,7 +706,7 @@
 
         <h3>4. Practising with the quiz</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>In the <b>Bidding quiz</b> panel, below the deal, pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>. It uses the deal you built, whose four hands must be complete.</span></li>
+          <li><span data-help-icon="quiz"></span><span>In the <b>Practise</b> tab, pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>. It uses the deal you built, whose four hands must be complete.</span></li>
         </ul>
         <ul>
           <li>Only your hand is shown: the deal built above and the buttons below the table are hidden, and stay hidden once the quiz is over. The <b>Show the deal</b> link shows them.</li>
@@ -682,15 +719,15 @@
         <p><b>Quiz mode</b>: the switch below the hand picker makes every new deal arrive <b>hidden</b> — random, example, loaded from a file or brought back when the page opens — so you practise on a deal you do not know. The <b>Show the deal</b> link reveals it whenever you like. The setting is remembered between visits.</p>
 
         <h3>5. Reading cards from a photo (optional)</h3>
-        <p>Tick <b>AI card-recognition server</b> at the bottom of the page. An AI server must be running: without it, these buttons stay greyed out.</p>
+        <p>Tick <b>AI card-recognition server</b> in the <b>Settings</b> (the cog in the top bar). An AI server must be running: without it, these buttons stay greyed out.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>In the top row of buttons: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header: a photo of <b>that hand only</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>In the menu behind the <b>Random deal</b> arrow: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header: a photo of <b>that hand only</b>.</span></li>
         </ul>
         <p>Before sending, rotate the photo and draw the frame around the cards to read. Unrecognised cards wait in the centre.</p>
 
         <h3>6. Settings</h3>
-        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the top bar. Both are remembered between visits, like quiz mode and your last complete deal. The <b>?</b> button opens this guide, which the welcome screen also offers on first launch.</p>
-        <p>At the bottom of the page, the <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, the reason appears just below: reload the page, or try another browser.</p>
+        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the <b>Settings</b>: the cog in the top bar. Both are remembered between visits, like quiz mode and your last complete deal. The <b>?</b> button opens this guide, which the welcome screen also offers on first launch.</p>
+        <p>In the Settings, the <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</p>
       </div>
     </div>
   </dialog>

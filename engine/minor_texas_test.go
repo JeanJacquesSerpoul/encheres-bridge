@@ -11,9 +11,9 @@ import (
 // else the plain rectification to 3C), 3C transfers to diamonds (mandatory
 // rectification to 3D, no decline option). A weak hand (<=7HL) just signs
 // off, correcting a declined club Texas back to 3C. A game-going hand
-// (10HL+) with a genuine singleton/void announces it next: the "meilleur
-// résidu" for a major singleton (naming the OTHER major), 3NT for a short
-// in the other minor, or 3D for a 5-5 clubs-diamonds two-suiter.
+// (10HL+) with a genuine singleton/void announces it next: a major singleton
+// is named naturally (3H = short hearts, 3S = short spades), 3NT shows a
+// short in the other minor, and 3D a 5-5 clubs-diamonds two-suiter.
 func TestMinorTexas(t *testing.T) {
 	const north, east, south = 0, 1, 2
 	// North has a 4-card club suit: every club Texas below sees the "good
@@ -79,7 +79,7 @@ func TestMinorTexas(t *testing.T) {
 		}
 	})
 
-	t.Run("Manche, singleton Pique, meilleur residu 3C", func(t *testing.T) {
+	t.Run("Manche, singleton Pique annonce naturellement par 3P", func(t *testing.T) {
 		// East is pinned: left to the filler it would draw both majors
 		// five-five and open the Landy 2C intervention [I-3b], which is
 		// correct bridge but not what this test is about.
@@ -94,11 +94,31 @@ func TestMinorTexas(t *testing.T) {
 			t.Fatalf("South's call = %s (%s), want 2P (club Texas)\nauction: %s", got, comment, formatAuction(calls))
 		}
 		southGot, southComment := southsCall(calls, south, 1)
-		if southGot != "3C" {
-			t.Fatalf("South's announcement = %s (%s), want 3C (singleton spade, best residual)\nauction: %s", southGot, southComment, formatAuction(calls))
+		if southGot != "3P" {
+			t.Fatalf("South's announcement = %s (%s), want 3P (singleton spade, named naturally)\nauction: %s", southGot, southComment, formatAuction(calls))
 		}
 		if !strings.Contains(southComment, "Pique") {
 			t.Fatalf("comment %q does not mention spades", southComment)
+		}
+	})
+
+	t.Run("Manche, singleton Coeur annonce naturellement par 3C", func(t *testing.T) {
+		d := dealWithQuietOpponents(north, map[int]*Hand{
+			north: northHand,
+			south: hand("A32", "Q", "T97", "KJ9876"),
+			east:  hand("J987", "KJ54", "A65", "Q2"),
+		})
+		calls := NewEngine(d).Run()
+		got, comment := southsCall(calls, south, 0)
+		if got != "2P" {
+			t.Fatalf("South's call = %s (%s), want 2P (club Texas)\nauction: %s", got, comment, formatAuction(calls))
+		}
+		southGot, southComment := southsCall(calls, south, 1)
+		if southGot != "3C" {
+			t.Fatalf("South's announcement = %s (%s), want 3C (singleton heart, named naturally)\nauction: %s", southGot, southComment, formatAuction(calls))
+		}
+		if !strings.Contains(southComment, "Cœur") {
+			t.Fatalf("comment %q does not mention hearts", southComment)
 		}
 	})
 

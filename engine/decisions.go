@@ -1368,8 +1368,8 @@ func (e *Engine) afterMinorTexasWeak(p *playerState) (Call, meaning) {
 
 // afterMinorTexasGame concludes a game-going minor Texas by announcing the
 // shape found at the time of the ask: a 5-5 two-suiter is shown naturally
-// with 3D; otherwise the singleton is announced by the "meilleur résidu" --
-// naming the major NOT held short -- or by 3NT for a short in the other
+// with 3D; otherwise the singleton is named naturally in a major -- 3H =
+// short hearts, 3S = short spades -- or by 3NT for a short in the other
 // minor.
 func (e *Engine) afterMinorTexasGame(p *playerState, primary Suit, twoSuited bool) (Call, meaning) {
 	h := p.hand
@@ -1392,18 +1392,18 @@ func (e *Engine) afterMinorTexasGame(p *playerState, primary Suit, twoSuited boo
 	if primary == Diamonds {
 		otherMinor = Clubs
 	}
-	tr.note("la courte, par l'enchère libre la moins chère (3♥ = ♠, 3♠ = ♥, 3SA = l'autre mineure)",
-		"the short suit, by the cheapest free bid (3♥ = ♠, 3♠ = ♥, 3NT = the other minor)")
+	tr.note("la courte, annoncée naturellement dans les majeures (3♥ = ♥, 3♠ = ♠, 3SA = l'autre mineure)",
+		"the short suit, named naturally in the majors (3♥ = ♥, 3♠ = ♠, 3NT = the other minor)")
 	switch short {
-	case Spades:
+	case Hearts:
 		c := bid(3, SHearts)
 		if e.legal(p.seat, c) {
-			return c, m(10, 40, "singleton/chicane à Pique (meilleur résidu)", "singleton/void in spades (best residual)").withShort(Spades, h.Len(Spades)).asForcing()
+			return c, m(10, 40, "singleton/chicane à Cœur", "singleton/void in hearts").withShort(Hearts, h.Len(Hearts)).asForcing()
 		}
-	case Hearts:
+	case Spades:
 		c := bid(3, SSpades)
 		if e.legal(p.seat, c) {
-			return c, m(10, 40, "singleton/chicane à Cœur (meilleur résidu)", "singleton/void in hearts (best residual)").withShort(Hearts, h.Len(Hearts)).asForcing()
+			return c, m(10, 40, "singleton/chicane à Pique", "singleton/void in spades").withShort(Spades, h.Len(Spades)).asForcing()
 		}
 	case otherMinor:
 		c := bid(3, SNoTrump)

@@ -596,6 +596,17 @@ sinon il rectifie. Carreau : rectification à 3♦ obligatoire.
 Sur un Texas faible, le répondant qui reçoit 2SA **revient à 3♣** — arrêt
 absolu.
 
+### [N-10] Suites après la rectification du Texas mineur
+Le répondant :
+- **main faible** → **Passe** (arrêt dans la mineure) ;
+- **courte**, annoncée **naturellement dans les majeures** : **3♥** =
+  singleton/chicane ♥, **3♠** = singleton/chicane ♠, **3SA** =
+  singleton/chicane dans **l'autre mineure** ;
+- **bicolore 5-5 mineur** → **3♦**, forcing de manche ;
+- pas de courte à montrer → **3SA**.
+⚠ C'est bien la couleur *courte* qui est nommée, et non le « meilleur résidu »
+(l'autre majeure) : `1SA – 3♣ – 3♦ – 3♥` montre une courte à **Cœur**.
+
 ---
 
 ## 6. Réponses aux ouvertures fortes et de barrage

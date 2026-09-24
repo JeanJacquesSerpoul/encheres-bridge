@@ -98,6 +98,7 @@ type meaning struct {
 	michaels               bool    // specified Michaels two-suited overcall
 	mSuits                 [2]Suit // the two suits shown by a Michaels overcall
 	landy                  bool    // 2C Landy: both majors, at least 5-4, over an opposing 1NT opening
+	bothMajors             bool    // 4D over partner's 1NT: 5-5 in the majors, opener picks his better one
 	reopen                 bool    // balancing bid (réveil): the opening came back after two passes
 	reopenAsk              bool    // advancer's cue-bid over a suit réveil: game hope, opening values
 	controlBid             bool    // cue-bid showing a control during slam exploration

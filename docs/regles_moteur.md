@@ -546,6 +546,18 @@ neuvième avant de s'engager. Suites en [§8.5].
 ### [N-3] Stayman
 4+ cartes dans une majeure et **8 H** (sur 1SA) / **4 H** (sur 2SA) → 2♣ / 3♣.
 
+### [N-3b] Bicolore majeur 5-5 (sur 1SA seulement)
+5 ♥ **et** 5 ♠ avec **9 H et plus** → **4♦**, forcing de manche : l'ouvreur
+nomme sa meilleure majeure au palier de 4, et le répondant passe. L'ouvreur
+d'1SA est régulier, il ne peut donc être court dans les deux majeures : sa
+plus longue en fait un fit de **8 cartes au moins**, et la manche se joue
+mieux là qu'à Sans-Atout. À longueur égale (3-3), ce sont les **honneurs** qui
+tranchent, puis Cœur, la manche la moins chère.
+⚠ Sous le seuil, l'échelle ordinaire s'applique : **Stayman** à partir de 8 H
+[N-3], sinon l'échelle Sans-Atout [N-6]. Le seuil se lit en **H**, comme celui
+du Stayman, et non en HL : un 5-5 porte toujours 2 points de longueur, qui
+diraient la même chose de toutes les mains.
+
 ### [N-4] Texas mineurs (sur 1SA seulement)
 2♠ = Trèfle, 3♣ = Carreau. Conditions : 6+ cartes dans la mineure avec
 **HL ≤ 7** (main faible), **ou** 10 HL et plus **avec un singleton/chicane**.
@@ -2213,3 +2225,4 @@ Les endroits où le moteur tranche d'une manière qui mérite l'avis d'un joueur
 | 21 | **Quatrième couleur à saut** | La fiche en fait un bicolore 5-5 naturel à honneurs concentrés, forcing de manche. Le moteur ne produit pas ce saut : toute quatrième couleur qu'il nomme est la demande [C-21], au palier le plus bas |
 | 22 | **Troisième couleur forcing** | La fiche la dit « en principe forcing de manche » sans donner de plancher ; le moteur exige **11 H** et interdit la demande à une main déjà passée [C-28] |
 | 23 | **Manche mineure après la dénégation d'arrêt** | [C-10] la prévoit, mais le seuil de 30 la met hors d'atteinte : le répondant est plafonné à 10 H par sa réponse d'1SA et l'ouvreur à 16 par sa redemande. La branche est donc théorique — à trancher : abaisser le seuil pour cette séquence, ou l'assumer |
+| 24 | **Bicolore majeur 5-5 sur 1SA** | Le 4♦ est un **choix de manche**, pas une enchère de chelem : l'ouvreur nomme sa majeure et l'échange s'arrête là. Une 5-5 majeure très forte n'a pas d'autre route que celle-ci [N-3b] |

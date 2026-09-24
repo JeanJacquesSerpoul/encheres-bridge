@@ -3426,7 +3426,7 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 				if s != os && h.Len(s) >= 4 && s.Strain() < os.Strain() {
 					tr.check(true, "main irrégulière, 4 cartes dans une couleur moins chère → bicolore économique",
 						"unbalanced, four cards in a cheaper suit → economical two-suiter", cards(h, s))
-					return e.cheapSecondSuit(p, s, bidSuit(2, s), h.HL())
+					return e.cheapSecondSuit(p, s, bidSuit(2, s), h.HL(), false)
 				}
 			}
 		}
@@ -3455,9 +3455,16 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 // to distinguish: partner cannot pass the cheap bid, so it already carries the
 // whole range, and the level the jump would spend is room the slam exploration
 // needs. The zone announced there carries no ceiling, the bid limiting nothing.
-func (e *Engine) cheapSecondSuit(p *playerState, s Suit, cheap Call, hl int) (Call, meaning) {
+//
+// twoOverOne says the response was a new suit at the two level, from an
+// unpassed hand and in the opponents' silence. It forces the same way whether
+// it came with a fit or not, but only the unfitted one
+// [RM-5] records the game force: the fitted "changement de couleur avant
+// soutien" [RM-4] does not, and without this flag an 18 HL opener jumped over
+// it (1S-2C-3D) where [RO-19] keeps the cheap 2D.
+func (e *Engine) cheapSecondSuit(p *playerState, s Suit, cheap Call, hl int, twoOverOne bool) (Call, meaning) {
 	economic := m(12, 17, "bicolore économique", "cheap second suit, 12-17").withLen(s, 4)
-	if e.gameForce[sideOf(p.seat)] {
+	if e.gameForce[sideOf(p.seat)] || twoOverOne {
 		return cheap, m(12, -1, "bicolore économique, sans plafond : le forcing de manche est déjà engagé",
 			"cheap second suit, unlimited: the auction is already game forcing").withLen(s, 4)
 	}
@@ -3743,7 +3750,11 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			// bid, so it already carries the whole range, and the level the
 			// jump would spend is room the slam exploration needs. The zone
 			// announced there carries no ceiling, the bid limiting nothing.
-			return e.cheapSecondSuit(p, s, c, hl)
+			// A two-over-one forces only from an unpassed hand [RM-1b], and
+			// only in the opponents' silence: over an intervention the
+			// two-level new suit is a free bid, not a commitment to game.
+			twoOverOne := respLevel == 2 && !e.ps[partnerOf(p.seat)].passedOpening && e.uncontested(p.seat)
+			return e.cheapSecondSuit(p, s, c, hl, twoOverOne)
 		}
 		if tr.check(hl >= 18 && c.Level <= 2,
 			"4 cartes à "+suitSymbol[s]+", plus chère, 18 HL et plus → bicolore cher (forcing)",

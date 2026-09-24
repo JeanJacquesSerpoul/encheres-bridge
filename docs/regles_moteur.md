@@ -793,7 +793,9 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
   haut), **18 HL et plus** → forcing. Sans lui, un jeu de 19 et un jeu de 12
   faisaient la même enchère et le répondant n'avait aucun moyen de les
   distinguer. Exception : quand le **forcing de manche est déjà engagé** (une
-  réponse 2 sur 1), le saut n'a rien à distinguer — le partenaire ne peut pas
+  réponse 2 sur 1 d'une main non passée, dans le silence adverse, **fittée ou
+  non** — le changement de couleur avant soutien de [RM-4] y compris :
+  `1♠ – 2♣ – 2♦` et non `3♦` avec 18 HL), le saut n'a rien à distinguer — le partenaire ne peut pas
   passer l'enchère économique, qui porte alors toute la fourchette et
   n'annonce aucun plafond — et le palier qu'il dépenserait est celui dont
   l'exploration du chelem a besoin.

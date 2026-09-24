@@ -2104,9 +2104,33 @@ function renderBidReady() {
   const fill = $("#bid-fill-btn");
   fill.textContent = t.fill;
   fill.classList.toggle("hidden", zoneCount(UNASSIGNED) === 0);
+  if (ready) scheduleAutoBid();
 }
 
 $("#bid-fill-btn").addEventListener("click", () => $("#cons-fill-btn").click());
+
+// Le moteur tourne dans la page et répond sans délai : une donne complète qui
+// change voit ses enchères recalculées d'elles-mêmes, sans attendre le
+// bouton. Jamais pendant un questionnaire ni sur une donne masquée — ce
+// serait la dévoiler —, ni avant que le moteur ne soit prêt, ni par-dessus un
+// message que l'utilisateur doit lire.
+let autoBidTimer = null;
+
+function autoBidAllowed() {
+  return healthState === "online" && !quiz && dealComplete() &&
+    !!pbnGames[selectedGameIdx] &&
+    $("#result-panel").classList.contains("hidden") &&
+    !$("#input-panel").classList.contains("quiz-running") &&
+    !$("#cons-error").textContent;
+}
+
+function scheduleAutoBid() {
+  clearTimeout(autoBidTimer);
+  autoBidTimer = setTimeout(() => {
+    autoBidTimer = null;
+    if (autoBidAllowed()) simulate({ auto: true });
+  }, 150);
+}
 
 // Le redessin ci-dessus remplace tout le tableau : l'élément qui avait le
 // focus n'existe plus. Sans cette reprise, chaque carte déplacée au clavier
@@ -3262,8 +3286,12 @@ function renderResult(r) {
   auctionTip.hide();
   auctionTip.calls = r.auction;
   auctionTip.lang = lang;
+  // Chaque case porte l'indice de son enchère : la case, la ligne commentée
+  // et la main de l'enchérisseur s'éclairent ensemble (voir linkCall).
   const grid = auctionGridHTML(r.dealer, r.auction, lang, (a) => {
-    if (!a.comment) return `<td class="bid-cell">${bidHTML(a.bid, lang)}</td>`;
+    if (!a.comment) {
+      return `<td class="bid-cell" data-i="${r.auction.indexOf(a)}">${bidHTML(a.bid, lang)}</td>`;
+    }
     return `<td class="bid-cell has-tip" tabindex="0" data-i="${r.auction.indexOf(a)}">` +
       `${bidHTML(a.bid, lang)}</td>`;
   });
@@ -3293,8 +3321,8 @@ function renderResult(r) {
       const head = `<span class="who">${esc(SEAT_SHORT[lang][a.player])}</span> - ` +
         bidHTML(a.bid, lang);
       return a.comment && !isPass(a.bid)
-        ? `<li>${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
-        : `<li class="silent">${icon}${head}</li>`;
+        ? `<li data-i="${i}">${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
+        : `<li class="silent" data-i="${i}">${icon}${head}</li>`;
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;
 
@@ -3419,6 +3447,10 @@ const auctionTip = {
     const tip = this.el();
     const call = this.calls[Number(cell && cell.dataset.i)];
     if (!tip || !call || this.open === cell) return;
+    // Sur grand écran, la ligne commentée est juste sous la grille et
+    // s'éclaire avec la case (voir linkCall) : l'infobulle ne ferait que
+    // masquer la grille.
+    if (wideLayout.matches) return;
     this.hide();
     this.open = cell;
     cell.classList.add("is-open");
@@ -3596,6 +3628,8 @@ async function checkHealth() {
   $("#health-text").textContent = "…";
   try {
     healthState = (await bidsLocal.selfCheck()) ? "online" : "offline";
+    // La donne affichée au chargement attendait le moteur.
+    scheduleAutoBid();
   } catch (err) {
     healthState = "offline";
     errEl.textContent = err.message;
@@ -3670,29 +3704,38 @@ async function fetchBid(lang) {
   return bidsLocal.bid(pbn, lang);
 }
 
-async function simulate() {
+// `auto` : le calcul relancé de lui-même sur une donne qui vient de changer
+// (voir scheduleAutoBid). Il ne change ni d'onglet ni de mode, ne fait pas
+// défiler la page et ne dit rien s'il échoue : l'utilisateur n'a rien demandé.
+async function simulate(opts) {
+  const auto = !!(opts && opts.auto === true);
   const btn = $("#bid-btn");
   // Le message va dans #cons-error, qui est sur la même ligne que le bouton.
   // Il partait dans #error, une rangée plus bas, à côté du questionnaire :
   // une donne incomplète produisait un refus qu'on ne voyait pas, et le clic
   // paraissait sans effet.
   const errEl = $("#cons-error");
-  setError(errEl, "");
-  resetQuiz();
+  if (!auto) {
+    setError(errEl, "");
+    resetQuiz();
+  }
   const lang = $("#lang").value;
   btn.disabled = true;
   try {
     const body = await fetchBid(lang);
     renderResult(body);
-    // Le contrat s'affiche au centre de la table en lecture : on y revient.
-    editRequested = false;
-    renderDealMode();
-    // Sur écran étroit, le panneau est sous la table : on y descend, sans quoi
-    // le calcul semble n'avoir rien donné. Sur grand écran, il est à côté.
-    selectTab("bids", true);
+    if (!auto) {
+      // Le contrat s'affiche au centre de la table en lecture : on y revient.
+      editRequested = false;
+      renderDealMode();
+      // Sur écran étroit, le panneau est sous la table : on y descend, sans
+      // quoi le calcul semble n'avoir rien donné. Sur grand écran, il est à
+      // côté.
+      selectTab("bids", true);
+    }
   } catch (err) {
-    setError(errEl, err.message);
-    $("#result-panel").classList.add("hidden");
+    if (!auto) setError(errEl, err.message);
+    hideResult();
   } finally {
     renderBidReady();
   }
@@ -3803,6 +3846,7 @@ function setDealHidden(hidden) {
   // bouton resterait enfoncé sur un panneau invisible : il s'éteint.
   $("#pbn-toggle-btn").disabled = hidden;
   if (hidden) setPbnOpen(false);
+  else scheduleAutoBid();
 }
 
 $("#quiz-show-deal-btn").addEventListener("click", () => setDealHidden(false));
@@ -3827,7 +3871,49 @@ function hideResult() {
   // La table en lecture perd le contrat et l'analyse du moteur, qui ne
   // décrivent plus la donne.
   renderReadTable();
+  linkCall(null);
 }
+
+// ---------- la grille, les commentaires et la table, liés ----------
+//
+// Survoler ou atteindre au clavier une enchère — dans la grille ou dans la
+// liste commentée — éclaire sa case, sa ligne et la main de celui qui l'a
+// faite. Un clic dans la grille amène la ligne commentée à l'écran.
+function linkCall(i) {
+  for (const el of document.querySelectorAll(".linked")) el.classList.remove("linked");
+  for (const el of document.querySelectorAll(".read-layout .hand.speaking")) {
+    el.classList.remove("speaking");
+  }
+  const call = i == null ? null : (commentsTree.auction || [])[i];
+  if (!call) return;
+  $(`#auction-body td[data-i="${i}"]`)?.classList.add("linked");
+  $(`#comments > li[data-i="${i}"]`)?.classList.add("linked");
+  $("#hand-" + call.player)?.classList.add("speaking");
+}
+
+for (const sel of ["#auction-body", "#comments"]) {
+  const root = $(sel);
+  const pick = (ev) => {
+    const el = ev.target.closest("[data-i]");
+    // Dans la liste, l'icône d'arbre porte aussi un data-i : c'est la ligne
+    // qui compte.
+    const row = sel === "#comments" ? ev.target.closest("li[data-i]") : el;
+    linkCall(row ? +row.dataset.i : null);
+  };
+  root.addEventListener("mouseover", pick);
+  root.addEventListener("focusin", pick);
+  root.addEventListener("mouseleave", () => linkCall(null));
+  root.addEventListener("focusout", (ev) => {
+    if (!root.contains(ev.relatedTarget)) linkCall(null);
+  });
+}
+
+$("#auction-body").addEventListener("click", (ev) => {
+  const cell = ev.target.closest("td[data-i]");
+  if (!cell) return;
+  $(`#comments > li[data-i="${cell.dataset.i}"]`)
+    ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
 
 function hiddenHandHTML(seat, lang) {
   return `

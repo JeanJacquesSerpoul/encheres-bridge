@@ -529,6 +529,15 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 				// bestNewSuit may fall back on a three-card minor: record only
 				// the length actually held.
 				mn := m(13, 40, "changement de couleur avant soutien, 13HLD et plus", "new suit before supporting, 13+ HLD").withLen(s, min(4, h.Len(s))).asForcing()
+				// The support comes next round, at the cheapest level: the
+				// "fit différé" [RM-4b]. Planned only after a two-over-one from
+				// an unpassed hand in the opponents' silence, where the side is
+				// committed to game and the cheap raise is forcing; at the one
+				// level, or over an intervention, the generic continuation
+				// keeps deciding.
+				if lvl == 2 && !p.passedOpening && e.uncontested(p.seat) {
+					p.planned = func() (Call, meaning) { return e.delayedSupport(p, M) }
+				}
 				return bidSuit(lvl, s), mn
 			}
 			// Every side suit is too short to name honestly (a hand built
@@ -668,6 +677,32 @@ func isRencontre(h *Hand, fit Suit, minFit int, candidate Suit) bool {
 
 // rencontreCall builds the jump call and meaning for a rencontre in
 // candidate, jumpLevels steps beyond the cheapest legal reply.
+// delayedSupport is responder's second call after the fitted two-over-one
+// ("changement de couleur avant soutien", [RM-4]): the "fit différé" [RM-4b].
+// The trump is named at the three level, forcing to game -- not at the two
+// level, where the bare preference (1S-2C-2D-2S) belongs to the hands that
+// only just responded. Jumping to game
+// instead would say "nothing more to add" and shut opener out, while he alone
+// knows how far above his minimum he stands: the cheap raise leaves him the
+// room to start the control bids with a slam-going hand, or to settle in game
+// with a minimum.
+//
+// When the opponents have come in, or opener's rebid has already gone past
+// three of the major, the generic continuation decides.
+func (e *Engine) delayedSupport(p *playerState, M Suit) (Call, meaning) {
+	tr := e.tr
+	c := bidSuit(3, M)
+	if !tr.check(e.uncontested(p.seat) && e.legal(p.seat, c),
+		"fit différé : l'atout au palier de 3, forcing [RM-4b]",
+		"delayed support: the trump at the three level, forcing [RM-4b]", "") {
+		return e.concludeFrom(p, tr)
+	}
+	e.gameForce[sideOf(p.seat)] = true
+	return c, m(13, -1, "fit différé, forcing de manche : l'atout avant les contrôles",
+		"delayed support, game forcing: trumps agreed before the controls").
+		withLen(M, min(4, p.hand.Len(M))).asForcing()
+}
+
 func (e *Engine) rencontreCall(p *playerState, fit, candidate Suit, minFit, jumpLevels int) (Call, meaning, bool) {
 	h := p.hand
 	if !isRencontre(h, fit, minFit, candidate) {

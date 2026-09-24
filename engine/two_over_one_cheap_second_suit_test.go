@@ -52,3 +52,39 @@ func TestNoJumpSecondSuitOverFittedTwoOverOne(t *testing.T) {
 			last.Format("fr"), formatAuction(calls))
 	}
 }
+
+// TestDelayedSupportThenControls follows the same deal one round further.
+// Over 2D, South -- fitted two-over-one, 13+ HLD -- must name the trump at the
+// three level, forcing ("fit différé" [RM-4b]) rather than jump to 4S, which
+// would shut opener out. North, 20 HLD with a slam in view, then starts the
+// control bids: his singleton is the club queen, which fills South's clubs,
+// so neither the 3NT "oui mais" [S-2d] nor the slam valuation holds it
+// against him.
+func TestDelayedSupportThenControls(t *testing.T) {
+	pbn := `[Dealer "N"]
+[Vulnerable "All"]
+[Deal "N:KJ9762.Q4.AKJT.Q 3.T852.Q762.9863 QT4.A96.53.AK542 A85.KJ73.984.JT7"]`
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+	if len(calls) < 9 {
+		t.Fatalf("auction too short: %s", formatAuction(calls))
+	}
+	south := calls[6] // N 1S, E -, S 2C, W -, N 2D, E -, S ?
+	if south.Call != bidSuit(3, Spades) || !south.M.forcing {
+		t.Fatalf("South's second call = %s (%s), want a forcing 3P (fit différé)\nauction: %s",
+			south.Call.Format("fr"), south.M.fr, formatAuction(calls))
+	}
+	north := calls[8]
+	if north.Call.Kind != KindBid || north.Call.Strain == SNoTrump || north.Call == bidSuit(4, Spades) {
+		t.Fatalf("North's call over 3P = %s (%s), want a control bid\nauction: %s",
+			north.Call.Format("fr"), north.M.fr, formatAuction(calls))
+	}
+	contract, _, _ := finalContract(calls)
+	if contract.Level < 6 {
+		t.Fatalf("final contract = %s, want the small slam\nauction: %s",
+			contract.Format("fr"), formatAuction(calls))
+	}
+}

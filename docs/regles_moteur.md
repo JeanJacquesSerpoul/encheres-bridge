@@ -392,6 +392,18 @@ Dans l'ordre :
 - **6-10 HLD** → **2M**.
 - moins de 6 → passe.
 
+### [RM-4b] Le fit différé
+Après le **changement de couleur avant soutien** au palier de 2 (réponse 2 sur
+1 fittée, d'une main non passée, dans le silence adverse), le répondant dit
+l'atout **au palier de 3**, quelle que soit la redemande de l'ouvreur :
+`1♠ – 2♣ – 2♦ – 3♠`. L'enchère est **forcing de manche** et laisse l'espace du
+chelem : seul l'ouvreur sait de combien il dépasse son minimum, il lance les
+contrôles avec une main de chelem ou conclut à la manche avec un minimum.
+Sauter à la manche (`4♠`) dirait au contraire « rien à ajouter » et fermerait
+la porte. Pas au palier de 2 : `2♠` y est la simple préférence.
+Sur intervention, ou si l'ouvreur a déjà dépassé 3 de la majeure, la décision
+générique reprend la main.
+
 ### [RM-5] Sans fit, 11 HL et plus
 Changement de couleur **2 sur 1** dans la meilleure couleur → **forcing de
 manche** (le camp est engagé).
@@ -1795,6 +1807,13 @@ trois As et une sixième à côté — où nommer un contrôle est manifestement
 meilleur. Un singleton face à la longueur du partenaire n'a pas ce défaut :
 c'est un fait sur le fit qu'aucune enchère de contrôle ne peut exprimer, et il
 reste vrai quelle que soit la force du reste.
+
+**Sauf un singleton honneur** (As, Roi ou Dame sec) : face à la longueur du
+partenaire, il ne se perd pas, il complète sa couleur (♣D sec en face de
+♣AR542). Il ne déclenche pas le « oui mais », et l'évaluation pour le chelem
+(le minimum combiné sans l'appoint des courtes face aux longues du partenaire)
+ne le décompte pas. `1♠ – 2♣ – 2♦ – 3♠` avec ♠RV9762 ♥D4 ♦ARVX ♣D : Nord
+lance les contrôles (`4♦`) au lieu de 3SA.
 
 ### [S-3] Couleur annexe non contrôlée
 Une couleur (hors atout) où l'on a **2 cartes ou plus sans A ni R**, que le

@@ -310,6 +310,8 @@
              (voir .pbn-copy-btn) ; dessin, nom et infobulle par renderDealActions. -->
         <div class="pbn-box">
           <textarea id="pbn" rows="4" spellcheck="false" placeholder='[Dealer "S"]&#10;[Vulnerable "All"]&#10;[Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]'></textarea>
+          <!-- Replier le texte, sans rouvrir le menu Partager qui l'a ouvert. -->
+          <button id="pbn-close-btn" type="button" class="pbn-copy-btn pbn-close-btn"></button>
           <button id="pbn-copy-btn" type="button" class="pbn-copy-btn"></button>
         </div>
       </div>
@@ -647,7 +649,7 @@
         <ul class="help-icons">
           <li><span data-help-icon="link"></span><span><b>Copier le lien de cette donne</b> : une adresse qui contient la donne. Qui l'ouvre la retrouve (masquée s'il a activé le mode questionnaire).</span></li>
           <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne dans un fichier .pbn.</span></li>
-          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque, sous la barre, la donne écrite au format PBN (une coche le signale dans le menu). Collez-y une donne reçue par courriel (la table suit), corrigez-la à la main, ou copiez-la avec la petite icône en bas à droite du texte.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque, sous la barre, la donne écrite au format PBN (une coche le signale dans le menu). Collez-y une donne reçue par courriel (la table suit), corrigez-la à la main, ou copiez-la avec la petite icône en bas à droite du texte ; la croix voisine le replie.</span></li>
         </ul>
         <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
         <p>À la première visite, la table porte la <b>donne exemple</b>. Ensuite, votre <b>dernière donne complète</b> revient à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
@@ -762,7 +764,7 @@
         <ul class="help-icons">
           <li><span data-help-icon="link"></span><span><b>Copy a link to this deal</b>: an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
           <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal as a .pbn file.</span></li>
-          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides, below the bar, the deal written in PBN format (a tick marks it in the menu). Paste a deal received by e-mail there (the table follows), fix it by hand, or copy it with the small icon at the bottom right of the text.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides, below the bar, the deal written in PBN format (a tick marks it in the menu). Paste a deal received by e-mail there (the table follows), fix it by hand, or copy it with the small icon at the bottom right of the text; the cross next to it folds it away.</span></li>
         </ul>
         <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
         <p>On your first visit the table holds the <b>example deal</b>. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>

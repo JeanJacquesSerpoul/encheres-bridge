@@ -357,7 +357,8 @@ textarea {
    coin, où se trouve la poignée de redimensionnement, et le texte garde une
    marge à droite pour ne pas passer dessous. */
 .pbn-box { position: relative; }
-.pbn-box textarea { padding-right: 46px; }
+/* Place pour les deux boutons posés en bas à droite : replier, copier. */
+.pbn-box textarea { padding-right: 82px; }
 .pbn-copy-btn {
   position: absolute;
   right: 18px;
@@ -382,6 +383,8 @@ textarea {
   color: var(--accent);
 }
 .pbn-copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+/* La croix, à gauche du bouton Copier : même boîte, 6 px d'écart. */
+.pbn-copy-btn.pbn-close-btn { right: 54px; }
 
 /* Marks the deal selected via #deal-select within the raw PBN text
    (see highlightSelectedDeal in app.js). */

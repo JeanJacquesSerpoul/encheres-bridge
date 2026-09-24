@@ -145,8 +145,30 @@ handle_path /aiproxy* {
 }
 ```
 
-Dans ce cas, mettez `TRUST_PROXY=true`, et `CORS_ORIGINS` à l'origine du
-client.
+### À faire en production
+
+Derrière Caddy, deux variables du `.env` du serveur doivent quitter leur valeur
+par défaut :
+
+```dotenv
+TRUST_PROXY=true
+CORS_ORIGINS=https://<domaine>
+```
+
+- **`TRUST_PROXY=true`** : vu du serveur, toutes les requêtes viennent de Caddy
+  (`127.0.0.1`). Sans cette variable, les visiteurs partagent tous la même
+  limite de débit, et le premier qui l'épuise bloque les autres. Avec elle, le
+  serveur lit l'IP réelle dans `X-Forwarded-For`, que Caddy réécrit. Laissez-la
+  à `false` si le serveur est joignable sans passer par Caddy : un appelant
+  pourrait sinon choisir lui-même l'IP qu'on limite.
+- **`CORS_ORIGINS`** : l'origine du client, c'est-à-dire schéma et domaine,
+  sans chemin ni `/` final (`https://<domaine>`, même si le client est servi
+  sous `/bridgequizz/`). Plusieurs origines se séparent par des virgules. Avec
+  `*`, la valeur par défaut, n'importe quelle page web peut appeler le serveur
+  depuis le navigateur de ses visiteurs, et le serveur le signale au démarrage.
+
+Redémarrez ensuite le serveur (`docker compose up -d`). Le journal de
+démarrage ne doit plus afficher l'avertissement sur `CORS_ORIGINS`.
 
 Le serveur d'IA reste facultatif : sans lui, seuls les boutons photo du client
 s'éteignent.

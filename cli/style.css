@@ -2138,3 +2138,27 @@ main:has(#result-panel:not(.hidden)) #par-empty { display: none; }
 #par-content .par-row { justify-content: center; }
 #par-content .par-table { margin-left: auto; margin-right: auto; }
 #par-content .par-row:has(#par-btn.hidden):has(#par-status:empty):has(#par-error:empty) { display: none; }
+
+/* ---------- boîte à enchères : palier, puis dénomination ---------- */
+
+.bb-grid { max-width: 440px; margin: 0 auto 6px; gap: 8px; }
+.bb-row.bb-levels { grid-template-columns: repeat(7, 1fr); }
+.bb-row.bb-strains { grid-template-columns: repeat(5, 1fr); }
+.bb-row.bb-special { max-width: none; }
+.bb-btn.bb-level { font-weight: 700; }
+.bb-btn.bb-level[aria-pressed="true"] {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  color: var(--on-accent);
+}
+.bb-btn.bb-strain { font-size: 1.05rem; min-height: 44px; }
+.bb-keys { margin: 2px 0 0; font-size: .8rem; text-align: center; }
+@media (pointer: coarse) { .bb-keys { display: none; } }
+
+/* La table du questionnaire vit dans le panneau de la donne : visible tant
+   qu'un questionnaire est ouvert sur la donne masquée. Afficher la donne en
+   cours de route rend la table en lecture, complète, à sa place. */
+.quiz-table { display: none; }
+main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-table { display: grid; }
+main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-hidden-note { margin-bottom: 10px; }
+@media print { .quiz-table { display: none !important; } }

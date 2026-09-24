@@ -600,6 +600,19 @@ est **0-7 H** : simple erreur de libellé.
 Sur 1SA : 2♦ = pas de majeure quatrième · 2♥ = 4 ♥ sans 4 ♠ · 2♠ = 4 ♠ sans
 4 ♥ · 2SA = les deux. Sur 2SA, même échelle décalée (3♦/3♥/3♠/3SA).
 
+### [N-7b] Suites du répondant fitté après le Stayman (sur 1SA)
+Le fit trouvé (l'ouvreur a montré la majeure quatrième du répondant), le
+compte combiné décide [E-9] : la manche en majeure demande **27 HLD**, mesurés
+face à la fourchette de l'ouvreur (15-17).
+- **12 HLD et plus** (la manche face au minimum) → **4M**.
+- **10-11 HLD** (la manche seulement face au maximum) → **3M**, proposition ;
+  l'ouvreur accepte quand son compte atteint 27, passe sinon.
+- **Moins de 10 HLD** → **Passe** : même face à 17, la manche n'y est pas.
+
+Les zones de chelem (splinter, convention 2012) restent au-dessus.
+`1SA – 2♣ – 2♠ – 3♠ – Passe` avec ♠AV94 ♥92 ♦764 ♣RV75 (10 HLD) face à
+♠RD107 ♥AR4 ♦R95 ♣1062 (15 H, régulier).
+
 ### [N-8] Rectification du Texas majeur
 Rectification au plus bas. **Super-accept** (saut) avec **4 atouts** et un
 maximum (au moins 2 H au-dessus du plancher annoncé), uniquement au palier

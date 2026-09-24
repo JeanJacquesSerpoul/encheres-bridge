@@ -1721,6 +1721,33 @@ func (e *Engine) afterStaymanOneMajor(p *playerState, base, askLevel int, M Suit
 				return c, mn
 			}
 		}
+		// Over a 1SA base the rest of the ladder is the combined count too
+		// [E-9]: a major game needs 27 HLD, so it is bid outright only when
+		// the opening's floor gets there, invited when only its ceiling does,
+		// and not sought at all below that. A fixed 10 HLD bid game on 25
+		// (1SA - 2C - 2S - 4S with AJ94 92 764 KJ75 facing a flat 15-count).
+		if askLevel == 2 {
+			opener := e.ps[partnerOf(p.seat)]
+			game := gameThreshold(M, true)
+			sure, reach := game-opener.shownMin, game-opener.shownMax
+			if tr.check(hld >= sure, fmt.Sprintf("%d HLD et plus : la manche face au minimum de l'ouvreur → 4%s", sure, sym),
+				fmt.Sprintf("%d+ HLD: game facing opener's minimum → 4%s", sure, sym), pts(hld, "HLD")) {
+				if c := bidSuit(4, M); e.legal(p.seat, c) {
+					return c, m(sure, 40, "conclusion à la manche dans le fit majeur, naturel non forcing", "raise to game in the major fit, natural non-forcing").withLen(M, 4)
+				}
+			}
+			if tr.check(hld >= reach, fmt.Sprintf("%d-%d HLD : la manche seulement face au maximum → proposition 3%s", reach, sure-1, sym),
+				fmt.Sprintf("%d-%d HLD: game only facing the maximum → 3%s invitation", reach, sure-1, sym), pts(hld, "HLD")) {
+				if c := bidSuit(3, M); e.legal(p.seat, c) {
+					p.invited = true
+					return c, m(reach, sure-1, "proposition de manche dans le fit majeur : 4"+sym+" face au maximum",
+						"game invitation in the major fit: 4"+sym+" facing a maximum").withLen(M, 4).asInvite()
+				}
+			}
+			tr.note("fit trouvé, mais la manche est hors de portée même face au maximum → Passe",
+				"fit found, but game is out of reach even facing a maximum → Pass")
+			return passCall, m(-1, reach-1, "fit trouvé, la manche est hors de portée", "fit found, game out of reach").withLen(M, 4)
+		}
 		if tr.check(hld >= 10, "10 HLD et plus → la manche 4"+sym, "10+ HLD → game 4"+sym, pts(hld, "HLD")) {
 			// Game in a major is always four of it, never askLevel+2: that
 			// formula lands on 4M over a 1SA opening (askLevel 2) but overshoots

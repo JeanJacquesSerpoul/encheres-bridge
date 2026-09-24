@@ -19,7 +19,10 @@ func TestStaymanDevelopments(t *testing.T) {
 	northDeny := hand("K32", "Q32", "AKJ4", "Q54")   // 15H, 3-3-4-3: answers 2D
 	northBoth := hand("KQ32", "AJ32", "K5", "Q54")   // 15H, 4-4-2-3: answers 2SA
 
-	t.Run("soutien naturel non forcing apres 2C", func(t *testing.T) {
+	// The fitted continuations follow the combined count [E-9]: a major game
+	// needs 27 HLD, so facing 15-17 it is bid from 12 HLD, invited on 10-11
+	// and not sought below.
+	t.Run("fit apres 2C, 8 HLD : passe", func(t *testing.T) {
 		d := dealWithQuietOpponents(north, map[int]*Hand{
 			north: northHearts,
 			south: hand("987", "KJ98", "A65", "987"),
@@ -30,11 +33,23 @@ func TestStaymanDevelopments(t *testing.T) {
 			t.Fatalf("North's Stayman answer = %s, want 2C\nauction: %s", northGot, formatAuction(calls))
 		}
 		got, comment := southsCall(calls, south, 1)
-		if got != "3C" {
-			t.Fatalf("South's call = %s (%s), want 3C (natural raise)\nauction: %s", got, comment, formatAuction(calls))
+		if got != "Passe" {
+			t.Fatalf("South's call = %s (%s), want Passe (17 + 8 stays short of 27)\nauction: %s", got, comment, formatAuction(calls))
 		}
-		if !strings.Contains(comment, "non forcing") {
-			t.Fatalf("comment %q does not read as non-forcing", comment)
+	})
+
+	t.Run("fit apres 2C, 10 HLD : proposition 3C", func(t *testing.T) {
+		d := dealWithQuietOpponents(north, map[int]*Hand{
+			north: northHearts,
+			south: hand("987", "KJ98", "A65", "Q87"),
+		})
+		calls := NewEngine(d).Run()
+		got, comment := southsCall(calls, south, 1)
+		if got != "3C" {
+			t.Fatalf("South's call = %s (%s), want 3C (game invitation)\nauction: %s", got, comment, formatAuction(calls))
+		}
+		if !strings.Contains(comment, "proposition") {
+			t.Fatalf("comment %q does not read as an invitation", comment)
 		}
 	})
 

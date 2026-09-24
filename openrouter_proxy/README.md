@@ -28,6 +28,15 @@ bin/openrouter_proxy.sh           # Linux (ou Git Bash sous Windows) ; -p <port>
 .\bin\openrouter_proxy.ps1        # Windows ; -Port <port> pour changer de port
 ```
 
+Avec Docker mais sans rien compiler, [bin/docker-compose.yml](bin/docker-compose.yml)
+monte l'exécutable Linux dans une image Alpine. Il lit sa configuration dans
+`bin/.env`, à créer lui aussi depuis `.env.example` :
+
+```bash
+cp .env.example bin/.env    # puis renseigner OPENROUTER_API_KEY
+cd bin && docker compose up -d
+```
+
 Les scripts se placent dans ce dossier pour que `.env` soit lu. Après une
 modification des sources, `make bin` recompile les deux exécutables.
 

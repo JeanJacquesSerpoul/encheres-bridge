@@ -625,147 +625,231 @@
       <div class="help-body" data-help-lang="fr" lang="fr">
         <p class="help-lead">L'application déroule les enchères d'une donne de bridge selon le <b>Système d'Enchères Français (SEF)</b> et les commente, enchère par enchère. Vous pouvez aussi vous entraîner : le questionnaire vous fait enchérir à la place d'un joueur. Tout est calculé dans votre navigateur, sans compte ni serveur.</p>
 
-        <h3>1. Obtenir une donne</h3>
-        <p>Au-dessus de la table, <b>Donne aléatoire</b> tire une donne d'un clic ; sa flèche ouvre les autres façons d'en obtenir une (donne exemple, fichier). Le menu <b>Partager</b> regroupe le lien, la sauvegarde et le texte PBN.</p>
+        <h3>1. L'écran</h3>
+        <ul>
+          <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
+          <li>À droite, un panneau à trois onglets : <b>Enchères</b>, <b>PAR</b> et <b>S'entraîner</b>. Il reste en vue quand la page défile.</li>
+          <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
+          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8) et <b>?</b> ce mode d'emploi.</li>
+        </ul>
+
+        <h3>2. Obtenir une donne</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît.</span></li>
-          <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir plus bas).</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir §3).</span></li>
+        </ul>
+        <p>La <b>flèche</b> à côté de ce bouton ouvre les autres façons d'obtenir une donne :</p>
+        <ul class="help-icons">
           <li><span data-help-icon="book"></span><span><b>Donne exemple</b> : une donne toute prête pour découvrir l'application.</span></li>
-          <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne affichée dans un fichier .pbn.</span></li>
-          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque, sous les boutons, la donne écrite au format PBN — le bouton reste enfoncé tant que le texte est affiché. On peut y coller une donne reçue par courriel (le tableau de cartes suit), la corriger à la main, ou la copier avec la petite icône en bas à droite du texte.</span></li>
-          <li><span data-help-icon="link"></span><span><b>Copier le lien</b> : copie une adresse qui contient la donne. Qui l'ouvre retrouve cette donne (masquée s'il a activé le mode questionnaire).</span></li>
+          <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît.</span></li>
+          <li><span data-help-icon="camera"></span><span><b>Photographier les quatre mains</b>, si la lecture par photo est activée (voir §7).</span></li>
+        </ul>
+        <p>Le menu <b>Partager</b> sert à emporter la donne hors de la page :</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="link"></span><span><b>Copier le lien de cette donne</b> : une adresse qui contient la donne. Qui l'ouvre la retrouve (masquée s'il a activé le mode questionnaire).</span></li>
+          <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne dans un fichier .pbn.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque, sous la barre, la donne écrite au format PBN (une coche le signale dans le menu). Collez-y une donne reçue par courriel (la table suit), corrigez-la à la main, ou copiez-la avec la petite icône en bas à droite du texte.</span></li>
         </ul>
         <p><b>Donneur</b> et <b>Vulnérabilité</b> s'imposent ou se tirent au sort (<i>Aléatoire</i>). Une donne chargée d'un fichier impose les siens jusqu'au prochain tirage.</p>
-        <p>À la première visite, la <b>donne exemple</b> est affichée. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
+        <p>À la première visite, la table porte la <b>donne exemple</b>. Ensuite, votre <b>dernière donne complète</b> revient à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
 
-        <h3>2. Composer la donne à la main</h3>
-        <p>La table se lit par défaut : les quatre mains autour du tapis, avec leurs points. <b>Modifier la donne</b> la passe en édition, où l'on déplace les cartes ; <b>Terminer</b> revient à la lecture. Une donne incomplète s'ouvre d'elle-même en édition.</p>
+        <h3>3. Lire et modifier la donne</h3>
+        <p>La table se <b>lit</b> par défaut : les quatre mains autour du tapis, avec leurs points d'honneur (PH), le donneur et la vulnérabilité au centre.</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="edit"></span><span><b>Modifier la donne</b> passe la table en <b>édition</b> ; <b>Terminer</b> revient à la lecture (éteint tant que la donne est incomplète). Une donne incomplète s'ouvre d'elle-même en édition ; une nouvelle donne, tirée ou chargée, revient en lecture.</span></li>
+        </ul>
+        <p>En édition :</p>
         <ul>
           <li><b>Glissez</b> une carte d'une main à l'autre, ou vers <b>Cartes non affectées</b> pour la retirer.</li>
           <li>Sur écran tactile, <b>touchez la carte, puis sa destination</b>. Sur téléphone, la zone <b>Cartes non affectées</b> reste en haut de l'écran pendant que vous faites défiler les mains.</li>
-          <li>Au <b>clavier</b> : Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend une carte puis la dépose sur la main où vous êtes, Échap la repose.</li>
+          <li>Au clavier : voir §9.</li>
+          <li>Chaque main affiche ses PH et son nombre de cartes (<i>13/13</i>).</li>
         </ul>
         <ul class="help-icons">
           <li><span data-help-icon="trash"></span><span>Dans l'en-tête d'une main : renvoie ses cartes au centre.</span></li>
         </ul>
-        <p>Chaque main affiche ses <b>points d'honneur (PH)</b> et son nombre de cartes (<i>13/13</i>).</p>
-        <p>Sous la table en édition :</p>
+        <p>Sous la table en édition (des icônes seules sur téléphone ; leur nom complet est dans l'infobulle) :</p>
         <ul class="help-icons">
           <li><span data-help-icon="undo"></span><span><b>Annuler</b> (ou <b>Ctrl+Z</b>) : revient sur la dernière action qui a changé la donne — carte déplacée, main vidée, table vidée ou complétée, nouvelle donne tirée ou chargée.</span></li>
-          <li><span data-help-icon="gather"></span><span><b>Retirer toutes les cartes</b> : vide les quatre mains.</span></li>
-          <li><span data-help-icon="deal"></span><span><b>Compléter les mains</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
-          <li><span data-help-icon="bounds"></span><span><b>Bornes de points</b> : affiche les champs <b>Mini</b> et <b>Maxi</b> de chaque main, qui bornent ses PH. Les tirages et la distribution automatique les respectent, et le compteur passe en rouge si la main en sort.</span></li>
-          <li><span data-help-icon="eraser"></span><span><b>Effacer les bornes</b> : remet tous les Mini/Maxi à vide.</span></li>
-          <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : le grand bouton sous la table, qui reste en vue quand vous faites défiler les mains. Il s'allume une fois les quatre mains complètes ; sinon il dit combien de mains sont incomplètes et propose de les compléter.</span></li>
+          <li><span data-help-icon="gather"></span><span><b>Tout retirer</b> : vide les quatre mains.</span></li>
+          <li><span data-help-icon="deal"></span><span><b>Compléter</b> : distribue les cartes non affectées, en respectant les bornes.</span></li>
+          <li><span data-help-icon="bounds"></span><span><b>Bornes</b> : affiche les champs <b>Mini</b> et <b>Maxi</b> de chaque main, qui bornent ses PH. Les tirages et <b>Compléter</b> les respectent, et le compteur passe en rouge si la main en sort.</span></li>
+          <li><span data-help-icon="eraser"></span><span><b>Effacer les bornes</b> : remet tous les Mini et Maxi à vide.</span></li>
         </ul>
 
-        <h3>3. Lire le résultat</h3>
+        <h3>4. Les enchères (onglet Enchères)</h3>
         <ul>
-          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone, où les onglets forment une barre au bas de l'écran (son bouton <b>Donne</b> remonte à la table). Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main). L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
-          <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement — sauf en mode questionnaire, pour ne rien dévoiler.</li>
-          <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée sur la table. Un clic amène la ligne à l'écran. Sur téléphone, touchez-la pour lire sa signification.</li>
+          <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement. Exceptions : pendant un questionnaire et sur une donne masquée, pour ne rien dévoiler.</li>
+          <li>Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main).</li>
+          <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée de doré sur la table. Un clic amène la ligne à l'écran. Sur téléphone, touchez-la pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère.</li>
-          <li>L'onglet <b>PAR</b>, calculé dès qu'on l'ouvre et à chaque nouvelle donne tant qu'il reste ouvert : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
+          <li>L'icône d'<b>imprimante</b> imprime la table, la séquence, les commentaires et le PAR s'il est calculé. Sur écran étroit, <b>Revenir à la donne</b> remonte à la table.</li>
+        </ul>
+        <ul class="help-icons">
+          <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : le grand bouton sous la table, qui reste en vue quand vous faites défiler les mains, pour lancer le calcul vous-même. Sur une donne incomplète, il est éteint, dit combien de mains sont incomplètes et propose <b>Compléter les mains</b>.</span></li>
         </ul>
 
-        <h3>4. S'entraîner avec le questionnaire</h3>
+        <h3>5. Le PAR (onglet PAR)</h3>
+        <ul>
+          <li>Le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul double-mort).</li>
+          <li>Il se calcule à l'ouverture de l'onglet, puis pour chaque nouvelle donne tant que l'onglet reste ouvert. Il faut une donne complète dont les enchères sont calculées.</li>
+          <li>Survolez une case (ou touchez-la) pour voir les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres.</li>
+          <li>Le bouton <b>Calcul du PAR</b> n'apparaît que pour relancer le calcul après un échec.</li>
+        </ul>
+
+        <h3>6. S'entraîner (onglet S'entraîner)</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Dans l'onglet <b>S'entraîner</b>, choisissez <b>votre main</b> (N, E, S ou O), puis <b>Commencer le questionnaire</b>. Il porte sur la donne composée, dont les quatre mains doivent être complètes.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Choisissez <b>votre main</b> (Nord, Est, Sud ou Ouest), puis le bouton à la toque, <b>Commencer le questionnaire</b>. Il porte sur la donne de la table, dont les quatre mains doivent être complètes.</span></li>
         </ul>
         <ul>
-          <li>Seule votre main est visible : la donne composée et les boutons sous la table sont masqués, et le restent une fois le questionnaire terminé. Le lien <b>Afficher la donne</b> les montre.</li>
-          <li>Les enchères des autres joueurs s'affichent d'elles-mêmes, l'une après l'autre, brièvement surlignées.</li>
-          <li>Votre main et des dos de cartes pour les autres s'affichent sur la table, à la place de la donne masquée ; l'onglet garde la séquence et la boîte à enchères.</li>
-          <li>À votre tour, la <b>boîte à enchères</b> : choisissez un <b>palier</b> (1 à 7 ; le plus bas encore permis est déjà choisi), puis une <b>dénomination</b> (♣ ♦ ♥ ♠ SA), ou Passe, Contre, Surcontre. Elle ne propose que les enchères permises. Au clavier : un chiffre pour le palier, C D H S N pour la dénomination, P pour passer, X pour contrer. Vous voyez aussitôt si la vôtre est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite.</li>
-          <li>Après une mauvaise réponse, <b>Voir l'arbre de décision</b> montre le chemin suivi par le moteur sur votre main : chaque règle examinée, dans l'ordre, avec ✓ ou ✗ et la valeur mesurée (points, longueurs), jusqu'à l'enchère attendue. Toutes les enchères du moteur ont leur arbre.</li>
-          <li><b>Annuler</b> arrête le questionnaire à tout moment et revient à la donne (qui reste masquée en mode questionnaire).</li>
-          <li>À la fin : les mains dévoilées, votre <b>score</b> (bonnes réponses et pourcentage), la liste de vos erreurs avec l'enchère attendue et son explication, le contrat final, et le choix de <b>rejouer</b> la donne, d'en tirer une <b>nouvelle</b> ou d'<b>afficher le détail complet</b>.</li>
+          <li>La donne est masquée. La table montre votre main et des dos de cartes pour les autres, avec au centre le joueur qui parle ; l'onglet affiche la séquence.</li>
+          <li>Les enchères des autres joueurs arrivent d'elles-mêmes, l'une après l'autre, brièvement surlignées.</li>
+          <li>À votre tour, la <b>boîte à enchères</b> : choisissez un <b>palier</b> (1 à 7 ; le plus bas encore permis est déjà choisi), puis une <b>dénomination</b> (♣ ♦ ♥ ♠ SA), ou Passe, Contre, Surcontre. Elle ne propose que les enchères permises.</li>
+          <li>Vous voyez aussitôt si votre enchère est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite. Après une erreur, <b>Voir l'arbre de décision</b> montre le chemin suivi par le moteur sur votre main : chaque règle examinée, avec ✓ ou ✗ et la valeur mesurée (points, longueurs).</li>
+          <li><b>Annuler</b> arrête le questionnaire à tout moment.</li>
+          <li>À la fin : les mains dévoilées, votre <b>score</b> (bonnes réponses et pourcentage), vos erreurs avec l'enchère attendue, le contrat final, et le choix entre <b>Rejouer cette donne</b>, <b>Nouvelle donne</b> et <b>Afficher le détail complet</b>.</li>
+          <li>La donne reste masquée après le questionnaire : le lien <b>Afficher la donne</b> la montre quand vous le voulez.</li>
         </ul>
-        <p><b>Mode questionnaire</b> : l'interrupteur sous le choix de la main fait arriver <b>masquée</b> chaque nouvelle donne — tirée, exemple, chargée d'un fichier ou retrouvée à l'ouverture de la page — pour vous entraîner sur une donne que vous ne connaissez pas. Le lien <b>Afficher la donne</b> la montre quand vous le voulez. Le réglage est retenu d'une visite à l'autre.</p>
+        <p><b>Mode questionnaire</b> : cet interrupteur fait arriver <b>masquée</b> chaque nouvelle donne — tirée, exemple, chargée ou retrouvée à l'ouverture de la page — pour vous entraîner sur une donne que vous ne connaissez pas. Il est retenu d'une visite à l'autre.</p>
 
-        <h3>5. Lire les cartes sur une photo (facultatif)</h3>
-        <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> dans les <b>Réglages</b> (la roue dentée du bandeau). Il faut un serveur IA en service : sans lui, ces boutons restent grisés.</p>
+        <h3>7. Lire les cartes sur une photo (facultatif)</h3>
+        <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> dans les Réglages. Il faut un serveur IA en service : sans lui, les boutons photo restent grisés.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>Dans le menu de la flèche de <b>Donne aléatoire</b> : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main : une photo de <b>cette seule main</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>Dans le menu de la flèche de <b>Donne aléatoire</b> : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main, en édition : une photo de <b>cette seule main</b>.</span></li>
         </ul>
-        <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire. Les cartes non reconnues attendent au centre.</p>
+        <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire, puis <b>Lire les cartes</b>. Les cartes non reconnues attendent dans <b>Cartes non affectées</b>.</p>
 
-        <h3>6. Réglages</h3>
-        <p><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre), dans les <b>Réglages</b> : la roue dentée du bandeau. Ils sont retenus d'une visite à l'autre, comme le mode questionnaire et votre dernière donne complète. Le bouton <b>?</b> ouvre ce mode d'emploi, que l'écran d'accueil propose aussi au premier lancement.</p>
-        <p>Dans les Réglages, la <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</p>
+        <h3>8. Réglages</h3>
+        <ul>
+          <li><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre).</li>
+          <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
+          <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
+        </ul>
+        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. L'écran d'accueil du premier lancement propose aussi ce mode d'emploi.</p>
+
+        <h3>9. Raccourcis clavier</h3>
+        <ul>
+          <li><b>Ctrl+Z</b> (<b>Cmd+Z</b> sur Mac) : annuler la dernière action sur la donne.</li>
+          <li><b>Table en édition</b> : <b>Tab</b> passe d'une main à l'autre, les <b>flèches</b> parcourent ses cartes, <b>Entrée</b> ou <b>Espace</b> prend une carte puis la dépose sur la main où vous êtes, <b>Échap</b> la repose.</li>
+          <li><b>Menus</b> (flèche de Donne aléatoire, Partager) : <b>Entrée</b> ou <b>↓</b> ouvre, <b>↑</b> et <b>↓</b> parcourent les articles, <b>Échap</b> referme — les Réglages aussi.</li>
+          <li><b>Onglets</b> : <b>←</b> et <b>→</b> passent de l'un à l'autre, <b>Début</b> et <b>Fin</b> vont au premier et au dernier.</li>
+          <li><b>Boîte à enchères</b> : <b>1</b> à <b>7</b> pour le palier, puis <b>C D H S N</b> pour ♣ ♦ ♥ ♠ SA ; <b>P</b> pour passer, <b>X</b> pour contrer (ou surcontrer).</li>
+          <li><b>Échap</b> referme aussi ce mode d'emploi et les infobulles.</li>
+        </ul>
       </div>
 
       <div class="help-body" data-help-lang="en" lang="en" hidden>
         <p class="help-lead">The app runs the auction of a bridge deal following the <b>French bidding system (SEF)</b> and explains every call. You can also practise: the quiz has you bid in place of one player. Everything is computed in your browser, with no account and no server.</p>
 
-        <h3>1. Getting a deal</h3>
-        <p>Above the table, <b>Random deal</b> draws a deal in one click; its arrow opens the other ways to get one (example deal, file). The <b>Share</b> menu holds the link, the download and the PBN text.</p>
+        <h3>1. The screen</h3>
+        <ul>
+          <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
+          <li>On the right, a panel with three tabs: <b>Auction</b>, <b>Par</b> and <b>Practise</b>. It stays in view while the page scrolls.</li>
+          <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
+          <li>In the top bar, the cog opens the <b>Settings</b> (see §8) and <b>?</b> opens this guide.</li>
+        </ul>
+
+        <h3>2. Getting a deal</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears.</span></li>
-          <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see below).</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see §3).</span></li>
+        </ul>
+        <p>The <b>arrow</b> next to that button opens the other ways to get a deal:</p>
+        <ul class="help-icons">
           <li><span data-help-icon="book"></span><span><b>Example deal</b>: a ready-made deal to discover the app.</span></li>
-          <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal on screen as a .pbn file.</span></li>
-          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides, below the buttons, the deal written in PBN format — the button stays pressed while the text is shown. Paste a deal received by e-mail there (the card table follows), fix it by hand, or copy it with the small icon at the bottom right of the text.</span></li>
-          <li><span data-help-icon="link"></span><span><b>Copy the link</b>: copies an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
+          <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears.</span></li>
+          <li><span data-help-icon="camera"></span><span><b>Photograph the four hands</b>, when photo reading is turned on (see §7).</span></li>
+        </ul>
+        <p>The <b>Share</b> menu takes the deal out of the page:</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="link"></span><span><b>Copy a link to this deal</b>: an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
+          <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal as a .pbn file.</span></li>
+          <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides, below the bar, the deal written in PBN format (a tick marks it in the menu). Paste a deal received by e-mail there (the table follows), fix it by hand, or copy it with the small icon at the bottom right of the text.</span></li>
         </ul>
         <p><b>Dealer</b> and <b>Vulnerability</b> can be set or drawn at random (<i>Random</i>). A deal loaded from a file sets its own until the next draw.</p>
-        <p>On your first visit the <b>example deal</b> is shown. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
+        <p>On your first visit the table holds the <b>example deal</b>. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
 
-        <h3>2. Building the deal by hand</h3>
-        <p>The table opens for reading: the four hands around the felt, with their points. <b>Edit the deal</b> switches it to editing, where you move cards; <b>Done</b> goes back to reading. An incomplete deal opens in editing on its own.</p>
+        <h3>3. Reading and editing the deal</h3>
+        <p>The table opens for <b>reading</b>: the four hands around the felt, with their high-card points (HCP), and the dealer and vulnerability in the middle.</p>
+        <ul class="help-icons">
+          <li><span data-help-icon="edit"></span><span><b>Edit the deal</b> switches the table to <b>editing</b>; <b>Done</b> goes back to reading (greyed out while the deal is incomplete). An incomplete deal opens in editing on its own; a new deal, drawn or loaded, comes back in reading.</span></li>
+        </ul>
+        <p>While editing:</p>
         <ul>
           <li><b>Drag</b> a card from one hand to another, or to <b>Unassigned cards</b> to take it out.</li>
           <li>On a touch screen, <b>tap the card, then its destination</b>. On a phone, the <b>Unassigned cards</b> area stays at the top of the screen while you scroll through the hands.</li>
-          <li>With the <b>keyboard</b>: Tab moves between hands, the arrows walk through the cards, Enter or Space picks a card up and drops it on the hand you are on, Escape puts it back.</li>
+          <li>With the keyboard: see §9.</li>
+          <li>Each hand shows its HCP and card count (<i>13/13</i>).</li>
         </ul>
         <ul class="help-icons">
           <li><span data-help-icon="trash"></span><span>In a hand's header: sends its cards back to the centre.</span></li>
         </ul>
-        <p>Each hand shows its <b>high-card points (HCP)</b> and card count (<i>13/13</i>).</p>
-        <p>Below the table, while editing:</p>
+        <p>Below the table while editing (icons only on a phone; their full name is in the tooltip):</p>
         <ul class="help-icons">
           <li><span data-help-icon="undo"></span><span><b>Undo</b> (or <b>Ctrl+Z</b>): reverts the last action that changed the deal — a card moved, a hand or the whole table emptied or filled, a new deal drawn or loaded.</span></li>
-          <li><span data-help-icon="gather"></span><span><b>Take out every card</b>: empties the four hands.</span></li>
-          <li><span data-help-icon="deal"></span><span><b>Fill the hands</b>: deals the unassigned cards, within the bounds.</span></li>
-          <li><span data-help-icon="bounds"></span><span><b>Point bounds</b>: shows each hand's <b>Min</b> and <b>Max</b> fields, which bound its HCP. Random draws and automatic dealing respect them, and the counter turns red when the hand falls outside.</span></li>
-          <li><span data-help-icon="eraser"></span><span><b>Clear bounds</b>: empties every Min/Max field.</span></li>
-          <li><span data-help-icon="play"></span><span><b>Run the auction</b>: the large button below the table, which stays in view while you scroll through the hands. It lights up once all four hands are complete; otherwise it says how many hands are incomplete and offers to fill them.</span></li>
+          <li><span data-help-icon="gather"></span><span><b>Take all out</b>: empties the four hands.</span></li>
+          <li><span data-help-icon="deal"></span><span><b>Fill</b>: deals the unassigned cards, within the bounds.</span></li>
+          <li><span data-help-icon="bounds"></span><span><b>Bounds</b>: shows each hand's <b>Min</b> and <b>Max</b> fields, which bound its HCP. Random draws and <b>Fill</b> respect them, and the counter turns red when the hand falls outside.</span></li>
+          <li><span data-help-icon="eraser"></span><span><b>Clear bounds</b>: empties every Min and Max field.</span></li>
         </ul>
 
-        <h3>3. Reading the result</h3>
+        <h3>4. The auction (Auction tab)</h3>
         <ul>
-          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone, where the tabs become a bar at the bottom of the screen (its <b>Deal</b> button scrolls back to the table). The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type). The printer icon prints it (hands, auction, comments and the par if computed).</li>
-          <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change — except in quiz mode, so as not to give anything away.</li>
-          <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled on the table. A click brings the line into view. On a phone, tap it to read its meaning.</li>
+          <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change. Exceptions: during a quiz and on a hidden deal, so as not to give anything away.</li>
+          <li>The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type).</li>
+          <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled in gold on the table. A click brings the line into view. On a phone, tap it to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call.</li>
-          <li>The <b>Par</b> tab, computed as soon as you open it and for every new deal while it stays open: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>
+          <li>The <b>printer</b> icon prints the table, the auction, the comments and the par if computed. On a narrow screen, <b>Back to the deal</b> scrolls back to the table.</li>
+        </ul>
+        <ul class="help-icons">
+          <li><span data-help-icon="play"></span><span><b>Run the auction</b>: the large button below the table, which stays in view while you scroll through the hands, to run the computation yourself. On an incomplete deal it is greyed out, says how many hands are incomplete and offers <b>Fill the hands</b>.</span></li>
         </ul>
 
-        <h3>4. Practising with the quiz</h3>
+        <h3>5. The par (Par tab)</h3>
+        <ul>
+          <li>The tricks each side takes in each strain, all cards visible (double-dummy analysis).</li>
+          <li>It is computed when you open the tab, then for every new deal while the tab stays open. It needs a complete deal whose auction has been computed.</li>
+          <li>Hover over a cell (or tap it) to see the opening leads that hold declarer to that many tricks, and what the others cost.</li>
+          <li>The <b>Compute the par</b> button only shows up to retry after a failure.</li>
+        </ul>
+
+        <h3>6. Practising (Practise tab)</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>In the <b>Practise</b> tab, pick <b>your hand</b> (N, E, S or W), then <b>Start the quiz</b>. It uses the deal you built, whose four hands must be complete.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Pick <b>your hand</b> (North, East, South or West), then the mortarboard button, <b>Start the quiz</b>. It uses the deal on the table, whose four hands must be complete.</span></li>
         </ul>
         <ul>
-          <li>Only your hand is shown: the deal built above and the buttons below the table are hidden, and stay hidden once the quiz is over. The <b>Show the deal</b> link shows them.</li>
+          <li>The deal is hidden. The table shows your hand and card backs for the others, with the player to speak in the middle; the tab shows the auction.</li>
           <li>The other players' calls appear on their own, one after another, briefly highlighted.</li>
-          <li>Your hand, and card backs for the others, show on the table in place of the hidden deal; the tab keeps the auction and the bidding box.</li>
-          <li>On your turn, the <b>bidding box</b>: pick a <b>level</b> (1 to 7; the lowest one still allowed is already picked), then a <b>strain</b> (♣ ♦ ♥ ♠ NT), or Pass, Double, Redouble. It only offers legal calls. With the keyboard: a digit for the level, C D H S N for the strain, P to pass, X to double. You see at once whether yours matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on.</li>
-          <li>After a wrong answer, <b>Show the decision tree</b> displays the path the engine followed on your hand: each rule examined, in order, with ✓ or ✗ and the measured value (points, lengths), down to the expected call. Every call the engine makes has its tree.</li>
-          <li><b>Cancel</b> stops the quiz at any time and goes back to the deal (which stays hidden in quiz mode).</li>
-          <li>At the end: the hands revealed, your <b>score</b> (right answers and percentage), the list of your mistakes with the expected call and why, the final contract, and the choice to <b>replay</b> the deal, draw a <b>new</b> one or <b>show the full detail</b>.</li>
+          <li>On your turn, the <b>bidding box</b>: pick a <b>level</b> (1 to 7; the lowest one still allowed is already picked), then a <b>strain</b> (♣ ♦ ♥ ♠ NT), or Pass, Double, Redouble. It only offers legal calls.</li>
+          <li>You see at once whether your call matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on. After a mistake, <b>Show the decision tree</b> displays the path the engine followed on your hand: each rule examined, with ✓ or ✗ and the measured value (points, lengths).</li>
+          <li><b>Cancel</b> stops the quiz at any time.</li>
+          <li>At the end: the hands revealed, your <b>score</b> (right answers and percentage), your mistakes with the expected call, the final contract, and the choice between <b>Replay this deal</b>, <b>New deal</b> and <b>Show full detail</b>.</li>
+          <li>The deal stays hidden after the quiz: the <b>Show the deal</b> link reveals it whenever you like.</li>
         </ul>
-        <p><b>Quiz mode</b>: the switch below the hand picker makes every new deal arrive <b>hidden</b> — random, example, loaded from a file or brought back when the page opens — so you practise on a deal you do not know. The <b>Show the deal</b> link reveals it whenever you like. The setting is remembered between visits.</p>
+        <p><b>Quiz mode</b>: this switch makes every new deal arrive <b>hidden</b> — random, example, loaded or brought back when the page opens — so you practise on a deal you do not know. It is remembered between visits.</p>
 
-        <h3>5. Reading cards from a photo (optional)</h3>
-        <p>Tick <b>AI card-recognition server</b> in the <b>Settings</b> (the cog in the top bar). An AI server must be running: without it, these buttons stay greyed out.</p>
+        <h3>7. Reading cards from a photo (optional)</h3>
+        <p>Tick <b>AI card-recognition server</b> in the Settings. An AI server must be running: without it, the photo buttons stay greyed out.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>In the menu behind the <b>Random deal</b> arrow: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header: a photo of <b>that hand only</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>In the menu behind the <b>Random deal</b> arrow: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header, while editing: a photo of <b>that hand only</b>.</span></li>
         </ul>
-        <p>Before sending, rotate the photo and draw the frame around the cards to read. Unrecognised cards wait in the centre.</p>
+        <p>Before sending, rotate the photo and draw the frame around the cards to read, then <b>Read the cards</b>. Unrecognised cards wait in <b>Unassigned cards</b>.</p>
 
-        <h3>6. Settings</h3>
-        <p><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark), in the <b>Settings</b>: the cog in the top bar. Both are remembered between visits, like quiz mode and your last complete deal. The <b>?</b> button opens this guide, which the welcome screen also offers on first launch.</p>
-        <p>In the Settings, the <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</p>
+        <h3>8. Settings</h3>
+        <ul>
+          <li><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark).</li>
+          <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
+          <li>The <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
+        </ul>
+        <p>Language, theme, quiz mode, the photo option and your last complete deal are remembered between visits, in this browser only. The welcome screen on first launch also offers this guide.</p>
+
+        <h3>9. Keyboard shortcuts</h3>
+        <ul>
+          <li><b>Ctrl+Z</b> (<b>Cmd+Z</b> on a Mac): undo the last action on the deal.</li>
+          <li><b>Table while editing</b>: <b>Tab</b> moves between hands, the <b>arrows</b> walk through its cards, <b>Enter</b> or <b>Space</b> picks a card up and drops it on the hand you are on, <b>Escape</b> puts it back.</li>
+          <li><b>Menus</b> (Random deal arrow, Share): <b>Enter</b> or <b>↓</b> opens, <b>↑</b> and <b>↓</b> move through the items, <b>Escape</b> closes — the Settings too.</li>
+          <li><b>Tabs</b>: <b>←</b> and <b>→</b> move between them, <b>Home</b> and <b>End</b> go to the first and the last.</li>
+          <li><b>Bidding box</b>: <b>1</b> to <b>7</b> for the level, then <b>C D H S N</b> for ♣ ♦ ♥ ♠ NT; <b>P</b> to pass, <b>X</b> to double (or redouble).</li>
+          <li><b>Escape</b> also closes this guide and the tooltips.</li>
+        </ul>
       </div>
     </div>
   </dialog>

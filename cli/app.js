@@ -4532,7 +4532,7 @@ $("#nav-deal-btn").addEventListener("click", () => revealPane($("#input-panel"))
 const HELP_ICONS = {
   file: IMPORT_SVG, dice: DICE_SVG, book: BOOK_SVG, save: EXPORT_SVG,
   pbn: CODE_SVG, link: LINK_SVG, gather: GATHER_SVG, deal: DEAL_SVG, bounds: BOUNDS_SVG, undo: UNDO_SVG, eraser: ERASER_SVG, play: PLAY_SVG,
-  quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG,
+  quiz: QUIZ_SVG, trash: TRASH_SVG, camera: CAMERA_SVG, edit: PENCIL_SVG,
 };
 
 function renderHelpIcons() {

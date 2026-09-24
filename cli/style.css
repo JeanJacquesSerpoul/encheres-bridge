@@ -566,8 +566,12 @@ button:disabled { opacity: .6; cursor: wait; }
   main { margin: 0; max-width: none; padding: 0; }
   .panel { border: none; box-shadow: none; padding: 0; margin: 0 0 12px; }
   main { display: block !important; }
-  main:has(#result-panel:not(.hidden)) #input-panel,
+  /* La table du résultat est celle de la donne, en lecture : seule elle
+     s'imprime du panneau de gauche. */
+  main:has(#result-panel:not(.hidden)) #input-panel > :not(#constraints),
+  main:has(#result-panel:not(.hidden)) #constraints > :not(#read-layout),
   main:has(#result-panel:not(.hidden)) #tabpanel-train { display: none !important; }
+  main:has(#result-panel:not(.hidden)) #read-layout { display: grid !important; }
   main:has(#result-panel:not(.hidden)) #tabpanel-bids { display: block !important; }
   .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
   .comments > li { break-inside: avoid; }
@@ -1458,6 +1462,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #input-panel.quiz-running .cons-layout,
 #input-panel.quiz-running #pbn-details,
 #input-panel.quiz-running #cons-actions,
+#input-panel.quiz-running .read-layout,
 #input-panel.quiz-running #bid-row { display: none; }
 
 /* Un bouton qui se lit comme un lien : l'action est secondaire. */
@@ -2062,4 +2067,46 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
      de partage s'efface derrière son icône : la rangée tient sur une ligne. */
   #share-menu-btn .cmd-label { display: none; }
   .cmd-btn.cmd-labeled { padding: 0 12px; }
+}
+
+/* ---------- la table en lecture, la table en édition ----------
+
+   En lecture, les quatre mains compactes autour du tapis ; en édition, les
+   zones où l'on déplace les cartes et la barre de leurs commandes. Jamais les
+   deux à la fois. */
+#input-panel:not(.editing) .cons-layout,
+#input-panel:not(.editing) #cons-actions { display: none; }
+#input-panel.editing .read-layout { display: none; }
+.read-layout { margin: 4px 0 0; }
+
+/* La bascule enfoncée pendant l'édition, comme une bascule ouverte. */
+.cmd-btn[aria-pressed="true"] {
+  background: var(--tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Les commandes de l'édition portent leur nom : plus étroites que les
+   boutons de la barre du haut. */
+#cons-actions .cmd-btn.cmd-labeled {
+  height: 40px;
+  padding: 0 12px;
+  gap: 6px;
+  font-weight: 500;
+  font-size: .9rem;
+}
+#cons-actions .cmd-btn.cmd-labeled svg { width: 18px; height: 18px; }
+
+/* Sans message, la ligne des messages ne prend pas de place. */
+.cons-status:has(#cons-busy:empty):has(#cons-error:empty) { display: none; }
+.cons-status { margin: 6px 0 0; }
+
+@media (max-width: 480px) {
+  /* Sur un téléphone, les commandes d'édition redeviennent des icônes : leur
+     nom reste lu par un lecteur d'écran, et dans l'infobulle. */
+  #cons-actions .cmd-btn.cmd-labeled { width: 44px; padding: 0; }
+  #cons-actions .cmd-label {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
 }

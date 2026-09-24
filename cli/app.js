@@ -194,6 +194,9 @@ const UI_TEXT = {
       "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
     moreDeals: "Autres façons d'obtenir une donne",
+    editDeal: "Modifier la donne",
+    editDone: "Terminer",
+    editDoneBlocked: "Complétez les quatre mains pour revenir à la table.",
     shareMenu: "Partager",
     settings: "Réglages",
     tabsLabel: "Que faire de la donne",
@@ -348,6 +351,9 @@ const UI_TEXT = {
       "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
     moreDeals: "Other ways to get a deal",
+    editDeal: "Edit the deal",
+    editDone: "Done",
+    editDoneBlocked: "Complete all four hands to go back to the table.",
     shareMenu: "Share",
     settings: "Settings",
     tabsLabel: "What to do with the deal",
@@ -626,6 +632,7 @@ function loadPbn(text, fileName) {
     $("#vul").value = "";
   }
   dealFromFile = !!fileName;
+  editRequested = false;
   resetQuiz();
   hideNewDealInQuizMode();
   hideResult();
@@ -1160,6 +1167,9 @@ const CONS_TEXT = {
     photoHand: (seat) =>
       `Photographier la main ${/^[AEIOU]/.test(seat) ? "d'" : "de "}${seat}`,
     fill: "Compléter les mains",
+    // Les noms courts des commandes de la table en édition, écrits sur les
+    // boutons ; le nom complet reste dans leur infobulle.
+    short: { undo: "Annuler", clear: "Tout retirer", fill: "Compléter", bounds: "Bornes", reset: "Effacer les bornes" },
     incomplete: (n) => n === 1 ? "Une main est incomplète." : `${n} mains sont incomplètes.`,
     errRange: (seat) => `${seat} : les bornes doivent être comprises entre 0 et ${MAX_HAND_HCP} PH.`,
     errOrder: (seat) => `${seat} : le mini dépasse le maxi.`,
@@ -1202,6 +1212,7 @@ const CONS_TEXT = {
     clearHand: "Take this hand's cards out",
     photoHand: (seat) => `Photograph ${seat}'s hand`,
     fill: "Fill the hands",
+    short: { undo: "Undo", clear: "Take all out", fill: "Fill", bounds: "Bounds", reset: "Clear bounds" },
     incomplete: (n) => n === 1 ? "One hand is incomplete." : `${n} hands are incomplete.`,
     errRange: (seat) => `${seat}: bounds must be between 0 and ${MAX_HAND_HCP} HCP.`,
     errOrder: (seat) => `${seat}: min is greater than max.`,
@@ -1677,6 +1688,12 @@ const CODE_SVG = `${SVG_OPEN}
   <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/>
 </svg>`;
 
+// Un crayon : modifier la donne.
+const PENCIL_SVG = `${SVG_OPEN}
+  <path d="M12 20h9"/>
+  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>
+</svg>`;
+
 // Une flèche vers le bas : le bouton ouvre un menu.
 const CHEVRON_SVG = `${SVG_OPEN}
   <path d="m6 9 6 6 6-6"/>
@@ -1808,6 +1825,7 @@ function neutralZoneHTML(lang) {
 function setCommandButton(sel, svg, name, labeled) {
   const btn = $(sel);
   if (labeled) {
+    btn.classList.add("cmd-labeled");
     btn.innerHTML = `${svg}<span class="cmd-label">${esc(name)}</span>`;
     btn.removeAttribute("aria-label");
     delete btn.dataset.tip;
@@ -1967,11 +1985,18 @@ $("#pbn-toggle-btn").addEventListener("click", () => {
 function renderBoundsCards() {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
-  setCommandButton("#cons-undo-btn", UNDO_SVG, t.undo);
-  setCommandButton("#cons-reset-btn", ERASER_SVG, t.reset);
-  setCommandButton("#cons-clear-btn", GATHER_SVG, t.clear);
-  setCommandButton("#cons-fill-btn", DEAL_SVG, t.fill);
-  setCommandButton("#cons-bounds-btn", BOUNDS_SVG, t.boundsToggle);
+  // En édition, les commandes portent leur nom : c'est là qu'on les cherche.
+  // Le nom complet, raccourci clavier compris, reste dans l'infobulle.
+  for (const [sel, svg, key, long] of [
+    ["#cons-undo-btn", UNDO_SVG, "undo", t.undo],
+    ["#cons-clear-btn", GATHER_SVG, "clear", t.clear],
+    ["#cons-fill-btn", DEAL_SVG, "fill", t.fill],
+    ["#cons-bounds-btn", BOUNDS_SVG, "bounds", t.boundsToggle],
+    ["#cons-reset-btn", ERASER_SVG, "reset", t.reset],
+  ]) {
+    setCommandButton(sel, svg, t.short[key], true);
+    $(sel).title = long;
+  }
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction, true);
   setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
@@ -1995,6 +2020,75 @@ function renderBoundsCards() {
   renderPhotoButtons(); // les boutons des mains viennent d'être recréés
   restoreCardFocus();
   renderBidReady();
+  renderDealMode();
+  renderReadTable();
+}
+
+// ---------- lecture et édition ----------
+//
+// La table se lit par défaut : quatre mains compactes autour du tapis, comme
+// au résultat. On passe en édition pour déplacer des cartes ou poser des
+// bornes, et la table y bascule d'elle-même tant que la donne est incomplète
+// — il n'y a rien à lire sur une donne à moitié distribuée. Une nouvelle donne
+// (tirage, exemple, fichier, lien) ramène à la lecture.
+let editRequested = false;
+
+function dealComplete() {
+  return zoneCount(UNASSIGNED) === 0 && SEATS.every((seat) => zoneCount(seat) === HAND_SIZE);
+}
+
+function dealEditing() {
+  return editRequested || !dealComplete();
+}
+
+function renderDealMode() {
+  const t = UI_TEXT[$("#lang").value];
+  const editing = dealEditing();
+  $("#input-panel").classList.toggle("editing", editing);
+  const btn = $("#edit-btn");
+  btn.setAttribute("aria-pressed", String(editing));
+  setCommandButton("#edit-btn", editing ? CHECK_SVG : PENCIL_SVG,
+    editing ? t.editDone : t.editDeal, true);
+  // Terminer sur une donne incomplète ne mènerait nulle part : le bouton dit
+  // pourquoi il est éteint.
+  btn.disabled = editing && !dealComplete();
+  btn.title = btn.disabled ? t.editDoneBlocked : "";
+}
+
+$("#edit-btn").addEventListener("click", () => {
+  editRequested = !dealEditing();
+  renderDealMode();
+});
+
+// Le centre de la table sans résultat : donneur et vulnérabilité de la donne.
+function readCenterHTML(lang) {
+  const block = pbnGames[selectedGameIdx] || "";
+  const dealer = (block.match(/\[Dealer\s+"([NESW])"\]/i) || [])[1];
+  const vul = block.match(/\[Vulnerable\s+"([^"]*)"\]/i);
+  const t = UI_TEXT[lang];
+  return `
+    ${dealer ? `<div>${withColon(t.dealer, lang)} <b>${esc(SEAT_SHORT[lang][dealer.toUpperCase()])}</b></div>` : ""}
+    <div class="vul-line">${vulHTML(vul ? normalizeVul(vul[1]) : "None", lang)}</div>`;
+}
+
+// Remplit la table en lecture depuis la donne. Un résultat affiché l'a déjà
+// remplie avec l'analyse du moteur (points H/HL, type de main, contrat) : on
+// ne l'écrase pas.
+function renderReadTable() {
+  if (!$("#result-panel").classList.contains("hidden")) return;
+  const lang = $("#lang").value;
+  const hands = currentDealHands();
+  const ph = CONS_TEXT[lang].ph;
+  for (const seat of SEATS) {
+    const hand = hands && hands[seat];
+    $("#hand-" + seat).innerHTML = `
+      <div class="seat-name">
+        <span>${esc(SEAT_LABEL[lang][seat])}</span>
+        <span class="pts">${hand ? handHCP(hand) : 0} ${esc(ph)}</span>
+      </div>
+      ${suitLinesHTML(hand, lang)}`;
+  }
+  $("#table-center").innerHTML = readCenterHTML(lang);
 }
 
 // « Afficher les enchères » ne s'allume que sur une donne complète. Éteint, il
@@ -2069,7 +2163,11 @@ $("#cons-bounds-btn").addEventListener("click", () => {
 // setError, et rouvre les bornes quand le message les concerne.
 function setBoundsError(errEl, msg) {
   setError(errEl, msg);
-  if (msg) setBoundsOpen(true);
+  if (!msg) return;
+  setBoundsOpen(true);
+  // Les bornes ne se voient qu'en édition : on y passe pour les montrer.
+  editRequested = true;
+  renderDealMode();
 }
 
 $("#cons-reset-btn").addEventListener("click", () => {
@@ -3586,6 +3684,9 @@ async function simulate() {
   try {
     const body = await fetchBid(lang);
     renderResult(body);
+    // Le contrat s'affiche au centre de la table en lecture : on y revient.
+    editRequested = false;
+    renderDealMode();
     // Sur écran étroit, le panneau est sous la table : on y descend, sans quoi
     // le calcul semble n'avoir rien donné. Sur grand écran, il est à côté.
     selectTab("bids", true);
@@ -3723,6 +3824,9 @@ $("#back-to-deal-btn").addEventListener("click", () => {
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
 function hideResult() {
   $("#result-panel").classList.add("hidden");
+  // La table en lecture perd le contrat et l'analyse du moteur, qui ne
+  // décrivent plus la donne.
+  renderReadTable();
 }
 
 function hiddenHandHTML(seat, lang) {

@@ -268,6 +268,9 @@
                     aria-expanded="false" aria-controls="pbn-details"></button>
           </div>
         </div>
+        <!-- Bascule entre la table en lecture et la table en édition (voir
+             « lecture et édition » dans app.js). Libellé par renderDealMode. -->
+        <button id="edit-btn" type="button" class="cmd-btn cmd-labeled" aria-pressed="false"></button>
         <span id="photo-status" class="muted hidden"></span>
         <input id="photo-input" type="file" accept="image/*" capture="environment" class="hidden">
         <!-- Donneur et vulnérabilité se replient en bloc : groupés, ils ne se
@@ -342,6 +345,18 @@
           <span data-i18n="quizDealHidden">Donne masquée.</span>
           <button id="quiz-show-deal-btn" type="button" class="link-btn" data-i18n="quizShowDeal">Afficher la donne</button>
         </p>
+        <!-- La table en lecture : les quatre mains autour du tapis, et au centre
+             le donneur, la vulnérabilité puis le contrat une fois les enchères
+             calculées. Remplie par renderReadTable, puis par renderResult avec
+             l'analyse du moteur. C'est la seule table du résultat : les mains
+             ne sont plus redites dans l'onglet Enchères. -->
+        <div class="table-layout read-layout" id="read-layout">
+          <div id="hand-N" class="hand seat-n"></div>
+          <div id="hand-W" class="hand seat-w"></div>
+          <div class="table-center seat-c" id="table-center"></div>
+          <div id="hand-E" class="hand seat-e"></div>
+          <div id="hand-S" class="hand seat-s"></div>
+        </div>
         <div class="table-layout cons-layout">
           <div class="hand cons-hand seat-n" id="cons-N"></div>
           <div class="hand cons-hand seat-w" id="cons-W"></div>
@@ -374,6 +389,10 @@
           <!-- L'attente des deux tirages. Distincte de #cons-error : un
                tirage en cours n'est pas un refus, et le ton de l'annonce
                n'est pas le même. -->
+        </div>
+        <!-- Messages de la donne, hors de la barre d'édition : un tirage refusé
+             se lit aussi quand la table est en lecture. -->
+        <div class="row row-centered cons-status">
           <span id="cons-busy" class="muted"></span>
           <span id="cons-error" class="error"></span>
         </div>
@@ -413,14 +432,6 @@
         <button id="back-to-deal-btn" type="button" class="link-btn" data-i18n="backToDeal">Revenir à la donne</button>
         <button id="print-btn" type="button" class="mini-btn"></button>
       </p>
-
-      <div class="table-layout">
-        <div id="hand-N" class="hand seat-n"></div>
-        <div id="hand-W" class="hand seat-w"></div>
-        <div class="table-center seat-c" id="table-center"></div>
-        <div id="hand-E" class="hand seat-e"></div>
-        <div id="hand-S" class="hand seat-s"></div>
-      </div>
 
       <!-- La séquence et ses commentaires, côte à côte sur grand écran : l'un
            se lit en regard de l'autre, et empilés ils laissaient les deux
@@ -607,6 +618,7 @@
         <p>À la première visite, la <b>donne exemple</b> est affichée. Ensuite, votre <b>dernière donne complète</b> est retrouvée à chaque ouverture de la page (jamais la donne exemple, qui n'est qu'à un clic).</p>
 
         <h3>2. Composer la donne à la main</h3>
+        <p>La table se lit par défaut : les quatre mains autour du tapis, avec leurs points. <b>Modifier la donne</b> la passe en édition, où l'on déplace les cartes ; <b>Terminer</b> revient à la lecture. Une donne incomplète s'ouvre d'elle-même en édition.</p>
         <ul>
           <li><b>Glissez</b> une carte d'une main à l'autre, ou vers <b>Cartes non affectées</b> pour la retirer.</li>
           <li>Sur écran tactile, <b>touchez la carte, puis sa destination</b>. Sur téléphone, la zone <b>Cartes non affectées</b> reste en haut de l'écran pendant que vous faites défiler les mains.</li>
@@ -616,7 +628,7 @@
           <li><span data-help-icon="trash"></span><span>Dans l'en-tête d'une main : renvoie ses cartes au centre.</span></li>
         </ul>
         <p>Chaque main affiche ses <b>points d'honneur (PH)</b> et son nombre de cartes (<i>13/13</i>).</p>
-        <p>Sous la table :</p>
+        <p>Sous la table en édition :</p>
         <ul class="help-icons">
           <li><span data-help-icon="undo"></span><span><b>Annuler</b> (ou <b>Ctrl+Z</b>) : revient sur la dernière action qui a changé la donne — carte déplacée, main vidée, table vidée ou complétée, nouvelle donne tirée ou chargée.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Retirer toutes les cartes</b> : vide les quatre mains.</span></li>
@@ -628,7 +640,7 @@
 
         <h3>3. Lire le résultat</h3>
         <ul>
-          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone (<b>Revenir à la donne</b> y remonte) : les quatre mains, et au centre le <b>contrat</b> final avec son déclarant. L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
+          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone (<b>Revenir à la donne</b> y remonte). Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main). L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou touchez-la) pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère.</li>
           <li><b>Calcul du PAR</b> : le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table. Survolez une case (ou touchez-la) pour voir les bonnes entames.</li>
@@ -677,6 +689,7 @@
         <p>On your first visit the <b>example deal</b> is shown. After that, your <b>last complete deal</b> comes back each time you open the page (never the example deal, which is one click away).</p>
 
         <h3>2. Building the deal by hand</h3>
+        <p>The table opens for reading: the four hands around the felt, with their points. <b>Edit the deal</b> switches it to editing, where you move cards; <b>Done</b> goes back to reading. An incomplete deal opens in editing on its own.</p>
         <ul>
           <li><b>Drag</b> a card from one hand to another, or to <b>Unassigned cards</b> to take it out.</li>
           <li>On a touch screen, <b>tap the card, then its destination</b>. On a phone, the <b>Unassigned cards</b> area stays at the top of the screen while you scroll through the hands.</li>
@@ -686,7 +699,7 @@
           <li><span data-help-icon="trash"></span><span>In a hand's header: sends its cards back to the centre.</span></li>
         </ul>
         <p>Each hand shows its <b>high-card points (HCP)</b> and card count (<i>13/13</i>).</p>
-        <p>Below the table:</p>
+        <p>Below the table, while editing:</p>
         <ul class="help-icons">
           <li><span data-help-icon="undo"></span><span><b>Undo</b> (or <b>Ctrl+Z</b>): reverts the last action that changed the deal — a card moved, a hand or the whole table emptied or filled, a new deal drawn or loaded.</span></li>
           <li><span data-help-icon="gather"></span><span><b>Take out every card</b>: empties the four hands.</span></li>
@@ -698,7 +711,7 @@
 
         <h3>3. Reading the result</h3>
         <ul>
-          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone (<b>Back to the deal</b> scrolls back up): the four hands, and in the middle the final <b>contract</b> with its declarer. The printer icon prints it (hands, auction, comments and the par if computed).</li>
+          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone (<b>Back to the deal</b> scrolls back up). The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type). The printer icon prints it (hands, auction, comments and the par if computed).</li>
           <li><b>Auction</b>: hover over a call (or tap it) to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call.</li>
           <li><b>Compute the par</b>: the tricks each side takes in each strain, all cards visible. Hover over a cell (or tap it) to see the right opening leads.</li>

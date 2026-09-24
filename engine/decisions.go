@@ -427,9 +427,43 @@ func (e *Engine) respond(p *playerState) (Call, meaning) {
 		return e.respondMajor(p, Suit(oc.Strain))
 	case oc.Level == 2 && (oc.Strain == SHearts || oc.Strain == SSpades):
 		return e.respondWeak2(p, Suit(oc.Strain))
+	case oc.Level == 3 && (oc.Strain == SHearts || oc.Strain == SSpades):
+		return e.respondThreeMajorPreempt(p, Suit(oc.Strain))
 	default:
 		return e.concludeHandoff(p)
 	}
+}
+
+// respondThreeMajorPreempt answers partner's three-level major preempt, a
+// seven-card suit [O-7]. Three trumps make ten, and the law of total tricks
+// puts the side at the four level whatever the points [F-6b]: with a weak hand
+// the raise extends the preempt, with a good one it is the game -- the same
+// call, the way four trumps raise a weak two to game "quel que soit le nombre
+// de points" [F-4]. The count alone missed it: 13 H facing a 5-10 barrage
+// never reaches the 27 HLD of a major game, and North passed 3S holding
+// T54 K A93 AQ8752.
+//
+// From 16 H, and with fewer than three trumps, the general rule [F-6] and the
+// generic machinery keep deciding: the strong hand raises on two trumps
+// there, and a slam still has its road.
+func (e *Engine) respondThreeMajorPreempt(p *playerState, M Suit) (Call, meaning) {
+	h := p.hand
+	tr := e.tr
+	sym := suitSymbol[M]
+	tr.note("le partenaire a ouvert d'un barrage à 3"+sym+" (7 cartes, 5-10 H)",
+		"partner opened a three-level preempt in 3"+sym+" (seven cards, 5-10 H)")
+	sup := h.Len(M)
+	if tr.check(sup >= 3 && h.H() < 16,
+		"3 atouts et plus, moins de 16 H → 4"+sym+" : loi des levées totales, 10 atouts [F-6b]",
+		"three or more trumps, under 16 H → 4"+sym+": law of total tricks, ten trumps [F-6b]",
+		cards(h, M)+", "+pts(h.H(), "H")) {
+		if c := bidSuit(4, M); e.legal(p.seat, c) {
+			return c, m(0, 15, fmt.Sprintf("loi des levées totales : 7 + %d = %d atouts → la manche, prolongement du barrage", sup, 7+sup),
+				fmt.Sprintf("law of total tricks: 7 + %d = %d trumps → game, extending the preempt", sup, 7+sup)).
+				withLen(M, min(sup, 4)).asLawBid(M)
+		}
+	}
+	return e.concludeHandoff(p)
 }
 
 func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {

@@ -17,6 +17,20 @@ go run .                  # écoute sur http://localhost:9013
 docker compose up --build -d
 ```
 
+Sans Go ni Docker, les exécutables précompilés de [bin/](bin/) suffisent
+(Linux et Windows, amd64). Après avoir créé `.env` comme ci-dessus :
+
+```bash
+bin/server_ai.sh            # Linux (ou Git Bash sous Windows) ; -p <port> pour changer de port
+```
+
+```powershell
+.\bin\server_ai.ps1         # Windows ; -Port <port> pour changer de port
+```
+
+Les scripts se placent dans ce dossier pour que `.env` soit lu. Après une
+modification des sources, `make bin` recompile les deux exécutables.
+
 Le client vise ce port par défaut : dans l'en-tête, **Serveur IA → Local** vaut
 `http://localhost:9013`. Tant que `/health` répond, les boutons appareil photo
 s'allument.

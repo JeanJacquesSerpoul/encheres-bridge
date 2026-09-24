@@ -3343,6 +3343,7 @@ function renderResult(r) {
   // Tableau du « PAR » (levées double-mort) : remis à zéro pour la donne qu'on
   // vient d'afficher, puis calculé à la demande par le bouton (voir par.js).
   if (typeof parSetDeal === "function") parSetDeal(r.hands, lang);
+  setParReady(true);
   // L'onglet du PAR ouvert suit la donne : il se recalcule avec elle.
   if (!$("#tabpanel-par").hidden && typeof parCompute === "function") parCompute();
 }
@@ -3883,8 +3884,16 @@ $("#back-to-deal-btn").addEventListener("click", () => {
 });
 
 // Hides the "Résultat" auction display, e.g. when a different deal is picked.
+// L'onglet du PAR ne montre que la donne dont il a reçu les mains (voir
+// parSetDeal) : celle d'un résultat affiché, ou celle d'un questionnaire
+// terminé. Jamais pendant l'exercice, où il dévoilerait la donne.
+function setParReady(on) {
+  $("#tabpanel-par").classList.toggle("par-ready", on);
+}
+
 function hideResult() {
   $("#result-panel").classList.add("hidden");
+  setParReady(false);
   // La table en lecture perd le contrat et l'analyse du moteur, qui ne
   // décrivent plus la donne.
   renderReadTable();
@@ -4282,6 +4291,11 @@ function finishQuiz() {
   // lancement revient pour changer de main.
   $("#quiz-cancel-btn").classList.add("hidden");
   $("#quiz-launch-panel").classList.remove("quiz-running");
+  // Les mains sont dévoilées : le PAR de la donne jouée n'a plus rien à cacher,
+  // même si la donne composée reste masquée à gauche.
+  if (typeof parSetDeal === "function") parSetDeal(quiz.result.hands, quiz.lang);
+  setParReady(true);
+  if (!$("#tabpanel-par").hidden && typeof parCompute === "function") parCompute();
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const r = quiz.result;
@@ -4335,6 +4349,7 @@ async function startQuiz() {
   const errEl = $("#error");
   setError(errEl, "");
   $("#result-panel").classList.add("hidden");
+  setParReady(false);
   const lang = $("#lang").value;
   const seat = chosenSeat();
   btn.disabled = true;

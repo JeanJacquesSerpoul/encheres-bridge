@@ -301,7 +301,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 
 ### Le PAR
 
-L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
+L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne ; à la fin d'un questionnaire aussi, mais jamais pendant, où il dévoilerait la donne —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
 
 ### Reconnaissance des cartes par photo (serveur IA)
 

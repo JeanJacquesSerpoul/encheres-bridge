@@ -202,6 +202,8 @@ const UI_TEXT = {
     tabsLabel: "Que faire de la donne",
     tabBids: "Enchères",
     tabTrain: "S'entraîner",
+    tabPar: "PAR",
+    parEmpty: "Le PAR s'affiche ici pour une donne complète dont les enchères sont calculées.",
     bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
     pbnCopy: "Copier le texte PBN",
     shareLink: "Copier le lien de cette donne",
@@ -359,6 +361,8 @@ const UI_TEXT = {
     tabsLabel: "What to do with the deal",
     tabBids: "Auction",
     tabTrain: "Practise",
+    tabPar: "Par",
+    parEmpty: "The par shows up here for a complete deal whose auction has been computed.",
     bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
     pbnCopy: "Copy the PBN text",
     shareLink: "Copy a link to this deal",
@@ -3329,6 +3333,8 @@ function renderResult(r) {
   // Tableau du « PAR » (levées double-mort) : remis à zéro pour la donne qu'on
   // vient d'afficher, puis calculé à la demande par le bouton (voir par.js).
   if (typeof parSetDeal === "function") parSetDeal(r.hands, lang);
+  // L'onglet du PAR ouvert suit la donne : il se recalcule avec elle.
+  if (!$("#tabpanel-par").hidden && typeof parCompute === "function") parCompute();
 }
 
 // Infobulle de la séquence d'enchères : même boîte que celle du PAR (styles
@@ -4407,6 +4413,8 @@ function selectTab(name, reveal) {
     document.getElementById(tab.getAttribute("aria-controls")).hidden = !on;
   }
   if (reveal) revealPane($("#side-pane"));
+  // Le PAR se calcule à l'ouverture de son onglet, une fois par donne.
+  if (name === "par" && typeof parCompute === "function") parCompute();
 }
 
 for (const tab of document.querySelectorAll('[role="tab"]')) {

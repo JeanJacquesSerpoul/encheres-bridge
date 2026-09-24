@@ -572,6 +572,9 @@ button:disabled { opacity: .6; cursor: wait; }
   main:has(#result-panel:not(.hidden)) #constraints > :not(#read-layout),
   main:has(#result-panel:not(.hidden)) #tabpanel-train { display: none !important; }
   main:has(#result-panel:not(.hidden)) #read-layout { display: grid !important; }
+  /* Le PAR, s'il est calculé, s'imprime sous la séquence. */
+  main:has(#result-panel:not(.hidden)) #tabpanel-par { display: block !important; }
+  #par-empty { display: none !important; }
   main:has(#result-panel:not(.hidden)) #tabpanel-bids { display: block !important; }
   .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
   .comments > li { break-inside: avoid; }
@@ -1042,7 +1045,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #result-panel .comments { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
 #result-panel h2,
 #result-panel h3,
-#result-panel .par-hint,
+#result-panel .par-hint, #par-content .par-hint, #par-content .par-credit,
 #result-panel .par-credit { text-align: center; }
 /* Rangée souple, centrée comme le reste du panneau : elle était à gauche
    quand le reste était centré. */
@@ -2125,3 +2128,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 @media (prefers-reduced-motion: reduce) {
   #comments > li, .read-layout .hand { transition: none; }
 }
+
+/* ---------- l'onglet du PAR ---------- */
+
+/* Le PAR ne décrit que la donne dont les enchères sont affichées : sans elles,
+   l'onglet dit comment l'obtenir. */
+main:has(#result-panel.hidden) #par-content { display: none; }
+main:has(#result-panel:not(.hidden)) #par-empty { display: none; }
+#par-content .par-row { justify-content: center; }
+#par-content .par-table { margin-left: auto; margin-right: auto; }
+#par-content .par-row:has(#par-btn.hidden):has(#par-status:empty):has(#par-error:empty) { display: none; }

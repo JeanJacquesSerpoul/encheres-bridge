@@ -1032,6 +1032,25 @@ func (e *Engine) respondNT(p *playerState, base, oMin int) (Call, meaning) {
 	tr := e.tr
 	majors := cards(h, Hearts) + ", " + cards(h, Spades)
 
+	// 5-5 in the majors over a 1NT opening: 4D names the two-suiter in one
+	// call and lets opener pick. Opener is regular, so he cannot be short in
+	// both majors -- one of them is a fit of eight cards at least, and the
+	// hand belongs in that major's game rather than in notrump. Below the
+	// threshold the ordinary ladder still applies: Stayman from 8 H, then the
+	// quantitative notrump ladder [N-6].
+	if base == 1 && tr.check(lh >= 5 && ls >= 5 && hp >= 9,
+		"bicolore majeur 5-5 et 9 H et plus → 4♦",
+		"5-5 in the majors and 9+ H → 4♦", majors+", "+pts(hp, "H")) {
+		c := bid(4, SDiamonds)
+		if e.legal(p.seat, c) {
+			e.gameForce[sideOf(p.seat)] = true
+			mn := m(9, 40, "bicolore majeur 5-5, l'ouvreur choisit sa majeure", "5-5 in the majors, opener picks his major").
+				withLen(Hearts, 5).withLen(Spades, 5).asForcing()
+			mn.bothMajors = true
+			return c, mn
+		}
+	}
+
 	// Transfers with a five-card major: a genuine single-suiter only. A
 	// four-five (or five-four) two-suited major hand goes through Stayman
 	// instead, so it can explore either fit (docs/bidings.md, "chassé-croisé").
@@ -2908,6 +2927,9 @@ func (e *Engine) openerRebid(p *playerState) (Call, meaning) {
 				"partner asked Stayman: show the four-card majors")
 			return e.staymanAnswer(p, oc.Level)
 		}
+		if rm != nil && rm.bothMajors {
+			return e.bothMajorsAnswer(p)
+		}
 		if rm != nil && rm.hasTexas {
 			if rm.texas.IsMajor() {
 				e.tr.note("le partenaire a fait un Texas : rectifier dans sa majeure",
@@ -2983,6 +3005,27 @@ func (e *Engine) staymanAnswer(p *playerState, base int) (Call, meaning) {
 		tr.check(true, "pas de majeure quatrième → 3♦", "no four-card major → 3♦", majors)
 		return bid(3, SDiamonds), m(-1, -1, "pas de majeure quatrième", "no four-card major")
 	}
+}
+
+// bothMajorsAnswer picks the major of the 4D two-suiter. Opener is regular,
+// so the longer major is a fit of at least eight cards; on equal length the
+// honours decide, and failing that hearts, the cheaper game.
+func (e *Engine) bothMajorsAnswer(p *playerState) (Call, meaning) {
+	h := p.hand
+	tr := e.tr
+	lh, ls := h.Len(Hearts), h.Len(Spades)
+	tr.note("le partenaire a annoncé un bicolore majeur 5-5 : choisir sa majeure",
+		"partner showed a 5-5 major two-suiter: pick a major")
+	M := Hearts
+	switch {
+	case ls > lh, ls == lh && h.SuitH(Spades) > h.SuitH(Hearts):
+		M = Spades
+	}
+	c := bidSuit(4, M)
+	cFR, cEN := callSym(c)
+	tr.check(true, "la meilleure majeure → "+cFR, "the better major → "+cEN,
+		cards(h, Hearts)+", "+cards(h, Spades))
+	return c, m(-1, -1, "choix de la majeure sur le bicolore 5-5", "picks the major of the 5-5 two-suiter").withLen(M, h.Len(M))
 }
 
 func (e *Engine) transferAnswer(p *playerState, t Suit) (Call, meaning) {

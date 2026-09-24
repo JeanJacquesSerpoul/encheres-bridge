@@ -1877,7 +1877,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   clip-path: inset(50%);
   white-space: nowrap;
 }
-@media print { .tabpanel > section > h2 { position: static; width: auto; height: auto; clip-path: none; } }
+/* À l'impression non plus : la table imprimée au-dessus porte déjà le
+   contrat, le titre tombait entre elle et la séquence. */
 
 /* L'onglet Enchères, tant qu'il n'y a rien à montrer. */
 .tab-empty {
@@ -1961,7 +1962,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .menu-item.hidden { display: none; }
 .menu-item svg { width: 18px; height: 18px; flex: none; color: var(--accent); }
 .menu-item:hover:not(:disabled),
-.menu-item:focus-visible { background: var(--tint); outline: none; }
+.menu-item:focus-visible { background: var(--tint); outline: 2px solid var(--accent); outline-offset: -2px; }
 .menu-item:disabled { opacity: .45; cursor: not-allowed; }
 /* Le texte PBN affiché : l'article le dit par une coche. */
 .menu-item[aria-expanded="true"]::after { content: "✓"; margin-left: auto; color: var(--accent); }
@@ -2062,7 +2063,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   height: 9px;
   border-radius: 50%;
   background: var(--ko);
-  border: 2px solid var(--felt-dark);
+  /* Cerclé de blanc : le rouge seul ne tenait que 1,9 sur le vert du
+     bandeau ; le cercle blanc en tient 8,7. */
+  border: 2px solid var(--on-accent);
 }
 
 @media (max-width: 480px) {
@@ -2124,7 +2127,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #auction-body td.linked { box-shadow: inset 0 0 0 2px var(--accent); }
 #comments > li { border-radius: 6px; padding: 2px 6px; transition: background .12s; }
 .read-layout .hand { transition: box-shadow .12s; }
-.read-layout .hand.speaking { box-shadow: 0 0 0 3px var(--gold); }
+/* Le doré clair : le doré des bandeaux ne tenait que 2,85 sur le tapis, sous
+   le seuil de 3 d'un repère non textuel ; celui-ci en tient 4,4. */
+.read-layout .hand.speaking { box-shadow: 0 0 0 3px var(--gold-soft); }
 @media (prefers-reduced-motion: reduce) {
   #comments > li, .read-layout .hand { transition: none; }
 }
@@ -2162,3 +2167,42 @@ main:has(#result-panel:not(.hidden)) #par-empty { display: none; }
 main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-table { display: grid; }
 main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-hidden-note { margin-bottom: 10px; }
 @media print { .quiz-table { display: none !important; } }
+
+/* ---------- téléphone : la barre d'onglets au bas de l'écran ---------- */
+
+.tabbar { display: flex; align-items: stretch; }
+.tabbar .tabs { flex: 1; }
+.tab-nav { display: none; }
+
+@media (max-width: 720px) {
+  .tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    padding: 0 6px env(safe-area-inset-bottom);
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow-sticky);
+  }
+  .tabbar .tabs { margin: 0; border-bottom: none; justify-content: space-around; }
+  .tabbar .tab {
+    flex: 1;
+    padding: 14px 4px 12px;
+    margin: 0;
+    border-bottom: none;
+    border-top: 3px solid transparent;
+    font-size: .9rem;
+  }
+  .tabbar .tab[aria-selected="true"] { border-top-color: var(--accent); }
+  /* Quatre boutons de même largeur : la donne, puis les trois onglets. */
+  .tab-nav { display: block; flex: 1; }
+  .tabbar .tabs { flex: 3; }
+  /* La barre occupe le bas de l'écran : la page, le bouton principal collé
+     et le bandeau des infobulles se posent au-dessus d'elle. */
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  .bid-row { bottom: calc(52px + env(safe-area-inset-bottom)); }
+  .par-tip.sheet { bottom: calc(64px + env(safe-area-inset-bottom)); }
+}
+@media print { .tabbar { display: none !important; } }

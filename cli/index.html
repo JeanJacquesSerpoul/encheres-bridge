@@ -426,6 +426,11 @@
          manière ARIA — flèches pour passer de l'un à l'autre (voir « onglets »
          dans app.js). -->
     <div class="panel side-pane" id="side-pane">
+      <!-- Sur téléphone, les onglets deviennent une barre fixée au bas de
+           l'écran, précédée d'un bouton qui remonte à la donne (masqué sur
+           grand écran, où la table est toujours en vue). -->
+      <div class="tabbar">
+      <button id="nav-deal-btn" type="button" class="tab tab-nav" data-i18n="dealPanel">Donne</button>
       <div class="tabs" role="tablist" data-i18n-label="tabsLabel">
         <button id="tab-bids" type="button" role="tab" class="tab" data-tab="bids"
                 aria-selected="true" aria-controls="tabpanel-bids" data-i18n="tabBids">Enchères</button>
@@ -435,6 +440,7 @@
         <button id="tab-train" type="button" role="tab" class="tab" data-tab="train"
                 aria-selected="false" aria-controls="tabpanel-train" tabindex="-1"
                 data-i18n="tabTrain">S'entraîner</button>
+      </div>
       </div>
 
     <div id="tabpanel-bids" class="tabpanel" role="tabpanel" aria-labelledby="tab-bids">
@@ -655,7 +661,7 @@
 
         <h3>3. Lire le résultat</h3>
         <ul>
-          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone (<b>Revenir à la donne</b> y remonte). Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main). L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
+          <li>Le résultat s'affiche dans l'onglet <b>Enchères</b>, à droite de la table sur grand écran, sous elle sur téléphone, où les onglets forment une barre au bas de l'écran (son bouton <b>Donne</b> remonte à la table). Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main). L'icône d'imprimante l'imprime (mains, séquence, commentaires et PAR s'il est calculé).</li>
           <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement — sauf en mode questionnaire, pour ne rien dévoiler.</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée sur la table. Un clic amène la ligne à l'écran. Sur téléphone, touchez-la pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère.</li>
@@ -728,7 +734,7 @@
 
         <h3>3. Reading the result</h3>
         <ul>
-          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone (<b>Back to the deal</b> scrolls back up). The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type). The printer icon prints it (hands, auction, comments and the par if computed).</li>
+          <li>The result shows up in the <b>Auction</b> tab, to the right of the table on a large screen, below it on a phone, where the tabs become a bar at the bottom of the screen (its <b>Deal</b> button scrolls back to the table). The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type). The printer icon prints it (hands, auction, comments and the par if computed).</li>
           <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change — except in quiz mode, so as not to give anything away.</li>
           <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled on the table. A click brings the line into view. On a phone, tap it to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call.</li>

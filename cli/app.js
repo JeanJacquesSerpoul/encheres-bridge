@@ -1976,6 +1976,8 @@ window.addEventListener("hashchange", () => {
 $("#print-btn").addEventListener("click", () => window.print());
 window.addEventListener("beforeprint", () => {
   document.documentElement.dataset.theme = "light";
+  // Une enchère survolée au moment d'imprimer resterait éclairée sur papier.
+  linkCall(null);
 });
 window.addEventListener("afterprint", applyTheme);
 
@@ -4503,7 +4505,9 @@ function selectTab(name, reveal) {
 }
 
 for (const tab of document.querySelectorAll('[role="tab"]')) {
-  tab.addEventListener("click", () => selectTab(tab.dataset.tab));
+  // Sur écran étroit, l'onglet est une barre au bas de l'écran : le choisir
+  // mène aussi au panneau.
+  tab.addEventListener("click", () => selectTab(tab.dataset.tab, true));
   tab.addEventListener("keydown", (ev) => {
     const tabs = [...document.querySelectorAll('[role="tab"]')];
     const i = tabs.indexOf(tab);
@@ -4518,6 +4522,8 @@ for (const tab of document.querySelectorAll('[role="tab"]')) {
     next.focus();
   });
 }
+
+$("#nav-deal-btn").addEventListener("click", () => revealPane($("#input-panel")));
 
 // ---------- mode d'emploi ----------
 

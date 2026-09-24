@@ -1,4 +1,4 @@
-BINARY  = server_ai
+BINARY  = openrouter_proxy
 LDFLAGS = -ldflags "-s -w"
 
 ifeq ($(OS),Windows_NT)
@@ -27,7 +27,7 @@ build:
 	$(SET_LINUX) go build $(LDFLAGS) -o dist/$(BINARY) .
 	$(SET_WIN) go build $(LDFLAGS) -o dist/$(BINARY).exe .
 
-## Rebuild the versioned binaries of bin/ (launched by bin/server_ai.sh / .ps1)
+## Rebuild the versioned binaries of bin/ (launched by bin/openrouter_proxy.sh / .ps1)
 bin:
 	$(SET_LINUX) go build -trimpath $(LDFLAGS) -o bin/$(BINARY) .
 	$(SET_WIN) go build -trimpath $(LDFLAGS) -o bin/$(BINARY).exe .

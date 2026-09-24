@@ -1,5 +1,5 @@
 .env
 dist/
-/server_ai
-/server_ai.exe
+/openrouter_proxy
+/openrouter_proxy.exe
 *.log

@@ -1,11 +1,12 @@
-﻿# server_ai.ps1 — lance le serveur IA précompilé (bin\server_ai.exe, Windows
-# amd64) sur http://localhost:<port>/. Ctrl+C l'arrête.
+﻿# openrouter_proxy.ps1 — lance le serveur IA précompilé
+# (bin\openrouter_proxy.exe, Windows amd64) sur http://localhost:<port>/.
+# Ctrl+C l'arrête.
 #
 # Le serveur lit son .env dans le dossier courant : le script se place donc
 # dans openrouter_proxy\, où se trouve .env (à copier depuis .env.example).
 # Les variables déjà présentes dans l'environnement l'emportent sur .env.
 #
-# Usage : .\bin\server_ai.ps1 [-Port 9013]
+# Usage : .\bin\openrouter_proxy.ps1 [-Port 9013]
 #   -Port  port d'écoute     (défaut : PORT du .env, sinon 9013)
 param(
     [ValidateRange(0, 65535)]
@@ -14,7 +15,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$bin = Join-Path $PSScriptRoot "server_ai.exe"
+$bin = Join-Path $PSScriptRoot "openrouter_proxy.exe"
 
 if (-not (Test-Path $bin)) {
     throw "Binaire introuvable : $bin (make bin le recompile)."

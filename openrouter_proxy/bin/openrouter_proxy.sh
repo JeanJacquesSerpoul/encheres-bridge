@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# server_ai.sh — lance le serveur IA précompilé (bin/server_ai, Linux amd64)
-# sur http://localhost:<port>/. Ctrl+C l'arrête.
+# openrouter_proxy.sh — lance le serveur IA précompilé (bin/openrouter_proxy,
+# Linux amd64) sur http://localhost:<port>/. Ctrl+C l'arrête.
 #
 # Le serveur lit son .env dans le dossier courant : le script se place donc
 # dans openrouter_proxy/, où se trouve .env (à copier depuis .env.example).
 # Les variables déjà présentes dans l'environnement l'emportent sur .env.
 #
-# Usage : bin/server_ai.sh [-p port] [-h]
+# Usage : bin/openrouter_proxy.sh [-p port] [-h]
 #   -p  port d'écoute     (défaut : PORT du .env, sinon 9013)
 #   -h  affiche cette aide
 set -euo pipefail
@@ -41,9 +41,9 @@ root="$(dirname "$bindir")"
 
 # Git Bash et Cygwin prennent le binaire Windows, le seul qu'ils sachent
 # exécuter.
-bin="$bindir/server_ai"
+bin="$bindir/openrouter_proxy"
 case "${OSTYPE:-}" in
-    msys*|cygwin*|win*) bin="$bindir/server_ai.exe" ;;
+    msys*|cygwin*|win*) bin="$bindir/openrouter_proxy.exe" ;;
 esac
 
 [ -f "$bin" ] || { echo "Binaire introuvable : $bin (make bin le recompile)." >&2; exit 1; }

@@ -21,11 +21,11 @@ Sans Go ni Docker, les exécutables précompilés de [bin/](bin/) suffisent
 (Linux et Windows, amd64). Après avoir créé `.env` comme ci-dessus :
 
 ```bash
-bin/server_ai.sh            # Linux (ou Git Bash sous Windows) ; -p <port> pour changer de port
+bin/openrouter_proxy.sh           # Linux (ou Git Bash sous Windows) ; -p <port> pour changer de port
 ```
 
 ```powershell
-.\bin\server_ai.ps1         # Windows ; -Port <port> pour changer de port
+.\bin\openrouter_proxy.ps1        # Windows ; -Port <port> pour changer de port
 ```
 
 Les scripts se placent dans ce dossier pour que `.env` soit lu. Après une
@@ -145,7 +145,7 @@ Un `?provider=` est toléré s'il vaut `OPENROUTER`.
 
 ```bash
 go test ./...
-make build          # dist/server_ai et dist/server_ai.exe
+make build          # dist/openrouter_proxy et dist/openrouter_proxy.exe
 ```
 
 ## Déploiement

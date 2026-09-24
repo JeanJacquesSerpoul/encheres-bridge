@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="docs/donne.png" alt="Composition de la donne : les quatre mains, leurs bornes de points et la zone des cartes non affectées, avant le calcul des enchères ou le questionnaire" width="900">
+  <img src="docs/donne.png" alt="La table en édition : la barre Donne aléatoire, Partager, Terminer ; les quatre mains avec leurs bornes de points, la zone des cartes non affectées, les commandes d'édition et le bouton Afficher les enchères" width="560">
 </p>
 
 <p align="center">
-  <img src="docs/resultat.png" alt="Résultat : contrat et déclarant, les quatre mains autour du tapis, la séquence d'enchères, son commentaire enchère par enchère et le tableau des levées double-mort" width="900">
+  <img src="docs/resultat.png" alt="L'écran en deux colonnes : à gauche la table en lecture, le contrat au centre ; à droite l'onglet Enchères, sa grille et la séquence commentée, dont l'enchère survolée s'éclaire avec la main de son auteur" width="900">
 </p>
 
 # Bridge Bidding
@@ -248,7 +248,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 **Au premier lancement**, un écran d'accueil propose de **consulter l'aide** ou de **continuer sans l'aide** ; il ne revient plus ensuite.
 
-**L'écran** a deux colonnes sur grand écran (1100 px et plus) : la **table** à gauche, et à droite un panneau à onglets, **Enchères** et **S'entraîner**, qui reste en vue quand la page défile. Sur écran plus étroit, le panneau passe sous la table.
+**L'écran** a deux colonnes sur grand écran (1100 px et plus) : la **table** à gauche, et à droite un panneau à onglets, **Enchères** et **S'entraîner**, qui reste en vue quand la page défile. Sur écran plus étroit, le panneau passe sous la table ; sur téléphone, ses onglets deviennent une barre fixée au bas de l'écran, précédée d'un bouton **Donne** qui remonte à la table.
 
 **Le bandeau** porte deux boutons : la roue des **Réglages** et le **?** du **mode d'emploi**, une aide en ligne en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons. Les Réglages regroupent la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre), l'état du moteur et tout ce qui touche au serveur IA. Ce dernier tient à une case à cocher, **décochée par défaut** (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 

@@ -256,9 +256,15 @@ const UI_TEXT = {
     quizCancel: "Annuler",
     welcomeTitle: "Bienvenue",
     welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
-    welcomeHelp: "Consulter l'aide",
-    welcomeSkip: "Continuer sans l'aide",
-    welcomeNote: "L'aide reste accessible à tout moment par le bouton ? en haut de la page.",
+    welcomeTutorial: "Afficher le tutoriel",
+    welcomeSkip: "Continuer sans le tutoriel",
+    welcomeNote: "Le tutoriel et le mode d'emploi restent accessibles à tout moment par le bouton ? en haut de la page.",
+    tutorialTitle: "Tutoriel",
+    tutorialOpen: "Tutoriel",
+    tutorialPrev: "‹ Précédent",
+    tutorialNext: "Suivant ›",
+    tutorialDone: "Terminer",
+    tutorialZoom: "Agrandir l'image",
     quizReplay: "Rejouer cette donne",
     quizNewDeal: "Nouvelle donne",
     hiddenHand: "main cachée",
@@ -415,9 +421,15 @@ const UI_TEXT = {
     quizCancel: "Cancel",
     welcomeTitle: "Welcome",
     welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
-    welcomeHelp: "Read the guide",
-    welcomeSkip: "Continue without the guide",
-    welcomeNote: "The guide is always available from the ? button at the top of the page.",
+    welcomeTutorial: "Show the tutorial",
+    welcomeSkip: "Continue without the tutorial",
+    welcomeNote: "The tutorial and the guide are always available from the ? button at the top of the page.",
+    tutorialTitle: "Tutorial",
+    tutorialOpen: "Tutorial",
+    tutorialPrev: "‹ Previous",
+    tutorialNext: "Next ›",
+    tutorialDone: "Finish",
+    tutorialZoom: "Enlarge the picture",
     quizReplay: "Replay this deal",
     quizNewDeal: "New deal",
     hiddenHand: "hidden hand",
@@ -4748,9 +4760,198 @@ helpDialog.addEventListener("click", (ev) => {
   if (ev.target === helpDialog) helpDialog.close();
 });
 
+// ---------- tutoriel ----------
+//
+// Une étape par écran : une capture (cli/tutorial/<langue>/NN.jpg, NN étant
+// le rang de l'étape) et son explication. Les captures sont prises par
+// tools/tutorial/capture.js, qui rejoue les mêmes scènes dans le même ordre :
+// une étape ajoutée ici demande sa scène là-bas.
+const TUTORIAL_STEPS = [
+  {
+    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, trois onglets : Enchères, PAR et S'entraîner.\nEn haut, la roue dentée ouvre les réglages et ? le mode d'emploi — et ce tutoriel."],
+    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings and ? the guide — and this tutorial."],
+  },
+  {
+    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète.\nLa flèche à côté propose la donne exemple ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
+    en: ["Getting a deal", "Random deal draws a complete deal.\nThe arrow next to it offers the example deal or a .pbn file (a tournament file too: a selector then picks the deal)."],
+  },
+  {
+    fr: ["Partager la donne", "Copiez un lien qui contient la donne, sauvez-la dans un fichier .pbn, ou affichez son texte PBN pour le copier ou y coller une donne reçue.\nDonneur et Vulnérabilité s'imposent ou se tirent au sort."],
+    en: ["Sharing the deal", "Copy a link that holds the deal, save it to a .pbn file, or show its PBN text to copy it or paste a deal you received.\nDealer and Vulnerability can be set or drawn at random."],
+  },
+  {
+    fr: ["Modifier la donne", "Modifier la donne passe la table en édition ; Terminer revient à la lecture.\nChaque main affiche ses points d'honneur (PH) et son nombre de cartes. La corbeille renvoie ses cartes au centre, dans Cartes non affectées."],
+    en: ["Editing the deal", "Edit the deal switches the table to editing; Done goes back to reading.\nEach hand shows its high-card points (HCP) and card count. The bin sends its cards to the centre, into Unassigned cards."],
+  },
+  {
+    fr: ["Prendre plusieurs cartes", "Touchez (ou cliquez) les cartes l'une après l'autre dans une main : elles se remplissent de vert.\nLe symbole ♠ ♥ ♦ ♣ prend toute la couleur d'un coup.\nTouchez ensuite une carte ou le fond de la main visée : toute la sélection y part. Le bandeau du bas compte les cartes prises et permet de tout reposer."],
+    en: ["Picking several cards", "Tap (or click) cards one after the other in a hand: they fill in green.\nThe ♠ ♥ ♦ ♣ symbol takes the whole suit at once.\nThen tap a card or the background of the target hand: the whole selection goes there. The bar at the bottom counts the cards and lets you put them all back."],
+  },
+  {
+    fr: ["Glisser-déposer", "Glissez une carte d'une main à l'autre, ou vers le centre pour la retirer. Une carte prise emporte toute la sélection (+5 ici).\nLa main survolée s'entoure de vert si elle a la place, de rouge sinon.\nAu clavier et à la souris : Maj prend une plage, Ctrl (⌘) ajoute une carte d'une autre main."],
+    en: ["Drag and drop", "Drag a card from one hand to another, or to the centre to take it out. A selected card carries the whole selection (+5 here).\nThe hand under the pointer gets a green outline if it has room, a red one if not.\nWith keyboard and mouse: Shift takes a range, Ctrl (⌘) adds a card from another hand."],
+  },
+  {
+    fr: ["Bornes, Compléter, Annuler", "Bornes affiche les PH mini et maxi de chaque main : les tirages et Compléter les respectent, et le compteur rougit si la main en sort.\nCompléter distribue les cartes du centre. Annuler (Ctrl+Z) revient sur la dernière action.\nTant qu'une main est incomplète, Afficher les enchères est éteint et propose Compléter les mains."],
+    en: ["Bounds, Fill, Undo", "Bounds shows each hand's min and max HCP: draws and Fill respect them, and the counter turns red when the hand is outside.\nFill deals the cards from the centre. Undo (Ctrl+Z) reverts the last action.\nWhile a hand is incomplete, Show the auction is off and offers Fill the hands."],
+  },
+  {
+    fr: ["Les enchères", "Dès que la donne est complète, le moteur déroule les enchères du Système d'Enchères Français.\nLa séquence commentée explique chaque enchère. Survolez-en une (ou touchez-la) : sa ligne s'éclaire et la main de son auteur est cerclée sur la table.\nL'imprimante imprime la table, la séquence et le PAR."],
+    en: ["The auction", "As soon as the deal is complete, the engine runs the auction in the French bidding system (SEF).\nThe commented auction explains every call. Hover one (or tap it): its line lights up and its bidder's hand is circled on the table.\nThe printer prints the table, the auction and the par."],
+  },
+  {
+    fr: ["L'arbre de décision", "L'icône en tête d'une ligne déplie l'arbre de décision : les règles examinées par le moteur sur la main, dans l'ordre, avec ✓ ou ✗ et la valeur mesurée, jusqu'à l'enchère choisie.\nC'est le meilleur moyen de comprendre pourquoi une enchère a été faite."],
+    en: ["The decision tree", "The icon at the start of a line opens the decision tree: the rules the engine checked on the hand, in order, with ✓ or ✗ and the measured value, down to the chosen call.\nIt is the best way to understand why a call was made."],
+  },
+  {
+    fr: ["Le PAR", "L'onglet PAR donne les levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul double-mort).\nSurvolez ou touchez une case : les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres."],
+    en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
+  },
+  {
+    fr: ["S'entraîner", "Choisissez votre main (Nord, Est, Sud ou Ouest), puis la toque pour commencer le questionnaire sur la donne de la table.\nLe mode questionnaire fait arriver masquée chaque nouvelle donne : vous enchérissez sans la connaître."],
+    en: ["Practise", "Choose your hand (North, East, South or West), then the cap to start the quiz on the deal on the table.\nQuiz mode brings every new deal in hidden: you bid without knowing it."],
+  },
+  {
+    fr: ["Le questionnaire", "La table ne montre que votre main. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, Contre, Surcontre. Au clavier : 1 à 7, puis C D H S N, P, X."],
+    en: ["The quiz", "The table shows only your hand. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
+  },
+  {
+    fr: ["La réponse", "Vous voyez aussitôt si votre enchère est celle du SEF ; sinon, l'enchère attendue et son explication, et l'arbre de décision sur votre main.\nContinuer passe à la suite ; Annuler arrête le questionnaire."],
+    en: ["The answer", "You see at once whether your call is the SEF one; if not, the expected call with its explanation, and the decision tree on your hand.\nContinue moves on; Cancel stops the quiz."],
+  },
+  {
+    fr: ["Le score", "À la fin : votre score, vos erreurs avec l'enchère attendue et le contrat final.\nRejouez la donne, tirez-en une nouvelle, ou affichez le détail complet : les onglets Enchères et PAR se remplissent avec la donne jouée."],
+    en: ["The score", "At the end: your score, your mistakes with the expected call, and the final contract.\nReplay the deal, draw a new one, or show the full detail: the Auction and Par tabs fill in with the deal you played."],
+  },
+  {
+    fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre) et l'option de lecture des cartes sur une photo, qui demande un serveur IA.\nLa pastille verte dit que le moteur d'enchères est prêt."],
+    en: ["Settings", "The cog: language, theme (automatic, light or dark) and the option to read cards from a photo, which needs an AI server.\nThe green dot says the bidding engine is ready."],
+  },
+  {
+    fr: ["Sur téléphone", "La table passe en une colonne et les onglets forment une barre au bas de l'écran, précédée de Donne qui remonte à la table.\nAfficher les enchères reste collé en bas pendant que vous faites défiler les mains.\nBon jeu ! Ce tutoriel se rouvre depuis le mode d'emploi, bouton ?."],
+    en: ["On a phone", "The table goes to one column and the tabs become a bar at the bottom of the screen, led by Deal, which takes you back to the table.\nShow the auction stays at the bottom while you scroll through the hands.\nEnjoy! This tutorial opens again from the guide, ? button."],
+  },
+];
+
+const tutorialDialog = $("#tutorial-dialog");
+let tutorialStep = 0;
+
+function tutorialImage(i, lang) {
+  return `tutorial/${lang}/${String(i + 1).padStart(2, "0")}.jpg`;
+}
+
+function renderTutorial() {
+  const lang = $("#lang").value;
+  const t = UI_TEXT[lang];
+  const n = TUTORIAL_STEPS.length;
+  const i = tutorialStep;
+  const [title, text] = TUTORIAL_STEPS[i][lang];
+  const src = tutorialImage(i, lang);
+  $("#tutorial-img").src = src;
+  $("#tutorial-img").alt = title;
+  $("#tutorial-img-link").href = src;
+  $("#tutorial-img-link").title = t.tutorialZoom;
+  $("#tutorial-step-title").textContent = title;
+  $("#tutorial-step-text").textContent = text;
+  $("#tutorial-count").textContent = `${i + 1} / ${n}`;
+  $("#tutorial-bar").style.width = `${((i + 1) / n) * 100}%`;
+  $("#tutorial-prev").textContent = t.tutorialPrev;
+  $("#tutorial-prev").disabled = i === 0;
+  $("#tutorial-next").textContent = i === n - 1 ? t.tutorialDone : t.tutorialNext;
+  const dots = $("#tutorial-dots");
+  if (dots.children.length !== n) {
+    dots.innerHTML = TUTORIAL_STEPS.map((_, k) =>
+      `<button type="button" class="tutorial-dot" data-step="${k}"></button>`).join("");
+  }
+  [...dots.children].forEach((dot, k) => {
+    const label = `${k + 1}. ${TUTORIAL_STEPS[k][lang][0]}`;
+    dot.setAttribute("aria-label", label);
+    dot.title = label;
+    if (k === i) dot.setAttribute("aria-current", "step");
+    else dot.removeAttribute("aria-current");
+  });
+  // L'étape suivante se charge pendant qu'on lit celle-ci : le passage à elle
+  // est alors immédiat.
+  if (i + 1 < n) new Image().src = tutorialImage(i + 1, lang);
+  $(".tutorial-body").scrollTop = 0;
+}
+
+function tutorialGo(i) {
+  if (i < 0 || i >= TUTORIAL_STEPS.length) return;
+  tutorialStep = i;
+  renderTutorial();
+}
+
+function openTutorial() {
+  closeMenus();
+  if (helpDialog.open) helpDialog.close();
+  tutorialStep = 0;
+  renderTutorial();
+  tutorialDialog.showModal();
+  $("#tutorial-next").focus();
+}
+
+$("#tutorial-prev").addEventListener("click", () => tutorialGo(tutorialStep - 1));
+$("#tutorial-next").addEventListener("click", () => {
+  if (tutorialStep === TUTORIAL_STEPS.length - 1) tutorialDialog.close();
+  else tutorialGo(tutorialStep + 1);
+});
+$("#tutorial-dots").addEventListener("click", (ev) => {
+  const dot = ev.target.closest("[data-step]");
+  if (dot) tutorialGo(Number(dot.dataset.step));
+});
+$("#tutorial-close").addEventListener("click", () => tutorialDialog.close());
+$("#help-tutorial-btn").addEventListener("click", openTutorial);
+// Un clic sur le voile referme, comme pour le mode d'emploi.
+tutorialDialog.addEventListener("click", (ev) => {
+  if (ev.target === tutorialDialog) tutorialDialog.close();
+});
+// Flèches gauche et droite, Début et Fin — sauf sur un bouton de la rangée des
+// points, où elles gardent leur rôle d'aller d'un point au suivant.
+tutorialDialog.addEventListener("keydown", (ev) => {
+  const moves = {
+    ArrowLeft: tutorialStep - 1,
+    ArrowRight: tutorialStep + 1,
+    Home: 0,
+    End: TUTORIAL_STEPS.length - 1,
+  };
+  if (!(ev.key in moves) || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+  ev.preventDefault();
+  tutorialGo(moves[ev.key]);
+  const dot = ev.target.closest && ev.target.closest(".tutorial-dot");
+  if (dot) $(`.tutorial-dot[data-step="${tutorialStep}"]`).focus();
+});
+// Au doigt : un balayage horizontal franc change d'étape. Un geste surtout
+// vertical est un défilement du texte, et reste à lui.
+{
+  let x0 = null;
+  let y0 = 0;
+  let swipedAt = 0;
+  const body = $(".tutorial-body");
+  body.addEventListener("pointerdown", (ev) => {
+    if (ev.pointerType === "mouse") return;
+    x0 = ev.clientX;
+    y0 = ev.clientY;
+  });
+  body.addEventListener("pointerup", (ev) => {
+    if (x0 === null) return;
+    const dx = ev.clientX - x0;
+    const dy = ev.clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < 1.5 * Math.abs(dy)) return;
+    swipedAt = Date.now();
+    tutorialGo(tutorialStep + (dx < 0 ? 1 : -1));
+  });
+  body.addEventListener("pointercancel", () => { x0 = null; });
+  // Un balayage qui finit sur l'image ne doit pas l'ouvrir en grand.
+  $("#tutorial-img-link").addEventListener("click", (ev) => {
+    if (Date.now() - swipedAt < 400) ev.preventDefault();
+  });
+}
+
 // ---------- écran d'accueil ----------
 
-// Au premier lancement, un écran propose le mode d'emploi, sans l'imposer. Le
+// Au premier lancement, un écran propose le tutoriel, sans l'imposer. Le
 // choix, quel qu'il soit — Échap compris —, est retenu : l'écran ne revient
 // plus. Un navigateur qui a déjà une donne retenue n'en est pas à son premier
 // lancement : l'écran est apparu après lui, et l'y montrer serait une gêne.
@@ -4763,11 +4964,11 @@ function dismissWelcome() {
   welcomeDialog.close();
 }
 $("#welcome-skip-btn").addEventListener("click", dismissWelcome);
-$("#welcome-help-btn").addEventListener("click", () => {
+$("#welcome-tutorial-btn").addEventListener("click", () => {
   dismissWelcome();
-  openHelp();
+  openTutorial();
 });
-// Échap ferme l'écran lui aussi : c'est un choix de passer l'aide.
+// Échap ferme l'écran lui aussi : c'est un choix de passer le tutoriel.
 welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));
 
 // Lu avant que la donne restaurée ne soit réécrite : c'est son absence qui

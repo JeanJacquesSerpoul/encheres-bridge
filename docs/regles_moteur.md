@@ -255,18 +255,25 @@ Le barrage aux paliers de 3 et de 4 achète son palier avec la seule longueur.
 Le palier de 2 n'achète presque rien : il se paie en qualité de main, et les
 conditions y sont donc plus lourdes.
 
-- **exactement 6 cartes** dans la majeure, et une couleur qui vaut d'être
-  jouée : deux des cinq gros honneurs **et** au moins les trois points de
-  **DV9xxx**, le minimum classique. VT9xxx a la forme, pas la couleur ;
-- **pas de couleur annexe cinquième** : une mineure quatrième est tolérée, une
-  cinquième carte fait de la main un bicolore, qui n'est pas ce que l'enchère
-  dit ;
+On ouvre d'un 2 majeur faible avec **6 à 10 H** et **les quatre conditions**
+suivantes, sans dérogation :
+
+- **une couleur convenable de 6 cartes**, **D109xxx au minimum** : deux des
+  cinq gros honneurs avec au moins 3 H dans la couleur (DV, R10, AV et mieux),
+  ou la Dame avec le 10 et le 9. V109xxx a la forme, pas la couleur ;
 - **pas 4 cartes dans l'autre majeure**, que le partenaire ne retrouverait
   jamais ;
-- **au plus une levée de défense extérieure**, un As ou un Roi. Avec deux, la
-  main défend mieux qu'elle ne barre ;
-- **6-11 H**. Le plafond n'est atteint qu'à défaut : 11 H et six cartes valent
-  13 HL, donc l'ouverture d'1 les prend d'abord [O-6].
+- **pas de mineure cinquième** : une mineure quatrième est tolérée, une
+  cinquième carte fait de la main un bicolore, qui n'est pas ce que l'enchère
+  dit ;
+- **moins de deux levées de défense extérieures, ni deux As** : un As ou un
+  Roi hors de la couleur compte une levée. Avec deux, la main défend mieux
+  qu'elle ne barre.
+
+Ces conditions suffisent à tenir la défense hors de la main : le test « la
+moitié des points dans la couleur longue » ne vaut que pour les barrages aux
+paliers de 3 et de 4. À 11 H, six cartes valent 13 HL : l'ouverture d'1 prend
+la main [O-6].
 
 **Pas de 2 faible en quatrième position** : trois passes ont fait le tour, il
 n'y a plus personne à barrer, et la main qui ouvrirait d'1 passe.
@@ -310,8 +317,8 @@ Tout le reste.
 
 > ⚠ **Trou connu** : dans les deux premiers sièges, une main de 11 H et 12 HL
 > avec une couleur sixième médiocre ne peut ni ouvrir d'1 [O-6] ni barrer
-> [O-7] : elle passe. Le 2 faible monte pourtant à 11 H [O-7a], mais il réclame
-> une belle couleur, que cette main-là n'a pas — et l'ouverture légère [O-7b],
+> [O-7] : elle passe. Le 2 faible s'arrête à 10 H [O-7a], et il réclame
+> de toute façon une couleur convenable, que cette main-là n'a pas — et l'ouverture légère [O-7b],
 > qui la réclame aussi, ne la rattrape pas davantage en troisième.
 
 ---

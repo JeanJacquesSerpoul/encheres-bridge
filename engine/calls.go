@@ -82,6 +82,7 @@ type meaning struct {
 	relay                  bool    // artificial relay (Stayman, 2C/2D relays...)
 	cuebid                 bool    // bid of the opponents' suit in answer to a takeout double
 	overcallAsk            bool    // cue-bid of the opener's suit asking the overcaller whether his intervention holds opening values
+	askMax                 bool    // the overcaller's "opening values" answer to that cue-bid: the side is bound for game [A-6]
 	wideDouble             bool    // answer to a takeout double made without a jump available (2H over 1S): the zone spans the weak and the middle one
 	wideDoubleSuit         Suit    // the major named by that wide answer
 	checkbackOffer         bool    // opener's jump 2NT rebid (18-19), 3C checkback available

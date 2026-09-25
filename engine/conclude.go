@@ -448,11 +448,18 @@ func init() {
 						second, secondLen = s, p.hand.Len(s)
 					}
 				}
+				// Over the direct overcall the opening values put the side in
+				// game: the cue-bid held 11 useful H or 13 HLD [A-6]. The
+				// réveil's own answer [R-4] stays a description.
+				gameBound := func(mn meaning) meaning {
+					mn.askMax = !ctx.pm.reopenAsk
+					return mn
+				}
 				if ctx.tr.check(secondLen >= 4, "maximum : une deuxième couleur de 4 cartes → la nommer",
 					"maximum: a second four-card suit → bid it", shape(p.hand)) {
 					c := e.cheapestCall(second.Strain())
 					if c.Level <= 3 && e.legal(p.seat, c) {
-						return c, m(maxLo, maxHi, topFR+", deuxième couleur", topEN+", second suit").withLen(second, secondLen), true
+						return c, gameBound(m(maxLo, maxHi, topFR+", deuxième couleur", topEN+", second suit").withLen(second, secondLen)), true
 					}
 				}
 				stopped := true
@@ -464,14 +471,73 @@ func init() {
 				if ctx.tr.check(stopped, "maximum : leurs couleurs arrêtées → Sans-Atout", "maximum: their suits stopped → notrump", "") {
 					c := e.cheapestCall(SNoTrump)
 					if c.Level <= 3 && e.legal(p.seat, c) {
-						return c, m(maxLo, maxHi, topFR+", arrêt dans leur couleur", topEN+", their suit held"), true
+						// The stoppers are what the bid says: record them, or
+						// partner keeps refusing the notrump game for want of
+						// a hold this answer has just guaranteed.
+						mn := m(maxLo, maxHi, topFR+", arrêt dans leur couleur", topEN+", their suit held")
+						for _, os := range e.opponentSuits(p) {
+							mn = mn.withStopper(os)
+						}
+						return c, gameBound(mn), true
 					}
 				}
 				c := e.cheapestCall(own.Strain())
 				c = bid(c.Level+1, own.Strain())
 				if ctx.tr.check(c.Level <= 4 && e.legal(p.seat, c), "maximum, sinon → saut dans ma couleur",
 					"maximum, otherwise → jump in my suit", "") {
-					return c, m(maxLo, maxHi, topFR+", saut dans ma couleur", topEN+", jump in my suit").withLen(own, ownLen), true
+					return c, gameBound(m(maxLo, maxHi, topFR+", saut dans ma couleur", topEN+", jump in my suit").withLen(own, ownLen)), true
+				}
+				return Call{}, meaning{}, false
+			},
+		},
+		{
+			// Partner answered my strength-asking cue-bid with opening values:
+			// the side is in game [A-6], and notrump comes first -- nine
+			// tricks beat eleven for the same bonus -- unless an opposing suit
+			// is unstopped or my hand is unbalanced. 1C - 1D - 2C - 2NT with
+			// AK KJ85 952 T852 is 3NT, not a 3D invitation. A slam count is
+			// left to the generic decision.
+			name: "game-after-overcall-strength-ask",
+			fr:   "le partenaire a l'ouverture sur mon cue-bid : la manche, à Sans-Atout d'abord",
+			en:   "partner shows opening values over my cue-bid: game, notrump first",
+			when: func(e *Engine, ctx *concludeCtx) bool {
+				return ctx.pm != nil && ctx.pm.askMax && ctx.hasBid && ctx.lastSeat == partnerOf(ctx.p.seat) && !isGame(ctx.last)
+			},
+			run: func(e *Engine, ctx *concludeCtx) (Call, meaning, bool) {
+				p, tr := ctx.p, ctx.tr
+				if tr.check(ctx.cMin >= 31, "minimum combiné en zone de chelem (31) → décision générale",
+					"combined minimum in the slam zone (31) → generic decision", fmt.Sprintf("%d", ctx.cMin)) {
+					return Call{}, meaning{}, false
+				}
+				done := func(c Call, fr, en string) (Call, meaning, bool) {
+					if !c.higherThan(ctx.last) || !e.legal(p.seat, c) {
+						return Call{}, meaning{}, false
+					}
+					// The count travels with the conclusion: the cue-bid had
+					// no ceiling, and partner would otherwise read it as a
+					// slam try. H for 3NT, the fit's HLD for a suit game.
+					val := ctx.own
+					if c.Strain == SNoTrump {
+						val = p.hand.H()
+					}
+					mn := m(val, val, fr, en)
+					if ctx.hasFit && c.Strain == ctx.fit.Strain() {
+						mn = mn.withLen(ctx.fit, p.hand.Len(ctx.fit))
+					}
+					return c, mn, true
+				}
+				if tr.check(ctx.hasFit && ctx.fit.IsMajor(), "fit majeur → 4 dans la majeure",
+					"major fit → four of the major", "") {
+					return done(bidSuit(4, ctx.fit), "conclusion à la manche : l'ouverture face au cue-bid", "game: opening values facing the cue-bid")
+				}
+				regular := p.hand.IsRegular() || p.hand.IsSemiRegular()
+				if tr.check(ctx.ntOK && regular, "leurs couleurs arrêtées et main régulière → 3SA plutôt que la manche en mineure",
+					"their suits stopped and a balanced hand → 3NT rather than the minor game", shape(p.hand)) {
+					return done(bid(3, SNoTrump), "conclusion à 3SA : l'ouverture face au cue-bid, leurs couleurs arrêtées", "3NT: opening values facing the cue-bid, their suits stopped")
+				}
+				if tr.check(ctx.hasFit, "arrêt manquant ou main irrégulière → la manche en mineure",
+					"a stopper missing or an unbalanced hand → the minor game", "") {
+					return done(bidSuit(5, ctx.fit), "conclusion à la manche en mineure : l'ouverture face au cue-bid", "minor game: opening values facing the cue-bid")
 				}
 				return Call{}, meaning{}, false
 			},

@@ -1514,6 +1514,15 @@ La réponse est codée :
   quatrième, à défaut Sans-Atout avec les couleurs adverses tenues, à défaut
   saut dans sa propre couleur. Jamais le simple retour, réservé au minimum.
 
+Sur la réponse **avec l'ouverture**, le camp est **en manche** : le cue-bid
+tenait 11 H utiles ou 13 HLD. L'avancée la nomme, **3SA d'abord** — neuf
+levées au lieu de onze pour la même prime — **sauf** couleur adverse non
+arrêtée (ni chez elle, ni par le 2SA du partenaire, qui garantit l'arrêt) ou
+main irrégulière : alors la manche dans le fit (4 en majeure, 5 en mineure).
+Elle y annonce sa force exacte, que le cue-bid laissait sans plafond. Avec un
+minimum combiné en zone de chelem (31), la décision générale reprend la main.
+`1♣ – 1♦ – 2♣ – 2SA` avec ♠AR ♥RV85 ♦952 ♣10852 → **3SA**, pas 3♦.
+
 ### [A-7] La suite des enchères, après le soutien de l'avancée
 Le soutien a **plafonné** l'avancée — 7-10 HLD pour le simple, 11-12 pour le
 saut [A-5] — tandis que l'intervenant n'a toujours annoncé que les 9-18 HL de

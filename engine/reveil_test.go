@@ -39,7 +39,7 @@ func TestReopenZones(t *testing.T) {
 			name:    "couleur simple : 8H et 5 belles cartes",
 			opening: Diamonds,
 			h:       hand("KQT64", "J9", "Q53", "T32"),
-			want:    "1P", hint: "dénie l'ouverture",
+			want:    "1P", hint: "8-13HL et 5 cartes",
 		},
 		{
 			// Exact hand from the reference document (section 3).

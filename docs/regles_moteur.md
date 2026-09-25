@@ -1322,7 +1322,7 @@ enchère voudrait dire en intervention.
 
 | Réveil | Signification |
 | --- | --- |
-| Couleur au palier de 1 · `1♣ passe passe 1♠` | 5 cartes, **8-13 HL** — dénie l'ouverture |
+| Couleur au palier de 1 · `1♣ passe passe 1♠` | 5 cartes, **8-13 HL** (à partir de 14 HL, contre) |
 | Couleur sans saut au palier de 2 · `1♠ passe passe 2♣` | idem |
 | Majeure avec saut au palier de 2 · `1♦ passe passe 2♥` | barrage : **6 cartes**, l'équivalent d'un beau 2 faible |
 | Majeure avec saut au palier de 3 · `1♥ passe passe 3♠` | barrage : **7 cartes**, l'équivalent d'une ouverture au palier de 3 |
@@ -1342,7 +1342,8 @@ Ces enchères sont **réservées** : un réveil naturel ne les emprunte jamais,
 le partenaire lirait le bicolore et nommerait une couleur que personne n'a.
 ### [V-2] **2SA** = 17-19 HL régulier avec arrêt.
 ### [V-3] **Contre obligatoire à partir de 14 HL** : la main possède
-l'ouverture, et tout réveil par une couleur la dénierait. Deux nuances :
+l'ouverture, et tout réveil par une couleur, plafonné à 13 HL, la
+sous-évaluerait. Deux nuances :
 - **jeu régulier de 14-16 H** avec un arrêt (ou trois petites) → contre, puis
   **Sans-Atout au palier le moins cher** sur la réponse minimale du
   partenaire. C'est cette deuxième enchère qui distingue la main du contre à
@@ -1363,8 +1364,9 @@ couleur elle-même, l'ouverture déniée. En mineure c'est l'inverse : pas de
 barrage à faire, mais une **belle couleur sixième à la limite de l'ouverture**,
 **11 HL et plus**. Indisponible quand le saut est déjà pris par un bicolore
 [V-1].
-### [V-6] **Réveil par une couleur** : belle couleur cinquième, **8-13 HL** —
-dénie l'ouverture.
+### [V-6] **Réveil par une couleur** : belle couleur cinquième, **8-13 HL** :
+à partir de 14 HL, la main contre [V-3]. Elle peut valoir une ouverture
+(12-13 H) ; le réveil ne la dénie pas, il la plafonne.
 ### [V-7] **Contre d'appel dès 8 H** avec la forme tricolore idéale : court
 (≤ 2 cartes) dans leur couleur, 3 cartes et plus partout ailleurs.
 ### [V-8] Exceptionnellement, une **belle couleur quatrième** (5 H dans la

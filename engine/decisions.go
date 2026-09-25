@@ -4242,7 +4242,7 @@ func (e *Engine) isClassicReopen() bool {
 // reopenBid chooses the balancing call over the opponents' dying one-level
 // opening (docs/regles_moteur.md §9.3). Three families share the seat and none
 // of them means what the same call would mean in the direct seat: a suit, with
-// or without a jump, denies opening values; the notrump bids are limited
+// or without a jump, stops at 13 HL; the notrump bids are limited
 // (9-13 HL for 1SA, 17-19 for 2SA) and ask for a hold in the opened suit; and
 // the double covers three hands with nothing in common -- the takeout shape
 // short in their suit, where 8 H is enough, opening values with no notrump bid
@@ -4267,8 +4267,8 @@ func (e *Engine) reopenBid(p *playerState, opp Suit) (Call, meaning) {
 		"17-19 HL, balanced, stopper in their suit → 2NT [V-2]", pts(hl, "HL")+", "+shape(h)) {
 		return bid(2, SNoTrump), m(17, 19, "réveil de 2SA naturel, 17-19HL régulier avec arrêt", "natural 2NT reopening, 17-19 HL balanced with a stopper").withStopper(opp).asReopen()
 	}
-	// From 14 HL the hand holds an opening, and every suit reopening denies
-	// one: the double is compulsory [V-3]. The balanced 14-16 with a hold
+	// From 14 HL every suit reopening would understate the hand, capped as it
+	// is at 13: the double is compulsory [V-3]. The balanced 14-16 with a hold
 	// plans the notrump rebid that alone pins its zone -- the double on its
 	// own would leave partner reading the 8 H takeout shape.
 	if tr.check(hl >= 14 && e.legal(p.seat, doubleCall), "14 HL et plus : la valeur d'une ouverture → contre de réveil [V-3]",
@@ -4390,8 +4390,8 @@ func reopenReserved(c Call, opp Suit) bool {
 	}
 }
 
-// reopenSuit names a good five-card suit without a jump: 8-13 HL, denying an
-// opening [V-6]. level selects the rung the call must land on, so the
+// reopenSuit names a good five-card suit without a jump: 8-13 HL, the 14 HL
+// and up going through the double [V-6] -- 12 or 13 H is still an opening. level selects the rung the call must land on, so the
 // one-level reopening can outrank the notrump bids while the two-level one
 // stays below them.
 func (e *Engine) reopenSuit(p *playerState, opp Suit, level int) (Call, meaning, bool) {
@@ -4416,7 +4416,7 @@ func (e *Engine) reopenSuit(p *playerState, opp Suit, level int) (Call, meaning,
 	if c.Level != level || reopenReserved(c, opp) || !e.legal(p.seat, c) {
 		return Call{}, meaning{}, false
 	}
-	mn := m(8, 13, "réveil par une couleur, 8-13HL et 5 cartes, dénie l'ouverture", "suit reopening, 8-13 HL and five cards, denies an opening hand").withLen(best, 5).asReopen()
+	mn := m(8, 13, "réveil par une couleur, 8-13HL et 5 cartes", "suit reopening, 8-13 HL and five cards").withLen(best, 5).asReopen()
 	return c, mn, true
 }
 

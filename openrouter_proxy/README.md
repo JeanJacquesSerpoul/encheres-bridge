@@ -63,11 +63,19 @@ Tout passe par l'environnement ; `.env` est lu au démarrage s'il existe.
 | `ENABLE_MODELS_ENDPOINT` | `false`                     | Non         | Exposer `GET /api/models` |
 | `BIND_ADDR`          | `127.0.0.1`                     | Non         | Interface où `docker compose` publie le port |
 
-Le modèle par défaut est un modèle de vision « flash » : il lit des cartes en
-quelques secondes, et c'est celui que le client demande explicitement
-(`IA_MODEL` dans [cli/app.js](../cli/app.js)). Le changer ici suffit à servir un
-autre modèle aux requêtes qui n'en précisent pas — celles du client, elles,
-continueront de nommer le leur.
+Le modèle par défaut, `google/gemini-3.1-flash-lite`, est un modèle de vision
+« flash », choisi pour son **efficacité** (il lit des cartes en quelques
+secondes) et son **faible coût** : environ **0,0005 $ par image**, soit
+**0,50 $ pour 1 000 images**. C'est aussi celui que le client demande
+explicitement (`IA_MODEL` dans [cli/app.js](../cli/app.js)). Le changer ici
+suffit à servir un autre modèle aux requêtes qui n'en précisent pas — celles du
+client, elles, continueront de nommer le leur.
+
+La lecture est **la plus efficace sur une donne imprimée** (diagramme de
+journal, de livre ou d'écran : rangs et couleurs écrits en clair, sur un fond
+net). Elle l'est **moins sur des cartes réelles** photographiées sur la table :
+chevauchements, petits index, reflets et perspective font manquer ou mal lire
+certaines cartes.
 
 ## Sécurité
 

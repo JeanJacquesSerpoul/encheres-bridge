@@ -1,40 +1,17 @@
-# Lance l'exécutable Linux précompilé de ce dossier (openrouter_proxy) dans un
-# conteneur, sans rien compiler : le binaire, statique, est monté en lecture
-# seule dans une image Alpine, qui fournit les certificats TLS et le wget du
-# healthcheck.
-#
-# La configuration vient de bin/.env, qui n'est pas versionné : copiez-y
-# ../.env.example et renseignez OPENROUTER_API_KEY. docker compose lit aussi ce
-# fichier pour PORT et BIND_ADDR.
-#
-#   cd bin && docker compose up -d
 services:
-  openrouter-proxy:
-    image: alpine:3.19
-    container_name: bridge-openrouter-proxy
+  openrouter_proxy:
+    build: .
+    image: openrouter_proxy:latest
+    container_name: openrouter_proxy
     restart: unless-stopped
-    volumes:
-      - ./openrouter_proxy:/app/openrouter_proxy:ro
-    working_dir: /app
-    entrypoint: ["/app/openrouter_proxy"]
-    user: "10001:10001"
-    # Published on loopback only: the reverse proxy (or the local browser)
-    # reaches it there. Set BIND_ADDR=0.0.0.0 to expose it on every interface.
     ports:
-      - "${BIND_ADDR:-127.0.0.1}:${PORT:-9013}:${PORT:-9013}"
+      - "${PORT:-9013}:${PORT:-9013}"
     env_file:
       - .env
     environment:
       - PORT=${PORT:-9013}
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    read_only: true
-    tmpfs:
-      - /tmp
-    mem_limit: 256m
-    cpus: "1.0"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:${PORT:-9013}/health"]
       interval: 30s

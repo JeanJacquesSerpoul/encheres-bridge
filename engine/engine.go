@@ -1569,14 +1569,14 @@ func (e *Engine) controlBid(p *playerState, trump Suit) (Call, meaning, bool) {
 	// the fit must stay unambiguous. The ceiling lifts to the small slam only
 	// when the five level is already paid for -- the auction sits strictly
 	// above game (a cue exchange under way) with the combined minimum in the
-	// slam zone -- or when initiating from the game level itself with a real
-	// cushion beyond that zone (e.g. over partner's direct jump to game, which
-	// left no room below it). The trump suit is not part of this rotation up
+	// slam zone -- or when initiating from the game level itself with a
+	// cushion beyond that zone, 34 (e.g. over partner's direct jump to game,
+	// which left no room below it). The trump suit is not part of this rotation up
 	// there: once the side controls run out, continueControlBid decides
 	// whether the fit above game shows the trump honour or stops.
 	ceiling := game
 	cMin := h.HLD(trump) + partner.shownMin
-	if cMin >= 36 || (last.higherThan(game) && cMin >= 33) {
+	if cMin >= 34 || (last.higherThan(game) && cMin >= 33) {
 		ceiling = bidSuit(6, trump)
 	}
 	// Where the rotation starts. The player who opens the exchange names the
@@ -1863,7 +1863,9 @@ func (e *Engine) trumpNamedByBoth(p *playerState, fit Suit) bool {
 }
 
 // hldFacingPartner values the hand for play in trump, discounting shortness in
-// a suit partner has shown real length in.
+// a suit partner has shown real length in: five cards and up. Facing the four
+// a 1D opening shows, a void still ruffs -- QJ5 Q9762 - A7542 opposite 1D -
+// 1H - 4H keeps its three points and reaches the slam zone.
 //
 // HLD pays for shortness because short suits let the trumps work. That premise
 // fails exactly where partner is long: a void opposite six clubs is not three
@@ -1875,7 +1877,7 @@ func (e *Engine) hldFacingPartner(p *playerState, trump Suit) int {
 	v := p.hand.HLD(trump)
 	partner := e.ps[partnerOf(p.seat)]
 	for s := Clubs; s <= Spades; s++ {
-		if s == trump || partner.shownLens[s] < 4 || singletonHonour(p.hand, s) {
+		if s == trump || partner.shownLens[s] < 5 || singletonHonour(p.hand, s) {
 			continue
 		}
 		switch p.hand.Len(s) {

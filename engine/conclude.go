@@ -1771,13 +1771,13 @@ func init() {
 					// free -- partner can always sign off in four of the fit --
 					// so ask the question there without further conditions.
 					// Above game it buys the five level if the missing control
-					// never shows, so it additionally needs a real cushion
+					// never shows, so it additionally needs a cushion (34)
 					// beyond the bare slam zone and a partner whose last bid
 					// set a narrow codified zone (e.g. a 20-23 jump raise) the
 					// count can trust -- not a heuristic conclusion whose cap
 					// is an illusion inherited from an earlier bid.
 					belowGame := gameOfTrump(fit).higherThan(last)
-					cushion := cMin >= 36 && pm != nil && pm.minPts >= 0 && pm.maxPts >= 0 && pm.maxPts-pm.minPts <= 4
+					cushion := cMin >= 34 && pm != nil && pm.minPts >= 0 && pm.maxPts >= 0 && pm.maxPts-pm.minPts <= 4
 					// The trump is agreed [S-4b] -- the branch above returned
 					// otherwise -- so the cue-bid names a suit partner can read
 					// even when he alone has shown its length: a raise is not

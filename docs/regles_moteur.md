@@ -86,8 +86,11 @@ n'est pas trois points de coupe, c'est trois points de **gaspillage** — sa
 longueur est l'endroit où nos petits atouts auraient gagné leur vie, et les
 honneurs qu'il y détient sont des levées que la courte jette. Le moteur
 retranche donc les points D dans toute couleur où le partenaire a montré
-**4 cartes et plus** (`hldFacingPartner`) — même instrument que
-`hldAgainstTheirBidding`, tourné vers notre propre camp.
+**5 cartes et plus** (`hldFacingPartner`) — même instrument que
+`hldAgainstTheirBidding`, tourné vers notre propre camp. Face à une couleur de
+4 cartes — l'ouverture de 1♦ par exemple — la courte garde ses points : la
+longueur d'en face n'est pas assez grande pour que nos atouts n'aient rien à
+couper.
 
 ⚠ **Seulement au chelem.** La manche se gagne sur une coupe à laquelle le
 compte ne croit qu'à moitié ; douze levées, non. Les points restent donc dans
@@ -1823,7 +1826,7 @@ la réserve que cette courte inspire s'exprime par le 3SA « oui mais » [S-2d],
 jamais par un saut dans l'ordre des contrôles.)
 
 Garde-fou : l'échange ne dépasse jamais le palier de la **manche** dans
-l'atout — sauf si le compte atteint 36, ou 33 quand le palier de la manche
+l'atout — sauf si le compte atteint 34, ou 33 quand le palier de la manche
 est déjà consommé.
 
 **L'atout au-dessus de la manche.** Quand l'échange a passé la manche et
@@ -1906,9 +1909,12 @@ deuxième tour). On sonde alors par contrôles :
   partenaire sait lire même s'il est seul à avoir montré la longueur d'atout.
   Exiger que les deux mains l'aient montrée ne laissait à la main de chelem
   que la manche à annoncer ;
-- **au-dessus**, seulement si le compte atteint **36** et que la dernière
+- **au-dessus**, seulement si le compte atteint **34** et que la dernière
   enchère du partenaire délimitait une zone **étroite** (amplitude ≤ 4 points),
   car la sonde achète alors le palier de 5 si le contrôle ne vient pas.
+  `1♦ – 1♥ – 4♥` (20-23 HLD) avec ♠DV5 ♥D9762 ♦— ♣A7542 : 14 HLD, la chicane
+  comptée face aux quatre Carreaux de l'ouverture, soit 34 → **5♣**, et le
+  camp atteint **6♥**.
 
 ### [S-3b] Quand il n'y a plus de contrôle à montrer
 On revient à **la manche dans l'atout**. Ce n'est pas un arrêt : l'enchère ne

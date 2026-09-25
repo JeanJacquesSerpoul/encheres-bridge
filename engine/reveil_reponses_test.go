@@ -177,8 +177,11 @@ func TestAnswerReopenSuit(t *testing.T) {
 		{"9-12H avec l'arrêt : 1SA", hand("74", "KJ83", "Q962", "A75"), "1SA", "9-12H"},
 		{"13-15H avec l'arrêt : 2SA", hand("74", "KJ83", "AQ92", "AJ5"), "2SA", "13-15H"},
 		{"fit et l'ouverture : cue-bid espoir de manche", hand("KJ85", "A94", "73", "KQ86"), "2K", "espoir de manche"},
-		{"fit et 7-10HLD : soutien simple", hand("KQ72", "J64", "A53", "T64"), "2P", "soutien simple"},
-		{"fit et 11-12HLD : soutien à saut", hand("KQ72", "J64", "A53", "Q64"), "3P", "soutien à saut"},
+		{"fit et 7-10HLD : soutien simple", hand("KQ7", "J642", "A53", "T64"), "2P", "soutien simple"},
+		{"fit et 11-12HLD : soutien à saut", hand("KQ7", "J642", "A53", "Q64"), "3P", "soutien à saut"},
+		// Four trumps opposite the five the réveil promises: the ninth trump
+		// is worth a point, and 10 H becomes the 11 HLD of the jump raise.
+		{"fit de 9 : le neuvième atout compte", hand("KQ72", "J64", "A53", "T64"), "3P", "soutien à saut"},
 		{"misfit avec sa propre couleur : non forcing", hand("6", "KQJ84", "95", "K7432"), "2C", "misfit"},
 		{"rien à dire : passe", hand("83", "9642", "T74", "J952"), "Passe", ""},
 	}

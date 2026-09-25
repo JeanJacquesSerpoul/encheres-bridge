@@ -59,6 +59,22 @@ func maxHandValue(h *Hand) int {
 	return v
 }
 
+// maxFitValue adds to maxHandValue the point each trump beyond the eighth is
+// worth once partner has shown his length [R-1]: HLD in a suit, plus the
+// combined length over eight. partnerLens is what partner's calls have
+// promised so far.
+func maxFitValue(h *Hand, partnerLens [4]int) int {
+	v := maxHandValue(h)
+	for s := Clubs; s <= Spades; s++ {
+		if fit := h.Len(s) + partnerLens[s]; fit > 8 {
+			if hld := h.HLD(s) + fit - 8; hld > v {
+				v = hld
+			}
+		}
+	}
+	return v
+}
+
 // TestConsistencyInvariants runs the engine over a large batch of seeded
 // random deals and enforces the hard invariants every auction must satisfy:
 // legality of each call, termination without the safety net, honesty of the
@@ -90,9 +106,14 @@ func TestConsistencyInvariants(t *testing.T) {
 		hasBid := false
 		lastBidSide := -1
 		doubled, redoubled := false, false
+		var shown [4][4]int // per seat, the longest length promised per suit
 		for i, sc := range calls {
 			h := d.Hands[sc.Seat]
 			mn := sc.M
+			partnerLens := shown[partnerOf(sc.Seat)]
+			for s := Clubs; s <= Spades; s++ {
+				shown[sc.Seat][s] = max(shown[sc.Seat][s], mn.lens[s])
+			}
 
 			// Basic auction legality.
 			switch sc.Call.Kind {
@@ -129,9 +150,9 @@ func TestConsistencyInvariants(t *testing.T) {
 				report(d, calls, "deal %d: call #%d (%s %s, %q) has min %d > max %d",
 					n, i, seatNames[sc.Seat], sc.Call.Format("fr"), mn.fr, mn.minPts, mn.maxPts)
 			}
-			if mn.minPts > maxHandValue(h) {
+			if worth := maxFitValue(h, partnerLens); mn.minPts > worth {
 				report(d, calls, "deal %d: call #%d (%s %s, %q) promises %d points, hand is worth at most %d",
-					n, i, seatNames[sc.Seat], sc.Call.Format("fr"), mn.fr, mn.minPts, maxHandValue(h))
+					n, i, seatNames[sc.Seat], sc.Call.Format("fr"), mn.fr, mn.minPts, worth)
 			}
 
 			// A comment announcing "conclusion à la manche" must sit on a bid

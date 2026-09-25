@@ -1716,6 +1716,16 @@ l'atout est alors convenu de fait, puisqu'il est la seule couleur du camp sur
 la table, et l'échange s'ouvre quand même.
 
 ### [S-1] Déclenchement avec fit
+- ⚠ **Les points des adversaires comptent aussi.** Le jeu n'a que 40 H : ce
+  qu'ils ont annoncé (leur plancher en HL, moins 2 points de longueur chacun
+  — une ouverture de 12 HL, c'est au moins 10 H) est retiré du plafond de
+  notre camp. Sous **33 H**, pas de chelem sur les honneurs : pas d'essai par
+  contrôles, pas de Blackwood. `1♣ – 1♦ – 2♣ – 2SA – 3SA` : l'ouverture d'Est
+  laisse au plus 30 H à Nord-Sud, Sud (♠D3 ♥A3 ♦ARV86 ♣R743, 17 H) passe.
+  Le plafond s'efface devant une **courte** (singleton ou chicane) tenue ou
+  annoncée par le partenaire : un chelem de coupes ne se compte pas en
+  honneurs, et 25 H avec un fit de 9 et deux singletons le font après
+  l'ouverture adverse.
 - **29 à 32** combinés **et un chelem en vue** → essai par contrôles. « On ne
   démarre les enchères de contrôle que si on envisage un chelem » : il faut
   que le **maximum** combiné atteigne la zone (**33**) — un partenaire à

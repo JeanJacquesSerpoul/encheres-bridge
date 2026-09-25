@@ -1537,17 +1537,20 @@ s'applique aussi de ce côté de la table.
 
 **Principe** : on répond **comme si le partenaire était faible**, car avec un
 jeu valant l'ouverture le réveilleur, lui, doit reparler. Le réveil est plafonné
-à 13 HL et a dénié l'ouverture : les zones de §9.2 et de [A-5], taillées pour
+à 13 HL : les zones de §9.2 et de [A-5], taillées pour
 une intervention directe de 9-18 HL, surenchériraient sur presque toutes les
 mains.
 
 ### [R-1] Sur un **réveil par une couleur** (5 cartes, 8-13 HL)
 - **Passe** — c'est la réponse la plus fréquente ;
-- avec le **fit** (3 atouts et plus) : 13 HLD et plus → **cue-bid** de la
+- avec le **fit** (3 atouts et plus), en comptant **+1 HLD par atout au-delà
+  du huitième** (le réveil en promet 5) : 13 HLD et plus → **cue-bid** de la
   couleur d'ouverture [R-4] · 11-12 HLD → soutien à saut · 7-10 HLD → soutien
   simple. Contrairement à [A-5], le saut **survit au passe** de l'avancée : en
   réveil ce passe n'a rien dénié, c'est la raison même pour laquelle le
-  partenaire a dû réveiller ;
+  partenaire a dû réveiller. `1♠ – passe – passe – 2♥` avec ♠A75 ♥A864 ♦V953
+  ♣D8 : 11 H + 1 (doubleton) + 1 (neuvième atout) = 13 HLD → **2♠**, et le
+  réveilleur au maximum conclut à **4♥** ;
 - 4 atouts et une belle couleur cinquième, 8-11 H → **rencontre** [A-5] ;
 - **2SA** = 13-15 H · **1SA** = 9-12 H, dans les deux cas avec l'arrêt (ou
   trois petites cartes) dans la couleur d'ouverture. 1SA occupant la zone

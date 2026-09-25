@@ -5137,7 +5137,7 @@ func (e *Engine) advance(p *playerState) (Call, meaning) {
 // ---------- answering the balancing seat (réponses au réveil) ----------
 
 // advanceReopenSuit answers a suit réveil (docs/regles_moteur.md §9.5). The
-// balancing bid has already denied an opening and capped itself at 13 HL, so
+// balancing bid has already capped itself at 13 HL, so
 // this is not the advance made over a direct overcall: there is no strength
 // left to ask about, the notrump answers carry their own — higher — zones
 // because partner's may be as little as 8 HL, and the cue-bid of the opener's
@@ -5147,6 +5147,11 @@ func (e *Engine) advanceReopenSuit(p *playerState, s Suit) (Call, meaning) {
 	hp, hl := h.H(), h.HL()
 	sup, hld := h.Len(s), h.HLD(s)
 	opp, hasOpp := Suit(e.openCall.Strain), e.openCall.Strain <= SSpades
+	// Each trump beyond the eighth is worth a point [R-1]: the réveil promises
+	// five, so four-card support makes a nine-card fit. A75 A864 J953 Q8 over
+	// 1S - Pass - Pass - 2H counts 11 H + 1 (doubleton) + 1 (ninth trump) =
+	// 13 HLD, the cue-bid's zone.
+	fitLen := sup + e.ps[partnerOf(p.seat)].shownLens[s]
 
 	// cue bids the opener's suit: "espoir de manche, l'ouverture et plus".
 	// Unlike the cue-bid of [A-6] it asks nothing about partner's strength —
@@ -5182,6 +5187,11 @@ func (e *Engine) advanceReopenSuit(p *playerState, s Suit) (Call, meaning) {
 		}
 	}
 	if tr.check(sup >= 3, "3 atouts et plus", "three or more trumps", cards(h, s)) {
+		if fitLen > 8 {
+			hld += fitLen - 8
+			tr.check(true, "atouts au-delà du huitième : +1 HLD chacun",
+				"trumps beyond the eighth: +1 HLD each", fmt.Sprintf("fit de %d → %d HLD", fitLen, hld))
+		}
 		switch {
 		case tr.check(hld >= 13, "13 HLD et plus → cue-bid, espoir de manche", "13+ HLD → cue-bid, game hope", pts(hld, "HLD")):
 			if c, mn, ok := cue(13, "cue-bid sur le réveil : espoir de manche avec le fit, l'ouverture et plus, forcing", "cue-bid over the reopening: game hope with a fit, opening values and up, forcing"); ok {

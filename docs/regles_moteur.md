@@ -181,6 +181,12 @@ le **plancher** annoncé par le partenaire, jamais son maximum. Le maximum ne
 sert qu'à une chose : vérifier qu'un chelem est **arithmétiquement possible**
 avant de démarrer une sonde par contrôles ([S-1]) — jamais à conclure.
 
+Une conclusion à la manche annonce son plancher **dans l'unité de la manche
+choisie** : en H pur pour 3SA, en HLD pour une manche à la couleur. Un 3SA qui
+annonçait un plancher HLD (la longueur d'une mineure comptée en points)
+gonflait le compte combiné du partenaire et l'envoyait au chelem à SA sur une
+force qui n'y était pas.
+
 Ce calcul vaut aussi pour les **échelles conventionnelles** : les paliers
 d'une réponse à 2SA, d'un développement du Stayman ou d'un transfert après les
 deux majeures ne sont pas des nombres fixes, mais **33 moins le plancher promis
@@ -758,6 +764,12 @@ atteint le seuil de manche → **4M** directement.
 ### [RO-3] 17-18 H, main équilibrée → **2SA**, proposition.
 ### [RO-4] 6 cartes et 17 HL et plus → **répétition à saut** (17-19), invite.
 ### [RO-5] 6 cartes → **répétition simple** (13-16).
+### [RO-5b] Bicolore cher, 18 HL et plus
+4+ cartes dans une couleur **plus chère** que l'ouverture, 18 HL et plus →
+**2 de cette couleur**, forcing (18-23 HL), comme [RO-19] : l'ouverture y est
+enregistrée à 4 cartes au moins. Sans lui, `1♦ – 1SA` avec ♠ARV5 ♥ADV7 ♦AD96 ♣5
+(20 H) répétait ses ♦ « par défaut » en 12-14 [RO-7] et le répondant passait
+sous la manche.
 ### [RO-6] Bicolore économique
 Seulement avec une main **irrégulière** : 4+ cartes dans une couleur moins
 chère que l'ouverture → 2 dans cette couleur (12-17).
@@ -845,6 +857,9 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
   de la vraie couleur comme une valeur de coupe au lieu d'un gaspillage
   [E-1c].
 - **Bicolore à saut** (palier ≤ 3), **20 HL et plus** → forcing de manche.
+  Il passe **avant** le changement de couleur au palier de 1 : `1♣ – 1♦ – 2♥`
+  et non `1♥` avec 20 HL. Le palier de 1, non forcing, ne peut pas porter une
+  main qui a la manche en face de n'importe quelle réponse.
 
 ### [RO-19b] Réponses au bicolore cher
 Le bicolore cher est **auto-forcing**. Toutes les réponses sont **forcing de

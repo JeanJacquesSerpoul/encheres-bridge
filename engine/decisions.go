@@ -3509,6 +3509,18 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 		mn := m(13, 16, "répétition, 6 cartes", "rebid, six-card suit").withLen(os, 6)
 		mn.openerMinorRebid = !os.IsMajor()
 		return bidSuit(2, os), mn
+	case tr.check(e.reverseOverOneNT(p, os) != (Call{}),
+		"4 cartes dans une couleur plus chère que l'ouverture, 18 HL et plus → bicolore cher, forcing [RO-5b]",
+		"four cards in a suit above the opening, 18+ HL → reverse, forcing [RO-5b]", pts(h.HL(), "HL")):
+		// The reverse [RO-5b]: a higher-ranking four-card suit and 18 HL, the
+		// same bicolore cher as over a suit response. Without it the strong
+		// two-suiter fell through to the default rebid announcing 12-14
+		// (1H-1NT-2H on AKJ8 AKJ97 A75 7).
+		c := e.reverseOverOneNT(p, os)
+		s := Suit(c.Strain)
+		mn := m(18, 23, "bicolore cher, forcing", "reverse, forcing").withLen(s, 4).withLen(os, 4).asForcing()
+		mn.reverse = true
+		return c, mn
 	default:
 		// The cheap second suit "promet une main irrégulière" (docs/bidings.md,
 		// "LE BICOLORE ÉCONOMIQUE"; its 15-17H exception, the "faux bicolore
@@ -3533,6 +3545,26 @@ func (e *Engine) rebidOverOneNT(p *playerState, os Suit) (Call, meaning) {
 		tr.note("main régulière minimale : 1SA est le bon contrat → Passe", "minimum balanced hand: 1NT is the right contract → Pass")
 		return passCall, m(12, 14, "jeu régulier minimal", "minimum balanced hand")
 	}
+}
+
+// reverseOverOneNT finds the reverse over the 1NT response [RO-5b]: a
+// four-card suit ranking above the opening, biddable at the two level, with
+// 18 HL. It records the test in the trace; the zero Call means no reverse.
+func (e *Engine) reverseOverOneNT(p *playerState, os Suit) Call {
+	h := p.hand
+	if h.HL() < 18 {
+		return Call{}
+	}
+	for s := Spades; s > os; s-- {
+		if h.Len(s) < 4 {
+			continue
+		}
+		c := bidSuit(2, s)
+		if e.legal(p.seat, c) {
+			return c
+		}
+	}
+	return Call{}
 }
 
 // cheapSecondSuit builds opener's rebid in a second suit that ranks below the
@@ -3821,6 +3853,19 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			continue
 		}
 		c := e.cheapestCall(s.Strain())
+		// The one-level new suit denies a jump [RO-19]: partner may pass it,
+		// so a 20-count cannot hide behind it -- it jumps, game forcing, the
+		// way the higher-ranking second suit does below. Checked first,
+		// otherwise 1C-1D-1H with 20 HL was passed out in a game.
+		if c.Level == 1 && hl >= 20 {
+			jump := bid(2, s.Strain())
+			if tr.check(e.legal(p.seat, jump),
+				"4 cartes à "+suitSymbol[s]+", 20 HL et plus → bicolore à saut, forcing de manche [RO-19]",
+				"four "+suitSymbol[s]+", 20+ HL → jump shift, game forcing [RO-19]", pts(hl, "HL")) {
+				e.gameForce[sideOf(p.seat)] = true
+				return jump, m(20, 23, "bicolore à saut, forcing de manche", "jump shift, game forcing").withLen(s, 4).asForcing()
+			}
+		}
 		if c.Level == 1 {
 			tr.check(true, "4 cartes à "+suitSymbol[s]+", nommable au palier de 1 → nouvelle couleur",
 				"four "+suitSymbol[s]+", biddable at the one level → new suit", cards(h, s))

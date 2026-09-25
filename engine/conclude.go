@@ -2387,7 +2387,17 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		}
 		gcFR, gcEN := callSym(gc)
 		if tr.check(e.legal(p.seat, gc), "→ la manche : "+gcFR, "→ game: "+gcEN, "") {
-			mn := m(own-1, -1, "conclusion à la manche sur la force combinée", "bids game on combined strength")
+			// The floor announced is in the unit of the game bid. own is HLD
+			// when a fit is known, but a notrump game was chosen on honour
+			// points (25 H [E-9]), and partner adds this floor to his own H to
+			// look for a notrump slam: announcing the HLD there made 1C-1D-1H-
+			// 3NT with AK J2 AKT98743 3 read as 22+, and 12 H opposite drove
+			// to 6NT on 27 together.
+			floor := own - 1
+			if gc.Kind == KindBid && gc.Strain == SNoTrump {
+				floor = p.hand.H() - 1
+			}
+			mn := m(floor, -1, "conclusion à la manche sur la force combinée", "bids game on combined strength")
 			if hasFit && gc.Kind == KindBid && gc.Strain != SNoTrump {
 				// Record the real trump length so partner can still read
 				// the fit afterwards (e.g. to launch a slam try) rather

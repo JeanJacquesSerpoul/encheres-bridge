@@ -845,6 +845,9 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
   de la vraie couleur comme une valeur de coupe au lieu d'un gaspillage
   [E-1c].
 - **Bicolore à saut** (palier ≤ 3), **20 HL et plus** → forcing de manche.
+  Il passe **avant** le changement de couleur au palier de 1 : `1♣ – 1♦ – 2♥`
+  et non `1♥` avec 20 HL. Le palier de 1, non forcing, ne peut pas porter une
+  main qui a la manche en face de n'importe quelle réponse.
 
 ### [RO-19b] Réponses au bicolore cher
 Le bicolore cher est **auto-forcing**. Toutes les réponses sont **forcing de

@@ -3821,6 +3821,19 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			continue
 		}
 		c := e.cheapestCall(s.Strain())
+		// The one-level new suit denies a jump [RO-19]: partner may pass it,
+		// so a 20-count cannot hide behind it -- it jumps, game forcing, the
+		// way the higher-ranking second suit does below. Checked first,
+		// otherwise 1C-1D-1H with 20 HL was passed out in a game.
+		if c.Level == 1 && hl >= 20 {
+			jump := bid(2, s.Strain())
+			if tr.check(e.legal(p.seat, jump),
+				"4 cartes à "+suitSymbol[s]+", 20 HL et plus → bicolore à saut, forcing de manche [RO-19]",
+				"four "+suitSymbol[s]+", 20+ HL → jump shift, game forcing [RO-19]", pts(hl, "HL")) {
+				e.gameForce[sideOf(p.seat)] = true
+				return jump, m(20, 23, "bicolore à saut, forcing de manche", "jump shift, game forcing").withLen(s, 4).asForcing()
+			}
+		}
 		if c.Level == 1 {
 			tr.check(true, "4 cartes à "+suitSymbol[s]+", nommable au palier de 1 → nouvelle couleur",
 				"four "+suitSymbol[s]+", biddable at the one level → new suit", cards(h, s))

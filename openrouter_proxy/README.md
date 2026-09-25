@@ -163,7 +163,7 @@ Derrière un reverse proxy, le serveur se monte à côté de celui des enchères
 le client attend alors l'URL complète dans **Serveur IA → Distant**. Avec Caddy :
 
 ```caddy
-handle_path /aiproxy* {
+handle_path /openrouter-proxy* {
     reverse_proxy localhost:9013
 }
 ```

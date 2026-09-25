@@ -8,8 +8,8 @@ const $ = (sel) => document.querySelector(sel);
 // en WebAssembly (bids-wasm.js) : il n'y a aucun serveur d'enchères à viser.
 // Seul le serveur IA, facultatif, se choisit encore (voir plus bas).
 
-// Le serveur d'IA (aiproxy) prête son /api/chat à la lecture des cartes sur une
-// photo. Il est facultatif : sans lui tout le reste du client fonctionne, seuls
+// Le serveur d'IA (openrouter_proxy) prête son /api/chat à la lecture des
+// cartes sur une photo. Il est facultatif : sans lui tout le reste du client fonctionne, seuls
 // les boutons photo s'éteignent (voir renderPhotoButtons). En local il écoute
 // sur 9013 ; en production il est proxifié sous un préfixe propre au
 // déploiement, d'où l'absence de valeur par défaut en distant : la figer ferait
@@ -138,7 +138,7 @@ const UI_TEXT = {
     wasmFailed: "Le moteur d'enchères n'a pas répondu.",
     wasmUnsupported: "Ce navigateur ne gère pas WebAssembly.",
     serverIa: "Serveur IA",
-    serverIaPlaceholder: "https://exemple.net/aiproxy",
+    serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
@@ -307,7 +307,7 @@ const UI_TEXT = {
     wasmFailed: "The bidding engine did not answer.",
     wasmUnsupported: "This browser does not support WebAssembly.",
     serverIa: "AI server",
-    serverIaPlaceholder: "https://example.net/aiproxy",
+    serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
     serverTest: "Test",
     healthUnknown: "unknown state",

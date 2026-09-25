@@ -49,8 +49,7 @@ function readIaEnabled() {
 function applyIaFeature() {
   const on = iaEnabled();
   saveStored(IA_ENABLED_KEY, on ? "1" : "0");
-  for (const sel of ["#ia-server-bar", "#ia-health-check",
-                     "#deal-photo-btn", "#photo-status"]) {
+  for (const sel of ["#ia-server-bar", "#ia-health-check", "#photo-status"]) {
     $(sel).classList.toggle("hidden", !on);
   }
   renderBoundsCards(); // réémet (ou retire) les boutons photo des mains
@@ -1880,17 +1879,22 @@ function boundsCardHTML(seat, lang) {
     <div class="cons-cards"${handLength(hand) ? "" : " " + emptyDropHTML(seat, lang)}>${zoneCardsHTML(seat, lang)}</div>`;
 }
 
-// The centre of the table holds the cards that belong to no hand yet.
+// The centre of the table holds the cards that belong to no hand yet. Son
+// en-tête porte la photo des quatre mains, qui refait la donne entière — à
+// côté des cartes qui attendent leur main, là où la lecture les verse.
 function neutralZoneHTML(lang) {
   const t = CONS_TEXT[lang];
   const count = zoneCount(UNASSIGNED);
+  const camera = iaEnabled()
+    ? `<button type="button" class="cons-btn" data-photo="deal">${CAMERA_SVG}</button>`
+    : "";
   const body = count
     ? `<div class="cons-cards">${zoneCardsHTML(UNASSIGNED, lang)}</div>`
     : `<div class="neutral-hint" ${emptyDropHTML(UNASSIGNED, lang)}>${esc(t.neutralHint)}</div>`;
   return `
     <div class="cons-head">
       <span class="cons-seat">${esc(t.neutral)}</span>
-      <span class="cons-chips"><span class="cons-chip">${count}</span></span>
+      <span class="cons-chips">${camera}<span class="cons-chip">${count}</span></span>
     </div>
     ${body}`;
 }

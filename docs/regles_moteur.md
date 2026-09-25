@@ -1354,7 +1354,9 @@ l'ouverture, et tout réveil par une couleur la dénierait. Deux nuances :
 ### [V-4] **1SA** = 9-13 HL, arrêt **ou trois petites cartes** dans la couleur
 d'ouverture. Une belle couleur cinquième nommable **au palier de 1** passe
 avant : une couleur que le partenaire peut soutenir vaut mieux qu'un 1SA
-limité. Au palier de 2, c'est 1SA qui passe avant.
+limité. Une belle **majeure** cinquième passe avant **même au palier de 2** :
+sur 1♠, V93 RV1053 AR10 64 réveille à **2♥**, pas à 1SA. Une mineure au
+palier de 2, elle, reste derrière 1SA.
 ### [V-5] **Réveils à saut.** En majeure le saut est un **barrage** et rien
 d'autre — 6 cartes au palier de 2, 7 cartes au palier de 3, la force dans la
 couleur elle-même, l'ouverture déniée. En mineure c'est l'inverse : pas de

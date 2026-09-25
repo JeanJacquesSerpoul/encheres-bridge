@@ -4299,6 +4299,14 @@ func (e *Engine) reopenBid(p *playerState, opp Suit) (Call, meaning) {
 		"good five-card suit at the one level, 8-13 HL → bid it [V-6]", callOrEmpty(c, ok)) {
 		return c, mn
 	}
+	// A good five-card major outranks 1SA even at the two level [V-4]: it is
+	// the suit the side most wants to play, and partner can raise it. Over
+	// 1S, J93 KJT53 AKT 64 reopens 2H, not 1NT. A minor stays below 1SA.
+	if c, mn, ok := e.reopenSuit(p, opp, 2); ok && Suit(c.Strain).IsMajor() &&
+		tr.check(true, "belle majeure cinquième au palier de 2 → la nommer, avant 1SA [V-4]",
+			"good five-card major at the two level → bid it, before 1NT [V-4]", callOrEmpty(c, ok)) {
+		return c, mn
+	}
 	// 1SA de réveil: 9-13 HL with a stopper or three small cards [V-4].
 	if tr.check(hl >= 9 && hl <= 13 && balanced && h.reopenHold(opp),
 		"9-13 HL, régulière, arrêt ou trois petites cartes dans leur couleur → 1SA [V-4]",

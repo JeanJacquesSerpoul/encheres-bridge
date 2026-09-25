@@ -4784,8 +4784,8 @@ const TUTORIAL_STEPS = [
     en: ["Sharing the deal", "Copy a link that holds the deal, save it to a .pbn file, or show its PBN text to copy it or paste a deal you received.\nDealer and Vulnerability can be set or drawn at random."],
   },
   {
-    fr: ["Modifier la donne", "Modifier la donne passe la table en édition ; Terminer revient à la lecture.\nChaque main affiche ses points d'honneur (PH) et son nombre de cartes. La corbeille renvoie ses cartes au centre, dans Cartes non affectées."],
-    en: ["Editing the deal", "Edit the deal switches the table to editing; Done goes back to reading.\nEach hand shows its high-card points (HCP) and card count. The bin sends its cards to the centre, into Unassigned cards."],
+    fr: ["Modifier la donne", "Modifier la donne passe la table en édition ; Terminer revient à la lecture.\nChaque main affiche ses points d'honneur (PH) et son nombre de cartes. La corbeille renvoie ses cartes au centre, dans Cartes non affectées.\nAvec la lecture par photo (voir Réglages), l'appareil photo d'une main lit cette main, celui de Cartes non affectées les quatre mains."],
+    en: ["Editing the deal", "Edit the deal switches the table to editing; Done goes back to reading.\nEach hand shows its high-card points (HCP) and card count. The bin sends its cards to the centre, into Unassigned cards.\nWith photo reading on (see Settings), a hand's camera reads that hand, and the one on Unassigned cards reads all four."],
   },
   {
     fr: ["Prendre plusieurs cartes", "Touchez (ou cliquez) les cartes l'une après l'autre dans une main : elles se remplissent de vert.\nLe symbole ♠ ♥ ♦ ♣ prend toute la couleur d'un coup.\nTouchez ensuite une carte ou le fond de la main visée : toute la sélection y part. Le bandeau du bas compte les cartes prises et permet de tout reposer."],
@@ -4828,8 +4828,8 @@ const TUTORIAL_STEPS = [
     en: ["The score", "At the end: your score, your mistakes with the expected call, and the final contract.\nReplay the deal, draw a new one, or show the full detail: the Auction and Par tabs fill in with the deal you played."],
   },
   {
-    fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre) et l'option de lecture des cartes sur une photo, qui demande un serveur IA.\nLa pastille verte dit que le moteur d'enchères est prêt."],
-    en: ["Settings", "The cog: language, theme (automatic, light or dark) and the option to read cards from a photo, which needs an AI server.\nThe green dot says the bidding engine is ready."],
+    fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre) et l'option de lecture des cartes sur une photo, qui demande un serveur IA : elle ajoute un appareil photo aux mains et à Cartes non affectées.\nLa pastille verte dit que le moteur d'enchères est prêt."],
+    en: ["Settings", "The cog: language, theme (automatic, light or dark) and the option to read cards from a photo, which needs an AI server: it adds a camera to the hands and to Unassigned cards.\nThe green dot says the bidding engine is ready."],
   },
   {
     fr: ["Sur téléphone", "La table passe en une colonne et les onglets forment une barre au bas de l'écran, précédée de Donne qui remonte à la table.\nAfficher les enchères reste collé en bas pendant que vous faites défiler les mains.\nBon jeu ! Ce tutoriel se rouvre par l'écran ▶ du bandeau."],

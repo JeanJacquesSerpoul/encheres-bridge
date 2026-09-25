@@ -313,6 +313,16 @@ Une fois cochée l'option **Serveur IA de reconnaissance des cartes**, dans les 
 - **Recadrage et rotation.** La photo passe ensuite par un éditeur, avant tout envoi : deux boutons la font tourner d'un quart de tour dans un sens ou dans l'autre — l'orientation relevée par l'appareil ne redresse pas une photo prise à plat sur la table — et un glissement sur l'image y trace le rectangle à lire, que huit poignées ajustent et qu'un glissement à l'intérieur déplace. Le rectangle suit les rotations, **Image entière** le rouvre en grand, **Annuler** abandonne la photo. Seule la zone retenue part au serveur : le décor autour des cartes coûtait au modèle des cartes lues.
 - Les figures écrites dans une autre langue (R/D/V) sont converties par le modèle lui-même. Un rang illisible, une carte en double ou une main déjà pleine sont écartés, et le compte rendu affiché à côté du bouton le dit.
 
+**Le modèle par défaut : `google/gemini-3.1-flash-lite`.** C'est lui que le client demande (`IA_MODEL` dans [cli/app.js](cli/app.js)) et que le serveur sert par défaut (`DEFAULT_MODEL`). Il est choisi pour deux raisons :
+
+- **l'efficacité** : un modèle de vision « flash », qui lit une donne en quelques secondes ;
+- **son faible coût** : environ **0,0005 $ par image**, soit **0,50 $ pour 1 000 images**.
+
+**Ce qu'il lit bien, et moins bien :**
+
+- **Une donne imprimée** (diagramme de journal, de livre, de feuille de tournoi ou d'écran) : c'est la lecture **la plus efficace**. Les rangs et les couleurs y sont écrits en clair, alignés, sur un fond net.
+- **Des cartes réelles** posées sur la table : la lecture est **moins efficace**. Les cartes se chevauchent, les index sont petits, les reflets et la perspective gênent, et une carte en partie cachée peut être manquée ou mal lue. Étalez bien les cartes, index visibles, sous un éclairage franc, et recadrez la photo sur les cartes seules : les cartes non lues attendent dans **Cartes non affectées**, à compléter à la main.
+
 Le serveur IA se choisit dans les Réglages, sous l'option : **Local** vise `http://localhost:9013` (son port par défaut), **Distant** attend l'URL du déploiement — par exemple `https://<domaine>/openrouter-proxy` derrière Caddy ; mode et URL sont mémorisés (`localStorage`). Son état est sondé au chargement et affiché sous lui, avec un bouton **Tester**. **Tant qu'il ne répond pas, les boutons photo restent désactivés** : le reste du client, lui, fonctionne sans lui. Mise en route et configuration : [openrouter_proxy/README.md](openrouter_proxy/README.md). Sans Go, les exécutables précompilés d'[openrouter_proxy/bin/](openrouter_proxy/bin/) (Linux et Windows) se lancent par `openrouter_proxy.sh` ou `openrouter_proxy.ps1`, ou dans Docker par le `docker-compose.yml` du même dossier. **En production**, derrière Caddy, mettez `TRUST_PROXY=true` et `CORS_ORIGINS=https://<domaine>` (l'origine du client) dans le `.env` du serveur ; le détail est dans [À faire en production](openrouter_proxy/README.md#à-faire-en-production).
 
 ---

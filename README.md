@@ -6,7 +6,7 @@
   <img src="docs/resultat.png" alt="L'écran en deux colonnes : à gauche la table en lecture, le contrat au centre ; à droite l'onglet Enchères, sa grille et la séquence commentée, dont l'enchère survolée s'éclaire avec la main de son auteur" width="900">
 </p>
 
-# Bridge Bidding
+# Enchères au jeu de bridge
 
 **L'application est en ligne : <https://jeanjacquesserpoul.github.io/encheres-bridge/>**
 

@@ -258,7 +258,7 @@ const UI_TEXT = {
     welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
     welcomeTutorial: "Afficher le tutoriel",
     welcomeSkip: "Continuer sans le tutoriel",
-    welcomeNote: "Le tutoriel et le mode d'emploi restent accessibles à tout moment par le bouton ? en haut de la page.",
+    welcomeNote: "Le tutoriel et le mode d'emploi restent accessibles à tout moment par les boutons en haut de la page.",
     tutorialTitle: "Tutoriel",
     tutorialOpen: "Tutoriel",
     tutorialPrev: "‹ Précédent",
@@ -423,7 +423,7 @@ const UI_TEXT = {
     welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
     welcomeTutorial: "Show the tutorial",
     welcomeSkip: "Continue without the tutorial",
-    welcomeNote: "The tutorial and the guide are always available from the ? button at the top of the page.",
+    welcomeNote: "The tutorial and the guide are always available from the buttons at the top of the page.",
     tutorialTitle: "Tutorial",
     tutorialOpen: "Tutorial",
     tutorialPrev: "‹ Previous",
@@ -4768,8 +4768,8 @@ helpDialog.addEventListener("click", (ev) => {
 // une étape ajoutée ici demande sa scène là-bas.
 const TUTORIAL_STEPS = [
   {
-    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, trois onglets : Enchères, PAR et S'entraîner.\nEn haut, la roue dentée ouvre les réglages et ? le mode d'emploi — et ce tutoriel."],
-    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings and ? the guide — and this tutorial."],
+    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, trois onglets : Enchères, PAR et S'entraîner.\nEn haut, la roue dentée ouvre les réglages, l'écran ▶ ce tutoriel et ? le mode d'emploi."],
+    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
     fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète.\nLa flèche à côté propose la donne exemple ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
@@ -4828,8 +4828,8 @@ const TUTORIAL_STEPS = [
     en: ["Settings", "The cog: language, theme (automatic, light or dark) and the option to read cards from a photo, which needs an AI server.\nThe green dot says the bidding engine is ready."],
   },
   {
-    fr: ["Sur téléphone", "La table passe en une colonne et les onglets forment une barre au bas de l'écran, précédée de Donne qui remonte à la table.\nAfficher les enchères reste collé en bas pendant que vous faites défiler les mains.\nBon jeu ! Ce tutoriel se rouvre depuis le mode d'emploi, bouton ?."],
-    en: ["On a phone", "The table goes to one column and the tabs become a bar at the bottom of the screen, led by Deal, which takes you back to the table.\nShow the auction stays at the bottom while you scroll through the hands.\nEnjoy! This tutorial opens again from the guide, ? button."],
+    fr: ["Sur téléphone", "La table passe en une colonne et les onglets forment une barre au bas de l'écran, précédée de Donne qui remonte à la table.\nAfficher les enchères reste collé en bas pendant que vous faites défiler les mains.\nBon jeu ! Ce tutoriel se rouvre par l'écran ▶ du bandeau."],
+    en: ["On a phone", "The table goes to one column and the tabs become a bar at the bottom of the screen, led by Deal, which takes you back to the table.\nShow the auction stays at the bottom while you scroll through the hands.\nEnjoy! This tutorial opens again from the ▶ screen in the top bar."],
   },
 ];
 
@@ -4902,6 +4902,7 @@ $("#tutorial-dots").addEventListener("click", (ev) => {
 });
 $("#tutorial-close").addEventListener("click", () => tutorialDialog.close());
 $("#help-tutorial-btn").addEventListener("click", openTutorial);
+$("#tutorial-btn").addEventListener("click", openTutorial);
 // Un clic sur le voile referme, comme pour le mode d'emploi.
 tutorialDialog.addEventListener("click", (ev) => {
   if (ev.target === tutorialDialog) tutorialDialog.close();

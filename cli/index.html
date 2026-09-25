@@ -191,8 +191,18 @@
           </p>
         </div>
       </div>
-      <!-- Le mode d'emploi, au bout du bandeau avec les autres réglages de la
-           page. Nom et infobulle posés par applyLang. -->
+      <!-- Le tutoriel en images (voir « tutoriel » dans app.js), puis le mode
+           d'emploi, au bout du bandeau avec les autres réglages de la page.
+           Noms et infobulles posés par applyLang. -->
+      <button id="tutorial-btn" type="button" class="help-btn"
+              data-i18n-title="tutorialOpen" data-i18n-label="tutorialOpen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="m10 7 5 3-5 3z"/>
+          <path d="M8 21h8"/><path d="M12 17v4"/>
+        </svg>
+      </button>
       <button id="help-btn" type="button" class="help-btn"
               data-i18n-title="helpOpen" data-i18n-label="helpOpen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -641,7 +651,7 @@
           <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
           <li>À droite, un panneau à trois onglets : <b>Enchères</b>, <b>PAR</b> et <b>S'entraîner</b>. Il reste en vue quand la page défile.</li>
           <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
-          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8) et <b>?</b> ce mode d'emploi, d'où le bouton <b>Tutoriel</b> lance la prise en main en images.</li>
+          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8), l'écran ▶ le <b>Tutoriel</b> (la prise en main en images) et <b>?</b> ce mode d'emploi.</li>
         </ul>
 
         <h3>2. Obtenir une donne</h3>
@@ -736,7 +746,7 @@
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
           <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
-        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le bouton <b>Tutoriel</b>, en haut de ce mode d'emploi, fait défiler la prise en main étape par étape, en images ; l'écran d'accueil du premier lancement le propose aussi.</p>
+        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par l'écran ▶ du bandeau ou par le bouton en haut de ce mode d'emploi, et l'écran d'accueil du premier lancement le propose aussi.</p>
 
         <h3>9. Raccourcis clavier</h3>
         <ul>
@@ -757,7 +767,7 @@
           <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
           <li>On the right, a panel with three tabs: <b>Auction</b>, <b>Par</b> and <b>Practise</b>. It stays in view while the page scrolls.</li>
           <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
-          <li>In the top bar, the cog opens the <b>Settings</b> (see §8) and <b>?</b> opens this guide, whose <b>Tutorial</b> button starts the illustrated walkthrough.</li>
+          <li>In the top bar, the cog opens the <b>Settings</b> (see §8) and the screen ▶ opens the <b>Tutorial</b> (the illustrated walkthrough) and <b>?</b> opens this guide.</li>
         </ul>
 
         <h3>2. Getting a deal</h3>
@@ -852,7 +862,7 @@
           <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
           <li>The <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
         </ul>
-        <p>Language, theme, quiz mode, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> button, at the top of this guide, walks through the app step by step, with pictures; the welcome screen on first launch offers it too.</p>
+        <p>Language, theme, quiz mode, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the ▶ screen in the top bar or the button at the top of this guide; the welcome screen on first launch offers it too.</p>
 
         <h3>9. Keyboard shortcuts</h3>
         <ul>

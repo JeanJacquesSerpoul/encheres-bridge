@@ -1940,10 +1940,37 @@ func singletonHonour(h *Hand, s Suit) bool {
 // bid to, and a responder's very first call has expressed nothing yet.
 func (e *Engine) slamProbeArmed(ctx *concludeCtx) bool {
 	partnerWideRange := ctx.partner.shownMax-ctx.partner.shownMin > 4
-	return ctx.hasFit && ctx.cMin >= 29 && ctx.cMin < 33 &&
+	return !e.slamOutOfReach(ctx.p) && ctx.hasFit && ctx.cMin >= 29 && ctx.cMin < 33 &&
 		ctx.p.bids > 0 && ctx.partner.bids > 0 && !e.bw[ctx.side].asked &&
 		((ctx.cMaxSlam >= 33 && partnerWideRange) || ctx.cMin >= 30) &&
 		(ctx.fit.IsMajor() || !ctx.ntOK || ctx.cMin >= 31)
+}
+
+// slamOutOfReach reports that the opponents' own bidding leaves our side short
+// of the 33 honour points a slam needs [E-9]: 40 H in the pack, minus what they
+// have shown. Their floors are announced in HL, so two length points come off
+// each before they count as honours -- an opening of 12 HL is at least 10 H.
+// 1C - 1D - 2C - 2NT - 3NT: East's opening leaves North-South 30 H at most,
+// and South, 17 H, passes 3NT rather than probe a slam that cannot be there.
+//
+// The honours cap only binds a slam that would have to be made on honours. A
+// singleton or a void, held here or shown by partner, makes its tricks by
+// ruffing: 25 H with a nine-card fit and two singletons is a cold slam after
+// the opponents' 1H opening, and the cap stands aside.
+func (e *Engine) slamOutOfReach(p *playerState) bool {
+	partner := e.ps[partnerOf(p.seat)]
+	for s := Clubs; s <= Spades; s++ {
+		if p.hand.Len(s) <= 1 || partner.shortShown[s] {
+			return false
+		}
+	}
+	theirs := 0
+	for _, seat := range []int{(p.seat + 1) % 4, (p.seat + 3) % 4} {
+		if o := e.ps[seat]; o.shownMin > 2 {
+			theirs += o.shownMin - 2
+		}
+	}
+	return 40-theirs < 33
 }
 
 // expressFit names the trump before the controls [S-0]: the cheapest raise of

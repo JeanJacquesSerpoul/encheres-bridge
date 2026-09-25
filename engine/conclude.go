@@ -1697,7 +1697,7 @@ func init() {
 				// level on the way to a slam the count never came near.
 				noKeycardMissing := ctx.hasFit && ctx.own >= 20 && ctx.cMinSlam >= 32 &&
 					ctx.p.hand.Keycards(ctx.fit)+ctx.partner.keycardsShown >= 5
-				return ctx.hasFit && (ctx.cMinSlam >= 33 || noKeycardMissing) &&
+				return ctx.hasFit && (ctx.cMinSlam >= 33 || noKeycardMissing) && !e.slamOutOfReach(ctx.p) &&
 					ctx.p.bids > 0 && ctx.partner.bids > 0 &&
 					!e.bw[ctx.side].asked && !ctx.p.answeredAces
 			},

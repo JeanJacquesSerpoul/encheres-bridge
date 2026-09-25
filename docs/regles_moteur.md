@@ -415,7 +415,9 @@ Changement de couleur **2 sur 1** dans la meilleure couleur → **forcing de
 manche** (le camp est engagé).
 
 ### [RM-6] Sans fit, 6-10 HL
-**1SA** « poubelle ».
+**1SA** « poubelle », avec **6 H au moins** : les points de longueur viennent
+d'une couleur que le partenaire ignorera, et à Sans-Atout une longue sans
+honneur ne fait pas de levée. D2 2 8764 R109753 (5 H, 7 HL) passe sur 1♠.
 
 ### [RM-7] Moins de 6 HL
 Passe.

@@ -1173,7 +1173,8 @@ const CONS_TEXT = {
     // une case vide au glissé est ingrat, et personne ne devinait le repli.
     neutralHint:
       "Glissez une carte d'une main à l'autre, ou ici pour la retirer. " +
-      "Au clic : touchez la carte, puis sa destination.",
+      "Au clic : touchez une ou plusieurs cartes, puis leur destination. " +
+      "Le symbole ♠ ♥ ♦ ♣ prend toute la couleur.",
     clear: "Retirer toutes les cartes",
     clearHand: "Retirer les cartes de cette main",
     photoHand: (seat) =>
@@ -1201,14 +1202,28 @@ const CONS_TEXT = {
     cardLabel: (rank, suit, zone) => `${rank} de ${suit}, ${zone}`,
     emptyZoneLabel: (zone) => `${zone}, aucune carte`,
     // Annoncés dans la zone de politesse, à chaque geste au clavier.
-    cardHeld: (card) => `${card} : pris. Allez à la destination, puis Entrée.`,
+    cardHeld: (card, n) => n > 1
+      ? `${card} : pris, ${n} cartes sélectionnées. Allez à la destination, puis Entrée.`
+      : `${card} : pris. Allez à la destination, puis Entrée.`,
     cardDropped: (card, zone) => `${card} : déposé dans ${zone}.`,
+    cardsDropped: (n, zone) => `${n} cartes déposées dans ${zone}.`,
     cardReleased: (card) => `${card} : reposé.`,
+    selectionCleared: "Sélection annulée.",
+    // Le bandeau qui suit la sélection : combien de cartes, et quoi en faire.
+    selCount: (n) => n === 1 ? "1 carte sélectionnée" : `${n} cartes sélectionnées`,
+    selHint: "touchez une main pour l'y déposer",
+    selHintMany: "touchez une main pour les y déposer",
+    selClear: "Désélectionner",
+    suitSelect: (suit, zone) => `Sélectionner les ${suit} (${zone})`,
+    errRoom: (seat, room, n) =>
+      `${seat} n'a de place que pour ${room} carte${room > 1 ? "s" : ""} : ${n} sont sélectionnées.`,
     cardsHelp:
       "Tableau des quatre mains. Tabulation pour passer d'une main à l'autre, " +
       "flèches gauche et droite pour parcourir ses cartes, haut et bas pour " +
-      "changer de couleur. Entrée ou Espace prend une carte, puis la dépose " +
-      "sur la main où vous êtes. Échap la repose.",
+      "changer de couleur. Entrée ou Espace prend une carte ; d'autres cartes " +
+      "de la même main s'ajoutent à la sélection, Maj + Entrée prend toutes " +
+      "celles qui séparent de la précédente, Ctrl + Entrée ajoute celle d'une " +
+      "autre main. Entrée sur une autre main y dépose la sélection. Échap la repose.",
   },
   en: {
     ph: "HCP", min: "Min", max: "Max",
@@ -1219,7 +1234,8 @@ const CONS_TEXT = {
     neutral: "Unassigned cards",
     neutralHint:
       "Drag a card from one hand to another, or here to take it out. " +
-      "By click: tap the card, then its destination.",
+      "By click: tap one or more cards, then their destination. " +
+      "The ♠ ♥ ♦ ♣ symbol takes the whole suit.",
     clear: "Take out every card",
     clearHand: "Take this hand's cards out",
     photoHand: (seat) => `Photograph ${seat}'s hand`,
@@ -1241,13 +1257,27 @@ const CONS_TEXT = {
     suitName: { spades: "spades", hearts: "hearts", diamonds: "diamonds", clubs: "clubs" },
     cardLabel: (rank, suit, zone) => `${rank} of ${suit}, ${zone}`,
     emptyZoneLabel: (zone) => `${zone}, no cards`,
-    cardHeld: (card) => `${card}: picked up. Go to the destination, then press Enter.`,
+    cardHeld: (card, n) => n > 1
+      ? `${card}: picked up, ${n} cards selected. Go to the destination, then press Enter.`
+      : `${card}: picked up. Go to the destination, then press Enter.`,
     cardDropped: (card, zone) => `${card}: dropped in ${zone}.`,
+    cardsDropped: (n, zone) => `${n} cards dropped in ${zone}.`,
     cardReleased: (card) => `${card}: put back.`,
+    selectionCleared: "Selection cleared.",
+    selCount: (n) => n === 1 ? "1 card selected" : `${n} cards selected`,
+    selHint: "tap a hand to drop it there",
+    selHintMany: "tap a hand to drop them there",
+    selClear: "Deselect",
+    suitSelect: (suit, zone) => `Select the ${suit} (${zone})`,
+    errRoom: (seat, room, n) =>
+      `${seat} only has room for ${room} card${room > 1 ? "s" : ""}: ${n} are selected.`,
     cardsHelp:
       "Table of the four hands. Tab moves between hands, left and right arrows " +
       "walk through a hand's cards, up and down change suit. Enter or Space " +
-      "picks a card up, then drops it on the hand you are on. Escape puts it back.",
+      "picks a card up; more cards of the same hand join the selection, " +
+      "Shift+Enter takes every card back to the previous one, Ctrl+Enter adds " +
+      "one from another hand. Enter on another hand drops the selection there. " +
+      "Escape puts it back.",
   },
 };
 
@@ -1265,9 +1295,21 @@ const ZONES = [...SEATS, UNASSIGNED];
 const HAND_SIZE = 13;
 
 let dealZones = emptyZones();
-// Carte désignée par un simple clic, en attente d'une zone de destination
-// (voir le glisser-déposer plus bas).
-let selectedCard = null;
+// Cartes désignées par un simple clic, en attente d'une zone de destination
+// (voir le glisser-déposer plus bas). Elles peuvent venir de plusieurs mains :
+// le dépôt les rassemble toutes dans la zone visée.
+let selection = [];
+// La dernière carte prise : l'autre bout d'une plage prise avec Maj.
+let selAnchor = null;
+
+function isSelected(card) {
+  return selection.some((c) => sameCard(c, card));
+}
+
+function clearSelection() {
+  selection = [];
+  selAnchor = null;
+}
 
 // ---------- le clavier ----------
 // Une carte par zone porte le tabindex ; c'est celle-ci. Mémorisée par zone,
@@ -1357,7 +1399,7 @@ function syncZonesFromPbn() {
       }
     }
   }
-  selectedCard = null;
+  clearSelection();
   renderBoundsCards();
   rememberCompleteDeal();
 }
@@ -1437,7 +1479,7 @@ function undo() {
   $("#file-name").textContent = snap.fileName;
   refreshDealSelector(false);
   gatherMissingCards();
-  selectedCard = null;
+  clearSelection();
   renderBoundsCards();
   resetQuiz();
   hideResult();
@@ -1602,7 +1644,7 @@ function zoneCardsHTML(zone, lang) {
           .split("")
           .map((rank) => {
             const card = { zone, suit, rank };
-            const held = sameCard(selectedCard, card);
+            const held = isSelected(card);
             const sel = held ? " picked" : "";
             const tab = roving && roving.suit === suit && roving.rank === rank ? 0 : -1;
             return `<span class="card${cls}${sel}" data-owner="${zone}" data-suit="${suit}" ` +
@@ -1612,8 +1654,19 @@ function zoneCardsHTML(zone, lang) {
           })
           .join("")
       : '<span class="void" aria-hidden="true">—</span>';
-    return `<div class="suitline"><span class="suitsym${cls}" aria-hidden="true">${SUIT_SYMBOLS[suit]}</span>${cards}</div>`;
+    // Le symbole prend toute la couleur de la zone d'un seul geste : au
+    // pointeur seulement, le clavier a Maj + Entrée pour la même chose.
+    const pick = ranks
+      ? ` data-suit-pick="${suit}" data-owner="${zone}" title="${esc(suitPickLabel(zone, suit, lang))}"`
+      : "";
+    return `<div class="suitline"><span class="suitsym${cls}${ranks ? " suit-pick" : ""}"${pick} aria-hidden="true">${SUIT_SYMBOLS[suit]}</span>${cards}</div>`;
   }).join("");
+}
+
+function suitPickLabel(zone, suit, lang) {
+  const t = CONS_TEXT[lang];
+  const name = zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][zone];
+  return t.suitSelect(t.suitName[suit], name);
 }
 
 // Une zone vide n'a aucune carte à focaliser, et serait donc impossible à
@@ -2043,6 +2096,7 @@ function renderBoundsCards() {
   center.classList.toggle("filled", zoneCount(UNASSIGNED) > 0);
   center.innerHTML = neutralZoneHTML(lang);
   renderPhotoButtons(); // les boutons des mains viennent d'être recréés
+  renderSelectionBar();
   restoreCardFocus();
   renderBidReady();
   renderDealMode();
@@ -2233,7 +2287,7 @@ $("#cons-reset-btn").addEventListener("click", () => {
 // on considère que l'utilisateur a simplement cliqué la carte.
 const DRAG_THRESHOLD = 5;
 
-let dragState = null; // { card, el, x0, y0, moved, pointerId, ghost }
+let dragState = null; // { card, cards, el, x0, y0, moved, pointerId, ghost }
 
 function cardFromEl(el) {
   return { zone: el.dataset.owner, suit: el.dataset.suit, rank: el.dataset.rank };
@@ -2251,11 +2305,10 @@ function clearDropHints() {
   }
 }
 
-// Whether `zone` can take one more card: the neutral zone is unbounded, a
-// hand stops at 13.
-function zoneAccepts(zone, card) {
-  if (zone === card.zone) return false;
-  return zone === UNASSIGNED || zoneCount(zone) < HAND_SIZE;
+// Whether `zone` can take every card of `cards` that isn't already there: the
+// neutral zone is unbounded, a hand stops at 13.
+function zoneAccepts(zone, cards) {
+  return dropPlan(cards, zone).fits;
 }
 
 // ---------- ce qui est dit à voix haute ----------
@@ -2310,93 +2363,184 @@ function setStatus(el, msg) {
 window.a11ySetError = setError;
 window.a11ySetStatus = setStatus;
 
-// Prendre une carte, ou déposer celle qu'on tient sur la main de celle-ci.
+// Prendre une carte, ou déposer la sélection sur la main de celle-ci.
 // C'est ce que fait un clic simple, et c'est ce que fait Entrée : le geste est
 // écrit une fois pour les deux, sans quoi les deux finiraient par diverger.
-// Dépose la carte tenue dans `zone`. `fallback` est la carte à refocaliser si
-// le dépôt est refusé — celle sur laquelle on se trouvait.
-//
-// Un refus — la main est pleine — laisse la carte dans la main : on la tient
-// toujours, et on peut viser ailleurs sans la reprendre. Elle était reposée
-// jusqu'ici, y compris à la souris, ce qui obligeait à recommencer.
-function dropHeld(zone, fallback) {
+
+// Les cartes que `zone` recevrait (celles qui y sont déjà ne bougent pas), et
+// la place qu'elle a pour elles.
+function dropPlan(cards, zone) {
+  const moving = cards.filter((c) => c.zone !== zone);
+  const room = zone === UNASSIGNED ? Infinity : HAND_SIZE - zoneCount(zone);
+  return { moving, room, fits: moving.length > 0 && moving.length <= room };
+}
+
+function zoneName(zone, lang) {
+  return zone === UNASSIGNED ? CONS_TEXT[lang].neutral : SEAT_LABEL[lang][zone];
+}
+
+// Déplace `cards` dans `zone`, en un seul geste annulable. Tout ou rien : une
+// main qui n'a pas la place pour toute la sélection n'en prend aucune, et la
+// sélection reste en main pour viser ailleurs. Renvoie vrai si elles ont bougé.
+function dropCards(cards, zone) {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
-  const held = selectedCard;
-  const name = cardLabel(held, lang);
-  const zoneName = zone === UNASSIGNED ? t.neutral : SEAT_LABEL[lang][zone];
-  if (!zoneAccepts(zone, held)) {
+  const plan = dropPlan(cards, zone);
+  if (!plan.moving.length) {
+    renderBoundsCards();
+    return false;
+  }
+  if (!plan.fits) {
     // setError annonce lui-même : un announce() de plus ferait dire deux fois
     // la même phrase, une fois poliment et une fois en interrompant.
-    setError($("#cons-error"), t.errFull(zoneName));
-    refocusCard = fallback;
+    setError($("#cons-error"), plan.room === 0
+      ? t.errFull(zoneName(zone, lang))
+      : t.errRoom(zoneName(zone, lang), plan.room, plan.moving.length));
     renderBoundsCards();
-    return;
+    return false;
   }
-  selectedCard = null;
-  dropCard(held, zone);
-  refocusCard = { zone, suit: held.suit, rank: held.rank };
-  rovingByZone[zone] = { suit: held.suit, rank: held.rank };
-  announce(t.cardDropped(name, zoneName));
+  for (const card of plan.moving) moveCard(card, zone);
+  setError($("#cons-error"), validateBounds(lang));
+  const last = plan.moving[plan.moving.length - 1];
+  refocusCard = { zone, suit: last.suit, rank: last.rank };
+  rovingByZone[zone] = { suit: last.suit, rank: last.rank };
+  announce(plan.moving.length === 1
+    ? t.cardDropped(cardLabel(plan.moving[0], lang), zoneName(zone, lang))
+    : t.cardsDropped(plan.moving.length, zoneName(zone, lang)));
+  commitZones();
+  return true;
+}
+
+// Dépose la sélection dans `zone`. `fallback` est la carte à refocaliser si
+// le dépôt est refusé — celle sur laquelle on se trouvait.
+//
+// Un refus — la main est pleine — laisse les cartes en main : on les tient
+// toujours, et on peut viser ailleurs sans les reprendre.
+function dropHeld(zone, fallback) {
+  const held = selection;
+  clearSelection();
+  if (dropCards(held, zone)) return;
+  selection = held;
+  refocusCard = fallback;
   renderBoundsCards();
 }
 
-function activateCard(card) {
+// Un clic sur une carte :
+// - sur une carte prise, la repose ;
+// - avec Maj, prend toutes les cartes de la zone entre la précédente et elle ;
+// - dans une main où l'on a déjà pris des cartes (ou avec Ctrl/Cmd, depuis
+//   n'importe quelle main), l'ajoute à la sélection ;
+// - dans une autre main, y dépose la sélection. C'est ce qui rend le geste
+//   praticable au doigt : on touche les cartes, puis n'importe quelle carte de
+//   la destination, plus facile à viser que le fond d'une main.
+function activateCard(card, mods = {}) {
   const lang = $("#lang").value;
   const t = CONS_TEXT[lang];
-  if (selectedCard && selectedCard.zone !== card.zone) {
+  refocusCard = card;
+  rovingByZone[card.zone] = { suit: card.suit, rank: card.rank };
+  if (mods.range && selAnchor && selAnchor.zone === card.zone && !sameCard(selAnchor, card)) {
+    const list = zoneCardList(card.zone);
+    const at = (c) => list.findIndex((x) => x.suit === c.suit && x.rank === c.rank);
+    const [a, b] = [at(selAnchor), at(card)].sort((x, y) => x - y);
+    for (const c of list.slice(a, b + 1)) if (!isSelected(c)) selection.push(c);
+    selAnchor = card;
+    announce(t.cardHeld(cardLabel(card, lang), selection.length));
+    renderBoundsCards();
+    return;
+  }
+  if (isSelected(card)) {
+    selection = selection.filter((c) => !sameCard(c, card));
+    if (sameCard(selAnchor, card)) selAnchor = selection[selection.length - 1] || null;
+    announce(t.cardReleased(cardLabel(card, lang)));
+    renderBoundsCards();
+    return;
+  }
+  if (selection.length && !mods.add && !selection.some((c) => c.zone === card.zone)) {
     dropHeld(card.zone, card);
     return;
   }
-  const wasHeld = sameCard(selectedCard, card);
-  selectedCard = wasHeld ? null : card;
-  refocusCard = card;
-  rovingByZone[card.zone] = { suit: card.suit, rank: card.rank };
-  announce(wasHeld ? t.cardReleased(cardLabel(card, lang)) : t.cardHeld(cardLabel(card, lang)));
+  selection.push(card);
+  selAnchor = card;
+  announce(t.cardHeld(cardLabel(card, lang), selection.length));
   renderBoundsCards();
 }
 
-// Déposer la carte tenue dans une zone visée directement — le fond d'une main,
+// Le symbole d'une couleur : prend toutes ses cartes dans la zone, ou les
+// repose si elles étaient déjà toutes prises. Il ne dépose jamais : sa cible
+// est trop petite pour qu'on l'ait visée par hasard.
+function toggleSuit(zone, suit) {
+  const lang = $("#lang").value;
+  const cards = zoneCardList(zone).filter((c) => c.suit === suit);
+  if (!cards.length) return;
+  if (cards.every(isSelected)) {
+    selection = selection.filter((c) => !(c.zone === zone && c.suit === suit));
+    if (selAnchor && selAnchor.zone === zone && selAnchor.suit === suit) {
+      selAnchor = selection[selection.length - 1] || null;
+    }
+    announce(CONS_TEXT[lang].selCount(selection.length));
+  } else {
+    for (const c of cards) if (!isSelected(c)) selection.push(c);
+    selAnchor = cards[cards.length - 1];
+    announce(CONS_TEXT[lang].selCount(selection.length));
+  }
+  renderBoundsCards();
+}
+
+// Déposer la sélection dans une zone visée directement — le fond d'une main,
 // ou une main vide, qui n'a aucune carte sur laquelle cliquer.
 function activateZone(zone) {
-  if (!selectedCard) return;
-  dropHeld(zone, selectedCard);
+  if (!selection.length) return;
+  dropHeld(zone, selection[0]);
 }
 
-function dropCard(card, zone) {
-  if (zone === card.zone) {
-    renderBoundsCards();
-    return;
-  }
-  const lang = $("#lang").value;
-  if (!zoneAccepts(zone, card)) {
-    setError($("#cons-error"), CONS_TEXT[lang].errFull(SEAT_LABEL[lang][zone]));
-    renderBoundsCards();
-    return;
-  }
-  setError($("#cons-error"), validateBounds(lang));
-  moveCard(card, zone);
-  commitZones();
+// Le bandeau de la sélection : combien de cartes on tient et où les poser,
+// avec de quoi tout reposer. Collé au bas de l'écran sur téléphone, il reste
+// en vue pendant qu'on fait défiler la table jusqu'à la main visée.
+function renderSelectionBar() {
+  const bar = $("#cons-selbar");
+  if (!bar) return;
+  const t = CONS_TEXT[$("#lang").value];
+  const n = selection.length;
+  bar.classList.toggle("hidden", n === 0);
+  if (!n) return;
+  $("#cons-selbar-text").innerHTML =
+    `<b>${esc(t.selCount(n))}</b> — ${esc(n > 1 ? t.selHintMany : t.selHint)}`;
+  $("#cons-selbar-clear").textContent = t.selClear;
 }
 
+$("#cons-selbar-clear").addEventListener("click", () => {
+  clearSelection();
+  announce(CONS_TEXT[$("#lang").value].selectionCleared);
+  renderBoundsCards();
+});
+
+// Glisser une carte prise emporte toute la sélection ; glisser une autre carte
+// n'emporte qu'elle, et la sélection est reposée — c'est ce qu'on attend d'un
+// gestionnaire de fichiers, et cela évite d'emmener sans le voir des cartes
+// prises plus tôt dans une autre main.
 function startDrag(ev) {
   dragState.moved = true;
-  selectedCard = null;
   const card = dragState.card;
-  const ghost = document.createElement("div");
+  dragState.cards = isSelected(card) ? selection.slice() : [card];
+  clearSelection();
   const cls = RED_SUITS.has(card.suit) ? " red" : "";
+  const ghost = document.createElement("div");
   ghost.className = "card-ghost";
+  const more = dragState.cards.length - 1;
   ghost.innerHTML =
     `<span class="suitsym${cls}">${SUIT_SYMBOLS[card.suit]}</span>` +
-    `<span class="${cls.trim()}">${rankHTML(card.rank, $("#lang").value)}</span>`;
+    `<span class="${cls.trim()}">${rankHTML(card.rank, $("#lang").value)}</span>` +
+    (more ? `<span class="ghost-count">+${more}</span>` : "");
   document.body.appendChild(ghost);
   dragState.ghost = ghost;
-  dragState.el.classList.add("dragging");
+  dragState.els = dragState.cards.map(cardElement).filter(Boolean);
+  for (const el of dragState.els) el.classList.add("dragging");
+  renderSelectionBar();
 }
 
 function endDrag() {
   if (dragState && dragState.ghost) dragState.ghost.remove();
-  if (dragState && dragState.el) dragState.el.classList.remove("dragging");
+  if (dragState && dragState.els) for (const el of dragState.els) el.classList.remove("dragging");
   clearDropHints();
   dragState = null;
 }
@@ -2404,10 +2548,12 @@ function endDrag() {
 $("#constraints").addEventListener("pointerdown", (ev) => {
   if (ev.pointerType === "mouse" && ev.button !== 0) return;
   if (ev.target.closest("input, button, select")) return;
+  const suitEl = ev.target.closest("[data-suit-pick]");
   const cardEl = ev.target.closest(".card");
   const zoneEl = ev.target.closest("[data-zone]");
-  if (!cardEl && !zoneEl) return;
+  if (!suitEl && !cardEl && !zoneEl) return;
   dragState = {
+    suitPick: suitEl ? { zone: suitEl.dataset.owner, suit: suitEl.dataset.suitPick } : null,
     card: cardEl ? cardFromEl(cardEl) : null,
     el: cardEl,
     zone: zoneEl ? zoneEl.dataset.zone : null,
@@ -2429,9 +2575,9 @@ window.addEventListener("pointermove", (ev) => {
   // La zone d'origine ne s'illumine pas : y relâcher la carte ne fait rien,
   // ce n'est pas un refus.
   const zone = zoneUnder(ev.clientX, ev.clientY);
-  if (zone && zone !== dragState.card.zone) {
+  if (zone && dragState.cards.some((c) => c.zone !== zone)) {
     const target = document.querySelector(`[data-zone="${zone}"]`);
-    target.classList.add(zoneAccepts(zone, dragState.card) ? "drop-ok" : "drop-no");
+    target.classList.add(zoneAccepts(zone, dragState.cards) ? "drop-ok" : "drop-no");
   }
   ev.preventDefault();
 }, { passive: false });
@@ -2443,16 +2589,29 @@ window.addEventListener("pointerup", (ev) => {
 
   if (st.moved) {
     const zone = zoneUnder(ev.clientX, ev.clientY);
-    if (zone) dropCard(st.card, zone);
-    else renderBoundsCards();
+    if (zone) {
+      // Refusé, le glisser rend la sélection qu'il emportait : on vise
+      // ailleurs sans reprendre les cartes une à une.
+      if (!dropCards(st.cards, zone) && st.cards.length > 1) {
+        selection = st.cards;
+        renderBoundsCards();
+      }
+    } else if (st.cards.length > 1) {
+      selection = st.cards;
+      renderBoundsCards();
+    } else {
+      renderBoundsCards();
+    }
     return;
   }
 
   // Simple click: pick a card up, then click its destination. Clicking a card
-  // of another zone drops the held one there — handy on touch screens, where
-  // an empty spot can be hard to aim at. Le clavier passe par les mêmes deux
+  // of another zone drops the selection there — handy on touch screens, where
+  // an empty spot can be hard to aim at. Le clavier passe par les mêmes
   // fonctions : un seul modèle pour les deux entrées.
-  if (st.card) activateCard(st.card);
+  const mods = { add: ev.ctrlKey || ev.metaKey, range: ev.shiftKey };
+  if (st.suitPick) toggleSuit(st.suitPick.zone, st.suitPick.suit);
+  else if (st.card) activateCard(st.card, mods);
   else if (st.zone) activateZone(st.zone);
 });
 
@@ -2481,12 +2640,13 @@ function cardElement(card) {
 }
 
 $("#constraints").addEventListener("keydown", (ev) => {
-  if (ev.key === "Escape" && selectedCard) {
+  if (ev.key === "Escape" && selection.length) {
     const lang = $("#lang").value;
-    const card = selectedCard;
-    selectedCard = null;
+    const card = selection[selection.length - 1];
+    const many = selection.length > 1;
+    clearSelection();
     refocusCard = card;
-    announce(CONS_TEXT[lang].cardReleased(cardLabel(card, lang)));
+    announce(many ? CONS_TEXT[lang].selectionCleared : CONS_TEXT[lang].cardReleased(cardLabel(card, lang)));
     renderBoundsCards();
     ev.preventDefault();
     return;
@@ -2512,7 +2672,7 @@ $("#constraints").addEventListener("keydown", (ev) => {
     case "Enter":
     case " ":
       ev.preventDefault();
-      activateCard(card);
+      activateCard(card, { add: ev.ctrlKey || ev.metaKey, range: ev.shiftKey });
       return;
     case "ArrowRight":
       ev.preventDefault();
@@ -2612,7 +2772,7 @@ $("#cons-clear-btn").addEventListener("click", () => {
     for (const card of zoneCards(seat)) moveCard({ ...card, zone: seat }, UNASSIGNED);
   }
   setError($("#cons-error"), "");
-  selectedCard = null;
+  clearSelection();
   commitZones();
 });
 
@@ -2623,7 +2783,7 @@ $("#constraints").addEventListener("click", (ev) => {
   if (!btn) return;
   emptyHandToNeutral(btn.dataset.clearHand);
   setError($("#cons-error"), "");
-  selectedCard = null;
+  clearSelection();
   commitZones();
 });
 
@@ -2830,7 +2990,7 @@ function applyPhotoHand(seat, data) {
     takeCard(card);
     dealZones[seat][card.suit] = sortRanks(dealZones[seat][card.suit] + card.rank);
   }
-  selectedCard = null;
+  clearSelection();
   setError($("#cons-error"), "");
   commitZones();
   return { read: kept.length, dropped };
@@ -2868,7 +3028,7 @@ function applyPhotoDeal(data) {
     }
   }
   dealZones = zones;
-  selectedCard = null;
+  clearSelection();
   setError($("#cons-error"), "");
   commitZones();
   return { read, dropped };

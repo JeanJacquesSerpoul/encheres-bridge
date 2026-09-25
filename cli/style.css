@@ -948,8 +948,55 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   outline-offset: -2px;
 }
 .cons-cards[role="button"], .neutral-hint[role="button"] { cursor: pointer; }
-.card.picked { border-color: var(--accent); background: var(--tint); box-shadow: 0 0 0 2px rgba(var(--accent-rgb), .3); }
+/* Une carte prise se distingue d'un coup d'œil d'une carte survolée ou
+   focalisée : pleine, en couleur d'accent, et un peu soulevée. Avec plusieurs
+   cartes prises, c'est le seul repère de ce qui partira. */
+.card.picked,
+.card.picked.red {
+  border-color: var(--accent-bg);
+  background: var(--accent-bg);
+  color: var(--on-accent);
+  box-shadow: 0 2px 0 rgba(var(--accent-rgb), .35);
+  transform: translateY(-2px);
+}
+.card.picked:focus { outline-color: var(--ink); }
 .card.dragging { opacity: .35; }
+/* Le symbole d'une couleur prend toute la couleur de la zone. */
+.cons-cards .suit-pick { cursor: pointer; border-radius: 4px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) { .cons-cards .suit-pick:hover { background: var(--tint); } }
+/* Au doigt, le symbole est une cible : on l'élargit sans décaler les cartes. */
+@media (pointer: coarse) {
+  .cons-cards .suitsym { width: 1.8em; padding: 4px 0; }
+}
+/* Le nombre de cartes emportées, sur la carte qui suit le pointeur. */
+.ghost-count {
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--on-accent);
+  font-size: .8rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+/* Le bandeau de la sélection, en tête de la rangée collée du bouton principal
+   (.bid-row) : sur téléphone, la main visée est souvent plus bas, et il faut
+   garder en vue ce qu'on tient. */
+.cons-selbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 12px;
+  padding: 6px 14px;
+  max-width: 100%;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: .9rem;
+  text-align: center;
+}
+.cons-selbar.hidden { display: none; }
+.cons-selbar .link-btn { min-height: 32px; font-weight: 600; }
 
 /* Carte suivant le pointeur pendant le glisser. */
 .card-ghost {
@@ -2084,7 +2131,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    zones où l'on déplace les cartes et la barre de leurs commandes. Jamais les
    deux à la fois. */
 #input-panel:not(.editing) .cons-layout,
-#input-panel:not(.editing) #cons-actions { display: none; }
+#input-panel:not(.editing) #cons-actions,
+#input-panel:not(.editing) #cons-selbar { display: none; }
 #input-panel.editing .read-layout { display: none; }
 .read-layout { margin: 4px 0 0; }
 

@@ -414,6 +414,14 @@
              donne est incomplète, avec la raison et le remède à côté (voir
              renderBidReady). -->
         <div class="bid-row" id="bid-row">
+          <!-- Les cartes prises, en attente d'une destination (voir
+               renderSelectionBar) : leur nombre, où les poser, et de quoi tout
+               reposer. Dans la rangée collée au bas de l'écran, au-dessus du
+               bouton : on le garde en vue en faisant défiler la table. -->
+          <div id="cons-selbar" class="cons-selbar hidden">
+            <span id="cons-selbar-text"></span>
+            <button id="cons-selbar-clear" type="button" class="link-btn"></button>
+          </div>
           <button id="bid-btn" type="button" class="cmd-btn cmd-primary cmd-labeled cta-btn"></button>
           <p id="bid-hint" class="bid-hint hidden">
             <span id="bid-hint-text"></span>
@@ -662,6 +670,7 @@
         <p>En édition :</p>
         <ul>
           <li><b>Glissez</b> une carte d'une main à l'autre, ou vers <b>Cartes non affectées</b> pour la retirer.</li>
+          <li><b>Plusieurs cartes à la fois</b> : touchez-les l'une après l'autre dans une même main, ou touchez le symbole <b>♠ ♥ ♦ ♣</b> d'une main pour en prendre toute la couleur. Touchez ensuite une carte ou le fond de la main visée : toute la sélection y part. Au glisser, une carte prise emporte les autres avec elle. Au clavier et à la souris, <b>Maj</b> prend une plage, <b>Ctrl</b> (⌘ sur Mac) ajoute une carte d'une autre main. Une main qui n'a pas la place pour toute la sélection la refuse, et les cartes restent prises.</li>
           <li>Sur écran tactile, <b>touchez la carte, puis sa destination</b>. Sur téléphone, la zone <b>Cartes non affectées</b> reste en haut de l'écran pendant que vous faites défiler les mains.</li>
           <li>Au clavier : voir §9.</li>
           <li>Chaque main affiche ses PH et son nombre de cartes (<i>13/13</i>).</li>
@@ -777,6 +786,7 @@
         <p>While editing:</p>
         <ul>
           <li><b>Drag</b> a card from one hand to another, or to <b>Unassigned cards</b> to take it out.</li>
+          <li><b>Several cards at once</b>: tap them one after the other within a hand, or tap a hand's <b>♠ ♥ ♦ ♣</b> symbol to take the whole suit. Then tap a card or the background of the target hand: the whole selection goes there. When dragging, a selected card carries the others along. With keyboard or mouse, <b>Shift</b> takes a range, <b>Ctrl</b> (⌘ on Mac) adds a card from another hand. A hand without room for the whole selection refuses it, and the cards stay selected.</li>
           <li>On a touch screen, <b>tap the card, then its destination</b>. On a phone, the <b>Unassigned cards</b> area stays at the top of the screen while you scroll through the hands.</li>
           <li>With the keyboard: see §9.</li>
           <li>Each hand shows its HCP and card count (<i>13/13</i>).</li>

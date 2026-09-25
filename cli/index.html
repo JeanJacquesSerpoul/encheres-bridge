@@ -623,6 +623,7 @@
     <div class="help-box">
       <div class="help-head">
         <h2 id="help-title" data-i18n="helpTitle">Mode d'emploi</h2>
+        <button id="help-tutorial-btn" type="button" class="help-tutorial-btn" data-i18n="tutorialOpen">Tutoriel</button>
         <button id="help-close" type="button" class="icon-btn"
                 data-i18n-title="helpClose" data-i18n-label="helpClose">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -640,7 +641,7 @@
           <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
           <li>À droite, un panneau à trois onglets : <b>Enchères</b>, <b>PAR</b> et <b>S'entraîner</b>. Il reste en vue quand la page défile.</li>
           <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
-          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8) et <b>?</b> ce mode d'emploi.</li>
+          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8) et <b>?</b> ce mode d'emploi, d'où le bouton <b>Tutoriel</b> lance la prise en main en images.</li>
         </ul>
 
         <h3>2. Obtenir une donne</h3>
@@ -735,7 +736,7 @@
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
           <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
-        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. L'écran d'accueil du premier lancement propose aussi ce mode d'emploi.</p>
+        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le bouton <b>Tutoriel</b>, en haut de ce mode d'emploi, fait défiler la prise en main étape par étape, en images ; l'écran d'accueil du premier lancement le propose aussi.</p>
 
         <h3>9. Raccourcis clavier</h3>
         <ul>
@@ -756,7 +757,7 @@
           <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
           <li>On the right, a panel with three tabs: <b>Auction</b>, <b>Par</b> and <b>Practise</b>. It stays in view while the page scrolls.</li>
           <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
-          <li>In the top bar, the cog opens the <b>Settings</b> (see §8) and <b>?</b> opens this guide.</li>
+          <li>In the top bar, the cog opens the <b>Settings</b> (see §8) and <b>?</b> opens this guide, whose <b>Tutorial</b> button starts the illustrated walkthrough.</li>
         </ul>
 
         <h3>2. Getting a deal</h3>
@@ -851,7 +852,7 @@
           <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
           <li>The <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
         </ul>
-        <p>Language, theme, quiz mode, the photo option and your last complete deal are remembered between visits, in this browser only. The welcome screen on first launch also offers this guide.</p>
+        <p>Language, theme, quiz mode, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> button, at the top of this guide, walks through the app step by step, with pictures; the welcome screen on first launch offers it too.</p>
 
         <h3>9. Keyboard shortcuts</h3>
         <ul>
@@ -866,18 +867,59 @@
     </div>
   </dialog>
 
+  <!-- Le tutoriel : les étapes de la prise en main, une par écran, chacune
+       avec sa capture d'écran (cli/tutorial/<langue>/NN.jpg, prises par
+       tools/tutorial/capture.js) et son explication (TUTORIAL_STEPS dans
+       app.js). Flèches du clavier, balayage du doigt, ou les boutons. -->
+  <dialog id="tutorial-dialog" class="tutorial-dialog" aria-labelledby="tutorial-title">
+    <div class="tutorial-box">
+      <div class="tutorial-head">
+        <h2 id="tutorial-title" data-i18n="tutorialTitle">Tutoriel</h2>
+        <span id="tutorial-count" class="tutorial-count" aria-live="polite"></span>
+        <button id="tutorial-close" type="button" class="icon-btn"
+                data-i18n-title="helpClose" data-i18n-label="helpClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="tutorial-progress" aria-hidden="true"><div id="tutorial-bar"></div></div>
+      <div class="tutorial-body">
+        <a id="tutorial-img-link" class="tutorial-figure" target="_blank" rel="noopener">
+          <img id="tutorial-img" alt="" decoding="async">
+          <span class="tutorial-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M11 8v6"/><path d="M8 11h6"/>
+            </svg>
+          </span>
+        </a>
+        <div class="tutorial-text">
+          <h3 id="tutorial-step-title"></h3>
+          <p id="tutorial-step-text"></p>
+        </div>
+      </div>
+      <div class="tutorial-nav">
+        <button id="tutorial-prev" type="button"></button>
+        <div id="tutorial-dots" class="tutorial-dots"></div>
+        <button id="tutorial-next" type="button" class="primary"></button>
+      </div>
+    </div>
+  </dialog>
+
   <!-- Écran d'accueil, au premier lancement seulement (voir WELCOME_KEY dans
-       app.js) : proposer le mode d'emploi à qui découvre l'application, sans
+       app.js) : proposer le tutoriel à qui découvre l'application, sans
        l'imposer. Même construction que le mode d'emploi, un <dialog> natif. -->
   <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
     <div class="welcome-box">
       <h2 id="welcome-title" data-i18n="welcomeTitle">Bienvenue</h2>
       <p data-i18n="welcomeText">Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.</p>
       <div class="welcome-actions">
-        <button id="welcome-help-btn" type="button" class="primary" data-i18n="welcomeHelp">Consulter l'aide</button>
-        <button id="welcome-skip-btn" type="button" data-i18n="welcomeSkip">Continuer sans l'aide</button>
+        <button id="welcome-tutorial-btn" type="button" class="primary" data-i18n="welcomeTutorial">Afficher le tutoriel</button>
+        <button id="welcome-skip-btn" type="button" data-i18n="welcomeSkip">Continuer sans le tutoriel</button>
       </div>
-      <p class="welcome-note" data-i18n="welcomeNote">L'aide reste accessible à tout moment par le bouton ? en haut de la page.</p>
+      <p class="welcome-note" data-i18n="welcomeNote">Le tutoriel et le mode d'emploi restent accessibles à tout moment par le bouton ? en haut de la page.</p>
     </div>
   </dialog>
 

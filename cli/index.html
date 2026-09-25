@@ -248,18 +248,6 @@
               <span class="cmd-label" data-i18n="fileLoad">Charger un fichier .pbn</span>
               <input id="file" type="file" accept=".pbn,.txt,text/plain" tabindex="-1">
             </label>
-            <!-- Photo des quatre mains : le serveur IA y lit les cartes et
-                 remplit la donne (voir la section « reconnaissance » de
-                 app.js). État posé par renderPhotoButtons ; le champ fichier,
-                 unique, est partagé avec les boutons par main. -->
-            <button id="deal-photo-btn" type="button" class="menu-item hidden" data-photo="deal">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                <circle cx="12" cy="13" r="4"/>
-              </svg>
-              <span class="cmd-label" data-i18n="photoDeal">Photographier les quatre mains</span>
-            </button>
           </div>
         </div>
         <!-- Ce que l'on fait de la donne hors de la page : la copier, la
@@ -662,7 +650,6 @@
         <ul class="help-icons">
           <li><span data-help-icon="book"></span><span><b>Donne exemple</b> : une donne toute prête pour découvrir l'application.</span></li>
           <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît.</span></li>
-          <li><span data-help-icon="camera"></span><span><b>Photographier les quatre mains</b>, si la lecture par photo est activée (voir §7).</span></li>
         </ul>
         <p>Le menu <b>Partager</b> sert à emporter la donne hors de la page :</p>
         <ul class="help-icons">
@@ -736,7 +723,7 @@
         <h3>7. Lire les cartes sur une photo (facultatif)</h3>
         <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> dans les Réglages. Il faut un serveur IA en service : sans lui, les boutons photo restent grisés.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>Dans le menu de la flèche de <b>Donne aléatoire</b> : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main, en édition : une photo de <b>cette seule main</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>Dans l'en-tête de <b>Cartes non affectées</b>, en édition : une photo des <b>quatre mains</b> posées en croix (Nord en haut). Dans l'en-tête d'une main, en édition : une photo de <b>cette seule main</b>.</span></li>
         </ul>
         <p>Avant l'envoi, faites pivoter la photo et tracez le cadre des cartes à lire, puis <b>Lire les cartes</b>. Les cartes non reconnues attendent dans <b>Cartes non affectées</b>.</p>
 
@@ -778,7 +765,6 @@
         <ul class="help-icons">
           <li><span data-help-icon="book"></span><span><b>Example deal</b>: a ready-made deal to discover the app.</span></li>
           <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears.</span></li>
-          <li><span data-help-icon="camera"></span><span><b>Photograph the four hands</b>, when photo reading is turned on (see §7).</span></li>
         </ul>
         <p>The <b>Share</b> menu takes the deal out of the page:</p>
         <ul class="help-icons">
@@ -852,7 +838,7 @@
         <h3>7. Reading cards from a photo (optional)</h3>
         <p>Tick <b>AI card-recognition server</b> in the Settings. An AI server must be running: without it, the photo buttons stay greyed out.</p>
         <ul class="help-icons">
-          <li><span data-help-icon="camera"></span><span>In the menu behind the <b>Random deal</b> arrow: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header, while editing: a photo of <b>that hand only</b>.</span></li>
+          <li><span data-help-icon="camera"></span><span>In the <b>Unassigned cards</b> header, while editing: a photo of the <b>four hands</b> laid out in a cross (North at the top). In a hand's header, while editing: a photo of <b>that hand only</b>.</span></li>
         </ul>
         <p>Before sending, rotate the photo and draw the frame around the cards to read, then <b>Read the cards</b>. Unrecognised cards wait in <b>Unassigned cards</b>.</p>
 

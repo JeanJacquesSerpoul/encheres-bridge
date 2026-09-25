@@ -758,6 +758,12 @@ atteint le seuil de manche → **4M** directement.
 ### [RO-3] 17-18 H, main équilibrée → **2SA**, proposition.
 ### [RO-4] 6 cartes et 17 HL et plus → **répétition à saut** (17-19), invite.
 ### [RO-5] 6 cartes → **répétition simple** (13-16).
+### [RO-5b] Bicolore cher, 18 HL et plus
+4+ cartes dans une couleur **plus chère** que l'ouverture, 18 HL et plus →
+**2 de cette couleur**, forcing (18-23 HL), comme [RO-19] : l'ouverture y est
+enregistrée à 4 cartes au moins. Sans lui, `1♦ – 1SA` avec ♠ARV5 ♥ADV7 ♦AD96 ♣5
+(20 H) répétait ses ♦ « par défaut » en 12-14 [RO-7] et le répondant passait
+sous la manche.
 ### [RO-6] Bicolore économique
 Seulement avec une main **irrégulière** : 4+ cartes dans une couleur moins
 chère que l'ouverture → 2 dans cette couleur (12-17).

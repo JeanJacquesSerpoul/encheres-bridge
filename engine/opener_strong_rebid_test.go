@@ -28,3 +28,24 @@ func TestJumpShiftInsteadOfOneLevelNewSuit(t *testing.T) {
 		t.Fatalf("final contract %s stays below game\nauction: %s", contract.Format("fr"), formatAuction(calls))
 	}
 }
+
+// TestReverseOverOneNotrump (board 299): East opens 1H on AKJ8.AKJ97.A75.7
+// (20 H) and hears the 1NT response. The engine rebid 2H, "répétition par
+// défaut, 12-14" [RO-7]. A higher-ranking four-card suit with 18+ HL is the
+// reverse [RO-19], over 1NT as over a suit response: 2S, forcing.
+func TestReverseOverOneNotrump(t *testing.T) {
+	pbn := `[Dealer "S"]
+[Vulnerable "None"]
+[Deal "N:QT9.853.KT82.AJT AKJ8.AKJ97.A75.7 743.T62.Q63.9852 652.Q4.J94.KQ643"]`
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+	const east = 1
+	got, comment := southsCall(calls, east, 1)
+	if got != "2P" {
+		t.Fatalf("East's rebid over 1NT = %s (%s), want 2P (reverse, forcing)\nauction: %s",
+			got, comment, formatAuction(calls))
+	}
+}

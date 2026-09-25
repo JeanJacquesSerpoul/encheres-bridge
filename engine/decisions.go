@@ -629,13 +629,20 @@ func (e *Engine) respondMajor(p *playerState, M Suit) (Call, meaning) {
 			return bidSuit(lvl, s), m(11, 40, "changement de couleur 2 sur 1, 11HL et plus, forcing de manche", "two-over-one response, 11+ HL, game forcing").withLen(s, min(4, h.Len(s))).asForcing()
 		}
 	}
-	if tr.check(hl >= 6,
-		"sans fit, 6-10 HL → 1SA [RM-6]",
-		"no fit, 6-10 HL → 1NT [RM-6]", pts(hl, "HL")) {
+	// A notrump response also needs 6 H of its own [RM-6]: the length points
+	// belong to a suit partner will never hear about, and at notrump a long
+	// suit without honours brings no trick. Q2 2 8764 KT9753 (5 H, 7 HL)
+	// passes 1S.
+	if tr.check(hl >= 6 && h.H() >= 6,
+		"sans fit, 6-10 HL dont 6 H au moins → 1SA [RM-6]",
+		"no fit, 6-10 HL with at least 6 H → 1NT [RM-6]",
+		fmt.Sprintf("%d H, %d HL", h.H(), hl)) {
 		return bid(1, SNoTrump), m(6, 10, "1SA \"poubelle\", 6-10HL sans fit", "1NT response, 6-10 HL, no fit")
 	}
-	tr.note("moins de 6 HL → Passe", "fewer than 6 HL → Pass")
-	return passCall, m(0, 5, "moins de 6 points", "fewer than 6 points")
+	tr.note("moins de 6 HL, ou moins de 6 H → Passe", "fewer than 6 HL, or fewer than 6 H → Pass")
+	// Either way the hand holds fewer than 6 H: say it in the unit that is
+	// always true, not "6 points" that 7 HL would seem to contradict.
+	return passCall, m(0, 5, "moins de 6 points H", "fewer than 6 HCP")
 }
 
 // bestNewSuit picks the suit for a forcing change of suit over partner's M:

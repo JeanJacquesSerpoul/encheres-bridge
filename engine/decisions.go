@@ -4540,10 +4540,18 @@ func (e *Engine) reopenTwoSuiter(p *playerState, opened Suit) (Call, meaning, bo
 // ---------- specified Michaels cue-bid ----------
 
 // michaelsCandidate reports whether the hand qualifies for a specified
-// Michaels two-suiter (docs/addon_3.md): always 5+-5+, never 5-4, both
-// suits of playing quality, 9 HL and up with no upper limit.
+// Michaels two-suiter [I-2]: always 5+-5+, never 5-4, 9 HL and up with no
+// upper limit, and suits worth playing: both of quality [E-4], or one of them
+// with the honours concentrated in the pair (6 H and up between the two). The
+// shape is the message and partner picks the trump: AKT65 J9762 over 1C is
+// 2D, not a 1S overcall that would bury the hearts; J9653 KT953 (4 H in the
+// suits) is still too thin to jump to 3C.
 func (h *Hand) michaelsCandidate(s1, s2 Suit) bool {
-	return h.Len(s1) >= 5 && h.Len(s2) >= 5 && h.GoodSuit(s1) && h.GoodSuit(s2) && h.HL() >= 9
+	if h.Len(s1) < 5 || h.Len(s2) < 5 || h.HL() < 9 {
+		return false
+	}
+	g1, g2 := h.GoodSuit(s1), h.GoodSuit(s2)
+	return g1 && g2 || (g1 || g2) && h.SuitH(s1)+h.SuitH(s2) >= 6
 }
 
 // michaelsShape looks for a specified Michaels two-suiter over a one-level

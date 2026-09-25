@@ -1141,8 +1141,11 @@ Si l'ouverture adverse d'1 à la couleur revient après **deux passes**
 (une seule enchère dans tout l'étui) → barème du réveil [§9.3].
 
 ### [I-2] Bicolore Michaël précisé (sur une ouverture d'1)
-Toujours **5-5 au moins**, jamais 5-4, les deux couleurs de qualité [E-4],
-**9 HL et plus, sans limite supérieure**.
+Toujours **5-5 au moins**, jamais 5-4, **9 HL et plus, sans limite
+supérieure**. Les deux couleurs sont de qualité [E-4], **ou** l'une l'est et
+les honneurs sont dans le bicolore (**6 H et plus** dans les deux couleurs) :
+sur 1♣, AR1065 V9762 V5 4 dit **2♦**, pas 1♠ qui enterrerait les Cœurs ;
+V9653 R10953 (4 H dans les couleurs) reste trop maigre.
 - Sur une **majeure** : cue-bid = l'autre majeure + ♣ · **3♣** = l'autre
   majeure + ♦ · **2SA** = les deux mineures.
 - Sur une **mineure** : **2♦** = les deux majeures · **2SA** = ♥ + l'autre

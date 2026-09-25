@@ -181,6 +181,12 @@ le **plancher** annoncé par le partenaire, jamais son maximum. Le maximum ne
 sert qu'à une chose : vérifier qu'un chelem est **arithmétiquement possible**
 avant de démarrer une sonde par contrôles ([S-1]) — jamais à conclure.
 
+Une conclusion à la manche annonce son plancher **dans l'unité de la manche
+choisie** : en H pur pour 3SA, en HLD pour une manche à la couleur. Un 3SA qui
+annonçait un plancher HLD (la longueur d'une mineure comptée en points)
+gonflait le compte combiné du partenaire et l'envoyait au chelem à SA sur une
+force qui n'y était pas.
+
 Ce calcul vaut aussi pour les **échelles conventionnelles** : les paliers
 d'une réponse à 2SA, d'un développement du Stayman ou d'un transfert après les
 deux majeures ne sont pas des nombres fixes, mais **33 moins le plancher promis

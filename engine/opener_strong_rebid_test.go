@@ -49,3 +49,24 @@ func TestReverseOverOneNotrump(t *testing.T) {
 			got, comment, formatAuction(calls))
 	}
 }
+
+// TestNotrumpGameAnnouncesHonourFloor (board 1355): North bids 3NT on
+// AK.J2.AKT98743.3 -- chosen on 15 H + 12 = 27 for notrump. The call used to
+// announce its HLD floor (22, the seven diamonds counted), and South, 12 H,
+// added it to their honours, found "34" and drove to 6NT on 27 together. The
+// floor of a notrump game is in honour points [E-9]: South passes 3NT.
+func TestNotrumpGameAnnouncesHonourFloor(t *testing.T) {
+	pbn := `[Dealer "S"]
+[Vulnerable "None"]
+[Deal "N:AK.J2.AKT98743.3 986.AQ75.QJ6.J86 QJ3.T986.2.AKQ52 T7542.K43.5.T974"]`
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+	contract, _, _ := finalContract(calls)
+	if contract.Level >= 6 {
+		t.Fatalf("final contract = %s, want no slam on 27 combined honours\nauction: %s",
+			contract.Format("fr"), formatAuction(calls))
+	}
+}

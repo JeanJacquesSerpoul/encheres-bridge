@@ -2307,12 +2307,19 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		tr.in()
 		defer tr.out()
 	}
+	// Partner's notrump rebid is balanced, so it holds at least two cards in
+	// the major we showed: with a sixth one the eight-card fit is certain.
+	partnerNT := false
+	if psc, ok := e.lastCallBy(partner.seat); ok && psc.Call.IsBid() && psc.Call.Strain == SNoTrump {
+		partnerNT = true
+	}
 	if wantGame && !(hasFit && fit.IsMajor()) &&
-		!p.hand.IsRegular() && !p.hand.IsSemiRegular() {
-		// An unbalanced hand with a six-card major it has already shown
-		// belongs in four of that major, not 3NT (or a minor game):
-		// opposite partner's balanced rebid the major is at worst a 6-2
-		// fit, while a singleton or void makes notrump run off the top.
+		(partnerNT || !p.hand.IsRegular() && !p.hand.IsSemiRegular()) {
+		// A six-card major already shown belongs in four of that major, not
+		// 3NT (or a minor game): opposite partner's balanced rebid the major
+		// is at worst a 6-2 fit, and an unbalanced hand makes notrump run off
+		// the top. So does a balanced 6-3-2-2 or 6-3-3-2 hand: 1C-1S-1NT
+		// with AKQJ54 864 KJ 73 plays 4S, the known fit, not 3NT.
 		for _, s := range []Suit{Spades, Hearts} {
 			if p.shownLens[s] >= 4 && p.hand.Len(s) >= 6 {
 				tr.check(true, "main irrégulière avec une majeure sixième déjà nommée : la manche dans cette majeure",

@@ -12,6 +12,8 @@ func TestWeakTwoShape(t *testing.T) {
 		want       bool
 	}{
 		{"DV9xxx, rien à côté", "QJ9432", "543", "876", "2", true},
+		{"D109xxx : le minimum", "QT9432", "543", "876", "2", true},
+		{"D108xxx : sous le minimum", "QT8432", "543", "976", "2", false},
 		{"VT9xxx : la forme sans la couleur", "JT9432", "543", "876", "2", false},
 		{"Axxxxx : un seul honneur", "A98432", "543", "876", "2", false},
 		{"mineure quatrième : tolérée", "QJ9432", "54", "8", "K543", true},
@@ -19,6 +21,7 @@ func TestWeakTwoShape(t *testing.T) {
 		{"autre majeure quatrième", "QJ9432", "K543", "8", "54", false},
 		{"une levée de défense extérieure", "QJ9432", "A54", "876", "2", true},
 		{"deux levées de défense extérieures", "QJ9432", "A54", "K76", "2", false},
+		{"deux As extérieurs", "QJ9432", "A54", "A76", "2", false},
 		{"septième : ce n'est plus un 2 faible", "QJ97432", "54", "876", "2", false},
 	}
 	for _, tc := range cases {
@@ -61,6 +64,9 @@ func TestWeakTwoOpeningZone(t *testing.T) {
 		{"6 H en deuxième position", "KJ9432", "Q54", "876", "2", 6, 1, "2P"},
 		{"6 H en troisième position", "KJ9432", "Q54", "876", "2", 6, 2, "2P"},
 		{"6 H en quatrième position : personne à barrer", "KJ9432", "Q54", "876", "2", 6, 3, "Passe"},
+		{"10 H : le plafond", "KJ9432", "Q54", "KJ6", "2", 10, 0, "2P"},
+		// 11 H and six cards make 13 HL: the one-level opening [O-6].
+		{"11 H : au-dessus du plafond", "KQ9432", "Q54", "KJ6", "2", 11, 0, "1P"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -72,8 +78,8 @@ func TestWeakTwoOpeningZone(t *testing.T) {
 			if got := c.Format("fr"); got != tc.want {
 				t.Fatalf("ouverture = %s (%s), attendu %s", got, mn.fr, tc.want)
 			}
-			if tc.want == "2P" && (mn.minPts != 6 || mn.maxPts != 11) {
-				t.Fatalf("zone annoncée %d-%d, attendue 6-11 (%s)", mn.minPts, mn.maxPts, mn.fr)
+			if tc.want == "2P" && (mn.minPts != 6 || mn.maxPts != 10) {
+				t.Fatalf("zone annoncée %d-%d, attendue 6-10 (%s)", mn.minPts, mn.maxPts, mn.fr)
 			}
 		})
 	}

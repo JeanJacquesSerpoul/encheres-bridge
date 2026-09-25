@@ -311,21 +311,18 @@ func sevenCardSolidMinor(h *Hand) (Suit, bool) {
 // weakTwoShape reports whether the hand is the one a weak two major describes
 // [O-7a]. The barrage at the three and four levels asks far less: it buys its
 // level with length alone, while the two level buys almost nothing and has to
-// be paid for in the quality of the hand.
+// be paid for in the quality of the hand. All four conditions are required:
 //
-//   - exactly six cards in the major, and a suit worth playing: two of the top
-//     five honours and at least the three honour points of QJ9xxx, the
-//     classical minimum. JT9xxx has the shape and not the suit;
+//   - a proper six-card suit, Q109xxx at the least (weakTwoSuit). J109xxx has
+//     the shape and not the suit;
+//   - no four cards in the other major, which partner would never find;
 //   - no side suit of five cards -- a four-card minor is tolerated, a fifth
 //     card makes the hand a two-suiter, which is not what the bid says;
-//   - no four cards in the other major, which partner would never find;
-//   - at most one defensive trick outside the suit, an ace or a king. Two of
-//     them and the hand defends better than it preempts.
+//   - fewer than two defensive tricks outside the suit, and so never two
+//     aces: an ace or a king counts one. Two of them and the hand defends
+//     better than it preempts.
 func weakTwoShape(h *Hand, long Suit) bool {
-	if h.Len(long) != 6 || !long.IsMajor() {
-		return false
-	}
-	if !h.GoodSuit(long) || h.SuitH(long) < 3 {
+	if h.Len(long) != 6 || !long.IsMajor() || !weakTwoSuit(h, long) {
 		return false
 	}
 	defence := 0
@@ -349,32 +346,50 @@ func weakTwoShape(h *Hand, long Suit) bool {
 	return defence <= 1
 }
 
+// weakTwoSuit reports a six-card suit worth a weak two: Q109xxx at the least
+// [O-7a]. Two of the five top honours with at least 3 H in the suit (QJ, K10,
+// AJ and up), or the queen with the ten and the nine -- the classical minimum.
+func weakTwoSuit(h *Hand, s Suit) bool {
+	top := 0
+	for _, r := range []byte{'A', 'K', 'Q', 'J', 'T'} {
+		if h.HasCard(s, r) {
+			top++
+		}
+	}
+	if top >= 2 && h.SuitH(s) >= 3 {
+		return true
+	}
+	return h.HasCard(s, 'Q') && h.HasCard(s, 'T') && h.HasCard(s, '9')
+}
+
 func (e *Engine) preemptOpening(h *Hand) (Call, meaning, bool) {
 	long := h.Longest()
 	n := h.Len(long)
 	hp := h.H()
 	otherMajor4 := (long != Hearts && h.Len(Hearts) >= 4) || (long != Spades && h.Len(Spades) >= 4)
-	// Every preempt wants the honour strength concentrated in the suit
-	// itself: with the points mostly outside (e.g. JT9xxx and seven
+	tr := e.tr
+	// No weak two in fourth seat: three passes have gone round, there is
+	// nobody left to preempt, and the hand that would open one is worth a
+	// pass instead [O-7a]. Its own four conditions already keep the defence
+	// out of the hand, so it skips the half-the-points test below.
+	fourthSeat := len(e.calls) == 3
+	if tr.check(weakTwoShape(h, long) && hp >= 6 && hp <= 10 && !fourthSeat,
+		"6 cartes en majeure (D109xxx au moins), pas 4 cartes dans l'autre majeure, pas de mineure cinquième, moins de 2 levées de défense extérieures, 6-10 H, pas en quatrième → 2 majeur faible [O-7a]",
+		"six cards in a major (Q109xxx at least), no four cards in the other major, no five-card minor, fewer than two outside defensive tricks, 6-10 H, not fourth seat → weak two [O-7a]",
+		cards(h, long)+", "+pts(hp, "H")) {
+		return bidSuit(2, long), m(6, 10, "2 majeur faible, 6 cartes, 6-10H", "weak two, six cards, 6-10 H").withLen(long, 6), true
+	}
+	// The higher preempts want the honour strength concentrated in the suit
+	// itself: with the points mostly outside (e.g. JT9xxxx and seven
 	// scattered points), the hand has too much defence and too weak a suit
 	// to preempt -- it passes.
-	tr := e.tr
 	if !tr.check(h.SuitH(long)*2 >= h.H(),
 		"la moitié des points au moins dans la couleur longue",
 		"at least half the points in the long suit",
 		fmt.Sprintf("%d H sur %d", h.SuitH(long), h.H())) {
 		return Call{}, meaning{}, false
 	}
-	// No weak two in fourth seat: three passes have gone round, there is
-	// nobody left to preempt, and the hand that would open one is worth a
-	// pass instead [O-7a].
-	fourthSeat := len(e.calls) == 3
 	switch {
-	case tr.check(weakTwoShape(h, long) && hp >= 6 && hp <= 11 && !fourthSeat,
-		"six belles cartes en majeure, 6-11 H, pas en quatrième → 2 majeur faible [O-7a]",
-		"six good cards in a major, 6-11 H, not fourth seat → weak two [O-7a]",
-		cards(h, long)+", "+pts(hp, "H")):
-		return bidSuit(2, long), m(6, 11, "2 majeur faible, 6 belles cartes", "weak two, six good cards").withLen(long, 6), true
 	case tr.check(n == 7 && hp <= 10 && h.GoodSuit(long) && !otherMajor4,
 		"belle septième, 10 H au plus, sans 4 cartes dans l'autre majeure → barrage à 3",
 		"good seven-card suit, 10 H at most, no four cards in the other major → three-level preempt",

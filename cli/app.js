@@ -686,16 +686,19 @@ function defaultPbnName(lang) {
   return `${UI_TEXT[lang].fileSaveStem}-${stamp}.pbn`;
 }
 
-// Hands the PBN text back as a .pbn file. What is saved is the whole textarea
-// — toutes ses donnes, tags compris — et non la seule donne sélectionnée : les
-// zones y réécrivent les cartes à chaque déplacement, donc le fichier obtenu
-// est bien ce que la page affiche. Un fichier chargé garde son nom.
+// Hands the PBN text back as a .pbn file. Les zones réécrivent les cartes dans
+// le texte à chaque déplacement, donc le fichier obtenu est bien ce que la page
+// affiche. Une donne seule est sauvée telle quelle, et un fichier chargé garde
+// son nom. D'un fichier de plusieurs donnes, seule la donne choisie dans
+// « Donne à utiliser » est sauvée, tags compris, sous un nom horodaté comme
+// une donne seule : le nom du fichier d'origine en ferait croire une copie.
 $("#save-btn").addEventListener("click", () => {
   const lang = $("#lang").value;
   // #cons-error et non #error : celui-ci vit tout en bas du panneau, à côté
   // du questionnaire. Un message sur la donne se lit près de la donne.
   const errEl = $("#cons-error");
-  const text = $("#pbn").value.trim();
+  const multi = pbnGames.length > 1;
+  const text = (multi ? pbnGames[selectedGameIdx] : $("#pbn").value).trim();
   if (!text) {
     setError(errEl, CONS_TEXT[lang].errNoPbn);
     return;
@@ -704,7 +707,7 @@ $("#save-btn").addEventListener("click", () => {
   const url = URL.createObjectURL(new Blob([text + "\n"], { type: "text/plain" }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = $("#file-name").textContent.trim() || defaultPbnName(lang);
+  a.download = (!multi && $("#file-name").textContent.trim()) || defaultPbnName(lang);
   document.body.appendChild(a);
   a.click();
   a.remove();

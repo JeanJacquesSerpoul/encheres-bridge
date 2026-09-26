@@ -1991,6 +1991,24 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   font-size: .95rem;
 }
 
+/* La lecture d'une photo : le message, le délai à prévoir et les secondes
+   écoulées l'un sous l'autre, « Annuler » à droite -- ou dessous, sur un écran
+   trop étroit pour les deux. */
+.photo-loading-box {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 420px;
+}
+
+.photo-loading-text {
+  display: flex;
+  flex: 1 1 200px;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.photo-loading-text .muted { font-size: .85rem; }
+
 .spinner {
   flex: none;
   width: 20px;

@@ -159,6 +159,9 @@ const UI_TEXT = {
     photoUnknown: "État du serveur IA inconnu : reconnaissance des cartes indisponible",
     photoNoUrl: "Renseignez l'URL du serveur IA.",
     photoBusy: "Lecture des cartes…",
+    photoBusyHint: "Cela peut prendre jusqu'à une minute et demie.",
+    photoElapsed: (s) => `${s} s écoulée${s > 1 ? "s" : ""}`,
+    photoCancelled: "Lecture des cartes annulée.",
     photoFailed: "Le serveur IA n'a pas su lire les cartes.",
     photoBadAnswer: "Réponse du serveur IA illisible.",
     photoNone: "Aucune carte reconnue sur la photo.",
@@ -328,6 +331,9 @@ const UI_TEXT = {
     photoUnknown: "AI server state unknown: card recognition unavailable",
     photoNoUrl: "Enter the AI server URL.",
     photoBusy: "Reading the cards…",
+    photoBusyHint: "This may take up to a minute and a half.",
+    photoElapsed: (s) => `${s} s elapsed`,
+    photoCancelled: "Card reading cancelled.",
     photoFailed: "The AI server could not read the cards.",
     photoBadAnswer: "Unreadable answer from the AI server.",
     photoNone: "No card recognised in the photo.",
@@ -2923,6 +2929,8 @@ async function recognizePhoto(image) {
   photoBusy = true;
   renderPhotoButtons();
   showPhotoStatus(t.photoBusy, false);
+  const cancel = new AbortController();
+  const hideWait = showPhotoWait(cancel);
   try {
     const resp = await fetchWithTimeout(iaURL() + "/api/chat", {
       method: "POST",
@@ -2932,6 +2940,7 @@ async function recognizePhoto(image) {
         model: IA_MODEL,
         image,
       }),
+      signal: cancel.signal,
     }, TIMEOUT_VISION);
     let body;
     try {
@@ -2939,6 +2948,8 @@ async function recognizePhoto(image) {
     } catch (err) {
       throw new Error(t.photoBadAnswer);
     }
+    // Une réponse arrivée juste après « Annuler » ne touche plus à la donne.
+    if (cancel.signal.aborted) throw new Error(t.photoCancelled);
     if (!resp.ok || !body.success) throw new Error(body.error || t.photoFailed);
     const answer = parseIaJSON(body.response);
     const report = target === "deal"
@@ -2946,11 +2957,53 @@ async function recognizePhoto(image) {
       : applyPhotoHand(target, answer);
     showPhotoStatus(photoReport(report), report.read === 0);
   } catch (err) {
-    showPhotoStatus(err.message, true);
+    // Renoncer n'est pas une erreur : le compte rendu le dit sans l'alarme.
+    if (cancel.signal.aborted) showPhotoStatus(t.photoCancelled, false);
+    else showPhotoStatus(err.message, true);
   } finally {
+    hideWait();
     photoBusy = false;
     renderPhotoButtons();
   }
+}
+
+// Voile d'attente de la lecture : il paraît aussitôt (l'attente se compte en
+// dizaines de secondes, pas en clignements), égrène les secondes et offre
+// « Annuler », qui interrompt la requête. Rend la fonction qui le retire.
+function showPhotoWait(cancel) {
+  const veil = $("#photo-loading");
+  const elapsed = $("#photo-loading-elapsed");
+  const button = $("#photo-loading-cancel");
+  const start = Date.now();
+  const tick = () => {
+    const t = UI_TEXT[$("#lang").value];
+    elapsed.textContent = t.photoElapsed(Math.floor((Date.now() - start) / 1000));
+  };
+  tick();
+  const timer = setInterval(tick, 1000);
+  const onCancel = () => cancel.abort();
+  const onKey = (ev) => {
+    if (ev.key === "Escape") cancel.abort();
+    // Tabuler ne mène nulle part ailleurs : la page est sous le voile.
+    if (ev.key === "Tab") {
+      ev.preventDefault();
+      button.focus();
+    }
+  };
+  button.addEventListener("click", onCancel);
+  document.addEventListener("keydown", onKey);
+  const opener = document.activeElement;
+  veil.classList.remove("hidden");
+  // Le seul geste possible sous le voile : le focus y va.
+  button.focus();
+  return () => {
+    clearInterval(timer);
+    button.removeEventListener("click", onCancel);
+    document.removeEventListener("keydown", onKey);
+    veil.classList.add("hidden");
+    elapsed.textContent = "";
+    if (opener && document.contains(opener)) opener.focus();
+  };
 }
 
 function photoReport(report) {
@@ -3735,12 +3788,18 @@ auctionTip.bind();
 const TIMEOUT_PROBE = 8000;
 const TIMEOUT_VISION = 90000;
 
+// options.signal, s'il est fourni, laisse l'appelant renoncer lui-même : son
+// abandon remonte tel quel (AbortError), à distinguer du délai dépassé.
 async function fetchWithTimeout(url, options, ms = TIMEOUT_PROBE) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
+  const outer = options.signal;
+  const relay = () => ctrl.abort();
+  if (outer) outer.addEventListener("abort", relay, { once: true });
   try {
     return await fetch(url, { ...options, signal: ctrl.signal });
   } catch (err) {
+    if (outer && outer.aborted) throw err;
     // Le renoncement se lit comme une erreur d'abandon : on la retraduit,
     // « The user aborted a request » n'apprenant rien à personne.
     const t = UI_TEXT[$("#lang").value];
@@ -3751,6 +3810,7 @@ async function fetchWithTimeout(url, options, ms = TIMEOUT_PROBE) {
     throw err;
   } finally {
     clearTimeout(timer);
+    if (outer) outer.removeEventListener("abort", relay);
   }
 }
 

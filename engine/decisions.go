@@ -5258,8 +5258,8 @@ func (e *Engine) advanceReopenSuit(p *playerState, s Suit) (Call, meaning) {
 	if tr.check(sup >= 3, "3 atouts et plus", "three or more trumps", cards(h, s)) {
 		if bonus := e.fitLengthBonus(p, s); bonus > 0 {
 			hld += bonus
-			tr.check(true, "neuvième atout connu : +1 HLD",
-				"ninth trump known: +1 HLD", fmt.Sprintf("fit de %d → %d HLD", fitLen, hld))
+			tr.check(true, "atouts au-delà du huitième : +1 HLD chacun",
+				"trumps beyond the eighth: +1 HLD each", fmt.Sprintf("fit de %d → %d HLD", fitLen, hld))
 		}
 		switch {
 		case tr.check(hld >= 13, "13 HLD et plus → cue-bid, espoir de manche", "13+ HLD → cue-bid, game hope", pts(hld, "HLD")):

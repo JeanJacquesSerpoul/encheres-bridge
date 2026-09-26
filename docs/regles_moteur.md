@@ -1250,7 +1250,8 @@ plus vague. Au-dessus de 18, le contre reprend la main.
 
 ### [I-4b] 3SA sur un barrage de 3
 Sur une **ouverture de barrage au palier de 3** : **16-20 H**, un **arrêt**
-dans leur couleur, **sans chicane** → **3SA**, naturel. Le barrage a pris la
+dans leur couleur, **sans chicane** → **3SA**, naturel. À partir de 18 H, une
+main irrégulière avec un seul arrêt préfère le contre [I-2]. Le barrage a pris la
 place de toute séquence descriptive, et l'arrêt dans la couleur du barreur est
 justement ce que son partenaire ne peut pas avoir : la manche est là en face
 de quelques points. Essayé **avant** le contre 18 H et plus, qui laisserait le

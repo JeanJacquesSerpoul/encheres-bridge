@@ -4088,8 +4088,13 @@ func (e *Engine) overcall(p *playerState) (Call, meaning) {
 	// level. `3♦` - ? with K854 AT5 KQJ42 A bids 3NT; it used to pass.
 	if hasOppSuit && last.Level == 3 && last == e.openCall && sideOf(lastSeat) != sideOf(p.seat) {
 		noVoid := h.Len(Clubs) > 0 && h.Len(Diamonds) > 0 && h.Len(Hearts) > 0 && h.Len(Spades) > 0
+		// From 18 H the strong double is there too, and it is the better
+		// call for an unbalanced hand with a single stop: 3♠ - ? with A92
+		// KJ84 A KQJ32 belongs in 4♥ opposite partner's hearts, not in a
+		// 3NT the spades run against.
+		shapeOK := hp < 18 || h.IsRegular() || h.IsSemiRegular() || h.DoubleStopper(oppSuit)
 		c := bid(3, SNoTrump)
-		if tr.check(hp >= 16 && hp <= 20 && noVoid && h.Stopper(oppSuit) && e.legal(p.seat, c),
+		if tr.check(hp >= 16 && hp <= 20 && noVoid && shapeOK && h.Stopper(oppSuit) && e.legal(p.seat, c),
 			"sur leur barrage de 3 : 16-20 H, arrêt dans leur couleur, sans chicane → 3SA [I-4b]",
 			"over their three-level preempt: 16-20 H, a stopper in their suit, no void → 3NT [I-4b]",
 			pts(hp, "H")+", "+shape(h)) {

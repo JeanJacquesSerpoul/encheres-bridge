@@ -155,6 +155,20 @@ func (e *Engine) opening(p *playerState) (Call, meaning) {
 		}
 		return bidSuit(1, s), m(12, 23, fr, en).withLen(s, min)
 	}
+	// [O-6b] Both majors at 11 H: one short of [O-6], but the hand holds the
+	// two suits that buy the partscore, and passing it lets the opponents
+	// in at the level of their choice. It opens the longer major (5-5 has
+	// already reached 13 HL and [O-6]).
+	if lh, ls := h.Len(Hearts), h.Len(Spades); tr.check(hp == 11 && lh >= 4 && ls >= 4 && max(lh, ls) >= 5,
+		"11 H, bicolore majeur 5-4 ou 4-5 → 1 dans la majeure cinquième [O-6b]",
+		"11 H, both majors 5-4 or 4-5 → one of the five-card major [O-6b]", pts(hp, "H")+", "+shape(h)) {
+		s, other := Spades, Hearts
+		if lh > ls {
+			s, other = Hearts, Spades
+		}
+		return bidSuit(1, s), m(11, 23, "ouverture majeure, 5 cartes et plus, bicolore majeur dès 11H", "major-suit opening, 5+ cards, both majors from 11 H").
+			withLen(s, 5).withLen(other, 4)
+	}
 	if tr.check(hp >= 5 && hp <= 11,
 		"5 à 11 H → barrage possible [O-7]",
 		"5 to 11 H → a preempt is possible [O-7]", pts(hp, "H")) {

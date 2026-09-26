@@ -5725,11 +5725,18 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 			}
 			return c, mn
 		}
-		if tr.check(stopper, "arrêt dans leur couleur, main régulière → 1SA",
-			"stopper in their suit, balanced → 1NT", cards(h, oppSuit)) {
+		if tr.check(stopper, "arrêt dans leur couleur, main régulière → Sans-Atout au plus bas",
+			"stopper in their suit, balanced → cheapest notrump", cards(h, oppSuit)) {
 			c := e.cheapestCall(SNoTrump)
 			if c.Level == 1 {
 				return c, m(8, 10, "1SA, 8-10H, dénie une majeure quatrième", "1NT, 8-10, denies a four-card major")
+			}
+			// Over a two-level opening (a weak two) the cheapest notrump is
+			// 2NT: still the natural answer, the zone and the stopper
+			// unchanged. Without it 2S X P, with AQ95 in spades and 10 H,
+			// fell through to the 0-7 minimum answer at the three level.
+			if c.Level == 2 && e.legal(p.seat, c) {
+				return c, m(8, 10, "2SA, 8-10H, arrêt dans leur couleur", "2NT, 8-10, stopper in their suit").withStopper(oppSuit)
 			}
 		}
 		// Jump in a five-card or longer minor, not forcing.

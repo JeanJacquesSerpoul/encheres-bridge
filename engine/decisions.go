@@ -4160,6 +4160,20 @@ func (e *Engine) overcall(p *playerState) (Call, meaning) {
 	if bestLen > 0 {
 		bestVal = cards(h, best)
 	}
+	// Over their major, four cards in the other one come first: a
+	// five-card minor that could only be overcalled at the two level gives
+	// way to the takeout double when the hand has its floor and shape. 1S -
+	// ? with T8 KQ92 Q7 AK843 doubles: 2C buries the 4-4 heart fit partner
+	// cannot show any more once the opener's side has raised. A sixth card
+	// keeps the overcall -- the suit is then worth naming for itself.
+	if hasOppSuit && oppSuit.IsMajor() && last.Level == 1 && bestLen == 5 && !best.IsMajor() &&
+		e.cheapestCall(best.Strain()).Level == 2 && e.legal(p.seat, doubleCall) &&
+		tr.check(hp >= 12 && hp <= 17 && takeoutShape(h, oppSuit),
+			"sur leur majeure : 4 cartes dans l'autre majeure, mineure de 5 cartes et 12-17 H → contre plutôt qu'intervention au palier de 2",
+			"over their major: four cards in the other major, a five-card minor and 12-17 H → takeout double rather than a two-level overcall",
+			pts(hp, "H")+", "+shape(h)) {
+		return doubleCall, takeoutDoubleMeaning(oppSuit)
+	}
 	if tr.check(bestLen >= minLen,
 		fmt.Sprintf("belle couleur de %d cartes et plus, libre → intervention à la couleur", minLen),
 		fmt.Sprintf("good %d+ card suit, still free → suit overcall", minLen), bestVal) {
@@ -4206,17 +4220,7 @@ func (e *Engine) overcall(p *playerState) (Call, meaning) {
 			floorFR+" et la forme du contre (court dans leur couleur, les autres majeures) → contre d'appel",
 			floorEN+" and takeout shape (short in their suit, the other majors) → takeout double",
 			floorVal+", "+shape(h)) {
-			mn := m(12, 17, "contre d'appel, 12H et plus", "takeout double, 12+")
-			for s := Clubs; s <= Spades; s++ {
-				if s.IsMajor() && s != oppSuit {
-					n := 3
-					if oppSuit.IsMajor() {
-						n = 4
-					}
-					mn = mn.withLen(s, n)
-				}
-			}
-			return doubleCall, mn
+			return doubleCall, takeoutDoubleMeaning(oppSuit)
 		}
 		// Over a two-level bid, keep the generic short-in-their-suit rule.
 		if last.Level == 2 && tr.check(hp >= 12 && hp <= 17 && h.Len(oppSuit) <= 2,
@@ -4889,6 +4893,23 @@ func (e *Engine) afterLandy(p *playerState) (Call, meaning) {
 		}
 	}
 	return e.concludeHandoff(p)
+}
+
+// takeoutDoubleMeaning is what the takeout double of a one-level opening in
+// opp promises: 12-17 H and the unbid majors, three cards each over a minor,
+// four in the other major over a major.
+func takeoutDoubleMeaning(opp Suit) meaning {
+	mn := m(12, 17, "contre d'appel, 12H et plus", "takeout double, 12+")
+	for s := Clubs; s <= Spades; s++ {
+		if s.IsMajor() && s != opp {
+			n := 3
+			if opp.IsMajor() {
+				n = 4
+			}
+			mn = mn.withLen(s, n)
+		}
+	}
+	return mn
 }
 
 // takeoutShape checks the distribution conditions for a takeout double of a

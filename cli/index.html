@@ -992,6 +992,23 @@
     </div>
   </div>
 
+  <!-- Voile d'attente de la reconnaissance des cartes. Le modèle de vision met
+       des dizaines de secondes à lire une photo : le voile dit que l'attente a
+       une raison, compte les secondes pour montrer qu'elle avance, et laisse
+       renoncer. Posé et retiré par recognizePhoto dans app.js. Le compteur
+       n'est pas annoncé : une annonce par seconde couvrirait tout le reste. -->
+  <div id="photo-loading" class="engine-loading hidden">
+    <div class="engine-loading-box photo-loading-box">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="photo-loading-text">
+        <span role="status" aria-live="polite" data-i18n="photoBusy">Lecture des cartes…</span>
+        <span class="muted" data-i18n="photoBusyHint">Cela peut prendre jusqu'à une minute et demie.</span>
+        <span id="photo-loading-elapsed" class="muted" aria-hidden="true"></span>
+      </span>
+      <button id="photo-loading-cancel" type="button" data-i18n="photoCancel">Annuler</button>
+    </div>
+  </div>
+
   <!-- Infobulle d'entame du tableau du PAR (par.js la remplit). Hors du
        tableau et en position fixe : ni la cellule ni le panneau ne peuvent la
        rogner, et elle devient un bandeau bas sur mobile. -->

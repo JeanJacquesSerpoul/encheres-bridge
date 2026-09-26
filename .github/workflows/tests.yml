@@ -4,7 +4,7 @@
 # casse le moteur n'était vue qu'une fois fusionnée. Ce workflow lance les
 # mêmes tests plus tôt, dont le banc de non-régression contre le par
 # (engine/par_bench_test.go, voir tools/par/README.md) : il échoue dès que
-# l'écart total au par augmente sur les 7 000 donnes du banc.
+# l'écart total au par augmente sur les 12 000 donnes du banc.
 name: Tests
 
 on:

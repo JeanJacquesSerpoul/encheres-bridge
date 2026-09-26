@@ -1502,6 +1502,10 @@ func init() {
 							acceptVal += 2
 						}
 					}
+					// The ninth trump is an extra value too [E-9d]: a fourth
+					// trump facing a five-card suit is a maximum the point
+					// count alone does not show.
+					acceptVal += e.fitLengthBonus(p, fit)
 				} else {
 					// No suit fit: the invitation is toward notrump, where shape
 					// does not add playing tricks the way it does in a suit
@@ -1574,7 +1578,7 @@ func init() {
 						// trumps are spent drawing the opponents' -- and
 						// counting it is how a flat 3-5-3-2 opening talks
 						// itself into a failing game.
-						v = e.hldAgainstTheirBidding(p, fit)
+						v = e.hldAgainstTheirBidding(p, fit) + e.fitLengthBonus(p, fit)
 					}
 					accept = partner.shownMin+v >= gameThresholdFor(fit, hasFit, ntOK)
 					g := gameThresholdFor(fit, hasFit, ntOK)
@@ -2383,6 +2387,18 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	tr.note("aucune convention en cours : décision sur la force combinée (la main + le minimum-maximum montré par le partenaire)",
 		"no convention under way: decision on combined strength (your hand + the minimum-maximum partner has shown)")
 	tr.check(hasFit, "fit de 8 cartes et plus connu", "known fit of 8+ cards", fitVal)
+	// The fit's own length is part of its value for game [E-9d]: HLD counts
+	// the ruffs the shortness buys, the ninth trump is the trick the length
+	// itself makes. Only here, where game is decided: the
+	// slam handlers keep their own count (cMinSlam), which every point has to
+	// turn into a trick.
+	if hasFit {
+		if bonus := e.fitLengthBonus(p, fit); bonus > 0 {
+			own, cMin, cMax = own+bonus, cMin+bonus, cMax+bonus
+			tr.check(true, "neuvième atout connu : +1 HLD [E-9d]",
+				"ninth trump known: +1 HLD [E-9d]", fmt.Sprintf("+%d", bonus))
+		}
+	}
 	if !(hasFit && fit.IsMajor()) {
 		tr.check(ntOK, "Sans-Atout jouable : arrêt dans chaque couleur adverse",
 			"notrump playable: a stopper in every opposing suit", "")

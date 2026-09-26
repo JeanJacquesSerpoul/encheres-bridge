@@ -30,7 +30,7 @@ le même rapport : deux révisions du moteur se comparent ligne à ligne.
 La table de levées double-mort et le par ne dépendent **que de la donne**, pas
 du moteur. Le banc les garde une fois pour toutes :
 [`engine/testdata/par_bench.jsonl.gz`](../../engine/testdata/par_bench.jsonl.gz)
-contient 7 000 donnes (graines 20260906, 42 et 7), leurs tables et leur par.
+contient 12 000 donnes (graines 20260906, 42, 7 et 20261001), leurs tables et leur par.
 [`TestParBenchmark`](../../engine/par_bench_test.go) rejoue les enchères avec
 le moteur courant, note chaque contrat et fait le total des écarts au par en
 IMP. Le tout prend moins d'une seconde, sans solveur.

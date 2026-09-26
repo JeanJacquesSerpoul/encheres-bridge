@@ -218,6 +218,19 @@ seuls honneurs atteignent. Avec un fit majeur de huit cartes, **25 H** combinés
 `1♣ – 1♥ – 2♥` avec A842 AQ94 J6 QT6 : 13 + 12 = 25 → **4♥**, et non une
 proposition.
 
+### [E-9d] Le neuvième atout vaut un point
+Dès que le fit **connu** — ses propres atouts plus la longueur que le
+partenaire a promise — atteint **neuf cartes**, la décision de manche
+(conclusion, proposition, acceptation d'une proposition) compte **+1 HLD**.
+Mesuré sur 5 000 donnes en double-mort : une manche en majeure passe les 50 %
+de réussite vers **28 HLD** (deux mains) avec huit atouts, vers **27** avec
+neuf ; un dixième n'ajoute rien de mesurable, ses points de longueur étant
+déjà dans le HL. Validé hors échantillon sur le banc de non-régression
+(tools/par/README.md) : **+127 IMP** sur les 5 000 donnes de la graine
+20261001, qui n'avaient servi à aucun réglage (57 donnes gagnées, 43 perdues),
++241 IMP sur les 12 000 donnes du banc. Le bonus ne vaut pas pour le chelem, dont le compte
+(sans l'appoint des courtes face aux longues du partenaire) reste inchangé.
+
 ### [E-9b] La limite du partenaire est déjà la proposition
 Quand l'enchère qui proposerait la manche est **celle que le partenaire vient
 de faire** — sa redemande limite 2SA (18-19), ou sa proposition 3M dans le fit
@@ -1622,8 +1635,8 @@ mains.
 
 ### [R-1] Sur un **réveil par une couleur** (5 cartes, 8-13 HL)
 - **Passe** — c'est la réponse la plus fréquente ;
-- avec le **fit** (3 atouts et plus), en comptant **+1 HLD par atout au-delà
-  du huitième** (le réveil en promet 5) : 13 HLD et plus → **cue-bid** de la
+- avec le **fit** (3 atouts et plus), en comptant **+1 HLD dès le neuvième
+  atout** (le réveil en promet 5 ; voir [E-9d]) : 13 HLD et plus → **cue-bid** de la
   couleur d'ouverture [R-4] · 11-12 HLD → soutien à saut · 7-10 HLD → soutien
   simple. Contrairement à [A-5], le saut **survit au passe** de l'avancée : en
   réveil ce passe n'a rien dénié, c'est la raison même pour laquelle le

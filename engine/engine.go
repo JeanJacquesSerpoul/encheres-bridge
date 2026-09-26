@@ -396,6 +396,21 @@ func (e *Engine) fitSuit(p *playerState) (Suit, bool) {
 	return best, found
 }
 
+// fitLengthBonus values the known length of the fit in fit [E-9d]: one point
+// once the trumps this hand holds and those partner has promised reach nine.
+// The ninth trump is a trick the eight-card count does not see -- one more
+// ruff, one trump fewer for the defence. Measured on 5,000 double-dummy
+// deals, a major game crosses even odds at 28 HLD (both hands) with eight
+// trumps and at 27 with nine; a tenth adds nothing more, its length points
+// being already in HL. Only promised length counts: partner's extra trumps
+// are his to add, so the bonus never overstates what the side knows.
+func (e *Engine) fitLengthBonus(p *playerState, fit Suit) int {
+	if p.hand.Len(fit)+e.ps[partnerOf(p.seat)].shownLens[fit] >= 9 {
+		return 1
+	}
+	return 0
+}
+
 // hasHelp reports whether p's hand can plausibly cover losers in s, as asked
 // by a help-suit game try: an ace or king there, a third-round queen, or
 // shortness to ruff.

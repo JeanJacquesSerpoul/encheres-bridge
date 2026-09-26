@@ -3495,11 +3495,11 @@ $("#lang").addEventListener("change", () => {
   if (!$("#result-panel").classList.contains("hidden") && !quiz) simulate();
 });
 
-// Builds a W/N/E/S auction grid (head + body rows) from a list of calls,
+// Builds a S/W/N/E auction grid (head + body rows) from a list of calls,
 // padding the first row up to the dealer's column. `cellRenderer(call)`
 // returns the <td> HTML for a played call.
 function auctionGridHTML(dealer, calls, lang, cellRenderer) {
-  const columns = ["W", "N", "E", "S"];
+  const columns = ["S", "W", "N", "E"];
   const headHTML = columns.map((s) => `<th>${esc(SEAT_SHORT[lang][s])}</th>`).join("");
   const cells = [];
   for (let i = 0; i < columns.indexOf(dealer); i++) cells.push(null);
@@ -3538,7 +3538,7 @@ function renderResult(r) {
     <div>${withColon(lang === "fr" ? "Donneur" : "Dealer", lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
     <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>`;
 
-  // Auction grid: columns W N E S, first row padded up to the dealer.
+  // Auction grid: columns S W N E, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de
   // celle du PAR (auctionTip, plus bas).
   auctionTip.hide();

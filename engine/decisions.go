@@ -5597,16 +5597,24 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 	h := p.hand
 	hp := h.H()
 
+	// Every suit the opponents have named is theirs, not only the one partner
+	// doubled: over 1D X 1S, a spade answer would bid the responder's suit.
+	var theirs [4]bool
+	theirs[oppSuit] = true
+	for _, s := range e.opponentSuits(p) {
+		theirs[s] = true
+	}
+
 	// Longest four-card or longer major, hearts preferred on a tie (the
 	// cheaper answer, as over an opening bid).
 	var maj Suit
 	majLen := 0
 	for _, s := range []Suit{Hearts, Spades} {
-		if s != oppSuit && h.Len(s) >= 4 && h.Len(s) > majLen {
+		if !theirs[s] && h.Len(s) >= 4 && h.Len(s) > majLen {
 			maj, majLen = s, h.Len(s)
 		}
 	}
-	bothMajors := !oppSuit.IsMajor() && h.Len(Hearts) >= 4 && h.Len(Spades) >= 4
+	bothMajors := !theirs[Hearts] && !theirs[Spades] && h.Len(Hearts) >= 4 && h.Len(Spades) >= 4
 	stopper := h.Stopper(oppSuit) && (h.IsRegular() || h.IsSemiRegular())
 	tr := e.tr
 	majVal := cards(h, Hearts) + ", " + cards(h, Spades)
@@ -5716,7 +5724,7 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 		var mi Suit
 		miLen := 0
 		for _, s := range []Suit{Diamonds, Clubs} {
-			if s != oppSuit && h.Len(s) >= 5 && h.Len(s) > miLen {
+			if !theirs[s] && h.Len(s) >= 5 && h.Len(s) > miLen {
 				mi, miLen = s, h.Len(s)
 			}
 		}
@@ -5726,6 +5734,14 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 			if c.Level+1 <= 3 {
 				return bid(c.Level+1, mi.Strain()), m(8, 10, "saut en mineure, 5 cartes et plus, non forcing", "minor-suit jump, five-plus cards, not forcing").withLen(mi, 5)
 			}
+		}
+		// The lie is only owed to a forced answer: once the right-hand
+		// opponent has bid, a hand with nothing true to say passes, and the
+		// doubler, who will speak again, may still reopen.
+		if tr.check(!forced, "l'adversaire a parlé après le contre, rien à décrire → Passe",
+			"the opponents bid over the double, nothing to describe → Pass", "") {
+			tr.out()
+			return passCall, m(0, 10, "", "")
 		}
 		if c := e.cheapestCall(SNoTrump); c.Level == 1 {
 			tr.note("sinon → 1SA, le moins mauvais mensonge", "otherwise → 1NT, the least bad lie")
@@ -5745,7 +5761,7 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 	if majLen == 0 {
 		bestLen := 0
 		for _, s := range []Suit{Spades, Hearts, Diamonds, Clubs} {
-			if s == oppSuit {
+			if theirs[s] {
 				continue
 			}
 			if h.Len(s) > bestLen {

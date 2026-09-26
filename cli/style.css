@@ -2219,6 +2219,14 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   padding: 14px 16px;
   font-size: .9rem;
 }
+/* Le menu est ancré sous la roue, mais la roue n'est pas au bord droit : deux
+   boutons la suivent. Sur écran étroit, le panneau de 360 px débordait donc à
+   gauche de l'écran. Il s'ancre alors au bandeau entier, bord droit contre bord
+   droit : sa largeur, plafonnée à l'écran moins 24 px, tient toujours. */
+.header-inner { position: relative; }
+@media (max-width: 720px) {
+  .settings-menu { position: static; }
+}
 .settings-pop h2 { margin: 0 0 10px; font-size: 1rem; }
 .settings-grid {
   display: grid;

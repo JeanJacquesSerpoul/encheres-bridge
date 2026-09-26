@@ -276,6 +276,13 @@ autre A ni R, et au plus une D extérieure.
 L'ouverture majeure promet **5 cartes**, l'ouverture mineure **3 cartes**.
 Fourchette annoncée : 12-23 HL.
 
+### [O-6b] Bicolore majeur à 11 H
+Avec **11 H** et les deux majeures **5-4 ou 4-5**, on ouvre d'**1 dans la
+majeure cinquième** (la plus longue), en toute position : la main tient les
+deux couleurs qui achètent la partielle. Le 5-5 n'a pas besoin de cette règle :
+à 11 H il vaut déjà 13 HL et s'ouvre par [O-6]. L'ouverture promet 5 cartes
+dans la majeure nommée et 4 dans l'autre ; fourchette annoncée : 11-23.
+
 ### [O-7] Barrages
 Seulement avec **5 à 10 H**, et à condition que **la moitié au moins des points
 H de la main soit dans la couleur du barrage** (`SuitH×2 ≥ H`) : une main aux

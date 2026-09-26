@@ -14,6 +14,13 @@ const passedHandDeal = `[Dealer "N"]
 [Vulnerable "None"]
 [Deal "N:A8762.QJ83.A985. KT43.62.KJ.T6543 Q.AK.T763.AQJ872 J95.T9754.Q42.K9"]`
 
+// The same deal with North's heart jack moved to West. With it North holds
+// 11 H and both majors, which open since [O-6b]; without it the pass the
+// ceiling test is about still happens.
+const passedHandDeal10H = `[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:A8762.Q873.A985. KT43.62.KJ.T6543 Q.AK.T763.AQJ872 J95.JT954.Q42.K9"]`
+
 // Three faults on this deal, and each one alone would still have bid the
 // slam. North's club void faced South's own club suit, so the three points
 // HLD grants for it were waste, not ruffing value [E-1c] -- and the reverse
@@ -48,7 +55,7 @@ func TestPassedHandDoesNotDriveToSlam(t *testing.T) {
 // A pass before anyone opened caps the hand at 11 [E-1b]; no later bid may
 // raise that ceiling to match its own announced floor.
 func TestPassedHandKeepsItsCeiling(t *testing.T) {
-	d, err := ParsePBN([]byte(passedHandDeal))
+	d, err := ParsePBN([]byte(passedHandDeal10H))
 	if err != nil {
 		t.Fatalf("bad deal: %v", err)
 	}

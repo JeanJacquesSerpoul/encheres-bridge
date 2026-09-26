@@ -4,7 +4,7 @@ package engine
 // non-régression »). The double-dummy trick table and the par of a deal depend
 // on the cards alone, never on the engine: tools/par/audit.js computed them
 // once, tools/par/bench-export.js stored them in testdata/par_bench.jsonl.gz,
-// and this test only replays the auctions. Seven thousand deals take a few
+// and this test only replays the auctions. Twelve thousand deals take a few
 // seconds instead of the half hour the solver needs.
 //
 // The score is the total distance to the par, in IMPs, over the whole bench.

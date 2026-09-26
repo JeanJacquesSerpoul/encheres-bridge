@@ -2444,6 +2444,20 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 		// the top. So does a balanced 6-3-2-2 or 6-3-3-2 hand: 1C-1S-1NT
 		// with AKQJ54 864 KJ 73 plays 4S, the known fit, not 3NT.
 		for _, s := range []Suit{Spades, Hearts} {
+			// Game is named only on a certain eight-card fit: the sixth
+			// card needs two opposite, which a notrump rebid guarantees
+			// and a suit rebid does not. 1C-1H-4C with 832 KQJ653 2 Q74
+			// may face a singleton heart, and the nine clubs are sure.
+			partnerMin := partner.shownLens[s]
+			if partnerNT {
+				partnerMin = max(partnerMin, 2)
+			}
+			if p.shownLens[s] >= 4 && p.hand.Len(s) >= 6 && !tr.check(p.hand.Len(s)+partnerMin >= 8,
+				"majeure sixième : fit de 8 cartes certain (redemande à Sans-Atout ou longueur montrée)",
+				"six-card major: eight-card fit certain (notrump rebid or length shown)",
+				fmt.Sprintf("%d + %d %s", p.hand.Len(s), partnerMin, suitSymbol[s])) {
+				continue
+			}
 			if p.shownLens[s] >= 4 && p.hand.Len(s) >= 6 {
 				tr.check(true, "main irrégulière avec une majeure sixième déjà nommée : la manche dans cette majeure",
 					"unbalanced hand with a six-card major already bid: game in that major", cards(p.hand, s))

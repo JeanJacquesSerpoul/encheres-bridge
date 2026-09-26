@@ -252,6 +252,16 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 **Le bandeau** porte deux boutons : la roue des **Réglages** et le **?** du **mode d'emploi**, une aide en ligne en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons et suit l'écran dans l'ordre où on le découvre — l'écran, la donne, les enchères, le PAR, l'entraînement, la photo, les réglages —, puis récapitule les **raccourcis clavier**. Les Réglages regroupent la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre), l'état du moteur et tout ce qui touche au serveur IA. Ce dernier tient à une case à cocher, **décochée par défaut** (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
+### Le format PBN
+
+Le **PBN** (*Portable Bridge Notation*) est le format texte standard des donnes de bridge. Une donne y tient en quelques lignes lisibles — `[Dealer "N"]`, `[Vulnerable "NS"]`, `[Deal "N:AKQ7.T98.… …"]` —, et un fichier `.pbn` peut en contenir tout un tournoi, un bloc `[Board]` par donne. Son intérêt pour l'utilisateur : **faire passer une donne d'une application à l'autre sans la recopier carte par carte**.
+
+- **Lire ici les donnes d'ailleurs** : les fichiers de donnes distribués après un tournoi de club, ceux des machines à distribuer, ou les donnes produites par un générateur ou un logiciel de mise en page (BridgeComposer, par exemple) sont le plus souvent disponibles en PBN. **Charger un fichier .pbn** les ouvre ; un fichier de plusieurs donnes fait apparaître **Donne à utiliser**.
+- **Emporter ailleurs les donnes d'ici** : **Sauver le PBN** enregistre la donne affichée dans un fichier `.pbn` que les autres logiciels de bridge savent lire — pour l'analyser en double mort, l'imprimer ou la rejouer.
+- **L'échanger en texte** : une donne PBN se colle dans un courriel ou un message. **Texte de la donne (format PBN)** l'affiche, prête à copier, et accepte une donne collée : la table suit.
+
+Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le moteur en lit, dans [Format PBN minimal attendu](#format-pbn-minimal-attendu).
+
 ### Composer la donne
 
 - La barre au-dessus de la table : **Donne aléatoire**, dont la flèche ouvre **Donne exemple** et **Charger un fichier .pbn**, puis le menu **Partager** : **Copier le lien**, **Sauver le PBN** et **Texte de la donne (format PBN)**. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**.

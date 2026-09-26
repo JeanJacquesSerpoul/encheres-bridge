@@ -4079,6 +4079,23 @@ func (e *Engine) overcall(p *playerState) (Call, meaning) {
 			return c, m(16, 18, "intervention à 1SA, 16-18H et arrêt", "1NT overcall, strong balanced with a stopper").withStopper(oppSuit)
 		}
 	}
+	// Natural 3NT over a three-level preempt [I-4b]: 16-20 H, a stopper in
+	// their suit and no void. The preempt has taken the room every
+	// descriptive sequence needed, and the stopper is precisely what the
+	// preemptor's partner cannot have: this is the game the hand already
+	// holds opposite a few points. Tried before the strong double, which from
+	// 18 H would otherwise leave partner to guess the strain at the four
+	// level. `3♦` - ? with K854 AT5 KQJ42 A bids 3NT; it used to pass.
+	if hasOppSuit && last.Level == 3 && last == e.openCall && sideOf(lastSeat) != sideOf(p.seat) {
+		noVoid := h.Len(Clubs) > 0 && h.Len(Diamonds) > 0 && h.Len(Hearts) > 0 && h.Len(Spades) > 0
+		c := bid(3, SNoTrump)
+		if tr.check(hp >= 16 && hp <= 20 && noVoid && h.Stopper(oppSuit) && e.legal(p.seat, c),
+			"sur leur barrage de 3 : 16-20 H, arrêt dans leur couleur, sans chicane → 3SA [I-4b]",
+			"over their three-level preempt: 16-20 H, a stopper in their suit, no void → 3NT [I-4b]",
+			pts(hp, "H")+", "+shape(h)) {
+			return c, m(16, 20, "3SA sur barrage, 16-20H et arrêt", "3NT over a preempt, 16-20 with a stopper").withStopper(oppSuit)
+		}
+	}
 	// Strong takeout double: from 18H the hand is beyond every natural
 	// overcall, so the double carries no shape promise.
 	if tr.check(hp >= 18 && e.legal(p.seat, doubleCall) && last.Level <= 4,
@@ -4210,6 +4227,25 @@ func (e *Engine) overcall(p *playerState) (Call, meaning) {
 			if tr.check(ok, "au moins 3 cartes dans chaque autre couleur → contre",
 				"at least three cards in every other suit → double", shape(h)) {
 				return doubleCall, m(12, 17, "contre d'appel", "takeout double")
+			}
+		}
+		// Over a three-level preempt [I-6b]: the double asks partner to bid at
+		// the three or four level, so it needs more than the two-level 12:
+		// 15-17 H (18 and more doubled above, any shape), two cards at most
+		// in their suit and three at least in every other one.
+		if last.Level == 3 && last == e.openCall && tr.check(hp >= 15 && h.Len(oppSuit) <= 2,
+			"sur leur barrage de 3 : 15-17 H, deux cartes au plus dans leur couleur → contre d'appel envisagé [I-6b]",
+			"over their three-level preempt: 15-17 H, two cards at most in their suit → takeout double considered [I-6b]",
+			pts(hp, "H")+", "+cards(h, oppSuit)) {
+			ok := true
+			for s := Clubs; s <= Spades; s++ {
+				if s != oppSuit && h.Len(s) < 3 {
+					ok = false
+				}
+			}
+			if tr.check(ok, "au moins 3 cartes dans chaque autre couleur → contre",
+				"at least three cards in every other suit → double", shape(h)) {
+				return doubleCall, m(15, 17, "contre d'appel sur barrage", "takeout double of a preempt")
 			}
 		}
 	}

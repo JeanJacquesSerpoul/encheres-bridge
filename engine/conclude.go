@@ -2397,6 +2397,19 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	tr.check(wantGame,
 		"minimum combiné suffisant pour une manche : 27 HLD en majeure, 25 H à Sans-Atout, 30 HLD en mineure",
 		"combined minimum enough for game: 27 HLD in a major, 25 H in notrump, 30 HLD in a minor", gameVal)
+	// The 27 HLD of a major game counts distribution in both hands, and
+	// partner's floor has usually counted his already: a flat hand facing a
+	// raise then scores its own shortness alone and falls short of a game the
+	// honours make by themselves. Twenty-five honour points with an
+	// eight-card major fit are the notrump game's own count, and the fit
+	// only adds tricks to it [E-9c]: 1C - 1H - 2H with A842 AQ94 J6 QT6 is
+	// 13 + 12, game, not an invitation.
+	if !wantGame && hasFit && fit.IsMajor() && p.bids > 0 && tr.check(p.hand.H()+partner.shownMin >= 25,
+		"fit majeur : 25 H combinés suffisent aussi pour la manche [E-9c]",
+		"major fit: 25 combined H are also enough for game [E-9c]",
+		fmt.Sprintf("%d H + %d = %d", p.hand.H(), partner.shownMin, p.hand.H()+partner.shownMin)) {
+		gc, wantGame = bidSuit(4, fit), true
+	}
 	if wantGame {
 		tr.in()
 		defer tr.out()

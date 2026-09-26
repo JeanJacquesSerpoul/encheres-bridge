@@ -1502,9 +1502,9 @@ func init() {
 							acceptVal += 2
 						}
 					}
-					// The trumps beyond the eighth are extra values too [R-1]:
-					// a fourth trump facing a five-card suit is a maximum the
-					// point count alone does not show.
+					// The ninth trump is an extra value too [E-9d]: a fourth
+					// trump facing a five-card suit is a maximum the point
+					// count alone does not show.
 					acceptVal += e.fitLengthBonus(p, fit)
 				} else {
 					// No suit fit: the invitation is toward notrump, where shape
@@ -2387,16 +2387,16 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	tr.note("aucune convention en cours : décision sur la force combinée (la main + le minimum-maximum montré par le partenaire)",
 		"no convention under way: decision on combined strength (your hand + the minimum-maximum partner has shown)")
 	tr.check(hasFit, "fit de 8 cartes et plus connu", "known fit of 8+ cards", fitVal)
-	// The fit's own length is part of its value for game [R-1]: HLD counts
-	// the ruffs the shortness buys, the trumps beyond the eighth are the
-	// tricks the length itself makes. Only here, where game is decided: the
+	// The fit's own length is part of its value for game [E-9d]: HLD counts
+	// the ruffs the shortness buys, the ninth trump is the trick the length
+	// itself makes. Only here, where game is decided: the
 	// slam handlers keep their own count (cMinSlam), which every point has to
 	// turn into a trick.
 	if hasFit {
 		if bonus := e.fitLengthBonus(p, fit); bonus > 0 {
 			own, cMin, cMax = own+bonus, cMin+bonus, cMax+bonus
-			tr.check(true, "atouts au-delà du huitième : +1 HLD chacun [R-1]",
-				"trumps beyond the eighth: +1 HLD each [R-1]", fmt.Sprintf("+%d", bonus))
+			tr.check(true, "neuvième atout connu : +1 HLD [E-9d]",
+				"ninth trump known: +1 HLD [E-9d]", fmt.Sprintf("+%d", bonus))
 		}
 	}
 	if !(hasFit && fit.IsMajor()) {

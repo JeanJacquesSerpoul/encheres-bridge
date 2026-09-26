@@ -17,19 +17,24 @@ go run .                  # écoute sur http://localhost:9013
 docker compose up --build -d
 ```
 
-Sans Go ni Docker, les exécutables précompilés de [bin/](bin/) suffisent
-(Linux et Windows, amd64). Après avoir créé `.env` comme ci-dessus :
+Sans Docker, compilez d'abord les exécutables de [bin/](bin/) (Linux et
+Windows, amd64 ; ils ne sont pas versionnés) avec
+[build-proxy.sh](build-proxy.sh) sous Linux ou Git Bash,
+[build-proxy.ps1](build-proxy.ps1) sous Windows, ou `make bin`. Go n'est
+nécessaire qu'à cette étape. Après avoir créé `.env` comme ci-dessus :
 
 ```bash
+./build-proxy.sh                  # une fois après un clone, puis après chaque modification des sources
 bin/openrouter_proxy.sh           # Linux (ou Git Bash sous Windows) ; -p <port> pour changer de port
 ```
 
 ```powershell
+.\build-proxy.ps1                 # une fois après un clone, puis après chaque modification des sources
 .\bin\openrouter_proxy.ps1        # Windows ; -Port <port> pour changer de port
 ```
 
-Avec Docker mais sans rien compiler, [bin/docker-compose.yml](bin/docker-compose.yml)
-monte l'exécutable Linux dans une image Alpine. Il lit sa configuration dans
+Avec Docker, [bin/docker-compose.yml](bin/docker-compose.yml) monte
+l'exécutable Linux compilé ci-dessus dans une image Alpine. Il lit sa configuration dans
 `bin/.env`, à créer lui aussi depuis `.env.example` :
 
 ```bash
@@ -37,11 +42,9 @@ cp .env.example bin/.env    # puis renseigner OPENROUTER_API_KEY
 cd bin && docker compose up -d
 ```
 
-Les scripts se placent dans ce dossier pour que `.env` soit lu. Après une
-modification des sources, `make bin` recompile les deux exécutables — ou, sans
-make, [build-proxy.sh](build-proxy.sh) sous Linux ou Git Bash et
-[build-proxy.ps1](build-proxy.ps1) sous Windows : mêmes drapeaux, mêmes
-fichiers produits dans `bin/`.
+Les scripts se placent dans ce dossier pour que `.env` soit lu. `make bin` et
+les scripts `build-proxy` utilisent les mêmes drapeaux et produisent les mêmes
+fichiers dans `bin/`.
 
 Le client vise ce port par défaut : dans l'en-tête, **Serveur IA → Local** vaut
 `http://localhost:9013`. Tant que `/health` répond, les boutons appareil photo

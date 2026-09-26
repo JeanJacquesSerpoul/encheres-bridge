@@ -1502,10 +1502,6 @@ func init() {
 							acceptVal += 2
 						}
 					}
-					// The trumps beyond the eighth are extra values too [R-1]:
-					// a fourth trump facing a five-card suit is a maximum the
-					// point count alone does not show.
-					acceptVal += e.fitLengthBonus(p, fit)
 				} else {
 					// No suit fit: the invitation is toward notrump, where shape
 					// does not add playing tricks the way it does in a suit
@@ -1578,7 +1574,7 @@ func init() {
 						// trumps are spent drawing the opponents' -- and
 						// counting it is how a flat 3-5-3-2 opening talks
 						// itself into a failing game.
-						v = e.hldAgainstTheirBidding(p, fit) + e.fitLengthBonus(p, fit)
+						v = e.hldAgainstTheirBidding(p, fit)
 					}
 					accept = partner.shownMin+v >= gameThresholdFor(fit, hasFit, ntOK)
 					g := gameThresholdFor(fit, hasFit, ntOK)
@@ -2387,18 +2383,6 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	tr.note("aucune convention en cours : décision sur la force combinée (la main + le minimum-maximum montré par le partenaire)",
 		"no convention under way: decision on combined strength (your hand + the minimum-maximum partner has shown)")
 	tr.check(hasFit, "fit de 8 cartes et plus connu", "known fit of 8+ cards", fitVal)
-	// The fit's own length is part of its value for game [R-1]: HLD counts
-	// the ruffs the shortness buys, the trumps beyond the eighth are the
-	// tricks the length itself makes. Only here, where game is decided: the
-	// slam handlers keep their own count (cMinSlam), which every point has to
-	// turn into a trick.
-	if hasFit {
-		if bonus := e.fitLengthBonus(p, fit); bonus > 0 {
-			own, cMin, cMax = own+bonus, cMin+bonus, cMax+bonus
-			tr.check(true, "atouts au-delà du huitième : +1 HLD chacun [R-1]",
-				"trumps beyond the eighth: +1 HLD each [R-1]", fmt.Sprintf("+%d", bonus))
-		}
-	}
 	if !(hasFit && fit.IsMajor()) {
 		tr.check(ntOK, "Sans-Atout jouable : arrêt dans chaque couleur adverse",
 			"notrump playable: a stopper in every opposing suit", "")

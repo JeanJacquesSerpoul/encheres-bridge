@@ -5256,8 +5256,8 @@ func (e *Engine) advanceReopenSuit(p *playerState, s Suit) (Call, meaning) {
 		}
 	}
 	if tr.check(sup >= 3, "3 atouts et plus", "three or more trumps", cards(h, s)) {
-		if bonus := e.fitLengthBonus(p, s); bonus > 0 {
-			hld += bonus
+		if fitLen > 8 {
+			hld += fitLen - 8
 			tr.check(true, "atouts au-delà du huitième : +1 HLD chacun",
 				"trumps beyond the eighth: +1 HLD each", fmt.Sprintf("fit de %d → %d HLD", fitLen, hld))
 		}

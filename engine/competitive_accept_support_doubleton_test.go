@@ -18,11 +18,6 @@ import (
 //
 // TestOpenerDeclinesCompetitiveRaiseGame guards the other side of the rule:
 // the same doubleton in the long-trump hand buys nothing and must not count.
-//
-// Since the trumps beyond the eighth are counted for game [R-1], West no
-// longer needs the invitation: seven spades facing the three East's raise
-// promised make a ten-card fit, and West bids 4S himself. Either road is the
-// game the deal holds; what must not happen is East passing a 3S invitation.
 func TestSupportingHandCountsItsDoubleton(t *testing.T) {
 	const pbn = `[Dealer "S"]
 [Vulnerable "EW"]
@@ -33,10 +28,7 @@ func TestSupportingHandCountsItsDoubleton(t *testing.T) {
 	}
 	calls := NewEngine(d).Run()
 
-	const east, west = 1, 3
-	if w, ok := nthCallOf(calls, west, 2); ok && w.Call == bidSuit(4, Spades) {
-		return
-	}
+	const east = 1
 	n := 0
 	for _, sc := range calls {
 		if sc.Seat != east {

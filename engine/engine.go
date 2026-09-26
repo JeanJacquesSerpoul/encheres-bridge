@@ -396,23 +396,6 @@ func (e *Engine) fitSuit(p *playerState) (Suit, bool) {
 	return best, found
 }
 
-// fitLengthWeight is what each trump beyond the eighth adds to the fit's
-// count [R-1]. A ninth trump is a trick the eight-card count does not see:
-// the side ruffs once more, and the opponents hold one trump fewer.
-const fitLengthWeight = 1
-
-// fitLengthBonus values the known length of the fit in fit [R-1]: the trumps
-// this hand holds plus those partner has promised, fitLengthWeight for each
-// beyond the eighth. Only promised length counts -- partner's extra trumps are
-// his to add -- so the bonus never overstates what the side knows.
-func (e *Engine) fitLengthBonus(p *playerState, fit Suit) int {
-	n := p.hand.Len(fit) + e.ps[partnerOf(p.seat)].shownLens[fit]
-	if n <= 8 {
-		return 0
-	}
-	return (n - 8) * fitLengthWeight
-}
-
 // hasHelp reports whether p's hand can plausibly cover losers in s, as asked
 // by a help-suit game try: an ace or king there, a third-round queen, or
 // shortness to ruff.

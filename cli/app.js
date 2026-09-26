@@ -900,11 +900,11 @@ let selectedGameIdx = 0;
 // selection (styled via CSS) rather than editing the text, so the value
 // sent to the server is never altered.
 //
-// `reveal` additionally opens the raw-text panel, focuses the textarea and
-// scrolls to the block: a browser only paints a text selection when the
-// field is focused, so without this the marker is invisible. Used for an
-// explicit pick in the deal selector; left off while just loading a file,
-// so the panel stays collapsed as before.
+// `reveal` additionally focuses the textarea and scrolls to the block: a
+// browser only paints a text selection when the field is focused, so without
+// this the marker is invisible. It never opens the raw-text panel: a pick in
+// the deal selector reveals the block only if the panel is already open, and
+// opening it with #pbn-toggle-btn reveals the current block.
 // Locates the selected block inside the textarea. Blocks are matched in
 // order, so identical deals in one file still resolve to distinct ranges.
 function selectedGameRange() {
@@ -930,10 +930,8 @@ function highlightSelectedDeal(reveal) {
   if (!range) return;
   const text = textarea.value;
   const { start, end } = range;
-  if (reveal) {
-    setPbnOpen(true);
-    textarea.focus({ preventScroll: true });
-  }
+  if (reveal && $("#pbn-details").hidden) reveal = false;
+  if (reveal) textarea.focus({ preventScroll: true });
   textarea.setSelectionRange(start, end);
   if (reveal) {
     const lineIndex = (text.slice(0, start).match(/\n/g) || []).length;
@@ -2078,8 +2076,13 @@ function setPbnOpen(open) {
   $("#pbn-toggle-btn").setAttribute("aria-expanded", String(open));
 }
 
+// À l'ouverture, un fichier de plusieurs donnes montre celle qui est choisie
+// dans « Donne à utiliser » : c'est le seul moment où le texte apparaît pour
+// elle, le sélecteur ne l'ouvrant plus de lui-même.
 $("#pbn-toggle-btn").addEventListener("click", () => {
-  setPbnOpen($("#pbn-details").hidden);
+  const open = $("#pbn-details").hidden;
+  setPbnOpen(open);
+  if (open) highlightSelectedDeal(true);
 });
 
 function renderBoundsCards() {

@@ -209,6 +209,15 @@ avec un **fit mineur** et Sans-Atout jouable [E-7], la manche visée est 3SA et
 le seuil est **25** ; sans les arrêts, il ne reste que 5♣/5♦ — onze levées — et
 le seuil remonte à **30**. Un fit majeur joue toujours 4M : **27**.
 
+### [E-9c] Fit majeur : 25 H suffisent aussi
+Le seuil de **27 HLD** en majeure compte la distribution des deux mains, et le
+plancher du partenaire a souvent déjà compté la sienne (soutien 12-16 **HLD**) :
+une main plate n'y ajoute que sa propre courte et reste sous un seuil que les
+seuls honneurs atteignent. Avec un fit majeur de huit cartes, **25 H** combinés
+(ses honneurs + le plancher du partenaire) donnent aussi la manche.
+`1♣ – 1♥ – 2♥` avec A842 AQ94 J6 QT6 : 13 + 12 = 25 → **4♥**, et non une
+proposition.
+
 ### [E-9b] La limite du partenaire est déjà la proposition
 Quand l'enchère qui proposerait la manche est **celle que le partenaire vient
 de faire** — sa redemande limite 2SA (18-19), ou sa proposition 3M dans le fit
@@ -1238,6 +1247,16 @@ l'intervention à 1SA nomme en une enchère une forme, un arrêt et une fourchet
 de deux points, et une main qui y entre n'a rien à gagner à la description la
 plus vague. Au-dessus de 18, le contre reprend la main.
 
+
+### [I-4b] 3SA sur un barrage de 3
+Sur une **ouverture de barrage au palier de 3** : **16-20 H**, un **arrêt**
+dans leur couleur, **sans chicane** → **3SA**, naturel. À partir de 18 H, une
+main irrégulière avec un seul arrêt préfère le contre [I-2]. Le barrage a pris la
+place de toute séquence descriptive, et l'arrêt dans la couleur du barreur est
+justement ce que son partenaire ne peut pas avoir : la manche est là en face
+de quelques points. Essayé **avant** le contre 18 H et plus, qui laisserait le
+partenaire deviner la dénomination au palier de 4. `3♦ – ?` avec K854 AT5
+KQJ42 A → **3SA** (le moteur passait).
 ### [I-5] Intervention naturelle à la couleur
 Belle couleur d'au moins 5 cartes, avec **deux honneurs** au moins (A, R, D,
 V ou 10), jamais une couleur nommée par les adversaires — ni **Trèfle dans le
@@ -1305,6 +1324,12 @@ huitième dès 4 cartes en face.
 
 Sur une enchère au palier de 2 : 12-17 H, au plus 2 cartes dans leur couleur,
 3+ partout ailleurs.
+
+### [I-6b] Contre d'appel sur un barrage de 3
+Sur une **ouverture de barrage au palier de 3** : **15-17 H**, au plus 2 cartes
+dans leur couleur, 3 cartes et plus partout ailleurs. Le partenaire répondra au
+palier de 3 ou de 4 : le plancher de 12 du palier de 2 ne suffit plus. À partir
+de 18 H, le contre « toutes distributions » [I-2] s'applique.
 
 ### [I-7] Sinon passe.
 

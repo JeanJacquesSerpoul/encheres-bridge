@@ -209,6 +209,16 @@ avec un **fit mineur** et Sans-Atout jouable [E-7], la manche visée est 3SA et
 le seuil est **25** ; sans les arrêts, il ne reste que 5♣/5♦ — onze levées — et
 le seuil remonte à **30**. Un fit majeur joue toujours 4M : **27**.
 
+### [E-9b] La limite du partenaire est déjà la proposition
+Quand l'enchère qui proposerait la manche est **celle que le partenaire vient
+de faire** — sa redemande limite 2SA (18-19), ou sa proposition 3M dans le fit
+majeur — elle ne peut pas être répétée, et la question n'est plus de proposer
+mais d'accepter. Hors forcing de manche, la décision se prend sur le **milieu
+de sa fourchette** (arrondi vers le haut) : la main plus ce milieu au seuil de
+la manche [E-9] → la manche ; sinon passe. `1♣ – 1♠ – 2SA` avec six points :
+6 + 19 = 25 → **3SA**, là où le moteur passait faute de pouvoir « proposer »
+2SA une seconde fois.
+
 ---
 
 ## 3. Les ouvertures
@@ -820,6 +830,13 @@ Soutien à saut (3M, 11-12 HLD) :
 Après une ouverture mineure et une réponse majeure au palier de 1, ce saut
 arme le **Checkback 3♣** [§8.2].
 
+### [RO-16b] Majeure sixième du répondant face au 2SA limite
+Face à la redemande 2SA (18-19, équilibrée), une majeure **sixième déjà
+nommée** par le répondant fait un fit de huit cartes au moins : la manche se
+joue **4M**, et la sixième carte y est une levée, donc la main se compte en
+**HL** ([E-9b], seuil 25). `1♥ – 1♠ – 2SA` avec Q98742 K8 JT86 5 : 7 HL + 19
+→ **4♠**.
+
 ### [RO-17] 12-14 H, main équilibrée, réponse au palier de 1 → **1SA**.
 Après 1m–1M et 1♥–1♠, ce 1SA arme le **Roudi 2♣** [§8.3].
 Si 1SA est devenu illégal (intervention) : **2SA** à condition d'avoir un arrêt
@@ -872,6 +889,24 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
   Il passe **avant** le changement de couleur au palier de 1 : `1♣ – 1♦ – 2♥`
   et non `1♥` avec 20 HL. Le palier de 1, non forcing, ne peut pas porter une
   main qui a la manche en face de n'importe quelle réponse.
+
+### [RO-19c] Le bicolore économique allonge l'ouverture
+La seconde couleur étant moins chère que la première, l'ouverture en compte au
+moins autant : le bicolore économique (et son saut) enregistre **4 cartes**
+dans la couleur d'ouverture, et non les 3 d'une ouverture mineure.
+`1♦ – 1♠ – 2♣` promet quatre carreaux ; le répondant qui en a quatre et deux
+trèfles trouve le fit de huit cartes (préférence ou proposition), au lieu de
+passer dans un 4-2 à trèfle. La **préférence** pour la première couleur est
+prise quand elle est le fit strictement meilleur ; à longueurs annoncées
+égales (4-4), des longueurs égales chez le répondant laissent l'enchère où
+elle est.
+
+### [RO-19d] Refuser 2SA avec une main irrégulière
+Sur la proposition 2SA du partenaire, l'ouvreur minimum qui a une **chicane**
+(ou un singleton dans la couleur du partenaire) et une **sixième** déjà nommée
+ne passe pas : il refuse en revenant à **3 de sa couleur**, non forcing.
+`1♦ – 1♠ – 2♣ – 2SA` avec — K84 AT7654 AQT7 → **3♦** ; le Sans-Atout
+partiel chute là où le carreau gagne.
 
 ### [RO-19b] Réponses au bicolore cher
 Le bicolore cher est **auto-forcing**. Toutes les réponses sont **forcing de

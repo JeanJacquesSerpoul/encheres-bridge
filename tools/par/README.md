@@ -25,6 +25,21 @@ La sortie va dans `tools/par/out/` (non versionné) :
 Une même graine redonne exactement les mêmes donnes, donc les mêmes enchères et
 le même rapport : deux révisions du moteur se comparent ligne à ligne.
 
+## Comparer deux révisions du moteur
+
+```bash
+cp -r tools/par/out /tmp/avant       # audit de référence
+# … modification du moteur, puis nouvel audit avec la même graine
+tools/par/run.sh
+node tools/par/compare.js /tmp/avant/par.json tools/par/out/par.json
+```
+
+[`compare.js`](compare.js) vérifie que les deux audits portent sur les mêmes
+donnes, puis affiche l'écart moyen au par avant et après, les six catégories
+(nombre de donnes et IMP qu'elles coûtent) et les donnes dont l'enchère a
+changé : les plus grands gains, puis les plus grandes pertes (`--all` pour la
+liste complète).
+
 ## Les deux moitiés
 
 **Les enchères** viennent de `TestParAuditDump` (voir

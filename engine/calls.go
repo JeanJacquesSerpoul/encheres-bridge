@@ -74,6 +74,7 @@ type meaning struct {
 	lens                   [4]int
 	short                  [4]bool // suits this bid discloses as a singleton or void
 	forcing                bool
+	passForbidden          bool    // partner may not pass, though the bid is otherwise read as natural and non-forcing (opener's one-level new suit)
 	invite                 bool    // invitation to game
 	slamInvite             bool    // quantitative slam try
 	secondSuitTry          bool    // second five-card suit named at the four level over partner's 3NT, a slam try [S-13c]

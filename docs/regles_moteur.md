@@ -893,7 +893,12 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
 ### [RO-19] Deuxième couleur (4 cartes et plus)
 - **Changement de couleur au palier de 1** (1♣ – 1♥ – 1♠) → montre la forme,
   dénie un saut ou un bicolore cher, **ne dit rien du niveau de points** :
-  l'ouvreur précisera sa force au tour suivant. Non forcing.
+  l'ouvreur précisera sa force au tour suivant. **Forcing un tour** face à un
+  répondant non passé : il ne peut pas passer, et dispose toujours d'une
+  enchère bon marché (1SA d'attente, préférence, soutien). Seul le passe lui
+  est retiré ; l'enchère reste lue comme naturelle, propositions comprises.
+  Face à un répondant passé, dont la réponse est déjà limitée, elle reste non
+  forcing.
 - **Bicolore économique** (palier de 2 dans une couleur moins chère que
   l'ouverture) → **12-17**, non forcing. Le partenaire est libre de le passer :
   l'enchère ne peut donc pas porter en plus les mains qui veulent l'entendre
@@ -916,8 +921,8 @@ que l'ouverture (12-16 HLD), et le saut à la manche se fait à partir de
   [E-1c].
 - **Bicolore à saut** (palier ≤ 3), **20 HL et plus** → forcing de manche.
   Il passe **avant** le changement de couleur au palier de 1 : `1♣ – 1♦ – 2♥`
-  et non `1♥` avec 20 HL. Le palier de 1, non forcing, ne peut pas porter une
-  main qui a la manche en face de n'importe quelle réponse.
+  et non `1♥` avec 20 HL. Le palier de 1, forcing un tour seulement, ne peut
+  pas porter une main qui a la manche en face de n'importe quelle réponse.
 
 ### [RO-19c] Le bicolore économique allonge l'ouverture
 La seconde couleur étant moins chère que la première, l'ouverture en compte au

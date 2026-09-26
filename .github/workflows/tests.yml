@@ -1,0 +1,31 @@
+# Tests du dépôt sur chaque pull request et chaque poussée.
+#
+# pages.yml et wasm.yml ne testent qu'après la fusion sur main : une PR qui
+# casse le moteur n'était vue qu'une fois fusionnée. Ce workflow lance les
+# mêmes tests plus tôt, dont le banc de non-régression contre le par
+# (engine/par_bench_test.go, voir tools/par/README.md) : il échoue dès que
+# l'écart total au par augmente sur les 7 000 donnes du banc.
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main] # main est déjà testé par pages.yml et wasm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: go test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+
+      - name: Tests du moteur (dont le banc du par)
+        run: go test ./...

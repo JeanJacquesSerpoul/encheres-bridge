@@ -355,6 +355,8 @@ Le rapport (`tools/par/out/rapport.html`) donne la vue d'ensemble — contrats t
 
 À graine égale les donnes sont les mêmes, donc deux révisions du moteur se comparent ligne à ligne. Le harnais Go est ignoré tant que `PAR_AUDIT_OUT` ne désigne pas un fichier : `go test ./...` n'en voit rien. Mode d'emploi complet dans [tools/par/README.md](tools/par/README.md).
 
+**Banc de non-régression.** 7 000 donnes dont la table double-mort et le par sont précalculés ([engine/testdata/par_bench.jsonl.gz](engine/testdata/par_bench.jsonl.gz)) : `go test ./...` rejoue leurs enchères en moins d'une seconde et **échoue si l'écart total au par augmente**. Les tests tournent sur chaque pull request (workflow `Tests`). Voir [tools/par/README.md](tools/par/README.md#banc-de-non-régression).
+
 ---
 
 ## Format de la réponse du moteur

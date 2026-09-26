@@ -25,6 +25,58 @@ La sortie va dans `tools/par/out/` (non versionné) :
 Une même graine redonne exactement les mêmes donnes, donc les mêmes enchères et
 le même rapport : deux révisions du moteur se comparent ligne à ligne.
 
+## Banc de non-régression
+
+La table de levées double-mort et le par ne dépendent **que de la donne**, pas
+du moteur. Le banc les garde une fois pour toutes :
+[`engine/testdata/par_bench.jsonl.gz`](../../engine/testdata/par_bench.jsonl.gz)
+contient 7 000 donnes (graines 20260906, 42 et 7), leurs tables et leur par.
+[`TestParBenchmark`](../../engine/par_bench_test.go) rejoue les enchères avec
+le moteur courant, note chaque contrat et fait le total des écarts au par en
+IMP. Le tout prend moins d'une seconde, sans solveur.
+
+**La règle** : le moteur est déterministe, le total est exact, et le test
+échoue dès qu'il dépasse la référence
+([`par_bench_baseline.json`](../../engine/testdata/par_bench_baseline.json)).
+Un total plus bas passe, et le test rappelle de verrouiller le gain. Le banc
+fait partie de `go test ./...`, qui tourne sur chaque PR (workflow `Tests`).
+
+```bash
+go test -run TestParBenchmark -v ./engine                   # le total et les six catégories
+PAR_BENCH_UPDATE=1 go test -run TestParBenchmark ./engine   # réécrire la référence
+```
+
+Réécrire la référence est le seul moyen de faire accepter une dégradation : le
+changement de `par_bench_baseline.json` apparaît alors dans le diff de la PR,
+avec son chiffre.
+
+**Comparer deux versions du moteur en quelques secondes** : `PAR_BENCH_OUT`
+écrit les donnes rejouées au format de `par.json`, que lit
+[`compare.js`](compare.js).
+
+```bash
+PAR_BENCH_OUT=/tmp/avant.json go test -run TestParBenchmark -count=1 ./engine
+# … modification du moteur …
+PAR_BENCH_OUT=/tmp/apres.json go test -run TestParBenchmark -count=1 ./engine
+node tools/par/compare.js /tmp/avant.json /tmp/apres.json
+```
+
+**Ajouter des donnes** : lancer un audit avec une nouvelle graine, puis
+reconstruire le fichier avec [`bench-export.js`](bench-export.js) en lui
+passant chaque graine avec son `par.json`. Le moteur n'entre pas dans le
+fichier : seules comptent la donne, la table et le par.
+
+```bash
+tools/par/run.sh 5000 99
+node tools/par/bench-export.js engine/testdata/par_bench.jsonl.gz \
+  20260906=… 42=… 7=… 99=tools/par/out/par.json
+PAR_BENCH_UPDATE=1 go test -run TestParBenchmark ./engine
+```
+
+Garder des graines qui n'ont servi à aucun réglage : un seuil calibré sur une
+partie du banc y gagne mécaniquement, et seules les autres graines disent si
+le gain est réel.
+
 ## Comparer deux révisions du moteur
 
 ```bash

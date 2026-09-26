@@ -1789,6 +1789,22 @@ func init() {
 						e.bw[ctx.side] = st
 						return c, mn, true
 					}
+					// Over five of the minor trump, every control bid lands
+					// above the game and leaves no sign-off but six: it is a
+					// slam commitment, only worth making on a certain slam --
+					// the cushion the above-game probe below demands (34 and
+					// a partner limited to a narrow zone). 1C - 1H - 4C - 5C
+					// with A7 9 KQ76 AKJT82 facing a heuristic game passes:
+					// 5D would have bought 6C, off the heart ace and a spade.
+					if !fit.IsMajor() && !gameOfTrump(fit).higherThan(last) {
+						certain := cMin >= 34 && pm != nil && pm.minPts >= 0 && pm.maxPts >= 0 && pm.maxPts-pm.minPts <= 4
+						if !tr.check(certain,
+							"au-dessus de 5 en mineure, un contrôle engage le chelem : seulement s'il est certain (34 HLD et un partenaire limité)",
+							"above five of the minor, a control commits to slam: only when it is certain (34 HLD and a limited partner)",
+							fmt.Sprintf("%d HLD", cMin)) {
+							return Call{}, meaning{}, false
+						}
+					}
 					// Every side suit covered but 4SA already gone (the auction
 					// is past it): keep describing with control bids instead of
 					// giving up -- the exchange finds the slam or signs off on

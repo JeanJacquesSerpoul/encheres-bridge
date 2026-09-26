@@ -2739,7 +2739,7 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 	}
 
 	// Forced to bid?
-	if tr.check(pm != nil && pm.forcing && partnerJustActed && ours,
+	if tr.check(pm != nil && (pm.forcing || pm.passForbidden) && partnerJustActed && ours,
 		"le partenaire vient de faire une enchère forcing → enchère au plus bas palier",
 		"partner has just made a forcing bid → cheapest constructive call", "") {
 		return e.cheapestConstructive(p, fit, hasFit)

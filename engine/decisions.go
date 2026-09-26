@@ -3923,7 +3923,19 @@ func (e *Engine) rebidOverNewSuit(p *playerState, os, rs Suit, respLevel int) (C
 			// level -- opener clarifies his strength next round. Only a
 			// two-level second suit carries the "bicolore économique" 12-17
 			// message [RO-19].
-			return c, m(-1, -1, "changement de couleur au palier de 1", "new suit at the one level").withLen(s, 4)
+			//
+			// Facing a responder who has not passed, it is forcing for one
+			// round all the same: 1C-1H-1S leaves him a cheap way back (1NT,
+			// a preference) and the opener's range is still open up to 19.
+			// Only the pass is taken away -- partner otherwise reads the bid
+			// as the natural one it is, invitations included. Facing a passed
+			// hand the response is itself limited and he may pass.
+			mn := m(-1, -1, "changement de couleur au palier de 1", "new suit at the one level").withLen(s, 4)
+			if !e.passedBeforeOpening(partnerOf(p.seat)) {
+				mn.fr, mn.en = "changement de couleur au palier de 1, forcing", "new suit at the one level, forcing"
+				mn.passForbidden = true
+			}
+			return c, mn
 		}
 		if c.Level == 2 && s.Strain() < os.Strain() {
 			tr.check(true, "4 cartes à "+suitSymbol[s]+", moins chère que l'ouverture → bicolore économique [RO-19]",

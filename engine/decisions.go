@@ -3612,11 +3612,24 @@ func (e *Engine) reverseOverOneNT(p *playerState, os Suit) Call {
 // [RM-5] records the game force: the fitted "changement de couleur avant
 // soutien" [RM-4] does not, and without this flag an 18 HL opener jumped over
 // it (1S-2C-3D) where [RO-19] keeps the cheap 2D.
+//
+// The second suit ranks below the opening, so the opening suit is at least as
+// long as it: four cards at least, whatever the opening promised on its own
+// [RO-19c]. A 1D opening says "three or more"; 1D then 2C says "four or more",
+// and without that inference partner's preference for the diamonds -- four
+// facing four -- was never found, and 1D-1S-2C died in a 4-2 club fit.
 func (e *Engine) cheapSecondSuit(p *playerState, s Suit, cheap Call, hl int, twoOverOne bool) (Call, meaning) {
-	economic := m(12, 17, "bicolore économique", "cheap second suit, 12-17").withLen(s, 4)
+	lens := func(mn meaning) meaning {
+		mn = mn.withLen(s, 4)
+		if fb, ok := e.firstBidBy(p.seat); ok && fb.IsBid() && fb.Strain < SNoTrump && Suit(fb.Strain) != s {
+			mn = mn.withLen(Suit(fb.Strain), 4)
+		}
+		return mn
+	}
+	economic := lens(m(12, 17, "bicolore économique", "cheap second suit, 12-17"))
 	if e.gameForce[sideOf(p.seat)] || twoOverOne {
-		return cheap, m(12, -1, "bicolore économique, sans plafond : le forcing de manche est déjà engagé",
-			"cheap second suit, unlimited: the auction is already game forcing").withLen(s, 4)
+		return cheap, lens(m(12, -1, "bicolore économique, sans plafond : le forcing de manche est déjà engagé",
+			"cheap second suit, unlimited: the auction is already game forcing"))
 	}
 	if hl <= 17 {
 		return cheap, economic
@@ -3628,7 +3641,7 @@ func (e *Engine) cheapSecondSuit(p *playerState, s Suit, cheap Call, hl int, two
 	if hl >= 20 {
 		e.gameForce[sideOf(p.seat)] = true
 	}
-	return jump, m(18, 23, "saut dans la seconde couleur, forcing", "jump in the second suit, forcing").withLen(s, 4).asForcing()
+	return jump, lens(m(18, 23, "saut dans la seconde couleur, forcing", "jump in the second suit, forcing")).asForcing()
 }
 
 // hldAgainstTheirBidding values the hand for the agreed trump, then takes

@@ -1653,6 +1653,34 @@ func init() {
 						}
 					}
 				}
+				// The same stranding in notrump: a 2NT invitation passed by a
+				// hand with a void (or a singleton in partner's suit) and a
+				// six-card suit leaves the side in a notrump partscore the
+				// short suit runs off, when the long suit plays [RO-19d]. 1D
+				// 1S 2C 2NT with — K84 AT7654 AQT7 goes back to 3D.
+				if !hasFit && last == bid(2, SNoTrump) && !p.hand.IsRegular() && !p.hand.IsSemiRegular() {
+					short := false
+					for s := Clubs; s <= Spades; s++ {
+						if p.hand.Len(s) == 0 || (p.hand.Len(s) == 1 && partner.shownLens[s] >= 4) {
+							short = true
+						}
+					}
+					long, longLen := Clubs, 0
+					for s := Clubs; s <= Spades; s++ {
+						if p.shownLens[s] >= 3 && p.hand.Len(s) > longLen {
+							long, longLen = s, p.hand.Len(s)
+						}
+					}
+					if short && longLen >= 6 {
+						c := bidSuit(3, long)
+						if tr.check(e.legal(p.seat, c),
+							"refuser le Sans-Atout : courte dans une couleur et sixième, retour à sa couleur au palier de 3",
+							"decline notrump: short suit and a six-card suit, back to the own suit at the three level", shape(p.hand)) {
+							return c, m(-1, declineMax, "refuse la proposition, main irrégulière : retour à sa sixième",
+								"declines the invitation, unbalanced: back to the six-card suit").withLen(long, longLen), true
+						}
+					}
+				}
 				tr.note("refuser → Passe", "decline → Pass")
 				return passCall, m(-1, declineMax, "refuse la proposition, minimum", "declines the invitation, minimum"), true
 			},
@@ -2572,6 +2600,48 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 				fmt.Sprintf("%d H + %d = %d", p.hand.H(), partner.shownMax, cMaxNT))
 			canInvite = false
 		}
+		// The invitation we would make is the very bid partner has just made:
+		// his own limit bid (1C-1S-2NT, 18-19) is already the proposal, and
+		// the question left is whether to accept it. Re-bidding it is
+		// impossible, and passing it on the ground that it "still invites"
+		// threw away 24-25 point games: six points facing 18-19 left in 2NT.
+		// Decide on the middle of partner's announced range [E-9b].
+		if canInvite && c == last && ctx.lastSeat == partner.seat && pm != nil && !pm.forcing && !e.gameForce[side] &&
+			(c.Strain == SNoTrump || pm.invite && hasFit && fit.IsMajor() && c.Strain == fit.Strain()) {
+			val, valUnit := own, unit
+			game := bid(3, SNoTrump)
+			switch {
+			case c.Strain != SNoTrump:
+				game = bidSuit(4, fit)
+			case hasLongMajor:
+				// A six-card major already bid facing a balanced notrump
+				// limit: partner holds two of them at least, the fit is
+				// eight cards, and the game belongs in the major [RO-16b].
+				// The sixth card is a trick there, so the hand counts its
+				// length points.
+				game = bidSuit(4, longMajor)
+				val, valUnit = p.hand.HL(), "HL"
+			default:
+				val, valUnit = p.hand.H(), "H"
+			}
+			mid := (partner.shownMin + partner.shownMax + 1) / 2
+			gFR, gEN := callSym(game)
+			lFR, lEN := callSym(c)
+			if tr.check(val+mid >= threshold && e.legal(p.seat, game),
+				fmt.Sprintf("le partenaire a déjà proposé (%s) : le milieu de sa fourchette atteint la manche (%d) → %s", lFR, threshold, gFR),
+				fmt.Sprintf("partner has already invited (%s): the middle of his range reaches game (%d) → %s", lEN, threshold, gEN),
+				fmt.Sprintf("%d %s + %d = %d", val, valUnit, mid, val+mid)) {
+				mn := m(threshold-partner.shownMax, -1, "accepte la limite du partenaire : la manche", "accepts partner's limit bid: game")
+				if game.Strain != SNoTrump {
+					mn = mn.withLen(Suit(game.Strain), p.hand.Len(Suit(game.Strain)))
+				}
+				return game, mn
+			}
+			tr.note("le partenaire a déjà proposé, le milieu de sa fourchette reste sous la manche → Passe",
+				"partner has already invited, the middle of his range stays below game → Pass")
+			return passCall, m(-1, -1, "la limite du partenaire convient, la manche est trop loin",
+				"partner's limit bid stands, game is out of reach")
+		}
 		if canInvite && raisesTheLevel && belowInviteZone {
 			tr.check(false, fmt.Sprintf("la main vaut elle-même une proposition (%d et plus)", inviteFloor),
 				fmt.Sprintf("the hand is itself worth an invitation (%d+)", inviteFloor), pts(own, unit))
@@ -2782,15 +2852,18 @@ func (e *Engine) preferenceBack(ctx *concludeCtx) (Call, meaning, bool) {
 		return Call{}, meaning{}, false
 	}
 	first, second := Suit(fb.Strain), Suit(last.Strain)
-	// Only a first suit known to be the longer one is worth going back to:
+	// Only a first suit known to be at least as long is worth going back to:
 	// the opening major promises five cards, the second suit four. A minor
-	// opening, promising three, tells us nothing to prefer.
-	if partner.shownLens[first] < 5 || partner.shownLens[second] < 4 ||
-		partner.shownLens[first] <= partner.shownLens[second] {
+	// opening followed by a cheaper second suit promises four [RO-19c]: the
+	// two suits may then be 4-4, and the preference is only taken when our
+	// own length makes the first suit the strictly better fit (4-2 against
+	// 2-4 sends 1D-1S-2C back to 2D; 3-3 leaves it in clubs).
+	fl, sl := partner.shownLens[first], partner.shownLens[second]
+	if fl < 4 || sl < 4 || fl < sl {
 		return Call{}, meaning{}, false
 	}
-	if p.hand.Len(first) < 2 ||
-		p.hand.Len(first)+partner.shownLens[first] < p.hand.Len(second)+partner.shownLens[second] {
+	ownFirst, ownSecond := p.hand.Len(first)+fl, p.hand.Len(second)+sl
+	if p.hand.Len(first) < 2 || ownFirst < ownSecond || (fl == sl && ownFirst == ownSecond) {
 		return Call{}, meaning{}, false
 	}
 	c := bidSuit(last.Level, first)

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# openrouter_proxy.sh — lance le serveur IA précompilé (bin/openrouter_proxy,
-# Linux amd64) sur http://localhost:<port>/. Ctrl+C l'arrête.
+# openrouter_proxy.sh — lance le serveur IA compilé par build-proxy.sh
+# (bin/openrouter_proxy, Linux amd64) sur http://localhost:<port>/. Ctrl+C l'arrête.
 #
 # Le serveur lit son .env dans le dossier courant : le script se place donc
 # dans openrouter_proxy/, où se trouve .env (à copier depuis .env.example).
@@ -46,7 +46,7 @@ case "${OSTYPE:-}" in
     msys*|cygwin*|win*) bin="$bindir/openrouter_proxy.exe" ;;
 esac
 
-[ -f "$bin" ] || { echo "Binaire introuvable : $bin (make bin le recompile)." >&2; exit 1; }
+[ -f "$bin" ] || { echo "Binaire introuvable : $bin (lancez d'abord build-proxy.sh ou make bin)." >&2; exit 1; }
 # Un clone ou une archive peut perdre le bit d'exécution.
 [ -x "$bin" ] || chmod +x "$bin"
 

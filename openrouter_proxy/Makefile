@@ -27,7 +27,7 @@ build:
 	$(SET_LINUX) go build $(LDFLAGS) -o dist/$(BINARY) .
 	$(SET_WIN) go build $(LDFLAGS) -o dist/$(BINARY).exe .
 
-## Rebuild the versioned binaries of bin/ (launched by bin/openrouter_proxy.sh / .ps1).
+## Build the (unversioned) binaries of bin/ (launched by bin/openrouter_proxy.sh / .ps1).
 ## build-proxy.sh and build-proxy.ps1 do the same without make.
 bin:
 	$(SET_LINUX) go build -trimpath $(LDFLAGS) -o bin/$(BINARY) .

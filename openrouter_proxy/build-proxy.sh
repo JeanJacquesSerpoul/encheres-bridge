@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # build-proxy.sh — compile le serveur IA dans bin/ : bin/openrouter_proxy
-# (linux/amd64) et bin/openrouter_proxy.exe (windows/amd64). Les deux sont
-# versionnés : ce sont eux que lancent bin/openrouter_proxy.sh et
-# bin/openrouter_proxy.ps1, sans Go ni Docker.
+# (linux/amd64) et bin/openrouter_proxy.exe (windows/amd64), que lancent
+# ensuite bin/openrouter_proxy.sh et bin/openrouter_proxy.ps1. Ils ne sont pas
+# versionnés : à lancer une fois après un clone, puis après chaque
+# modification des sources.
 #
 # Mêmes drapeaux que la cible « make bin » du Makefile : ce script est la voie
 # sans make, sous Windows comme sous Linux.
@@ -11,7 +12,7 @@
 set -euo pipefail
 
 usage() {
-    sed -n '2,10p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+    sed -n '2,11p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
 }
 
 while getopts "h" opt; do
@@ -27,7 +28,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "$root/bin"
 
 # -trimpath : aucun chemin de la machine de compilation ne doit se retrouver
-# dans un binaire commité. -s -w : sans table des symboles ni informations de
+# dans un binaire distribué. -s -w : sans table des symboles ni informations de
 # débogage.
 ldflags="-s -w"
 

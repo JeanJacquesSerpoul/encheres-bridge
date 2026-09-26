@@ -1,4 +1,4 @@
-﻿# openrouter_proxy.ps1 — lance le serveur IA précompilé
+﻿# openrouter_proxy.ps1 — lance le serveur IA compilé par build-proxy.ps1
 # (bin\openrouter_proxy.exe, Windows amd64) sur http://localhost:<port>/.
 # Ctrl+C l'arrête.
 #
@@ -18,7 +18,7 @@ $root = Split-Path -Parent $PSScriptRoot
 $bin = Join-Path $PSScriptRoot "openrouter_proxy.exe"
 
 if (-not (Test-Path $bin)) {
-    throw "Binaire introuvable : $bin (make bin le recompile)."
+    throw "Binaire introuvable : $bin (lancez d'abord build-proxy.ps1 ou make bin)."
 }
 if (-not (Test-Path (Join-Path $root ".env")) -and -not $env:OPENROUTER_API_KEY) {
     throw "Ni $root\.env ni OPENROUTER_API_KEY : copiez .env.example en .env et renseignez la clé."

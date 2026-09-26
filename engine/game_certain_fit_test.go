@@ -33,3 +33,19 @@ func TestGameOnlyOnCertainFit(t *testing.T) {
 	}
 	t.Fatalf("West made fewer than two calls\nauction: %s", formatAuction(calls))
 }
+
+// TestNoControlsOverFiveOfTheMinor continues the same deal: over West's 5C,
+// East's 5D cue-bid left no sign-off but 6C, off the heart ace and a spade.
+// Above five of the minor a control commits to slam, so without a certain
+// one East passes and the side plays 5C.
+func TestNoControlsOverFiveOfTheMinor(t *testing.T) {
+	d, err := ParsePBN([]byte(`[Dealer "N"][Vulnerable "NS"][Deal "N:54.AT87.AJT9843. A7.9.KQ76.AKJT82 KQJT96.42.5.9653 832.KQJ653.2.Q74"]`))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+	contract, _, _ := finalContract(calls)
+	if got := contract.Format("fr"); got != "5T" {
+		t.Fatalf("final contract = %s, want 5T\nauction: %s", got, formatAuction(calls))
+	}
+}

@@ -38,7 +38,10 @@ cd bin && docker compose up -d
 ```
 
 Les scripts se placent dans ce dossier pour que `.env` soit lu. Après une
-modification des sources, `make bin` recompile les deux exécutables.
+modification des sources, `make bin` recompile les deux exécutables — ou, sans
+make, [build-proxy.sh](build-proxy.sh) sous Linux ou Git Bash et
+[build-proxy.ps1](build-proxy.ps1) sous Windows : mêmes drapeaux, mêmes
+fichiers produits dans `bin/`.
 
 Le client vise ce port par défaut : dans l'en-tête, **Serveur IA → Local** vaut
 `http://localhost:9013`. Tant que `/health` répond, les boutons appareil photo

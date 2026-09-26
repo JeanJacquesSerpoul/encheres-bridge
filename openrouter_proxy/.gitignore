@@ -1,5 +1,5 @@
 .env
 dist/
-/openrouter_proxy
-/openrouter_proxy.exe
+/bin/openrouter_proxy
+/bin/openrouter_proxy.exe
 *.log

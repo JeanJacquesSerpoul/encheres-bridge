@@ -173,6 +173,16 @@ table.ddt td{padding:3px 9px;text-align:center;border-top:1px solid var(--rule-2
 table.ddt td.hi{background:var(--accent-soft);color:var(--accent);font-weight:600}
 table.ddt td.hip{box-shadow:inset 0 0 0 1.5px var(--ink-3)}
 .dnote{font-size:11.5px;color:var(--ink-3);margin-top:9px;max-width:24ch;line-height:1.45}
+.pbn{margin-top:22px}
+.pbn .dt{display:flex;align-items:center;gap:12px}
+.pbn pre{margin:0;padding:10px 12px;background:var(--surface);border:1px solid var(--rule);
+  border-radius:2px;font-family:var(--mono);font-size:12px;line-height:1.5;
+  white-space:pre-wrap;overflow-wrap:anywhere;user-select:all}
+.pbn button{appearance:none;border:1px solid var(--rule);background:var(--surface);
+  border-radius:2px;padding:1px 8px;font:inherit;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-2);cursor:pointer}
+.pbn button:hover{background:var(--raise);color:var(--ink)}
+.pbn button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--rule);
   font-size:12.5px;color:var(--ink-3);max-width:74ch}
 footer p{margin:0 0 10px}
@@ -378,6 +388,34 @@ function ddHTML(d){
   }
   return h+"</table>";
 }
+var PBN_STRAIN=["C","D","H","S","NT"];
+var PBN_CALL={T:"C",K:"D",C:"H",P:"S",SA:"NT"};
+function pbnText(d){
+  var toks=d.a?d.a.split(" ").map(function(t){return t.split(":")[1];}):[];
+  var calls=toks.map(function(t){
+    if(t==="Passe") return "Pass";
+    if(t==="Contre") return "X";
+    if(t==="Surcontre") return "XX";
+    return t.charAt(0)+(PBN_CALL[t.slice(1)]||t.slice(1));
+  });
+  // Contre ou surcontre : le dernier des deux annoncé après la dernière enchère.
+  var dbl="";
+  toks.forEach(function(t){
+    if(t==="Contre") dbl="X"; else if(t==="Surcontre") dbl="XX";
+    else if(t!=="Passe") dbl="";
+  });
+  var lines=[
+    '[Board "'+d.b+'"]',
+    '[Dealer "'+d.d+'"]',
+    '[Vulnerable "'+d.v+'"]',
+    '[Deal "'+d.p+'"]',
+    '[Declarer "'+(d.lv?["N","E","S","W"][d.dc]:"")+'"]',
+    '[Contract "'+(d.lv?d.lv+PBN_STRAIN[d.st]+dbl:"Pass")+'"]',
+    '[Auction "'+d.d+'"]'
+  ];
+  for(var i=0;i<calls.length;i+=4) lines.push(calls.slice(i,i+4).join(" "));
+  return lines.join("\n");
+}
 function detailHTML(d){
   var hands=d.p.slice(2).split(" ").map(function(h){return h.split(".");});
   var facts=[];
@@ -399,7 +437,9 @@ function detailHTML(d){
     "<div>"+'<div class="dt">Enchères</div>'+auctionHTML(d)+"</div>"+
     "<div>"+'<div class="dt">Levées double-mort</div>'+ddHTML(d)+
       '<div class="dnote">Fond vert : le contrat effectivement joué. Encadré : la case du contrat du par.</div></div>'+
-  "</div>";
+  "</div>"+
+  '<div class="pbn"><div class="dt">PBN <button type="button" class="copy">copier</button></div>'+
+    "<pre>"+esc(pbnText(d))+"</pre></div>";
 }
 function rowHTML(d){
   return '<tr class="row" data-b="'+d.b+'">'+
@@ -442,6 +482,13 @@ document.getElementById("cats").addEventListener("click",function(e){
 });
 moreEl.addEventListener("click",function(){render(false);});
 rowsEl.addEventListener("click",function(e){
+  var cp=e.target.closest("button.copy");
+  if(cp){
+    var txt=cp.closest(".pbn").querySelector("pre").textContent;
+    var done=function(){cp.textContent="copié";setTimeout(function(){cp.textContent="copier";},1200);};
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(done,function(){});
+    return;
+  }
   var tr=e.target.closest("tr.row"); if(!tr) return;
   var nx=tr.nextElementSibling;
   if(nx&&nx.className==="detail"){nx.remove();return;}

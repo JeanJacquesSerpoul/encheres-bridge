@@ -208,6 +208,7 @@ const UI_TEXT = {
     parEmpty: "Le PAR s'affiche ici pour une donne complète dont les enchères sont calculées.",
     bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
     pbnCopy: "Copier le texte PBN",
+    pbnPaste: "Coller le presse-papiers dans le texte PBN",
     pbnClose: "Masquer le texte PBN",
     shareLink: "Copier le lien de cette donne",
     shareCopied: "Lien de la donne copié",
@@ -215,6 +216,10 @@ const UI_TEXT = {
     printResult: "Imprimer le résultat",
     pbnCopied: "Texte PBN copié",
     pbnCopyFailed: "Copie impossible : sélectionnez le texte et copiez-le à la main.",
+    pbnPasted: "Texte collé",
+    pbnPasteFailed:
+      "Collage impossible : collez le texte dans la zone avec Ctrl+V " +
+      "(le navigateur ne laisse pas toujours la page lire le presse-papiers).",
     pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
     dealToUse: "Donne à utiliser",
     dealWord: "Donne",
@@ -380,6 +385,7 @@ const UI_TEXT = {
     parEmpty: "The par shows up here for a complete deal whose auction has been computed.",
     bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
     pbnCopy: "Copy the PBN text",
+    pbnPaste: "Paste the clipboard into the PBN text",
     pbnClose: "Hide the PBN text",
     shareLink: "Copy a link to this deal",
     shareCopied: "Deal link copied",
@@ -387,6 +393,10 @@ const UI_TEXT = {
     printResult: "Print the result",
     pbnCopied: "PBN text copied",
     pbnCopyFailed: "Could not copy: select the text and copy it by hand.",
+    pbnPasted: "Text pasted",
+    pbnPasteFailed:
+      "Could not paste: paste the text into the box with Ctrl+V " +
+      "(the browser does not always let the page read the clipboard).",
     pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
     dealToUse: "Deal to use",
     dealWord: "Deal",
@@ -1816,6 +1826,15 @@ const CHECK_SVG = `${SVG_OPEN}
   <path d="M5 12.5 10 17 19 7"/>
 </svg>`;
 
+// Un presse-papiers où entre une flèche : coller. Le dessin dit où va le texte,
+// là où les deux feuilles décalées de Copier disent d'où il vient.
+const PASTE_SVG = `${SVG_OPEN}
+  <path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+  <path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+  <path d="M16 4h2a2 2 0 0 1 2 2v4"/>
+  <path d="M21 14H11"/><path d="m15 10-4 4 4 4"/>
+</svg>`;
+
 // Une flèche vers le bas au-dessus d'un plateau : le fichier est téléchargé.
 const EXPORT_SVG = `${SVG_OPEN}
   <path d="M12 3v11"/><path d="m8 10 4 4 4-4"/>
@@ -1944,6 +1963,7 @@ function renderDealActions() {
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave, true);
   setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle, true);
   setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
+  setCommandButton("#pbn-paste-btn", PASTE_SVG, t.pbnPaste);
   setCommandButton("#pbn-close-btn", CLOSE_SVG, t.pbnClose);
   setCommandButton("#share-btn", LINK_SVG, t.shareLink, true);
   setCommandButton("#print-btn", PRINT_SVG, t.printResult);
@@ -2007,6 +2027,38 @@ async function copyPbn() {
   flashCopied($("#pbn-copy-btn"), ok, t.pbnCopied, t.pbnCopyFailed);
 }
 
+// Colle le presse-papiers dans le texte PBN, comme le ferait Ctrl+V : le texte
+// s'insère au curseur, ou remplace tout le texte quand la zone n'a pas le focus
+// — un simple clic sur le bouton ne place aucun curseur, et une insertion en
+// tête donnerait deux donnes à la suite. L'événement `input` rejoue ensuite la
+// mise à jour habituelle, celle qui redessine le tableau de cartes.
+async function pastePbn() {
+  const t = UI_TEXT[$("#lang").value];
+  const btn = $("#pbn-paste-btn");
+  const textarea = $("#pbn");
+  let text = "";
+  try {
+    text = await navigator.clipboard.readText();
+  } catch (err) {
+    // Presse-papiers refusé (contexte non sûr, ou permission) : traité plus
+    // bas comme un presse-papiers vide.
+    text = "";
+  }
+  if (!text) {
+    // Rien à coller : la zone prend le focus, le clavier reste possible.
+    textarea.focus();
+    flashCopied(btn, false, t.pbnPasted, t.pbnPasteFailed);
+    return;
+  }
+  if (document.activeElement === textarea) {
+    textarea.setRangeText(text, textarea.selectionStart, textarea.selectionEnd, "end");
+  } else {
+    textarea.value = text;
+  }
+  textarea.dispatchEvent(new Event("input", { bubbles: true }));
+  flashCopied(btn, true, t.pbnPasted, t.pbnPasteFailed);
+}
+
 // ---------- partage ----------
 //
 // Le lien porte la donne sélectionnée dans son fragment (#pbn=…) : le fragment
@@ -2066,6 +2118,7 @@ window.addEventListener("beforeprint", () => {
 window.addEventListener("afterprint", applyTheme);
 
 $("#pbn-copy-btn").addEventListener("click", copyPbn);
+$("#pbn-paste-btn").addEventListener("click", pastePbn);
 // Le texte disparaît sous le focus : il revient au menu qui l'a ouvert.
 $("#pbn-close-btn").addEventListener("click", () => {
   setPbnOpen(false);

@@ -1088,6 +1088,11 @@ $("#deal-select").addEventListener("change", () => {
 $("#pbn").addEventListener("input", () => {
   if (writingPbn) return;
   refreshDealSelector(false);
+  // Le texte corrigé décrit une autre donne : le contrat et l'analyse affichés
+  // ne valent plus pour elle. Le résultat se referme donc, comme lorsqu'une
+  // carte est déplacée dans le panneau — et les enchères de la donne corrigée
+  // se recalculent d'elles-mêmes une fois le résultat parti.
+  if (!$("#result-panel").classList.contains("hidden")) hideResult();
 });
 
 // ---------- display helpers ----------

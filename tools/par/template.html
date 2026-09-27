@@ -353,7 +353,8 @@ function callHTML(tok){
 }
 function auctionHTML(d){
   var toks=d.a?d.a.split(" "):[];
-  var start=["N","E","S","W"].indexOf(d.d);
+  // Colonnes S, O, N, E comme dans l'application.
+  var start=["S","W","N","E"].indexOf(d.d);
   var cells=[],i;
   for(i=0;i<start;i++) cells.push("");
   toks.forEach(function(t){cells.push(callHTML(t.split(":")[1]));});
@@ -363,7 +364,7 @@ function auctionHTML(d){
     rows+="<tr>"+cells.slice(i,i+4).map(function(c){
       return "<td>"+(c||"")+"</td>";}).join("")+"</tr>";
   }
-  return '<table class="auc"><thead><tr><th>N</th><th>E</th><th>S</th><th>O</th></tr></thead><tbody>'+
+  return '<table class="auc"><thead><tr><th>S</th><th>O</th><th>N</th><th>E</th></tr></thead><tbody>'+
     rows+"</tbody></table>";
 }
 function ddHTML(d){

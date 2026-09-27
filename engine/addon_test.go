@@ -25,7 +25,7 @@ func TestTakeoutDoubleAddon(t *testing.T) {
 			name: "contre d'appel sur 1K, majeures 4-3 en 4-3-3-3",
 			pbn: `[Dealer "S"]
 [Deal "S:K54.A92.KQJ85.42 AQ72.KT3.974.AJ3 JT9.QJ8.AT3.K765 863.7654.62.QT98"]`,
-			seat: west, want: "Contre", hint: "contre d'appel",
+			seat: west, want: "X", hint: "contre d'appel",
 		},
 		{
 			// W = K3 AT87 T53 AK75 (14H) passes over 1D: only two spades.
@@ -49,14 +49,14 @@ func TestTakeoutDoubleAddon(t *testing.T) {
 			name: "contre sur 1C, 4 piques et court à Coeur",
 			pbn: `[Dealer "S"]
 [Deal "S:K5.AQJ96.A83.932 AQ72.K3.KJ54.T87 JT9.T87.Q96.AKQJ 8643.542.T72.654"]`,
-			seat: west, want: "Contre", hint: "contre d'appel",
+			seat: west, want: "X", hint: "contre d'appel",
 		},
 		{
 			// W = AK95 A3 T87 AKJ3 (19H): any-shape double from 18H.
 			name: "contre toutes distributions, 18H et plus",
 			pbn: `[Dealer "S"]
 [Deal "S:876.K52.AQJ43.Q4 AK95.A3.T87.AKJ3 QJT.QJT9.K96.T98 432.8764.52.7652"]`,
-			seat: west, want: "Contre", hint: "toutes distributions",
+			seat: west, want: "X", hint: "toutes distributions",
 		},
 		{
 			// E = JT63 QJ4 K954 72 (7H): zone 0-7, minimum answer in the

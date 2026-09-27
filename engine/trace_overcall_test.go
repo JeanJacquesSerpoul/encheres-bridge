@@ -72,7 +72,7 @@ func TestTakeoutDoubleAnswerTrace(t *testing.T) {
 	if got := calls[0].Call.Format("fr"); got != "1T" {
 		t.Fatalf("ouverture = %s, attendu 1T", got)
 	}
-	assertCall(t, calls[1], 1, "Contre", "forme du contre")
+	assertCall(t, calls[1], 1, "X", "forme du contre")
 	if calls[2].Call.Kind != KindPass {
 		t.Fatalf("Sud devait passer, il dit %s", calls[2].Call.Format("fr"))
 	}

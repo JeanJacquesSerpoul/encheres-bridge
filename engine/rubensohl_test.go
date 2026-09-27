@@ -29,8 +29,8 @@ func TestRubensohl(t *testing.T) {
 		})
 		calls := NewEngine(d).Run()
 		got, comment := southsCall(calls, south, 0)
-		if got != "Contre" {
-			t.Fatalf("South's call = %s (%s), want Contre (double)\nauction: %s", got, comment, formatAuction(calls))
+		if got != "X" {
+			t.Fatalf("South's call = %s (%s), want X (double)\nauction: %s", got, comment, formatAuction(calls))
 		}
 		if !strings.Contains(comment, "Rubensohl") || !strings.Contains(comment, "positif") {
 			t.Fatalf("comment %q does not read as the Rubensohl positive double", comment)

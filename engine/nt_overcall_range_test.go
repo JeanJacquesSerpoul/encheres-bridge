@@ -33,11 +33,11 @@ func TestNTOvercallRange(t *testing.T) {
 		hcp        int
 		want       string
 	}{
-		{"15 H : sous la zone", "AQ32", "KJ4", "Q76", "QJ8", 15, "Contre"},
+		{"15 H : sous la zone", "AQ32", "KJ4", "Q76", "QJ8", 15, "X"},
 		{"16 H : plancher", "AQ32", "KJ4", "QJ6", "QJ8", 16, "1SA"},
 		{"17 H", "AQ32", "KQ4", "QJ6", "QJ8", 17, "1SA"},
 		{"18 H : plafond, avant le contre", "AQ32", "KQ4", "KJ6", "QJ8", 18, "1SA"},
-		{"19 H : le contre reprend la main", "AQ32", "KQ4", "KQ6", "QJ8", 19, "Contre"},
+		{"19 H : le contre reprend la main", "AQ32", "KQ4", "KQ6", "QJ8", 19, "X"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -72,7 +72,7 @@ func TestNTOvercallConditions(t *testing.T) {
 	}{
 		{"arrêt = Dame troisième", "AQ32", "KJ4", "QJ6", "QJ8", "1SA"},
 		{"arrêt = Valet quatrième", "AQ32", "AJ4", "J643", "KJ", "1SA"},
-		{"trois petites : pas d'arrêt", "AQ32", "AQ4", "643", "KJ98", "Contre"},
+		{"trois petites : pas d'arrêt", "AQ32", "AQ4", "643", "KJ98", "X"},
 		{"chicane dans leur couleur : main irrégulière", "AQ432", "KJ42", "", "AQ98", "1P"},
 	}
 	for _, tc := range cases {

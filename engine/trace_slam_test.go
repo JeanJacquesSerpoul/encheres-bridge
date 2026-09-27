@@ -85,6 +85,13 @@ func TestBlackwoodAndInvitationTrace(t *testing.T) {
 // namesCall reports whether a held test or a note of the trace concludes on
 // the call: the call follows the last arrow of its label.
 func namesCall(trace []traceStep, callFR string) bool {
+	// The trace spells a double out in words; the call itself is X or XX.
+	switch callFR {
+	case "X":
+		callFR = "contre"
+	case "XX":
+		callFR = "surcontre"
+	}
 	for _, s := range trace {
 		if !s.ok && !s.note {
 			continue

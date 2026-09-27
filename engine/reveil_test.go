@@ -53,7 +53,7 @@ func TestReopenZones(t *testing.T) {
 			name:    "contre dès 8H : tricolore court dans l'ouverture",
 			opening: Hearts,
 			h:       hand("AT83", "2", "KJ72", "J973"),
-			want:    "Contre", hint: "dès 8H",
+			want:    "X", hint: "dès 8H",
 		},
 		{
 			// Balanced 14-16 with the opened suit held: too strong for the
@@ -62,7 +62,7 @@ func TestReopenZones(t *testing.T) {
 			name:    "contre 14-16H régulier : le Sans-Atout suivra",
 			opening: Diamonds,
 			h:       hand("AQ3", "KJ6", "AT75", "QT2"),
-			want:    "Contre", hint: "14-16H",
+			want:    "X", hint: "14-16H",
 		},
 		{
 			name:    "2SA naturel : 17-19HL régulier",
@@ -108,7 +108,7 @@ func TestReopenZones(t *testing.T) {
 			name:    "contre à 8H : singleton dans l'ouverture",
 			opening: Diamonds,
 			h:       hand("9832", "K872", "3", "KQ73"),
-			want:    "Contre", hint: "réveil",
+			want:    "X", hint: "réveil",
 		},
 		{
 			// One point short of the 8 H floor, and four cards in the opened

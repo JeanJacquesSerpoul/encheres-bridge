@@ -351,6 +351,11 @@ function callHTML(tok){
   var st=rest==="SA"?4:CODE[rest];
   return lv+(st===undefined?esc(rest):suit(st));
 }
+// Les colonnes se lisent dans l'ordre S, O, N, E : la rotation part de Sud,
+// dont la main figure en bas du diagramme, et suit la table dans le sens des
+// aiguilles d'une montre. Les cellules, elles, restent indexées N, E, S, O,
+// l'ordre d'appel des joueurs : seul l'affichage est permuté.
+var AUC_SEATS=[2,3,0,1];
 function auctionHTML(d){
   var toks=d.a?d.a.split(" "):[];
   var start=["N","E","S","W"].indexOf(d.d);
@@ -358,13 +363,14 @@ function auctionHTML(d){
   for(i=0;i<start;i++) cells.push("");
   toks.forEach(function(t){cells.push(callHTML(t.split(":")[1]));});
   while(cells.length%4) cells.push("");
-  var rows="";
+  var head="",rows="";
+  AUC_SEATS.forEach(function(s){head+="<th>"+SEAT[s]+"</th>";});
   for(i=0;i<cells.length;i+=4){
-    rows+="<tr>"+cells.slice(i,i+4).map(function(c){
+    rows+="<tr>"+AUC_SEATS.map(function(s){
+      var c=cells[i+s];
       return "<td>"+(c||"")+"</td>";}).join("")+"</tr>";
   }
-  return '<table class="auc"><thead><tr><th>N</th><th>E</th><th>S</th><th>O</th></tr></thead><tbody>'+
-    rows+"</tbody></table>";
+  return '<table class="auc"><thead><tr>'+head+'</tr></thead><tbody>'+rows+"</tbody></table>";
 }
 function ddHTML(d){
   var h='<table class="ddt"><tr><th class="s"></th>'+[0,1,2,3,4].map(function(st){

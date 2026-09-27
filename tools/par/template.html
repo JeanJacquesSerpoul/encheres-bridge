@@ -380,13 +380,14 @@ function auctionHTML(d){
 function ddHTML(d){
   var h='<table class="ddt"><tr><th class="s"></th>'+[0,1,2,3,4].map(function(st){
     return "<th>"+suit(st)+"</th>";}).join("")+"</tr>";
-  for(var seat=0;seat<4;seat++){
+  // Lignes N, S, E, O comme dans l'application.
+  [0,2,1,3].forEach(function(seat){
     h+='<tr><th class="s">'+SEAT[seat]+"</th>"+[0,1,2,3,4].map(function(st){
       var v=d.t[DDS_STRAIN[st]*4+seat],cls="";
       if(d.lv>0&&seat===d.dc&&st===d.st) cls="hi";
       else if(d.pl&&st===d.ps&&seat%2===d.pd&&v===d.pt) cls="hip";
       return "<td"+(cls?' class="'+cls+'"':"")+">"+v+"</td>";}).join("")+"</tr>";
-  }
+  });
   return h+"</table>";
 }
 var PBN_STRAIN=["C","D","H","S","NT"];

@@ -384,6 +384,14 @@ textarea {
   color: var(--accent);
 }
 .pbn-copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+/* Hors modification de la donne, le texte ne se corrige pas : le bouton Coller
+   s'éteint, et le survol ne le rallume pas. */
+.pbn-copy-btn:disabled { opacity: .45; cursor: not-allowed; }
+.pbn-copy-btn:disabled:hover {
+  background: var(--panel);
+  border-color: var(--border);
+  color: var(--muted);
+}
 /* Le bouton Copier, à gauche du bouton Coller : même boîte, 6 px d'écart. */
 #pbn-copy-btn { right: 54px; }
 /* La croix, à gauche du bouton Copier : même boîte, 6 px d'écart. */

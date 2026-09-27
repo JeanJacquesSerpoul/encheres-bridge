@@ -355,8 +355,8 @@ function handHTML(name,ranks){
 var CODE={T:0,K:1,C:2,P:3};
 function callHTML(tok){
   if(tok==="Passe") return '<span class="p">passe</span>';
-  if(tok==="Contre") return "<b>contre</b>";
-  if(tok==="Surcontre") return "<b>surcontre</b>";
+  if(tok==="X"||tok==="Contre") return "<b>X</b>";
+  if(tok==="XX"||tok==="Surcontre") return "<b>XX</b>";
   var lv=tok.charAt(0),rest=tok.slice(1);
   var st=rest==="SA"?4:CODE[rest];
   return lv+(st===undefined?esc(rest):suit(st));
@@ -396,15 +396,15 @@ function pbnText(d){
   var toks=d.a?d.a.split(" ").map(function(t){return t.split(":")[1];}):[];
   var calls=toks.map(function(t){
     if(t==="Passe") return "Pass";
-    if(t==="Contre") return "X";
-    if(t==="Surcontre") return "XX";
+    if(t==="X"||t==="Contre") return "X";
+    if(t==="XX"||t==="Surcontre") return "XX";
     return t.charAt(0)+(PBN_CALL[t.slice(1)]||t.slice(1));
   });
   // Contre ou surcontre : le dernier des deux annoncé après la dernière enchère.
   var dbl="";
-  toks.forEach(function(t){
-    if(t==="Contre") dbl="X"; else if(t==="Surcontre") dbl="XX";
-    else if(t!=="Passe") dbl="";
+  calls.forEach(function(c){
+    if(c==="X"||c==="XX") dbl=c;
+    else if(c!=="Pass") dbl="";
   });
   var lines=[
     '[Board "'+d.b+'"]',

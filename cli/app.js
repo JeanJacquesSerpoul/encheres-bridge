@@ -228,7 +228,7 @@ const UI_TEXT = {
     auctionSeq: "Séquence d'enchères",
     continue: "Continuer",
     // Le questionnaire, jusqu'ici écrit en ternaires dans renderQuizStep,
-    // chooseBid et finishQuiz. « Passe », « Contre » et « Surcontre » restent
+    // chooseBid et finishQuiz. « Passe », « X » et « XX » restent
     // hors d'ici à dessein : parseBidToken s'en sert comme jetons de
     // comparaison, les déplacer découplerait l'affichage de la valeur.
     quizYourTurn: (seat) => `À vous de parler (${seat}) — choisissez votre enchère.`,
@@ -1132,7 +1132,7 @@ function vulHTML(vul, lang) {
 function bidHTML(bidText, lang) {
   const map = STRAIN_MAP[lang];
   const match = bidText.match(/^([1-7])(SA|NT|[A-Z]+)$/);
-  if (!match) return esc(bidText); // Pass / X / XX / Contre...
+  if (!match) return esc(bidText); // Pass / Passe / X / XX
   const sym = map[match[2]];
   if (!sym) return esc(bidText);
   if (sym === "♥" || sym === "♦") {
@@ -4211,11 +4211,11 @@ function team(seat) {
   return TEAM[seat];
 }
 
-// Turns a bid string ("3SA", "Passe", "Contre"...) into a comparable token.
+// Turns a bid string ("3SA", "Passe", "X"...) into a comparable token.
 function parseBidToken(text, lang) {
   if (isPass(text)) return { type: "pass" };
-  if (text === (lang === "fr" ? "Contre" : "X")) return { type: "x" };
-  if (text === (lang === "fr" ? "Surcontre" : "XX")) return { type: "xx" };
+  if (text === "X") return { type: "x" };
+  if (text === "XX") return { type: "xx" };
   const m = text.match(/^([1-7])(.+)$/);
   if (!m) return { type: "unknown" };
   const strainIdx = STRAIN_ORDER[lang].indexOf(m[2]);
@@ -4270,8 +4270,8 @@ function buildBiddingBoxHTML(lang, legal) {
   const strains = STRAIN_ORDER[lang].map((code, idx) =>
     `<button type="button" class="bb-btn bb-strain" data-strain="${code}" data-idx="${idx}"></button>`);
   const passText = lang === "fr" ? "Passe" : "Pass";
-  const xText = lang === "fr" ? "Contre" : "X";
-  const xxText = lang === "fr" ? "Surcontre" : "XX";
+  const xText = "X";
+  const xxText = "XX";
   return `
     <div class="bb-grid">
       <div class="bb-row bb-levels" role="group" aria-label="${esc(t.bbLevel)}">${levels.join("")}</div>
@@ -4882,7 +4882,7 @@ const TUTORIAL_STEPS = [
     en: ["Practise", "Choose your hand (North, East, South or West), then the cap to start the quiz on the deal on the table.\nQuiz mode brings every new deal in hidden: you bid without knowing it."],
   },
   {
-    fr: ["Le questionnaire", "La table ne montre que votre main. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, Contre, Surcontre. Au clavier : 1 à 7, puis C D H S N, P, X."],
+    fr: ["Le questionnaire", "La table ne montre que votre main. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],
     en: ["The quiz", "The table shows only your hand. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {

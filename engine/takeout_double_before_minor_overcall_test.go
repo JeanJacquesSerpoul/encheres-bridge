@@ -18,7 +18,7 @@ func TestTakeoutDoubleBeforeMinorOvercall(t *testing.T) {
 			// W = T8 KQ92 Q7 AK843 (14 H): 1S - X, not 2C.
 			name: "sur 1P, quatre cœurs : contre plutôt que 2T",
 			pbn:  `[Dealer "S"][Vulnerable "EW"][Deal "E:K64.AT843.JT.T65 AQ972.75.K98.QJ2 T8.KQ92.Q7.AK843 J53.J6.A65432.97"]`,
-			want: "Contre",
+			want: "X",
 		},
 		{
 			// W = T86 KQ9 Q7 AK843: three hearts only, the takeout shape is

@@ -27,7 +27,7 @@ func TestTakeoutDoubleOfPreempt(t *testing.T) {
 	})
 	calls := NewEngine(d).Run()
 	wantCall(t, calls, north, 1, "3C")
-	wantCall(t, calls, east, 1, "Contre")
+	wantCall(t, calls, east, 1, "X")
 }
 
 // TestMajorGameOnHonours: 1C - 1H - 2H, and East holds A842 AQ94 J6 QT6. The

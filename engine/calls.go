@@ -50,14 +50,9 @@ func (c Call) Format(lang string) string {
 		}
 		return "Pass"
 	case KindDouble:
-		if fr {
-			return "Contre"
-		}
+		// X et XX dans les deux langues, comme sur les boîtes à enchères.
 		return "X"
 	case KindRedouble:
-		if fr {
-			return "Surcontre"
-		}
 		return "XX"
 	}
 	names := strainEN

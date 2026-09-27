@@ -209,6 +209,7 @@ const UI_TEXT = {
     bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
     pbnCopy: "Copier le texte PBN",
     pbnPaste: "Coller le presse-papiers dans le texte PBN",
+    pbnPasteReadOnly: "Le texte ne s'ouvre à la saisie qu'en modification de la donne : activez « Modifier la donne ».",
     pbnClose: "Masquer le texte PBN",
     shareLink: "Copier le lien de cette donne",
     shareCopied: "Lien de la donne copié",
@@ -220,7 +221,7 @@ const UI_TEXT = {
     pbnPasteFailed:
       "Collage impossible : collez le texte dans la zone avec Ctrl+V " +
       "(le navigateur ne laisse pas toujours la page lire le presse-papiers).",
-    pbnNote: "Format texte standard des donnes de bridge. Collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
+    pbnNote: "Format texte standard des donnes de bridge. En modification de la donne, collez-en une reçue par courriel, ou corrigez celle-ci à la main : le tableau de cartes suit.",
     dealToUse: "Donne à utiliser",
     dealWord: "Donne",
     boardWord: "plateau",
@@ -386,6 +387,7 @@ const UI_TEXT = {
     bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
     pbnCopy: "Copy the PBN text",
     pbnPaste: "Paste the clipboard into the PBN text",
+    pbnPasteReadOnly: "The text only opens for typing while editing the deal: turn on \u201cEdit the deal\u201d.",
     pbnClose: "Hide the PBN text",
     shareLink: "Copy a link to this deal",
     shareCopied: "Deal link copied",
@@ -397,7 +399,7 @@ const UI_TEXT = {
     pbnPasteFailed:
       "Could not paste: paste the text into the box with Ctrl+V " +
       "(the browser does not always let the page read the clipboard).",
-    pbnNote: "The standard text format for bridge deals. Paste one you received by e-mail, or fix this one by hand: the card table follows.",
+    pbnNote: "The standard text format for bridge deals. While editing the deal, paste one you received by e-mail, or fix this one by hand: the card table follows.",
     dealToUse: "Deal to use",
     dealWord: "Deal",
     boardWord: "board",
@@ -1086,6 +1088,11 @@ $("#deal-select").addEventListener("change", () => {
 $("#pbn").addEventListener("input", () => {
   if (writingPbn) return;
   refreshDealSelector(false);
+  // Le texte corrigé décrit une autre donne : le contrat et l'analyse affichés
+  // ne valent plus pour elle. Le résultat se referme donc, comme lorsqu'une
+  // carte est déplacée dans le panneau — et les enchères de la donne corrigée
+  // se recalculent d'elles-mêmes une fois le résultat parti.
+  if (!$("#result-panel").classList.contains("hidden")) hideResult();
 });
 
 // ---------- display helpers ----------
@@ -1967,6 +1974,9 @@ function renderDealActions() {
   setCommandButton("#pbn-close-btn", CLOSE_SVG, t.pbnClose);
   setCommandButton("#share-btn", LINK_SVG, t.shareLink, true);
   setCommandButton("#print-btn", PRINT_SVG, t.printResult);
+  // Le nom ci-dessus est celui du collage possible : hors modification de la
+  // donne, l'infobulle dit à la place pourquoi le bouton est éteint.
+  renderPbnMode();
 }
 
 // Place un texte dans le presse-papiers. Le presse-papiers moderne exige un
@@ -2036,6 +2046,9 @@ async function pastePbn() {
   const t = UI_TEXT[$("#lang").value];
   const btn = $("#pbn-paste-btn");
   const textarea = $("#pbn");
+  // Le bouton est éteint hors modification de la donne : rien à faire ici pour
+  // un clic qui lui serait adressé par un autre chemin.
+  if (!dealEditing()) return;
   let text = "";
   try {
     text = await navigator.clipboard.readText();
@@ -2215,6 +2228,20 @@ function renderDealMode() {
   const hidden = $("#input-panel").classList.contains("quiz-running");
   btn.disabled = hidden || (editing && !dealComplete());
   btn.title = btn.disabled && !hidden ? t.editDoneBlocked : "";
+  renderPbnMode();
+}
+
+// Le texte PBN suit le mode de la donne : en modification, on le corrige et on
+// y colle ; en lecture, il se lit et se copie sans se corriger. La note au-dessus
+// de la zone le dit, et le bouton Coller s'éteint — la zone reste alors
+// sélectionnable, ce que la copie demande.
+function renderPbnMode() {
+  const t = UI_TEXT[$("#lang").value];
+  const editing = dealEditing();
+  $("#pbn").readOnly = !editing;
+  const btn = $("#pbn-paste-btn");
+  btn.disabled = !editing;
+  btn.dataset.tip = editing ? t.pbnPaste : t.pbnPasteReadOnly;
 }
 
 $("#edit-btn").addEventListener("click", () => {

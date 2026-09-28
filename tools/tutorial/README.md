@@ -30,9 +30,9 @@ Sous Windows, dans PowerShell :
 Le script sert `cli/` en local (port 9377, ou `TUTORIAL_PORT`), prend les
 captures, puis remplace `cli/tutorial/`. Il faut Node, Python et Playwright
 avec Chromium (`npm i -g playwright` puis `npx playwright install chromium`, ou
-le Playwright déjà installé). `run.ps1` prend les captures dans
-`cli/tutorial.new/` et ne remplace `cli/tutorial/` qu'une fois toutes réussies :
-un échec laisse les images en place.
+le Playwright déjà installé). Les deux scripts prennent les captures dans
+`cli/tutorial.new/` et ne remplacent `cli/tutorial/` qu'une fois toutes
+réussies : un échec laisse les images en place.
 
 À relancer après tout changement visible de l'interface. **Une étape ajoutée
 ou retirée dans `TUTORIAL_STEPS` demande la scène correspondante dans

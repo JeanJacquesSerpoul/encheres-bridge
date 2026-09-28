@@ -153,7 +153,8 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
-| `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, pied de page, écran d'accueil) |
+| `animation.html` | 41 Ko | 11 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, pied de page, écran d'accueil) |
+| `animation/` | 140 Ko | — | ses deux captures de la table en édition (`donne-fr.jpg`, `donne-en.jpg`) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
 
@@ -520,6 +521,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `.github/workflows/wasm.yml` | Recompile et recommite `cli/bids.wasm` quand les sources Go changent sur `main` |
 | `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
+| `tools/animation/` | Captures de la table en édition pour la vidéo de présentation (`cli/animation/`), avec Playwright |
 | `openrouter_proxy/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `openrouter_proxy/bin/` | Exécutables précompilés du serveur IA (Linux, Windows), leurs scripts de lancement et un `docker-compose.yml` qui lance le binaire Linux |
 | `openrouter_proxy/build-proxy.sh`, `.ps1` | Compilation du serveur IA dans `openrouter_proxy/bin/` (`openrouter_proxy`, `openrouter_proxy.exe`, non versionnés) |

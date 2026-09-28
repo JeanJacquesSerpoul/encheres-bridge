@@ -103,23 +103,15 @@
   .scene.on .pbn .caret { animation: blink .8s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
-  .table { position: absolute; left: 150px; top: 124px; width: 520px; height: 404px;
-    display: grid; grid-template-columns: 1fr 150px 1fr; grid-template-rows: 1fr 150px 1fr; gap: 8px; }
-  .hand { font-size: 17px; line-height: 1.4; font-variant-numeric: tabular-nums; align-self: center; }
-  .hand .seat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 2px; }
-  .hand .s { display: block; white-space: nowrap; }
-  .hand .s::first-letter { color: var(--on-felt); }
-  .hand .r::first-letter { color: #ff8a7a; }
-  .n { grid-column: 2; grid-row: 1; justify-self: center; align-self: end; }
-  .o { grid-column: 1; grid-row: 2; justify-self: end; }
-  .e { grid-column: 3; grid-row: 2; justify-self: start; }
-  .s-seat { grid-column: 2; grid-row: 3; justify-self: center; align-self: start; }
-  .compass { grid-column: 2; grid-row: 2; border-radius: 12px; background: rgba(0,0,0,.2); border: 1px solid var(--felt-line);
-    display: grid; place-items: center; text-align: center; font-size: 13px; color: var(--on-felt-muted); line-height: 1.6; }
-  .compass b { display: block; color: var(--on-felt); font-weight: 600; }
-  .hl-south { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 6px; }
-  .scene.on .hl-south { animation: glow 1.4s ease 2.6s both; }
-  @keyframes glow { from { outline-color: transparent; } }
+  /* La table de l'application en mode modification : une capture d'écran
+     (animation/donne-fr.jpg et donne-en.jpg, prises par
+     tools/animation/capture.js), posée comme un écran sur le tapis. */
+  .shot { position: absolute; left: 44px; top: 132px; width: 580px; height: 392px; margin: 0;
+    display: grid; place-items: center; }
+  .shot img { display: block; max-width: 580px; max-height: 392px; border-radius: 12px; background: #fff;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .08); }
+  .scene.on .shot { --k: shot; --t: .9s; }
+  @keyframes shot { from { opacity: 0; transform: translateY(24px) scale(.94); } }
   .ways { position: absolute; right: 44px; top: 170px; width: 220px; display: grid; gap: 10px; }
   .ways div { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 9px; background: rgba(255,255,255,.07);
     font-size: 14px; line-height: 1.35; }
@@ -245,7 +237,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .scene.on .a, .scene.on .fan .card, .scene.on .line .bid, .scene.on .myhand .card, .scene.on .pbn .typed,
-    .scene.on .choice.good, .scene.on .pointer, .scene.on .hl-south, .scene.on .par .cell b, .scene.on .par .cell.hl { animation-duration: .01s !important; animation-delay: 0s !important; }
+    .scene.on .choice.good, .scene.on .pointer, .scene.on .par .cell b, .scene.on .par .cell.hl { animation-duration: .01s !important; animation-delay: 0s !important; }
     .scene.on .par .cell::after, .scene.on .quiz-q .ask, .scene.on .pbn .caret { animation: none !important; }
   }
 </style>
@@ -278,13 +270,10 @@
       <section class="scene" data-dur="7" data-label="chDeal">
         <div class="chapter-tag a"><i>1</i> <b data-t="tagDeal">Composer la donne</b></div>
         <div class="pbn a" style="--d:.1"><span class="typed">S:J76.AK2.K6432.AJ 8.J8543.QT9.QT83 AKT95.Q9.875.962 Q432.T76.AJ.K754</span><span class="caret"></span></div>
-        <div class="table">
-          <div class="hand n a" style="--d:1.2"><div class="seat" data-t="north">Nord</div><span class="s" data-hand="♠ A K 10 9 5">♠ A R 10 9 5</span><span class="s r" data-hand="♥ Q 9">♥ D 9</span><span class="s r">♦ 8 7 5</span><span class="s">♣ 9 6 2</span></div>
-          <div class="hand o a" style="--d:1.9"><div class="seat" data-t="west">Ouest</div><span class="s">♠ 8</span><span class="s r" data-hand="♥ J 8 5 4 3">♥ V 8 5 4 3</span><span class="s r" data-hand="♦ Q 10 9">♦ D 10 9</span><span class="s" data-hand="♣ Q 10 8 3">♣ D 10 8 3</span></div>
-          <div class="compass a" style="--k:pop;--d:.9"><div data-t="compass"><b>Sud donneur</b>Tous vulnérables</div></div>
-          <div class="hand e a" style="--d:1.4"><div class="seat" data-t="east">Est</div><span class="s" data-hand="♠ Q 4 3 2">♠ D 4 3 2</span><span class="s r">♥ 10 7 6</span><span class="s r" data-hand="♦ A J">♦ A V</span><span class="s" data-hand="♣ K 7 5 4">♣ R 7 5 4</span></div>
-          <div class="hand s-seat hl-south a" style="--d:1.65"><div class="seat" data-t="south">Sud</div><span class="s" data-hand="♠ J 7 6">♠ V 7 6</span><span class="s r" data-hand="♥ A K 2">♥ A R 2</span><span class="s r" data-hand="♦ K 6 4 3 2">♦ R 6 4 3 2</span><span class="s" data-hand="♣ A J">♣ A V</span></div>
-        </div>
+        <figure class="shot a" style="--d:1">
+          <img src="animation/donne-fr.jpg" data-img="animation/donne-{lang}.jpg" data-t-alt="dealShot"
+               alt="La table de l'application en mode modification : les quatre mains de la donne, avec leurs points et la zone des cartes non affectées">
+        </figure>
         <div class="ways">
           <div class="a" style="--d:2.4"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l9-9 3 3-9 9H6z"/></svg><span data-t="way1">Saisie des quatre mains</span></div>
           <div class="a" style="--d:2.7"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg><span data-t="way2">Fichier ou texte .pbn</span></div>
@@ -390,9 +379,10 @@
 (function () {
   // Les textes des deux langues. Le français est aussi écrit dans la page, qui
   // se lit donc sans script. data-t désigne la clé du texte, data-t-label celle
-  // de l'aria-label ; data-hand porte une ligne de main en notation anglaise
-  // (A K Q J), data-rank-line une suite de hauteurs, data-rank une seule
-  // hauteur (K, Q, J). Les commentaires d'enchères sont ceux du moteur, mot
+  // de l'aria-label, data-t-alt celle du texte de remplacement d'une image ;
+  // data-img est le chemin d'une image, {lang} y valant fr ou en ;
+  // data-rank-line porte une suite de hauteurs en notation anglaise (A K Q J),
+  // data-rank une seule hauteur (K, Q, J). Les commentaires d'enchères sont ceux du moteur, mot
   // pour mot (meaning.fr / meaning.en).
   var TEXT = {
     fr: {
@@ -403,8 +393,8 @@
       tagline: "Les enchères d'une donne, déroulées et commentées en <b>Système d'Enseignement Français</b>",
       chOpen: "Ouverture", chDeal: "La donne", chBids: "Les enchères", chPar: "Le PAR", chTrain: "S'entraîner", chEnd: "Récapitulatif",
       tagDeal: "Composer la donne", tagBids: "Dérouler les enchères", tagPar: "Comparer au PAR", tagTrain: "S'entraîner",
-      north: "Nord", east: "Est", south: "Sud", west: "Ouest", wShort: "O",
-      compass: "<b>Sud donneur</b>Tous vulnérables",
+      wShort: "O",
+      dealShot: "La table de l'application en mode modification : les quatre mains de la donne, avec leurs points et la zone des cartes non affectées",
       way1: "Saisie des quatre mains", way2: "Fichier ou texte .pbn", way3: "Photo des cartes, lue par un serveur IA",
       comments: "Séquence commentée",
       c1: "ouverture 1SA, 15-17H régulier",
@@ -438,8 +428,8 @@
       tagline: "The auction of a deal, bid and explained in the <b>French bidding system (SEF)</b>",
       chOpen: "Opening", chDeal: "The deal", chBids: "The auction", chPar: "The par", chTrain: "Practise", chEnd: "Summary",
       tagDeal: "Build the deal", tagBids: "Run the auction", tagPar: "Compare with the par", tagTrain: "Practise",
-      north: "North", east: "East", south: "South", west: "West", wShort: "W",
-      compass: "<b>South deals</b>All vulnerable",
+      wShort: "W",
+      dealShot: "The app's table in edit mode: the four hands of the deal, with their points and the unassigned-cards area",
       way1: "Enter the four hands", way2: ".pbn file or text", way3: "Photo of the cards, read by an AI server",
       comments: "Annotated auction",
       c1: "1NT opening, 15-17 balanced",
@@ -497,7 +487,7 @@
   }
 
   // Les lignes de main en français, telles qu'écrites dans la page.
-  var handEls = Array.prototype.slice.call(document.querySelectorAll("[data-hand], [data-rank-line]"));
+  var handEls = Array.prototype.slice.call(document.querySelectorAll("[data-rank-line]"));
   handEls.forEach(function (el) { el.dataset.fr = el.textContent; });
 
   // Mise à l'échelle du plateau 960 × 540 dans la largeur disponible ; en mode
@@ -546,9 +536,11 @@
     document.querySelectorAll("[data-t]").forEach(function (el) { el.innerHTML = T[el.dataset.t]; });
     document.querySelectorAll("[data-t-label]").forEach(function (el) { el.setAttribute("aria-label", T[el.dataset.tLabel]); });
     handEls.forEach(function (el) {
-      el.textContent = l === "en" ? (el.dataset.hand || el.dataset.rankLine) : el.dataset.fr;
+      el.textContent = l === "en" ? el.dataset.rankLine : el.dataset.fr;
     });
     document.querySelectorAll("[data-rank]").forEach(function (el) { el.textContent = RANK[l][el.dataset.rank]; });
+    document.querySelectorAll("[data-img]").forEach(function (el) { el.src = el.dataset.img.replace("{lang}", l); });
+    document.querySelectorAll("[data-t-alt]").forEach(function (el) { el.alt = T[el.dataset.tAlt]; });
     scenes.forEach(function (s, i) {
       s.setAttribute("aria-label", T[s.dataset.label]);
       bars[i].querySelector(".lbl").textContent = T[s.dataset.label];

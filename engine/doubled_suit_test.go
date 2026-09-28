@@ -117,3 +117,30 @@ func TestReopeningDoubleAnswerAvoidsTheirSuit(t *testing.T) {
 		t.Fatalf("South never called\nauction: %s", formatAuction(calls))
 	}
 }
+
+// TestThreeNTAnswerOverDoubledPreempt replays a reported auction: 3C X P,
+// South holds QT7.AT5.T972.Q95 -- 8 H, balanced, Q95 in clubs. The engine
+// answered 3D "0-7H": its notrump answer of the middle zone stopped at the
+// two level. Over a three-level preempt it is 3NT [D-4].
+func TestThreeNTAnswerOverDoubledPreempt(t *testing.T) {
+	pbn := `[Dealer "E"]
+[Vulnerable "NS"]
+[Deal "E:942.Q82..KJ76432 QT7.AT5.T972.Q95 AK8.J97643.863.8 J653.K.AKQJ54.AT"]`
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+
+	const south = 2
+	for _, sc := range calls {
+		if sc.Seat != south || sc.Call.Kind == KindPass {
+			continue
+		}
+		if got := sc.Call.Format("fr"); got != "3SA" {
+			t.Fatalf("South's answer = %s (%q), want 3N\nauction: %s", got, sc.M.fr, formatAuction(calls))
+		}
+		return
+	}
+	t.Fatalf("South never answered the double\nauction: %s", formatAuction(calls))
+}

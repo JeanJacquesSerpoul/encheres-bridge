@@ -1382,11 +1382,16 @@ avec 11 H et **un arrêt et demi** · sinon **cue-bid**, forcing et auto-forcing
 Au-delà de 14 H la main sort de la zone forte et passe elle aussi par le
 cue-bid, plutôt que par une réponse qui la plafonnerait.
 ### [D-4] 8-10 H : les deux majeures quatrièmes sur une ouverture mineure →
-cue-bid · majeure quatrième ou cinquième → l'échelle ci-dessus · sinon **1SA**
-avec arrêt · sinon saut dans une mineure cinquième · sinon **1SA** « le moins
-mauvais mensonge ».
+cue-bid · majeure quatrième ou cinquième → l'échelle ci-dessus · sinon
+Sans-Atout au plus bas avec arrêt : **1SA**, **2SA** sur un barrage de 2,
+**3SA** sur un barrage de 3 (le contreur a 15 H et plus : la manche est là) ·
+sinon saut dans une mineure cinquième · sinon **1SA** « le moins mauvais
+mensonge ». Au palier de 3, sans rien de tout cela, la main répond au plus bas
+comme en zone faible [D-5].
 ### [D-5] 0-7 H : couleur **sans saut**, majeure quatrième avant mineure
-cinquième — quitte à nommer une majeure troisième. Jamais 1SA, qui garantit
+cinquième — quitte à nommer une majeure troisième. **À partir du palier de 3**,
+aucun saut n'étant possible sous la manche, cette réponse est aussi celle de la
+zone moyenne qui n'a rien d'autre à dire : elle couvre **0-10 H**. Jamais 1SA, qui garantit
 8-10 H : le partenaire dirait 2SA ou 3SA sur une main que l'on n'a pas. Toutes
 les enchères à Sans-Atout sont positives et leur zone est précise.
 ### [D-6] Le cue-bid demande au contreur sa **majeure quatrième la moins

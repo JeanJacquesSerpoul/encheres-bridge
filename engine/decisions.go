@@ -5735,6 +5735,13 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 			if c.Level == 2 && e.legal(p.seat, c) {
 				return c, m(8, 10, "2SA, 8-10H, arrêt dans leur couleur", "2NT, 8-10, stopper in their suit").withStopper(oppSuit)
 			}
+			// Over a three-level preempt the cheapest notrump is already the
+			// game: the doubler holds 15 H or more, so 8-10 H and the stopper
+			// bid it. Without it 3C X P, with Q95 in clubs and 8 H, fell
+			// through to the 0-7 minimum answer.
+			if c.Level == 3 && e.legal(p.seat, c) {
+				return c, m(8, 10, "3SA, 8-10H, arrêt dans leur couleur", "3NT, 8-10, stopper in their suit").withStopper(oppSuit)
+			}
 		}
 		// Jump in a five-card or longer minor, not forcing.
 		var mi Suit
@@ -5797,6 +5804,11 @@ func (e *Engine) answerDouble(p *playerState, oppSuit Suit, forced bool) (Call, 
 		n = h.Len(best)
 	}
 	tr.note("majeure quatrième d'abord, sinon la couleur la plus longue", "a four-card major first, otherwise the longest suit")
+	// From the three level on, no jump is left below game: the middle zone
+	// with nothing else to say answers there too, so the bid spans 0-10 H.
+	if c.Level >= 3 {
+		return c, m(0, 10, "réponse au contre au palier le plus bas, 0-10H : pas de saut possible", "minimum answer to the takeout double, 0-10: no jump available").withLen(best, n)
+	}
 	return c, m(0, 7, "réponse au contre au palier le plus bas, 0-7H", "minimum answer to the takeout double, 0-7").withLen(best, n)
 }
 

@@ -487,7 +487,7 @@ const UI_TEXT = {
     // français, pas en anglais, où il faut la préposition.
     appLicence: "Licensed under",
     appSource: "Source code on GitHub",
-    appAnimation: "Presentation video (in French)",
+    appAnimation: "Presentation video",
     parCredit: "Double dummy tricks computed by",
     parCreditAuthors: "from Bo Haglund and Søren Hein — license",
     parLeadComputing: "Solving the lead…",

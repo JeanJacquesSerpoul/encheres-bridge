@@ -281,9 +281,9 @@ const UI_TEXT = {
     quizCancel: "Annuler",
     welcomeTitle: "Bienvenue",
     welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
-    welcomeTutorial: "Afficher le tutoriel",
-    welcomeSkip: "Continuer sans le tutoriel",
-    welcomeNote: "Le tutoriel et le mode d'emploi restent accessibles à tout moment par les boutons en haut de la page.",
+    welcomeVideo: "Voir la vidéo de présentation",
+    welcomeSkip: "Continuer sans la vidéo",
+    welcomeNote: "La vidéo, le tutoriel et le mode d'emploi restent accessibles à tout moment par les boutons en haut de la page.",
     tutorialTitle: "Tutoriel",
     tutorialOpen: "Tutoriel",
     tutorialPrev: "‹ Précédent",
@@ -457,9 +457,9 @@ const UI_TEXT = {
     quizCancel: "Cancel",
     welcomeTitle: "Welcome",
     welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
-    welcomeTutorial: "Show the tutorial",
-    welcomeSkip: "Continue without the tutorial",
-    welcomeNote: "The tutorial and the guide are always available from the buttons at the top of the page.",
+    welcomeVideo: "Watch the presentation video",
+    welcomeSkip: "Continue without the video",
+    welcomeNote: "The video, the tutorial and the guide are always available from the buttons at the top of the page.",
     tutorialTitle: "Tutorial",
     tutorialOpen: "Tutorial",
     tutorialPrev: "‹ Previous",
@@ -5124,10 +5124,12 @@ tutorialDialog.addEventListener("keydown", (ev) => {
 
 // ---------- écran d'accueil ----------
 
-// Au premier lancement, un écran propose le tutoriel, sans l'imposer. Le
-// choix, quel qu'il soit — Échap compris —, est retenu : l'écran ne revient
-// plus. Un navigateur qui a déjà une donne retenue n'en est pas à son premier
-// lancement : l'écran est apparu après lui, et l'y montrer serait une gêne.
+// Au premier lancement, un écran propose la vidéo de présentation, sans
+// l'imposer. Elle s'ouvre dans un nouvel onglet, comme depuis le bandeau : la
+// donne exemple reste prête ici au retour. Le choix, quel qu'il soit — Échap
+// compris —, est retenu : l'écran ne revient plus. Un navigateur qui a déjà
+// une donne retenue n'en est pas à son premier lancement : l'écran est apparu
+// après lui, et l'y montrer serait une gêne.
 const WELCOME_KEY = "bids.welcomed";
 const welcomeDialog = $("#welcome-dialog");
 // Retenu au moment même du choix, et non sur l'événement « close » : celui-ci
@@ -5137,11 +5139,11 @@ function dismissWelcome() {
   welcomeDialog.close();
 }
 $("#welcome-skip-btn").addEventListener("click", dismissWelcome);
-$("#welcome-tutorial-btn").addEventListener("click", () => {
+$("#welcome-video-btn").addEventListener("click", () => {
   dismissWelcome();
-  openTutorial();
+  window.open($("#video-link").href, "_blank", "noopener");
 });
-// Échap ferme l'écran lui aussi : c'est un choix de passer le tutoriel.
+// Échap ferme l'écran lui aussi : c'est un choix de passer la vidéo.
 welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));
 
 // Lu avant que la donne restaurée ne soit réécrite : c'est son absence qui

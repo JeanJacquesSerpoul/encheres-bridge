@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Animation de présentation de l'application : une page autonome, à ouvrir
+     dans un navigateur. La donne est celle d'Est donneur, EO vulnérables ;
+     les enchères sont celles du moteur, les levées et le PAR ceux du solveur
+     DDS de cli/ et de tools/par/par.js. -->
+<title>Enchères en mouvement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #0d1511;
+    --page-ink: #dfe9e1;
+    --page-muted: #8fa596;
+    --felt: #2e6b46;
+    --felt-deep: #1a432c;
+    --felt-line: rgba(234, 245, 236, .16);
+    --on-felt: #eaf5ec;
+    --on-felt-muted: #b5d3bd;
+    --gold: #e0a30c;
+    --gold-soft: #ffd166;
+    --card: #fdfdf9;
+    --card-ink: #1d2b1f;
+    --red: #c0392b;
+    --serif: "Young Serif", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--page); color: var(--page-ink); }
+  [hidden] { display: none !important; }
+  body { font-family: var(--sans); padding-inline: 16px; padding-block: 28px 40px; }
+  .wrap { max-width: 1000px; margin-inline: auto; display: grid; gap: 18px; }
+
+  .intro-line { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; }
+  .intro-line h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 3.5vw, 2.1rem); text-wrap: balance; }
+  .intro-line h1 span { color: var(--gold); }
+  .intro-line p { margin: 0; color: var(--page-muted); font-size: .95rem; max-width: 44ch; }
+
+  /* ---------- Le plateau : 960 × 540, mis à l'échelle par le script ---------- */
+  .viewport { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .06); background: var(--felt-deep); }
+  .stage { position: absolute; left: 0; top: 0; width: 960px; height: 540px; transform-origin: 0 0; color: var(--on-felt);
+    background:
+      radial-gradient(120% 90% at 50% 38%, var(--felt) 0%, var(--felt-deep) 78%),
+      var(--felt-deep); overflow: hidden; }
+  .stage::after { /* grain du tapis */
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,.035) 0 2px, transparent 2px 5px),
+                      repeating-linear-gradient(-45deg, rgba(255,255,255,.025) 0 2px, transparent 2px 6px); }
+
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s linear .5s; }
+  .scene.on { opacity: 1; visibility: visible; transition: opacity .5s ease; }
+  .chapter-tag { position: absolute; left: 44px; top: 34px; display: flex; align-items: center; gap: 10px;
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-felt-muted); }
+  .chapter-tag b { font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: 0; text-transform: none; color: var(--on-felt); }
+  .chapter-tag i { font-style: normal; color: var(--gold); }
+
+  /* animation d'entrée : .a + --d (délai en s) ; rejouée à chaque entrée de scène */
+  .scene.on .a { animation: var(--k, rise) var(--t, .7s) var(--ease) both; animation-delay: calc(var(--d, 0) * 1s); }
+  .paused .scene .a, .paused .scene .loop { animation-play-state: paused !important; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes pop { from { opacity: 0; transform: scale(.6); } 70% { transform: scale(1.06); } }
+  @keyframes slide { from { opacity: 0; transform: translateX(-26px); } }
+  @keyframes fade { from { opacity: 0; } }
+
+  /* ---------- Cartes ---------- */
+  .card { position: absolute; width: 118px; height: 168px; border-radius: 11px; background: var(--card); color: var(--card-ink);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(0,0,0,.08); font-family: var(--serif); }
+  .card.red { color: var(--red); }
+  .card .idx { position: absolute; left: 10px; top: 8px; line-height: 1; text-align: center; font-size: 26px; }
+  .card .idx small { display: block; font-size: 22px; }
+  .card .pip { position: absolute; inset: 0; display: grid; place-items: center; font-size: 64px; }
+  .card .idx.b { left: auto; top: auto; right: 10px; bottom: 8px; transform: rotate(180deg); }
+
+  /* 1 · ouverture */
+  .fan { position: absolute; left: 50%; top: 70px; width: 0; height: 200px; }
+  .fan .card { left: -59px; top: 0; transform-origin: 50% 120%; }
+  .scene.on .fan .card { animation: deal 1s var(--ease) both; animation-delay: calc(var(--d) * 1s); }
+  @keyframes deal { from { transform: translate(var(--fx), -260px) rotate(var(--fr0)); } to { transform: rotate(var(--r)); } }
+  .fan .card { transform: rotate(var(--r)); }
+  .title-block { position: absolute; left: 0; right: 0; top: 320px; text-align: center; }
+  .title-block h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 66px; line-height: 1.05; }
+  .title-block p { margin: 14px 0 0; font-size: 19px; color: var(--on-felt-muted); }
+  .title-block p b { color: var(--gold-soft); font-weight: 500; }
+  .scene.on .title-block h2, .scene.on .title-block p { --k: settle; }
+  @keyframes settle { from { transform: translateY(16px) scale(.98); letter-spacing: .04em; } }
+
+  /* 2 · la donne */
+  .pbn { position: absolute; left: 44px; top: 84px; font-family: var(--mono); font-size: 14px; color: var(--on-felt);
+    background: rgba(0, 0, 0, .22); border: 1px solid var(--felt-line); border-radius: 8px; padding: 8px 12px; white-space: nowrap; }
+  .pbn .typed { display: inline-block; overflow: hidden; vertical-align: bottom; width: 0; }
+  .scene.on .pbn .typed { animation: type 2.4s steps(69) .4s forwards; }
+  @keyframes type { to { width: 69ch; } }
+  .pbn .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--gold); vertical-align: -3px; margin-left: 2px; }
+  .scene.on .pbn .caret { animation: blink .8s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .table { position: absolute; left: 150px; top: 138px; width: 520px; height: 380px;
+    display: grid; grid-template-columns: 1fr 150px 1fr; grid-template-rows: 1fr 150px 1fr; gap: 8px; }
+  .hand { font-size: 17px; line-height: 1.5; font-variant-numeric: tabular-nums; align-self: center; }
+  .hand .seat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 2px; }
+  .hand .s { display: block; white-space: nowrap; }
+  .hand .s::first-letter { color: var(--on-felt); }
+  .hand .r::first-letter { color: #ff8a7a; }
+  .n { grid-column: 2; grid-row: 1; justify-self: center; align-self: end; }
+  .o { grid-column: 1; grid-row: 2; justify-self: end; }
+  .e { grid-column: 3; grid-row: 2; justify-self: start; }
+  .s-seat { grid-column: 2; grid-row: 3; justify-self: center; align-self: start; }
+  .compass { grid-column: 2; grid-row: 2; border-radius: 12px; background: rgba(0,0,0,.2); border: 1px solid var(--felt-line);
+    display: grid; place-items: center; text-align: center; font-size: 13px; color: var(--on-felt-muted); line-height: 1.6; }
+  .compass b { display: block; color: var(--on-felt); font-weight: 600; }
+  .hl-south { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 6px; }
+  .scene.on .hl-south { animation: glow 1.4s ease 2.6s both; }
+  @keyframes glow { from { outline-color: transparent; } }
+  .ways { position: absolute; right: 44px; top: 170px; width: 220px; display: grid; gap: 10px; }
+  .ways div { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 9px; background: rgba(255,255,255,.07);
+    font-size: 14px; line-height: 1.35; }
+  .ways svg { flex: none; width: 22px; height: 22px; stroke: var(--gold-soft); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* 3 · les enchères */
+  .seq { position: absolute; left: 44px; top: 96px; width: 640px; display: grid; gap: 7px; }
+  .seq h3 { margin: 0 0 4px; font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-felt-muted); }
+  .line { display: grid; grid-template-columns: 26px 22px 64px 1fr; align-items: center; gap: 10px; font-size: 16px; min-height: 40px; }
+  .line .no { color: var(--on-felt-muted); font-variant-numeric: tabular-nums; text-align: right; font-size: 14px; }
+  .line .who { font-weight: 600; color: var(--gold-soft); }
+  .bid { display: inline-grid; place-items: center; height: 34px; border-radius: 7px; background: var(--card); color: var(--card-ink);
+    font-family: var(--serif); font-size: 19px; box-shadow: 0 3px 8px rgba(0,0,0,.3); }
+  .bid.red { color: var(--red); }
+  .bid.pass { background: #3f8a5c; color: #fff; font-family: var(--sans); font-size: 14px; font-weight: 600; }
+  .line .txt { color: var(--on-felt); }
+  .line.ctrl .txt::before { content: "contrôle"; display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 99px;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: rgba(224, 163, 12, .22); color: var(--gold-soft); vertical-align: 2px; }
+  .scene.on .line { --k: slide; --t: .55s; }
+  .scene.on .line .bid { animation: pop .5s var(--ease) both; animation-delay: calc(var(--d) * 1s + .08s); }
+  .contract { position: absolute; right: 44px; bottom: 44px; width: 210px; padding: 18px 20px; border-radius: 14px;
+    background: var(--gold); color: var(--card-ink); box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+  .contract small { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+  .contract strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 46px; line-height: 1.1; }
+  .contract strong em { font-style: normal; color: var(--red); }
+  .contract span { font-size: 14px; }
+  .scene.on .contract { --k: pop; }
+  .mini-hand { position: absolute; right: 44px; top: 96px; width: 210px; padding: 14px 16px; border-radius: 12px;
+    background: rgba(0,0,0,.2); border: 1px solid var(--felt-line); font-size: 15px; line-height: 1.55; }
+  .mini-hand .seat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+
+  /* 4 · le PAR */
+  .par { position: absolute; left: 150px; top: 116px; display: grid;
+    grid-template-columns: 60px repeat(5, 84px); gap: 6px; font-variant-numeric: tabular-nums; }
+  .par .h { display: grid; place-items: center; height: 34px; font-family: var(--serif); font-size: 22px; }
+  .par .h.red { color: #ff8a7a; }
+  .par .rh { display: grid; place-items: center; font-weight: 600; color: var(--gold-soft); letter-spacing: .1em; }
+  .par .cell { height: 50px; border-radius: 8px; background: rgba(255,255,255,.07); position: relative; overflow: hidden;
+    display: grid; place-items: center; font-family: var(--serif); font-size: 24px; }
+  .par .cell b { font-weight: 400; position: relative; z-index: 1; }
+  .par .cell::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 20%, rgba(255, 209, 102, .35) 50%, transparent 80%); transform: translateX(-100%); }
+  .scene.on .par .cell::after { animation: scan .9s ease-in-out 2 both; animation-delay: calc(var(--d) * 1s + .3s); }
+  .scene.on .par .cell b { animation: pop .45s var(--ease) both; animation-delay: calc(var(--d) * 1s + 1.6s); }
+  .scene.on .par .cell.hl { animation: mark .6s ease 2.9s both; }
+  @keyframes mark { to { background: var(--gold); color: var(--card-ink); } }
+  .paused .par .cell::after, .paused .par .cell b, .paused .par .cell.hl { animation-play-state: paused !important; }
+  @keyframes scan { to { transform: translateX(100%); } }
+  .par-result { position: absolute; right: 44px; top: 116px; width: 190px; padding: 16px 18px; border-radius: 14px;
+    background: var(--gold); color: var(--card-ink); box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+  .par-result small { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+  .par-result strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; }
+  .par-result strong em { font-style: normal; color: var(--red); }
+  .par-result span { font-size: 14px; font-variant-numeric: tabular-nums; }
+  .par-note { position: absolute; left: 0; right: 0; top: 410px; text-align: center; }
+  .par-note p { margin: 0 auto; max-width: 56ch; font-size: 17px; line-height: 1.5; }
+  .par-note small { display: block; margin-top: 10px; font-size: 13px; color: var(--on-felt-muted); }
+
+  /* 5 · s'entraîner */
+  .quiz-q { position: absolute; left: 44px; top: 96px; font-size: 18px; }
+  .quiz-q .bids { display: flex; gap: 8px; align-items: center; margin-top: 10px; font-size: 15px; color: var(--on-felt-muted); }
+  .quiz-q .bids .bid { width: 54px; }
+  .quiz-q .bids .ask { width: 54px; height: 34px; border-radius: 7px; border: 2px dashed var(--gold); display: grid; place-items: center;
+    color: var(--gold-soft); font-weight: 600; }
+  .scene.on .quiz-q .ask { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(1.08); } }
+  .myhand { position: absolute; left: 44px; top: 214px; height: 130px; width: 620px; }
+  .myhand .card { width: 74px; height: 106px; border-radius: 8px; top: 0; left: calc(var(--i) * 41px); }
+  .myhand .card .idx { font-size: 20px; left: 7px; top: 6px; }
+  .myhand .card .idx small { font-size: 17px; }
+  .myhand .card .pip { display: none; }
+  .scene.on .myhand .card { animation: rise .5s var(--ease) both; animation-delay: calc(.3s + var(--i) * .06s); }
+  .choices { position: absolute; left: 44px; top: 372px; display: flex; gap: 14px; }
+  .choice { width: 104px; height: 64px; border-radius: 10px; background: rgba(255,255,255,.08); border: 1px solid var(--felt-line);
+    display: grid; place-items: center; font-family: var(--serif); font-size: 26px; position: relative; }
+  .choice.red { color: #ff8a7a; }
+  .scene.on .choice.good { animation: pick .6s var(--ease) 3.1s both; }
+  @keyframes pick { to { background: var(--card); color: var(--red); border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold); } }
+  .pointer { position: absolute; width: 26px; height: 26px; border-radius: 50%; border: 3px solid var(--gold-soft);
+    background: rgba(255, 209, 102, .25); left: 60px; top: 480px; opacity: 0; }
+  .scene.on .pointer { animation: aim 2.2s var(--ease) 1.2s both; }
+  @keyframes aim { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 1; }
+    60% { transform: translate(141px, -89px); } 75% { transform: translate(141px, -89px) scale(.7); } 100% { opacity: 1; transform: translate(141px, -89px); } }
+  .verdict { position: absolute; left: 44px; top: 462px; display: flex; gap: 12px; align-items: center; font-size: 16px; }
+  .verdict .ok { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #3fbf6c; color: #0d1511; font-weight: 700; }
+  .quiz-side { position: absolute; right: 44px; top: 96px; width: 230px; font-size: 15px; line-height: 1.55; color: var(--on-felt-muted); }
+  .quiz-side b { color: var(--on-felt); font-weight: 600; }
+
+  /* 6 · fin */
+  .end { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 18px; }
+  .end h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 58px; }
+  .end h2 span { color: var(--gold); }
+  .end .steps { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .end .steps span { padding: 7px 14px; border-radius: 99px; background: rgba(255,255,255,.09); font-size: 15px; }
+  .end p { margin: 0; color: var(--on-felt-muted); font-size: 15px; }
+
+  /* ---------- Contrôles ---------- */
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border-radius: 9px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,.14); background: #16251c; color: var(--page-ink); font: 500 14px var(--sans); }
+  .btn:hover { background: #1d3226; }
+  .btn:focus-visible, .chap:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .chapters { flex: 1 1 420px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+  .chap { appearance: none; border: 0; background: none; padding: 0; cursor: pointer; text-align: left; color: var(--page-muted);
+    font: 500 12px var(--sans); display: grid; gap: 6px; min-width: 0; }
+  .chap .bar { height: 4px; border-radius: 99px; background: rgba(255,255,255,.12); overflow: hidden; }
+  .chap .bar i { display: block; height: 100%; width: 0; background: var(--gold); }
+  .chap .lbl { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chap.cur { color: var(--page-ink); }
+  .foot { color: var(--page-muted); font-size: 13px; line-height: 1.5; }
+  .foot a { color: var(--gold-soft); }
+
+  @media (max-width: 640px) {
+    .chapters { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scene.on .a, .scene.on .fan .card, .scene.on .line .bid, .scene.on .myhand .card, .scene.on .pbn .typed,
+    .scene.on .choice.good, .scene.on .pointer, .scene.on .hl-south, .scene.on .par .cell b, .scene.on .par .cell.hl { animation-duration: .01s !important; animation-delay: 0s !important; }
+    .scene.on .par .cell::after, .scene.on .quiz-q .ask, .scene.on .pbn .caret { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro-line">
+    <h1>Enchères <span>en mouvement</span></h1>
+    <p>Une donne, de la saisie au contrat : ce que fait l'application Enchères au bridge, en quarante-deux secondes.</p>
+  </div>
+
+  <div class="viewport" id="viewport">
+    <div class="stage" id="stage" aria-live="polite">
+
+      <!-- 1 · Ouverture -->
+      <section class="scene" data-dur="5" data-label="Ouverture" aria-label="Ouverture">
+        <div class="fan">
+          <div class="card" style="--r:-21deg;--fr0:-40deg;--fx:-300px;--d:.05"><span class="idx">A<small>♠</small></span><span class="pip">♠</span><span class="idx b">A<small>♠</small></span></div>
+          <div class="card red" style="--r:-7deg;--fr0:20deg;--fx:-120px;--d:.2"><span class="idx">R<small>♥</small></span><span class="pip">♥</span><span class="idx b">R<small>♥</small></span></div>
+          <div class="card red" style="--r:7deg;--fr0:-15deg;--fx:120px;--d:.35"><span class="idx">D<small>♦</small></span><span class="pip">♦</span><span class="idx b">D<small>♦</small></span></div>
+          <div class="card" style="--r:21deg;--fr0:40deg;--fx:300px;--d:.5"><span class="idx">V<small>♣</small></span><span class="pip">♣</span><span class="idx b">V<small>♣</small></span></div>
+        </div>
+        <div class="title-block">
+          <h2 class="a" style="--d:.9">Enchères au bridge</h2>
+          <p class="a" style="--d:1.3">Les enchères d'une donne, déroulées et commentées en <b>Système d'Enseignement Français</b></p>
+        </div>
+      </section>
+
+      <!-- 2 · La donne -->
+      <section class="scene" data-dur="7" data-label="La donne" aria-label="La donne">
+        <div class="chapter-tag a"><i>1</i> <b>Composer la donne</b></div>
+        <div class="pbn a" style="--d:.1"><span class="typed">E:AJ53.Q.763.QT953 2.AKJ743.KQ42.K7 KT96.T985.J85.82 Q874.62.AT9.AJ64</span><span class="caret"></span></div>
+        <div class="table">
+          <div class="hand n a" style="--d:1.2"><div class="seat">Nord</div><span class="s">♠ D 8 7 4</span><span class="s r">♥ 6 2</span><span class="s r">♦ A 10 9</span><span class="s">♣ A V 6 4</span></div>
+          <div class="hand o a" style="--d:1.9"><div class="seat">Ouest</div><span class="s">♠ R 10 9 6</span><span class="s r">♥ 10 9 8 5</span><span class="s r">♦ V 8 5</span><span class="s">♣ 8 2</span></div>
+          <div class="compass a" style="--k:pop;--d:.9"><div><b>Est donneur</b>EO vulnérables</div></div>
+          <div class="hand e a" style="--d:1.4"><div class="seat">Est</div><span class="s">♠ A V 5 3</span><span class="s r">♥ D</span><span class="s r">♦ 7 6 3</span><span class="s">♣ D 10 9 5 3</span></div>
+          <div class="hand s-seat hl-south a" style="--d:1.65"><div class="seat">Sud</div><span class="s">♠ 2</span><span class="s r">♥ A R V 7 4 3</span><span class="s r">♦ R D 4 2</span><span class="s">♣ R 7</span></div>
+        </div>
+        <div class="ways">
+          <div class="a" style="--d:2.4"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l9-9 3 3-9 9H6z"/></svg>Saisie des quatre mains</div>
+          <div class="a" style="--d:2.7"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg>Fichier ou texte .pbn</div>
+          <div class="a" style="--d:3"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Photo des cartes, lue par un serveur IA</div>
+        </div>
+      </section>
+
+      <!-- 3 · Les enchères -->
+      <section class="scene" data-dur="12" data-label="Les enchères" aria-label="Les enchères">
+        <div class="chapter-tag a"><i>2</i> <b>Dérouler les enchères</b></div>
+        <div class="seq">
+          <h3 class="a" style="--d:.2">Séquence commentée</h3>
+          <div class="line a" style="--d:.6"><span class="no">1.</span><span class="who">S</span><span class="bid red">1♥</span><span class="txt">ouverture majeure, 5 cartes et plus, 12-23HL</span></div>
+          <div class="line a" style="--d:1.8"><span class="no">2.</span><span class="who">N</span><span class="bid">1♠</span><span class="txt">changement de couleur 1 sur 1, 4 cartes et plus, forcing</span></div>
+          <div class="line a" style="--d:3"><span class="no">3.</span><span class="who">S</span><span class="bid red">3♦</span><span class="txt">saut dans la seconde couleur, forcing</span></div>
+          <div class="line a" style="--d:4.2"><span class="no">4.</span><span class="who">N</span><span class="bid">3SA</span><span class="txt">conclusion à la manche sur la force combinée</span></div>
+          <div class="line ctrl a" style="--d:5.4"><span class="no">5.</span><span class="who">S</span><span class="bid">4♣</span><span class="txt">le Roi</span></div>
+          <div class="line ctrl a" style="--d:6.4"><span class="no">6.</span><span class="who">N</span><span class="bid red">4♦</span><span class="txt">l'As</span></div>
+          <div class="line ctrl a" style="--d:7.4"><span class="no">7.</span><span class="who">S</span><span class="bid red">4♥</span><span class="txt">l'As d'atout</span></div>
+          <div class="line a" style="--d:8.4"><span class="no">8.</span><span class="who">N</span><span class="bid pass">Passe</span><span class="txt">pas de contrôle à Pique, arrêt au palier de 4</span></div>
+        </div>
+        <div class="mini-hand a" style="--d:.4"><div class="seat">Sud · 16 H</div>♠ 2<br><span style="color:#ff8a7a">♥</span> A R V 7 4 3<br><span style="color:#ff8a7a">♦</span> R D 4 2<br>♣ R 7</div>
+        <div class="contract a" style="--d:9.4"><small>Contrat final</small><strong>4<em>♥</em></strong><span>joué par Sud</span></div>
+      </section>
+
+      <!-- 4 · Le PAR -->
+      <section class="scene" data-dur="8" data-label="Le PAR" aria-label="Le PAR">
+        <div class="chapter-tag a"><i>3</i> <b>Comparer au PAR</b></div>
+        <div class="par a" style="--k:fade;--d:.2" aria-label="Levées double-mort par déclarant et dénomination">
+          <span></span><span class="h">♣</span><span class="h red">♦</span><span class="h red">♥</span><span class="h">♠</span><span class="h" style="font-size:18px">SA</span>
+          <span class="rh">N</span><span class="cell" style="--d:0.0"><b>8</b></span><span class="cell" style="--d:0.1"><b>11</b></span><span class="cell hl" style="--d:0.2"><b>11</b></span><span class="cell" style="--d:0.3"><b>7</b></span><span class="cell" style="--d:0.4"><b>9</b></span>
+          <span class="rh">S</span><span class="cell" style="--d:0.15"><b>8</b></span><span class="cell" style="--d:0.25"><b>11</b></span><span class="cell hl" style="--d:0.35"><b>11</b></span><span class="cell" style="--d:0.45"><b>7</b></span><span class="cell" style="--d:0.55"><b>9</b></span>
+          <span class="rh">E</span><span class="cell" style="--d:0.3"><b>5</b></span><span class="cell" style="--d:0.4"><b>2</b></span><span class="cell" style="--d:0.5"><b>2</b></span><span class="cell" style="--d:0.6"><b>5</b></span><span class="cell" style="--d:0.7"><b>4</b></span>
+          <span class="rh">O</span><span class="cell" style="--d:0.45"><b>5</b></span><span class="cell" style="--d:0.55"><b>2</b></span><span class="cell" style="--d:0.65"><b>2</b></span><span class="cell" style="--d:0.75"><b>5</b></span><span class="cell" style="--d:0.85"><b>4</b></span>
+        </div>
+        <div class="par-result a" style="--k:pop;--d:3.2"><small>PAR</small><strong>4<em>♥</em> Nord-Sud</strong><span>+450 · 11 levées</span></div>
+        <div class="par-note">
+          <p class="a" style="--d:3.6">Le contrat des enchères, 4♥ par Sud, est celui du PAR.</p>
+          <small class="a" style="--d:4">Levées double-mort calculées par DDS, de Bo Haglund et Søren Hein, directement dans le navigateur</small>
+        </div>
+      </section>
+
+      <!-- 5 · S'entraîner -->
+      <section class="scene" data-dur="7" data-label="S'entraîner" aria-label="S'entraîner">
+        <div class="chapter-tag a"><i>4</i> <b>S'entraîner</b></div>
+        <div class="quiz-q a" style="--d:.2">À vous d'enchérir, en Sud :
+          <div class="bids"><span class="bid red">1♥</span>–<span class="bid pass">Passe</span>–<span class="bid">1♠</span>–<span class="bid pass">Passe</span>–<span class="ask">?</span></div>
+        </div>
+        <div class="myhand" aria-label="Votre main">
+          <div class="card" style="--i:0"><span class="idx">2<small>♠</small></span></div>
+          <div class="card red" style="--i:1"><span class="idx">A<small>♥</small></span></div>
+          <div class="card red" style="--i:2"><span class="idx">R<small>♥</small></span></div>
+          <div class="card red" style="--i:3"><span class="idx">V<small>♥</small></span></div>
+          <div class="card red" style="--i:4"><span class="idx">7<small>♥</small></span></div>
+          <div class="card red" style="--i:5"><span class="idx">4<small>♥</small></span></div>
+          <div class="card red" style="--i:6"><span class="idx">3<small>♥</small></span></div>
+          <div class="card red" style="--i:7"><span class="idx">R<small>♦</small></span></div>
+          <div class="card red" style="--i:8"><span class="idx">D<small>♦</small></span></div>
+          <div class="card red" style="--i:9"><span class="idx">4<small>♦</small></span></div>
+          <div class="card red" style="--i:10"><span class="idx">2<small>♦</small></span></div>
+          <div class="card" style="--i:11"><span class="idx">R<small>♣</small></span></div>
+          <div class="card" style="--i:12"><span class="idx">7<small>♣</small></span></div>
+        </div>
+        <div class="choices">
+          <div class="choice red a" style="--d:.9">2♥</div>
+          <div class="choice red good a" style="--d:1">3♦</div>
+          <div class="choice a" style="--d:1.1;font-size:22px">2SA</div>
+        </div>
+        <div class="pointer" aria-hidden="true"></div>
+        <div class="verdict a" style="--d:3.6"><span class="ok">✓</span>3♦ : saut dans la seconde couleur, forcing</div>
+        <div class="quiz-side a" style="--d:.6"><b>Mode questionnaire.</b> La donne reste masquée : vous enchérissez avec votre seule main, et l'application compare chaque enchère à la sienne, commentaire à l'appui.</div>
+      </section>
+
+      <!-- 6 · Fin -->
+      <section class="scene" data-dur="5" data-label="Récapitulatif" aria-label="Récapitulatif">
+        <div class="end">
+          <h2 class="a">Enchères <span>au bridge</span></h2>
+          <div class="steps">
+            <span class="a" style="--d:.4">Composer</span><span class="a" style="--d:.55">Enchérir</span><span class="a" style="--d:.7">Comparer au PAR</span><span class="a" style="--d:.85">S'entraîner</span>
+          </div>
+          <p class="a" style="--d:1.2">Bridge Bidding, de Jean-Jacques Serpoul · en français et en anglais</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="play" type="button" aria-label="Pause">
+      <svg id="ico-pause" viewBox="0 0 16 16"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg>
+      <svg id="ico-play" viewBox="0 0 16 16" hidden><path d="M4 2.5v11l9-5.5z"/></svg>
+      <span id="play-lbl">Pause</span>
+    </button>
+    <button class="btn" id="replay" type="button">
+      <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 1-5.6 3.8l1.8.8A4 4 0 1 0 8 4v2L4.5 3 8 0z"/></svg>Rejouer
+    </button>
+    <div class="chapters" id="chapters"></div>
+  </div>
+
+  <p class="foot">La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge">github.com/JeanJacquesSerpoul/encheres-bridge</a></p>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById("stage");
+  var viewport = document.getElementById("viewport");
+  var scenes = Array.prototype.slice.call(stage.querySelectorAll(".scene"));
+  var chaptersEl = document.getElementById("chapters");
+  var playBtn = document.getElementById("play");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Mise à l'échelle du plateau 960 × 540 dans la largeur disponible.
+  function fit() { stage.style.transform = "scale(" + (viewport.clientWidth / 960) + ")"; }
+  fit();
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(viewport); else window.addEventListener("resize", fit);
+
+  var starts = [], total = 0;
+  scenes.forEach(function (s) { starts.push(total); total += parseFloat(s.dataset.dur); });
+
+  var bars = scenes.map(function (s, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chap";
+    b.innerHTML = '<span class="bar"><i></i></span><span class="lbl"></span>';
+    b.querySelector(".lbl").textContent = s.dataset.label;
+    b.setAttribute("aria-label", "Aller au chapitre : " + s.dataset.label);
+    b.addEventListener("click", function () { seek(starts[i]); });
+    chaptersEl.appendChild(b);
+    return b;
+  });
+
+  var t = 0, cur = -1, playing = !reduce, last = null;
+
+  function show(i) {
+    scenes.forEach(function (s, j) { if (j !== i) s.classList.remove("on"); });
+    var s = scenes[i];
+    s.classList.remove("on");
+    void s.offsetWidth; // relance les animations d'entrée
+    s.classList.add("on");
+    bars.forEach(function (b, j) { b.classList.toggle("cur", j === i); });
+    cur = i;
+  }
+  function indexAt(time) {
+    for (var i = scenes.length - 1; i >= 0; i--) if (time >= starts[i]) return i;
+    return 0;
+  }
+  function paint() {
+    bars.forEach(function (b, j) {
+      var d = parseFloat(scenes[j].dataset.dur);
+      var p = Math.min(1, Math.max(0, (t - starts[j]) / d));
+      b.querySelector("i").style.width = (p * 100) + "%";
+    });
+  }
+  function seek(time) {
+    t = time; show(indexAt(t)); paint();
+  }
+  function setPlaying(on) {
+    playing = on;
+    stage.classList.toggle("paused", !on);
+    document.getElementById("ico-pause").hidden = !on;
+    document.getElementById("ico-play").hidden = on;
+    document.getElementById("play-lbl").textContent = on ? "Pause" : "Lecture";
+    playBtn.setAttribute("aria-label", on ? "Pause" : "Lecture");
+    last = null;
+  }
+  function tick(now) {
+    if (playing) {
+      if (last !== null) {
+        t += (now - last) / 1000;
+        if (t >= total) t = 0;
+        var i = indexAt(t);
+        if (i !== cur) show(i);
+        paint();
+      }
+      last = now;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener("click", function () { setPlaying(!playing); });
+  document.getElementById("replay").addEventListener("click", function () { seek(0); setPlaying(true); });
+
+  seek(0);
+  setPlaying(playing);
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

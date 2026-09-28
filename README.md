@@ -305,6 +305,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 |---|---|
 | `bids.lang`, `bids.theme` | Langue et thème |
 | `bids.quizMode` | Mode questionnaire activé ou non |
+| `bids.hidePasses` | Passes masqués ou non dans la séquence commentée |
 | `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |
 | `bids.welcomed` | Écran d'accueil déjà vu : il ne s'affiche qu'au premier lancement |
 | `ia.enabled`, `ia.mode`, `ia.local`, `ia.remote` | Option de reconnaissance par photo et serveur IA visé |

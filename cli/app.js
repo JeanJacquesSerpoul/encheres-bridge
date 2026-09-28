@@ -20,6 +20,7 @@ const IA_LOCAL_KEY = "ia.local";
 const IA_REMOTE_KEY = "ia.remote";
 const IA_MODE_KEY = "ia.mode";
 const IA_ENABLED_KEY = "ia.enabled";
+const HIDE_PASSES_KEY = "bids.hidePasses";
 
 const iaModeSelect = $("#ia-mode");
 iaModeSelect.value = readIaMode();
@@ -34,6 +35,21 @@ iaModeSelect.addEventListener("change", applyIaMode);
 const iaEnabledToggle = $("#ia-enabled");
 iaEnabledToggle.checked = readIaEnabled();
 iaEnabledToggle.addEventListener("change", applyIaFeature);
+
+// Option d'affichage, par défaut OFF : cochée, la séquence commentée cache
+// ses passes. Une simple classe sur la liste, sans la réémettre : chaque ligne
+// y garde son numéro de tour (attribut value), les enchères restantes ne se
+// renumérotent donc pas.
+const hidePassesToggle = $("#hide-passes");
+hidePassesToggle.checked = readStored(HIDE_PASSES_KEY, "") === "1";
+hidePassesToggle.addEventListener("change", applyHidePasses);
+applyHidePasses();
+
+function applyHidePasses() {
+  const on = hidePassesToggle.checked;
+  saveStored(HIDE_PASSES_KEY, on ? "1" : "0");
+  $("#comments").classList.toggle("hide-passes", on);
+}
 
 function iaEnabled() {
   return iaEnabledToggle.checked;
@@ -140,6 +156,7 @@ const UI_TEXT = {
     serverIa: "Serveur IA",
     serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
+    hidePasses: "Ne pas afficher les passes",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
     versionWasm: "Moteur d'enchères",
@@ -318,6 +335,7 @@ const UI_TEXT = {
     serverIa: "AI server",
     serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
+    hidePasses: "Hide passes",
     serverTest: "Test",
     healthUnknown: "unknown state",
     versionWasm: "Bidding engine",
@@ -3664,9 +3682,11 @@ function renderResult(r) {
         : `<span class="tree-icon-gap" aria-hidden="true"></span>`;
       const head = `<span class="who">${esc(SEAT_SHORT[lang][a.player])}</span> - ` +
         bidHTML(a.bid, lang);
-      return a.comment && !isPass(a.bid)
-        ? `<li data-i="${i}">${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
-        : `<li class="silent" data-i="${i}">${icon}${head}</li>`;
+      const attrs = `data-i="${i}" value="${i + 1}"`;
+      if (isPass(a.bid)) return `<li class="silent pass" ${attrs}>${icon}${head}</li>`;
+      return a.comment
+        ? `<li ${attrs}>${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
+        : `<li class="silent" ${attrs}>${icon}${head}</li>`;
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;
 

@@ -99,11 +99,10 @@ func TestSpoutnikAnswerNeverPasses(t *testing.T) {
 	}
 }
 
-// TestSpoutnikDoubleNeedsEightHonourPoints replays a reported auction:
-// 1C-(1D), North holds T8.T643.KQT654.T -- four hearts, but only 5 H, the
-// diamond length alone lifting it to 7 HL. The engine made the Spoutnik
-// double on those length points; it needs 8 H [RC-6].
-func TestSpoutnikDoubleNeedsEightHonourPoints(t *testing.T) {
+// TestSpoutnikDoubleNeedsEightHL replays a reported auction: 1C-(1D), North
+// holds T8.T643.KQT654.T -- four hearts, 5 H and 7 HL with the diamond
+// length. The Spoutnik double needs 8 HL [RC-6]: one point short.
+func TestSpoutnikDoubleNeedsEightHL(t *testing.T) {
 	pbn := `[Dealer "S"]
 [Vulnerable "NS"]
 [Deal "S:KQ92.A7.J9.KQ873 A53.98.A8732.AJ6 T8.T643.KQT654.T J764.KQJ52..9542"]`
@@ -116,8 +115,33 @@ func TestSpoutnikDoubleNeedsEightHonourPoints(t *testing.T) {
 	const north = 0
 	for _, sc := range calls {
 		if sc.Seat == north && sc.M.spoutnik {
-			t.Fatalf("North made the Spoutnik double with 5 H (%q)\nauction: %s",
+			t.Fatalf("North made the Spoutnik double with 7 HL (%q)\nauction: %s",
 				sc.M.fr, formatAuction(calls))
 		}
 	}
+}
+
+// TestSpoutnikDoubleCountsLengthPoints: the floor is 8 HL, not 8 H [RC-6].
+// 1C-(1D), North holds KJ43.72.QJ9854.3 -- four spades, 7 H and 9 HL with the
+// six diamonds: enough for the Spoutnik double.
+func TestSpoutnikDoubleCountsLengthPoints(t *testing.T) {
+	const north, east, south, west = 0, 1, 2, 3
+	d := dealWith(south, map[int]*Hand{
+		north: hand("KJ43", "72", "QJ9854", "3"),
+		south: hand("A92", "AK5", "7", "KQ8765"),
+		west:  hand("Q7", "QJ3", "AKT62", "J42"),
+	})
+	calls := NewEngine(d).Run()
+
+	for _, sc := range calls {
+		if sc.Seat != north {
+			continue
+		}
+		if !sc.M.spoutnik {
+			t.Fatalf("North's first call = %s (%q), want the Spoutnik double\nauction: %s",
+				sc.Call.Format("fr"), sc.M.fr, formatAuction(calls))
+		}
+		return
+	}
+	t.Fatalf("North never bid\nauction: %s", formatAuction(calls))
 }

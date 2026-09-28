@@ -519,7 +519,7 @@ majeure d'ouverture à 3 cartes garde la priorité — ce fit-là est déjà con
 | Longueur | Enchère | Plancher |
 |---|---|---|
 | 5 cartes et plus | la couleur, au palier de 1 ou de 2 | 6 HL au palier de 1, **11 HL** au palier de 2 |
-| exactement 4 | **Contre Spoutnik** [RC-6] | **8 H**, quel que soit le palier |
+| exactement 4 | **Contre Spoutnik** [RC-6] | **8 HL**, quel que soit le palier |
 | exactement 4, sans contre disponible (intervention par **Contre**) | la couleur au palier de 1 | 6 HL |
 
 Choix entre les deux majeures : la plus longue dès cinq cartes (♠ à
@@ -530,9 +530,10 @@ Choix entre les deux majeures : la plus longue dès cinq cartes (♠ à
 Sur l'intervention à la couleur d'un adversaire (palier de 1 ou de 2), le
 **Contre** du répondant montre **exactement 4 cartes** dans la ou les
 majeures que personne n'a nommées — la longueur qu'une enchère naturelle ne
-peut plus promettre, puisque cinq cartes la nomment. Il demande **8 H** au
-minimum, quel que soit le palier : les points de longueur ne suffisent pas,
-car l'ouvreur peut devoir répondre au palier de 2.
+peut plus promettre, puisque cinq cartes la nomment. Il demande **8 HL** au
+minimum, quel que soit le palier : l'ouvreur peut devoir répondre au palier
+de 2, et les 6 points d'une réponse au palier de 1 n'y suffisent pas.
+`1♣ – (1♦) – ?` avec ♠108 ♥10643 ♦RD10654 ♣10 (5 H, 7 HL) → pas de contre.
 
 **L'ouvreur ne passe jamais** : le contre est une enchère, pas une punition.
 - 4 cartes dans la majeure annoncée → il la nomme : au plus bas avec 12-16

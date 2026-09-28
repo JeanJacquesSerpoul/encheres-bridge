@@ -2486,10 +2486,26 @@ func (e *Engine) concludeGameDecision(ctx *concludeCtx) (Call, meaning) {
 				if psc, ok := e.lastCallBy(partner.seat); ok && psc.Call.IsBid() && psc.Call.Strain == SNoTrump {
 					reval := p.hand.HLD(s)
 					for os := Clubs; os <= Spades; os++ {
-						if os == s || p.hand.Len(os) != 1 {
+						if os == s || p.hand.Len(os) > 1 {
 							continue
 						}
+						// Shortness facing the four cards partner showed in a
+						// suit of his own -- he has chosen notrump over it --
+						// buys no ruff: our long trumps would only ruff in the
+						// hand that has tricks to spare, and his length there is
+						// what the shortness wastes. 1H - 1S - 3D - 3NT with
+						// 2 AKJ743 KQ42 K7 counts 21 HLD, 31 on paper, but the
+						// stiff spade faces his spades: 29, no slam in view, and
+						// the controls are for a slam hunt, not for a game already
+						// obvious [S-1]. The same discount hldFacingPartner makes
+						// against a five-card suit.
+						facing := partner.shownLens[os] >= 4 && !singletonHonour(p.hand, os)
 						switch {
+						case facing && p.hand.Len(os) == 0:
+							reval -= 3
+						case facing:
+							reval -= 2
+						case p.hand.Len(os) == 0:
 						case p.hand.HasCard(os, 'Q'):
 							reval -= 2
 						case p.hand.HasCard(os, 'J'):

@@ -411,18 +411,25 @@ func (e *Engine) fitLengthBonus(p *playerState, fit Suit) int {
 	return 0
 }
 
-// hasHelp reports whether p's hand can plausibly cover losers in s, as asked
-// by a help-suit game try: an ace or king there, a third-round queen, or
-// shortness to ruff.
+// hasHelp reports whether p's hand covers the losers a help-suit game try
+// asks about [C-19]. The try suit holds no ace or king (two to four small
+// cards or a lone queen): at least two losers there, so the help has to cover
+// two of them -- two honours (ace, king, queen), or a singleton or void that
+// ruffs the second and third rounds. One honour covers a single loser, and a
+// doubleton only the third round: 1H - (2C) - 2H - 3D with A2 in diamonds
+// still leaves the opener a diamond loser too many, and declines with 3H.
 func (e *Engine) hasHelp(p *playerState, s Suit) bool {
 	h := p.hand
-	if h.HasCard(s, 'A') || h.HasCard(s, 'K') {
+	if h.Len(s) <= 1 {
 		return true
 	}
-	if h.Len(s) <= 2 {
-		return true
+	honours := 0
+	for _, r := range []byte{'A', 'K', 'Q'} {
+		if h.HasCard(s, r) {
+			honours++
+		}
 	}
-	return h.HasCard(s, 'Q') && h.Len(s) >= 3
+	return honours >= 2
 }
 
 // uncontested reports whether the opponents of the given seat have stayed

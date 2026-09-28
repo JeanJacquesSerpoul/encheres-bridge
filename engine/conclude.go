@@ -1371,9 +1371,10 @@ func init() {
 		},
 		{
 			// Help-suit game try from partner: unlike a generic invitation,
-			// accepting requires real help in the named suit (an honor or
-			// shortness), not just being in the upper half of the shown point
-			// range (docs/bidings.md, "EN FACE D'UN SOUTIEN MAJEUR SIMPLE").
+			// accepting requires real help in the named suit -- two honours, or
+			// a singleton or void (see hasHelp) --, not just being in the upper
+			// half of the shown point range (docs/bidings.md, "EN FACE D'UN
+			// SOUTIEN MAJEUR SIMPLE").
 			name: "help-suit-try-answer",
 			fr:   "le partenaire fait un essai de manche dans une couleur d'aide : accepter avec de l'aide dans cette couleur",
 			en:   "partner makes a help-suit game try: accept with help in that suit",
@@ -1384,8 +1385,8 @@ func init() {
 				p, fit, hasFit, last := ctx.p, ctx.fit, ctx.hasFit, ctx.last
 				tr := ctx.tr
 				if hasFit && tr.check(e.hasHelp(p, ctx.pm.helpSuit),
-					"aide dans la couleur d'essai : As ou Roi, Dame troisième, ou deux cartes au plus",
-					"help in the try suit: ace or king, queen third, or two cards at most", cards(p.hand, ctx.pm.helpSuit)) {
+					"aide dans la couleur d'essai : deux honneurs (A, R, D), ou un singleton ou une chicane",
+					"help in the try suit: two honours (A, K, Q), or a singleton or void", cards(p.hand, ctx.pm.helpSuit)) {
 					gc := bidSuit(4, fit)
 					gcFR, gcEN := callSym(gc)
 					if tr.check(e.legal(p.seat, gc), "→ la manche : "+gcFR, "→ game: "+gcEN, "") {

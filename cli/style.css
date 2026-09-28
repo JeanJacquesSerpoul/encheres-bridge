@@ -1632,6 +1632,55 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   font-size: .85rem;
 }
 
+/* ---------- vidéo de présentation ----------
+
+   Le cadre prend la largeur de la fenêtre et une hauteur qui loge le plateau
+   16:9 plus la rangée de commandes ; animation.html, en mode intégré, se met à
+   l'échelle de ce qu'on lui donne. Fond sombre : celui de l'animation, pour
+   qu'aucun liseré clair ne l'entoure. */
+.video-dialog {
+  width: min(980px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.video-dialog::backdrop { background: var(--overlay); }
+.video-box {
+  display: flex;
+  flex-direction: column;
+  background: #0d1511;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+}
+.video-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px 4px 18px;
+  color: #dfe9e1;
+}
+.video-head h2 { margin: 0; font-size: 1.05rem; font-weight: 600; }
+.video-head .icon-btn {
+  margin-left: auto;
+  background: transparent;
+  border-color: transparent;
+  color: inherit;
+}
+.video-head .icon-btn:hover { background: rgba(255, 255, 255, .1); }
+.video-frame {
+  display: block;
+  width: 100%;
+  height: min(calc(min(980px, 100vw - 24px) * .5625 + 96px), calc(100dvh - 24px - 48px));
+  border: 0;
+  background: #0d1511;
+}
+/* Sur écran étroit, les chapitres passent sur deux lignes sous le plateau. */
+@media (max-width: 640px) {
+  .video-frame { height: min(calc((100vw - 24px) * .5625 + 150px), calc(100dvh - 24px - 48px)); }
+}
+
 /* ---------- tutoriel ---------- */
 
 /* Même construction que le mode d'emploi : le <dialog> nu, tout le visible

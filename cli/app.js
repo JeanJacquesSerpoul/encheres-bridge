@@ -314,6 +314,7 @@ const UI_TEXT = {
     appLicence: "Licence",
     appSource: "Code source sur GitHub",
     appAnimation: "Vidéo de présentation",
+    videoClose: "Fermer la vidéo",
     parCredit: "Levées double-mort calculées par",
     parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
     parLeadComputing: "Recherche de l'entame…",
@@ -488,6 +489,7 @@ const UI_TEXT = {
     appLicence: "Licensed under",
     appSource: "Source code on GitHub",
     appAnimation: "Presentation video",
+    videoClose: "Close the video",
     parCredit: "Double dummy tricks computed by",
     parCreditAuthors: "from Bo Haglund and Søren Hein — license",
     parLeadComputing: "Solving the lead…",
@@ -5122,11 +5124,53 @@ tutorialDialog.addEventListener("keydown", (ev) => {
   });
 }
 
+// ---------- vidéo de présentation ----------
+
+// animation.html s'affiche dans une fenêtre de la page plutôt que dans un
+// nouvel onglet : on la regarde sans quitter la donne. Le cadre est chargé à
+// l'ouverture, dans la langue courante (#fr / #en) et en mode intégré
+// (?embed), puis vidé à la fermeture pour que l'animation s'arrête. Les liens
+// gardent leur href : clic du milieu ou Ctrl+clic ouvrent toujours un onglet.
+const videoDialog = $("#video-dialog");
+const videoFrame = $("#video-frame");
+
+function openVideo() {
+  closeMenus();
+  if (helpDialog.open) helpDialog.close();
+  videoFrame.src = `animation.html?embed#${$("#lang").value}`;
+  videoDialog.showModal();
+  $("#video-close").focus();
+}
+
+for (const link of document.querySelectorAll(".video-open")) {
+  link.addEventListener("click", (ev) => {
+    if (ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+    ev.preventDefault();
+    openVideo();
+  });
+}
+// Vidé à chaque voie de fermeture, et pas seulement sur « close » : cet
+// événement arrive après coup, et certains navigateurs le retardent tant que
+// la page n'est pas affichée.
+function stopVideo() {
+  videoFrame.src = "about:blank";
+}
+function closeVideo() {
+  videoDialog.close();
+  stopVideo();
+}
+$("#video-close").addEventListener("click", closeVideo);
+videoDialog.addEventListener("click", (ev) => {
+  if (ev.target === videoDialog) closeVideo();
+});
+videoDialog.addEventListener("cancel", stopVideo); // Échap
+videoDialog.addEventListener("close", stopVideo);
+
 // ---------- écran d'accueil ----------
 
 // Au premier lancement, un écran propose la vidéo de présentation, sans
-// l'imposer. Elle s'ouvre dans un nouvel onglet, comme depuis le bandeau : la
-// donne exemple reste prête ici au retour. Le choix, quel qu'il soit — Échap
+// l'imposer. Elle s'ouvre dans sa fenêtre, comme depuis le bandeau : la donne
+// exemple est prête derrière elle. Le choix, quel qu'il soit — Échap
 // compris —, est retenu : l'écran ne revient plus. Un navigateur qui a déjà
 // une donne retenue n'en est pas à son premier lancement : l'écran est apparu
 // après lui, et l'y montrer serait une gêne.
@@ -5141,7 +5185,7 @@ function dismissWelcome() {
 $("#welcome-skip-btn").addEventListener("click", dismissWelcome);
 $("#welcome-video-btn").addEventListener("click", () => {
   dismissWelcome();
-  window.open($("#video-link").href, "_blank", "noopener");
+  openVideo();
 });
 // Échap ferme l'écran lui aussi : c'est un choix de passer la vidéo.
 welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));

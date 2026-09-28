@@ -4994,8 +4994,8 @@ const TUTORIAL_STEPS = [
     en: ["The score", "At the end: your score, your mistakes with the expected call, and the final contract.\nReplay the deal, draw a new one, or show the full detail: the Auction and Par tabs fill in with the deal you played."],
   },
   {
-    fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre) et l'option de lecture des cartes sur une photo, qui demande un serveur IA : elle ajoute un appareil photo aux mains et à Cartes non affectées.\nLa pastille verte dit que le moteur d'enchères est prêt."],
-    en: ["Settings", "The cog: language, theme (automatic, light or dark) and the option to read cards from a photo, which needs an AI server: it adds a camera to the hands and to Unassigned cards.\nThe green dot says the bidding engine is ready."],
+    fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre), l'option qui retire les passes de la séquence commentée et celle de lecture des cartes sur une photo, qui demande un serveur IA : elle ajoute un appareil photo aux mains et à Cartes non affectées.\nLa pastille verte dit que le moteur d'enchères est prêt."],
+    en: ["Settings", "The cog: language, theme (automatic, light or dark), the option that removes the passes from the annotated auction and the one to read cards from a photo, which needs an AI server: it adds a camera to the hands and to Unassigned cards.\nThe green dot says the bidding engine is ready."],
   },
   {
     fr: ["Sur téléphone", "La table passe en une colonne et les onglets forment une barre au bas de l'écran, précédée de Donne qui remonte à la table.\nAfficher les enchères reste collé en bas pendant que vous faites défiler les mains.\nBon jeu ! Ce tutoriel se rouvre par l'écran ▶ du bandeau."],

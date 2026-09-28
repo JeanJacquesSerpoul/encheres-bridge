@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Animation de présentation de l'application : une page autonome, à ouvrir
-     dans un navigateur. La donne est celle d'Est donneur, EO vulnérables ;
+<!-- Animation de présentation de l'application, liée depuis le pied de page
+     de index.html ; la page est autonome et s'ouvre aussi seule. La donne est celle d'Est donneur, EO vulnérables ;
      les enchères sont celles du moteur, les levées et le PAR ceux du solveur
      DDS de cli/ et de tools/par/par.js. -->
 <title>Enchères en mouvement</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root {
     color-scheme: dark;
@@ -167,7 +167,7 @@
   @keyframes mark { to { background: var(--gold); color: var(--card-ink); } }
   .paused .par .cell::after, .paused .par .cell b, .paused .par .cell.hl { animation-play-state: paused !important; }
   @keyframes scan { to { transform: translateX(100%); } }
-  .par-result { position: absolute; right: 44px; top: 116px; width: 190px; padding: 16px 18px; border-radius: 14px;
+  .par-result { position: absolute; right: 40px; top: 116px; width: 224px; padding: 16px 18px; border-radius: 14px;
     background: var(--gold); color: var(--card-ink); box-shadow: 0 12px 30px rgba(0,0,0,.35); }
   .par-result small { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
   .par-result strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; }
@@ -312,7 +312,7 @@
           <span class="rh">E</span><span class="cell" style="--d:0.3"><b>5</b></span><span class="cell" style="--d:0.4"><b>2</b></span><span class="cell" style="--d:0.5"><b>2</b></span><span class="cell" style="--d:0.6"><b>5</b></span><span class="cell" style="--d:0.7"><b>4</b></span>
           <span class="rh">O</span><span class="cell" style="--d:0.45"><b>5</b></span><span class="cell" style="--d:0.55"><b>2</b></span><span class="cell" style="--d:0.65"><b>2</b></span><span class="cell" style="--d:0.75"><b>5</b></span><span class="cell" style="--d:0.85"><b>4</b></span>
         </div>
-        <div class="par-result a" style="--k:pop;--d:3.2"><small>PAR</small><strong>4<em>♥</em> Nord-Sud</strong><span>+450 · 11 levées</span></div>
+        <div class="par-result a" style="--k:pop;--d:3.2"><small>PAR</small><strong>4<em>♥</em> Nord‑Sud</strong><span>+450 · 11 levées</span></div>
         <div class="par-note">
           <p class="a" style="--d:3.6">Le contrat des enchères, 4♥ par Sud, est celui du PAR.</p>
           <small class="a" style="--d:4">Levées double-mort calculées par DDS, de Bo Haglund et Søren Hein, directement dans le navigateur</small>
@@ -375,7 +375,7 @@
     <div class="chapters" id="chapters"></div>
   </div>
 
-  <p class="foot">La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge">github.com/JeanJacquesSerpoul/encheres-bridge</a></p>
+  <p class="foot"><a href="index.html">Ouvrir l'application</a> · La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge">github.com/JeanJacquesSerpoul/encheres-bridge</a></p>
 </div>
 
 <script>

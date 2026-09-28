@@ -313,6 +313,7 @@ const UI_TEXT = {
     // d'une phrase commencée au-dessus.
     appLicence: "Licence",
     appSource: "Code source sur GitHub",
+    appAnimation: "Animation de présentation",
     parCredit: "Levées double-mort calculées par",
     parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
     parLeadComputing: "Recherche de l'entame…",
@@ -486,6 +487,7 @@ const UI_TEXT = {
     // français, pas en anglais, où il faut la préposition.
     appLicence: "Licensed under",
     appSource: "Source code on GitHub",
+    appAnimation: "Animated tour (in French)",
     parCredit: "Double dummy tricks computed by",
     parCreditAuthors: "from Bo Haglund and Søren Hein — license",
     parLeadComputing: "Solving the lead…",

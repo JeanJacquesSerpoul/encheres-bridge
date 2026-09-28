@@ -1837,6 +1837,14 @@ la table, et l'échange s'ouvre quand même.
   23 HLD et tombe pile sur 33 face au plafond du soutien — mais le singleton
   Cœur est en face des Cœurs du partenaire et n'achète rien : 31 en valeur
   chelem, pas de chelem en vue, pas d'échange de contrôles.
+- ⚠ Face à un partenaire qui a **conclu à Sans-Atout**, la majeure sixième
+  revalorisée ne compte pas non plus la courte tenue en face d'une couleur où
+  il a annoncé **4 cartes** : il a préféré Sans-Atout à cette couleur, nos
+  atouts longs ne couperaient que dans la main qui a déjà ses levées.
+  `1♥ – 1♠ – 3♦ – 3SA` avec ♠2 ♥ARV743 ♦RD42 ♣R7 : 21 HLD, 31 sur le
+  papier, mais le singleton Pique fait face aux Piques du partenaire → 29,
+  pas de chelem en vue : **4♥**, pas de 4♣ de contrôle pour une manche
+  évidente.
 - ⚠ Ce maximum ne dispense pas non plus **à lui seul** : l'amplitude large
   qui le justifie (« contre d'appel ou intervention, peut cacher sous son
   plancher de quoi conclure ») ne décrit pas un soutien simple codifié. Un

@@ -153,7 +153,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
-| `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, pied de page, écran d'accueil) |
+| `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
 

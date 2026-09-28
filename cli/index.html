@@ -197,13 +197,13 @@
           </p>
         </div>
       </div>
-      <!-- La vidéo de présentation (animation.html, dans un nouvel onglet pour
-           ne pas quitter la donne en cours), le tutoriel en images (voir
+      <!-- La vidéo de présentation (animation.html, dans sa fenêtre : voir
+           openVideo dans app.js), le tutoriel en images (voir
            « tutoriel » dans app.js), puis le mode d'emploi, au bout du bandeau
            avec les autres réglages de la page. Le bouton « lecture » est
            réservé à la vidéo ; le tutoriel, qui est une leçon et non un film,
            porte la toque. Noms et infobulles posés par applyLang. -->
-      <a id="video-link" class="help-btn" href="animation.html" target="_blank" rel="noopener"
+      <a id="video-link" class="help-btn video-open" href="animation.html" target="_blank" rel="noopener"
          data-i18n-title="appAnimation" data-i18n-label="appAnimation">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -629,7 +629,7 @@
          rel="noopener noreferrer" data-i18n="appSource">Code source sur GitHub</a>
       <span class="app-credit-sep" aria-hidden="true">·</span>
       <!-- La vidéo de présentation, aussi au bandeau (voir #video-link). -->
-      <a href="animation.html" target="_blank" rel="noopener"
+      <a class="video-open" href="animation.html" target="_blank" rel="noopener"
          data-i18n="appAnimation">Vidéo de présentation</a>
     </p>
   </footer>
@@ -662,7 +662,7 @@
           <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
           <li>À droite, un panneau à trois onglets : <b>Enchères</b>, <b>PAR</b> et <b>S'entraîner</b>. Il reste en vue quand la page défile.</li>
           <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
-          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8), le bouton ▶ la <b>Vidéo de présentation</b> (dans un nouvel onglet), la toque le <b>Tutoriel</b> (la prise en main en images) et <b>?</b> ce mode d'emploi.</li>
+          <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8), le bouton ▶ la <b>Vidéo de présentation</b> (dans une fenêtre, sans quitter la donne), la toque le <b>Tutoriel</b> (la prise en main en images) et <b>?</b> ce mode d'emploi.</li>
         </ul>
 
         <h3>2. Obtenir une donne</h3>
@@ -786,7 +786,7 @@
           <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
           <li>On the right, a panel with three tabs: <b>Auction</b>, <b>Par</b> and <b>Practise</b>. It stays in view while the page scrolls.</li>
           <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
-          <li>In the top bar, the cog opens the <b>Settings</b> (see §8), the ▶ button the <b>Presentation video</b> (in a new tab), the graduation cap the <b>Tutorial</b> (the illustrated walkthrough) and <b>?</b> this guide.</li>
+          <li>In the top bar, the cog opens the <b>Settings</b> (see §8), the ▶ button the <b>Presentation video</b> (in a window, without leaving the deal), the graduation cap the <b>Tutorial</b> (the illustrated walkthrough) and <b>?</b> this guide.</li>
         </ul>
 
         <h3>2. Getting a deal</h3>
@@ -948,6 +948,27 @@
   <!-- Écran d'accueil, au premier lancement seulement (voir WELCOME_KEY dans
        app.js) : proposer le tutoriel à qui découvre l'application, sans
        l'imposer. Même construction que le mode d'emploi, un <dialog> natif. -->
+  <!-- Vidéo de présentation : animation.html dans un cadre, en mode intégré
+       (?embed : sans son en-tête ni son pied de page), dans la langue de la
+       page. Le cadre n'est chargé qu'à l'ouverture et vidé à la fermeture :
+       l'animation ne tourne pas en arrière-plan. Voir openVideo dans app.js. -->
+  <dialog id="video-dialog" class="video-dialog" aria-labelledby="video-title">
+    <div class="video-box">
+      <div class="video-head">
+        <h2 id="video-title" data-i18n="appAnimation">Vidéo de présentation</h2>
+        <button id="video-close" type="button" class="icon-btn"
+                data-i18n-title="videoClose" data-i18n-label="videoClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+      <iframe id="video-frame" class="video-frame" data-i18n-title="appAnimation"
+              title="Vidéo de présentation"></iframe>
+    </div>
+  </dialog>
+
   <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
     <div class="welcome-box">
       <h2 id="welcome-title" data-i18n="welcomeTitle">Bienvenue</h2>

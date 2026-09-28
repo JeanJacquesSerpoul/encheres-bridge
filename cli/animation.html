@@ -234,6 +234,14 @@
   .foot { color: var(--page-muted); font-size: 13px; line-height: 1.5; }
   .foot a { color: var(--gold-soft); }
 
+  /* Mode intégré (?embed), dans la fenêtre de l'application : ni en-tête ni
+     pied de page, ni bouton de langue — la langue est celle de l'application,
+     passée par #fr / #en. Le plateau se met à l'échelle de la hauteur aussi
+     (voir fit). */
+  .embed body { padding: 10px 12px 12px; }
+  .embed .intro-line, .embed .foot, .embed #lang-btn { display: none; }
+  .embed .wrap { gap: 12px; }
+  .embed .viewport { margin-inline: auto; }
   @media (max-width: 640px) {
     .chapters { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 12px; }
   }
@@ -476,6 +484,8 @@
   var playBtn = document.getElementById("play");
   var langBtn = document.getElementById("lang-btn");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var embed = /[?&]embed\b/.test(location.search);
+  if (embed) document.documentElement.classList.add("embed");
 
   function initialLang() {
     var h = location.hash.slice(1);
@@ -496,10 +506,29 @@
   var handEls = Array.prototype.slice.call(document.querySelectorAll("[data-hand], [data-rank-line]"));
   handEls.forEach(function (el) { el.dataset.fr = el.textContent; });
 
-  // Mise à l'échelle du plateau 960 × 540 dans la largeur disponible.
-  function fit() { stage.style.transform = "scale(" + (viewport.clientWidth / 960) + ")"; }
+  // Mise à l'échelle du plateau 960 × 540 dans la largeur disponible ; en mode
+  // intégré, dans la hauteur aussi : la fenêtre de l'application est bornée,
+  // et les commandes doivent rester visibles sous le plateau.
+  var wrap = document.querySelector(".wrap");
+  var controls = document.querySelector(".controls");
+  function fit() {
+    if (embed) {
+      var room = window.innerHeight - 22 - 12 - controls.offsetHeight;
+      var w = Math.max(160, Math.min(wrap.clientWidth, Math.floor(room * 16 / 9)));
+      viewport.style.width = w + "px";
+    }
+    stage.style.transform = "scale(" + (viewport.clientWidth / 960) + ")";
+  }
   fit();
-  if (window.ResizeObserver) new ResizeObserver(fit).observe(viewport); else window.addEventListener("resize", fit);
+  // Les commandes changent de hauteur quand elles passent sur plusieurs lignes
+  // ou que les polices arrivent : le plateau se recalcule alors.
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(fit);
+    ro.observe(viewport);
+    ro.observe(controls);
+  }
+  window.addEventListener("resize", fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
   var starts = [], total = 0;
   scenes.forEach(function (s) { starts.push(total); total += parseFloat(s.dataset.dur); });

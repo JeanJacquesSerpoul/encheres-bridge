@@ -158,6 +158,12 @@
               <option value="dark" data-i18n="themeDark">Sombre</option>
             </select>
           </div>
+          <!-- Par défaut OFF : cochée, la séquence commentée ne liste plus les
+               passes (voir applyHidePasses dans app.js). -->
+          <label class="feature-toggle">
+            <input id="hide-passes" type="checkbox">
+            <span data-i18n="hidePasses">Ne pas afficher les passes</span>
+          </label>
           <!-- Option générale, par défaut OFF : tant qu'elle n'est pas cochée,
                rien de la reconnaissance des cartes par photo n'apparaît — ni
                le choix du serveur IA, ni les boutons appareil photo, ni son
@@ -740,10 +746,11 @@
         <h3>8. Réglages</h3>
         <ul>
           <li><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre).</li>
+          <li><b>Ne pas afficher les passes</b> : la séquence commentée ne liste plus que les enchères, contres et surcontres ; chaque ligne garde son numéro de tour. La grille des enchères, elle, garde tous les passes.</li>
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
           <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
-        <p>Langue, thème, mode questionnaire, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par l'écran ▶ du bandeau ou par le bouton en haut de ce mode d'emploi, et l'écran d'accueil du premier lancement le propose aussi.</p>
+        <p>Langue, thème, mode questionnaire, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par l'écran ▶ du bandeau ou par le bouton en haut de ce mode d'emploi, et l'écran d'accueil du premier lancement le propose aussi.</p>
 
         <h3>9. Raccourcis clavier</h3>
         <ul>

@@ -524,6 +524,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `openrouter_proxy/build-proxy.sh`, `.ps1` | Compilation du serveur IA dans `openrouter_proxy/bin/` (`openrouter_proxy`, `openrouter_proxy.exe`, non versionnés) |
 | `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
+| `docs/animation.html` | Animation de présentation de l'application (page autonome, à ouvrir dans un navigateur) |
 | `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
 
 ## Licence

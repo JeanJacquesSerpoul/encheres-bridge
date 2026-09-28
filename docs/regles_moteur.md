@@ -2013,6 +2013,17 @@ pas la main et ne ferme pas l'étui. Le partenaire garde la parole et peut
 poursuivre — c'est précisément ce que fait la main qui voit les cinq clefs
 réunies [S-1].
 
+Avec **l'As ou le Roi d'atout**, cette manche est elle-même un **contrôle** :
+celui d'atout, la seule couleur que les contrôles sous la manche ne pouvaient
+pas nommer. Elle ne montre aucune force de plus — la main qui n'a plus rien à
+dire la dit aussi — et le partenaire la lit dans l'échange : il poursuit
+s'il a de quoi (un contrôle au-dessus, ou **33 combinés** pour 4SA), sinon il
+passe en disant le contrôle qui manque. Les raccourcis de [S-4] qui attendent
+des contrôles encore à venir (20 HLD et tous les contrôles, As manquant
+localisé) ne s'appliquent plus : il n'en viendra pas d'autre.
+`1♥ – 1♠ – 3♦ – 3SA – 4♣ – 4♦ – 4♥` avec ♠2 ♥ARV743 ♦RD42 ♣R7 : 4♥ montre
+l'As d'atout ; Nord (♠D874 ♥62 ♦A109 ♣AV64), sans contrôle à Pique, passe.
+
 ### [S-4] Passage au Blackwood
 Depuis l'échange de contrôles, et **selon ce que la question coûte** :
 - **atout mineur** : **29 combinés**. La manche est déjà au palier de 5, donc

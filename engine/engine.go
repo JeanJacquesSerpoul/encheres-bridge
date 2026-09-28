@@ -2180,6 +2180,13 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit, tr *tracer) (Cal
 	// T9543 AQJ72 A7 5 facing AKQJ86 - 84 QJT84, 29 combined, six cold).
 	keysDecide := cMin >= 29 && deniedSideAces(p.hand, partner, trump) == 1 &&
 		e.allSideSuitsControlled(p, trump)
+	// Partner's game in the fit has shown the trump honour and said he has no
+	// side control left: the exchange has nothing more to reveal, so only the
+	// count can take the pair past game -- the shortcuts above read controls
+	// still to come, and there are none.
+	if lastSeat == partnerOf(p.seat) && last == gameOfTrump(trump) {
+		strongAllControls, keysDecide = false, false
+	}
 	blackwoodAvailable := !e.bw[side].asked && !p.answeredAces &&
 		(askZone || strongAllControls || keysDecide) && e.trumpAgreed(p, trump) &&
 		fourNT.higherThan(last) && e.legal(p.seat, fourNT)
@@ -2234,6 +2241,27 @@ func (e *Engine) continueControlBid(p *playerState, trump Suit, tr *tracer) (Cal
 		}
 		if c == game {
 			gFR, gEN := callSym(game)
+			// Once the exchange is under way the game in the fit is still a
+			// word in it, not the last one: holding the trump ace or king, it
+			// shows that control -- the one suit the cue-bids below game could
+			// not name -- and partner, who knows what is still missing, decides
+			// whether to go on. It shows the honour, not extra strength: it is
+			// also the call of a hand with nothing more to say, so the floor
+			// partner counts on stays where the exchange left it.
+			if fr, en, _, keycard, held := controlKind(p.hand, trump, trump); held {
+				missing, deniedFR, deniedEN := e.missingSideControls(p, trump)
+				if deniedFR != "" {
+					fr, en = fr+", pas de contrôle à "+deniedFR, en+", no "+deniedEN+" control"
+				}
+				tr.note("plus de contrôle annexe à montrer → la manche, qui montre le contrôle d'atout : "+gFR,
+					"no further side control to show → game, showing the trump control: "+gEN)
+				mn := m(-1, -1, fr, en).withLen(trump, p.hand.Len(trump))
+				mn.controlBid = true
+				mn.controlSuit = trump
+				mn.keycardShown = keycard
+				mn.deniedCtrl = missing
+				return c, mn
+			}
 			tr.note("plus de contrôle à montrer → la manche : "+gFR, "no further control to show → game: "+gEN)
 			return c, m(-1, -1, "plus de contrôle à montrer, je nomme la manche", "no further control to show, naming the game").withLen(trump, p.hand.Len(trump))
 		}

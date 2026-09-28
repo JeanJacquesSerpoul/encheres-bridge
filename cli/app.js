@@ -281,8 +281,8 @@ const UI_TEXT = {
     quizCancel: "Annuler",
     welcomeTitle: "Bienvenue",
     welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
-    welcomeVideo: "Voir la vidéo de présentation",
-    welcomeSkip: "Continuer sans la vidéo",
+    welcomeStart: "Commencer",
+    welcomeVideo: "Voir la vidéo en grand",
     welcomeNote: "La vidéo, le tutoriel et le mode d'emploi restent accessibles à tout moment par les boutons en haut de la page.",
     tutorialTitle: "Tutoriel",
     tutorialOpen: "Tutoriel",
@@ -458,8 +458,8 @@ const UI_TEXT = {
     quizCancel: "Cancel",
     welcomeTitle: "Welcome",
     welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
-    welcomeVideo: "Watch the presentation video",
-    welcomeSkip: "Continue without the video",
+    welcomeStart: "Get started",
+    welcomeVideo: "Watch the video full size",
     welcomeNote: "The video, the tutorial and the guide are always available from the buttons at the top of the page.",
     tutorialTitle: "Tutorial",
     tutorialOpen: "Tutorial",
@@ -5168,27 +5168,36 @@ videoDialog.addEventListener("close", stopVideo);
 
 // ---------- écran d'accueil ----------
 
-// Au premier lancement, un écran propose la vidéo de présentation, sans
-// l'imposer. Elle s'ouvre dans sa fenêtre, comme depuis le bandeau : la donne
-// exemple est prête derrière elle. Le choix, quel qu'il soit — Échap
-// compris —, est retenu : l'écran ne revient plus. Un navigateur qui a déjà
-// une donne retenue n'en est pas à son premier lancement : l'écran est apparu
-// après lui, et l'y montrer serait une gêne.
+// Au premier lancement, l'écran d'accueil fait tourner la vidéo de
+// présentation en vignette : chacun voit ce que fait l'application sans rien
+// avoir à décider, et « Commencer » ferme tout d'un clic. « Voir la vidéo en
+// grand » l'ouvre dans sa fenêtre, comme depuis le bandeau. Le choix, quel
+// qu'il soit — Échap compris —, est retenu : l'écran ne revient plus. Un
+// navigateur qui a déjà une donne retenue n'en est pas à son premier
+// lancement : l'écran est apparu après lui, et l'y montrer serait une gêne.
+// Qui arrive par un lien de partage ne le voit pas non plus : il vient voir
+// une donne précise, et l'écran s'interposerait entre elle et lui.
 const WELCOME_KEY = "bids.welcomed";
 const welcomeDialog = $("#welcome-dialog");
+const welcomeVideo = $("#welcome-video");
 // Retenu au moment même du choix, et non sur l'événement « close » : celui-ci
 // n'arrive qu'après coup, et une page rechargée entre-temps rouvrait l'écran.
+// La vignette est vidée du même coup, pour que l'animation s'arrête.
 function dismissWelcome() {
   saveStored(WELCOME_KEY, "1");
   welcomeDialog.close();
+  welcomeVideo.src = "about:blank";
 }
-$("#welcome-skip-btn").addEventListener("click", dismissWelcome);
+$("#welcome-start-btn").addEventListener("click", dismissWelcome);
 $("#welcome-video-btn").addEventListener("click", () => {
   dismissWelcome();
   openVideo();
 });
-// Échap ferme l'écran lui aussi : c'est un choix de passer la vidéo.
-welcomeDialog.addEventListener("cancel", () => saveStored(WELCOME_KEY, "1"));
+// Échap ferme l'écran lui aussi : c'est « Commencer ».
+welcomeDialog.addEventListener("cancel", () => {
+  saveStored(WELCOME_KEY, "1");
+  welcomeVideo.src = "about:blank";
+});
 
 // Lu avant que la donne restaurée ne soit réécrite : c'est son absence qui
 // signe une première visite.
@@ -5228,4 +5237,7 @@ applyIaFeature();
 })();
 
 // Sur une page désormais visible, pas sous le voile de démarrage.
-if (firstLaunch) welcomeDialog.showModal();
+if (firstLaunch && !sharedAtLoad) {
+  welcomeVideo.src = `animation.html?embed&bare#${$("#lang").value}`;
+  welcomeDialog.showModal();
+}

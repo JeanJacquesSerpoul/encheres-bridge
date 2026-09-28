@@ -1602,7 +1602,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 /* ---------- écran d'accueil ---------- */
 
 .welcome-dialog {
-  width: min(520px, calc(100vw - 32px));
+  width: min(560px, calc(100vw - 32px));
   padding: 0;
   border: none;
   border-radius: var(--radius);
@@ -1618,6 +1618,17 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 .welcome-box h2 { margin: 0 0 10px; font-size: 1.25rem; }
 .welcome-box p { margin: 0 0 16px; }
+/* La vignette de la vidéo : 16:9, bord à bord dans la largeur de l'écran. */
+.welcome-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #1a432c;
+  pointer-events: none;
+}
 .welcome-actions {
   display: flex;
   flex-wrap: wrap;

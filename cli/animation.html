@@ -240,6 +240,11 @@
   .embed .intro-line, .embed .foot, .embed #lang-btn { display: none; }
   .embed .wrap { gap: 12px; }
   .embed .viewport { margin-inline: auto; }
+  /* Vignette (?embed&bare), dans l'écran d'accueil : le plateau seul, qui
+     tourne en boucle, sans aucune commande. */
+  .bare body { padding: 0; }
+  .bare .controls { display: none; }
+  .bare .viewport { border-radius: 0; box-shadow: none; }
   @media (max-width: 640px) {
     .chapters { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 12px; }
   }
@@ -479,7 +484,9 @@
   var langBtn = document.getElementById("lang-btn");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var embed = /[?&]embed\b/.test(location.search);
+  var bare = embed && /[?&]bare\b/.test(location.search);
   if (embed) document.documentElement.classList.add("embed");
+  if (bare) document.documentElement.classList.add("bare");
 
   function initialLang() {
     var h = location.hash.slice(1);
@@ -507,7 +514,7 @@
   var controls = document.querySelector(".controls");
   function fit() {
     if (embed) {
-      var room = window.innerHeight - 22 - 12 - controls.offsetHeight;
+      var room = bare ? window.innerHeight : window.innerHeight - 22 - 12 - controls.offsetHeight;
       var w = Math.max(160, Math.min(wrap.clientWidth, Math.floor(room * 16 / 9)));
       viewport.style.width = w + "px";
     }
@@ -585,7 +592,9 @@
   function setPlaying(on) {
     var T = TEXT[lang];
     playing = on;
-    stage.classList.toggle("paused", !on);
+    // Mouvement réduit : les entrées sont instantanées, et figer leurs
+    // animations les laisserait à leur première image, c'est-à-dire cachées.
+    stage.classList.toggle("paused", !on && !reduce);
     document.getElementById("ico-pause").hidden = !on;
     document.getElementById("ico-play").hidden = on;
     document.getElementById("play-lbl").textContent = on ? T.pause : T.play;

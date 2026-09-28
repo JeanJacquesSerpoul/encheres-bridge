@@ -197,16 +197,27 @@
           </p>
         </div>
       </div>
-      <!-- Le tutoriel en images (voir « tutoriel » dans app.js), puis le mode
-           d'emploi, au bout du bandeau avec les autres réglages de la page.
-           Noms et infobulles posés par applyLang. -->
+      <!-- La vidéo de présentation (animation.html, dans un nouvel onglet pour
+           ne pas quitter la donne en cours), le tutoriel en images (voir
+           « tutoriel » dans app.js), puis le mode d'emploi, au bout du bandeau
+           avec les autres réglages de la page. Le bouton « lecture » est
+           réservé à la vidéo ; le tutoriel, qui est une leçon et non un film,
+           porte la toque. Noms et infobulles posés par applyLang. -->
+      <a id="video-link" class="help-btn" href="animation.html" target="_blank" rel="noopener"
+         data-i18n-title="appAnimation" data-i18n-label="appAnimation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="4"/>
+          <path d="m10 8.5 5 3.5-5 3.5z"/>
+        </svg>
+      </a>
       <button id="tutorial-btn" type="button" class="help-btn"
               data-i18n-title="tutorialOpen" data-i18n-label="tutorialOpen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="3" width="20" height="14" rx="2"/>
-          <path d="m10 7 5 3-5 3z"/>
-          <path d="M8 21h8"/><path d="M12 17v4"/>
+          <path d="M21.4 10.9a1 1 0 0 0 0-1.8l-8.6-3.9a2 2 0 0 0-1.6 0L2.6 9.1a1 1 0 0 0 0 1.8l8.6 3.9a2 2 0 0 0 1.6 0z"/>
+          <path d="M22 10v6"/>
+          <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
         </svg>
       </button>
       <button id="help-btn" type="button" class="help-btn"
@@ -616,6 +627,10 @@
       <span class="app-credit-sep" aria-hidden="true">·</span>
       <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge" target="_blank"
          rel="noopener noreferrer" data-i18n="appSource">Code source sur GitHub</a>
+      <span class="app-credit-sep" aria-hidden="true">·</span>
+      <!-- La vidéo de présentation, aussi au bandeau (voir #video-link). -->
+      <a href="animation.html" target="_blank" rel="noopener"
+         data-i18n="appAnimation">Vidéo de présentation</a>
     </p>
   </footer>
 

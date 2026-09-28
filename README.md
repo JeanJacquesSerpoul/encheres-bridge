@@ -81,7 +81,7 @@ go run ./serve -port 8080    # autre port (ou PORT=8080)
 
 ### Méthode 2 — Copie de `cli/` sur un hébergeur statique
 
-Le dossier [cli/](cli/) est l'application complète : dix fichiers, moteur d'enchères compris. Aucun serveur Go, aucune compilation, aucune configuration.
+Le dossier [cli/](cli/) est l'application complète : onze fichiers, moteur d'enchères compris. Aucun serveur Go, aucune compilation, aucune configuration.
 
 **1. Récupérer `cli/`** depuis GitHub : bouton **Code › Download ZIP** puis extraire le dossier `cli/`, ou `git clone` comme ci-dessus.
 
@@ -139,7 +139,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 ./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows
 ```
 
-**2. Copier `cli/` en entier.** Ces dix fichiers, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
+**2. Copier `cli/` en entier.** Ces onze fichiers, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
 
 | Fichier | Taille | gzip | |
 |---|---:|---:|---|
@@ -153,6 +153,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
+| `animation.html` | 32 Ko | 8 Ko | vidéo de présentation, liée depuis le bandeau et le pied de page (facultative) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
 
@@ -524,7 +525,6 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `openrouter_proxy/build-proxy.sh`, `.ps1` | Compilation du serveur IA dans `openrouter_proxy/bin/` (`openrouter_proxy`, `openrouter_proxy.exe`, non versionnés) |
 | `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
-| `docs/animation.html` | Animation de présentation de l'application (page autonome, à ouvrir dans un navigateur) |
 | `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
 
 ## Licence

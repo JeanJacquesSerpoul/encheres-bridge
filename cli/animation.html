@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Animation de présentation de l'application : une page autonome, à ouvrir
-     dans un navigateur. La donne est celle d'Est donneur, EO vulnérables ;
-     les enchères sont celles du moteur, les levées et le PAR ceux du solveur
-     DDS de cli/ et de tools/par/par.js. -->
+<!-- Vidéo de présentation de l'application, en français et en anglais,
+     liée depuis le bandeau et le pied de page de index.html ; la page est
+     autonome et s'ouvre aussi seule. La donne est celle d'Est donneur, EO
+     vulnérables ; les enchères et leurs commentaires sont ceux du moteur,
+     les levées et le PAR ceux du solveur DDS de cli/ et de tools/par/par.js. -->
 <title>Enchères en mouvement</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root {
     color-scheme: dark;
@@ -102,9 +103,9 @@
   .scene.on .pbn .caret { animation: blink .8s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
-  .table { position: absolute; left: 150px; top: 138px; width: 520px; height: 380px;
+  .table { position: absolute; left: 150px; top: 124px; width: 520px; height: 404px;
     display: grid; grid-template-columns: 1fr 150px 1fr; grid-template-rows: 1fr 150px 1fr; gap: 8px; }
-  .hand { font-size: 17px; line-height: 1.5; font-variant-numeric: tabular-nums; align-self: center; }
+  .hand { font-size: 17px; line-height: 1.4; font-variant-numeric: tabular-nums; align-self: center; }
   .hand .seat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 2px; }
   .hand .s { display: block; white-space: nowrap; }
   .hand .s::first-letter { color: var(--on-felt); }
@@ -135,7 +136,7 @@
   .bid.red { color: var(--red); }
   .bid.pass { background: #3f8a5c; color: #fff; font-family: var(--sans); font-size: 14px; font-weight: 600; }
   .line .txt { color: var(--on-felt); }
-  .line.ctrl .txt::before { content: "contrôle"; display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 99px;
+  .line.ctrl .txt::before { content: var(--ctrl-word, "contrôle"); display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 99px;
     font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: rgba(224, 163, 12, .22); color: var(--gold-soft); vertical-align: 2px; }
   .scene.on .line { --k: slide; --t: .55s; }
   .scene.on .line .bid { animation: pop .5s var(--ease) both; animation-delay: calc(var(--d) * 1s + .08s); }
@@ -148,6 +149,7 @@
   .scene.on .contract { --k: pop; }
   .mini-hand { position: absolute; right: 44px; top: 96px; width: 210px; padding: 14px 16px; border-radius: 12px;
     background: rgba(0,0,0,.2); border: 1px solid var(--felt-line); font-size: 15px; line-height: 1.55; }
+  .mini-hand .rs { color: #ff8a7a; }
   .mini-hand .seat { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
 
   /* 4 · le PAR */
@@ -167,7 +169,7 @@
   @keyframes mark { to { background: var(--gold); color: var(--card-ink); } }
   .paused .par .cell::after, .paused .par .cell b, .paused .par .cell.hl { animation-play-state: paused !important; }
   @keyframes scan { to { transform: translateX(100%); } }
-  .par-result { position: absolute; right: 44px; top: 116px; width: 190px; padding: 16px 18px; border-radius: 14px;
+  .par-result { position: absolute; right: 40px; top: 116px; width: 224px; padding: 16px 18px; border-radius: 14px;
     background: var(--gold); color: var(--card-ink); box-shadow: 0 12px 30px rgba(0,0,0,.35); }
   .par-result small { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
   .par-result strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; }
@@ -245,119 +247,119 @@
 <body>
 <div class="wrap">
   <div class="intro-line">
-    <h1>Enchères <span>en mouvement</span></h1>
-    <p>Une donne, de la saisie au contrat : ce que fait l'application Enchères au bridge, en quarante-deux secondes.</p>
+    <h1 data-t="h1">Enchères <span>en mouvement</span></h1>
+    <p data-t="lede">Une donne, de la saisie au contrat : ce que fait l'application Enchères au bridge, en quarante-deux secondes.</p>
   </div>
 
   <div class="viewport" id="viewport">
     <div class="stage" id="stage" aria-live="polite">
 
       <!-- 1 · Ouverture -->
-      <section class="scene" data-dur="5" data-label="Ouverture" aria-label="Ouverture">
+      <section class="scene" data-dur="5" data-label="chOpen">
         <div class="fan">
           <div class="card" style="--r:-21deg;--fr0:-40deg;--fx:-300px;--d:.05"><span class="idx">A<small>♠</small></span><span class="pip">♠</span><span class="idx b">A<small>♠</small></span></div>
-          <div class="card red" style="--r:-7deg;--fr0:20deg;--fx:-120px;--d:.2"><span class="idx">R<small>♥</small></span><span class="pip">♥</span><span class="idx b">R<small>♥</small></span></div>
-          <div class="card red" style="--r:7deg;--fr0:-15deg;--fx:120px;--d:.35"><span class="idx">D<small>♦</small></span><span class="pip">♦</span><span class="idx b">D<small>♦</small></span></div>
-          <div class="card" style="--r:21deg;--fr0:40deg;--fx:300px;--d:.5"><span class="idx">V<small>♣</small></span><span class="pip">♣</span><span class="idx b">V<small>♣</small></span></div>
+          <div class="card red" style="--r:-7deg;--fr0:20deg;--fx:-120px;--d:.2"><span class="idx"><span data-rank="K">R</span><small>♥</small></span><span class="pip">♥</span><span class="idx b"><span data-rank="K">R</span><small>♥</small></span></div>
+          <div class="card red" style="--r:7deg;--fr0:-15deg;--fx:120px;--d:.35"><span class="idx"><span data-rank="Q">D</span><small>♦</small></span><span class="pip">♦</span><span class="idx b"><span data-rank="Q">D</span><small>♦</small></span></div>
+          <div class="card" style="--r:21deg;--fr0:40deg;--fx:300px;--d:.5"><span class="idx"><span data-rank="J">V</span><small>♣</small></span><span class="pip">♣</span><span class="idx b"><span data-rank="J">V</span><small>♣</small></span></div>
         </div>
         <div class="title-block">
-          <h2 class="a" style="--d:.9">Enchères au bridge</h2>
-          <p class="a" style="--d:1.3">Les enchères d'une donne, déroulées et commentées en <b>Système d'Enseignement Français</b></p>
+          <h2 class="a" style="--d:.9" data-t="appTitle">Enchères au bridge</h2>
+          <p class="a" style="--d:1.3" data-t="tagline">Les enchères d'une donne, déroulées et commentées en <b>Système d'Enseignement Français</b></p>
         </div>
       </section>
 
       <!-- 2 · La donne -->
-      <section class="scene" data-dur="7" data-label="La donne" aria-label="La donne">
-        <div class="chapter-tag a"><i>1</i> <b>Composer la donne</b></div>
+      <section class="scene" data-dur="7" data-label="chDeal">
+        <div class="chapter-tag a"><i>1</i> <b data-t="tagDeal">Composer la donne</b></div>
         <div class="pbn a" style="--d:.1"><span class="typed">E:AJ53.Q.763.QT953 2.AKJ743.KQ42.K7 KT96.T985.J85.82 Q874.62.AT9.AJ64</span><span class="caret"></span></div>
         <div class="table">
-          <div class="hand n a" style="--d:1.2"><div class="seat">Nord</div><span class="s">♠ D 8 7 4</span><span class="s r">♥ 6 2</span><span class="s r">♦ A 10 9</span><span class="s">♣ A V 6 4</span></div>
-          <div class="hand o a" style="--d:1.9"><div class="seat">Ouest</div><span class="s">♠ R 10 9 6</span><span class="s r">♥ 10 9 8 5</span><span class="s r">♦ V 8 5</span><span class="s">♣ 8 2</span></div>
-          <div class="compass a" style="--k:pop;--d:.9"><div><b>Est donneur</b>EO vulnérables</div></div>
-          <div class="hand e a" style="--d:1.4"><div class="seat">Est</div><span class="s">♠ A V 5 3</span><span class="s r">♥ D</span><span class="s r">♦ 7 6 3</span><span class="s">♣ D 10 9 5 3</span></div>
-          <div class="hand s-seat hl-south a" style="--d:1.65"><div class="seat">Sud</div><span class="s">♠ 2</span><span class="s r">♥ A R V 7 4 3</span><span class="s r">♦ R D 4 2</span><span class="s">♣ R 7</span></div>
+          <div class="hand n a" style="--d:1.2"><div class="seat" data-t="north">Nord</div><span class="s" data-hand="♠ Q 8 7 4">♠ D 8 7 4</span><span class="s r">♥ 6 2</span><span class="s r">♦ A 10 9</span><span class="s" data-hand="♣ A J 6 4">♣ A V 6 4</span></div>
+          <div class="hand o a" style="--d:1.9"><div class="seat" data-t="west">Ouest</div><span class="s" data-hand="♠ K 10 9 6">♠ R 10 9 6</span><span class="s r">♥ 10 9 8 5</span><span class="s r" data-hand="♦ J 8 5">♦ V 8 5</span><span class="s">♣ 8 2</span></div>
+          <div class="compass a" style="--k:pop;--d:.9"><div data-t="compass"><b>Est donneur</b>EO vulnérables</div></div>
+          <div class="hand e a" style="--d:1.4"><div class="seat" data-t="east">Est</div><span class="s" data-hand="♠ A J 5 3">♠ A V 5 3</span><span class="s r" data-hand="♥ Q">♥ D</span><span class="s r">♦ 7 6 3</span><span class="s" data-hand="♣ Q 10 9 5 3">♣ D 10 9 5 3</span></div>
+          <div class="hand s-seat hl-south a" style="--d:1.65"><div class="seat" data-t="south">Sud</div><span class="s">♠ 2</span><span class="s r" data-hand="♥ A K J 7 4 3">♥ A R V 7 4 3</span><span class="s r" data-hand="♦ K Q 4 2">♦ R D 4 2</span><span class="s" data-hand="♣ K 7">♣ R 7</span></div>
         </div>
         <div class="ways">
-          <div class="a" style="--d:2.4"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l9-9 3 3-9 9H6z"/></svg>Saisie des quatre mains</div>
-          <div class="a" style="--d:2.7"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg>Fichier ou texte .pbn</div>
-          <div class="a" style="--d:3"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Photo des cartes, lue par un serveur IA</div>
+          <div class="a" style="--d:2.4"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l9-9 3 3-9 9H6z"/></svg><span data-t="way1">Saisie des quatre mains</span></div>
+          <div class="a" style="--d:2.7"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg><span data-t="way2">Fichier ou texte .pbn</span></div>
+          <div class="a" style="--d:3"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span data-t="way3">Photo des cartes, lue par un serveur IA</span></div>
         </div>
       </section>
 
       <!-- 3 · Les enchères -->
-      <section class="scene" data-dur="12" data-label="Les enchères" aria-label="Les enchères">
-        <div class="chapter-tag a"><i>2</i> <b>Dérouler les enchères</b></div>
+      <section class="scene" data-dur="12" data-label="chBids">
+        <div class="chapter-tag a"><i>2</i> <b data-t="tagBids">Dérouler les enchères</b></div>
         <div class="seq">
-          <h3 class="a" style="--d:.2">Séquence commentée</h3>
-          <div class="line a" style="--d:.6"><span class="no">1.</span><span class="who">S</span><span class="bid red">1♥</span><span class="txt">ouverture majeure, 5 cartes et plus, 12-23HL</span></div>
-          <div class="line a" style="--d:1.8"><span class="no">2.</span><span class="who">N</span><span class="bid">1♠</span><span class="txt">changement de couleur 1 sur 1, 4 cartes et plus, forcing</span></div>
-          <div class="line a" style="--d:3"><span class="no">3.</span><span class="who">S</span><span class="bid red">3♦</span><span class="txt">saut dans la seconde couleur, forcing</span></div>
-          <div class="line a" style="--d:4.2"><span class="no">4.</span><span class="who">N</span><span class="bid">3SA</span><span class="txt">conclusion à la manche sur la force combinée</span></div>
-          <div class="line ctrl a" style="--d:5.4"><span class="no">5.</span><span class="who">S</span><span class="bid">4♣</span><span class="txt">le Roi</span></div>
-          <div class="line ctrl a" style="--d:6.4"><span class="no">6.</span><span class="who">N</span><span class="bid red">4♦</span><span class="txt">l'As</span></div>
-          <div class="line ctrl a" style="--d:7.4"><span class="no">7.</span><span class="who">S</span><span class="bid red">4♥</span><span class="txt">l'As d'atout</span></div>
-          <div class="line a" style="--d:8.4"><span class="no">8.</span><span class="who">N</span><span class="bid pass">Passe</span><span class="txt">pas de contrôle à Pique, arrêt au palier de 4</span></div>
+          <h3 class="a" style="--d:.2" data-t="comments">Séquence commentée</h3>
+          <div class="line a" style="--d:.6"><span class="no">1.</span><span class="who">S</span><span class="bid red">1♥</span><span class="txt" data-t="c1">ouverture majeure, 5 cartes et plus, 12-23HL</span></div>
+          <div class="line a" style="--d:1.8"><span class="no">2.</span><span class="who">N</span><span class="bid">1♠</span><span class="txt" data-t="c2">changement de couleur 1 sur 1, 4 cartes et plus, forcing</span></div>
+          <div class="line a" style="--d:3"><span class="no">3.</span><span class="who">S</span><span class="bid red">3♦</span><span class="txt" data-t="c3">saut dans la seconde couleur, forcing</span></div>
+          <div class="line a" style="--d:4.2"><span class="no">4.</span><span class="who">N</span><span class="bid" data-t="nt3">3SA</span><span class="txt" data-t="c4">conclusion à la manche sur la force combinée</span></div>
+          <div class="line ctrl a" style="--d:5.4"><span class="no">5.</span><span class="who">S</span><span class="bid">4♣</span><span class="txt" data-t="c5">le Roi</span></div>
+          <div class="line ctrl a" style="--d:6.4"><span class="no">6.</span><span class="who">N</span><span class="bid red">4♦</span><span class="txt" data-t="c6">l'As</span></div>
+          <div class="line ctrl a" style="--d:7.4"><span class="no">7.</span><span class="who">S</span><span class="bid red">4♥</span><span class="txt" data-t="c7">l'As d'atout</span></div>
+          <div class="line a" style="--d:8.4"><span class="no">8.</span><span class="who">N</span><span class="bid pass" data-t="pass">Passe</span><span class="txt" data-t="c8">pas de contrôle à Pique, arrêt au palier de 4</span></div>
         </div>
-        <div class="mini-hand a" style="--d:.4"><div class="seat">Sud · 16 H</div>♠ 2<br><span style="color:#ff8a7a">♥</span> A R V 7 4 3<br><span style="color:#ff8a7a">♦</span> R D 4 2<br>♣ R 7</div>
-        <div class="contract a" style="--d:9.4"><small>Contrat final</small><strong>4<em>♥</em></strong><span>joué par Sud</span></div>
+        <div class="mini-hand a" style="--d:.4"><div class="seat" data-t="southHcp">Sud · 16 H</div><span>♠ 2</span><br><span class="rs">♥</span> <span data-rank-line="A K J 7 4 3">A R V 7 4 3</span><br><span class="rs">♦</span> <span data-rank-line="K Q 4 2">R D 4 2</span><br>♣ <span data-rank-line="K 7">R 7</span></div>
+        <div class="contract a" style="--d:9.4"><small data-t="finalContract">Contrat final</small><strong>4<em>♥</em></strong><span data-t="bySouth">joué par Sud</span></div>
       </section>
 
       <!-- 4 · Le PAR -->
-      <section class="scene" data-dur="8" data-label="Le PAR" aria-label="Le PAR">
-        <div class="chapter-tag a"><i>3</i> <b>Comparer au PAR</b></div>
-        <div class="par a" style="--k:fade;--d:.2" aria-label="Levées double-mort par déclarant et dénomination">
-          <span></span><span class="h">♣</span><span class="h red">♦</span><span class="h red">♥</span><span class="h">♠</span><span class="h" style="font-size:18px">SA</span>
+      <section class="scene" data-dur="8" data-label="chPar">
+        <div class="chapter-tag a"><i>3</i> <b data-t="tagPar">Comparer au PAR</b></div>
+        <div class="par a" style="--k:fade;--d:.2" data-t-label="parGrid" aria-label="Levées double-mort par déclarant et dénomination">
+          <span></span><span class="h">♣</span><span class="h red">♦</span><span class="h red">♥</span><span class="h">♠</span><span class="h" style="font-size:18px" data-t="nt">SA</span>
           <span class="rh">N</span><span class="cell" style="--d:0.0"><b>8</b></span><span class="cell" style="--d:0.1"><b>11</b></span><span class="cell hl" style="--d:0.2"><b>11</b></span><span class="cell" style="--d:0.3"><b>7</b></span><span class="cell" style="--d:0.4"><b>9</b></span>
           <span class="rh">S</span><span class="cell" style="--d:0.15"><b>8</b></span><span class="cell" style="--d:0.25"><b>11</b></span><span class="cell hl" style="--d:0.35"><b>11</b></span><span class="cell" style="--d:0.45"><b>7</b></span><span class="cell" style="--d:0.55"><b>9</b></span>
           <span class="rh">E</span><span class="cell" style="--d:0.3"><b>5</b></span><span class="cell" style="--d:0.4"><b>2</b></span><span class="cell" style="--d:0.5"><b>2</b></span><span class="cell" style="--d:0.6"><b>5</b></span><span class="cell" style="--d:0.7"><b>4</b></span>
-          <span class="rh">O</span><span class="cell" style="--d:0.45"><b>5</b></span><span class="cell" style="--d:0.55"><b>2</b></span><span class="cell" style="--d:0.65"><b>2</b></span><span class="cell" style="--d:0.75"><b>5</b></span><span class="cell" style="--d:0.85"><b>4</b></span>
+          <span class="rh" data-t="wShort">O</span><span class="cell" style="--d:0.45"><b>5</b></span><span class="cell" style="--d:0.55"><b>2</b></span><span class="cell" style="--d:0.65"><b>2</b></span><span class="cell" style="--d:0.75"><b>5</b></span><span class="cell" style="--d:0.85"><b>4</b></span>
         </div>
-        <div class="par-result a" style="--k:pop;--d:3.2"><small>PAR</small><strong>4<em>♥</em> Nord-Sud</strong><span>+450 · 11 levées</span></div>
+        <div class="par-result a" style="--k:pop;--d:3.2"><small>PAR</small><strong>4<em>♥</em> <span data-t="ns">Nord‑Sud</span></strong><span data-t="parScore">+450 · 11 levées</span></div>
         <div class="par-note">
-          <p class="a" style="--d:3.6">Le contrat des enchères, 4♥ par Sud, est celui du PAR.</p>
-          <small class="a" style="--d:4">Levées double-mort calculées par DDS, de Bo Haglund et Søren Hein, directement dans le navigateur</small>
+          <p class="a" style="--d:3.6" data-t="parIsPar">Le contrat des enchères, 4♥ par Sud, est celui du PAR.</p>
+          <small class="a" style="--d:4" data-t="ddsCredit">Levées double-mort calculées par DDS, de Bo Haglund et Søren Hein, directement dans le navigateur</small>
         </div>
       </section>
 
       <!-- 5 · S'entraîner -->
-      <section class="scene" data-dur="7" data-label="S'entraîner" aria-label="S'entraîner">
-        <div class="chapter-tag a"><i>4</i> <b>S'entraîner</b></div>
-        <div class="quiz-q a" style="--d:.2">À vous d'enchérir, en Sud :
-          <div class="bids"><span class="bid red">1♥</span>–<span class="bid pass">Passe</span>–<span class="bid">1♠</span>–<span class="bid pass">Passe</span>–<span class="ask">?</span></div>
+      <section class="scene" data-dur="7" data-label="chTrain">
+        <div class="chapter-tag a"><i>4</i> <b data-t="tagTrain">S'entraîner</b></div>
+        <div class="quiz-q a" style="--d:.2"><span data-t="yourTurn">À vous d'enchérir, en Sud :</span>
+          <div class="bids"><span class="bid red">1♥</span>–<span class="bid pass" data-t="pass">Passe</span>–<span class="bid">1♠</span>–<span class="bid pass" data-t="pass">Passe</span>–<span class="ask">?</span></div>
         </div>
-        <div class="myhand" aria-label="Votre main">
+        <div class="myhand" data-t-label="yourHand" aria-label="Votre main">
           <div class="card" style="--i:0"><span class="idx">2<small>♠</small></span></div>
           <div class="card red" style="--i:1"><span class="idx">A<small>♥</small></span></div>
-          <div class="card red" style="--i:2"><span class="idx">R<small>♥</small></span></div>
-          <div class="card red" style="--i:3"><span class="idx">V<small>♥</small></span></div>
+          <div class="card red" style="--i:2"><span class="idx"><span data-rank="K">R</span><small>♥</small></span></div>
+          <div class="card red" style="--i:3"><span class="idx"><span data-rank="J">V</span><small>♥</small></span></div>
           <div class="card red" style="--i:4"><span class="idx">7<small>♥</small></span></div>
           <div class="card red" style="--i:5"><span class="idx">4<small>♥</small></span></div>
           <div class="card red" style="--i:6"><span class="idx">3<small>♥</small></span></div>
-          <div class="card red" style="--i:7"><span class="idx">R<small>♦</small></span></div>
-          <div class="card red" style="--i:8"><span class="idx">D<small>♦</small></span></div>
+          <div class="card red" style="--i:7"><span class="idx"><span data-rank="K">R</span><small>♦</small></span></div>
+          <div class="card red" style="--i:8"><span class="idx"><span data-rank="Q">D</span><small>♦</small></span></div>
           <div class="card red" style="--i:9"><span class="idx">4<small>♦</small></span></div>
           <div class="card red" style="--i:10"><span class="idx">2<small>♦</small></span></div>
-          <div class="card" style="--i:11"><span class="idx">R<small>♣</small></span></div>
+          <div class="card" style="--i:11"><span class="idx"><span data-rank="K">R</span><small>♣</small></span></div>
           <div class="card" style="--i:12"><span class="idx">7<small>♣</small></span></div>
         </div>
         <div class="choices">
           <div class="choice red a" style="--d:.9">2♥</div>
           <div class="choice red good a" style="--d:1">3♦</div>
-          <div class="choice a" style="--d:1.1;font-size:22px">2SA</div>
+          <div class="choice a" style="--d:1.1;font-size:22px" data-t="nt2">2SA</div>
         </div>
         <div class="pointer" aria-hidden="true"></div>
-        <div class="verdict a" style="--d:3.6"><span class="ok">✓</span>3♦ : saut dans la seconde couleur, forcing</div>
-        <div class="quiz-side a" style="--d:.6"><b>Mode questionnaire.</b> La donne reste masquée : vous enchérissez avec votre seule main, et l'application compare chaque enchère à la sienne, commentaire à l'appui.</div>
+        <div class="verdict a" style="--d:3.6"><span class="ok">✓</span><span data-t="verdict">3♦ : saut dans la seconde couleur, forcing</span></div>
+        <div class="quiz-side a" style="--d:.6" data-t="quizSide"><b>Mode questionnaire.</b> La donne reste masquée : vous enchérissez avec votre seule main, et l'application compare chaque enchère à la sienne, commentaire à l'appui.</div>
       </section>
 
       <!-- 6 · Fin -->
-      <section class="scene" data-dur="5" data-label="Récapitulatif" aria-label="Récapitulatif">
+      <section class="scene" data-dur="5" data-label="chEnd">
         <div class="end">
-          <h2 class="a">Enchères <span>au bridge</span></h2>
+          <h2 class="a" data-t="endTitle">Enchères <span>au bridge</span></h2>
           <div class="steps">
-            <span class="a" style="--d:.4">Composer</span><span class="a" style="--d:.55">Enchérir</span><span class="a" style="--d:.7">Comparer au PAR</span><span class="a" style="--d:.85">S'entraîner</span>
+            <span class="a" style="--d:.4" data-t="step1">Composer</span><span class="a" style="--d:.55" data-t="step2">Enchérir</span><span class="a" style="--d:.7" data-t="step3">Comparer au PAR</span><span class="a" style="--d:.85" data-t="step4">S'entraîner</span>
           </div>
-          <p class="a" style="--d:1.2">Bridge Bidding, de Jean-Jacques Serpoul · en français et en anglais</p>
+          <p class="a" style="--d:1.2" data-t="credit">Bridge Bidding, de Jean-Jacques Serpoul · en français et en anglais</p>
         </div>
       </section>
     </div>
@@ -370,22 +372,129 @@
       <span id="play-lbl">Pause</span>
     </button>
     <button class="btn" id="replay" type="button">
-      <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 1-5.6 3.8l1.8.8A4 4 0 1 0 8 4v2L4.5 3 8 0z"/></svg>Rejouer
+      <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 1-5.6 3.8l1.8.8A4 4 0 1 0 8 4v2L4.5 3 8 0z"/></svg><span data-t="replay">Rejouer</span>
     </button>
+    <!-- L'autre langue, nommée dans sa propre langue. -->
+    <button class="btn" id="lang-btn" type="button" lang="en">English</button>
     <div class="chapters" id="chapters"></div>
   </div>
 
-  <p class="foot">La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge">github.com/JeanJacquesSerpoul/encheres-bridge</a></p>
+  <p class="foot" data-t="foot"><a href="index.html">Ouvrir l'application</a> · La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href="https://github.com/JeanJacquesSerpoul/encheres-bridge">github.com/JeanJacquesSerpoul/encheres-bridge</a></p>
 </div>
 
 <script>
 (function () {
+  // Les textes des deux langues. Le français est aussi écrit dans la page, qui
+  // se lit donc sans script. data-t désigne la clé du texte, data-t-label celle
+  // de l'aria-label ; data-hand porte une ligne de main en notation anglaise
+  // (A K Q J), data-rank-line une suite de hauteurs, data-rank une seule
+  // hauteur (K, Q, J). Les commentaires d'enchères sont ceux du moteur, mot
+  // pour mot (meaning.fr / meaning.en).
+  var TEXT = {
+    fr: {
+      pageTitle: "Enchères en mouvement",
+      h1: "Enchères <span>en mouvement</span>",
+      lede: "Une donne, de la saisie au contrat : ce que fait l'application Enchères au bridge, en quarante-deux secondes.",
+      appTitle: "Enchères au bridge",
+      tagline: "Les enchères d'une donne, déroulées et commentées en <b>Système d'Enseignement Français</b>",
+      chOpen: "Ouverture", chDeal: "La donne", chBids: "Les enchères", chPar: "Le PAR", chTrain: "S'entraîner", chEnd: "Récapitulatif",
+      tagDeal: "Composer la donne", tagBids: "Dérouler les enchères", tagPar: "Comparer au PAR", tagTrain: "S'entraîner",
+      north: "Nord", east: "Est", south: "Sud", west: "Ouest", wShort: "O",
+      compass: "<b>Est donneur</b>EO vulnérables",
+      way1: "Saisie des quatre mains", way2: "Fichier ou texte .pbn", way3: "Photo des cartes, lue par un serveur IA",
+      comments: "Séquence commentée",
+      c1: "ouverture majeure, 5 cartes et plus, 12-23HL",
+      c2: "changement de couleur 1 sur 1, 4 cartes et plus, forcing",
+      c3: "saut dans la seconde couleur, forcing",
+      c4: "conclusion à la manche sur la force combinée",
+      c5: "le Roi", c6: "l'As", c7: "l'As d'atout",
+      c8: "pas de contrôle à Pique, arrêt au palier de 4",
+      ctrl: "contrôle",
+      nt: "SA", nt2: "2SA", nt3: "3SA", pass: "Passe",
+      southHcp: "Sud · 16 H",
+      finalContract: "Contrat final", bySouth: "joué par Sud",
+      parGrid: "Levées double-mort par déclarant et dénomination",
+      ns: "Nord‑Sud", parScore: "+450 · 11 levées",
+      parIsPar: "Le contrat des enchères, 4♥ par Sud, est celui du PAR.",
+      ddsCredit: "Levées double-mort calculées par DDS, de Bo Haglund et Søren Hein, directement dans le navigateur",
+      yourTurn: "À vous d'enchérir, en Sud :", yourHand: "Votre main",
+      verdict: "3♦ : saut dans la seconde couleur, forcing",
+      quizSide: "<b>Mode questionnaire.</b> La donne reste masquée : vous enchérissez avec votre seule main, et l'application compare chaque enchère à la sienne, commentaire à l'appui.",
+      endTitle: "Enchères <span>au bridge</span>",
+      step1: "Composer", step2: "Enchérir", step3: "Comparer au PAR", step4: "S'entraîner",
+      credit: "Bridge Bidding, de Jean-Jacques Serpoul · en français et en anglais",
+      play: "Lecture", pause: "Pause", replay: "Rejouer", goTo: "Aller au chapitre : ",
+      otherLang: "English",
+      foot: "<a href=\"index.html\">Ouvrir l'application</a> · La donne est celle d'Est donneur, EO vulnérables, que le moteur enchérit aujourd'hui ainsi. Code source : <a href=\"https://github.com/JeanJacquesSerpoul/encheres-bridge\">github.com/JeanJacquesSerpoul/encheres-bridge</a>"
+    },
+    en: {
+      pageTitle: "Bidding in motion",
+      h1: "Bidding <span>in motion</span>",
+      lede: "One deal, from entry to contract: what the Bridge Bidding app does, in forty-two seconds.",
+      appTitle: "Bridge Bidding",
+      tagline: "The auction of a deal, bid and explained in the <b>French bidding system (SEF)</b>",
+      chOpen: "Opening", chDeal: "The deal", chBids: "The auction", chPar: "The par", chTrain: "Practise", chEnd: "Summary",
+      tagDeal: "Build the deal", tagBids: "Run the auction", tagPar: "Compare with the par", tagTrain: "Practise",
+      north: "North", east: "East", south: "South", west: "West", wShort: "W",
+      compass: "<b>East deals</b>EW vulnerable",
+      way1: "Enter the four hands", way2: ".pbn file or text", way3: "Photo of the cards, read by an AI server",
+      comments: "Annotated auction",
+      c1: "major-suit opening, 5+ cards, 12-23 HL",
+      c2: "one-over-one response, 4+ cards, forcing",
+      c3: "jump in the second suit, forcing",
+      c4: "bids game on combined strength",
+      c5: "the king", c6: "the ace", c7: "the trump ace",
+      c8: "no spades control, stopping at the 4 level",
+      ctrl: "control",
+      nt: "NT", nt2: "2NT", nt3: "3NT", pass: "Pass",
+      southHcp: "South · 16 HCP",
+      finalContract: "Final contract", bySouth: "played by South",
+      parGrid: "Double-dummy tricks by declarer and strain",
+      ns: "North‑South", parScore: "+450 · 11 tricks",
+      parIsPar: "The contract reached, 4♥ by South, is the par.",
+      ddsCredit: "Double-dummy tricks computed by DDS, by Bo Haglund and Søren Hein, right in the browser",
+      yourTurn: "Your turn to bid, as South:", yourHand: "Your hand",
+      verdict: "3♦: jump in the second suit, forcing",
+      quizSide: "<b>Bidding quiz.</b> The deal stays hidden: you bid with your own hand only, and the app checks each call against its own, with the explanation.",
+      endTitle: "Bridge <span>Bidding</span>",
+      step1: "Build", step2: "Bid", step3: "Compare with the par", step4: "Practise",
+      credit: "Bridge Bidding, by Jean-Jacques Serpoul · in French and English",
+      play: "Play", pause: "Pause", replay: "Replay", goTo: "Go to chapter: ",
+      otherLang: "Français",
+      foot: "<a href=\"index.html\">Open the app</a> · East deals, EW vulnerable; this is how the engine bids it today. Source code: <a href=\"https://github.com/JeanJacquesSerpoul/encheres-bridge\">github.com/JeanJacquesSerpoul/encheres-bridge</a>"
+    }
+  };
+  // Même clé que l'application (app.js, LANG_KEY) : les deux pages partagent la
+  // langue choisie. Un #fr ou #en dans l'adresse l'emporte.
+  var LANG_KEY = "bids.lang";
+  var RANK = { fr: { K: "R", Q: "D", J: "V" }, en: { K: "K", Q: "Q", J: "J" } };
+
   var stage = document.getElementById("stage");
   var viewport = document.getElementById("viewport");
   var scenes = Array.prototype.slice.call(stage.querySelectorAll(".scene"));
   var chaptersEl = document.getElementById("chapters");
   var playBtn = document.getElementById("play");
+  var langBtn = document.getElementById("lang-btn");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function initialLang() {
+    var h = location.hash.slice(1);
+    if (TEXT[h]) return h;
+    try {
+      var saved = localStorage.getItem(LANG_KEY);
+      if (TEXT[saved]) return saved;
+    } catch (err) { /* stockage refusé : on suit le navigateur */ }
+    var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    for (var i = 0; i < prefs.length; i++) {
+      var base = String(prefs[i]).toLowerCase().split("-")[0];
+      if (TEXT[base]) return base;
+    }
+    return "en";
+  }
+
+  // Les lignes de main en français, telles qu'écrites dans la page.
+  var handEls = Array.prototype.slice.call(document.querySelectorAll("[data-hand], [data-rank-line]"));
+  handEls.forEach(function (el) { el.dataset.fr = el.textContent; });
 
   // Mise à l'échelle du plateau 960 × 540 dans la largeur disponible.
   function fit() { stage.style.transform = "scale(" + (viewport.clientWidth / 960) + ")"; }
@@ -399,14 +508,34 @@
     var b = document.createElement("button");
     b.type = "button"; b.className = "chap";
     b.innerHTML = '<span class="bar"><i></i></span><span class="lbl"></span>';
-    b.querySelector(".lbl").textContent = s.dataset.label;
-    b.setAttribute("aria-label", "Aller au chapitre : " + s.dataset.label);
     b.addEventListener("click", function () { seek(starts[i]); });
     chaptersEl.appendChild(b);
     return b;
   });
 
-  var t = 0, cur = -1, playing = !reduce, last = null;
+  var lang = initialLang(), t = 0, cur = -1, playing = !reduce, last = null;
+
+  function applyLang(l) {
+    lang = l;
+    var T = TEXT[l];
+    document.documentElement.lang = l;
+    document.title = T.pageTitle;
+    document.querySelectorAll("[data-t]").forEach(function (el) { el.innerHTML = T[el.dataset.t]; });
+    document.querySelectorAll("[data-t-label]").forEach(function (el) { el.setAttribute("aria-label", T[el.dataset.tLabel]); });
+    handEls.forEach(function (el) {
+      el.textContent = l === "en" ? (el.dataset.hand || el.dataset.rankLine) : el.dataset.fr;
+    });
+    document.querySelectorAll("[data-rank]").forEach(function (el) { el.textContent = RANK[l][el.dataset.rank]; });
+    stage.style.setProperty("--ctrl-word", '"' + T.ctrl + '"');
+    scenes.forEach(function (s, i) {
+      s.setAttribute("aria-label", T[s.dataset.label]);
+      bars[i].querySelector(".lbl").textContent = T[s.dataset.label];
+      bars[i].setAttribute("aria-label", T.goTo + T[s.dataset.label]);
+    });
+    langBtn.textContent = T.otherLang;
+    langBtn.lang = l === "fr" ? "en" : "fr";
+    setPlaying(playing);
+  }
 
   function show(i) {
     scenes.forEach(function (s, j) { if (j !== i) s.classList.remove("on"); });
@@ -432,12 +561,13 @@
     t = time; show(indexAt(t)); paint();
   }
   function setPlaying(on) {
+    var T = TEXT[lang];
     playing = on;
     stage.classList.toggle("paused", !on);
     document.getElementById("ico-pause").hidden = !on;
     document.getElementById("ico-play").hidden = on;
-    document.getElementById("play-lbl").textContent = on ? "Pause" : "Lecture";
-    playBtn.setAttribute("aria-label", on ? "Pause" : "Lecture");
+    document.getElementById("play-lbl").textContent = on ? T.pause : T.play;
+    playBtn.setAttribute("aria-label", on ? T.pause : T.play);
     last = null;
   }
   function tick(now) {
@@ -456,7 +586,20 @@
 
   playBtn.addEventListener("click", function () { setPlaying(!playing); });
   document.getElementById("replay").addEventListener("click", function () { seek(0); setPlaying(true); });
+  langBtn.addEventListener("click", function () {
+    var next = lang === "fr" ? "en" : "fr";
+    try { localStorage.setItem(LANG_KEY, next); } catch (err) { /* choix valable pour cette visite */ }
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    applyLang(next);
+    show(cur); // la scène en cours se rejoue dans la nouvelle langue
+  });
 
+  window.addEventListener("hashchange", function () {
+    var h = location.hash.slice(1);
+    if (TEXT[h] && h !== lang) { applyLang(h); show(cur); }
+  });
+
+  applyLang(lang);
   seek(0);
   setPlaying(playing);
   requestAnimationFrame(tick);

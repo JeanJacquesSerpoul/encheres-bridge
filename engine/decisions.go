@@ -2484,9 +2484,9 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 				return c, m(floor, 40, fr, en).withLen(best, bestLen).asForcing()
 			}
 			if c, mn, ok := e.spoutnikDouble(p, os, oppBid, overcalled); tr.check(ok,
-				"exactement 4 cartes dans une majeure libre, 6 HL (8 sur un palier de 2) → contre Spoutnik",
-				"exactly four cards in a free major, 6 HL (8 over a two-level bid) → negative double",
-				cards(h, Spades)+", "+cards(h, Hearts)+", "+pts(hl, "HL")) {
+				"exactement 4 cartes dans une majeure libre, 8 H → contre Spoutnik",
+				"exactly four cards in a free major, 8 H → negative double",
+				cards(h, Spades)+", "+cards(h, Hearts)+", "+pts(h.H(), "H")) {
 				return c, mn
 			}
 		}
@@ -2647,19 +2647,16 @@ func (e *Engine) respondCompetitive(p *playerState) (Call, meaning) {
 // overcall it shows exactly four cards in the unbid major(s) -- the length a
 // natural bid can no longer promise, since five cards name the suit. Opener
 // answers it by naming the fit when he holds it (answerSpoutnik). It asks for
-// six points over a one-level overcall, eight over a two-level one: partner
-// may have to answer at the two level.
+// eight honour points at any level: length points alone do not buy it, since
+// partner may have to answer at the two level.
 func (e *Engine) spoutnikDouble(p *playerState, os Suit, oppBid [4]bool, overcalled bool) (Call, meaning, bool) {
 	h := p.hand
 	last, _, _ := e.lastBid()
 	if !overcalled || last.Level > 2 || !e.legal(p.seat, doubleCall) {
 		return Call{}, meaning{}, false
 	}
-	floor := 6
-	if last.Level >= 2 {
-		floor = 8
-	}
-	if h.HL() < floor {
+	const floor = 8
+	if h.H() < floor {
 		return Call{}, meaning{}, false
 	}
 	var majors [4]bool

@@ -98,3 +98,26 @@ func TestSpoutnikAnswerNeverPasses(t *testing.T) {
 		t.Fatalf("call = %s (%q), want a descriptive bid without the heart fit", c.Format("fr"), mn.fr)
 	}
 }
+
+// TestSpoutnikDoubleNeedsEightHonourPoints replays a reported auction:
+// 1C-(1D), North holds T8.T643.KQT654.T -- four hearts, but only 5 H, the
+// diamond length alone lifting it to 7 HL. The engine made the Spoutnik
+// double on those length points; it needs 8 H [RC-6].
+func TestSpoutnikDoubleNeedsEightHonourPoints(t *testing.T) {
+	pbn := `[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQ92.A7.J9.KQ873 A53.98.A8732.AJ6 T8.T643.KQT654.T J764.KQJ52..9542"]`
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("bad deal: %v", err)
+	}
+	calls := NewEngine(d).Run()
+
+	const north = 0
+	for _, sc := range calls {
+		if sc.Seat == north && sc.M.spoutnik {
+			t.Fatalf("North made the Spoutnik double with 5 H (%q)\nauction: %s",
+				sc.M.fr, formatAuction(calls))
+		}
+	}
+}

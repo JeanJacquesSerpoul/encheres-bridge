@@ -1602,7 +1602,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 /* ---------- écran d'accueil ---------- */
 
 .welcome-dialog {
-  width: min(460px, calc(100vw - 32px));
+  width: min(520px, calc(100vw - 32px));
   padding: 0;
   border: none;
   border-radius: var(--radius);

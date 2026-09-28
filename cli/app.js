@@ -5129,8 +5129,9 @@ tutorialDialog.addEventListener("keydown", (ev) => {
 // animation.html s'affiche dans une fenêtre de la page plutôt que dans un
 // nouvel onglet : on la regarde sans quitter la donne. Le cadre est chargé à
 // l'ouverture, dans la langue courante (#fr / #en) et en mode intégré
-// (?embed), puis vidé à la fermeture pour que l'animation s'arrête. Les liens
-// gardent leur href : clic du milieu ou Ctrl+clic ouvrent toujours un onglet.
+// (?embed), puis vidé à la fermeture pour que l'animation s'arrête. Le lien du
+// bandeau garde son href : clic du milieu ou Ctrl+clic ouvrent toujours un
+// onglet.
 const videoDialog = $("#video-dialog");
 const videoFrame = $("#video-frame");
 

@@ -411,18 +411,14 @@ func (e *Engine) fitLengthBonus(p *playerState, fit Suit) int {
 	return 0
 }
 
-// hasHelp reports whether p's hand can plausibly cover losers in s, as asked
-// by a help-suit game try: an ace or king there, a third-round queen, or
-// shortness to ruff.
+// hasHelp reports whether p's hand promises a sure trick in s, as asked by a
+// help-suit game try [C-19]: the ace, the king with the queen, or a singleton
+// or void that ruffs from the second round. A lone king is a trick only when
+// the ace sits well, a queen or a doubleton covers nothing for certain: 1H -
+// 2H - 3D with Q2 in diamonds declines with 3H.
 func (e *Engine) hasHelp(p *playerState, s Suit) bool {
 	h := p.hand
-	if h.HasCard(s, 'A') || h.HasCard(s, 'K') {
-		return true
-	}
-	if h.Len(s) <= 2 {
-		return true
-	}
-	return h.HasCard(s, 'Q') && h.Len(s) >= 3
+	return h.Len(s) <= 1 || h.HasCard(s, 'A') || h.HasCard(s, 'K') && h.HasCard(s, 'Q')
 }
 
 // uncontested reports whether the opponents of the given seat have stayed

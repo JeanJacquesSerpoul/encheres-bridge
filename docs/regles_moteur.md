@@ -1098,8 +1098,11 @@ sinon 3SA avec l'arrêt, sinon cue-bid de l'intervention pour nier.
 ### 8.7 Essai « couleur nécessitant un appui »
 ### [C-18] Après un soutien majeur simple, l'ouvreur de 17-21 HLD nomme une
 couleur annexe de **2 à 4 cartes sans A ni R** au palier ≤ 3.
-### [C-19] Le partenaire accepte **seulement avec une aide réelle** : A ou R,
-ou D troisième, ou une courte (≤ 2 cartes) — pas sur le seul compte de points.
+### [C-19] Le partenaire accepte **seulement avec une levée certaine** dans la
+couleur d'essai — pas sur le seul compte de points : l'**As**, **Roi-Dame**, ou
+un **singleton** ou une **chicane**, qui coupe dès le deuxième tour. Le Roi seul
+ne fait une levée que si l'As est bien placé ; la Dame et le doubleton ne
+couvrent rien à coup sûr. `1♥ – 2♥ – 3♦` avec ♦D2 → **3♥**, pas 4♥.
 ### [C-20] L'essai doit laisser la place de refuser : la couleur nommée doit
 avoir **trois de l'atout au-dessus d'elle**. Un « essai » à 3♠ sur un fit à
 Cœur ne laisse au partenaire sans aide que 4♥ ou le passe — et le passe fait

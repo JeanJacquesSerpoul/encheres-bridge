@@ -2959,8 +2959,8 @@
 # A.14 Roudi
 # ======================================================================
 # en: A.14 Roudi
-# Après 1♣/♦ – 1♥/♠ – 1SA, 2♣ du répondant (11+ HL, majeure 5e) demande à l'ouvreur son soutien. SEF 2024 : toutes les enchères du répondant au niveau de 3 après le Roudi sont forcing de manche.
-# en: After 1♣/♦ – 1♥/♠ – 1NT, responder's 2♣ (11+ HL, five-card major) asks opener about support. SEF 2024: every responder's bid at the three level after Roudi is game forcing.
+# Après 1♣/♦ – 1♥/♠ – 1SA (ou 1♥ – 1♠ – 1SA), 2♣ du répondant (11+ HL, majeure 5e) demande à l'ouvreur son soutien et sa force. Roudi à 3 paliers : 2♦ = 2 cartes dans la majeure (minimum ou maximum), 2♥ = 3 cartes minimum, 2♠ = 3 cartes maximum. SEF 2024 : toutes les enchères du répondant au niveau de 3 après le Roudi sont forcing de manche.
+# en: After 1♣/♦ – 1♥/♠ – 1NT (or 1♥ – 1♠ – 1NT), responder's 2♣ (11+ HL, five-card major) asks opener about support and strength. Three-step Roudi: 2♦ = two cards in the major (minimum or maximum), 2♥ = three cards, minimum, 2♠ = three cards, maximum. SEF 2024: every responder's bid at the three level after Roudi is game forcing.
 - id: "roudi.{m}.{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M} 1NT"
@@ -2968,19 +2968,28 @@
   cond: "{M} >= 5 and hl >= 11"
   forcing: F1
   meaning: "Roudi : 11+ HL, majeure 5e, demande le soutien"
-  meaning_en: "Roudi: 11+ HL, 5-card major, asks for support"
+  meaning_en: "Roudi: 11+ HL, five-card major, asks for support"
   status: sef
   alert: true
-# --- réponses de l'ouvreur (réponse 1♥ : fiche ; réponse 1♠ : transposition)
-# en: opener's answers (1♥ response: card; 1♠ response: transposition)
+- id: roudi.H.S
+  seq: "1H 1S 1NT"
+  call: 2C
+  cond: "S >= 5 and hl >= 11"
+  forcing: F1
+  meaning: "Roudi : 11+ HL, 5 piques, demande le soutien"
+  meaning_en: "Roudi: 11+ HL, five spades, asks for support"
+  status: choix
+  alert: true
+# --- réponses de l'ouvreur : Roudi à 3 paliers
+# en: opener's answers: three-step Roudi
 - id: "roudi.{m}.H.2S"
   for: [{m: C}, {m: D}]
   seq: "1{m} 1H 1NT 2C"
   call: 2S
   cond: "H == 3 and hl >= 14"
   forcing: F1
-  meaning: "3 cartes à ♥, maximum"
-  meaning_en: "3 hearts, maximum"
+  meaning: "Fitté maximum : 3 cartes à ♥, 13-14 H"
+  meaning_en: "Fit, maximum: three hearts, 13-14 HCP"
   status: sef
   alert: true
 - id: "roudi.{m}.H.2H"
@@ -2989,183 +2998,130 @@
   call: 2H
   cond: "H == 3"
   forcing: NF
-  meaning: "3 cartes à ♥, minimum"
-  meaning_en: "3 hearts, minimum"
+  meaning: "Fitté minimum : 3 cartes à ♥, 12-13 H"
+  meaning_en: "Fit, minimum: three hearts, 12-13 HCP"
   status: sef
-- id: "roudi.{m}.H.2NT"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1H 1NT 2C"
-  call: 2NT
-  cond: "hl >= 14"
-  forcing: NF
-  meaning: "2 cartes à ♥, maximum"
-  meaning_en: "2 hearts, maximum"
-  status: infere
-- id: "roudi.{m}.H.2D"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1H 1NT 2C"
-  call: 2D
-  cond: "true"
-  forcing: F1
-  meaning: "2 cartes à ♥, sans force"
-  meaning_en: "2 hearts, no strength"
-  status: sef
-  alert: true
-- id: "roudi.{m}.S.2H"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C"
-  call: 2H
-  cond: "H >= 4"
-  forcing: F1
-  meaning: "4 cartes à ♥"
-  meaning_en: "4 hearts"
-  status: infere
-- id: "roudi.{m}.S.3S"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C"
-  call: 3S
-  cond: "S == 3 and hl >= 14"
-  forcing: FM
-  meaning: "3 cartes à ♠, maximum"
-  meaning_en: "3 spades, maximum"
-  status: infere
 - id: "roudi.{m}.S.2S"
-  for: [{m: C}, {m: D}]
+  for: [{m: C}, {m: D}, {m: H}]
   seq: "1{m} 1S 1NT 2C"
   call: 2S
+  cond: "S == 3 and hl >= 14"
+  forcing: F1
+  meaning: "Fitté maximum : 3 cartes à ♠, 13-14 H"
+  meaning_en: "Fit, maximum: three spades, 13-14 HCP"
+  status: choix
+  alert: true
+- id: "roudi.{m}.S.2H"
+  for: [{m: C}, {m: D}, {m: H}]
+  seq: "1{m} 1S 1NT 2C"
+  call: 2H
   cond: "S == 3"
-  forcing: NF
-  meaning: "3 cartes à ♠, minimum"
-  meaning_en: "3 spades, minimum"
-  status: infere
-- id: "roudi.{m}.S.2NT"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C"
-  call: 2NT
-  cond: "hl >= 14"
-  forcing: NF
-  meaning: "2 cartes à ♠, maximum"
-  meaning_en: "2 spades, maximum"
-  status: infere
-- id: "roudi.{m}.S.2D"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C"
+  forcing: F1
+  meaning: "Fitté minimum : 3 cartes à ♠, 12-13 H"
+  meaning_en: "Fit, minimum: three spades, 12-13 HCP"
+  status: choix
+  alert: true
+- id: "roudi.{m}.{M}.2D"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C"
   call: 2D
   cond: "true"
   forcing: F1
-  meaning: "2 cartes à ♠, minimum"
-  meaning_en: "2 spades, minimum"
-  status: infere
+  meaning: "Pas fitté : 2 cartes dans la majeure, minimum ou maximum"
+  meaning_en: "No fit: two cards in the major, minimum or maximum"
+  status: choix
   alert: true
 # --- suites du répondant
 # en: responder's continuations
 - id: "roudi.{m}.{M}.max.4"
-  for: [{m: C, M: H, f: 2S}, {m: D, M: H, f: 2S}, {m: C, M: S, f: 3S}, {m: D, M: S, f: 3S}]
-  seq: "1{m} 1{M} 1NT 2C {f}"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2S"
   call: "4{M}"
   cond: "true"
   forcing: SO
   meaning: "Fit et maximum en face : manche"
-  meaning_en: "Fit and maximum opposite: game"
+  meaning_en: "Fit and a maximum opposite: game"
   status: infere
 - id: "roudi.{m}.{M}.min.4"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2{M}"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2H"
   call: "4{M}"
   cond: "hl >= 13"
   forcing: SO
   meaning: "Fit : manche"
   meaning_en: "Fit: game"
   status: infere
-- id: "roudi.{m}.{M}.2D.4M"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D|2NT"
-  call: "4{M}"
-  cond: "{M} >= 6 and hl >= 13"
-  forcing: SO
-  meaning: "6 cartes, manche"
-  meaning_en: "6 cards, game"
-  status: infere
-- id: "roudi.{m}.{M}.2D.3NT"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D|2NT"
-  call: 3NT
-  cond: "hl >= 13"
-  forcing: SO
-  meaning: "Manche à SA"
-  meaning_en: "Game in NT"
-  status: infere
-- id: "roudi.{m}.{M}.2NT.3NT"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2NT"
-  call: 3NT
-  cond: "true"
-  forcing: SO
-  meaning: "Maximum en face : manche"
-  meaning_en: "Maximum opposite: game"
-  status: infere
-- id: "roudi.{m}.{M}.2D.2NT"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D"
-  call: 2NT
-  cond: "true"
-  forcing: INV
-  meaning: "Naturel, 11-12 H"
-  meaning_en: "Natural, 11-12 HCP"
-  status: sef
-- id: "roudi.{m}.S.2H.4H"
+- id: "roudi.{m}.H.min.p"
   for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C 2H"
-  call: 4H
-  cond: "H >= 4 and hl >= 13"
-  forcing: SO
-  meaning: "Fit ♥, manche"
-  meaning_en: "♥ fit, game"
-  status: infere
-- id: "roudi.{m}.S.2H.3NT"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C 2H"
-  call: 3NT
-  cond: "hl >= 13"
-  forcing: SO
-  meaning: "Manche"
-  meaning_en: "Game"
-  status: infere
-- id: "roudi.{m}.S.2H.2NT"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S 1NT 2C 2H"
-  call: 2NT
-  cond: "true"
-  forcing: INV
-  meaning: "11-12"
-  meaning_en: "11-12"
-  status: infere
-- id: "roudi.{m}.{M}.min.p"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2{M}"
+  seq: "1{m} 1H 1NT 2C 2H"
   call: P
   cond: "true"
   forcing: NF
   meaning: "Fit minimum, 11-12 : partielle"
   meaning_en: "Minimum fit, 11-12: partscore"
   status: infere
-- id: "roudi.{m}.{M}.2NT.o"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D|2H 2NT"
-  call: 3NT
-  cond: "hl >= 14"
-  forcing: SO
-  meaning: "Accepte l'invitation"
-  meaning_en: "Accepts the invitation"
+- id: "roudi.{m}.S.min.2S"
+  for: [{m: C}, {m: D}, {m: H}]
+  seq: "1{m} 1S 1NT 2C 2H"
+  call: 2S
+  cond: "true"
+  forcing: NF
+  meaning: "Fit minimum, 11-12 : partielle à ♠"
+  meaning_en: "Minimum fit, 11-12: partscore in spades"
   status: infere
-- id: "roudi.{m}.{M}.2NT.op"
-  for: [{m: C, M: H}, {m: D, M: H}, {m: C, M: S}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D|2H 2NT"
+- id: "roudi.{m}.S.min.2S.p"
+  for: [{m: C}, {m: D}, {m: H}]
+  seq: "1{m} 1S 1NT 2C 2H 2S"
   call: P
   cond: "true"
   forcing: NF
-  meaning: "Minimum"
-  meaning_en: "Minimum"
+  meaning: "Partielle"
+  meaning_en: "Partscore"
+  status: infere
+- id: "roudi.{m}.{M}.2D.4M"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2D"
+  call: "4{M}"
+  cond: "{M} >= 6 and hl >= 13"
+  forcing: SO
+  meaning: "6 cartes, manche"
+  meaning_en: "Six cards, game"
+  status: infere
+- id: "roudi.{m}.{M}.2D.3NT"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2D"
+  call: 3NT
+  cond: "hl >= 13"
+  forcing: SO
+  meaning: "Manche à SA"
+  meaning_en: "Game in NT"
+  status: infere
+- id: "roudi.{m}.{M}.2D.2NT"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2D"
+  call: 2NT
+  cond: "true"
+  forcing: INV
+  meaning: "Naturel, 11-12 H : l'ouvreur conclut selon sa force"
+  meaning_en: "Natural, 11-12 HCP: opener decides on strength"
+  status: sef
+- id: "roudi.{m}.{M}.2NT.o"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2D 2NT"
+  call: 3NT
+  cond: "hl >= 14"
+  forcing: SO
+  meaning: "Maximum : accepte l'invitation"
+  meaning_en: "Maximum: accepts the invitation"
+  status: infere
+- id: "roudi.{m}.{M}.2NT.op"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
+  seq: "1{m} 1{M} 1NT 2C 2D 2NT"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum : refuse"
+  meaning_en: "Minimum: declines"
   status: infere
 
 # ======================================================================

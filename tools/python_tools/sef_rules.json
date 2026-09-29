@@ -7547,7 +7547,7 @@
   "cond": "H >= 5 and hl >= 11",
   "forcing": "F1",
   "meaning": "Roudi : 11+ HL, majeure 5e, demande le soutien",
-  "meaning_en": "Roudi: 11+ HL, 5-card major, asks for support",
+  "meaning_en": "Roudi: 11+ HL, five-card major, asks for support",
   "status": "sef",
   "alert": true
  },
@@ -7558,7 +7558,7 @@
   "cond": "S >= 5 and hl >= 11",
   "forcing": "F1",
   "meaning": "Roudi : 11+ HL, majeure 5e, demande le soutien",
-  "meaning_en": "Roudi: 11+ HL, 5-card major, asks for support",
+  "meaning_en": "Roudi: 11+ HL, five-card major, asks for support",
   "status": "sef",
   "alert": true
  },
@@ -7569,7 +7569,7 @@
   "cond": "H >= 5 and hl >= 11",
   "forcing": "F1",
   "meaning": "Roudi : 11+ HL, majeure 5e, demande le soutien",
-  "meaning_en": "Roudi: 11+ HL, 5-card major, asks for support",
+  "meaning_en": "Roudi: 11+ HL, five-card major, asks for support",
   "status": "sef",
   "alert": true
  },
@@ -7580,8 +7580,19 @@
   "cond": "S >= 5 and hl >= 11",
   "forcing": "F1",
   "meaning": "Roudi : 11+ HL, majeure 5e, demande le soutien",
-  "meaning_en": "Roudi: 11+ HL, 5-card major, asks for support",
+  "meaning_en": "Roudi: 11+ HL, five-card major, asks for support",
   "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "roudi.H.S",
+  "seq": "1H 1S 1NT",
+  "call": "2C",
+  "cond": "S >= 5 and hl >= 11",
+  "forcing": "F1",
+  "meaning": "Roudi : 11+ HL, 5 piques, demande le soutien",
+  "meaning_en": "Roudi: 11+ HL, five spades, asks for support",
+  "status": "choix",
   "alert": true
  },
  {
@@ -7590,8 +7601,8 @@
   "call": "2S",
   "cond": "H == 3 and hl >= 14",
   "forcing": "F1",
-  "meaning": "3 cartes à ♥, maximum",
-  "meaning_en": "3 hearts, maximum",
+  "meaning": "Fitté maximum : 3 cartes à ♥, 13-14 H",
+  "meaning_en": "Fit, maximum: three hearts, 13-14 HCP",
   "status": "sef",
   "alert": true
  },
@@ -7601,8 +7612,8 @@
   "call": "2S",
   "cond": "H == 3 and hl >= 14",
   "forcing": "F1",
-  "meaning": "3 cartes à ♥, maximum",
-  "meaning_en": "3 hearts, maximum",
+  "meaning": "Fitté maximum : 3 cartes à ♥, 13-14 H",
+  "meaning_en": "Fit, maximum: three hearts, 13-14 HCP",
   "status": "sef",
   "alert": true
  },
@@ -7612,8 +7623,8 @@
   "call": "2H",
   "cond": "H == 3",
   "forcing": "NF",
-  "meaning": "3 cartes à ♥, minimum",
-  "meaning_en": "3 hearts, minimum",
+  "meaning": "Fitté minimum : 3 cartes à ♥, 12-13 H",
+  "meaning_en": "Fit, minimum: three hearts, 12-13 HCP",
   "status": "sef"
  },
  {
@@ -7622,29 +7633,75 @@
   "call": "2H",
   "cond": "H == 3",
   "forcing": "NF",
-  "meaning": "3 cartes à ♥, minimum",
-  "meaning_en": "3 hearts, minimum",
+  "meaning": "Fitté minimum : 3 cartes à ♥, 12-13 H",
+  "meaning_en": "Fit, minimum: three hearts, 12-13 HCP",
   "status": "sef"
  },
  {
-  "id": "roudi.C.H.2NT",
-  "seq": "1C 1H 1NT 2C",
-  "call": "2NT",
-  "cond": "hl >= 14",
-  "forcing": "NF",
-  "meaning": "2 cartes à ♥, maximum",
-  "meaning_en": "2 hearts, maximum",
-  "status": "infere"
+  "id": "roudi.C.S.2S",
+  "seq": "1C 1S 1NT 2C",
+  "call": "2S",
+  "cond": "S == 3 and hl >= 14",
+  "forcing": "F1",
+  "meaning": "Fitté maximum : 3 cartes à ♠, 13-14 H",
+  "meaning_en": "Fit, maximum: three spades, 13-14 HCP",
+  "status": "choix",
+  "alert": true
  },
  {
-  "id": "roudi.D.H.2NT",
-  "seq": "1D 1H 1NT 2C",
-  "call": "2NT",
-  "cond": "hl >= 14",
-  "forcing": "NF",
-  "meaning": "2 cartes à ♥, maximum",
-  "meaning_en": "2 hearts, maximum",
-  "status": "infere"
+  "id": "roudi.D.S.2S",
+  "seq": "1D 1S 1NT 2C",
+  "call": "2S",
+  "cond": "S == 3 and hl >= 14",
+  "forcing": "F1",
+  "meaning": "Fitté maximum : 3 cartes à ♠, 13-14 H",
+  "meaning_en": "Fit, maximum: three spades, 13-14 HCP",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.H.S.2S",
+  "seq": "1H 1S 1NT 2C",
+  "call": "2S",
+  "cond": "S == 3 and hl >= 14",
+  "forcing": "F1",
+  "meaning": "Fitté maximum : 3 cartes à ♠, 13-14 H",
+  "meaning_en": "Fit, maximum: three spades, 13-14 HCP",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.C.S.2H",
+  "seq": "1C 1S 1NT 2C",
+  "call": "2H",
+  "cond": "S == 3",
+  "forcing": "F1",
+  "meaning": "Fitté minimum : 3 cartes à ♠, 12-13 H",
+  "meaning_en": "Fit, minimum: three spades, 12-13 HCP",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.D.S.2H",
+  "seq": "1D 1S 1NT 2C",
+  "call": "2H",
+  "cond": "S == 3",
+  "forcing": "F1",
+  "meaning": "Fitté minimum : 3 cartes à ♠, 12-13 H",
+  "meaning_en": "Fit, minimum: three spades, 12-13 HCP",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.H.S.2H",
+  "seq": "1H 1S 1NT 2C",
+  "call": "2H",
+  "cond": "S == 3",
+  "forcing": "F1",
+  "meaning": "Fitté minimum : 3 cartes à ♠, 12-13 H",
+  "meaning_en": "Fit, minimum: three spades, 12-13 HCP",
+  "status": "choix",
+  "alert": true
  },
  {
   "id": "roudi.C.H.2D",
@@ -7652,9 +7709,20 @@
   "call": "2D",
   "cond": "true",
   "forcing": "F1",
-  "meaning": "2 cartes à ♥, sans force",
-  "meaning_en": "2 hearts, no strength",
-  "status": "sef",
+  "meaning": "Pas fitté : 2 cartes dans la majeure, minimum ou maximum",
+  "meaning_en": "No fit: two cards in the major, minimum or maximum",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.C.S.2D",
+  "seq": "1C 1S 1NT 2C",
+  "call": "2D",
+  "cond": "true",
+  "forcing": "F1",
+  "meaning": "Pas fitté : 2 cartes dans la majeure, minimum ou maximum",
+  "meaning_en": "No fit: two cards in the major, minimum or maximum",
+  "status": "choix",
   "alert": true
  },
  {
@@ -7663,100 +7731,9 @@
   "call": "2D",
   "cond": "true",
   "forcing": "F1",
-  "meaning": "2 cartes à ♥, sans force",
-  "meaning_en": "2 hearts, no strength",
-  "status": "sef",
-  "alert": true
- },
- {
-  "id": "roudi.C.S.2H",
-  "seq": "1C 1S 1NT 2C",
-  "call": "2H",
-  "cond": "H >= 4",
-  "forcing": "F1",
-  "meaning": "4 cartes à ♥",
-  "meaning_en": "4 hearts",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2H",
-  "seq": "1D 1S 1NT 2C",
-  "call": "2H",
-  "cond": "H >= 4",
-  "forcing": "F1",
-  "meaning": "4 cartes à ♥",
-  "meaning_en": "4 hearts",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.3S",
-  "seq": "1C 1S 1NT 2C",
-  "call": "3S",
-  "cond": "S == 3 and hl >= 14",
-  "forcing": "FM",
-  "meaning": "3 cartes à ♠, maximum",
-  "meaning_en": "3 spades, maximum",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.3S",
-  "seq": "1D 1S 1NT 2C",
-  "call": "3S",
-  "cond": "S == 3 and hl >= 14",
-  "forcing": "FM",
-  "meaning": "3 cartes à ♠, maximum",
-  "meaning_en": "3 spades, maximum",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2S",
-  "seq": "1C 1S 1NT 2C",
-  "call": "2S",
-  "cond": "S == 3",
-  "forcing": "NF",
-  "meaning": "3 cartes à ♠, minimum",
-  "meaning_en": "3 spades, minimum",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2S",
-  "seq": "1D 1S 1NT 2C",
-  "call": "2S",
-  "cond": "S == 3",
-  "forcing": "NF",
-  "meaning": "3 cartes à ♠, minimum",
-  "meaning_en": "3 spades, minimum",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2NT",
-  "seq": "1C 1S 1NT 2C",
-  "call": "2NT",
-  "cond": "hl >= 14",
-  "forcing": "NF",
-  "meaning": "2 cartes à ♠, maximum",
-  "meaning_en": "2 spades, maximum",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2NT",
-  "seq": "1D 1S 1NT 2C",
-  "call": "2NT",
-  "cond": "hl >= 14",
-  "forcing": "NF",
-  "meaning": "2 cartes à ♠, maximum",
-  "meaning_en": "2 spades, maximum",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2D",
-  "seq": "1C 1S 1NT 2C",
-  "call": "2D",
-  "cond": "true",
-  "forcing": "F1",
-  "meaning": "2 cartes à ♠, minimum",
-  "meaning_en": "2 spades, minimum",
-  "status": "infere",
+  "meaning": "Pas fitté : 2 cartes dans la majeure, minimum ou maximum",
+  "meaning_en": "No fit: two cards in the major, minimum or maximum",
+  "status": "choix",
   "alert": true
  },
  {
@@ -7765,9 +7742,20 @@
   "call": "2D",
   "cond": "true",
   "forcing": "F1",
-  "meaning": "2 cartes à ♠, minimum",
-  "meaning_en": "2 spades, minimum",
-  "status": "infere",
+  "meaning": "Pas fitté : 2 cartes dans la majeure, minimum ou maximum",
+  "meaning_en": "No fit: two cards in the major, minimum or maximum",
+  "status": "choix",
+  "alert": true
+ },
+ {
+  "id": "roudi.H.S.2D",
+  "seq": "1H 1S 1NT 2C",
+  "call": "2D",
+  "cond": "true",
+  "forcing": "F1",
+  "meaning": "Pas fitté : 2 cartes dans la majeure, minimum ou maximum",
+  "meaning_en": "No fit: two cards in the major, minimum or maximum",
+  "status": "choix",
   "alert": true
  },
  {
@@ -7777,7 +7765,17 @@
   "cond": "true",
   "forcing": "SO",
   "meaning": "Fit et maximum en face : manche",
-  "meaning_en": "Fit and maximum opposite: game",
+  "meaning_en": "Fit and a maximum opposite: game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.S.max.4",
+  "seq": "1C 1S 1NT 2C 2S",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Fit et maximum en face : manche",
+  "meaning_en": "Fit and a maximum opposite: game",
   "status": "infere"
  },
  {
@@ -7787,33 +7785,43 @@
   "cond": "true",
   "forcing": "SO",
   "meaning": "Fit et maximum en face : manche",
-  "meaning_en": "Fit and maximum opposite: game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.max.4",
-  "seq": "1C 1S 1NT 2C 3S",
-  "call": "4S",
-  "cond": "true",
-  "forcing": "SO",
-  "meaning": "Fit et maximum en face : manche",
-  "meaning_en": "Fit and maximum opposite: game",
+  "meaning_en": "Fit and a maximum opposite: game",
   "status": "infere"
  },
  {
   "id": "roudi.D.S.max.4",
-  "seq": "1D 1S 1NT 2C 3S",
+  "seq": "1D 1S 1NT 2C 2S",
   "call": "4S",
   "cond": "true",
   "forcing": "SO",
   "meaning": "Fit et maximum en face : manche",
-  "meaning_en": "Fit and maximum opposite: game",
+  "meaning_en": "Fit and a maximum opposite: game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.max.4",
+  "seq": "1H 1S 1NT 2C 2S",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Fit et maximum en face : manche",
+  "meaning_en": "Fit and a maximum opposite: game",
   "status": "infere"
  },
  {
   "id": "roudi.C.H.min.4",
   "seq": "1C 1H 1NT 2C 2H",
   "call": "4H",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.S.min.4",
+  "seq": "1C 1S 1NT 2C 2H",
+  "call": "4S",
   "cond": "hl >= 13",
   "forcing": "SO",
   "meaning": "Fit : manche",
@@ -7831,18 +7839,8 @@
   "status": "infere"
  },
  {
-  "id": "roudi.C.S.min.4",
-  "seq": "1C 1S 1NT 2C 2S",
-  "call": "4S",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Fit : manche",
-  "meaning_en": "Fit: game",
-  "status": "infere"
- },
- {
   "id": "roudi.D.S.min.4",
-  "seq": "1D 1S 1NT 2C 2S",
+  "seq": "1D 1S 1NT 2C 2H",
   "call": "4S",
   "cond": "hl >= 13",
   "forcing": "SO",
@@ -7851,223 +7849,13 @@
   "status": "infere"
  },
  {
-  "id": "roudi.C.H.2D.4M",
-  "seq": "1C 1H 1NT 2C 2D|2NT",
-  "call": "4H",
-  "cond": "H >= 6 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "6 cartes, manche",
-  "meaning_en": "6 cards, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.H.2D.4M",
-  "seq": "1D 1H 1NT 2C 2D|2NT",
-  "call": "4H",
-  "cond": "H >= 6 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "6 cartes, manche",
-  "meaning_en": "6 cards, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2D.4M",
-  "seq": "1C 1S 1NT 2C 2D|2NT",
+  "id": "roudi.H.S.min.4",
+  "seq": "1H 1S 1NT 2C 2H",
   "call": "4S",
-  "cond": "S >= 6 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "6 cartes, manche",
-  "meaning_en": "6 cards, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2D.4M",
-  "seq": "1D 1S 1NT 2C 2D|2NT",
-  "call": "4S",
-  "cond": "S >= 6 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "6 cartes, manche",
-  "meaning_en": "6 cards, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.H.2D.3NT",
-  "seq": "1C 1H 1NT 2C 2D|2NT",
-  "call": "3NT",
   "cond": "hl >= 13",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.H.2D.3NT",
-  "seq": "1D 1H 1NT 2C 2D|2NT",
-  "call": "3NT",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2D.3NT",
-  "seq": "1C 1S 1NT 2C 2D|2NT",
-  "call": "3NT",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2D.3NT",
-  "seq": "1D 1S 1NT 2C 2D|2NT",
-  "call": "3NT",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.H.2NT.3NT",
-  "seq": "1C 1H 1NT 2C 2NT",
-  "call": "3NT",
-  "cond": "true",
-  "forcing": "SO",
-  "meaning": "Maximum en face : manche",
-  "meaning_en": "Maximum opposite: game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.H.2NT.3NT",
-  "seq": "1D 1H 1NT 2C 2NT",
-  "call": "3NT",
-  "cond": "true",
-  "forcing": "SO",
-  "meaning": "Maximum en face : manche",
-  "meaning_en": "Maximum opposite: game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2NT.3NT",
-  "seq": "1C 1S 1NT 2C 2NT",
-  "call": "3NT",
-  "cond": "true",
-  "forcing": "SO",
-  "meaning": "Maximum en face : manche",
-  "meaning_en": "Maximum opposite: game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2NT.3NT",
-  "seq": "1D 1S 1NT 2C 2NT",
-  "call": "3NT",
-  "cond": "true",
-  "forcing": "SO",
-  "meaning": "Maximum en face : manche",
-  "meaning_en": "Maximum opposite: game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.H.2D.2NT",
-  "seq": "1C 1H 1NT 2C 2D",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "Naturel, 11-12 H",
-  "meaning_en": "Natural, 11-12 HCP",
-  "status": "sef"
- },
- {
-  "id": "roudi.D.H.2D.2NT",
-  "seq": "1D 1H 1NT 2C 2D",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "Naturel, 11-12 H",
-  "meaning_en": "Natural, 11-12 HCP",
-  "status": "sef"
- },
- {
-  "id": "roudi.C.S.2D.2NT",
-  "seq": "1C 1S 1NT 2C 2D",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "Naturel, 11-12 H",
-  "meaning_en": "Natural, 11-12 HCP",
-  "status": "sef"
- },
- {
-  "id": "roudi.D.S.2D.2NT",
-  "seq": "1D 1S 1NT 2C 2D",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "Naturel, 11-12 H",
-  "meaning_en": "Natural, 11-12 HCP",
-  "status": "sef"
- },
- {
-  "id": "roudi.C.S.2H.4H",
-  "seq": "1C 1S 1NT 2C 2H",
-  "call": "4H",
-  "cond": "H >= 4 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "Fit ♥, manche",
-  "meaning_en": "♥ fit, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2H.4H",
-  "seq": "1D 1S 1NT 2C 2H",
-  "call": "4H",
-  "cond": "H >= 4 and hl >= 13",
-  "forcing": "SO",
-  "meaning": "Fit ♥, manche",
-  "meaning_en": "♥ fit, game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2H.3NT",
-  "seq": "1C 1S 1NT 2C 2H",
-  "call": "3NT",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Manche",
-  "meaning_en": "Game",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2H.3NT",
-  "seq": "1D 1S 1NT 2C 2H",
-  "call": "3NT",
-  "cond": "hl >= 13",
-  "forcing": "SO",
-  "meaning": "Manche",
-  "meaning_en": "Game",
-  "status": "infere"
- },
- {
-  "id": "roudi.C.S.2H.2NT",
-  "seq": "1C 1S 1NT 2C 2H",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "11-12",
-  "meaning_en": "11-12",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.S.2H.2NT",
-  "seq": "1D 1S 1NT 2C 2H",
-  "call": "2NT",
-  "cond": "true",
-  "forcing": "INV",
-  "meaning": "11-12",
-  "meaning_en": "11-12",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
   "status": "infere"
  },
  {
@@ -8091,103 +7879,313 @@
   "status": "infere"
  },
  {
-  "id": "roudi.C.S.min.p",
-  "seq": "1C 1S 1NT 2C 2S",
-  "call": "P",
+  "id": "roudi.C.S.min.2S",
+  "seq": "1C 1S 1NT 2C 2H",
+  "call": "2S",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Fit minimum, 11-12 : partielle",
-  "meaning_en": "Minimum fit, 11-12: partscore",
+  "meaning": "Fit minimum, 11-12 : partielle à ♠",
+  "meaning_en": "Minimum fit, 11-12: partscore in spades",
   "status": "infere"
  },
  {
-  "id": "roudi.D.S.min.p",
-  "seq": "1D 1S 1NT 2C 2S",
+  "id": "roudi.D.S.min.2S",
+  "seq": "1D 1S 1NT 2C 2H",
+  "call": "2S",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Fit minimum, 11-12 : partielle à ♠",
+  "meaning_en": "Minimum fit, 11-12: partscore in spades",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.min.2S",
+  "seq": "1H 1S 1NT 2C 2H",
+  "call": "2S",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Fit minimum, 11-12 : partielle à ♠",
+  "meaning_en": "Minimum fit, 11-12: partscore in spades",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.S.min.2S.p",
+  "seq": "1C 1S 1NT 2C 2H 2S",
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Fit minimum, 11-12 : partielle",
-  "meaning_en": "Minimum fit, 11-12: partscore",
+  "meaning": "Partielle",
+  "meaning_en": "Partscore",
   "status": "infere"
+ },
+ {
+  "id": "roudi.D.S.min.2S.p",
+  "seq": "1D 1S 1NT 2C 2H 2S",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Partielle",
+  "meaning_en": "Partscore",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.min.2S.p",
+  "seq": "1H 1S 1NT 2C 2H 2S",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Partielle",
+  "meaning_en": "Partscore",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.H.2D.4M",
+  "seq": "1C 1H 1NT 2C 2D",
+  "call": "4H",
+  "cond": "H >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "6 cartes, manche",
+  "meaning_en": "Six cards, game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.S.2D.4M",
+  "seq": "1C 1S 1NT 2C 2D",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "6 cartes, manche",
+  "meaning_en": "Six cards, game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.H.2D.4M",
+  "seq": "1D 1H 1NT 2C 2D",
+  "call": "4H",
+  "cond": "H >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "6 cartes, manche",
+  "meaning_en": "Six cards, game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.S.2D.4M",
+  "seq": "1D 1S 1NT 2C 2D",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "6 cartes, manche",
+  "meaning_en": "Six cards, game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.2D.4M",
+  "seq": "1H 1S 1NT 2C 2D",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "6 cartes, manche",
+  "meaning_en": "Six cards, game",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.H.2D.3NT",
+  "seq": "1C 1H 1NT 2C 2D",
+  "call": "3NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.S.2D.3NT",
+  "seq": "1C 1S 1NT 2C 2D",
+  "call": "3NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.H.2D.3NT",
+  "seq": "1D 1H 1NT 2C 2D",
+  "call": "3NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.S.2D.3NT",
+  "seq": "1D 1S 1NT 2C 2D",
+  "call": "3NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.2D.3NT",
+  "seq": "1H 1S 1NT 2C 2D",
+  "call": "3NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.C.H.2D.2NT",
+  "seq": "1C 1H 1NT 2C 2D",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "Naturel, 11-12 H : l'ouvreur conclut selon sa force",
+  "meaning_en": "Natural, 11-12 HCP: opener decides on strength",
+  "status": "sef"
+ },
+ {
+  "id": "roudi.C.S.2D.2NT",
+  "seq": "1C 1S 1NT 2C 2D",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "Naturel, 11-12 H : l'ouvreur conclut selon sa force",
+  "meaning_en": "Natural, 11-12 HCP: opener decides on strength",
+  "status": "sef"
+ },
+ {
+  "id": "roudi.D.H.2D.2NT",
+  "seq": "1D 1H 1NT 2C 2D",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "Naturel, 11-12 H : l'ouvreur conclut selon sa force",
+  "meaning_en": "Natural, 11-12 HCP: opener decides on strength",
+  "status": "sef"
+ },
+ {
+  "id": "roudi.D.S.2D.2NT",
+  "seq": "1D 1S 1NT 2C 2D",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "Naturel, 11-12 H : l'ouvreur conclut selon sa force",
+  "meaning_en": "Natural, 11-12 HCP: opener decides on strength",
+  "status": "sef"
+ },
+ {
+  "id": "roudi.H.S.2D.2NT",
+  "seq": "1H 1S 1NT 2C 2D",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "Naturel, 11-12 H : l'ouvreur conclut selon sa force",
+  "meaning_en": "Natural, 11-12 HCP: opener decides on strength",
+  "status": "sef"
  },
  {
   "id": "roudi.C.H.2NT.o",
-  "seq": "1C 1H 1NT 2C 2D|2H 2NT",
+  "seq": "1C 1H 1NT 2C 2D 2NT",
   "call": "3NT",
   "cond": "hl >= 14",
   "forcing": "SO",
-  "meaning": "Accepte l'invitation",
-  "meaning_en": "Accepts the invitation",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.H.2NT.o",
-  "seq": "1D 1H 1NT 2C 2D|2H 2NT",
-  "call": "3NT",
-  "cond": "hl >= 14",
-  "forcing": "SO",
-  "meaning": "Accepte l'invitation",
-  "meaning_en": "Accepts the invitation",
+  "meaning": "Maximum : accepte l'invitation",
+  "meaning_en": "Maximum: accepts the invitation",
   "status": "infere"
  },
  {
   "id": "roudi.C.S.2NT.o",
-  "seq": "1C 1S 1NT 2C 2D|2H 2NT",
+  "seq": "1C 1S 1NT 2C 2D 2NT",
   "call": "3NT",
   "cond": "hl >= 14",
   "forcing": "SO",
-  "meaning": "Accepte l'invitation",
-  "meaning_en": "Accepts the invitation",
+  "meaning": "Maximum : accepte l'invitation",
+  "meaning_en": "Maximum: accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.H.2NT.o",
+  "seq": "1D 1H 1NT 2C 2D 2NT",
+  "call": "3NT",
+  "cond": "hl >= 14",
+  "forcing": "SO",
+  "meaning": "Maximum : accepte l'invitation",
+  "meaning_en": "Maximum: accepts the invitation",
   "status": "infere"
  },
  {
   "id": "roudi.D.S.2NT.o",
-  "seq": "1D 1S 1NT 2C 2D|2H 2NT",
+  "seq": "1D 1S 1NT 2C 2D 2NT",
   "call": "3NT",
   "cond": "hl >= 14",
   "forcing": "SO",
-  "meaning": "Accepte l'invitation",
-  "meaning_en": "Accepts the invitation",
+  "meaning": "Maximum : accepte l'invitation",
+  "meaning_en": "Maximum: accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.2NT.o",
+  "seq": "1H 1S 1NT 2C 2D 2NT",
+  "call": "3NT",
+  "cond": "hl >= 14",
+  "forcing": "SO",
+  "meaning": "Maximum : accepte l'invitation",
+  "meaning_en": "Maximum: accepts the invitation",
   "status": "infere"
  },
  {
   "id": "roudi.C.H.2NT.op",
-  "seq": "1C 1H 1NT 2C 2D|2H 2NT",
+  "seq": "1C 1H 1NT 2C 2D 2NT",
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Minimum",
-  "meaning_en": "Minimum",
-  "status": "infere"
- },
- {
-  "id": "roudi.D.H.2NT.op",
-  "seq": "1D 1H 1NT 2C 2D|2H 2NT",
-  "call": "P",
-  "cond": "true",
-  "forcing": "NF",
-  "meaning": "Minimum",
-  "meaning_en": "Minimum",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
   "status": "infere"
  },
  {
   "id": "roudi.C.S.2NT.op",
-  "seq": "1C 1S 1NT 2C 2D|2H 2NT",
+  "seq": "1C 1S 1NT 2C 2D 2NT",
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Minimum",
-  "meaning_en": "Minimum",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.D.H.2NT.op",
+  "seq": "1D 1H 1NT 2C 2D 2NT",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
   "status": "infere"
  },
  {
   "id": "roudi.D.S.2NT.op",
-  "seq": "1D 1S 1NT 2C 2D|2H 2NT",
+  "seq": "1D 1S 1NT 2C 2D 2NT",
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Minimum",
-  "meaning_en": "Minimum",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
+  "status": "infere"
+ },
+ {
+  "id": "roudi.H.S.2NT.op",
+  "seq": "1H 1S 1NT 2C 2D 2NT",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
   "status": "infere"
  },
  {

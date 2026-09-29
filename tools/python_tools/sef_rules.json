@@ -5343,7 +5343,7 @@
  },
  {
   "id": "bwk.H.after",
-  "seq": "BW:H 4NT * 5NT 6C|6D|6H",
+  "seq": "BW:H 4NT * 5NT 6C|6D",
   "call": "7H",
   "cond": "ptricks >= 9",
   "forcing": "SO",
@@ -5353,7 +5353,7 @@
  },
  {
   "id": "bwk.D.after",
-  "seq": "BW:D 4NT * 5NT 6C|6D|6H",
+  "seq": "BW:D 4NT * 5NT 6C",
   "call": "7D",
   "cond": "ptricks >= 9",
   "forcing": "SO",
@@ -5373,7 +5373,7 @@
  },
  {
   "id": "bwk.H.after6",
-  "seq": "BW:H 4NT * 5NT 6C|6D|6H",
+  "seq": "BW:H 4NT * 5NT 6C|6D",
   "call": "6H",
   "cond": "true",
   "forcing": "SO",
@@ -5383,7 +5383,7 @@
  },
  {
   "id": "bwk.D.after6",
-  "seq": "BW:D 4NT * 5NT 6C|6D|6H",
+  "seq": "BW:D 4NT * 5NT 6C",
   "call": "6D",
   "cond": "true",
   "forcing": "SO",
@@ -5687,8 +5687,8 @@
  {
   "id": "sl.st.H.cue.4M",
   "seq": [
-   "1NT 2C 2H 3S 4C|4D|4H",
-   "1NT 2C 2NT 3H 4C|4D|4H"
+   "1NT 2C 2H 3S 4C|4D",
+   "1NT 2C 2NT 3H 4C|4D"
   ],
   "call": "4H",
   "cond": "true",
@@ -5860,7 +5860,7 @@
   "id": "sl.tm.3H.3NT",
   "seq": "1NT 2S 3C 3H",
   "call": "3NT",
-  "cond": "stop('H') and hcp_in('H') >= 3 and '3H' != '3NT'",
+  "cond": "stop('H') and hcp_in('H') >= 3",
   "forcing": "SO",
   "meaning": "Arrêt (points perdus) dans la courte : 3SA",
   "meaning_en": "Stop (points wasted) in the short suit: 3NT",
@@ -5870,17 +5870,7 @@
   "id": "sl.tm.3S.3NT",
   "seq": "1NT 2S 3C 3S",
   "call": "3NT",
-  "cond": "stop('S') and hcp_in('S') >= 3 and '3S' != '3NT'",
-  "forcing": "SO",
-  "meaning": "Arrêt (points perdus) dans la courte : 3SA",
-  "meaning_en": "Stop (points wasted) in the short suit: 3NT",
-  "status": "infere"
- },
- {
-  "id": "sl.tm.3NT.3NT",
-  "seq": "1NT 2S 3C 3NT",
-  "call": "3NT",
-  "cond": "stop('D') and hcp_in('D') >= 3 and '3NT' != '3NT'",
+  "cond": "stop('S') and hcp_in('S') >= 3",
   "forcing": "SO",
   "meaning": "Arrêt (points perdus) dans la courte : 3SA",
   "meaning_en": "Stop (points wasted) in the short suit: 3NT",
@@ -20890,7 +20880,7 @@
  },
  {
   "id": "1H.2C.x.2NT",
-  "seq": "1H 2C 2H|2H|3C",
+  "seq": "1H 2C 2H|2H",
   "call": "2NT",
   "cond": "true",
   "forcing": "INV",
@@ -20900,7 +20890,7 @@
  },
  {
   "id": "1H.2D.x.2NT",
-  "seq": "1H 2D 2H|2H|3D",
+  "seq": "1H 2D 2H|2H",
   "call": "2NT",
   "cond": "true",
   "forcing": "INV",
@@ -20910,7 +20900,7 @@
  },
  {
   "id": "1S.2C.x.2NT",
-  "seq": "1S 2C 2S|2H|3C",
+  "seq": "1S 2C 2S|2H",
   "call": "2NT",
   "cond": "true",
   "forcing": "INV",
@@ -20920,12 +20910,52 @@
  },
  {
   "id": "1S.2D.x.2NT",
-  "seq": "1S 2D 2S|2H|3D",
+  "seq": "1S 2D 2S|2H",
   "call": "2NT",
   "cond": "true",
   "forcing": "INV",
   "meaning": "11-12, pas de fit",
   "meaning_en": "11-12, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "1H.2C.3C.P",
+  "seq": "1H 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11-12, pas de fit majeur : on joue 3 dans la mineure",
+  "meaning_en": "11-12, no major fit: play three of the minor",
+  "status": "infere"
+ },
+ {
+  "id": "1H.2D.3D.P",
+  "seq": "1H 2D 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11-12, pas de fit majeur : on joue 3 dans la mineure",
+  "meaning_en": "11-12, no major fit: play three of the minor",
+  "status": "infere"
+ },
+ {
+  "id": "1S.2C.3C.P",
+  "seq": "1S 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11-12, pas de fit majeur : on joue 3 dans la mineure",
+  "meaning_en": "11-12, no major fit: play three of the minor",
+  "status": "infere"
+ },
+ {
+  "id": "1S.2D.3D.P",
+  "seq": "1S 2D 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11-12, pas de fit majeur : on joue 3 dans la mineure",
+  "meaning_en": "11-12, no major fit: play three of the minor",
   "status": "infere"
  },
  {
@@ -21040,12 +21070,22 @@
  },
  {
   "id": "1D.2C.x.2NT",
-  "seq": "1D 2C 2D|2H|2S|3C",
+  "seq": "1D 2C 2D|2H|2S",
   "call": "2NT",
   "cond": "true",
   "forcing": "INV",
   "meaning": "11-12",
   "meaning_en": "11-12",
+  "status": "infere"
+ },
+ {
+  "id": "1D.2C.3C.P",
+  "seq": "1D 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11-12 : on joue 3♣",
+  "meaning_en": "11-12: play 3♣",
   "status": "infere"
  },
  {
@@ -21320,7 +21360,7 @@
  },
  {
   "id": "2H.2NT.x.4H",
-  "seq": "2H 2NT 3C|3D|3H|3S|3NT|4C|4D|4H|4S",
+  "seq": "2H 2NT 3C|3D|3H|3S|3NT|4C|4D",
   "call": "4H",
   "cond": "H >= 2",
   "forcing": "SO",
@@ -21330,7 +21370,7 @@
  },
  {
   "id": "2S.2NT.x.4S",
-  "seq": "2S 2NT 3C|3D|3H|3S|3NT|4C|4D|4H|4S",
+  "seq": "2S 2NT 3C|3D|3H|3S|3NT|4C|4D|4H",
   "call": "4S",
   "cond": "S >= 2",
   "forcing": "SO",
@@ -21340,7 +21380,7 @@
  },
  {
   "id": "2H.2NT.4x.4H",
-  "seq": "2H 2NT 4C|4D|4H|4S",
+  "seq": "2H 2NT 4C|4D",
   "call": "4H",
   "cond": "true",
   "forcing": "SO",
@@ -21350,7 +21390,7 @@
  },
  {
   "id": "2S.2NT.4x.4S",
-  "seq": "2S 2NT 4C|4D|4H|4S",
+  "seq": "2S 2NT 4C|4D|4H",
   "call": "4S",
   "cond": "true",
   "forcing": "SO",

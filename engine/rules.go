@@ -400,7 +400,7 @@ func LoadRulesText(data []byte) (int, error) {
 	return len(rs.Rules), nil
 }
 
-var errNoRules = errors.New("no bidding rules loaded (rules/sef_rules.yaml)")
+var errNoRules = errors.New("no bidding rules loaded (rules/default.yaml)")
 
 func currentRules() (*RuleSet, error) {
 	rs := activeRules.Load()

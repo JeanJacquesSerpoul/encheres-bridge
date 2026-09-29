@@ -6,7 +6,7 @@ Règles d'enchères du système SEF 2024 (1 189 règles après expansion), deux 
 
 | Fichier | Rôle |
 |---|---|
-| [`../../cli/rules/sef_rules.yaml`](../../cli/rules/sef_rules.yaml) | **Source unique des règles** : c'est le seul fichier de règles à modifier. Il vit dans le client web, où le moteur Go/WASM de la page le lit à chaque chargement |
+| [`../../cli/rules/default.yaml`](../../cli/rules/default.yaml) | **Source unique des règles** : c'est le seul fichier de règles à modifier. Il vit dans le client web, où le moteur Go/WASM de la page le lit à chaque chargement |
 | `sef_rules.json` | Règles expansées, générées depuis le YAML |
 | `sef_tests.json` | Cas de test de référence (9 326 cas), générés depuis le YAML ; rejoués aussi par le moteur Go (`engine/rules_test.go`) |
 | `sef_rules.py` | Moteur de référence (Python) et outil de validation, d'export et de test |
@@ -42,7 +42,7 @@ Chaque annonce du JSON contient `seat`, `call`, `alerted`, `alert` (texte de l'a
 
 Limites : la compétition n'est couverte que pour les séquences courantes (section A.18 bis : interventions sur une ouverture au palier de 1 et sur un 2 faible, réveil, réponses et redemandes de la défense, suites du camp de l'ouvreur). La vulnérabilité est accessible aux conditions (`vul`, `opp_vul`).
 
-## Le fichier `cli/rules/sef_rules.yaml`
+## Le fichier `cli/rules/default.yaml`
 
 C'est une **liste ordonnée** de règles : pour une main et une séquence d'enchères données, la **première règle applicable** donne l'enchère. L'ordre est donc une priorité. Les lignes qui commencent par `#` sont des commentaires (titres de section, explications).
 
@@ -119,8 +119,8 @@ Exemple : après 1♠, avec 6 cartes de trèfle et 11-15 HL, inviter à 3♣. On
 Vérifier l'effet avec une main concrète :
 
 ```bash
-python sef_rules.py ../../cli/rules/sef_rules.yaml --validate
-python sef_rules.py ../../cli/rules/sef_rules.yaml --hand "32.32.32.AKQJ92" --seq 1S
+python sef_rules.py ../../cli/rules/default.yaml --validate
+python sef_rules.py ../../cli/rules/default.yaml --hand "32.32.32.AKQJ92" --seq 1S
 # avant : 2C  [F1, sef, 1S.r.2C]      après : 3C  [INV, choix, 1S.r.3C.invit]
 ```
 
@@ -142,7 +142,7 @@ On change les champs voulus en gardant l'`id`. Exemple : demander 12 HL au lieu 
 ```
 
 ```bash
-python sef_rules.py ../../cli/rules/sef_rules.yaml --hand "K2.QJ432.KJ2.432" --seq 1S
+python sef_rules.py ../../cli/rules/default.yaml --hand "K2.QJ432.KJ2.432" --seq 1S
 # avant : 2H (1S.r.2H)      après : 2C  (1S.r.2m.fallback) : la main de 11 HL passe à la règle suivante
 ```
 
@@ -158,13 +158,13 @@ On supprime le bloc entier (de `- id:` jusqu'à la règle suivante). Exemple : r
 
 ## Modifier les règles
 
-On ne modifie que `cli/rules/sef_rules.yaml` (chaque règle porte `meaning` en français et `meaning_en` en anglais, tous deux obligatoires). Puis on régénère et on vérifie :
+On ne modifie que `cli/rules/default.yaml` (chaque règle porte `meaning` en français et `meaning_en` en anglais, tous deux obligatoires). Puis on régénère et on vérifie :
 
 ```bash
-python sef_rules.py ../../cli/rules/sef_rules.yaml --validate
-python sef_rules.py ../../cli/rules/sef_rules.yaml --json sef_rules.json
-python sef_rules.py ../../cli/rules/sef_rules.yaml --gen-tests 1500 sef_tests.json --seed 2024
-python sef_rules.py ../../cli/rules/sef_rules.yaml --check-tests sef_tests.json
+python sef_rules.py ../../cli/rules/default.yaml --validate
+python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json
+python sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024
+python sef_rules.py ../../cli/rules/default.yaml --check-tests sef_tests.json
 node sef_engine.js sef_rules.json sef_tests.json
 python gen_golden.py
 cd ../.. && go test ./engine
@@ -175,6 +175,6 @@ cd ../.. && go test ./engine
 Autres commandes utiles :
 
 ```bash
-python sef_rules.py ../../cli/rules/sef_rules.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C" --lang EN   # enchère d'une main
-python sef_rules.py ../../cli/rules/sef_rules.yaml --simulate 1000                                        # simulation sur donnes aléatoires
+python sef_rules.py ../../cli/rules/default.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C" --lang EN   # enchère d'une main
+python sef_rules.py ../../cli/rules/default.yaml --simulate 1000                                        # simulation sur donnes aléatoires
 ```

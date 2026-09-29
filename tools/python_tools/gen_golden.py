@@ -2,7 +2,7 @@
 """Génère les enchères de référence du moteur Go (engine/testdata/golden_python.json).
 
 Chaque donne est enchérie par pbn_auction.generate_auction (les quatre mains, adversaires
-compris) avec cli/rules/sef_rules.yaml ; le test Go TestGoldenPython rejoue les mêmes donnes
+compris) avec cli/rules/default.yaml ; le test Go TestGoldenPython rejoue les mêmes donnes
 et compare siège, enchère, règle et commentaire.
 
 Usage : python gen_golden.py [--random 200] [--seed 2024]
@@ -20,7 +20,7 @@ sys.path.insert(0, HERE)
 import sef_rules as sr          # noqa: E402
 import pbn_auction as pa        # noqa: E402
 
-RULES = os.path.join(ROOT, "cli", "rules", "sef_rules.yaml")
+RULES = os.path.join(ROOT, "cli", "rules", "default.yaml")
 OUT = os.path.join(ROOT, "engine", "testdata", "golden_python.json")
 BENCH = os.path.join(ROOT, "engine", "testdata", "par_bench.jsonl.gz")
 

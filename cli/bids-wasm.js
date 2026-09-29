@@ -23,7 +23,7 @@
   const WASM_URL = "bids.wasm";
   // Les règles d'enchères, lues par le moteur à chaque chargement de la page :
   // on les modifie dans ce fichier, sans recompiler bids.wasm (cli/rules/README.md).
-  const RULES_URL = "rules/sef_rules.yaml";
+  const RULES_URL = "rules/default.yaml";
 
   let modulePromise = null;
   let loaded = false;
@@ -139,7 +139,7 @@
     const res = api.loadRules(rules.text);
     if (!res || !res.ok) {
       const detail = (res && res.error) || tr("wasmFailed");
-      console.error("rules/sef_rules.yaml :", detail);
+      console.error("rules/default.yaml :", detail);
       throw new Error(tr("rulesInvalid") + " " + detail);
     }
     return api;

@@ -24,7 +24,7 @@ Le dépôt contient quatre morceaux :
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
-Les règles appliquées par le moteur sont **[cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml)** : une liste ordonnée où la première règle applicable donne l'enchère. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
+Les règles appliquées par le moteur sont **[cli/rules/default.yaml](cli/rules/default.yaml)** : une liste ordonnée où la première règle applicable donne l'enchère. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
 
 ---
 
@@ -154,7 +154,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
-| `rules/sef_rules.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
+| `rules/default.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
@@ -351,13 +351,13 @@ Les tests confrontent le moteur Go à la **référence Python** de [tools/python
 
 | Test | Ce qu'il vérifie |
 |---|---|
-| [rules_test.go](engine/rules_test.go) | l'expansion de `cli/rules/sef_rules.yaml` est identique à `sef_rules.json` (1 189 règles) ; les 9 326 cas de `sef_tests.json` (caractéristiques de la main, règle choisie) passent tous |
+| [rules_test.go](engine/rules_test.go) | l'expansion de `cli/rules/default.yaml` est identique à `sef_rules.json` (1 189 règles) ; les 9 326 cas de `sef_tests.json` (caractéristiques de la main, règle choisie) passent tous |
 | [golden_test.go](engine/golden_test.go) | 315 donnes enchéries par `pbn_auction.py` — les quatre mains, donc la compétition, la légalité et la fin de l'enchère — sont reproduites enchère par enchère, règle et commentaire compris ([testdata/golden_python.json](engine/testdata/golden_python.json), régénéré par `tools/python_tools/gen_golden.py`) |
 | [expr_test.go](engine/expr_test.go) | le langage des conditions, avec la sémantique Python (comparaisons chaînées, booléens comptés 0/1, `in`), et ce qu'il refuse |
 | [api_test.go](engine/api_test.go) | le JSON rendu à la page, les erreurs, le chargement des règles (absentes, invalides), la trace |
 | [engine_test.go](engine/engine_test.go) | le parseur PBN, et 2 000 donnes aléatoires : chaque séquence est légale, suit la rotation des joueurs et se termine |
 
-Après une modification de `sef_rules.yaml`, les jeux de référence se régénèrent avec les outils Python (voir [cli/rules/README.md](cli/rules/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
+Après une modification de `default.yaml`, les jeux de référence se régénèrent avec les outils Python (voir [cli/rules/README.md](cli/rules/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
 
 ## Audit du par
 
@@ -390,7 +390,7 @@ Le moteur expose à la page une petite API ([engine/api.go](engine/api.go)), que
 | `bid(pbn, lang)` | Enchères d'une donne : l'objet JSON décrit ci-dessous |
 | `bids(pbn, lang)` | Même chose pour chaque donne d'un fichier de tournoi : un tableau de ces objets |
 | `selfCheck()` | Rejoue une donne de référence (pastille d'état des Réglages) |
-| `loadRules(yaml)` | *(module WASM seulement)* Installe les règles : [cli/bids-wasm.js](cli/bids-wasm.js) télécharge `rules/sef_rules.yaml` et le passe au moteur avant tout calcul ; un fichier invalide est refusé avec la liste de ses erreurs |
+| `loadRules(yaml)` | *(module WASM seulement)* Installe les règles : [cli/bids-wasm.js](cli/bids-wasm.js) télécharge `rules/default.yaml` et le passe au moteur avant tout calcul ; un fichier invalide est refusé avec la liste de ses erreurs |
 | `version()` | Révision du moteur, date du commit, version de Go |
 
 `lang` vaut `en` (défaut) ou `fr`. Un PBN invalide, une langue inconnue ou l'absence de règles renvoient une erreur au lieu de la réponse.
@@ -479,7 +479,7 @@ Exemple réel (donne ci-dessus, `lang=fr`, champs `trace` omis) :
 
 ## Moteur d'enchères (SEF)
 
-Le moteur fait enchérir les quatre joueurs à tour de rôle, à partir du donneur, jusqu'à trois passes après une enchère (ou quatre passes d'entrée). Il ne code **aucune règle de bridge** : il applique celles de [cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml), exactement comme `pbn_auction.py` ([tools/python_tools/](tools/python_tools/)), dont il est le portage.
+Le moteur fait enchérir les quatre joueurs à tour de rôle, à partir du donneur, jusqu'à trois passes après une enchère (ou quatre passes d'entrée). Il ne code **aucune règle de bridge** : il applique celles de [cli/rules/default.yaml](cli/rules/default.yaml), exactement comme `pbn_auction.py` ([tools/python_tools/](tools/python_tools/)), dont il est le portage.
 
 À chaque tour :
 
@@ -492,7 +492,7 @@ Le format des règles, les caractéristiques de main disponibles et le langage d
 ### Ce que le moteur ne fait pas
 
 - **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires).
-- **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml)) :
+- **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/rules/default.yaml](cli/rules/default.yaml)) :
   - côté défense : interventions sur une ouverture au palier de 1 (1SA, couleur, saut faible, contre d'appel, contre fort) et sur un 2 faible, réveil, réponses de l'avancée et redemandes de l'intervenant ou du contreur ;
   - côté ouvreur : soutien, 2SA fitté, cue-bid, Spoutnik, Sans-Atout et couleur nouvelle après une intervention, puis les suites de l'ouvreur.
 
@@ -508,7 +508,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | Fichier | Rôle |
 |---------|------|
 | `engine/api.go` | API du moteur rendue à la page : `BidJSON`, `BidsJSON`, `SelfCheck`, `LoadRulesJSON`, `VersionJSON` |
-| `engine/rules.go` | Lecture de `sef_rules.yaml` : expansion des modèles `for:`, validation, règles actives |
+| `engine/rules.go` | Lecture de `default.yaml` : expansion des modèles `for:`, validation, règles actives |
 | `engine/expr.go` | Langage des conditions : analyseur et évaluateur (sémantique Python) |
 | `engine/features.go` | Caractéristiques de la main lues par les conditions (H, HL, longueurs, levées, contrôles…) |
 | `engine/match.go` | Motifs de séquence et choix de la première règle applicable |
@@ -523,7 +523,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `wasm/main.go` | Point d'entrée WebAssembly (`js && wasm`) : l'API du moteur exposée à la page |
 | `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
 | `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
-| `cli/rules/` | Les règles d'enchères (`sef_rules.yaml`), modifiables sans recompiler |
+| `cli/rules/` | Les règles d'enchères (`default.yaml`), modifiables sans recompiler |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |

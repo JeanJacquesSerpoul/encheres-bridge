@@ -17,10 +17,10 @@ import (
 )
 
 const (
-	rulesPath     = "../cli/rules/sef_rules.yaml"
+	rulesPath     = "../cli/rules/default.yaml"
 	pyRulesJSON   = "../tools/python_tools/sef_rules.json"
 	pyTestsJSON   = "../tools/python_tools/sef_tests.json"
-	regenerateCmd = "cd tools/python_tools && python sef_rules.py ../../cli/rules/sef_rules.yaml --json sef_rules.json " +
+	regenerateCmd = "cd tools/python_tools && python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json " +
 		"--gen-tests 1500 sef_tests.json --seed 2024"
 )
 
@@ -30,7 +30,7 @@ var (
 	testRulesErr  error
 )
 
-// loadTestRules loads cli/rules/sef_rules.yaml once and installs it, so every
+// loadTestRules loads cli/rules/default.yaml once and installs it, so every
 // test of the package bids with the rules the page ships.
 func loadTestRules(t testing.TB) *RuleSet {
 	t.Helper()
@@ -201,7 +201,7 @@ func TestConformancePython(t *testing.T) {
 	// Windows checkout (CRLF) and the CI's (LF) hold the same rules.
 	sum := sha256.Sum256(bytes.ReplaceAll(yamlData, []byte("\r\n"), []byte("\n")))
 	if hex.EncodeToString(sum[:]) != suite.SHA {
-		t.Fatalf("sef_tests.json a été généré depuis une autre version de sef_rules.yaml : regénérer (%s)", regenerateCmd)
+		t.Fatalf("sef_tests.json a été généré depuis une autre version de default.yaml : regénérer (%s)", regenerateCmd)
 	}
 	if len(suite.Cases) != suite.Count {
 		t.Fatalf("%d cas lus, l'en-tête en annonce %d", len(suite.Cases), suite.Count)

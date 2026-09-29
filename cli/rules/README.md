@@ -42,7 +42,7 @@ python rules_pdf.py ../../cli/rules/mon-systeme.yaml --title "Mon système"
 python rules_pdf.py ../../cli/rules/mon-systeme.yaml --title "Mon système" --lang EN
 ```
 
-Les titres de section et de sous-section du fichier ont leur traduction anglaise sur la ligne suivante, `# en: …` : le PDF anglais l'utilise (les autres commentaires restent en français). Un nouveau titre prend la même convention.
+Les titres de section et de sous-section du fichier, ainsi que chaque ligne de commentaire, ont leur traduction anglaise sur la ligne suivante, `# en: …` : le PDF anglais l'utilise à la place du texte français. Un nouveau titre ou un nouveau commentaire prend la même convention.
 
 Le PDF porte l'empreinte du fichier de règles dont il est issu. `go test ./engine` échoue quand un PDF déclaré ne correspond plus à ses règles : il faut alors le régénérer.
 

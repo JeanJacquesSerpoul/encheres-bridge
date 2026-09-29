@@ -13,6 +13,7 @@
 # ======================================================================
 # en: A.4 Openings
 # Ordre = priorité : on vérifie d'abord les ouvertures fortes, puis 1SA, les ouvertures au palier de 1, enfin les barrages.
+# en: Order = priority: strong openings are checked first, then 1NT, the one-level openings, and finally the preempts.
 - id: open.2D
   seq: ""
   call: 2D
@@ -147,6 +148,7 @@
 # ======================================================================
 # en: A.5 1NT opening
 # Sur 1SA contré, le camp de l'ouvreur ignore le contre (SEF : « 2♣ = Stayman, etc. ») : chaque motif porte aussi sa variante « 1NT (X) … ».
+# en: Over a doubled 1NT, the opening side ignores the double (SEF: “2♣ = Stayman, etc.”): each pattern also carries its “1NT (X) …” variant.
 # Réponses
 # en: Responses
 - id: 1NT.r.5NT
@@ -943,6 +945,7 @@
 # ======================================================================
 # en: A.6 2NT opening (and 2♣ – 2♦ – 2NT)
 # Les mêmes règles s'appliquent après 2♣ – 2♦ – 2SA (22-23 HL) : `seq` est une liste. Les seuils du répondant, calibrés pour 20-21, sont un peu prudents dans ce cas.
+# en: The same rules apply after 2♣ – 2♦ – 2NT (22-23 HL): `seq` is a list. Responder's thresholds, tuned for 20-21, are slightly cautious in that case.
 - id: 2NT.r.5NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 5NT
@@ -1452,6 +1455,7 @@
 # ======================================================================
 # en: A.7 bis Drury (passed-hand responses)
 # Ces règles commencent par `P` : elles ne s'appliquent que si le répondant a déjà passé. Elles précèdent les réponses ordinaires à 1♥/1♠.
+# en: These rules start with `P`: they apply only when responder has already passed. They come before the ordinary responses to 1♥/1♠.
 - id: "drury.{M}.2NT"
   for: [{M: H}, {M: S}]
   seq: "P 1{M}"
@@ -2308,6 +2312,7 @@
 # ======================================================================
 # en: A.11 Keycard Blackwood: responses
 # Réponses au 4SA Blackwood quand l'atout convenu est `{t}` (voir A.12 pour l'atout convenu, les entrées et la suite). Les réponses avec chicane (5SA, 6♣, 6♦) ne sont utilisées qu'avec un atout majeur.
+# en: Responses to Blackwood 4NT when the agreed trump is `{t}` (see A.12 for the agreed trump, the entries and the continuation). The void-showing responses (5NT, 6♣, 6♦) are used only with a major-suit trump.
 - id: "bw.{t}.6D"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2377,6 +2382,7 @@
 # ======================================================================
 # en: A.12 Blackwood: entries, asker, grand slam
 # L'atout convenu est un **état** de l'enchère : une règle qui porte `trump: X` fixe l'atout à X quand elle est choisie. Les règles `BW:X …` ne s'appliquent que si l'atout convenu est X (le préfixe vaut « n'importe quel début de séquence »). Condition de la fiche pour poser le Blackwood (jeu 30/41) : ♠ aucune clé exigée ; ♥ 2 clés ou 1 clé + la Dame ; ♦ 2 clés ; ♣ 3 clés.
+# en: The agreed trump is a **state** of the auction: a rule carrying `trump: X` sets the trump to X when it is chosen. `BW:X …` rules apply only when the agreed trump is X (the prefix stands for “any start of the sequence”). Condition on the card for asking Blackwood (30/41 deck): ♠ no key card required; ♥ 2 key cards, or 1 key card + the Queen; ♦ 2 key cards; ♣ 3 key cards.
 # --- demandeur après la réponse au Blackwood 5 clés (total de clés déduit de sa main)
 # en: asker after the keycard response (total keycards from his own hand)
 - id: "bwa.{t}.5S.5NT"
@@ -2515,6 +2521,7 @@
 # ======================================================================
 # en: A.13 Controls and slam continuations
 # Contrôle du 1er tour : As ou chicane (`ctrl1`). Contrôle du 2e tour : Roi ou singleton (`ctrl2`). On nomme les contrôles **du moins cher au plus cher**, en commençant par ceux du 1er tour. Un Splinter est valorisé quand le partenaire n'a pas de points perdus dans la courte (`hcp_in(courte) <= 1`).
+# en: First-round control: Ace or void (`ctrl1`). Second-round control: King or singleton (`ctrl2`). Controls are bid **cheapest first**, starting with first-round controls. A Splinter is upgraded when partner has no wasted points in the short suit (`hcp_in(short) <= 1`).
 # --- 1M – 3M (11-12 DH) : Blackwood de l'ouvreur
 # en: 1M – 3M (11-12 DH): opener's Blackwood
 - id: "sl.1{M}.3{M}.bw"
@@ -2882,6 +2889,7 @@
 # ======================================================================
 # en: A.14 Roudi
 # Après 1♣/♦ – 1♥/♠ – 1SA, 2♣ du répondant (11+ HL, majeure 5e) demande à l'ouvreur son soutien. SEF 2024 : toutes les enchères du répondant au niveau de 3 après le Roudi sont forcing de manche.
+# en: After 1♣/♦ – 1♥/♠ – 1NT, responder's 2♣ (11+ HL, five-card major) asks opener about support. SEF 2024: every responder's bid at the three level after Roudi is game forcing.
 - id: "roudi.{m}.{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M} 1NT"
@@ -3094,7 +3102,9 @@
 # ======================================================================
 # en: A.15 Third suit forcing
 # Le répondant nomme la 3e couleur après la répétition de la mineure d'ouverture : il rallonge sa couleur, demande un arrêt pour SA ou rend l'enchère forcing (9+ HL, pas auto-forcing). Réponses non forcing de l'ouvreur : retour à 2 dans la majeure du répondant, 2SA avec arrêt, répétition de sa couleur. Le soutien de la 3e couleur est naturel.
+# en: Responder bids the third suit after opener rebids the opening minor: to show extra length, ask for a stopper for NT, or make the auction forcing (9+ HL, not self-forcing). Opener's non-forcing answers: back to responder's major at the two level, 2NT with a stopper, rebid of own suit. Raising the third suit is natural.
 # cas : o = ouverture, M = majeure du répondant, t = 3e couleur, f = 4e couleur (non nommée)
+# en: cases: o = opening, M = responder's major, t = third suit, f = fourth suit (unbid)
 - id: 1C.1S.2C.2H
   seq: "1C 1S 2C"
   call: 2H
@@ -3341,6 +3351,7 @@
 # ======================================================================
 # en: A.16 Fourth suit forcing
 # Le répondant nomme la 4e couleur pour rallonger sa couleur, demander l'arrêt pour SA ou rendre l'enchère forcing ; au palier de 2 (économique) elle est auto-forcing, et toute enchère au palier de 3 qui suit est forcing de manche. Réponses de l'ouvreur : 2SA avec l'arrêt (mini-maxi : 12-15 ou 18-19 HL), 3 cartes dans la majeure du répondant, soutien de la 4e couleur mineure au palier de 3 avec As troisième et ouverture non minimum, répétition de ses couleurs.
+# en: Responder bids the fourth suit to show extra length, ask for a stopper for NT, or make the auction forcing; at the two level (economical) it is self-forcing, and any following bid at the three level is game forcing. Opener's answers: 2NT with the stopper (mini-maxi: 12-15 or 18-19 HL), three cards in responder's major, raise of a fourth-suit minor at the three level with Axx and a non-minimum opening, rebid of own suits.
 - id: "fcf.{k}.ask"
   for: [{k: a, s: "1C 1H 1S", call: 2D, F: D, M: H, o2: S}, {k: b, s: "1D 1H 1S", call: 2C, F: C, M: H, o2: S}, {k: c, s: "1D 1S 2C", call: 2H, F: H, M: S, o2: C}, {k: e, s: "1H 1S 2C", call: 2D, F: D, M: S, o2: C}, {k: f, s: "1H 1S 2D", call: 3C, F: C, M: S, o2: D}]
   seq: "{s}"
@@ -3471,6 +3482,7 @@
 # ======================================================================
 # en: A.17 Checkback Stayman (SEF 2018, optional)
 # Actif seulement si l'option `checkback2018` est activée.
+# en: Active only when the `checkback2018` option is enabled.
 - id: 1D.1S.2NT.3C
   option: checkback2018
   seq: "1D 1S 2NT"
@@ -3817,10 +3829,15 @@
 # ======================================================================
 # en: A.18 bis Competition: overcalls, balancing and continuations
 # Socle du camp de la défense sur une ouverture adverse au palier de 1 à la couleur. Seuils SEF : intervention à 1SA 16-18 H régulier avec arrêt ;
+# en: Basic defence against an opposing one-level suit opening. SEF thresholds: 1NT overcall 16-18 H, balanced, with a stopper;
 # contre « toutes distributions » 18 H et plus ; intervention à la couleur 5+ cartes et belle couleur, 5 H dans la couleur (9+ H, 10-17 HL au palier de 1 ; 11+ HL et 6 cartes ou 14 HL au palier de 2) ;
+# en: “any shape” double with 18+ H; suit overcall with a good 5+ card suit, 5 H in the suit (9+ H, 10-17 HL at the one level; 11+ HL and six cards, or 14 HL, at the two level);
 # saut faible 6 cartes 6-10 H ; contre d'appel 13+ (sur mineure : 3-4 cartes dans chaque majeure ; sur majeure : 4 cartes dans l'autre majeure, court dans l'ouverture).
+# en: weak jump overcall with six cards and 6-10 H; takeout double with 13+ (over a minor: 3-4 cards in each major; over a major: four cards in the other major, short in the opened suit).
 # Seuils réglés sur le banc du par (engine/testdata/par_bench.jsonl.gz) : une intervention plus légère coûte plus au camp de l'ouvreur qu'elle ne rapporte.
+# en: Thresholds tuned on the par benchmark (engine/testdata/par_bench.jsonl.gz): a lighter overcall costs the overcalling side more than it gains.
 # Les bicolores (Michaëls, 2SA) sont codés plus haut et gardent la priorité. Les séquences commencent par l'ouverture adverse : `P (1♦)` et `(1♦)` sont traités ensemble.
+# en: Two-suiters (Michaels, 2NT) are coded earlier and keep priority. Sequences start with the opponents' opening: `P (1♦)` and `(1♦)` are handled together.
 # --- intervention directe
 # en: direct overcall
 - id: "def.{o}.1NT"
@@ -4377,7 +4394,9 @@
 # --- camp de l'ouvreur après une intervention à la couleur : le répondant
 # en: opening side after a suit overcall: responder
 # Majeure : 2SA = fitté 11-15 HLD, cue-bid = 4 atouts et 16+ HLD (forcing de manche), soutien simple 6-10 HLD. Mineure : 5 atouts.
+# en: Major: 2NT = fit, 11-15 HLD; cue-bid = four trumps and 16+ HLD (game forcing); simple raise 6-10 HLD. Minor: five trumps.
 # Contre = Spoutnik (majeure(s) 4e non nommée(s)) ; couleur nouvelle naturelle et forcing ; SA avec l'arrêt.
+# en: Double = Sputnik (four cards in the unbid major(s)); new suit natural and forcing; NT with a stopper.
 - id: "rep.{x}.{y}.cue"
   for: [{x: 1H, y: 1S, xs: H, cue: 2S}, {x: 1H, y: 2C, xs: H, cue: 3C}, {x: 1H, y: 2D, xs: H, cue: 3D}, {x: 1S, y: 2C, xs: S, cue: 3C},
         {x: 1S, y: 2D, xs: S, cue: 3D}, {x: 1S, y: 2H, xs: S, cue: 3H}, {x: 1H, y: 2S, xs: H, cue: 3S}]
@@ -5369,6 +5388,7 @@
 # ======================================================================
 # en: A.19 Natural continuations (completions)
 # Ces règles comblent les enchères courantes que les fiches ne détaillent pas : redemandes naturelles de l'ouvreur et 3e enchère du répondant. Elles sont toutes `infere` : à remplacer par les règles de la Partie B dès qu'elles sont précisées. Elles viennent **après** les règles spécifiques, qui gardent la priorité.
+# en: These rules fill in common bids that the cards do not detail: opener's natural rebids and responder's third bid. They are all `infere`: to be replaced by the Part B rules once those are specified. They come **after** the specific rules, which keep priority.
 # --- ouvreur après 1♣ – 1♦
 # en: opener after 1♣ – 1♦
 - id: 1C.1D.1H
@@ -5871,6 +5891,7 @@
 # --- ouvreur : nouvelle couleur au palier de 1 après 1♣/♦ – 1♥
 # en: opener: new suit at the one level after 1♣/♦ – 1♥
 # (1{m} 1H 1S est déjà codé ; ici : 3e enchère du répondant)
+# en: (1{m} 1H 1S is already coded; here: responder's third bid)
 - id: "{o}.{r}.{b}.3NT"
   for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
   seq: "{o} {r} {b}"

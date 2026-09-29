@@ -128,6 +128,8 @@ func (e *Engine) Run() []SeatCall {
 	var feats [4]*features
 	for seat, h := range e.deal.Hands {
 		feats[seat] = newFeatures(h)
+		feats[seat].vul = e.deal.Vul[sideOf(seat)]
+		feats[seat].oppVul = e.deal.Vul[1-sideOf(seat)]
 	}
 	trump := [2]string{} // agreed suit per pair (N/S = 0, E/W = 1)
 	var history []SeatCall

@@ -468,6 +468,9 @@ var condNames = func() map[string]bool {
 	for _, n := range funcNames {
 		m[n] = true
 	}
+	for _, n := range contextNames {
+		m[n] = true
+	}
 	return m
 }()
 

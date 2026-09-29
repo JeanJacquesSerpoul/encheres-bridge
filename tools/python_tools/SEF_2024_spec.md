@@ -134,8 +134,12 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 | `ctrl1(s)` | bool | As dans `s`, ou n = 0 |
 | `ctrl2(s)` | bool | As ou Roi dans `s`, ou n ≤ 1 |
 | `max(…)`, `min(…)` | fonction | Maximum / minimum de ses arguments |
+| `vul` | bool | Le camp du joueur qui parle est vulnérable (tag PBN `[Vulnerable]` : `NS`, `EW`, `All`/`Both`) |
+| `opp_vul` | bool | Le camp adverse est vulnérable |
 
-Les conditions ne portent que sur la main du joueur qui parle : ce que le partenaire a montré est contenu dans `seq`.
+Les conditions ne portent que sur la main du joueur qui parle et sur la vulnérabilité (`vul`, `opp_vul`) : ce que le partenaire a montré est contenu dans `seq`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
+
+Dans `sef_tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) ; `sef_rules.py --hand` accepte `--vul` et `--opp-vul`.
 
 ## 5. État de l'enchère : atout convenu
 

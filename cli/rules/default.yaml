@@ -118,10 +118,10 @@
   for: [{X: S}, {X: H}, {X: D}, {X: C}]
   seq: ""
   call: "3{X}"
-  cond: "hcp <= 10 and {X} == 7 and ((vul and hcp_in('{X}') >= 6) or (not vul and opp_vul and top('{X}') >= 1) or (not vul and not opp_vul and top('{X}') >= 2))"
+  cond: "hcp <= 10 and {X} == 7 and ((vul and top('{X}') >= 2) or (not vul and top('{X}') >= 1))"
   forcing: NF
-  meaning: "Barrage : 7 cartes avec 2 gros honneurs (vulnérable : 6 H dans la couleur ; vulnérabilité favorable : 1 gros honneur)"
-  meaning_en: "Preempt: 7-card suit with 2 high honors (vulnerable: 6 HCP in the suit; favorable vulnerability: 1 high honor)"
+  meaning: "Barrage : 7 cartes, 10 H max ; non vulnérable, 1 gros honneur ; vulnérable, 2 gros honneurs"
+  meaning_en: "Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors"
   status: choix
 - id: "open.2{M}"
   for: [{M: S}, {M: H}]

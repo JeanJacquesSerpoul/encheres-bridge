@@ -492,7 +492,11 @@ Le format des règles, les caractéristiques de main disponibles et le langage d
 ### Ce que le moteur ne fait pas
 
 - **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires).
-- **La compétition** n'est que partiellement codée (Landy, Michaels, Rubensohl, Spoutnik simple…) : dès qu'un adversaire intervient hors de ces séquences, la plupart des enchères deviennent des passes par défaut.
+- **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml)) :
+  - côté défense : interventions sur une ouverture au palier de 1 (1SA, couleur, saut faible, contre d'appel, contre fort) et sur un 2 faible, réveil, réponses de l'avancée et redemandes de l'intervenant ou du contreur ;
+  - côté ouvreur : soutien, 2SA fitté, cue-bid, Spoutnik, Sans-Atout et couleur nouvelle après une intervention, puis les suites de l'ouvreur.
+
+  Au-delà (deuxième intervention, enchères de sacrifice, compétition au palier de 3 et plus), les enchères restent souvent des passes par défaut. Les seuils des interventions sont réglés sur le banc du par.
 - Chaque condition ne lit que la **main du joueur** : ce que le partenaire a montré n'est connu qu'à travers la séquence elle-même.
 
 Les séquences produites restent en tout état de cause légales, terminées et commentées.

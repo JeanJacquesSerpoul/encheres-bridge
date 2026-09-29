@@ -131,7 +131,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnérable)",
   "meaning_en": "Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.4H",
@@ -141,7 +141,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnérable)",
   "meaning_en": "Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.4D",
@@ -151,7 +151,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnérable)",
   "meaning_en": "Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.4C",
@@ -161,7 +161,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnérable)",
   "meaning_en": "Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.3S",
@@ -171,7 +171,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 7 cartes avec 2 gros honneurs (vulnérable : 6 H dans la couleur ; vulnérabilité favorable : 1 gros honneur)",
   "meaning_en": "Preempt: 7-card suit with 2 high honors (vulnerable: 6 HCP in the suit; favorable vulnerability: 1 high honor)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.3H",
@@ -181,7 +181,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 7 cartes avec 2 gros honneurs (vulnérable : 6 H dans la couleur ; vulnérabilité favorable : 1 gros honneur)",
   "meaning_en": "Preempt: 7-card suit with 2 high honors (vulnerable: 6 HCP in the suit; favorable vulnerability: 1 high honor)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.3D",
@@ -191,7 +191,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 7 cartes avec 2 gros honneurs (vulnérable : 6 H dans la couleur ; vulnérabilité favorable : 1 gros honneur)",
   "meaning_en": "Preempt: 7-card suit with 2 high honors (vulnerable: 6 HCP in the suit; favorable vulnerability: 1 high honor)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.3C",
@@ -201,7 +201,7 @@
   "forcing": "NF",
   "meaning": "Barrage : 7 cartes avec 2 gros honneurs (vulnérable : 6 H dans la couleur ; vulnérabilité favorable : 1 gros honneur)",
   "meaning_en": "Preempt: 7-card suit with 2 high honors (vulnerable: 6 HCP in the suit; favorable vulnerability: 1 high honor)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.2S",
@@ -211,7 +211,7 @@
   "forcing": "NF",
   "meaning": "2 faible : 6 cartes, 6-10 HL (vulnérable : 7-10 HL et 2 gros honneurs ; vulnérabilité favorable : 5-10 HL)",
   "meaning_en": "Weak two: 6 cards, 6-10 HL (vulnerable: 7-10 HL and 2 high honors; favorable vulnerability: 5-10 HL)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.2H",
@@ -221,7 +221,7 @@
   "forcing": "NF",
   "meaning": "2 faible : 6 cartes, 6-10 HL (vulnérable : 7-10 HL et 2 gros honneurs ; vulnérabilité favorable : 5-10 HL)",
   "meaning_en": "Weak two: 6 cards, 6-10 HL (vulnerable: 7-10 HL and 2 high honors; favorable vulnerability: 5-10 HL)",
-  "status": "sef"
+  "status": "choix"
  },
  {
   "id": "open.pass",

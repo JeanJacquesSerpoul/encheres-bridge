@@ -61,7 +61,7 @@ jobs:
         run: |
           for f in index.html style.css app.js par.js bids-wasm.js wasm_exec.js \
                    bids.wasm coi-serviceworker.js dds_web_wasm.js dds_web_wasm_bin.js \
-                   rules/default.yaml; do
+                   rules/default.yaml rules/index.json; do
             if [ ! -s "cli/$f" ]; then
               echo "::error::cli/$f est manquant ou vide"
               exit 1

@@ -153,8 +153,8 @@ const UI_TEXT = {
     wasmMissingExec: "wasm_exec.js absent — lancez build-wasm.sh pour le moteur du navigateur.",
     wasmFailed: "Le moteur d'enchères n'a pas répondu.",
     wasmUnsupported: "Ce navigateur ne gère pas WebAssembly.",
-    rulesMissing: "Règles d'enchères introuvables (rules/default.yaml).",
-    rulesInvalid: "Règles d'enchères invalides (rules/default.yaml) :",
+    rulesMissing: "Règles d'enchères introuvables (rules/{file}).",
+    rulesInvalid: "Règles d'enchères invalides (rules/{file}) :",
     serverIa: "Serveur IA",
     serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
@@ -203,6 +203,8 @@ const UI_TEXT = {
     optRandom: "Aléatoire",
     language: "Langue",
     theme: "Thème",
+    rulesSystem: "Système",
+    rulesSystemTitle: "Système d'enchères : le fichier de règles que le moteur applique (dossier rules/).",
     themeTitle: "Thème du système — c'est le choix par défaut — ou thème imposé à la page.",
     themeAuto: "Automatique",
     themeLight: "Clair",
@@ -336,8 +338,8 @@ const UI_TEXT = {
     wasmMissingExec: "wasm_exec.js is missing — run build-wasm.sh for the in-browser engine.",
     wasmFailed: "The bidding engine did not answer.",
     wasmUnsupported: "This browser does not support WebAssembly.",
-    rulesMissing: "Bidding rules not found (rules/default.yaml).",
-    rulesInvalid: "Invalid bidding rules (rules/default.yaml):",
+    rulesMissing: "Bidding rules not found (rules/{file}).",
+    rulesInvalid: "Invalid bidding rules (rules/{file}):",
     serverIa: "AI server",
     serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
@@ -386,6 +388,8 @@ const UI_TEXT = {
     optRandom: "Random",
     language: "Language",
     theme: "Theme",
+    rulesSystem: "System",
+    rulesSystemTitle: "Bidding system: the rules file the engine applies (rules/ folder).",
     themeTitle: "Use the system theme — the default — or force one for the page.",
     themeAuto: "Automatic",
     themeLight: "Light",
@@ -613,6 +617,62 @@ $("#theme").addEventListener("change", () => {
   applyTheme();
 });
 
+// Le système d'enchères : l'un des fichiers de règles de rules/, que liste
+// rules/index.json (un site statique ne sait pas lister un dossier). Le choix
+// est mémorisé par bids-wasm.js ; default.yaml par défaut. Changer de système
+// recharge les règles dans le moteur — sans le réinstancier — puis relance le
+// contrôle d'état, qui recalcule la donne affichée.
+const RULES_INDEX_URL = "rules/index.json";
+var rulesSystems = [{ file: "default.yaml", name: { fr: "SEF 2024", en: "SEF 2024" } }];
+
+function rulesSystemName(file, lang) {
+  const sys = rulesSystems.find((s) => s.file === file);
+  return (sys && (sys.name[lang] || sys.name.fr || sys.name.en)) || file;
+}
+
+function renderRulesSystems() {
+  const lang = $("#lang").value;
+  const sel = $("#rules-system");
+  const current = bidsLocal.rules.current();
+  sel.replaceChildren(...rulesSystems.map((s) => new Option(rulesSystemName(s.file, lang), s.file)));
+  sel.value = current;
+}
+
+async function initRulesSystems() {
+  try {
+    const resp = await fetch(RULES_INDEX_URL, { cache: "no-cache" });
+    if (resp.ok) {
+      const body = await resp.json();
+      const list = (body && Array.isArray(body.systems) ? body.systems : [])
+        .filter((s) => s && typeof s.file === "string")
+        .map((s) => ({ file: s.file, name: (s.name && typeof s.name === "object") ? s.name : {} }));
+      if (list.length) rulesSystems = list;
+    }
+  } catch (err) {
+    /* pas de manifeste : seul le système par défaut est proposé */
+  }
+  // Un choix mémorisé que le manifeste ne propose plus revient au défaut.
+  if (!rulesSystems.some((s) => s.file === bidsLocal.rules.current())) {
+    bidsLocal.rules.set(bidsLocal.rules.defaultFile);
+    checkHealth();
+  }
+  renderRulesSystems();
+  renderVersion();
+}
+
+$("#rules-system").addEventListener("change", async () => {
+  bidsLocal.rules.set($("#rules-system").value);
+  renderVersion();
+  const run = healthRun + 1;
+  await checkHealth();
+  // Le résultat affiché vient de l'autre système : on le redemande, comme au
+  // changement de langue — mais pas pendant ni après un questionnaire, qui
+  // garde ses enchères (voir resetQuiz). Sans résultat affiché, le contrôle
+  // d'état relance déjà le calcul automatique.
+  if (run === healthRun && healthState === "online" && !quiz &&
+      !$("#result-panel").classList.contains("hidden")) simulate();
+});
+
 // En mode automatique, le thème suit le système d'un changement à l'autre :
 // basculer le mode sombre de Windows ne doit pas demander un rechargement. Le
 // choix est relu à chaque fois — un thème forcé n'a rien à suivre — et
@@ -671,6 +731,7 @@ function applyLang() {
   }
   // Le titre de l'onglet suit la langue, comme celui du bandeau ([data-i18n]).
   document.title = t.appTitle;
+  renderRulesSystems();
   renderDealActions();
   renderIaHint();
   renderSeatCompass();
@@ -3957,14 +4018,17 @@ function renderVersion() {
   const t = UI_TEXT[$("#lang").value];
   // Le nom du moteur reste affiché même sans version : il dit à quelle ligne
   // du pied de page appartient la pastille d'état (l'autre étant celle de l'IA).
+  // Le système d'enchères suit le nom du moteur : c'est lui qui décide des
+  // enchères, autant que le code.
+  const system = rulesSystemName(bidsLocal.rules.current(), $("#lang").value);
   if (!engineVersion) {
-    el.textContent = t.versionWasm;
+    el.textContent = `${t.versionWasm} · ${system}`;
     el.removeAttribute("title");
     return;
   }
   // L'étoile signale un moteur compilé sur un dépôt modifié : la révision
   // seule prétendrait alors correspondre à un commit qu'il ne reflète pas.
-  el.textContent = `${t.versionWasm} ${engineVersion.revision}${engineVersion.modified ? " *" : ""}`;
+  el.textContent = `${t.versionWasm} ${engineVersion.revision}${engineVersion.modified ? " *" : ""} · ${system}`;
   const parts = [t.versionWasmTitle];
   if (engineVersion.time) parts.push(engineVersion.time);
   if (engineVersion.go) parts.push(engineVersion.go);
@@ -4002,20 +4066,30 @@ window.onBidsEngineLoad = function (state) {
 // S'il ne se charge pas (fichier absent, page ouverte en file://, navigateur
 // sans WebAssembly), la raison s'affiche au pied de page : sans moteur, rien
 // ne peut être calculé.
+// Seul le dernier contrôle lancé a la parole : changer de système d'enchères
+// en relance un, et le précédent — parti avec d'autres règles — ne doit pas
+// écraser son verdict en arrivant après lui.
+let healthRun = 0;
+
 async function checkHealth() {
+  const run = ++healthRun;
   healthState = null;
   renderHealth();
   const errEl = $("#engine-error");
   errEl.textContent = "";
   $("#health-text").textContent = "…";
+  let state, error = "";
   try {
-    healthState = (await bidsLocal.selfCheck()) ? "online" : "offline";
-    // La donne affichée au chargement attendait le moteur.
-    scheduleAutoBid();
+    state = (await bidsLocal.selfCheck()) ? "online" : "offline";
   } catch (err) {
-    healthState = "offline";
-    errEl.textContent = err.message;
+    state = "offline";
+    error = err.message;
   }
+  if (run !== healthRun) return;
+  healthState = state;
+  errEl.textContent = error;
+  // La donne affichée au chargement attendait le moteur.
+  if (state === "online") scheduleAutoBid();
   renderHealth();
   fetchVersion();
 }
@@ -5229,6 +5303,8 @@ setPbnOpen(false);
 // premier calcul demandé est alors immédiat. Le mode navigateur reste celui
 // par défaut, un mode déjà choisi primant toujours.
 checkHealth();
+// La liste des systèmes d'enchères, lue de rules/index.json.
+initRulesSystems();
 // applyIaFeature affiche ou masque tout le bloc IA selon l'option (OFF par
 // défaut) et ne sonde le serveur IA que lorsqu'elle est active.
 applyIaFeature();

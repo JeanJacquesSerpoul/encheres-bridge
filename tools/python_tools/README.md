@@ -40,7 +40,7 @@ python pbn_auction.py donne.pbn --option checkback2018
 
 Chaque annonce du JSON contient `seat`, `call`, `alerted`, `alert` (texte de l'alerte), et, en mode généré, `rule` (identifiant de la règle) et `meaning`.
 
-Limites : les règles couvrent surtout la paire Nord-Sud avec adversaires qui passent ; la vulnérabilité n'est pas utilisée.
+Limites : les règles couvrent surtout la paire Nord-Sud avec adversaires qui passent. La vulnérabilité est accessible aux conditions (`vul`, `opp_vul`).
 
 ## Le fichier `cli/rules/sef_rules.yaml`
 

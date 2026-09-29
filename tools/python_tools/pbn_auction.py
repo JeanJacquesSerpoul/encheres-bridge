@@ -206,9 +206,17 @@ def _legal(call, history, seat):
     return (int(call[0]), SUIT_RANK[call[1:]]) > (int(lv), SUIT_RANK[su])
 
 
-def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=False):
-    """Enchères des quatre mains selon les règles. Retourne une liste de dicts."""
+def parse_vulnerable(value):
+    """Tag [Vulnerable] -> (N/S vulnérable, E/O vulnérable)."""
+    v = (value or "").strip().upper()
+    return (v in ("NS", "ALL", "BOTH"), v in ("EW", "ALL", "BOTH"))
+
+
+def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=False, vulnerable=None):
+    """Enchères des quatre mains selon les règles. Retourne une liste de dicts.
+    vulnerable : valeur du tag [Vulnerable] (None, NS, EW, All...), lue par les conditions vul / opp_vul."""
     import sef_rules as sr
+    vuln = parse_vulnerable(vulnerable)
     start = SEATS.index(dealer)
     parsed = {seat: sr.parse_hand(h) for seat, h in hands.items()}
     history, out = [], []            # history : (siège 0-3, annonce)
@@ -224,7 +232,8 @@ def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=Fals
                 seq.append(f"({c})")
         opener = next((w % 2 for w, c in history if c != "P"), None)  # paire qui a ouvert
         forced = opps_pass and opener is not None and pair != opener
-        r = None if forced else sr.choose(rules, " ".join(seq), parsed[SEATS[seat]], options, trump[pair])
+        r = None if forced else sr.choose(rules, " ".join(seq), parsed[SEATS[seat]], options, trump[pair],
+                                          vuln[pair], vuln[1 - pair])
         note = None
         if forced:
             note = MSG[lang]["opp_pass"]
@@ -256,7 +265,7 @@ def build_generated(tags, index, rules, options, lang="FR", opps_pass=False):
     if dealer not in SEATS:
         dealer = "N"
     hands = parse_deal(tags["Deal"], lang)
-    bids = generate_auction(rules, hands, dealer, tuple(options), lang, opps_pass)
+    bids = generate_auction(rules, hands, dealer, tuple(options), lang, opps_pass, tags.get("Vulnerable"))
     return {
         "index": index,
         "board": tags.get("Board"),

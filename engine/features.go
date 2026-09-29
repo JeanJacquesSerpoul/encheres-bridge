@@ -38,6 +38,10 @@ type features struct {
 	shape        string
 	balanced     bool
 	semibalanced bool
+
+	// Context, not the hand: the vulnerability of the bidder's side and of
+	// the opponents, read by the conditions as vul and opp_vul.
+	vul, oppVul bool
 }
 
 func has(cards string, rank byte) bool {
@@ -191,6 +195,10 @@ func (f *features) scalar(name string) (value, bool) {
 		return floatVal(f.qtricks), true
 	case "sidetricks":
 		return floatVal(f.sidetricks), true
+	case "vul":
+		return boolVal(f.vul), true
+	case "opp_vul":
+		return boolVal(f.oppVul), true
 	}
 	return value{}, false
 }
@@ -236,6 +244,10 @@ var suitFuncs = map[string]func(f *features, s Suit) value{
 // featureNames are the plain names, in the order of sef_rules.py's FEATS.
 var featureNames = []string{"S", "H", "D", "C", "hcp", "hl", "dh", "hld", "shape", "balanced", "semibalanced",
 	"aces", "kings", "losers", "ptricks", "qtricks", "sidetricks"}
+
+// contextNames describe the table rather than the hand: they are not part
+// of a hand's feature dump.
+var contextNames = []string{"vul", "opp_vul"}
 
 // funcNames are the per-suit functions, in the order of sef_rules.py's FUNCS.
 var funcNames = []string{"ace", "king", "queen", "top", "solid", "stop", "short", "hcp_in", "keycards", "ctrl1", "ctrl2"}

@@ -27,7 +27,8 @@ STATUS = {'sef', 'choix', 'sef2018', 'infere', 'a_verifier'}
 FIELDS = {'id', 'seq', 'call', 'cond', 'forcing', 'meaning', 'meaning_en', 'status', 'alert', 'option', 'for', 'trump'}
 NAMES = {'S', 'H', 'D', 'C', 'hcp', 'hl', 'dh', 'hld', 'shape', 'balanced', 'semibalanced',
          'aces', 'kings', 'losers', 'ptricks', 'qtricks', 'sidetricks', 'ace', 'king', 'queen', 'top', 'solid', 'stop',
-         'short', 'hcp_in', 'keycards', 'ctrl1', 'ctrl2', 'max', 'min', 'true', 'false', 'True', 'False'}
+         'short', 'hcp_in', 'keycards', 'ctrl1', 'ctrl2', 'max', 'min', 'true', 'false', 'True', 'False',
+         'vul', 'opp_vul'}
 NODES = (ast.Expression, ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not, ast.USub, ast.Compare,
          ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE, ast.In, ast.NotIn, ast.BinOp, ast.Add,
          ast.Sub, ast.Name, ast.Load, ast.Constant, ast.Call, ast.Tuple)
@@ -220,8 +221,10 @@ def rule_matches(r, seq, trump=None):
     return False
 
 
-def choose(rules, seq, hand, options=(), trump=None):
+def choose(rules, seq, hand, options=(), trump=None, vul=False, opp_vul=False):
+    """vul / opp_vul : vulnérabilité du camp qui parle / du camp adverse."""
     env = features(hand)
+    env.update(vul=bool(vul), opp_vul=bool(opp_vul))
     for r in rules:
         if r.get('option') and r['option'] not in options:
             continue
@@ -295,6 +298,8 @@ def gen_tests(rules, md, n, seed, path):
     cases, seen = [], set()
     for i in range(n + n // 2):
         opts = ('checkback2018',) if i % 4 == 3 else ()
+        # vulnérabilité (camp N/S, camp adverse) : les quatre cas en rotation, sans toucher au tirage
+        vul, opp_vul = ((False, False), (True, False), (False, True), (True, True))[(i // 4) % 4]
         hands = deal(rng)
         if i >= n:   # donnes fortes : couvrent Blackwood, contrôles et chelems
             while features(hands[0])['hcp'] + features(hands[1])['hcp'] < 31:
@@ -302,12 +307,12 @@ def gen_tests(rules, md, n, seed, path):
         calls, who, opened, trump = [], 0, False, None
         for _ in range(24):
             seq = ' '.join(calls)
-            r = choose(rules, seq, hands[who], opts, trump)
-            key = (fmt(hands[who]), seq, trump, opts)
+            r = choose(rules, seq, hands[who], opts, trump, vul, opp_vul)
+            key = (fmt(hands[who]), seq, trump, opts, vul, opp_vul)
             if key not in seen:
                 seen.add(key)
                 cases.append({'id': len(cases) + 1, 'hand': fmt(hands[who]), 'seq': seq, 'trump': trump,
-                              'options': list(opts),
+                              'options': list(opts), 'vul': vul, 'opp_vul': opp_vul,
                               'expected': {'call': r['call'] if r else None, 'rule': r['id'] if r else None},
                               'features': feature_dump(hands[who])})
             if r is None:
@@ -337,7 +342,7 @@ def check_tests(rules, path):
     bad = 0
     for c in data['cases']:
         h = parse_hand(c['hand'])
-        r = choose(rules, c['seq'], h, tuple(c['options']), c['trump'])
+        r = choose(rules, c['seq'], h, tuple(c['options']), c['trump'], c.get('vul', False), c.get('opp_vul', False))
         got = {'call': r['call'] if r else None, 'rule': r['id'] if r else None}
         if got != c['expected'] or feature_dump(h) != c['features']:
             bad += 1
@@ -363,6 +368,8 @@ def main():
     ap.add_argument('--hand')
     ap.add_argument('--seq', default='')
     ap.add_argument('--trump')
+    ap.add_argument('--vul', action='store_true', help='avec --hand : le camp qui parle est vulnérable')
+    ap.add_argument('--opp-vul', action='store_true', help='avec --hand : les adversaires sont vulnérables')
     ap.add_argument('--lang', default='FR', type=str.upper, choices=['FR', 'EN'], help='FR=Français (défaut), EN=Anglais')
     ap.add_argument('--gen-tests', nargs=2, metavar=('DONNES', 'FICHIER'))
     ap.add_argument('--check-tests', metavar='FICHIER')
@@ -386,7 +393,7 @@ def main():
     if a.check_tests:
         sys.exit(1 if check_tests(rules, a.check_tests) else 0)
     if a.hand is not None:
-        r = choose(rules, a.seq, parse_hand(a.hand), a.option, a.trump)
+        r = choose(rules, a.seq, parse_hand(a.hand), a.option, a.trump, a.vul, a.opp_vul)
         print('Aucune règle (séquence non codée)' if r is None else
               '%s  [%s, %s, %s]  %s' % (r['call'], r['forcing'], r['status'], r['id'], r['meaning_en'] if a.lang == 'EN' else r['meaning']))
     if a.simulate:

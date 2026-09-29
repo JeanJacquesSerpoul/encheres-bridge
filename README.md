@@ -491,7 +491,7 @@ Le format des règles, les caractéristiques de main disponibles et le langage d
 
 ### Ce que le moteur ne fait pas
 
-- **La vulnérabilité** (tag `[Vulnerable]`, exposée dans la réponse) n'intervient dans aucune règle.
+- **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires).
 - **La compétition** n'est que partiellement codée (Landy, Michaels, Rubensohl, Spoutnik simple…) : dès qu'un adversaire intervient hors de ces séquences, la plupart des enchères deviennent des passes par défaut.
 - Chaque condition ne lit que la **main du joueur** : ce que le partenaire a montré n'est connu qu'à travers la séquence elle-même.
 

@@ -21,6 +21,9 @@
   // seconde déclaration serait une SyntaxError de redéclaration.
   const q = (sel) => document.querySelector(sel);
   const WASM_URL = "bids.wasm";
+  // Les règles d'enchères, lues par le moteur à chaque chargement de la page :
+  // on les modifie dans ce fichier, sans recompiler bids.wasm (cli/rules/README.md).
+  const RULES_URL = "rules/sef_rules.yaml";
 
   let modulePromise = null;
   let loaded = false;
@@ -83,8 +86,24 @@
     }
   }
 
+  // Le texte des règles. no-cache : une règle modifiée doit servir dès le
+  // rechargement de la page, pas quand le cache du navigateur expire.
+  async function fetchRules() {
+    const resp = await fetch(RULES_URL, { cache: "no-cache" });
+    if (!resp.ok) {
+      throw new Error(tr("rulesMissing") + " (HTTP " + resp.status + ")");
+    }
+    return resp.text();
+  }
+
   async function instantiate() {
     const go = new Go();
+    // Les deux téléchargements en parallèle ; l'erreur éventuelle des règles
+    // n'est levée qu'après, pour ne pas laisser de rejet sans gestionnaire.
+    const rulesText = fetchRules().then(
+      (text) => ({ text }),
+      (error) => ({ error })
+    );
     const resp = await fetch(WASM_URL);
     if (!resp.ok) {
       throw new Error(tr("wasmMissing") + " (HTTP " + resp.status + ")");
@@ -113,7 +132,17 @@
     // d'un plantage du runtime Go, qu'on ne veut pas perdre en silence.
     go.run(result.instance).catch((err) => console.error("bids.wasm :", err));
     await ready;
-    return window.bidsWasm;
+
+    const api = window.bidsWasm;
+    const rules = await rulesText;
+    if (rules.error) throw rules.error;
+    const res = api.loadRules(rules.text);
+    if (!res || !res.ok) {
+      const detail = (res && res.error) || tr("wasmFailed");
+      console.error("rules/sef_rules.yaml :", detail);
+      throw new Error(tr("rulesInvalid") + " " + detail);
+    }
+    return api;
   }
 
   // Un appel au moteur. Le code Go est synchrone et tient la boucle

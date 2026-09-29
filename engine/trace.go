@@ -1,143 +1,128 @@
 package engine
 
-import "fmt"
+// The decision tree of a call (the "trace" of the response, drawn by the page
+// under each call): the sequence the pair saw, the rule that answered it, and
+// its condition clause by clause, each evaluated on the hand.
 
-// The decision trace: the path the engine followed to reach a call, test by
-// test, evaluated on the hand — what the quiz shows under a wrong answer
-// (« Voir l'arbre de décision »).
-//
-// Decisions stay ordinary Go conditions. An instrumented one reads
-//
-//	if e.tr.check(hl >= 24, "24 HL et plus → 2♦", "24+ HL → 2♦", pts(hl, "HL")) {
-//
-// check records the test and hands its boolean straight back, so the trace
-// can never change a decision. A nil tracer records nothing: the same code
-// runs traced from Run and untraced from everywhere else.
-//
-// Situations not yet instrumented leave the trace empty, and the page then
-// offers no link for them.
+import (
+	"fmt"
+	"strings"
+)
 
+// traceStep is one line of the tree, in both languages until the response
+// picks one.
 type traceStep struct {
-	fr, en string // the test, in both languages
-	value  string // what the hand measured, e.g. "14 HL" (language-neutral)
-	ok     bool   // whether the test held
-	note   bool   // informative line rather than a test
-	depth  int    // nesting, for the sub-tests of a branch
+	fr, en   string
+	valueFR  string
+	valueEN  string
+	ok, note bool
+	depth    int
 }
 
-type tracer struct {
-	steps   []traceStep
-	depth   int
-	dropped bool // the decision was handed to untraced code: see drop
+// forcingText spells out the rules' forcing codes.
+var forcingText = map[string][2]string{
+	"NF":  {"non forcing", "non-forcing"},
+	"F1":  {"forcing un tour", "forcing one round"},
+	"FM":  {"forcing de manche", "game forcing"},
+	"SO":  {"conclusion", "sign-off"},
+	"INV": {"invitation", "invitational"},
+	"REL": {"relais", "relay"},
+	"ASK": {"question", "asking bid"},
+	"TO":  {"contre d'appel", "takeout"},
+	"PEN": {"punitif", "penalty"},
 }
 
-// check records a test and returns its outcome unchanged.
-func (t *tracer) check(ok bool, fr, en, value string) bool {
-	if t != nil && !t.dropped {
-		t.steps = append(t.steps, traceStep{fr: fr, en: en, value: value, ok: ok, depth: t.depth})
+// maxTraceDepth bounds how far nested and/or clauses unfold.
+const maxTraceDepth = 3
+
+func traceCall(sc *SeatCall, f *features) []traceStep {
+	seqFR, seqEN := "début d'enchère", "start of the auction"
+	if len(sc.Seq) > 0 {
+		seqFR, seqEN = formatSeq(sc.Seq, "fr"), formatSeq(sc.Seq, "en")
 	}
-	return ok
-}
-
-// note records an informative line: a safety net that replaced the call, a
-// call planned on an earlier turn.
-func (t *tracer) note(fr, en string) {
-	if t != nil && !t.dropped {
-		t.steps = append(t.steps, traceStep{fr: fr, en: en, note: true, depth: t.depth})
+	steps := []traceStep{{
+		fr: "Séquence de la paire", en: "Pair's sequence",
+		valueFR: seqFR, valueEN: seqEN, note: true,
+	}}
+	switch sc.Why {
+	case noRule:
+		return append(steps, traceStep{
+			fr: "Aucune règle ne couvre cette séquence : passe par défaut",
+			en: "No rule covers this sequence: default pass", note: true,
+		})
+	case illegalBy:
+		r := sc.Denied
+		return append(steps, traceStep{
+			fr:      fmt.Sprintf("La règle %s donnerait %s, illégal : passe par défaut", r.ID, r.Call.Format("fr")),
+			en:      fmt.Sprintf("Rule %s would give %s, which is illegal: default pass", r.ID, r.Call.Format("en")),
+			valueFR: r.Meaning, valueEN: r.MeaningEN, note: true,
+		})
 	}
-}
-
-// drop discards the trace (the steps stay, for rewind, but none is shown): the
-// decision was finally taken by code that is not instrumented yet, and a path stopping before the real decision would mislead
-// more than it explains. With no test left, the page shows no link.
-func (t *tracer) drop() {
-	if t != nil {
-		t.dropped = true
+	r := sc.Rule
+	fc := forcingText[r.Forcing]
+	steps = append(steps, traceStep{
+		fr: "Règle " + r.ID, en: "Rule " + r.ID,
+		valueFR: fc[0], valueEN: fc[1], ok: true,
+	})
+	if c := r.cond; c.kind == nConst && c.val.truthy() {
+		return append(steps, traceStep{fr: "Aucune condition sur la main", en: "No condition on the hand", ok: true, depth: 1})
 	}
+	return traceClauses(steps, r.cond, f, 1)
 }
 
-// untraced passes a decision through unchanged and drops the trace — for the
-// calls handed to code not yet instrumented: return e.untraced(e.conclude(p)).
-func (e *Engine) untraced(c Call, mn meaning) (Call, meaning) {
-	e.tr.drop()
-	return c, mn
-}
-
-// traceMark is a point in the trace to come back to: see mark and rewind.
-type traceMark struct {
-	n, depth int
-	dropped  bool
-}
-
-// mark and rewind undo what a rule recorded when it finally did not decide
-// the call and the next rule is tried instead.
-func (t *tracer) mark() traceMark {
-	if t == nil {
-		return traceMark{}
+// traceClauses adds one step per clause of the condition's top-level and; a
+// clause that is itself an and or an or gets its own step, its parts one
+// level below.
+func traceClauses(steps []traceStep, n *node, f *features, depth int) []traceStep {
+	if n.kind == nAnd && depth == 1 {
+		for _, k := range n.kids {
+			steps = traceClauses(steps, k, f, depth)
+		}
+		return steps
 	}
-	return traceMark{len(t.steps), t.depth, t.dropped}
-}
-
-func (t *tracer) rewind(m traceMark) {
-	if t == nil {
-		return
-	}
-	if m.n <= len(t.steps) {
-		t.steps = t.steps[:m.n]
-	}
-	t.depth, t.dropped = m.depth, m.dropped
-}
-
-// in and out nest the tests of a branch under the test that opened it.
-func (t *tracer) in() {
-	if t != nil {
-		t.depth++
-	}
-}
-
-func (t *tracer) out() {
-	if t != nil && t.depth > 0 {
-		t.depth--
-	}
-}
-
-// hasTests reports whether at least one real test was recorded: a trace made
-// only of notes explains nothing, and the page shows no link for it.
-func (t *tracer) hasTests() bool {
-	if t == nil || t.dropped {
-		return false
-	}
-	for _, s := range t.steps {
-		if !s.note {
-			return true
+	steps = append(steps, clauseStep(n, f, depth))
+	if (n.kind == nOr || n.kind == nAnd) && depth < maxTraceDepth {
+		for _, k := range n.kids {
+			steps = traceClauses(steps, k, f, depth+1)
 		}
 	}
-	return false
+	return steps
 }
 
-// ---------- formatting the measured values ----------
-
-var suitSymbol = [4]string{"♣", "♦", "♥", "♠"}
-
-// pts formats a point count: "14 HL", "13 H".
-func pts(n int, unit string) string { return fmt.Sprintf("%d %s", n, unit) }
-
-// cards formats a suit length: "5 ♠".
-func cards(h *Hand, s Suit) string { return fmt.Sprintf("%d %s", h.Len(s), suitSymbol[s]) }
-
-// callSym writes a bid with suit symbols, in each language: "1♥", "1SA"/"1NT".
-func callSym(c Call) (fr, en string) {
-	if !c.IsBid() {
-		return c.Format("fr"), c.Format("en")
+func clauseStep(n *node, f *features, depth int) traceStep {
+	st := traceStep{fr: n.src, en: n.src, depth: depth}
+	v, err := n.eval(f)
+	st.ok = err == nil && v.truthy()
+	var fr, en []string
+	for _, l := range n.leaves(nil, map[string]bool{}) {
+		lv, err := l.eval(f)
+		if err != nil {
+			continue
+		}
+		fr = append(fr, l.src+" = "+traceValue(lv, "fr"))
+		en = append(en, l.src+" = "+traceValue(lv, "en"))
 	}
-	if c.Strain == SNoTrump {
-		return fmt.Sprintf("%dSA", c.Level), fmt.Sprintf("%dNT", c.Level)
+	switch n.kind {
+	case nName, nCall: // a lone fact: its value is the verdict
+		fr, en = nil, nil
+	case nAnd, nOr: // the parts below carry the values
+		if depth < maxTraceDepth {
+			fr, en = nil, nil
+		}
 	}
-	s := fmt.Sprintf("%d%s", c.Level, suitSymbol[Suit(c.Strain)])
-	return s, s
+	st.valueFR, st.valueEN = strings.Join(fr, ", "), strings.Join(en, ", ")
+	return st
 }
 
-// shape formats the hand pattern in ♠-♥-♦-♣ order: "4-3-4-2".
-func shape(h *Hand) string {
-	return fmt.Sprintf("%d-%d-%d-%d", h.Len(Spades), h.Len(Hearts), h.Len(Diamonds), h.Len(Clubs))
+func traceValue(v value, lang string) string {
+	switch v.kind {
+	case kBool:
+		if lang == "fr" {
+			return map[bool]string{true: "oui", false: "non"}[v.i != 0]
+		}
+		return map[bool]string{true: "yes", false: "no"}[v.i != 0]
+	case kStr:
+		return v.s
+	}
+	return v.String()
 }

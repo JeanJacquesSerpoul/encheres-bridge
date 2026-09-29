@@ -26,6 +26,9 @@ func BidJSON(pbn []byte, lang string) ([]byte, error) {
 	if len(pbn) == 0 {
 		return nil, errors.New("empty PBN text")
 	}
+	if _, err := currentRules(); err != nil {
+		return nil, err
+	}
 	deal, err := ParsePBN(pbn)
 	if err != nil {
 		return nil, fmt.Errorf("invalid PBN file: %w", err)
@@ -42,6 +45,9 @@ func BidsJSON(pbn []byte, lang string) ([]byte, error) {
 	if len(pbn) == 0 {
 		return nil, errors.New("empty PBN text")
 	}
+	if _, err := currentRules(); err != nil {
+		return nil, err
+	}
 	deals, err := ParsePBNBoards(pbn)
 	if err != nil {
 		return nil, fmt.Errorf("invalid PBN file: %w", err)
@@ -57,6 +63,9 @@ func BidsJSON(pbn []byte, lang string) ([]byte, error) {
 // show the engine's state and to instantiate the module before the first
 // real request.
 func SelfCheck() error {
+	if _, err := currentRules(); err != nil {
+		return fmt.Errorf("engine self-check failed: %w", err)
+	}
 	deal, err := ParsePBN([]byte(referencePBN))
 	if err != nil {
 		return fmt.Errorf("engine self-check failed: %w", err)
@@ -65,6 +74,16 @@ func SelfCheck() error {
 		return errors.New("engine self-check produced no calls")
 	}
 	return nil
+}
+
+// LoadRulesJSON installs the rules file the page fetched (cli/rules/), and
+// answers with the number of rules it holds once expanded.
+func LoadRulesJSON(yamlText []byte) ([]byte, error) {
+	n, err := LoadRulesText(yamlText)
+	if err != nil {
+		return nil, fmt.Errorf("invalid rules file: %w", err)
+	}
+	return encodeJSON(map[string]int{"rules": n})
 }
 
 // VersionJSON describes the build (revision, commit date, Go version) as JSON,

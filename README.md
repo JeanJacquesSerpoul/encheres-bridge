@@ -18,12 +18,13 @@ Le dépôt contient quatre morceaux :
 
 | | Quoi | Où |
 |---|------|-----|
-| **Le moteur d'enchères** | bibliothèque Go sans dépendance, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
+| **Le moteur d'enchères** | bibliothèque Go qui applique les règles SEF d'un fichier YAML, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
+| **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler | [cli/rules/](cli/rules/) |
 | **Le client web** | composition de la donne, enchères commentées, questionnaire, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
-Les règles réellement appliquées par le moteur sont décrites, une par une et avec leurs seuils, dans **[docs/regles_moteur.md](docs/regles_moteur.md)**.
+Les règles appliquées par le moteur sont **[cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml)** : une liste ordonnée où la première règle applicable donne l'enchère. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
 
 ---
 
@@ -81,7 +82,7 @@ go run ./serve -port 8080    # autre port (ou PORT=8080)
 
 ### Méthode 2 — Copie de `cli/` sur un hébergeur statique
 
-Le dossier [cli/](cli/) est l'application complète : onze fichiers, moteur d'enchères compris. Aucun serveur Go, aucune compilation, aucune configuration.
+Le dossier [cli/](cli/) est l'application complète : onze fichiers et le dossier `rules/`, moteur d'enchères et règles compris. Aucun serveur Go, aucune compilation, aucune configuration.
 
 **1. Récupérer `cli/`** depuis GitHub : bouton **Code › Download ZIP** puis extraire le dossier `cli/`, ou `git clone` comme ci-dessus.
 
@@ -139,7 +140,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 ./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows
 ```
 
-**2. Copier `cli/` en entier.** Ces onze fichiers, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
+**2. Copier `cli/` en entier.** Ces onze fichiers et le dossier `rules/`, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
 
 | Fichier | Taille | gzip | |
 |---|---:|---:|---|
@@ -153,6 +154,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
+| `rules/sef_rules.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
@@ -283,7 +285,7 @@ Les enchères se calculent **d'elles-mêmes** dès que la donne est complète �
 
 Le moteur Go ([engine/](engine/)) est compilé en **WebAssembly** par [build-wasm.sh](build-wasm.sh) : son point d'entrée [wasm/main.go](wasm/main.go) produit `cli/bids.wasm` (versionné, ~4,5 Mo, ~1,2 Mo sur le réseau une fois compressé). Le client le précharge dès l'ouverture de la page ([cli/bids-wasm.js](cli/bids-wasm.js)), hors du chemin critique de l'affichage, et calcule les enchères sur place : aucune requête, et l'application fonctionne hors ligne une fois chargée.
 
-La pastille d'état des Réglages rejoue une donne de référence au chargement et nomme la révision du moteur (une étoile signale un moteur compilé sur un dépôt modifié). Si le moteur ne se charge pas — fichier absent, page ouverte en `file://`, navigateur sans WebAssembly —, la raison s'affiche au pied de page et un point rouge marque la roue des Réglages : sans lui, rien ne peut être calculé.
+La pastille d'état des Réglages rejoue une donne de référence au chargement et nomme la révision du moteur (une étoile signale un moteur compilé sur un dépôt modifié). Si le moteur ne se charge pas — fichier absent, règles introuvables ou invalides, page ouverte en `file://`, navigateur sans WebAssembly —, la raison s'affiche au pied de page et un point rouge marque la roue des Réglages : sans lui, rien ne peut être calculé.
 
 ### Le questionnaire
 
@@ -292,7 +294,7 @@ L'onglet **S'entraîner** choisit **votre main** (Nord, Est, Sud ou Ouest) et la
 - **Seule votre main est visible.** La donne composée au-dessus — les quatre mains, le texte PBN et les boutons sous la table — est masquée, remplacée par la ligne « Donne masquée. **Afficher la donne** » ; ce lien la montre à tout moment.
 - Les enchères des trois autres sièges **s'enchaînent d'elles-mêmes** (une toutes les 0,7 s), chacune brièvement surlignée à son arrivée dans la grille.
 - La table du questionnaire — votre main, des dos de cartes pour les trois autres, le siège qui parle au centre — prend la place de la donne masquée dans le panneau de gauche ; l'onglet **S'entraîner** garde la grille et la boîte à enchères.
-- À votre tour, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), puis une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), et Passe, X (contre), XX (surcontre) — quinze boutons au lieu de trente-huit. Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre). Elle n'ouvre que les enchères **légales** (palier suffisant, contre et surcontre selon le camp du dernier appelant). La réponse est comparée à celle du moteur : verdict, enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main — chaque règle examinée dans l'ordre, ✓ ou ✗, avec la valeur mesurée —, pour toutes les enchères du moteur (voir le champ `trace` ci-dessous) ; le même lien figure dans le récapitulatif de fin.
+- À votre tour, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), puis une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), et Passe, X (contre), XX (surcontre) — quinze boutons au lieu de trente-huit. Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre). Elle n'ouvre que les enchères **légales** (palier suffisant, contre et surcontre selon le camp du dernier appelant). La réponse est comparée à celle du moteur : verdict, enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main — la séquence vue par la paire, la règle retenue, puis chaque clause de sa condition, ✓ ou ✗, avec la valeur mesurée —, pour toutes les enchères du moteur (voir le champ `trace` ci-dessous) ; le même lien figure dans le récapitulatif de fin.
 - **Annuler** arrête le questionnaire à tout moment et revient au panneau de la donne.
 - À la fin, les mains sont dévoilées dans le questionnaire, le score s'affiche (`n / total`, en pourcentage) avec le contrat final, et trois suites sont offertes : **Rejouer cette donne**, **Nouvelle donne**, **Afficher le détail complet**. Les onglets **Enchères** et **PAR** se remplissent aussitôt avec la donne jouée, sans quitter le score ; un changement de langue ne referme pas le questionnaire. La donne composée, elle, **reste masquée** : le lien **Afficher la donne** la rend.
 
@@ -345,9 +347,17 @@ Le serveur IA se choisit dans les Réglages, sous l'option : **Local** vise `htt
 go test ./...
 ```
 
-Environ 140 fichiers de tests couvrent le parseur PBN (rotation des mains, validation des 13 cartes, doublons, fuzz), le JSON que le moteur rend à la page ([engine/api_test.go](engine/api_test.go)) et, surtout, les règles du moteur convention par convention — un fichier par sujet (`drury_test.go`, `landy_test.go`, `reveil_test.go`, `fourth_suit_forcing_test.go`...). Un test de cohérence soumet 2 000 donnes aléatoires au moteur pour vérifier que chaque séquence est légale (enchères suffisantes, contres valides, rotation des joueurs) et se termine. Des donnes d'exemple sont fournies dans [engine/testdata/](engine/testdata/).
+Les tests confrontent le moteur Go à la **référence Python** de [tools/python_tools/](tools/python_tools/), dont il est le portage :
 
-Trois fichiers ne sont pas des assertions mais des **harnais** : `audit_soft_test.go` et `audit_detail_test.go` publient des statistiques (manches manquées, chelems minces, trous par forme d'enchère) sans jamais échouer, et `audit_par_test.go` alimente l'audit ci-dessous.
+| Test | Ce qu'il vérifie |
+|---|---|
+| [rules_test.go](engine/rules_test.go) | l'expansion de `cli/rules/sef_rules.yaml` est identique à `sef_rules.json` (1 189 règles) ; les 9 326 cas de `sef_tests.json` (caractéristiques de la main, règle choisie) passent tous |
+| [golden_test.go](engine/golden_test.go) | 315 donnes enchéries par `pbn_auction.py` — les quatre mains, donc la compétition, la légalité et la fin de l'enchère — sont reproduites enchère par enchère, règle et commentaire compris ([testdata/golden_python.json](engine/testdata/golden_python.json), régénéré par `tools/python_tools/gen_golden.py`) |
+| [expr_test.go](engine/expr_test.go) | le langage des conditions, avec la sémantique Python (comparaisons chaînées, booléens comptés 0/1, `in`), et ce qu'il refuse |
+| [api_test.go](engine/api_test.go) | le JSON rendu à la page, les erreurs, le chargement des règles (absentes, invalides), la trace |
+| [engine_test.go](engine/engine_test.go) | le parseur PBN, et 2 000 donnes aléatoires : chaque séquence est légale, suit la rotation des joueurs et se termine |
+
+Après une modification de `sef_rules.yaml`, les jeux de référence se régénèrent avec les outils Python (voir [cli/rules/README.md](cli/rules/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
 
 ## Audit du par
 
@@ -380,9 +390,10 @@ Le moteur expose à la page une petite API ([engine/api.go](engine/api.go)), que
 | `bid(pbn, lang)` | Enchères d'une donne : l'objet JSON décrit ci-dessous |
 | `bids(pbn, lang)` | Même chose pour chaque donne d'un fichier de tournoi : un tableau de ces objets |
 | `selfCheck()` | Rejoue une donne de référence (pastille d'état des Réglages) |
+| `loadRules(yaml)` | *(module WASM seulement)* Installe les règles : [cli/bids-wasm.js](cli/bids-wasm.js) télécharge `rules/sef_rules.yaml` et le passe au moteur avant tout calcul ; un fichier invalide est refusé avec la liste de ses erreurs |
 | `version()` | Révision du moteur, date du commit, version de Go |
 
-`lang` vaut `en` (défaut) ou `fr`. Un PBN invalide ou une langue inconnue renvoient une erreur au lieu de la réponse.
+`lang` vaut `en` (défaut) ou `fr`. Un PBN invalide, une langue inconnue ou l'absence de règles renvoient une erreur au lieu de la réponse.
 
 ### Format PBN minimal attendu
 
@@ -398,7 +409,7 @@ Le tag `Deal` suit le format PBN standard :
 
 ### Réponse
 
-Exemple réel (donne ci-dessus, `lang=fr`) :
+Exemple réel (donne ci-dessus, `lang=fr`, champs `trace` omis) :
 
 ```json
 {
@@ -420,16 +431,16 @@ Exemple réel (donne ci-dessus, `lang=fr`) :
     "W": { "...": "..." }
   },
   "auction": [
-    { "player": "N", "bid": "2SA",   "comment": "ouverture 2SA, 20-21H régulier" },
-    { "player": "E", "bid": "Passe", "comment": "pas de quoi intervenir" },
-    { "player": "S", "bid": "3T",    "comment": "Stayman, demande les majeures quatrièmes" },
-    { "player": "W", "bid": "Passe", "comment": "pas de quoi intervenir" },
-    { "player": "N", "bid": "3K",    "comment": "pas de majeure quatrième" },
-    { "player": "E", "bid": "Passe", "comment": "pas de quoi intervenir" },
-    { "player": "S", "bid": "3SA",   "comment": "3SA sur la force combinée" },
-    { "player": "W", "bid": "Passe", "comment": "pas de quoi intervenir" },
-    { "player": "N", "bid": "Passe", "comment": "l'enchère du partenaire convient, rien à ajouter" },
-    { "player": "E", "bid": "Passe", "comment": "pas de quoi intervenir" }
+    { "player": "N", "bid": "2SA",   "comment": "20-21 HL, régulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles)" },
+    { "player": "E", "bid": "Passe", "comment": "passe par défaut (aucune règle pour cette séquence)" },
+    { "player": "S", "bid": "3T",    "comment": "Stayman 4 réponses" },
+    { "player": "W", "bid": "Passe", "comment": "passe par défaut (aucune règle pour cette séquence)" },
+    { "player": "N", "bid": "3K",    "comment": "Pas de majeure 4e" },
+    { "player": "E", "bid": "Passe", "comment": "passe par défaut (aucune règle pour cette séquence)" },
+    { "player": "S", "bid": "3SA",   "comment": "Pas de fit" },
+    { "player": "W", "bid": "Passe", "comment": "passe par défaut (aucune règle pour cette séquence)" },
+    { "player": "N", "bid": "Passe", "comment": "Fin" },
+    { "player": "E", "bid": "Passe", "comment": "passe par défaut (aucune règle pour cette séquence)" }
   ],
   "contract": "3SA",
   "declarer": "N",
@@ -451,11 +462,11 @@ Exemple réel (donne ci-dessus, `lang=fr`) :
 | `hands.<siège>.type` | Type de main : `régulière`, `unicolore`, `bicolore`, `tricolore` (`en` : `regular`, `single-suited`, `two-suited`, `three-suited`) |
 | `auction[].player` | Joueur : `N`, `E`, `S`, `W` (dans l'ordre, en commençant par le donneur) |
 | `auction[].bid` | Enchère dans la notation de la langue demandée |
-| `auction[].comment` | Signification de l'enchère dans le système SEF. **Jamais vide** : un passe que le système ne commente pas reçoit la raison que sa position garantit (voir [§1.1](docs/regles_moteur.md)) |
+| `auction[].comment` | Signification de l'enchère : le champ `meaning` (ou `meaning_en`) de la règle qui l'a donnée. Un passe qu'aucune règle ne donne l'explique : « passe par défaut (aucune règle pour cette séquence) », ou la règle écartée parce que son enchère aurait été illégale |
 | `contract` | Contrat final (ex. `4P`), ou `Passe`/`Pass` si la donne est passée |
 | `declarer` | Déclarant : premier joueur du camp gagnant à avoir nommé la dénomination du contrat (vide si donne passée) |
 | `doubled` | `true` si le contrat final est contré (ou surcontré) |
-| `auction[].trace` | Chemin de décision de l'enchère, évalué sur la main (présent sur toutes les enchères du moteur ; `TestTraceEndsOnConclusion` le vérifie sur des donnes aléatoires) : liste de `{label, value, ok, note, depth}` — le test dans la langue demandée, la valeur mesurée (`"14 HL"`, `"4 ♠"`), s'il tient, s'il s'agit d'une simple note (filet de sécurité, passe final), sa profondeur d'imbrication |
+| `auction[].trace` | Arbre de décision de l'enchère (présent sur chacune) : liste de `{label, value, ok, note, depth}`. D'abord la séquence vue par la paire (note), puis la règle retenue et son caractère forcing, puis chaque clause de sa condition évaluée sur la main (`"20 <= hl <= 21"`, valeur `"hl = 20"`), les parties d'un `or` ou d'un `and` imbriqué un niveau plus bas. Un passe par défaut n'a que la séquence et sa raison |
 
 ### Notation des enchères
 
@@ -468,29 +479,21 @@ Exemple réel (donne ci-dessus, `lang=fr`) :
 
 ## Moteur d'enchères (SEF)
 
-Le moteur fait enchérir les quatre joueurs à tour de rôle, chacun avec sa seule main et les informations promises par les enchères précédentes, jusqu'à trois passes consécutives.
+Le moteur fait enchérir les quatre joueurs à tour de rôle, à partir du donneur, jusqu'à trois passes après une enchère (ou quatre passes d'entrée). Il ne code **aucune règle de bridge** : il applique celles de [cli/rules/sef_rules.yaml](cli/rules/sef_rules.yaml), exactement comme `pbn_auction.py` ([tools/python_tools/](tools/python_tools/)), dont il est le portage.
 
-> **La description complète et à jour des règles est dans [docs/regles_moteur.md](docs/regles_moteur.md)** : chaque règle y porte un numéro stable — **[O-3]**, **[RM-7]**, **[C-21]**… — citable en revue, avec le seuil exact que le code applique et un **⚠** partout où il s'écarte du SEF. Le tableau ci-dessous n'est qu'une carte d'ensemble.
+À chaque tour :
 
-| Domaine | Ce que le moteur couvre | Détail |
-|---------|--------------------------|--------|
-| **Évaluation** | H, HL avant fit, HLD après fit (chicane 3, singleton 2, doubleton 1), belle couleur, arrêt / double arrêt / arrêt et demi, dévaluation par les enchères adverses, seuils de manche et de chelem | [§2](docs/regles_moteur.md#2-évaluation-des-mains) |
-| **Ouvertures** | 1♣/1♦ (mineure la plus longue, 3-3 → 1♣, 4-4/5-5 → 1♦), 1♥/1♠ (5 cartes, 12-23 HL), 1SA (15-17 H régulier), 2SA (20-21 H), 2♣ fort indéterminé, 2♦ forcing de manche, 3SA mineure septième affranchie, 2♥/2♠ faibles, barrages 3 (7 cartes) et 4 (8 cartes), ouvertures légères de 3ᵉ et 4ᵉ | [§3](docs/regles_moteur.md#3-les-ouvertures) |
-| **Réponses à 1 à la couleur** | soutiens par zones HLD (dont le 2SA fitté 11-12), splinter, 1SA « poubelle », changements de couleur forcing 1 sur 1 et 2 sur 1, majeure quatrième prioritaire sur mineure, Drury de la main déjà passée face à une ouverture de 3ᵉ ou 4ᵉ, réponses en compétition | [§4](docs/regles_moteur.md#4-réponses-aux-ouvertures-de-1-à-la-couleur) |
-| **Réponses à 1SA / 2SA** | Stayman, Texas majeurs et mineurs, misère dorée, bicolore mineur fort, échelle Sans-Atout quantitative | [§5](docs/regles_moteur.md#5-réponses-à-1sa-et-2sa) |
-| **Réponses aux ouvertures fortes et de barrage** | relais 2♦ sur 2♣ (2SA d'attente 0-7, scission de la zone faible sur les honneurs avec fit mineur), réponses aux As sur 2♦, réponses aux 2 faibles par zones HLD (2SA relais-fitté, attaque-défense, prolongement de barrage) | [§6](docs/regles_moteur.md#6-réponses-aux-ouvertures-fortes-et-de-barrage) |
-| **Redemandes de l'ouvreur** | 1SA/2SA/3SA par zones, soutiens 12-16 / 17-19 / 20+ HLD, bicolores économique / à saut / **cher** (18 HL et plus, auto-forcing), répétitions simple et à saut, rectifications des Texas, suites de 2♣ et 2♦, réveil de l'ouvreur | [§7](docs/regles_moteur.md#7-redemandes-de-louvreur) |
-| **Conventions du camp de l'ouvreur** | Checkback, Roudi à trois paliers, demande d'arrêt après répétition d'une mineure, Rubensohl, essai « couleur nécessitant un appui », **quatrième couleur forcing** (avec le 2♠ « impossible » au palier de 1) et **troisième couleur forcing** (la « collante » de l'ouverture) | [§8](docs/regles_moteur.md#8-conventions-du-camp-de-louvreur) |
-| **Défense** | interventions naturelles, 1SA d'intervention 16-18, contre d'appel 12-17 et contre « toutes distributions » à partir de 18, Michaels, Landy, règle des trois zones sur le contre, cue-bid de force de l'avancée, **le réveil** et ses réponses | [§9](docs/regles_moteur.md#9-le-camp-de-la-défense) |
-| **Compétition** | loi des levées totales (soutien et bataille de partielle), surenchère, sacrifice calculé sur le barème exact ([score.go](engine/score.go)), contre punitif | [§10](docs/regles_moteur.md#10-la-compétition) |
-| **Chelem** | enchères de contrôle, Blackwood 4SA « cinq clefs », appel aux Rois, 4SA quantitatif, déclenchement par le compte (29-32 par contrôles, 33 direct) ou par les clefs vues | [§11](docs/regles_moteur.md#11-la-zone-de-chelem) |
-| **Conclusion** | chaque joueur additionne ses points et ceux promis par le partenaire pour viser le bon palier — manche à 25 HL (SA), 27 HLD (majeure), 30 HLD (mineure), chelem à 33 — ou proposer en zone intermédiaire | [§12](docs/regles_moteur.md#12-la-décision-générique-de-fin-denchères) |
+1. **La séquence vue par la paire** qui parle : ses propres enchères, passes comprises, et celles des adversaires entre parenthèses, leurs passes omises (`1C (1S) X`).
+2. **La première règle applicable**, dans l'ordre du fichier : son motif `seq` correspond à la séquence (jokers `*`, `**`, alternatives `A|B`, `BW:x` quand l'atout convenu est x), et sa condition `cond` est vraie sur la main (`hcp`, `hl`, longueurs, `balanced`, `stop('H')`, `keycards('S')`…).
+3. **Son enchère**, si elle est légale ; sinon, ou si aucune règle ne s'applique, un **passe par défaut**, commenté comme tel. Une règle peut fixer l'atout convenu de la paire (`trump`), que lisent les réponses au Blackwood.
+
+Le format des règles, les caractéristiques de main disponibles et le langage des conditions sont décrits dans [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md) ; la description bridge des conventions dans [tools/python_tools/SEF_2024.md](tools/python_tools/SEF_2024.md).
 
 ### Ce que le moteur ne fait pas
 
-- **La vulnérabilité** (tag `[Vulnerable]`, exposée dans la réponse) n'entre que dans les décisions de sacrifice compétitif ([score.go](engine/score.go)) ; elle ne pèse nulle part ailleurs dans l'arbre de décision.
-- **Les contres** sont essentiellement d'appel. Le punitif n'apparaît que dans deux situations précises : le contre d'un sacrifice adverse [L-4], et le passe qui convertit en punitif le contre Rubensohl du partenaire (arrêt et 17 H et plus) [C-17]. Il n'y a notamment **pas de contre punitif de 1SA**.
-- Le moteur implémente un **sous-ensemble raisonné** du SEF, et assume des écarts. Ils sont recensés, avec ce qu'ils coûtent, dans [§14 « Points à discuter en priorité »](docs/regles_moteur.md#14-points-à-discuter-en-priorité) ; les rattrapages qui masquent un trou plutôt qu'une règle de bridge sont isolés dans [§13 « Filets de sécurité »](docs/regles_moteur.md#13-filets-de-sécurité) — leur déclenchement signale un vrai bug.
+- **La vulnérabilité** (tag `[Vulnerable]`, exposée dans la réponse) n'intervient dans aucune règle.
+- **La compétition** n'est que partiellement codée (Landy, Michaels, Rubensohl, Spoutnik simple…) : dès qu'un adversaire intervient hors de ces séquences, la plupart des enchères deviennent des passes par défaut.
+- Chaque condition ne lit que la **main du joueur** : ce que le partenaire a montré n'est connu qu'à travers la séquence elle-même.
 
 Les séquences produites restent en tout état de cause légales, terminées et commentées.
 
@@ -500,30 +503,32 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 
 | Fichier | Rôle |
 |---------|------|
-| `engine/api.go` | API du moteur rendue à la page : `BidJSON`, `BidsJSON`, `SelfCheck`, `VersionJSON` |
+| `engine/api.go` | API du moteur rendue à la page : `BidJSON`, `BidsJSON`, `SelfCheck`, `LoadRulesJSON`, `VersionJSON` |
+| `engine/rules.go` | Lecture de `sef_rules.yaml` : expansion des modèles `for:`, validation, règles actives |
+| `engine/expr.go` | Langage des conditions : analyseur et évaluateur (sémantique Python) |
+| `engine/features.go` | Caractéristiques de la main lues par les conditions (H, HL, longueurs, levées, contrôles…) |
+| `engine/match.go` | Motifs de séquence et choix de la première règle applicable |
+| `engine/auction.go` | Boucle d'enchères : séquence vue par la paire, légalité, atout convenu, passe par défaut |
+| `engine/trace.go` | Arbre de décision de chaque enchère |
 | `engine/pbn.go` | Parseur PBN (`Board`, `Dealer`, `Vulnerable`, `Deal`) |
-| `engine/cards.go` | Mains et évaluation (H/HL/HLD, types, arrêts) |
-| `engine/calls.go` | Enchères, significations, notation `en`/`fr` |
-| `engine/engine.go` | Boucle d'enchères, rôles, mémoire des enchères, Blackwood |
-| `engine/decisions.go` | Règles SEF (ouvertures, réponses, redemandes, interventions, réveil) |
-| `engine/conclude.go` | Conclusion de l'enchère : table de handlers par convention, puis décision générique (manche/proposition/chelem) |
-| `engine/score.go` | Barème de marque, utilisé pour les décisions de sacrifice |
+| `engine/cards.go`, `engine/calls.go` | Mains et type de main ; enchères et notation `en`/`fr` |
 | `engine/response.go` | Forme JSON de la réponse, estampille de version, encodeur |
-| `engine/*_test.go` | ~140 fichiers : parseur, API JSON, et une convention par fichier |
-| `engine/audit_par_test.go`, `audit_soft_test.go`, `audit_detail_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit, statistiques |
-| `engine/testdata/` | Donnes PBN d'exemple |
+| `engine/*_test.go` | Conformité à la référence Python, API JSON, invariants, banc du par |
+| `engine/audit_par_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit du par |
+| `engine/testdata/` | Donnes PBN d'exemple, enchères de référence de `pbn_auction.py`, banc du par |
 | `wasm/main.go` | Point d'entrée WebAssembly (`js && wasm`) : l'API du moteur exposée à la page |
 | `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
 | `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
+| `cli/rules/` | Les règles d'enchères (`sef_rules.yaml`), modifiables sans recompiler |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `.github/workflows/wasm.yml` | Recompile et recommite `cli/bids.wasm` quand les sources Go changent sur `main` |
 | `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
+| `tools/python_tools/` | Référence Python du moteur (`sef_rules.py`, `pbn_auction.py`), validation des règles, génération des jeux de test, spécification |
 | `openrouter_proxy/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `openrouter_proxy/bin/` | Exécutables précompilés du serveur IA (Linux, Windows), leurs scripts de lancement et un `docker-compose.yml` qui lance le binaire Linux |
 | `openrouter_proxy/build-proxy.sh`, `.ps1` | Compilation du serveur IA dans `openrouter_proxy/bin/` (`openrouter_proxy`, `openrouter_proxy.exe`, non versionnés) |
-| `docs/regles_moteur.md` | Description complète des règles telles qu'elles sont codées |
 | `docs/pbn.txt` | Rappel du format PBN |
 | `THIRD-PARTY-NOTICES.md` | Composants tiers redistribués et leurs licences |
 
@@ -531,4 +536,4 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 
 Ce projet est distribué sous la **licence publique générale GNU, version 3** (GPL-3.0) — voir [LICENSE](LICENSE).
 
-Il redistribue un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client dans l'onglet « PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.
+Le moteur compilé embarque la bibliothèque Go **[yaml.v3](https://github.com/go-yaml/yaml)** (licences MIT et Apache 2.0), qui lit le fichier de règles. Il redistribue aussi un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client dans l'onglet « PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.

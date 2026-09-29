@@ -116,3 +116,32 @@ func TestParAuditDump(t *testing.T) {
 	}
 	t.Logf("%d boards written to %s (seed %d)", deals, out, seed)
 }
+
+// randomDeal deals the 52 cards with rng: the same seed gives the same boards,
+// so two revisions of the engine are audited on the same deals.
+func randomDeal(rng *rand.Rand) *Deal {
+	type card struct {
+		s Suit
+		r byte
+	}
+	var deck []card
+	for s := Clubs; s <= Spades; s++ {
+		for i := 0; i < len(rankOrder); i++ {
+			deck = append(deck, card{s, rankOrder[i]})
+		}
+	}
+	rng.Shuffle(len(deck), func(i, j int) { deck[i], deck[j] = deck[j], deck[i] })
+	d := &Deal{Dealer: rng.Intn(4)}
+	for seat := 0; seat < 4; seat++ {
+		var bySuit [4][]byte
+		for _, c := range deck[seat*13 : (seat+1)*13] {
+			bySuit[c.s] = append(bySuit[c.s], c.r)
+		}
+		h := &Hand{}
+		for s := Clubs; s <= Spades; s++ {
+			h.Suits[s] = sortRanks(string(bySuit[s]))
+		}
+		d.Hands[seat] = h
+	}
+	return d
+}

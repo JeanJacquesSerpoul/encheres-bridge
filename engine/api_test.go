@@ -128,6 +128,98 @@ func TestBidJSON_Errors(t *testing.T) {
 	}
 }
 
+// TestRulesLoading: without rules the engine refuses to bid, a broken file is
+// refused with every problem listed, and a good one reports its rule count.
+func TestRulesLoading(t *testing.T) {
+	saved := activeRules.Load()
+	defer SetRules(saved)
+
+	activeRules.Store(nil)
+	good, _ := os.ReadFile("testdata/d1.pbn")
+	if _, err := BidJSON(good, "fr"); err == nil || !strings.Contains(err.Error(), "no bidding rules loaded") {
+		t.Fatalf("BidJSON sans règles : err = %v", err)
+	}
+	if err := SelfCheck(); err == nil {
+		t.Fatalf("SelfCheck sans règles : want an error")
+	}
+
+	broken := []byte(`- id: a
+  seq: ""
+  call: 9Z
+  cond: "hcp >= 12 and foo"
+  forcing: NF
+  meaning: m
+  meaning_en: m
+  status: sef
+- id: a
+  seq: ""
+  call: P
+  cond: "true"
+  forcing: XX
+  meaning: m
+  meaning_en: m
+  status: sef
+`)
+	_, err := LoadRulesJSON(broken)
+	if err == nil {
+		t.Fatalf("règles invalides acceptées")
+	}
+	for _, want := range []string{"invalid rules file", "id en double", "enchère invalide", "nom inconnu : foo", "forcing invalide"} {
+		if !strings.Contains(err.Error(), want) {
+			t.Errorf("erreur %q : devrait mentionner %q", err, want)
+		}
+	}
+	if activeRules.Load() != nil {
+		t.Fatalf("des règles invalides ne doivent pas être installées")
+	}
+
+	yamlText, err := os.ReadFile(rulesPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	data, err := LoadRulesJSON(yamlText)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var n struct{ Rules int }
+	if err := json.Unmarshal(data, &n); err != nil || n.Rules < 1000 {
+		t.Fatalf("LoadRulesJSON = %s (%v)", data, err)
+	}
+}
+
+// TestTrace: every call carries its decision tree -- the pair's sequence,
+// then the rule and its clauses, or why the pass was a default one.
+func TestTrace(t *testing.T) {
+	pbn, _ := os.ReadFile("testdata/d1.pbn")
+	data, err := BidJSON(pbn, "fr")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var resp bidResponse
+	if err := json.Unmarshal(data, &resp); err != nil {
+		t.Fatal(err)
+	}
+	opening := resp.Auction[0]
+	if len(opening.Trace) < 3 || opening.Trace[0].Label != "Séquence de la paire" ||
+		opening.Trace[0].Value != "début d'enchère" || opening.Trace[1].Label != "Règle open.2NT" {
+		t.Fatalf("trace de l'ouverture : %+v", opening.Trace)
+	}
+	for _, st := range opening.Trace[2:] {
+		if st.Depth < 1 || (st.Depth == 1 && !st.Ok) { // a failing alternative of an or may sit below
+			t.Logf("%+v", opening.Trace)
+			t.Errorf("clause de l'ouverture retenue : %+v", st)
+		}
+	}
+	east := resp.Auction[1]
+	if len(east.Trace) != 2 || !east.Trace[1].Note || !strings.Contains(east.Trace[1].Label, "Aucune règle") ||
+		east.Trace[0].Value != "(2SA)" {
+		t.Fatalf("trace d'une passe par défaut : %+v", east.Trace)
+	}
+	if east.Comment != "passe par défaut (aucune règle pour cette séquence)" {
+		t.Fatalf("commentaire d'une passe par défaut : %q", east.Comment)
+	}
+}
+
 func TestSelfCheck(t *testing.T) {
 	if err := SelfCheck(); err != nil {
 		t.Fatalf("SelfCheck: %v", err)

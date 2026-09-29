@@ -20959,6 +20959,716 @@
   "status": "infere"
  },
  {
+  "id": "eco.1D.1H.2C.4H",
+  "seq": "1D 1H 2C",
+  "call": "4H",
+  "cond": "H >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 13+ HL : manche",
+  "meaning_en": "Six-card major, 13+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.4S",
+  "seq": "1D 1S 2C",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 13+ HL : manche",
+  "meaning_en": "Six-card major, 13+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.4S",
+  "seq": "1H 1S 2C",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 13+ HL : manche",
+  "meaning_en": "Six-card major, 13+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.4S",
+  "seq": "1H 1S 2D",
+  "call": "4S",
+  "cond": "S >= 6 and hl >= 13",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 13+ HL : manche",
+  "meaning_en": "Six-card major, 13+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.4H",
+  "seq": "1H 1S 2C",
+  "call": "4H",
+  "cond": "H >= 3 and hld >= 13",
+  "forcing": "SO",
+  "meaning": "Fit dans la majeure d'ouverture, 13+ HLD : manche",
+  "meaning_en": "Fit in the opening major, 13+ HLD: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.4H",
+  "seq": "1H 1S 2D",
+  "call": "4H",
+  "cond": "H >= 3 and hld >= 13",
+  "forcing": "SO",
+  "meaning": "Fit dans la majeure d'ouverture, 13+ HLD : manche",
+  "meaning_en": "Fit in the opening major, 13+ HLD: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3H",
+  "seq": "1H 1S 2C",
+  "call": "3H",
+  "cond": "H >= 3 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Préférence à saut : 3 cartes, 10-12 HLD, invitation",
+  "meaning_en": "Jump preference: 3 cards, 10-12 HLD, invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3H",
+  "seq": "1H 1S 2D",
+  "call": "3H",
+  "cond": "H >= 3 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Préférence à saut : 3 cartes, 10-12 HLD, invitation",
+  "meaning_en": "Jump preference: 3 cards, 10-12 HLD, invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3H",
+  "seq": "1D 1H 2C",
+  "call": "3H",
+  "cond": "H >= 6 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Majeure 6e, 10-12 HL : invitation",
+  "meaning_en": "Six-card major, 10-12 HL: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3S",
+  "seq": "1D 1S 2C",
+  "call": "3S",
+  "cond": "S >= 6 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Majeure 6e, 10-12 HL : invitation",
+  "meaning_en": "Six-card major, 10-12 HL: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3S",
+  "seq": "1H 1S 2C",
+  "call": "3S",
+  "cond": "S >= 6 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Majeure 6e, 10-12 HL : invitation",
+  "meaning_en": "Six-card major, 10-12 HL: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3S",
+  "seq": "1H 1S 2D",
+  "call": "3S",
+  "cond": "S >= 6 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Majeure 6e, 10-12 HL : invitation",
+  "meaning_en": "Six-card major, 10-12 HL: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3C",
+  "seq": "1D 1H 2C",
+  "call": "3C",
+  "cond": "C >= 4 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur, 10-12 HLD : invitation",
+  "meaning_en": "Raise of the second suit, 10-12 HLD: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3C",
+  "seq": "1D 1S 2C",
+  "call": "3C",
+  "cond": "C >= 4 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur, 10-12 HLD : invitation",
+  "meaning_en": "Raise of the second suit, 10-12 HLD: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3C",
+  "seq": "1H 1S 2C",
+  "call": "3C",
+  "cond": "C >= 4 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur, 10-12 HLD : invitation",
+  "meaning_en": "Raise of the second suit, 10-12 HLD: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3D",
+  "seq": "1H 1S 2D",
+  "call": "3D",
+  "cond": "D >= 4 and 10 <= hld <= 12",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur, 10-12 HLD : invitation",
+  "meaning_en": "Raise of the second suit, 10-12 HLD: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3D.m",
+  "seq": "1D 1H 2C",
+  "call": "3D",
+  "cond": "D >= 3 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Préférence à saut : 10-12 HL, invitation",
+  "meaning_en": "Jump preference: 10-12 HL, invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3D.m",
+  "seq": "1D 1S 2C",
+  "call": "3D",
+  "cond": "D >= 3 and 10 <= hl <= 12",
+  "forcing": "INV",
+  "meaning": "Préférence à saut : 10-12 HL, invitation",
+  "meaning_en": "Jump preference: 10-12 HL, invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.2H",
+  "seq": "1D 1H 2C",
+  "call": "2H",
+  "cond": "H >= 6 and C <= 2",
+  "forcing": "NF",
+  "meaning": "Majeure 6e, minimum",
+  "meaning_en": "Six-card major, minimum",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.2S",
+  "seq": "1D 1S 2C",
+  "call": "2S",
+  "cond": "S >= 6 and C <= 2",
+  "forcing": "NF",
+  "meaning": "Majeure 6e, minimum",
+  "meaning_en": "Six-card major, minimum",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.2S",
+  "seq": "1H 1S 2C",
+  "call": "2S",
+  "cond": "S >= 6 and C <= 2",
+  "forcing": "NF",
+  "meaning": "Majeure 6e, minimum",
+  "meaning_en": "Six-card major, minimum",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.2S",
+  "seq": "1H 1S 2D",
+  "call": "2S",
+  "cond": "S >= 6 and D <= 2",
+  "forcing": "NF",
+  "meaning": "Majeure 6e, minimum",
+  "meaning_en": "Six-card major, minimum",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.pref",
+  "seq": "1D 1H 2C",
+  "call": "2D",
+  "cond": "D >= 2 and D > C - 1 and C <= 3",
+  "forcing": "NF",
+  "meaning": "Préférence pour la première couleur",
+  "meaning_en": "Preference for the first suit",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.pref",
+  "seq": "1D 1S 2C",
+  "call": "2D",
+  "cond": "D >= 2 and D > C - 1 and C <= 3",
+  "forcing": "NF",
+  "meaning": "Préférence pour la première couleur",
+  "meaning_en": "Preference for the first suit",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.pref",
+  "seq": "1H 1S 2C",
+  "call": "2H",
+  "cond": "H >= 2 and H > C - 1 and C <= 3",
+  "forcing": "NF",
+  "meaning": "Préférence pour la première couleur",
+  "meaning_en": "Preference for the first suit",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.pref",
+  "seq": "1H 1S 2D",
+  "call": "2H",
+  "cond": "H >= 2 and H > D - 1 and D <= 3",
+  "forcing": "NF",
+  "meaning": "Préférence pour la première couleur",
+  "meaning_en": "Preference for the first suit",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2H.4H",
+  "seq": "1S 1NT 2H",
+  "call": "4H",
+  "cond": "H >= 4 and hld >= 12",
+  "forcing": "SO",
+  "meaning": "Fit ♥, 12+ HLD : manche",
+  "meaning_en": "Heart fit, 12+ HLD: game",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2C.3C",
+  "seq": "1H 1NT 2C",
+  "call": "3C",
+  "cond": "C >= 4 and 9 <= hld <= 11",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur : invitation",
+  "meaning_en": "Raise of the second suit: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2D.3D",
+  "seq": "1H 1NT 2D",
+  "call": "3D",
+  "cond": "D >= 4 and 9 <= hld <= 11",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur : invitation",
+  "meaning_en": "Raise of the second suit: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2C.3C",
+  "seq": "1S 1NT 2C",
+  "call": "3C",
+  "cond": "C >= 4 and 9 <= hld <= 11",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur : invitation",
+  "meaning_en": "Raise of the second suit: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2D.3D",
+  "seq": "1S 1NT 2D",
+  "call": "3D",
+  "cond": "D >= 4 and 9 <= hld <= 11",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur : invitation",
+  "meaning_en": "Raise of the second suit: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2H.3H",
+  "seq": "1S 1NT 2H",
+  "call": "3H",
+  "cond": "H >= 4 and 9 <= hld <= 11",
+  "forcing": "INV",
+  "meaning": "Soutien de la seconde couleur : invitation",
+  "meaning_en": "Raise of the second suit: invitational",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2C.pref",
+  "seq": "1H 1NT 2C",
+  "call": "2H",
+  "cond": "H >= 2 and C <= 2",
+  "forcing": "NF",
+  "meaning": "Préférence pour la majeure d'ouverture",
+  "meaning_en": "Preference for the opening major",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2D.pref",
+  "seq": "1H 1NT 2D",
+  "call": "2H",
+  "cond": "H >= 2 and D <= 2",
+  "forcing": "NF",
+  "meaning": "Préférence pour la majeure d'ouverture",
+  "meaning_en": "Preference for the opening major",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2C.pref",
+  "seq": "1S 1NT 2C",
+  "call": "2S",
+  "cond": "S >= 2 and C <= 2",
+  "forcing": "NF",
+  "meaning": "Préférence pour la majeure d'ouverture",
+  "meaning_en": "Preference for the opening major",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2D.pref",
+  "seq": "1S 1NT 2D",
+  "call": "2S",
+  "cond": "S >= 2 and D <= 2",
+  "forcing": "NF",
+  "meaning": "Préférence pour la majeure d'ouverture",
+  "meaning_en": "Preference for the opening major",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2H.pref",
+  "seq": "1S 1NT 2H",
+  "call": "2S",
+  "cond": "S >= 2 and H <= 2",
+  "forcing": "NF",
+  "meaning": "Préférence pour la majeure d'ouverture",
+  "meaning_en": "Preference for the opening major",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3D.3NT",
+  "seq": "1D 1H 2C 3D",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3H.4H",
+  "seq": "1D 1H 2C 3H",
+  "call": "4H",
+  "cond": "H >= 2 and hl >= 16",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3C.3NT",
+  "seq": "1D 1H 2C 3C",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3D.3NT",
+  "seq": "1D 1S 2C 3D",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3S.4S",
+  "seq": "1D 1S 2C 3S",
+  "call": "4S",
+  "cond": "S >= 2 and hl >= 16",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3C.3NT",
+  "seq": "1D 1S 2C 3C",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3H.4H",
+  "seq": "1H 1S 2C 3H",
+  "call": "4H",
+  "cond": "hld >= 18",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3S.4S",
+  "seq": "1H 1S 2C 3S",
+  "call": "4S",
+  "cond": "S >= 2 and hl >= 16",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3C.3NT",
+  "seq": "1H 1S 2C 3C",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3H.4H",
+  "seq": "1H 1S 2D 3H",
+  "call": "4H",
+  "cond": "hld >= 18",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3S.4S",
+  "seq": "1H 1S 2D 3S",
+  "call": "4S",
+  "cond": "S >= 2 and hl >= 16",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3D.3NT",
+  "seq": "1H 1S 2D 3D",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2C.3C.3NT",
+  "seq": "1H 1NT 2C 3C",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2D.3D.3NT",
+  "seq": "1H 1NT 2D 3D",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2C.3C.3NT",
+  "seq": "1S 1NT 2C 3C",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2D.3D.3NT",
+  "seq": "1S 1NT 2D 3D",
+  "call": "3NT",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2H.3H.4H",
+  "seq": "1S 1NT 2H 3H",
+  "call": "4H",
+  "cond": "hl >= 17",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3D.P",
+  "seq": "1D 1H 2C 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3H.P",
+  "seq": "1D 1H 2C 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1H.2C.3C.P",
+  "seq": "1D 1H 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3D.P",
+  "seq": "1D 1S 2C 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3S.P",
+  "seq": "1D 1S 2C 3S",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1D.1S.2C.3C.P",
+  "seq": "1D 1S 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3H.P",
+  "seq": "1H 1S 2C 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3S.P",
+  "seq": "1H 1S 2C 3S",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2C.3C.P",
+  "seq": "1H 1S 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3H.P",
+  "seq": "1H 1S 2D 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3S.P",
+  "seq": "1H 1S 2D 3S",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1S.2D.3D.P",
+  "seq": "1H 1S 2D 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2C.3C.P",
+  "seq": "1H 1NT 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1H.1NT.2D.3D.P",
+  "seq": "1H 1NT 2D 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2C.3C.P",
+  "seq": "1S 1NT 2C 3C",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2D.3D.P",
+  "seq": "1S 1NT 2D 3D",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "eco.1S.1NT.2H.3H.P",
+  "seq": "1S 1NT 2H 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Refuse l'invitation",
+  "meaning_en": "Declines the invitation",
+  "status": "infere"
+ },
+ {
   "id": "gen.lim.3NT",
   "seq": "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S",
   "call": "3NT",

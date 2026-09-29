@@ -995,6 +995,19 @@
   "status": "sef"
  },
  {
+  "id": "1NT.2C.x.6NT",
+  "seq": [
+   "1NT 2C 2D|2H|2S",
+   "1NT (X) 2C 2D|2H|2S"
+  ],
+  "call": "6NT",
+  "cond": "hl >= 18",
+  "forcing": "SO",
+  "meaning": "Pas de fit, 18+ HL : petit chelem à SA",
+  "meaning_en": "No fit, 18+ HL: small slam in NT",
+  "status": "infere"
+ },
+ {
   "id": "1NT.2C.x.3NT",
   "seq": [
    "1NT 2C 2D|2H|2S",
@@ -2065,6 +2078,58 @@
   "status": "infere"
  },
  {
+  "id": "2NT.3C.x.6NT",
+  "seq": [
+   "2NT 3C 3D|3H|3S",
+   "2C 2D 2NT 3C 3D|3H|3S"
+  ],
+  "call": "6NT",
+  "cond": "hl >= 13",
+  "forcing": "SO",
+  "meaning": "Pas de fit, 13+ HL : petit chelem à SA",
+  "meaning_en": "No fit, 13+ HL: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2NT.3C.x.4NT",
+  "seq": [
+   "2NT 3C 3D|3H|3S",
+   "2C 2D 2NT 3C 3D|3H|3S"
+  ],
+  "call": "4NT",
+  "cond": "hl == 12",
+  "forcing": "INV",
+  "meaning": "Pas de fit, 12 HL : quantitatif",
+  "meaning_en": "No fit, 12 HL: quantitative",
+  "status": "infere"
+ },
+ {
+  "id": "2NT.3C.x.4NT.acc",
+  "seq": [
+   "2NT 3C 3D|3H|3S 4NT",
+   "2C 2D 2NT 3C 3D|3H|3S 4NT"
+  ],
+  "call": "6NT",
+  "cond": "hl >= 21",
+  "forcing": "SO",
+  "meaning": "Maximum : accepte",
+  "meaning_en": "Maximum: accepts",
+  "status": "infere"
+ },
+ {
+  "id": "2NT.3C.x.4NT.p",
+  "seq": [
+   "2NT 3C 3D|3H|3S 4NT",
+   "2C 2D 2NT 3C 3D|3H|3S 4NT"
+  ],
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
+  "status": "infere"
+ },
+ {
   "id": "2NT.3C.x.3NT",
   "seq": [
    "2NT 3C 3D|3H|3S",
@@ -2130,6 +2195,36 @@
   "status": "sef"
  },
  {
+  "id": "2NT.tex.H.bw",
+  "seq": [
+   "2NT 3D 3H",
+   "2C 2D 2NT 3D 3H"
+  ],
+  "call": "4NT",
+  "cond": "hl >= 10",
+  "forcing": "ASK",
+  "meaning": "Fit et 10+ HL : Blackwood",
+  "meaning_en": "Fit and 10+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "2NT.tex.S.bw",
+  "seq": [
+   "2NT 3H 3S",
+   "2C 2D 2NT 3H 3S"
+  ],
+  "call": "4NT",
+  "cond": "hl >= 10",
+  "forcing": "ASK",
+  "meaning": "Fit et 10+ HL : Blackwood",
+  "meaning_en": "Fit and 10+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
+ },
+ {
   "id": "2NT.tex.H.r",
   "seq": [
    "2NT 3D 3H",
@@ -2154,6 +2249,36 @@
   "meaning": "Manche",
   "meaning_en": "Game",
   "status": "infere"
+ },
+ {
+  "id": "2NT.tex.H.3NT.bw",
+  "seq": [
+   "2NT 3D 3NT",
+   "2C 2D 2NT 3D 3NT"
+  ],
+  "call": "4NT",
+  "cond": "H >= 6 and hl >= 10",
+  "forcing": "ASK",
+  "meaning": "6+ cartes et 10+ HL : Blackwood",
+  "meaning_en": "6+ cards and 10+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "2NT.tex.S.3NT.bw",
+  "seq": [
+   "2NT 3H 3NT",
+   "2C 2D 2NT 3H 3NT"
+  ],
+  "call": "4NT",
+  "cond": "S >= 6 and hl >= 10",
+  "forcing": "ASK",
+  "meaning": "6+ cartes et 10+ HL : Blackwood",
+  "meaning_en": "6+ cards and 10+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
  },
  {
   "id": "2NT.tex.H.3NT.r",
@@ -21174,6 +21299,26 @@
   "status": "infere"
  },
  {
+  "id": "rev.a.6NT",
+  "seq": "1C|1D 1S 2H",
+  "call": "6NT",
+  "cond": "hl >= 16 and (balanced or semibalanced)",
+  "forcing": "SO",
+  "meaning": "16+ HL face au bicolore cher : petit chelem à SA",
+  "meaning_en": "16+ HL opposite a reverse: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "rev.b.6NT",
+  "seq": "1C 1H|1S 2D",
+  "call": "6NT",
+  "cond": "hl >= 16 and (balanced or semibalanced)",
+  "forcing": "SO",
+  "meaning": "16+ HL face au bicolore cher : petit chelem à SA",
+  "meaning_en": "16+ HL opposite a reverse: small slam in NT",
+  "status": "infere"
+ },
+ {
   "id": "rev.a.3NT",
   "seq": "1C|1D 1S 2H",
   "call": "3NT",
@@ -23196,6 +23341,16 @@
   "status": "infere"
  },
  {
+  "id": "gen.lim.6NT",
+  "seq": "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S",
+  "call": "6NT",
+  "cond": "hl >= 19 and (balanced or semibalanced)",
+  "forcing": "SO",
+  "meaning": "19+ HL face à une redemande minimum : petit chelem à SA",
+  "meaning_en": "19+ HL opposite a minimum rebid: small slam in NT",
+  "status": "infere"
+ },
+ {
   "id": "gen.lim.3NT",
   "seq": "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S",
   "call": "3NT",
@@ -23233,6 +23388,406 @@
   "forcing": "NF",
   "meaning": "Minimum : passe",
   "meaning_en": "Minimum: pass",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.S.7",
+  "seq": "2D 3H|3S|3NT",
+  "call": "7S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces == 2 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.S.7",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "7S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces == 1 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.S.7",
+  "seq": "2D 4NT",
+  "call": "7S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces == 0 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.H.7",
+  "seq": "2D 3H|3S|3NT",
+  "call": "7H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces == 2 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.H.7",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "7H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces == 1 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.H.7",
+  "seq": "2D 4NT",
+  "call": "7H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces == 0 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.D.7",
+  "seq": "2D 3H|3S|3NT",
+  "call": "7D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces == 2 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.D.7",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "7D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces == 1 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.D.7",
+  "seq": "2D 4NT",
+  "call": "7D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces == 0 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.C.7",
+  "seq": "2D 3H|3S|3NT",
+  "call": "7C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces == 2 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.C.7",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "7C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces == 1 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.C.7",
+  "seq": "2D 4NT",
+  "call": "7C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces == 0 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Les 4 As et 13 levées comptées : grand chelem",
+  "meaning_en": "All four aces and 13 tricks counted: grand slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.0as.S.6",
+  "seq": "2D 2H|2NT",
+  "call": "6S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.1as.S.6",
+  "seq": "2D 2S|3C|3D",
+  "call": "6S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 2 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.S.6",
+  "seq": "2D 3H|3S|3NT",
+  "call": "6S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 1 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.S.6",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "6S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 0 and ptricks >= 7",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.S.6",
+  "seq": "2D 4NT",
+  "call": "6S",
+  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.0as.H.6",
+  "seq": "2D 2H|2NT",
+  "call": "6H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.1as.H.6",
+  "seq": "2D 2S|3C|3D",
+  "call": "6H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 2 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.H.6",
+  "seq": "2D 3H|3S|3NT",
+  "call": "6H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 1 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.H.6",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "6H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 0 and ptricks >= 7",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.H.6",
+  "seq": "2D 4NT",
+  "call": "6H",
+  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.0as.D.6",
+  "seq": "2D 2H|2NT",
+  "call": "6D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.1as.D.6",
+  "seq": "2D 2S|3C|3D",
+  "call": "6D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 2 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.D.6",
+  "seq": "2D 3H|3S|3NT",
+  "call": "6D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 1 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.D.6",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "6D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 0 and ptricks >= 7",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.D.6",
+  "seq": "2D 4NT",
+  "call": "6D",
+  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.0as.C.6",
+  "seq": "2D 2H|2NT",
+  "call": "6C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.1as.C.6",
+  "seq": "2D 2S|3C|3D",
+  "call": "6C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 2 and ptricks >= 9",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.C.6",
+  "seq": "2D 3H|3S|3NT",
+  "call": "6C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 1 and ptricks >= 8",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.C.6",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "6C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 0 and ptricks >= 7",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.C.6",
+  "seq": "2D 4NT",
+  "call": "6C",
+  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
+  "forcing": "SO",
+  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
+  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.7NT",
+  "seq": "2D 3H|3S|3NT",
+  "call": "7NT",
+  "cond": "balanced and aces == 2 and hcp >= 26",
+  "forcing": "SO",
+  "meaning": "Régulier, les 4 As et 37 H à deux : grand chelem à SA",
+  "meaning_en": "Balanced, all four aces and 37 HCP together: grand slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.7NT",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "7NT",
+  "cond": "balanced and aces == 1 and hcp >= 22",
+  "forcing": "SO",
+  "meaning": "Régulier, les 4 As et 37 H à deux : grand chelem à SA",
+  "meaning_en": "Balanced, all four aces and 37 HCP together: grand slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.7NT",
+  "seq": "2D 4NT",
+  "call": "7NT",
+  "cond": "balanced and aces == 0 and hcp >= 18",
+  "forcing": "SO",
+  "meaning": "Régulier, les 4 As et 37 H à deux : grand chelem à SA",
+  "meaning_en": "Balanced, all four aces and 37 HCP together: grand slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.0as.6NT",
+  "seq": "2D 2H|2NT",
+  "call": "6NT",
+  "cond": "balanced and aces >= 3 and hcp >= 25",
+  "forcing": "SO",
+  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
+  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.1as.6NT",
+  "seq": "2D 2S|3C|3D",
+  "call": "6NT",
+  "cond": "balanced and aces >= 2 and hcp >= 26",
+  "forcing": "SO",
+  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
+  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2as.6NT",
+  "seq": "2D 3H|3S|3NT",
+  "call": "6NT",
+  "cond": "balanced and aces >= 1 and hcp >= 22",
+  "forcing": "SO",
+  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
+  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3as.6NT",
+  "seq": "2D 4C|4D|4H|4S",
+  "call": "6NT",
+  "cond": "balanced and aces >= 0 and hcp >= 18",
+  "forcing": "SO",
+  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
+  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.4as.6NT",
+  "seq": "2D 4NT",
+  "call": "6NT",
+  "cond": "balanced and aces >= 0 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
+  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
   "status": "infere"
  },
  {
@@ -23544,6 +24099,102 @@
   "meaning": "Minimum",
   "meaning_en": "Minimum",
   "status": "infere"
+ },
+ {
+  "id": "1C.1H.4H.bw",
+  "seq": "1C 1H 4H",
+  "call": "4NT",
+  "cond": "hl >= 12",
+  "forcing": "ASK",
+  "meaning": "Ouvreur 18+ fitté, 12+ HL : Blackwood",
+  "meaning_en": "Opener 18+ with a fit, 12+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "1C.1S.4S.bw",
+  "seq": "1C 1S 4S",
+  "call": "4NT",
+  "cond": "hl >= 12",
+  "forcing": "ASK",
+  "meaning": "Ouvreur 18+ fitté, 12+ HL : Blackwood",
+  "meaning_en": "Opener 18+ with a fit, 12+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "1D.1H.4H.bw",
+  "seq": "1D 1H 4H",
+  "call": "4NT",
+  "cond": "hl >= 12",
+  "forcing": "ASK",
+  "meaning": "Ouvreur 18+ fitté, 12+ HL : Blackwood",
+  "meaning_en": "Opener 18+ with a fit, 12+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "1D.1S.4S.bw",
+  "seq": "1D 1S 4S",
+  "call": "4NT",
+  "cond": "hl >= 12",
+  "forcing": "ASK",
+  "meaning": "Ouvreur 18+ fitté, 12+ HL : Blackwood",
+  "meaning_en": "Opener 18+ with a fit, 12+ HL: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "1H.2C.x.bw",
+  "seq": "1H 2C 2H|2H|3C",
+  "call": "4NT",
+  "cond": "H >= 3 and hld >= 16",
+  "forcing": "ASK",
+  "meaning": "Fit et 16+ HLD : Blackwood",
+  "meaning_en": "Fit and 16+ HLD: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "1H.2D.x.bw",
+  "seq": "1H 2D 2H|2H|3D",
+  "call": "4NT",
+  "cond": "H >= 3 and hld >= 16",
+  "forcing": "ASK",
+  "meaning": "Fit et 16+ HLD : Blackwood",
+  "meaning_en": "Fit and 16+ HLD: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "1S.2C.x.bw",
+  "seq": "1S 2C 2S|2H|3C",
+  "call": "4NT",
+  "cond": "S >= 3 and hld >= 16",
+  "forcing": "ASK",
+  "meaning": "Fit et 16+ HLD : Blackwood",
+  "meaning_en": "Fit and 16+ HLD: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "1S.2D.x.bw",
+  "seq": "1S 2D 2S|2H|3D",
+  "call": "4NT",
+  "cond": "S >= 3 and hld >= 16",
+  "forcing": "ASK",
+  "meaning": "Fit et 16+ HLD : Blackwood",
+  "meaning_en": "Fit and 16+ HLD: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
  },
  {
   "id": "1H.2C.x.4H",
@@ -24024,6 +24675,30 @@
   "meaning": "Minimum",
   "meaning_en": "Minimum",
   "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.bw",
+  "seq": "2C 2D 2H",
+  "call": "4NT",
+  "cond": "H >= 3 and hl >= 11",
+  "forcing": "ASK",
+  "meaning": "Fit et 11+ HL face à 18-21 : Blackwood",
+  "meaning_en": "Fit and 11+ HL opposite 18-21: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.2S.bw",
+  "seq": "2C 2D 2S",
+  "call": "4NT",
+  "cond": "S >= 3 and hl >= 11",
+  "forcing": "ASK",
+  "meaning": "Fit et 11+ HL face à 18-21 : Blackwood",
+  "meaning_en": "Fit and 11+ HL opposite 18-21: Blackwood",
+  "status": "infere",
+  "alert": true,
+  "trump": "S"
  },
  {
   "id": "2C.2D.2H.4H",

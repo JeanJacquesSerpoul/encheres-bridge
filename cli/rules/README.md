@@ -4,6 +4,27 @@
 
 **Pour modifier une règle**, on édite ce fichier puis on recharge la page. Il n'y a rien à recompiler.
 
+## Plusieurs systèmes
+
+Le dossier peut contenir plusieurs fichiers de règles. Chacun est un système d'enchères que l'on choisit dans **Réglages › Système**. Le choix est mémorisé dans le navigateur, et `default.yaml` est utilisé tant que rien d'autre n'a été choisi.
+
+Un site statique ne sait pas lister un dossier : les systèmes proposés sont donc ceux que déclare `index.json`. Pour en ajouter un :
+
+1. copier `default.yaml` sous un autre nom, par exemple `mon-systeme.yaml`. Seuls les lettres, chiffres, `.`, `-` et `_` sont permis, avec l'extension `.yaml` ou `.yml` ;
+2. le modifier ;
+3. l'ajouter à `index.json`, avec son nom dans les deux langues :
+
+```json
+{
+  "systems": [
+    { "file": "default.yaml", "name": { "fr": "SEF 2024", "en": "SEF 2024" } },
+    { "file": "mon-systeme.yaml", "name": { "fr": "Mon système", "en": "My system" } }
+  ]
+}
+```
+
+Si un système mémorisé disparaît de `index.json`, la page revient à `default.yaml`. Les tests du dépôt, eux, portent sur `default.yaml` uniquement.
+
 ## Principe
 
 Le fichier est une **liste ordonnée**. À son tour de parole, un joueur prend la **première règle applicable** : son `option` est activée (aucune ne l'est dans l'application), son motif `seq` correspond à la séquence vue par sa paire, et sa condition `cond` est vraie sur sa main. Si aucune règle ne s'applique, ou si l'enchère de la règle est illégale, il passe, et le commentaire l'indique.

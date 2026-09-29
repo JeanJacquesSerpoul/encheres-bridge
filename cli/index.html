@@ -157,6 +157,13 @@
               <option value="light" data-i18n="themeLight">Clair</option>
               <option value="dark" data-i18n="themeDark">Sombre</option>
             </select>
+            <!-- Les fichiers de règles de rules/, listés par rules/index.json ;
+                 default.yaml par défaut, le choix est mémorisé (voir
+                 initRulesSystems dans app.js). -->
+            <label for="rules-system" data-i18n="rulesSystem">Système</label>
+            <select id="rules-system" data-i18n-title="rulesSystemTitle">
+              <option value="default.yaml" selected>SEF 2024</option>
+            </select>
           </div>
           <!-- Par défaut OFF : cochée, la séquence commentée ne liste plus les
                passes (voir applyHidePasses dans app.js). -->
@@ -757,9 +764,10 @@
         <h3>8. Réglages</h3>
         <ul>
           <li><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre).</li>
+          <li><b>Système</b> : le système d'enchères que le moteur applique, c'est-à-dire l'un des fichiers de règles du dossier <code>rules/</code> (par défaut <b>SEF 2024</b>, <code>default.yaml</code>). Le choix est mémorisé, et les enchères affichées sont recalculées aussitôt.</li>
           <li><b>Ne pas afficher les passes</b> : la séquence commentée ne liste plus que les enchères, contres et surcontres ; chaque ligne garde son numéro de tour. La grille des enchères, elle, garde tous les passes.</li>
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
-          <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
+          <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version et le système choisi. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
         <p>Langue, thème, mode questionnaire, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par la toque du bandeau ou par le bouton en haut de ce mode d'emploi. L'écran d'accueil du premier lancement fait tourner, lui, la <b>Vidéo de présentation</b> : une donne suivie de la saisie au contrat, en quarante-deux secondes.</p>
 
@@ -881,9 +889,10 @@
         <h3>8. Settings</h3>
         <ul>
           <li><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark).</li>
+          <li><b>System</b>: the bidding system the engine applies, that is one of the rules files of the <code>rules/</code> folder (<b>SEF 2024</b>, <code>default.yaml</code>, by default). The choice is remembered, and the displayed auction is recomputed at once.</li>
           <li><b>Hide passes</b>: the annotated auction lists only bids, doubles and redoubles; each line keeps its turn number. The auction grid still shows every pass.</li>
           <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
-          <li>The <b>green dot</b> shows that the bidding engine is ready, with its version. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
+          <li>The <b>green dot</b> shows that the bidding engine is ready, with its version and the chosen system. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
         </ul>
         <p>Language, theme, quiz mode, the passes display, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the graduation cap in the top bar or the button at the top of this guide. The welcome screen on first launch plays the <b>Presentation video</b> instead: one deal followed from entry to contract, in forty-two seconds.</p>
 

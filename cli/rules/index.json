@@ -1,0 +1,8 @@
+{
+  "systems": [
+    {
+      "file": "default.yaml",
+      "name": { "fr": "SEF 2024", "en": "SEF 2024" }
+    }
+  ]
+}

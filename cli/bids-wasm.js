@@ -22,11 +22,36 @@
   const q = (sel) => document.querySelector(sel);
   const WASM_URL = "bids.wasm";
   // Les règles d'enchères, lues par le moteur à chaque chargement de la page :
-  // on les modifie dans ce fichier, sans recompiler bids.wasm (cli/rules/README.md).
-  const RULES_URL = "rules/default.yaml";
+  // on les modifie sans recompiler bids.wasm (cli/rules/README.md). Le système
+  // choisi dans les réglages est mémorisé ; default.yaml sinon.
+  const RULES_DIR = "rules/";
+  const DEFAULT_RULES = "default.yaml";
+  const RULES_KEY = "bids.rules";
+  // Un nom de fichier du dossier rules/, rien d'autre : ni chemin, ni URL.
+  const RULES_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*\.ya?ml$/;
 
-  let modulePromise = null;
+  let modulePromise = null; // le module WASM, instancié une fois pour toutes
   let loaded = false;
+  let rules = null; // { file, promise } : les règles installées dans le module
+
+  function rulesChoice() {
+    try {
+      const saved = localStorage.getItem(RULES_KEY);
+      if (saved && RULES_NAME.test(saved)) return saved;
+    } catch (err) {
+      /* stockage inaccessible : le système par défaut */
+    }
+    return DEFAULT_RULES;
+  }
+
+  function saveRulesChoice(file) {
+    try {
+      if (file === DEFAULT_RULES) localStorage.removeItem(RULES_KEY);
+      else localStorage.setItem(RULES_KEY, file);
+    } catch (err) {
+      /* rien à faire : le choix vaudra pour cette session seulement */
+    }
+  }
 
   // Le module pèse plusieurs mégaoctets : sur un lien lent son arrivée prend
   // des secondes, pendant lesquelles un bouton grisé ne dit rien. On prévient
@@ -46,10 +71,11 @@
     return dict[key] || key;
   }
 
-  // Charge et instancie le module, une fois pour toutes. La promesse est
-  // oubliée en cas d'échec : un nouveau clic réessaie au lieu de resservir
-  // l'erreur indéfiniment.
-  function loadModule() {
+  // Le module prêt à calculer : instancié une fois pour toutes, avec les
+  // règles du système choisi. Chaque promesse est oubliée en cas d'échec : un
+  // nouveau clic réessaie au lieu de resservir l'erreur indéfiniment.
+  // Le module seul, sans règles : ce qu'il faut pour lire sa version.
+  function loadWasm() {
     if (typeof WebAssembly !== "object") {
       return Promise.reject(new Error(tr("wasmUnsupported")));
     }
@@ -57,18 +83,44 @@
       return Promise.reject(new Error(tr("wasmMissingExec")));
     }
     if (!modulePromise) {
-      modulePromise = instantiate().then(
-        (api) => {
-          loaded = true;
-          return api;
-        },
-        (err) => {
-          modulePromise = null;
-          throw err;
-        }
-      );
+      modulePromise = instantiate().catch((err) => {
+        modulePromise = null;
+        throw err;
+      });
     }
     return modulePromise;
+  }
+
+  function loadModule() {
+    const file = rulesChoice();
+    // Les règles se téléchargent pendant que le module s'instancie ; leur
+    // erreur éventuelle n'est levée qu'après, pour ne pas laisser de rejet
+    // sans gestionnaire.
+    const text = rules && rules.file === file ? null : fetchRules(file).then(
+      (body) => ({ body }),
+      (error) => ({ error })
+    );
+    return loadWasm().then((api) => {
+      if (!rules || rules.file !== file) {
+        const promise = text.then((got) => {
+          if (got.error) throw got.error;
+          const res = api.loadRules(got.body);
+          if (!res || !res.ok) {
+            const detail = (res && res.error) || tr("wasmFailed");
+            console.error(RULES_DIR + file + " :", detail);
+            throw new Error(tr("rulesInvalid").replace("{file}", file) + " " + detail);
+          }
+        });
+        rules = { file, promise };
+        promise.catch(() => {
+          if (rules && rules.promise === promise) rules = null;
+        });
+      }
+      return rules.promise.then(() => {
+        loaded = true;
+        return api;
+      });
+    });
   }
 
   // Le voile d'attente ne suit pas le téléchargement mais l'attente : le
@@ -88,22 +140,16 @@
 
   // Le texte des règles. no-cache : une règle modifiée doit servir dès le
   // rechargement de la page, pas quand le cache du navigateur expire.
-  async function fetchRules() {
-    const resp = await fetch(RULES_URL, { cache: "no-cache" });
+  async function fetchRules(file) {
+    const resp = await fetch(RULES_DIR + file, { cache: "no-cache" });
     if (!resp.ok) {
-      throw new Error(tr("rulesMissing") + " (HTTP " + resp.status + ")");
+      throw new Error(tr("rulesMissing").replace("{file}", file) + " (HTTP " + resp.status + ")");
     }
     return resp.text();
   }
 
   async function instantiate() {
     const go = new Go();
-    // Les deux téléchargements en parallèle ; l'erreur éventuelle des règles
-    // n'est levée qu'après, pour ne pas laisser de rejet sans gestionnaire.
-    const rulesText = fetchRules().then(
-      (text) => ({ text }),
-      (error) => ({ error })
-    );
     const resp = await fetch(WASM_URL);
     if (!resp.ok) {
       throw new Error(tr("wasmMissing") + " (HTTP " + resp.status + ")");
@@ -132,17 +178,7 @@
     // d'un plantage du runtime Go, qu'on ne veut pas perdre en silence.
     go.run(result.instance).catch((err) => console.error("bids.wasm :", err));
     await ready;
-
-    const api = window.bidsWasm;
-    const rules = await rulesText;
-    if (rules.error) throw rules.error;
-    const res = api.loadRules(rules.text);
-    if (!res || !res.ok) {
-      const detail = (res && res.error) || tr("wasmFailed");
-      console.error("rules/default.yaml :", detail);
-      throw new Error(tr("rulesInvalid") + " " + detail);
-    }
-    return api;
+    return window.bidsWasm;
   }
 
   // Un appel au moteur. Le code Go est synchrone et tient la boucle
@@ -159,9 +195,20 @@
   }
 
   window.bidsLocal = {
+    // Le système d'enchères : le fichier de rules/ que le moteur applique.
+    // set() mémorise le choix ; les règles sont (re)chargées au prochain
+    // appel au moteur — selfCheck, d'ordinaire, que la page relance aussitôt.
+    rules: {
+      defaultFile: DEFAULT_RULES,
+      current: rulesChoice,
+      set(file) {
+        if (!RULES_NAME.test(file)) throw new Error("invalid rules file name: " + file);
+        saveRulesChoice(file);
+      },
+    },
     bid: (pbn, lang) => call("bid", pbn, lang).then(JSON.parse),
     bids: (pbn, lang) => call("bids", pbn, lang).then(JSON.parse),
-    version: () => loadModule().then((api) => JSON.parse(api.version)),
+    version: () => loadWasm().then((api) => JSON.parse(api.version)),
     // Rejoue la donne de référence de /ready : la pastille d'état dit la même
     // chose dans les deux modes. C'est aussi ce qui instancie le module à
     // l'ouverture de la page, en silence — loadModule et non awaitModule :

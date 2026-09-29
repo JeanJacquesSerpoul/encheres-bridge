@@ -205,6 +205,7 @@ const UI_TEXT = {
     theme: "Thème",
     rulesSystem: "Système",
     rulesSystemTitle: "Système d'enchères : le fichier de règles que le moteur applique (dossier rules/).",
+    rulesHelp: "Description du système (PDF)",
     themeTitle: "Thème du système — c'est le choix par défaut — ou thème imposé à la page.",
     themeAuto: "Automatique",
     themeLight: "Clair",
@@ -390,6 +391,7 @@ const UI_TEXT = {
     theme: "Theme",
     rulesSystem: "System",
     rulesSystemTitle: "Bidding system: the rules file the engine applies (rules/ folder).",
+    rulesHelp: "System description (PDF)",
     themeTitle: "Use the system theme — the default — or force one for the page.",
     themeAuto: "Automatic",
     themeLight: "Light",
@@ -636,7 +638,25 @@ function renderRulesSystems() {
   const current = bidsLocal.rules.current();
   sel.replaceChildren(...rulesSystems.map((s) => new Option(rulesSystemName(s.file, lang), s.file)));
   sel.value = current;
+  const pdf = rulesSystemPdf(current, lang);
+  $("#rules-help").hidden = !pdf;
 }
+
+// La description PDF d'un système, dans la langue demandée si elle existe :
+// champ pdf de rules/index.json, un nom de fichier ou { fr, en }.
+const RULES_PDF_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pdf$/;
+
+function rulesSystemPdf(file, lang) {
+  const sys = rulesSystems.find((s) => s.file === file);
+  const pdf = sys && sys.pdf;
+  const name = typeof pdf === "string" ? pdf : pdf && (pdf[lang] || pdf.fr || pdf.en);
+  return name && RULES_PDF_NAME.test(name) ? name : null;
+}
+
+$("#rules-help").addEventListener("click", () => {
+  const pdf = rulesSystemPdf(bidsLocal.rules.current(), $("#lang").value);
+  if (pdf) window.open("rules/" + pdf, "_blank", "noopener");
+});
 
 async function initRulesSystems() {
   try {
@@ -645,7 +665,7 @@ async function initRulesSystems() {
       const body = await resp.json();
       const list = (body && Array.isArray(body.systems) ? body.systems : [])
         .filter((s) => s && typeof s.file === "string")
-        .map((s) => ({ file: s.file, name: (s.name && typeof s.name === "object") ? s.name : {} }));
+        .map((s) => ({ file: s.file, name: (s.name && typeof s.name === "object") ? s.name : {}, pdf: s.pdf }));
       if (list.length) rulesSystems = list;
     }
   } catch (err) {

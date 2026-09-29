@@ -156,6 +156,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
 | `rules/default.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
 | `rules/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
+| `rules/default.pdf`, `rules/default.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.

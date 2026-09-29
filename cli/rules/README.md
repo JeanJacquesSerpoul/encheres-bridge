@@ -25,6 +25,25 @@ Un site statique ne sait pas lister un dossier : les systèmes proposés sont do
 
 Si un système mémorisé disparaît de `index.json`, la page revient à `default.yaml`. Les tests du dépôt, eux, portent sur `default.yaml` uniquement.
 
+## Description en PDF
+
+Le bouton **?** à côté de la liste des systèmes ouvre la description du système choisi : un PDF lisible, règle par règle, section par section, avec les conditions traduites en clair. Il est produit à partir du fichier de règles, et `index.json` le déclare par système, dans chaque langue :
+
+```json
+{ "file": "mon-systeme.yaml", "name": { "fr": "Mon système", "en": "My system" },
+  "pdf": { "fr": "mon-systeme.pdf", "en": "mon-systeme.en.pdf" } }
+```
+
+Pour le produire ou le mettre à jour, sans dépendance à installer :
+
+```bash
+cd tools/python_tools
+python rules_pdf.py ../../cli/rules/mon-systeme.yaml --title "Mon système"
+python rules_pdf.py ../../cli/rules/mon-systeme.yaml --title "Mon système" --lang EN
+```
+
+Le PDF porte l'empreinte du fichier de règles dont il est issu. `go test ./engine` échoue quand un PDF déclaré ne correspond plus à ses règles : il faut alors le régénérer.
+
 ## Principe
 
 Le fichier est une **liste ordonnée**. À son tour de parole, un joueur prend la **première règle applicable** : son `option` est activée (aucune ne l'est dans l'application), son motif `seq` correspond à la séquence vue par sa paire, et sa condition `cond` est vraie sur sa main. Si aucune règle ne s'applique, ou si l'enchère de la règle est illégale, il passe, et le commentaire l'indique.
@@ -75,6 +94,8 @@ cd tools/python_tools
 python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json
 python sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024
 python gen_golden.py
+python rules_pdf.py ../../cli/rules/default.yaml
+python rules_pdf.py ../../cli/rules/default.yaml --lang EN
 cd ../.. && go test ./engine
 ```
 

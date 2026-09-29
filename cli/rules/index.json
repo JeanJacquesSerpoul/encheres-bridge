@@ -2,7 +2,8 @@
   "systems": [
     {
       "file": "default.yaml",
-      "name": { "fr": "SEF 2024", "en": "SEF 2024" }
+      "name": { "fr": "SEF 2024", "en": "SEF 2024" },
+      "pdf": { "fr": "default.pdf", "en": "default.en.pdf" }
     }
   ]
 }

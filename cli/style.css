@@ -2306,6 +2306,10 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   gap: 8px 12px;
   margin-bottom: 12px;
 }
+/* Le système d'enchères et, à côté, le bouton de sa description PDF. */
+.rules-system-row { display: flex; gap: 6px; min-width: 0; }
+.rules-system-row select { flex: 1; min-width: 0; }
+.rules-system-row .icon-btn { padding: 4px 6px; }
 .settings-pop select,
 .settings-pop input[type="text"] {
   padding: 6px 8px;

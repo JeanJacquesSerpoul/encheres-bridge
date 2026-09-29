@@ -116,33 +116,30 @@ func buildResponse(deal *Deal, calls []SeatCall, lang string) bidResponse {
 		Hands:      map[string]handJSON{},
 	}
 	for seat, h := range deal.Hands {
+		f := newFeatures(h)
 		resp.Hands[seatNames[seat]] = handJSON{
 			Spades:   h.Suits[Spades],
 			Hearts:   h.Suits[Hearts],
 			Diamonds: h.Suits[Diamonds],
 			Clubs:    h.Suits[Clubs],
-			HLPoints: h.HL(),
-			HPoints:  h.H(),
+			HLPoints: f.hl,
+			HPoints:  f.hcp,
 			Type:     localizeHandType(h.Type(), lang),
 		}
 	}
 	for _, sc := range calls {
-		comment := sc.M.en
-		if lang == "fr" {
-			comment = sc.M.fr
-		}
 		var trace []traceJSON
 		for _, st := range sc.Trace {
-			label := st.en
+			label, value := st.en, st.valueEN
 			if lang == "fr" {
-				label = st.fr
+				label, value = st.fr, st.valueFR
 			}
-			trace = append(trace, traceJSON{Label: label, Value: st.value, Ok: st.ok, Note: st.note, Depth: st.depth})
+			trace = append(trace, traceJSON{Label: label, Value: value, Ok: st.ok, Note: st.note, Depth: st.depth})
 		}
 		resp.Auction = append(resp.Auction, auctionJSON{
 			Player:  seatNames[sc.Seat],
 			Bid:     sc.Call.Format(lang),
-			Comment: comment,
+			Comment: sc.comment(lang),
 			Trace:   trace,
 		})
 	}

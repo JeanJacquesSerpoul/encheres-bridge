@@ -167,11 +167,11 @@ func jsonValue(v value) any {
 }
 
 type sefCase struct {
-	ID       int            `json:"id"`
-	Hand     string         `json:"hand"`
-	Seq      string         `json:"seq"`
-	Trump    *string        `json:"trump"`
-	Options  []string       `json:"options"`
+	ID       int      `json:"id"`
+	Hand     string   `json:"hand"`
+	Seq      string   `json:"seq"`
+	Trump    *string  `json:"trump"`
+	Options  []string `json:"options"`
 	Expected struct {
 		Call *string `json:"call"`
 		Rule *string `json:"rule"`

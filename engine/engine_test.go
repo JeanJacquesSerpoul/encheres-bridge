@@ -6,6 +6,24 @@ import (
 	"testing"
 )
 
+func mustParsePBN(t *testing.T, pbn string) *Deal {
+	t.Helper()
+	d, err := ParsePBN([]byte(pbn))
+	if err != nil {
+		t.Fatalf("ParsePBN: %v", err)
+	}
+	return d
+}
+
+// formatAuction writes an auction as "N:1SA E:Passe ...", in French.
+func formatAuction(calls []SeatCall) string {
+	parts := make([]string, len(calls))
+	for i, sc := range calls {
+		parts[i] = seatNames[sc.Seat] + ":" + sc.Call.Format("fr")
+	}
+	return strings.Join(parts, " ")
+}
+
 func dealFrom(rng *rand.Rand) *Deal {
 	cards := make([]int, 52)
 	for i := range cards {
@@ -37,7 +55,7 @@ func TestAuctionsTerminateAndAreLegal(t *testing.T) {
 		if len(calls) > maxLen {
 			maxLen = len(calls)
 		}
-		if len(calls) >= 40 {
+		if len(calls) >= maxCalls {
 			t.Fatalf("deal %d: auction hit the safety cap (%d calls)", i, len(calls))
 		}
 		// Check seat rotation and call legality.
@@ -85,7 +103,7 @@ func TestParsePBN(t *testing.T) {
 	if d.Dealer != 0 {
 		t.Fatalf("dealer = %d, want 0 (N)", d.Dealer)
 	}
-	if d.Hands[0].Suits[Spades] != "AKQ" || d.Hands[0].H() != 20 {
+	if d.Hands[0].Suits[Spades] != "AKQ" || newFeatures(d.Hands[0]).hcp != 20 {
 		t.Fatalf("north hand parsed wrong: %+v", d.Hands[0])
 	}
 	// Rotation starting from another seat.

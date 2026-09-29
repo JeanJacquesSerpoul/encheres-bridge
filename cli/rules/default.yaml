@@ -3731,10 +3731,10 @@
   for: [{o: 1C}, {o: 1D}]
   seq: "{o} (1S)"
   call: X
-  cond: "(H == 4 and hcp >= 8) or (H == 5 and 8 <= hcp <= 10)"
+  cond: "(H == 4 and hcp >= 8) or (H == 5 and 8 <= hcp <= 10) or (H == 6 and 6 <= hcp <= 10)"
   forcing: TO
-  meaning: "Spoutnik : 4♥ et 8+ H, ou 5♥ et 10 H max"
-  meaning_en: "Sputnik: 4♥ and 8+ HCP, or 5♥ and 10 HCP max"
+  meaning: "Spoutnik : 4♥ et 8+ H, ou 5-6♥ et 10 H max (répétés ensuite)"
+  meaning_en: "Sputnik: 4♥ and 8+ HCP, or 5-6♥ and 10 HCP max (rebid next)"
   status: sef
   alert: true
 - id: spoutnik.1C.1D
@@ -4643,6 +4643,24 @@
   meaning_en: "Game in notrump"
   status: infere
 # --- ouverture mineure contrée
+- id: "spoutnik.{o}.1S.{r}.2H"
+  for: [{o: 1C, r: 1NT}, {o: 1C, r: 2C}, {o: 1D, r: 1NT}, {o: 1D, r: 2D}]
+  seq: "{o} (1S) X {r}"
+  call: 2H
+  cond: "H >= 5 and hcp <= 10"
+  forcing: NF
+  meaning: "Répète les cœurs : 5-6 cartes, 10 H max"
+  meaning_en: "Rebids the hearts: 5-6 cards, 10 HCP max"
+  status: sef
+- id: "spoutnik.{o}.1S.{r}.2H.P"
+  for: [{o: 1C, r: 1NT}, {o: 1C, r: 2C}, {o: 1D, r: 1NT}, {o: 1D, r: 2D}]
+  seq: "{o} (1S) X {r} 2H"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Passe : 2♥ est une conclusion"
+  meaning_en: "Pass: 2♥ is a signoff"
+  status: infere
 - id: "rep.{m}.X.XX"
   for: [{m: 1C, ms: C}, {m: 1D, ms: D}]
   seq: "{m} (X)"

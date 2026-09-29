@@ -175,6 +175,7 @@ type sefCase struct {
 	Options  []string `json:"options"`
 	Vul      bool     `json:"vul"`
 	OppVul   bool     `json:"opp_vul"`
+	Seat     int      `json:"seat"`
 	Expected struct {
 		Call *string `json:"call"`
 		Rule *string `json:"rule"`
@@ -216,7 +217,7 @@ func TestConformancePython(t *testing.T) {
 			}
 			continue
 		}
-		f.vul, f.oppVul = c.Vul, c.OppVul
+		f.vul, f.oppVul, f.seat = c.Vul, c.OppVul, c.Seat
 		opts := map[string]bool{}
 		for _, o := range c.Options {
 			opts[o] = true

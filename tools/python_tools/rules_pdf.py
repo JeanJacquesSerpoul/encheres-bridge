@@ -43,7 +43,8 @@ TXT = {
             "séquence commence elle-même par Passe.",
             "Points : H = points d'honneur (A 4, R 3, D 2, V 1) ; HL = H + un point par carte au-delà de la 4e "
             "dans chaque couleur ; DH = H + points de courte (chicane 3, singleton 2, doubleton 1) ; HLD = HL + "
-            "points de courte. ♠ ♥ ♦ ♣ seuls désignent la longueur de la couleur.",
+            "points de courte. ♠ ♥ ♦ ♣ seuls désignent la longueur de la couleur. Position : rang du joueur dans le "
+            "tour d'enchères (1 = donneur, 4 = 4e position).",
             "Forcing : NF non forcing, F1 forcing un tour, FM forcing de manche, INV invitation, SO conclusion, "
             "REL relais, ASK question, TO contre d'appel, PEN punitif. Statut : SEF (fiches SEF 2024), SEF 2018, "
             "choix (option retenue), inféré (complétion naturelle, absente des fiches), à vérifier.",
@@ -51,7 +52,7 @@ TXT = {
         names=dict(hcp="H", hl="HL", dh="DH", hld="HLD", shape="forme", balanced="main régulière",
                    semibalanced="main semi-régulière", aces="nombre d'As", kings="nombre de Rois", losers="perdantes",
                    ptricks="levées de jeu", qtricks="levées rapides", sidetricks="levées rapides annexes",
-                   vul="vulnérable", opp_vul="adversaires vulnérables"),
+                   vul="vulnérable", opp_vul="adversaires vulnérables", seat="position"),
         neg=dict(balanced="main irrégulière", semibalanced="main non semi-régulière", vul="non vulnérable",
                  opp_vul="adversaires non vulnérables"),
         funcs=dict(ace="As {s}", king="Roi {s}", queen="Dame {s}", top="gros honneurs {s}", solid="{s} ARD",
@@ -82,7 +83,8 @@ TXT = {
             "are ignored, unless the sequence itself starts with Pass.",
             "Points: HCP = high-card points (A 4, K 3, Q 2, J 1); HL = HCP + one point per card beyond the fourth "
             "in each suit; DH = HCP + shortness points (void 3, singleton 2, doubleton 1); HLD = HL + shortness "
-            "points. ♠ ♥ ♦ ♣ alone mean the length of the suit.",
+            "points. ♠ ♥ ♦ ♣ alone mean the length of the suit. Seat: the player's rank in the auction (1 = dealer, "
+            "4 = fourth seat).",
             "Forcing: NF non-forcing, F1 forcing one round, FM game forcing, INV invitational, SO sign-off, "
             "REL relay, ASK asking bid, TO takeout double, PEN penalty. Status: SEF (SEF 2024 cards), SEF 2018, "
             "choix (chosen option), inferred (natural completion, not on the cards), to be checked.",
@@ -90,7 +92,7 @@ TXT = {
         names=dict(hcp="HCP", hl="HL", dh="DH", hld="HLD", shape="shape", balanced="balanced",
                    semibalanced="semi-balanced", aces="aces", kings="kings", losers="losers",
                    ptricks="playing tricks", qtricks="quick tricks", sidetricks="side quick tricks",
-                   vul="vulnerable", opp_vul="opponents vulnerable"),
+                   vul="vulnerable", opp_vul="opponents vulnerable", seat="seat"),
         neg=dict(balanced="unbalanced", semibalanced="not semi-balanced", vul="not vulnerable",
                  opp_vul="opponents not vulnerable"),
         funcs=dict(ace="{s} ace", king="{s} king", queen="{s} queen", top="{s} top honours", solid="{s} AKQ",

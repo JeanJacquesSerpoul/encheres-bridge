@@ -493,7 +493,7 @@ Le format des règles, les caractéristiques de main disponibles et le langage d
 
 ### Ce que le moteur ne fait pas
 
-- **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires).
+- **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires), comme le rang du joueur dans le tour d'enchères (`seat`, 1 = donneur) : l'ouverture en 4e position suit la règle des 15.
 - **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/rules/default.yaml](cli/rules/default.yaml)) :
   - côté défense : interventions sur une ouverture au palier de 1 (1SA, couleur, saut faible, contre d'appel, contre fort) et sur un 2 faible, réveil, réponses de l'avancée et redemandes de l'intervenant ou du contreur ;
   - côté ouvreur : soutien, 2SA fitté, cue-bid, Spoutnik, Sans-Atout et couleur nouvelle après une intervention, puis les suites de l'ouvreur.

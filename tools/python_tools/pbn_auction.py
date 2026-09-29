@@ -214,7 +214,8 @@ def parse_vulnerable(value):
 
 def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=False, vulnerable=None):
     """Enchères des quatre mains selon les règles. Retourne une liste de dicts.
-    vulnerable : valeur du tag [Vulnerable] (None, NS, EW, All...), lue par les conditions vul / opp_vul."""
+    vulnerable : valeur du tag [Vulnerable] (None, NS, EW, All...), lue par les conditions vul / opp_vul.
+    Le rang du joueur à partir du donneur (1 à 4) est lu par la condition seat."""
     import sef_rules as sr
     vuln = parse_vulnerable(vulnerable)
     start = SEATS.index(dealer)
@@ -233,7 +234,7 @@ def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=Fals
         opener = next((w % 2 for w, c in history if c != "P"), None)  # paire qui a ouvert
         forced = opps_pass and opener is not None and pair != opener
         r = None if forced else sr.choose(rules, " ".join(seq), parsed[SEATS[seat]], options, trump[pair],
-                                          vuln[pair], vuln[1 - pair])
+                                          vuln[pair], vuln[1 - pair], (seat - start) % 4 + 1)
         note = None
         if forced:
             note = MSG[lang]["opp_pass"]

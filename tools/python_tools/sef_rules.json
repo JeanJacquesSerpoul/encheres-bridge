@@ -93,6 +93,46 @@
   "status": "sef"
  },
  {
+  "id": "open.4e.1S",
+  "seq": "",
+  "call": "1S",
+  "cond": "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15 and (S >= 5 and S >= H)",
+  "forcing": "NF",
+  "meaning": "4e position, 10-11 H : règle des 15 (H + nombre de piques ≥ 15)",
+  "meaning_en": "Fourth seat, 10-11 HCP: rule of 15 (HCP + number of spades ≥ 15)",
+  "status": "choix"
+ },
+ {
+  "id": "open.4e.1H",
+  "seq": "",
+  "call": "1H",
+  "cond": "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15 and (H >= 5)",
+  "forcing": "NF",
+  "meaning": "4e position, 10-11 H : règle des 15 (H + nombre de piques ≥ 15)",
+  "meaning_en": "Fourth seat, 10-11 HCP: rule of 15 (HCP + number of spades ≥ 15)",
+  "status": "choix"
+ },
+ {
+  "id": "open.4e.1D",
+  "seq": "",
+  "call": "1D",
+  "cond": "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15 and (D >= 3 and (D > C or (D == C and D >= 4)))",
+  "forcing": "NF",
+  "meaning": "4e position, 10-11 H : règle des 15 (H + nombre de piques ≥ 15)",
+  "meaning_en": "Fourth seat, 10-11 HCP: rule of 15 (HCP + number of spades ≥ 15)",
+  "status": "choix"
+ },
+ {
+  "id": "open.4e.1C",
+  "seq": "",
+  "call": "1C",
+  "cond": "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15 and (true)",
+  "forcing": "NF",
+  "meaning": "4e position, 10-11 H : règle des 15 (H + nombre de piques ≥ 15)",
+  "meaning_en": "Fourth seat, 10-11 HCP: rule of 15 (HCP + number of spades ≥ 15)",
+  "status": "choix"
+ },
+ {
   "id": "open.4NT",
   "seq": "",
   "call": "4NT",

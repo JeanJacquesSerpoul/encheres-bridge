@@ -661,10 +661,19 @@ function rulesSystemPdf(file, lang) {
 
 // Le PDF s'ouvre dans une fenêtre modale, affiché par le lecteur du navigateur.
 // Le cadre n'est chargé qu'à l'ouverture et vidé à la fermeture ; le lien de
-// l'en-tête ouvre le même fichier dans un onglet. Un navigateur sans lecteur
-// PDF intégré l'ouvre directement dans un onglet.
+// l'en-tête ouvre le même fichier dans un onglet. Sur iOS et Android, ou sans
+// lecteur PDF intégré, le PDF s'ouvre directement dans un onglet : la fenêtre
+// modale est réservée à l'ordinateur.
 const rulesPdfDialog = $("#rules-pdf-dialog");
 const rulesPdfFrame = $("#rules-pdf-frame");
+
+// iOS / iPadOS et Android. L'iPad se présente comme un Mac (« Macintosh ») :
+// il se reconnaît à son écran tactile.
+function isMobileOS() {
+  const ua = navigator.userAgent;
+  return /Android|iPhone|iPad|iPod/i.test(ua) ||
+    (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+}
 
 function openRulesPdf() {
   const lang = $("#lang").value;
@@ -673,8 +682,7 @@ function openRulesPdf() {
   if (!pdf) return;
   closeMenus();
   const url = "rules/" + pdf;
-  // Sans lecteur PDF intégré (Chrome Android…), le cadre resterait vide.
-  if (navigator.pdfViewerEnabled === false) {
+  if (isMobileOS() || navigator.pdfViewerEnabled === false) {
     window.open(url, "_blank", "noopener");
     return;
   }

@@ -232,25 +232,31 @@ def cond_text(cond, t):
 
 
 # ---------------------------------------------------------------- structure du fichier
-def outline(path):
-    """Les événements du fichier dans l'ordre : sections, sous-sections, commentaires, modèles de règles."""
+def outline(path, lang="FR"):
+    """Les événements du fichier dans l'ordre : sections, sous-sections, commentaires, modèles de règles.
+
+    Une ligne « # en: … » qui suit un titre (ou un commentaire) en donne la traduction anglaise : elle
+    remplace le texte français dans le PDF anglais et n'apparaît jamais comme un commentaire."""
     lines = io.open(path, encoding="utf-8").read().replace("\r\n", "\n").split("\n")
     events, started, i = [], False, 0
     while i < len(lines):
         ln = lines[i]
         if ln.startswith("# ====") and i + 2 < len(lines) and lines[i + 2].startswith("# ===="):
-            events.append(("section", lines[i + 1][2:].strip()))
+            events.append(["section", lines[i + 1][2:].strip()])
             started = True
             i += 3
             continue
-        if started and ln.startswith("# --- "):
-            events.append(("sub", ln[6:].strip()))
+        if started and ln.startswith("# en: "):
+            if events and events[-1][0] != "rule" and lang == "EN":
+                events[-1][1] = ln[6:].strip()
+        elif started and ln.startswith("# --- "):
+            events.append(["sub", ln[6:].strip()])
         elif started and ln.startswith("# "):
-            events.append(("note", ln[2:].strip()))
+            events.append(["note", ln[2:].strip()])
         elif started and ln.startswith("- id:"):
-            events.append(("rule", ln[5:].strip().strip('"')))
+            events.append(["rule", ln[5:].strip().strip('"')])
         i += 1
-    return events
+    return [tuple(e) for e in events]
 
 
 # ---------------------------------------------------------------- PDF
@@ -508,7 +514,7 @@ def build(src, out, lang, title):
     sha = fingerprint(src)
     doc.paragraph("%s : %s · %d %s · %s %s" % (t["source"], os.path.basename(src), len(rules), t["rules"], t["sha"], sha[:16] + "…"),
                   size=7.5, color=(0.45, 0.45, 0.45), before=6)
-    for kind, value in outline(src):
+    for kind, value in outline(src, lang):
         if kind == "section":
             doc.new_page()
             doc.heading(value, 1)

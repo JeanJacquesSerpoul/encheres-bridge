@@ -11,7 +11,9 @@
 # ======================================================================
 # A.4 Ouvertures
 # ======================================================================
+# en: A.4 Openings
 # Ordre = priorité : on vérifie d'abord les ouvertures fortes, puis 1SA, les ouvertures au palier de 1, enfin les barrages.
+# en: Order = priority: strong openings are checked first, then 1NT, the one-level openings, and finally the preempts.
 - id: open.2D
   seq: ""
   call: 2D
@@ -144,8 +146,11 @@
 # ======================================================================
 # A.5 Ouverture de 1SA
 # ======================================================================
+# en: A.5 1NT opening
 # Sur 1SA contré, le camp de l'ouvreur ignore le contre (SEF : « 2♣ = Stayman, etc. ») : chaque motif porte aussi sa variante « 1NT (X) … ».
+# en: Over a doubled 1NT, the opening side ignores the double (SEF: “2♣ = Stayman, etc.”): each pattern also carries its “1NT (X) …” variant.
 # Réponses
+# en: Responses
 - id: 1NT.r.5NT
   seq: ["1NT", "1NT (X)"]
   call: 5NT
@@ -303,6 +308,7 @@
   meaning_en: "Fewer than 8 HCP, no suit to show"
   status: sef
 # Redemandes de l'ouvreur
+# en: Opener's rebids
 - id: 1NT.2C.2NT
   seq: ["1NT 2C", "1NT (X) 2C"]
   call: 2NT
@@ -420,6 +426,7 @@
   meaning_en: "Minimum / final contract"
   status: sef
 # Suites du répondant après Stayman
+# en: Responder's continuations after Stayman
 - id: "1NT.2C.2D.2{M}"
   for: [{M: H, oM: S}, {M: S, oM: H}]
   seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
@@ -580,6 +587,7 @@
   status: sef
   alert: true
 # Suites après les réponses de l'ouvreur au Stayman
+# en: Continuations after opener's answers to Stayman
 - id: 1NT.2C.2NT.3C.3H
   seq: ["1NT 2C 2NT 3C", "1NT (X) 2C 2NT 3C"]
   call: 3H
@@ -672,6 +680,7 @@
   meaning_en: "End (slam continuations not coded: see Part B)"
   status: infere
 # Suites du répondant après Texas
+# en: Responder's continuations after a transfer
 - id: "1NT.tex{M}.55.2S"
   for: [{T: 2D, M: H}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
@@ -854,6 +863,7 @@
   meaning_en: "Nothing: pass"
   status: infere
 # Suites après Texas mineur
+# en: Continuations after a minor-suit transfer
 - id: 1NT.2S.3C.3D
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 3D
@@ -933,7 +943,9 @@
 # ======================================================================
 # A.6 Ouverture de 2SA (et 2♣ – 2♦ – 2SA)
 # ======================================================================
+# en: A.6 2NT opening (and 2♣ – 2♦ – 2NT)
 # Les mêmes règles s'appliquent après 2♣ – 2♦ – 2SA (22-23 HL) : `seq` est une liste. Les seuils du répondant, calibrés pour 20-21, sont un peu prudents dans ce cas.
+# en: The same rules apply after 2♣ – 2♦ – 2NT (22-23 HL): `seq` is a list. Responder's thresholds, tuned for 20-21, are slightly cautious in that case.
 - id: 2NT.r.5NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 5NT
@@ -1134,6 +1146,7 @@
 # ======================================================================
 # A.7 Ouvertures de 1♣ / 1♦ : réponses et redemandes
 # ======================================================================
+# en: A.7 1♣ / 1♦ openings: responses and rebids
 - id: "1{m}.r.2{M}.strong"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m}"
@@ -1308,6 +1321,7 @@
   meaning_en: "Fewer than 5-6 HCP"
   status: sef
 # Redemandes de l'ouvreur après 1♣/♦ – 1♥/♠
+# en: Opener's rebids after 1♣/♦ – 1♥/♠
 - id: "1{m}.1{M}.4{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M}"
@@ -1439,7 +1453,9 @@
 # ======================================================================
 # A.7 bis Drury (réponses d'une main passée)
 # ======================================================================
+# en: A.7 bis Drury (passed-hand responses)
 # Ces règles commencent par `P` : elles ne s'appliquent que si le répondant a déjà passé. Elles précèdent les réponses ordinaires à 1♥/1♠.
+# en: These rules start with `P`: they apply only when responder has already passed. They come before the ordinary responses to 1♥/1♠.
 - id: "drury.{M}.2NT"
   for: [{M: H}, {M: S}]
   seq: "P 1{M}"
@@ -1463,6 +1479,7 @@
   alert: true
   trump: "{M}"
 # --- réponses de l'ouvreur au Drury simple (fiche sur 1♠ ; 1♥ par transposition)
+# en: opener's answers to simple Drury (card for 1♠; 1♥ by transposition)
 - id: "drury.S.3S"
   seq: "P 1S 2C"
   call: 3S
@@ -1543,6 +1560,7 @@
   meaning_en: "Light opening: to stop"
   status: "{st}"
 # --- suites du répondant
+# en: responder's continuations
 - id: "drury.{M}.2D.r4"
   for: [{M: H}, {M: S}]
   seq: "P 1{M} 2C 2D"
@@ -1589,6 +1607,7 @@
   meaning_en: "Partscore"
   status: infere
 # --- Super Drury : interrogative au singleton
+# en: Super Drury: singleton ask
 - id: "sdrury.{M}.3C"
   for: [{M: H}, {M: S}]
   seq: "P 1{M} 2NT"
@@ -1650,6 +1669,7 @@
 # ======================================================================
 # A.8 Ouvertures de 1♥ / 1♠ : réponses et suites
 # ======================================================================
+# en: A.8 1♥ / 1♠ openings: responses and continuations
 - id: "1{M}.r.4NT"
   for: [{M: H, km: "keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))"}, {M: S, km: "true"}]
   seq: "1{M}"
@@ -1815,6 +1835,7 @@
   meaning_en: "Nothing"
   status: sef
 # Suites après soutien et 2SA fitté
+# en: Continuations after a raise and the fitted 2NT
 - id: "1{M}.2{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: "1{M} 2{M}"
@@ -1910,6 +1931,7 @@
 # ======================================================================
 # A.9 Ouvertures de 2 (2♣, 2♦, 2♥/2♠)
 # ======================================================================
+# en: A.9 Two-level openings (2♣, 2♦, 2♥/2♠)
 - id: 2C.r.2D
   seq: "2C"
   call: 2D
@@ -2135,6 +2157,7 @@
 # ======================================================================
 # A.10 Ouvertures de 3, 3SA, 4 et 4SA
 # ======================================================================
+# en: A.10 Three-level, 3NT, four-level and 4NT openings
 - id: "3{m}.r.3NT"
   for: [{m: C}, {m: D}]
   seq: "3{m}"
@@ -2287,7 +2310,9 @@
 # ======================================================================
 # A.11 Blackwood 5 clés : réponses
 # ======================================================================
+# en: A.11 Keycard Blackwood: responses
 # Réponses au 4SA Blackwood quand l'atout convenu est `{t}` (voir A.12 pour l'atout convenu, les entrées et la suite). Les réponses avec chicane (5SA, 6♣, 6♦) ne sont utilisées qu'avec un atout majeur.
+# en: Responses to Blackwood 4NT when the agreed trump is `{t}` (see A.12 for the agreed trump, the entries and the continuation). The void-showing responses (5NT, 6♣, 6♦) are used only with a major-suit trump.
 - id: "bw.{t}.6D"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2355,8 +2380,11 @@
 # ======================================================================
 # A.12 Blackwood : entrées, demandeur, grand chelem
 # ======================================================================
+# en: A.12 Blackwood: entries, asker, grand slam
 # L'atout convenu est un **état** de l'enchère : une règle qui porte `trump: X` fixe l'atout à X quand elle est choisie. Les règles `BW:X …` ne s'appliquent que si l'atout convenu est X (le préfixe vaut « n'importe quel début de séquence »). Condition de la fiche pour poser le Blackwood (jeu 30/41) : ♠ aucune clé exigée ; ♥ 2 clés ou 1 clé + la Dame ; ♦ 2 clés ; ♣ 3 clés.
+# en: The agreed trump is a **state** of the auction: a rule carrying `trump: X` sets the trump to X when it is chosen. `BW:X …` rules apply only when the agreed trump is X (the prefix stands for “any start of the sequence”). Condition on the card for asking Blackwood (30/41 deck): ♠ no key card required; ♥ 2 key cards, or 1 key card + the Queen; ♦ 2 key cards; ♣ 3 key cards.
 # --- demandeur après la réponse au Blackwood 5 clés (total de clés déduit de sa main)
+# en: asker after the keycard response (total keycards from his own hand)
 - id: "bwa.{t}.5S.5NT"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT 5S"
@@ -2441,6 +2469,7 @@
   meaning_en: "Small slam (or no 5-level available)"
   status: infere
 # --- Blackwood aux Rois à 5SA : 7 avec 13 levées, sinon le Roi le plus économique
+# en: 5NT king ask: grand slam with 13 tricks, otherwise the cheapest king
 - id: "bwk.{t}.7"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT * 5NT"
@@ -2490,8 +2519,11 @@
 # ======================================================================
 # A.13 Contrôles et suites de chelem
 # ======================================================================
+# en: A.13 Controls and slam continuations
 # Contrôle du 1er tour : As ou chicane (`ctrl1`). Contrôle du 2e tour : Roi ou singleton (`ctrl2`). On nomme les contrôles **du moins cher au plus cher**, en commençant par ceux du 1er tour. Un Splinter est valorisé quand le partenaire n'a pas de points perdus dans la courte (`hcp_in(courte) <= 1`).
+# en: First-round control: Ace or void (`ctrl1`). Second-round control: King or singleton (`ctrl2`). Controls are bid **cheapest first**, starting with first-round controls. A Splinter is upgraded when partner has no wasted points in the short suit (`hcp_in(short) <= 1`).
 # --- 1M – 3M (11-12 DH) : Blackwood de l'ouvreur
+# en: 1M – 3M (11-12 DH): opener's Blackwood
 - id: "sl.1{M}.3{M}.bw"
   for: [{M: H, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, km: "true"}]
   seq: "1{M} 3{M}"
@@ -2504,6 +2536,7 @@
   alert: true
   trump: "{M}"
 # --- Splinter du répondant : l'ouvreur sans points perdus dans la courte pose le Blackwood
+# en: Responder's splinter: opener with no wasted values in the shortness asks for keycards
 - id: "sl.spl.{M}.{s}.bw"
   for: [{M: H, s: C, c: 4C, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: H, s: D, c: 4D, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: H, s: S, c: 3S, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, s: C, c: 4C, km: "true"}, {M: S, s: D, c: 4D, km: "true"}, {M: S, s: H, c: 4H, km: "true"}]
   seq: "1{M} {c}"
@@ -2526,6 +2559,7 @@
   status: infere
   trump: "{M}"
 # --- 1SA – Stayman – fit avec espoir de chelem : l'ouvreur nomme ses contrôles
+# en: 1NT – Stayman – fit with slam interest: opener cue-bids his controls
 - id: "sl.st.{M}.{c}"
   for: [{M: H, x: 3S, c: C}, {M: H, x: 3S, c: D}, {M: S, x: 3H, c: C}, {M: S, x: 3H, c: D}, {M: S, x: 3H, c: H}]
   seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}", "1NT (X) 2C 2{M} {x}", "1NT (X) 2C 2NT 3{M}"]
@@ -2586,6 +2620,7 @@
   meaning_en: "No slam"
   status: infere
 # --- 1SA – Stayman – Splinter
+# en: 1NT – Stayman – splinter
 - id: "sl.stspl.{M}.{s}.bw"
   for: [{M: H, s: C, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: H, s: D, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, s: C, km: "true"}, {M: S, s: D, km: "true"}]
   seq: ["1NT 2C 2{M} 4{s}", "1NT (X) 2C 2{M} 4{s}"]
@@ -2608,6 +2643,7 @@
   status: infere
   trump: "{M}"
 # --- Texas mineurs : l'ouvreur juge la courte du répondant
+# en: Minor-suit transfers: opener judges responder's shortness
 - id: "sl.tm.{c}.3NT"
   for: [{c: 3H, s: H}, {c: 3S, s: S}]
   seq: ["1NT 2S 3C {c}", "1NT (X) 2S 3C {c}"]
@@ -2644,6 +2680,7 @@
   meaning_en: "Nothing wasted in the short ♣: slam"
   status: infere
 # --- Saut fort du répondant (6 cartes, 16+) : Blackwood après le fit de l'ouvreur
+# en: Responder's strong jump (6 cards, 16+): Blackwood after opener's fit
 - id: "sl.js.{k}.bw"
   for: [{k: a, s: "1C|1D 2H", X: H, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {k: b, s: "1C|1D 2S", X: S, km: "true"}, {k: c, s: "1H 2S", X: S, km: "true"}, {k: d, s: "1S 3H", X: H, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}]
   seq: "{s} 4{X}"
@@ -2656,6 +2693,7 @@
   alert: true
   trump: "{X}"
 # --- Enchère d'essai 2SA, réponse maximum : l'ouvreur très fort pose le Blackwood
+# en: 2NT game try, maximum answer: a very strong opener asks for keycards
 - id: "sl.ess.{M}.bw"
   for: [{M: H, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, km: "true"}]
   seq: "1{M} 2{M} 2NT 3C|3D|3H|4C|4D"
@@ -2668,6 +2706,7 @@
   alert: true
   trump: "{M}"
 # --- 1M – 5M : demande de qualité d'atout
+# en: 1M – 5M: trump quality ask
 - id: "sl.q.{M}.5NT"
   for: [{M: H}, {M: S}]
   seq: "1{M} 5{M}"
@@ -2714,6 +2753,7 @@
   meaning_en: "Small slam"
   status: infere
 # --- 2♦ fort : l'ouvreur décide du chelem d'après les As montrés
+# en: Strong 2♦: opener decides the slam from the aces shown
 - id: "sl.2D.{X}.{a}.7"
   for: [{X: S, r: "2H|2NT", a: 0}, {X: S, r: "2S|3C|3D", a: 1}, {X: S, r: "3H|3S|3NT", a: 2}, {X: S, r: "4C|4D|4H|4S", a: 3}, {X: S, r: "4NT", a: 4}, {X: H, r: "2H|2NT", a: 0}, {X: H, r: "2S|3C|3D", a: 1}, {X: H, r: "3H|3S|3NT", a: 2}, {X: H, r: "4C|4D|4H|4S", a: 3}, {X: H, r: "4NT", a: 4}, {X: D, r: "2H|2NT", a: 0}, {X: D, r: "2S|3C|3D", a: 1}, {X: D, r: "3H|3S|3NT", a: 2}, {X: D, r: "4C|4D|4H|4S", a: 3}, {X: D, r: "4NT", a: 4}, {X: C, r: "2H|2NT", a: 0}, {X: C, r: "2S|3C|3D", a: 1}, {X: C, r: "3H|3S|3NT", a: 2}, {X: C, r: "4C|4D|4H|4S", a: 3}, {X: C, r: "4NT", a: 4}]
   seq: "2D {r}"
@@ -2742,6 +2782,7 @@
   meaning_en: "Balanced, at most one ace missing: 6NT"
   status: infere
 # --- chelems à SA par les points (règle de la fiche : 4SA qui suit directement une enchère à SA est quantitatif)
+# en: notrump slams on points (card rule: 4NT directly over a notrump bid is quantitative)
 - id: q.2NT.5NT
   seq: ["2NT 5NT", "2C 2D 2NT 5NT"]
   call: 6NT
@@ -2846,7 +2887,9 @@
 # ======================================================================
 # A.14 Roudi
 # ======================================================================
+# en: A.14 Roudi
 # Après 1♣/♦ – 1♥/♠ – 1SA, 2♣ du répondant (11+ HL, majeure 5e) demande à l'ouvreur son soutien. SEF 2024 : toutes les enchères du répondant au niveau de 3 après le Roudi sont forcing de manche.
+# en: After 1♣/♦ – 1♥/♠ – 1NT, responder's 2♣ (11+ HL, five-card major) asks opener about support. SEF 2024: every responder's bid at the three level after Roudi is game forcing.
 - id: "roudi.{m}.{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M} 1NT"
@@ -2858,6 +2901,7 @@
   status: sef
   alert: true
 # --- réponses de l'ouvreur (réponse 1♥ : fiche ; réponse 1♠ : transposition)
+# en: opener's answers (1♥ response: card; 1♠ response: transposition)
 - id: "roudi.{m}.H.2S"
   for: [{m: C}, {m: D}]
   seq: "1{m} 1H 1NT 2C"
@@ -2943,6 +2987,7 @@
   status: infere
   alert: true
 # --- suites du répondant
+# en: responder's continuations
 - id: "roudi.{m}.{M}.max.4"
   for: [{m: C, M: H, f: 2S}, {m: D, M: H, f: 2S}, {m: C, M: S, f: 3S}, {m: D, M: S, f: 3S}]
   seq: "1{m} 1{M} 1NT 2C {f}"
@@ -3055,8 +3100,11 @@
 # ======================================================================
 # A.15 3e couleur forcing
 # ======================================================================
+# en: A.15 Third suit forcing
 # Le répondant nomme la 3e couleur après la répétition de la mineure d'ouverture : il rallonge sa couleur, demande un arrêt pour SA ou rend l'enchère forcing (9+ HL, pas auto-forcing). Réponses non forcing de l'ouvreur : retour à 2 dans la majeure du répondant, 2SA avec arrêt, répétition de sa couleur. Le soutien de la 3e couleur est naturel.
+# en: Responder bids the third suit after opener rebids the opening minor: to show extra length, ask for a stopper for NT, or make the auction forcing (9+ HL, not self-forcing). Opener's non-forcing answers: back to responder's major at the two level, 2NT with a stopper, rebid of own suit. Raising the third suit is natural.
 # cas : o = ouverture, M = majeure du répondant, t = 3e couleur, f = 4e couleur (non nommée)
+# en: cases: o = opening, M = responder's major, t = third suit, f = fourth suit (unbid)
 - id: 1C.1S.2C.2H
   seq: "1C 1S 2C"
   call: 2H
@@ -3084,6 +3132,7 @@
   status: sef
   alert: true
 # --- réponses de l'ouvreur
+# en: opener's answers
 - id: "tcf.{o}{M}.fit3"
   for: [{o: C, M: H, t: D, f: S, fit: 2H}, {o: C, M: S, t: D, f: H, fit: 2S}, {o: D, M: H, t: S, f: C, fit: 3H}, {o: D, M: S, t: H, f: C, fit: 2S}]
   seq: "1{o} 1{M} 2{o} 2{t}"
@@ -3185,6 +3234,7 @@
   meaning_en: "No ♥ stopper"
   status: infere
 # --- conclusion du répondant
+# en: responder's conclusion
 - id: "tcf.{o}{M}.c4Mfit"
   for: [{o: C, M: H, t: D, x: 2H}, {o: C, M: S, t: D, x: 2S}, {o: D, M: H, t: S, x: 3H}, {o: D, M: S, t: H, x: 2S}]
   seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C 3{M}", "1C 1S 2C 2H 2S"]
@@ -3299,7 +3349,9 @@
 # ======================================================================
 # A.16 4e couleur forcing
 # ======================================================================
+# en: A.16 Fourth suit forcing
 # Le répondant nomme la 4e couleur pour rallonger sa couleur, demander l'arrêt pour SA ou rendre l'enchère forcing ; au palier de 2 (économique) elle est auto-forcing, et toute enchère au palier de 3 qui suit est forcing de manche. Réponses de l'ouvreur : 2SA avec l'arrêt (mini-maxi : 12-15 ou 18-19 HL), 3 cartes dans la majeure du répondant, soutien de la 4e couleur mineure au palier de 3 avec As troisième et ouverture non minimum, répétition de ses couleurs.
+# en: Responder bids the fourth suit to show extra length, ask for a stopper for NT, or make the auction forcing; at the two level (economical) it is self-forcing, and any following bid at the three level is game forcing. Opener's answers: 2NT with the stopper (mini-maxi: 12-15 or 18-19 HL), three cards in responder's major, raise of a fourth-suit minor at the three level with Axx and a non-minimum opening, rebid of own suits.
 - id: "fcf.{k}.ask"
   for: [{k: a, s: "1C 1H 1S", call: 2D, F: D, M: H, o2: S}, {k: b, s: "1D 1H 1S", call: 2C, F: C, M: H, o2: S}, {k: c, s: "1D 1S 2C", call: 2H, F: H, M: S, o2: C}, {k: e, s: "1H 1S 2C", call: 2D, F: D, M: S, o2: C}, {k: f, s: "1H 1S 2D", call: 3C, F: C, M: S, o2: D}]
   seq: "{s}"
@@ -3311,6 +3363,7 @@
   status: sef
   alert: true
 # --- réponses de l'ouvreur
+# en: opener's answers
 - id: "fcf.{k}.nt"
   for: [{k: a, s: "1C 1H 1S 2D", F: D, nt: 2NT, fo: F1}, {k: b, s: "1D 1H 1S 2C", F: C, nt: 2NT, fo: F1}, {k: c, s: "1D 1S 2C 2H", F: H, nt: 2NT, fo: F1}, {k: e, s: "1H 1S 2C 2D", F: D, nt: 2NT, fo: F1}, {k: f, s: "1H 1S 2D 3C", F: C, nt: 3NT, fo: SO}]
   seq: "{s}"
@@ -3348,6 +3401,7 @@
   meaning_en: "Rebid of the opening suit"
   status: sef
 # --- conclusion du répondant
+# en: responder's conclusion
 - id: "fcf.{k}.c4Mfit"
   for: [{k: a, s: "1C 1H 1S 2D 2H", M: H}, {k: b, s: "1D 1H 1S 2C 2H", M: H}, {k: c, s: "1D 1S 2C 2H 2S", M: S}, {k: e, s: "1H 1S 2C 2D 2S", M: S}, {k: f, s: "1H 1S 2D 3C 3S", M: S}]
   seq: "{s}"
@@ -3385,6 +3439,7 @@
   meaning_en: "End"
   status: infere
 # --- l'ouvreur 18-19 après 2SA – 3SA : continue (fiche : 4 dans la majeure avec 3 cartes, sinon 4SA)
+# en: 18-19 opener after 2NT – 3NT: goes on (card: four of the major with 3 cards, otherwise 4NT)
 - id: "fcf.{k}.mm.4M"
   for: [{k: a, s: "1C 1H 1S 2D", M: H}, {k: b, s: "1D 1H 1S 2C", M: H}, {k: c, s: "1D 1S 2C 2H", M: S}, {k: e, s: "1H 1S 2C 2D", M: S}]
   seq: "{s} 2NT 3NT"
@@ -3425,7 +3480,9 @@
 # ======================================================================
 # A.17 Check-back Stayman (SEF 2018, option)
 # ======================================================================
+# en: A.17 Checkback Stayman (SEF 2018, optional)
 # Actif seulement si l'option `checkback2018` est activée.
+# en: Active only when the `checkback2018` option is enabled.
 - id: 1D.1S.2NT.3C
   option: checkback2018
   seq: "1D 1S 2NT"
@@ -3495,6 +3552,7 @@
 # ======================================================================
 # A.18 Compétition
 # ======================================================================
+# en: A.18 Competition
 - id: def1NT.2NT
   seq: "(1NT)"
   call: 2NT
@@ -3769,12 +3827,19 @@
 # ======================================================================
 # A.18 bis Compétition : interventions, réveil et suites
 # ======================================================================
+# en: A.18 bis Competition: overcalls, balancing and continuations
 # Socle du camp de la défense sur une ouverture adverse au palier de 1 à la couleur. Seuils SEF : intervention à 1SA 16-18 H régulier avec arrêt ;
+# en: Basic defence against an opposing one-level suit opening. SEF thresholds: 1NT overcall 16-18 H, balanced, with a stopper;
 # contre « toutes distributions » 18 H et plus ; intervention à la couleur 5+ cartes et belle couleur, 5 H dans la couleur (9+ H, 10-17 HL au palier de 1 ; 11+ HL et 6 cartes ou 14 HL au palier de 2) ;
+# en: “any shape” double with 18+ H; suit overcall with a good 5+ card suit, 5 H in the suit (9+ H, 10-17 HL at the one level; 11+ HL and six cards, or 14 HL, at the two level);
 # saut faible 6 cartes 6-10 H ; contre d'appel 13+ (sur mineure : 3-4 cartes dans chaque majeure ; sur majeure : 4 cartes dans l'autre majeure, court dans l'ouverture).
+# en: weak jump overcall with six cards and 6-10 H; takeout double with 13+ (over a minor: 3-4 cards in each major; over a major: four cards in the other major, short in the opened suit).
 # Seuils réglés sur le banc du par (engine/testdata/par_bench.jsonl.gz) : une intervention plus légère coûte plus au camp de l'ouvreur qu'elle ne rapporte.
+# en: Thresholds tuned on the par benchmark (engine/testdata/par_bench.jsonl.gz): a lighter overcall costs the overcalling side more than it gains.
 # Les bicolores (Michaëls, 2SA) sont codés plus haut et gardent la priorité. Les séquences commencent par l'ouverture adverse : `P (1♦)` et `(1♦)` sont traités ensemble.
+# en: Two-suiters (Michaels, 2NT) are coded earlier and keep priority. Sequences start with the opponents' opening: `P (1♦)` and `(1♦)` are handled together.
 # --- intervention directe
+# en: direct overcall
 - id: "def.{o}.1NT"
   for: [{o: 1C, os: C}, {o: 1D, os: D}, {o: 1H, os: H}, {o: 1S, os: S}]
   seq: "({o})"
@@ -3848,6 +3913,7 @@
   meaning_en: "No overcall"
   status: sef
 # --- réveil : l'ouverture revient après deux passes (le partenaire a passé)
+# en: balancing: the opening comes round after two passes (partner has passed)
 - id: "rev.{o}.2NT"
   for: [{o: 1C, os: C}, {o: 1D, os: D}, {o: 1H, os: H}, {o: 1S, os: S}]
   seq: "({o}) P"
@@ -3921,6 +3987,7 @@
   meaning_en: "No balancing action"
   status: sef
 # --- réponses au contre d'appel (l'adversaire de droite a passé) : trois zones, 0-7 / 8-10 / 11+ H
+# en: answers to the takeout double (right-hand opponent passed): three zones, 0-7 / 8-10 / 11+ HCP
 - id: "advX.{o}.4{M}"
   for: [{o: 1C, M: S, N: H}, {o: 1C, M: H, N: S}, {o: 1D, M: S, N: H}, {o: 1D, M: H, N: S}, {o: 1H, M: S, N: H}, {o: 1S, M: H, N: S}]
   seq: ["({o}) X", "({o}) P X"]
@@ -3989,6 +4056,7 @@
   meaning_en: "Answer to the double: 0-10 HCP, best suit"
   status: sef
 # --- réponses à l'intervention du partenaire (l'adversaire de droite a passé)
+# en: answers to partner's overcall (right-hand opponent passed)
 - id: "advI.{o}.{c}.cue"
   for: [{o: 1C, os: C, c: 1D, s: D, f: 3}, {o: 1C, os: C, c: 1H, s: H, f: 3}, {o: 1C, os: C, c: 1S, s: S, f: 3}, {o: 1D, os: D, c: 1H, s: H, f: 3}, {o: 1D, os: D, c: 1S, s: S, f: 3}, {o: 1H, os: H, c: 1S, s: S, f: 3},
         {o: 1D, os: D, c: 2C, s: C, f: 2}, {o: 1H, os: H, c: 2C, s: C, f: 2}, {o: 1H, os: H, c: 2D, s: D, f: 2}, {o: 1S, os: S, c: 2C, s: C, f: 2}, {o: 1S, os: S, c: 2D, s: D, f: 2}, {o: 1S, os: S, c: 2H, s: H, f: 2}]
@@ -4064,6 +4132,7 @@
   meaning_en: "Pass"
   status: infere
 # --- réponses à l'intervention à 1SA (16-18) et au saut faible du partenaire
+# en: answers to partner's 1NT overcall (16-18) and weak jump overcall
 - id: "adv1NT.{o}.4{M}"
   for: [{o: 1C, M: S}, {o: 1C, M: H}, {o: 1D, M: S}, {o: 1D, M: H}, {o: 1H, M: S}, {o: 1S, M: H}]
   seq: "({o}) 1NT"
@@ -4110,6 +4179,7 @@
   meaning_en: "Game over the weak jump: fit, 15+ HLD"
   status: infere
 # --- redemande du contreur (l'avancée a répondu, l'ouvreur de nouveau muet)
+# en: doubler's rebid (advancer has answered, opener silent again)
 - id: "dblR.{o}.cue.{M}"
   for: [{o: 1C, os: C, M: H, call: 2H}, {o: 1C, os: C, M: S, call: 2S}, {o: 1D, os: D, M: H, call: 2H}, {o: 1D, os: D, M: S, call: 2S}, {o: 1H, os: H, M: S, call: 2S}, {o: 1S, os: S, M: H, call: 3H}]
   seq: ["({o}) X 2{os}", "({o}) P X 2{os}"]
@@ -4220,6 +4290,7 @@
   meaning_en: "Accepts: 3NT"
   status: infere
 # --- redemande de l'intervenant (l'avancée a répondu, l'ouvreur de nouveau muet)
+# en: overcaller's rebid (advancer has answered, opener silent again)
 - id: "ovR.{o}.{c}.cue.min"
   for: [{o: 1C, os: C, c: 1D, r: 2D}, {o: 1C, os: C, c: 1H, r: 2H}, {o: 1C, os: C, c: 1S, r: 2S}, {o: 1D, os: D, c: 1H, r: 2H}, {o: 1D, os: D, c: 1S, r: 2S}, {o: 1H, os: H, c: 1S, r: 2S},
         {o: 1D, os: D, c: 2C, r: 3C}, {o: 1H, os: H, c: 2C, r: 3C}, {o: 1H, os: H, c: 2D, r: 3D}, {o: 1S, os: S, c: 2C, r: 3C}, {o: 1S, os: S, c: 2D, r: 3D}, {o: 1S, os: S, c: 2H, r: 3H}]
@@ -4321,8 +4392,11 @@
   meaning_en: "Accepts: 3NT"
   status: infere
 # --- camp de l'ouvreur après une intervention à la couleur : le répondant
+# en: opening side after a suit overcall: responder
 # Majeure : 2SA = fitté 11-15 HLD, cue-bid = 4 atouts et 16+ HLD (forcing de manche), soutien simple 6-10 HLD. Mineure : 5 atouts.
+# en: Major: 2NT = fit, 11-15 HLD; cue-bid = four trumps and 16+ HLD (game forcing); simple raise 6-10 HLD. Minor: five trumps.
 # Contre = Spoutnik (majeure(s) 4e non nommée(s)) ; couleur nouvelle naturelle et forcing ; SA avec l'arrêt.
+# en: Double = Sputnik (four cards in the unbid major(s)); new suit natural and forcing; NT with a stopper.
 - id: "rep.{x}.{y}.cue"
   for: [{x: 1H, y: 1S, xs: H, cue: 2S}, {x: 1H, y: 2C, xs: H, cue: 3C}, {x: 1H, y: 2D, xs: H, cue: 3D}, {x: 1S, y: 2C, xs: S, cue: 3C},
         {x: 1S, y: 2D, xs: S, cue: 3D}, {x: 1S, y: 2H, xs: S, cue: 3H}, {x: 1H, y: 2S, xs: H, cue: 3S}]
@@ -4457,6 +4531,7 @@
   meaning_en: "Pass"
   status: infere
 # --- l'ouvreur, après l'intervention et le passe de son partenaire : réouverture
+# en: opener, after the overcall and partner's pass: reopening
 - id: "ouv.{x}.{y}.P.rebid"
   for: [{x: 1C, y: 1D, xs: C, r2: 2C}, {x: 1C, y: 1H, xs: C, r2: 2C}, {x: 1C, y: 1S, xs: C, r2: 2C}, {x: 1D, y: 1H, xs: D, r2: 2D},
         {x: 1D, y: 1S, xs: D, r2: 2D}, {x: 1H, y: 1S, xs: H, r2: 2H}, {x: 1D, y: 2C, xs: D, r2: 2D}, {x: 1H, y: 2C, xs: H, r2: 2H},
@@ -4481,6 +4556,7 @@
   meaning_en: "Pass"
   status: infere
 # --- l'ouvreur, après la réponse de son partenaire (l'intervenant de nouveau muet)
+# en: opener, after partner's response (overcaller silent again)
 - id: "ouv.{x}.{y}.raise.4"
   for: [{x: 1H, y: 1S, xs: H, r2: 2H}, {x: 1H, y: 2C, xs: H, r2: 2H}, {x: 1H, y: 2D, xs: H, r2: 2H}, {x: 1S, y: 2C, xs: S, r2: 2S},
         {x: 1S, y: 2D, xs: S, r2: 2S}, {x: 1S, y: 2H, xs: S, r2: 2S}, {x: 1H, y: 2S, xs: H, r2: 3H}]
@@ -4593,6 +4669,7 @@
   meaning_en: "Game in notrump"
   status: infere
 # --- l'ouvreur répond au contre Spoutnik, puis le répondant conclut
+# en: opener answers the Sputnik double, then responder concludes
 - id: "ouv.{x}.{y}.X.{M}"
   for: [{x: 1C, y: 1H, M: S, c: 1S}, {x: 1D, y: 1H, M: S, c: 1S}, {x: 1C, y: 1S, M: H, c: 2H}, {x: 1D, y: 1S, M: H, c: 2H}, {x: 1D, y: 2C, M: H, c: 2H},
         {x: 1D, y: 2C, M: S, c: 2S}, {x: 1H, y: 2C, M: S, c: 2S}, {x: 1H, y: 2D, M: S, c: 2S}, {x: 1S, y: 2C, M: H, c: 2H}, {x: 1S, y: 2D, M: H, c: 2H},
@@ -4662,6 +4739,7 @@
   meaning_en: "Game in notrump"
   status: infere
 # --- ouverture mineure contrée
+# en: minor-suit opening doubled
 - id: "spoutnik.{o}.1S.{r}.2H"
   for: [{o: 1C, r: 1NT}, {o: 1C, r: 2C}, {o: 1D, r: 1NT}, {o: 1D, r: 2D}]
   seq: "{o} (1S) X {r}"
@@ -4726,6 +4804,7 @@
   meaning_en: "Pass"
   status: infere
 # --- l'ouvreur après la couleur nouvelle (forcing) de son partenaire en compétition
+# en: opener after partner's (forcing) new suit in competition
 - id: "ouv.{x}.{y}.{c}.raise"
   for: [{x: 1C, y: 1D, c: 1S, s: S, r: 2S}, {x: 1C, y: 1D, c: 1H, s: H, r: 2H}, {x: 1C, y: 1H, c: 1S, s: S, r: 2S}, {x: 1C, y: 1S, c: 2H, s: H, r: 3H},
         {x: 1D, y: 1H, c: 1S, s: S, r: 2S}, {x: 1D, y: 1S, c: 2H, s: H, r: 3H}, {x: 1D, y: 2C, c: 2S, s: S, r: 3S}, {x: 1D, y: 2C, c: 2H, s: H, r: 3H},
@@ -4771,6 +4850,7 @@
   meaning_en: "Rebids his suit"
   status: infere
 # --- défense contre les 2 faibles (2♥ / 2♠), en position directe et en réveil
+# en: defence against weak twos (2♥ / 2♠), direct and balancing seat
 - id: "def.{o}.2NT"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
   seq: "({o})"
@@ -4911,6 +4991,7 @@
   meaning_en: "Game: fit, 12+ HLD"
   status: infere
 # --- réveil sur l'ouverture adverse de 1SA : les interventions de la position directe
+# en: balancing over the opponents' 1NT: the direct-seat overcalls
 - id: "rev1NT.2C"
   seq: "(1NT) P"
   call: "2C"
@@ -4948,6 +5029,7 @@
   status: sef
 
 # --- réponses aux bicolores (Michaëls, 2SA) : la plus longue des deux couleurs, la manche en majeure avec le fit et 12+ HLD
+# en: answers to two-suiters (Michaels, 2NT): the longer suit, major-suit game with a fit and 12+ HLD
 - id: "advM.{o}.{c}.4{M}"
   for: [{o: 1C, c: 2D, M: S}, {o: 1C, c: 2D, M: H}, {o: 1D, c: 2D, M: S}, {o: 1D, c: 2D, M: H}, {o: 1H, c: 2H, M: S}, {o: 1S, c: 2S, M: H}, {o: 1C, c: 2NT, M: H}, {o: 1D, c: 2NT, M: H}]
   seq: "({o}) {c}"
@@ -4970,6 +5052,7 @@
   meaning_en: "Picks the longer of the two suits"
   status: infere
 # --- contre sur 1SA adverse (mineure 5e + majeure 4e) : l'avancée donne sa préférence, l'intervenant précise
+# en: double of the opponents' 1NT (5-card minor + 4-card major): advancer gives preference, overcaller specifies
 - id: def1NT.X.2C
   seq: ["(1NT) X", "(1NT) P X"]
   call: 2C
@@ -5037,6 +5120,7 @@
   meaning_en: "Longer major"
   status: infere
 # --- Rubensohl : l'ouvreur de 1SA complète le Texas ; sur le contre Spoutnik, il nomme sa majeure 4e
+# en: Rubensohl: the 1NT opener completes the transfer; over the Sputnik double he names his 4-card major
 - id: "rub.{i}.{t}.acc"
   for: [{i: 2H, t: 2NT, r: 3C}, {i: 2H, t: 3C, r: 3D}, {i: 2H, t: 3H, r: 3S}, {i: 2S, t: 2NT, r: 3C}, {i: 2S, t: 3C, r: 3D}, {i: 2S, t: 3D, r: 3H}]
   seq: "1NT ({i}) {t}"
@@ -5057,6 +5141,7 @@
   meaning_en: "Answer to the Sputnik double"
   status: infere
 # --- ouverture mineure contrée, surcontre : l'ouvreur attend
+# en: minor-suit opening doubled, redouble: opener waits
 - id: "ouv.{m}.X.XX.P"
   for: [{m: 1C}, {m: 1D}]
   seq: "{m} (X) XX"
@@ -5068,6 +5153,7 @@
   status: infere
 
 # --- 2SA bicolore mineur sur 1SA adverse : l'avancée choisit sa mineure
+# en: 2NT minor two-suiter over the opponents' 1NT: advancer picks a minor
 - id: "def1NT.2NT.{r}"
   for: [{r: 3D, t: "D > C"}, {r: 3C, t: "true"}]
   seq: ["(1NT) 2NT", "(1NT) P 2NT"]
@@ -5079,6 +5165,7 @@
   status: infere
 
 # --- le répondant après le bicolore à saut de l'ouvreur (forcing de manche)
+# en: responder after opener's jump shift (game forcing)
 - id: "js.{o}.{r}.{j}.4{o2}"
   for: [{o: 1H, o2: H, r: 1S, j: 3C}, {o: 1H, o2: H, r: 1S, j: 3D}]
   seq: "{o} {r} {j}"
@@ -5108,6 +5195,7 @@
   status: infere
 
 # --- l'ouvreur après le 1SA de son partenaire au deuxième tour
+# en: opener after partner's 1NT at the second round
 - id: "o4.{s}.1NT.3NT"
   for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
   seq: "{s} 1NT"
@@ -5146,6 +5234,7 @@
   status: infere
 
 # --- le répondant de 1SA après le bicolore à saut de l'ouvreur (forcing de manche)
+# en: the 1NT responder after opener's jump shift (game forcing)
 - id: "js.1S.1NT.3H.4H"
   seq: "1S 1NT 3H"
   call: 4H
@@ -5165,6 +5254,7 @@
   status: infere
 
 # --- 1SA et intervention adverse à 2♣ ou 2♦ (hors Rubensohl) : le répondant, naturel
+# en: 1NT and an opposing 2♣ or 2♦ overcall (outside Rubensohl): responder, natural
 - id: "1NT.int{i}.4{M}"
   for: [{i: 2C, M: S}, {i: 2C, M: H}, {i: 2D, M: S}, {i: 2D, M: H}]
   seq: "1NT ({i})"
@@ -5203,6 +5293,7 @@
   status: infere
 
 # --- défense contre les barrages de 3 : 3SA, contre, intervention (position directe et réveil)
+# en: defence against three-level preempts: 3NT, double, overcall (direct and balancing seat)
 - id: "def.{o}.3NT"
   for: [{o: 3C, os: C}, {o: 3D, os: D}, {o: 3H, os: H}, {o: 3S, os: S}]
   seq: ["({o})", "({o}) P"]
@@ -5240,6 +5331,7 @@
   meaning_en: "No overcall"
   status: infere
 # --- réponses au contre d'un barrage de 3
+# en: answers to the double of a three-level preempt
 - id: "advX.{o}.{r}.{n}"
   for: [{o: 3C, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp >= 8)"}, {o: 3C, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3C, n: 3, r: 3NT, t: "stop('C') and hcp >= 7"}, {o: 3C, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3C, n: 5, r: 3H, t: "H >= 4"}, {o: 3C, n: 6, r: 3D, t: "true"},
         {o: 3D, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp >= 8)"}, {o: 3D, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3D, n: 3, r: 3NT, t: "stop('D') and hcp >= 7"}, {o: 3D, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3D, n: 5, r: 3H, t: "H >= 4"}, {o: 3D, n: 6, r: 4C, t: "C >= 5"}, {o: 3D, n: 7, r: 3H, t: "H >= S"}, {o: 3D, n: 8, r: 3S, t: "true"},
@@ -5254,6 +5346,7 @@
   status: infere
 
 # --- défense contre les barrages de 4
+# en: defence against four-level preempts
 - id: "def.{o}.X"
   for: [{o: 4C}, {o: 4D}, {o: 4H}, {o: 4S}]
   seq: ["({o})", "({o}) P"]
@@ -5293,8 +5386,11 @@
 # ======================================================================
 # A.19 Suites naturelles (complétions)
 # ======================================================================
+# en: A.19 Natural continuations (completions)
 # Ces règles comblent les enchères courantes que les fiches ne détaillent pas : redemandes naturelles de l'ouvreur et 3e enchère du répondant. Elles sont toutes `infere` : à remplacer par les règles de la Partie B dès qu'elles sont précisées. Elles viennent **après** les règles spécifiques, qui gardent la priorité.
+# en: These rules fill in common bids that the cards do not detail: opener's natural rebids and responder's third bid. They are all `infere`: to be replaced by the Part B rules once those are specified. They come **after** the specific rules, which keep priority.
 # --- ouvreur après 1♣ – 1♦
+# en: opener after 1♣ – 1♦
 - id: 1C.1D.1H
   seq: "1C 1D"
   call: 1H
@@ -5361,6 +5457,7 @@
   status: infere
 
 # --- ouvreur après 1♥ – 1♠
+# en: opener after 1♥ – 1♠
 - id: 1H.1S.4S
   seq: "1H 1S"
   call: 4S
@@ -5437,6 +5534,7 @@
   status: infere
 
 # --- ouvreur après 1M – 1SA
+# en: opener after 1M – 1NT
 - id: "1{M}.1NT.2NT"
   for: [{M: H}, {M: S}]
   seq: "1{M} 1NT"
@@ -5510,6 +5608,7 @@
   status: infere
 
 # --- répondant après un bicolore cher (forcing)
+# en: responder after a reverse (forcing)
 - id: "rev.{s}.4H"
   for: [{s: "1C|1D 1S 2H"}]
   seq: "{s}"
@@ -5557,6 +5656,7 @@
   status: infere
 
 # --- 2SA mini-maxi après 2 sur 1 : le répondant dit 3SA, l'ouvreur 18-19 continue à 4SA
+# en: min-max 2NT after a two-over-one: responder bids 3NT, an 18-19 opener goes on to 4NT
 - id: "mm.{o}.{m}.4NT"
   for: [{o: 1H, m: C}, {o: 1H, m: D}, {o: 1S, m: C}, {o: 1S, m: D}, {o: 1D, m: C}]
   seq: "{o} 2{m} 2NT 3NT"
@@ -5586,6 +5686,7 @@
   status: infere
 
 # --- 1SA – 2♠ – 3♣ – 3♦ (bicolore mineur de manche)
+# en: 1NT – 2♠ – 3♣ – 3♦ (game-forcing minor two-suiter)
 - id: 1NT.2S.3C.3D.3NT
   seq: ["1NT 2S 3C 3D", "1NT (X) 2S 3C 3D"]
   call: 3NT
@@ -5612,6 +5713,7 @@
   status: infere
 
 # --- après une réponse forte à saut (6 cartes, 16+) : simplifié
+# en: after a strong jump response (6 cards, 16+): simplified
 - id: "js.{s}.raise"
   for: [{s: "1C 2D", X: D}, {s: "1D 3C", X: C}, {s: "1C|1D 2H", X: H}, {s: "1C|1D 2S", X: S}, {s: "1H 2S", X: S}, {s: "1S 3H", X: H}, {s: "1H|1S 3C", X: C}, {s: "1H|1S 3D", X: D}]
   seq: "{s}"
@@ -5641,6 +5743,7 @@
   status: infere
 
 # --- barrages et soutiens terminaux
+# en: preempts and terminal raises
 - id: "pre.{s}.pass"
   for: [{s: "1C 4C"}, {s: "1D 4D"}, {s: "1C|1D 3H|3S"}]
   seq: "{s}"
@@ -5652,6 +5755,7 @@
   status: infere
 
 # --- répondant après 1♣ – 1♦ – 3♣ et après 2SA 18-19 de l'ouvreur
+# en: responder after 1♣ – 1♦ – 3♣ and after opener's 18-19 2NT
 - id: 1C.1D.3C.3NT
   seq: "1C 1D 3C"
   call: 3NT
@@ -5678,6 +5782,7 @@
   status: infere
 
 # --- répondant après 1♠ – 2♥ – 2♠ / 2SA / 3♥
+# en: responder after 1♠ – 2♥ – 2♠ / 2NT / 3♥
 - id: 1S.2H.x.4S
   seq: "1S 2H 2S|2NT|3H"
   call: 4S
@@ -5736,6 +5841,7 @@
   status: infere
 
 # --- ouvreur après une réponse 2 sur 1 (1M – 2m, 1♦ – 2♣)
+# en: opener after a two-over-one response (1M – 2m, 1♦ – 2♣)
 - id: "{o}.2{m}.3NT"
   for: [{o: 1H, m: C}, {o: 1H, m: D}, {o: 1S, m: C}, {o: 1S, m: D}, {o: 1D, m: C}]
   seq: "{o} 2{m}"
@@ -5783,7 +5889,9 @@
   status: infere
 
 # --- ouvreur : nouvelle couleur au palier de 1 après 1♣/♦ – 1♥
+# en: opener: new suit at the one level after 1♣/♦ – 1♥
 # (1{m} 1H 1S est déjà codé ; ici : 3e enchère du répondant)
+# en: (1{m} 1H 1S is already coded; here: responder's third bid)
 - id: "{o}.{r}.{b}.3NT"
   for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
   seq: "{o} {r} {b}"
@@ -5849,6 +5957,7 @@
   status: infere
 
 # --- 3e enchère du répondant après une redemande limitée de l'ouvreur
+# en: responder's third call after a limited rebid by opener
 - id: "{o}.{r}.{x}.game"
   for: [{o: "1C|1D", r: 1H, x: 2H, M: H}, {o: "1C|1D", r: 1S, x: 2S, M: S}, {o: 1H, r: 1S, x: 2S, M: S}]
   seq: "{o} {r} {x}"
@@ -5868,6 +5977,7 @@
   meaning_en: "Invitation"
   status: infere
 # --- le répondant bicolore majeur 5-5 (a répondu 1♠)
+# en: responder with 5-5 in the majors (has responded 1♠)
 - id: 1D.1S.2C.3H
   seq: "1D 1S 2C"
   call: 3H
@@ -5936,6 +6046,7 @@
   meaning_en: "Prefers hearts (or equal)"
   status: infere
 # --- le répondant après le bicolore économique de l'ouvreur (12-17 HL, non forcing)
+# en: responder after opener's economical two-suiter (12-17 HL, non-forcing)
 - id: "eco.{o}.{r}.{x}.4{rs}"
   for: [{o: "1D", r: "1H", x: "2C", rs: "H"}, {o: "1D", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2D", rs: "S"}]
   seq: "{o} {r} {x}"
@@ -6009,6 +6120,7 @@
   meaning_en: "Preference for the first suit"
   status: infere
 # --- le répondant de 1SA après la nouvelle couleur de l'ouvreur
+# en: the 1NT responder after opener's new suit
 - id: "eco.{o}.1NT.{x}.4H"
   for: [{o: "1S", x: "2H", xs: "H"}]
   seq: "{o} 1NT {x}"
@@ -6037,6 +6149,7 @@
   meaning_en: "Preference for the opening major"
   status: infere
 # --- l'ouvreur répond à l'invitation du répondant
+# en: opener answers responder's invitation
 - id: "eco.{o}.{r}.{x}.{j}.{g}"
   for: [{o: "1D", r: "1H", x: "2C", j: "3D", g: "3NT", t: "hl >= 17"}, {o: "1D", r: "1H", x: "2C", j: "3H", g: "4H", t: "H >= 2 and hl >= 16"}, {o: "1D", r: "1H", x: "2C", j: "3C", g: "3NT", t: "hl >= 17"}, {o: "1D", r: "1S", x: "2C", j: "3D", g: "3NT", t: "hl >= 17"}, {o: "1D", r: "1S", x: "2C", j: "3S", g: "4S", t: "S >= 2 and hl >= 16"}, {o: "1D", r: "1S", x: "2C", j: "3C", g: "3NT", t: "hl >= 17"}, {o: "1H", r: "1S", x: "2C", j: "3H", g: "4H", t: "hld >= 18"}, {o: "1H", r: "1S", x: "2C", j: "3S", g: "4S", t: "S >= 2 and hl >= 16"}, {o: "1H", r: "1S", x: "2C", j: "3C", g: "3NT", t: "hl >= 17"}, {o: "1H", r: "1S", x: "2D", j: "3H", g: "4H", t: "hld >= 18"}, {o: "1H", r: "1S", x: "2D", j: "3S", g: "4S", t: "S >= 2 and hl >= 16"}, {o: "1H", r: "1S", x: "2D", j: "3D", g: "3NT", t: "hl >= 17"}, {o: "1H", r: "1NT", x: "2C", j: "3C", g: "3NT", t: "hl >= 17"}, {o: "1H", r: "1NT", x: "2D", j: "3D", g: "3NT", t: "hl >= 17"}, {o: "1S", r: "1NT", x: "2C", j: "3C", g: "3NT", t: "hl >= 17"}, {o: "1S", r: "1NT", x: "2D", j: "3D", g: "3NT", t: "hl >= 17"}, {o: "1S", r: "1NT", x: "2H", j: "3H", g: "4H", t: "hl >= 17"}]
   seq: "{o} {r} {x} {j}"
@@ -6089,6 +6202,7 @@
   status: infere
 
 # --- 2♦ fort : l'ouvreur conclut après la réponse en As (simplifié)
+# en: strong 2♦: opener concludes after the ace-showing response (simplified)
 - id: 2D.x.3NT
   seq: "2D 2H|2S|2NT|3C|3D"
   call: 3NT
@@ -6133,6 +6247,7 @@
   status: infere
 
 # --- ouvreur après une réponse limitée à 1♣/♦
+# en: opener after a limited response to 1♣/♦
 - id: "1{m}.1NT.2NT"
   for: [{m: C}, {m: D}]
   seq: "1{m} 1NT"
@@ -6225,6 +6340,7 @@
   status: infere
 
 # --- ouvreur après 1M – 3M (11-12 DH)
+# en: opener after 1M – 3M (11-12 DH)
 - id: "1{M}.3{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: "1{M} 3{M}"
@@ -6245,6 +6361,7 @@
   status: infere
 
 # --- répondant après 1M – 2m – 2x (2 sur 1)
+# en: responder after 1M – 2m – 2x (two over one)
 - id: "{o}.2{m}.x.4{M}"
   for: [{o: 1H, M: H, m: C}, {o: 1H, M: H, m: D}, {o: 1S, M: S, m: C}, {o: 1S, M: S, m: D}]
   seq: "{o} 2{m} 2{M}|2H|3{m}"
@@ -6334,6 +6451,7 @@
   status: infere
 
 # --- répondant après une redemande à saut de l'ouvreur (6 cartes, 15-17)
+# en: responder after opener's jump rebid (6 cards, 15-17)
 - id: "{o}.{r}.3{X}.game"
   for: [{o: 1H, r: 1S, X: H}, {o: 1H, r: 1NT, X: H}, {o: 1S, r: 1NT, X: S}, {o: "1C|1D", r: "1H|1S", X: C}, {o: "1C|1D", r: "1H|1S", X: D}]
   seq: "{o} {r} 3{X}"
@@ -6363,6 +6481,7 @@
   status: infere
 
 # --- après 2♣ – 2♦ – 2♥/♠
+# en: after 2♣ – 2♦ – 2♥/♠
 - id: "2C.2D.2{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: "2C 2D 2{M}"
@@ -6426,6 +6545,7 @@
   status: infere
 
 # --- 2 faible : suites
+# en: weak two: continuations
 - id: "2{M}.2NT.x.4{M}"
   for: [{M: H, a: "3C|3D|3S|3NT|4C|4D"}, {M: S, a: "3C|3D|3H|3NT|4C|4D|4H"}]
   seq: "2{M} 2NT {a}"
@@ -6473,6 +6593,7 @@
   status: infere
 
 # --- répondant après un soutien à saut ou 2SA 18-19 de l'ouvreur
+# en: responder after opener's jump raise or 18-19 2NT
 - id: "1{m}.1{M}.3{M}.4{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M} 3{M}"
@@ -6511,6 +6632,7 @@
   status: infere
 
 # --- ouvreur après 1♠ – 2♥
+# en: opener after 1♠ – 2♥
 - id: 1S.2H.4H
   seq: "1S 2H"
   call: 4H
@@ -6553,6 +6675,7 @@
   status: infere
 
 # --- répondant après 1M – 2SA fitté – 3M (minimum)
+# en: responder after 1M – fitted 2NT – 3M (minimum)
 - id: "1{M}.2NT.3{M}.pass"
   for: [{M: H}, {M: S}]
   seq: "1{M} 2NT 3{M}"
@@ -6564,6 +6687,7 @@
   status: infere
 
 # --- essai 2SA : l'ouvreur conclut après la réponse maximum
+# en: 2NT game try: opener concludes after the maximum answer
 - id: "ess.{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: "1{M} 2{M} 2NT 3C|3D|3H|4C|4D"
@@ -6584,6 +6708,7 @@
   status: infere
 
 # --- Stayman : l'ouvreur répond à l'espoir de chelem ou au splinter
+# en: Stayman: opener answers the slam try or the splinter
 - id: "1NT.2C.2{M}.slam.r"
   for: [{M: H, x: "3S|4C|4D"}, {M: S, x: "3H|4C|4D"}]
   seq: ["1NT 2C 2{M} {x}", "1NT (X) 2C 2{M} {x}"]
@@ -6595,6 +6720,7 @@
   status: infere
 
 # --- Stayman : 1SA 2♣ 2♠ 2SA 3♥ (3 cœurs, maximum)
+# en: Stayman: 1NT 2♣ 2♠ 2NT 3♥ (3 hearts, maximum)
 - id: 1NT.2C.2S.2NT.3H.4H
   seq: ["1NT 2C 2S 2NT 3H", "1NT (X) 2C 2S 2NT 3H"]
   call: 4H
@@ -6613,6 +6739,7 @@
   status: infere
 
 # --- divers
+# en: miscellaneous
 - id: "1NT.3{M}.r"
   for: [{M: H}, {M: S}]
   seq: ["1NT 3{M}", "1NT (X) 3{M}"]
@@ -6700,6 +6827,7 @@
   status: infere
 
 # --- ouvreur, 4e enchère après une 3e enchère limitée du répondant
+# en: opener, fourth call after responder's limited third call
 - id: gen.o4.2NT
   seq: "* * * 2NT"
   call: 3NT
@@ -6727,6 +6855,7 @@
   status: infere
 
 # --- fin générique : après une manche ou un chelem, on passe
+# en: generic end: after a game or a slam, pass
 - id: gen.end.pass
   seq: "** 3NT|4H|4S|5C|5D|5H|5S|6C|6D|6H|6S|6NT|7C|7D|7H|7S|7NT"
   call: P

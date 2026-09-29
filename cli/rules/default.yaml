@@ -144,9 +144,10 @@
 # ======================================================================
 # A.5 Ouverture de 1SA
 # ======================================================================
+# Sur 1SA contré, le camp de l'ouvreur ignore le contre (SEF : « 2♣ = Stayman, etc. ») : chaque motif porte aussi sa variante « 1NT (X) … ».
 # Réponses
 - id: 1NT.r.5NT
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 5NT
   cond: "18 <= hl <= 19 and S < 4 and H < 4"
   forcing: F1
@@ -154,7 +155,7 @@
   meaning_en: "18-19 HL: opener bids 6NT (or continues with Baron)"
   status: sef
 - id: 1NT.r.4NT
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 4NT
   cond: "hl == 17 and S < 4 and H < 4"
   forcing: INV
@@ -162,7 +163,7 @@
   meaning_en: "Quantitative 17 HL: invitation to small slam"
   status: choix
 - id: 1NT.r.4D
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 4D
   cond: "H >= 5 and S >= 5 and 9 <= hcp <= 12"
   forcing: REL
@@ -172,7 +173,7 @@
   alert: true
 - id: "1NT.r.3{M}.slam"
   for: [{M: S}, {M: H}, {M: D}]
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: "3{M}"
   cond: "{M} >= 6 and hl >= 17"
   forcing: FM
@@ -181,7 +182,7 @@
   status: sef
 - id: "1NT.r.4{M}"
   for: [{M: S}, {M: H}]
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: "4{M}"
   cond: "{M} >= 6 and {M} >= max(S, H) and 9 <= hl <= 16"
   forcing: SO
@@ -189,7 +190,7 @@
   meaning_en: "Natural, 6+ cards, to play"
   status: sef
 - id: 1NT.r.2D.55weak
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2D
   cond: "H == 5 and S == 5 and 7 <= hl <= 8"
   forcing: REL
@@ -198,7 +199,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2C.54
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2C
   cond: "max(H, S) == 5 and min(H, S) == 4 and hl >= 7"
   forcing: F1
@@ -207,7 +208,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2C.misere
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2C
   cond: "max(H, S) == 5 and 7 <= hl <= 8 and min(S, H, D, C) <= 1"
   forcing: F1
@@ -216,7 +217,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2C
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2C
   cond: "(H == 4 or S == 4) and max(H, S) < 5 and hl >= 8 and not (shape == '4333' and hcp < 12)"
   forcing: F1
@@ -225,7 +226,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2H
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2H
   cond: "S >= 5 and S >= H"
   forcing: REL
@@ -234,7 +235,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2D
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2D
   cond: "H >= 5"
   forcing: REL
@@ -243,7 +244,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2S.minors
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2S
   cond: "C >= 5 and D >= 5 and hl >= 9"
   forcing: REL
@@ -252,7 +253,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2S
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2S
   cond: "C >= 6 and C >= D and (hl < 8 or (hl >= 12 and min(S, H, D) <= 1))"
   forcing: REL
@@ -261,7 +262,7 @@
   status: sef
   alert: true
 - id: 1NT.r.3C
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 3C
   cond: "D >= 6 and (hl < 8 or (hl >= 12 and min(S, H, C) <= 1))"
   forcing: REL
@@ -270,7 +271,7 @@
   status: sef
   alert: true
 - id: 1NT.r.2NT
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 2NT
   cond: "hl == 8"
   forcing: INV
@@ -278,7 +279,7 @@
   meaning_en: "8 HCP, game invitation"
   status: sef
 - id: 1NT.r.3NT
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 3NT
   cond: "9 <= hl <= 16"
   forcing: SO
@@ -286,7 +287,7 @@
   meaning_en: "9-16 HL, to play"
   status: sef
 - id: 1NT.r.6NT
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: 6NT
   cond: "hl >= 20"
   forcing: SO
@@ -294,7 +295,7 @@
   meaning_en: "20+ HL: direct small slam"
   status: infere
 - id: 1NT.r.pass
-  seq: "1NT"
+  seq: ["1NT", "1NT (X)"]
   call: P
   cond: "true"
   forcing: NF
@@ -303,7 +304,7 @@
   status: sef
 # Redemandes de l'ouvreur
 - id: 1NT.2C.2NT
-  seq: "1NT 2C"
+  seq: ["1NT 2C", "1NT (X) 2C"]
   call: 2NT
   cond: "H >= 4 and S >= 4"
   forcing: F1
@@ -312,7 +313,7 @@
   status: sef
   alert: true
 - id: 1NT.2C.2H
-  seq: "1NT 2C"
+  seq: ["1NT 2C", "1NT (X) 2C"]
   call: 2H
   cond: "H >= 4"
   forcing: NF
@@ -320,7 +321,7 @@
   meaning_en: "Stayman: 4 hearts"
   status: sef
 - id: 1NT.2C.2S
-  seq: "1NT 2C"
+  seq: ["1NT 2C", "1NT (X) 2C"]
   call: 2S
   cond: "S >= 4"
   forcing: NF
@@ -328,7 +329,7 @@
   meaning_en: "Stayman: 4 spades"
   status: sef
 - id: 1NT.2C.2D
-  seq: "1NT 2C"
+  seq: ["1NT 2C", "1NT (X) 2C"]
   call: 2D
   cond: "true"
   forcing: NF
@@ -338,7 +339,7 @@
   alert: true
 - id: "1NT.tex.{M}.super"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T}"
+  seq: ["1NT {T}", "1NT (X) {T}"]
   call: "3{M}"
   cond: "{M} >= 4 and hl >= 17"
   forcing: INV
@@ -347,7 +348,7 @@
   status: sef
 - id: "1NT.tex.{M}"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T}"
+  seq: ["1NT {T}", "1NT (X) {T}"]
   call: "2{M}"
   cond: "true"
   forcing: NF
@@ -355,7 +356,7 @@
   meaning_en: "Corrects the Texas transfer"
   status: sef
 - id: 1NT.2S.3C
-  seq: "1NT 2S"
+  seq: ["1NT 2S", "1NT (X) 2S"]
   call: 3C
   cond: "true"
   forcing: NF
@@ -363,7 +364,7 @@
   meaning_en: "Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed)"
   status: sef
 - id: 1NT.3C.3D
-  seq: "1NT 3C"
+  seq: ["1NT 3C", "1NT (X) 3C"]
   call: 3D
   cond: "true"
   forcing: NF
@@ -371,7 +372,7 @@
   meaning_en: "Corrects the Texas ♦"
   status: sef
 - id: 1NT.4D.4H
-  seq: "1NT 4D"
+  seq: ["1NT 4D", "1NT (X) 4D"]
   call: 4H
   cond: "H >= S"
   forcing: SO
@@ -379,7 +380,7 @@
   meaning_en: "Chooses ♥"
   status: sef
 - id: 1NT.4D.4S
-  seq: "1NT 4D"
+  seq: ["1NT 4D", "1NT (X) 4D"]
   call: 4S
   cond: "true"
   forcing: SO
@@ -387,15 +388,15 @@
   meaning_en: "Chooses ♠"
   status: sef
 - id: 1NT.2NT.3NT
-  seq: "1NT 2NT"
+  seq: ["1NT 2NT", "1NT (X) 2NT"]
   call: 3NT
-  cond: "hl >= 16"
+  cond: "hl >= 17"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
   status: sef
 - id: 1NT.4NT.6NT
-  seq: "1NT 4NT"
+  seq: ["1NT 4NT", "1NT (X) 4NT"]
   call: 6NT
   cond: "hl >= 16"
   forcing: SO
@@ -403,7 +404,7 @@
   meaning_en: "16-17 HL: accepts the small-slam invitation"
   status: choix
 - id: 1NT.5NT.6NT
-  seq: "1NT 5NT"
+  seq: ["1NT 5NT", "1NT (X) 5NT"]
   call: 6NT
   cond: "true"
   forcing: SO
@@ -411,7 +412,7 @@
   meaning_en: "Bids 6NT (the card also allows a Baron)"
   status: sef
 - id: 1NT.inv.pass
-  seq: "1NT 2NT|4NT|3NT|4H|4S"
+  seq: ["1NT 2NT|4NT|3NT|4H|4S", "1NT (X) 2NT|4NT|3NT|4H|4S"]
   call: P
   cond: "true"
   forcing: NF
@@ -421,7 +422,7 @@
 # Suites du répondant après Stayman
 - id: "1NT.2C.2D.2{M}"
   for: [{M: H, oM: S}, {M: S, oM: H}]
-  seq: "1NT 2C 2D"
+  seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: "2{M}"
   cond: "{M} == 5 and {oM} == 4 and hl <= 8"
   forcing: NF
@@ -429,7 +430,7 @@
   meaning_en: "5-4 in the majors, 7-8 HCP (or Golden Misery): to play"
   status: sef
 - id: 1NT.2C.2D.2M.misere
-  seq: "1NT 2C 2D"
+  seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: 2H
   cond: "H == 5 and hl <= 8"
   forcing: NF
@@ -437,7 +438,7 @@
   meaning_en: "Golden Misery: to play 2♥"
   status: sef
 - id: 1NT.2C.2D.2S.misere
-  seq: "1NT 2C 2D"
+  seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: 2S
   cond: "S == 5 and hl <= 8"
   forcing: NF
@@ -446,7 +447,7 @@
   status: sef
 - id: "1NT.2C.2D.cc{call}"
   for: [{call: 3H, M: S, oM: H}, {call: 3S, M: H, oM: S}]
-  seq: "1NT 2C 2D"
+  seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: "{call}"
   cond: "{M} == 5 and {oM} == 4 and hl >= 9"
   forcing: FM
@@ -456,7 +457,7 @@
   alert: true
 - id: "1NT.2C.2{M}.splinter{s}"
   for: [{M: H, s: C}, {M: H, s: D}, {M: S, s: C}, {M: S, s: D}]
-  seq: "1NT 2C 2{M}"
+  seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "4{s}"
   cond: "{M} >= 4 and 13 <= hl <= 14 and short('{s}')"
   forcing: FM
@@ -466,7 +467,7 @@
   alert: true
 - id: "1NT.2C.2{M}.slam"
   for: [{M: H, x: 3S}, {M: S, x: 3H}]
-  seq: "1NT 2C 2{M}"
+  seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "{x}"
   cond: "{M} >= 4 and hl >= 15"
   forcing: FM
@@ -476,7 +477,7 @@
   alert: true
 - id: "1NT.2C.2{M}.game"
   for: [{M: H}, {M: S}]
-  seq: "1NT 2C 2{M}"
+  seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "4{M}"
   cond: "{M} >= 4 and hl >= 9"
   forcing: SO
@@ -485,7 +486,7 @@
   status: sef
 - id: "1NT.2C.2{M}.inv"
   for: [{M: H}, {M: S}]
-  seq: "1NT 2C 2{M}"
+  seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "3{M}"
   cond: "{M} >= 4 and hl == 8"
   forcing: INV
@@ -494,7 +495,7 @@
   status: infere
 - id: "1NT.2C.2{M}.misere"
   for: [{M: H}, {M: S}]
-  seq: "1NT 2C 2{M}"
+  seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: P
   cond: "{M} >= 4 and hl <= 7"
   forcing: NF
@@ -502,7 +503,7 @@
   meaning_en: "Golden Misery: to play"
   status: sef
 - id: 1NT.2C.x.4NT
-  seq: "1NT 2C 2D|2H|2S"
+  seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 4NT
   cond: "hl == 17"
   forcing: INV
@@ -510,7 +511,7 @@
   meaning_en: "Quantitative (no fit)"
   status: sef
 - id: 1NT.2C.x.2NT
-  seq: "1NT 2C 2D|2H|2S"
+  seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 2NT
   cond: "hl <= 8"
   forcing: INV
@@ -518,7 +519,7 @@
   meaning_en: "Invitation without a fit"
   status: sef
 - id: 1NT.2C.x.3NT
-  seq: "1NT 2C 2D|2H|2S"
+  seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -526,7 +527,7 @@
   meaning_en: "Game without a fit"
   status: sef
 - id: 1NT.2C.2NT.slamS
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3S
   cond: "S >= 4 and H < 4 and hl >= 15"
   forcing: FM
@@ -535,7 +536,7 @@
   status: sef
   trump: S
 - id: 1NT.2C.2NT.slam
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3H
   cond: "H >= 4 and hl >= 15"
   forcing: FM
@@ -543,7 +544,7 @@
   meaning_en: "Natural, game-forcing, slam interest"
   status: sef
 - id: 1NT.2C.2NT.4C
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 4C
   cond: "H >= 4 and hl >= 9"
   forcing: REL
@@ -552,7 +553,7 @@
   status: sef
   alert: true
 - id: 1NT.2C.2NT.4D
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 4D
   cond: "S >= 4 and hl >= 9"
   forcing: REL
@@ -561,7 +562,7 @@
   status: sef
   alert: true
 - id: 1NT.2C.2NT.3C
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3C
   cond: "H >= 4"
   forcing: REL
@@ -570,7 +571,7 @@
   status: sef
   alert: true
 - id: 1NT.2C.2NT.3D
-  seq: "1NT 2C 2NT"
+  seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3D
   cond: "true"
   forcing: REL
@@ -580,7 +581,7 @@
   alert: true
 # Suites après les réponses de l'ouvreur au Stayman
 - id: 1NT.2C.2NT.3C.3H
-  seq: "1NT 2C 2NT 3C"
+  seq: ["1NT 2C 2NT 3C", "1NT (X) 2C 2NT 3C"]
   call: 3H
   cond: "true"
   forcing: NF
@@ -588,7 +589,7 @@
   meaning_en: "Answers the relay"
   status: sef
 - id: 1NT.2C.2NT.3D.3S
-  seq: "1NT 2C 2NT 3D"
+  seq: ["1NT 2C 2NT 3D", "1NT (X) 2C 2NT 3D"]
   call: 3S
   cond: "true"
   forcing: NF
@@ -596,7 +597,7 @@
   meaning_en: "Answers the relay"
   status: sef
 - id: 1NT.2C.2NT.4C.4H
-  seq: "1NT 2C 2NT 4C"
+  seq: ["1NT 2C 2NT 4C", "1NT (X) 2C 2NT 4C"]
   call: 4H
   cond: "true"
   forcing: SO
@@ -604,7 +605,7 @@
   meaning_en: "Corrects the Texas transfer"
   status: sef
 - id: 1NT.2C.2NT.4D.4S
-  seq: "1NT 2C 2NT 4D"
+  seq: ["1NT 2C 2NT 4D", "1NT (X) 2C 2NT 4D"]
   call: 4S
   cond: "true"
   forcing: SO
@@ -612,7 +613,7 @@
   meaning_en: "Corrects the Texas transfer"
   status: sef
 - id: 1NT.2C.2S.2NT.3H
-  seq: "1NT 2C 2S 2NT"
+  seq: ["1NT 2C 2S 2NT", "1NT (X) 2C 2S 2NT"]
   call: 3H
   cond: "H == 3 and hl >= 16"
   forcing: F1
@@ -620,15 +621,15 @@
   meaning_en: "3 hearts and maximum (responder may have 5 hearts)"
   status: sef
 - id: 1NT.2C.x.2NT.3NT
-  seq: "1NT 2C 2D|2H|2S 2NT"
+  seq: ["1NT 2C 2D|2H|2S 2NT", "1NT (X) 2C 2D|2H|2S 2NT"]
   call: 3NT
-  cond: "hl >= 16"
+  cond: "hl >= 17"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
   status: sef
 - id: 1NT.2C.x.2NT.pass
-  seq: "1NT 2C 2D|2H|2S 2NT"
+  seq: ["1NT 2C 2D|2H|2S 2NT", "1NT (X) 2C 2D|2H|2S 2NT"]
   call: P
   cond: "true"
   forcing: NF
@@ -637,16 +638,16 @@
   status: sef
 - id: "1NT.2C.2{M}.3{M}.acc"
   for: [{M: H}, {M: S}]
-  seq: "1NT 2C 2{M} 3{M}"
+  seq: ["1NT 2C 2{M} 3{M}", "1NT (X) 2C 2{M} 3{M}"]
   call: "4{M}"
-  cond: "hl >= 16"
+  cond: "hl >= 17"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
   status: infere
 - id: "1NT.2C.2D.cc.{x}"
   for: [{x: 3H, M: S}, {x: 3S, M: H}]
-  seq: "1NT 2C 2D {x}"
+  seq: ["1NT 2C 2D {x}", "1NT (X) 2C 2D {x}"]
   call: "4{M}"
   cond: "{M} >= 3"
   forcing: SO
@@ -655,7 +656,7 @@
   status: infere
 - id: "1NT.2C.2D.cc.{x}.3NT"
   for: [{x: 3H}, {x: 3S}]
-  seq: "1NT 2C 2D {x}"
+  seq: ["1NT 2C 2D {x}", "1NT (X) 2C 2D {x}"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -663,7 +664,7 @@
   meaning_en: "No fit"
   status: infere
 - id: 1NT.2C.end.pass
-  seq: "1NT 2C 2D|2H|2S 2H|2S|3NT|4H|4S"
+  seq: ["1NT 2C 2D|2H|2S 2H|2S|3NT|4H|4S", "1NT (X) 2C 2D|2H|2S 2H|2S|3NT|4H|4S"]
   call: P
   cond: "true"
   forcing: NF
@@ -673,7 +674,7 @@
 # Suites du répondant après Texas
 - id: "1NT.tex{M}.55.2S"
   for: [{T: 2D, M: H}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 2S
   cond: "H == 5 and S == 5 and 7 <= hl <= 8"
   forcing: NF
@@ -681,7 +682,7 @@
   meaning_en: "5-5 in the majors, 7-8 HCP"
   status: sef
 - id: 1NT.2H.2S.55.3H
-  seq: "1NT 2H 2S"
+  seq: ["1NT 2H 2S", "1NT (X) 2H 2S"]
   call: 3H
   cond: "H >= 5 and S >= 5 and hl >= 15"
   forcing: FM
@@ -689,7 +690,7 @@
   meaning_en: "5-5 in the majors, 15+ HCP"
   status: sef
 - id: 1NT.2H.2S.55.4H
-  seq: "1NT 2H 2S"
+  seq: ["1NT 2H 2S", "1NT (X) 2H 2S"]
   call: 4H
   cond: "H >= 5 and S >= 5 and 13 <= hl <= 14"
   forcing: NF
@@ -698,7 +699,7 @@
   status: sef
 - id: "1NT.tex{M}.pass"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: P
   cond: "hl <= 7"
   forcing: NF
@@ -707,7 +708,7 @@
   status: sef
 - id: "1NT.tex{M}.3{M}"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: "3{M}"
   cond: "{M} >= 6 and hl == 8"
   forcing: INV
@@ -716,7 +717,7 @@
   status: infere
 - id: "1NT.tex{M}.2NT"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 2NT
   cond: "hl == 8"
   forcing: INV
@@ -725,7 +726,7 @@
   status: infere
 - id: "1NT.tex{M}.4{M}"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: "4{M}"
   cond: "{M} >= 6"
   forcing: SO
@@ -734,7 +735,7 @@
   status: infere
 - id: "1NT.tex{M}.3NT"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M}"
+  seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 3NT
   cond: "true"
   forcing: NF
@@ -743,25 +744,25 @@
   status: infere
 - id: "1NT.tex{M}.2NT.r"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M} 2NT"
+  seq: ["1NT {T} 2{M} 2NT", "1NT (X) {T} 2{M} 2NT"]
   call: "4{M}"
-  cond: "{M} >= 3 and hl >= 16"
+  cond: "{M} >= 3 and hl >= 17"
   forcing: SO
   meaning: "Maximum avec fit"
   meaning_en: "Maximum with a fit"
   status: infere
 - id: "1NT.tex{M}.2NT.3NT"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M} 2NT"
+  seq: ["1NT {T} 2{M} 2NT", "1NT (X) {T} 2{M} 2NT"]
   call: 3NT
-  cond: "hl >= 16"
+  cond: "hl >= 17"
   forcing: SO
   meaning: "Maximum sans fit"
   meaning_en: "Maximum without a fit"
   status: infere
 - id: "1NT.tex{M}.2NT.3{M}"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M} 2NT"
+  seq: ["1NT {T} 2{M} 2NT", "1NT (X) {T} 2{M} 2NT"]
   call: "3{M}"
   cond: "{M} >= 3"
   forcing: NF
@@ -770,16 +771,16 @@
   status: infere
 - id: "1NT.tex{M}.3M.4M"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M} 3{M}"
+  seq: ["1NT {T} 2{M} 3{M}", "1NT (X) {T} 2{M} 3{M}"]
   call: "4{M}"
-  cond: "hl >= 16"
+  cond: "hl >= 17"
   forcing: SO
   meaning: "Maximum : accepte"
   meaning_en: "Maximum: accepts"
   status: infere
 - id: "1NT.tex{M}.3NT.4M"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 2{M} 3NT"
+  seq: ["1NT {T} 2{M} 3NT", "1NT (X) {T} 2{M} 3NT"]
   call: "4{M}"
   cond: "{M} >= 3"
   forcing: SO
@@ -787,7 +788,7 @@
   meaning_en: "5-3 fit: corrects to 4M"
   status: infere
 - id: 1NT.2D.2H.2S.r
-  seq: "1NT 2D 2H 2S"
+  seq: ["1NT 2D 2H 2S", "1NT (X) 2D 2H 2S"]
   call: P
   cond: "S >= H"
   forcing: NF
@@ -795,7 +796,7 @@
   meaning_en: "Prefers ♠"
   status: infere
 - id: 1NT.2D.2H.2S.r3H
-  seq: "1NT 2D 2H 2S"
+  seq: ["1NT 2D 2H 2S", "1NT (X) 2D 2H 2S"]
   call: 3H
   cond: "true"
   forcing: NF
@@ -803,7 +804,7 @@
   meaning_en: "Prefers ♥"
   status: infere
 - id: 1NT.2H.2S.4H.r
-  seq: "1NT 2H 2S 4H"
+  seq: ["1NT 2H 2S 4H", "1NT (X) 2H 2S 4H"]
   call: 4S
   cond: "S > H"
   forcing: SO
@@ -811,7 +812,7 @@
   meaning_en: "Prefers ♠"
   status: infere
 - id: 1NT.2C.inv.pass
-  seq: ["1NT 2C 2H 3H", "1NT 2C 2S 3S"]
+  seq: ["1NT 2C 2H 3H", "1NT 2C 2S 3S", "1NT (X) 2C 2H 3H", "1NT (X) 2C 2S 3S"]
   call: P
   cond: "true"
   forcing: NF
@@ -819,7 +820,7 @@
   meaning_en: "Minimum: declines the invitation"
   status: infere
 - id: 1NT.tex.end.pass2
-  seq: "1NT 2H 2S 2NT|3S|3NT|4S|4H"
+  seq: ["1NT 2H 2S 2NT|3S|3NT|4S|4H", "1NT (X) 2H 2S 2NT|3S|3NT|4S|4H"]
   call: P
   cond: "true"
   forcing: NF
@@ -827,7 +828,7 @@
   meaning_en: "Minimum / no fit / signoff"
   status: infere
 - id: 1NT.tex.end.pass
-  seq: "1NT 2D 2H 2NT|3H|3NT|4H"
+  seq: ["1NT 2D 2H 2NT|3H|3NT|4H", "1NT (X) 2D 2H 2NT|3H|3NT|4H"]
   call: P
   cond: "true"
   forcing: NF
@@ -836,7 +837,7 @@
   status: infere
 - id: "1NT.tex{M}.super.r"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 3{M}"
+  seq: ["1NT {T} 3{M}", "1NT (X) {T} 3{M}"]
   call: "4{M}"
   cond: "hl >= 4"
   forcing: SO
@@ -845,7 +846,7 @@
   status: infere
 - id: "1NT.tex{M}.super.pass"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
-  seq: "1NT {T} 3{M}"
+  seq: ["1NT {T} 3{M}", "1NT (X) {T} 3{M}"]
   call: P
   cond: "true"
   forcing: NF
@@ -854,7 +855,7 @@
   status: infere
 # Suites après Texas mineur
 - id: 1NT.2S.3C.3D
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 3D
   cond: "C >= 5 and D >= 5 and hl >= 9"
   forcing: FM
@@ -863,7 +864,7 @@
   status: sef
 - id: "1NT.2S.3C.short{s}"
   for: [{s: H, call: 3H}, {s: S, call: 3S}]
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: "{call}"
   cond: "hl >= 12 and short('{s}')"
   forcing: FM
@@ -872,7 +873,7 @@
   status: sef
   alert: true
 - id: 1NT.2S.3C.4D
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 4D
   cond: "hl >= 16 and short('D')"
   forcing: FM
@@ -880,7 +881,7 @@
   meaning_en: "6♣ and singleton ♦"
   status: sef
 - id: 1NT.2S.3C.3NT
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 3NT
   cond: "hl >= 12 and short('D')"
   forcing: FM
@@ -889,7 +890,7 @@
   status: sef
   alert: true
 - id: 1NT.2S.3C.4C
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 4C
   cond: "hl >= 12"
   forcing: F1
@@ -897,7 +898,7 @@
   meaning_en: "6♣ without a singleton"
   status: sef
 - id: 1NT.2S.3C.pass
-  seq: "1NT 2S 3C"
+  seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: P
   cond: "true"
   forcing: NF
@@ -905,7 +906,7 @@
   meaning_en: "Weak: to play 3♣"
   status: sef
 - id: 1NT.3C.3D.4C
-  seq: "1NT 3C 3D"
+  seq: ["1NT 3C 3D", "1NT (X) 3C 3D"]
   call: 4C
   cond: "hl >= 12 and short('C')"
   forcing: FM
@@ -913,7 +914,7 @@
   meaning_en: "6♦ and short ♣, slam interest"
   status: sef
 - id: 1NT.3C.3D.4D
-  seq: "1NT 3C 3D"
+  seq: ["1NT 3C 3D", "1NT (X) 3C 3D"]
   call: 4D
   cond: "hl >= 12"
   forcing: F1
@@ -921,7 +922,7 @@
   meaning_en: "6♦ without shortness"
   status: sef
 - id: 1NT.3C.3D.pass
-  seq: "1NT 3C 3D"
+  seq: ["1NT 3C 3D", "1NT (X) 3C 3D"]
   call: P
   cond: "true"
   forcing: NF
@@ -2527,7 +2528,7 @@
 # --- 1SA – Stayman – fit avec espoir de chelem : l'ouvreur nomme ses contrôles
 - id: "sl.st.{M}.{c}"
   for: [{M: H, x: 3S, c: C}, {M: H, x: 3S, c: D}, {M: S, x: 3H, c: C}, {M: S, x: 3H, c: D}, {M: S, x: 3H, c: H}]
-  seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}"]
+  seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}", "1NT (X) 2C 2{M} {x}", "1NT (X) 2C 2NT 3{M}"]
   call: "4{c}"
   cond: "hl >= 16 and ctrl1('{c}')"
   forcing: F1
@@ -2538,7 +2539,7 @@
   trump: "{M}"
 - id: "sl.st.{M}.min"
   for: [{M: H, x: 3S}, {M: S, x: 3H}]
-  seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}"]
+  seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}", "1NT (X) 2C 2{M} {x}", "1NT (X) 2C 2NT 3{M}"]
   call: "4{M}"
   cond: "true"
   forcing: NF
@@ -2548,7 +2549,7 @@
   trump: "{M}"
 - id: "sl.st.{M}.cue.bw"
   for: [{M: H, x: 3S, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, x: 3H, km: "true"}]
-  seq: ["1NT 2C 2{M} {x} 4C|4D|4H", "1NT 2C 2NT 3{M} 4C|4D|4H"]
+  seq: ["1NT 2C 2{M} {x} 4C|4D|4H", "1NT 2C 2NT 3{M} 4C|4D|4H", "1NT (X) 2C 2{M} {x} 4C|4D|4H", "1NT (X) 2C 2NT 3{M} 4C|4D|4H"]
   call: 4NT
   cond: "{km}"
   forcing: ASK
@@ -2558,7 +2559,7 @@
   alert: true
 - id: "sl.st.{M}.cue.4M"
   for: [{M: H, x: 3S, c: "4C|4D"}, {M: S, x: 3H, c: "4C|4D|4H"}]
-  seq: ["1NT 2C 2{M} {x} {c}", "1NT 2C 2NT 3{M} {c}"]
+  seq: ["1NT 2C 2{M} {x} {c}", "1NT 2C 2NT 3{M} {c}", "1NT (X) 2C 2{M} {x} {c}", "1NT (X) 2C 2NT 3{M} {c}"]
   call: "4{M}"
   cond: "true"
   forcing: SO
@@ -2567,7 +2568,7 @@
   status: infere
 - id: "sl.st.{M}.min.bw"
   for: [{M: H, x: 3S, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, x: 3H, km: "true"}]
-  seq: ["1NT 2C 2{M} {x} 4{M}", "1NT 2C 2NT 3{M} 4{M}"]
+  seq: ["1NT 2C 2{M} {x} 4{M}", "1NT 2C 2NT 3{M} 4{M}", "1NT (X) 2C 2{M} {x} 4{M}", "1NT (X) 2C 2NT 3{M} 4{M}"]
   call: 4NT
   cond: "hl >= 18 and ({km})"
   forcing: ASK
@@ -2577,7 +2578,7 @@
   alert: true
 - id: "sl.st.{M}.min.p"
   for: [{M: H, x: 3S}, {M: S, x: 3H}]
-  seq: ["1NT 2C 2{M} {x} 4{M}", "1NT 2C 2NT 3{M} 4{M}"]
+  seq: ["1NT 2C 2{M} {x} 4{M}", "1NT 2C 2NT 3{M} 4{M}", "1NT (X) 2C 2{M} {x} 4{M}", "1NT (X) 2C 2NT 3{M} 4{M}"]
   call: P
   cond: "true"
   forcing: NF
@@ -2587,7 +2588,7 @@
 # --- 1SA – Stayman – Splinter
 - id: "sl.stspl.{M}.{s}.bw"
   for: [{M: H, s: C, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: H, s: D, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, s: C, km: "true"}, {M: S, s: D, km: "true"}]
-  seq: "1NT 2C 2{M} 4{s}"
+  seq: ["1NT 2C 2{M} 4{s}", "1NT (X) 2C 2{M} 4{s}"]
   call: 4NT
   cond: "hl >= 16 and hcp_in('{s}') <= 1 and ({km})"
   forcing: ASK
@@ -2598,7 +2599,7 @@
   trump: "{M}"
 - id: "sl.stspl.{M}.{s}.4M"
   for: [{M: H, s: C}, {M: H, s: D}, {M: S, s: C}, {M: S, s: D}]
-  seq: "1NT 2C 2{M} 4{s}"
+  seq: ["1NT 2C 2{M} 4{s}", "1NT (X) 2C 2{M} 4{s}"]
   call: "4{M}"
   cond: "true"
   forcing: SO
@@ -2609,7 +2610,7 @@
 # --- Texas mineurs : l'ouvreur juge la courte du répondant
 - id: "sl.tm.{c}.3NT"
   for: [{c: 3H, s: H}, {c: 3S, s: S}]
-  seq: "1NT 2S 3C {c}"
+  seq: ["1NT 2S 3C {c}", "1NT (X) 2S 3C {c}"]
   call: 3NT
   cond: "stop('{s}') and hcp_in('{s}') >= 3"
   forcing: SO
@@ -2618,7 +2619,7 @@
   status: infere
 - id: "sl.tm.{c}.6C"
   for: [{c: 3H, s: H}, {c: 3S, s: S}, {c: 3NT, s: D}, {c: 4D, s: D}]
-  seq: "1NT 2S 3C {c}"
+  seq: ["1NT 2S 3C {c}", "1NT (X) 2S 3C {c}"]
   call: 6C
   cond: "hl >= 16 and hcp_in('{s}') <= 1 and C >= 3 and aces >= 2"
   forcing: SO
@@ -2627,7 +2628,7 @@
   status: infere
 - id: "sl.tm.{c}.5C"
   for: [{c: 3H, s: H}, {c: 3S, s: S}, {c: 3NT, s: D}, {c: 4C, s: C}, {c: 4D, s: D}]
-  seq: "1NT 2S 3C {c}"
+  seq: ["1NT 2S 3C {c}", "1NT (X) 2S 3C {c}"]
   call: 5C
   cond: "true"
   forcing: SO
@@ -2635,7 +2636,7 @@
   meaning_en: "Game in ♣"
   status: infere
 - id: sl.tmd.4C.6D
-  seq: "1NT 3C 3D 4C"
+  seq: ["1NT 3C 3D 4C", "1NT (X) 3C 3D 4C"]
   call: 6D
   cond: "hl >= 16 and hcp_in('C') <= 1 and D >= 3 and aces >= 2"
   forcing: SO
@@ -3271,7 +3272,7 @@
   meaning_en: "Minimum"
   status: infere
 - id: q.st.4NT
-  seq: "1NT 2C 2D|2H|2S 4NT"
+  seq: ["1NT 2C 2D|2H|2S 4NT", "1NT (X) 2C 2D|2H|2S 4NT"]
   call: 6NT
   cond: "hl >= 16"
   forcing: SO
@@ -3287,7 +3288,7 @@
   meaning_en: "Accepts the quantitative bid (19-20 opposite)"
   status: infere
 - id: q.p
-  seq: ["1NT 2C 2D|2H|2S 4NT", "1C|1D 4NT"]
+  seq: ["1NT 2C 2D|2H|2S 4NT", "1C|1D 4NT", "1NT (X) 2C 2D|2H|2S 4NT"]
   call: P
   cond: "true"
   forcing: NF
@@ -5163,6 +5164,44 @@
   meaning_en: "Game in notrump"
   status: infere
 
+# --- 1SA et intervention adverse à 2♣ ou 2♦ (hors Rubensohl) : le répondant, naturel
+- id: "1NT.int{i}.4{M}"
+  for: [{i: 2C, M: S}, {i: 2C, M: H}, {i: 2D, M: S}, {i: 2D, M: H}]
+  seq: "1NT ({i})"
+  call: "4{M}"
+  cond: "{M} >= 6 and {M} >= max(S, H) and 9 <= hl <= 16"
+  forcing: SO
+  meaning: "Majeure 6e, 9+ HL : manche"
+  meaning_en: "Six-card major, 9+ HL: game"
+  status: infere
+- id: "1NT.int{i}.3NT"
+  for: [{i: 2C}, {i: 2D}]
+  seq: "1NT ({i})"
+  call: 3NT
+  cond: "9 <= hl <= 16"
+  forcing: SO
+  meaning: "Manche à SA : 9+ HL"
+  meaning_en: "Game in notrump: 9+ HL"
+  status: infere
+- id: "1NT.int{i}.2{M}"
+  for: [{i: 2C, M: S}, {i: 2C, M: H}, {i: 2D, M: S}, {i: 2D, M: H}]
+  seq: "1NT ({i})"
+  call: "2{M}"
+  cond: "{M} >= 5 and {M} >= max(S, H) and hl <= 8"
+  forcing: NF
+  meaning: "Majeure 5e, faible : pour jouer"
+  meaning_en: "Five-card major, weak: to play"
+  status: infere
+- id: "1NT.int{i}.P"
+  for: [{i: 2C}, {i: 2D}]
+  seq: "1NT ({i})"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Passe"
+  meaning_en: "Pass"
+  status: infere
+
 # ======================================================================
 # A.19 Suites naturelles (complétions)
 # ======================================================================
@@ -5460,7 +5499,7 @@
 
 # --- 1SA – 2♠ – 3♣ – 3♦ (bicolore mineur de manche)
 - id: 1NT.2S.3C.3D.3NT
-  seq: "1NT 2S 3C 3D"
+  seq: ["1NT 2S 3C 3D", "1NT (X) 2S 3C 3D"]
   call: 3NT
   cond: "stop('H') and stop('S')"
   forcing: SO
@@ -5468,7 +5507,7 @@
   meaning_en: "Major-suit stoppers: 3NT"
   status: infere
 - id: 1NT.2S.3C.3D.5D
-  seq: "1NT 2S 3C 3D"
+  seq: ["1NT 2S 3C 3D", "1NT (X) 2S 3C 3D"]
   call: 5D
   cond: "D >= C"
   forcing: SO
@@ -5476,7 +5515,7 @@
   meaning_en: "Prefers ♦"
   status: infere
 - id: 1NT.2S.3C.3D.5C
-  seq: "1NT 2S 3C 3D"
+  seq: ["1NT 2S 3C 3D", "1NT (X) 2S 3C 3D"]
   call: 5C
   cond: "true"
   forcing: SO
@@ -6459,7 +6498,7 @@
 # --- Stayman : l'ouvreur répond à l'espoir de chelem ou au splinter
 - id: "1NT.2C.2{M}.slam.r"
   for: [{M: H, x: "3S|4C|4D"}, {M: S, x: "3H|4C|4D"}]
-  seq: "1NT 2C 2{M} {x}"
+  seq: ["1NT 2C 2{M} {x}", "1NT (X) 2C 2{M} {x}"]
   call: "4{M}"
   cond: "true"
   forcing: NF
@@ -6469,7 +6508,7 @@
 
 # --- Stayman : 1SA 2♣ 2♠ 2SA 3♥ (3 cœurs, maximum)
 - id: 1NT.2C.2S.2NT.3H.4H
-  seq: "1NT 2C 2S 2NT 3H"
+  seq: ["1NT 2C 2S 2NT 3H", "1NT (X) 2C 2S 2NT 3H"]
   call: 4H
   cond: "H >= 5"
   forcing: SO
@@ -6477,7 +6516,7 @@
   meaning_en: "5-3 fit in ♥"
   status: infere
 - id: 1NT.2C.2S.2NT.3H.3NT
-  seq: "1NT 2C 2S 2NT 3H"
+  seq: ["1NT 2C 2S 2NT 3H", "1NT (X) 2C 2S 2NT 3H"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -6488,7 +6527,7 @@
 # --- divers
 - id: "1NT.3{M}.r"
   for: [{M: H}, {M: S}]
-  seq: "1NT 3{M}"
+  seq: ["1NT 3{M}", "1NT (X) 3{M}"]
   call: "4{M}"
   cond: "{M} >= 3"
   forcing: SO
@@ -6497,7 +6536,7 @@
   status: infere
 - id: "1NT.3{M}.3NT"
   for: [{M: H}, {M: S}, {M: D}]
-  seq: "1NT 3{M}"
+  seq: ["1NT 3{M}", "1NT (X) 3{M}"]
   call: 3NT
   cond: "true"
   forcing: NF
@@ -6505,7 +6544,7 @@
   meaning_en: "No fit"
   status: infere
 - id: 1NT.3C.3D.4D.r
-  seq: "1NT 3C 3D 4C|4D"
+  seq: ["1NT 3C 3D 4C|4D", "1NT (X) 3C 3D 4C|4D"]
   call: 5D
   cond: "true"
   forcing: SO
@@ -6564,7 +6603,7 @@
   meaning_en: "Minimum"
   status: infere
 - id: 1NT.tex.2NT.3M.p
-  seq: ["1NT 2D 2H 2NT 3H", "1NT 2H 2S 2NT 3S", "1NT 2C 2NT 3D 3S", "1NT 2C 2NT 3C 3H"]
+  seq: ["1NT 2D 2H 2NT 3H", "1NT 2H 2S 2NT 3S", "1NT 2C 2NT 3D 3S", "1NT 2C 2NT 3C 3H", "1NT (X) 2D 2H 2NT 3H", "1NT (X) 2H 2S 2NT 3S", "1NT (X) 2C 2NT 3D 3S", "1NT (X) 2C 2NT 3C 3H"]
   call: P
   cond: "true"
   forcing: NF

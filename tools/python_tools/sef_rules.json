@@ -24147,7 +24147,7 @@
  },
  {
   "id": "2H.2NT.x.4H",
-  "seq": "2H 2NT 3C|3D|3H|3S|3NT|4C|4D",
+  "seq": "2H 2NT 3C|3D|3S|3NT|4C|4D",
   "call": "4H",
   "cond": "H >= 2",
   "forcing": "SO",
@@ -24157,7 +24157,7 @@
  },
  {
   "id": "2S.2NT.x.4S",
-  "seq": "2S 2NT 3C|3D|3H|3S|3NT|4C|4D|4H",
+  "seq": "2S 2NT 3C|3D|3H|3NT|4C|4D|4H",
   "call": "4S",
   "cond": "S >= 2",
   "forcing": "SO",

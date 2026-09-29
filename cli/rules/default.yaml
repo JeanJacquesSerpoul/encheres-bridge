@@ -6427,7 +6427,7 @@
 
 # --- 2 faible : suites
 - id: "2{M}.2NT.x.4{M}"
-  for: [{M: H, a: "3C|3D|3H|3S|3NT|4C|4D"}, {M: S, a: "3C|3D|3H|3S|3NT|4C|4D|4H"}]
+  for: [{M: H, a: "3C|3D|3S|3NT|4C|4D"}, {M: S, a: "3C|3D|3H|3NT|4C|4D|4H"}]
   seq: "2{M} 2NT {a}"
   call: "4{M}"
   cond: "{M} >= 2"

@@ -986,6 +986,36 @@
     </div>
   </dialog>
 
+  <!-- Description PDF du système d'enchères (bouton #rules-help des réglages),
+       affichée par le lecteur PDF du navigateur dans un cadre. Le cadre n'est
+       chargé qu'à l'ouverture et vidé à la fermeture. Le lien de l'en-tête
+       ouvre le même PDF dans un onglet ; un navigateur sans lecteur PDF
+       intégré (Chrome Android…) l'y ouvre directement. Voir openRulesPdf. -->
+  <dialog id="rules-pdf-dialog" class="pdf-dialog" aria-labelledby="rules-pdf-title">
+    <div class="pdf-box">
+      <div class="pdf-head">
+        <h2 id="rules-pdf-title"></h2>
+        <a id="rules-pdf-tab" class="icon-btn" target="_blank" rel="noopener"
+           data-i18n-title="rulesPdfTab" data-i18n-label="rulesPdfTab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+        </a>
+        <button id="rules-pdf-close" type="button" class="icon-btn"
+                data-i18n-title="rulesPdfClose" data-i18n-label="rulesPdfClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+      <iframe id="rules-pdf-frame" class="pdf-frame" data-i18n-title="rulesHelp"
+              title="Description du système (PDF)"></iframe>
+    </div>
+  </dialog>
+
   <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
     <div class="welcome-box">
       <h2 id="welcome-title" data-i18n="welcomeTitle">Bienvenue</h2>

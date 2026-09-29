@@ -206,6 +206,9 @@ const UI_TEXT = {
     rulesSystem: "Système",
     rulesSystemTitle: "Système d'enchères : le fichier de règles que le moteur applique (dossier rules/).",
     rulesHelp: "Description du système (PDF)",
+    rulesPdfTitle: "Système {name}",
+    rulesPdfTab: "Ouvrir le PDF dans un nouvel onglet",
+    rulesPdfClose: "Fermer la description",
     themeTitle: "Thème du système — c'est le choix par défaut — ou thème imposé à la page.",
     themeAuto: "Automatique",
     themeLight: "Clair",
@@ -392,6 +395,9 @@ const UI_TEXT = {
     rulesSystem: "System",
     rulesSystemTitle: "Bidding system: the rules file the engine applies (rules/ folder).",
     rulesHelp: "System description (PDF)",
+    rulesPdfTitle: "{name} system",
+    rulesPdfTab: "Open the PDF in a new tab",
+    rulesPdfClose: "Close the description",
     themeTitle: "Use the system theme — the default — or force one for the page.",
     themeAuto: "Automatic",
     themeLight: "Light",
@@ -653,10 +659,46 @@ function rulesSystemPdf(file, lang) {
   return name && RULES_PDF_NAME.test(name) ? name : null;
 }
 
-$("#rules-help").addEventListener("click", () => {
-  const pdf = rulesSystemPdf(bidsLocal.rules.current(), $("#lang").value);
-  if (pdf) window.open("rules/" + pdf, "_blank", "noopener");
+// Le PDF s'ouvre dans une fenêtre modale, affiché par le lecteur du navigateur.
+// Le cadre n'est chargé qu'à l'ouverture et vidé à la fermeture ; le lien de
+// l'en-tête ouvre le même fichier dans un onglet. Un navigateur sans lecteur
+// PDF intégré l'ouvre directement dans un onglet.
+const rulesPdfDialog = $("#rules-pdf-dialog");
+const rulesPdfFrame = $("#rules-pdf-frame");
+
+function openRulesPdf() {
+  const lang = $("#lang").value;
+  const current = bidsLocal.rules.current();
+  const pdf = rulesSystemPdf(current, lang);
+  if (!pdf) return;
+  closeMenus();
+  const url = "rules/" + pdf;
+  // Sans lecteur PDF intégré (Chrome Android…), le cadre resterait vide.
+  if (navigator.pdfViewerEnabled === false) {
+    window.open(url, "_blank", "noopener");
+    return;
+  }
+  $("#rules-pdf-title").textContent = UI_TEXT[lang].rulesPdfTitle.replace("{name}", rulesSystemName(current, lang));
+  $("#rules-pdf-tab").href = url;
+  rulesPdfFrame.src = url;
+  rulesPdfDialog.showModal();
+  $("#rules-pdf-close").focus();
+}
+function stopRulesPdf() {
+  rulesPdfFrame.src = "about:blank";
+}
+function closeRulesPdf() {
+  rulesPdfDialog.close();
+  stopRulesPdf();
+}
+$("#rules-help").addEventListener("click", openRulesPdf);
+$("#rules-pdf-close").addEventListener("click", closeRulesPdf);
+$("#rules-pdf-tab").addEventListener("click", closeRulesPdf);
+rulesPdfDialog.addEventListener("click", (ev) => {
+  if (ev.target === rulesPdfDialog) closeRulesPdf();
 });
+rulesPdfDialog.addEventListener("cancel", stopRulesPdf); // Échap
+rulesPdfDialog.addEventListener("close", stopRulesPdf);
 
 async function initRulesSystems() {
   try {

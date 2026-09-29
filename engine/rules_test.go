@@ -5,6 +5,7 @@ package engine
 // sef_tests.json (hand features and chosen rule) against features/choose.
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -194,7 +195,9 @@ func TestConformancePython(t *testing.T) {
 		t.Fatal(err)
 	}
 	yamlData, _ := os.ReadFile(rulesPath)
-	sum := sha256.Sum256(yamlData)
+	// The fingerprint ignores line endings, as sef_rules.py computes it: a
+	// Windows checkout (CRLF) and the CI's (LF) hold the same rules.
+	sum := sha256.Sum256(bytes.ReplaceAll(yamlData, []byte("\r\n"), []byte("\n")))
 	if hex.EncodeToString(sum[:]) != suite.SHA {
 		t.Fatalf("sef_tests.json a été généré depuis une autre version de sef_rules.yaml : regénérer (%s)", regenerateCmd)
 	}

@@ -321,7 +321,8 @@ def gen_tests(rules, md, n, seed, path):
                 opened = True
             who = 1 - who
     data = {'format': 'sef-tests/1', 'source': os.path.basename(md),
-            'source_sha256': hashlib.sha256(open(md, 'rb').read()).hexdigest(),
+            # empreinte indépendante des fins de ligne (checkout Windows CRLF ou CI LF)
+            'source_sha256': hashlib.sha256(open(md, 'rb').read().replace(b'\r\n', b'\n')).hexdigest(),
             'seed': seed, 'deals': n + n // 2, 'strong_deals': n // 2, 'count': len(cases), 'cases': cases}
     with open(path, 'w', encoding='utf-8') as f:   # un cas par ligne
         head = json.dumps({k: v for k, v in data.items() if k != 'cases'}, ensure_ascii=False)[:-1]

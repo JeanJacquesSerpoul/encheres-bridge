@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""Moteur de lecture des règles SEF 2024 : sef_rules.yaml (source), ou blocs ```yaml sef-rules d'un .md.
+"""Moteur de lecture des règles SEF 2024 : cli/rules/sef_rules.yaml (source), ou blocs ```yaml sef-rules d'un .md.
+
+Le fichier de règles vit dans cli/rules/, où le moteur Go/WASM de la page le lit au chargement.
 
 Usage :
-  python3 sef_rules.py sef_rules.yaml --validate          # vérifie le fichier
-  python3 sef_rules.py sef_rules.yaml --json rules.json   # exporte les règles expansées
-  python3 sef_rules.py sef_rules.yaml --simulate 1000     # enchères sans intervention sur donnes aléatoires
-  python3 sef_rules.py sef_rules.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C"
-  python3 sef_rules.py sef_rules.yaml --gen-tests 1500 sef_tests.json   # génère les cas de test
-  python3 sef_rules.py sef_rules.yaml --check-tests sef_tests.json      # rejoue les cas de test
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --validate          # vérifie le fichier
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --json rules.json   # exporte les règles expansées
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --simulate 1000     # enchères sans intervention sur donnes aléatoires
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C"
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --gen-tests 1500 sef_tests.json   # génère les cas de test
+  python3 sef_rules.py ../../cli/rules/sef_rules.yaml --check-tests sef_tests.json      # rejoue les cas de test
 """
 import argparse, ast, json, os, random, re, sys
 from collections import Counter
 
 import yaml
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_RULES = os.path.normpath(os.path.join(HERE, '..', '..', 'cli', 'rules', 'sef_rules.yaml'))
 
 SUITS = 'SHDC'
 RANKS = 'AKQJT98765432'

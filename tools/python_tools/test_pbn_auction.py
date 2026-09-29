@@ -10,7 +10,7 @@ import pbn_auction as pa
 import sef_rules as sr
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RULES = sr.load(os.path.join(HERE, "sef_rules.yaml"))
+RULES = sr.load(sr.DEFAULT_RULES)
 assert not sr.validate(RULES)   # compile aussi les conditions des règles
 
 # Donne de donne.pbn : Sud ouvre 2♦ (19 H, 6-4-0-3)

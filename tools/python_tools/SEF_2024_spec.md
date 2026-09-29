@@ -1,12 +1,12 @@
 # SEF 2024 — Spécification du moteur d'enchères
 
-Ce document décrit comment une application doit interpréter les règles d'enchères SEF 2024. Il se suffit à lui-même : les règles sont dans `sef_rules.yaml` (source) et `sef_rules.json` (généré), la description bridge dans `SEF_2024.md`.
+Ce document décrit comment une application doit interpréter les règles d'enchères SEF 2024. Il se suffit à lui-même : les règles sont dans `cli/rules/sef_rules.yaml` (source) et `sef_rules.json` (généré), la description bridge dans `SEF_2024.md`.
 
 ## 1. Fichiers livrés
 
 | Fichier | Rôle | Utilisé par l'application |
 |---|---|---|
-| `sef_rules.yaml` | **Source unique des règles**, éditée à la main (modèles `for`, commentaires) | Non (sert à générer le JSON) |
+| `cli/rules/sef_rules.yaml` | **Source unique des règles**, éditée à la main (modèles `for`, commentaires) | Non (sert à générer le JSON) |
 | `sef_rules.json` | Les règles, expansées et ordonnées (données) | **Oui**, chargé au démarrage |
 | `sef_rules.schema.json` | Schéma JSON (draft 2020-12) de `sef_rules.json` | Oui, pour valider le fichier au chargement |
 | `SEF_2024_spec.md` | Ce document : sémantique des règles | Par le développeur |
@@ -15,19 +15,19 @@ Ce document décrit comment une application doit interpréter les règles d'ench
 | `sef_engine.js` | Seconde implémentation (Node.js), écrite d'après ce document seul ; rejoue `sef_tests.json` | Facultatif (exemple de portage) |
 | `SEF_2024.md` | Description bridge du système, pour la lecture (sans règles) | Non |
 
-Chaîne de production : on modifie **uniquement** `sef_rules.yaml`, puis on régénère :
+Chaîne de production : on modifie **uniquement** `cli/rules/sef_rules.yaml`, puis on régénère :
 
 ```
-python3 sef_rules.py sef_rules.yaml --validate
-python3 sef_rules.py sef_rules.yaml --json sef_rules.json
-python3 sef_rules.py sef_rules.yaml --gen-tests 1500 sef_tests.json --seed 2024
+python3 sef_rules.py ../../cli/rules/sef_rules.yaml --validate
+python3 sef_rules.py ../../cli/rules/sef_rules.yaml --json sef_rules.json
+python3 sef_rules.py ../../cli/rules/sef_rules.yaml --gen-tests 1500 sef_tests.json --seed 2024
 ```
 
 `sef_tests.json` porte l'empreinte SHA-256 du `sef_rules.yaml` d'origine (`source_sha256`) : les tests et les règles doivent provenir de la même version.
 
 ### Substitution `for` (fichier YAML seulement)
 
-Dans `sef_rules.yaml`, une règle peut porter `for:` (liste de dictionnaires). Elle est dupliquée pour chaque dictionnaire, et chaque `{clé}` est remplacée par sa valeur dans tous les champs texte (y compris les éléments d'une `seq` en liste). `sef_rules.json` contient les règles déjà expansées, sans `for`.
+Dans `cli/rules/sef_rules.yaml`, une règle peut porter `for:` (liste de dictionnaires). Elle est dupliquée pour chaque dictionnaire, et chaque `{clé}` est remplacée par sa valeur dans tous les champs texte (y compris les éléments d'une `seq` en liste). `sef_rules.json` contient les règles déjà expansées, sans `for`.
 
 ## 2. Structure d'une règle
 
@@ -179,7 +179,7 @@ En-tête : `format` (`sef-tests/1`), `source`, `source_sha256`, `seed`, `deals` 
 Une réimplémentation est conforme quand, pour **chaque** cas, elle calcule les mêmes `features` et renvoie la même règle. Vérifier d'abord `features` (erreurs de calcul), puis `expected` (erreurs de correspondance ou de priorité). La version de référence se contrôle par :
 
 ```
-python3 sef_rules.py sef_rules.yaml --check-tests sef_tests.json
+python3 sef_rules.py ../../cli/rules/sef_rules.yaml --check-tests sef_tests.json
 node sef_engine.js sef_rules.json sef_tests.json
 ```
 

@@ -5,7 +5,7 @@ from endplay.types import Deal, Denom, Player
 from endplay.dds import calc_dd_table
 import sef_rules as sr
 
-rules = sr.load('sef_rules.yaml'); assert not sr.validate(rules)
+rules = sr.load(sr.DEFAULT_RULES); assert not sr.validate(rules)
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 20000
 rng = random.Random(2026)
 DEN = {'C': Denom.clubs, 'D': Denom.diamonds, 'H': Denom.hearts, 'S': Denom.spades, 'NT': Denom.nt}

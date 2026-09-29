@@ -41,12 +41,36 @@ DDS includes historical copyright notices including:
 Copyright 2006-2014 by Bo Haglund
 Copyright 2014 by Bo Haglund / Soren Hein as of version 2.8.0.
 
+## yaml.v3 — YAML support for Go
+
+The bidding engine reads its rules file (`cli/rules/sef_rules.yaml`) with
+the Go package `gopkg.in/yaml.v3` (version 3.0.1). It is compiled into
+the engine's WebAssembly module, [cli/bids.wasm](cli/bids.wasm).
+
+Project:
+https://github.com/go-yaml/yaml
+
+License:
+MIT License (for the files ported from libyaml) and Apache License,
+Version 2.0 (for the rest), as described in the project's LICENSE file.
+
+yaml.v3 includes the following copyright notices:
+
+Copyright (c) 2006-2010 Kirill Simonov
+Copyright (c) 2006-2011 Kirill Simonov
+Copyright (c) 2011-2019 Canonical Ltd
+Copyright 2011-2016 Canonical Ltd.
+
+The MIT License is available at:
+
+https://opensource.org/licenses/MIT
+
 ## Relationship with this project
 
 The `encheres-bridge` project itself is licensed under the GNU General
 Public License, version 3.
 
-The Apache-2.0 licensed DDS components remain subject to the terms of
-the Apache License, Version 2.0. Their inclusion in this GPL-3.0
-project does not change the licensing terms applicable to the DDS
-components.
+The Apache-2.0 licensed DDS components, and the MIT / Apache-2.0
+licensed yaml.v3 package, remain subject to their own licenses. Their
+inclusion in this GPL-3.0 project does not change the licensing terms
+applicable to those components.

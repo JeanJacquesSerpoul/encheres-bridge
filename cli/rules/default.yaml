@@ -89,6 +89,15 @@
   meaning: "Mineure la plus longue (3-3 : 1♣)"
   meaning_en: "Longest minor (3-3: 1♣)"
   status: sef
+- id: "open.4e.{c}"
+  for: [{c: 1S, x: "S >= 5 and S >= H"}, {c: 1H, x: "H >= 5"}, {c: 1D, x: "D >= 3 and (D > C or (D == C and D >= 4))"}, {c: 1C, x: "true"}]
+  seq: ""
+  call: "{c}"
+  cond: "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15 and ({x})"
+  forcing: NF
+  meaning: "4e position, 10-11 H : règle des 15 (H + nombre de piques ≥ 15)"
+  meaning_en: "Fourth seat, 10-11 HCP: rule of 15 (HCP + number of spades ≥ 15)"
+  status: choix
 - id: open.4NT
   seq: ""
   call: 4NT

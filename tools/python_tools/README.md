@@ -41,7 +41,7 @@ python pbn_auction.py donne.pbn --option checkback2018
 
 Chaque annonce du JSON contient `seat`, `call`, `alerted`, `alert` (texte de l'alerte), et, en mode généré, `rule` (identifiant de la règle) et `meaning`.
 
-Limites : la compétition n'est couverte que pour les séquences courantes (section A.18 bis : interventions sur une ouverture au palier de 1 et sur un 2 faible, réveil, réponses et redemandes de la défense, suites du camp de l'ouvreur). La vulnérabilité est accessible aux conditions (`vul`, `opp_vul`).
+Limites : la compétition n'est couverte que pour les séquences courantes (section A.18 bis : interventions sur une ouverture au palier de 1 et sur un 2 faible, réveil, réponses et redemandes de la défense, suites du camp de l'ouvreur). La vulnérabilité est accessible aux conditions (`vul`, `opp_vul`), ainsi que le rang du joueur dans le tour d'enchères (`seat`).
 
 ## Le fichier `cli/rules/default.yaml`
 

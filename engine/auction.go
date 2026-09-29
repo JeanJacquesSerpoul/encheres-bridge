@@ -130,6 +130,7 @@ func (e *Engine) Run() []SeatCall {
 		feats[seat] = newFeatures(h)
 		feats[seat].vul = e.deal.Vul[sideOf(seat)]
 		feats[seat].oppVul = e.deal.Vul[1-sideOf(seat)]
+		feats[seat].seat = (seat-e.deal.Dealer+4)%4 + 1
 	}
 	trump := [2]string{} // agreed suit per pair (N/S = 0, E/W = 1)
 	var history []SeatCall

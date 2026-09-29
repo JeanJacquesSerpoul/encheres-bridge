@@ -136,10 +136,11 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 | `max(…)`, `min(…)` | fonction | Maximum / minimum de ses arguments |
 | `vul` | bool | Le camp du joueur qui parle est vulnérable (tag PBN `[Vulnerable]` : `NS`, `EW`, `All`/`Both`) |
 | `opp_vul` | bool | Le camp adverse est vulnérable |
+| `seat` | int | Rang du joueur qui parle dans le tour d'enchères, compté depuis le donneur : 1 à 4 (4 = 4e position) |
 
-Les conditions ne portent que sur la main du joueur qui parle et sur la vulnérabilité (`vul`, `opp_vul`) : ce que le partenaire a montré est contenu dans `seq`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
+Les conditions ne portent que sur la main du joueur qui parle, sur la vulnérabilité (`vul`, `opp_vul`) et sur son rang (`seat`) : ce que le partenaire a montré est contenu dans `seq`. Les passes adverses n'apparaissant pas dans `seq`, seul `seat` distingue une ouverture en 1re, 3e ou 4e position ; exemple, la règle des 15 : `cond: "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15"`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
 
-Dans `sef_tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) ; `sef_rules.py --hand` accepte `--vul` et `--opp-vul`.
+Dans `sef_tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) et `seat` (Nord parle en 1re ou 2e position, Sud en 3e ou 4e) ; `sef_rules.py --hand` accepte `--vul`, `--opp-vul` et `--seat`.
 
 ## 5. État de l'enchère : atout convenu
 

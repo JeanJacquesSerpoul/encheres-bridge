@@ -31,6 +31,7 @@ func main() {
 	api.Set("bid", js.FuncOf(wasmBid))
 	api.Set("bids", js.FuncOf(wasmBids))
 	api.Set("selfCheck", js.FuncOf(wasmSelfCheck))
+	api.Set("loadRules", js.FuncOf(wasmLoadRules))
 	api.Set("version", js.ValueOf(engine.VersionJSON()))
 	js.Global().Set(wasmGlobal, api)
 
@@ -96,6 +97,24 @@ func wasmBid(_ js.Value, args []js.Value) any {
 
 func wasmBids(_ js.Value, args []js.Value) any {
 	return call(args, engine.BidsJSON)
+}
+
+// wasmLoadRules installs the rules file (the text of cli/rules/sef_rules.yaml,
+// fetched by the page) that every later auction bids with.
+func wasmLoadRules(_ js.Value, args []js.Value) (out any) {
+	defer func() {
+		if rec := recover(); rec != nil {
+			out = errResult("internal engine error: %v", rec)
+		}
+	}()
+	if len(args) == 0 || args[0].Type() != js.TypeString {
+		return errResult("missing rules text (first argument)")
+	}
+	data, err := engine.LoadRulesJSON([]byte(args[0].String()))
+	if err != nil {
+		return errResult("%v", err)
+	}
+	return okResult(data)
 }
 
 func wasmSelfCheck(_ js.Value, _ []js.Value) (out any) {

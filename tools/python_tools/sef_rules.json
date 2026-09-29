@@ -235,7 +235,10 @@
  },
  {
   "id": "1NT.r.5NT",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "5NT",
   "cond": "18 <= hl <= 19 and S < 4 and H < 4",
   "forcing": "F1",
@@ -245,7 +248,10 @@
  },
  {
   "id": "1NT.r.4NT",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "4NT",
   "cond": "hl == 17 and S < 4 and H < 4",
   "forcing": "INV",
@@ -255,7 +261,10 @@
  },
  {
   "id": "1NT.r.4D",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "4D",
   "cond": "H >= 5 and S >= 5 and 9 <= hcp <= 12",
   "forcing": "REL",
@@ -266,7 +275,10 @@
  },
  {
   "id": "1NT.r.3S.slam",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "3S",
   "cond": "S >= 6 and hl >= 17",
   "forcing": "FM",
@@ -276,7 +288,10 @@
  },
  {
   "id": "1NT.r.3H.slam",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "3H",
   "cond": "H >= 6 and hl >= 17",
   "forcing": "FM",
@@ -286,7 +301,10 @@
  },
  {
   "id": "1NT.r.3D.slam",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "3D",
   "cond": "D >= 6 and hl >= 17",
   "forcing": "FM",
@@ -296,7 +314,10 @@
  },
  {
   "id": "1NT.r.4S",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "4S",
   "cond": "S >= 6 and S >= max(S, H) and 9 <= hl <= 16",
   "forcing": "SO",
@@ -306,7 +327,10 @@
  },
  {
   "id": "1NT.r.4H",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "4H",
   "cond": "H >= 6 and H >= max(S, H) and 9 <= hl <= 16",
   "forcing": "SO",
@@ -316,7 +340,10 @@
  },
  {
   "id": "1NT.r.2D.55weak",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2D",
   "cond": "H == 5 and S == 5 and 7 <= hl <= 8",
   "forcing": "REL",
@@ -327,7 +354,10 @@
  },
  {
   "id": "1NT.r.2C.54",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2C",
   "cond": "max(H, S) == 5 and min(H, S) == 4 and hl >= 7",
   "forcing": "F1",
@@ -338,7 +368,10 @@
  },
  {
   "id": "1NT.r.2C.misere",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2C",
   "cond": "max(H, S) == 5 and 7 <= hl <= 8 and min(S, H, D, C) <= 1",
   "forcing": "F1",
@@ -349,7 +382,10 @@
  },
  {
   "id": "1NT.r.2C",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2C",
   "cond": "(H == 4 or S == 4) and max(H, S) < 5 and hl >= 8 and not (shape == '4333' and hcp < 12)",
   "forcing": "F1",
@@ -360,7 +396,10 @@
  },
  {
   "id": "1NT.r.2H",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2H",
   "cond": "S >= 5 and S >= H",
   "forcing": "REL",
@@ -371,7 +410,10 @@
  },
  {
   "id": "1NT.r.2D",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2D",
   "cond": "H >= 5",
   "forcing": "REL",
@@ -382,7 +424,10 @@
  },
  {
   "id": "1NT.r.2S.minors",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2S",
   "cond": "C >= 5 and D >= 5 and hl >= 9",
   "forcing": "REL",
@@ -393,7 +438,10 @@
  },
  {
   "id": "1NT.r.2S",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2S",
   "cond": "C >= 6 and C >= D and (hl < 8 or (hl >= 12 and min(S, H, D) <= 1))",
   "forcing": "REL",
@@ -404,7 +452,10 @@
  },
  {
   "id": "1NT.r.3C",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "3C",
   "cond": "D >= 6 and (hl < 8 or (hl >= 12 and min(S, H, C) <= 1))",
   "forcing": "REL",
@@ -415,7 +466,10 @@
  },
  {
   "id": "1NT.r.2NT",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "2NT",
   "cond": "hl == 8",
   "forcing": "INV",
@@ -425,7 +479,10 @@
  },
  {
   "id": "1NT.r.3NT",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "3NT",
   "cond": "9 <= hl <= 16",
   "forcing": "SO",
@@ -435,7 +492,10 @@
  },
  {
   "id": "1NT.r.6NT",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "6NT",
   "cond": "hl >= 20",
   "forcing": "SO",
@@ -445,7 +505,10 @@
  },
  {
   "id": "1NT.r.pass",
-  "seq": "1NT",
+  "seq": [
+   "1NT",
+   "1NT (X)"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -455,7 +518,10 @@
  },
  {
   "id": "1NT.2C.2NT",
-  "seq": "1NT 2C",
+  "seq": [
+   "1NT 2C",
+   "1NT (X) 2C"
+  ],
   "call": "2NT",
   "cond": "H >= 4 and S >= 4",
   "forcing": "F1",
@@ -466,7 +532,10 @@
  },
  {
   "id": "1NT.2C.2H",
-  "seq": "1NT 2C",
+  "seq": [
+   "1NT 2C",
+   "1NT (X) 2C"
+  ],
   "call": "2H",
   "cond": "H >= 4",
   "forcing": "NF",
@@ -476,7 +545,10 @@
  },
  {
   "id": "1NT.2C.2S",
-  "seq": "1NT 2C",
+  "seq": [
+   "1NT 2C",
+   "1NT (X) 2C"
+  ],
   "call": "2S",
   "cond": "S >= 4",
   "forcing": "NF",
@@ -486,7 +558,10 @@
  },
  {
   "id": "1NT.2C.2D",
-  "seq": "1NT 2C",
+  "seq": [
+   "1NT 2C",
+   "1NT (X) 2C"
+  ],
   "call": "2D",
   "cond": "true",
   "forcing": "NF",
@@ -497,7 +572,10 @@
  },
  {
   "id": "1NT.tex.H.super",
-  "seq": "1NT 2D",
+  "seq": [
+   "1NT 2D",
+   "1NT (X) 2D"
+  ],
   "call": "3H",
   "cond": "H >= 4 and hl >= 17",
   "forcing": "INV",
@@ -507,7 +585,10 @@
  },
  {
   "id": "1NT.tex.S.super",
-  "seq": "1NT 2H",
+  "seq": [
+   "1NT 2H",
+   "1NT (X) 2H"
+  ],
   "call": "3S",
   "cond": "S >= 4 and hl >= 17",
   "forcing": "INV",
@@ -517,7 +598,10 @@
  },
  {
   "id": "1NT.tex.H",
-  "seq": "1NT 2D",
+  "seq": [
+   "1NT 2D",
+   "1NT (X) 2D"
+  ],
   "call": "2H",
   "cond": "true",
   "forcing": "NF",
@@ -527,7 +611,10 @@
  },
  {
   "id": "1NT.tex.S",
-  "seq": "1NT 2H",
+  "seq": [
+   "1NT 2H",
+   "1NT (X) 2H"
+  ],
   "call": "2S",
   "cond": "true",
   "forcing": "NF",
@@ -537,7 +624,10 @@
  },
  {
   "id": "1NT.2S.3C",
-  "seq": "1NT 2S",
+  "seq": [
+   "1NT 2S",
+   "1NT (X) 2S"
+  ],
   "call": "3C",
   "cond": "true",
   "forcing": "NF",
@@ -547,7 +637,10 @@
  },
  {
   "id": "1NT.3C.3D",
-  "seq": "1NT 3C",
+  "seq": [
+   "1NT 3C",
+   "1NT (X) 3C"
+  ],
   "call": "3D",
   "cond": "true",
   "forcing": "NF",
@@ -557,7 +650,10 @@
  },
  {
   "id": "1NT.4D.4H",
-  "seq": "1NT 4D",
+  "seq": [
+   "1NT 4D",
+   "1NT (X) 4D"
+  ],
   "call": "4H",
   "cond": "H >= S",
   "forcing": "SO",
@@ -567,7 +663,10 @@
  },
  {
   "id": "1NT.4D.4S",
-  "seq": "1NT 4D",
+  "seq": [
+   "1NT 4D",
+   "1NT (X) 4D"
+  ],
   "call": "4S",
   "cond": "true",
   "forcing": "SO",
@@ -577,9 +676,12 @@
  },
  {
   "id": "1NT.2NT.3NT",
-  "seq": "1NT 2NT",
+  "seq": [
+   "1NT 2NT",
+   "1NT (X) 2NT"
+  ],
   "call": "3NT",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Accepte l'invitation",
   "meaning_en": "Accepts the invitation",
@@ -587,7 +689,10 @@
  },
  {
   "id": "1NT.4NT.6NT",
-  "seq": "1NT 4NT",
+  "seq": [
+   "1NT 4NT",
+   "1NT (X) 4NT"
+  ],
   "call": "6NT",
   "cond": "hl >= 16",
   "forcing": "SO",
@@ -597,7 +702,10 @@
  },
  {
   "id": "1NT.5NT.6NT",
-  "seq": "1NT 5NT",
+  "seq": [
+   "1NT 5NT",
+   "1NT (X) 5NT"
+  ],
   "call": "6NT",
   "cond": "true",
   "forcing": "SO",
@@ -607,7 +715,10 @@
  },
  {
   "id": "1NT.inv.pass",
-  "seq": "1NT 2NT|4NT|3NT|4H|4S",
+  "seq": [
+   "1NT 2NT|4NT|3NT|4H|4S",
+   "1NT (X) 2NT|4NT|3NT|4H|4S"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -617,7 +728,10 @@
  },
  {
   "id": "1NT.2C.2D.2H",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "2H",
   "cond": "H == 5 and S == 4 and hl <= 8",
   "forcing": "NF",
@@ -627,7 +741,10 @@
  },
  {
   "id": "1NT.2C.2D.2S",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "2S",
   "cond": "S == 5 and H == 4 and hl <= 8",
   "forcing": "NF",
@@ -637,7 +754,10 @@
  },
  {
   "id": "1NT.2C.2D.2M.misere",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "2H",
   "cond": "H == 5 and hl <= 8",
   "forcing": "NF",
@@ -647,7 +767,10 @@
  },
  {
   "id": "1NT.2C.2D.2S.misere",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "2S",
   "cond": "S == 5 and hl <= 8",
   "forcing": "NF",
@@ -657,7 +780,10 @@
  },
  {
   "id": "1NT.2C.2D.cc3H",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "3H",
   "cond": "S == 5 and H == 4 and hl >= 9",
   "forcing": "FM",
@@ -668,7 +794,10 @@
  },
  {
   "id": "1NT.2C.2D.cc3S",
-  "seq": "1NT 2C 2D",
+  "seq": [
+   "1NT 2C 2D",
+   "1NT (X) 2C 2D"
+  ],
   "call": "3S",
   "cond": "H == 5 and S == 4 and hl >= 9",
   "forcing": "FM",
@@ -679,7 +808,10 @@
  },
  {
   "id": "1NT.2C.2H.splinterC",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "4C",
   "cond": "H >= 4 and 13 <= hl <= 14 and short('C')",
   "forcing": "FM",
@@ -690,7 +822,10 @@
  },
  {
   "id": "1NT.2C.2H.splinterD",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "4D",
   "cond": "H >= 4 and 13 <= hl <= 14 and short('D')",
   "forcing": "FM",
@@ -701,7 +836,10 @@
  },
  {
   "id": "1NT.2C.2S.splinterC",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "4C",
   "cond": "S >= 4 and 13 <= hl <= 14 and short('C')",
   "forcing": "FM",
@@ -712,7 +850,10 @@
  },
  {
   "id": "1NT.2C.2S.splinterD",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "4D",
   "cond": "S >= 4 and 13 <= hl <= 14 and short('D')",
   "forcing": "FM",
@@ -723,7 +864,10 @@
  },
  {
   "id": "1NT.2C.2H.slam",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "3S",
   "cond": "H >= 4 and hl >= 15",
   "forcing": "FM",
@@ -734,7 +878,10 @@
  },
  {
   "id": "1NT.2C.2S.slam",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "3H",
   "cond": "S >= 4 and hl >= 15",
   "forcing": "FM",
@@ -745,7 +892,10 @@
  },
  {
   "id": "1NT.2C.2H.game",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "4H",
   "cond": "H >= 4 and hl >= 9",
   "forcing": "SO",
@@ -755,7 +905,10 @@
  },
  {
   "id": "1NT.2C.2S.game",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "4S",
   "cond": "S >= 4 and hl >= 9",
   "forcing": "SO",
@@ -765,7 +918,10 @@
  },
  {
   "id": "1NT.2C.2H.inv",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "3H",
   "cond": "H >= 4 and hl == 8",
   "forcing": "INV",
@@ -775,7 +931,10 @@
  },
  {
   "id": "1NT.2C.2S.inv",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "3S",
   "cond": "S >= 4 and hl == 8",
   "forcing": "INV",
@@ -785,7 +944,10 @@
  },
  {
   "id": "1NT.2C.2H.misere",
-  "seq": "1NT 2C 2H",
+  "seq": [
+   "1NT 2C 2H",
+   "1NT (X) 2C 2H"
+  ],
   "call": "P",
   "cond": "H >= 4 and hl <= 7",
   "forcing": "NF",
@@ -795,7 +957,10 @@
  },
  {
   "id": "1NT.2C.2S.misere",
-  "seq": "1NT 2C 2S",
+  "seq": [
+   "1NT 2C 2S",
+   "1NT (X) 2C 2S"
+  ],
   "call": "P",
   "cond": "S >= 4 and hl <= 7",
   "forcing": "NF",
@@ -805,7 +970,10 @@
  },
  {
   "id": "1NT.2C.x.4NT",
-  "seq": "1NT 2C 2D|2H|2S",
+  "seq": [
+   "1NT 2C 2D|2H|2S",
+   "1NT (X) 2C 2D|2H|2S"
+  ],
   "call": "4NT",
   "cond": "hl == 17",
   "forcing": "INV",
@@ -815,7 +983,10 @@
  },
  {
   "id": "1NT.2C.x.2NT",
-  "seq": "1NT 2C 2D|2H|2S",
+  "seq": [
+   "1NT 2C 2D|2H|2S",
+   "1NT (X) 2C 2D|2H|2S"
+  ],
   "call": "2NT",
   "cond": "hl <= 8",
   "forcing": "INV",
@@ -825,7 +996,10 @@
  },
  {
   "id": "1NT.2C.x.3NT",
-  "seq": "1NT 2C 2D|2H|2S",
+  "seq": [
+   "1NT 2C 2D|2H|2S",
+   "1NT (X) 2C 2D|2H|2S"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "SO",
@@ -835,7 +1009,10 @@
  },
  {
   "id": "1NT.2C.2NT.slamS",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "3S",
   "cond": "S >= 4 and H < 4 and hl >= 15",
   "forcing": "FM",
@@ -846,7 +1023,10 @@
  },
  {
   "id": "1NT.2C.2NT.slam",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "3H",
   "cond": "H >= 4 and hl >= 15",
   "forcing": "FM",
@@ -856,7 +1036,10 @@
  },
  {
   "id": "1NT.2C.2NT.4C",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "4C",
   "cond": "H >= 4 and hl >= 9",
   "forcing": "REL",
@@ -867,7 +1050,10 @@
  },
  {
   "id": "1NT.2C.2NT.4D",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "4D",
   "cond": "S >= 4 and hl >= 9",
   "forcing": "REL",
@@ -878,7 +1064,10 @@
  },
  {
   "id": "1NT.2C.2NT.3C",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "3C",
   "cond": "H >= 4",
   "forcing": "REL",
@@ -889,7 +1078,10 @@
  },
  {
   "id": "1NT.2C.2NT.3D",
-  "seq": "1NT 2C 2NT",
+  "seq": [
+   "1NT 2C 2NT",
+   "1NT (X) 2C 2NT"
+  ],
   "call": "3D",
   "cond": "true",
   "forcing": "REL",
@@ -900,7 +1092,10 @@
  },
  {
   "id": "1NT.2C.2NT.3C.3H",
-  "seq": "1NT 2C 2NT 3C",
+  "seq": [
+   "1NT 2C 2NT 3C",
+   "1NT (X) 2C 2NT 3C"
+  ],
   "call": "3H",
   "cond": "true",
   "forcing": "NF",
@@ -910,7 +1105,10 @@
  },
  {
   "id": "1NT.2C.2NT.3D.3S",
-  "seq": "1NT 2C 2NT 3D",
+  "seq": [
+   "1NT 2C 2NT 3D",
+   "1NT (X) 2C 2NT 3D"
+  ],
   "call": "3S",
   "cond": "true",
   "forcing": "NF",
@@ -920,7 +1118,10 @@
  },
  {
   "id": "1NT.2C.2NT.4C.4H",
-  "seq": "1NT 2C 2NT 4C",
+  "seq": [
+   "1NT 2C 2NT 4C",
+   "1NT (X) 2C 2NT 4C"
+  ],
   "call": "4H",
   "cond": "true",
   "forcing": "SO",
@@ -930,7 +1131,10 @@
  },
  {
   "id": "1NT.2C.2NT.4D.4S",
-  "seq": "1NT 2C 2NT 4D",
+  "seq": [
+   "1NT 2C 2NT 4D",
+   "1NT (X) 2C 2NT 4D"
+  ],
   "call": "4S",
   "cond": "true",
   "forcing": "SO",
@@ -940,7 +1144,10 @@
  },
  {
   "id": "1NT.2C.2S.2NT.3H",
-  "seq": "1NT 2C 2S 2NT",
+  "seq": [
+   "1NT 2C 2S 2NT",
+   "1NT (X) 2C 2S 2NT"
+  ],
   "call": "3H",
   "cond": "H == 3 and hl >= 16",
   "forcing": "F1",
@@ -950,9 +1157,12 @@
  },
  {
   "id": "1NT.2C.x.2NT.3NT",
-  "seq": "1NT 2C 2D|2H|2S 2NT",
+  "seq": [
+   "1NT 2C 2D|2H|2S 2NT",
+   "1NT (X) 2C 2D|2H|2S 2NT"
+  ],
   "call": "3NT",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Accepte l'invitation",
   "meaning_en": "Accepts the invitation",
@@ -960,7 +1170,10 @@
  },
  {
   "id": "1NT.2C.x.2NT.pass",
-  "seq": "1NT 2C 2D|2H|2S 2NT",
+  "seq": [
+   "1NT 2C 2D|2H|2S 2NT",
+   "1NT (X) 2C 2D|2H|2S 2NT"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -970,9 +1183,12 @@
  },
  {
   "id": "1NT.2C.2H.3H.acc",
-  "seq": "1NT 2C 2H 3H",
+  "seq": [
+   "1NT 2C 2H 3H",
+   "1NT (X) 2C 2H 3H"
+  ],
   "call": "4H",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Accepte l'invitation",
   "meaning_en": "Accepts the invitation",
@@ -980,9 +1196,12 @@
  },
  {
   "id": "1NT.2C.2S.3S.acc",
-  "seq": "1NT 2C 2S 3S",
+  "seq": [
+   "1NT 2C 2S 3S",
+   "1NT (X) 2C 2S 3S"
+  ],
   "call": "4S",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Accepte l'invitation",
   "meaning_en": "Accepts the invitation",
@@ -990,7 +1209,10 @@
  },
  {
   "id": "1NT.2C.2D.cc.3H",
-  "seq": "1NT 2C 2D 3H",
+  "seq": [
+   "1NT 2C 2D 3H",
+   "1NT (X) 2C 2D 3H"
+  ],
   "call": "4S",
   "cond": "S >= 3",
   "forcing": "SO",
@@ -1000,7 +1222,10 @@
  },
  {
   "id": "1NT.2C.2D.cc.3S",
-  "seq": "1NT 2C 2D 3S",
+  "seq": [
+   "1NT 2C 2D 3S",
+   "1NT (X) 2C 2D 3S"
+  ],
   "call": "4H",
   "cond": "H >= 3",
   "forcing": "SO",
@@ -1010,7 +1235,10 @@
  },
  {
   "id": "1NT.2C.2D.cc.3H.3NT",
-  "seq": "1NT 2C 2D 3H",
+  "seq": [
+   "1NT 2C 2D 3H",
+   "1NT (X) 2C 2D 3H"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "SO",
@@ -1020,7 +1248,10 @@
  },
  {
   "id": "1NT.2C.2D.cc.3S.3NT",
-  "seq": "1NT 2C 2D 3S",
+  "seq": [
+   "1NT 2C 2D 3S",
+   "1NT (X) 2C 2D 3S"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "SO",
@@ -1030,7 +1261,10 @@
  },
  {
   "id": "1NT.2C.end.pass",
-  "seq": "1NT 2C 2D|2H|2S 2H|2S|3NT|4H|4S",
+  "seq": [
+   "1NT 2C 2D|2H|2S 2H|2S|3NT|4H|4S",
+   "1NT (X) 2C 2D|2H|2S 2H|2S|3NT|4H|4S"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1040,7 +1274,10 @@
  },
  {
   "id": "1NT.texH.55.2S",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "2S",
   "cond": "H == 5 and S == 5 and 7 <= hl <= 8",
   "forcing": "NF",
@@ -1050,7 +1287,10 @@
  },
  {
   "id": "1NT.2H.2S.55.3H",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "3H",
   "cond": "H >= 5 and S >= 5 and hl >= 15",
   "forcing": "FM",
@@ -1060,7 +1300,10 @@
  },
  {
   "id": "1NT.2H.2S.55.4H",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "4H",
   "cond": "H >= 5 and S >= 5 and 13 <= hl <= 14",
   "forcing": "NF",
@@ -1070,7 +1313,10 @@
  },
  {
   "id": "1NT.texH.pass",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "P",
   "cond": "hl <= 7",
   "forcing": "NF",
@@ -1080,7 +1326,10 @@
  },
  {
   "id": "1NT.texS.pass",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "P",
   "cond": "hl <= 7",
   "forcing": "NF",
@@ -1090,7 +1339,10 @@
  },
  {
   "id": "1NT.texH.3H",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "3H",
   "cond": "H >= 6 and hl == 8",
   "forcing": "INV",
@@ -1100,7 +1352,10 @@
  },
  {
   "id": "1NT.texS.3S",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "3S",
   "cond": "S >= 6 and hl == 8",
   "forcing": "INV",
@@ -1110,7 +1365,10 @@
  },
  {
   "id": "1NT.texH.2NT",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "2NT",
   "cond": "hl == 8",
   "forcing": "INV",
@@ -1120,7 +1378,10 @@
  },
  {
   "id": "1NT.texS.2NT",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "2NT",
   "cond": "hl == 8",
   "forcing": "INV",
@@ -1130,7 +1391,10 @@
  },
  {
   "id": "1NT.texH.4H",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "4H",
   "cond": "H >= 6",
   "forcing": "SO",
@@ -1140,7 +1404,10 @@
  },
  {
   "id": "1NT.texS.4S",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "4S",
   "cond": "S >= 6",
   "forcing": "SO",
@@ -1150,7 +1417,10 @@
  },
  {
   "id": "1NT.texH.3NT",
-  "seq": "1NT 2D 2H",
+  "seq": [
+   "1NT 2D 2H",
+   "1NT (X) 2D 2H"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -1160,7 +1430,10 @@
  },
  {
   "id": "1NT.texS.3NT",
-  "seq": "1NT 2H 2S",
+  "seq": [
+   "1NT 2H 2S",
+   "1NT (X) 2H 2S"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -1170,9 +1443,12 @@
  },
  {
   "id": "1NT.texH.2NT.r",
-  "seq": "1NT 2D 2H 2NT",
+  "seq": [
+   "1NT 2D 2H 2NT",
+   "1NT (X) 2D 2H 2NT"
+  ],
   "call": "4H",
-  "cond": "H >= 3 and hl >= 16",
+  "cond": "H >= 3 and hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum avec fit",
   "meaning_en": "Maximum with a fit",
@@ -1180,9 +1456,12 @@
  },
  {
   "id": "1NT.texS.2NT.r",
-  "seq": "1NT 2H 2S 2NT",
+  "seq": [
+   "1NT 2H 2S 2NT",
+   "1NT (X) 2H 2S 2NT"
+  ],
   "call": "4S",
-  "cond": "S >= 3 and hl >= 16",
+  "cond": "S >= 3 and hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum avec fit",
   "meaning_en": "Maximum with a fit",
@@ -1190,9 +1469,12 @@
  },
  {
   "id": "1NT.texH.2NT.3NT",
-  "seq": "1NT 2D 2H 2NT",
+  "seq": [
+   "1NT 2D 2H 2NT",
+   "1NT (X) 2D 2H 2NT"
+  ],
   "call": "3NT",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum sans fit",
   "meaning_en": "Maximum without a fit",
@@ -1200,9 +1482,12 @@
  },
  {
   "id": "1NT.texS.2NT.3NT",
-  "seq": "1NT 2H 2S 2NT",
+  "seq": [
+   "1NT 2H 2S 2NT",
+   "1NT (X) 2H 2S 2NT"
+  ],
   "call": "3NT",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum sans fit",
   "meaning_en": "Maximum without a fit",
@@ -1210,7 +1495,10 @@
  },
  {
   "id": "1NT.texH.2NT.3H",
-  "seq": "1NT 2D 2H 2NT",
+  "seq": [
+   "1NT 2D 2H 2NT",
+   "1NT (X) 2D 2H 2NT"
+  ],
   "call": "3H",
   "cond": "H >= 3",
   "forcing": "NF",
@@ -1220,7 +1508,10 @@
  },
  {
   "id": "1NT.texS.2NT.3S",
-  "seq": "1NT 2H 2S 2NT",
+  "seq": [
+   "1NT 2H 2S 2NT",
+   "1NT (X) 2H 2S 2NT"
+  ],
   "call": "3S",
   "cond": "S >= 3",
   "forcing": "NF",
@@ -1230,9 +1521,12 @@
  },
  {
   "id": "1NT.texH.3M.4M",
-  "seq": "1NT 2D 2H 3H",
+  "seq": [
+   "1NT 2D 2H 3H",
+   "1NT (X) 2D 2H 3H"
+  ],
   "call": "4H",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum : accepte",
   "meaning_en": "Maximum: accepts",
@@ -1240,9 +1534,12 @@
  },
  {
   "id": "1NT.texS.3M.4M",
-  "seq": "1NT 2H 2S 3S",
+  "seq": [
+   "1NT 2H 2S 3S",
+   "1NT (X) 2H 2S 3S"
+  ],
   "call": "4S",
-  "cond": "hl >= 16",
+  "cond": "hl >= 17",
   "forcing": "SO",
   "meaning": "Maximum : accepte",
   "meaning_en": "Maximum: accepts",
@@ -1250,7 +1547,10 @@
  },
  {
   "id": "1NT.texH.3NT.4M",
-  "seq": "1NT 2D 2H 3NT",
+  "seq": [
+   "1NT 2D 2H 3NT",
+   "1NT (X) 2D 2H 3NT"
+  ],
   "call": "4H",
   "cond": "H >= 3",
   "forcing": "SO",
@@ -1260,7 +1560,10 @@
  },
  {
   "id": "1NT.texS.3NT.4M",
-  "seq": "1NT 2H 2S 3NT",
+  "seq": [
+   "1NT 2H 2S 3NT",
+   "1NT (X) 2H 2S 3NT"
+  ],
   "call": "4S",
   "cond": "S >= 3",
   "forcing": "SO",
@@ -1270,7 +1573,10 @@
  },
  {
   "id": "1NT.2D.2H.2S.r",
-  "seq": "1NT 2D 2H 2S",
+  "seq": [
+   "1NT 2D 2H 2S",
+   "1NT (X) 2D 2H 2S"
+  ],
   "call": "P",
   "cond": "S >= H",
   "forcing": "NF",
@@ -1280,7 +1586,10 @@
  },
  {
   "id": "1NT.2D.2H.2S.r3H",
-  "seq": "1NT 2D 2H 2S",
+  "seq": [
+   "1NT 2D 2H 2S",
+   "1NT (X) 2D 2H 2S"
+  ],
   "call": "3H",
   "cond": "true",
   "forcing": "NF",
@@ -1290,7 +1599,10 @@
  },
  {
   "id": "1NT.2H.2S.4H.r",
-  "seq": "1NT 2H 2S 4H",
+  "seq": [
+   "1NT 2H 2S 4H",
+   "1NT (X) 2H 2S 4H"
+  ],
   "call": "4S",
   "cond": "S > H",
   "forcing": "SO",
@@ -1302,7 +1614,9 @@
   "id": "1NT.2C.inv.pass",
   "seq": [
    "1NT 2C 2H 3H",
-   "1NT 2C 2S 3S"
+   "1NT 2C 2S 3S",
+   "1NT (X) 2C 2H 3H",
+   "1NT (X) 2C 2S 3S"
   ],
   "call": "P",
   "cond": "true",
@@ -1313,7 +1627,10 @@
  },
  {
   "id": "1NT.tex.end.pass2",
-  "seq": "1NT 2H 2S 2NT|3S|3NT|4S|4H",
+  "seq": [
+   "1NT 2H 2S 2NT|3S|3NT|4S|4H",
+   "1NT (X) 2H 2S 2NT|3S|3NT|4S|4H"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1323,7 +1640,10 @@
  },
  {
   "id": "1NT.tex.end.pass",
-  "seq": "1NT 2D 2H 2NT|3H|3NT|4H",
+  "seq": [
+   "1NT 2D 2H 2NT|3H|3NT|4H",
+   "1NT (X) 2D 2H 2NT|3H|3NT|4H"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1333,7 +1653,10 @@
  },
  {
   "id": "1NT.texH.super.r",
-  "seq": "1NT 2D 3H",
+  "seq": [
+   "1NT 2D 3H",
+   "1NT (X) 2D 3H"
+  ],
   "call": "4H",
   "cond": "hl >= 4",
   "forcing": "SO",
@@ -1343,7 +1666,10 @@
  },
  {
   "id": "1NT.texS.super.r",
-  "seq": "1NT 2H 3S",
+  "seq": [
+   "1NT 2H 3S",
+   "1NT (X) 2H 3S"
+  ],
   "call": "4S",
   "cond": "hl >= 4",
   "forcing": "SO",
@@ -1353,7 +1679,10 @@
  },
  {
   "id": "1NT.texH.super.pass",
-  "seq": "1NT 2D 3H",
+  "seq": [
+   "1NT 2D 3H",
+   "1NT (X) 2D 3H"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1363,7 +1692,10 @@
  },
  {
   "id": "1NT.texS.super.pass",
-  "seq": "1NT 2H 3S",
+  "seq": [
+   "1NT 2H 3S",
+   "1NT (X) 2H 3S"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1373,7 +1705,10 @@
  },
  {
   "id": "1NT.2S.3C.3D",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "3D",
   "cond": "C >= 5 and D >= 5 and hl >= 9",
   "forcing": "FM",
@@ -1383,7 +1718,10 @@
  },
  {
   "id": "1NT.2S.3C.shortH",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "3H",
   "cond": "hl >= 12 and short('H')",
   "forcing": "FM",
@@ -1394,7 +1732,10 @@
  },
  {
   "id": "1NT.2S.3C.shortS",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "3S",
   "cond": "hl >= 12 and short('S')",
   "forcing": "FM",
@@ -1405,7 +1746,10 @@
  },
  {
   "id": "1NT.2S.3C.4D",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "4D",
   "cond": "hl >= 16 and short('D')",
   "forcing": "FM",
@@ -1415,7 +1759,10 @@
  },
  {
   "id": "1NT.2S.3C.3NT",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "3NT",
   "cond": "hl >= 12 and short('D')",
   "forcing": "FM",
@@ -1426,7 +1773,10 @@
  },
  {
   "id": "1NT.2S.3C.4C",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "4C",
   "cond": "hl >= 12",
   "forcing": "F1",
@@ -1436,7 +1786,10 @@
  },
  {
   "id": "1NT.2S.3C.pass",
-  "seq": "1NT 2S 3C",
+  "seq": [
+   "1NT 2S 3C",
+   "1NT (X) 2S 3C"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -1446,7 +1799,10 @@
  },
  {
   "id": "1NT.3C.3D.4C",
-  "seq": "1NT 3C 3D",
+  "seq": [
+   "1NT 3C 3D",
+   "1NT (X) 3C 3D"
+  ],
   "call": "4C",
   "cond": "hl >= 12 and short('C')",
   "forcing": "FM",
@@ -1456,7 +1812,10 @@
  },
  {
   "id": "1NT.3C.3D.4D",
-  "seq": "1NT 3C 3D",
+  "seq": [
+   "1NT 3C 3D",
+   "1NT (X) 3C 3D"
+  ],
   "call": "4D",
   "cond": "hl >= 12",
   "forcing": "F1",
@@ -1466,7 +1825,10 @@
  },
  {
   "id": "1NT.3C.3D.pass",
-  "seq": "1NT 3C 3D",
+  "seq": [
+   "1NT 3C 3D",
+   "1NT (X) 3C 3D"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -5617,7 +5979,9 @@
   "id": "sl.st.H.C",
   "seq": [
    "1NT 2C 2H 3S",
-   "1NT 2C 2NT 3H"
+   "1NT 2C 2NT 3H",
+   "1NT (X) 2C 2H 3S",
+   "1NT (X) 2C 2NT 3H"
   ],
   "call": "4C",
   "cond": "hl >= 16 and ctrl1('C')",
@@ -5632,7 +5996,9 @@
   "id": "sl.st.H.D",
   "seq": [
    "1NT 2C 2H 3S",
-   "1NT 2C 2NT 3H"
+   "1NT 2C 2NT 3H",
+   "1NT (X) 2C 2H 3S",
+   "1NT (X) 2C 2NT 3H"
   ],
   "call": "4D",
   "cond": "hl >= 16 and ctrl1('D')",
@@ -5647,7 +6013,9 @@
   "id": "sl.st.S.C",
   "seq": [
    "1NT 2C 2S 3H",
-   "1NT 2C 2NT 3S"
+   "1NT 2C 2NT 3S",
+   "1NT (X) 2C 2S 3H",
+   "1NT (X) 2C 2NT 3S"
   ],
   "call": "4C",
   "cond": "hl >= 16 and ctrl1('C')",
@@ -5662,7 +6030,9 @@
   "id": "sl.st.S.D",
   "seq": [
    "1NT 2C 2S 3H",
-   "1NT 2C 2NT 3S"
+   "1NT 2C 2NT 3S",
+   "1NT (X) 2C 2S 3H",
+   "1NT (X) 2C 2NT 3S"
   ],
   "call": "4D",
   "cond": "hl >= 16 and ctrl1('D')",
@@ -5677,7 +6047,9 @@
   "id": "sl.st.S.H",
   "seq": [
    "1NT 2C 2S 3H",
-   "1NT 2C 2NT 3S"
+   "1NT 2C 2NT 3S",
+   "1NT (X) 2C 2S 3H",
+   "1NT (X) 2C 2NT 3S"
   ],
   "call": "4H",
   "cond": "hl >= 16 and ctrl1('H')",
@@ -5692,7 +6064,9 @@
   "id": "sl.st.H.min",
   "seq": [
    "1NT 2C 2H 3S",
-   "1NT 2C 2NT 3H"
+   "1NT 2C 2NT 3H",
+   "1NT (X) 2C 2H 3S",
+   "1NT (X) 2C 2NT 3H"
   ],
   "call": "4H",
   "cond": "true",
@@ -5706,7 +6080,9 @@
   "id": "sl.st.S.min",
   "seq": [
    "1NT 2C 2S 3H",
-   "1NT 2C 2NT 3S"
+   "1NT 2C 2NT 3S",
+   "1NT (X) 2C 2S 3H",
+   "1NT (X) 2C 2NT 3S"
   ],
   "call": "4S",
   "cond": "true",
@@ -5720,7 +6096,9 @@
   "id": "sl.st.H.cue.bw",
   "seq": [
    "1NT 2C 2H 3S 4C|4D|4H",
-   "1NT 2C 2NT 3H 4C|4D|4H"
+   "1NT 2C 2NT 3H 4C|4D|4H",
+   "1NT (X) 2C 2H 3S 4C|4D|4H",
+   "1NT (X) 2C 2NT 3H 4C|4D|4H"
   ],
   "call": "4NT",
   "cond": "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))",
@@ -5734,7 +6112,9 @@
   "id": "sl.st.S.cue.bw",
   "seq": [
    "1NT 2C 2S 3H 4C|4D|4H",
-   "1NT 2C 2NT 3S 4C|4D|4H"
+   "1NT 2C 2NT 3S 4C|4D|4H",
+   "1NT (X) 2C 2S 3H 4C|4D|4H",
+   "1NT (X) 2C 2NT 3S 4C|4D|4H"
   ],
   "call": "4NT",
   "cond": "true",
@@ -5748,7 +6128,9 @@
   "id": "sl.st.H.cue.4M",
   "seq": [
    "1NT 2C 2H 3S 4C|4D",
-   "1NT 2C 2NT 3H 4C|4D"
+   "1NT 2C 2NT 3H 4C|4D",
+   "1NT (X) 2C 2H 3S 4C|4D",
+   "1NT (X) 2C 2NT 3H 4C|4D"
   ],
   "call": "4H",
   "cond": "true",
@@ -5761,7 +6143,9 @@
   "id": "sl.st.S.cue.4M",
   "seq": [
    "1NT 2C 2S 3H 4C|4D|4H",
-   "1NT 2C 2NT 3S 4C|4D|4H"
+   "1NT 2C 2NT 3S 4C|4D|4H",
+   "1NT (X) 2C 2S 3H 4C|4D|4H",
+   "1NT (X) 2C 2NT 3S 4C|4D|4H"
   ],
   "call": "4S",
   "cond": "true",
@@ -5774,7 +6158,9 @@
   "id": "sl.st.H.min.bw",
   "seq": [
    "1NT 2C 2H 3S 4H",
-   "1NT 2C 2NT 3H 4H"
+   "1NT 2C 2NT 3H 4H",
+   "1NT (X) 2C 2H 3S 4H",
+   "1NT (X) 2C 2NT 3H 4H"
   ],
   "call": "4NT",
   "cond": "hl >= 18 and ((keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))))",
@@ -5788,7 +6174,9 @@
   "id": "sl.st.S.min.bw",
   "seq": [
    "1NT 2C 2S 3H 4S",
-   "1NT 2C 2NT 3S 4S"
+   "1NT 2C 2NT 3S 4S",
+   "1NT (X) 2C 2S 3H 4S",
+   "1NT (X) 2C 2NT 3S 4S"
   ],
   "call": "4NT",
   "cond": "hl >= 18 and (true)",
@@ -5802,7 +6190,9 @@
   "id": "sl.st.H.min.p",
   "seq": [
    "1NT 2C 2H 3S 4H",
-   "1NT 2C 2NT 3H 4H"
+   "1NT 2C 2NT 3H 4H",
+   "1NT (X) 2C 2H 3S 4H",
+   "1NT (X) 2C 2NT 3H 4H"
   ],
   "call": "P",
   "cond": "true",
@@ -5815,7 +6205,9 @@
   "id": "sl.st.S.min.p",
   "seq": [
    "1NT 2C 2S 3H 4S",
-   "1NT 2C 2NT 3S 4S"
+   "1NT 2C 2NT 3S 4S",
+   "1NT (X) 2C 2S 3H 4S",
+   "1NT (X) 2C 2NT 3S 4S"
   ],
   "call": "P",
   "cond": "true",
@@ -5826,7 +6218,10 @@
  },
  {
   "id": "sl.stspl.H.C.bw",
-  "seq": "1NT 2C 2H 4C",
+  "seq": [
+   "1NT 2C 2H 4C",
+   "1NT (X) 2C 2H 4C"
+  ],
   "call": "4NT",
   "cond": "hl >= 16 and hcp_in('C') <= 1 and ((keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))))",
   "forcing": "ASK",
@@ -5838,7 +6233,10 @@
  },
  {
   "id": "sl.stspl.H.D.bw",
-  "seq": "1NT 2C 2H 4D",
+  "seq": [
+   "1NT 2C 2H 4D",
+   "1NT (X) 2C 2H 4D"
+  ],
   "call": "4NT",
   "cond": "hl >= 16 and hcp_in('D') <= 1 and ((keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))))",
   "forcing": "ASK",
@@ -5850,7 +6248,10 @@
  },
  {
   "id": "sl.stspl.S.C.bw",
-  "seq": "1NT 2C 2S 4C",
+  "seq": [
+   "1NT 2C 2S 4C",
+   "1NT (X) 2C 2S 4C"
+  ],
   "call": "4NT",
   "cond": "hl >= 16 and hcp_in('C') <= 1 and (true)",
   "forcing": "ASK",
@@ -5862,7 +6263,10 @@
  },
  {
   "id": "sl.stspl.S.D.bw",
-  "seq": "1NT 2C 2S 4D",
+  "seq": [
+   "1NT 2C 2S 4D",
+   "1NT (X) 2C 2S 4D"
+  ],
   "call": "4NT",
   "cond": "hl >= 16 and hcp_in('D') <= 1 and (true)",
   "forcing": "ASK",
@@ -5874,7 +6278,10 @@
  },
  {
   "id": "sl.stspl.H.C.4M",
-  "seq": "1NT 2C 2H 4C",
+  "seq": [
+   "1NT 2C 2H 4C",
+   "1NT (X) 2C 2H 4C"
+  ],
   "call": "4H",
   "cond": "true",
   "forcing": "SO",
@@ -5885,7 +6292,10 @@
  },
  {
   "id": "sl.stspl.H.D.4M",
-  "seq": "1NT 2C 2H 4D",
+  "seq": [
+   "1NT 2C 2H 4D",
+   "1NT (X) 2C 2H 4D"
+  ],
   "call": "4H",
   "cond": "true",
   "forcing": "SO",
@@ -5896,7 +6306,10 @@
  },
  {
   "id": "sl.stspl.S.C.4M",
-  "seq": "1NT 2C 2S 4C",
+  "seq": [
+   "1NT 2C 2S 4C",
+   "1NT (X) 2C 2S 4C"
+  ],
   "call": "4S",
   "cond": "true",
   "forcing": "SO",
@@ -5907,7 +6320,10 @@
  },
  {
   "id": "sl.stspl.S.D.4M",
-  "seq": "1NT 2C 2S 4D",
+  "seq": [
+   "1NT 2C 2S 4D",
+   "1NT (X) 2C 2S 4D"
+  ],
   "call": "4S",
   "cond": "true",
   "forcing": "SO",
@@ -5918,7 +6334,10 @@
  },
  {
   "id": "sl.tm.3H.3NT",
-  "seq": "1NT 2S 3C 3H",
+  "seq": [
+   "1NT 2S 3C 3H",
+   "1NT (X) 2S 3C 3H"
+  ],
   "call": "3NT",
   "cond": "stop('H') and hcp_in('H') >= 3",
   "forcing": "SO",
@@ -5928,7 +6347,10 @@
  },
  {
   "id": "sl.tm.3S.3NT",
-  "seq": "1NT 2S 3C 3S",
+  "seq": [
+   "1NT 2S 3C 3S",
+   "1NT (X) 2S 3C 3S"
+  ],
   "call": "3NT",
   "cond": "stop('S') and hcp_in('S') >= 3",
   "forcing": "SO",
@@ -5938,7 +6360,10 @@
  },
  {
   "id": "sl.tm.3H.6C",
-  "seq": "1NT 2S 3C 3H",
+  "seq": [
+   "1NT 2S 3C 3H",
+   "1NT (X) 2S 3C 3H"
+  ],
   "call": "6C",
   "cond": "hl >= 16 and hcp_in('H') <= 1 and C >= 3 and aces >= 2",
   "forcing": "SO",
@@ -5948,7 +6373,10 @@
  },
  {
   "id": "sl.tm.3S.6C",
-  "seq": "1NT 2S 3C 3S",
+  "seq": [
+   "1NT 2S 3C 3S",
+   "1NT (X) 2S 3C 3S"
+  ],
   "call": "6C",
   "cond": "hl >= 16 and hcp_in('S') <= 1 and C >= 3 and aces >= 2",
   "forcing": "SO",
@@ -5958,7 +6386,10 @@
  },
  {
   "id": "sl.tm.3NT.6C",
-  "seq": "1NT 2S 3C 3NT",
+  "seq": [
+   "1NT 2S 3C 3NT",
+   "1NT (X) 2S 3C 3NT"
+  ],
   "call": "6C",
   "cond": "hl >= 16 and hcp_in('D') <= 1 and C >= 3 and aces >= 2",
   "forcing": "SO",
@@ -5968,7 +6399,10 @@
  },
  {
   "id": "sl.tm.4D.6C",
-  "seq": "1NT 2S 3C 4D",
+  "seq": [
+   "1NT 2S 3C 4D",
+   "1NT (X) 2S 3C 4D"
+  ],
   "call": "6C",
   "cond": "hl >= 16 and hcp_in('D') <= 1 and C >= 3 and aces >= 2",
   "forcing": "SO",
@@ -5978,7 +6412,10 @@
  },
  {
   "id": "sl.tm.3H.5C",
-  "seq": "1NT 2S 3C 3H",
+  "seq": [
+   "1NT 2S 3C 3H",
+   "1NT (X) 2S 3C 3H"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -5988,7 +6425,10 @@
  },
  {
   "id": "sl.tm.3S.5C",
-  "seq": "1NT 2S 3C 3S",
+  "seq": [
+   "1NT 2S 3C 3S",
+   "1NT (X) 2S 3C 3S"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -5998,7 +6438,10 @@
  },
  {
   "id": "sl.tm.3NT.5C",
-  "seq": "1NT 2S 3C 3NT",
+  "seq": [
+   "1NT 2S 3C 3NT",
+   "1NT (X) 2S 3C 3NT"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -6008,7 +6451,10 @@
  },
  {
   "id": "sl.tm.4C.5C",
-  "seq": "1NT 2S 3C 4C",
+  "seq": [
+   "1NT 2S 3C 4C",
+   "1NT (X) 2S 3C 4C"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -6018,7 +6464,10 @@
  },
  {
   "id": "sl.tm.4D.5C",
-  "seq": "1NT 2S 3C 4D",
+  "seq": [
+   "1NT 2S 3C 4D",
+   "1NT (X) 2S 3C 4D"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -6028,7 +6477,10 @@
  },
  {
   "id": "sl.tmd.4C.6D",
-  "seq": "1NT 3C 3D 4C",
+  "seq": [
+   "1NT 3C 3D 4C",
+   "1NT (X) 3C 3D 4C"
+  ],
   "call": "6D",
   "cond": "hl >= 16 and hcp_in('C') <= 1 and D >= 3 and aces >= 2",
   "forcing": "SO",
@@ -8197,7 +8649,10 @@
  },
  {
   "id": "q.st.4NT",
-  "seq": "1NT 2C 2D|2H|2S 4NT",
+  "seq": [
+   "1NT 2C 2D|2H|2S 4NT",
+   "1NT (X) 2C 2D|2H|2S 4NT"
+  ],
   "call": "6NT",
   "cond": "hl >= 16",
   "forcing": "SO",
@@ -8219,7 +8674,8 @@
   "id": "q.p",
   "seq": [
    "1NT 2C 2D|2H|2S 4NT",
-   "1C|1D 4NT"
+   "1C|1D 4NT",
+   "1NT (X) 2C 2D|2H|2S 4NT"
   ],
   "call": "P",
   "cond": "true",
@@ -19366,6 +19822,126 @@
   "status": "infere"
  },
  {
+  "id": "1NT.int2C.4S",
+  "seq": "1NT (2C)",
+  "call": "4S",
+  "cond": "S >= 6 and S >= max(S, H) and 9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 9+ HL : manche",
+  "meaning_en": "Six-card major, 9+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2C.4H",
+  "seq": "1NT (2C)",
+  "call": "4H",
+  "cond": "H >= 6 and H >= max(S, H) and 9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 9+ HL : manche",
+  "meaning_en": "Six-card major, 9+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.4S",
+  "seq": "1NT (2D)",
+  "call": "4S",
+  "cond": "S >= 6 and S >= max(S, H) and 9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 9+ HL : manche",
+  "meaning_en": "Six-card major, 9+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.4H",
+  "seq": "1NT (2D)",
+  "call": "4H",
+  "cond": "H >= 6 and H >= max(S, H) and 9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Majeure 6e, 9+ HL : manche",
+  "meaning_en": "Six-card major, 9+ HL: game",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2C.3NT",
+  "seq": "1NT (2C)",
+  "call": "3NT",
+  "cond": "9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 9+ HL",
+  "meaning_en": "Game in notrump: 9+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.3NT",
+  "seq": "1NT (2D)",
+  "call": "3NT",
+  "cond": "9 <= hl <= 16",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 9+ HL",
+  "meaning_en": "Game in notrump: 9+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2C.2S",
+  "seq": "1NT (2C)",
+  "call": "2S",
+  "cond": "S >= 5 and S >= max(S, H) and hl <= 8",
+  "forcing": "NF",
+  "meaning": "Majeure 5e, faible : pour jouer",
+  "meaning_en": "Five-card major, weak: to play",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2C.2H",
+  "seq": "1NT (2C)",
+  "call": "2H",
+  "cond": "H >= 5 and H >= max(S, H) and hl <= 8",
+  "forcing": "NF",
+  "meaning": "Majeure 5e, faible : pour jouer",
+  "meaning_en": "Five-card major, weak: to play",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.2S",
+  "seq": "1NT (2D)",
+  "call": "2S",
+  "cond": "S >= 5 and S >= max(S, H) and hl <= 8",
+  "forcing": "NF",
+  "meaning": "Majeure 5e, faible : pour jouer",
+  "meaning_en": "Five-card major, weak: to play",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.2H",
+  "seq": "1NT (2D)",
+  "call": "2H",
+  "cond": "H >= 5 and H >= max(S, H) and hl <= 8",
+  "forcing": "NF",
+  "meaning": "Majeure 5e, faible : pour jouer",
+  "meaning_en": "Five-card major, weak: to play",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2C.P",
+  "seq": "1NT (2C)",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Passe",
+  "meaning_en": "Pass",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.int2D.P",
+  "seq": "1NT (2D)",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Passe",
+  "meaning_en": "Pass",
+  "status": "infere"
+ },
+ {
   "id": "1C.1D.1H",
   "seq": "1C 1D",
   "call": "1H",
@@ -19997,7 +20573,10 @@
  },
  {
   "id": "1NT.2S.3C.3D.3NT",
-  "seq": "1NT 2S 3C 3D",
+  "seq": [
+   "1NT 2S 3C 3D",
+   "1NT (X) 2S 3C 3D"
+  ],
   "call": "3NT",
   "cond": "stop('H') and stop('S')",
   "forcing": "SO",
@@ -20007,7 +20586,10 @@
  },
  {
   "id": "1NT.2S.3C.3D.5D",
-  "seq": "1NT 2S 3C 3D",
+  "seq": [
+   "1NT 2S 3C 3D",
+   "1NT (X) 2S 3C 3D"
+  ],
   "call": "5D",
   "cond": "D >= C",
   "forcing": "SO",
@@ -20017,7 +20599,10 @@
  },
  {
   "id": "1NT.2S.3C.3D.5C",
-  "seq": "1NT 2S 3C 3D",
+  "seq": [
+   "1NT 2S 3C 3D",
+   "1NT (X) 2S 3C 3D"
+  ],
   "call": "5C",
   "cond": "true",
   "forcing": "SO",
@@ -23106,7 +23691,10 @@
  },
  {
   "id": "1NT.2C.2H.slam.r",
-  "seq": "1NT 2C 2H 3S|4C|4D",
+  "seq": [
+   "1NT 2C 2H 3S|4C|4D",
+   "1NT (X) 2C 2H 3S|4C|4D"
+  ],
   "call": "4H",
   "cond": "true",
   "forcing": "NF",
@@ -23116,7 +23704,10 @@
  },
  {
   "id": "1NT.2C.2S.slam.r",
-  "seq": "1NT 2C 2S 3H|4C|4D",
+  "seq": [
+   "1NT 2C 2S 3H|4C|4D",
+   "1NT (X) 2C 2S 3H|4C|4D"
+  ],
   "call": "4S",
   "cond": "true",
   "forcing": "NF",
@@ -23126,7 +23717,10 @@
  },
  {
   "id": "1NT.2C.2S.2NT.3H.4H",
-  "seq": "1NT 2C 2S 2NT 3H",
+  "seq": [
+   "1NT 2C 2S 2NT 3H",
+   "1NT (X) 2C 2S 2NT 3H"
+  ],
   "call": "4H",
   "cond": "H >= 5",
   "forcing": "SO",
@@ -23136,7 +23730,10 @@
  },
  {
   "id": "1NT.2C.2S.2NT.3H.3NT",
-  "seq": "1NT 2C 2S 2NT 3H",
+  "seq": [
+   "1NT 2C 2S 2NT 3H",
+   "1NT (X) 2C 2S 2NT 3H"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "SO",
@@ -23146,7 +23743,10 @@
  },
  {
   "id": "1NT.3H.r",
-  "seq": "1NT 3H",
+  "seq": [
+   "1NT 3H",
+   "1NT (X) 3H"
+  ],
   "call": "4H",
   "cond": "H >= 3",
   "forcing": "SO",
@@ -23156,7 +23756,10 @@
  },
  {
   "id": "1NT.3S.r",
-  "seq": "1NT 3S",
+  "seq": [
+   "1NT 3S",
+   "1NT (X) 3S"
+  ],
   "call": "4S",
   "cond": "S >= 3",
   "forcing": "SO",
@@ -23166,7 +23769,10 @@
  },
  {
   "id": "1NT.3H.3NT",
-  "seq": "1NT 3H",
+  "seq": [
+   "1NT 3H",
+   "1NT (X) 3H"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -23176,7 +23782,10 @@
  },
  {
   "id": "1NT.3S.3NT",
-  "seq": "1NT 3S",
+  "seq": [
+   "1NT 3S",
+   "1NT (X) 3S"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -23186,7 +23795,10 @@
  },
  {
   "id": "1NT.3D.3NT",
-  "seq": "1NT 3D",
+  "seq": [
+   "1NT 3D",
+   "1NT (X) 3D"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -23196,7 +23808,10 @@
  },
  {
   "id": "1NT.3C.3D.4D.r",
-  "seq": "1NT 3C 3D 4C|4D",
+  "seq": [
+   "1NT 3C 3D 4C|4D",
+   "1NT (X) 3C 3D 4C|4D"
+  ],
   "call": "5D",
   "cond": "true",
   "forcing": "SO",
@@ -23300,7 +23915,11 @@
    "1NT 2D 2H 2NT 3H",
    "1NT 2H 2S 2NT 3S",
    "1NT 2C 2NT 3D 3S",
-   "1NT 2C 2NT 3C 3H"
+   "1NT 2C 2NT 3C 3H",
+   "1NT (X) 2D 2H 2NT 3H",
+   "1NT (X) 2H 2S 2NT 3S",
+   "1NT (X) 2C 2NT 3D 3S",
+   "1NT (X) 2C 2NT 3C 3H"
   ],
   "call": "P",
   "cond": "true",

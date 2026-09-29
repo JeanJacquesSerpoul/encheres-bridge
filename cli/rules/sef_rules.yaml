@@ -2450,8 +2450,8 @@
   meaning_en: "No king to show: small slam"
   status: sef
 - id: "bwk.{t}.after"
-  for: [{t: S}, {t: H}, {t: D}]
-  seq: "BW:{t} 4NT * 5NT 6C|6D|6H"
+  for: [{t: S, k: "6C|6D|6H"}, {t: H, k: "6C|6D"}, {t: D, k: "6C"}]
+  seq: "BW:{t} 4NT * 5NT {k}"
   call: "7{t}"
   cond: "ptricks >= 9"
   forcing: SO
@@ -2459,8 +2459,8 @@
   meaning_en: "The king shown is enough: grand slam"
   status: infere
 - id: "bwk.{t}.after6"
-  for: [{t: S}, {t: H}, {t: D}]
-  seq: "BW:{t} 4NT * 5NT 6C|6D|6H"
+  for: [{t: S, k: "6C|6D|6H"}, {t: H, k: "6C|6D"}, {t: D, k: "6C"}]
+  seq: "BW:{t} 4NT * 5NT {k}"
   call: "6{t}"
   cond: "true"
   forcing: SO
@@ -2539,8 +2539,8 @@
   status: infere
   alert: true
 - id: "sl.st.{M}.cue.4M"
-  for: [{M: H, x: 3S}, {M: S, x: 3H}]
-  seq: ["1NT 2C 2{M} {x} 4C|4D|4H", "1NT 2C 2NT 3{M} 4C|4D|4H"]
+  for: [{M: H, x: 3S, c: "4C|4D"}, {M: S, x: 3H, c: "4C|4D|4H"}]
+  seq: ["1NT 2C 2{M} {x} {c}", "1NT 2C 2NT 3{M} {c}"]
   call: "4{M}"
   cond: "true"
   forcing: SO
@@ -2590,10 +2590,10 @@
   trump: "{M}"
 # --- Texas mineurs : l'ouvreur juge la courte du répondant
 - id: "sl.tm.{c}.3NT"
-  for: [{c: 3H, s: H}, {c: 3S, s: S}, {c: 3NT, s: D}]
+  for: [{c: 3H, s: H}, {c: 3S, s: S}]
   seq: "1NT 2S 3C {c}"
   call: 3NT
-  cond: "stop('{s}') and hcp_in('{s}') >= 3 and '{c}' != '3NT'"
+  cond: "stop('{s}') and hcp_in('{s}') >= 3"
   forcing: SO
   meaning: "Arrêt (points perdus) dans la courte : 3SA"
   meaning_en: "Stop (points wasted) in the short suit: 3NT"
@@ -5810,12 +5810,21 @@
   status: infere
 - id: "{o}.2{m}.x.2NT"
   for: [{o: 1H, M: H, m: C}, {o: 1H, M: H, m: D}, {o: 1S, M: S, m: C}, {o: 1S, M: S, m: D}]
-  seq: "{o} 2{m} 2{M}|2H|3{m}"
+  seq: "{o} 2{m} 2{M}|2H"
   call: 2NT
   cond: "true"
   forcing: INV
   meaning: "11-12, pas de fit"
   meaning_en: "11-12, no fit"
+  status: infere
+- id: "{o}.2{m}.3{m}.P"
+  for: [{o: 1H, m: C}, {o: 1H, m: D}, {o: 1S, m: C}, {o: 1S, m: D}]
+  seq: "{o} 2{m} 3{m}"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "11-12, pas de fit majeur : on joue 3 dans la mineure"
+  meaning_en: "11-12, no major fit: play three of the minor"
   status: infere
 - id: "{o}.2{m}.2NT.r"
   for: [{o: 1H, M: H, m: C}, {o: 1H, M: H, m: D}, {o: 1S, M: S, m: C}, {o: 1S, M: S, m: D}, {o: 1D, M: D, m: C}]
@@ -5844,12 +5853,20 @@
   meaning_en: "Game in NT"
   status: infere
 - id: 1D.2C.x.2NT
-  seq: "1D 2C 2D|2H|2S|3C"
+  seq: "1D 2C 2D|2H|2S"
   call: 2NT
   cond: "true"
   forcing: INV
   meaning: "11-12"
   meaning_en: "11-12"
+  status: infere
+- id: 1D.2C.3C.P
+  seq: "1D 2C 3C"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "11-12 : on joue 3♣"
+  meaning_en: "11-12: play 3♣"
   status: infere
 
 # --- répondant après une redemande à saut de l'ouvreur (6 cartes, 15-17)
@@ -5946,8 +5963,8 @@
 
 # --- 2 faible : suites
 - id: "2{M}.2NT.x.4{M}"
-  for: [{M: H}, {M: S}]
-  seq: "2{M} 2NT 3C|3D|3H|3S|3NT|4C|4D|4H|4S"
+  for: [{M: H, a: "3C|3D|3H|3S|3NT|4C|4D"}, {M: S, a: "3C|3D|3H|3S|3NT|4C|4D|4H"}]
+  seq: "2{M} 2NT {a}"
   call: "4{M}"
   cond: "{M} >= 2"
   forcing: SO
@@ -5955,8 +5972,8 @@
   meaning_en: "Game opposite a maximum"
   status: infere
 - id: "2{M}.2NT.4x.4{M}"
-  for: [{M: H}, {M: S}]
-  seq: "2{M} 2NT 4C|4D|4H|4S"
+  for: [{M: H, a: "4C|4D"}, {M: S, a: "4C|4D|4H"}]
+  seq: "2{M} 2NT {a}"
   call: "4{M}"
   cond: "true"
   forcing: SO

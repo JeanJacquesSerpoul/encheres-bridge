@@ -11,7 +11,7 @@ Usage :
   python3 sef_rules.py ../../cli/rules/sef_rules.yaml --gen-tests 1500 sef_tests.json   # génère les cas de test
   python3 sef_rules.py ../../cli/rules/sef_rules.yaml --check-tests sef_tests.json      # rejoue les cas de test
 """
-import argparse, ast, json, os, random, re, sys
+import argparse, ast, itertools, json, os, random, re, sys
 from collections import Counter
 
 import yaml
@@ -112,6 +112,54 @@ def validate(rules):
         except Exception as ex:
             errs.append('%s : condition %r -> %s' % (rid, r['cond'], ex))
     return errs
+
+
+_RANK = {'C': 0, 'D': 1, 'H': 2, 'S': 3, 'NT': 4}
+
+
+def _illegal(call, seq):
+    """Raison pour laquelle `call` est illégale après la séquence concrète `seq`, ou None."""
+    if call == 'P':
+        return None
+    if call in ('X', 'XX'):
+        last = next((t for t in reversed(seq) if t != 'P'), None)
+        if last is None or not last.startswith('('):
+            return 'contre sans enchère adverse à contrer'
+        inner = last.strip('()')
+        if call == 'X' and not inner[0].isdigit():
+            return 'contre d\'un contre'
+        if call == 'XX' and inner != 'X':
+            return 'surcontre sans contre adverse'
+        return None
+    bids = [t.strip('()') for t in seq if t.strip('()')[0].isdigit()]
+    if bids and (int(call[0]), _RANK[call[1:]]) <= (int(bids[-1][0]), _RANK[bids[-1][1:]]):
+        return '%s n\'est pas au-dessus de %s' % (call, bids[-1])
+    return None
+
+
+def legality_warnings(rules):
+    """Règles dont l'enchère est illégale pour une séquence que leur motif accepte.
+
+    La séquence vue par la paire contient toutes les enchères de la table : la dernière enchère du
+    motif est la dernière de la table. Un joker `*` placé après la dernière enchère connue empêche de
+    conclure ; le moteur passerait alors (« passe par défaut ») au lieu de suivre la règle."""
+    out = []
+    for r in rules:
+        pats = r['seq'] if isinstance(r['seq'], list) else [r['seq']]
+        for pat in pats:
+            toks = pat.split()
+            if toks and (toks[0] == '**' or toks[0].startswith('BW:')):
+                toks = toks[1:]
+            if '*' in toks:
+                last = max(i for i, t in enumerate(toks) if t == '*')
+                if not any(a[0].isdigit() for t in toks[last + 1:] for a in t.strip('()').split('|')):
+                    continue
+                toks = ['P' if t == '*' else t for t in toks]
+            choices = [['(%s)' % a if t.startswith('(') else a for a in t.strip('()').split('|')] for t in toks]
+            reasons = sorted({_illegal(str(r['call']), list(s)) for s in itertools.product(*choices)} - {None})
+            if reasons:
+                out.append('%s : séquence %r -> %s' % (r.get('id', '?'), pat, '; '.join(reasons)))
+    return out
 
 
 # ---------------------------------------------------------------- main
@@ -384,6 +432,10 @@ def main():
         print('Statuts :', dict(Counter(r.get('status') for r in rules)))
         if errs:
             sys.exit(1)
+        warns = legality_warnings(rules)
+        print('%d avertissement(s) : enchère illégale' % len(warns))
+        for w in warns:
+            print('  !', w)
     if a.json:
         out = [{k: v for k, v in r.items() if not k.startswith('_')} for r in rules]
         json.dump(out, open(a.json, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

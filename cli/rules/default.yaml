@@ -1311,10 +1311,10 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M}"
   call: "4{M}"
-  cond: "{M} >= 4 and 18 <= hl <= 19 and not balanced"
+  cond: "{M} >= 4 and hld >= 18 and not balanced"
   forcing: SO
-  meaning: "Fit 4e, 18-19 HL, 5422"
-  meaning_en: "4-card fit, 18-19 HL, 5422"
+  meaning: "Fit 4e, 18+ HLD, irrégulier"
+  meaning_en: "4-card fit, 18+ HLD, unbalanced"
   status: sef
 - id: "1{m}.1{M}.3NT"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
@@ -1330,19 +1330,19 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M}"
   call: "3{M}"
-  cond: "{M} >= 4 and 15 <= hl <= 17"
+  cond: "{M} >= 4 and 15 <= hld <= 17"
   forcing: INV
-  meaning: "Fit 4e, 15-17 HL"
-  meaning_en: "4-card fit, 15-17 HL"
+  meaning: "Fit 4e, 15-17 HLD"
+  meaning_en: "4-card fit, 15-17 HLD"
   status: infere
 - id: "1{m}.1{M}.2{M}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M}"
   call: "2{M}"
-  cond: "{M} >= 4 and hl <= 14"
+  cond: "{M} >= 4 and hld <= 14"
   forcing: NF
-  meaning: "Fit 4e, 12-14 HL"
-  meaning_en: "4-card fit, 12-14 HL"
+  meaning: "Fit 4e, 12-14 HLD"
+  meaning_en: "4-card fit, 12-14 HLD"
   status: infere
 - id: "1{m}.1{M}.2NT"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
@@ -1389,6 +1389,15 @@
   meaning: "Régulier 12-14 HL"
   meaning_en: "Balanced 12-14 HL"
   status: infere
+- id: "1{m}.1{M}.3NT.long"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "1{m} 1{M}"
+  call: 3NT
+  cond: "{m} >= 6 and hl >= 18"
+  forcing: SO
+  meaning: "Mineure 6e, 18+ HL : 3SA"
+  meaning_en: "Six-card minor, 18+ HL: 3NT"
+  status: infere
 - id: "1{m}.1{M}.3{m}"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M}"
@@ -1397,6 +1406,15 @@
   forcing: INV
   meaning: "6 cartes, 15-17 HL"
   meaning_en: "6 cards, 15-17 HL"
+  status: infere
+- id: "1D.1{M}.3C.fort"
+  for: [{M: H}, {M: S}]
+  seq: "1D 1{M}"
+  call: 3C
+  cond: "D >= 5 and C >= 4 and hl >= 18"
+  forcing: FM
+  meaning: "Bicolore à saut ♦/♣ : 18+ HL, forcing de manche"
+  meaning_en: "Jump shift ♦/♣: 18+ HL, game forcing"
   status: infere
 - id: "1D.1{M}.2C"
   for: [{M: H}, {M: S}]
@@ -1800,7 +1818,7 @@
   for: [{M: H}, {M: S}]
   seq: "1{M} 2{M}"
   call: "4{M}"
-  cond: "hld >= 19"
+  cond: "hld >= 18"
   forcing: SO
   meaning: "Manche"
   meaning_en: "Game"
@@ -1809,7 +1827,7 @@
   for: [{M: H}, {M: S}]
   seq: "1{M} 2{M}"
   call: 2NT
-  cond: "hld >= 17"
+  cond: "hld >= 16"
   forcing: F1
   meaning: "Enchère d'essai généralisée"
   meaning_en: "General help-suit game try"
@@ -5059,6 +5077,92 @@
   meaning_en: "Picks a minor"
   status: infere
 
+# --- le répondant après le bicolore à saut de l'ouvreur (forcing de manche)
+- id: "js.{o}.{r}.{j}.4{o2}"
+  for: [{o: 1H, o2: H, r: 1S, j: 3C}, {o: 1H, o2: H, r: 1S, j: 3D}]
+  seq: "{o} {r} {j}"
+  call: "4{o2}"
+  cond: "{o2} >= 3"
+  forcing: SO
+  meaning: "Fit dans la majeure d'ouverture : manche"
+  meaning_en: "Fit in the opening major: game"
+  status: infere
+- id: "js.{o}.{r}.{j}.4{r2}"
+  for: [{o: 1D, r: 1H, r2: H, j: 3C}, {o: 1D, r: 1S, r2: S, j: 3C}, {o: 1H, r: 1S, r2: S, j: 3C}, {o: 1H, r: 1S, r2: S, j: 3D}]
+  seq: "{o} {r} {j}"
+  call: "4{r2}"
+  cond: "{r2} >= 6"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "js.{o}.{r}.{j}.3NT"
+  for: [{o: 1D, r: 1H, j: 3C}, {o: 1D, r: 1S, j: 3C}, {o: 1H, r: 1S, j: 3C}, {o: 1H, r: 1S, j: 3D}]
+  seq: "{o} {r} {j}"
+  call: 3NT
+  cond: "true"
+  forcing: SO
+  meaning: "Manche à SA"
+  meaning_en: "Game in notrump"
+  status: infere
+
+# --- l'ouvreur après le 1SA de son partenaire au deuxième tour
+- id: "o4.{s}.1NT.3NT"
+  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
+  seq: "{s} 1NT"
+  call: 3NT
+  cond: "hl >= 18"
+  forcing: SO
+  meaning: "18+ HL : manche à SA"
+  meaning_en: "18+ HL: game in notrump"
+  status: infere
+- id: "o4.{s}.1NT.2NT"
+  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
+  seq: "{s} 1NT"
+  call: 2NT
+  cond: "16 <= hl <= 17"
+  forcing: INV
+  meaning: "16-17 HL : invitation"
+  meaning_en: "16-17 HL: invitation"
+  status: infere
+- id: "o4.{s}.1NT.2NT.3NT"
+  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
+  seq: "{s} 1NT 2NT"
+  call: 3NT
+  cond: "hcp >= 8"
+  forcing: SO
+  meaning: "Maximum : 3SA"
+  meaning_en: "Maximum: 3NT"
+  status: infere
+- id: "o4.{s}.1NT.2NT.P"
+  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
+  seq: "{s} 1NT 2NT"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum : on joue 2SA"
+  meaning_en: "Minimum: play 2NT"
+  status: infere
+
+# --- le répondant de 1SA après le bicolore à saut de l'ouvreur (forcing de manche)
+- id: "js.1S.1NT.3H.4H"
+  seq: "1S 1NT 3H"
+  call: 4H
+  cond: "H >= 4"
+  forcing: SO
+  meaning: "Fit ♥ : manche"
+  meaning_en: "Heart fit: game"
+  status: infere
+- id: "js.{M}.1NT.{c}.3NT"
+  for: [{M: H, c: 3C}, {M: H, c: 3D}, {M: S, c: 3H}, {M: S, c: 3C}, {M: S, c: 3D}]
+  seq: "1{M} 1NT {c}"
+  call: 3NT
+  cond: "true"
+  forcing: SO
+  meaning: "Manche à SA"
+  meaning_en: "Game in notrump"
+  status: infere
+
 # ======================================================================
 # A.19 Suites naturelles (complétions)
 # ======================================================================
@@ -5178,6 +5282,15 @@
   meaning: "6 cœurs, 15-17 HL"
   meaning_en: "6 hearts, 15-17 HL"
   status: infere
+- id: "1H.1S.3{m}.fort"
+  for: [{m: C}, {m: D}]
+  seq: "1H 1S"
+  call: "3{m}"
+  cond: "H >= 5 and {m} >= 4 and {m} >= max(C, D) and hl >= 18"
+  forcing: FM
+  meaning: "Bicolore à saut : 18+ HL, forcing de manche"
+  meaning_en: "Jump shift: 18+ HL, game forcing"
+  status: infere
 - id: "1H.1S.2{m}"
   for: [{m: C}, {m: D}]
   seq: "1H 1S"
@@ -5205,6 +5318,24 @@
   forcing: INV
   meaning: "Régulier 18-19 HL"
   meaning_en: "Balanced 18-19 HL"
+  status: infere
+- id: "1{M}.1NT.4{M}"
+  for: [{M: H}, {M: S}]
+  seq: "1{M} 1NT"
+  call: "4{M}"
+  cond: "{M} >= 6 and hl >= 19"
+  forcing: SO
+  meaning: "Majeure 6e, 19+ HL : manche"
+  meaning_en: "Six-card major, 19+ HL: game"
+  status: infere
+- id: "1{M}.1NT.{c}.fort"
+  for: [{M: H, c: 3C, t: "C >= 4 and C >= D"}, {M: H, c: 3D, t: "D >= 4"}, {M: S, c: 3H, t: "H >= 4"}, {M: S, c: 3C, t: "C >= 4 and C >= D"}, {M: S, c: 3D, t: "D >= 4"}]
+  seq: "1{M} 1NT"
+  call: "{c}"
+  cond: "{t} and hl >= 19"
+  forcing: FM
+  meaning: "Bicolore à saut : 19+ HL, forcing de manche"
+  meaning_en: "Jump shift: 19+ HL, game forcing"
   status: infere
 - id: "1{M}.1NT.3{M}"
   for: [{M: H}, {M: S}]

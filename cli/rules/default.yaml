@@ -525,6 +525,14 @@
   meaning: "Invitation sans fit"
   meaning_en: "Invitation without a fit"
   status: sef
+- id: 1NT.2C.x.6NT
+  seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
+  call: 6NT
+  cond: "hl >= 18"
+  forcing: SO
+  meaning: "Pas de fit, 18+ HL : petit chelem à SA"
+  meaning_en: "No fit, 18+ HL: small slam in NT"
+  status: infere
 - id: 1NT.2C.x.3NT
   seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 3NT
@@ -1082,6 +1090,38 @@
   meaning: "Fit, manche"
   meaning_en: "Fit, game"
   status: infere
+- id: 2NT.3C.x.6NT
+  seq: ["2NT 3C 3D|3H|3S", "2C 2D 2NT 3C 3D|3H|3S"]
+  call: 6NT
+  cond: "hl >= 13"
+  forcing: SO
+  meaning: "Pas de fit, 13+ HL : petit chelem à SA"
+  meaning_en: "No fit, 13+ HL: small slam in NT"
+  status: infere
+- id: 2NT.3C.x.4NT
+  seq: ["2NT 3C 3D|3H|3S", "2C 2D 2NT 3C 3D|3H|3S"]
+  call: 4NT
+  cond: "hl == 12"
+  forcing: INV
+  meaning: "Pas de fit, 12 HL : quantitatif"
+  meaning_en: "No fit, 12 HL: quantitative"
+  status: infere
+- id: 2NT.3C.x.4NT.acc
+  seq: ["2NT 3C 3D|3H|3S 4NT", "2C 2D 2NT 3C 3D|3H|3S 4NT"]
+  call: 6NT
+  cond: "hl >= 21"
+  forcing: SO
+  meaning: "Maximum : accepte"
+  meaning_en: "Maximum: accepts"
+  status: infere
+- id: 2NT.3C.x.4NT.p
+  seq: ["2NT 3C 3D|3H|3S 4NT", "2C 2D 2NT 3C 3D|3H|3S 4NT"]
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum : refuse"
+  meaning_en: "Minimum: declines"
+  status: infere
 - id: 2NT.3C.x.3NT
   seq: ["2NT 3C 3D|3H|3S", "2C 2D 2NT 3C 3D|3H|3S"]
   call: 3NT
@@ -1108,6 +1148,17 @@
   meaning: "Minimum ou non fitté"
   meaning_en: "Minimum or no fit"
   status: sef
+- id: "2NT.tex.{M}.bw"
+  for: [{T: 3D, M: H}, {T: 3H, M: S}]
+  seq: ["2NT {T} 3{M}", "2C 2D 2NT {T} 3{M}"]
+  call: 4NT
+  cond: "hl >= 10"
+  forcing: ASK
+  meaning: "Fit et 10+ HL : Blackwood"
+  meaning_en: "Fit and 10+ HL: Blackwood"
+  status: infere
+  alert: true
+  trump: "{M}"
 - id: "2NT.tex.{M}.r"
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T} 3{M}", "2C 2D 2NT {T} 3{M}"]
@@ -1117,6 +1168,17 @@
   meaning: "Manche"
   meaning_en: "Game"
   status: infere
+- id: "2NT.tex.{M}.3NT.bw"
+  for: [{T: 3D, M: H}, {T: 3H, M: S}]
+  seq: ["2NT {T} 3NT", "2C 2D 2NT {T} 3NT"]
+  call: 4NT
+  cond: "{M} >= 6 and hl >= 10"
+  forcing: ASK
+  meaning: "6+ cartes et 10+ HL : Blackwood"
+  meaning_en: "6+ cards and 10+ HL: Blackwood"
+  status: infere
+  alert: true
+  trump: "{M}"
 - id: "2NT.tex.{M}.3NT.r"
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T} 3NT", "2C 2D 2NT {T} 3NT"]
@@ -5618,6 +5680,15 @@
   meaning: "Fit ♥, manche"
   meaning_en: "♥ fit, game"
   status: infere
+- id: "rev.{i}.6NT"
+  for: [{i: a, s: "1C|1D 1S 2H"}, {i: b, s: "1C 1H|1S 2D"}]
+  seq: "{s}"
+  call: 6NT
+  cond: "hl >= 16 and (balanced or semibalanced)"
+  forcing: SO
+  meaning: "16+ HL face au bicolore cher : petit chelem à SA"
+  meaning_en: "16+ HL opposite a reverse: small slam in NT"
+  status: infere
 - id: "rev.{i}.3NT"
   for: [{i: a, s: "1C|1D 1S 2H"}, {i: b, s: "1C 1H|1S 2D"}]
   seq: "{s}"
@@ -6168,6 +6239,14 @@
   meaning: "Refuse l'invitation"
   meaning_en: "Declines the invitation"
   status: infere
+- id: "gen.lim.6NT"
+  seq: "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S"
+  call: 6NT
+  cond: "hl >= 19 and (balanced or semibalanced)"
+  forcing: SO
+  meaning: "19+ HL face à une redemande minimum : petit chelem à SA"
+  meaning_en: "19+ HL opposite a minimum rebid: small slam in NT"
+  status: infere
 - id: "gen.lim.3NT"
   seq: "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S"
   call: 3NT
@@ -6203,6 +6282,44 @@
 
 # --- 2♦ fort : l'ouvreur conclut après la réponse en As (simplifié)
 # en: strong 2♦: opener concludes after the ace-showing response (simplified)
+# --- 2♦ fort : chelem d'après le nombre d'As montré par la réponse
+# en: strong 2♦: slam from the number of aces shown by the response
+- id: "2D.{g}.{t}.7"
+  for: [{t: S, g: 2as, r: "3H|3S|3NT", a: 2, n: 2, p: 10}, {t: S, g: 3as, r: "4C|4D|4H|4S", a: 3, n: 1, p: 9}, {t: S, g: 4as, r: "4NT", a: 4, n: 0, p: 8}, {t: H, g: 2as, r: "3H|3S|3NT", a: 2, n: 2, p: 10}, {t: H, g: 3as, r: "4C|4D|4H|4S", a: 3, n: 1, p: 9}, {t: H, g: 4as, r: "4NT", a: 4, n: 0, p: 8}, {t: D, g: 2as, r: "3H|3S|3NT", a: 2, n: 2, p: 10}, {t: D, g: 3as, r: "4C|4D|4H|4S", a: 3, n: 1, p: 9}, {t: D, g: 4as, r: "4NT", a: 4, n: 0, p: 8}, {t: C, g: 2as, r: "3H|3S|3NT", a: 2, n: 2, p: 10}, {t: C, g: 3as, r: "4C|4D|4H|4S", a: 3, n: 1, p: 9}, {t: C, g: 4as, r: "4NT", a: 4, n: 0, p: 8}]
+  seq: "2D {r}"
+  call: "7{t}"
+  cond: "{t} >= 5 and {t} >= max(S, H, D, C) and aces == {n} and ptricks >= {p}"
+  forcing: SO
+  meaning: "Les 4 As et 13 levées comptées : grand chelem"
+  meaning_en: "All four aces and 13 tricks counted: grand slam"
+  status: infere
+- id: "2D.{g}.{t}.6"
+  for: [{t: S, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: S, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: S, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: S, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: S, g: 4as, r: "4NT", n: 0, p: 6}, {t: H, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: H, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: H, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: H, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: H, g: 4as, r: "4NT", n: 0, p: 6}, {t: D, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: D, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: D, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: D, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: D, g: 4as, r: "4NT", n: 0, p: 6}, {t: C, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: C, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: C, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: C, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: C, g: 4as, r: "4NT", n: 0, p: 6}]
+  seq: "2D {r}"
+  call: "6{t}"
+  cond: "{t} >= 5 and {t} >= max(S, H, D, C) and aces >= {n} and ptricks >= {p}"
+  forcing: SO
+  meaning: "Au plus un As manque et 12 levées comptées : petit chelem"
+  meaning_en: "At most one ace missing and 12 tricks counted: small slam"
+  status: infere
+- id: "2D.{g}.7NT"
+  for: [{g: 2as, r: "3H|3S|3NT", n: 2, h: 26}, {g: 3as, r: "4C|4D|4H|4S", n: 1, h: 22}, {g: 4as, r: "4NT", n: 0, h: 18}]
+  seq: "2D {r}"
+  call: 7NT
+  cond: "balanced and aces == {n} and hcp >= {h}"
+  forcing: SO
+  meaning: "Régulier, les 4 As et 37 H à deux : grand chelem à SA"
+  meaning_en: "Balanced, all four aces and 37 HCP together: grand slam in NT"
+  status: infere
+- id: "2D.{g}.6NT"
+  for: [{g: 0as, r: "2H|2NT", n: 3, h: 25}, {g: 1as, r: "2S|3C|3D", n: 2, h: 26}, {g: 2as, r: "3H|3S|3NT", n: 1, h: 22}, {g: 3as, r: "4C|4D|4H|4S", n: 0, h: 18}, {g: 4as, r: "4NT", n: 0, h: 14}]
+  seq: "2D {r}"
+  call: 6NT
+  cond: "balanced and aces >= {n} and hcp >= {h}"
+  forcing: SO
+  meaning: "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA"
+  meaning_en: "Balanced, at most one ace missing and 33 HCP together: small slam in NT"
+  status: infere
 - id: 2D.x.3NT
   seq: "2D 2H|2S|2NT|3C|3D"
   call: 3NT
@@ -6360,8 +6477,33 @@
   meaning_en: "Minimum"
   status: infere
 
+# --- répondant après 1♣/♦ – 1♥/♠ – 4♥/♠ (18+ HLD fitté)
+# en: responder after 1♣/♦ – 1♥/♠ – 4♥/♠ (18+ HLD with a fit)
+- id: "1{m}.1{M}.4{M}.bw"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "1{m} 1{M} 4{M}"
+  call: 4NT
+  cond: "hl >= 12"
+  forcing: ASK
+  meaning: "Ouvreur 18+ fitté, 12+ HL : Blackwood"
+  meaning_en: "Opener 18+ with a fit, 12+ HL: Blackwood"
+  status: infere
+  alert: true
+  trump: "{M}"
+
 # --- répondant après 1M – 2m – 2x (2 sur 1)
 # en: responder after 1M – 2m – 2x (two over one)
+- id: "{o}.2{m}.x.bw"
+  for: [{o: 1H, M: H, m: C}, {o: 1H, M: H, m: D}, {o: 1S, M: S, m: C}, {o: 1S, M: S, m: D}]
+  seq: "{o} 2{m} 2{M}|2H|3{m}"
+  call: 4NT
+  cond: "{M} >= 3 and hld >= 16"
+  forcing: ASK
+  meaning: "Fit et 16+ HLD : Blackwood"
+  meaning_en: "Fit and 16+ HLD: Blackwood"
+  status: infere
+  alert: true
+  trump: "{M}"
 - id: "{o}.2{m}.x.4{M}"
   for: [{o: 1H, M: H, m: C}, {o: 1H, M: H, m: D}, {o: 1S, M: S, m: C}, {o: 1S, M: S, m: D}]
   seq: "{o} 2{m} 2{M}|2H|3{m}"
@@ -6482,6 +6624,17 @@
 
 # --- après 2♣ – 2♦ – 2♥/♠
 # en: after 2♣ – 2♦ – 2♥/♠
+- id: "2C.2D.2{M}.bw"
+  for: [{M: H}, {M: S}]
+  seq: "2C 2D 2{M}"
+  call: 4NT
+  cond: "{M} >= 3 and hl >= 11"
+  forcing: ASK
+  meaning: "Fit et 11+ HL face à 18-21 : Blackwood"
+  meaning_en: "Fit and 11+ HL opposite 18-21: Blackwood"
+  status: infere
+  alert: true
+  trump: "{M}"
 - id: "2C.2D.2{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: "2C 2D 2{M}"

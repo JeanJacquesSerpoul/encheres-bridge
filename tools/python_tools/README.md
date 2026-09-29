@@ -12,6 +12,7 @@ Règles d'enchères du système SEF 2024 (1 189 règles après expansion), deux 
 | `sef_rules.py` | Moteur de référence (Python) et outil de validation, d'export et de test |
 | `sef_engine.js` | Second moteur (Node.js), écrit d'après la spécification seule ; rejoue `sef_tests.json` |
 | `pbn_auction.py` | Lit un fichier PBN et sort la séquence d'enchères d'une donne en JSON ; le moteur Go de l'application en est le portage |
+| `rules_pdf.py` | Produit la description lisible d'un système en PDF (`cli/rules/default.pdf`, `default.en.pdf`), ouverte par le bouton ? des Réglages ; sans dépendance |
 | `gen_golden.py` | Génère `engine/testdata/golden_python.json` : des enchères complètes de `pbn_auction.py` que le moteur Go doit reproduire |
 | `test_pbn_auction.py` | Tests de `pbn_auction.py` (38 tests, `python -m unittest test_pbn_auction -v`) |
 | `test_chelems.py` | Évalue les chelems du système au double mort (nécessite `endplay`) |

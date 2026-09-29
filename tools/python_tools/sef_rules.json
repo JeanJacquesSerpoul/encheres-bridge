@@ -20959,6 +20959,116 @@
   "status": "infere"
  },
  {
+  "id": "1D.1S.2C.3H",
+  "seq": "1D 1S 2C",
+  "call": "3H",
+  "cond": "H >= 5 and S >= 5 and 9 <= hcp <= 11",
+  "forcing": "INV",
+  "meaning": "Bicolore majeur 5-5, 9-11 H : invitation",
+  "meaning_en": "5-5 in the majors, 9-11 HCP: invitational",
+  "status": "choix"
+ },
+ {
+  "id": "1D.1S.2C.3H.4H",
+  "seq": "1D 1S 2C 3H",
+  "call": "4H",
+  "cond": "H >= 3 and H >= S and hl >= 14",
+  "forcing": "SO",
+  "meaning": "Fit ♥, maximum : manche",
+  "meaning_en": "Heart fit, maximum: game",
+  "status": "infere"
+ },
+ {
+  "id": "1D.1S.2C.3H.4S",
+  "seq": "1D 1S 2C 3H",
+  "call": "4S",
+  "cond": "S >= 3 and hl >= 14",
+  "forcing": "SO",
+  "meaning": "Fit ♠, maximum : manche",
+  "meaning_en": "Spade fit, maximum: game",
+  "status": "infere"
+ },
+ {
+  "id": "1D.1S.2C.3H.3S",
+  "seq": "1D 1S 2C 3H",
+  "call": "3S",
+  "cond": "S > H",
+  "forcing": "NF",
+  "meaning": "Préfère les piques, minimum",
+  "meaning_en": "Prefers spades, minimum",
+  "status": "infere"
+ },
+ {
+  "id": "1D.1S.2C.3H.P",
+  "seq": "1D 1S 2C 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : on joue 3♥",
+  "meaning_en": "Minimum: play 3♥",
+  "status": "infere"
+ },
+ {
+  "id": "1C.1S.1NT.2H",
+  "seq": "1C 1S 1NT",
+  "call": "2H",
+  "cond": "H >= 5 and S >= 5 and hcp <= 8",
+  "forcing": "NF",
+  "meaning": "Bicolore majeur 5-5 faible : l'ouvreur choisit",
+  "meaning_en": "Weak 5-5 in the majors: opener picks",
+  "status": "choix"
+ },
+ {
+  "id": "1D.1S.1NT.2H",
+  "seq": "1D 1S 1NT",
+  "call": "2H",
+  "cond": "H >= 5 and S >= 5 and hcp <= 8",
+  "forcing": "NF",
+  "meaning": "Bicolore majeur 5-5 faible : l'ouvreur choisit",
+  "meaning_en": "Weak 5-5 in the majors: opener picks",
+  "status": "choix"
+ },
+ {
+  "id": "1C.1S.1NT.2H.2S",
+  "seq": "1C 1S 1NT 2H",
+  "call": "2S",
+  "cond": "S > H",
+  "forcing": "NF",
+  "meaning": "Préfère les piques",
+  "meaning_en": "Prefers spades",
+  "status": "infere"
+ },
+ {
+  "id": "1D.1S.1NT.2H.2S",
+  "seq": "1D 1S 1NT 2H",
+  "call": "2S",
+  "cond": "S > H",
+  "forcing": "NF",
+  "meaning": "Préfère les piques",
+  "meaning_en": "Prefers spades",
+  "status": "infere"
+ },
+ {
+  "id": "1C.1S.1NT.2H.P",
+  "seq": "1C 1S 1NT 2H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Préfère les cœurs (ou autant)",
+  "meaning_en": "Prefers hearts (or equal)",
+  "status": "infere"
+ },
+ {
+  "id": "1D.1S.1NT.2H.P",
+  "seq": "1D 1S 1NT 2H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Préfère les cœurs (ou autant)",
+  "meaning_en": "Prefers hearts (or equal)",
+  "status": "infere"
+ },
+ {
   "id": "eco.1D.1H.2C.4H",
   "seq": "1D 1H 2C",
   "call": "4H",

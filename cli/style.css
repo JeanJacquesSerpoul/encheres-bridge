@@ -1692,6 +1692,55 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .video-frame { height: min(calc((100vw - 24px) * .5625 + 150px), calc(100dvh - 24px - 48px)); }
 }
 
+/* ---------- description PDF du système d'enchères ---------- */
+
+/* Même construction que la vidéo : le <dialog> nu, tout le visible dans
+   .pdf-box, un clic sur le voile referme (voir openRulesPdf dans app.js). */
+.pdf-dialog {
+  width: min(980px, calc(100vw - 24px));
+  height: calc(100dvh - 24px);
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+}
+.pdf-dialog::backdrop { background: var(--overlay); }
+.pdf-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+}
+.pdf-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px 8px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.pdf-head h2 {
+  margin: 0 auto 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Le lien vers l'onglet a l'allure d'un bouton-icône, pas d'un lien. */
+.pdf-head a.icon-btn { color: inherit; border-radius: var(--radius); }
+.pdf-head a.icon-btn:hover { background: var(--border); }
+.pdf-frame {
+  display: block;
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #525659;
+}
+
 /* ---------- tutoriel ---------- */
 
 /* Même construction que le mode d'emploi : le <dialog> nu, tout le visible

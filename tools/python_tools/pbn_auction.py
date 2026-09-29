@@ -3,10 +3,10 @@
 
 Si la donne contient une section [Auction], elle est lue. Sinon (ou avec
 --generate), les enchères sont générées à partir des quatre mains [Deal]
-avec les règles SEF 2024 (cli/rules/sef_rules.yaml).
+avec les règles SEF 2024 (cli/rules/default.yaml).
 
 Usage : python pbn_auction.py fichier.pbn [index] [-o sortie.json]
-                              [--generate] [--rules ../../cli/rules/sef_rules.yaml] [--option checkback2018]
+                              [--generate] [--rules ../../cli/rules/default.yaml] [--option checkback2018]
                               [--lang FR|EN]   (FR=Français, défaut ; EN=Anglais)
                               [--opponents-pass]   (la paire qui n'a pas ouvert passe toujours)
   index : numéro de la donne (défaut 1)
@@ -137,7 +137,7 @@ MSG = {
         "index": "numéro de la donne (défaut 1)",
         "output": "fichier JSON de sortie (défaut : stdout)",
         "generate": "génère les enchères depuis [Deal], même si [Auction] existe",
-        "rules": "fichier de règles (défaut : cli/rules/sef_rules.yaml)",
+        "rules": "fichier de règles (défaut : cli/rules/default.yaml)",
         "option": "option du système, ex. checkback2018 (répétable)",
         "lang": "langue des textes : FR=Français (défaut), EN=Anglais",
         "opps_pass": "les adversaires (la paire qui n'a pas ouvert) passent toujours",
@@ -156,7 +156,7 @@ MSG = {
         "index": "deal number (default 1)",
         "output": "output JSON file (default: stdout)",
         "generate": "generate the auction from [Deal], even if [Auction] exists",
-        "rules": "rules file (default: cli/rules/sef_rules.yaml)",
+        "rules": "rules file (default: cli/rules/default.yaml)",
         "option": "system option, e.g. checkback2018 (repeatable)",
         "lang": "text language: FR=French (default), EN=English",
         "opps_pass": "opponents (the pair that did not open) always pass",
@@ -292,7 +292,7 @@ def main():
     ap.add_argument("-o", "--output", help=m["output"])
     ap.add_argument("--generate", action="store_true", help=m["generate"])
     ap.add_argument("--rules", default=os.path.normpath(os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "..", "..", "cli", "rules", "sef_rules.yaml")), help=m["rules"])
+        os.path.dirname(os.path.abspath(__file__)), "..", "..", "cli", "rules", "default.yaml")), help=m["rules"])
     ap.add_argument("--option", action="append", default=[], help=m["option"])
     ap.add_argument("--opponents-pass", action="store_true", help=m["opps_pass"])
     ap.add_argument("--lang", default="FR", type=str.upper, choices=LANGS, help=m["lang"])

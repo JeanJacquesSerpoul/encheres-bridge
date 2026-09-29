@@ -4,9 +4,9 @@
 # Liste ordonnée : la première règle applicable donne l'enchère.
 # Les règles avec « for » sont des modèles, expansés par sef_rules.py.
 # Après modification :
-#   python3 sef_rules.py sef_rules.yaml --validate
-#   python3 sef_rules.py sef_rules.yaml --json sef_rules.json
-#   python3 sef_rules.py sef_rules.yaml --gen-tests 1500 sef_tests.json --seed 2024
+#   python3 tools/python_tools/sef_rules.py cli/rules/default.yaml --validate
+#   (cd tools/python_tools && python3 sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json)
+#   (cd tools/python_tools && python3 sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024)
 
 # ======================================================================
 # A.4 Ouvertures

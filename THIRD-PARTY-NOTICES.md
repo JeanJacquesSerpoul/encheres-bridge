@@ -43,7 +43,7 @@ Copyright 2014 by Bo Haglund / Soren Hein as of version 2.8.0.
 
 ## yaml.v3 — YAML support for Go
 
-The bidding engine reads its rules file (`cli/rules/sef_rules.yaml`) with
+The bidding engine reads its rules file (`cli/rules/default.yaml`) with
 the Go package `gopkg.in/yaml.v3` (version 3.0.1). It is compiled into
 the engine's WebAssembly module, [cli/bids.wasm](cli/bids.wasm).
 

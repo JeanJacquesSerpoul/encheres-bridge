@@ -1,6 +1,6 @@
 # Règles d'enchères
 
-`sef_rules.yaml` contient toutes les règles d'enchères de l'application : les 1 189 règles du SEF 2024 une fois les modèles `for:` expansés. Le moteur d'enchères (`../bids.wasm`) ne contient **aucune** règle de bridge. À chaque chargement de la page, `../bids-wasm.js` télécharge ce fichier et le transmet au moteur.
+`default.yaml` contient toutes les règles d'enchères de l'application : les 1 189 règles du SEF 2024 une fois les modèles `for:` expansés. Le moteur d'enchères (`../bids.wasm`) ne contient **aucune** règle de bridge. À chaque chargement de la page, `../bids-wasm.js` télécharge ce fichier et le transmet au moteur.
 
 **Pour modifier une règle**, on édite ce fichier puis on recharge la page. Il n'y a rien à recompiler.
 
@@ -42,7 +42,7 @@ Si le fichier est invalide, par exemple avec un champ manquant, une enchère mal
 Avant de publier une modification, on peut valider le fichier depuis la racine du dépôt :
 
 ```bash
-python tools/python_tools/sef_rules.py cli/rules/sef_rules.yaml --validate
+python tools/python_tools/sef_rules.py cli/rules/default.yaml --validate
 ```
 
 ## Garder les tests à jour
@@ -51,8 +51,8 @@ Les tests du moteur (`go test ./...`) le comparent à la référence Python sur 
 
 ```bash
 cd tools/python_tools
-python sef_rules.py ../../cli/rules/sef_rules.yaml --json sef_rules.json
-python sef_rules.py ../../cli/rules/sef_rules.yaml --gen-tests 1500 sef_tests.json --seed 2024
+python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json
+python sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024
 python gen_golden.py
 cd ../.. && go test ./engine
 ```

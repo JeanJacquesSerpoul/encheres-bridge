@@ -275,7 +275,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 - **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne — masquée s'il a activé le mode questionnaire —, puis l'adresse redevient celle de la page.
 - **Donne aléatoire** tire une donne complète ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table porte la **donne exemple**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple.
-- **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…), avec leur nombre de donnes ; un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
+- **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…) ; un champ filtre la liste, les flèches la parcourent, Entrée ou un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
 - **La table en lecture, la table en édition** : la table se lit par défaut, quatre mains compactes autour du tapis avec leurs points. **Modifier la donne** la passe en édition, avec les zones de cartes et leurs commandes ; **Terminer** revient à la lecture (éteint tant que la donne est incomplète). Une donne incomplète s'ouvre d'elle-même en édition, une nouvelle donne tirée ou chargée en lecture, et un message sur les bornes rouvre l'édition pour les montrer.
 - **Composer à la main** (en édition) : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
 - Chaque main porte deux **bornes de points d'honneur** (mini/maxi), repliées par défaut : le bouton **Bornes de points** sous la table les affiche (un message d'erreur sur les bornes les rouvre de lui-même). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
@@ -291,6 +291,8 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
+
+La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit de chaque fichier de la page que son début (requête HTTP `Range`) pour en tirer le libellé. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure. Le fichier entier n'est lu qu'au choix du thème.
 
 ```json
 { "files": ["4e-couleur-forcing.pbn", "drury.pbn"] }

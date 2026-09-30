@@ -8983,11 +8983,61 @@
   "alert": true
  },
  {
+  "id": "fcf.a.fitM",
+  "seq": "1C 1H 1S 2D",
+  "call": "2H",
+  "cond": "H >= 3",
+  "forcing": "FM",
+  "meaning": "3 cartes dans la majeure du répondant",
+  "meaning_en": "3 cards in responder's major",
+  "status": "sef"
+ },
+ {
+  "id": "fcf.b.fitM",
+  "seq": "1D 1H 1S 2C",
+  "call": "2H",
+  "cond": "H >= 3",
+  "forcing": "FM",
+  "meaning": "3 cartes dans la majeure du répondant",
+  "meaning_en": "3 cards in responder's major",
+  "status": "sef"
+ },
+ {
+  "id": "fcf.c.fitM",
+  "seq": "1D 1S 2C 2H",
+  "call": "2S",
+  "cond": "S >= 3",
+  "forcing": "FM",
+  "meaning": "3 cartes dans la majeure du répondant",
+  "meaning_en": "3 cards in responder's major",
+  "status": "sef"
+ },
+ {
+  "id": "fcf.e.fitM",
+  "seq": "1H 1S 2C 2D",
+  "call": "2S",
+  "cond": "S >= 3",
+  "forcing": "FM",
+  "meaning": "3 cartes dans la majeure du répondant",
+  "meaning_en": "3 cards in responder's major",
+  "status": "sef"
+ },
+ {
+  "id": "fcf.f.fitM",
+  "seq": "1H 1S 2D 3C",
+  "call": "3S",
+  "cond": "S >= 3",
+  "forcing": "FM",
+  "meaning": "3 cartes dans la majeure du répondant",
+  "meaning_en": "3 cards in responder's major",
+  "status": "sef"
+ },
+ {
   "id": "fcf.a.nt",
   "seq": "1C 1H 1S 2D",
   "call": "2NT",
   "cond": "stop('D')",
-  "forcing": "F1",
+  "forcing": "FM",
   "meaning": "Arrêt dans la 4e couleur (2SA : 12-15 ou 18-19 HL)",
   "meaning_en": "Stopper in the fourth suit (2NT: 12-15 or 18-19 HL)",
   "status": "sef"
@@ -8997,7 +9047,7 @@
   "seq": "1D 1H 1S 2C",
   "call": "2NT",
   "cond": "stop('C')",
-  "forcing": "F1",
+  "forcing": "FM",
   "meaning": "Arrêt dans la 4e couleur (2SA : 12-15 ou 18-19 HL)",
   "meaning_en": "Stopper in the fourth suit (2NT: 12-15 or 18-19 HL)",
   "status": "sef"
@@ -9007,7 +9057,7 @@
   "seq": "1D 1S 2C 2H",
   "call": "2NT",
   "cond": "stop('H')",
-  "forcing": "F1",
+  "forcing": "FM",
   "meaning": "Arrêt dans la 4e couleur (2SA : 12-15 ou 18-19 HL)",
   "meaning_en": "Stopper in the fourth suit (2NT: 12-15 or 18-19 HL)",
   "status": "sef"
@@ -9017,7 +9067,7 @@
   "seq": "1H 1S 2C 2D",
   "call": "2NT",
   "cond": "stop('D')",
-  "forcing": "F1",
+  "forcing": "FM",
   "meaning": "Arrêt dans la 4e couleur (2SA : 12-15 ou 18-19 HL)",
   "meaning_en": "Stopper in the fourth suit (2NT: 12-15 or 18-19 HL)",
   "status": "sef"
@@ -9033,53 +9083,53 @@
   "status": "sef"
  },
  {
-  "id": "fcf.a.fitM",
+  "id": "fcf.a.rebid2",
   "seq": "1C 1H 1S 2D",
-  "call": "2H",
-  "cond": "H >= 3",
-  "forcing": "F1",
-  "meaning": "3 cartes dans la majeure du répondant",
-  "meaning_en": "3 cards in responder's major",
+  "call": "2S",
+  "cond": "S >= 5",
+  "forcing": "FM",
+  "meaning": "Répétition de la 2e couleur : 5 cartes",
+  "meaning_en": "Rebid of the second suit: 5 cards",
   "status": "sef"
  },
  {
-  "id": "fcf.b.fitM",
+  "id": "fcf.b.rebid2",
   "seq": "1D 1H 1S 2C",
-  "call": "2H",
-  "cond": "H >= 3",
-  "forcing": "F1",
-  "meaning": "3 cartes dans la majeure du répondant",
-  "meaning_en": "3 cards in responder's major",
+  "call": "2S",
+  "cond": "S >= 5",
+  "forcing": "FM",
+  "meaning": "Répétition de la 2e couleur : 5 cartes",
+  "meaning_en": "Rebid of the second suit: 5 cards",
   "status": "sef"
  },
  {
-  "id": "fcf.c.fitM",
+  "id": "fcf.c.rebid2",
   "seq": "1D 1S 2C 2H",
-  "call": "2S",
-  "cond": "S >= 3",
-  "forcing": "F1",
-  "meaning": "3 cartes dans la majeure du répondant",
-  "meaning_en": "3 cards in responder's major",
+  "call": "3C",
+  "cond": "C >= 5",
+  "forcing": "FM",
+  "meaning": "Répétition de la 2e couleur : 5 cartes",
+  "meaning_en": "Rebid of the second suit: 5 cards",
   "status": "sef"
  },
  {
-  "id": "fcf.e.fitM",
+  "id": "fcf.e.rebid2",
   "seq": "1H 1S 2C 2D",
-  "call": "2S",
-  "cond": "S >= 3",
-  "forcing": "F1",
-  "meaning": "3 cartes dans la majeure du répondant",
-  "meaning_en": "3 cards in responder's major",
+  "call": "3C",
+  "cond": "C >= 5",
+  "forcing": "FM",
+  "meaning": "Répétition de la 2e couleur : 5 cartes",
+  "meaning_en": "Rebid of the second suit: 5 cards",
   "status": "sef"
  },
  {
-  "id": "fcf.f.fitM",
+  "id": "fcf.f.rebid2",
   "seq": "1H 1S 2D 3C",
-  "call": "3S",
-  "cond": "S >= 3",
-  "forcing": "F1",
-  "meaning": "3 cartes dans la majeure du répondant",
-  "meaning_en": "3 cards in responder's major",
+  "call": "3D",
+  "cond": "D >= 5",
+  "forcing": "FM",
+  "meaning": "Répétition de la 2e couleur : 5 cartes",
+  "meaning_en": "Rebid of the second suit: 5 cards",
   "status": "sef"
  },
  {
@@ -9113,13 +9163,23 @@
   "status": "sef"
  },
  {
+  "id": "fcf.b.jump",
+  "seq": "1D 1H 1S 2C",
+  "call": "3D",
+  "cond": "D >= 6",
+  "forcing": "FM",
+  "meaning": "Répétition à saut de la mineure : 6+ cartes",
+  "meaning_en": "Jump rebid of the minor: 6+ cards",
+  "status": "sef"
+ },
+ {
   "id": "fcf.a.rebid",
   "seq": "1C 1H 1S 2D",
   "call": "3C",
   "cond": "true",
-  "forcing": "F1",
-  "meaning": "Répétition de la couleur d'ouverture",
-  "meaning_en": "Rebid of the opening suit",
+  "forcing": "FM",
+  "meaning": "Répétition de la couleur d'ouverture, sans autre enchère possible",
+  "meaning_en": "Rebid of the opening suit, nothing else to bid",
   "status": "sef"
  },
  {
@@ -9127,9 +9187,9 @@
   "seq": "1D 1H 1S 2C",
   "call": "2D",
   "cond": "true",
-  "forcing": "F1",
-  "meaning": "Répétition de la couleur d'ouverture",
-  "meaning_en": "Rebid of the opening suit",
+  "forcing": "FM",
+  "meaning": "Répétition de la couleur d'ouverture, sans autre enchère possible",
+  "meaning_en": "Rebid of the opening suit, nothing else to bid",
   "status": "sef"
  },
  {
@@ -9137,9 +9197,9 @@
   "seq": "1D 1S 2C 2H",
   "call": "3D",
   "cond": "true",
-  "forcing": "F1",
-  "meaning": "Répétition de la couleur d'ouverture",
-  "meaning_en": "Rebid of the opening suit",
+  "forcing": "FM",
+  "meaning": "Répétition de la couleur d'ouverture, sans autre enchère possible",
+  "meaning_en": "Rebid of the opening suit, nothing else to bid",
   "status": "sef"
  },
  {
@@ -9147,9 +9207,9 @@
   "seq": "1H 1S 2C 2D",
   "call": "2H",
   "cond": "true",
-  "forcing": "F1",
-  "meaning": "Répétition de la couleur d'ouverture",
-  "meaning_en": "Rebid of the opening suit",
+  "forcing": "FM",
+  "meaning": "Répétition de la couleur d'ouverture, sans autre enchère possible",
+  "meaning_en": "Rebid of the opening suit, nothing else to bid",
   "status": "sef"
  },
  {
@@ -9157,9 +9217,9 @@
   "seq": "1H 1S 2D 3C",
   "call": "3H",
   "cond": "true",
-  "forcing": "F1",
-  "meaning": "Répétition de la couleur d'ouverture",
-  "meaning_en": "Rebid of the opening suit",
+  "forcing": "FM",
+  "meaning": "Répétition de la couleur d'ouverture, sans autre enchère possible",
+  "meaning_en": "Rebid of the opening suit, nothing else to bid",
   "status": "sef"
  },
  {
@@ -9260,6 +9320,26 @@
   "forcing": "SO",
   "meaning": "6 cartes : manche dans la majeure",
   "meaning_en": "6 cards: game in the major",
+  "status": "infere"
+ },
+ {
+  "id": "fcf.a.c4o2",
+  "seq": "1C 1H 1S 2D 2S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit 5-3 dans la 2e couleur de l'ouvreur : manche",
+  "meaning_en": "5-3 fit in opener's second suit: game",
+  "status": "infere"
+ },
+ {
+  "id": "fcf.b.c4o2",
+  "seq": "1D 1H 1S 2C 2S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit 5-3 dans la 2e couleur de l'ouvreur : manche",
+  "meaning_en": "5-3 fit in opener's second suit: game",
   "status": "infere"
  },
  {

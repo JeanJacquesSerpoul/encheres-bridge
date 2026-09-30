@@ -2131,6 +2131,34 @@
   "status": "choix"
  },
  {
+  "id": "2NT.3C.3H.6H",
+  "seq": [
+   "2NT 3C 3H",
+   "2C 2D 2NT 3C 3H"
+  ],
+  "call": "6H",
+  "cond": "H >= 4 and hl >= 12",
+  "forcing": "SO",
+  "meaning": "Fit et 12+ HL : petit chelem",
+  "meaning_en": "Fit and 12+ HL: small slam",
+  "status": "infere",
+  "trump": "H"
+ },
+ {
+  "id": "2NT.3C.3S.6S",
+  "seq": [
+   "2NT 3C 3S",
+   "2C 2D 2NT 3C 3S"
+  ],
+  "call": "6S",
+  "cond": "S >= 4 and hl >= 12",
+  "forcing": "SO",
+  "meaning": "Fit et 12+ HL : petit chelem",
+  "meaning_en": "Fit and 12+ HL: small slam",
+  "status": "infere",
+  "trump": "S"
+ },
+ {
   "id": "2NT.3C.3H.4H",
   "seq": [
    "2NT 3C 3H",
@@ -12335,6 +12363,138 @@
   "status": "sef"
  },
  {
+  "id": "advI.1C.1D.cue.fort",
+  "seq": "(1C) 1D",
+  "call": "2C",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1C.1H.cue.fort",
+  "seq": "(1C) 1H",
+  "call": "2C",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1C.1S.cue.fort",
+  "seq": "(1C) 1S",
+  "call": "2C",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1D.1H.cue.fort",
+  "seq": "(1D) 1H",
+  "call": "2D",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1D.1S.cue.fort",
+  "seq": "(1D) 1S",
+  "call": "2D",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1H.1S.cue.fort",
+  "seq": "(1H) 1S",
+  "call": "2H",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1D.2C.cue.fort",
+  "seq": "(1D) 2C",
+  "call": "2D",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1H.2C.cue.fort",
+  "seq": "(1H) 2C",
+  "call": "2H",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1H.2D.cue.fort",
+  "seq": "(1H) 2D",
+  "call": "2H",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1S.2C.cue.fort",
+  "seq": "(1S) 2C",
+  "call": "2S",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1S.2D.cue.fort",
+  "seq": "(1S) 2D",
+  "call": "2S",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "advI.1S.2H.cue.fort",
+  "seq": "(1S) 2H",
+  "call": "2S",
+  "cond": "hcp >= 13",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 13+ H sans fit ni arrêt",
+  "meaning_en": "Cue-bid: 13+ HCP, no fit or stopper",
+  "status": "infere",
+  "alert": true
+ },
+ {
   "id": "advI.1C.1D.pass",
   "seq": "(1C) 1D",
   "call": "P",
@@ -13098,6 +13258,84 @@
   "forcing": "SO",
   "meaning": "Manche : fitté, 15+ H",
   "meaning_en": "Game: fit, 15+ HCP",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.saut.2H.3NT",
+  "seq": [
+   "(1C) X 2H",
+   "(1C) P X 2H"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('C')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.saut.2S.3NT",
+  "seq": [
+   "(1C) X 2S",
+   "(1C) P X 2S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('C')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.saut.2H.3NT",
+  "seq": [
+   "(1D) X 2H",
+   "(1D) P X 2H"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('D')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.saut.2S.3NT",
+  "seq": [
+   "(1D) X 2S",
+   "(1D) P X 2S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('D')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1H.saut.2S.3NT",
+  "seq": [
+   "(1H) X 2S",
+   "(1H) P X 2S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('H')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1S.saut.3H.3NT",
+  "seq": [
+   "(1S) X 3H",
+   "(1S) P X 3H"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('S')",
+  "forcing": "SO",
+  "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
+  "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
   "status": "infere"
  },
  {
@@ -24937,50 +25175,50 @@
   "id": "1H.1S.3H.3NT",
   "seq": "1H 1S 3H",
   "call": "3NT",
-  "cond": "hl >= 8",
+  "cond": "hl >= 9 and (H >= 2 or hl >= 11)",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
+  "meaning": "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL",
+  "meaning_en": "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL",
   "status": "infere"
  },
  {
   "id": "1H.1NT.3H.3NT",
   "seq": "1H 1NT 3H",
   "call": "3NT",
-  "cond": "hl >= 8",
+  "cond": "hl >= 9 and (H >= 2 or hl >= 11)",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
+  "meaning": "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL",
+  "meaning_en": "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL",
   "status": "infere"
  },
  {
   "id": "1S.1NT.3S.3NT",
   "seq": "1S 1NT 3S",
   "call": "3NT",
-  "cond": "hl >= 8",
+  "cond": "hl >= 9 and (S >= 2 or hl >= 11)",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
+  "meaning": "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL",
+  "meaning_en": "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL",
   "status": "infere"
  },
  {
   "id": "1C|1D.1H|1S.3C.3NT",
   "seq": "1C|1D 1H|1S 3C",
   "call": "3NT",
-  "cond": "hl >= 8",
+  "cond": "hl >= 9 and (C >= 2 or hl >= 11)",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
+  "meaning": "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL",
+  "meaning_en": "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL",
   "status": "infere"
  },
  {
   "id": "1C|1D.1H|1S.3D.3NT",
   "seq": "1C|1D 1H|1S 3D",
   "call": "3NT",
-  "cond": "hl >= 8",
+  "cond": "hl >= 9 and (D >= 2 or hl >= 11)",
   "forcing": "SO",
-  "meaning": "Manche à SA",
-  "meaning_en": "Game in NT",
+  "meaning": "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL",
+  "meaning_en": "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL",
   "status": "infere"
  },
  {

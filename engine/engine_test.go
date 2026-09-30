@@ -176,3 +176,48 @@ func TestForcingBidsGetAnAnswer(t *testing.T) {
 		}
 	}
 }
+
+// TestNoThreeNTOverJumpRebidWithVoid: 1♠ 1SA 3♠, responder void in spades
+// with 7 H: the spades will not run, no 3SA.
+func TestNoThreeNTOverJumpRebidWithVoid(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "N"]
+[Vulnerable "NS"]
+[Deal "N:AK9832.92.J.AQ98 Q765.43.952.KJ62 .QT7.KQT7643.754 JT4.AKJ865.A8.T3"]`)
+	got := formatAuction(NewEngine(d).Run())
+	if strings.Contains(got, "3SA") || !strings.HasPrefix(got, "N:1P E:Passe S:1SA W:Passe N:3P") {
+		t.Fatalf("enchères : %s", got)
+	}
+}
+
+// TestSlamAfterStaymanFitOver2NT: 2SA 3♣ 3♥, responder has 4 hearts and
+// 12 H: the line holds 31 H and the fit, 6♥.
+func TestSlamAfterStaymanFitOver2NT(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "E"]
+[Vulnerable "None"]
+[Deal "N:QJ983.5.7653.J63 K4.KQJ64.J4.AKQ4 T62.932.KQ9.T972 A75.AT87.AT82.85"]`)
+	const want = "E:2SA S:Passe W:3T N:Passe E:3C S:Passe W:6C"
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}
+
+// TestStrongHandsInCompetition: the strong advancer or doubler no longer
+// passes below game. (1♣) 1♦ – : 2♣ cue-bid with 15 H and no fit, then 3SA;
+// (1♦) P P X – 2♥ (8-10): the 16 H doubler with the stopper bids 3SA.
+func TestStrongHandsInCompetition(t *testing.T) {
+	for _, c := range []struct{ pbn, want string }{
+		{`[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "N:QT.A3.KJ542.QJ64 632.8542.T9873.5 AK97.QT6.AQ.T973 J854.KJ97.6.AK82"]`,
+			"W:1T N:1K E:Passe S:2T W:Passe N:3SA"},
+		{`[Dealer "E"]
+[Vulnerable "All"]
+[Deal "N:J98.A95.AK3.K432 AK42.KJ.J965.J87 65.8742.QT82.AQT QT73.QT63.74.965"]`,
+			"E:1K S:Passe W:Passe N:X E:Passe S:2C W:Passe N:3SA"},
+	} {
+		got := formatAuction(NewEngine(mustParsePBN(t, c.pbn)).Run())
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("enchères :\n %s\nattendu :\n %s …", got, c.want)
+		}
+	}
+}

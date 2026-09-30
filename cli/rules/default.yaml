@@ -4259,6 +4259,26 @@
   status: sef
 # --- réponses à l'intervention du partenaire (l'adversaire de droite a passé)
 # en: answers to partner's overcall (right-hand opponent passed)
+# Loi des levées totales (J.-R. Vernes) : en compétition, on peut disputer jusqu'au palier égal au nombre d'atouts de la ligne moins 6 — 8 atouts au palier de 2, 9 au palier de 3, 10 au palier de 4.
+# en: Law of total tricks (J.-R. Vernes): in competition, you may contest up to the level equal to the line's trumps minus 6 — 8 trumps at the two level, 9 at the three level, 10 at the four level.
+- id: "advI.lt.{o}.{M}.4"
+  for: [{o: 1C, M: H}, {o: 1D, M: H}, {o: 1C, M: S}, {o: 1D, M: S}, {o: 1H, M: S}]
+  seq: "({o}) 1{M}"
+  call: "4{M}"
+  cond: "{M} >= 5 and 5 <= hld <= 10"
+  forcing: SO
+  meaning: "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)"
+  meaning_en: "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)"
+  status: choix
+- id: "ovR.lt.{o}.{M}.3"
+  for: [{o: 1C, M: H, r: "X|1S|1NT|2C|2D", z: "2S|2NT|3C|3D|X"}, {o: 1D, M: H, r: "X|1S|1NT|2C|2D", z: "2S|2NT|3C|3D|X"}, {o: 1C, M: S, r: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}, {o: 1D, M: S, r: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}, {o: 1H, M: S, r: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}]
+  seq: ["({o}) 1{M} 2{M} ({z})", "({o}) 1{M} ({r}) 2{M} ({z})"]
+  call: "3{M}"
+  cond: "{M} >= 6"
+  forcing: NF
+  meaning: "6 cartes face au soutien : 9 atouts, on dispute au palier de 3"
+  meaning_en: "Six cards opposite the raise: 9 trumps, compete at the three level"
+  status: choix
 - id: "advI.{o}.{c}.cue"
   for: [{o: 1C, os: C, c: 1D, s: D, f: 3}, {o: 1C, os: C, c: 1H, s: H, f: 3}, {o: 1C, os: C, c: 1S, s: S, f: 3}, {o: 1D, os: D, c: 1H, s: H, f: 3}, {o: 1D, os: D, c: 1S, s: S, f: 3}, {o: 1H, os: H, c: 1S, s: S, f: 3},
         {o: 1D, os: D, c: 2C, s: C, f: 2}, {o: 1H, os: H, c: 2C, s: C, f: 2}, {o: 1H, os: H, c: 2D, s: D, f: 2}, {o: 1S, os: S, c: 2C, s: C, f: 2}, {o: 1S, os: S, c: 2D, s: D, f: 2}, {o: 1S, os: S, c: 2H, s: H, f: 2}]
@@ -4698,6 +4718,26 @@
   meaning_en: "Fitted 2NT: 11-15 HLD"
   status: sef
   alert: true
+# Loi des levées totales (J.-R. Vernes) : en compétition, on peut disputer jusqu'au palier égal au nombre d'atouts de la ligne moins 6 — 8 atouts au palier de 2, 9 au palier de 3, 10 au palier de 4.
+# en: Law of total tricks (J.-R. Vernes): in competition, you may contest up to the level equal to the line's trumps minus 6 — 8 trumps at the two level, 9 at the three level, 10 at the four level.
+- id: "rep.{x}.{y}.lt4"
+  for: [{x: 1H, y: 1S, xs: H}, {x: 1H, y: 2C, xs: H}, {x: 1H, y: 2D, xs: H}, {x: 1S, y: 2C, xs: S}, {x: 1S, y: 2D, xs: S}, {x: 1S, y: 2H, xs: S}, {x: 1H, y: 2S, xs: H}]
+  seq: "{x} ({y})"
+  call: "4{xs}"
+  cond: "{xs} >= 5 and 5 <= hld <= 10"
+  forcing: SO
+  meaning: "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)"
+  meaning_en: "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)"
+  status: choix
+- id: "rep.{x}.{y}.lt3"
+  for: [{x: 1H, y: 1S, xs: H, r3: 3H}, {x: 1H, y: 2C, xs: H, r3: 3H}, {x: 1H, y: 2D, xs: H, r3: 3H}, {x: 1S, y: 2C, xs: S, r3: 3S}, {x: 1S, y: 2D, xs: S, r3: 3S}, {x: 1S, y: 2H, xs: S, r3: 3S}]
+  seq: "{x} ({y})"
+  call: "{r3}"
+  cond: "{xs} == 4 and 5 <= hld <= 10"
+  forcing: NF
+  meaning: "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)"
+  meaning_en: "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)"
+  status: choix
 - id: "rep.{x}.{y}.raise"
   for: [{x: 1H, y: 1S, xs: H, r2: 2H}, {x: 1H, y: 2C, xs: H, r2: 2H}, {x: 1H, y: 2D, xs: H, r2: 2H}, {x: 1S, y: 2C, xs: S, r2: 2S},
         {x: 1S, y: 2D, xs: S, r2: 2S}, {x: 1S, y: 2H, xs: S, r2: 2S}, {x: 1H, y: 2S, xs: H, r2: 3H}]
@@ -4708,6 +4748,35 @@
   meaning: "Soutien simple : 6-10 HLD"
   meaning_en: "Simple raise: 6-10 HLD"
   status: sef
+# --- l'adversaire dispute au palier de 3 après notre soutien simple : on reparle à 9 atouts, pas à 8
+# en: the opponents compete at the three level after our simple raise: bid again with 9 trumps, not with 8
+- id: "rep.lt.{x}.op3"
+  for: [{x: 1H, xs: H, y: "X|1S|1NT|2C|2D", z: "2S|2NT|3C|3D|X"}, {x: 1S, xs: S, y: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}]
+  seq: ["{x} ({y}) 2{xs} ({z})", "{x} 2{xs} ({z})"]
+  call: "3{xs}"
+  cond: "{xs} >= 6"
+  forcing: NF
+  meaning: "6 atouts face au soutien : 9 atouts, on dispute au palier de 3"
+  meaning_en: "Six trumps opposite the raise: 9 trumps, compete at the three level"
+  status: choix
+- id: "rep.lt.{x}.op.p"
+  for: [{x: 1H, xs: H, y: "X|1S|1NT|2C|2D", z: "2S|2NT|3C|3D|X"}, {x: 1S, xs: S, y: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}]
+  seq: ["{x} ({y}) 2{xs} ({z})", "{x} 2{xs} ({z})"]
+  call: P
+  cond: "hld <= 17"
+  forcing: NF
+  meaning: "8 atouts : on ne dispute pas au palier de 3 (loi des levées totales)"
+  meaning_en: "8 trumps: do not compete at the three level (law of total tricks)"
+  status: choix
+- id: "rep.lt.{x}.rsp3"
+  for: [{x: 1H, xs: H, y: "X|1S|1NT|2C|2D", z: "2S|2NT|3C|3D|X"}, {x: 1S, xs: S, y: "X|1NT|2C|2D|2H", z: "2NT|3C|3D|3H|X"}]
+  seq: ["{x} ({y}) 2{xs} ({z}) P", "{x} 2{xs} ({z}) P"]
+  call: "3{xs}"
+  cond: "{xs} >= 4"
+  forcing: NF
+  meaning: "4 atouts face à l'ouverture 5e : 9 atouts, on dispute au palier de 3"
+  meaning_en: "Four trumps opposite a five-card opening: 9 trumps, compete at the three level"
+  status: choix
 - id: "rep.{x}.{y}.cue.m"
   for: [{x: 1C, y: 1D, xs: C, cue: 2D}, {x: 1C, y: 1H, xs: C, cue: 2H}, {x: 1C, y: 1S, xs: C, cue: 2S}, {x: 1D, y: 1H, xs: D, cue: 2H},
         {x: 1D, y: 1S, xs: D, cue: 2S}, {x: 1D, y: 2C, xs: D, cue: 3C}, {x: 1C, y: 2H, xs: C, cue: 3H}, {x: 1C, y: 2S, xs: C, cue: 3S},

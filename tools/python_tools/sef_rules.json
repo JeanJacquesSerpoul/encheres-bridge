@@ -11922,6 +11922,121 @@
   "status": "sef"
  },
  {
+  "id": "advI.lt.1C.H.4",
+  "seq": "(1C) 1H",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "advI.lt.1D.H.4",
+  "seq": "(1D) 1H",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "advI.lt.1C.S.4",
+  "seq": "(1C) 1S",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "advI.lt.1D.S.4",
+  "seq": "(1D) 1S",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "advI.lt.1H.S.4",
+  "seq": "(1H) 1S",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts face à l'intervention 5e (10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps opposite the five-card overcall (10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "ovR.lt.1C.H.3",
+  "seq": [
+   "(1C) 1H 2H (2S|2NT|3C|3D|X)",
+   "(1C) 1H (X|1S|1NT|2C|2D) 2H (2S|2NT|3C|3D|X)"
+  ],
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "NF",
+  "meaning": "6 cartes face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six cards opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "ovR.lt.1D.H.3",
+  "seq": [
+   "(1D) 1H 2H (2S|2NT|3C|3D|X)",
+   "(1D) 1H (X|1S|1NT|2C|2D) 2H (2S|2NT|3C|3D|X)"
+  ],
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "NF",
+  "meaning": "6 cartes face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six cards opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "ovR.lt.1C.S.3",
+  "seq": [
+   "(1C) 1S 2S (2NT|3C|3D|3H|X)",
+   "(1C) 1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X)"
+  ],
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "NF",
+  "meaning": "6 cartes face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six cards opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "ovR.lt.1D.S.3",
+  "seq": [
+   "(1D) 1S 2S (2NT|3C|3D|3H|X)",
+   "(1D) 1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X)"
+  ],
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "NF",
+  "meaning": "6 cartes face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six cards opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "ovR.lt.1H.S.3",
+  "seq": [
+   "(1H) 1S 2S (2NT|3C|3D|3H|X)",
+   "(1H) 1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X)"
+  ],
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "NF",
+  "meaning": "6 cartes face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six cards opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
   "id": "advI.1C.1D.cue",
   "seq": "(1C) 1D",
   "call": "2C",
@@ -15336,6 +15451,136 @@
   "alert": true
  },
  {
+  "id": "rep.1H.1S.lt4",
+  "seq": "1H (1S)",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.2C.lt4",
+  "seq": "1H (2C)",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.2D.lt4",
+  "seq": "1H (2D)",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2C.lt4",
+  "seq": "1S (2C)",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2D.lt4",
+  "seq": "1S (2D)",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2H.lt4",
+  "seq": "1S (2H)",
+  "call": "4S",
+  "cond": "S >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.2S.lt4",
+  "seq": "1H (2S)",
+  "call": "4H",
+  "cond": "H >= 5 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 5 atouts (loi des levées totales : 10 atouts, palier de 4)",
+  "meaning_en": "Preemptive raise: five trumps (law of total tricks: 10 trumps, four level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.1S.lt3",
+  "seq": "1H (1S)",
+  "call": "3H",
+  "cond": "H == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.2C.lt3",
+  "seq": "1H (2C)",
+  "call": "3H",
+  "cond": "H == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1H.2D.lt3",
+  "seq": "1H (2D)",
+  "call": "3H",
+  "cond": "H == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2C.lt3",
+  "seq": "1S (2C)",
+  "call": "3S",
+  "cond": "S == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2D.lt3",
+  "seq": "1S (2D)",
+  "call": "3S",
+  "cond": "S == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.1S.2H.lt3",
+  "seq": "1S (2H)",
+  "call": "3S",
+  "cond": "S == 4 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Barrage : 4 atouts (loi des levées totales : 9 atouts, palier de 3)",
+  "meaning_en": "Preemptive raise: four trumps (law of total tricks: 9 trumps, three level)",
+  "status": "choix"
+ },
+ {
   "id": "rep.1H.1S.raise",
   "seq": "1H (1S)",
   "call": "2H",
@@ -15404,6 +15649,84 @@
   "meaning": "Soutien simple : 6-10 HLD",
   "meaning_en": "Simple raise: 6-10 HLD",
   "status": "sef"
+ },
+ {
+  "id": "rep.lt.1H.op3",
+  "seq": [
+   "1H (X|1S|1NT|2C|2D) 2H (2S|2NT|3C|3D|X)",
+   "1H 2H (2S|2NT|3C|3D|X)"
+  ],
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "NF",
+  "meaning": "6 atouts face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six trumps opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "rep.lt.1S.op3",
+  "seq": [
+   "1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X)",
+   "1S 2S (2NT|3C|3D|3H|X)"
+  ],
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "NF",
+  "meaning": "6 atouts face au soutien : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Six trumps opposite the raise: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "rep.lt.1H.op.p",
+  "seq": [
+   "1H (X|1S|1NT|2C|2D) 2H (2S|2NT|3C|3D|X)",
+   "1H 2H (2S|2NT|3C|3D|X)"
+  ],
+  "call": "P",
+  "cond": "hld <= 17",
+  "forcing": "NF",
+  "meaning": "8 atouts : on ne dispute pas au palier de 3 (loi des levées totales)",
+  "meaning_en": "8 trumps: do not compete at the three level (law of total tricks)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.lt.1S.op.p",
+  "seq": [
+   "1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X)",
+   "1S 2S (2NT|3C|3D|3H|X)"
+  ],
+  "call": "P",
+  "cond": "hld <= 17",
+  "forcing": "NF",
+  "meaning": "8 atouts : on ne dispute pas au palier de 3 (loi des levées totales)",
+  "meaning_en": "8 trumps: do not compete at the three level (law of total tricks)",
+  "status": "choix"
+ },
+ {
+  "id": "rep.lt.1H.rsp3",
+  "seq": [
+   "1H (X|1S|1NT|2C|2D) 2H (2S|2NT|3C|3D|X) P",
+   "1H 2H (2S|2NT|3C|3D|X) P"
+  ],
+  "call": "3H",
+  "cond": "H >= 4",
+  "forcing": "NF",
+  "meaning": "4 atouts face à l'ouverture 5e : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Four trumps opposite a five-card opening: 9 trumps, compete at the three level",
+  "status": "choix"
+ },
+ {
+  "id": "rep.lt.1S.rsp3",
+  "seq": [
+   "1S (X|1NT|2C|2D|2H) 2S (2NT|3C|3D|3H|X) P",
+   "1S 2S (2NT|3C|3D|3H|X) P"
+  ],
+  "call": "3S",
+  "cond": "S >= 4",
+  "forcing": "NF",
+  "meaning": "4 atouts face à l'ouverture 5e : 9 atouts, on dispute au palier de 3",
+  "meaning_en": "Four trumps opposite a five-card opening: 9 trumps, compete at the three level",
+  "status": "choix"
  },
  {
   "id": "rep.1C.1D.cue.m",

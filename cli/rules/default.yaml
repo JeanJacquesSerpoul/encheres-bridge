@@ -4294,6 +4294,18 @@
   meaning: "3SA : 14+ H, arrêt"
   meaning_en: "3NT: 14+ HCP, stopper"
   status: sef
+# Sans fit ni arrêt, une main de 13 H ne passe pas : cue-bid, l'intervenant décrit sa main. Mesuré sur le banc du par.
+# en: With no fit and no stopper, a 13 HCP hand does not pass: cue-bid, overcaller describes the hand. Measured on the par benchmark.
+- id: "advI.{o}.{c}.cue.fort"
+  for: [{o: 1C, os: C, c: 1D}, {o: 1C, os: C, c: 1H}, {o: 1C, os: C, c: 1S}, {o: 1D, os: D, c: 1H}, {o: 1D, os: D, c: 1S}, {o: 1H, os: H, c: 1S}, {o: 1D, os: D, c: 2C}, {o: 1H, os: H, c: 2C}, {o: 1H, os: H, c: 2D}, {o: 1S, os: S, c: 2C}, {o: 1S, os: S, c: 2D}, {o: 1S, os: S, c: 2H}]
+  seq: "({o}) {c}"
+  call: "2{os}"
+  cond: "hcp >= 13"
+  forcing: F1
+  meaning: "Cue-bid : 13+ H sans fit ni arrêt"
+  meaning_en: "Cue-bid: 13+ HCP, no fit or stopper"
+  status: infere
+  alert: true
 - id: "advI.{o}.{c}.pass"
   for: [{o: 1C, c: 1D}, {o: 1C, c: 1H}, {o: 1C, c: 1S}, {o: 1D, c: 1H}, {o: 1D, c: 1S}, {o: 1H, c: 1S}, {o: 1D, c: 2C}, {o: 1H, c: 2C}, {o: 1H, c: 2D}, {o: 1S, c: 2C}, {o: 1S, c: 2D}, {o: 1S, c: 2H}]
   seq: "({o}) {c}"
@@ -4396,6 +4408,17 @@
   forcing: SO
   meaning: "Manche : fitté, 15+ H"
   meaning_en: "Game: fit, 15+ HCP"
+  status: infere
+# Le contreur fort sans fit, arrêt en main, conclut à 3SA sur la réponse à saut (8-10 H). Mesuré sur le banc du par.
+# en: The strong doubler with no fit and a stopper bids 3NT over the jump answer (8-10 HCP). Measured on the par benchmark.
+- id: "dblR.{o}.saut.{c}.3NT"
+  for: [{o: 1C, os: C, c: 2H}, {o: 1C, os: C, c: 2S}, {o: 1D, os: D, c: 2H}, {o: 1D, os: D, c: 2S}, {o: 1H, os: H, c: 2S}, {o: 1S, os: S, c: 3H}]
+  seq: ["({o}) X {c}", "({o}) P X {c}"]
+  call: 3NT
+  cond: "hcp >= 15 and stop('{os}')"
+  forcing: SO
+  meaning: "Manche à SA : 15+ H et l'arrêt, sans fit"
+  meaning_en: "Game in NT: 15+ HCP and the stopper, no fit"
   status: infere
 - id: "dblR.{o}.1NT"
   for: [{o: 1C}, {o: 1D}, {o: 1H}, {o: 1S}]

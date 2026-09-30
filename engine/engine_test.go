@@ -200,3 +200,24 @@ func TestSlamAfterStaymanFitOver2NT(t *testing.T) {
 		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
 	}
 }
+
+// TestStrongHandsInCompetition: the strong advancer or doubler no longer
+// passes below game. (1♣) 1♦ – : 2♣ cue-bid with 15 H and no fit, then 3SA;
+// (1♦) P P X – 2♥ (8-10): the 16 H doubler with the stopper bids 3SA.
+func TestStrongHandsInCompetition(t *testing.T) {
+	for _, c := range []struct{ pbn, want string }{
+		{`[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "N:QT.A3.KJ542.QJ64 632.8542.T9873.5 AK97.QT6.AQ.T973 J854.KJ97.6.AK82"]`,
+			"W:1T N:1K E:Passe S:2T W:Passe N:3SA"},
+		{`[Dealer "E"]
+[Vulnerable "All"]
+[Deal "N:J98.A95.AK3.K432 AK42.KJ.J965.J87 65.8742.QT82.AQT QT73.QT63.74.965"]`,
+			"E:1K S:Passe W:Passe N:X E:Passe S:2C W:Passe N:3SA"},
+	} {
+		got := formatAuction(NewEngine(mustParsePBN(t, c.pbn)).Run())
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("enchères :\n %s\nattendu :\n %s …", got, c.want)
+		}
+	}
+}

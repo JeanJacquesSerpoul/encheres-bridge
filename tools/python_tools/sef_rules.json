@@ -11103,10 +11103,10 @@
    "(1C) P X"
   ],
   "call": "4S",
-  "cond": "(S >= 7 or (S >= 6 and hcp >= 8) or (S >= 5 and hcp >= 11)) and (S >= H or '1C' in ('1H', '1S'))",
+  "cond": "((S >= 6 and 8 <= hcp <= 15) or (S >= 5 and 11 <= hcp <= 15)) and (S >= H or '1C' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11116,10 +11116,10 @@
    "(1C) P X"
   ],
   "call": "4H",
-  "cond": "(H >= 7 or (H >= 6 and hcp >= 8) or (H >= 5 and hcp >= 11)) and (H >= S or '1C' in ('1H', '1S'))",
+  "cond": "((H >= 6 and 8 <= hcp <= 15) or (H >= 5 and 11 <= hcp <= 15)) and (H >= S or '1C' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11129,10 +11129,10 @@
    "(1D) P X"
   ],
   "call": "4S",
-  "cond": "(S >= 7 or (S >= 6 and hcp >= 8) or (S >= 5 and hcp >= 11)) and (S >= H or '1D' in ('1H', '1S'))",
+  "cond": "((S >= 6 and 8 <= hcp <= 15) or (S >= 5 and 11 <= hcp <= 15)) and (S >= H or '1D' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11142,10 +11142,10 @@
    "(1D) P X"
   ],
   "call": "4H",
-  "cond": "(H >= 7 or (H >= 6 and hcp >= 8) or (H >= 5 and hcp >= 11)) and (H >= S or '1D' in ('1H', '1S'))",
+  "cond": "((H >= 6 and 8 <= hcp <= 15) or (H >= 5 and 11 <= hcp <= 15)) and (H >= S or '1D' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11155,10 +11155,10 @@
    "(1H) P X"
   ],
   "call": "4S",
-  "cond": "(S >= 7 or (S >= 6 and hcp >= 8) or (S >= 5 and hcp >= 11)) and (S >= H or '1H' in ('1H', '1S'))",
+  "cond": "((S >= 6 and 8 <= hcp <= 15) or (S >= 5 and 11 <= hcp <= 15)) and (S >= H or '1H' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11168,10 +11168,10 @@
    "(1S) P X"
   ],
   "call": "4H",
-  "cond": "(H >= 7 or (H >= 6 and hcp >= 8) or (H >= 5 and hcp >= 11)) and (H >= S or '1S' in ('1H', '1S'))",
+  "cond": "((H >= 6 and 8 <= hcp <= 15) or (H >= 5 and 11 <= hcp <= 15)) and (H >= S or '1S' in ('1H', '1S'))",
   "forcing": "SO",
-  "meaning": "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e",
-  "meaning_en": "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards",
+  "meaning": "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H",
+  "meaning_en": "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP",
   "status": "sef"
  },
  {
@@ -11181,10 +11181,10 @@
    "(1C) P X"
   ],
   "call": "3NT",
-  "cond": "12 <= hcp <= 14 and (balanced or semibalanced) and stop('C') and H < 4 and S < 4",
+  "cond": "13 <= hcp <= 15 and (balanced or semibalanced) and top('C') >= 2 and H < 4 and S < 4",
   "forcing": "SO",
-  "meaning": "3SA : 12-14 H, régulier, arrêt, pas de majeure 4e",
-  "meaning_en": "3NT: 12-14 HCP, balanced, stopper, no 4-card major",
+  "meaning": "3SA : 13-15 H, deux arrêts dans leur couleur, pas de majeure 4e",
+  "meaning_en": "3NT: 13-15 HCP, two stoppers in their suit, no four-card major",
   "status": "sef"
  },
  {
@@ -11194,10 +11194,10 @@
    "(1D) P X"
   ],
   "call": "3NT",
-  "cond": "12 <= hcp <= 14 and (balanced or semibalanced) and stop('D') and H < 4 and S < 4",
+  "cond": "13 <= hcp <= 15 and (balanced or semibalanced) and top('D') >= 2 and H < 4 and S < 4",
   "forcing": "SO",
-  "meaning": "3SA : 12-14 H, régulier, arrêt, pas de majeure 4e",
-  "meaning_en": "3NT: 12-14 HCP, balanced, stopper, no 4-card major",
+  "meaning": "3SA : 13-15 H, deux arrêts dans leur couleur, pas de majeure 4e",
+  "meaning_en": "3NT: 13-15 HCP, two stoppers in their suit, no four-card major",
   "status": "sef"
  },
  {
@@ -11207,10 +11207,10 @@
    "(1H) P X"
   ],
   "call": "3NT",
-  "cond": "12 <= hcp <= 14 and (balanced or semibalanced) and stop('H') and S < 4",
+  "cond": "13 <= hcp <= 15 and (balanced or semibalanced) and top('H') >= 2 and S < 4",
   "forcing": "SO",
-  "meaning": "3SA : 12-14 H, régulier, arrêt, pas de majeure 4e",
-  "meaning_en": "3NT: 12-14 HCP, balanced, stopper, no 4-card major",
+  "meaning": "3SA : 13-15 H, deux arrêts dans leur couleur, pas de majeure 4e",
+  "meaning_en": "3NT: 13-15 HCP, two stoppers in their suit, no four-card major",
   "status": "sef"
  },
  {
@@ -11220,10 +11220,10 @@
    "(1S) P X"
   ],
   "call": "3NT",
-  "cond": "12 <= hcp <= 14 and (balanced or semibalanced) and stop('S') and H < 4",
+  "cond": "13 <= hcp <= 15 and (balanced or semibalanced) and top('S') >= 2 and H < 4",
   "forcing": "SO",
-  "meaning": "3SA : 12-14 H, régulier, arrêt, pas de majeure 4e",
-  "meaning_en": "3NT: 12-14 HCP, balanced, stopper, no 4-card major",
+  "meaning": "3SA : 13-15 H, deux arrêts dans leur couleur, pas de majeure 4e",
+  "meaning_en": "3NT: 13-15 HCP, two stoppers in their suit, no four-card major",
   "status": "sef"
  },
  {
@@ -11233,10 +11233,10 @@
    "(1C) P X"
   ],
   "call": "2NT",
-  "cond": "hcp == 11 and (balanced or semibalanced) and stop('C') and H < 4 and S < 4",
+  "cond": "11 <= hcp <= 12 and (balanced or semibalanced) and stop('C') and hcp_in('C') >= 4 and H < 4 and S < 4",
   "forcing": "INV",
-  "meaning": "2SA : 11 H, régulier, arrêt",
-  "meaning_en": "2NT: 11 HCP, balanced, stopper",
+  "meaning": "2SA : 11-12 H, un arrêt et demi dans leur couleur",
+  "meaning_en": "2NT: 11-12 HCP, one and a half stoppers in their suit",
   "status": "sef"
  },
  {
@@ -11246,10 +11246,10 @@
    "(1D) P X"
   ],
   "call": "2NT",
-  "cond": "hcp == 11 and (balanced or semibalanced) and stop('D') and H < 4 and S < 4",
+  "cond": "11 <= hcp <= 12 and (balanced or semibalanced) and stop('D') and hcp_in('D') >= 4 and H < 4 and S < 4",
   "forcing": "INV",
-  "meaning": "2SA : 11 H, régulier, arrêt",
-  "meaning_en": "2NT: 11 HCP, balanced, stopper",
+  "meaning": "2SA : 11-12 H, un arrêt et demi dans leur couleur",
+  "meaning_en": "2NT: 11-12 HCP, one and a half stoppers in their suit",
   "status": "sef"
  },
  {
@@ -11259,10 +11259,10 @@
    "(1H) P X"
   ],
   "call": "2NT",
-  "cond": "hcp == 11 and (balanced or semibalanced) and stop('H') and S < 4",
+  "cond": "11 <= hcp <= 12 and (balanced or semibalanced) and stop('H') and hcp_in('H') >= 4 and S < 4",
   "forcing": "INV",
-  "meaning": "2SA : 11 H, régulier, arrêt",
-  "meaning_en": "2NT: 11 HCP, balanced, stopper",
+  "meaning": "2SA : 11-12 H, un arrêt et demi dans leur couleur",
+  "meaning_en": "2NT: 11-12 HCP, one and a half stoppers in their suit",
   "status": "sef"
  },
  {
@@ -11272,10 +11272,10 @@
    "(1S) P X"
   ],
   "call": "2NT",
-  "cond": "hcp == 11 and (balanced or semibalanced) and stop('S') and H < 4",
+  "cond": "11 <= hcp <= 12 and (balanced or semibalanced) and stop('S') and hcp_in('S') >= 4 and H < 4",
   "forcing": "INV",
-  "meaning": "2SA : 11 H, régulier, arrêt",
-  "meaning_en": "2NT: 11 HCP, balanced, stopper",
+  "meaning": "2SA : 11-12 H, un arrêt et demi dans leur couleur",
+  "meaning_en": "2NT: 11-12 HCP, one and a half stoppers in their suit",
   "status": "sef"
  },
  {
@@ -11287,8 +11287,8 @@
   "call": "2C",
   "cond": "hcp >= 11",
   "forcing": "F1",
-  "meaning": "Cue-bid : 11+ H, forcing ; demande la majeure 4e la moins chère",
-  "meaning_en": "Cue-bid: 11+ HCP, forcing; asks for the cheapest 4-card major",
+  "meaning": "Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arrêt, ou espoir de chelem)",
+  "meaning_en": "Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes)",
   "status": "sef",
   "alert": true
  },
@@ -11301,8 +11301,8 @@
   "call": "2D",
   "cond": "hcp >= 11",
   "forcing": "F1",
-  "meaning": "Cue-bid : 11+ H, forcing ; demande la majeure 4e la moins chère",
-  "meaning_en": "Cue-bid: 11+ HCP, forcing; asks for the cheapest 4-card major",
+  "meaning": "Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arrêt, ou espoir de chelem)",
+  "meaning_en": "Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes)",
   "status": "sef",
   "alert": true
  },
@@ -11315,8 +11315,8 @@
   "call": "2H",
   "cond": "hcp >= 11",
   "forcing": "F1",
-  "meaning": "Cue-bid : 11+ H, forcing ; demande la majeure 4e la moins chère",
-  "meaning_en": "Cue-bid: 11+ HCP, forcing; asks for the cheapest 4-card major",
+  "meaning": "Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arrêt, ou espoir de chelem)",
+  "meaning_en": "Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes)",
   "status": "sef",
   "alert": true
  },
@@ -11329,10 +11329,103 @@
   "call": "2S",
   "cond": "hcp >= 11",
   "forcing": "F1",
-  "meaning": "Cue-bid : 11+ H, forcing ; demande la majeure 4e la moins chère",
-  "meaning_en": "Cue-bid: 11+ HCP, forcing; asks for the cheapest 4-card major",
+  "meaning": "Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arrêt, ou espoir de chelem)",
+  "meaning_en": "Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes)",
   "status": "sef",
   "alert": true
+ },
+ {
+  "id": "advX.1C.cue.2M",
+  "seq": [
+   "(1C) X",
+   "(1C) P X"
+  ],
+  "call": "2C",
+  "cond": "8 <= hcp <= 10 and H >= 4 and S >= 4",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 8-10 H et les deux majeures 4e",
+  "meaning_en": "Cue-bid: 8-10 HCP and both four-card majors",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "advX.1D.cue.2M",
+  "seq": [
+   "(1D) X",
+   "(1D) P X"
+  ],
+  "call": "2D",
+  "cond": "8 <= hcp <= 10 and H >= 4 and S >= 4",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 8-10 H et les deux majeures 4e",
+  "meaning_en": "Cue-bid: 8-10 HCP and both four-card majors",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "advX.1C.dsaut.S",
+  "seq": [
+   "(1C) X",
+   "(1C) P X"
+  ],
+  "call": "3S",
+  "cond": "8 <= hcp <= 10 and S == 5 and (S > H or '1C' == '1H' or (S == H and 'S' == 'S'))",
+  "forcing": "INV",
+  "meaning": "Réponse à double saut : majeure 5e, 8-10 H",
+  "meaning_en": "Double-jump answer: five-card major, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1C.dsaut.H",
+  "seq": [
+   "(1C) X",
+   "(1C) P X"
+  ],
+  "call": "3H",
+  "cond": "8 <= hcp <= 10 and H == 5 and (H > S or '1C' == '1H' or (H == S and 'H' == 'S'))",
+  "forcing": "INV",
+  "meaning": "Réponse à double saut : majeure 5e, 8-10 H",
+  "meaning_en": "Double-jump answer: five-card major, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1D.dsaut.S",
+  "seq": [
+   "(1D) X",
+   "(1D) P X"
+  ],
+  "call": "3S",
+  "cond": "8 <= hcp <= 10 and S == 5 and (S > H or '1D' == '1H' or (S == H and 'S' == 'S'))",
+  "forcing": "INV",
+  "meaning": "Réponse à double saut : majeure 5e, 8-10 H",
+  "meaning_en": "Double-jump answer: five-card major, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1D.dsaut.H",
+  "seq": [
+   "(1D) X",
+   "(1D) P X"
+  ],
+  "call": "3H",
+  "cond": "8 <= hcp <= 10 and H == 5 and (H > S or '1D' == '1H' or (H == S and 'H' == 'S'))",
+  "forcing": "INV",
+  "meaning": "Réponse à double saut : majeure 5e, 8-10 H",
+  "meaning_en": "Double-jump answer: five-card major, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1H.dsaut.S",
+  "seq": [
+   "(1H) X",
+   "(1H) P X"
+  ],
+  "call": "3S",
+  "cond": "8 <= hcp <= 10 and S == 5 and (S > H or '1H' == '1H' or (S == H and 'S' == 'S'))",
+  "forcing": "INV",
+  "meaning": "Réponse à double saut : majeure 5e, 8-10 H",
+  "meaning_en": "Double-jump answer: five-card major, 8-10 HCP",
+  "status": "sef"
  },
  {
   "id": "advX.1C.saut.S",
@@ -11341,10 +11434,10 @@
    "(1C) P X"
   ],
   "call": "2S",
-  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1C' in ('1H', '1S') or (S == H and 'S' == 'H'))",
+  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1C' in ('1H', '1S') or (S == H and 'S' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11354,10 +11447,10 @@
    "(1C) P X"
   ],
   "call": "2H",
-  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '2H' != '3H') and (H > S or '1C' in ('1H', '1S') or (H == S and 'H' == 'H'))",
+  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '2H' != '3H') and (H > S or '1C' in ('1H', '1S') or (H == S and 'H' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11367,10 +11460,10 @@
    "(1D) P X"
   ],
   "call": "2S",
-  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1D' in ('1H', '1S') or (S == H and 'S' == 'H'))",
+  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1D' in ('1H', '1S') or (S == H and 'S' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11380,10 +11473,10 @@
    "(1D) P X"
   ],
   "call": "2H",
-  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '2H' != '3H') and (H > S or '1D' in ('1H', '1S') or (H == S and 'H' == 'H'))",
+  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '2H' != '3H') and (H > S or '1D' in ('1H', '1S') or (H == S and 'H' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11393,10 +11486,10 @@
    "(1H) P X"
   ],
   "call": "2S",
-  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1H' in ('1H', '1S') or (S == H and 'S' == 'H'))",
+  "cond": "8 <= hcp <= 10 and S >= 4 and (S >= 5 or '2S' != '3H') and (S > H or '1H' in ('1H', '1S') or (S == H and 'S' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11406,10 +11499,88 @@
    "(1S) P X"
   ],
   "call": "3H",
-  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '3H' != '3H') and (H > S or '1S' in ('1H', '1S') or (H == S and 'H' == 'H'))",
+  "cond": "8 <= hcp <= 10 and H >= 4 and (H >= 5 or '3H' != '3H') and (H > S or '1S' in ('1H', '1S') or (H == S and 'H' == 'S'))",
   "forcing": "INV",
-  "meaning": "Réponse à saut : 4+ cartes, 8-10 H",
-  "meaning_en": "Jump response: 4+ cards, 8-10 HCP",
+  "meaning": "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H",
+  "meaning_en": "Jump answer: four-card major (five-card over 1♠), 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1C.saut.D",
+  "seq": [
+   "(1C) X",
+   "(1C) P X"
+  ],
+  "call": "2D",
+  "cond": "8 <= hcp <= 10 and D >= 5 and not balanced and D == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1D.saut.C",
+  "seq": [
+   "(1D) X",
+   "(1D) P X"
+  ],
+  "call": "3C",
+  "cond": "8 <= hcp <= 10 and C >= 5 and not balanced and C == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1H.saut.C",
+  "seq": [
+   "(1H) X",
+   "(1H) P X"
+  ],
+  "call": "3C",
+  "cond": "8 <= hcp <= 10 and C >= 5 and not balanced and C == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1H.saut.D",
+  "seq": [
+   "(1H) X",
+   "(1H) P X"
+  ],
+  "call": "3D",
+  "cond": "8 <= hcp <= 10 and D >= 5 and not balanced and D == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1S.saut.C",
+  "seq": [
+   "(1S) X",
+   "(1S) P X"
+  ],
+  "call": "3C",
+  "cond": "8 <= hcp <= 10 and C >= 5 and not balanced and C == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1S.saut.D",
+  "seq": [
+   "(1S) X",
+   "(1S) P X"
+  ],
+  "call": "3D",
+  "cond": "8 <= hcp <= 10 and D >= 5 and not balanced and D == max(S, H, D, C)",
+  "forcing": "INV",
+  "meaning": "Réponse à saut : mineure 5e, 8-10 H",
+  "meaning_en": "Jump answer: five-card minor, 8-10 HCP",
   "status": "sef"
  },
  {
@@ -11419,10 +11590,10 @@
    "(1C) P X"
   ],
   "call": "1NT",
-  "cond": "8 <= hcp <= 10 and stop('C')",
+  "cond": "8 <= hcp <= 10 and (balanced or stop('C'))",
   "forcing": "NF",
-  "meaning": "1SA : 8-10 H, arrêt",
-  "meaning_en": "1NT: 8-10 HCP, stopper",
+  "meaning": "1SA : 8-10 H, régulier",
+  "meaning_en": "1NT: 8-10 HCP, balanced",
   "status": "sef"
  },
  {
@@ -11432,10 +11603,10 @@
    "(1D) P X"
   ],
   "call": "1NT",
-  "cond": "8 <= hcp <= 10 and stop('D')",
+  "cond": "8 <= hcp <= 10 and (balanced or stop('D'))",
   "forcing": "NF",
-  "meaning": "1SA : 8-10 H, arrêt",
-  "meaning_en": "1NT: 8-10 HCP, stopper",
+  "meaning": "1SA : 8-10 H, régulier",
+  "meaning_en": "1NT: 8-10 HCP, balanced",
   "status": "sef"
  },
  {
@@ -11445,10 +11616,10 @@
    "(1H) P X"
   ],
   "call": "1NT",
-  "cond": "8 <= hcp <= 10 and stop('H')",
+  "cond": "8 <= hcp <= 10 and (balanced or stop('H'))",
   "forcing": "NF",
-  "meaning": "1SA : 8-10 H, arrêt",
-  "meaning_en": "1NT: 8-10 HCP, stopper",
+  "meaning": "1SA : 8-10 H, régulier",
+  "meaning_en": "1NT: 8-10 HCP, balanced",
   "status": "sef"
  },
  {
@@ -11458,23 +11629,10 @@
    "(1S) P X"
   ],
   "call": "1NT",
-  "cond": "8 <= hcp <= 10 and stop('S')",
+  "cond": "8 <= hcp <= 10 and (balanced or stop('S'))",
   "forcing": "NF",
-  "meaning": "1SA : 8-10 H, arrêt",
-  "meaning_en": "1NT: 8-10 HCP, stopper",
-  "status": "sef"
- },
- {
-  "id": "advX.1C.1H.1",
-  "seq": [
-   "(1C) X",
-   "(1C) P X"
-  ],
-  "call": "1H",
-  "cond": "H >= 4 and H >= S",
-  "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "1SA : 8-10 H, régulier",
+  "meaning_en": "1NT: 8-10 HCP, balanced",
   "status": "sef"
  },
  {
@@ -11484,23 +11642,23 @@
    "(1C) P X"
   ],
   "call": "1S",
-  "cond": "S >= 4",
+  "cond": "S >= 4 and S >= H",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
-  "id": "advX.1D.1H.1",
+  "id": "advX.1C.1H.1",
   "seq": [
-   "(1D) X",
-   "(1D) P X"
+   "(1C) X",
+   "(1C) P X"
   ],
   "call": "1H",
-  "cond": "H >= 4 and H >= S",
+  "cond": "H >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11510,10 +11668,23 @@
    "(1D) P X"
   ],
   "call": "1S",
-  "cond": "S >= 4",
+  "cond": "S >= 4 and S >= H",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
+  "status": "sef"
+ },
+ {
+  "id": "advX.1D.1H.1",
+  "seq": [
+   "(1D) X",
+   "(1D) P X"
+  ],
+  "call": "1H",
+  "cond": "H >= 4",
+  "forcing": "NF",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11525,8 +11696,8 @@
   "call": "1S",
   "cond": "S >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11538,8 +11709,8 @@
   "call": "2H",
   "cond": "H >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11551,8 +11722,8 @@
   "call": "1D",
   "cond": "D >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11564,8 +11735,8 @@
   "call": "2C",
   "cond": "C >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11577,8 +11748,8 @@
   "call": "2D",
   "cond": "D >= 4 and D >= C",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11590,8 +11761,8 @@
   "call": "2C",
   "cond": "C >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11603,8 +11774,8 @@
   "call": "2D",
   "cond": "D >= 4 and D >= C",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11616,8 +11787,8 @@
   "call": "2C",
   "cond": "C >= 4",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11629,8 +11800,8 @@
   "call": "1H",
   "cond": "H >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11642,8 +11813,8 @@
   "call": "1S",
   "cond": "S >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11655,8 +11826,8 @@
   "call": "1H",
   "cond": "H >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11668,8 +11839,8 @@
   "call": "1S",
   "cond": "S >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11681,8 +11852,8 @@
   "call": "1S",
   "cond": "S >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11694,8 +11865,8 @@
   "call": "2H",
   "cond": "H >= 3",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11707,8 +11878,8 @@
   "call": "1D",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11720,8 +11891,8 @@
   "call": "2C",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11733,8 +11904,8 @@
   "call": "2C",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -11746,8 +11917,8 @@
   "call": "2C",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Réponse au contre : 0-10 H, sa meilleure couleur",
-  "meaning_en": "Answer to the double: 0-10 HCP, best suit",
+  "meaning": "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord",
+  "meaning_en": "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first",
   "status": "sef"
  },
  {
@@ -12981,7 +13152,7 @@
    "(1C) P X 2C 2H"
   ],
   "call": "4H",
-  "cond": "H >= 4",
+  "cond": "H >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
@@ -12994,7 +13165,7 @@
    "(1C) P X 2C 2S"
   ],
   "call": "4S",
-  "cond": "S >= 4",
+  "cond": "S >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
@@ -13007,7 +13178,7 @@
    "(1D) P X 2D 2H"
   ],
   "call": "4H",
-  "cond": "H >= 4",
+  "cond": "H >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
@@ -13020,7 +13191,7 @@
    "(1D) P X 2D 2S"
   ],
   "call": "4S",
-  "cond": "S >= 4",
+  "cond": "S >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
@@ -13033,7 +13204,7 @@
    "(1H) P X 2H 2S"
   ],
   "call": "4S",
-  "cond": "S >= 4",
+  "cond": "S >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
@@ -13046,10 +13217,140 @@
    "(1S) P X 2S 3H"
   ],
   "call": "4H",
-  "cond": "H >= 4",
+  "cond": "H >= 4 and hcp >= 11",
   "forcing": "SO",
   "meaning": "Fit 4-4 : manche",
   "meaning_en": "4-4 fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.cue.2H.inv",
+  "seq": [
+   "(1C) X 2C 2H",
+   "(1C) P X 2C 2H"
+  ],
+  "call": "3H",
+  "cond": "H >= 4",
+  "forcing": "INV",
+  "meaning": "Fit 4-4 avec 8-10 H : invitation",
+  "meaning_en": "4-4 fit with 8-10 HCP: invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.cue.2S.inv",
+  "seq": [
+   "(1C) X 2C 2S",
+   "(1C) P X 2C 2S"
+  ],
+  "call": "3S",
+  "cond": "S >= 4",
+  "forcing": "INV",
+  "meaning": "Fit 4-4 avec 8-10 H : invitation",
+  "meaning_en": "4-4 fit with 8-10 HCP: invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.cue.2H.inv",
+  "seq": [
+   "(1D) X 2D 2H",
+   "(1D) P X 2D 2H"
+  ],
+  "call": "3H",
+  "cond": "H >= 4",
+  "forcing": "INV",
+  "meaning": "Fit 4-4 avec 8-10 H : invitation",
+  "meaning_en": "4-4 fit with 8-10 HCP: invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.cue.2S.inv",
+  "seq": [
+   "(1D) X 2D 2S",
+   "(1D) P X 2D 2S"
+  ],
+  "call": "3S",
+  "cond": "S >= 4",
+  "forcing": "INV",
+  "meaning": "Fit 4-4 avec 8-10 H : invitation",
+  "meaning_en": "4-4 fit with 8-10 HCP: invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.cue.2NT.p",
+  "seq": [
+   "(1C) X 2C 2NT",
+   "(1C) P X 2C 2NT"
+  ],
+  "call": "P",
+  "cond": "hcp <= 10",
+  "forcing": "NF",
+  "meaning": "8-10 H : partielle",
+  "meaning_en": "8-10 HCP: partscore",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.cue.2NT.p",
+  "seq": [
+   "(1D) X 2D 2NT",
+   "(1D) P X 2D 2NT"
+  ],
+  "call": "P",
+  "cond": "hcp <= 10",
+  "forcing": "NF",
+  "meaning": "8-10 H : partielle",
+  "meaning_en": "8-10 HCP: partscore",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.cue.2H.3M.4M",
+  "seq": [
+   "(1C) X 2C 2H 3H",
+   "(1C) P X 2C 2H 3H"
+  ],
+  "call": "4H",
+  "cond": "hcp >= 15",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.cue.2S.3M.4M",
+  "seq": [
+   "(1C) X 2C 2S 3S",
+   "(1C) P X 2C 2S 3S"
+  ],
+  "call": "4S",
+  "cond": "hcp >= 15",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.cue.2H.3M.4M",
+  "seq": [
+   "(1D) X 2D 2H 3H",
+   "(1D) P X 2D 2H 3H"
+  ],
+  "call": "4H",
+  "cond": "hcp >= 15",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.cue.2S.3M.4M",
+  "seq": [
+   "(1D) X 2D 2S 3S",
+   "(1D) P X 2D 2S 3S"
+  ],
+  "call": "4S",
+  "cond": "hcp >= 15",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation",
+  "meaning_en": "Accepts the invitation",
   "status": "infere"
  },
  {
@@ -13336,6 +13637,214 @@
   "forcing": "SO",
   "meaning": "Manche à SA : 15+ H et l'arrêt, sans fit",
   "meaning_en": "Game in NT: 15+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.dsaut.H",
+  "seq": [
+   "(1C) X 3H",
+   "(1C) P X 3H"
+  ],
+  "call": "4H",
+  "cond": "H >= 3 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)",
+  "meaning_en": "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.dsaut.S",
+  "seq": [
+   "(1C) X 3S",
+   "(1C) P X 3S"
+  ],
+  "call": "4S",
+  "cond": "S >= 3 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)",
+  "meaning_en": "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.dsaut.H",
+  "seq": [
+   "(1D) X 3H",
+   "(1D) P X 3H"
+  ],
+  "call": "4H",
+  "cond": "H >= 3 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)",
+  "meaning_en": "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.dsaut.S",
+  "seq": [
+   "(1D) X 3S",
+   "(1D) P X 3S"
+  ],
+  "call": "4S",
+  "cond": "S >= 3 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)",
+  "meaning_en": "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1H.dsaut.S",
+  "seq": [
+   "(1H) X 3S",
+   "(1H) P X 3S"
+  ],
+  "call": "4S",
+  "cond": "S >= 3 and hcp >= 14",
+  "forcing": "SO",
+  "meaning": "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)",
+  "meaning_en": "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.dsaut.H.3NT",
+  "seq": [
+   "(1C) X 3H",
+   "(1C) P X 3H"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 14 and stop('C')",
+  "forcing": "SO",
+  "meaning": "3SA : 14+ H et l'arrêt, sans fit",
+  "meaning_en": "3NT: 14+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.dsaut.S.3NT",
+  "seq": [
+   "(1C) X 3S",
+   "(1C) P X 3S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 14 and stop('C')",
+  "forcing": "SO",
+  "meaning": "3SA : 14+ H et l'arrêt, sans fit",
+  "meaning_en": "3NT: 14+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.dsaut.H.3NT",
+  "seq": [
+   "(1D) X 3H",
+   "(1D) P X 3H"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 14 and stop('D')",
+  "forcing": "SO",
+  "meaning": "3SA : 14+ H et l'arrêt, sans fit",
+  "meaning_en": "3NT: 14+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.dsaut.S.3NT",
+  "seq": [
+   "(1D) X 3S",
+   "(1D) P X 3S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 14 and stop('D')",
+  "forcing": "SO",
+  "meaning": "3SA : 14+ H et l'arrêt, sans fit",
+  "meaning_en": "3NT: 14+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1H.dsaut.S.3NT",
+  "seq": [
+   "(1H) X 3S",
+   "(1H) P X 3S"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 14 and stop('H')",
+  "forcing": "SO",
+  "meaning": "3SA : 14+ H et l'arrêt, sans fit",
+  "meaning_en": "3NT: 14+ HCP and the stopper, no fit",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1C.saut.D.3NT",
+  "seq": [
+   "(1C) X 2D",
+   "(1C) P X 2D"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('C')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1D.saut.C.3NT",
+  "seq": [
+   "(1D) X 3C",
+   "(1D) P X 3C"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('D')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1H.saut.C.3NT",
+  "seq": [
+   "(1H) X 3C",
+   "(1H) P X 3C"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('H')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1H.saut.D.3NT",
+  "seq": [
+   "(1H) X 3D",
+   "(1H) P X 3D"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('H')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1S.saut.C.3NT",
+  "seq": [
+   "(1S) X 3C",
+   "(1S) P X 3C"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('S')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
+  "status": "infere"
+ },
+ {
+  "id": "dblR.1S.saut.D.3NT",
+  "seq": [
+   "(1S) X 3D",
+   "(1S) P X 3D"
+  ],
+  "call": "3NT",
+  "cond": "hcp >= 15 and stop('S')",
+  "forcing": "SO",
+  "meaning": "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)",
+  "meaning_en": "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)",
   "status": "infere"
  },
  {

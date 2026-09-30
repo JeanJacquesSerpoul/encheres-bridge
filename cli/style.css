@@ -510,7 +510,10 @@ button:disabled { opacity: .6; cursor: wait; }
   padding: 0 34px 0 12px;
   border: none;
   border-radius: 0 12px 12px 0;
-  background: transparent;
+  /* Un fond réel et non transparent : la liste déroulante native le reprend.
+     Transparent, elle s'ouvrait sur du blanc avec le texte clair du thème
+     sombre, et les choix non sélectionnés ne se lisaient plus. */
+  background: var(--panel);
   color: var(--ink);
   font: inherit;
   font-weight: 600;
@@ -555,7 +558,8 @@ button:disabled { opacity: .6; cursor: wait; }
 .deal-cmds .cmd-btn svg { flex: none; }
 #deal-actions .field:has(select:disabled) { background: var(--disabled-bg); }
 #deal-actions .field:has(select:disabled)::after { opacity: .4; }
-#deal-actions .field select:disabled { background: transparent; cursor: not-allowed; }
+#deal-actions .field select:disabled { background: var(--disabled-bg); cursor: not-allowed; }
+#deal-actions .field select option { background: var(--panel); color: var(--ink); font-weight: 400; }
 .cmd-btn:hover:not(:disabled) {
   background: var(--tint);
   border-color: var(--accent);

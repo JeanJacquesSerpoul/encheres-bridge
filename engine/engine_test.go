@@ -142,3 +142,16 @@ func TestParsePBN(t *testing.T) {
 		}
 	}
 }
+
+// TestThirdSuitRaiseWithoutFit: after 1♦ 1♠ 2♦ 2♥ 3♥, opener holds 5♦ and
+// 4♥. Responder, void in hearts, must not pass 3♥: 3NT with the ♣ stopper.
+func TestThirdSuitRaiseWithoutFit(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:32.KQ6.K86.QT753 Q9.A982.A5432.A6 K864.JT7543.Q.84 AJT75..JT97.KJ92"]`)
+	calls := NewEngine(d).Run()
+	const want = "S:Passe W:1K N:Passe E:1P S:Passe W:2K N:Passe E:2C S:Passe W:3C N:Passe E:3SA"
+	if got := formatAuction(calls); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}

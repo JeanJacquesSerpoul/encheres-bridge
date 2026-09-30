@@ -8683,6 +8683,86 @@
   "status": "infere"
  },
  {
+  "id": "tcf.CH.nofit.3NT",
+  "seq": "1C 1H 2C 2D 3D",
+  "call": "3NT",
+  "cond": "D <= 2 and stop('S')",
+  "forcing": "SO",
+  "meaning": "Pas de fit dans la 3e couleur, arrêt dans la 4e : 3SA",
+  "meaning_en": "No fit in the third suit, fourth suit stopped: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.CS.nofit.3NT",
+  "seq": "1C 1S 2C 2D 3D",
+  "call": "3NT",
+  "cond": "D <= 2 and stop('H')",
+  "forcing": "SO",
+  "meaning": "Pas de fit dans la 3e couleur, arrêt dans la 4e : 3SA",
+  "meaning_en": "No fit in the third suit, fourth suit stopped: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.DH.nofit.3NT",
+  "seq": "1D 1H 2D 2S 3S",
+  "call": "3NT",
+  "cond": "S <= 2 and stop('C')",
+  "forcing": "SO",
+  "meaning": "Pas de fit dans la 3e couleur, arrêt dans la 4e : 3SA",
+  "meaning_en": "No fit in the third suit, fourth suit stopped: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.DS.nofit.3NT",
+  "seq": "1D 1S 2D 2H 3H",
+  "call": "3NT",
+  "cond": "H <= 2 and stop('C')",
+  "forcing": "SO",
+  "meaning": "Pas de fit dans la 3e couleur, arrêt dans la 4e : 3SA",
+  "meaning_en": "No fit in the third suit, fourth suit stopped: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.CH.nofit.4o",
+  "seq": "1C 1H 2C 2D 3D",
+  "call": "4C",
+  "cond": "D <= 2",
+  "forcing": "NF",
+  "meaning": "Pas de fit dans la 3e couleur ni d'arrêt dans la 4e : retour à la mineure 5e de l'ouvreur",
+  "meaning_en": "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.CS.nofit.4o",
+  "seq": "1C 1S 2C 2D 3D",
+  "call": "4C",
+  "cond": "D <= 2",
+  "forcing": "NF",
+  "meaning": "Pas de fit dans la 3e couleur ni d'arrêt dans la 4e : retour à la mineure 5e de l'ouvreur",
+  "meaning_en": "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.DH.nofit.4o",
+  "seq": "1D 1H 2D 2S 3S",
+  "call": "4D",
+  "cond": "S <= 2",
+  "forcing": "NF",
+  "meaning": "Pas de fit dans la 3e couleur ni d'arrêt dans la 4e : retour à la mineure 5e de l'ouvreur",
+  "meaning_en": "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor",
+  "status": "infere"
+ },
+ {
+  "id": "tcf.DS.nofit.4o",
+  "seq": "1D 1S 2D 2H 3H",
+  "call": "4D",
+  "cond": "H <= 2",
+  "forcing": "NF",
+  "meaning": "Pas de fit dans la 3e couleur ni d'arrêt dans la 4e : retour à la mineure 5e de l'ouvreur",
+  "meaning_en": "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor",
+  "status": "infere"
+ },
+ {
   "id": "tcf.CH.cp",
   "seq": [
    "1C 1H 2C 2D 2H|3H|3D|2NT|3C",

@@ -2186,10 +2186,10 @@
   for: [{M: H}, {M: S}]
   seq: "2{M}"
   call: 2NT
-  cond: "hcp >= 15"
+  cond: "hl >= 15"
   forcing: F1
-  meaning: "Relais avec espoir de manche"
-  meaning_en: "Relay with game interest"
+  meaning: "Relais avec espoir de manche, 15 HL et plus"
+  meaning_en: "Relay with game interest, 15+ HL"
   status: sef
   alert: true
 - id: "2{M}.r.4{M}"

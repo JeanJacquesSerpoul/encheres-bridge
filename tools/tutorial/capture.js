@@ -152,34 +152,39 @@ async function scenes(browser, lang, dir) {
   await shoot(page, out(10), ["#tabpanel-par", "#par-tip"]);
   await page.mouse.move(0, 0);
 
-  // 11. S'entraîner : choisir sa main, lancer le questionnaire.
-  await page.click("#tab-train");
-  await shoot(page, out(11), ["#side-pane"]);
+  // 11. S'entraîner : le choix de la main.
+  await page.click("#train-btn");
+  await page.waitForSelector("#train-seat-dialog[open]");
+  await page.waitForTimeout(200);
+  await shoot(page, out(11), ["#train-seat-dialog .train-seat-box"]);
 
-  // 12. Le questionnaire : la boîte à enchères.
-  await page.click('.seat-pick input[value="S"]', { force: true });
-  await page.click("#quiz-btn");
+  // 12. La table : votre main en bas, la boîte à enchères à votre tour. Les
+  // donnes sont tirées au hasard : la capture change d'une fois à l'autre.
+  await page.click('.seat-choice[data-seat="S"]');
   await page.waitForSelector("#bidding-box .bb-btn:not([disabled])", { timeout: 30000 });
   await page.waitForTimeout(300);
-  await shoot(page, out(12), ["#quiz-table", "#side-pane"]);
+  await page.screenshot({ path: out(12), type: "jpeg", quality: QUALITY });
 
   // 13. La réponse : correcte ou non, avec l'enchère attendue.
   await page.locator("#bidding-box .bb-pass").click();
-  await page.waitForSelector("#quiz-feedback:not(:empty)", { timeout: 10000 }).catch(() => {});
+  await page.waitForSelector("#quiz-feedback:not(.hidden)", { timeout: 10000 }).catch(() => {});
   await page.waitForTimeout(300);
-  await shoot(page, out(13), ["#side-pane"]);
+  await page.screenshot({ path: out(13), type: "jpeg", quality: QUALITY });
 
-  // 14. Le score, à la fin du questionnaire.
-  for (let i = 0; i < 40; i++) {
-    if (await page.locator("#quiz-score:not(:empty)").isVisible().catch(() => false)) break;
-    const cont = page.locator("#quiz-continue-btn");
+  // 14. Le score de la séance, après une donne jouée jusqu'au bout.
+  for (let i = 0; i < 60; i++) {
+    if (await page.locator("#train-new-btn:not(.hidden)").isVisible().catch(() => false)) break;
+    const cont = page.locator("#quiz-continue-btn:not(.hidden)");
     if (await cont.isVisible().catch(() => false)) { await cont.click(); continue; }
-    const pass = page.locator("#bidding-box .bb-pass:not([disabled])");
+    const pass = page.locator("#bidding-box:not(.hidden) .bb-pass:not([disabled])");
     if (await pass.isVisible().catch(() => false)) { await pass.click(); continue; }
     await page.waitForTimeout(400);
   }
-  await page.waitForTimeout(400);
-  await shoot(page, out(14), ["#side-pane"]);
+  await page.click("#train-finish");
+  await page.waitForSelector("#train-summary:not([hidden])");
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: out(14), type: "jpeg", quality: QUALITY });
+  await page.click("#train-end-btn");
 
   // 15. Réglages.
   await page.click("#settings-btn");

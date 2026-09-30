@@ -515,30 +515,6 @@ button:disabled { opacity: .6; cursor: wait; }
   text-align: center;
 }
 
-/* ---------- lancer le questionnaire ----------
-
-   Un panneau à part, sous celui de la donne, et non la suite de ses
-   commandes : le questionnaire n'agit pas sur la donne, il ouvre un
-   entraînement où l'on répond à la place d'un siège. Titre centré, comme
-   celui de la donne. */
-.quiz-launch h2 { text-align: center; }
-/* Pendant le questionnaire, la rangée de lancement laisse la place au
-   déroulement, sous le même titre. */
-.quiz-launch.quiz-running .quiz-launch-controls { display: none; }
-
-/* Récapitulatif des erreurs, en fin de questionnaire. */
-.quiz-recap {
-  max-width: 560px;
-  margin: 12px auto;
-  text-align: left;
-}
-.quiz-recap h3 { margin: 0 0 6px; font-size: .95rem; text-align: center; }
-.quiz-recap ol { margin: 0; padding-left: 1.4em; }
-.quiz-recap li { margin: 6px 0; }
-.quiz-recap .recap-bids { margin-right: 8px; white-space: nowrap; }
-.quiz-recap .muted { font-size: .9rem; }
-.quiz-recap-none { margin: 10px 0; color: var(--accent); }
-
 /* Retour vers la donne et impression, en tête du Résultat. */
 .back-to-deal {
   display: flex;
@@ -577,9 +553,8 @@ button:disabled { opacity: .6; cursor: wait; }
    app.js le temps de l'impression. */
 @media print {
   header, footer, dialog, #boot-loading, #engine-loading,
-  button, select, .file-btn, .switch, .quiz-mode-hint, .pbn-details,
-  #deal-select-row, #cons-actions, #bid-row, .tabs, .tab-empty,
-  .quiz-hidden-note { display: none !important; }
+  button, select, .file-btn, .pbn-details,
+  #deal-select-row, #cons-actions, #bid-row, .tabs, .tab-empty { display: none !important; }
   .tabpanel[hidden] { display: none !important; }
   body { background: #fff; }
   main { margin: 0; max-width: none; padding: 0; }
@@ -588,8 +563,7 @@ button:disabled { opacity: .6; cursor: wait; }
   /* La table du résultat est celle de la donne, en lecture : seule elle
      s'imprime du panneau de gauche. */
   main:has(#result-panel:not(.hidden)) #input-panel > :not(#constraints),
-  main:has(#result-panel:not(.hidden)) #constraints > :not(#read-layout),
-  main:has(#result-panel:not(.hidden)) #tabpanel-train { display: none !important; }
+  main:has(#result-panel:not(.hidden)) #constraints > :not(#read-layout) { display: none !important; }
   main:has(#result-panel:not(.hidden)) #read-layout { display: grid !important; }
   /* Le PAR, s'il est calculé, s'imprime sous la séquence. */
   main:has(#result-panel:not(.hidden)) #tabpanel-par { display: block !important; }
@@ -597,87 +571,6 @@ button:disabled { opacity: .6; cursor: wait; }
   main:has(#result-panel:not(.hidden)) #tabpanel-bids { display: block !important; }
   .table-layout, .result-seqs, .auction, .par-table { break-inside: avoid; }
   .comments > li { break-inside: avoid; }
-}
-.quiz-launch-row {
-  display: flex;
-  /* Aligné par le bas, et non centré : le bloc des sièges porte sa légende
-     au-dessus des pastilles, si bien qu'un centrage posait le bouton une
-     demi-légende plus haut qu'elles. Par le bas, il retrouve leur ligne. */
-  align-items: flex-end;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-/* Les quatre sièges en bandeau. Le compas en croix disait bien la place de
-   chacun, mais il coûtait trois rangées de hauteur pour quatre choix — cher,
-   sous une rangée d'icônes qui en tient une seule. Un fieldset sans bordure :
-   sa légende sert de titre, et les boutons radio qu'il contient font circuler
-   les flèches d'eux-mêmes. */
-.seat-pills {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
-.seat-pills-row { display: flex; gap: 6px; flex-wrap: wrap; }
-
-/* Le bouton radio lui-même est retiré de l'image mais reste focalisable : la
-   pastille qui l'habille prend sa place. Même masquage que le champ fichier,
-   pour la même raison. */
-.seat-pick input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-.seat-pick {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--panel);
-  color: var(--muted);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: .85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background .15s, border-color .15s, color .15s;
-}
-.seat-pick:hover { border-color: var(--accent); color: var(--accent); }
-.seat-pick.is-picked {
-  background: var(--accent-bg);
-  border-color: var(--accent-bg);
-  color: var(--on-accent);
-}
-/* Le focus se pose sur le champ caché : c'est la pastille qui doit le
-   montrer, sans quoi il n'y aurait rien à voir. */
-.seat-pick:has(input:focus-visible) {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Le bouton qui lance l'entraînement prend la hauteur des pastilles qu'il
-   suit : il appartient à la même rangée, et le carré de 44 px de la rangée
-   du dessus la dépassait d'un cran. */
-.quiz-launch .cmd-btn {
-  width: 34px;
-  height: 34px;
-}
-.quiz-launch .cmd-btn svg { width: 19px; height: 19px; }
-
-/* Au doigt, la pastille et le bouton gagnent la hauteur des autres cibles. La
-   règle est ici et non dans le bloc « pointer: coarse » plus haut : à
-   spécificité égale, c'est la dernière écrite qui l'emporte. */
-@media (pointer: coarse) {
-  .seat-pick { min-height: 42px; }
-  .quiz-launch .cmd-btn { width: 42px; height: 42px; }
 }
 .icon-btn:disabled { cursor: not-allowed; }
 /* Compte rendu de la reconnaissance : il ne prend sa place dans la ligne que
@@ -1128,18 +1021,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   }
 }
 
-/* Questionnaire : même centrage que le résultat pour le titre et la séquence. */
-#quiz-panel .auction { margin-left: auto; margin-right: auto; }
-#quiz-panel h2,
-#quiz-panel h3 { text-align: center; }
-/* « Révéler l'enchère… », « Continuer », puis la rangée spéciale de la boîte
-   à enchères et le bilan de fin : centrés sous la séquence qu'ils font
-   avancer, et non plus calés à gauche d'un panneau où tout le reste l'est. */
-#quiz-panel .row { justify-content: center; }
-#quiz-panel .bb-row.bb-special { margin-left: auto; margin-right: auto; }
-#quiz-panel .quiz-score { text-align: center; }
-#quiz-panel .quiz-score-actions { justify-content: center; }
-
 /* PAR (levées double-mort) — tableau sur le modèle dds_web. */
 #par-status { font-size: .9rem; }
 .par-table {
@@ -1348,11 +1229,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
   .auction th, .auction td { padding: 5px 4px; font-size: .9rem; }
 
-  /* Les quatre pastilles et le bouton du questionnaire sur une ligne : le
-     bouton, seul sur la suivante, semblait détaché des sièges qu'il lance. */
-  .quiz-launch-row { flex-wrap: nowrap; gap: 10px; }
-  .seat-pick { padding: 0 10px; }
-
   .bb-row { gap: 3px; }
   .bb-btn { font-size: .85rem; padding: 6px 2px; }
   .bb-row.bb-special { max-width: none; }
@@ -1366,12 +1242,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   padding: 8px 14px;
   margin-bottom: 14px;
   font-weight: 600;
-}
-
-.hand .hidden-hand {
-  color: var(--muted);
-  letter-spacing: 2px;
-  padding: 6px 0;
 }
 
 .auction td.bid-cell.correct { background: var(--success-bg); color: var(--accent); }
@@ -1468,28 +1338,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   font-variant-numeric: tabular-nums;
 }
 .tree-end { margin-top: 6px; }
-.quiz-recap .tree-toggle { color: inherit; margin-left: 6px; font-size: .85rem; }
-
-.quiz-score {
-  background: var(--felt);
-  color: var(--on-accent);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-top: 10px;
-}
-.quiz-score .score-big { font-size: 1.6rem; font-weight: 700; }
-/* Sur le tapis vert, l'accent vert de .quiz-recap-none ne se lisait plus. */
-.quiz-score .quiz-recap-none { color: var(--on-accent); }
-/* Les trois suites de la fin de partie : rejouer, tirer une autre donne, voir
-   le détail. Elles se replient l'une sous l'autre quand la place manque
-   plutôt que de déborder du bandeau vert. */
-.quiz-score-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.quiz-score-actions button { margin: 0; }
 
 /* L'enchère adverse qui vient de s'enchaîner : elle surgit dans la grille
    puis son surlignage s'éteint, avant que la suivante ne prenne le relais
@@ -1512,30 +1360,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   }
 }
 
-/* ---------- donne masquée pendant le questionnaire ---------- */
-
-/* Voir setDealHidden : les quatre mains, le texte PBN et les commandes qui
-   modifient la donne sous la table disparaissent ; une ligne en tient lieu. */
-.quiz-hidden-note { display: none; }
-#input-panel.quiz-running .quiz-hidden-note {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 4px 10px;
-  margin: 12px 0;
-  padding: 14px;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  color: var(--muted);
-  font-size: .9rem;
-}
-#input-panel.quiz-running .cons-layout,
-#input-panel.quiz-running #pbn-details,
-#input-panel.quiz-running #cons-actions,
-#input-panel.quiz-running .read-layout,
-#input-panel.quiz-running #bid-row { display: none; }
-
 /* Un bouton qui se lit comme un lien : l'action est secondaire. */
 .link-btn {
   padding: 0;
@@ -1549,59 +1373,308 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 .link-btn:hover { background: none; text-decoration-thickness: 2px; }
 
-/* ---------- interrupteur (mode questionnaire) ----------
+/* ---------- s'entraîner ----------
 
-   Une case à cocher rendue en interrupteur : la case reste dans l'arbre et
-   au clavier (Espace la bascule), seul son dessin est remplacé par la piste. */
-.switch {
+   Deux fenêtres : le choix de la main, en rose des vents, puis la table, en
+   plein écran. La table reprend l'allure d'une table en ligne : votre main en
+   bas, étalée carte par carte ; les trois autres dos tournés ; au centre la
+   boîte des enchères, les sièges vulnérables en rouge. */
+.train-seat-dialog {
+  width: min(420px, calc(100vw - 32px));
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow-modal);
+}
+.train-seat-dialog::backdrop { background: var(--overlay); }
+.train-seat-box { padding: 20px 22px 16px; text-align: center; }
+.train-seat-box h2 { margin: 0 0 6px; font-size: 1.2rem; }
+.train-seat-box p { margin: 0; font-size: .9rem; }
+.seat-compass {
+  display: grid;
+  grid-template-areas: ". n ." "w c e" ". s .";
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-width: 320px;
+  margin: 18px auto;
+}
+.seat-choice {
+  min-height: 48px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.seat-choice:hover,
+.seat-choice:focus-visible { border-color: var(--accent); color: var(--accent); background: var(--tint); }
+.seat-choice.is-last { border-color: var(--accent); }
+.seat-choice[data-seat="N"] { grid-area: n; }
+.seat-choice[data-seat="W"] { grid-area: w; }
+.seat-choice[data-seat="E"] { grid-area: e; }
+.seat-choice[data-seat="S"] { grid-area: s; }
+.seat-compass-center { grid-area: c; border-radius: 8px; background: var(--felt); }
+.train-seat-actions { display: flex; justify-content: center; }
+.train-seat-actions button { margin: 0; }
+
+.train-dialog {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--bg);
+  color: var(--ink);
+}
+.train-dialog::backdrop { background: var(--overlay); }
+.train-box { display: flex; flex-direction: column; height: 100%; }
+.train-head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: fit-content;
-  margin: 16px auto 0;
-  cursor: pointer;
+  gap: 12px;
+  padding: 8px 12px 8px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+.train-head h2 { margin: 0; font-size: 1.1rem; white-space: nowrap; }
+.train-where {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
   font-size: .9rem;
 }
-.switch input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-  margin: 0;
+.train-nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.train-nav .cmd-btn { width: 40px; height: 40px; }
+.train-nav .train-finish { width: auto; padding: 0 12px; }
+.train-count { min-width: 6.5em; text-align: center; font-variant-numeric: tabular-nums; font-size: .9rem; }
+.train-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 16px;
+  padding: 16px;
+  overflow: auto;
 }
-.switch-track {
-  position: relative;
-  flex: none;
-  width: 38px;
-  height: 22px;
-  border-radius: 11px;
-  background: var(--border);
-  transition: background .15s;
+.train-body[hidden] { display: none; }
+
+/* Le tapis : un partenaire en face, les adversaires de chaque côté. */
+.train-table {
+  display: grid;
+  grid-template-areas: "top top top" "left center right" "bottom bottom bottom";
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 1.3fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  justify-items: center;
+  min-height: 460px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--felt);
 }
-.switch-track::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 16px;
-  height: 16px;
+.tseat { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.tseat-top { grid-area: top; }
+.tseat-left { grid-area: left; }
+.tseat-right { grid-area: right; }
+.tseat-bottom { grid-area: bottom; }
+.tcenter { grid-area: center; width: 100%; max-width: 300px; }
+
+/* La plaque d'un siège : l'initiale sur fond blanc, rouge si son camp est
+   vulnérable ; jaune quand c'est à lui de parler. */
+.tplate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px 3px 3px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .35);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.tplate.speaking { background: #ffd54f; color: #1d1d1d; }
+.tletter {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: #fff;
+  color: #1a432c;
+  font-weight: 700;
+}
+.tplate.vul .tletter { background: #c62828; color: #fff; }
+.tme { font-weight: 400; opacity: .85; }
+.tdealer {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: var(--panel);
+  background: #fff;
+  color: #1a432c;
+  font-size: .7rem;
+  font-weight: 700;
+}
+.tpts { color: rgba(255, 255, 255, .85); font-size: .8rem; }
+
+/* Les dos de cartes, en éventail serré. */
+.tbacks { display: flex; padding-left: 14px; }
+.tback {
+  width: 24px;
+  height: 34px;
+  margin-left: -14px;
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 3px;
+  background: repeating-linear-gradient(45deg, #1f4f9c 0 3px, #2f66bf 3px 6px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
-  transition: transform .15s;
 }
-.switch input:checked + .switch-track { background: var(--accent); }
-.switch input:checked + .switch-track::after { transform: translateX(16px); }
-.switch input:focus-visible + .switch-track {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.tbacks-side .tback { width: 20px; height: 30px; margin-left: -13px; }
+
+/* Votre main, carte par carte. */
+.tcards { display: flex; justify-content: center; padding-left: 22px; }
+/* L'indice (rang et couleur) dans le coin gauche : c'est la seule partie de
+   la carte que la suivante ne recouvre pas. */
+.tcard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50px;
+  height: 70px;
+  margin-left: -22px;
+  padding: 3px 0 0 4px;
+  border: 1px solid #b9b9b9;
+  border-radius: 6px;
+  background: #fff;
+  color: #151515;
+  line-height: 1.05;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
 }
-.quiz-mode-hint {
-  margin: 4px 0 0;
+.tcard b { font-size: 1.1rem; letter-spacing: -1px; }
+.tcard i { font-style: normal; font-size: 1.2rem; }
+.tcard.red { color: #c62828; }
+
+/* Une main dévoilée en fin d'enchère. */
+.topen {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: .9rem;
+}
+
+/* La boîte des enchères, au centre du tapis. */
+.tcenter .tauction {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+  color: var(--ink);
+  font-weight: 600;
+}
+.tauction th {
+  padding: 5px 0;
+  background: #eef1ef;
+  color: #1d1d1d;
+  font-weight: 700;
+}
+.tauction th.vul { background: #c62828; color: #fff; }
+.tauction th.me { box-shadow: inset 0 -3px 0 var(--accent); }
+.tauction td {
+  height: 28px;
+  padding: 2px 4px;
+  border: none;
   text-align: center;
-  color: var(--muted);
-  font-size: .8rem;
+  white-space: nowrap;
+}
+.tauction td.bid-cell.correct { background: var(--success-bg); color: var(--accent); }
+.tauction td.bid-cell.incorrect { background: var(--error-bg); color: var(--red); }
+.tauction td.bid-cell.incorrect .expected { color: var(--accent); margin-left: 2px; }
+.tauction td.tpending { color: var(--accent); animation: tpending 1s ease-in-out infinite alternate; }
+@keyframes tpending { from { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .tauction td.tpending { animation: none; } }
+.tauction td.bid-cell.just-revealed { animation: bid-reveal .6s ease-out; }
+.tcontract {
+  margin-top: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .35);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.train-side { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.train-side .quiz-turn { margin: 0; }
+.train-side .quiz-turn:empty { display: none; }
+.train-side .bidding-box { margin: 0; }
+.train-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.train-actions button { margin: 0; }
+.train-actions:not(:has(button:not(.hidden))) { display: none; }
+
+/* Le score de la séance. */
+.train-summary {
+  flex: 1;
+  overflow: auto;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+.train-summary h3 { margin: 0 0 6px; text-align: center; }
+.train-summary .score-big { font-size: 2rem; font-weight: 700; text-align: center; }
+.train-summary > p { text-align: center; margin: 4px 0 16px; }
+.train-tables { margin: 0; padding: 0; list-style: none; }
+.train-tables > li { padding: 10px 0; border-top: 1px solid var(--border); }
+.train-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.train-row-n { font-weight: 600; }
+.train-row-label { flex: 1; min-width: 8em; color: var(--muted); font-size: .9rem; }
+.train-row-score { font-variant-numeric: tabular-nums; font-weight: 600; }
+.train-misses { margin: 6px 0 0; padding-left: 1.4em; font-size: .9rem; }
+.train-misses li { margin: 3px 0; }
+.train-misses .recap-bids { margin-right: 8px; white-space: nowrap; }
+.train-summary-actions { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+.train-summary-actions button { margin: 0; }
+
+@media (max-width: 900px) {
+  .train-body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .train-head { flex-wrap: wrap; gap: 6px 10px; padding: 8px 10px; }
+  .train-where { order: 2; flex-basis: calc(100% - 7em); }
+  .train-nav { order: 3; flex-basis: 100%; justify-content: space-between; margin-left: 0; }
+  .train-count { min-width: 0; flex: 1; }
+  .train-body { padding: 10px; gap: 10px; }
+  /* Sur un écran étroit, les adversaires se réduisent à leur plaque : la
+     place va à la boîte des enchères et à votre main. */
+  .train-table {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    min-height: 0;
+    padding: 10px 6px;
+    gap: 8px;
+  }
+  .tseat-left .tbacks, .tseat-right .tbacks { display: none; }
+  .tplate { gap: 4px; padding-right: 6px; font-size: .8rem; }
+  .tplate .tname { display: none; }
+  .tseat-bottom .tplate .tname { display: inline; }
+  .tbacks .tback { width: 18px; height: 26px; margin-left: -12px; }
+  .tcards { padding-left: 14px; }
+  .tcard { width: 36px; height: 54px; margin-left: -15px; padding-left: 2px; }
+  .tcard b, .tcard i { font-size: .95rem; }
+  .tcenter .tauction { font-size: .85rem; }
+  .topen { font-size: .75rem; padding: 4px 6px; }
 }
 
 /* ---------- écran d'accueil ---------- */
@@ -2578,14 +2651,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .bb-btn.bb-strain { font-size: 1.05rem; min-height: 44px; }
 .bb-keys { margin: 2px 0 0; font-size: .8rem; text-align: center; }
 @media (pointer: coarse) { .bb-keys { display: none; } }
-
-/* La table du questionnaire vit dans le panneau de la donne : visible tant
-   qu'un questionnaire est ouvert sur la donne masquée. Afficher la donne en
-   cours de route rend la table en lecture, complète, à sa place. */
-.quiz-table { display: none; }
-main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-table { display: grid; }
-main:has(#quiz-panel:not(.hidden)) #input-panel.quiz-running .quiz-hidden-note { margin-bottom: 10px; }
-@media print { .quiz-table { display: none !important; } }
 
 /* ---------- téléphone : la barre d'onglets au bas de l'écran ---------- */
 

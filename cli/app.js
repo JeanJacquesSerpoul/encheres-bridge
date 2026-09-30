@@ -258,6 +258,8 @@ const UI_TEXT = {
     dealWord: "Donne",
     boardWord: "plateau",
     dealerWord: "donneur",
+    dealPrev: "Donne précédente",
+    dealNext: "Donne suivante",
     runAuction: "Afficher les enchères",
     yourHand: "Votre main",
     seatTip: (seat) => `Votre main est en ${seat}`,
@@ -454,6 +456,8 @@ const UI_TEXT = {
     dealWord: "Deal",
     boardWord: "board",
     dealerWord: "dealer",
+    dealPrev: "Previous deal",
+    dealNext: "Next deal",
     runAuction: "Run the auction",
     yourHand: "Your hand",
     seatTip: (seat) => `Your hand is ${seat}`,
@@ -834,8 +838,14 @@ function applyLang() {
 
 // Loads a PBN text into the textarea and resets everything that depends on
 // the previous deal (quiz in progress, displayed result, deal picker).
+// Le fichier de pbn/ chargé par « Donnes thématiques » : sa ligne est cochée
+// dans la fenêtre, et c'est son nom que garde « Sauver le PBN » (le titre de
+// la donne porte alors le libellé du thème). Toute autre donne l'efface.
+let currentThemeFile = null;
+
 function loadPbn(text, fileName) {
   pushUndo();
+  currentThemeFile = null;
   $("#pbn").value = text;
   // Quitter une donne chargée remet les sélecteurs sur « Aléatoire » : ce
   // qu'ils affichaient venait du fichier, ce n'était pas une préférence de
@@ -891,7 +901,7 @@ $("#save-btn").addEventListener("click", () => {
   const url = URL.createObjectURL(new Blob([text + "\n"], { type: "text/plain" }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = (!multi && $("#file-name").textContent.trim()) || defaultPbnName(lang);
+  a.download = (!multi && (currentThemeFile || $("#file-name").textContent.trim())) || defaultPbnName(lang);
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -1181,13 +1191,9 @@ function fillThemeRow(li, th) {
   const lang = $("#lang").value;
   li.textContent = themeName(th, lang);
   li.classList.toggle("loading", !th.title);
-  // Le nom du fichier, en second, quand le libellé le cache.
-  if (th.title && themeName(th, lang) !== th.file) {
-    const file = document.createElement("span");
-    file.className = "themes-file";
-    file.textContent = th.file;
-    li.append(file);
-  }
+  // Le thème chargé : coché, et annoncé comme tel.
+  if (th.file === currentThemeFile) li.setAttribute("aria-current", "true");
+  else li.removeAttribute("aria-current");
 }
 
 function refreshThemeRow(th) {
@@ -1233,7 +1239,9 @@ function filterThemes(resetActive) {
   status.textContent = !themeFiles.length ? t.themesEmpty
     : themeShown.length ? "" : searching ? t.themesSearching : t.themesNone;
   status.hidden = !status.textContent;
-  let next = resetActive || !before ? 0 : themeShown.indexOf(before);
+  // Sans désignation à suivre, elle part du thème chargé, sinon du premier.
+  const current = themeShown.findIndex((th) => th.file === currentThemeFile);
+  let next = before && !resetActive ? themeShown.indexOf(before) : !themesInput.value.trim() ? current : 0;
   if (next < 0) next = 0;
   setThemeActive(themeShown.length ? next : -1);
   themesInput.setAttribute("aria-expanded", String(themeShown.length > 0));
@@ -1265,7 +1273,8 @@ async function chooseTheme(th) {
     const text = await loadThemeText(th);
     themesDialog.close();
     setError($("#cons-error"), "");
-    loadPbn(text, th.file);
+    loadPbn(text, themeName(th, $("#lang").value));
+    currentThemeFile = th.file;
   } catch (err) {
     status.textContent = t.themesReadError.replace("{file}", th.file);
     status.hidden = false;
@@ -1361,9 +1370,17 @@ function dealLabel(block, idx) {
   const t = UI_TEXT[$("#lang").value];
   const dealer = block.match(/\[Dealer\s+"([^"]+)"\]/);
   const board = block.match(/\[Board\s+"([^"]+)"\]/);
+  const lang = $("#lang").value;
   let label = `${t.dealWord} ${idx + 1}`;
-  if (board) label += ` (${t.boardWord} ${board[1]})`;
-  if (dealer) label += ` — ${t.dealerWord} ${dealer[1]}`;
+  // Le plateau seulement s'il apprend quelque chose : « Donne 3 (plateau 3) »
+  // disait deux fois la même chose.
+  if (board && board[1].trim() !== String(idx + 1)) label += ` (${t.boardWord} ${board[1]})`;
+  // Le siège en toutes lettres, dans la langue de la page : la lettre PBN
+  // brute écrivait « donneur W » en français.
+  if (dealer) {
+    const seat = dealer[1].trim().toUpperCase();
+    label += ` — ${t.dealerWord} ${(SEAT_LABEL[lang] && SEAT_LABEL[lang][seat]) || dealer[1]}`;
+  }
   return label;
 }
 
@@ -1434,6 +1451,7 @@ function refreshDealSelector(resetSelection) {
       .map((b, i) => `<option value="${i}">${esc(dealLabel(b, i))}</option>`)
       .join("");
     sel.value = String(selectedGameIdx);
+    renderDealStep();
     row.classList.remove("hidden");
     if (resetSelection) highlightSelectedDeal(false);
   }
@@ -1533,15 +1551,30 @@ function normalizeVul(value) {
   }
 }
 
-$("#deal-select").addEventListener("change", () => {
-  selectedGameIdx = +$("#deal-select").value;
+// Passe à la donne `idx` du fichier : par le sélecteur, ou par ses boutons
+// précédente et suivante.
+function selectGame(idx) {
+  if (idx < 0 || idx >= pbnGames.length) return;
+  selectedGameIdx = idx;
+  $("#deal-select").value = String(idx);
+  renderDealStep();
   resetQuiz();
   hideNewDealInQuizMode();
   hideResult();
   syncTagSelects();
   syncZonesFromPbn();
   highlightSelectedDeal(true);
-});
+}
+
+// Les boutons s'éteignent sur la première et la dernière donne.
+function renderDealStep() {
+  $("#deal-prev-btn").disabled = selectedGameIdx <= 0;
+  $("#deal-next-btn").disabled = selectedGameIdx >= pbnGames.length - 1;
+}
+
+$("#deal-select").addEventListener("change", () => selectGame(+$("#deal-select").value));
+$("#deal-prev-btn").addEventListener("click", () => selectGame(selectedGameIdx - 1));
+$("#deal-next-btn").addEventListener("click", () => selectGame(selectedGameIdx + 1));
 
 // Hand-editing the PBN text wins over the cards laid out in the panel; our own
 // write-backs (writeZonesToPbn) are skipped, or they would empty the neutral
@@ -1949,6 +1982,7 @@ function undoSnapshot() {
     idx: selectedGameIdx,
     fromFile: dealFromFile,
     fileName: $("#file-name").textContent,
+    themeFile: currentThemeFile,
   };
 }
 
@@ -1973,6 +2007,7 @@ function undo() {
   selectedGameIdx = snap.idx;
   dealFromFile = snap.fromFile;
   $("#file-name").textContent = snap.fileName;
+  currentThemeFile = snap.themeFile;
   refreshDealSelector(false);
   gatherMissingCards();
   clearSelection();
@@ -2265,6 +2300,14 @@ const CHEVRON_SVG = `${SVG_OPEN}
   <path d="m6 9 6 6 6-6"/>
 </svg>`;
 
+// Donne précédente et suivante d'un fichier.
+const PREV_SVG = `${SVG_OPEN}
+  <path d="m15 18-6-6 6-6"/>
+</svg>`;
+const NEXT_SVG = `${SVG_OPEN}
+  <path d="m9 18 6-6-6-6"/>
+</svg>`;
+
 // Une boîte d'où sort une flèche : partager la donne hors de la page.
 const SHARE_SVG = `${SVG_OPEN}
   <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/>
@@ -2426,6 +2469,8 @@ function renderDealActions() {
   const t = UI_TEXT[lang];
   setCommandButton("#random-btn", DICE_SVG, t.randomDeal, true);
   setCommandButton("#new-deal-more-btn", CHEVRON_SVG, t.moreDeals);
+  setCommandButton("#deal-prev-btn", PREV_SVG, t.dealPrev);
+  setCommandButton("#deal-next-btn", NEXT_SVG, t.dealNext);
   setCommandButton("#share-menu-btn", SHARE_SVG, t.shareMenu, true);
   setCommandButton("#themes-btn", BOOK_SVG, t.themeDeals, true);
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave, true);

@@ -155,3 +155,24 @@ func TestThirdSuitRaiseWithoutFit(t *testing.T) {
 		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
 	}
 }
+
+// TestForcingBidsGetAnAnswer: after a forcing bid, partner no longer passes
+// for want of a rule. 1♣ 1♠ 2♣ 2♥ 3♥ reaches 4♥; 1SA (2♠) 3♠ (stopper ask)
+// gets its 3SA.
+func TestForcingBidsGetAnAnswer(t *testing.T) {
+	for _, c := range []struct{ pbn, want string }{
+		{`[Dealer "N"]
+[Vulnerable "NS"]
+[Deal "N:K.QT97.AK2.K7653 J654.J832.J9.QJ2 AT983.AK64.876.T Q72.5.QT543.A984"]`,
+			"N:1T E:Passe S:1P W:Passe N:2T E:Passe S:2C W:Passe N:3C E:Passe S:4C"},
+		{`[Dealer "N"]
+[Vulnerable "All"]
+[Deal "N:AK.852.Q6543.KQ6 Q76542.AK3.K8.87 J8.Q96.AJ92.AT95 T93.JT74.T7.J432"]`,
+			"N:1SA E:2P S:3P W:Passe N:3SA"},
+	} {
+		got := formatAuction(NewEngine(mustParsePBN(t, c.pbn)).Run())
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("enchères :\n %s\nattendu :\n %s …", got, c.want)
+		}
+	}
+}

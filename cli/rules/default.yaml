@@ -715,6 +715,25 @@
   meaning: "Bicolore 5-5 majeur, 15+ H"
   meaning_en: "5-5 in the majors, 15+ HCP"
   status: sef
+# L'ouvreur choisit la majeure de la manche : le 5-5 est forcing de manche.
+# en: Opener picks the major for game: the 5-5 is game forcing.
+- id: "1NT.2H.2S.55.3H.4{M}"
+  for: [{M: H, o: S}, {M: S, o: H}]
+  seq: ["1NT 2H 2S 3H", "1NT (X) 2H 2S 3H"]
+  call: "4{M}"
+  cond: "{M} >= 3 and {M} >= {o}"
+  forcing: SO
+  meaning: "Choisit la majeure de la manche (3 cartes au moins)"
+  meaning_en: "Picks the major for game (at least 3 cards)"
+  status: infere
+- id: 1NT.2H.2S.55.3H.3NT
+  seq: ["1NT 2H 2S 3H", "1NT (X) 2H 2S 3H"]
+  call: 3NT
+  cond: "true"
+  forcing: SO
+  meaning: "Doubleton dans les deux majeures : 3SA"
+  meaning_en: "Doubleton in both majors: 3NT"
+  status: infere
 - id: 1NT.2H.2S.55.4H
   seq: ["1NT 2H 2S", "1NT (X) 2H 2S"]
   call: 4H
@@ -1531,10 +1550,10 @@
   for: [{M: H}, {M: S}]
   seq: "P 1{M}"
   call: 2NT
-  cond: "{M} >= 4 and min(S, H, D, C) == 1 and 10 <= hld <= 12"
+  cond: "{M} >= 4 and min(S, H, D, C) <= 1 and 10 <= hld <= 12"
   forcing: F1
-  meaning: "Super Drury : 4 atouts, un singleton, 11 HLD"
-  meaning_en: "Super Drury: 4-card support, a singleton, 11 HLD"
+  meaning: "Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD"
+  meaning_en: "Super Drury: 4-card support, a singleton or void, 11 HLD"
   status: sef
   alert: true
   trump: "{M}"
@@ -1542,7 +1561,7 @@
   for: [{M: H}, {M: S}]
   seq: "P 1{M}"
   call: 2C
-  cond: "{M} >= 3 and 11 <= dh <= 12 and not ({M} >= 4 and min(S, H, D, C) <= 1)"
+  cond: "{M} >= 3 and dh >= 11 and not ({M} >= 4 and min(S, H, D, C) <= 1)"
   forcing: F1
   meaning: "Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD"
   meaning_en: "Drury: 3-card support (or 4 without a singleton), 11-12 HLD"
@@ -1702,10 +1721,10 @@
   for: [{M: S, s: D, c: 3D}, {M: S, s: H, c: 3H}, {M: S, s: C, c: 3S}, {M: H, s: D, c: 3D}, {M: H, s: C, c: 3H}, {M: H, s: S, c: 3S}]
   seq: "P 1{M} 2NT 3C"
   call: "{c}"
-  cond: "{s} == 1"
+  cond: "{s} <= 1"
   forcing: F1
-  meaning: "Singleton dans la couleur"
-  meaning_en: "Singleton in the suit"
+  meaning: "Singleton (ou chicane) dans la couleur"
+  meaning_en: "Singleton (or void) in the suit"
   status: sef
   alert: true
 - id: "sdrury.{M}.{s}.bw"
@@ -3200,9 +3219,25 @@
   seq: "1C 1S 2C 2H"
   call: 3H
   cond: "H >= 4"
-  forcing: F1
+  forcing: NF
   meaning: "Fit ♥"
   meaning_en: "♥ fit"
+  status: infere
+- id: 1C.1S.2C.2H.3H.4H
+  seq: "1C 1S 2C 2H 3H"
+  call: 4H
+  cond: "hl >= 12"
+  forcing: SO
+  meaning: "Manche à ♥"
+  meaning_en: "Game in ♥"
+  status: infere
+- id: 1C.1S.2C.2H.3H.p
+  seq: "1C 1S 2C 2H 3H"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "11 HL : partielle"
+  meaning_en: "11 HL: partscore"
   status: infere
 - id: 1C.1S.2C.2H.2S
   seq: "1C 1S 2C 2H"
@@ -3821,6 +3856,31 @@
   meaning_en: "Asks for a ♠ stopper"
   status: sef
   alert: true
+- id: rub.2S.3S.3NT
+  seq: "1NT (2S) 3S"
+  call: 3NT
+  cond: "stop('S')"
+  forcing: SO
+  meaning: "Arrêt ♠"
+  meaning_en: "♠ stopper"
+  status: infere
+- id: rub.2S.3S.4H
+  seq: "1NT (2S) 3S"
+  call: 4H
+  cond: "H >= 4"
+  forcing: NF
+  meaning: "Pas d'arrêt ♠, 4 cœurs"
+  meaning_en: "No ♠ stopper, 4 hearts"
+  status: infere
+- id: "rub.2S.3S.4{m}"
+  for: [{m: C, o: D, cond: "C >= D"}, {m: D, o: C, cond: "true"}]
+  seq: "1NT (2S) 3S"
+  call: "4{m}"
+  cond: "{cond}"
+  forcing: NF
+  meaning: "Pas d'arrêt ♠ : la plus longue mineure"
+  meaning_en: "No ♠ stopper: the longer minor"
+  status: infere
 - id: "rub.{i}.pass"
   for: [{i: 2H}, {i: 2S}]
   seq: "1NT ({i})"
@@ -3859,6 +3919,33 @@
   meaning: "10+ H, fitté ou non"
   meaning_en: "10+ HCP, with or without a fit"
   status: sef
+- id: "truscott.{M}.2NT.4M"
+  for: [{M: H}, {M: S}]
+  seq: "1{M} (X) 2NT"
+  call: "4{M}"
+  cond: "hld >= 14"
+  forcing: SO
+  meaning: "Accepte l'invitation : manche"
+  meaning_en: "Accepts the invitation: game"
+  status: infere
+- id: "truscott.{M}.2NT.3M"
+  for: [{M: H}, {M: S}]
+  seq: "1{M} (X) 2NT"
+  call: "3{M}"
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum : refuse"
+  meaning_en: "Minimum: declines"
+  status: infere
+- id: "truscott.{M}.XX.p"
+  for: [{M: H}, {M: S}]
+  seq: "1{M} (X) XX"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Passe : le répondant décrira sa main"
+  meaning_en: "Pass: responder will describe the hand"
+  status: infere
 - id: "truscott.{M}.3M"
   for: [{M: H}, {M: S}]
   seq: "1{M} (X)"

@@ -221,3 +221,15 @@ func TestStrongHandsInCompetition(t *testing.T) {
 		}
 	}
 }
+
+// TestLevy2NTOverWeakTwoDouble: (2♥) X – 2SA forcing de manche (Lévy),
+// 3♣ contre banal, 3♥ cue-bid (4 piques sans tenue ♥), 4♠ par le contreur.
+func TestLevy2NTOverWeakTwoDouble(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "N"]
+[Vulnerable "NS"]
+[Deal "N:T9864.A85.Q5.AJ5 7532.63.AK83.Q92 .KQJT92.J642.863 AKQJ.74.T97.KT74"]`)
+	const want = "N:Passe E:Passe S:2C W:X N:Passe E:2SA S:Passe W:3T N:Passe E:3C S:Passe W:4P"
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}

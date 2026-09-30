@@ -1538,6 +1538,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    bornée entre le téléphone et le grand écran. Dos, plaques, boîte des
    enchères et textes en découlent (--fs). */
 .train-table {
+  position: relative;
   container-type: inline-size;
   --cw: clamp(34px, min(7cqw, 9dvh), 112px);
   --fs: clamp(13px, calc(var(--cw) * .3), 28px);
@@ -1561,6 +1562,31 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .tseat-right { grid-area: right; }
 .tseat-bottom { grid-area: bottom; }
 .tcenter { grid-area: center; width: 100%; max-width: calc(var(--cw) * 6.5); font-size: var(--fs); }
+
+/* Copier le PBN : un petit bouton posé en haut à droite du tapis. */
+.train-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, .3);
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.train-copy-btn svg { width: 17px; height: 17px; }
+.train-copy-btn:hover:not(:disabled) { background: rgba(0, 0, 0, .5); border-color: #fff; }
+.train-copy-btn.copied { color: #ffd54f; border-color: #ffd54f; }
+.train-copy-btn:disabled { opacity: .4; cursor: not-allowed; }
 
 /* La plaque d'un siège : l'initiale sur fond blanc, rouge si son camp est
    vulnérable ; jaune quand c'est à lui de parler. */

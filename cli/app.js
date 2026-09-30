@@ -273,7 +273,6 @@ const UI_TEXT = {
     bbStrain: "Dénomination",
     bbKeys: "Clavier : 1 à 7 pour le palier, C D H S N pour ♣ ♦ ♥ ♠ SA, P pour passe, X pour contre.",
     quizAboutToBid: (seat) => `${seat} va annoncer.`,
-    quizCorrect: "✓ Correct !",
     quizWrong: "✗ Différent du système SEF",
     quizExpected: "Enchère attendue",
     treeShow: "Voir l'arbre de décision",
@@ -478,7 +477,6 @@ const UI_TEXT = {
     bbStrain: "Strain",
     bbKeys: "Keyboard: 1 to 7 for the level, C D H S N for ♣ ♦ ♥ ♠ NT, P to pass, X to double.",
     quizAboutToBid: (seat) => `${seat} is about to bid.`,
-    quizCorrect: "✓ Correct!",
     quizWrong: "✗ Not what the SEF system bids",
     quizExpected: "Expected call",
     treeShow: "Show the decision tree",
@@ -4875,8 +4873,8 @@ function renderBiddingStrains() {
 // ---------- s'entraîner : la table ----------
 //
 // Une séance d'entraînement : on choisit sa main, puis on enchérit sur des
-// donnes tirées au hasard, comme « Donne aléatoire » (parmi les donnes
-// thématiques si l'option est cochée, voir drawPracticePBN). Chaque donne est
+// donnes distribuées au hasard ou tirées des donnes thématiques (voir
+// drawPracticePBN). Chaque donne est
 // une « table » : l'enchère complète du moteur, et ce que l'on y a répondu.
 // Le thème d'une donne n'apparaît pas à la table, pour ne rien souffler :
 // seul le score de « Terminer » le cite, une fois les enchères faites.
@@ -5162,20 +5160,24 @@ function chooseBid(bidText) {
   quiz.idx++;
 
   $("#bidding-box").classList.add("hidden");
+  // La bonne enchère ne s'annonce pas : la donne continue aussitôt. Seule
+  // l'erreur arrête la table, le temps de lire l'enchère attendue.
+  if (isCorrect) {
+    renderQuizStep();
+    return;
+  }
   renderTrainTable(null);
 
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   const fb = $("#quiz-feedback");
-  fb.className = "quiz-feedback " + (isCorrect ? "correct" : "incorrect");
-  const verdict = esc(isCorrect ? t.quizCorrect : t.quizWrong);
-  const refLine = isCorrect
-    ? ""
-    : `<div>${withColon(esc(t.quizExpected), lang)} <b>${bidHTML(entry.bid, lang)}</b></div>`;
+  fb.className = "quiz-feedback incorrect";
+  const verdict = esc(t.quizWrong);
+  const refLine = `<div>${withColon(esc(t.quizExpected), lang)} <b>${bidHTML(entry.bid, lang)}</b></div>`;
   const commentLine = entry.comment
     ? `<div class="muted">${esc(entry.comment)}</div>`
     : "";
-  const treeLine = isCorrect ? "" : decisionTreeToggleHTML(entry, lang);
+  const treeLine = decisionTreeToggleHTML(entry, lang);
   fb.innerHTML = `<span class="verdict">${verdict}</span>${refLine}${commentLine}${treeLine}`;
   fb.classList.remove("hidden");
   $("#train-turn").textContent = "";
@@ -5730,8 +5732,8 @@ const TUTORIAL_STEPS = [
     en: ["The table", "Your hand at the bottom, the other three face down; in the middle the auction box, vulnerable seats in red. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {
-    fr: ["La réponse", "Vous voyez aussitôt si votre enchère est celle du SEF ; sinon, l'enchère attendue et son explication, et l'arbre de décision sur votre main. Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent ; ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
-    en: ["The answer", "You see at once whether your call is the SEF one; if not, the expected call with its explanation, and the decision tree on your hand. Continue moves on.\nOnce the auction is over, all four hands are shown; ‹ and › scroll through the deals played, Next deal draws a new one."],
+    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent ; ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
+    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown; ‹ and › scroll through the deals played, Next deal draws a new one."],
   },
   {
     fr: ["Le score", "Terminer affiche votre score sur toute la séance, puis donne par donne : contrat, score et enchères ratées avec l'enchère attendue.\nRevoir rouvre une donne ; Reprendre l'entraînement revient à la table."],

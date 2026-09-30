@@ -165,8 +165,13 @@ async function scenes(browser, lang, dir) {
   await page.waitForTimeout(300);
   await page.screenshot({ path: out(12), type: "jpeg", quality: QUALITY });
 
-  // 13. La réponse : correcte ou non, avec l'enchère attendue.
-  await page.locator("#bidding-box .bb-pass").click();
+  // 13. La réponse, après une erreur : la bonne enchère ne s'affiche pas, la
+  // donne continue. Passe, sauf si c'est justement l'enchère attendue : alors
+  // la première couleur permise, au palier présélectionné.
+  const passIsRight = await page.evaluate(() =>
+    quiz.result.auction[quiz.idx].bid === document.querySelector("#bidding-box .bb-pass").dataset.bid);
+  if (passIsRight) await page.locator("#bidding-box .bb-strain:not([disabled])").first().click();
+  else await page.locator("#bidding-box .bb-pass").click();
   await page.waitForSelector("#quiz-feedback:not(.hidden)", { timeout: 10000 }).catch(() => {});
   await page.waitForTimeout(300);
   await page.screenshot({ path: out(13), type: "jpeg", quality: QUALITY });

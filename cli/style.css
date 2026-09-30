@@ -318,6 +318,11 @@ main.workspace { max-width: 1440px; }
 .row-centered .error:empty { display: none; }
 /* Même raison pour le message d'attente : vide, il décalerait le centrage. */
 #cons-busy:empty { display: none; }
+/* Le sélecteur de donne entre ses boutons précédente et suivante : les trois
+   restent sur une ligne, le sélecteur cédant la largeur qui manque. */
+.deal-step { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-width: 0; }
+.deal-step select { min-width: 0; max-width: 100%; }
+.deal-step .cmd-btn { flex: none; }
 /* Un libellé et son champ, insécables : quand la ligne se replie, ils passent
    ensemble à la suivante. */
 .field { display: inline-flex; align-items: center; gap: 8px; }
@@ -1807,7 +1812,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .themes-item.active { background: var(--tint); outline: 2px solid var(--accent); outline-offset: -2px; }
 /* Libellé pas encore lu : le nom du fichier, en retrait. */
 .themes-item.loading { color: var(--muted); }
-.themes-file { margin-left: auto; flex: none; color: var(--muted); font-size: .8rem; }
+.themes-item[aria-current="true"]::after { content: "✓"; margin-left: auto; color: var(--accent); }
 .themes-more { height: 1px; }
 
 /* ---------- tutoriel ---------- */

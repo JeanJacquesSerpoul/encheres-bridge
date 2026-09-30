@@ -358,7 +358,8 @@ Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **vot
 - **Terminer** affiche le **score de la séance** : les enchères conformes au SEF sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).
   - **Revoir** rouvre une donne ; **Reprendre l'entraînement** revient à la table.
   - La croix, ou Échap, ferme l'entraînement.
-- **Copier le PBN** : le petit bouton en haut à droite du tapis copie le PBN de la donne de la table dans le presse-papiers.
+- **Copier le PBN** : le premier petit bouton en haut à droite du tapis copie le PBN de la donne de la table dans le presse-papiers.
+- **Faire tourner la table** : le second tourne la vue d'un quart de tour, dans le sens des aiguilles d'une montre. On enchérit toujours pour le même siège, dont la main reste face visible où qu'elle soit (en cartes en haut ou en bas, couleur par couleur sur un côté). La rotation vaut pour toute la séance.
 
 ### Ce que le navigateur retient
 

@@ -314,6 +314,7 @@ const UI_TEXT = {
     trainNextTip: "Donne suivante",
     trainFinish: "Terminer",
     trainCopy: "Copier le PBN de la donne",
+    trainRotate: "Faire tourner la table",
     trainCount: (k, n) => `Donne ${k} / ${n}`,
     trainYou: "(vous)",
     trainAuctionOver: "Enchère terminée : les quatre mains sont dévoilées.",
@@ -515,6 +516,7 @@ const UI_TEXT = {
     trainNextTip: "Next deal",
     trainFinish: "Finish",
     trainCopy: "Copy the deal's PBN",
+    trainRotate: "Rotate the table",
     trainCount: (k, n) => `Deal ${k} / ${n}`,
     trainYou: "(you)",
     trainAuctionOver: "Auction over: all four hands are shown.",
@@ -2398,6 +2400,12 @@ const PRINT_SVG = `${SVG_OPEN}
 
 // Deux feuilles décalées : copier. Puis la coche qui la remplace un instant,
 // une fois la copie faite.
+// Une flèche en arc de cercle : faire tourner la table d'un quart de tour.
+const ROTATE_SVG = `${SVG_OPEN}
+  <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+  <path d="M21 3v6h-6"/>
+</svg>`;
+
 const COPY_SVG = `${SVG_OPEN}
   <rect x="9" y="9" width="12" height="12" rx="2"/>
   <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
@@ -2750,9 +2758,10 @@ function renderBoundsCards() {
   setCommandButton("#train-next", NEXT_SVG, UI_TEXT[lang].trainNextTip);
   setCommandButton("#train-finish", CHECK_SVG, UI_TEXT[lang].trainFinish, true);
   setCommandButton("#train-copy-btn", COPY_SVG, UI_TEXT[lang].trainCopy);
+  setCommandButton("#train-rotate-btn", ROTATE_SVG, UI_TEXT[lang].trainRotate);
   // Dans la fenêtre modale, l'infobulle de la page passe dessous : le nom
   // s'affiche aussi par l'infobulle native.
-  $("#train-copy-btn").title = $("#train-copy-btn").dataset.tip || "";
+  for (const id of ["#train-copy-btn", "#train-rotate-btn"]) $(id).title = $(id).dataset.tip || "";
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
   $("#cards-help").textContent = t.cardsHelp;
@@ -4892,10 +4901,18 @@ const TRAIN_SUITS = ["spades", "hearts", "clubs", "diamonds"];
 
 // Le siège de chaque place, votre main en bas : à gauche le joueur qui parle
 // après vous, en face le partenaire, à droite celui qui parle avant vous.
-function trainPlaces(seat) {
-  const left = NEXT_SEAT[seat];
+// Le bouton de rotation fait tourner la table d'un quart de tour dans le
+// sens des aiguilles d'une montre, `rot` fois : chaque siège passe à la place
+// suivante, et celui de droite descend en bas. On enchérit toujours pour le
+// même siège ; seule la vue change.
+const PREV_SEAT = { N: "W", E: "N", S: "E", W: "S" };
+
+function trainPlaces(seat, rot = 0) {
+  let bottom = seat;
+  for (let i = 0; i < rot % 4; i++) bottom = PREV_SEAT[bottom];
+  const left = NEXT_SEAT[bottom];
   const top = NEXT_SEAT[left];
-  return { bottom: seat, left, top, right: NEXT_SEAT[top] };
+  return { bottom, left, top, right: NEXT_SEAT[top] };
 }
 
 function seatVulnerable(seat, vul) {
@@ -4957,7 +4974,7 @@ function trainAuctionHTML(table, speaker) {
       if (c.pending) return `<td class="tpending">?</td>`;
       let cls = "bid-cell";
       if (c.isUser) cls += c.isCorrect ? " correct" : " incorrect";
-      else if (c === last && !table.done) cls += " just-revealed";
+      else if (c === last && !table.done && !(train && train.still)) cls += " just-revealed";
       const content = c.expected
         ? `<s>${bidHTML(c.bid, lang)}</s> <span class="expected">${bidHTML(c.expected, lang)}</span>`
         : bidHTML(c.bid, lang);
@@ -4980,14 +4997,18 @@ function trainAuctionHTML(table, speaker) {
 // parle. Une table finie montre les quatre mains.
 function renderTrainTable(speaker) {
   const table = quiz;
-  const places = trainPlaces(table.seat);
+  const places = trainPlaces(table.seat, train ? train.rot : 0);
   for (const [place, seat] of Object.entries(places)) {
     const el = $("#tseat-" + place);
     const hand = table.result.hands[seat];
-    const open = place === "bottom" || table.done;
+    const mine = seat === table.seat;
+    const open = mine || table.done;
+    const side = place === "left" || place === "right";
     let body;
-    if (!open) body = trainBacksHTML(place === "left" || place === "right");
-    else if (place === "bottom") body = trainCardsHTML(hand, table.lang);
+    if (!open) body = trainBacksHTML(side);
+    // Votre main s'étale en cartes en haut ou en bas ; sur un côté, où la
+    // place manque, elle se lit couleur par couleur, comme les mains dévoilées.
+    else if (mine && !side) body = trainCardsHTML(hand, table.lang);
     else body = `<div class="topen">${suitLinesHTML(hand, table.lang)}</div>`;
     const pts = open ? `<span class="tpts">${hand.h_points} H</span>` : "";
     el.innerHTML = trainPlateHTML(seat, table, seat === speaker) + body + pts;
@@ -5000,6 +5021,7 @@ function renderTrainNav() {
   const n = train.tables.length;
   const table = quiz;
   $("#train-copy-btn").disabled = !(table && table.pbn);
+  $("#train-rotate-btn").disabled = !table;
   $("#train-count").textContent = t.trainCount(train.cur + 1, n);
   $("#train-prev").disabled = train.cur <= 0;
   // Suivante : une table déjà jouée, ou une nouvelle donne une fois l'enchère finie.
@@ -5337,7 +5359,7 @@ $("#train-summary").addEventListener("click", (ev) => {
 // La séance commence : la fenêtre s'ouvre sur une première donne.
 function startTraining(seat) {
   saveStored(TRAIN_SEAT_KEY, seat);
-  train = { seat, lang: $("#lang").value, tables: [], cur: -1 };
+  train = { seat, lang: $("#lang").value, tables: [], cur: -1, rot: 0 };
   quiz = null;
   for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
   $("#tcenter").innerHTML = "";
@@ -5350,6 +5372,7 @@ function startTraining(seat) {
   $("#train-prev").disabled = true;
   $("#train-next").disabled = true;
   $("#train-copy-btn").disabled = true;
+  $("#train-rotate-btn").disabled = true;
   $("#train-new-btn").classList.add("hidden");
   trainDialog.showModal();
   newTrainTable();
@@ -5392,6 +5415,19 @@ $("#train-next").addEventListener("click", () => train && trainNext());
 $("#train-new-btn").addEventListener("click", () => train && trainNext());
 $("#train-finish").addEventListener("click", () => train && train.tables.length && finishTraining());
 $("#train-close").addEventListener("click", () => trainDialog.close());
+// Un quart de tour de la table ; la rotation vaut pour toute la séance.
+$("#train-rotate-btn").addEventListener("click", () => {
+  if (!train || !quiz) return;
+  train.rot = (train.rot + 1) % 4;
+  const speaker = !quiz.done && quiz.idx < quiz.result.auction.length
+    ? quiz.result.auction[quiz.idx].player : null;
+  // Le verdict attend « Continuer » : personne n'a encore la parole.
+  const waiting = !$("#quiz-continue-btn").classList.contains("hidden");
+  // Tourner la table ne rejoue pas l'arrivée de la dernière enchère.
+  train.still = true;
+  renderTrainTable(waiting ? null : speaker);
+  train.still = false;
+});
 // Le PBN de la donne de la table, dans le presse-papiers.
 $("#train-copy-btn").addEventListener("click", async () => {
   if (!quiz || !quiz.pbn) return;

@@ -465,13 +465,97 @@ button:disabled { opacity: .6; cursor: wait; }
 }
 .cmd-btn svg { width: 21px; height: 21px; }
 
-/* Donneur et vulnérabilité voisinent avec ces boutons dans la même rangée :
-   à 33 px contre 44, ils flottaient au milieu. Ils prennent leur hauteur et
-   leur arrondi — la rangée se lit alors d'un trait. */
-#deal-actions select {
-  min-height: 44px;
-  border-radius: 12px;
+/* Les commandes de la donne : les quatre boutons sur une rangée, Donneur et
+   Vulnérabilité sur la suivante. Chaque champ est une pastille de la hauteur
+   et de l'arrondi des boutons : le libellé à gauche, séparé d'un filet, la
+   valeur à droite avec sa flèche. */
+#deal-actions {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  container-type: inline-size;
 }
+.deal-cmds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+#deal-actions .field-group { gap: 10px; justify-content: center; }
+#deal-actions .field {
+  position: relative;
+  gap: 0;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  transition: border-color .15s, background .15s;
+}
+#deal-actions .field:hover:not(:has(select:disabled)) { border-color: var(--accent); }
+#deal-actions .field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent); }
+#deal-actions .field label {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 14px;
+  border-right: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+#deal-actions .field select {
+  height: 100%;
+  min-height: 0;
+  padding: 0 34px 0 12px;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+#deal-actions .field select:focus { outline: none; }
+/* La flèche, dessinée comme celle des menus à libellé. */
+#deal-actions .field::after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -6px;
+  border: solid var(--muted);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+/* Quand les quatre boutons ne tiennent plus sur une ligne, ils passent en
+   grille 2 × 2 de largeurs égales plutôt que de laisser le dernier seul sur
+   la suivante ; les deux champs prennent la même grille. */
+@container (max-width: 820px) {
+  .deal-cmds,
+  #deal-actions .field-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: min(100%, 520px);
+  }
+  .deal-cmds > .cmd-btn, .deal-cmds > .menu { width: 100%; }
+  .deal-cmds > .menu:not(.split-btn) > .cmd-btn { flex: 1; }
+  .deal-cmds > .split-btn > .cmd-btn:first-child { flex: 1; min-width: 0; }
+  .deal-cmds > .split-btn > .split-caret { flex: none; }
+  #deal-actions .field { min-width: 0; }
+  #deal-actions .field select { flex: 1; min-width: 0; }
+}
+/* Le dessin garde sa taille quand le bouton se resserre. */
+.deal-cmds .cmd-btn svg { flex: none; }
+#deal-actions .field:has(select:disabled) { background: var(--disabled-bg); }
+#deal-actions .field:has(select:disabled)::after { opacity: .4; }
+#deal-actions .field select:disabled { background: transparent; cursor: not-allowed; }
 .cmd-btn:hover:not(:disabled) {
   background: var(--tint);
   border-color: var(--accent);
@@ -1194,26 +1278,11 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .panel { padding: 12px 10px; border-radius: 8px; }
   .row { gap: 8px; }
 
-  /* Les commandes de la donne sont devenues des icônes : les quatre tiennent
-     sur une ligne, même à 320 px, et la grille de deux colonnes qui les
-     remettait en ordre n'a plus d'objet — elle existait parce que « Sauver le
-     PBN » finissait à côté de « Donneur », comme s'ils allaient ensemble.
-     Restent les deux champs, qu'on envoie sous les boutons pour la même
-     raison, libellé au-dessus. */
-  #deal-actions #photo-status { flex-basis: 100%; text-align: center; }
-  #deal-actions .field-group {
-    flex-basis: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  #deal-actions .field {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 3px;
-  }
-  #deal-actions .field label { font-size: .8rem; color: var(--muted); }
-  #deal-actions select { width: 100%; }
+  /* Sur téléphone, les quatre boutons en grille 2 × 2, de largeurs égales ;
+     les deux champs côte à côte, sur toute la largeur. */
+  #deal-actions { gap: 8px; }
+  #deal-actions #photo-status { text-align: center; }
+
 
   /* Primary actions become full-width, easy to tap. */
   .row button.primary { flex: 1 1 100%; }
@@ -2549,10 +2618,32 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 
 @media (max-width: 480px) {
-  /* Sur un téléphone, les libellés de la barre restent, mais celui du menu
-     de partage s'efface derrière son icône : la rangée tient sur une ligne. */
-  #share-menu-btn .cmd-label { display: none; }
   .cmd-btn.cmd-labeled { padding: 0 12px; }
+  /* Sur un téléphone, la grille 2 × 2 des commandes garde tous ses libellés,
+     « Partager » compris : un cran plus petits, avec moins de marge. */
+  .deal-cmds .cmd-btn.cmd-labeled { gap: 6px; padding: 0 8px; font-size: .88rem; }
+  .deal-cmds .cmd-btn svg { width: 18px; height: 18px; }
+  .deal-cmds .split-btn .split-caret { width: 30px; }
+  /* Les deux champs : le libellé en petites capitales au-dessus de la
+     valeur, dans la même pastille. */
+  #deal-actions .field {
+    flex-direction: column;
+    align-items: stretch;
+    height: 50px;
+  }
+  #deal-actions .field label {
+    align-self: auto;
+    padding: 5px 12px 0;
+    border-right: none;
+    font-size: .68rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  #deal-actions .field select { height: auto; flex: 1; padding: 0 30px 2px 12px; border-radius: 0 0 12px 12px; }
+  #deal-actions .field::after { top: 62%; }
+}
+@media (max-width: 360px) {
+  .deal-cmds .cmd-btn svg { display: none; }
 }
 
 /* ---------- la table en lecture, la table en édition ----------

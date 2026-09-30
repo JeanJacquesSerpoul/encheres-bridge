@@ -5633,8 +5633,8 @@ const TUTORIAL_STEPS = [
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {
-    fr: ["S'entraîner", "Le bouton S'entraîner, à côté de Donne aléatoire : choisissez votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont tirées au hasard, comme par Donne aléatoire, et vous ne voyez que votre main."],
-    en: ["Practise", "The Practise button, next to Random deal: choose your hand (North, East, South or West).\nDeals are drawn at random, like Random deal's, and you only see your own hand."],
+    fr: ["S'entraîner", "Le bouton S'entraîner, après Partager : choisissez votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont tirées au hasard, comme par Donne aléatoire, et vous ne voyez que votre main."],
+    en: ["Practise", "The Practise button, after Share: choose your hand (North, East, South or West).\nDeals are drawn at random, like Random deal's, and you only see your own hand."],
   },
   {
     fr: ["La table", "Votre main en bas, les trois autres dos tournés ; au centre la boîte des enchères, sièges vulnérables en rouge. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],

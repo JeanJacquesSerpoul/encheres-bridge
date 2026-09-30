@@ -293,7 +293,7 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
 
-La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit de chaque fichier de la page que son début (requête HTTP `Range`) pour en tirer le libellé. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure. Le fichier entier n'est lu qu'au choix du thème.
+La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit que les fichiers de la page affichée, pour en tirer le libellé ; ils sont gardés, et le choix d'un thème le charge aussitôt. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure.
 
 ```json
 { "files": ["4e-couleur-forcing.pbn", "drury.pbn", "2-trefle-fort.pbn"] }

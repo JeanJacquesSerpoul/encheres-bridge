@@ -106,7 +106,7 @@ function renderIaHint() {
     `${t.serverLocal} (${readIaLocal().replace(/^https?:\/\//, "")})`;
 }
 
-// La donne exemple, rappelée par son bouton : une manche à SA par Stayman.
+// La donne exemple, celle de la première visite : une manche à SA par Stayman.
 const EXAMPLE_PBN = `[Dealer "S"]
 [Vulnerable "All"]
 [Deal "S:943.T3.Q753.Q983 J8.A54.AKT8.K765 AKT.J92.J964.J42 Q7652.KQ876.2.AT"]`;
@@ -170,7 +170,11 @@ const UI_TEXT = {
     dealPanel: "Donne",
     fileLoad: "Charger un fichier .pbn",
     randomDeal: "Donne aléatoire",
-    exampleDeal: "Donne exemple",
+    themeDeals: "Donnes thématiques",
+    themesClose: "Fermer la liste",
+    themesLoading: "Chargement des fichiers…",
+    themesEmpty: "Aucun fichier de donnes thématiques.",
+    themesCount: "{n} donnes",
     fileSave: "Sauver le PBN",
     fileSaveStem: "donne",
     photoDeal: "Photographier les quatre mains",
@@ -359,7 +363,11 @@ const UI_TEXT = {
     dealPanel: "Deal",
     fileLoad: "Load a .pbn file",
     randomDeal: "Random deal",
-    exampleDeal: "Example deal",
+    themeDeals: "Themed deals",
+    themesClose: "Close the list",
+    themesLoading: "Loading the files…",
+    themesEmpty: "No themed deal files.",
+    themesCount: "{n} deals",
     fileSave: "Save the PBN",
     fileSaveStem: "deal",
     photoDeal: "Photograph the four hands",
@@ -803,6 +811,7 @@ function applyLang() {
   document.title = t.appTitle;
   renderRulesSystems();
   renderDealActions();
+  renderThemes();
   renderIaHint();
   renderSeatCompass();
   for (const opt of $("#dealer").options) {
@@ -1018,9 +1027,102 @@ async function drawRandomDeal() {
 
 $("#random-btn").addEventListener("click", drawRandomDeal);
 
-$("#example-btn").addEventListener("click", () => {
-  setError($("#cons-error"), "");
-  loadPbn(EXAMPLE_PBN);
+// ---------- donnes thématiques ----------
+
+// Les fichiers PBN de pbn/, que liste pbn/index.json (un site statique ne sait
+// pas lister un dossier). Chacun porte son libellé en tête, une ligne par
+// langue, avant la première donne :
+//   % Titre-FR: 4e couleur forcing
+//   % Titre-EN: Fourth suit forcing
+// Sans ces lignes, la liste affiche le nom du fichier. Les fichiers sont lus à
+// la première ouverture de la fenêtre, puis gardés : un clic charge aussitôt.
+const THEMES_INDEX_URL = "pbn/index.json";
+const THEME_FILE = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pbn$/i;
+const themesDialog = $("#themes-dialog");
+let themeFiles = null; // [{ file, title: { fr, en }, text, count }]
+
+function pbnTitles(text) {
+  const title = {};
+  for (const line of text.split(/\r?\n/)) {
+    const m = line.match(/^%\s*Titre-(FR|EN)\s*:\s*(.*?)\s*$/i);
+    if (m) title[m[1].toLowerCase()] = m[2];
+    else if (/^\s*\[/.test(line)) break; // la première donne : l'en-tête est fini
+  }
+  return title;
+}
+
+async function loadThemes() {
+  let files = [];
+  try {
+    const resp = await fetch(THEMES_INDEX_URL, { cache: "no-cache" });
+    if (resp.ok) {
+      const body = await resp.json();
+      files = (body && Array.isArray(body.files) ? body.files : [])
+        .filter((f) => typeof f === "string" && THEME_FILE.test(f));
+    }
+  } catch (err) {
+    /* pas de manifeste : aucune donne thématique */
+  }
+  const read = await Promise.all(files.map(async (file) => {
+    try {
+      const resp = await fetch(`pbn/${file}`, { cache: "no-cache" });
+      if (!resp.ok) return null;
+      const text = await resp.text();
+      return { file, title: pbnTitles(text), text, count: splitPbnGames(text).length };
+    } catch (err) {
+      return null; // un fichier illisible est omis, les autres restent
+    }
+  }));
+  return read.filter(Boolean);
+}
+
+function renderThemes() {
+  if (!themeFiles) return;
+  const t = UI_TEXT[$("#lang").value];
+  const lang = $("#lang").value;
+  $("#themes-status").textContent = themeFiles.length ? "" : t.themesEmpty;
+  $("#themes-status").hidden = themeFiles.length > 0;
+  $("#themes-list").replaceChildren(...themeFiles.map((th) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "themes-item";
+    const name = document.createElement("span");
+    name.className = "themes-name";
+    name.textContent = th.title[lang] || th.title.fr || th.title.en || th.file;
+    const count = document.createElement("span");
+    count.className = "themes-count";
+    count.textContent = t.themesCount.replace("{n}", th.count);
+    btn.append(name, count);
+    btn.addEventListener("click", () => {
+      themesDialog.close();
+      setError($("#cons-error"), "");
+      loadPbn(th.text, th.file);
+    });
+    const li = document.createElement("li");
+    li.append(btn);
+    return li;
+  }));
+}
+
+async function openThemes() {
+  closeMenus();
+  if (!themeFiles) {
+    $("#themes-status").textContent = UI_TEXT[$("#lang").value].themesLoading;
+    $("#themes-status").hidden = false;
+    $("#themes-list").replaceChildren();
+  }
+  themesDialog.showModal();
+  $("#themes-close").focus();
+  if (!themeFiles) themeFiles = await loadThemes();
+  renderThemes();
+  const first = $("#themes-list .themes-item");
+  if (first) first.focus();
+}
+
+$("#themes-btn").addEventListener("click", openThemes);
+$("#themes-close").addEventListener("click", () => themesDialog.close());
+themesDialog.addEventListener("click", (ev) => {
+  if (ev.target === themesDialog) themesDialog.close();
 });
 
 $("#dealer").addEventListener("change", () => {
@@ -1934,7 +2036,7 @@ const DICE_SVG = `${SVG_OPEN}
   <path d="M8 16h.01"/><path d="M16 16h.01"/>
 </svg>`;
 
-// Un livre ouvert : la donne exemple, celle du manuel.
+// Un livre ouvert : les donnes thématiques.
 const BOOK_SVG = `${SVG_OPEN}
   <path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/>
   <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>
@@ -2123,7 +2225,7 @@ function renderDealActions() {
   setCommandButton("#random-btn", DICE_SVG, t.randomDeal, true);
   setCommandButton("#new-deal-more-btn", CHEVRON_SVG, t.moreDeals);
   setCommandButton("#share-menu-btn", SHARE_SVG, t.shareMenu, true);
-  setCommandButton("#example-btn", BOOK_SVG, t.exampleDeal, true);
+  setCommandButton("#themes-btn", BOOK_SVG, t.themeDeals, true);
   setCommandButton("#save-btn", EXPORT_SVG, t.fileSave, true);
   setCommandButton("#pbn-toggle-btn", CODE_SVG, t.pbnToggle, true);
   setCommandButton("#pbn-copy-btn", COPY_SVG, t.pbnCopy);
@@ -5094,8 +5196,8 @@ const TUTORIAL_STEPS = [
     en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
-    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète.\nLa flèche à côté propose la donne exemple ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
-    en: ["Getting a deal", "Random deal draws a complete deal.\nThe arrow next to it offers the example deal or a .pbn file (a tournament file too: a selector then picks the deal)."],
+    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
+    en: ["Getting a deal", "Random deal draws a complete deal.\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
   },
   {
     fr: ["Partager la donne", "Copiez un lien qui contient la donne, sauvez-la dans un fichier .pbn, ou affichez son texte PBN pour le copier ou y coller une donne reçue.\nDonneur et Vulnérabilité s'imposent ou se tirent au sort."],

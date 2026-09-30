@@ -286,3 +286,14 @@ func TestLawOfTotalTricksRaises(t *testing.T) {
 		}
 	}
 }
+
+// TestWeakTwoCountsHonourPoints: the weak two counts honour points (6-10 H),
+// not length points. North's 9 H and six spades (11 HL) open 2♠.
+func TestWeakTwoCountsHonourPoints(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:AKT976.J5.T95.JT 5.AKQ642.K8743.8 32.8.AQJ62.AQ932 QJ84.T973..K7654"]`)
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, "N:2P") {
+		t.Fatalf("enchères : %s", got)
+	}
+}

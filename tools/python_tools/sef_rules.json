@@ -247,20 +247,20 @@
   "id": "open.2S",
   "seq": "",
   "call": "2S",
-  "cond": "S == 6 and ((vul and 7 <= hl <= 10 and top('S') >= 2) or (not vul and opp_vul and 5 <= hl <= 10) or (not vul and not opp_vul and 6 <= hl <= 10))",
+  "cond": "S == 6 and ((vul and 7 <= hcp <= 10 and top('S') >= 2) or (not vul and opp_vul and 5 <= hcp <= 10) or (not vul and not opp_vul and 6 <= hcp <= 10))",
   "forcing": "NF",
-  "meaning": "2 faible : 6 cartes, 6-10 HL (vulnérable : 7-10 HL et 2 gros honneurs ; vulnérabilité favorable : 5-10 HL)",
-  "meaning_en": "Weak two: 6 cards, 6-10 HL (vulnerable: 7-10 HL and 2 high honors; favorable vulnerability: 5-10 HL)",
+  "meaning": "2 faible : 6 cartes, 6-10 H (vulnérable : 7-10 H et 2 gros honneurs ; vulnérabilité favorable : 5-10 H)",
+  "meaning_en": "Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP)",
   "status": "choix"
  },
  {
   "id": "open.2H",
   "seq": "",
   "call": "2H",
-  "cond": "H == 6 and ((vul and 7 <= hl <= 10 and top('H') >= 2) or (not vul and opp_vul and 5 <= hl <= 10) or (not vul and not opp_vul and 6 <= hl <= 10))",
+  "cond": "H == 6 and ((vul and 7 <= hcp <= 10 and top('H') >= 2) or (not vul and opp_vul and 5 <= hcp <= 10) or (not vul and not opp_vul and 6 <= hcp <= 10))",
   "forcing": "NF",
-  "meaning": "2 faible : 6 cartes, 6-10 HL (vulnérable : 7-10 HL et 2 gros honneurs ; vulnérabilité favorable : 5-10 HL)",
-  "meaning_en": "Weak two: 6 cards, 6-10 HL (vulnerable: 7-10 HL and 2 high honors; favorable vulnerability: 5-10 HL)",
+  "meaning": "2 faible : 6 cartes, 6-10 H (vulnérable : 7-10 H et 2 gros honneurs ; vulnérabilité favorable : 5-10 H)",
+  "meaning_en": "Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP)",
   "status": "choix"
  },
  {

@@ -352,7 +352,7 @@ Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **vot
 - **À votre tour**, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), puis Passe, X (contre) et XX (surcontre).
   - Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre).
   - Elle n'ouvre que les enchères **légales**.
-- **Le verdict est immédiat** : votre enchère est comparée à celle du moteur, avec l'enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
+- **Seule l'erreur s'affiche** : votre enchère est comparée à celle du moteur. Conforme, elle passe sans message et la donne continue ; sinon la table s'arrête sur l'enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
 - **L'enchère finie**, les quatre mains se dévoilent et le contrat s'affiche, **sans score**. **Donne suivante** tire la donne suivante.
 - **‹ et ›** font défiler les donnes déjà jouées, dans leur état final. › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.
 - **Terminer** affiche le **score de la séance** : les enchères conformes au SEF sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).

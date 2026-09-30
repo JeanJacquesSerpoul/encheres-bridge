@@ -1,3 +1,11 @@
 {
-  "files": ["4e-couleur-forcing.pbn", "drury.pbn", "2-trefle-fort.pbn", "roudi.pbn", "2-faible.pbn", "2-carreau-fm.pbn", "contre-appel.pbn"]
+  "files": [
+    { "file": "4e-couleur-forcing.pbn", "fr": "4e couleur forcing", "en": "Fourth suit forcing" },
+    { "file": "drury.pbn", "fr": "Drury", "en": "Drury" },
+    { "file": "2-trefle-fort.pbn", "fr": "2♣ fort indéterminé", "en": "Strong 2♣ (catch-all)" },
+    { "file": "roudi.pbn", "fr": "Roudi", "en": "Roudi (checkback after 1NT rebid)" },
+    { "file": "2-faible.pbn", "fr": "2 faible (2♥ / 2♠) et sa défense", "en": "Weak two (2♥ / 2♠) and its defence" },
+    { "file": "2-carreau-fm.pbn", "fr": "2♦ forcing de manche", "en": "Game-forcing 2♦" },
+    { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" }
+  ]
 }

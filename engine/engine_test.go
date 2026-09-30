@@ -233,3 +233,24 @@ func TestLevy2NTOverWeakTwoDouble(t *testing.T) {
 		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
 	}
 }
+
+// TestDefenceAgainstPreempts: (3♣) X – 4♣ cue-bid with both majors 4-4,
+// the doubler names his four-card major; (4♠) 4SA two-suiter, partner
+// names the cheapest acceptable minor.
+func TestDefenceAgainstPreempts(t *testing.T) {
+	for _, c := range []struct{ pbn, want string }{
+		{`[Dealer "N"]
+[Vulnerable "EW"]
+[Deal "N:95.T.632.AJ98752 AJT74.AJ532.AK7. 862.K96.T984.QT3 KQ3.Q874.QJ5.K64"]`,
+			"N:3T E:X S:Passe W:4T N:Passe E:4C"},
+		{`[Dealer "W"]
+[Vulnerable "All"]
+[Deal "N:.A7.AK984.AKJ862 9.KT9843.Q752.T5 K874.J52.JT63.93 AQJT6532.Q6..Q74"]`,
+			"W:4P N:4SA E:Passe S:5K"},
+	} {
+		got := formatAuction(NewEngine(mustParsePBN(t, c.pbn)).Run())
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("enchères :\n %s\nattendu :\n %s …", got, c.want)
+		}
+	}
+}

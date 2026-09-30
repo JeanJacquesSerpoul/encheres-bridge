@@ -5789,63 +5789,345 @@
   meaning_en: "Pass"
   status: infere
 
-# --- défense contre les barrages de 3 : 3SA, contre, intervention (position directe et réveil)
-# en: defence against three-level preempts: 3NT, double, overcall (direct and balancing seat)
-- id: "def.{o}.3NT"
-  for: [{o: 3C, os: C}, {o: 3D, os: D}, {o: 3H, os: H}, {o: 3S, os: S}]
-  seq: ["({o})", "({o}) P"]
-  call: 3NT
-  cond: "16 <= hcp <= 20 and stop('{os}') and min(S, H, D, C) >= 1"
-  forcing: SO
-  meaning: "3SA : 16-20 H, arrêt dans leur couleur"
-  meaning_en: "3NT: 16-20 HCP, stopper in their suit"
-  status: sef
-- id: "def.{o}.X"
-  for: [{o: 3C, t: "C <= 2 and D >= 3 and H >= 3 and S >= 3"}, {o: 3D, t: "D <= 2 and C >= 3 and H >= 3 and S >= 3"}, {o: 3H, t: "H <= 2 and S >= 4"}, {o: 3S, t: "S <= 2 and H >= 4"}]
-  seq: ["({o})", "({o}) P"]
-  call: X
-  cond: "(hcp >= 15 and {t}) or hcp >= 18"
-  forcing: TO
-  meaning: "Contre : 15+ H, court dans leur couleur (ou 18+ H)"
-  meaning_en: "Double: 15+ HCP, short in their suit (or 18+ HCP)"
-  status: sef
-- id: "def.{o}.{c}"
-  for: [{o: 3C, c: 3D, s: D}, {o: 3C, c: 3H, s: H}, {o: 3C, c: 3S, s: S}, {o: 3D, c: 3H, s: H}, {o: 3D, c: 3S, s: S}, {o: 3H, c: 3S, s: S}, {o: 3H, c: 4C, s: C}, {o: 3H, c: 4D, s: D}, {o: 3S, c: 4H, s: H}, {o: 3S, c: 4C, s: C}, {o: 3S, c: 4D, s: D}]
+# --- défense contre les barrages de 3 et de 4 (M. Bessis, Bridgeur n° 758, 2003)
+# en: defence against three- and four-level preempts (M. Bessis, Bridgeur no. 758, 2003)
+# Prudent en 2e position : on n'intervient qu'avec une main qui aurait parlé sur une ouverture au palier de 1 (pas de barrage sur un barrage). Très actif en réveil : une courte dans leur couleur suffit, même sans l'ouverture. Les enchères ont le même sens dans les deux positions ; la couleur promet 6 cartes (souvent 5 au palier de 3), le contre est d'appel, 3SA est naturel, 4SA montre un bicolore.
+# en: Careful in second seat: act only with a hand that would have acted over a one-level opening (no preempt over a preempt). Very active in the balancing seat: shortness in their suit is enough, even without opening values. Calls mean the same in both seats; a suit shows 6 cards (often 5 at the three level), the double is for takeout, 3NT is natural, 4NT shows a two-suiter.
+# --- barrages de 3 : bicolores (5-5, mains prometteuses)
+# en: three-level preempts: two-suiters (5-5, promising hands)
+- id: "dbar.{o}.bic.{c}"
+  for: [{o: 3C, c: 4C, t: "D >= 5 and H >= 5", l: "♦ et ♥"}, {o: 3C, c: 4D, t: "H >= 5 and S >= 5", l: "majeur"}, {o: 3D, c: 4D, t: "H >= 5 and S >= 5", l: "majeur"},
+        {o: 3H, c: 4H, t: "S >= 5 and max(C, D) >= 5", l: "♠ et une mineure"}, {o: 3H, c: 4NT, t: "C >= 5 and D >= 5", l: "mineur"},
+        {o: 3S, c: 4S, t: "H >= 5 and max(C, D) >= 5", l: "♥ et une mineure"}, {o: 3S, c: 4NT, t: "C >= 5 and D >= 5", l: "mineur"}]
   seq: ["({o})", "({o}) P"]
   call: "{c}"
-  cond: "{s} >= 6 and hcp_in('{s}') >= 5 and 13 <= hl <= 18 and {s} == max(S, H, D, C)"
+  cond: "{t} and losers <= 4"
+  forcing: F1
+  meaning: "Bicolore {l} 5-5, 4 perdantes au plus"
+  meaning_en: "5-5 two-suiter ({l}), at most 4 losers"
+  status: choix
+  alert: true
+# --- barrages de 3 : position directe
+# en: three-level preempts: direct seat
+- id: "dbar.{o}.3NT"
+  for: [{o: 3C, os: C}, {o: 3D, os: D}, {o: 3H, os: H}, {o: 3S, os: S}]
+  seq: "({o})"
+  call: 3NT
+  cond: "16 <= hcp <= 21 and stop('{os}') and (balanced or semibalanced or max(C, D) >= 6)"
+  forcing: SO
+  meaning: "3SA naturel : 16+ H, tenue dans leur couleur (préféré à la mineure au palier de 4)"
+  meaning_en: "Natural 3NT: 16+ HCP, stopper in their suit (preferred to the minor at the four level)"
+  status: choix
+- id: "dbar.{o}.X"
+  for: [{o: 3C, t: "C <= 2 and H >= 3 and S >= 3"}, {o: 3D, t: "D <= 2 and H >= 3 and S >= 3"},
+        {o: 3H, t: "H <= 2 and (S >= 4 or (S >= 3 and hcp >= 16))"}, {o: 3S, t: "S <= 2 and (H >= 4 or (H >= 3 and hcp >= 16))"}]
+  seq: "({o})"
+  call: X
+  cond: "hcp >= 14 and {t}"
+  forcing: TO
+  meaning: "Contre d'appel : 14+ H, court dans leur couleur, 3 cartes au moins dans la majeure non nommée"
+  meaning_en: "Takeout double: 14+ HCP, short in their suit, at least 3 cards in the unbid major"
+  status: choix
+- id: "dbar.{o}.{c}"
+  for: [{o: 3C, c: 3D, s: D, f3: true}, {o: 3C, c: 3H, s: H, f3: true}, {o: 3C, c: 3S, s: S, f3: true}, {o: 3D, c: 3H, s: H, f3: true}, {o: 3D, c: 3S, s: S, f3: true}, {o: 3H, c: 3S, s: S, f3: true},
+        {o: 3H, c: 4C, s: C, f3: false}, {o: 3H, c: 4D, s: D, f3: false}, {o: 3S, c: 4H, s: H, f3: false}, {o: 3S, c: 4C, s: C, f3: false}, {o: 3S, c: 4D, s: D, f3: false}]
+  seq: "({o})"
+  call: "{c}"
+  cond: "{s} == max(S, H, D, C) and top('{s}') >= 2 and hcp <= 19 and (({s} >= 6 and hcp >= 12) or ({s} == 5 and hcp >= 14 and {f3}))"
   forcing: NF
-  meaning: "Intervention : belle 6e, 13+ HL"
-  meaning_en: "Overcall: good six-card suit, 13+ HL"
-  status: infere
-- id: "def.{o}.pass"
+  meaning: "Intervention : belle 6e (5e au palier de 3 avec 14+ H)"
+  meaning_en: "Overcall: good six-card suit (five-card at the three level with 14+ HCP)"
+  status: choix
+- id: "dbar.{o}.X.fort"
   for: [{o: 3C}, {o: 3D}, {o: 3H}, {o: 3S}]
-  seq: ["({o})", "({o}) P"]
+  seq: "({o})"
+  call: X
+  cond: "hcp >= 18 and min(S, H, D, C) >= 1"
+  forcing: TO
+  meaning: "Contre : 18+ H, sans unicolore à décrire"
+  meaning_en: "Double: 18+ HCP, no one-suiter to show"
+  status: choix
+- id: "dbar.{o}.pass"
+  for: [{o: 3C}, {o: 3D}, {o: 3H}, {o: 3S}]
+  seq: "({o})"
   call: P
   cond: "true"
   forcing: NF
-  meaning: "Pas d'intervention"
-  meaning_en: "No overcall"
-  status: infere
-# --- réponses au contre d'un barrage de 3
-# en: answers to the double of a three-level preempt
-- id: "advX.{o}.{r}.{n}"
-  for: [{o: 3C, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp >= 8)"}, {o: 3C, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3C, n: 3, r: 3NT, t: "stop('C') and hcp >= 7"}, {o: 3C, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3C, n: 5, r: 3H, t: "H >= 4"}, {o: 3C, n: 6, r: 3D, t: "true"},
-        {o: 3D, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp >= 8)"}, {o: 3D, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3D, n: 3, r: 3NT, t: "stop('D') and hcp >= 7"}, {o: 3D, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3D, n: 5, r: 3H, t: "H >= 4"}, {o: 3D, n: 6, r: 4C, t: "C >= 5"}, {o: 3D, n: 7, r: 3H, t: "H >= S"}, {o: 3D, n: 8, r: 3S, t: "true"},
+  meaning: "Pas d'intervention : pas de barrage sur un barrage"
+  meaning_en: "No action: no preempt over a preempt"
+  status: choix
+# --- barrages de 3 : réveil, dynamique
+# en: three-level preempts: balancing seat, active
+- id: "dbar.{o}.rev.X.fort"
+  for: [{o: 3C}, {o: 3D}, {o: 3H}, {o: 3S}]
+  seq: "({o}) P"
+  call: X
+  cond: "hcp >= 17"
+  forcing: TO
+  meaning: "Contre de réveil : main forte"
+  meaning_en: "Balancing double: strong hand"
+  status: choix
+- id: "dbar.{o}.rev.X.maj"
+  for: [{o: 3C, os: C, t: "((H >= 3 and S >= 3) or (hcp >= 14 and min(H, S) >= 2)) and max(H, S) >= 4"}, {o: 3D, os: D, t: "((H >= 3 and S >= 3) or (hcp >= 14 and min(H, S) >= 2)) and max(H, S) >= 4"}, {o: 3H, os: H, t: "S >= 4"}, {o: 3S, os: S, t: "H >= 4"}]
+  seq: "({o}) P"
+  call: X
+  cond: "hcp >= 13 and {os} <= 3 and {t}"
+  forcing: TO
+  meaning: "Contre de réveil : 13+ H et une majeure 4e non nommée"
+  meaning_en: "Balancing double: 13+ HCP and a four-card unbid major"
+  status: choix
+- id: "dbar.{o}.rev.3NT"
+  for: [{o: 3C, os: C}, {o: 3D, os: D}, {o: 3H, os: H}, {o: 3S, os: S}]
+  seq: "({o}) P"
+  call: 3NT
+  cond: "14 <= hcp <= 20 and stop('{os}')"
+  forcing: SO
+  meaning: "3SA de réveil : 14+ H, tenue dans leur couleur"
+  meaning_en: "Balancing 3NT: 14+ HCP, stopper in their suit"
+  status: choix
+- id: "dbar.{o}.rev.{c}"
+  for: [{o: 3C, c: 3D, s: D, f3: true}, {o: 3C, c: 3H, s: H, f3: true}, {o: 3C, c: 3S, s: S, f3: true}, {o: 3D, c: 3H, s: H, f3: true}, {o: 3D, c: 3S, s: S, f3: true}, {o: 3H, c: 3S, s: S, f3: true},
+        {o: 3H, c: 4C, s: C, f3: false}, {o: 3H, c: 4D, s: D, f3: false}, {o: 3S, c: 4H, s: H, f3: false}, {o: 3S, c: 4C, s: C, f3: false}, {o: 3S, c: 4D, s: D, f3: false}]
+  seq: "({o}) P"
+  call: "{c}"
+  cond: "{s} == max(S, H, D, C) and top('{s}') >= 1 and 8 <= hcp <= 15 and ({s} >= 6 or ({s} == 5 and {f3}))"
+  forcing: NF
+  meaning: "Réveil : 5 cartes au moins, 8-15 H"
+  meaning_en: "Balancing overcall: at least 5 cards, 8-15 HCP"
+  status: choix
+- id: "dbar.{o}.rev.X"
+  for: [{o: 3C, os: C, t: "H >= 3 and S >= 3"}, {o: 3D, os: D, t: "H >= 3 and S >= 3"}, {o: 3H, os: H, t: "S >= 3"}, {o: 3S, os: S, t: "H >= 3"}]
+  seq: "({o}) P"
+  call: X
+  cond: "({os} <= 1 and hcp >= 8 and {t}) or ({os} <= 2 and hcp >= 11 and {t})"
+  forcing: TO
+  meaning: "Contre de réveil : main bien distribuée (8+ H), courte dans leur couleur"
+  meaning_en: "Balancing double: well-shaped hand (8+ HCP), short in their suit"
+  status: choix
+- id: "dbar.{o}.rev.pass"
+  for: [{o: 3C}, {o: 3D}, {o: 3H}, {o: 3S}]
+  seq: "({o}) P"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Pas de réveil"
+  meaning_en: "No balancing action"
+  status: choix
+# --- réponses au contre d'un barrage de 3 : le plein de sa main, sans dépasser facilement la manche
+# en: answers to the double of a three-level preempt: bid the full value of the hand, without easily going past game
+- id: "dbar.{o}.X.cue"
+  for: [{o: 3C, c: 4C, t: "(S == 4 and H == 4 and hcp >= 8) or hcp >= 13"}, {o: 3D, c: 4D, t: "(S == 4 and H == 4 and hcp >= 8) or hcp >= 13"}, {o: 3H, c: 4H, t: "hcp >= 13"}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "{c}"
+  cond: "{t}"
+  forcing: F1
+  meaning: "Cue-bid : les deux majeures 4-4 (sur une mineure), ou une main assez forte pour le palier de 5"
+  meaning_en: "Cue-bid: both majors 4-4 (over a minor), or a hand strong enough for the five level"
+  status: choix
+  alert: true
+- id: "dbar.{o}.X.{r}.{n}"
+  for: [{o: 3C, n: 1, r: 4S, t: "(S >= 5 and S >= H) or (S >= 4 and hcp >= 8 and H <= 3)"}, {o: 3C, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3C, n: 3, r: 3NT, t: "stop('C') and hcp >= 7"}, {o: 3C, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3C, n: 5, r: 3H, t: "H >= 4"}, {o: 3C, n: 6, r: 3D, t: "true"},
+        {o: 3D, n: 1, r: 4S, t: "(S >= 5 and S >= H) or (S >= 4 and hcp >= 8 and H <= 3)"}, {o: 3D, n: 2, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 8)"}, {o: 3D, n: 3, r: 3NT, t: "stop('D') and hcp >= 7"}, {o: 3D, n: 4, r: 3S, t: "S >= 4 and S >= H"}, {o: 3D, n: 5, r: 3H, t: "H >= 4"}, {o: 3D, n: 6, r: 4C, t: "C >= 5"}, {o: 3D, n: 7, r: 3H, t: "H >= S"}, {o: 3D, n: 8, r: 3S, t: "true"},
         {o: 3H, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp >= 7)"}, {o: 3H, n: 2, r: 3NT, t: "stop('H') and hcp >= 7"}, {o: 3H, n: 3, r: 3S, t: "S >= 4"}, {o: 3H, n: 4, r: 4D, t: "D >= 5 and D >= C"}, {o: 3H, n: 5, r: 4C, t: "C >= 5"}, {o: 3H, n: 6, r: 3S, t: "true"},
         {o: 3S, n: 1, r: 4H, t: "H >= 5 or (H >= 4 and hcp >= 7)"}, {o: 3S, n: 2, r: 3NT, t: "stop('S') and hcp >= 7"}, {o: 3S, n: 3, r: 4D, t: "D >= 5 and D >= C"}, {o: 3S, n: 4, r: 4C, t: "C >= 5"}, {o: 3S, n: 5, r: 4H, t: "H >= 4"}, {o: 3S, n: 6, r: 4D, t: "D > C"}, {o: 3S, n: 7, r: 4C, t: "true"}]
   seq: ["({o}) X", "({o}) P X"]
   call: "{r}"
   cond: "{t}"
   forcing: NF
-  meaning: "Réponse au contre d'un barrage"
-  meaning_en: "Answer to the double of a preempt"
-  status: infere
-
-# --- défense contre les barrages de 4
-# en: defence against four-level preempts
+  meaning: "Réponse au contre d'un barrage : le plein de sa main"
+  meaning_en: "Answer to the double of a preempt: the full value of the hand"
+  status: choix
+- id: "dbar.{o}.X.cue.{r}.{n}"
+  for: [{o: 3C, c: 4C, n: 1, r: 4H, t: "H >= 4"}, {o: 3C, c: 4C, n: 2, r: 4S, t: "true"},
+        {o: 3D, c: 4D, n: 1, r: 4H, t: "H >= 4"}, {o: 3D, c: 4D, n: 2, r: 4S, t: "true"},
+        {o: 3H, c: 4H, n: 1, r: 4S, t: "S >= 3"}, {o: 3H, c: 4H, n: 2, r: 5C, t: "C >= D"}, {o: 3H, c: 4H, n: 3, r: 5D, t: "true"}]
+  seq: ["({o}) X {c}", "({o}) P X {c}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Réponse au cue-bid : la majeure 4e, sinon la meilleure couleur"
+  meaning_en: "Answer to the cue-bid: the four-card major, otherwise the best suit"
+  status: choix
+- id: "dbar.{o}.X.cue.4H.4S"
+  for: [{o: 3C, c: 4C}, {o: 3D, c: 4D}]
+  seq: ["({o}) X {c} 4H", "({o}) P X {c} 4H"]
+  call: 4S
+  cond: "S >= 5 and H <= 3"
+  forcing: SO
+  meaning: "Corrige à ♠"
+  meaning_en: "Corrects to ♠"
+  status: choix
+# --- réponses aux bicolores sur un barrage de 3 (au palier de la manche)
+# en: answers to the two-suiters over a three-level preempt (at game level)
+- id: "dbar.{o}.bic.{c}.{r}.{n}"
+  for: [{o: 3C, c: 4C, n: 1, r: 4H, t: "H >= 3 and H >= D"}, {o: 3C, c: 4C, n: 2, r: 5D, t: "true"},
+        {o: 3C, c: 4D, n: 1, r: 4S, t: "S >= H"}, {o: 3C, c: 4D, n: 2, r: 4H, t: "true"},
+        {o: 3D, c: 4D, n: 1, r: 4S, t: "S >= H"}, {o: 3D, c: 4D, n: 2, r: 4H, t: "true"},
+        {o: 3H, c: 4H, n: 1, r: 4S, t: "S >= 3"}, {o: 3H, c: 4H, n: 2, r: 5C, t: "C >= D"}, {o: 3H, c: 4H, n: 3, r: 5D, t: "true"},
+        {o: 3S, c: 4S, n: 1, r: 5H, t: "H >= 3"}, {o: 3S, c: 4S, n: 2, r: 5C, t: "C >= D"}, {o: 3S, c: 4S, n: 3, r: 5D, t: "true"},
+        {o: 3H, c: 4NT, n: 1, r: 5C, t: "C >= D"}, {o: 3H, c: 4NT, n: 2, r: 5D, t: "true"},
+        {o: 3S, c: 4NT, n: 1, r: 5C, t: "C >= D"}, {o: 3S, c: 4NT, n: 2, r: 5D, t: "true"}]
+  seq: ["({o}) {c}", "({o}) P {c}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Choix de la couleur face au bicolore"
+  meaning_en: "Choice of suit opposite the two-suiter"
+  status: choix
+- id: "dbar.{o}.bic.{c}.{a}.corr"
+  for: [{o: 3H, c: 4H, a: 5C, r: 5D, t: "D >= 5"}, {o: 3S, c: 4S, a: 5C, r: 5D, t: "D >= 5"}]
+  seq: ["({o}) {c} {a}", "({o}) P {c} {a}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Corrige vers sa mineure"
+  meaning_en: "Corrects to own minor"
+  status: choix
+# --- barrages de 4♥ / 4♠ : « faites comme sur 1♥ (1♠) avec un peu plus de sérieux »
+# en: 4♥ / 4♠ preempts: "act as over 1♥ (1♠), a little more soundly"
+- id: "dbar.{o}.4NT"
+  for: [{o: 4H, t: "C >= 5 and D >= 5"}, {o: 4S, t: "(C >= 5) + (D >= 5) + (H >= 5) >= 2"}]
+  seq: ["({o})", "({o}) P"]
+  call: 4NT
+  cond: "{t} and (losers <= 4 or (losers <= 5 and hcp >= 14))"
+  forcing: F1
+  meaning: "4SA : bicolore franc (sur 4♥ les mineures, sur 4♠ deux des trois autres couleurs)"
+  meaning_en: "4NT: clear two-suiter (over 4♥ the minors, over 4♠ two of the other three suits)"
+  status: choix
+  alert: true
+- id: dbar.4H.4S
+  seq: ["(4H)", "(4H) P"]
+  call: 4S
+  cond: "(S >= 6 and top('S') >= 2 and hl >= 14) or (S >= 5 and max(C, D) >= 5 and top('S') >= 2 and hcp >= 11)"
+  forcing: NF
+  meaning: "4♠ : belle 6e, ou bicolore avec 5 piques"
+  meaning_en: "4♠: good six-card suit, or a two-suiter with five spades"
+  status: choix
+- id: "dbar.{o}.X"
+  for: [{o: 4H, M: H, N: S}, {o: 4S, M: S, N: H}]
+  seq: "({o})"
+  call: X
+  cond: "{M} <= 2 and hcp >= 14 and ({N} >= 4 or ({N} >= 3 and {M} <= 1))"
+  forcing: TO
+  meaning: "Contre d'appel : une bonne ouverture, court dans leur couleur, 4 cartes dans l'autre majeure (3 avec un singleton)"
+  meaning_en: "Takeout double: a good opening, short in their suit, 4 cards in the other major (3 with a singleton)"
+  status: choix
+- id: "dbar.{o}.5{m}"
+  for: [{o: 4H, m: C}, {o: 4H, m: D}, {o: 4S, m: C}, {o: 4S, m: D}]
+  seq: ["({o})", "({o}) P"]
+  call: "5{m}"
+  cond: "top('{m}') >= 2 and hcp >= 11 and ({m} >= 7 or ({m} >= 6 and losers <= 4))"
+  forcing: NF
+  meaning: "Intervention : couleur solide 6e ou 7e, distribution puissante"
+  meaning_en: "Overcall: solid six- or seven-card suit, powerful shape"
+  status: choix
+- id: "dbar.{o}.X.fort"
+  for: [{o: 4H, M: H}, {o: 4S, M: S}]
+  seq: "({o})"
+  call: X
+  cond: "{M} <= 2 and hcp >= 18"
+  forcing: TO
+  meaning: "Contre : 18+ H, court dans leur couleur"
+  meaning_en: "Double: 18+ HCP, short in their suit"
+  status: choix
+- id: "dbar.{o}.pass"
+  for: [{o: 4H}, {o: 4S}]
+  seq: "({o})"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Passe (long dans leur couleur, on attend le réveil du partenaire)"
+  meaning_en: "Pass (long in their suit, wait for partner to balance)"
+  status: choix
+- id: "dbar.{o}.rev.X"
+  for: [{o: 4H, M: H, N: S}, {o: 4S, M: S, N: H}]
+  seq: "({o}) P"
+  call: X
+  cond: "({M} <= 1 and hcp >= 11 and {N} >= 3) or ({M} <= 2 and hcp >= 13 and {N} >= 3) or ({M} <= 2 and hcp >= 16)"
+  forcing: TO
+  meaning: "Contre de réveil : court dans leur couleur, moins que l'ouverture en position directe"
+  meaning_en: "Balancing double: short in their suit, less than a direct-seat opening"
+  status: choix
+- id: "dbar.{o}.rev.pass"
+  for: [{o: 4H}, {o: 4S}]
+  seq: "({o}) P"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Pas de réveil"
+  meaning_en: "No balancing action"
+  status: choix
+# --- réponses au contre de 4♥ / 4♠ : passer avec les mains plates, surenchérir avec les mains distribuées
+# en: answers to the double of 4♥ / 4♠: pass with flat hands, bid with shapely hands
+- id: "dbar.{o}.X.{r}.{n}"
+  for: [{o: 4H, n: 1, r: 4S, t: "S >= 5 or (S >= 4 and hcp - hcp_in('H') >= 2)"}, {o: 4H, n: 2, r: 4NT, t: "C >= 4 and D >= 4 and C + D >= 9"}, {o: 4H, n: 3, r: 5C, t: "C >= 6 and C >= D"}, {o: 4H, n: 4, r: 5D, t: "D >= 6"},
+        {o: 4S, n: 1, r: 5H, t: "H >= 6 or (H >= 5 and hcp >= 7)"}, {o: 4S, n: 2, r: 4NT, t: "C >= 4 and D >= 4 and C + D >= 9"}, {o: 4S, n: 3, r: 5C, t: "C >= 6 and C >= D"}, {o: 4S, n: 4, r: 5D, t: "D >= 6"}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Réponse au contre : une couleur 6e, un bicolore (4SA : choix des mineures), ou 4 piques sur 4♥"
+  meaning_en: "Answer to the double: a six-card suit, a two-suiter (4NT: choice of minors), or four spades over 4♥"
+  status: choix
+- id: "dbar.{o}.X.pass"
+  for: [{o: 4H}, {o: 4S}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Transforme le contre : main plate, on marque dans la colonne"
+  meaning_en: "Leaves the double in: flat hand, take the penalty"
+  status: choix
+- id: "dbar.{o}.X.4NT.{r}"
+  for: [{o: 4H, r: 5C, t: "C >= D"}, {o: 4H, r: 5D, t: "true"}, {o: 4S, r: 5C, t: "C >= D"}, {o: 4S, r: 5D, t: "true"}]
+  seq: ["({o}) X 4NT", "({o}) P X 4NT"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Choisit la mineure"
+  meaning_en: "Picks the minor"
+  status: choix
+# --- réponses à 4SA bicolore
+# en: answers to the two-suited 4NT
+- id: "dbar.4H.4NT.{r}"
+  for: [{r: 5C, t: "C >= D"}, {r: 5D, t: "true"}]
+  seq: ["(4H) 4NT", "(4H) P 4NT"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Choisit la mineure"
+  meaning_en: "Picks the minor"
+  status: choix
+- id: "dbar.4S.4NT.{r}.{n}"
+  for: [{n: 1, r: 5C, t: "C >= 3 and (C >= D or H <= 1)"}, {n: 2, r: 5D, t: "D >= 3"}, {n: 3, r: 5C, t: "true"}]
+  seq: ["(4S) 4NT", "(4S) P 4NT"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "La mineure la moins chère acceptable : le bicolore corrigera"
+  meaning_en: "The cheapest acceptable minor: the two-suiter will correct"
+  status: choix
+- id: "dbar.4S.4NT.{a}.{r}"
+  for: [{a: 5C, r: 5D, t: "C <= 4 and D >= 5"}, {a: 5C, r: 5H, t: "C <= 4"}, {a: 5D, r: 5H, t: "D <= 4"}]
+  seq: ["(4S) 4NT {a}", "(4S) P 4NT {a}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Corrige vers ses couleurs"
+  meaning_en: "Corrects to own suits"
+  status: choix
+- id: "dbar.4S.4NT.5C.5D.5H"
+  seq: ["(4S) 4NT 5C 5D", "(4S) P 4NT 5C 5D"]
+  call: 5H
+  cond: "H >= 3 and H > D"
+  forcing: SO
+  meaning: "Le partenaire a les ♦ et les ♥ : 5♥"
+  meaning_en: "Partner holds ♦ and ♥: 5♥"
+  status: choix
+# --- barrages de 4♣ / 4♦
+# en: 4♣ / 4♦ preempts
 - id: "def.{o}.X"
-  for: [{o: 4C}, {o: 4D}, {o: 4H}, {o: 4S}]
+  for: [{o: 4C}, {o: 4D}]
   seq: ["({o})", "({o}) P"]
   call: X
   cond: "hcp >= 16"
@@ -5853,16 +6135,8 @@
   meaning: "Contre : 16+ H"
   meaning_en: "Double: 16+ HCP"
   status: infere
-- id: "def.4H.4S"
-  seq: ["(4H)", "(4H) P"]
-  call: 4S
-  cond: "S >= 6 and hcp_in('S') >= 5 and hl >= 14"
-  forcing: NF
-  meaning: "Intervention : belle 6e, 14+ HL"
-  meaning_en: "Overcall: good six-card suit, 14+ HL"
-  status: infere
 - id: "def.{o}.pass"
-  for: [{o: 4C}, {o: 4D}, {o: 4H}, {o: 4S}]
+  for: [{o: 4C}, {o: 4D}]
   seq: ["({o})", "({o}) P"]
   call: P
   cond: "true"
@@ -5871,7 +6145,7 @@
   meaning_en: "No overcall"
   status: infere
 - id: "advX.{o}.{r}.{n}"
-  for: [{o: 4C, n: 1, r: 4S, t: "S >= 4 and S >= H"}, {o: 4C, n: 2, r: 4H, t: "H >= 4"}, {o: 4D, n: 1, r: 4S, t: "S >= 4 and S >= H"}, {o: 4D, n: 2, r: 4H, t: "H >= 4"}, {o: 4H, n: 1, r: 4S, t: "S >= 5 and hcp <= 7"}]
+  for: [{o: 4C, n: 1, r: 4S, t: "S >= 4 and S >= H"}, {o: 4C, n: 2, r: 4H, t: "H >= 4"}, {o: 4D, n: 1, r: 4S, t: "S >= 4 and S >= H"}, {o: 4D, n: 2, r: 4H, t: "H >= 4"}]
   seq: ["({o}) X", "({o}) P X"]
   call: "{r}"
   cond: "{t}"

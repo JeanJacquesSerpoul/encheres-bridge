@@ -3298,6 +3298,26 @@
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
   status: infere
+# L'ouvreur a soutenu la 3e couleur : il a 5 cartes dans sa mineure (répétée) et 4 dans la 3e couleur. Sans fit dans la 3e couleur (2 cartes au plus), le répondant ne la laisse pas jouer : 3SA avec l'arrêt dans la 4e couleur, sinon retour à la mineure de l'ouvreur.
+# en: Opener raised the third suit: 5 cards in the rebid minor and 4 in the third suit. With no fit in the third suit (2 cards at most), responder does not leave it in: 3NT with a stopper in the fourth suit, otherwise back to opener's minor.
+- id: "tcf.{o}{M}.nofit.3NT"
+  for: [{o: C, M: H, t: D, f: S}, {o: C, M: S, t: D, f: H}, {o: D, M: H, t: S, f: C}, {o: D, M: S, t: H, f: C}]
+  seq: "1{o} 1{M} 2{o} 2{t} 3{t}"
+  call: 3NT
+  cond: "{t} <= 2 and stop('{f}')"
+  forcing: SO
+  meaning: "Pas de fit dans la 3e couleur, arrêt dans la 4e : 3SA"
+  meaning_en: "No fit in the third suit, fourth suit stopped: 3NT"
+  status: infere
+- id: "tcf.{o}{M}.nofit.4o"
+  for: [{o: C, M: H, t: D}, {o: C, M: S, t: D}, {o: D, M: H, t: S}, {o: D, M: S, t: H}]
+  seq: "1{o} 1{M} 2{o} 2{t} 3{t}"
+  call: "4{o}"
+  cond: "{t} <= 2"
+  forcing: NF
+  meaning: "Pas de fit dans la 3e couleur ni d'arrêt dans la 4e : retour à la mineure 5e de l'ouvreur"
+  meaning_en: "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor"
+  status: infere
 - id: "tcf.{o}{M}.cp"
   for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C"}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H"}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C"}]
   seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}"]

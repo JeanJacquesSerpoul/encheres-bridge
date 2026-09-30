@@ -690,6 +690,7 @@
           <li>L'enchère finie, les quatre mains se dévoilent et le contrat s'affiche, sans score. <b>Donne suivante</b> (ou ›) tire la donne suivante.</li>
           <li><b>‹</b> et <b>›</b> font défiler les donnes déjà jouées, pour les revoir ; › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.</li>
           <li><b>Terminer</b> affiche votre <b>score</b> sur l'ensemble de la séance (enchères conformes au SEF sur vos enchères, en pourcentage), puis donne par donne avec vos erreurs ; <b>Revoir</b> rouvre une donne, <b>Reprendre l'entraînement</b> revient à la table. La croix ferme l'entraînement.</li>
+          <li>Le petit bouton en haut à droite du tapis copie le <b>PBN de la donne</b> dans le presse-papiers, pour la rejouer ou l'analyser ailleurs.</li>
         </ul>
 
         <h3>7. Lire les cartes sur une photo (facultatif)</h3>
@@ -815,6 +816,7 @@
           <li>Once the auction is over, all four hands are shown with the contract, and no score. <b>Next deal</b> (or ›) draws the next deal.</li>
           <li><b>‹</b> and <b>›</b> scroll through the deals already played, to review them; › only draws a new deal once the current auction is over.</li>
           <li><b>Finish</b> shows your <b>score</b> for the whole session (calls matching the SEF out of your calls, as a percentage), then deal by deal with your mistakes; <b>Review</b> reopens a deal, <b>Back to practice</b> returns to the table. The cross closes the practice.</li>
+          <li>The small button at the top right of the table copies the <b>deal's PBN</b> to the clipboard, to replay or analyse it elsewhere.</li>
         </ul>
 
         <h3>7. Reading cards from a photo (optional)</h3>
@@ -1018,6 +1020,9 @@
       </div>
       <div class="train-body" id="train-body">
         <div class="train-table" id="train-table">
+          <!-- Copie le PBN de la donne de la table, comme le bouton du texte PBN
+               de la page. -->
+          <button id="train-copy-btn" type="button" class="train-copy-btn" disabled></button>
           <div class="tseat tseat-top" id="tseat-top"></div>
           <div class="tseat tseat-left" id="tseat-left"></div>
           <div class="tcenter" id="tcenter"></div>

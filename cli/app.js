@@ -313,6 +313,7 @@ const UI_TEXT = {
     trainPrev: "Donne précédente",
     trainNextTip: "Donne suivante",
     trainFinish: "Terminer",
+    trainCopy: "Copier le PBN de la donne",
     trainCount: (k, n) => `Donne ${k} / ${n}`,
     trainYou: "(vous)",
     trainAuctionOver: "Enchère terminée : les quatre mains sont dévoilées.",
@@ -513,6 +514,7 @@ const UI_TEXT = {
     trainPrev: "Previous deal",
     trainNextTip: "Next deal",
     trainFinish: "Finish",
+    trainCopy: "Copy the deal's PBN",
     trainCount: (k, n) => `Deal ${k} / ${n}`,
     trainYou: "(you)",
     trainAuctionOver: "Auction over: all four hands are shown.",
@@ -2747,6 +2749,10 @@ function renderBoundsCards() {
   setCommandButton("#train-prev", PREV_SVG, UI_TEXT[lang].trainPrev);
   setCommandButton("#train-next", NEXT_SVG, UI_TEXT[lang].trainNextTip);
   setCommandButton("#train-finish", CHECK_SVG, UI_TEXT[lang].trainFinish, true);
+  setCommandButton("#train-copy-btn", COPY_SVG, UI_TEXT[lang].trainCopy);
+  // Dans la fenêtre modale, l'infobulle de la page passe dessous : le nom
+  // s'affiche aussi par l'infobulle native.
+  $("#train-copy-btn").title = $("#train-copy-btn").dataset.tip || "";
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
   $("#cards-help").textContent = t.cardsHelp;
@@ -4993,6 +4999,7 @@ function renderTrainNav() {
   const t = UI_TEXT[train.lang];
   const n = train.tables.length;
   const table = quiz;
+  $("#train-copy-btn").disabled = !(table && table.pbn);
   $("#train-count").textContent = t.trainCount(train.cur + 1, n);
   $("#train-prev").disabled = train.cur <= 0;
   // Suivante : une table déjà jouée, ou une nouvelle donne une fois l'enchère finie.
@@ -5240,7 +5247,7 @@ async function newTrainTable() {
     const { pbn, label } = await drawPracticePBN(lang);
     const result = await bidsLocal.bid(pbn, lang);
     train.tables.push({ result, seat: train.seat, lang, calls: [], idx: 0,
-      correctCount: 0, totalUser: 0, done: false, label });
+      correctCount: 0, totalUser: 0, done: false, label, pbn });
     showTrainTable(train.tables.length - 1);
   } catch (err) {
     $("#train-turn").textContent = "";
@@ -5342,6 +5349,7 @@ function startTraining(seat) {
   $("#train-count").textContent = "";
   $("#train-prev").disabled = true;
   $("#train-next").disabled = true;
+  $("#train-copy-btn").disabled = true;
   $("#train-new-btn").classList.add("hidden");
   trainDialog.showModal();
   newTrainTable();
@@ -5384,6 +5392,13 @@ $("#train-next").addEventListener("click", () => train && trainNext());
 $("#train-new-btn").addEventListener("click", () => train && trainNext());
 $("#train-finish").addEventListener("click", () => train && train.tables.length && finishTraining());
 $("#train-close").addEventListener("click", () => trainDialog.close());
+// Le PBN de la donne de la table, dans le presse-papiers.
+$("#train-copy-btn").addEventListener("click", async () => {
+  if (!quiz || !quiz.pbn) return;
+  const t = UI_TEXT[$("#lang").value];
+  const ok = await copyToClipboard(quiz.pbn);
+  flashCopied($("#train-copy-btn"), ok, t.pbnCopied, t.pbnCopyFailed);
+});
 trainDialog.addEventListener("close", () => {
   cancelAutoReveal();
   train = null;

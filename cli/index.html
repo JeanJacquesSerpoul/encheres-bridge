@@ -177,12 +177,6 @@
               </button>
             </div>
           </div>
-          <!-- Par défaut ON : cochée, « Donne aléatoire » tire une donne au hasard
-               parmi les donnes thématiques (voir drawThemedDeal dans app.js). -->
-          <label class="feature-toggle">
-            <input id="random-themes" type="checkbox">
-            <span data-i18n="randomThemes">Donnes aléatoires tirées des thèmes</span>
-          </label>
           <!-- Par défaut OFF : cochée, la séquence commentée ne liste plus les
                passes (voir applyHidePasses dans app.js). -->
           <label class="feature-toggle">
@@ -610,7 +604,7 @@
 
         <h3>2. Obtenir une donne</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir §3). Par défaut, elle la choisit parmi les donnes thématiques (option des Réglages, voir §8).</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Donne aléatoire</b> : tire une donne complète, en respectant les bornes de points (voir §3).</span></li>
         </ul>
         <p>La <b>flèche</b> à côté de ce bouton ouvre les autres façons d'obtenir une donne :</p>
         <ul class="help-icons">
@@ -680,7 +674,7 @@
 
         <h3>6. S'entraîner</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, après Partager, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Les donnes y sont tirées comme par <b>Donne aléatoire</b> : parmi les donnes thématiques si l'option est cochée, avec le donneur, la vulnérabilité et les bornes choisis. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, après Partager, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Il choisit aussi les <b>donnes</b> : <b>Aléatoires</b> (distribuées au hasard), <b>Tous les thèmes</b> (tirées parmi toutes les donnes thématiques) ou <b>Un thème</b> (celui de la liste). Le donneur, la vulnérabilité et les bornes choisis s'appliquent. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
         </ul>
         <ul>
           <li>Votre main est toujours <b>en bas</b>, face visible ; les trois autres joueurs ont le dos tourné (à gauche, celui qui parle après vous ; en face, votre partenaire). Au centre, la boîte des enchères : les sièges vulnérables y sont en rouge, et un <b>?</b> marque le tour de parole. La plaque du joueur qui parle s'éclaire en jaune.</li>
@@ -705,12 +699,11 @@
         <ul>
           <li><b>Langue</b> (français ou anglais) et <b>Thème</b> (automatique, clair ou sombre).</li>
           <li><b>Système</b> : le système d'enchères que le moteur applique, c'est-à-dire l'un des fichiers de règles du dossier <code>rules/</code> (par défaut <b>SEF 2024</b>, <code>default.yaml</code>). Le choix est mémorisé, et les enchères affichées sont recalculées aussitôt. Le bouton <b>?</b> à côté ouvre sa description complète en PDF, règle par règle.</li>
-          <li><b>Donnes aléatoires tirées des thèmes</b> (cochée par défaut) : <b>Donne aléatoire</b> tire une donne au hasard parmi toutes les donnes thématiques ; le titre de la donne indique son thème. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent ; si aucune donne thématique ne leur convient, la donne est tirée comme d'habitude. Décochée, <b>Donne aléatoire</b> distribue les 52 cartes au hasard.</li>
           <li><b>Ne pas afficher les passes</b> : la séquence commentée ne liste plus que les enchères, contres et surcontres ; chaque ligne garde son numéro de tour. La grille des enchères, elle, garde tous les passes.</li>
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
           <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version et le système choisi. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
-        <p>Langue, thème, main choisie pour l'entraînement, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par la toque du bandeau ou par le bouton en haut de ce mode d'emploi. L'écran d'accueil du premier lancement fait tourner, lui, la <b>Vidéo de présentation</b> : une donne suivie de la saisie au contrat, en quarante-deux secondes.</p>
+        <p>Langue, thème, main et donnes choisies pour l'entraînement, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par la toque du bandeau ou par le bouton en haut de ce mode d'emploi. L'écran d'accueil du premier lancement fait tourner, lui, la <b>Vidéo de présentation</b> : une donne suivie de la saisie au contrat, en quarante-deux secondes.</p>
 
         <h3>9. Raccourcis clavier</h3>
         <ul>
@@ -736,7 +729,7 @@
 
         <h3>2. Getting a deal</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see §3). By default it picks it among the themed deals (a Settings option, see §8).</span></li>
+          <li><span data-help-icon="dice"></span><span><b>Random deal</b>: draws a full deal, within the point bounds (see §3).</span></li>
         </ul>
         <p>The <b>arrow</b> next to that button opens the other ways to get a deal:</p>
         <ul class="help-icons">
@@ -806,7 +799,7 @@
 
         <h3>6. Practising</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, after Share, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. Its deals are drawn like <b>Random deal</b>'s: among the themed deals if that option is on, with the dealer, vulnerability and bounds you chose. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
+          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, after Share, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. It also picks the <b>deals</b>: <b>Random</b> (dealt at random), <b>All topics</b> (drawn among all the themed deals) or <b>One topic</b> (the one in the list). The dealer, vulnerability and bounds you chose apply. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
         </ul>
         <ul>
           <li>Your hand is always <b>at the bottom</b>, face up; the other three players' cards are face down (on your left, the player who bids after you; opposite, your partner). In the middle, the auction box: vulnerable seats are shown in red, and a <b>?</b> marks whose turn it is. The plate of the player to bid lights up in yellow.</li>
@@ -831,12 +824,11 @@
         <ul>
           <li><b>Language</b> (French or English) and <b>Theme</b> (automatic, light or dark).</li>
           <li><b>System</b>: the bidding system the engine applies, that is one of the rules files of the <code>rules/</code> folder (<b>SEF 2024</b>, <code>default.yaml</code>, by default). The choice is remembered, and the displayed auction is recomputed at once. The <b>?</b> button next to it opens its full description as a PDF, rule by rule.</li>
-          <li><b>Random deals from the themes</b> (on by default): <b>Random deal</b> picks a deal at random among all the themed deals; the deal's title gives its topic. The dealer, vulnerability and point bounds you chose apply; if no themed deal fits them, the deal is drawn as usual. Off, <b>Random deal</b> deals the 52 cards at random.</li>
           <li><b>Hide passes</b>: the annotated auction lists only bids, doubles and redoubles; each line keeps its turn number. The auction grid still shows every pass.</li>
           <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
           <li>The <b>green dot</b> shows that the bidding engine is ready, with its version and the chosen system. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
         </ul>
-        <p>Language, theme, the hand chosen for practice, the passes display, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the graduation cap in the top bar or the button at the top of this guide. The welcome screen on first launch plays the <b>Presentation video</b> instead: one deal followed from entry to contract, in forty-two seconds.</p>
+        <p>Language, theme, the hand and deals chosen for practice, the passes display, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the graduation cap in the top bar or the button at the top of this guide. The welcome screen on first launch plays the <b>Presentation video</b> instead: one deal followed from entry to contract, in forty-two seconds.</p>
 
         <h3>9. Keyboard shortcuts</h3>
         <ul>
@@ -976,12 +968,22 @@
     </div>
   </dialog>
 
-  <!-- S'entraîner, 1 : le choix de sa main. Une rose des vents : chaque siège
-       à sa place autour de la table. Le dernier choix est retenu. -->
+  <!-- S'entraîner, 1 : les donnes (aléatoires, tous les thèmes ou un thème),
+       puis la main, en rose des vents autour de la table. Choisir la main
+       lance l'entraînement. Les deux choix sont retenus. -->
   <dialog id="train-seat-dialog" class="train-seat-dialog" aria-labelledby="train-seat-title">
     <div class="train-seat-box">
-      <h2 id="train-seat-title" data-i18n="trainSeatTitle">Votre main</h2>
-      <p class="muted" data-i18n="trainSeatHint">Choisissez le siège où vous enchérirez : les donnes sont tirées au hasard, et vous ne voyez que votre main.</p>
+      <h2 id="train-seat-title" data-i18n="trainTitle">S'entraîner</h2>
+      <fieldset class="train-source">
+        <legend data-i18n="trainSource">Donnes</legend>
+        <div class="train-source-pills">
+          <label><input type="radio" name="train-source" value="random"><span data-i18n="trainSrcRandom">Aléatoires</span></label>
+          <label><input type="radio" name="train-source" value="all"><span data-i18n="trainSrcAll">Tous les thèmes</span></label>
+          <label><input type="radio" name="train-source" value="theme"><span data-i18n="trainSrcTheme">Un thème</span></label>
+        </div>
+        <select id="train-theme" data-i18n-label="trainSrcTheme" hidden></select>
+      </fieldset>
+      <p class="train-seat-label" data-i18n="trainSeatTitle">Votre main</p>
       <div class="seat-compass" role="group" data-i18n-label="trainSeatTitle">
         <button type="button" class="seat-choice" data-seat="N"></button>
         <button type="button" class="seat-choice" data-seat="W"></button>

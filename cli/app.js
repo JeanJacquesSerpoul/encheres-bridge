@@ -174,7 +174,10 @@ const UI_TEXT = {
     themesClose: "Fermer la liste",
     themesLoading: "Chargement des fichiers…",
     themesEmpty: "Aucun fichier de donnes thématiques.",
-    themesCount: "{n} donnes",
+    themesFilter: "Rechercher un thème…",
+    themesSearching: "Recherche…",
+    themesNone: "Aucun thème ne correspond.",
+    themesReadError: "Impossible de lire {file}.",
     fileSave: "Sauver le PBN",
     fileSaveStem: "donne",
     photoDeal: "Photographier les quatre mains",
@@ -367,7 +370,10 @@ const UI_TEXT = {
     themesClose: "Close the list",
     themesLoading: "Loading the files…",
     themesEmpty: "No themed deal files.",
-    themesCount: "{n} deals",
+    themesFilter: "Search a topic…",
+    themesSearching: "Searching…",
+    themesNone: "No topic matches.",
+    themesReadError: "Could not read {file}.",
     fileSave: "Save the PBN",
     fileSaveStem: "deal",
     photoDeal: "Photograph the four hands",
@@ -1034,12 +1040,29 @@ $("#random-btn").addEventListener("click", drawRandomDeal);
 // langue, avant la première donne :
 //   % Titre-FR: 4e couleur forcing
 //   % Titre-EN: Fourth suit forcing
-// Sans ces lignes, la liste affiche le nom du fichier. Les fichiers sont lus à
-// la première ouverture de la fenêtre, puis gardés : un clic charge aussitôt.
+// Sans ces lignes, la liste affiche le nom du fichier.
+//
+// La fenêtre est une combo box : un champ qui filtre, sous lui la liste des
+// thèmes. Elle tient des centaines de fichiers sans tout lire d'avance :
+// - la liste se construit par pages de THEMES_PAGE, la suivante quand on
+//   approche du bas ;
+// - les libellés d'une page se lisent quand elle se construit, et de chaque
+//   fichier seulement le début (requête Range) ;
+// - dès qu'on tape un filtre, les libellés encore inconnus se lisent en
+//   arrière-plan, THEMES_PARALLEL à la fois, et la liste se met à jour ;
+// - le fichier entier n'est lu qu'au choix du thème.
 const THEMES_INDEX_URL = "pbn/index.json";
 const THEME_FILE = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pbn$/i;
+const THEMES_PAGE = 40;
+const THEMES_PARALLEL = 4;
+const THEME_HEAD_BYTES = 2048;
 const themesDialog = $("#themes-dialog");
-let themeFiles = null; // [{ file, title: { fr, en }, text, count }]
+const themesInput = $("#themes-input");
+const themesList = $("#themes-list");
+let themeFiles = null; // [{ file, title: { fr, en } | null, text, pending }]
+let themeShown = []; // les thèmes que retient le filtre, dans l'ordre de la liste
+let themeRendered = 0; // combien de ces lignes sont dans la liste
+let themeActive = -1; // la ligne désignée au clavier
 
 function pbnTitles(text) {
   const title = {};
@@ -1051,72 +1074,259 @@ function pbnTitles(text) {
   return title;
 }
 
-async function loadThemes() {
-  let files = [];
-  try {
-    const resp = await fetch(THEMES_INDEX_URL, { cache: "no-cache" });
-    if (resp.ok) {
-      const body = await resp.json();
-      files = (body && Array.isArray(body.files) ? body.files : [])
-        .filter((f) => typeof f === "string" && THEME_FILE.test(f));
-    }
-  } catch (err) {
-    /* pas de manifeste : aucune donne thématique */
-  }
-  const read = await Promise.all(files.map(async (file) => {
-    try {
-      const resp = await fetch(`pbn/${file}`, { cache: "no-cache" });
-      if (!resp.ok) return null;
-      const text = await resp.text();
-      return { file, title: pbnTitles(text), text, count: splitPbnGames(text).length };
-    } catch (err) {
-      return null; // un fichier illisible est omis, les autres restent
-    }
-  }));
-  return read.filter(Boolean);
+function themeName(th, lang) {
+  return (th.title && (th.title[lang] || th.title.fr || th.title.en)) || th.file;
 }
 
+async function loadThemeIndex() {
+  try {
+    const resp = await fetch(THEMES_INDEX_URL, { cache: "no-cache" });
+    if (!resp.ok) return [];
+    const body = await resp.json();
+    const files = body && Array.isArray(body.files) ? body.files : [];
+    return [...new Set(files.filter((f) => typeof f === "string" && THEME_FILE.test(f)))]
+      .map((file) => ({ file, title: null, text: null, pending: null }));
+  } catch (err) {
+    return []; // pas de manifeste : aucune donne thématique
+  }
+}
+
+// Le libellé d'un thème, lu du début du fichier. Un serveur qui ignore Range
+// renvoie le fichier entier (200 au lieu de 206) : il est alors gardé, et le
+// choix du thème n'a plus rien à lire.
+function loadThemeTitle(th) {
+  if (th.title || th.pending) return th.pending;
+  th.pending = fetch(`pbn/${th.file}`, {
+    cache: "no-cache",
+    headers: { Range: `bytes=0-${THEME_HEAD_BYTES - 1}` },
+  })
+    .then(async (resp) => {
+      if (!resp.ok) throw new Error(resp.status);
+      const text = await resp.text();
+      if (resp.status === 200) th.text = text;
+      th.title = pbnTitles(text);
+    })
+    .catch(() => {
+      th.title = {}; // illisible : le nom du fichier en tiendra lieu
+    })
+    .finally(() => {
+      th.pending = null;
+      refreshThemeRow(th);
+      // Pendant une recherche, un libellé arrivé peut faire entrer son thème
+      // dans la liste : elle se refait, une fois par image au plus.
+      if (themesInput.value.trim()) refilterSoon();
+    });
+  return th.pending;
+}
+
+let refilterFrame = 0;
+function refilterSoon() {
+  if (refilterFrame) return;
+  refilterFrame = requestAnimationFrame(() => {
+    refilterFrame = 0;
+    if (themesDialog.open) filterThemes(false);
+  });
+}
+
+async function loadThemeText(th) {
+  if (th.text) return th.text;
+  const resp = await fetch(`pbn/${th.file}`, { cache: "no-cache" });
+  if (!resp.ok) throw new Error(resp.status);
+  th.text = await resp.text();
+  if (!th.title) th.title = pbnTitles(th.text);
+  return th.text;
+}
+
+// Tous les libellés encore inconnus, quelques-uns à la fois : le filtre ne
+// peut porter que sur ce qui est lu. Relancé à chaque frappe, il ne refait
+// rien de ce qui est déjà lu ou en cours.
+let themeSweep = null;
+function loadAllThemeTitles() {
+  if (themeSweep) return themeSweep;
+  const queue = themeFiles.filter((th) => !th.title);
+  const worker = async () => {
+    while (queue.length) await loadThemeTitle(queue.shift());
+  };
+  themeSweep = Promise.all(Array.from({ length: THEMES_PARALLEL }, worker)).finally(() => {
+    themeSweep = null;
+    if (themesInput.value.trim()) filterThemes(false);
+  });
+  return themeSweep;
+}
+
+// Sans accents ni casse : « drury » trouve « Drury », « thematique »
+// trouve « thématique ».
+function foldText(s) {
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+}
+
+function themeMatches(th, words) {
+  if (!words.length) return true;
+  const hay = foldText([th.file, th.title && th.title.fr, th.title && th.title.en].filter(Boolean).join(" "));
+  return words.every((w) => hay.includes(w));
+}
+
+// La page suivante, quand le bas de la liste approche.
+const themeMoreObserver = new IntersectionObserver((entries) => {
+  if (entries.some((e) => e.isIntersecting)) renderThemePage();
+}, { root: themesList, rootMargin: "200px 0px" });
+
+function themeRow(th, pos) {
+  const li = document.createElement("li");
+  li.id = `themes-opt-${pos}`;
+  li.className = "themes-item";
+  li.setAttribute("role", "option");
+  li.setAttribute("aria-selected", "false");
+  li.dataset.index = themeFiles.indexOf(th);
+  li.dataset.pos = pos;
+  fillThemeRow(li, th);
+  li.addEventListener("mousedown", (ev) => ev.preventDefault()); // le champ garde le focus
+  li.addEventListener("click", () => chooseTheme(th));
+  return li;
+}
+
+function fillThemeRow(li, th) {
+  const lang = $("#lang").value;
+  li.textContent = themeName(th, lang);
+  li.classList.toggle("loading", !th.title);
+  // Le nom du fichier, en second, quand le libellé le cache.
+  if (th.title && themeName(th, lang) !== th.file) {
+    const file = document.createElement("span");
+    file.className = "themes-file";
+    file.textContent = th.file;
+    li.append(file);
+  }
+}
+
+function refreshThemeRow(th) {
+  const li = themesList.querySelector(`[data-index="${themeFiles.indexOf(th)}"]`);
+  if (li) fillThemeRow(li, th);
+}
+
+function renderThemePage() {
+  const sentinel = themesList.querySelector(".themes-more");
+  if (sentinel) {
+    themeMoreObserver.unobserve(sentinel);
+    sentinel.remove();
+  }
+  const end = Math.min(themeShown.length, themeRendered + THEMES_PAGE);
+  for (let pos = themeRendered; pos < end; pos++) {
+    themesList.append(themeRow(themeShown[pos], pos));
+    if (!themeShown[pos].title) loadThemeTitle(themeShown[pos]);
+  }
+  themeRendered = end;
+  if (themeRendered < themeShown.length) {
+    const more = document.createElement("li");
+    more.className = "themes-more";
+    more.setAttribute("role", "presentation");
+    themesList.append(more);
+    themeMoreObserver.observe(more);
+  }
+}
+
+// Refait la liste selon le filtre. `resetActive` remet la désignation en
+// tête (une frappe) ; sinon elle suit le thème qu'elle désignait (un libellé
+// arrivé entre-temps).
+function filterThemes(resetActive) {
+  const t = UI_TEXT[$("#lang").value];
+  const words = foldText(themesInput.value).split(/\s+/).filter(Boolean);
+  const before = themeActive >= 0 ? themeShown[themeActive] : null;
+  themeShown = themeFiles.filter((th) => themeMatches(th, words));
+  themeMoreObserver.disconnect();
+  themesList.replaceChildren();
+  themeRendered = 0;
+  renderThemePage();
+  const status = $("#themes-status");
+  const searching = words.length && themeSweep;
+  status.textContent = !themeFiles.length ? t.themesEmpty
+    : themeShown.length ? "" : searching ? t.themesSearching : t.themesNone;
+  status.hidden = !status.textContent;
+  let next = resetActive || !before ? 0 : themeShown.indexOf(before);
+  if (next < 0) next = 0;
+  setThemeActive(themeShown.length ? next : -1);
+  themesInput.setAttribute("aria-expanded", String(themeShown.length > 0));
+}
+
+function setThemeActive(pos) {
+  const old = themesList.querySelector(".themes-item.active");
+  if (old) {
+    old.classList.remove("active");
+    old.setAttribute("aria-selected", "false");
+  }
+  themeActive = pos;
+  if (pos < 0) {
+    themesInput.removeAttribute("aria-activedescendant");
+    return;
+  }
+  while (pos >= themeRendered) renderThemePage();
+  const li = $(`#themes-opt-${pos}`);
+  li.classList.add("active");
+  li.setAttribute("aria-selected", "true");
+  themesInput.setAttribute("aria-activedescendant", li.id);
+  li.scrollIntoView({ block: "nearest" });
+}
+
+async function chooseTheme(th) {
+  const t = UI_TEXT[$("#lang").value];
+  const status = $("#themes-status");
+  try {
+    const text = await loadThemeText(th);
+    themesDialog.close();
+    setError($("#cons-error"), "");
+    loadPbn(text, th.file);
+  } catch (err) {
+    status.textContent = t.themesReadError.replace("{file}", th.file);
+    status.hidden = false;
+  }
+}
+
+themesInput.addEventListener("input", () => {
+  // Le filtre ne porte que sur les libellés lus : les autres se lisent
+  // d'abord en arrière-plan (« Recherche… » tant qu'il en manque).
+  if (themesInput.value.trim() && themeFiles.some((th) => !th.title)) loadAllThemeTitles();
+  filterThemes(true);
+});
+
+themesInput.addEventListener("keydown", (ev) => {
+  const n = themeShown.length;
+  if (!n) return;
+  const step = { ArrowDown: 1, ArrowUp: -1, PageDown: 10, PageUp: -10 }[ev.key];
+  if (step) {
+    ev.preventDefault();
+    setThemeActive(Math.max(0, Math.min(n - 1, (themeActive < 0 ? -1 : themeActive) + step)));
+  } else if ((ev.key === "Home" || ev.key === "End") && ev.ctrlKey) {
+    ev.preventDefault();
+    setThemeActive(ev.key === "Home" ? 0 : n - 1);
+  } else if (ev.key === "Enter" && themeActive >= 0) {
+    ev.preventDefault();
+    chooseTheme(themeShown[themeActive]);
+  }
+});
+
+// Les libellés changent de langue avec la page.
 function renderThemes() {
   if (!themeFiles) return;
-  const t = UI_TEXT[$("#lang").value];
-  const lang = $("#lang").value;
-  $("#themes-status").textContent = themeFiles.length ? "" : t.themesEmpty;
-  $("#themes-status").hidden = themeFiles.length > 0;
-  $("#themes-list").replaceChildren(...themeFiles.map((th) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "themes-item";
-    const name = document.createElement("span");
-    name.className = "themes-name";
-    name.textContent = th.title[lang] || th.title.fr || th.title.en || th.file;
-    const count = document.createElement("span");
-    count.className = "themes-count";
-    count.textContent = t.themesCount.replace("{n}", th.count);
-    btn.append(name, count);
-    btn.addEventListener("click", () => {
-      themesDialog.close();
-      setError($("#cons-error"), "");
-      loadPbn(th.text, th.file);
-    });
-    const li = document.createElement("li");
-    li.append(btn);
-    return li;
-  }));
+  themesInput.placeholder = UI_TEXT[$("#lang").value].themesFilter;
+  if (themesDialog.open) filterThemes(false);
 }
 
 async function openThemes() {
   closeMenus();
-  if (!themeFiles) {
-    $("#themes-status").textContent = UI_TEXT[$("#lang").value].themesLoading;
-    $("#themes-status").hidden = false;
-    $("#themes-list").replaceChildren();
-  }
+  const t = UI_TEXT[$("#lang").value];
+  themesInput.value = "";
+  themesInput.placeholder = t.themesFilter;
   themesDialog.showModal();
-  $("#themes-close").focus();
-  if (!themeFiles) themeFiles = await loadThemes();
-  renderThemes();
-  const first = $("#themes-list .themes-item");
-  if (first) first.focus();
+  // Au doigt, le focus dans le champ sortirait le clavier par-dessus la liste :
+  // il n'y va qu'à la souris, où il sert au filtre et aux flèches.
+  if (matchMedia("(pointer: fine)").matches) themesInput.focus();
+  if (!themeFiles) {
+    const status = $("#themes-status");
+    status.textContent = t.themesLoading;
+    status.hidden = false;
+    themesList.replaceChildren();
+    themeFiles = await loadThemeIndex();
+  }
+  filterThemes(true);
 }
 
 $("#themes-btn").addEventListener("click", openThemes);

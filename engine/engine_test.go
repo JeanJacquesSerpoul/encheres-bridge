@@ -176,3 +176,15 @@ func TestForcingBidsGetAnAnswer(t *testing.T) {
 		}
 	}
 }
+
+// TestNoThreeNTOverJumpRebidWithVoid: 1♠ 1SA 3♠, responder void in spades
+// with 7 H: the spades will not run, no 3SA.
+func TestNoThreeNTOverJumpRebidWithVoid(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "N"]
+[Vulnerable "NS"]
+[Deal "N:AK9832.92.J.AQ98 Q765.43.952.KJ62 .QT7.KQT7643.754 JT4.AKJ865.A8.T3"]`)
+	got := formatAuction(NewEngine(d).Run())
+	if strings.Contains(got, "3SA") || !strings.HasPrefix(got, "N:1P E:Passe S:1SA W:Passe N:3P") {
+		t.Fatalf("enchères : %s", got)
+	}
+}

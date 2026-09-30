@@ -342,7 +342,7 @@ La pastille d'état des Réglages rejoue une donne de référence au chargement 
 
 Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
 
-- **Les donnes** se choisissent dans la même boîte, en tête : **Aléatoires** (distribuées au hasard), **Tous les thèmes** (tirées parmi toutes les donnes thématiques) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
+- **Les donnes** se choisissent dans la même boîte, en tête : **Aléatoires** (distribuées au hasard), **Tous les thèmes** (tirées parmi toutes les donnes thématiques) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, **Plus de donnes disponibles** s'affiche. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
 - **La table** reprend l'allure d'une table en ligne :
   - votre main est toujours **en bas**, étalée carte par carte ;
   - les trois autres joueurs ont le dos tourné : à gauche celui qui parle après vous, en face le partenaire ;

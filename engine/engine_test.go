@@ -254,3 +254,15 @@ func TestDefenceAgainstPreempts(t *testing.T) {
 		}
 	}
 }
+
+// TestTakeoutDoubleAnswerZones: (1♣) X – 3♠ is the double jump, five
+// spades and 8-10 H; the doubler with the fit bids game.
+func TestTakeoutDoubleAnswerZones(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "N"]
+[Vulnerable "All"]
+[Deal "N:QT642.62.A95.A97 K3.95.KT73.KQJ54 A985.AKJT.Q862.3 J7.Q8743.J4.T862"]`)
+	const want = "N:Passe E:1T S:X W:Passe N:3P E:Passe S:4P"
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}

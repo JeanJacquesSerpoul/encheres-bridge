@@ -4160,32 +4160,34 @@
   status: sef
 # --- réponses au contre d'appel (l'adversaire de droite a passé) : trois zones, 0-7 / 8-10 / 11+ H
 # en: answers to the takeout double (right-hand opponent passed): three zones, 0-7 / 8-10 / 11+ HCP
+# La réponse est obligatoire, même avec 0 point. 0-7 H : couleur 4e au moins, sans saut (4♥ et 4♠ : 1♠). 8-10 H : majeure 4e à saut, 5e à double saut, 6e à la manche ; mineure 5e à saut ; les deux majeures 4e : cue-bid ; 1SA régulier. 11+ H : manche avec une majeure 5e, 2SA 11-12 avec un arrêt et demi, 3SA 13-15 avec deux arrêts, sinon cue-bid (seule réponse forcing : majeure seulement 4e, pas d'arrêt, ou espoir de chelem).
+# en: Answering is compulsory, even with 0 points. 0-7 HCP: a suit of at least 4 cards, no jump (4♥ and 4♠: 1♠). 8-10 HCP: a four-card major with a jump, five-card with a double jump, six-card at game; a five-card minor with a jump; both four-card majors: cue-bid; 1NT balanced. 11+ HCP: game with a five-card major, 2NT 11-12 with one and a half stoppers, 3NT 13-15 with two stoppers, otherwise the cue-bid (the only forcing answer: only a four-card major, no stopper, or slam hopes).
 - id: "advX.{o}.4{M}"
   for: [{o: 1C, M: S, N: H}, {o: 1C, M: H, N: S}, {o: 1D, M: S, N: H}, {o: 1D, M: H, N: S}, {o: 1H, M: S, N: H}, {o: 1S, M: H, N: S}]
   seq: ["({o}) X", "({o}) P X"]
   call: "4{M}"
-  cond: "({M} >= 7 or ({M} >= 6 and hcp >= 8) or ({M} >= 5 and hcp >= 11)) and ({M} >= {N} or '{o}' in ('1H', '1S'))"
+  cond: "(({M} >= 6 and 8 <= hcp <= 15) or ({M} >= 5 and 11 <= hcp <= 15)) and ({M} >= {N} or '{o}' in ('1H', '1S'))"
   forcing: SO
-  meaning: "Manche : majeure 5e avec 11+ H, 6e avec 8+ H, ou 7e"
-  meaning_en: "Game: 5-card major with 11+ HCP, 6 cards with 8+, or 7 cards"
+  meaning: "Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H"
+  meaning_en: "Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP"
   status: sef
 - id: "advX.{o}.3NT"
   for: [{o: 1C, os: C, nm: "H < 4 and S < 4"}, {o: 1D, os: D, nm: "H < 4 and S < 4"}, {o: 1H, os: H, nm: "S < 4"}, {o: 1S, os: S, nm: "H < 4"}]
   seq: ["({o}) X", "({o}) P X"]
   call: 3NT
-  cond: "12 <= hcp <= 14 and (balanced or semibalanced) and stop('{os}') and {nm}"
+  cond: "13 <= hcp <= 15 and (balanced or semibalanced) and top('{os}') >= 2 and {nm}"
   forcing: SO
-  meaning: "3SA : 12-14 H, régulier, arrêt, pas de majeure 4e"
-  meaning_en: "3NT: 12-14 HCP, balanced, stopper, no 4-card major"
+  meaning: "3SA : 13-15 H, deux arrêts dans leur couleur, pas de majeure 4e"
+  meaning_en: "3NT: 13-15 HCP, two stoppers in their suit, no four-card major"
   status: sef
 - id: "advX.{o}.2NT"
   for: [{o: 1C, os: C, nm: "H < 4 and S < 4"}, {o: 1D, os: D, nm: "H < 4 and S < 4"}, {o: 1H, os: H, nm: "S < 4"}, {o: 1S, os: S, nm: "H < 4"}]
   seq: ["({o}) X", "({o}) P X"]
   call: 2NT
-  cond: "hcp == 11 and (balanced or semibalanced) and stop('{os}') and {nm}"
+  cond: "11 <= hcp <= 12 and (balanced or semibalanced) and stop('{os}') and hcp_in('{os}') >= 4 and {nm}"
   forcing: INV
-  meaning: "2SA : 11 H, régulier, arrêt"
-  meaning_en: "2NT: 11 HCP, balanced, stopper"
+  meaning: "2SA : 11-12 H, un arrêt et demi dans leur couleur"
+  meaning_en: "2NT: 11-12 HCP, one and a half stoppers in their suit"
   status: sef
 - id: "advX.{o}.cue"
   for: [{o: 1C, os: C}, {o: 1D, os: D}, {o: 1H, os: H}, {o: 1S, os: S}]
@@ -4193,30 +4195,58 @@
   call: "2{os}"
   cond: "hcp >= 11"
   forcing: F1
-  meaning: "Cue-bid : 11+ H, forcing ; demande la majeure 4e la moins chère"
-  meaning_en: "Cue-bid: 11+ HCP, forcing; asks for the cheapest 4-card major"
+  meaning: "Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arrêt, ou espoir de chelem)"
+  meaning_en: "Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes)"
   status: sef
   alert: true
+- id: "advX.{o}.cue.2M"
+  for: [{o: 1C, os: C}, {o: 1D, os: D}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "2{os}"
+  cond: "8 <= hcp <= 10 and H >= 4 and S >= 4"
+  forcing: F1
+  meaning: "Cue-bid : 8-10 H et les deux majeures 4e"
+  meaning_en: "Cue-bid: 8-10 HCP and both four-card majors"
+  status: sef
+  alert: true
+- id: "advX.{o}.dsaut.{M}"
+  for: [{o: 1C, M: S, N: H}, {o: 1C, M: H, N: S}, {o: 1D, M: S, N: H}, {o: 1D, M: H, N: S}, {o: 1H, M: S, N: H}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "3{M}"
+  cond: "8 <= hcp <= 10 and {M} == 5 and ({M} > {N} or '{o}' == '1H' or ({M} == {N} and '{M}' == 'S'))"
+  forcing: INV
+  meaning: "Réponse à double saut : majeure 5e, 8-10 H"
+  meaning_en: "Double-jump answer: five-card major, 8-10 HCP"
+  status: sef
 - id: "advX.{o}.saut.{M}"
   for: [{o: 1C, M: S, N: H, call: 2S}, {o: 1C, M: H, N: S, call: 2H}, {o: 1D, M: S, N: H, call: 2S}, {o: 1D, M: H, N: S, call: 2H}, {o: 1H, M: S, N: H, call: 2S}, {o: 1S, M: H, N: S, call: 3H}]
   seq: ["({o}) X", "({o}) P X"]
   call: "{call}"
-  cond: "8 <= hcp <= 10 and {M} >= 4 and ({M} >= 5 or '{call}' != '3H') and ({M} > {N} or '{o}' in ('1H', '1S') or ({M} == {N} and '{M}' == 'H'))"
+  cond: "8 <= hcp <= 10 and {M} >= 4 and ({M} >= 5 or '{call}' != '3H') and ({M} > {N} or '{o}' in ('1H', '1S') or ({M} == {N} and '{M}' == 'S'))"
   forcing: INV
-  meaning: "Réponse à saut : 4+ cartes, 8-10 H"
-  meaning_en: "Jump response: 4+ cards, 8-10 HCP"
+  meaning: "Réponse à saut : majeure 4e (5e sur 1♠), 8-10 H"
+  meaning_en: "Jump answer: four-card major (five-card over 1♠), 8-10 HCP"
+  status: sef
+- id: "advX.{o}.saut.{m}"
+  for: [{o: 1C, m: D, call: 2D}, {o: 1D, m: C, call: 3C}, {o: 1H, m: C, call: 3C}, {o: 1H, m: D, call: 3D}, {o: 1S, m: C, call: 3C}, {o: 1S, m: D, call: 3D}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "{call}"
+  cond: "8 <= hcp <= 10 and {m} >= 5 and not balanced and {m} == max(S, H, D, C)"
+  forcing: INV
+  meaning: "Réponse à saut : mineure 5e, 8-10 H"
+  meaning_en: "Jump answer: five-card minor, 8-10 HCP"
   status: sef
 - id: "advX.{o}.1NT"
   for: [{o: 1C, os: C}, {o: 1D, os: D}, {o: 1H, os: H}, {o: 1S, os: S}]
   seq: ["({o}) X", "({o}) P X"]
   call: 1NT
-  cond: "8 <= hcp <= 10 and stop('{os}')"
+  cond: "8 <= hcp <= 10 and (balanced or stop('{os}'))"
   forcing: NF
-  meaning: "1SA : 8-10 H, arrêt"
-  meaning_en: "1NT: 8-10 HCP, stopper"
+  meaning: "1SA : 8-10 H, régulier"
+  meaning_en: "1NT: 8-10 HCP, balanced"
   status: sef
 - id: "advX.{o}.{c}.{n}"
-  for: [{o: 1C, c: 1H, s: H, n: 1, t: "H >= 4 and H >= S"}, {o: 1C, c: 1S, s: S, n: 1, t: "S >= 4"}, {o: 1D, c: 1H, s: H, n: 1, t: "H >= 4 and H >= S"}, {o: 1D, c: 1S, s: S, n: 1, t: "S >= 4"}, {o: 1H, c: 1S, s: S, n: 1, t: "S >= 4"}, {o: 1S, c: 2H, s: H, n: 1, t: "H >= 4"},
+  for: [{o: 1C, c: 1S, s: S, n: 1, t: "S >= 4 and S >= H"}, {o: 1C, c: 1H, s: H, n: 1, t: "H >= 4"}, {o: 1D, c: 1S, s: S, n: 1, t: "S >= 4 and S >= H"}, {o: 1D, c: 1H, s: H, n: 1, t: "H >= 4"}, {o: 1H, c: 1S, s: S, n: 1, t: "S >= 4"}, {o: 1S, c: 2H, s: H, n: 1, t: "H >= 4"},
         {o: 1C, c: 1D, s: D, n: 2, t: "D >= 4"}, {o: 1D, c: 2C, s: C, n: 2, t: "C >= 4"}, {o: 1H, c: 2D, s: D, n: 2, t: "D >= 4 and D >= C"}, {o: 1H, c: 2C, s: C, n: 2, t: "C >= 4"}, {o: 1S, c: 2D, s: D, n: 2, t: "D >= 4 and D >= C"}, {o: 1S, c: 2C, s: C, n: 2, t: "C >= 4"},
         {o: 1C, c: 1H, s: H, n: 3, t: "H >= 3"}, {o: 1C, c: 1S, s: S, n: 3, t: "S >= 3"}, {o: 1D, c: 1H, s: H, n: 3, t: "H >= 3"}, {o: 1D, c: 1S, s: S, n: 3, t: "S >= 3"}, {o: 1H, c: 1S, s: S, n: 3, t: "S >= 3"}, {o: 1S, c: 2H, s: H, n: 3, t: "H >= 3"},
         {o: 1C, c: 1D, s: D, n: 4, t: "true"}, {o: 1D, c: 2C, s: C, n: 4, t: "true"}, {o: 1H, c: 2C, s: C, n: 4, t: "true"}, {o: 1S, c: 2C, s: C, n: 4, t: "true"}]
@@ -4224,8 +4254,8 @@
   call: "{c}"
   cond: "{t}"
   forcing: NF
-  meaning: "Réponse au contre : 0-10 H, sa meilleure couleur"
-  meaning_en: "Answer to the double: 0-10 HCP, best suit"
+  meaning: "Réponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord"
+  meaning_en: "Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first"
   status: sef
 # --- réponses à l'intervention du partenaire (l'adversaire de droite a passé)
 # en: answers to partner's overcall (right-hand opponent passed)
@@ -4386,10 +4416,37 @@
   for: [{o: 1C, os: C, c: 2H, s: H}, {o: 1C, os: C, c: 2S, s: S}, {o: 1D, os: D, c: 2H, s: H}, {o: 1D, os: D, c: 2S, s: S}, {o: 1H, os: H, c: 2S, s: S}, {o: 1S, os: S, c: 3H, s: H}]
   seq: ["({o}) X 2{os} {c}", "({o}) P X 2{os} {c}"]
   call: "4{s}"
-  cond: "{s} >= 4"
+  cond: "{s} >= 4 and hcp >= 11"
   forcing: SO
   meaning: "Fit 4-4 : manche"
   meaning_en: "4-4 fit: game"
+  status: infere
+- id: "dblR.{o}.cue.{c}.inv"
+  for: [{o: 1C, os: C, c: 2H, s: H}, {o: 1C, os: C, c: 2S, s: S}, {o: 1D, os: D, c: 2H, s: H}, {o: 1D, os: D, c: 2S, s: S}]
+  seq: ["({o}) X 2{os} {c}", "({o}) P X 2{os} {c}"]
+  call: "3{s}"
+  cond: "{s} >= 4"
+  forcing: INV
+  meaning: "Fit 4-4 avec 8-10 H : invitation"
+  meaning_en: "4-4 fit with 8-10 HCP: invitation"
+  status: infere
+- id: "dblR.{o}.cue.2NT.p"
+  for: [{o: 1C, os: C}, {o: 1D, os: D}]
+  seq: ["({o}) X 2{os} 2NT", "({o}) P X 2{os} 2NT"]
+  call: P
+  cond: "hcp <= 10"
+  forcing: NF
+  meaning: "8-10 H : partielle"
+  meaning_en: "8-10 HCP: partscore"
+  status: infere
+- id: "dblR.{o}.cue.{c}.3M.4M"
+  for: [{o: 1C, os: C, c: 2H, s: H}, {o: 1C, os: C, c: 2S, s: S}, {o: 1D, os: D, c: 2H, s: H}, {o: 1D, os: D, c: 2S, s: S}]
+  seq: ["({o}) X 2{os} {c} 3{s}", "({o}) P X 2{os} {c} 3{s}"]
+  call: "4{s}"
+  cond: "hcp >= 15"
+  forcing: SO
+  meaning: "Accepte l'invitation"
+  meaning_en: "Accepts the invitation"
   status: infere
 - id: "dblR.{o}.cue.{c}.3NT"
   for: [{o: 1C, os: C, c: 2H}, {o: 1C, os: C, c: 2S}, {o: 1D, os: D, c: 2H}, {o: 1D, os: D, c: 2S}, {o: 1H, os: H, c: 2S}, {o: 1S, os: S, c: 3H}, {o: 1C, os: C, c: 2NT}, {o: 1D, os: D, c: 2NT}, {o: 1H, os: H, c: 2NT}, {o: 1S, os: S, c: 2NT}]
@@ -4419,6 +4476,33 @@
   forcing: SO
   meaning: "Manche à SA : 15+ H et l'arrêt, sans fit"
   meaning_en: "Game in NT: 15+ HCP and the stopper, no fit"
+  status: infere
+- id: "dblR.{o}.dsaut.{M}"
+  for: [{o: 1C, M: H}, {o: 1C, M: S}, {o: 1D, M: H}, {o: 1D, M: S}, {o: 1H, M: S}]
+  seq: ["({o}) X 3{M}", "({o}) P X 3{M}"]
+  call: "4{M}"
+  cond: "{M} >= 3 and hcp >= 14"
+  forcing: SO
+  meaning: "Manche : fit et 14+ H en face de la majeure 5e (8-10 H)"
+  meaning_en: "Game: fit and 14+ HCP opposite the five-card major (8-10 HCP)"
+  status: infere
+- id: "dblR.{o}.dsaut.{M}.3NT"
+  for: [{o: 1C, os: C, M: H}, {o: 1C, os: C, M: S}, {o: 1D, os: D, M: H}, {o: 1D, os: D, M: S}, {o: 1H, os: H, M: S}]
+  seq: ["({o}) X 3{M}", "({o}) P X 3{M}"]
+  call: 3NT
+  cond: "hcp >= 14 and stop('{os}')"
+  forcing: SO
+  meaning: "3SA : 14+ H et l'arrêt, sans fit"
+  meaning_en: "3NT: 14+ HCP and the stopper, no fit"
+  status: infere
+- id: "dblR.{o}.saut.{m}.3NT"
+  for: [{o: 1C, os: C, m: D, c: 2D}, {o: 1D, os: D, m: C, c: 3C}, {o: 1H, os: H, m: C, c: 3C}, {o: 1H, os: H, m: D, c: 3D}, {o: 1S, os: S, m: C, c: 3C}, {o: 1S, os: S, m: D, c: 3D}]
+  seq: ["({o}) X {c}", "({o}) P X {c}"]
+  call: 3NT
+  cond: "hcp >= 15 and stop('{os}')"
+  forcing: SO
+  meaning: "3SA : 15+ H et l'arrêt en face de la mineure 5e (8-10 H)"
+  meaning_en: "3NT: 15+ HCP and the stopper opposite the five-card minor (8-10 HCP)"
   status: infere
 - id: "dblR.{o}.1NT"
   for: [{o: 1C}, {o: 1D}, {o: 1H}, {o: 1S}]

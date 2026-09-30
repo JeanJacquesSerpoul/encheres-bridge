@@ -1046,16 +1046,17 @@ $("#random-btn").addEventListener("click", drawRandomDeal);
 // thèmes. Elle tient des centaines de fichiers sans tout lire d'avance :
 // - la liste se construit par pages de THEMES_PAGE, la suivante quand on
 //   approche du bas ;
-// - les libellés d'une page se lisent quand elle se construit, et de chaque
-//   fichier seulement le début (requête Range) ;
+// - les fichiers d'une page se lisent quand elle se construit, pour leur
+//   libellé, et sont gardés : le choix du thème n'a plus rien à lire ;
 // - dès qu'on tape un filtre, les libellés encore inconnus se lisent en
-//   arrière-plan, THEMES_PARALLEL à la fois, et la liste se met à jour ;
-// - le fichier entier n'est lu qu'au choix du thème.
+//   arrière-plan, THEMES_PARALLEL à la fois, et la liste se met à jour.
+// Pas de lecture partielle (Range) : GitHub Pages l'applique au fichier
+// compressé, et le navigateur n'en décompressait que le début — un fichier
+// de 50 donnes arrivait avec 13.
 const THEMES_INDEX_URL = "pbn/index.json";
 const THEME_FILE = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pbn$/i;
 const THEMES_PAGE = 40;
 const THEMES_PARALLEL = 4;
-const THEME_HEAD_BYTES = 2048;
 const themesDialog = $("#themes-dialog");
 const themesInput = $("#themes-input");
 const themesList = $("#themes-list");
@@ -1091,21 +1092,10 @@ async function loadThemeIndex() {
   }
 }
 
-// Le libellé d'un thème, lu du début du fichier. Un serveur qui ignore Range
-// renvoie le fichier entier (200 au lieu de 206) : il est alors gardé, et le
-// choix du thème n'a plus rien à lire.
+// Le libellé d'un thème, lu de l'en-tête de son fichier.
 function loadThemeTitle(th) {
   if (th.title || th.pending) return th.pending;
-  th.pending = fetch(`pbn/${th.file}`, {
-    cache: "no-cache",
-    headers: { Range: `bytes=0-${THEME_HEAD_BYTES - 1}` },
-  })
-    .then(async (resp) => {
-      if (!resp.ok) throw new Error(resp.status);
-      const text = await resp.text();
-      if (resp.status === 200) th.text = text;
-      th.title = pbnTitles(text);
-    })
+  th.pending = loadThemeText(th)
     .catch(() => {
       th.title = {}; // illisible : le nom du fichier en tiendra lieu
     })
@@ -1128,9 +1118,11 @@ function refilterSoon() {
   });
 }
 
+// « reload » et non « no-cache » : un navigateur qui a gardé la réponse
+// partielle d'une version précédente (Range) la recomposerait de travers.
 async function loadThemeText(th) {
   if (th.text) return th.text;
-  const resp = await fetch(`pbn/${th.file}`, { cache: "no-cache" });
+  const resp = await fetch(`pbn/${th.file}`, { cache: "reload" });
   if (!resp.ok) throw new Error(resp.status);
   th.text = await resp.text();
   if (!th.title) th.title = pbnTitles(th.text);

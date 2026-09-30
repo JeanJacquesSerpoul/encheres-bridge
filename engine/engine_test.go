@@ -266,3 +266,23 @@ func TestTakeoutDoubleAnswerZones(t *testing.T) {
 		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
 	}
 }
+
+// TestLawOfTotalTricksRaises: after an overcall, responder raises to the
+// level of the line's trumps minus 6 — four trumps to 3, five trumps to 4.
+func TestLawOfTotalTricksRaises(t *testing.T) {
+	for _, c := range []struct{ pbn, want string }{
+		{`[Dealer "E"]
+[Vulnerable "None"]
+[Deal "N:A8632.K984.85.53 KT75.7.J643.Q872 Q4.AQJT2.K972.J9 J9.653.AQT.AKT64"]`,
+			"E:Passe S:1C W:2T N:3C"},
+		{`[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "N:QJT92.86.83.AT93 64.AJT432.J7.J87 AK753..AQT642.52 8.KQ975.K95.KQ64"]`,
+			"S:1P W:2C N:4P"},
+	} {
+		got := formatAuction(NewEngine(mustParsePBN(t, c.pbn)).Run())
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("enchères :\n %s\nattendu :\n %s …", got, c.want)
+		}
+	}
+}

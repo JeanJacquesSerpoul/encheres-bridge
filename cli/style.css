@@ -1444,15 +1444,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   background: var(--panel);
 }
 .train-head h2 { margin: 0; font-size: 1.1rem; white-space: nowrap; }
-.train-where {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--muted);
-  font-size: .9rem;
-}
 .train-nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .train-nav .cmd-btn { width: 40px; height: 40px; }
 .train-nav .train-finish { width: auto; padding: 0 12px; }
@@ -1653,7 +1644,6 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 @media (max-width: 600px) {
   .train-head { flex-wrap: wrap; gap: 6px 10px; padding: 8px 10px; }
-  .train-where { order: 2; flex-basis: calc(100% - 7em); }
   .train-nav { order: 3; flex-basis: 100%; justify-content: space-between; margin-left: 0; }
   .train-count { min-width: 0; flex: 1; }
   .train-body { padding: 10px; gap: 10px; }

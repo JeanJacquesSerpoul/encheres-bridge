@@ -4871,6 +4871,8 @@ function renderBiddingStrains() {
 // donnes tirées au hasard, comme « Donne aléatoire » (parmi les donnes
 // thématiques si l'option est cochée, voir drawPracticePBN). Chaque donne est
 // une « table » : l'enchère complète du moteur, et ce que l'on y a répondu.
+// Le thème d'une donne n'apparaît pas à la table, pour ne rien souffler :
+// seul le score de « Terminer » le cite, une fois les enchères faites.
 // La table courante est `quiz` : le verdict, l'arbre de décision et la boîte
 // à enchères la lisent. Votre main est toujours en bas, face visible ; les
 // trois autres ont le dos tourné tant que l'enchère n'est pas finie.
@@ -4992,7 +4994,6 @@ function renderTrainNav() {
   const n = train.tables.length;
   const table = quiz;
   $("#train-count").textContent = t.trainCount(train.cur + 1, n);
-  $("#train-where").textContent = table && table.label ? table.label : "";
   $("#train-prev").disabled = train.cur <= 0;
   // Suivante : une table déjà jouée, ou une nouvelle donne une fois l'enchère finie.
   $("#train-next").disabled = !(train.cur < n - 1 || (table && table.done));
@@ -5339,7 +5340,6 @@ function startTraining(seat) {
   $("#quiz-continue-btn").classList.add("hidden");
   $("#bidding-box").classList.add("hidden");
   $("#train-count").textContent = "";
-  $("#train-where").textContent = "";
   $("#train-prev").disabled = true;
   $("#train-next").disabled = true;
   $("#train-new-btn").classList.add("hidden");

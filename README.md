@@ -283,20 +283,21 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Trois sont fournies, de 50 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Quatre sont fournies, de 50 donnes chacune :
 
 | Fichier | Thème |
 |---|---|
 | `4e-couleur-forcing.pbn` | le camp qui ouvre emploie la 4e couleur forcing |
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 | `2-trefle-fort.pbn` | ouverture de 2♣ fort indéterminé |
+| `roudi.pbn` | le répondant emploie le Roudi (2♣) après la redemande de 1SA de l'ouvreur |
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
 
 La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit que les fichiers de la page affichée, pour en tirer le libellé ; ils sont gardés, et le choix d'un thème le charge aussitôt. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure.
 
 ```json
-{ "files": ["4e-couleur-forcing.pbn", "drury.pbn", "2-trefle-fort.pbn"] }
+{ "files": ["4e-couleur-forcing.pbn", "drury.pbn", "2-trefle-fort.pbn", "roudi.pbn"] }
 ```
 
 Chaque fichier commence par son libellé, une ligne par langue, avant la première donne. Ce sont des lignes de commentaire PBN (`%`), que les autres logiciels ignorent. Sans elles, la liste affiche le nom du fichier.

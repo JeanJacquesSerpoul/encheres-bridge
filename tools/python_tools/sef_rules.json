@@ -2131,6 +2131,34 @@
   "status": "choix"
  },
  {
+  "id": "2NT.3C.3H.6H",
+  "seq": [
+   "2NT 3C 3H",
+   "2C 2D 2NT 3C 3H"
+  ],
+  "call": "6H",
+  "cond": "H >= 4 and hl >= 12",
+  "forcing": "SO",
+  "meaning": "Fit et 12+ HL : petit chelem",
+  "meaning_en": "Fit and 12+ HL: small slam",
+  "status": "infere",
+  "trump": "H"
+ },
+ {
+  "id": "2NT.3C.3S.6S",
+  "seq": [
+   "2NT 3C 3S",
+   "2C 2D 2NT 3C 3S"
+  ],
+  "call": "6S",
+  "cond": "S >= 4 and hl >= 12",
+  "forcing": "SO",
+  "meaning": "Fit et 12+ HL : petit chelem",
+  "meaning_en": "Fit and 12+ HL: small slam",
+  "status": "infere",
+  "trump": "S"
+ },
+ {
   "id": "2NT.3C.3H.4H",
   "seq": [
    "2NT 3C 3H",

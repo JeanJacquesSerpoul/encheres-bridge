@@ -1109,6 +1109,18 @@
   meaning: "Rectifie"
   meaning_en: "Corrects"
   status: choix
+# Fit majeur trouvé en face d'un 2SA (20-21 HL) : avec 12 HL, les 32-33 HL de la ligne et le fit valent le petit chelem. Mesuré sur le banc du par.
+# en: Major fit found opposite 2NT (20-21 HL): with 12 HL, the line's 32-33 HL and the fit are worth the small slam. Measured on the par benchmark.
+- id: "2NT.3C.3{M}.6{M}"
+  for: [{M: H}, {M: S}]
+  seq: ["2NT 3C 3{M}", "2C 2D 2NT 3C 3{M}"]
+  call: "6{M}"
+  cond: "{M} >= 4 and hl >= 12"
+  forcing: SO
+  meaning: "Fit et 12+ HL : petit chelem"
+  meaning_en: "Fit and 12+ HL: small slam"
+  status: infere
+  trump: "{M}"
 - id: "2NT.3C.3{M}.4{M}"
   for: [{M: H}, {M: S}]
   seq: ["2NT 3C 3{M}", "2C 2D 2NT 3C 3{M}"]

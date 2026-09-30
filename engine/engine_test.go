@@ -188,3 +188,15 @@ func TestNoThreeNTOverJumpRebidWithVoid(t *testing.T) {
 		t.Fatalf("enchères : %s", got)
 	}
 }
+
+// TestSlamAfterStaymanFitOver2NT: 2SA 3♣ 3♥, responder has 4 hearts and
+// 12 H: the line holds 31 H and the fit, 6♥.
+func TestSlamAfterStaymanFitOver2NT(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "E"]
+[Vulnerable "None"]
+[Deal "N:QJ983.5.7653.J63 K4.KQJ64.J4.AKQ4 T62.932.KQ9.T972 A75.AT87.AT82.85"]`)
+	const want = "E:2SA S:Passe W:3T N:Passe E:3C S:Passe W:6C"
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}

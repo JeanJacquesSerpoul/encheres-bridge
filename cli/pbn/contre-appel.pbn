@@ -101,13 +101,13 @@
 [Board "17"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:JT73.AK4.J742.A8 AK65.T.AK65.KQ76 Q42.J9873.8.T943 98.Q652.QT93.J52"]
+[Deal "N:AT6.AJ43.Q9.KT72 73.QT85.K53.Q863 KJ954.96.T842.95 Q82.K72.AJ76.AJ4"]
 
 [Event "Contre d'appel et ses réponses"]
 [Board "18"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:T32.A.AT8532.AQ6 K.J9872.976.KJT4 J8.T65.J4.987532 AQ97654.KQ43.KQ."]
+[Deal "N:T83.97.AQ3.AK632 A974.A85.J7642.J KJ6.T64.T95.9754 Q52.KQJ32.K8.QT8"]
 
 [Event "Contre d'appel et ses réponses"]
 [Board "19"]
@@ -115,38 +115,42 @@
 [Vulnerable "All"]
 [Deal "N:KQJT92.KQT92.A3. 543.A.K7542.AQ62 A87.J76.QT98.K93 6.8543.J6.JT8754"]
 
+
 [Event "Contre d'appel et ses réponses"]
 [Board "20"]
 [Dealer "N"]
 [Vulnerable "None"]
 [Deal "N:QT985.A75.Q87.83 J63.KJT6.A53.A62 AK.942.K42.KQ975 742.Q83.JT96.JT4"]
 
+
 [Event "Contre d'appel et ses réponses"]
 [Board "21"]
 [Dealer "E"]
 [Vulnerable "EW"]
-[Deal "N:AT.AKQ52.AQ97.76 6.84.J86542.JT82 J987.JT63.T3.K93 KQ5432.97.K.AQ54"]
+[Deal "N:42.AT5.976.QT763 T97.832.QJ2.J854 AJ83.KJ964.A8.K9 KQ65.Q7.KT543.A2"]
 
 [Event "Contre d'appel et ses réponses"]
 [Board "22"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "N:Q98.753.J9764.Q3 KJ2.JT986.AT8.62 A743.A.Q2.KT9874 T65.KQ42.K53.AJ5"]
-
-[Event "Contre d'appel et ses réponses"]
-[Board "23"]
-[Dealer "W"]
-[Vulnerable "NS"]
-[Deal "N:QT9.Q9.QT6.A8432 86.T8654.982.QJ5 J4.A72.A753.K976 AK7532.KJ3.KJ4.T"]
-
-[Event "Contre d'appel et ses réponses"]
-[Board "24"]
 [Dealer "N"]
 [Vulnerable "NS"]
 [Deal "N:A973.AKJ3.AT85.3 42.Q52.Q93.AK974 .T9864.J762.T852 KQJT865.7.K4.QJ6"]
 
 [Event "Contre d'appel et ses réponses"]
-[Board "25"]
+[Board "23"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "N:86.97632.J98.873 A9.AK.K.AQT96542 QJ72.J5.A7643.KJ KT543.QT84.QT52."]
+[Deal "N:A98.76.A2.AQ9765 KQ6.KQJ8.JT3.K83 T7.T543.K964.JT4 J5432.A92.Q875.2"]
+
+[Event "Contre d'appel et ses réponses"]
+[Board "24"]
+[Dealer "E"]
+[Vulnerable "EW"]
+[Deal "N:KQJ842.QJ.Q964.6 53.A53.KT8.AJ983 A976.KT92.J7.KQ2 T.8764.A532.T754"]
+
+
+[Event "Contre d'appel et ses réponses"]
+[Board "25"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "N:J7.AQ632.J3.AKQJ 962.J.KQ6.987642 K843.T875.T42.T3 AQT5.K94.A9875.5"]
+

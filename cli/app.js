@@ -1164,14 +1164,32 @@ function themeName(th, lang) {
   return (th.title && (th.title[lang] || th.title.fr || th.title.en)) || th.file;
 }
 
+// Les thèmes par ordre alphabétique de leur libellé dans la langue de la page
+// (sans casse ni accents, « 2 » avant « 10 »). Un thème dont le libellé n'est
+// pas encore lu se range à son nom de fichier.
+function sortedThemes(list, lang) {
+  const coll = new Intl.Collator(lang, { numeric: true, sensitivity: "base" });
+  return [...list].sort((a, b) => coll.compare(themeName(a, lang), themeName(b, lang)));
+}
+
 async function loadThemeIndex() {
   try {
     const resp = await fetch(THEMES_INDEX_URL, { cache: "no-cache" });
     if (!resp.ok) return [];
     const body = await resp.json();
     const files = body && Array.isArray(body.files) ? body.files : [];
-    return [...new Set(files.filter((f) => typeof f === "string" && THEME_FILE.test(f)))]
-      .map((file) => ({ file, title: null, text: null, pending: null }));
+    // Une entrée est un nom de fichier, ou { file, fr, en } : le libellé est
+    // alors connu d'avance, et la liste se trie sans lire les fichiers.
+    const seen = new Set();
+    const out = [];
+    for (const f of files) {
+      const file = typeof f === "string" ? f : f && f.file;
+      if (typeof file !== "string" || !THEME_FILE.test(file) || seen.has(file)) continue;
+      seen.add(file);
+      const title = f && typeof f === "object" && (f.fr || f.en) ? { fr: f.fr, en: f.en } : null;
+      out.push({ file, title, text: null, pending: null });
+    }
+    return out;
   } catch (err) {
     return []; // pas de manifeste : aucune donne thématique
   }
@@ -1304,7 +1322,7 @@ function filterThemes(resetActive) {
   const t = UI_TEXT[$("#lang").value];
   const words = foldText(themesInput.value).split(/\s+/).filter(Boolean);
   const before = themeActive >= 0 ? themeShown[themeActive] : null;
-  themeShown = themeFiles.filter((th) => themeMatches(th, words));
+  themeShown = sortedThemes(themeFiles.filter((th) => themeMatches(th, words)), $("#lang").value);
   themeMoreObserver.disconnect();
   themesList.replaceChildren();
   themeRendered = 0;
@@ -5408,7 +5426,7 @@ async function fillTrainThemes() {
   const sel = $("#train-theme");
   const files = await loadAllThemes();
   const keep = sel.value || readStored(TRAIN_THEME_KEY, "");
-  sel.replaceChildren(...files.map((th) => new Option(themeName(th, lang), th.file)));
+  sel.replaceChildren(...sortedThemes(files, lang).map((th) => new Option(themeName(th, lang), th.file)));
   if (files.some((th) => th.file === keep)) sel.value = keep;
   // Aucun thème joignable : seules les donnes aléatoires restent possibles.
   for (const input of trainSeatDialog.querySelectorAll('input[name="train-source"]')) {

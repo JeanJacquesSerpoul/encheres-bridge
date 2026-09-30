@@ -295,13 +295,20 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
 | `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 150 donnes à 0-7 H, 200 à 8-10 H, 150 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
 
-Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
+Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`. La fenêtre les range **par ordre alphabétique** de leur libellé dans la langue de la page (sans tenir compte de la casse ni des accents) ; la liste de l'entraînement aussi.
 
 La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit que les fichiers de la page affichée, pour en tirer le libellé ; ils sont gardés, et le choix d'un thème le charge aussitôt. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure.
 
 ```json
-{ "files": ["4e-couleur-forcing.pbn", "drury.pbn", "2-trefle-fort.pbn", "roudi.pbn", "2-faible.pbn", "2-carreau-fm.pbn", "contre-appel.pbn"] }
+{
+  "files": [
+    { "file": "4e-couleur-forcing.pbn", "fr": "4e couleur forcing", "en": "Fourth suit forcing" },
+    { "file": "drury.pbn", "fr": "Drury", "en": "Drury" }
+  ]
+}
 ```
+
+Chaque entrée donne le fichier et ses libellés : la liste se trie ainsi sans lire les fichiers. Une entrée peut aussi n'être que le nom du fichier (`"drury.pbn"`) : le libellé est alors lu dans l'en-tête du fichier, et le thème se range à son nom de fichier tant qu'il n'est pas lu.
 
 Chaque fichier commence par son libellé, une ligne par langue, avant la première donne. Ce sont des lignes de commentaire PBN (`%`), que les autres logiciels ignorent. Sans elles, la liste affiche le nom du fichier.
 
@@ -318,7 +325,7 @@ Chaque fichier commence par son libellé, une ligne par langue, avant la premiè
 
 Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchères selon le système choisi, et une série suit donc les règles quand elles changent.
 
-**Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans [cli/rules/default.yaml](cli/rules/default.yaml). Le tirage est reproductible (`--seed`, 2024 par défaut). `--max-per-rule N` plafonne le nombre de donnes par règle retenue, pour équilibrer les variantes d'un thème : sans lui, les ouvertures les plus fréquentes prennent presque toute la série. On déclare ensuite le fichier dans `cli/pbn/index.json`.
+**Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans [cli/rules/default.yaml](cli/rules/default.yaml). Le tirage est reproductible (`--seed`, 2024 par défaut). `--max-per-rule N` plafonne le nombre de donnes par règle retenue, pour équilibrer les variantes d'un thème : sans lui, les ouvertures les plus fréquentes prennent presque toute la série. On déclare ensuite le fichier et ses libellés dans `cli/pbn/index.json`.
 
 ```bash
 cd tools/python_tools

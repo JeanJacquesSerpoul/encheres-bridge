@@ -21,7 +21,6 @@ const IA_REMOTE_KEY = "ia.remote";
 const IA_MODE_KEY = "ia.mode";
 const IA_ENABLED_KEY = "ia.enabled";
 const HIDE_PASSES_KEY = "bids.hidePasses";
-const RANDOM_THEMES_KEY = "bids.randomThemes";
 
 const iaModeSelect = $("#ia-mode");
 iaModeSelect.value = readIaMode();
@@ -41,14 +40,6 @@ iaEnabledToggle.addEventListener("change", applyIaFeature);
 // ses passes. Une simple classe sur la liste, sans la réémettre : chaque ligne
 // y garde son numéro de tour (attribut value), les enchères restantes ne se
 // renumérotent donc pas.
-// Option de tirage, par défaut ON : cochée, « Donne aléatoire » tire une
-// donne parmi les donnes thématiques (voir drawThemedDeal).
-const randomThemesToggle = $("#random-themes");
-randomThemesToggle.checked = readStored(RANDOM_THEMES_KEY, "") !== "0";
-randomThemesToggle.addEventListener("change", () => {
-  saveStored(RANDOM_THEMES_KEY, randomThemesToggle.checked ? "1" : "0");
-});
-
 const hidePassesToggle = $("#hide-passes");
 hidePassesToggle.checked = readStored(HIDE_PASSES_KEY, "") === "1";
 hidePassesToggle.addEventListener("change", applyHidePasses);
@@ -168,7 +159,6 @@ const UI_TEXT = {
     serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
     hidePasses: "Ne pas afficher les passes",
-    randomThemes: "Donnes aléatoires tirées des thèmes",
     themeDealTitle: "{theme} — donne {n}",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
@@ -307,7 +297,11 @@ const UI_TEXT = {
     trainTitle: "S'entraîner",
     trainClose: "Fermer l'entraînement",
     trainSeatTitle: "Votre main",
-    trainSeatHint: "Choisissez le siège où vous enchérirez : les donnes sont tirées au hasard, et vous ne voyez que votre main.",
+    trainSource: "Donnes",
+    trainSrcRandom: "Aléatoires",
+    trainSrcAll: "Tous les thèmes",
+    trainSrcTheme: "Un thème",
+    trainNoThemed: "Aucune donne de ce choix ne respecte le donneur, la vulnérabilité et les bornes de points choisis.",
     trainCancel: "Annuler",
     trainNextDeal: "Donne suivante",
     trainPrev: "Donne précédente",
@@ -374,7 +368,6 @@ const UI_TEXT = {
     serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
     hidePasses: "Hide passes",
-    randomThemes: "Random deals from the themes",
     themeDealTitle: "{theme} — deal {n}",
     serverTest: "Test",
     healthUnknown: "unknown state",
@@ -509,7 +502,11 @@ const UI_TEXT = {
     trainTitle: "Practise",
     trainClose: "Close the practice",
     trainSeatTitle: "Your hand",
-    trainSeatHint: "Choose the seat you will bid from: deals are drawn at random, and you only see your own hand.",
+    trainSource: "Deals",
+    trainSrcRandom: "Random",
+    trainSrcAll: "All topics",
+    trainSrcTheme: "One topic",
+    trainNoThemed: "No deal of this choice fits the dealer, vulnerability and point bounds you chose.",
     trainCancel: "Cancel",
     trainNextDeal: "Next deal",
     trainPrev: "Previous deal",
@@ -1053,7 +1050,6 @@ async function drawRandomDeal() {
   if (errEl.textContent) return false;
   const fini = showBusy($("#random-btn"), CONS_TEXT[lang].busyDeal);
   try {
-    if (randomThemesToggle.checked && (await drawThemedDeal())) return true;
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
     if (!pbn) {
       setBoundsError(errEl, CONS_TEXT[lang].errNoDeal);
@@ -1080,18 +1076,23 @@ function dealHCP(block) {
   return hcp;
 }
 
-// Tire une donne au hasard parmi toutes les donnes thématiques, en respectant
-// le donneur, la vulnérabilité et les bornes de points choisis. Rend faux si
-// aucune ne convient, ou si les fichiers ne sont pas joignables : la donne est
-// alors distribuée comme d'habitude.
-async function pickThemedBlock() {
+// Tire une donne au hasard parmi les donnes thématiques — toutes, ou celles
+// du fichier `onlyFile` —, en respectant le donneur, la vulnérabilité et les
+// bornes de points choisis. Rend null si aucune ne convient, ou si les
+// fichiers ne sont pas joignables.
+async function loadAllThemes() {
   if (!themeFiles) themeFiles = await loadThemeIndex();
   await Promise.all(themeFiles.map((th) => loadThemeText(th).catch(() => null)));
+  return themeFiles;
+}
+
+async function pickThemedBlock(onlyFile) {
+  await loadAllThemes();
   const dealer = chosenDealer();
   const vul = chosenVul();
   const pool = [];
   for (const th of themeFiles) {
-    if (!th.text) continue;
+    if (!th.text || (onlyFile && th.file !== onlyFile)) continue;
     splitPbnGames(th.text).forEach((block, i) => {
       const d = block.match(/\[Dealer\s+"([NESW])"\]/i);
       const v = block.match(/\[Vulnerable\s+"([^"]*)"\]/i);
@@ -1108,15 +1109,6 @@ async function pickThemedBlock() {
   const label = UI_TEXT[lang].themeDealTitle
     .replace("{theme}", themeName(pick.th, lang)).replace("{n}", pick.n);
   return { block: pick.block, label };
-}
-
-async function drawThemedDeal() {
-  const pick = await pickThemedBlock();
-  if (!pick) return false;
-  loadPbn(pick.block);
-  $("#file-name").textContent = pick.label;
-  settlePbn();
-  return true;
 }
 
 $("#random-btn").addEventListener("click", drawRandomDeal);
@@ -5241,15 +5233,16 @@ function showTrainTable(k) {
   }
 }
 
-// La donne d'une nouvelle table : tirée comme par « Donne aléatoire », dans
-// les donnes thématiques si l'option est cochée, sinon distribuée au hasard ;
-// donneur, vulnérabilité et bornes de points choisis s'appliquent.
+// La donne d'une nouvelle table, selon le choix fait au départ : distribuée
+// au hasard, ou tirée parmi toutes les donnes thématiques, ou parmi celles
+// d'un thème. Donneur, vulnérabilité et bornes de points choisis s'appliquent.
 async function drawPracticePBN(lang) {
   const bad = validateBounds(lang);
   if (bad) throw new Error(bad);
-  if (randomThemesToggle.checked) {
-    const pick = await pickThemedBlock();
-    if (pick) return { pbn: pick.block, label: pick.label };
+  if (train.source !== "random") {
+    const pick = await pickThemedBlock(train.source === "theme" ? train.theme : null);
+    if (!pick) throw new Error(UI_TEXT[lang].trainNoThemed);
+    return { pbn: pick.block, label: pick.label };
   }
   const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
   if (!pbn) throw new Error(CONS_TEXT[lang].errNoDeal);
@@ -5359,7 +5352,11 @@ $("#train-summary").addEventListener("click", (ev) => {
 // La séance commence : la fenêtre s'ouvre sur une première donne.
 function startTraining(seat) {
   saveStored(TRAIN_SEAT_KEY, seat);
-  train = { seat, lang: $("#lang").value, tables: [], cur: -1, rot: 0 };
+  const source = trainSource();
+  const theme = $("#train-theme").value;
+  saveStored(TRAIN_SOURCE_KEY, source);
+  if (theme) saveStored(TRAIN_THEME_KEY, theme);
+  train = { seat, lang: $("#lang").value, tables: [], cur: -1, rot: 0, source, theme };
   quiz = null;
   for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
   $("#tcenter").innerHTML = "";
@@ -5378,12 +5375,52 @@ function startTraining(seat) {
   newTrainTable();
 }
 
+// Les donnes de l'entraînement : « random » (distribuées au hasard), « all »
+// (tous les thèmes) ou « theme » (le thème choisi dans la liste). Retenu d'une
+// visite à l'autre, comme la main et le thème.
+const TRAIN_SOURCE_KEY = "bids.trainSource";
+const TRAIN_THEME_KEY = "bids.trainTheme";
+
+function trainSource() {
+  const picked = trainSeatDialog.querySelector('input[name="train-source"]:checked');
+  return picked ? picked.value : "random";
+}
+
+function renderTrainSource() {
+  $("#train-theme").hidden = trainSource() !== "theme";
+}
+
+// La liste des thèmes, avec leur libellé dans la langue de la page.
+async function fillTrainThemes() {
+  const lang = $("#lang").value;
+  const sel = $("#train-theme");
+  const files = await loadAllThemes();
+  const keep = sel.value || readStored(TRAIN_THEME_KEY, "");
+  sel.replaceChildren(...files.map((th) => new Option(themeName(th, lang), th.file)));
+  if (files.some((th) => th.file === keep)) sel.value = keep;
+  // Aucun thème joignable : seules les donnes aléatoires restent possibles.
+  for (const input of trainSeatDialog.querySelectorAll('input[name="train-source"]')) {
+    if (input.value !== "random") input.disabled = !files.length;
+  }
+  if (!files.length) trainSeatDialog.querySelector('input[value="random"]').checked = true;
+  renderTrainSource();
+}
+
+for (const input of document.querySelectorAll('input[name="train-source"]')) {
+  input.addEventListener("change", renderTrainSource);
+}
+
 // Le choix de la main : les quatre sièges autour d'une table, le dernier
 // retenu mis en avant.
 function renderTrainSeatChoices() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
   const last = readStored(TRAIN_SEAT_KEY, "S");
+  const src = readStored(TRAIN_SOURCE_KEY, "random");
+  const radio = trainSeatDialog.querySelector(`input[name="train-source"][value="${src}"]`)
+    || trainSeatDialog.querySelector('input[value="random"]');
+  if (!trainSeatDialog.querySelector('input[name="train-source"]:checked')) radio.checked = true;
+  renderTrainSource();
   for (const btn of trainSeatDialog.querySelectorAll(".seat-choice")) {
     const seat = btn.dataset.seat;
     btn.textContent = SEAT_LABEL[lang][seat];
@@ -5395,6 +5432,7 @@ function renderTrainSeatChoices() {
 $("#train-btn").addEventListener("click", () => {
   closeMenus();
   renderTrainSeatChoices();
+  fillTrainThemes();
   trainSeatDialog.showModal();
   const last = trainSeatDialog.querySelector(".seat-choice.is-last");
   if (last) last.focus();
@@ -5648,8 +5686,8 @@ const TUTORIAL_STEPS = [
     en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, two tabs: Auction and Par.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
-    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, par défaut parmi les donnes thématiques (voir les réglages).\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
-    en: ["Getting a deal", "Random deal draws a complete deal, by default among the themed deals (see the settings).\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
+    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, distribuée au hasard.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
+    en: ["Getting a deal", "Random deal draws a complete deal, dealt at random.\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
   },
   {
     fr: ["Partager la donne", "Copiez un lien qui contient la donne, sauvez-la dans un fichier .pbn, ou affichez son texte PBN pour le copier ou y coller une donne reçue.\nDonneur et Vulnérabilité s'imposent ou se tirent au sort."],
@@ -5684,8 +5722,8 @@ const TUTORIAL_STEPS = [
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {
-    fr: ["S'entraîner", "Le bouton S'entraîner, après Partager : choisissez votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont tirées au hasard, comme par Donne aléatoire, et vous ne voyez que votre main."],
-    en: ["Practise", "The Practise button, after Share: choose your hand (North, East, South or West).\nDeals are drawn at random, like Random deal's, and you only see your own hand."],
+    fr: ["S'entraîner", "Le bouton S'entraîner, après Partager : choisissez les donnes (Aléatoires, Tous les thèmes ou Un thème), puis votre main (Nord, Est, Sud ou Ouest).\nVous ne voyez que votre main."],
+    en: ["Practise", "The Practise button, after Share: choose the deals (Random, All topics or One topic), then your hand (North, East, South or West).\nYou only see your own hand."],
   },
   {
     fr: ["La table", "Votre main en bas, les trois autres dos tournés ; au centre la boîte des enchères, sièges vulnérables en rouge. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],

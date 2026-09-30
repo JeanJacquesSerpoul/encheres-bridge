@@ -1462,19 +1462,56 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   box-shadow: var(--shadow-modal);
 }
 .train-seat-dialog::backdrop { background: var(--overlay); }
-.train-seat-box { padding: 20px 22px 16px; text-align: center; }
-.train-seat-box h2 { margin: 0 0 6px; font-size: 1.2rem; }
-.train-seat-box p { margin: 0; font-size: .9rem; }
+.train-seat-box { padding: 16px 18px 12px; text-align: center; }
+.train-seat-box h2 { margin: 0 0 10px; font-size: 1.15rem; }
+/* Les donnes : trois choix en contrôle segmenté, puis la liste des thèmes. */
+.train-source { margin: 0; padding: 0; border: 0; min-width: 0; }
+.train-source legend,
+.train-seat-label {
+  margin: 0 0 6px;
+  padding: 0;
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.train-source legend { width: 100%; text-align: center; }
+.train-source-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.train-source-pills label { position: relative; display: flex; }
+.train-source-pills label + label { border-left: 1px solid var(--border); }
+.train-source-pills input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.train-source-pills span {
+  flex: 1;
+  padding: 9px 4px;
+  font-size: .88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.train-source-pills label:hover span { background: var(--tint); }
+.train-source-pills input:checked + span { background: var(--accent-bg); color: var(--on-accent); }
+.train-source-pills input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: -3px; }
+.train-source-pills input:disabled + span { opacity: .4; cursor: not-allowed; }
+#train-theme { width: 100%; margin-top: 8px; min-height: 40px; background: var(--panel); color: var(--ink); }
+#train-theme option { background: var(--panel); color: var(--ink); }
+.train-seat-label { margin-top: 14px; }
 .seat-compass {
   display: grid;
   grid-template-areas: ". n ." "w c e" ". s .";
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  max-width: 320px;
-  margin: 18px auto;
+  gap: 6px;
+  max-width: 300px;
+  margin: 0 auto 12px;
 }
 .seat-choice {
-  min-height: 48px;
+  min-height: 42px;
   margin: 0;
   border: 1px solid var(--border);
   border-radius: 8px;

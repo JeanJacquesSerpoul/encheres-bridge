@@ -301,6 +301,7 @@ const UI_TEXT = {
     trainSrcAll: "Tous les thèmes",
     trainSrcTheme: "Un thème",
     trainNoThemed: "Aucune donne de ce choix ne respecte le donneur, la vulnérabilité et les bornes de points choisis.",
+    trainNoMoreDeals: "Plus de donnes disponibles.",
     trainCancel: "Annuler",
     trainNextDeal: "Donne suivante",
     trainPrev: "Donne précédente",
@@ -505,6 +506,7 @@ const UI_TEXT = {
     trainSrcAll: "All topics",
     trainSrcTheme: "One topic",
     trainNoThemed: "No deal of this choice fits the dealer, vulnerability and point bounds you chose.",
+    trainNoMoreDeals: "No more deals available.",
     trainCancel: "Cancel",
     trainNextDeal: "Next deal",
     trainPrev: "Previous deal",
@@ -1084,7 +1086,10 @@ async function loadAllThemes() {
   return themeFiles;
 }
 
-async function pickThemedBlock(onlyFile) {
+// `used` (facultatif) : les donnes déjà données, par leur clé « fichier#n » ;
+// elles sont écartées, et s'il ne reste qu'elles, la réponse porte
+// `exhausted`.
+async function pickThemedBlock(onlyFile, used) {
   await loadAllThemes();
   const dealer = chosenDealer();
   const vul = chosenVul();
@@ -1102,11 +1107,13 @@ async function pickThemedBlock(onlyFile) {
     });
   }
   if (!pool.length) return null;
-  const pick = pickRandom(pool);
+  const fresh = used ? pool.filter((p) => !used.has(`${p.th.file}#${p.n}`)) : pool;
+  if (!fresh.length) return { exhausted: true };
+  const pick = pickRandom(fresh);
   const lang = $("#lang").value;
   const label = UI_TEXT[lang].themeDealTitle
     .replace("{theme}", themeName(pick.th, lang)).replace("{n}", pick.n);
-  return { block: pick.block, label };
+  return { block: pick.block, label, key: `${pick.th.file}#${pick.n}` };
 }
 
 $("#random-btn").addEventListener("click", drawRandomDeal);
@@ -5238,12 +5245,15 @@ function showTrainTable(k) {
 // La donne d'une nouvelle table, selon le choix fait au départ : distribuée
 // au hasard, ou tirée parmi toutes les donnes thématiques, ou parmi celles
 // d'un thème. Donneur, vulnérabilité et bornes de points choisis s'appliquent.
+// Une donne thématique ne revient pas dans la même séance.
 async function drawPracticePBN(lang) {
   const bad = validateBounds(lang);
   if (bad) throw new Error(bad);
   if (train.source !== "random") {
-    const pick = await pickThemedBlock(train.source === "theme" ? train.theme : null);
+    const pick = await pickThemedBlock(train.source === "theme" ? train.theme : null, train.used);
     if (!pick) throw new Error(UI_TEXT[lang].trainNoThemed);
+    if (pick.exhausted) throw new Error(UI_TEXT[lang].trainNoMoreDeals);
+    train.used.add(pick.key);
     return { pbn: pick.block, label: pick.label };
   }
   const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
@@ -5358,7 +5368,7 @@ function startTraining(seat) {
   const theme = $("#train-theme").value;
   saveStored(TRAIN_SOURCE_KEY, source);
   if (theme) saveStored(TRAIN_THEME_KEY, theme);
-  train = { seat, lang: $("#lang").value, tables: [], cur: -1, rot: 0, source, theme };
+  train = { seat, lang: $("#lang").value, tables: [], cur: -1, rot: 0, source, theme, used: new Set() };
   quiz = null;
   for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
   $("#tcenter").innerHTML = "";

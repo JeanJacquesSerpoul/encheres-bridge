@@ -82,7 +82,7 @@ go run ./serve -port 8080    # autre port (ou PORT=8080)
 
 ### Méthode 2 — Copie de `cli/` sur un hébergeur statique
 
-Le dossier [cli/](cli/) est l'application complète : onze fichiers et le dossier `rules/`, moteur d'enchères et règles compris. Aucun serveur Go, aucune compilation, aucune configuration.
+Le dossier [cli/](cli/) est l'application complète : onze fichiers et les dossiers `rules/` et `pbn/`, moteur d'enchères et règles compris. Aucun serveur Go, aucune compilation, aucune configuration.
 
 **1. Récupérer `cli/`** depuis GitHub : bouton **Code › Download ZIP** puis extraire le dossier `cli/`, ou `git clone` comme ci-dessus.
 
@@ -140,7 +140,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 ./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows
 ```
 
-**2. Copier `cli/` en entier.** Ces onze fichiers et le dossier `rules/`, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
+**2. Copier `cli/` en entier.** Ces onze fichiers et les dossiers `rules/` et `pbn/`, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
 
 | Fichier | Taille | gzip | |
 |---|---:|---:|---|
@@ -157,6 +157,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `rules/default.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
 | `rules/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
 | `rules/default.pdf`, `rules/default.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
+| `pbn/index.json`, `pbn/*.pbn` | 21 Ko | 5 Ko | les donnes thématiques et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
@@ -261,7 +262,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 Le **PBN** (*Portable Bridge Notation*) est le format texte standard des donnes de bridge. Une donne y tient en quelques lignes lisibles — `[Dealer "N"]`, `[Vulnerable "NS"]`, `[Deal "N:AKQ7.T98.… …"]` —, et un fichier `.pbn` peut en contenir tout un tournoi, un bloc `[Board]` par donne. Son intérêt pour l'utilisateur : **faire passer une donne d'une application à l'autre sans la recopier carte par carte**.
 
-- **Lire ici les donnes d'ailleurs** : les fichiers de donnes distribués après un tournoi de club, ceux des machines à distribuer, ou les donnes produites par un générateur ou un logiciel de mise en page (BridgeComposer, par exemple) sont le plus souvent disponibles en PBN. **Charger un fichier .pbn** les ouvre ; un fichier de plusieurs donnes fait apparaître **Donne à utiliser**.
+- **Lire ici les donnes d'ailleurs** : les fichiers de donnes distribués après un tournoi de club, ceux des machines à distribuer, ou les donnes produites par un générateur ou un logiciel de mise en page (BridgeComposer, par exemple) sont le plus souvent disponibles en PBN. **Charger un fichier .pbn** les ouvre ; un fichier de plusieurs donnes fait apparaître **Donne à utiliser**. Les **Donnes thématiques** sont elles-mêmes des fichiers PBN.
 - **Emporter ailleurs les donnes d'ici** : **Sauver le PBN** enregistre la donne affichée dans un fichier `.pbn` que les autres logiciels de bridge savent lire — pour l'analyser en double mort, l'imprimer ou la rejouer.
 - **L'échanger en texte** : une donne PBN se colle dans un courriel ou un message. **Texte de la donne (format PBN)** l'affiche, prête à copier, et accepte une donne collée : la table suit.
 
@@ -274,11 +275,51 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 - **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne — masquée s'il a activé le mode questionnaire —, puis l'adresse redevient celle de la page.
 - **Donne aléatoire** tire une donne complète ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table porte la **donne exemple**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple.
-- **Donnes thématiques** ouvre une liste de fichiers de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…) ; un clic charge le fichier, et le sélecteur **Donne à utiliser** en parcourt les donnes. Ces fichiers sont dans [cli/pbn/](cli/pbn/), déclarés par `cli/pbn/index.json` (un site statique ne sait pas lister un dossier). Chacun commence par son libellé, `% Titre-FR: …` et `% Titre-EN: …` ; sans ces lignes, la liste affiche le nom du fichier. [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) en produit un nouveau : des donnes tirées au hasard dont les enchères emploient une règle donnée.
+- **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…), avec leur nombre de donnes ; un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
 - **La table en lecture, la table en édition** : la table se lit par défaut, quatre mains compactes autour du tapis avec leurs points. **Modifier la donne** la passe en édition, avec les zones de cartes et leurs commandes ; **Terminer** revient à la lecture (éteint tant que la donne est incomplète). Une donne incomplète s'ouvre d'elle-même en édition, une nouvelle donne tirée ou chargée en lecture, et un message sur les bornes rouvre l'édition pour les montrer.
 - **Composer à la main** (en édition) : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
 - Chaque main porte deux **bornes de points d'honneur** (mini/maxi), repliées par défaut : le bouton **Bornes de points** sous la table les affiche (un message d'erreur sur les bornes les rouvre de lui-même). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
 - Sous la table en édition, des boutons à libellés (des icônes sur téléphone) : **Annuler** (ou **Ctrl+Z**) revient sur la dernière action qui a changé la donne — déplacement, poubelle, table vidée ou complétée, photo, nouvelle donne tirée, exemple ou fichier chargé (50 étapes au plus, le temps de la visite) ; **Retirer toutes les cartes** vide la table, **Compléter les mains** répartit les cartes non affectées entre les mains incomplètes en respectant les bornes (grisé quand il n'y a rien à distribuer), **Effacer les bornes** remet les mini/maxi à vide. Dessous, le grand bouton **Afficher les enchères** lance le calcul ; il reste en vue au bas de l'écran pendant qu'on fait défiler les mains, et il est éteint tant que la donne est incomplète : il dit alors combien de mains le sont et propose de les compléter. L'en-tête de chaque main porte une **poubelle** qui renvoie ses seules cartes au centre.
+
+### Donnes thématiques
+
+Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Deux sont fournies, de 50 donnes chacune :
+
+| Fichier | Thème |
+|---|---|
+| `4e-couleur-forcing.pbn` | le camp qui ouvre emploie la 4e couleur forcing |
+| `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
+
+Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
+
+```json
+{ "files": ["4e-couleur-forcing.pbn", "drury.pbn"] }
+```
+
+Chaque fichier commence par son libellé, une ligne par langue, avant la première donne. Ce sont des lignes de commentaire PBN (`%`), que les autres logiciels ignorent. Sans elles, la liste affiche le nom du fichier.
+
+```
+% Titre-FR: 4e couleur forcing
+% Titre-EN: Fourth suit forcing
+
+[Event "4e couleur forcing"]
+[Board "1"]
+[Dealer "N"]
+[Vulnerable "None"]
+[Deal "N:…"]
+```
+
+Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchères selon le système choisi, et une série suit donc les règles quand elles changent.
+
+**Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans [cli/rules/default.yaml](cli/rules/default.yaml). Le tirage est reproductible (`--seed`, 2024 par défaut). On déclare ensuite le fichier dans `cli/pbn/index.json`.
+
+```bash
+cd tools/python_tools
+python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/pbn/drury.pbn \
+    --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 50
+```
+
+Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soit déclaré dans `index.json` ; son nom ne prend que des lettres, chiffres, `.`, `-` et `_`, avec l'extension `.pbn`.
 
 ### Voir les enchères
 
@@ -527,6 +568,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
 | `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
 | `cli/rules/` | Les règles d'enchères (`default.yaml`), modifiables sans recompiler |
+| `cli/pbn/` | Les donnes thématiques (fichiers PBN) et leur liste, `index.json` |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |

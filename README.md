@@ -157,7 +157,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `rules/default.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
 | `rules/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
 | `rules/default.pdf`, `rules/default.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
-| `pbn/index.json`, `pbn/*.pbn` | 21 Ko | 5 Ko | les donnes thématiques et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
+| `pbn/index.json`, `pbn/*.pbn` | 565 Ko | 125 Ko | les donnes thématiques et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
@@ -283,7 +283,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Sept sont fournies, de 50 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Sept sont fournies, de 500 donnes chacune :
 
 | Fichier | Thème |
 |---|---|
@@ -291,9 +291,9 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 | `2-trefle-fort.pbn` | ouverture de 2♣ fort indéterminé |
 | `roudi.pbn` | le répondant emploie le Roudi (2♣) après la redemande de 1SA de l'ouvreur |
-| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages fusionnés : 38 donnes variées, 3 au plus par action, et 12 donnes avec le 2SA de Lévy) |
+| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages fusionnés : 380 donnes variées, 30 au plus par action, et 120 donnes avec le 2SA de Lévy) |
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
-| `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 15 donnes à 0-7 H, 20 à 8-10 H, 15 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
+| `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 150 donnes à 0-7 H, 200 à 8-10 H, 150 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`, dans l'ordre de la liste.
 
@@ -323,7 +323,7 @@ Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchère
 ```bash
 cd tools/python_tools
 python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/pbn/drury.pbn \
-    --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 50
+    --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 500
 ```
 
 Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soit déclaré dans `index.json` ; son nom ne prend que des lettres, chiffres, `.`, `-` et `_`, avec l'extension `.pbn`.

@@ -49,6 +49,8 @@ def main():
     ap.add_argument("--en", required=True, help="libellé en anglais")
     ap.add_argument("-n", "--count", type=int, default=50, help="nombre de donnes (50)")
     ap.add_argument("--seed", type=int, default=2024, help="graine du tirage (2024)")
+    ap.add_argument("--max-per-rule", type=int, default=0,
+                    help="au plus N donnes par règle retenue, pour équilibrer les variantes du thème (0 : sans limite)")
     ap.add_argument("--rules", default=os.path.normpath(os.path.join(HERE, "../../cli/rules/default.yaml")))
     args = ap.parse_args()
 
@@ -59,15 +61,17 @@ def main():
     want = re.compile(args.rule)
     rng = random.Random(args.seed)
 
-    games, tried = [], 0
+    games, tried, per_rule = [], 0, {}
     while len(games) < args.count:
         tried += 1
         n = len(games) + 1
         dealer, vul = SEATS[(n - 1) % 4], VUL[(n - 1) % 16]
         hands = random_deal(rng)
         bids = generate_auction(rules, dict(zip(SEATS, hands)), dealer, (), "FR", False, vul)
-        if not any(b["rule"] and want.search(b["rule"]) for b in bids):
+        hit = next((b["rule"] for b in bids if b["rule"] and want.search(b["rule"])), None)
+        if hit is None or (args.max_per_rule and per_rule.get(hit, 0) >= args.max_per_rule):
             continue
+        per_rule[hit] = per_rule.get(hit, 0) + 1
         games.append("\n".join([
             f'[Event "{args.fr}"]', f'[Board "{n}"]', f'[Dealer "{dealer}"]',
             f'[Vulnerable "{vul}"]', f'[Deal "N:{" ".join(hands)}"]']))
@@ -76,6 +80,7 @@ def main():
     with open(args.output, "w", encoding="utf-8", newline="\n") as f:
         f.write(head + "\n" + "\n\n".join(games) + "\n")
     print(f"{len(games)} donnes retenues sur {tried} tirées -> {args.output}")
+    print("par règle : " + ", ".join(f"{k} {v}" for k, v in sorted(per_rule.items())))
 
 
 if __name__ == "__main__":

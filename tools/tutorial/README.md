@@ -12,7 +12,7 @@ d'écran et une explication :
 Les captures sont prises par `capture.js` avec Playwright. Il rejoue, pour
 chaque langue, les scènes de l'application dans l'ordre des étapes : la donne
 exemple, le menu des donnes, l'édition, la sélection de cartes, le glisser, les
-bornes, les enchères, l'arbre de décision, le PAR, le questionnaire, les
+bornes, les enchères, l'arbre de décision, le PAR, l'entraînement, les
 réglages et la vue téléphone.
 
 ## Reprendre les captures

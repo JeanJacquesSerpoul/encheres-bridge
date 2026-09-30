@@ -246,7 +246,6 @@ const UI_TEXT = {
     settings: "Réglages",
     tabsLabel: "Que faire de la donne",
     tabBids: "Enchères",
-    tabTrain: "S'entraîner",
     tabPar: "PAR",
     parEmpty: "Le PAR s'affiche ici pour une donne complète dont les enchères sont calculées.",
     bidsEmpty: "Composez une donne complète, puis « Afficher les enchères » : la séquence et ses commentaires s'affichent ici.",
@@ -272,10 +271,7 @@ const UI_TEXT = {
     dealPrev: "Donne précédente",
     dealNext: "Donne suivante",
     runAuction: "Afficher les enchères",
-    yourHand: "Votre main",
     seatTip: (seat) => `Votre main est en ${seat}`,
-    startQuiz: "Commencer le questionnaire",
-    quizPanel: "Questionnaire d'enchères",
     auctionSeq: "Séquence d'enchères",
     continue: "Continuer",
     // Le questionnaire, jusqu'ici écrit en ternaires dans renderQuizStep,
@@ -294,19 +290,8 @@ const UI_TEXT = {
     treeHide: "Masquer l'arbre de décision",
     treeWhy: "Pourquoi",
     treeHand: (seat, h, hl, shape) => `main de ${seat} : ${h} H, ${hl} HL, ${shape}`,
-    quizDone: "Questionnaire terminé.",
-    quizScore: "Score",
-    quizFinalContract: "Contrat final",
-    quizShowDetail: "Afficher le détail complet",
-    quizRecapTitle: "Vos erreurs",
-    quizRecapNone: "Aucune erreur : toutes vos enchères sont celles du SEF.",
     appTitle: "Enchères au bridge",
     backToDeal: "Revenir à la donne",
-    quizDealHidden: "Donne masquée.",
-    quizMode: "Mode questionnaire",
-    quizModeHint: "La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.",
-    quizShowDeal: "Afficher la donne",
-    quizCancel: "Annuler",
     welcomeTitle: "Bienvenue",
     welcomeText: "Composez une donne de bridge : l'application déroule ses enchères selon le Système d'Enchères Français et les commente, ou vous fait enchérir à la place d'un joueur.",
     welcomeStart: "Commencer",
@@ -318,8 +303,27 @@ const UI_TEXT = {
     tutorialNext: "Suivant ›",
     tutorialDone: "Terminer",
     tutorialZoom: "Agrandir l'image",
-    quizReplay: "Rejouer cette donne",
-    quizNewDeal: "Nouvelle donne",
+    trainBtn: "S'entraîner",
+    trainTitle: "S'entraîner",
+    trainClose: "Fermer l'entraînement",
+    trainSeatTitle: "Votre main",
+    trainSeatHint: "Choisissez le siège où vous enchérirez : les donnes sont tirées au hasard, et vous ne voyez que votre main.",
+    trainCancel: "Annuler",
+    trainNextDeal: "Donne suivante",
+    trainPrev: "Donne précédente",
+    trainNextTip: "Donne suivante",
+    trainFinish: "Terminer",
+    trainCount: (k, n) => `Donne ${k} / ${n}`,
+    trainYou: "(vous)",
+    trainAuctionOver: "Enchère terminée : les quatre mains sont dévoilées.",
+    trainPassedOut: "Passe générale",
+    trainUnfinished: "en cours",
+    trainBusy: "Tirage de la donne…",
+    trainSummaryTitle: "Votre score",
+    trainSummaryHint: (n) => `Enchères conformes au SEF sur l'ensemble de vos enchères, ${n > 1 ? `sur ${n} donnes` : "sur une donne"}.`,
+    trainReview: "Revoir",
+    trainResume: "Reprendre l'entraînement",
+    trainEnd: "Fermer",
     hiddenHand: "main cachée",
     dealerCap: "Donneur",
     byWord: "par",
@@ -446,7 +450,6 @@ const UI_TEXT = {
     settings: "Settings",
     tabsLabel: "What to do with the deal",
     tabBids: "Auction",
-    tabTrain: "Practise",
     tabPar: "Par",
     parEmpty: "The par shows up here for a complete deal whose auction has been computed.",
     bidsEmpty: "Build a complete deal, then \u201cRun the auction\u201d: the calls and their meaning show up here.",
@@ -472,10 +475,7 @@ const UI_TEXT = {
     dealPrev: "Previous deal",
     dealNext: "Next deal",
     runAuction: "Run the auction",
-    yourHand: "Your hand",
     seatTip: (seat) => `Your hand is ${seat}`,
-    startQuiz: "Start the quiz",
-    quizPanel: "Bidding quiz",
     auctionSeq: "Auction",
     continue: "Continue",
     quizYourTurn: (seat) => `Your turn to bid (${seat}) — choose your call.`,
@@ -490,19 +490,8 @@ const UI_TEXT = {
     treeHide: "Hide the decision tree",
     treeWhy: "Why",
     treeHand: (seat, h, hl, shape) => `${seat}'s hand: ${h} H, ${hl} HL, ${shape}`,
-    quizDone: "Quiz complete.",
-    quizScore: "Score",
-    quizFinalContract: "Final contract",
-    quizShowDetail: "Show full detail",
-    quizRecapTitle: "Your mistakes",
-    quizRecapNone: "No mistakes: every call matches the SEF.",
     appTitle: "Bridge Bidding",
     backToDeal: "Back to the deal",
-    quizDealHidden: "Deal hidden.",
-    quizMode: "Quiz mode",
-    quizModeHint: "The deal stays hidden as soon as it is drawn or loaded: you bid without knowing it.",
-    quizShowDeal: "Show the deal",
-    quizCancel: "Cancel",
     welcomeTitle: "Welcome",
     welcomeText: "Build a bridge deal: the app runs its auction following the French bidding system (SEF) and explains every call, or has you bid in place of one player.",
     welcomeStart: "Get started",
@@ -514,8 +503,27 @@ const UI_TEXT = {
     tutorialNext: "Next ›",
     tutorialDone: "Finish",
     tutorialZoom: "Enlarge the picture",
-    quizReplay: "Replay this deal",
-    quizNewDeal: "New deal",
+    trainBtn: "Practise",
+    trainTitle: "Practise",
+    trainClose: "Close the practice",
+    trainSeatTitle: "Your hand",
+    trainSeatHint: "Choose the seat you will bid from: deals are drawn at random, and you only see your own hand.",
+    trainCancel: "Cancel",
+    trainNextDeal: "Next deal",
+    trainPrev: "Previous deal",
+    trainNextTip: "Next deal",
+    trainFinish: "Finish",
+    trainCount: (k, n) => `Deal ${k} / ${n}`,
+    trainYou: "(you)",
+    trainAuctionOver: "Auction over: all four hands are shown.",
+    trainPassedOut: "Passed out",
+    trainUnfinished: "in progress",
+    trainBusy: "Drawing the deal…",
+    trainSummaryTitle: "Your score",
+    trainSummaryHint: (n) => `Calls matching the SEF out of all your calls, ${n > 1 ? `over ${n} deals` : "on one deal"}.`,
+    trainReview: "Review",
+    trainResume: "Back to practice",
+    trainEnd: "Close",
     hiddenHand: "hidden hand",
     dealerCap: "Dealer",
     byWord: "by",
@@ -767,10 +775,9 @@ $("#rules-system").addEventListener("change", async () => {
   const run = healthRun + 1;
   await checkHealth();
   // Le résultat affiché vient de l'autre système : on le redemande, comme au
-  // changement de langue — mais pas pendant ni après un questionnaire, qui
-  // garde ses enchères (voir resetQuiz). Sans résultat affiché, le contrôle
-  // d'état relance déjà le calcul automatique.
-  if (run === healthRun && healthState === "online" && !quiz &&
+  // changement de langue. Sans résultat affiché, le contrôle d'état relance
+  // déjà le calcul automatique.
+  if (run === healthRun && healthState === "online" &&
       !$("#result-panel").classList.contains("hidden")) simulate();
 });
 
@@ -836,7 +843,7 @@ function applyLang() {
   renderDealActions();
   renderThemes();
   renderIaHint();
-  renderSeatCompass();
+  renderTrainSeatChoices();
   for (const opt of $("#dealer").options) {
     if (opt.value) opt.textContent = SEAT_LABEL[lang][opt.value];
   }
@@ -869,8 +876,6 @@ function loadPbn(text, fileName) {
   }
   dealFromFile = !!fileName;
   editRequested = false;
-  resetQuiz();
-  hideNewDealInQuizMode();
   hideResult();
   refreshDealSelector(true);
   setPbnOpen(false);
@@ -1075,7 +1080,7 @@ function dealHCP(block) {
 // le donneur, la vulnérabilité et les bornes de points choisis. Rend faux si
 // aucune ne convient, ou si les fichiers ne sont pas joignables : la donne est
 // alors distribuée comme d'habitude.
-async function drawThemedDeal() {
+async function pickThemedBlock() {
   if (!themeFiles) themeFiles = await loadThemeIndex();
   await Promise.all(themeFiles.map((th) => loadThemeText(th).catch(() => null)));
   const dealer = chosenDealer();
@@ -1093,12 +1098,19 @@ async function drawThemedDeal() {
       pool.push({ th, block, n: i + 1 });
     });
   }
-  if (!pool.length) return false;
+  if (!pool.length) return null;
   const pick = pickRandom(pool);
+  const lang = $("#lang").value;
+  const label = UI_TEXT[lang].themeDealTitle
+    .replace("{theme}", themeName(pick.th, lang)).replace("{n}", pick.n);
+  return { block: pick.block, label };
+}
+
+async function drawThemedDeal() {
+  const pick = await pickThemedBlock();
+  if (!pick) return false;
   loadPbn(pick.block);
-  const t = UI_TEXT[$("#lang").value];
-  $("#file-name").textContent = t.themeDealTitle
-    .replace("{theme}", themeName(pick.th, $("#lang").value)).replace("{n}", pick.n);
+  $("#file-name").textContent = pick.label;
   settlePbn();
   return true;
 }
@@ -1402,7 +1414,6 @@ $("#dealer").addEventListener("change", () => {
   const seat = chosenDealer();
   if (!seat) return; // « Aléatoire » : le donneur sera tiré à la génération.
   setBlockDealer(seat);
-  resetQuiz();
   hideResult();
 });
 
@@ -1410,7 +1421,6 @@ $("#vul").addEventListener("change", () => {
   const vul = chosenVul();
   if (!vul) return; // Idem : tirée à la génération.
   setBlockVul(vul);
-  resetQuiz();
   hideResult();
 });
 
@@ -1620,8 +1630,6 @@ function selectGame(idx) {
   selectedGameIdx = idx;
   $("#deal-select").value = String(idx);
   renderDealStep();
-  resetQuiz();
-  hideNewDealInQuizMode();
   hideResult();
   syncTagSelects();
   syncZonesFromPbn();
@@ -2074,7 +2082,6 @@ function undo() {
   gatherMissingCards();
   clearSelection();
   renderBoundsCards();
-  resetQuiz();
   hideResult();
   setError($("#cons-error"), "");
   settlePbn();
@@ -2093,7 +2100,6 @@ document.addEventListener("keydown", (ev) => {
   const target = ev.target;
   if (target.closest && target.closest("input, textarea, select, [contenteditable]")) return;
   if (document.querySelector("dialog[open]")) return;
-  if ($("#input-panel").classList.contains("quiz-running")) return;
   if (!undoStack.length) return;
   ev.preventDefault();
   undo();
@@ -2126,7 +2132,6 @@ function commitZones() {
   writeZonesToPbn();
   settlePbn();
   renderBoundsCards();
-  resetQuiz();
   hideResult();
 }
 
@@ -2738,7 +2743,10 @@ function renderBoundsCards() {
     $(sel).title = long;
   }
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction, true);
-  setCommandButton("#quiz-btn", QUIZ_SVG, UI_TEXT[lang].startQuiz);
+  setCommandButton("#train-btn", QUIZ_SVG, UI_TEXT[lang].trainBtn, true);
+  setCommandButton("#train-prev", PREV_SVG, UI_TEXT[lang].trainPrev);
+  setCommandButton("#train-next", NEXT_SVG, UI_TEXT[lang].trainNextTip);
+  setCommandButton("#train-finish", CHECK_SVG, UI_TEXT[lang].trainFinish, true);
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
   $("#cards-help").textContent = t.cardsHelp;
@@ -2792,10 +2800,8 @@ function renderDealMode() {
     editing ? t.editDone : t.editDeal, true);
   // Terminer sur une donne incomplète ne mènerait nulle part : le bouton dit
   // pourquoi il est éteint.
-  // Donne masquée (questionnaire) : la modifier la dévoilerait.
-  const hidden = $("#input-panel").classList.contains("quiz-running");
-  btn.disabled = hidden || (editing && !dealComplete());
-  btn.title = btn.disabled && !hidden ? t.editDoneBlocked : "";
+  btn.disabled = editing && !dealComplete();
+  btn.title = btn.disabled ? t.editDoneBlocked : "";
   renderPbnMode();
 }
 
@@ -2874,10 +2880,9 @@ $("#bid-fill-btn").addEventListener("click", () => $("#cons-fill-btn").click());
 let autoBidTimer = null;
 
 function autoBidAllowed() {
-  return healthState === "online" && !quiz && dealComplete() &&
+  return healthState === "online" && dealComplete() &&
     !!pbnGames[selectedGameIdx] &&
     $("#result-panel").classList.contains("hidden") &&
-    !$("#input-panel").classList.contains("quiz-running") &&
     !$("#cons-error").textContent;
 }
 
@@ -4144,9 +4149,7 @@ $("#lang").addEventListener("change", () => {
   renderIaHealth();
   // Le résultat affiché a été calculé dans l'autre langue : on le redemande,
   // commentaires et types de mains sont traduits côté serveur.
-  // Pas pendant ni après un questionnaire : il garde sa langue, et le calcul le
-  // refermerait, score compris (voir resetQuiz).
-  if (!$("#result-panel").classList.contains("hidden") && !quiz) simulate();
+  if (!$("#result-panel").classList.contains("hidden")) simulate();
 });
 
 // Builds a S/W/N/E auction grid (head + body rows) from a list of calls,
@@ -4654,7 +4657,6 @@ async function simulate(opts) {
   const errEl = $("#cons-error");
   if (!auto) {
     setError(errEl, "");
-    resetQuiz();
   }
   const lang = $("#lang").value;
   btn.disabled = true;
@@ -4678,46 +4680,9 @@ async function simulate(opts) {
   }
 }
 
-// ---------- le siège du questionnaire ----------
-
-// Le siège retenu. Un bouton radio est toujours coché — celui de Nord au
-// départ — donc ce repli ne sert qu'à se garder d'un document à moitié bâti.
-function chosenSeat() {
-  const picked = document.querySelector('input[name="seat"]:checked');
-  return picked ? picked.value : "N";
-}
-
-// Nomme les quatre sièges. En bandeau, la pastille porte le nom entier plutôt
-// que son initiale : la place ne manque plus, et « Ouest » se lit sans avoir à
-// deviner ce que « O » désigne.
-function renderSeatCompass() {
-  const lang = $("#lang").value;
-  const t = UI_TEXT[lang];
-  for (const input of document.querySelectorAll('input[name="seat"]')) {
-    const seat = input.value;
-    const name = SEAT_LABEL[lang][seat];
-    input.setAttribute("aria-label", name);
-    input.nextElementSibling.textContent = name;
-    const pick = input.closest(".seat-pick");
-    // L'infobulle dit la phrase entière — « Votre main est en Nord » — là où
-    // le bandeau ne montre que les quatre noms. C'est elle qui porte ce que
-    // le libellé « Votre main » disait avant. L'étiquette entière la porte :
-    // la cible du survol est la pastille, pas le bouton radio qu'elle cache.
-    pick.dataset.tip = t.seatTip(name);
-    // La pastille retenue porte une classe, et non un `:has(input:checked)` :
-    // ce sélecteur-là n'est pas toujours réévalué quand la case est cochée
-    // par le code, et la marque restait sur le siège précédent.
-    pick.classList.toggle("is-picked", input.checked);
-  }
-}
-
-document.addEventListener("change", (ev) => {
-  if (ev.target.name === "seat") renderSeatCompass();
-});
-
 // ---------- quiz mode: guess your own seat's calls ----------
 
-let quiz = null; // { result, seat, lang, calls, idx, correctCount, totalUser }
+let quiz = null; // la table de l'entraînement : { result, seat, lang, calls, idx, correctCount, totalUser, done, label }
 
 // Enchaînement des enchères adverses, toujours actif. Sans lui, chaque tour
 // de table coûtait trois clics « Révéler » qui n'apprennent rien : on les
@@ -4736,68 +4701,6 @@ function cancelAutoReveal() {
   autoRevealTimer = null;
 }
 
-// Clears any quiz in progress, e.g. when a different PBN is loaded.
-function resetQuiz() {
-  cancelAutoReveal();
-  quiz = null;
-  $("#quiz-panel").classList.add("hidden");
-  $("#quiz-launch-panel").classList.remove("quiz-running");
-  // En mode questionnaire, la donne garde l'état où elle est : masquée tant
-  // qu'on ne l'a pas demandée, affichée si on l'a fait.
-  if (!quizMode()) setDealHidden(false);
-}
-
-// Mode questionnaire : chaque nouvelle donne arrive masquée, pour enchérir sur
-// une donne que l'on ne connaît pas. Mémorisé comme la langue.
-const QUIZ_MODE_KEY = "bids.quizMode";
-
-function quizMode() {
-  return $("#quiz-mode").checked;
-}
-
-// Une donne vient d'arriver (tirage, exemple, fichier, choix dans un fichier,
-// démarrage) : en mode questionnaire, elle se cache avant d'avoir été vue.
-// Déplacer une carte n'en est pas une : on ne re-masque pas une donne que
-// l'on est en train de composer.
-function hideNewDealInQuizMode() {
-  if (quizMode()) setDealHidden(true);
-}
-
-$("#quiz-mode").checked = readStored(QUIZ_MODE_KEY, "") === "1";
-$("#quiz-mode").addEventListener("change", () => {
-  saveStored(QUIZ_MODE_KEY, quizMode() ? "1" : "0");
-  // Activé : la donne affichée se cache aussitôt. Désactivé : elle revient,
-  // sauf pendant un questionnaire, qui la masque de toute façon.
-  if (quizMode()) setDealHidden(true);
-  else if (!quiz) setDealHidden(false);
-});
-
-// Le questionnaire cache les mains adverses : la donne composée au-dessus les
-// montrerait toutes, et son texte PBN aussi. Elles sont masquées pendant qu'on
-// enchérit, avec les commandes qui modifient la donne sous la table (voir
-// style.css), et le restent une fois le questionnaire terminé. Elles
-// reviennent quand on l'annule, quand on change de donne, ou à la demande.
-function setDealHidden(hidden) {
-  $("#input-panel").classList.toggle("quiz-running", hidden);
-  // Ouvrir le texte PBN ne montrerait rien — il est masqué lui aussi — et le
-  // bouton resterait enfoncé sur un panneau invisible : il s'éteint.
-  $("#pbn-toggle-btn").disabled = hidden;
-  renderDealMode();
-  if (hidden) setPbnOpen(false);
-  else scheduleAutoBid();
-}
-
-$("#quiz-show-deal-btn").addEventListener("click", () => setDealHidden(false));
-
-// Abandonne le questionnaire en cours : il se referme, la donne composée
-// revient, et la page remonte jusqu'à elle.
-function cancelQuiz() {
-  resetQuiz();
-  setError($("#error"), "");
-  revealPane($("#input-panel"));
-}
-
-$("#quiz-cancel-btn").addEventListener("click", cancelQuiz);
 
 $("#back-to-deal-btn").addEventListener("click", () => {
   revealPane($("#input-panel"));
@@ -4860,15 +4763,6 @@ $("#auction-body").addEventListener("click", (ev) => {
   $(`#comments > li[data-i="${cell.dataset.i}"]`)
     ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
-
-function hiddenHandHTML(seat, lang) {
-  return `
-    <div class="seat-name">
-      <span>${esc(SEAT_LABEL[lang][seat])}</span>
-      <span class="pts muted">${esc(UI_TEXT[lang].hiddenHand)}</span>
-    </div>
-    <div class="hidden-hand">🂠 🂠 🂠 🂠</div>`;
-}
 
 function team(seat) {
   return TEAM[seat];
@@ -4971,32 +4865,138 @@ function renderBiddingStrains() {
   }
 }
 
-function renderQuizHands(revealAll) {
-  for (const seat of ["N", "E", "S", "W"]) {
-    $("#qhand-" + seat).innerHTML =
-      revealAll || seat === quiz.seat
-        ? handHTML(seat, quiz.result.hands[seat], quiz.lang)
-        : hiddenHandHTML(seat, quiz.lang);
-  }
+// ---------- s'entraîner : la table ----------
+//
+// Une séance d'entraînement : on choisit sa main, puis on enchérit sur des
+// donnes tirées au hasard, comme « Donne aléatoire » (parmi les donnes
+// thématiques si l'option est cochée, voir drawPracticePBN). Chaque donne est
+// une « table » : l'enchère complète du moteur, et ce que l'on y a répondu.
+// La table courante est `quiz` : le verdict, l'arbre de décision et la boîte
+// à enchères la lisent. Votre main est toujours en bas, face visible ; les
+// trois autres ont le dos tourné tant que l'enchère n'est pas finie.
+const TRAIN_SEAT_KEY = "bids.trainSeat";
+const trainDialog = $("#train-dialog");
+const trainSeatDialog = $("#train-seat-dialog");
+let train = null; // { seat, lang, tables: [table], cur }
+const NEXT_SEAT = { N: "E", E: "S", S: "W", W: "N" };
+// Les couleurs de la main étalée, noires et rouges en alternance.
+const TRAIN_SUITS = ["spades", "hearts", "clubs", "diamonds"];
+
+// Le siège de chaque place, votre main en bas : à gauche le joueur qui parle
+// après vous, en face le partenaire, à droite celui qui parle avant vous.
+function trainPlaces(seat) {
+  const left = NEXT_SEAT[seat];
+  const top = NEXT_SEAT[left];
+  return { bottom: seat, left, top, right: NEXT_SEAT[top] };
 }
 
-function renderQuizAuction() {
-  // La dernière enchère adverse vient d'apparaître d'elle-même : un effet la
-  // signale, faute de quoi elle se glisserait dans la grille sans qu'on la voie.
-  const last = quiz.calls[quiz.calls.length - 1];
-  const grid = auctionGridHTML(quiz.result.dealer, quiz.calls, quiz.lang, (c) => {
-    let cls = "bid-cell";
-    if (c.isUser) cls += c.isCorrect ? " correct" : " incorrect";
-    else if (c === last) cls += " just-revealed";
-    // Mauvaise réponse : l'enchère jouée est barrée, la bonne s'affiche à
-    // côté plutôt que dans le seul texte de la rétroaction en dessous.
-    const content = c.expected
-      ? `<s>${bidHTML(c.bid, quiz.lang)}</s> <span class="expected">${bidHTML(c.expected, quiz.lang)}</span>`
-      : bidHTML(c.bid, quiz.lang);
-    return `<td class="${cls}">${content}</td>`;
-  });
-  $("#quiz-auction-head").innerHTML = grid.headHTML;
-  $("#quiz-auction-body").innerHTML = grid.bodyHTML;
+function seatVulnerable(seat, vul) {
+  return vul === "All" || vul === TEAM[seat];
+}
+
+// Votre main, carte par carte, comme sur une table en ligne.
+function trainCardsHTML(hand, lang) {
+  const cards = [];
+  for (const suit of TRAIN_SUITS) {
+    const red = RED_SUITS.has(suit) ? " red" : "";
+    for (const r of hand[suit] || "") {
+      cards.push(`<span class="tcard${red}"><b>${rankHTML(r, lang)}</b><i>${SUIT_SYMBOLS[suit]}</i></span>`);
+    }
+  }
+  return `<div class="tcards">${cards.join("")}</div>`;
+}
+
+function trainBacksHTML(side) {
+  return `<div class="tbacks${side ? " tbacks-side" : ""}">${"<span class=\"tback\"></span>".repeat(13)}</div>`;
+}
+
+// La plaque d'un siège : son initiale, son nom, « vous », le donneur ; rouge
+// quand son camp est vulnérable, soulignée quand c'est à lui de parler.
+function trainPlateHTML(seat, table, speaking) {
+  const lang = table.lang;
+  const t = UI_TEXT[lang];
+  const r = table.result;
+  const cls = ["tplate"];
+  if (seatVulnerable(seat, r.vulnerable)) cls.push("vul");
+  if (speaking) cls.push("speaking");
+  const me = seat === table.seat ? ` <span class="tme">${esc(t.trainYou)}</span>` : "";
+  const dealer = seat === r.dealer ? ` <span class="tdealer" title="${esc(t.dealerCap)}">D</span>` : "";
+  return `<div class="${cls.join(" ")}"><span class="tletter">${esc(SEAT_SHORT[lang][seat])}</span>` +
+    `<span class="tname">${esc(SEAT_LABEL[lang][seat])}${me}</span>${dealer}</div>`;
+}
+
+// La boîte des enchères, au centre : les quatre sièges en tête, rouges quand
+// ils sont vulnérables, puis les enchères tour par tour. La vôtre est verte
+// ou rouge selon le verdict ; un « ? » marque le tour de celui qui parle.
+function trainAuctionHTML(table, speaker) {
+  const lang = table.lang;
+  const r = table.result;
+  const columns = ["W", "N", "E", "S"];
+  const head = columns.map((s) => {
+    const cls = [seatVulnerable(s, r.vulnerable) ? "vul" : "", s === table.seat ? "me" : ""].filter(Boolean).join(" ");
+    return `<th class="${cls}">${esc(SEAT_SHORT[lang][s])}</th>`;
+  }).join("");
+  const cells = [];
+  for (let i = 0; i < columns.indexOf(r.dealer); i++) cells.push(null);
+  const last = table.calls[table.calls.length - 1];
+  for (const c of table.calls) cells.push(c);
+  if (speaker) cells.push({ pending: true });
+  while (cells.length % 4 !== 0) cells.push(undefined);
+  const rows = [];
+  for (let i = 0; i < cells.length; i += 4) {
+    const tds = cells.slice(i, i + 4).map((c) => {
+      if (!c) return "<td></td>";
+      if (c.pending) return `<td class="tpending">?</td>`;
+      let cls = "bid-cell";
+      if (c.isUser) cls += c.isCorrect ? " correct" : " incorrect";
+      else if (c === last && !table.done) cls += " just-revealed";
+      const content = c.expected
+        ? `<s>${bidHTML(c.bid, lang)}</s> <span class="expected">${bidHTML(c.expected, lang)}</span>`
+        : bidHTML(c.bid, lang);
+      return `<td class="${cls}">${content}</td>`;
+    });
+    rows.push(`<tr>${tds.join("")}</tr>`);
+  }
+  let foot = "";
+  if (table.done) {
+    const t = UI_TEXT[lang];
+    const passedOut = isPass(r.contract);
+    const contract = passedOut ? esc(t.trainPassedOut)
+      : `${bidHTML(r.contract, lang)}${r.doubled ? " X" : ""} ${esc(t.byWord)} ${esc(SEAT_SHORT[lang][r.declarer])}`;
+    foot = `<div class="tcontract">${contract}</div>`;
+  }
+  return `<table class="tauction"><thead><tr>${head}</tr></thead><tbody>${rows.join("")}</tbody></table>${foot}`;
+}
+
+// Pose la table : les quatre places, la boîte des enchères, et le siège qui
+// parle. Une table finie montre les quatre mains.
+function renderTrainTable(speaker) {
+  const table = quiz;
+  const places = trainPlaces(table.seat);
+  for (const [place, seat] of Object.entries(places)) {
+    const el = $("#tseat-" + place);
+    const hand = table.result.hands[seat];
+    const open = place === "bottom" || table.done;
+    let body;
+    if (!open) body = trainBacksHTML(place === "left" || place === "right");
+    else if (place === "bottom") body = trainCardsHTML(hand, table.lang);
+    else body = `<div class="topen">${suitLinesHTML(hand, table.lang)}</div>`;
+    const pts = open ? `<span class="tpts">${hand.h_points} H</span>` : "";
+    el.innerHTML = trainPlateHTML(seat, table, seat === speaker) + body + pts;
+  }
+  $("#tcenter").innerHTML = trainAuctionHTML(table, speaker);
+}
+
+function renderTrainNav() {
+  const t = UI_TEXT[train.lang];
+  const n = train.tables.length;
+  const table = quiz;
+  $("#train-count").textContent = t.trainCount(train.cur + 1, n);
+  $("#train-where").textContent = table && table.label ? table.label : "";
+  $("#train-prev").disabled = train.cur <= 0;
+  // Suivante : une table déjà jouée, ou une nouvelle donne une fois l'enchère finie.
+  $("#train-next").disabled = !(train.cur < n - 1 || (table && table.done));
+  $("#train-new-btn").classList.toggle("hidden", !(table && table.done && train.cur === n - 1));
 }
 
 function renderQuizStep() {
@@ -5005,38 +5005,32 @@ function renderQuizStep() {
   cancelAutoReveal();
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
-  renderQuizAuction();
-
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
   if (quiz.idx >= quiz.result.auction.length) {
     finishQuiz();
     return;
   }
-
   const entry = quiz.result.auction[quiz.idx];
+  renderTrainTable(entry.player);
+  renderTrainNav();
   const seatName = SEAT_LABEL[lang][entry.player];
-  $("#qtable-center").innerHTML = `
-    <div>${withColon(esc(t.dealerCap), lang)} <b>${esc(SEAT_SHORT[lang][quiz.result.dealer])}</b></div>
-    <div class="vul-line">${vulHTML(quiz.result.vulnerable, lang)}</div>
-    <div class="big">${esc(SEAT_SHORT[lang][entry.player])}</div>`;
-
   if (entry.player === quiz.seat) {
-    $("#quiz-turn").textContent = t.quizYourTurn(seatName);
+    $("#train-turn").textContent = t.quizYourTurn(seatName);
     const legal = computeLegalCalls(quiz.calls, quiz.seat, lang);
     const box = $("#bidding-box");
     box.innerHTML = buildBiddingBoxHTML(lang, legal);
     renderBiddingStrains();
     box.classList.remove("hidden");
   } else {
-    $("#quiz-turn").textContent = t.quizAboutToBid(seatName);
+    $("#train-turn").textContent = t.quizAboutToBid(seatName);
     $("#bidding-box").classList.add("hidden");
     // Aucun bouton : l'enchère des autres sièges s'affiche d'elle-même.
     const pending = quiz;
     autoRevealTimer = setTimeout(() => {
       autoRevealTimer = null;
-      // Le questionnaire a pu être relancé ou abandonné pendant l'attente.
-      if (quiz !== pending) return;
+      // La table a pu changer (Précédente, fermeture) pendant l'attente.
+      if (quiz !== pending || !trainDialog.open) return;
       revealOpponentCall();
     }, AUTO_REVEAL_MS);
   }
@@ -5141,9 +5135,12 @@ function chooseBid(bidText) {
     isCorrect,
     expected: isCorrect ? null : entry.bid,
   });
+  // Le tour est joué : revenir sur cette table (Précédente, puis Suivante)
+  // reprend à l'enchère suivante, sans reposer la même question.
+  quiz.idx++;
 
   $("#bidding-box").classList.add("hidden");
-  renderQuizAuction();
+  renderTrainTable(null);
 
   const lang = quiz.lang;
   const t = UI_TEXT[lang];
@@ -5159,10 +5156,12 @@ function chooseBid(bidText) {
   const treeLine = isCorrect ? "" : decisionTreeToggleHTML(entry, lang);
   fb.innerHTML = `<span class="verdict">${verdict}</span>${refLine}${commentLine}${treeLine}`;
   fb.classList.remove("hidden");
+  $("#train-turn").textContent = "";
 
   // Le verdict se lit : l'enchaînement ne s'applique qu'aux enchères des
   // autres, jamais au sien, d'où ce bouton.
   $("#quiz-continue-btn").classList.remove("hidden");
+  $("#quiz-continue-btn").focus();
 }
 
 // L'enchère d'un autre siège, jouée par le moteur, entre dans la séquence.
@@ -5175,127 +5174,221 @@ function revealOpponentCall() {
 
 // « Continuer », après le verdict de sa propre enchère.
 function onQuizContinue() {
-  quiz.idx++;
   renderQuizStep();
 }
 
-// Les enchères ratées, relues une à une : la vôtre barrée, l'attendue, et ce
-// qu'elle signifie dans le SEF. quiz.calls suit quiz.result.auction pas à pas,
-// donc un même indice désigne le même tour.
-function quizRecapHTML(t, lang) {
+// L'enchère est finie : les quatre mains se dévoilent, le contrat s'affiche.
+// Pas de score ici : il attend « Terminer ».
+function finishQuiz() {
+  quiz.done = true;
+  renderTrainTable(null);
+  const t = UI_TEXT[quiz.lang];
+  $("#train-turn").textContent = t.trainAuctionOver;
+  $("#bidding-box").classList.add("hidden");
+  renderTrainNav();
+  const next = $("#train-new-btn");
+  if (!next.classList.contains("hidden")) next.focus();
+}
+
+// Une table déjà jouée, revue : les mains dévoilées, l'enchère et vos verdicts
+// dans la boîte des enchères.
+function showTrainTable(k) {
+  cancelAutoReveal();
+  train.cur = k;
+  quiz = train.tables[k];
+  $("#train-summary").hidden = true;
+  $("#train-body").hidden = false;
+  $("#quiz-feedback").classList.add("hidden");
+  $("#quiz-continue-btn").classList.add("hidden");
+  $("#train-error").textContent = "";
+  if (quiz.done) {
+    renderTrainTable(null);
+    $("#bidding-box").classList.add("hidden");
+    $("#train-turn").textContent = UI_TEXT[quiz.lang].trainAuctionOver;
+    renderTrainNav();
+  } else {
+    renderQuizStep();
+  }
+}
+
+// La donne d'une nouvelle table : tirée comme par « Donne aléatoire », dans
+// les donnes thématiques si l'option est cochée, sinon distribuée au hasard ;
+// donneur, vulnérabilité et bornes de points choisis s'appliquent.
+async function drawPracticePBN(lang) {
+  const bad = validateBounds(lang);
+  if (bad) throw new Error(bad);
+  if (randomThemesToggle.checked) {
+    const pick = await pickThemedBlock();
+    if (pick) return { pbn: pick.block, label: pick.label };
+  }
+  const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
+  if (!pbn) throw new Error(CONS_TEXT[lang].errNoDeal);
+  return { pbn, label: "" };
+}
+
+async function newTrainTable() {
+  const lang = train.lang;
+  const t = UI_TEXT[lang];
+  const nextBtn = $("#train-next");
+  const newBtn = $("#train-new-btn");
+  nextBtn.disabled = true;
+  newBtn.disabled = true;
+  $("#train-error").textContent = "";
+  $("#train-turn").textContent = t.trainBusy;
+  try {
+    const { pbn, label } = await drawPracticePBN(lang);
+    const result = await bidsLocal.bid(pbn, lang);
+    train.tables.push({ result, seat: train.seat, lang, calls: [], idx: 0,
+      correctCount: 0, totalUser: 0, done: false, label });
+    showTrainTable(train.tables.length - 1);
+  } catch (err) {
+    $("#train-turn").textContent = "";
+    $("#train-error").textContent = err.message;
+    if (train.tables.length) renderTrainNav();
+  } finally {
+    newBtn.disabled = false;
+  }
+}
+
+function trainNext() {
+  if (train.cur < train.tables.length - 1) showTrainTable(train.cur + 1);
+  else if (quiz && quiz.done) newTrainTable();
+}
+
+// Les enchères ratées d'une table : la vôtre barrée, l'attendue, et ce qu'elle
+// signifie dans le SEF.
+function quizRecapHTML(table, t, lang) {
   const misses = [];
-  quiz.calls.forEach((c, i) => {
+  table.calls.forEach((c, i) => {
     if (!c.isUser || c.isCorrect) return;
-    const entry = quiz.result.auction[i];
+    const entry = table.result.auction[i];
     const comment = entry && entry.comment;
     misses.push(`
       <li>
         <span class="recap-bids"><s>${bidHTML(c.bid, lang)}</s> → <b>${bidHTML(c.expected, lang)}</b></span>
         ${comment ? `<span class="muted">${esc(comment)}</span>` : ""}
-        ${entry ? decisionTreeToggleHTML(entry, lang) : ""}
       </li>`);
   });
-  if (!misses.length) return `<p class="quiz-recap-none">${esc(t.quizRecapNone)}</p>`;
-  return `
-    <div class="quiz-recap">
-      <h3>${esc(t.quizRecapTitle)}</h3>
-      <ol>${misses.join("")}</ol>
-    </div>`;
+  if (!misses.length) return "";
+  return `<ol class="train-misses">${misses.join("")}</ol>`;
 }
 
-function finishQuiz() {
-  renderQuizHands(true);
-  // La donne composée reste masquée : les mains se lisent dans le
-  // questionnaire, et le lien « Afficher la donne » la rend à la demande.
-  // Plus rien à annuler : le score propose ses propres suites, et la rangée de
-  // lancement revient pour changer de main.
-  $("#quiz-cancel-btn").classList.add("hidden");
-  $("#quiz-launch-panel").classList.remove("quiz-running");
-  // Les mains sont dévoilées : les enchères commentées et le PAR de la donne
-  // jouée n'ont plus rien à cacher, même si la donne composée reste masquée à
-  // gauche. Leurs onglets se remplissent sans qu'on y soit emmené — le score
-  // reste sous les yeux ; renderResult lance aussi le PAR si son onglet est
-  // ouvert.
-  renderResult(quiz.result);
-  const lang = quiz.lang;
+// « Terminer » : le score de la séance, puis table par table, avec les
+// enchères ratées ; chaque table se revoit d'un clic.
+function finishTraining() {
+  cancelAutoReveal();
+  const lang = train.lang;
   const t = UI_TEXT[lang];
-  const r = quiz.result;
-  const passedOut = isPass(r.contract);
-  const contractHTML = passedOut ? esc(r.contract) : bidHTML(r.contract, lang) + (r.doubled ? " X" : "");
-  $("#qtable-center").innerHTML = `
-    <div>${withColon(esc(t.dealerCap), lang)} <b>${esc(SEAT_SHORT[lang][r.dealer])}</b></div>
-    <div class="vul-line">${vulHTML(r.vulnerable, lang)}</div>
-    <div class="big">${contractHTML}</div>
-    <div>${passedOut ? "" : esc(t.byWord) + " " + esc(SEAT_SHORT[lang][r.declarer])}</div>`;
+  let ok = 0;
+  let total = 0;
+  const rows = train.tables.map((table, k) => {
+    ok += table.correctCount;
+    total += table.totalUser;
+    const r = table.result;
+    const contract = !table.done ? esc(t.trainUnfinished)
+      : isPass(r.contract) ? esc(t.trainPassedOut)
+        : `${bidHTML(r.contract, lang)}${r.doubled ? " X" : ""} ${esc(t.byWord)} ${esc(SEAT_SHORT[lang][r.declarer])}`;
+    const score = table.totalUser ? `${table.correctCount} / ${table.totalUser}` : "—";
+    return `
+      <li>
+        <div class="train-row">
+          <span class="train-row-n">${esc(t.trainCount(k + 1, train.tables.length))}</span>
+          <span class="train-row-label">${esc(table.label || "")}</span>
+          <span class="train-row-contract">${contract}</span>
+          <span class="train-row-score">${score}</span>
+          <button type="button" class="link-btn" data-review="${k}">${esc(t.trainReview)}</button>
+        </div>
+        ${quizRecapHTML(table, t, lang)}
+      </li>`;
+  });
+  const pct = total ? Math.round((100 * ok) / total) : 0;
+  const summary = $("#train-summary");
+  summary.innerHTML = `
+    <h3>${esc(t.trainSummaryTitle)}</h3>
+    <div class="score-big">${ok} / ${total} <span class="muted">(${pct} %)</span></div>
+    <p class="muted">${esc(t.trainSummaryHint(train.tables.length))}</p>
+    <ol class="train-tables">${rows.join("")}</ol>
+    <div class="train-summary-actions">
+      <button type="button" id="train-resume-btn" class="primary">${esc(t.trainResume)}</button>
+      <button type="button" id="train-end-btn">${esc(t.trainEnd)}</button>
+    </div>`;
+  $("#train-body").hidden = true;
+  summary.hidden = false;
+  $("#train-prev").disabled = true;
+  $("#train-next").disabled = true;
+  $("#train-resume-btn").focus();
+}
 
-  $("#quiz-turn").textContent = t.quizDone;
-  $("#bidding-box").classList.add("hidden");
+$("#train-summary").addEventListener("click", (ev) => {
+  const review = ev.target.closest("[data-review]");
+  if (review) showTrainTable(+review.dataset.review);
+  else if (ev.target.closest("#train-resume-btn")) showTrainTable(train.cur);
+  else if (ev.target.closest("#train-end-btn")) trainDialog.close();
+});
+
+// La séance commence : la fenêtre s'ouvre sur une première donne.
+function startTraining(seat) {
+  saveStored(TRAIN_SEAT_KEY, seat);
+  train = { seat, lang: $("#lang").value, tables: [], cur: -1 };
+  quiz = null;
+  for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
+  $("#tcenter").innerHTML = "";
+  $("#train-summary").hidden = true;
+  $("#train-body").hidden = false;
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
-
-  const pct = quiz.totalUser ? Math.round((100 * quiz.correctCount) / quiz.totalUser) : 0;
-  const scoreEl = $("#quiz-score");
-  // Le score fermait la marche : pour rejouer, il fallait remonter la page
-  // jusqu'aux commandes de la donne. Les deux suites naturelles — refaire
-  // celle-ci, en tirer une autre — sont offertes ici, avec le détail.
-  scoreEl.innerHTML = `
-    <div class="score-big">${withColon(esc(t.quizScore), lang)} ${quiz.correctCount} / ${quiz.totalUser} (${pct}%)</div>
-    <div>${withColon(esc(t.quizFinalContract), lang)} <b>${contractHTML}</b></div>
-    ${quizRecapHTML(t, lang)}
-    <div class="quiz-score-actions">
-      <button type="button" id="quiz-replay-btn">${esc(t.quizReplay)}</button>
-      <button type="button" id="quiz-new-deal-btn">${esc(t.quizNewDeal)}</button>
-      <button type="button" id="quiz-show-detail-btn">${esc(t.quizShowDetail)}</button>
-    </div>`;
-  scoreEl.classList.remove("hidden");
-  // La donne n'a pas bougé : la redemander la rejoue à l'identique.
-  $("#quiz-replay-btn").addEventListener("click", startQuiz);
-  $("#quiz-new-deal-btn").addEventListener("click", async () => {
-    // Le tirage refuse quand les bornes ne laissent aucune donne, et le dit
-    // dans #cons-error : on ne lance pas un questionnaire sur la donne d'avant.
-    if (!(await drawRandomDeal())) {
-      $("#cons-error").scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
-    startQuiz();
-  });
-  $("#quiz-show-detail-btn").addEventListener("click", () => {
-    renderResult(quiz.result);
-    selectTab("bids", true);
-  });
+  $("#bidding-box").classList.add("hidden");
+  $("#train-count").textContent = "";
+  $("#train-where").textContent = "";
+  $("#train-prev").disabled = true;
+  $("#train-next").disabled = true;
+  $("#train-new-btn").classList.add("hidden");
+  trainDialog.showModal();
+  newTrainTable();
 }
 
-async function startQuiz() {
-  const btn = $("#quiz-btn");
-  const errEl = $("#error");
-  setError(errEl, "");
-  $("#result-panel").classList.add("hidden");
-  setParReady(false);
+// Le choix de la main : les quatre sièges autour d'une table, le dernier
+// retenu mis en avant.
+function renderTrainSeatChoices() {
   const lang = $("#lang").value;
-  const seat = chosenSeat();
-  btn.disabled = true;
-  try {
-    const result = await fetchBid(lang);
-    quiz = { result, seat, lang, calls: [], idx: 0, correctCount: 0, totalUser: 0 };
-    $("#quiz-panel").classList.remove("hidden");
-    $("#quiz-score").classList.add("hidden");
-    setDealHidden(true);
-    // Un seul questionnaire à l'écran : la rangée de lancement s'efface.
-    $("#quiz-launch-panel").classList.add("quiz-running");
-    $("#quiz-cancel-btn").classList.remove("hidden");
-    renderQuizHands();
-    renderQuizStep();
-    // La table du questionnaire est dans le panneau de la donne, au-dessus de
-    // l'onglet sur écran étroit : c'est à elle qu'on descend.
-    selectTab("train");
-    revealPane($("#quiz-table"));
-  } catch (err) {
-    setError(errEl, err.message);
-    $("#quiz-panel").classList.add("hidden");
-  } finally {
-    btn.disabled = false;
+  const t = UI_TEXT[lang];
+  const last = readStored(TRAIN_SEAT_KEY, "S");
+  for (const btn of trainSeatDialog.querySelectorAll(".seat-choice")) {
+    const seat = btn.dataset.seat;
+    btn.textContent = SEAT_LABEL[lang][seat];
+    btn.setAttribute("aria-label", t.seatTip(SEAT_LABEL[lang][seat]));
+    btn.classList.toggle("is-last", seat === last);
   }
 }
+
+$("#train-btn").addEventListener("click", () => {
+  closeMenus();
+  renderTrainSeatChoices();
+  trainSeatDialog.showModal();
+  const last = trainSeatDialog.querySelector(".seat-choice.is-last");
+  if (last) last.focus();
+});
+trainSeatDialog.addEventListener("click", (ev) => {
+  if (ev.target === trainSeatDialog) { trainSeatDialog.close(); return; }
+  const btn = ev.target.closest(".seat-choice");
+  if (!btn) return;
+  trainSeatDialog.close();
+  startTraining(btn.dataset.seat);
+});
+$("#train-seat-cancel").addEventListener("click", () => trainSeatDialog.close());
+
+$("#train-prev").addEventListener("click", () => {
+  if (train && train.cur > 0) showTrainTable(train.cur - 1);
+});
+$("#train-next").addEventListener("click", () => train && trainNext());
+$("#train-new-btn").addEventListener("click", () => train && trainNext());
+$("#train-finish").addEventListener("click", () => train && train.tables.length && finishTraining());
+$("#train-close").addEventListener("click", () => trainDialog.close());
+trainDialog.addEventListener("close", () => {
+  cancelAutoReveal();
+  train = null;
+  quiz = null;
+});
 
 $("#bidding-box").addEventListener("click", (ev) => {
   const level = ev.target.closest("button[data-level]");
@@ -5316,8 +5409,8 @@ document.addEventListener("keydown", (ev) => {
   const box = $("#bidding-box");
   if (box.classList.contains("hidden") || !box.querySelector(".bb-grid")) return;
   if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
-  if (ev.target.closest && ev.target.closest("input, select, textarea, dialog[open]")) return;
-  if ($("#tabpanel-train").hidden) return;
+  if (!trainDialog.open || !$("#train-summary").hidden) return;
+  if (ev.target.closest && ev.target.closest("input, select, textarea")) return;
   const key = ev.key.toLowerCase();
   let btn = null;
   if (/^[1-7]$/.test(key)) btn = box.querySelector(`.bb-level[data-level="${key}"]`);
@@ -5335,7 +5428,6 @@ $("#quiz-continue-btn").addEventListener("click", onQuizContinue);
 
 $("#ia-health-btn").addEventListener("click", checkIaHealth);
 $("#bid-btn").addEventListener("click", simulate);
-$("#quiz-btn").addEventListener("click", startQuiz);
 
 // ---------- menus ----------
 //
@@ -5501,8 +5593,8 @@ helpDialog.addEventListener("click", (ev) => {
 // une étape ajoutée ici demande sa scène là-bas.
 const TUTORIAL_STEPS = [
   {
-    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, trois onglets : Enchères, PAR et S'entraîner.\nEn haut, la roue dentée ouvre les réglages, l'écran ▶ ce tutoriel et ? le mode d'emploi."],
-    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
+    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, deux onglets : Enchères et PAR.\nEn haut, la roue dentée ouvre les réglages, l'écran ▶ ce tutoriel et ? le mode d'emploi."],
+    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, two tabs: Auction and Par.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
     fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, par défaut parmi les donnes thématiques (voir les réglages).\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
@@ -5541,20 +5633,20 @@ const TUTORIAL_STEPS = [
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {
-    fr: ["S'entraîner", "Choisissez votre main (Nord, Est, Sud ou Ouest), puis la toque pour commencer le questionnaire sur la donne de la table.\nLe mode questionnaire fait arriver masquée chaque nouvelle donne : vous enchérissez sans la connaître."],
-    en: ["Practise", "Choose your hand (North, East, South or West), then the cap to start the quiz on the deal on the table.\nQuiz mode brings every new deal in hidden: you bid without knowing it."],
+    fr: ["S'entraîner", "Le bouton S'entraîner, à côté de Donne aléatoire : choisissez votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont tirées au hasard, comme par Donne aléatoire, et vous ne voyez que votre main."],
+    en: ["Practise", "The Practise button, next to Random deal: choose your hand (North, East, South or West).\nDeals are drawn at random, like Random deal's, and you only see your own hand."],
   },
   {
-    fr: ["Le questionnaire", "La table ne montre que votre main. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],
-    en: ["The quiz", "The table shows only your hand. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
+    fr: ["La table", "Votre main en bas, les trois autres dos tournés ; au centre la boîte des enchères, sièges vulnérables en rouge. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],
+    en: ["The table", "Your hand at the bottom, the other three face down; in the middle the auction box, vulnerable seats in red. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {
-    fr: ["La réponse", "Vous voyez aussitôt si votre enchère est celle du SEF ; sinon, l'enchère attendue et son explication, et l'arbre de décision sur votre main.\nContinuer passe à la suite ; Annuler arrête le questionnaire."],
-    en: ["The answer", "You see at once whether your call is the SEF one; if not, the expected call with its explanation, and the decision tree on your hand.\nContinue moves on; Cancel stops the quiz."],
+    fr: ["La réponse", "Vous voyez aussitôt si votre enchère est celle du SEF ; sinon, l'enchère attendue et son explication, et l'arbre de décision sur votre main. Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent ; ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
+    en: ["The answer", "You see at once whether your call is the SEF one; if not, the expected call with its explanation, and the decision tree on your hand. Continue moves on.\nOnce the auction is over, all four hands are shown; ‹ and › scroll through the deals played, Next deal draws a new one."],
   },
   {
-    fr: ["Le score", "À la fin : votre score, vos erreurs avec l'enchère attendue et le contrat final.\nRejouez la donne, tirez-en une nouvelle, ou affichez le détail complet : les onglets Enchères et PAR se remplissent avec la donne jouée."],
-    en: ["The score", "At the end: your score, your mistakes with the expected call, and the final contract.\nReplay the deal, draw a new one, or show the full detail: the Auction and Par tabs fill in with the deal you played."],
+    fr: ["Le score", "Terminer affiche votre score sur toute la séance, puis donne par donne : contrat, score et enchères ratées avec l'enchère attendue.\nRevoir rouvre une donne ; Reprendre l'entraînement revient à la table."],
+    en: ["The score", "Finish shows your score for the whole session, then deal by deal: contract, score and missed calls with the expected one.\nReview reopens a deal; Back to practice returns to the table."],
   },
   {
     fr: ["Réglages", "La roue dentée : langue, thème (automatique, clair ou sombre), l'option qui retire les passes de la séquence commentée et celle de lecture des cartes sur une photo, qui demande un serveur IA : elle ajoute un appareil photo aux mains et à Cartes non affectées.\nLa pastille verte dit que le moteur d'enchères est prêt."],
@@ -5776,7 +5868,6 @@ refreshDealSelector(true);
 gatherMissingCards();
 renderBoundsCards();
 renderHelpIcons();
-hideNewDealInQuizMode();
 settlePbn();
 applyLang();
 setPbnOpen(false);

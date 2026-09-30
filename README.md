@@ -10,7 +10,7 @@
 
 **L'application est en ligne : <https://jeanjacquesserpoul.github.io/encheres-bridge/>**
 
-Application web qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), et la commente enchère par enchère ; un questionnaire permet de s'entraîner à enchérir à la place d'un joueur. Les donnes s'échangent au format **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
+Application web qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), et la commente enchère par enchère ; **S'entraîner** fait enchérir à la place d'un joueur, sur des donnes tirées au hasard. Les donnes s'échangent au format **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
 
 Le moteur d'enchères, écrit en Go, est compilé en **WebAssembly** et tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique)).
 
@@ -20,7 +20,7 @@ Le dépôt contient quatre morceaux :
 |---|------|-----|
 | **Le moteur d'enchères** | bibliothèque Go qui applique les règles SEF d'un fichier YAML, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
 | **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler | [cli/rules/](cli/rules/) |
-| **Le client web** | composition de la donne, enchères commentées, questionnaire, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
+| **Le client web** | composition de la donne, enchères commentées, entraînement, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
@@ -30,7 +30,7 @@ Les règles appliquées par le moteur sont **[cli/rules/default.yaml](cli/rules/
 
 ## Démarrage
 
-Il y a deux façons d'utiliser l'application. Dans les deux cas, c'est **la même page** et le moteur d'enchères tourne **dans le navigateur** (`cli/bids.wasm`) : les séquences, les commentaires, le questionnaire et le PAR sont identiques.
+Il y a deux façons d'utiliser l'application. Dans les deux cas, c'est **la même page** et le moteur d'enchères tourne **dans le navigateur** (`cli/bids.wasm`) : les séquences, les commentaires, l'entraînement et le PAR sont identiques.
 
 | | 1. En local avec `run.ps1` / `run.sh` | 2. Copie de `cli/` sur un hébergeur statique |
 |---|---|---|
@@ -254,7 +254,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 **Au premier lancement**, un écran d'accueil propose de **consulter l'aide** ou de **continuer sans l'aide** ; il ne revient plus ensuite.
 
-**L'écran** a deux colonnes sur grand écran (1100 px et plus) : la **table** à gauche, et à droite un panneau à onglets, **Enchères** et **S'entraîner**, qui reste en vue quand la page défile. Sur écran plus étroit, le panneau passe sous la table ; sur téléphone, ses onglets deviennent une barre fixée au bas de l'écran, précédée d'un bouton **Donne** qui remonte à la table.
+**L'écran** a deux colonnes sur grand écran (1100 px et plus) : la **table** à gauche, et à droite un panneau à onglets, **Enchères** et **PAR**, qui reste en vue quand la page défile. Sur écran plus étroit, le panneau passe sous la table ; sur téléphone, ses onglets deviennent une barre fixée au bas de l'écran, précédée d'un bouton **Donne** qui remonte à la table.
 
 **Le bandeau** porte deux boutons : la roue des **Réglages** et le **?** du **mode d'emploi**, une aide en ligne en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons et suit l'écran dans l'ordre où on le découvre — l'écran, la donne, les enchères, le PAR, l'entraînement, la photo, les réglages —, puis récapitule les **raccourcis clavier**. Les Réglages regroupent la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre), le **système d'enchères** (l'un des fichiers de règles de `cli/rules/`, listés par `cli/rules/index.json` ; `default.yaml` par défaut, le choix est mémorisé), l'option **Donnes aléatoires tirées des thèmes** (cochée par défaut : **Donne aléatoire** tire alors une donne au hasard parmi toutes les donnes thématiques, en respectant le donneur, la vulnérabilité et les bornes de points choisis, et le titre de la donne indique son thème ; si aucune ne convient, ou décochée, les 52 cartes sont distribuées au hasard), l'option **Ne pas afficher les passes** (décochée par défaut : cochée, la séquence commentée ne liste plus que les enchères, contres et surcontres, chacun gardant son numéro de tour ; la grille garde tous les passes), l'état du moteur et tout ce qui touche au serveur IA. Ce dernier tient à une case à cocher, **décochée par défaut** (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
@@ -271,8 +271,8 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 ### Composer la donne
 
 - La barre au-dessus de la table : **Donne aléatoire**, dont la flèche ouvre **Donnes thématiques** et **Charger un fichier .pbn**, puis le menu **Partager** : **Copier le lien**, **Sauver le PBN** et **Texte de la donne (format PBN)**. Un fichier de tournoi (plusieurs `[Board]`) fait apparaître un sélecteur **Donne à utiliser**, encadré de deux boutons ‹ › qui passent à la donne précédente ou suivante ; ses libellés donnent le numéro de la donne, celui du plateau s'il diffère, et le donneur.
-- **Texte de la donne (format PBN)** (icône `</>`) affiche ou masque, sous la rangée, la donne écrite au format PBN ; le bouton reste enfoncé tant que le texte est affiché. On peut y coller une donne reçue par courriel — le tableau de cartes suit —, la corriger à la main, ou la copier d'un clic avec la petite icône en bas à droite du texte ; la croix voisine le replie. Pendant un questionnaire, le texte est masqué avec la donne et le bouton est grisé.
-- **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne — masquée s'il a activé le mode questionnaire —, puis l'adresse redevient celle de la page.
+- **Texte de la donne (format PBN)** (icône `</>`) affiche ou masque, sous la rangée, la donne écrite au format PBN ; le bouton reste enfoncé tant que le texte est affiché. On peut y coller une donne reçue par courriel — le tableau de cartes suit —, la corriger à la main, ou la copier d'un clic avec la petite icône en bas à droite du texte ; la croix voisine le replie.
+- **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne, puis l'adresse redevient celle de la page.
 - **Donne aléatoire** tire une donne complète, par défaut parmi les donnes thématiques (option **Donnes aléatoires tirées des thèmes** des Réglages) ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table porte la **donne exemple**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple.
 - **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…) ; un champ filtre la liste, les flèches la parcourent, Entrée ou un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Le thème chargé est coché dans la liste, et son libellé tient lieu de nom de fichier en titre de la donne. Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
@@ -330,7 +330,7 @@ Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soi
 
 ### Voir les enchères
 
-Les enchères se calculent **d'elles-mêmes** dès que la donne est complète — au chargement, après un tirage, un fichier, un lien ou un déplacement de carte —, dans la page et sans délai ; **Afficher les enchères** reste là pour le demander explicitement. Le recalcul s'abstient pendant un questionnaire et sur une donne masquée, pour ne rien dévoiler, avant que le moteur ne soit prêt, et quand un message sur la donne attend d'être lu. Survoler une enchère de la grille — ou l'atteindre au clavier — éclaire sa ligne commentée et cercle de doré la main de son auteur sur la table ; un clic amène la ligne à l'écran. Sur grand écran, où la liste est sous la grille, l'infobulle de la case s'efface ; elle reste sur téléphone. Le contrat et son déclarant s'inscrivent au centre de la table en lecture, dont chaque main reçoit l'analyse du moteur (points H et HL, type de main) : les mains ne sont pas redites ailleurs. La page affiche aussi, dans l'onglet **Enchères** (à droite de la table, ou dessous sur écran étroit, où **Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée, dont chaque ligne porte à gauche une icône qui déplie l'**arbre de décision** de l'enchère (voir le champ `trace` ci-dessous).
+Les enchères se calculent **d'elles-mêmes** dès que la donne est complète — au chargement, après un tirage, un fichier, un lien ou un déplacement de carte —, dans la page et sans délai ; **Afficher les enchères** reste là pour le demander explicitement. Le recalcul s'abstient avant que le moteur ne soit prêt, et quand un message sur la donne attend d'être lu. Survoler une enchère de la grille — ou l'atteindre au clavier — éclaire sa ligne commentée et cercle de doré la main de son auteur sur la table ; un clic amène la ligne à l'écran. Sur grand écran, où la liste est sous la grille, l'infobulle de la case s'efface ; elle reste sur téléphone. Le contrat et son déclarant s'inscrivent au centre de la table en lecture, dont chaque main reçoit l'analyse du moteur (points H et HL, type de main) : les mains ne sont pas redites ailleurs. La page affiche aussi, dans l'onglet **Enchères** (à droite de la table, ou dessous sur écran étroit, où **Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée, dont chaque ligne porte à gauche une icône qui déplie l'**arbre de décision** de l'enchère (voir le champ `trace` ci-dessous).
 
 ### Le moteur dans la page
 
@@ -338,18 +338,26 @@ Le moteur Go ([engine/](engine/)) est compilé en **WebAssembly** par [build-was
 
 La pastille d'état des Réglages rejoue une donne de référence au chargement et nomme la révision du moteur (une étoile signale un moteur compilé sur un dépôt modifié). Si le moteur ne se charge pas — fichier absent, règles introuvables ou invalides, page ouverte en `file://`, navigateur sans WebAssembly —, la raison s'affiche au pied de page et un point rouge marque la roue des Réglages : sans lui, rien ne peut être calculé.
 
-### Le questionnaire
+### S'entraîner
 
-L'onglet **S'entraîner** choisit **votre main** (Nord, Est, Sud ou Ouest) et lance l'entraînement sur la donne composée.
+Le bouton **S'entraîner**, entre **Donne aléatoire** et **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
 
-- **Seule votre main est visible.** La donne composée au-dessus — les quatre mains, le texte PBN et les boutons sous la table — est masquée, remplacée par la ligne « Donne masquée. **Afficher la donne** » ; ce lien la montre à tout moment.
-- Les enchères des trois autres sièges **s'enchaînent d'elles-mêmes** (une toutes les 0,7 s), chacune brièvement surlignée à son arrivée dans la grille.
-- La table du questionnaire — votre main, des dos de cartes pour les trois autres, le siège qui parle au centre — prend la place de la donne masquée dans le panneau de gauche ; l'onglet **S'entraîner** garde la grille et la boîte à enchères.
-- À votre tour, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), puis une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), et Passe, X (contre), XX (surcontre) — quinze boutons au lieu de trente-huit. Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre). Elle n'ouvre que les enchères **légales** (palier suffisant, contre et surcontre selon le camp du dernier appelant). La réponse est comparée à celle du moteur : verdict, enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main — la séquence vue par la paire, la règle retenue, puis chaque clause de sa condition, ✓ ou ✗, avec la valeur mesurée —, pour toutes les enchères du moteur (voir le champ `trace` ci-dessous) ; le même lien figure dans le récapitulatif de fin.
-- **Annuler** arrête le questionnaire à tout moment et revient au panneau de la donne.
-- À la fin, les mains sont dévoilées dans le questionnaire, le score s'affiche (`n / total`, en pourcentage) avec le contrat final, et trois suites sont offertes : **Rejouer cette donne**, **Nouvelle donne**, **Afficher le détail complet**. Les onglets **Enchères** et **PAR** se remplissent aussitôt avec la donne jouée, sans quitter le score ; un changement de langue ne referme pas le questionnaire. La donne composée, elle, **reste masquée** : le lien **Afficher la donne** la rend.
-
-**Mode questionnaire** : un interrupteur sous le choix de la main, mémorisé dans le navigateur. Activé, il fait arriver **masquée** chaque nouvelle donne — tirage, donne exemple, fichier, choix dans un fichier multi-donnes, donne retrouvée à l'ouverture de la page — pour s'entraîner sur une donne que l'on ne connaît pas. **Afficher la donne** la montre ; déplacer ensuite une carte ne la re-masque pas. Désactivé, la donne s'affiche normalement et n'est masquée que pendant un questionnaire.
+- **Les donnes** sont tirées comme par **Donne aléatoire** : parmi les donnes thématiques si l'option **Donnes aléatoires tirées des thèmes** est cochée, sinon distribuées au hasard. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent, et le thème de la donne s'affiche dans l'en-tête.
+- **La table** reprend l'allure d'une table en ligne :
+  - votre main est toujours **en bas**, étalée carte par carte ;
+  - les trois autres joueurs ont le dos tourné : à gauche celui qui parle après vous, en face le partenaire ;
+  - chaque siège a sa plaque (initiale, nom, donneur), rouge quand son camp est vulnérable, jaune quand c'est à lui de parler ;
+  - au centre, la boîte des enchères (O N E S, sièges vulnérables en rouge), où un **?** marque le tour de parole.
+- **Les enchères des trois autres sièges** s'enchaînent d'elles-mêmes, une toutes les 0,7 s.
+- **À votre tour**, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), puis Passe, X (contre) et XX (surcontre).
+  - Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre).
+  - Elle n'ouvre que les enchères **légales**.
+- **Le verdict est immédiat** : votre enchère est comparée à celle du moteur, avec l'enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
+- **L'enchère finie**, les quatre mains se dévoilent et le contrat s'affiche, **sans score**. **Donne suivante** tire la donne suivante.
+- **‹ et ›** font défiler les donnes déjà jouées, dans leur état final. › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.
+- **Terminer** affiche le **score de la séance** : les enchères conformes au SEF sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).
+  - **Revoir** rouvre une donne ; **Reprendre l'entraînement** revient à la table.
+  - La croix, ou Échap, ferme l'entraînement.
 
 ### Ce que le navigateur retient
 
@@ -358,7 +366,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 | Clé | Contenu |
 |---|---|
 | `bids.lang`, `bids.theme` | Langue et thème |
-| `bids.quizMode` | Mode questionnaire activé ou non |
+| `bids.trainSeat` | Main choisie pour s'entraîner (Sud par défaut) |
 | `bids.hidePasses` | Passes masqués ou non dans la séquence commentée |
 | `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |
 | `bids.welcomed` | Écran d'accueil déjà vu : il ne s'affiche qu'au premier lancement |
@@ -366,7 +374,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 
 ### Le PAR
 
-L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne ; à la fin d'un questionnaire aussi, mais jamais pendant, où il dévoilerait la donne —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
+L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne  —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
 
 ### Reconnaissance des cartes par photo (serveur IA)
 

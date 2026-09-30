@@ -292,6 +292,10 @@
             </label>
           </div>
         </div>
+        <!-- S'entraîner : on choisit sa main, puis on enchérit sur des donnes
+             tirées au hasard, dans une fenêtre à part (voir « s'entraîner »
+             dans app.js). -->
+        <button id="train-btn" type="button" class="cmd-btn cmd-labeled"></button>
         <!-- Ce que l'on fait de la donne hors de la page : la copier, la
              sauver, la lire en texte. -->
         <div class="menu">
@@ -388,13 +392,6 @@
       <p id="live-polite" class="sr-only" role="status" aria-live="polite"></p>
       <p id="live-alert" class="sr-only" role="alert"></p>
       <div class="constraints" id="constraints" role="group" aria-describedby="cards-help">
-        <!-- Pendant le questionnaire, les quatre mains ci-dessous sont masquées
-             (voir setDealHidden) : elles dévoileraient celles que l'on doit
-             deviner. Cette ligne en tient lieu, et permet de les revoir. -->
-        <p class="quiz-hidden-note">
-          <span data-i18n="quizDealHidden">Donne masquée.</span>
-          <button id="quiz-show-deal-btn" type="button" class="link-btn" data-i18n="quizShowDeal">Afficher la donne</button>
-        </p>
         <!-- La table en lecture : les quatre mains autour du tapis, et au centre
              le donneur, la vulnérabilité puis le contrat une fois les enchères
              calculées. Remplie par renderReadTable, puis par renderResult avec
@@ -406,17 +403,6 @@
           <div class="table-center seat-c" id="table-center"></div>
           <div id="hand-E" class="hand seat-e"></div>
           <div id="hand-S" class="hand seat-s"></div>
-        </div>
-        <!-- La table du questionnaire : votre main, des dos de cartes pour les
-             autres, et au centre le siège qui parle. Elle prend la place de la
-             donne masquée, à gauche, pour laisser à l'onglet S'entraîner la
-             grille et la boîte à enchères (voir style.css). -->
-        <div class="table-layout quiz-table" id="quiz-table">
-          <div id="qhand-N" class="hand seat-n"></div>
-          <div id="qhand-W" class="hand seat-w"></div>
-          <div class="table-center seat-c" id="qtable-center"></div>
-          <div id="qhand-E" class="hand seat-e"></div>
-          <div id="qhand-S" class="hand seat-s"></div>
         </div>
         <div class="table-layout cons-layout">
           <div class="hand cons-hand seat-n" id="cons-N"></div>
@@ -495,9 +481,6 @@
         <button id="tab-par" type="button" role="tab" class="tab" data-tab="par"
                 aria-selected="false" aria-controls="tabpanel-par" tabindex="-1"
                 data-i18n="tabPar">PAR</button>
-        <button id="tab-train" type="button" role="tab" class="tab" data-tab="train"
-                aria-selected="false" aria-controls="tabpanel-train" tabindex="-1"
-                data-i18n="tabTrain">S'entraîner</button>
       </div>
       </div>
 
@@ -563,77 +546,6 @@
     </div>
     </div>
 
-    <!-- Le questionnaire : un entraînement où l'on répond à la place d'un
-         siège, dans son propre onglet. -->
-    <div id="tabpanel-train" class="tabpanel" role="tabpanel" aria-labelledby="tab-train" hidden>
-    <section class="quiz-launch" id="quiz-launch-panel">
-      <h2 data-i18n="quizPanel">Questionnaire d'enchères</h2>
-      <div class="quiz-launch-controls">
-      <div class="quiz-launch-row">
-        <!-- Le siège que le questionnaire fait jouer, en bandeau : le compas
-             en croix disait bien la place de chacun, mais il coûtait trois
-             rangées de hauteur pour quatre choix. Ce sont toujours des
-             boutons radio, donc les flèches y circulent d'elles-mêmes. -->
-        <fieldset class="seat-pills">
-          <!-- Le libellé ne s'affiche plus : les quatre noms se suffisent,
-               et l'infobulle de chaque pastille dit la phrase entière. Il
-               reste néanmoins dans l'arbre, car c'est lui qui nomme le
-               groupe de boutons radio à un lecteur d'écran. -->
-          <legend class="sr-only" data-i18n="yourHand">Votre main</legend>
-          <div class="seat-pills-row">
-            <label class="seat-pick"><input type="radio" name="seat" value="N" checked><span></span></label>
-            <label class="seat-pick"><input type="radio" name="seat" value="E"><span></span></label>
-            <label class="seat-pick"><input type="radio" name="seat" value="S"><span></span></label>
-            <label class="seat-pick"><input type="radio" name="seat" value="W"><span></span></label>
-          </div>
-        </fieldset>
-        <button id="quiz-btn" type="button" class="cmd-btn cmd-primary"></button>
-        <span id="error" class="error"></span>
-      </div>
-      <!-- Mode questionnaire : toute nouvelle donne arrive masquée, pour
-           s'entraîner sur une donne que l'on ne connaît pas. Mémorisé comme la
-           langue (voir QUIZ_MODE_KEY dans app.js). Une case à cocher, rendue
-           en interrupteur par style.css ; role="switch" le dit aux lecteurs
-           d'écran. -->
-      <label class="switch" id="quiz-mode-label">
-        <input type="checkbox" id="quiz-mode" role="switch">
-        <span class="switch-track" aria-hidden="true"></span>
-        <span data-i18n="quizMode">Mode questionnaire</span>
-      </label>
-      <p class="quiz-mode-hint" data-i18n="quizModeHint">La donne reste masquée dès qu'elle est tirée ou chargée : vous enchérissez sans la connaître.</p>
-      </div>
-
-      <!-- Le déroulement, dans le même panneau que le lancement : la rangée de
-           lancement s'efface pendant le questionnaire (.quiz-running), un
-           seul titre reste à l'écran. -->
-      <div class="hidden" id="quiz-panel">
-        <div id="quiz-turn" class="quiz-turn"></div>
-
-
-        <h3 data-i18n="auctionSeq">Séquence d'enchères</h3>
-        <table class="auction" id="quiz-auction-table">
-          <thead><tr id="quiz-auction-head"></tr></thead>
-          <tbody id="quiz-auction-body"></tbody>
-        </table>
-
-        <div id="bidding-box" class="bidding-box hidden"></div>
-
-        <div id="quiz-feedback" class="quiz-feedback hidden"></div>
-
-        <div class="row">
-          <!-- Après le verdict de sa propre enchère : les enchères des autres
-               sièges, elles, s'enchaînent seules. -->
-          <button id="quiz-continue-btn" type="button" class="primary hidden" data-i18n="continue">Continuer</button>
-          <!-- Abandonner le questionnaire à tout moment : il se referme et la
-               donne composée revient (voir cancelQuiz). Masqué une fois le
-               questionnaire terminé, où le score offre ses propres suites. -->
-          <button id="quiz-cancel-btn" type="button" data-i18n="quizCancel">Annuler</button>
-        </div>
-
-        <div id="quiz-score" class="quiz-score hidden"></div>
-      </div>
-    </section>
-    </div>
     </div>
 
   </main>
@@ -682,12 +594,12 @@
       </div>
 
       <div class="help-body" data-help-lang="fr" lang="fr">
-        <p class="help-lead">L'application déroule les enchères d'une donne de bridge selon le <b>Système d'Enchères Français (SEF)</b> et les commente, enchère par enchère. Vous pouvez aussi vous entraîner : le questionnaire vous fait enchérir à la place d'un joueur. Tout est calculé dans votre navigateur, sans compte ni serveur.</p>
+        <p class="help-lead">L'application déroule les enchères d'une donne de bridge selon le <b>Système d'Enchères Français (SEF)</b> et les commente, enchère par enchère. Vous pouvez aussi vous entraîner : <b>S'entraîner</b> vous fait enchérir à la place d'un joueur, sur des donnes tirées au hasard. Tout est calculé dans votre navigateur, sans compte ni serveur.</p>
 
         <h3>1. L'écran</h3>
         <ul>
           <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
-          <li>À droite, un panneau à trois onglets : <b>Enchères</b>, <b>PAR</b> et <b>S'entraîner</b>. Il reste en vue quand la page défile.</li>
+          <li>À droite, un panneau à deux onglets : <b>Enchères</b> et <b>PAR</b>. Il reste en vue quand la page défile.</li>
           <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
           <li>Dans le bandeau, la roue dentée ouvre les <b>Réglages</b> (voir §8), le bouton ▶ la <b>Vidéo de présentation</b> (dans une fenêtre, sans quitter la donne), la toque le <b>Tutoriel</b> (la prise en main en images) et <b>?</b> ce mode d'emploi.</li>
         </ul>
@@ -698,12 +610,12 @@
         </ul>
         <p>La <b>flèche</b> à côté de ce bouton ouvre les autres façons d'obtenir une donne :</p>
         <ul class="help-icons">
-          <li><span data-help-icon="book"></span><span><b>Donnes thématiques</b> : des séries de donnes choisies pour travailler un thème d'enchères (4e couleur forcing, Drury…). Une fenêtre liste les thèmes ; le champ en tête filtre la liste (sans tenir compte des accents), les flèches ↑ ↓ la parcourent et Entrée — ou un clic — charge la série ; le sélecteur <b>Donne à utiliser</b> et ses boutons <b>‹</b> <b>›</b> passent d'une donne à l'autre. Le thème chargé est coché dans la liste, et son nom s'affiche en titre de la donne. Les enchères n'y sont pas écrites : l'application les calcule, et le mode questionnaire s'y applique comme à toute donne.</span></li>
+          <li><span data-help-icon="book"></span><span><b>Donnes thématiques</b> : des séries de donnes choisies pour travailler un thème d'enchères (4e couleur forcing, Drury…). Une fenêtre liste les thèmes ; le champ en tête filtre la liste (sans tenir compte des accents), les flèches ↑ ↓ la parcourent et Entrée — ou un clic — charge la série ; le sélecteur <b>Donne à utiliser</b> et ses boutons <b>‹</b> <b>›</b> passent d'une donne à l'autre. Le thème chargé est coché dans la liste, et son nom s'affiche en titre de la donne. Les enchères n'y sont pas écrites : l'application les calcule.</span></li>
           <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît, encadré de deux boutons <b>‹</b> <b>›</b> qui passent à la donne précédente ou suivante.</span></li>
         </ul>
         <p>Le menu <b>Partager</b> sert à emporter la donne hors de la page :</p>
         <ul class="help-icons">
-          <li><span data-help-icon="link"></span><span><b>Copier le lien de cette donne</b> : une adresse qui contient la donne. Qui l'ouvre la retrouve (masquée s'il a activé le mode questionnaire).</span></li>
+          <li><span data-help-icon="link"></span><span><b>Copier le lien de cette donne</b> : une adresse qui contient la donne. Qui l'ouvre la retrouve.</span></li>
           <li><span data-help-icon="save"></span><span><b>Sauver le PBN</b> : télécharge la donne dans un fichier .pbn. D'un fichier de plusieurs donnes, seule la donne choisie dans <b>Donne à utiliser</b> est sauvée.</span></li>
           <li><span data-help-icon="pbn"></span><span><b>Texte de la donne (format PBN)</b> : affiche ou masque, sous la barre, la donne écrite au format PBN (une coche le signale dans le menu). Il se lit et se copie en tout temps, mais ne s'ouvre à la saisie qu'en modification de la donne (<b>Modifier la donne</b>) : collez-y alors une donne reçue par courriel (la table suit), ou corrigez-la à la main. Les petites icônes en bas à droite du texte le copient et y collent le presse-papiers ; la croix voisine le replie.</span></li>
         </ul>
@@ -744,7 +656,7 @@
 
         <h3>4. Les enchères (onglet Enchères)</h3>
         <ul>
-          <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement. Exceptions : pendant un questionnaire et sur une donne masquée, pour ne rien dévoiler.</li>
+          <li>Les enchères se calculent <b>d'elles-mêmes</b> dès que la donne est complète, et se recalculent à chaque changement.</li>
           <li>Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main).</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée de doré sur la table. Un clic amène la ligne à l'écran. Sur téléphone, touchez-la pour lire sa signification.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère. Pour une liste plus courte, l'option <b>Ne pas afficher les passes</b> des Réglages (voir §8) en retire les passes.</li>
@@ -757,25 +669,24 @@
         <h3>5. Le PAR (onglet PAR)</h3>
         <ul>
           <li>Le nombre de levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul double-mort).</li>
-          <li>Il se calcule à l'ouverture de l'onglet, puis pour chaque nouvelle donne tant que l'onglet reste ouvert. Il faut une donne complète dont les enchères sont calculées, ou un questionnaire terminé ; pendant le questionnaire, il reste masqué pour ne rien dévoiler.</li>
+          <li>Il se calcule à l'ouverture de l'onglet, puis pour chaque nouvelle donne tant que l'onglet reste ouvert. Il faut une donne complète dont les enchères sont calculées.</li>
           <li>Survolez une case (ou touchez-la) pour voir les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres.</li>
           <li>Le bouton <b>Calcul du PAR</b> n'apparaît que pour relancer le calcul après un échec.</li>
         </ul>
 
-        <h3>6. S'entraîner (onglet S'entraîner)</h3>
+        <h3>6. S'entraîner</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Choisissez <b>votre main</b> (Nord, Est, Sud ou Ouest), puis le bouton à la toque, <b>Commencer le questionnaire</b>. Il porte sur la donne de la table, dont les quatre mains doivent être complètes.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, à côté de Donne aléatoire, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Les donnes y sont tirées comme par <b>Donne aléatoire</b> : parmi les donnes thématiques si l'option est cochée, avec le donneur, la vulnérabilité et les bornes choisis.</span></li>
         </ul>
         <ul>
-          <li>La donne est masquée. La table montre votre main et des dos de cartes pour les autres, avec au centre le joueur qui parle ; l'onglet affiche la séquence.</li>
-          <li>Les enchères des autres joueurs arrivent d'elles-mêmes, l'une après l'autre, brièvement surlignées.</li>
-          <li>À votre tour, la <b>boîte à enchères</b> : choisissez un <b>palier</b> (1 à 7 ; le plus bas encore permis est déjà choisi), puis une <b>dénomination</b> (♣ ♦ ♥ ♠ SA), ou Passe, X (contre), XX (surcontre). Elle ne propose que les enchères permises.</li>
-          <li>Vous voyez aussitôt si votre enchère est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite. Après une erreur, <b>Voir l'arbre de décision</b> montre le chemin suivi par le moteur sur votre main : chaque règle examinée, avec ✓ ou ✗ et la valeur mesurée (points, longueurs).</li>
-          <li><b>Annuler</b> arrête le questionnaire à tout moment.</li>
-          <li>À la fin : les mains dévoilées, votre <b>score</b> (bonnes réponses et pourcentage), vos erreurs avec l'enchère attendue, le contrat final, et le choix entre <b>Rejouer cette donne</b>, <b>Nouvelle donne</b> et <b>Afficher le détail complet</b>. Les onglets <b>Enchères</b> et <b>PAR</b> se remplissent aussitôt avec la donne jouée.</li>
-          <li>La donne reste masquée après le questionnaire : le lien <b>Afficher la donne</b> la montre quand vous le voulez.</li>
+          <li>Votre main est toujours <b>en bas</b>, face visible ; les trois autres joueurs ont le dos tourné (à gauche, celui qui parle après vous ; en face, votre partenaire). Au centre, la boîte des enchères : les sièges vulnérables y sont en rouge, et un <b>?</b> marque le tour de parole. La plaque du joueur qui parle s'éclaire en jaune.</li>
+          <li>Les enchères des autres joueurs arrivent d'elles-mêmes, l'une après l'autre.</li>
+          <li>À votre tour, la <b>boîte à enchères</b> : choisissez un <b>palier</b> (1 à 7 ; le plus bas encore permis est déjà choisi), puis une <b>dénomination</b> (♣ ♦ ♥ ♠ SA), ou Passe, X (contre), XX (surcontre). Elle ne propose que les enchères permises ; le clavier marche aussi (voir §9).</li>
+          <li>Vous voyez aussitôt si votre enchère est celle du SEF, sinon l'enchère attendue et son explication ; <b>Continuer</b> passe à la suite. Après une erreur, <b>Voir l'arbre de décision</b> montre le chemin suivi par le moteur sur votre main.</li>
+          <li>L'enchère finie, les quatre mains se dévoilent et le contrat s'affiche, sans score. <b>Donne suivante</b> (ou ›) tire la donne suivante.</li>
+          <li><b>‹</b> et <b>›</b> font défiler les donnes déjà jouées, pour les revoir ; › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.</li>
+          <li><b>Terminer</b> affiche votre <b>score</b> sur l'ensemble de la séance (enchères conformes au SEF sur vos enchères, en pourcentage), puis donne par donne avec vos erreurs ; <b>Revoir</b> rouvre une donne, <b>Reprendre l'entraînement</b> revient à la table. La croix ferme l'entraînement.</li>
         </ul>
-        <p><b>Mode questionnaire</b> : cet interrupteur fait arriver <b>masquée</b> chaque nouvelle donne — tirée, thématique, chargée ou retrouvée à l'ouverture de la page — pour vous entraîner sur une donne que vous ne connaissez pas. Il est retenu d'une visite à l'autre.</p>
 
         <h3>7. Lire les cartes sur une photo (facultatif)</h3>
         <p>Cochez <b>Serveur IA de reconnaissance des cartes</b> dans les Réglages. Il faut un serveur IA en service : sans lui, les boutons photo restent grisés.</p>
@@ -794,7 +705,7 @@
           <li><b>Serveur IA de reconnaissance des cartes</b> : l'option de la lecture par photo, le serveur visé (<b>Local</b> ou <b>Distant</b>, avec son adresse) et <b>Tester</b> pour vérifier qu'il répond.</li>
           <li>La <b>pastille verte</b> indique que le moteur d'enchères est prêt, avec sa version et le système choisi. S'il ne se charge pas, un point rouge apparaît sur la roue dentée et la raison s'affiche au pied de la page : rechargez-la, ou essayez un autre navigateur.</li>
         </ul>
-        <p>Langue, thème, mode questionnaire, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par la toque du bandeau ou par le bouton en haut de ce mode d'emploi. L'écran d'accueil du premier lancement fait tourner, lui, la <b>Vidéo de présentation</b> : une donne suivie de la saisie au contrat, en quarante-deux secondes.</p>
+        <p>Langue, thème, main choisie pour l'entraînement, affichage des passes, option photo et dernière donne complète sont retenus d'une visite à l'autre, dans ce navigateur seulement. Le <b>Tutoriel</b> fait défiler la prise en main étape par étape, en images : il s'ouvre par la toque du bandeau ou par le bouton en haut de ce mode d'emploi. L'écran d'accueil du premier lancement fait tourner, lui, la <b>Vidéo de présentation</b> : une donne suivie de la saisie au contrat, en quarante-deux secondes.</p>
 
         <h3>9. Raccourcis clavier</h3>
         <ul>
@@ -808,12 +719,12 @@
       </div>
 
       <div class="help-body" data-help-lang="en" lang="en" hidden>
-        <p class="help-lead">The app runs the auction of a bridge deal following the <b>French bidding system (SEF)</b> and explains every call. You can also practise: the quiz has you bid in place of one player. Everything is computed in your browser, with no account and no server.</p>
+        <p class="help-lead">The app runs the auction of a bridge deal following the <b>French bidding system (SEF)</b> and explains every call. You can also practise: <b>Practise</b> has you bid in place of one player, on deals drawn at random. Everything is computed in your browser, with no account and no server.</p>
 
         <h3>1. The screen</h3>
         <ul>
           <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
-          <li>On the right, a panel with three tabs: <b>Auction</b>, <b>Par</b> and <b>Practise</b>. It stays in view while the page scrolls.</li>
+          <li>On the right, a panel with two tabs: <b>Auction</b> and <b>Par</b>. It stays in view while the page scrolls.</li>
           <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
           <li>In the top bar, the cog opens the <b>Settings</b> (see §8), the ▶ button the <b>Presentation video</b> (in a window, without leaving the deal), the graduation cap the <b>Tutorial</b> (the illustrated walkthrough) and <b>?</b> this guide.</li>
         </ul>
@@ -824,12 +735,12 @@
         </ul>
         <p>The <b>arrow</b> next to that button opens the other ways to get a deal:</p>
         <ul class="help-icons">
-          <li><span data-help-icon="book"></span><span><b>Themed deals</b>: sets of deals picked to work on a bidding topic (fourth suit forcing, Drury…). A window lists the topics; the field at the top filters the list (ignoring accents), the ↑ ↓ arrows move through it and Enter — or a click — loads the set; the <b>Deal to use</b> selector and its <b>‹</b> <b>›</b> buttons move from one deal to the next. The loaded topic is ticked in the list, and its name shows as the deal's title. The auctions are not written in them: the app works them out, and quiz mode applies as to any deal.</span></li>
+          <li><span data-help-icon="book"></span><span><b>Themed deals</b>: sets of deals picked to work on a bidding topic (fourth suit forcing, Drury…). A window lists the topics; the field at the top filters the list (ignoring accents), the ↑ ↓ arrows move through it and Enter — or a click — loads the set; the <b>Deal to use</b> selector and its <b>‹</b> <b>›</b> buttons move from one deal to the next. The loaded topic is ticked in the list, and its name shows as the deal's title. The auctions are not written in them: the app works them out.</span></li>
           <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears, between two <b>‹</b> <b>›</b> buttons that go to the previous or next deal.</span></li>
         </ul>
         <p>The <b>Share</b> menu takes the deal out of the page:</p>
         <ul class="help-icons">
-          <li><span data-help-icon="link"></span><span><b>Copy a link to this deal</b>: an address that carries the deal. Whoever opens it gets this deal (hidden if they turned quiz mode on).</span></li>
+          <li><span data-help-icon="link"></span><span><b>Copy a link to this deal</b>: an address that carries the deal. Whoever opens it gets this deal.</span></li>
           <li><span data-help-icon="save"></span><span><b>Save the PBN</b>: downloads the deal as a .pbn file. From a file of several deals, only the one picked in <b>Deal to use</b> is saved.</span></li>
           <li><span data-help-icon="pbn"></span><span><b>Deal as text (PBN format)</b>: shows or hides, below the bar, the deal written in PBN format (a tick marks it in the menu). It can be read and copied at any time, but only opens for typing while editing the deal (<b>Edit the deal</b>): paste a deal received by e-mail there (the table follows), or fix it by hand. The small icons at the bottom right of the text copy it and paste the clipboard into it; the cross next to it folds it away.</span></li>
         </ul>
@@ -870,7 +781,7 @@
 
         <h3>4. The auction (Auction tab)</h3>
         <ul>
-          <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change. Exceptions: during a quiz and on a hidden deal, so as not to give anything away.</li>
+          <li>The auction is computed <b>on its own</b> as soon as the deal is complete, and again after every change.</li>
           <li>The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type).</li>
           <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled in gold on the table. A click brings the line into view. On a phone, tap it to read its meaning.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call. For a shorter list, the <b>Hide passes</b> option in the Settings (see §8) removes the passes from it.</li>
@@ -883,25 +794,24 @@
         <h3>5. The par (Par tab)</h3>
         <ul>
           <li>The tricks each side takes in each strain, all cards visible (double-dummy analysis).</li>
-          <li>It is computed when you open the tab, then for every new deal while the tab stays open. It needs a complete deal whose auction has been computed, or a finished quiz; during the quiz it stays hidden so as not to give anything away.</li>
+          <li>It is computed when you open the tab, then for every new deal while the tab stays open. It needs a complete deal whose auction has been computed.</li>
           <li>Hover over a cell (or tap it) to see the opening leads that hold declarer to that many tricks, and what the others cost.</li>
           <li>The <b>Compute the par</b> button only shows up to retry after a failure.</li>
         </ul>
 
-        <h3>6. Practising (Practise tab)</h3>
+        <h3>6. Practising</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Pick <b>your hand</b> (North, East, South or West), then the mortarboard button, <b>Start the quiz</b>. It uses the deal on the table, whose four hands must be complete.</span></li>
+          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, next to Random deal, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. Its deals are drawn like <b>Random deal</b>'s: among the themed deals if that option is on, with the dealer, vulnerability and bounds you chose.</span></li>
         </ul>
         <ul>
-          <li>The deal is hidden. The table shows your hand and card backs for the others, with the player to speak in the middle; the tab shows the auction.</li>
-          <li>The other players' calls appear on their own, one after another, briefly highlighted.</li>
-          <li>On your turn, the <b>bidding box</b>: pick a <b>level</b> (1 to 7; the lowest one still allowed is already picked), then a <b>strain</b> (♣ ♦ ♥ ♠ NT), or Pass, Double, Redouble. It only offers legal calls.</li>
-          <li>You see at once whether your call matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on. After a mistake, <b>Show the decision tree</b> displays the path the engine followed on your hand: each rule examined, with ✓ or ✗ and the measured value (points, lengths).</li>
-          <li><b>Cancel</b> stops the quiz at any time.</li>
-          <li>At the end: the hands revealed, your <b>score</b> (right answers and percentage), your mistakes with the expected call, the final contract, and the choice between <b>Replay this deal</b>, <b>New deal</b> and <b>Show full detail</b>. The <b>Auction</b> and <b>Par</b> tabs fill in at once with the deal played.</li>
-          <li>The deal stays hidden after the quiz: the <b>Show the deal</b> link reveals it whenever you like.</li>
+          <li>Your hand is always <b>at the bottom</b>, face up; the other three players' cards are face down (on your left, the player who bids after you; opposite, your partner). In the middle, the auction box: vulnerable seats are shown in red, and a <b>?</b> marks whose turn it is. The plate of the player to bid lights up in yellow.</li>
+          <li>The other players' calls appear on their own, one after another.</li>
+          <li>On your turn, the <b>bidding box</b>: pick a <b>level</b> (1 to 7; the lowest one still allowed is already picked), then a <b>strain</b> (♣ ♦ ♥ ♠ NT), or Pass, Double, Redouble. It only offers legal calls; the keyboard works too (see §9).</li>
+          <li>You see at once whether your call matches the SEF, and if not, the expected call and why; <b>Continue</b> moves on. After a mistake, <b>Show the decision tree</b> displays the path the engine followed on your hand.</li>
+          <li>Once the auction is over, all four hands are shown with the contract, and no score. <b>Next deal</b> (or ›) draws the next deal.</li>
+          <li><b>‹</b> and <b>›</b> scroll through the deals already played, to review them; › only draws a new deal once the current auction is over.</li>
+          <li><b>Finish</b> shows your <b>score</b> for the whole session (calls matching the SEF out of your calls, as a percentage), then deal by deal with your mistakes; <b>Review</b> reopens a deal, <b>Back to practice</b> returns to the table. The cross closes the practice.</li>
         </ul>
-        <p><b>Quiz mode</b>: this switch makes every new deal arrive <b>hidden</b> — random, themed, loaded or brought back when the page opens — so you practise on a deal you do not know. It is remembered between visits.</p>
 
         <h3>7. Reading cards from a photo (optional)</h3>
         <p>Tick <b>AI card-recognition server</b> in the Settings. An AI server must be running: without it, the photo buttons stay greyed out.</p>
@@ -920,7 +830,7 @@
           <li><b>AI card-recognition server</b>: the photo-reading option, the server it targets (<b>Local</b> or <b>Remote</b>, with its address) and <b>Test</b> to check that it answers.</li>
           <li>The <b>green dot</b> shows that the bidding engine is ready, with its version and the chosen system. If it fails to load, a red dot appears on the cog and the reason shows at the bottom of the page: reload it, or try another browser.</li>
         </ul>
-        <p>Language, theme, quiz mode, the passes display, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the graduation cap in the top bar or the button at the top of this guide. The welcome screen on first launch plays the <b>Presentation video</b> instead: one deal followed from entry to contract, in forty-two seconds.</p>
+        <p>Language, theme, the hand chosen for practice, the passes display, the photo option and your last complete deal are remembered between visits, in this browser only. The <b>Tutorial</b> walks through the app step by step, with pictures: open it from the graduation cap in the top bar or the button at the top of this guide. The welcome screen on first launch plays the <b>Presentation video</b> instead: one deal followed from entry to contract, in forty-two seconds.</p>
 
         <h3>9. Keyboard shortcuts</h3>
         <ul>
@@ -1057,6 +967,74 @@
       </div>
       <p id="themes-status" class="themes-status" role="status"></p>
       <ul id="themes-list" class="themes-list" role="listbox" data-i18n-label="themeDeals"></ul>
+    </div>
+  </dialog>
+
+  <!-- S'entraîner, 1 : le choix de sa main. Une rose des vents : chaque siège
+       à sa place autour de la table. Le dernier choix est retenu. -->
+  <dialog id="train-seat-dialog" class="train-seat-dialog" aria-labelledby="train-seat-title">
+    <div class="train-seat-box">
+      <h2 id="train-seat-title" data-i18n="trainSeatTitle">Votre main</h2>
+      <p class="muted" data-i18n="trainSeatHint">Choisissez le siège où vous enchérirez : les donnes sont tirées au hasard, et vous ne voyez que votre main.</p>
+      <div class="seat-compass" role="group" data-i18n-label="trainSeatTitle">
+        <button type="button" class="seat-choice" data-seat="N"></button>
+        <button type="button" class="seat-choice" data-seat="W"></button>
+        <span class="seat-compass-center" aria-hidden="true"></span>
+        <button type="button" class="seat-choice" data-seat="E"></button>
+        <button type="button" class="seat-choice" data-seat="S"></button>
+      </div>
+      <div class="train-seat-actions">
+        <button id="train-seat-cancel" type="button" data-i18n="trainCancel">Annuler</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- S'entraîner, 2 : la table. Votre main en bas, face visible ; les trois
+       autres, dos tournés ; au centre la boîte des enchères. À côté, la boîte à
+       enchères et le verdict de chaque enchère. Précédente et Suivante
+       parcourent les donnes déjà jouées ; Suivante tire la donne suivante une
+       fois l'enchère finie. Terminer affiche le score de la séance. -->
+  <dialog id="train-dialog" class="train-dialog" aria-labelledby="train-title">
+    <div class="train-box">
+      <div class="train-head">
+        <h2 id="train-title" data-i18n="trainTitle">S'entraîner</h2>
+        <span id="train-where" class="train-where"></span>
+        <div class="train-nav">
+          <button id="train-prev" type="button" class="cmd-btn"></button>
+          <span id="train-count" class="train-count"></span>
+          <button id="train-next" type="button" class="cmd-btn"></button>
+          <button id="train-finish" type="button" class="cmd-btn cmd-labeled train-finish"></button>
+          <button id="train-close" type="button" class="icon-btn"
+                  data-i18n-title="trainClose" data-i18n-label="trainClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="train-body" id="train-body">
+        <div class="train-table" id="train-table">
+          <div class="tseat tseat-top" id="tseat-top"></div>
+          <div class="tseat tseat-left" id="tseat-left"></div>
+          <div class="tcenter" id="tcenter"></div>
+          <div class="tseat tseat-right" id="tseat-right"></div>
+          <div class="tseat tseat-bottom" id="tseat-bottom"></div>
+        </div>
+        <aside class="train-side">
+          <p id="train-turn" class="quiz-turn" aria-live="polite"></p>
+          <div id="bidding-box" class="bidding-box hidden"></div>
+          <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+          <div class="train-actions">
+            <!-- Après le verdict de sa propre enchère : les enchères des autres
+                 sièges, elles, s'enchaînent seules. -->
+            <button id="quiz-continue-btn" type="button" class="primary hidden" data-i18n="continue">Continuer</button>
+            <button id="train-new-btn" type="button" class="primary hidden" data-i18n="trainNextDeal">Donne suivante</button>
+          </div>
+          <p id="train-error" class="error"></p>
+        </aside>
+      </div>
+      <section id="train-summary" class="train-summary" hidden></section>
     </div>
   </dialog>
 

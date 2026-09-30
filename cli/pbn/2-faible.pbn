@@ -101,19 +101,19 @@
 [Board "17"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:T.A762.632.JT985 Q765.KQT543.J.Q6 A98432.J.KQT9.K4 KJ.98.A8754.A732"]
+[Deal "N:K32.64.K754.QJ74 65.KQT972.9.KT63 AT9.A5.AJT3.A852 QJ874.J83.Q862.9"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "18"]
 [Dealer "E"]
 [Vulnerable "None"]
-[Deal "N:AK95..AJ752.J987 J74.75.QT63.K543 632.KQ943.84.AQ2 QT8.AJT862.K9.T6"]
+[Deal "N:AQJ.KJ75.AQ63.A3 KT7632.A.4.QJ864 84.9843.98752.T7 95.QT62.KJT.K952"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "19"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "N:KJT543.T5.A2.J52 7.Q72.KT9853.764 Q8.AK9843.J7.T93 A962.J6.Q64.AKQ8"]
+[Deal "N:AKJ84.96.A.QJ954 7.QJ.KQT96.KT876 T932.T73.J853.A3 Q65.AK8542.742.2"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "20"]
@@ -125,19 +125,19 @@
 [Board "21"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "N:T.AK854.K92.A972 Q4.97.AQ875.T865 J753.JT3.JT4.KQ3 AK9862.Q62.63.J4"]
+[Deal "N:K92.543.QJT84.Q9 JT5.K9.AK52.T842 AQ743.J2.973.KJ3 86.AQT876.6.A765"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "22"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:AJ952.652.74.K83 .JT9873.Q53.QJ64 43.AKQ4.AJ6.A952 KQT876..KT982.T7"]
+[Deal "N:6.6542.9875.T632 AT8732.AJT9.J.98 KJ.KQ7.AKT63.KQJ Q954.83.Q42.A754"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "23"]
 [Dealer "E"]
 [Vulnerable "NS"]
-[Deal "N:T.AK85.AJ.QJ9753 KQ9842.J7.752.AT AJ65.6432.Q93.42 73.QT9.KT864.K86"]
+[Deal "N:Q.J97543.JT83.KQ KJT986.K6.7.9743 7532.QT.AKQ2.J82 A4.A82.9654.AT65"]
 
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "24"]
@@ -145,8 +145,10 @@
 [Vulnerable "EW"]
 [Deal "N:T3.86432.QJT3.Q7 4.AJT7.K98.JT542 AQJ876..754.9863 K952.KQ95.A62.AK"]
 
+
 [Event "2 faible (2♥ / 2♠) et sa défense"]
 [Board "25"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "N:A742.K76.8643.T2 J3.Q943.KQT5.A93 KQ9865.JT.J2.854 T.A852.A97.KQJ76"]
+[Deal "N:JT.KJT2.KJ54.T63 Q96.AQ4.Q93.K987 A87543.65.62.J42 K2.9873.AT87.AQ5"]
+

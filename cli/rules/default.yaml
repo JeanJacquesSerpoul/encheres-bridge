@@ -6692,6 +6692,8 @@
 
 # --- répondant après une redemande à saut de l'ouvreur (6 cartes, 15-17)
 # en: responder after opener's jump rebid (6 cards, 15-17)
+# Sans 2 cartes dans la couleur de l'ouvreur, elle ne s'affranchit pas en face : 3SA demande alors 11 HL. Mesuré sur le banc du par.
+# en: Without 2 cards in opener's suit it does not run opposite: 3NT then needs 11 HL. Measured on the par benchmark.
 - id: "{o}.{r}.3{X}.game"
   for: [{o: 1H, r: 1S, X: H}, {o: 1H, r: 1NT, X: H}, {o: 1S, r: 1NT, X: S}, {o: "1C|1D", r: "1H|1S", X: C}, {o: "1C|1D", r: "1H|1S", X: D}]
   seq: "{o} {r} 3{X}"
@@ -6705,10 +6707,10 @@
   for: [{o: 1H, r: 1S, X: H}, {o: 1H, r: 1NT, X: H}, {o: 1S, r: 1NT, X: S}, {o: "1C|1D", r: "1H|1S", X: C}, {o: "1C|1D", r: "1H|1S", X: D}]
   seq: "{o} {r} 3{X}"
   call: 3NT
-  cond: "hl >= 8"
+  cond: "hl >= 9 and ({X} >= 2 or hl >= 11)"
   forcing: SO
-  meaning: "Manche à SA"
-  meaning_en: "Game in NT"
+  meaning: "Manche à SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL"
+  meaning_en: "Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL"
   status: infere
 - id: "{o}.{r}.3{X}.pass"
   for: [{o: 1H, r: 1S, X: H}, {o: 1H, r: 1NT, X: H}, {o: 1S, r: 1NT, X: S}, {o: "1C|1D", r: "1H|1S", X: C}, {o: "1C|1D", r: "1H|1S", X: D}]

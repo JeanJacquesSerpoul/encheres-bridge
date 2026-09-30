@@ -1563,12 +1563,17 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .tseat-bottom { grid-area: bottom; }
 .tcenter { grid-area: center; width: 100%; max-width: calc(var(--cw) * 6.5); font-size: var(--fs); }
 
-/* Copier le PBN : un petit bouton posé en haut à droite du tapis. */
-.train-copy-btn {
+/* Copier le PBN, faire tourner la table : deux petits boutons posés en haut à
+   droite du tapis. */
+.train-tools {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 1;
+  display: flex;
+  gap: 6px;
+}
+.train-tool {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1583,10 +1588,10 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   cursor: pointer;
   transition: background .15s, border-color .15s;
 }
-.train-copy-btn svg { width: 17px; height: 17px; }
-.train-copy-btn:hover:not(:disabled) { background: rgba(0, 0, 0, .5); border-color: #fff; }
-.train-copy-btn.copied { color: #ffd54f; border-color: #ffd54f; }
-.train-copy-btn:disabled { opacity: .4; cursor: not-allowed; }
+.train-tool svg { width: 17px; height: 17px; }
+.train-tool:hover:not(:disabled) { background: rgba(0, 0, 0, .5); border-color: #fff; }
+.train-tool.copied { color: #ffd54f; border-color: #ffd54f; }
+.train-tool:disabled { opacity: .4; cursor: not-allowed; }
 
 /* La plaque d'un siège : l'initiale sur fond blanc, rouge si son camp est
    vulnérable ; jaune quand c'est à lui de parler. */

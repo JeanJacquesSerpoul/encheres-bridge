@@ -340,7 +340,7 @@ La pastille d'état des Réglages rejoue une donne de référence au chargement 
 
 ### S'entraîner
 
-Le bouton **S'entraîner**, entre **Donne aléatoire** et **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
+Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
 
 - **Les donnes** sont tirées comme par **Donne aléatoire** : parmi les donnes thématiques si l'option **Donnes aléatoires tirées des thèmes** est cochée, sinon distribuées au hasard. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
 - **La table** reprend l'allure d'une table en ligne :

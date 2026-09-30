@@ -267,54 +267,58 @@
            sans que rien ne dise à quoi elle sert. -->
       <p class="panel-intro" data-i18n="intro">Composez une donne — l'application déroule les enchères du système français et les commente, enchère par enchère.</p>
       <div class="row row-centered" id="deal-actions">
-        <!-- Barre de commandes à libellés. La donne aléatoire, l'action la plus
-             fréquente, est à un clic ; les autres façons d'obtenir une donne
-             sont dans le menu de sa flèche. Libellés, dessins et noms posés
-             par renderDealActions ; ouverture des menus par le script des
-             menus (voir « menus » dans app.js). -->
-        <div class="split-btn menu">
-          <button id="random-btn" type="button" class="cmd-btn cmd-labeled"></button>
-          <button id="new-deal-more-btn" type="button" class="cmd-btn menu-trigger split-caret"
-                  aria-expanded="false" aria-controls="new-deal-pop"></button>
-          <div id="new-deal-pop" class="menu-pop" hidden>
-            <button id="themes-btn" type="button" class="menu-item"></button>
-            <!-- Un <label> et non un <button> : c'est lui qui ouvre le champ
-                 fichier qu'il enveloppe. -->
-            <label class="file-btn menu-item" tabindex="0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
-                <path d="M14 3v5h5"/>
-                <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
-              </svg>
-              <span class="cmd-label" data-i18n="fileLoad">Charger un fichier .pbn</span>
-              <input id="file" type="file" accept=".pbn,.txt,text/plain" tabindex="-1">
-            </label>
+        <!-- Les quatre commandes de la donne, sur une rangée (une grille 2 × 2
+             sur téléphone) ; Donneur et Vulnérabilité en dessous. -->
+        <div class="deal-cmds">
+          <!-- Barre de commandes à libellés. La donne aléatoire, l'action la plus
+               fréquente, est à un clic ; les autres façons d'obtenir une donne
+               sont dans le menu de sa flèche. Libellés, dessins et noms posés
+               par renderDealActions ; ouverture des menus par le script des
+               menus (voir « menus » dans app.js). -->
+          <div class="split-btn menu">
+            <button id="random-btn" type="button" class="cmd-btn cmd-labeled"></button>
+            <button id="new-deal-more-btn" type="button" class="cmd-btn menu-trigger split-caret"
+                    aria-expanded="false" aria-controls="new-deal-pop"></button>
+            <div id="new-deal-pop" class="menu-pop" hidden>
+              <button id="themes-btn" type="button" class="menu-item"></button>
+              <!-- Un <label> et non un <button> : c'est lui qui ouvre le champ
+                   fichier qu'il enveloppe. -->
+              <label class="file-btn menu-item" tabindex="0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+                  <path d="M14 3v5h5"/>
+                  <path d="M12 18v-7"/><path d="m9 14 3-3 3 3"/>
+                </svg>
+                <span class="cmd-label" data-i18n="fileLoad">Charger un fichier .pbn</span>
+                <input id="file" type="file" accept=".pbn,.txt,text/plain" tabindex="-1">
+              </label>
+            </div>
           </div>
-        </div>
-        <!-- S'entraîner : on choisit sa main, puis on enchérit sur des donnes
-             tirées au hasard, dans une fenêtre à part (voir « s'entraîner »
-             dans app.js). -->
-        <button id="train-btn" type="button" class="cmd-btn cmd-labeled"></button>
-        <!-- Ce que l'on fait de la donne hors de la page : la copier, la
-             sauver, la lire en texte. -->
-        <div class="menu">
-          <button id="share-menu-btn" type="button" class="cmd-btn cmd-labeled menu-trigger"
-                  aria-expanded="false" aria-controls="share-pop"></button>
-          <div id="share-pop" class="menu-pop" hidden>
-            <!-- Lien de partage : la donne encodée dans l'adresse (#pbn=…),
-                 copiée dans le presse-papiers. Voir « partage » dans app.js. -->
-            <button id="share-btn" type="button" class="menu-item"></button>
-            <button id="save-btn" type="button" class="menu-item"></button>
-            <!-- Bascule du texte PBN, qui s'affiche sous la rangée ;
-                 aria-expanded par setPbnOpen. -->
-            <button id="pbn-toggle-btn" type="button" class="menu-item"
-                    aria-expanded="false" aria-controls="pbn-details"></button>
+          <!-- Ce que l'on fait de la donne hors de la page : la copier, la
+               sauver, la lire en texte. -->
+          <div class="menu">
+            <button id="share-menu-btn" type="button" class="cmd-btn cmd-labeled menu-trigger"
+                    aria-expanded="false" aria-controls="share-pop"></button>
+            <div id="share-pop" class="menu-pop" hidden>
+              <!-- Lien de partage : la donne encodée dans l'adresse (#pbn=…),
+                   copiée dans le presse-papiers. Voir « partage » dans app.js. -->
+              <button id="share-btn" type="button" class="menu-item"></button>
+              <button id="save-btn" type="button" class="menu-item"></button>
+              <!-- Bascule du texte PBN, qui s'affiche sous la rangée ;
+                   aria-expanded par setPbnOpen. -->
+              <button id="pbn-toggle-btn" type="button" class="menu-item"
+                      aria-expanded="false" aria-controls="pbn-details"></button>
+            </div>
           </div>
+          <!-- S'entraîner : on choisit sa main, puis on enchérit sur des donnes
+               tirées au hasard, dans une fenêtre à part (voir « s'entraîner »
+               dans app.js). -->
+          <button id="train-btn" type="button" class="cmd-btn cmd-labeled"></button>
+          <!-- Bascule entre la table en lecture et la table en édition (voir
+               « lecture et édition » dans app.js). Libellé par renderDealMode. -->
+          <button id="edit-btn" type="button" class="cmd-btn cmd-labeled" aria-pressed="false"></button>
         </div>
-        <!-- Bascule entre la table en lecture et la table en édition (voir
-             « lecture et édition » dans app.js). Libellé par renderDealMode. -->
-        <button id="edit-btn" type="button" class="cmd-btn cmd-labeled" aria-pressed="false"></button>
         <span id="photo-status" class="muted hidden"></span>
         <input id="photo-input" type="file" accept="image/*" capture="environment" class="hidden">
         <!-- Donneur et vulnérabilité se replient en bloc : groupés, ils ne se
@@ -676,7 +680,7 @@
 
         <h3>6. S'entraîner</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, à côté de Donne aléatoire, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Les donnes y sont tirées comme par <b>Donne aléatoire</b> : parmi les donnes thématiques si l'option est cochée, avec le donneur, la vulnérabilité et les bornes choisis. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, après Partager, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Les donnes y sont tirées comme par <b>Donne aléatoire</b> : parmi les donnes thématiques si l'option est cochée, avec le donneur, la vulnérabilité et les bornes choisis. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
         </ul>
         <ul>
           <li>Votre main est toujours <b>en bas</b>, face visible ; les trois autres joueurs ont le dos tourné (à gauche, celui qui parle après vous ; en face, votre partenaire). Au centre, la boîte des enchères : les sièges vulnérables y sont en rouge, et un <b>?</b> marque le tour de parole. La plaque du joueur qui parle s'éclaire en jaune.</li>
@@ -801,7 +805,7 @@
 
         <h3>6. Practising</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, next to Random deal, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. Its deals are drawn like <b>Random deal</b>'s: among the themed deals if that option is on, with the dealer, vulnerability and bounds you chose. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
+          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, after Share, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. Its deals are drawn like <b>Random deal</b>'s: among the themed deals if that option is on, with the dealer, vulnerability and bounds you chose. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
         </ul>
         <ul>
           <li>Your hand is always <b>at the bottom</b>, face up; the other three players' cards are face down (on your left, the player who bids after you; opposite, your partner). In the middle, the auction box: vulnerable seats are shown in red, and a <b>?</b> marks whose turn it is. The plate of the player to bid lights up in yellow.</li>

@@ -1521,15 +1521,22 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 560px);
   gap: 16px;
   padding: 16px;
   overflow: auto;
 }
 .train-body[hidden] { display: none; }
 
-/* Le tapis : un partenaire en face, les adversaires de chaque côté. */
+/* Le tapis : un partenaire en face, les adversaires de chaque côté.
+   Tout ce qui est posé dessus suit sa taille : une seule mesure, la largeur
+   d'une carte (--cw), prise sur la largeur du tapis et la hauteur de l'écran,
+   bornée entre le téléphone et le grand écran. Dos, plaques, boîte des
+   enchères et textes en découlent (--fs). */
 .train-table {
+  container-type: inline-size;
+  --cw: clamp(34px, min(7cqw, 9dvh), 112px);
+  --fs: clamp(13px, calc(var(--cw) * .3), 28px);
   display: grid;
   grid-template-areas: "top top top" "left center right" "bottom bottom bottom";
   grid-template-columns: minmax(0, 1fr) minmax(230px, 1.3fr) minmax(0, 1fr);
@@ -1542,21 +1549,23 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   border-radius: var(--radius);
   background: var(--felt);
 }
-.tseat { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+/* Les mesures se posent sur les enfants du tapis : c'est pour eux que les
+   unités cqw désignent la largeur du tapis. */
+.tseat { display: flex; flex-direction: column; align-items: center; gap: .4em; min-width: 0; font-size: var(--fs); }
 .tseat-top { grid-area: top; }
 .tseat-left { grid-area: left; }
 .tseat-right { grid-area: right; }
 .tseat-bottom { grid-area: bottom; }
-.tcenter { grid-area: center; width: 100%; max-width: 300px; }
+.tcenter { grid-area: center; width: 100%; max-width: calc(var(--cw) * 6.5); font-size: var(--fs); }
 
 /* La plaque d'un siège : l'initiale sur fond blanc, rouge si son camp est
    vulnérable ; jaune quand c'est à lui de parler. */
 .tplate {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 3px 12px 3px 3px;
-  border-radius: 6px;
+  gap: .5em;
+  padding: .2em .8em .2em .2em;
+  border-radius: .4em;
   background: rgba(0, 0, 0, .35);
   color: #fff;
   font-weight: 600;
@@ -1567,9 +1576,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .tletter {
   display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: .25em;
   background: #fff;
   color: #1a432c;
   font-weight: 700;
@@ -1579,59 +1588,59 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .tdealer {
   display: inline-grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: 1.7em;
+  height: 1.7em;
   border-radius: 50%;
   background: #fff;
   color: #1a432c;
-  font-size: .7rem;
+  font-size: .7em;
   font-weight: 700;
 }
-.tpts { color: rgba(255, 255, 255, .85); font-size: .8rem; }
+.tpts { color: rgba(255, 255, 255, .85); font-size: .8em; }
 
 /* Les dos de cartes, en éventail serré. */
-.tbacks { display: flex; padding-left: 14px; }
+.tbacks { display: flex; padding-left: calc(var(--cw) * .3); }
 .tback {
-  width: 24px;
-  height: 34px;
-  margin-left: -14px;
+  width: calc(var(--cw) * .5);
+  height: calc(var(--cw) * .7);
+  margin-left: calc(var(--cw) * -.3);
   border: 1px solid rgba(255, 255, 255, .9);
   border-radius: 3px;
   background: repeating-linear-gradient(45deg, #1f4f9c 0 3px, #2f66bf 3px 6px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
-.tbacks-side .tback { width: 20px; height: 30px; margin-left: -13px; }
+.tbacks-side .tback { width: calc(var(--cw) * .42); height: calc(var(--cw) * .6); margin-left: calc(var(--cw) * -.27); }
 
 /* Votre main, carte par carte. */
-.tcards { display: flex; justify-content: center; padding-left: 22px; }
+.tcards { display: flex; justify-content: center; padding-left: calc(var(--cw) * .44); }
 /* L'indice (rang et couleur) dans le coin gauche : c'est la seule partie de
    la carte que la suivante ne recouvre pas. */
 .tcard {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 50px;
-  height: 70px;
-  margin-left: -22px;
-  padding: 3px 0 0 4px;
+  width: var(--cw);
+  height: calc(var(--cw) * 1.4);
+  margin-left: calc(var(--cw) * -.44);
+  padding: calc(var(--cw) * .06) 0 0 calc(var(--cw) * .08);
   border: 1px solid #b9b9b9;
-  border-radius: 6px;
+  border-radius: calc(var(--cw) * .12);
   background: #fff;
   color: #151515;
   line-height: 1.05;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
 }
-.tcard b { font-size: 1.1rem; letter-spacing: -1px; }
-.tcard i { font-style: normal; font-size: 1.2rem; }
+.tcard b { font-size: calc(var(--cw) * .36); letter-spacing: -.05em; }
+.tcard i { font-style: normal; font-size: calc(var(--cw) * .4); }
 .tcard.red { color: #c62828; }
 
 /* Une main dévoilée en fin d'enchère. */
 .topen {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: .4em .7em;
+  border-radius: .4em;
   background: var(--panel);
   color: var(--ink);
-  font-size: .9rem;
+  font-size: .9em;
 }
 
 /* La boîte des enchères, au centre du tapis. */
@@ -1639,14 +1648,14 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: .5em;
   overflow: hidden;
   background: var(--panel);
   color: var(--ink);
   font-weight: 600;
 }
 .tauction th {
-  padding: 5px 0;
+  padding: .3em 0;
   background: #eef1ef;
   color: #1d1d1d;
   font-weight: 700;
@@ -1654,8 +1663,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .tauction th.vul { background: #c62828; color: #fff; }
 .tauction th.me { box-shadow: inset 0 -3px 0 var(--accent); }
 .tauction td {
-  height: 28px;
-  padding: 2px 4px;
+  height: 1.8em;
+  padding: .1em .2em;
   border: none;
   text-align: center;
   white-space: nowrap;
@@ -1668,9 +1677,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 @media (prefers-reduced-motion: reduce) { .tauction td.tpending { animation: none; } }
 .tauction td.bid-cell.just-revealed { animation: bid-reveal .6s ease-out; }
 .tcontract {
-  margin-top: 8px;
-  padding: 6px;
-  border-radius: 6px;
+  margin-top: .5em;
+  padding: .4em;
+  border-radius: .4em;
   background: rgba(0, 0, 0, .35);
   color: #fff;
   text-align: center;
@@ -1678,6 +1687,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 
 .train-side { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+/* Le panneau d'à côté grandit avec l'écran, comme le tapis : ses textes et la
+   boîte à enchères sont en em, sur une taille qui suit la largeur. */
+.train-side { font-size: clamp(15px, 1.05vw, 22px); }
+.train-side .bb-btn { font-size: 1em; min-height: 2.6em; }
+.train-side .bb-btn.bb-strain { font-size: 1.1em; }
+.train-side .bb-grid { max-width: none; }
+.train-side .bb-keys { font-size: .8em; }
 .train-side .quiz-turn { margin: 0; }
 .train-side .quiz-turn:empty { display: none; }
 .train-side .bidding-box { margin: 0; }
@@ -1719,21 +1735,19 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   /* Sur un écran étroit, les adversaires se réduisent à leur plaque : la
      place va à la boîte des enchères et à votre main. */
   .train-table {
+    /* La main occupe presque toute la largeur du téléphone. */
+    --cw: clamp(30px, 11cqw, 46px);
     grid-template-columns: auto minmax(0, 1fr) auto;
     min-height: 0;
     padding: 10px 6px;
     gap: 8px;
   }
   .tseat-left .tbacks, .tseat-right .tbacks { display: none; }
-  .tplate { gap: 4px; padding-right: 6px; font-size: .8rem; }
+  .tplate { gap: .3em; padding-right: .4em; }
   .tplate .tname { display: none; }
   .tseat-bottom .tplate .tname { display: inline; }
-  .tbacks .tback { width: 18px; height: 26px; margin-left: -12px; }
-  .tcards { padding-left: 14px; }
-  .tcard { width: 36px; height: 54px; margin-left: -15px; padding-left: 2px; }
-  .tcard b, .tcard i { font-size: .95rem; }
-  .tcenter .tauction { font-size: .85rem; }
-  .topen { font-size: .75rem; padding: 4px 6px; }
+  .tcenter .tauction { font-size: .9em; }
+  .topen { font-size: .8em; padding: .3em .4em; }
 }
 
 /* ---------- écran d'accueil ---------- */

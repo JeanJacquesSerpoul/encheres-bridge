@@ -1352,6 +1352,45 @@
   "status": "sef"
  },
  {
+  "id": "1NT.2H.2S.55.3H.4H",
+  "seq": [
+   "1NT 2H 2S 3H",
+   "1NT (X) 2H 2S 3H"
+  ],
+  "call": "4H",
+  "cond": "H >= 3 and H >= S",
+  "forcing": "SO",
+  "meaning": "Choisit la majeure de la manche (3 cartes au moins)",
+  "meaning_en": "Picks the major for game (at least 3 cards)",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.2H.2S.55.3H.4S",
+  "seq": [
+   "1NT 2H 2S 3H",
+   "1NT (X) 2H 2S 3H"
+  ],
+  "call": "4S",
+  "cond": "S >= 3 and S >= H",
+  "forcing": "SO",
+  "meaning": "Choisit la majeure de la manche (3 cartes au moins)",
+  "meaning_en": "Picks the major for game (at least 3 cards)",
+  "status": "infere"
+ },
+ {
+  "id": "1NT.2H.2S.55.3H.3NT",
+  "seq": [
+   "1NT 2H 2S 3H",
+   "1NT (X) 2H 2S 3H"
+  ],
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Doubleton dans les deux majeures : 3SA",
+  "meaning_en": "Doubleton in both majors: 3NT",
+  "status": "infere"
+ },
+ {
   "id": "1NT.2H.2S.55.4H",
   "seq": [
    "1NT 2H 2S",
@@ -3230,10 +3269,10 @@
   "id": "drury.H.2NT",
   "seq": "P 1H",
   "call": "2NT",
-  "cond": "H >= 4 and min(S, H, D, C) == 1 and 10 <= hld <= 12",
+  "cond": "H >= 4 and min(S, H, D, C) <= 1 and 10 <= hld <= 12",
   "forcing": "F1",
-  "meaning": "Super Drury : 4 atouts, un singleton, 11 HLD",
-  "meaning_en": "Super Drury: 4-card support, a singleton, 11 HLD",
+  "meaning": "Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD",
+  "meaning_en": "Super Drury: 4-card support, a singleton or void, 11 HLD",
   "status": "sef",
   "alert": true,
   "trump": "H"
@@ -3242,10 +3281,10 @@
   "id": "drury.S.2NT",
   "seq": "P 1S",
   "call": "2NT",
-  "cond": "S >= 4 and min(S, H, D, C) == 1 and 10 <= hld <= 12",
+  "cond": "S >= 4 and min(S, H, D, C) <= 1 and 10 <= hld <= 12",
   "forcing": "F1",
-  "meaning": "Super Drury : 4 atouts, un singleton, 11 HLD",
-  "meaning_en": "Super Drury: 4-card support, a singleton, 11 HLD",
+  "meaning": "Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD",
+  "meaning_en": "Super Drury: 4-card support, a singleton or void, 11 HLD",
   "status": "sef",
   "alert": true,
   "trump": "S"
@@ -3254,7 +3293,7 @@
   "id": "drury.H.2C",
   "seq": "P 1H",
   "call": "2C",
-  "cond": "H >= 3 and 11 <= dh <= 12 and not (H >= 4 and min(S, H, D, C) <= 1)",
+  "cond": "H >= 3 and dh >= 11 and not (H >= 4 and min(S, H, D, C) <= 1)",
   "forcing": "F1",
   "meaning": "Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD",
   "meaning_en": "Drury: 3-card support (or 4 without a singleton), 11-12 HLD",
@@ -3266,7 +3305,7 @@
   "id": "drury.S.2C",
   "seq": "P 1S",
   "call": "2C",
-  "cond": "S >= 3 and 11 <= dh <= 12 and not (S >= 4 and min(S, H, D, C) <= 1)",
+  "cond": "S >= 3 and dh >= 11 and not (S >= 4 and min(S, H, D, C) <= 1)",
   "forcing": "F1",
   "meaning": "Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD",
   "meaning_en": "Drury: 3-card support (or 4 without a singleton), 11-12 HLD",
@@ -3588,10 +3627,10 @@
   "id": "sdrury.S.D",
   "seq": "P 1S 2NT 3C",
   "call": "3D",
-  "cond": "D == 1",
+  "cond": "D <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -3599,10 +3638,10 @@
   "id": "sdrury.S.H",
   "seq": "P 1S 2NT 3C",
   "call": "3H",
-  "cond": "H == 1",
+  "cond": "H <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -3610,10 +3649,10 @@
   "id": "sdrury.S.C",
   "seq": "P 1S 2NT 3C",
   "call": "3S",
-  "cond": "C == 1",
+  "cond": "C <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -3621,10 +3660,10 @@
   "id": "sdrury.H.D",
   "seq": "P 1H 2NT 3C",
   "call": "3D",
-  "cond": "D == 1",
+  "cond": "D <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -3632,10 +3671,10 @@
   "id": "sdrury.H.C",
   "seq": "P 1H 2NT 3C",
   "call": "3H",
-  "cond": "C == 1",
+  "cond": "C <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -3643,10 +3682,10 @@
   "id": "sdrury.H.S",
   "seq": "P 1H 2NT 3C",
   "call": "3S",
-  "cond": "S == 1",
+  "cond": "S <= 1",
   "forcing": "F1",
-  "meaning": "Singleton dans la couleur",
-  "meaning_en": "Singleton in the suit",
+  "meaning": "Singleton (ou chicane) dans la couleur",
+  "meaning_en": "Singleton (or void) in the suit",
   "status": "sef",
   "alert": true
  },
@@ -8417,9 +8456,29 @@
   "seq": "1C 1S 2C 2H",
   "call": "3H",
   "cond": "H >= 4",
-  "forcing": "F1",
+  "forcing": "NF",
   "meaning": "Fit ♥",
   "meaning_en": "♥ fit",
+  "status": "infere"
+ },
+ {
+  "id": "1C.1S.2C.2H.3H.4H",
+  "seq": "1C 1S 2C 2H 3H",
+  "call": "4H",
+  "cond": "hl >= 12",
+  "forcing": "SO",
+  "meaning": "Manche à ♥",
+  "meaning_en": "Game in ♥",
+  "status": "infere"
+ },
+ {
+  "id": "1C.1S.2C.2H.3H.p",
+  "seq": "1C 1S 2C 2H 3H",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "11 HL : partielle",
+  "meaning_en": "11 HL: partscore",
   "status": "infere"
  },
  {
@@ -9993,6 +10052,46 @@
   "alert": true
  },
  {
+  "id": "rub.2S.3S.3NT",
+  "seq": "1NT (2S) 3S",
+  "call": "3NT",
+  "cond": "stop('S')",
+  "forcing": "SO",
+  "meaning": "Arrêt ♠",
+  "meaning_en": "♠ stopper",
+  "status": "infere"
+ },
+ {
+  "id": "rub.2S.3S.4H",
+  "seq": "1NT (2S) 3S",
+  "call": "4H",
+  "cond": "H >= 4",
+  "forcing": "NF",
+  "meaning": "Pas d'arrêt ♠, 4 cœurs",
+  "meaning_en": "No ♠ stopper, 4 hearts",
+  "status": "infere"
+ },
+ {
+  "id": "rub.2S.3S.4C",
+  "seq": "1NT (2S) 3S",
+  "call": "4C",
+  "cond": "C >= D",
+  "forcing": "NF",
+  "meaning": "Pas d'arrêt ♠ : la plus longue mineure",
+  "meaning_en": "No ♠ stopper: the longer minor",
+  "status": "infere"
+ },
+ {
+  "id": "rub.2S.3S.4D",
+  "seq": "1NT (2S) 3S",
+  "call": "4D",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas d'arrêt ♠ : la plus longue mineure",
+  "meaning_en": "No ♠ stopper: the longer minor",
+  "status": "infere"
+ },
+ {
   "id": "rub.2H.pass",
   "seq": "1NT (2H)",
   "call": "P",
@@ -10075,6 +10174,66 @@
   "meaning": "10+ H, fitté ou non",
   "meaning_en": "10+ HCP, with or without a fit",
   "status": "sef"
+ },
+ {
+  "id": "truscott.H.2NT.4M",
+  "seq": "1H (X) 2NT",
+  "call": "4H",
+  "cond": "hld >= 14",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation : manche",
+  "meaning_en": "Accepts the invitation: game",
+  "status": "infere"
+ },
+ {
+  "id": "truscott.S.2NT.4M",
+  "seq": "1S (X) 2NT",
+  "call": "4S",
+  "cond": "hld >= 14",
+  "forcing": "SO",
+  "meaning": "Accepte l'invitation : manche",
+  "meaning_en": "Accepts the invitation: game",
+  "status": "infere"
+ },
+ {
+  "id": "truscott.H.2NT.3M",
+  "seq": "1H (X) 2NT",
+  "call": "3H",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
+  "status": "infere"
+ },
+ {
+  "id": "truscott.S.2NT.3M",
+  "seq": "1S (X) 2NT",
+  "call": "3S",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum : refuse",
+  "meaning_en": "Minimum: declines",
+  "status": "infere"
+ },
+ {
+  "id": "truscott.H.XX.p",
+  "seq": "1H (X) XX",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Passe : le répondant décrira sa main",
+  "meaning_en": "Pass: responder will describe the hand",
+  "status": "infere"
+ },
+ {
+  "id": "truscott.S.XX.p",
+  "seq": "1S (X) XX",
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Passe : le répondant décrira sa main",
+  "meaning_en": "Pass: responder will describe the hand",
+  "status": "infere"
  },
  {
   "id": "truscott.H.3M",

@@ -291,7 +291,7 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 | `2-trefle-fort.pbn` | ouverture de 2♣ fort indéterminé |
 | `roudi.pbn` | le répondant emploie le Roudi (2♣) après la redemande de 1SA de l'ouvreur |
-| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible |
+| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages fusionnés : 38 donnes variées, 3 au plus par action, et 12 donnes avec le 2SA de Lévy) |
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
 | `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1, et la réponse du partenaire |
 

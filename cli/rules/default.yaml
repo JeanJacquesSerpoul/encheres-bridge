@@ -5044,147 +5044,449 @@
   meaning: "Répète sa couleur"
   meaning_en: "Rebids his suit"
   status: infere
-# --- défense contre les 2 faibles (2♥ / 2♠), en position directe et en réveil
-# en: defence against weak twos (2♥ / 2♠), direct and balancing seat
-- id: "def.{o}.2NT"
-  for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
+# --- défense contre les 2 faibles (2♥ / 2♠), en position directe et en réveil (cours C. Martel, 2018 ; 2SA FM d'A. Lévy)
+# en: defence against weak twos (2♥ / 2♠), direct and balancing seat (C. Martel's course, 2018; A. Lévy's game-forcing 2NT)
+# Réagir comme sur une ouverture au palier de 1, avec un peu plus de sérieux : toute intervention promet une valeur d'ouverture, pas de barrage sur un barrage. Court dans la couleur du barrage, on prend des risques ; long (2 cartes et plus), on reste prudent.
+# en: React as over a one-level opening, a little more soundly: every action promises opening values, no preempt over a preempt. Short in the preempt suit, take risks; long (2 cards or more), stay careful.
+# M = couleur du barrage, N = l'autre majeure
+# en: M = the preempt suit, N = the other major
+- id: "d2f.{o}.bic.{m}"
+  for: [{o: 2H, N: S, m: C, c: 4C, l: "♣ et ♠"}, {o: 2H, N: S, m: D, c: 4D, l: "♦ et ♠"}, {o: 2S, N: H, m: C, c: 4C, l: "♣ et ♥"}, {o: 2S, N: H, m: D, c: 4D, l: "♦ et ♥"}]
+  seq: ["({o})", "({o}) P"]
+  call: "{c}"
+  cond: "{m} >= 5 and {N} >= 5 and losers <= 4"
+  forcing: F1
+  meaning: "Bicolore 5-5 {l}, 4 perdantes au plus (forcing)"
+  meaning_en: "5-5 two-suiter in {l}, at most 4 losers (forcing)"
+  status: choix
+  alert: true
+- id: "d2f.{o}.cue"
+  for: [{o: 2H, M: H, N: S, c: 3H}, {o: 2S, M: S, N: H, c: 3S}]
+  seq: ["({o})", "({o}) P"]
+  call: "{c}"
+  cond: "((C >= 5 and D >= 5) or (C + D >= 9 and min(C, D) >= 4 and {N} <= 2)) and hl >= 16"
+  forcing: F1
+  meaning: "Cue-bid : bicolore mineur (5-5 ou 5-4), main de manche ; demande 3SA avec l'arrêt"
+  meaning_en: "Cue-bid: minor two-suiter (5-5 or 5-4), game values; asks for 3NT with a stopper"
+  status: choix
+  alert: true
+- id: "d2f.{o}.2NT"
+  for: [{o: 2H, M: H}, {o: 2S, M: S}]
   seq: "({o})"
-  call: "2NT"
+  call: 2NT
   cond: "15 <= hcp <= 18 and balanced and stop('{M}')"
   forcing: NF
-  meaning: "2SA : 15-18 H, régulier, arrêt"
-  meaning_en: "2NT: 15-18 HCP, balanced, stopper"
-  status: sef
-- id: "def.{o}.X.fort"
-  for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
+  meaning: "2SA : 15-18 H, régulier, un arrêt suffit"
+  meaning_en: "2NT: 15-18 HCP, balanced, one stopper is enough"
+  status: choix
+- id: "d2f.{o}.3NT"
+  for: [{o: 2H, M: H}, {o: 2S, M: S}]
+  seq: ["({o})", "({o}) P"]
+  call: 3NT
+  cond: "hcp >= 14 and stop('{M}') and ((C >= 6 and top('C') >= 2) or (D >= 6 and top('D') >= 2))"
+  forcing: SO
+  meaning: "3SA pour les jouer : longue mineure et l'arrêt"
+  meaning_en: "3NT to play: long minor and the stopper"
+  status: choix
+- id: "d2f.{o}.X.fort"
+  for: [{o: 2H}, {o: 2S}]
   seq: "({o})"
-  call: "X"
-  cond: "hcp >= 18"
+  call: X
+  cond: "hcp >= 19"
   forcing: TO
-  meaning: "Contre : 18+ H"
-  meaning_en: "Double: 18+ HCP"
-  status: sef
-- id: "def.{o}.X"
-  for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
-  seq: "({o})"
-  call: "X"
-  cond: "hcp >= 12 and {M} <= 2 and {N} >= 4 and min(C, D) >= 2"
-  forcing: TO
-  meaning: "Contre d'appel : 12+ H, 4 cartes dans l'autre majeure"
-  meaning_en: "Takeout double: 12+ HCP, 4 cards in the other major"
-  status: sef
-- id: "def.{o}.{c}"
-  for: [{o: 2H, c: 2S, s: S, n: 5}, {o: 2H, c: 3C, s: C, n: 6}, {o: 2H, c: 3D, s: D, n: 6}, {o: 2S, c: 3H, s: H, n: 6}, {o: 2S, c: 3C, s: C, n: 6},
-        {o: 2S, c: 3D, s: D, n: 6}]
+  meaning: "Contre : 19+ H, toutes distributions"
+  meaning_en: "Double: 19+ HCP, any shape"
+  status: choix
+- id: "d2f.{o}.{c}"
+  for: [{o: 2H, c: 2S, s: S, n: 5, lo: 12, hi: 18}, {o: 2H, c: 3C, s: C, n: 6, lo: 12, hi: 17}, {o: 2H, c: 3D, s: D, n: 6, lo: 12, hi: 17},
+        {o: 2S, c: 3H, s: H, n: 5, lo: 12, hi: 17}, {o: 2S, c: 3C, s: C, n: 6, lo: 12, hi: 17}, {o: 2S, c: 3D, s: D, n: 6, lo: 12, hi: 17}]
   seq: "({o})"
   call: "{c}"
-  cond: "{s} >= {n} and hcp_in('{s}') >= 4 and 11 <= hl <= 17 and {s} == max(S, H, D, C)"
+  cond: "{s} >= {n} and top('{s}') >= 2 and {lo} <= hcp <= {hi} and {s} == max(S, H, D, C)"
   forcing: NF
-  meaning: "Intervention : belle couleur, 11-17 HL"
-  meaning_en: "Overcall: good suit, 11-17 HL"
-  status: sef
-- id: "def.{o}.X.suffisant"
+  meaning: "Intervention : belle couleur de {n}+ cartes, {lo}-{hi} H"
+  meaning_en: "Overcall: good {n}+ card suit, {lo}-{hi} HCP"
+  status: choix
+- id: "d2f.{o}.X.single"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
   seq: "({o})"
-  call: "X"
-  cond: "hcp >= 15 and {M} <= 2"
+  call: X
+  cond: "{M} <= 1 and hcp >= 12 and {N} >= 3"
   forcing: TO
-  meaning: "Contre : 15+ H, court dans leur couleur"
-  meaning_en: "Double: 15+ HCP, short in their suit"
-  status: infere
-- id: "def.{o}.pass"
+  meaning: "Contre d'appel : 12+ H, singleton ou chicane dans leur couleur"
+  meaning_en: "Takeout double: 12+ HCP, singleton or void in their suit"
+  status: choix
+- id: "d2f.{o}.X"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
   seq: "({o})"
-  call: "P"
+  call: X
+  cond: "{M} <= 2 and (({N} >= 4 and hcp >= 13) or ({N} >= 3 and hcp >= 15) or hcp >= 17)"
+  forcing: TO
+  meaning: "Contre d'appel : 13-18 H, court dans leur couleur, 4 cartes dans l'autre majeure (3 avec 15+ H)"
+  meaning_en: "Takeout double: 13-18 HCP, short in their suit, 4 cards in the other major (3 with 15+ HCP)"
+  status: choix
+- id: "d2f.{o}.pass"
+  for: [{o: 2H}, {o: 2S}]
+  seq: "({o})"
+  call: P
   cond: "true"
   forcing: NF
   meaning: "Pas d'intervention"
-  meaning_en: "No overcall"
-  status: sef
-- id: "rev.{o}.X"
-  for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
+  meaning_en: "No action"
+  status: choix
+# --- réveil : les mêmes enchères, atténuées en force ou en distribution
+# en: balancing: the same calls, weaker in strength or shape
+- id: "d2f.{o}.rev.2NT"
+  for: [{o: 2H, M: H}, {o: 2S, M: S}]
   seq: "({o}) P"
-  call: "X"
-  cond: "hcp >= 10 and {M} <= 2"
+  call: 2NT
+  cond: "13 <= hcp <= 16 and balanced and stop('{M}')"
+  forcing: NF
+  meaning: "2SA de réveil : 13-16 H, régulier, arrêt"
+  meaning_en: "Balancing 2NT: 13-16 HCP, balanced, stopper"
+  status: choix
+- id: "d2f.{o}.rev.X.fort"
+  for: [{o: 2H}, {o: 2S}]
+  seq: "({o}) P"
+  call: X
+  cond: "hcp >= 17"
   forcing: TO
-  meaning: "Contre de réveil : 10+ H, court dans leur couleur"
-  meaning_en: "Balancing double: 10+ HCP, short in their suit"
-  status: infere
-- id: "rev.{o}.{c}"
-  for: [{o: 2H, c: 2S, s: S, n: 5}, {o: 2H, c: 3C, s: C, n: 6}, {o: 2H, c: 3D, s: D, n: 6}, {o: 2S, c: 3H, s: H, n: 6}, {o: 2S, c: 3C, s: C, n: 6},
-        {o: 2S, c: 3D, s: D, n: 6}]
+  meaning: "Contre de réveil : 17+ H, toutes distributions"
+  meaning_en: "Balancing double: 17+ HCP, any shape"
+  status: choix
+- id: "d2f.{o}.rev.{c}"
+  for: [{o: 2H, c: 2S, s: S, n: 5}, {o: 2H, c: 3C, s: C, n: 6}, {o: 2H, c: 3D, s: D, n: 6},
+        {o: 2S, c: 3H, s: H, n: 5}, {o: 2S, c: 3C, s: C, n: 6}, {o: 2S, c: 3D, s: D, n: 6}]
   seq: "({o}) P"
   call: "{c}"
-  cond: "{s} >= 5 and hcp_in('{s}') >= 3 and 9 <= hl <= 16 and {s} == max(S, H, D, C)"
+  cond: "{s} >= {n} and top('{s}') >= 2 and 9 <= hcp <= 15 and {s} == max(S, H, D, C)"
   forcing: NF
-  meaning: "Réveil : 5+ cartes"
-  meaning_en: "Balancing overcall: 5+ cards"
-  status: infere
-- id: "rev.{o}.pass"
+  meaning: "Réveil : belle couleur de {n}+ cartes, 9-15 H"
+  meaning_en: "Balancing overcall: good {n}+ card suit, 9-15 HCP"
+  status: choix
+- id: "d2f.{o}.rev.X"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
   seq: "({o}) P"
-  call: "P"
+  call: X
+  cond: "({M} <= 1 and hcp >= 9 and {N} >= 3) or ({M} <= 2 and (({N} >= 4 and hcp >= 11) or ({N} >= 3 and hcp >= 13)))"
+  forcing: TO
+  meaning: "Contre de réveil : court dans leur couleur, pas forcément la valeur d'une ouverture"
+  meaning_en: "Balancing double: short in their suit, not necessarily opening values"
+  status: choix
+- id: "d2f.{o}.rev.pass"
+  for: [{o: 2H}, {o: 2S}]
+  seq: "({o}) P"
+  call: P
   cond: "true"
   forcing: NF
   meaning: "Pas de réveil"
   meaning_en: "No balancing action"
-  status: infere
-- id: "advX.{o}.4{N}"
-  for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
+  status: choix
+# --- réponses au contre d'appel : 2SA forcing de manche (A. Lévy) dès 9 H, sinon conclusion ou couleur la plus longue
+# 9 H faits de Dames et de Valets comptent comme une main faible (0-8 H) : il faut 10 H, ou 9 H avec deux As ou Rois.
+# en: 9 HCP made of queens and jacks count as a weak hand (0-8 HCP): 10 HCP are needed, or 9 HCP with two aces or kings.
+# en: answers to the takeout double: game-forcing 2NT (A. Lévy) from 9 HCP, otherwise a conclusion or the longest suit
+- id: "d2f.{o}.X.4{N}"
+  for: [{o: 2H, N: S}, {o: 2S, N: H}]
   seq: ["({o}) X", "({o}) P X"]
   call: "4{N}"
-  cond: "({N} >= 5 and hcp >= 9) or ({N} >= 4 and hcp >= 11)"
+  cond: "{N} >= 5 and hcp <= 14 and (hcp >= 10 or (hcp == 9 and aces + kings >= 2))"
   forcing: SO
-  meaning: "Manche dans l'autre majeure"
-  meaning_en: "Game in the other major"
-  status: infere
-- id: "advX.{o}.3NT"
+  meaning: "Manche : 5/6 cartes dans l'autre majeure, sans espoir de chelem"
+  meaning_en: "Game: 5/6 cards in the other major, no slam hopes"
+  status: choix
+- id: "d2f.{o}.X.4{m}"
+  for: [{o: 2H, N: S, m: C}, {o: 2H, N: S, m: D}, {o: 2S, N: H, m: C}, {o: 2S, N: H, m: D}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: "4{m}"
+  cond: "{m} >= 6 and top('{m}') >= 2 and hcp >= 10 and {N} <= 3"
+  forcing: INV
+  meaning: "Unicolore mineur puissant"
+  meaning_en: "Strong one-suited minor"
+  status: choix
+- id: "d2f.{o}.X.3NT"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
   seq: ["({o}) X", "({o}) P X"]
-  call: "3NT"
-  cond: "hcp >= 10 and stop('{M}')"
+  call: 3NT
+  cond: "hcp <= 13 and (hcp >= 10 or (hcp == 9 and aces + kings >= 2)) and stop('{M}') and {N} <= 3"
   forcing: SO
-  meaning: "3SA avec l'arrêt"
-  meaning_en: "3NT with the stopper"
-  status: infere
-- id: "advX.{o}.{c}.{n}"
-  for: [{o: 2H, c: 2S, t: "S >= 4", n: 0}, {o: 2H, c: 3D, t: "D >= 4 and D > C", n: 1}, {o: 2H, c: 3C, t: "C >= 4", n: 2}, {o: 2H, c: 2S, t: true, n: 3},
-        {o: 2S, c: 3H, t: "H >= 4", n: 4}, {o: 2S, c: 3D, t: "D >= 4 and D > C", n: 5}, {o: 2S, c: 3C, t: "C >= 4", n: 6}, {o: 2S, c: 3H, t: "H >= 3", n: 7},
-        {o: 2S, c: 3C, t: true, n: 8}]
+  meaning: "3SA : 9-13 H, tenue dans leur couleur, pas 4 cartes dans l'autre majeure"
+  meaning_en: "3NT: 9-13 HCP, stopper in their suit, not 4 cards in the other major"
+  status: choix
+- id: "d2f.{o}.X.2NT"
+  for: [{o: 2H}, {o: 2S}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: 2NT
+  cond: "(hcp >= 10 or (hcp == 9 and aces + kings >= 2))"
+  forcing: FM
+  meaning: "2SA Lévy : forcing de manche, 9+ H"
+  meaning_en: "Lévy 2NT: game forcing, 9+ HCP"
+  status: choix
+  alert: true
+- id: "d2f.{o}.X.{c}.{n}"
+  for: [{o: 2H, c: 3S, t: "S >= 5 and hcp >= 6", n: 0}, {o: 2H, c: 2S, t: "S >= 4", n: 1}, {o: 2H, c: 3D, t: "D >= 4 and D > C", n: 2}, {o: 2H, c: 3C, t: "C >= 4", n: 3},
+        {o: 2H, c: 2S, t: "true", n: 4},
+        {o: 2S, c: 3H, t: "H >= 4", n: 5}, {o: 2S, c: 3D, t: "D >= 4 and D > C", n: 6}, {o: 2S, c: 3C, t: "C >= 4", n: 7}, {o: 2S, c: 3H, t: "H >= 3", n: 8},
+        {o: 2S, c: 3C, t: "true", n: 9}]
   seq: ["({o}) X", "({o}) P X"]
   call: "{c}"
   cond: "{t}"
   forcing: NF
-  meaning: "Réponse au contre : sa meilleure couleur"
-  meaning_en: "Answer to the double: best suit"
-  status: infere
-- id: "adv2NT.{o}.3NT"
+  meaning: "Réponse au contre : 0-8 H, sa couleur la plus longue, la majeure d'abord"
+  meaning_en: "Answer to the double: 0-8 HCP, longest suit, the major first"
+  status: choix
+# --- redemandes du contreur sur les réponses simples (0-8 H)
+# en: doubler's rebids over the simple answers (0-8 HCP)
+- id: "d2f.{o}.X.{a}.{r}"
+  for: [{o: 2H, a: 2S, r: 4S, t: "S >= 4 and hcp >= 17"}, {o: 2H, a: 2S, r: 3NT, t: "stop('H') and hcp >= 18"}, {o: 2H, a: 3S, r: 4S, t: "S >= 3 and hcp >= 15"},
+        {o: 2H, a: "3C|3D", r: 3NT, t: "stop('H') and hcp >= 17"},
+        {o: 2S, a: 3H, r: 4H, t: "H >= 4 and hcp >= 17"}, {o: 2S, a: 3H, r: 3NT, t: "stop('S') and hcp >= 18"}, {o: 2S, a: "3C|3D", r: 3NT, t: "stop('S') and hcp >= 17"}]
+  seq: ["({o}) X {a}", "({o}) P X {a}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Le contreur fort conclut à la manche"
+  meaning_en: "The strong doubler bids game"
+  status: choix
+# --- redemandes du contreur sur le 2SA forcing de manche
+# en: doubler's rebids over the game-forcing 2NT
+- id: "d2f.{o}.X.2NT.3NT"
   for: [{o: 2H, M: H, N: S}, {o: 2S, M: S, N: H}]
-  seq: "({o}) 2NT"
-  call: "3NT"
-  cond: "hcp >= 8"
+  seq: ["({o}) X 2NT", "({o}) P X 2NT"]
+  call: 3NT
+  cond: "balanced and 18 <= hcp <= 20 and stop('{M}') and {N} <= 3"
+  forcing: SO
+  meaning: "18-20 H régulier, tenue dans leur couleur, pas 4 cartes dans l'autre majeure"
+  meaning_en: "18-20 HCP balanced, stopper in their suit, not 4 cards in the other major"
+  status: choix
+- id: "d2f.{o}.X.2NT.{c}"
+  for: [{o: 2H, c: 3S, t: "S >= 5 and hcp >= 18"}, {o: 2S, c: 3H, t: "H >= 5"}]
+  seq: ["({o}) X 2NT", "({o}) P X 2NT"]
+  call: "{c}"
+  cond: "{t}"
+  forcing: FM
+  meaning: "5 cartes dans l'autre majeure"
+  meaning_en: "5 cards in the other major"
+  status: choix
+- id: "d2f.{o}.X.2NT.cue"
+  for: [{o: 2H, M: H, c: 3H}, {o: 2S, M: S, c: 3S}]
+  seq: ["({o}) X 2NT", "({o}) P X 2NT"]
+  call: "{c}"
+  cond: "hcp >= 18 and not stop('{M}')"
+  forcing: FM
+  meaning: "Cue-bid : 18+ H, pas de tenue dans leur couleur"
+  meaning_en: "Cue-bid: 18+ HCP, no stopper in their suit"
+  status: choix
+  alert: true
+- id: "d2f.{o}.X.2NT.3D"
+  for: [{o: 2H}, {o: 2S}]
+  seq: ["({o}) X 2NT", "({o}) P X 2NT"]
+  call: 3D
+  cond: "D >= 5"
+  forcing: FM
+  meaning: "5 cartes à ♦"
+  meaning_en: "5 diamonds"
+  status: choix
+- id: "d2f.{o}.X.2NT.3C"
+  for: [{o: 2H}, {o: 2S}]
+  seq: ["({o}) X 2NT", "({o}) P X 2NT"]
+  call: 3C
+  cond: "true"
+  forcing: FM
+  meaning: "Contre d'appel banal : attend les précisions du répondant"
+  meaning_en: "Plain takeout double: waits for responder's description"
+  status: choix
+  alert: true
+# --- le répondant décrit sa main sur 3♣ du contreur ; la tenue est l'As ou le Roi gardé (Dame-Valet troisième ne tient pas)
+# en: responder describes the hand over the doubler's 3♣; a stopper is the ace or a guarded king (queen-jack third does not hold)
+- id: "d2f.{o}.X.2NT.3C.{c}"
+  for: [{o: 2H, c: 3S, t: "S >= 4 and (ace('H') or (king('H') and H >= 2))"}, {o: 2H, c: 3H, t: "S >= 4"}, {o: 2S, c: 3H, t: "H >= 4 and (ace('S') or (king('S') and S >= 2))"}, {o: 2S, c: 3S, t: "H >= 4"}]
+  seq: ["({o}) X 2NT 3C", "({o}) P X 2NT 3C"]
+  call: "{c}"
+  cond: "{t}"
+  forcing: FM
+  meaning: "4 cartes dans l'autre majeure (l'autre majeure : avec la tenue ; le cue-bid : sans)"
+  meaning_en: "4 cards in the other major (the other major: with the stopper; the cue-bid: without)"
+  status: choix
+- id: "d2f.{o}.X.2NT.3C.3NT"
+  for: [{o: 2H, M: H}, {o: 2S, M: S}]
+  seq: ["({o}) X 2NT 3C", "({o}) P X 2NT 3C"]
+  call: 3NT
+  cond: "(ace('{M}') or (king('{M}') and {M} >= 2))"
+  forcing: SO
+  meaning: "3SA naturel : tenue, pas 4 cartes dans l'autre majeure"
+  meaning_en: "Natural 3NT: stopper, not 4 cards in the other major"
+  status: choix
+- id: "d2f.{o}.X.2NT.3C.3D"
+  for: [{o: 2H}, {o: 2S}]
+  seq: ["({o}) X 2NT 3C", "({o}) P X 2NT 3C"]
+  call: 3D
+  cond: "true"
+  forcing: FM
+  meaning: "Ni 4 cartes dans l'autre majeure, ni tenue dans leur couleur"
+  meaning_en: "Neither 4 cards in the other major nor a stopper in their suit"
+  status: choix
+# --- le contreur conclut
+# en: the doubler concludes
+- id: "d2f.{o}.X.2NT.3C.3D.{r}"
+  for: [{o: 2H, M: H, N: S, r: 3NT, t: "stop('H')"}, {o: 2H, M: H, N: S, r: 4S, t: "S >= 4"}, {o: 2H, M: H, N: S, r: 5C, t: "C >= D"}, {o: 2H, M: H, N: S, r: 5D, t: "true"},
+        {o: 2S, M: S, N: H, r: 3NT, t: "stop('S')"}, {o: 2S, M: S, N: H, r: 4H, t: "H >= 4"}, {o: 2S, M: S, N: H, r: 5C, t: "C >= D"}, {o: 2S, M: S, N: H, r: 5D, t: "true"}]
+  seq: ["({o}) X 2NT 3C 3D", "({o}) P X 2NT 3C 3D"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Manche : 3SA avec la tenue, sinon l'autre majeure à 4 cartes, sinon la mineure"
+  meaning_en: "Game: 3NT with the stopper, otherwise the four-card other major, otherwise the minor"
+  status: choix
+- id: "d2f.{o}.X.2NT.3C.{b}.{r}.{k}"
+  for: [{k: 0, o: 2H, b: 3S, r: 4S, t: "S >= 4"}, {k: 1, o: 2H, b: 3S, r: 3NT, t: "true"},
+        {k: 2, o: 2H, b: 3H, r: 4S, t: "S >= 4"}, {k: 3, o: 2H, b: 3H, r: 3NT, t: "stop('H')"}, {k: 4, o: 2H, b: 3H, r: 4S, t: "true"},
+        {k: 5, o: 2S, b: 3H, r: 4H, t: "H >= 4"}, {k: 6, o: 2S, b: 3H, r: 3NT, t: "true"},
+        {k: 7, o: 2S, b: 3S, r: 4H, t: "H >= 4"}, {k: 8, o: 2S, b: 3S, r: 3NT, t: "stop('S')"}, {k: 9, o: 2S, b: 3S, r: 4H, t: "true"}]
+  seq: ["({o}) X 2NT 3C {b}", "({o}) P X 2NT 3C {b}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Manche : le fit 4-4 dans l'autre majeure, sinon 3SA"
+  meaning_en: "Game: the 4-4 fit in the other major, otherwise 3NT"
+  status: choix
+# --- le répondant conclut sur les autres redemandes du contreur
+# en: responder concludes over the doubler's other rebids
+- id: "d2f.{o}.X.2NT.3D.{r}"
+  for: [{o: 2H, M: H, r: 3S, t: "S >= 4"}, {o: 2H, M: H, r: 3NT, t: "stop('H')"}, {o: 2H, M: H, r: 5D, t: "D >= 3"}, {o: 2H, M: H, r: 3H, t: "true"},
+        {o: 2S, M: S, r: 3H, t: "H >= 4"}, {o: 2S, M: S, r: 3NT, t: "stop('S')"}, {o: 2S, M: S, r: 5D, t: "D >= 3"}, {o: 2S, M: S, r: 3S, t: "true"}]
+  seq: ["({o}) X 2NT 3D", "({o}) P X 2NT 3D"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: FM
+  meaning: "Sur 5 cartes à ♦ : l'autre majeure à 4 cartes, 3SA avec la tenue, le fit ♦, sinon le cue-bid demande l'arrêt"
+  meaning_en: "Over five diamonds: the four-card other major, 3NT with the stopper, the ♦ fit, otherwise the cue-bid asks for a stopper"
+  status: choix
+- id: "d2f.{o}.X.2NT.3D.{b}.{r}"
+  for: [{o: 2H, b: 3S, r: 4S, t: "S >= 4"}, {o: 2H, b: 3S, r: 3NT, t: "stop('H')"}, {o: 2H, b: 3S, r: 5D, t: "true"},
+        {o: 2H, b: 3H, r: 3NT, t: "stop('H')"}, {o: 2H, b: 3H, r: 5D, t: "true"},
+        {o: 2S, b: 3H, r: 4H, t: "H >= 4"}, {o: 2S, b: 3H, r: 3NT, t: "stop('S')"}, {o: 2S, b: 3H, r: 5D, t: "true"},
+        {o: 2S, b: 3S, r: 3NT, t: "stop('S')"}, {o: 2S, b: 3S, r: 5D, t: "true"}]
+  seq: ["({o}) X 2NT 3D {b}", "({o}) P X 2NT 3D {b}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Manche : le fit majeur, 3SA avec la tenue, sinon 5♦"
+  meaning_en: "Game: the major fit, 3NT with the stopper, otherwise 5♦"
+  status: choix
+- id: "d2f.{o}.X.2NT.fort.{r}"
+  for: [{o: 2H, M: H, N: S, b: "3H|3S", r: 4S, t: "S >= 3"}, {o: 2H, M: H, N: S, b: "3H|3S", r: 3NT, t: "stop('H')"}, {o: 2H, M: H, N: S, b: "3H|3S", r: 5C, t: "C >= D"}, {o: 2H, M: H, N: S, b: "3H|3S", r: 5D, t: "true"},
+        {o: 2S, M: S, N: H, b: "3H|3S", r: 4H, t: "H >= 3"}, {o: 2S, M: S, N: H, b: "3H|3S", r: 3NT, t: "stop('S')"}, {o: 2S, M: S, N: H, b: "3H|3S", r: 5C, t: "C >= D"}, {o: 2S, M: S, N: H, b: "3H|3S", r: 5D, t: "true"}]
+  seq: ["({o}) X 2NT {b}", "({o}) P X 2NT {b}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Manche : l'autre majeure avec 3 cartes, 3SA avec la tenue, sinon la mineure"
+  meaning_en: "Game: the other major with 3 cards, 3NT with the stopper, otherwise the minor"
+  status: choix
+# --- réponses à l'intervention à 2SA (15-18) : texas, le texas impossible est un Stayman
+# en: answers to the 2NT overcall (15-18): transfers, the impossible transfer is Stayman
+- id: "d2f.{o}.2NT.{c}"
+  for: [{o: 2H, c: 3D, t: "S == 4 and hcp >= 8", m: "Stayman (le texas ♥ est impossible) : 4 cartes à ♠"}, {o: 2H, c: 3H, t: "S >= 5", m: "Texas ♠"},
+        {o: 2S, c: 3H, t: "H == 4 and hcp >= 8", m: "Stayman (le texas ♠ est impossible) : 4 cartes à ♥"}, {o: 2S, c: 3D, t: "H >= 5", m: "Texas ♥"}]
+  seq: ["({o}) 2NT", "({o}) P 2NT"]
+  call: "{c}"
+  cond: "{t}"
+  forcing: F1
+  meaning: "{m}"
+  meaning_en: "Transfer or Stayman over the 2NT overcall"
+  status: choix
+  alert: true
+- id: "d2f.{o}.2NT.3NT"
+  for: [{o: 2H, lo: 8}, {o: 2S, lo: 8}]
+  seq: ["({o}) 2NT", "({o}) P 2NT"]
+  call: 3NT
+  cond: "hcp >= {lo}"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in notrump"
-  status: infere
-- id: "advI.{o}.2S.4S"
-  for: [{o: 2H}]
-  seq: "({o}) 2S"
-  call: "4S"
-  cond: "S >= 3 and hld >= 13"
+  status: choix
+- id: "d2f.{o}.2NT.{a}.{r}"
+  for: [{o: 2H, a: 3D, r: 3S, t: "S >= 4"}, {o: 2H, a: 3D, r: 3NT, t: "true"}, {o: 2H, a: 3H, r: 3S, t: "true"},
+        {o: 2S, a: 3H, r: 4H, t: "H >= 4"}, {o: 2S, a: 3H, r: 3NT, t: "true"}, {o: 2S, a: 3D, r: 3H, t: "true"}]
+  seq: ["({o}) 2NT {a}", "({o}) P 2NT {a}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Réponse de l'intervenant au texas ou au Stayman"
+  meaning_en: "Overcaller's answer to the transfer or Stayman"
+  status: choix
+- id: "d2f.{o}.2NT.{a}.{b}.{r}"
+  for: [{o: 2H, a: 3D, b: 3S, r: 4S, t: "true"}, {o: 2H, a: 3H, b: 3S, r: 4S, t: "hcp >= 8"}, {o: 2S, a: 3D, b: 3H, r: 4H, t: "hcp >= 8"}]
+  seq: ["({o}) 2NT {a} {b}", "({o}) P 2NT {a} {b}"]
+  call: "{r}"
+  cond: "{t}"
   forcing: SO
-  meaning: "Manche : fitté, 13+ HLD"
-  meaning_en: "Game: fit, 13+ HLD"
-  status: infere
-- id: "advI.{o}.3H.4H"
-  for: [{o: 2S}]
-  seq: "({o}) 3H"
-  call: "4H"
-  cond: "H >= 3 and hld >= 12"
+  meaning: "Conclusion du répondant"
+  meaning_en: "Responder's conclusion"
+  status: choix
+- id: "d2f.{o}.rev.2NT.3NT"
+  for: [{o: 2H}, {o: 2S}]
+  seq: "({o}) P 2NT"
+  call: 3NT
+  cond: "hcp >= 10"
   forcing: SO
-  meaning: "Manche : fitté, 12+ HLD"
-  meaning_en: "Game: fit, 12+ HLD"
-  status: infere
+  meaning: "Manche à SA en face du 2SA de réveil (13-16)"
+  meaning_en: "Game in notrump opposite the balancing 2NT (13-16)"
+  status: choix
+# --- réponses aux bicolores
+# en: answers to the two-suiters
+- id: "d2f.{o}.cue.{r}"
+  for: [{o: 2H, M: H, c: 3H, r: 3NT, t: "stop('H')"}, {o: 2H, M: H, c: 3H, r: 5C, t: "C >= D and hcp >= 6"}, {o: 2H, M: H, c: 3H, r: 5D, t: "hcp >= 6"}, {o: 2H, M: H, c: 3H, r: 4C, t: "C >= D"}, {o: 2H, M: H, c: 3H, r: 4D, t: "true"},
+        {o: 2S, M: S, c: 3S, r: 3NT, t: "stop('S')"}, {o: 2S, M: S, c: 3S, r: 5C, t: "C >= D and hcp >= 6"}, {o: 2S, M: S, c: 3S, r: 5D, t: "hcp >= 6"}, {o: 2S, M: S, c: 3S, r: 4C, t: "C >= D"}, {o: 2S, M: S, c: 3S, r: 4D, t: "true"}]
+  seq: ["({o}) {c}", "({o}) P {c}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: NF
+  meaning: "Sur le cue-bid mineur : 3SA avec l'arrêt, sinon la meilleure mineure"
+  meaning_en: "Over the minor cue-bid: 3NT with a stopper, otherwise the better minor"
+  status: choix
+- id: "d2f.{o}.cue.4m.{r}"
+  for: [{o: 2H, c: 3H, r: 5C, a: 4C}, {o: 2H, c: 3H, r: 5D, a: 4D}, {o: 2S, c: 3S, r: 5C, a: 4C}, {o: 2S, c: 3S, r: 5D, a: 4D}]
+  seq: ["({o}) {c} {a}", "({o}) P {c} {a}"]
+  call: "{r}"
+  cond: "true"
+  forcing: SO
+  meaning: "Main de manche : la manche en mineure"
+  meaning_en: "Game values: game in the minor"
+  status: choix
+- id: "d2f.{o}.bic.{m}.{r}.{k}"
+  for: [{k: 0, o: 2H, N: S, m: C, c: 4C, r: 4S, t: "S >= 3"}, {k: 1, o: 2H, N: S, m: C, c: 4C, r: 5C, t: "C >= 3"}, {k: 2, o: 2H, N: S, m: C, c: 4C, r: 4S, t: "true"},
+        {k: 3, o: 2H, N: S, m: D, c: 4D, r: 4S, t: "S >= 3"}, {k: 4, o: 2H, N: S, m: D, c: 4D, r: 5D, t: "D >= 3"}, {k: 5, o: 2H, N: S, m: D, c: 4D, r: 4S, t: "true"},
+        {k: 6, o: 2S, N: H, m: C, c: 4C, r: 4H, t: "H >= 3"}, {k: 7, o: 2S, N: H, m: C, c: 4C, r: 5C, t: "C >= 3"}, {k: 8, o: 2S, N: H, m: C, c: 4C, r: 4H, t: "true"},
+        {k: 9, o: 2S, N: H, m: D, c: 4D, r: 4H, t: "H >= 3"}, {k: 10, o: 2S, N: H, m: D, c: 4D, r: 5D, t: "D >= 3"}, {k: 11, o: 2S, N: H, m: D, c: 4D, r: 4H, t: "true"}]
+  seq: ["({o}) {c}", "({o}) P {c}"]
+  call: "{r}"
+  cond: "{t}"
+  forcing: SO
+  meaning: "Sur le bicolore (forcing) : la majeure avec 3 cartes, sinon la mineure, au palier de la manche"
+  meaning_en: "Over the (forcing) two-suiter: the major with 3 cards, otherwise the minor, at game level"
+  status: choix
+# --- réponses aux interventions en couleur
+# en: answers to the suit overcalls
+- id: "d2f.{o}.adv.4{s}"
+  for: [{o: 2H, c: 2S, s: S, f: 3, h: 13}, {o: 2S, c: 3H, s: H, f: 3, h: 12}]
+  seq: ["({o}) {c}", "({o}) P {c}"]
+  call: "4{s}"
+  cond: "{s} >= {f} and hld >= {h}"
+  forcing: SO
+  meaning: "Manche : fitté, {h}+ HLD"
+  meaning_en: "Game: fit, {h}+ HLD"
+  status: choix
+- id: "d2f.{o}.adv.{c}.3NT"
+  for: [{o: 2H, M: H, c: 3C}, {o: 2H, M: H, c: 3D}, {o: 2S, M: S, c: 3C}, {o: 2S, M: S, c: 3D}]
+  seq: ["({o}) {c}", "({o}) P {c}"]
+  call: 3NT
+  cond: "hcp >= 11 and stop('{M}')"
+  forcing: SO
+  meaning: "3SA : l'arrêt et 11+ H en face de la belle mineure"
+  meaning_en: "3NT: the stopper and 11+ HCP opposite the good minor"
+  status: choix
 # --- réveil sur l'ouverture adverse de 1SA : les interventions de la position directe
 # en: balancing over the opponents' 1NT: the direct-seat overcalls
 - id: "rev1NT.2C"

@@ -21,6 +21,7 @@ const IA_REMOTE_KEY = "ia.remote";
 const IA_MODE_KEY = "ia.mode";
 const IA_ENABLED_KEY = "ia.enabled";
 const HIDE_PASSES_KEY = "bids.hidePasses";
+const RANDOM_THEMES_KEY = "bids.randomThemes";
 
 const iaModeSelect = $("#ia-mode");
 iaModeSelect.value = readIaMode();
@@ -40,6 +41,14 @@ iaEnabledToggle.addEventListener("change", applyIaFeature);
 // ses passes. Une simple classe sur la liste, sans la réémettre : chaque ligne
 // y garde son numéro de tour (attribut value), les enchères restantes ne se
 // renumérotent donc pas.
+// Option de tirage, par défaut ON : cochée, « Donne aléatoire » tire une
+// donne parmi les donnes thématiques (voir drawThemedDeal).
+const randomThemesToggle = $("#random-themes");
+randomThemesToggle.checked = readStored(RANDOM_THEMES_KEY, "") !== "0";
+randomThemesToggle.addEventListener("change", () => {
+  saveStored(RANDOM_THEMES_KEY, randomThemesToggle.checked ? "1" : "0");
+});
+
 const hidePassesToggle = $("#hide-passes");
 hidePassesToggle.checked = readStored(HIDE_PASSES_KEY, "") === "1";
 hidePassesToggle.addEventListener("change", applyHidePasses);
@@ -159,6 +168,8 @@ const UI_TEXT = {
     serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
     hidePasses: "Ne pas afficher les passes",
+    randomThemes: "Donnes aléatoires tirées des thèmes",
+    themeDealTitle: "{theme} — donne {n}",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
     versionWasm: "Moteur d'enchères",
@@ -357,6 +368,8 @@ const UI_TEXT = {
     serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
     hidePasses: "Hide passes",
+    randomThemes: "Random deals from the themes",
+    themeDealTitle: "{theme} — deal {n}",
     serverTest: "Test",
     healthUnknown: "unknown state",
     versionWasm: "Bidding engine",
@@ -901,7 +914,9 @@ $("#save-btn").addEventListener("click", () => {
   const url = URL.createObjectURL(new Blob([text + "\n"], { type: "text/plain" }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = (!multi && (currentThemeFile || $("#file-name").textContent.trim())) || defaultPbnName(lang);
+  // Le titre d'une donne tirée des thèmes est un libellé, pas un nom de fichier.
+  const shown = $("#file-name").textContent.trim();
+  a.download = (!multi && (currentThemeFile || (/\.pbn$/i.test(shown) && shown))) || defaultPbnName(lang);
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -1029,6 +1044,7 @@ async function drawRandomDeal() {
   if (errEl.textContent) return false;
   const fini = showBusy($("#random-btn"), CONS_TEXT[lang].busyDeal);
   try {
+    if (randomThemesToggle.checked && (await drawThemedDeal())) return true;
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
     if (!pbn) {
       setBoundsError(errEl, CONS_TEXT[lang].errNoDeal);
@@ -1039,6 +1055,52 @@ async function drawRandomDeal() {
   } finally {
     fini();
   }
+}
+
+// Points d'honneur de chaque siège, lus du tag [Deal] d'une donne.
+function dealHCP(block) {
+  const m = block.match(/\[Deal\s+"([NESW]):([^"]+)"\]/i);
+  if (!m) return null;
+  const hands = m[2].trim().split(/\s+/);
+  if (hands.length !== 4) return null;
+  const start = SEATS.indexOf(m[1].toUpperCase());
+  const hcp = {};
+  hands.forEach((h, i) => {
+    hcp[SEATS[(start + i) % 4]] = [...h.toUpperCase()].reduce((n, c) => n + (HONOUR_POINTS[c] || 0), 0);
+  });
+  return hcp;
+}
+
+// Tire une donne au hasard parmi toutes les donnes thématiques, en respectant
+// le donneur, la vulnérabilité et les bornes de points choisis. Rend faux si
+// aucune ne convient, ou si les fichiers ne sont pas joignables : la donne est
+// alors distribuée comme d'habitude.
+async function drawThemedDeal() {
+  if (!themeFiles) themeFiles = await loadThemeIndex();
+  await Promise.all(themeFiles.map((th) => loadThemeText(th).catch(() => null)));
+  const dealer = chosenDealer();
+  const vul = chosenVul();
+  const pool = [];
+  for (const th of themeFiles) {
+    if (!th.text) continue;
+    splitPbnGames(th.text).forEach((block, i) => {
+      const d = block.match(/\[Dealer\s+"([NESW])"\]/i);
+      const v = block.match(/\[Vulnerable\s+"([^"]*)"\]/i);
+      if (dealer && (!d || d[1].toUpperCase() !== dealer)) return;
+      if (vul && normalizeVul(v ? v[1] : "") !== vul) return;
+      const hcp = dealHCP(block);
+      if (!hcp || !SEATS.every((seat) => isWithinBounds(hcp[seat], hcpBounds[seat]))) return;
+      pool.push({ th, block, n: i + 1 });
+    });
+  }
+  if (!pool.length) return false;
+  const pick = pickRandom(pool);
+  loadPbn(pick.block);
+  const t = UI_TEXT[$("#lang").value];
+  $("#file-name").textContent = t.themeDealTitle
+    .replace("{theme}", themeName(pick.th, $("#lang").value)).replace("{n}", pick.n);
+  settlePbn();
+  return true;
 }
 
 $("#random-btn").addEventListener("click", drawRandomDeal);
@@ -5443,8 +5505,8 @@ const TUTORIAL_STEPS = [
     en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, three tabs: Auction, Par and Practise.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
-    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
-    en: ["Getting a deal", "Random deal draws a complete deal.\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
+    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, par défaut parmi les donnes thématiques (voir les réglages).\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
+    en: ["Getting a deal", "Random deal draws a complete deal, by default among the themed deals (see the settings).\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
   },
   {
     fr: ["Partager la donne", "Copiez un lien qui contient la donne, sauvez-la dans un fichier .pbn, ou affichez son texte PBN pour le copier ou y coller une donne reçue.\nDonneur et Vulnérabilité s'imposent ou se tirent au sort."],

@@ -18,7 +18,7 @@ Le dépôt contient quatre morceaux :
 
 | | Quoi | Où |
 |---|------|-----|
-| **Le moteur d'enchères** | bibliothèque Go qui applique les règles SEF d'un fichier YAML, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
+| **Le moteur d'enchères** | bibliothèque Go qui applique les règles d'un système d'enchères écrites en YAML, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
 | **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler. Un dossier par système, avec ses donnes thématiques | [cli/systems/](cli/systems/) |
 | **Le client web** | composition de la donne, enchères commentées, entraînement, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
@@ -114,7 +114,7 @@ Le client se suffit à lui-même : le moteur tourne dans le navigateur (`cli/bid
 
 1. lance `go test ./...` — le moteur WebAssembly *est* ce code Go, un test rouge signifierait des enchères fausses ;
 2. recompile `cli/bids.wasm` et `cli/wasm_exec.js` avec [build-wasm.sh](build-wasm.sh) : ils sont versionnés, mais le site publié ne dépend ainsi que des sources Go de `main` ;
-3. vérifie qu'aucun fichier de `cli/` ne manque, puis publie le dossier.
+3. vérifie qu'aucun fichier de `cli/` ne manque — y compris, pour chaque système de `cli/systems/index.json`, ses règles, ses PDF et les donnes thématiques qu'il déclare —, puis publie le dossier.
 
 Le site est servi sous **<https://jeanjacquesserpoul.github.io/encheres-bridge/>**. Tous les chemins du client sont relatifs, ce sous-répertoire ne demande donc aucun réglage.
 
@@ -334,6 +334,8 @@ python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drur
     --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 500
 ```
 
+Pour un autre système, on passe ses règles et on écrit dans son dossier : `--rules ../../cli/systems/<id>/rules.yaml` et `../../cli/systems/<id>/pbn/<fichier>.pbn`.
+
 Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soit déclaré dans `index.json` ; son nom ne prend que des lettres, chiffres, `.`, `-` et `_`, avec l'extension `.pbn`.
 
 ### Voir les enchères
@@ -350,7 +352,7 @@ La pastille d'état des Réglages rejoue une donne de référence au chargement 
 
 Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
 
-- **Les donnes** se choisissent dans la même boîte, en tête : **Aléatoires** (distribuées au hasard), **Tous les thèmes** (tirées parmi toutes les donnes thématiques) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, **Plus de donnes disponibles** s'affiche. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
+- **Les donnes** se choisissent dans la même boîte, en tête : **Aléatoires** (distribuées au hasard), **Tous les thèmes** (tirées parmi toutes les donnes thématiques du système choisi) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, **Plus de donnes disponibles** s'affiche. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
 - **La table** reprend l'allure d'une table en ligne :
   - votre main est toujours **en bas**, étalée carte par carte ;
   - les trois autres joueurs ont le dos tourné : à gauche celui qui parle après vous, en face le partenaire ;
@@ -360,10 +362,10 @@ Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **vot
 - **À votre tour**, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), puis Passe, X (contre) et XX (surcontre).
   - Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre).
   - Elle n'ouvre que les enchères **légales**.
-- **Seule l'erreur s'affiche** : votre enchère est comparée à celle du moteur. Conforme, elle passe sans message et la donne continue ; sinon la table s'arrête sur l'enchère attendue et son commentaire SEF, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
+- **Seule l'erreur s'affiche** : votre enchère est comparée à celle du moteur. Conforme, elle passe sans message et la donne continue ; sinon la table s'arrête sur l'enchère attendue et son commentaire, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
 - **L'enchère finie**, les quatre mains se dévoilent et le contrat s'affiche, **sans score**. **Donne suivante** tire la donne suivante.
 - **‹ et ›** font défiler les donnes déjà jouées, dans leur état final. › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.
-- **Terminer** affiche le **score de la séance** : les enchères conformes au SEF sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).
+- **Terminer** affiche le **score de la séance** : les enchères conformes au système choisi sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).
   - **Revoir** rouvre une donne ; **Reprendre l'entraînement** revient à la table.
   - La croix, ou Échap, ferme l'entraînement.
 - **Copier le PBN** : le premier petit bouton en haut à droite du tapis copie le PBN de la donne de la table dans le presse-papiers.
@@ -376,6 +378,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 | Clé | Contenu |
 |---|---|
 | `bids.lang`, `bids.theme` | Langue et thème |
+| `bids.rules` | Système d'enchères choisi, par son identifiant (`new`…) ; absent pour le SEF, système par défaut |
 | `bids.trainSeat` | Main choisie pour s'entraîner (Sud par défaut) |
 | `bids.trainSource` | Donnes de l'entraînement : `random`, `all` ou `theme` |
 | `bids.trainTheme` | Fichier du thème choisi pour l'entraînement |
@@ -428,6 +431,8 @@ Les tests confrontent le moteur Go à la **référence Python** de [tools/python
 | [api_test.go](engine/api_test.go) | le JSON rendu à la page, les erreurs, le chargement des règles (absentes, invalides), la trace |
 | [engine_test.go](engine/engine_test.go) | le parseur PBN, et 2 000 donnes aléatoires : chaque séquence est légale, suit la rotation des joueurs et se termine |
 
+Les tests valables pour tout système — conformité à la référence Python, enchères complètes, légalité des enchères ([legality_test.go](engine/legality_test.go)), banc du par et PDF à jour ([rules_pdf_test.go](engine/rules_pdf_test.go)) — tournent **une fois par système** de `cli/systems/index.json`, en sous-tests nommés d'après lui : `go test -run 'TestParBenchmark/new' ./engine` n'en lance qu'un. Les autres décrivent le SEF lui-même et ne portent que sur lui.
+
 Après une modification des règles d'un système, `./update-system.sh <système>` régénère ses jeux de référence avec les outils Python (voir [cli/systems/README.md](cli/systems/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
 
 ## Audit du par
@@ -448,7 +453,7 @@ Le rapport (`tools/par/out/rapport.html`) donne la vue d'ensemble — contrats t
 
 À graine égale les donnes sont les mêmes, donc deux révisions du moteur se comparent ligne à ligne. Le harnais Go est ignoré tant que `PAR_AUDIT_OUT` ne désigne pas un fichier : `go test ./...` n'en voit rien. Mode d'emploi complet dans [tools/par/README.md](tools/par/README.md).
 
-**Banc de non-régression.** 12 000 donnes dont la table double-mort et le par sont précalculés ([engine/testdata/par_bench.jsonl.gz](engine/testdata/par_bench.jsonl.gz)) : `go test ./...` rejoue leurs enchères en moins d'une seconde et **échoue si l'écart total au par augmente**. Les tests tournent sur chaque pull request (workflow `Tests`). Voir [tools/par/README.md](tools/par/README.md#banc-de-non-régression).
+**Banc de non-régression.** 12 000 donnes dont la table double-mort et le par sont précalculés ([engine/testdata/par_bench.jsonl.gz](engine/testdata/par_bench.jsonl.gz)) : `go test ./...` rejoue leurs enchères en quelques secondes et **échoue si l'écart total au par augmente**, pour chaque système contre sa propre référence (`engine/testdata/systems/<id>/par_baseline.json`). Les tests tournent sur chaque pull request (workflow `Tests`). Voir [tools/par/README.md](tools/par/README.md#banc-de-non-régression).
 
 ---
 
@@ -590,17 +595,18 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `engine/response.go` | Forme JSON de la réponse, estampille de version, encodeur |
 | `engine/*_test.go` | Conformité à la référence Python, API JSON, invariants, banc du par |
 | `engine/audit_par_test.go` | Harnais (jamais d'échec) : export des enchères pour l'audit du par |
-| `engine/testdata/` | Donnes PBN d'exemple, enchères de référence de `pbn_auction.py`, banc du par |
+| `engine/testdata/` | Donnes PBN d'exemple et banc du par ; dans `systems/<id>/`, les données de référence de chaque système (règles expansées, cas de test, enchères de `pbn_auction.py`, référence du banc) |
 | `wasm/main.go` | Point d'entrée WebAssembly (`js && wasm`) : l'API du moteur exposée à la page |
 | `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
 | `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
 | `cli/systems/` | Les systèmes d'enchères, un dossier chacun : règles (`rules.yaml`, modifiables sans recompiler), description PDF, donnes thématiques (`pbn/`) |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
+| `update-system.sh`, `update-system.ps1` | Après modification des règles d'un système : validation, données de test, PDF, tests ; `-p` / `-Publish` publie en pull request |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `.github/workflows/wasm.yml` | Recompile et recommite `cli/bids.wasm` quand les sources Go changent sur `main` |
 | `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
-| `tools/python_tools/` | Référence Python du moteur (`sef_rules.py`, `pbn_auction.py`), validation des règles, génération des jeux de test, spécification |
+| `tools/python_tools/` | Référence Python du moteur (`sef_rules.py`, `pbn_auction.py`), validation des règles, génération des jeux de test (`regen_system.py`) et des donnes thématiques, spécification |
 | `openrouter_proxy/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `openrouter_proxy/bin/` | Exécutables précompilés du serveur IA (Linux, Windows), leurs scripts de lancement et un `docker-compose.yml` qui lance le binaire Linux |
 | `openrouter_proxy/build-proxy.sh`, `.ps1` | Compilation du serveur IA dans `openrouter_proxy/bin/` (`openrouter_proxy`, `openrouter_proxy.exe`, non versionnés) |

@@ -1,0 +1,639 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Anatomie de rules.yaml</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Mise en page : un livret de règles. Colonne de lecture étroite, et pour
+   chaque notion un schéma posé sur le vert du tapis de l'application. */
+:root {
+  --bg: #f4f5f0;
+  --panel: #ffffff;
+  --ink: #1d2b1f;
+  --muted: #5c6b5f;
+  --line: #d8ddd4;
+  --tint: #eef3ec;
+  --felt: #2e6b46;
+  --felt-ink: #eaf5ec;
+  --felt-muted: #b9d4c1;
+  --accent: #1f6f43;
+  --gold: #e0a30c;
+  --gold-ink: #1d2b1f;
+  --red: #c0392b;
+  --ok: #1f8a3f;
+  --ok-bg: #e3f6e6;
+  --ko-bg: #fbeaea;
+  --skip: #9aa79c;
+  --code-bg: #f8f9f5;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a15; --panel: #1c241e; --ink: #e4ece5; --muted: #a3b2a6; --line: #34413a;
+    --tint: #223026; --felt: #1f4a31; --felt-ink: #e4f2e7; --felt-muted: #a6c7b0;
+    --accent: #6fcf97; --gold: #f2b632; --gold-ink: #1d2b1f; --red: #ff8a7a;
+    --ok: #6fcf97; --ok-bg: #1d3a26; --ko-bg: #3a2222; --skip: #627266; --code-bg: #182019;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a15; --panel: #1c241e; --ink: #e4ece5; --muted: #a3b2a6; --line: #34413a;
+  --tint: #223026; --felt: #1f4a31; --felt-ink: #e4f2e7; --felt-muted: #a6c7b0;
+  --accent: #6fcf97; --gold: #f2b632; --gold-ink: #1d2b1f; --red: #ff8a7a;
+  --ok: #6fcf97; --ok-bg: #1d3a26; --ko-bg: #3a2222; --skip: #627266; --code-bg: #182019;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 var(--font-body);
+  padding-inline: 16px;
+}
+main { max-width: 980px; margin: 0 auto; padding-block: 40px 72px; display: grid; gap: 64px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; max-width: 66ch; }
+code, .mono { font-family: var(--font-mono); font-size: .88em; }
+:not(pre) > code { background: var(--tint); padding: 1px 5px; border-radius: 4px; }
+.eyebrow { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.lede { font-size: 1.12rem; color: var(--muted); }
+section { display: grid; gap: 20px; min-width: 0; }
+.head { display: grid; gap: 10px; }
+.red { color: var(--red); }
+.felt {
+  background: var(--felt);
+  color: var(--felt-ink);
+  border-radius: var(--radius);
+  padding: 22px;
+  min-width: 0;
+}
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; min-width: 0; }
+.scroll { overflow-x: auto; }
+
+/* ---------- en-tête ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.hero .intro { display: grid; gap: 16px; }
+.tree { font-family: var(--font-mono); font-size: .86rem; line-height: 1.75; white-space: pre; }
+.tree .dir { color: var(--felt-ink); font-weight: 600; }
+.tree .file { color: var(--gold); font-weight: 600; }
+.tree .note { color: var(--felt-muted); }
+
+/* ---------- une règle annotée ---------- */
+.anatomy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+pre.yaml {
+  margin: 0; padding: 18px 18px 18px 14px; background: var(--code-bg); border: 1px solid var(--line);
+  border-radius: var(--radius); font-family: var(--font-mono); font-size: .84rem; line-height: 1.9; overflow-x: auto;
+}
+.yaml .k { color: var(--accent); font-weight: 600; }
+.yaml .s { color: var(--ink); }
+.yaml .c { color: var(--muted); }
+.yaml .pin {
+  display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin-right: 8px; border-radius: 50%;
+  background: var(--gold); color: var(--gold-ink); font: 600 .72rem/1 var(--font-body); vertical-align: 1px;
+}
+.yaml .pin.opt { background: transparent; color: var(--muted); border: 1.5px dashed var(--muted); }
+.fields { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.fields li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline; }
+.fields .pin {
+  display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%;
+  background: var(--gold); color: var(--gold-ink); font: 600 .78rem/1 var(--font-body); grid-row: span 2;
+}
+.fields .pin.opt { background: transparent; color: var(--muted); border: 1.5px dashed var(--muted); }
+.fields b { font-family: var(--font-mono); font-size: .92rem; }
+.fields span { color: var(--muted); font-size: .94rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: .86rem; color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); margin-right: 6px; vertical-align: -1px; }
+.legend i.opt { background: transparent; border: 1.5px dashed var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: .78rem; padding: 2px 8px; border-radius: 999px; background: var(--tint); border: 1px solid var(--line); }
+
+/* ---------- séquence vue par la paire ---------- */
+.seqdemo { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 20px; align-items: center; }
+.auction { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.auction th { font-size: .78rem; letter-spacing: .1em; color: var(--felt-muted); font-weight: 600; padding: 4px; }
+.auction th.us { color: var(--gold); }
+.auction td { text-align: center; padding: 8px 4px; font-weight: 600; font-size: 1.05rem; }
+.auction td.drop { color: var(--felt-muted); text-decoration: line-through; font-weight: 400; }
+.auction td.next { color: var(--gold); }
+.arrow { font-size: 1.8rem; color: var(--felt-muted); }
+.tokens { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.tok {
+  font-family: var(--font-mono); font-weight: 600; padding: 8px 12px; border-radius: 8px;
+  background: var(--felt-ink); color: #1d2b1f; font-size: 1rem;
+}
+.tok.opp { background: transparent; color: var(--felt-ink); border: 1.5px solid var(--felt-muted); }
+.caption { font-size: .88rem; color: var(--felt-muted); text-align: center; }
+.rules3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.rules3 > div { display: grid; gap: 6px; align-content: start; }
+.rules3 b { font-size: .95rem; }
+.rules3 span { color: var(--muted); font-size: .92rem; }
+
+/* ---------- motifs ---------- */
+.match { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.match th { text-align: left; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.match td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.match td:first-child { font-family: var(--font-mono); font-weight: 600; white-space: nowrap; }
+.match .ex { display: flex; flex-wrap: wrap; gap: 6px; }
+.verdict { font-family: var(--font-mono); font-size: .82rem; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+.verdict.yes { background: var(--ok-bg); color: var(--ok); }
+.verdict.no { background: var(--ko-bg); color: var(--red); }
+
+/* ---------- vocabulaire des conditions ---------- */
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.vocab > div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 8px; align-content: start; }
+.vocab h3 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.vocab p { font-size: .88rem; color: var(--muted); }
+
+/* ---------- simulateur ---------- */
+.sim { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.controls { display: grid; gap: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+.hands { display: grid; gap: 6px; }
+.hands button {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; text-align: left;
+  font: inherit; font-size: .9rem; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.hands button:hover { background: var(--tint); }
+.hands button[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); box-shadow: inset 3px 0 0 var(--accent); }
+.hands button small { color: var(--muted); font-family: var(--font-mono); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.custom { display: grid; gap: 6px; }
+.custom label { font-size: .84rem; color: var(--muted); }
+.custom .row { display: flex; gap: 6px; }
+.custom input {
+  flex: 1; min-width: 0; font: 500 .9rem var(--font-mono); padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+}
+.custom button, .replay {
+  font: 600 .88rem var(--font-body); padding: 8px 12px; border-radius: 8px; border: none;
+  background: var(--accent); color: var(--panel); cursor: pointer;
+}
+.custom .err { color: var(--red); font-size: .84rem; min-height: 1.2em; }
+.handcard { display: grid; gap: 10px; }
+.suits { display: grid; gap: 2px; font-family: var(--font-mono); font-size: 1rem; }
+.feat { display: flex; flex-wrap: wrap; gap: 6px; }
+.feat span { font-family: var(--font-mono); font-size: .78rem; padding: 2px 7px; border-radius: 6px; background: rgba(255,255,255,.12); color: var(--felt-ink); }
+.ruleslist { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; counter-reset: r; }
+.ruleslist li {
+  counter-increment: r; display: grid; grid-template-columns: 2.2em 3.6em minmax(0, 1fr) auto; gap: 4px 10px; align-items: center;
+  padding: 7px 10px; border-radius: 8px; border: 1px solid transparent; transition: background .2s, opacity .2s;
+}
+.ruleslist li::before { content: counter(r); font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.ruleslist .call { font-weight: 700; font-size: .98rem; }
+.ruleslist .cond { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); overflow-wrap: anywhere; }
+.ruleslist .id { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); grid-column: 3; }
+.ruleslist .mark { font-family: var(--font-mono); font-size: .82rem; font-weight: 600; grid-column: 4; grid-row: 1 / span 2; }
+.ruleslist li.fail { background: var(--ko-bg); }
+.ruleslist li.fail .mark { color: var(--red); }
+.ruleslist li.hit { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+.ruleslist li.hit .cond, .ruleslist li.hit .id, .ruleslist li.hit::before { color: var(--gold-ink); }
+.ruleslist li.later { opacity: .45; }
+.verdictbox { display: grid; gap: 6px; }
+.verdictbox .big { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
+.simhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+
+/* ---------- algorithme ---------- */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-items: stretch; }
+.step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 6px; align-content: start; position: relative; }
+.step .n { font: 700 .8rem var(--font-body); color: var(--accent); }
+.step p { font-size: .9rem; color: var(--muted); }
+.step.end { background: var(--felt); border-color: var(--felt); color: var(--felt-ink); }
+.step.end p { color: var(--felt-muted); }
+
+/* ---------- modèles for: ---------- */
+.fan { display: grid; grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1fr); gap: 16px; align-items: center; }
+.fan .out { display: grid; gap: 8px; }
+.fan .out div { font-family: var(--font-mono); font-size: .8rem; padding: 8px 10px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); overflow-wrap: anywhere; }
+.fan .out b { color: var(--accent); }
+
+/* ---------- atout convenu ---------- */
+.timeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.timeline > div { display: grid; gap: 6px; align-content: start; padding: 12px; border-radius: 8px; background: rgba(255,255,255,.08); }
+.timeline .bid { font-size: 1.3rem; font-weight: 700; }
+.timeline .who { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--felt-muted); }
+.timeline p { font-size: .84rem; color: var(--felt-muted); }
+.timeline .key { background: var(--gold); color: var(--gold-ink); }
+.timeline .key p, .timeline .key .who { color: var(--gold-ink); }
+.timeline code { background: rgba(0,0,0,.15); }
+
+/* ---------- du fichier au site ---------- */
+.pipe { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pipe > div { display: grid; gap: 8px; align-content: start; }
+.pipe ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .92rem; display: grid; gap: 4px; }
+pre.cmd { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--code-bg); border: 1px solid var(--line); font-family: var(--font-mono); font-size: .84rem; overflow-x: auto; }
+
+footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--line); padding-top: 16px; }
+
+@media (max-width: 760px) {
+  .hero, .anatomy, .seqdemo, .sim, .fan { grid-template-columns: minmax(0, 1fr); }
+  .arrow { transform: rotate(90deg); justify-self: center; }
+  .rules3, .pipe { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .controls { position: static; }
+  .ruleslist li { grid-template-columns: 2em 3.2em minmax(0, 1fr) auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main>
+
+  <header class="hero">
+    <div class="intro">
+      <span class="eyebrow">Encheres-bridge · systèmes d'enchères</span>
+      <h1>Anatomie de <code style="background:none;padding:0;font-size:.9em">rules.yaml</code></h1>
+      <p class="lede">Le moteur ne connaît aucune règle de bridge. Tout ce qu'il enchérit vient d'un fichier : une liste ordonnée de règles, où la première qui convient à la main donne l'enchère. Voici comment ce fichier se lit.</p>
+    </div>
+    <div class="felt">
+      <div class="tree"><span class="dir">cli/systems/</span>
+  <span class="file">index.json</span>      <span class="note">les systèmes proposés</span>
+  <span class="dir">sef/</span>            <span class="note">SEF 2024, par défaut</span>
+    <span class="file">rules.yaml</span>    <span class="note">830 règles écrites,</span>
+                  <span class="note">2 738 une fois expansées</span>
+    rules.pdf     <span class="note">description, en clair</span>
+    rules.en.pdf
+    pbn/          <span class="note">donnes thématiques</span>
+  <span class="dir">new/</span>            <span class="note">système en construction</span>
+    <span class="file">rules.yaml</span>    <span class="note">1 règle</span></div>
+    </div>
+  </header>
+
+  <section id="regle">
+    <div class="head">
+      <span class="eyebrow">1 · La brique de base</span>
+      <h2>Une règle, champ par champ</h2>
+      <p>Chaque règle répond à une seule question : <em>dans cette séquence, avec cette main, que dit-on ?</em> Voici une vraie règle du SEF, le Stayman après l'ouverture de 1SA.</p>
+    </div>
+    <div class="anatomy">
+<pre class="yaml"><span class="pin">1</span><span class="k">- id:</span> 1NT.r.2C
+<span class="pin">2</span>  <span class="k">seq:</span> ["1NT", "1NT (X)"]
+<span class="pin">3</span>  <span class="k">call:</span> 2C
+<span class="pin">4</span>  <span class="k">cond:</span> "(H == 4 or S == 4)
+        and max(H, S) &lt; 5 and hl &gt;= 8
+        and not (shape == '4333'
+                 and hcp &lt; 12)"
+<span class="pin">5</span>  <span class="k">forcing:</span> F1
+<span class="pin">6</span>  <span class="k">meaning:</span> "Stayman 4 réponses : majeure
+           4e, 8+ H (4333 : 12+ H)"
+<span class="pin">6</span>  <span class="k">meaning_en:</span> "4-response Stayman: …"
+<span class="pin">7</span>  <span class="k">status:</span> sef
+<span class="pin opt">8</span>  <span class="k">alert:</span> true</pre>
+      <ol class="fields">
+        <li><span class="pin">1</span><b>id</b><span>Identifiant unique. Il nomme la règle dans les commentaires, les tests et l'arbre de décision.</span></li>
+        <li><span class="pin">2</span><b>seq</b><span>Le motif de la séquence déjà enchérie, vue par la paire. <code>""</code> pour une ouverture ; une liste pour plusieurs séquences équivalentes, ici 1SA, contré ou non.</span></li>
+        <li><span class="pin">3</span><b>call</b><span>L'enchère proposée : <code>1C</code> à <code>7NT</code>, <code>P</code>, <code>X</code>, <code>XX</code>.</span></li>
+        <li><span class="pin">4</span><b>cond</b><span>La condition sur la main de celui qui parle. Une expression : points, longueurs, forme, levées…</span></li>
+        <li><span class="pin">5</span><b>forcing</b><span>La force de l'enchère.</span><div class="chips" style="grid-column:2"><span class="chip">NF</span><span class="chip">F1</span><span class="chip">FM</span><span class="chip">SO</span><span class="chip">INV</span><span class="chip">REL</span><span class="chip">ASK</span><span class="chip">TO</span><span class="chip">PEN</span></div></li>
+        <li><span class="pin">6</span><b>meaning, meaning_en</b><span>Le commentaire affiché, en français et en anglais, dans la séquence commentée.</span></li>
+        <li><span class="pin">7</span><b>status</b><span>L'origine de la règle.</span><div class="chips" style="grid-column:2"><span class="chip">sef</span><span class="chip">choix</span><span class="chip">sef2018</span><span class="chip">infere</span><span class="chip">a_verifier</span></div></li>
+        <li><span class="pin opt">8</span><b>alert, trump, option, for</b><span>Facultatifs : enchère à alerter, atout convenu (§ 6), règle réservée à une option, modèle à dupliquer (§ 5).</span></li>
+      </ol>
+    </div>
+    <div class="legend"><span><i></i>obligatoire</span><span><i class="opt"></i>facultatif</span></div>
+  </section>
+
+  <section id="sequence">
+    <div class="head">
+      <span class="eyebrow">2 · Ce que <code>seq</code> regarde</span>
+      <h2>La séquence vue par la paire</h2>
+      <p>Le motif <code>seq</code> ne se compare pas aux enchères de la table telles quelles, mais à la séquence vue par la paire qui parle : ses propres enchères, et celles des adversaires entre parenthèses.</p>
+    </div>
+    <div class="felt seqdemo">
+      <div class="scroll">
+        <table class="auction" aria-label="Enchères à la table">
+          <thead><tr><th class="us">NORD</th><th>EST</th><th class="us">SUD</th><th>OUEST</th></tr></thead>
+          <tbody>
+            <tr><td>1♣</td><td>1♠</td><td>X</td><td class="drop">Passe</td></tr>
+            <tr><td class="next">?</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div style="display:grid;gap:12px">
+        <div class="tokens"><span class="tok">1C</span><span class="tok opp">(1S)</span><span class="tok">X</span></div>
+        <p class="caption">Ce que voit Nord : <span class="mono">1C (1S) X</span></p>
+      </div>
+    </div>
+    <div class="rules3">
+      <div><b>Nos enchères, passes compris</b><span>Un passe du partenaire est une information : il s'écrit <code>P</code>.</span></div>
+      <div><b>Les leurs, entre parenthèses</b><span>Une intervention adverse devient <code>(1S)</code>. Leurs passes sont omis.</span></div>
+      <div><b>Les passes d'entrée s'effacent</b><span>Une main passée qui ouvre suit les règles d'ouverture, sauf si le motif commence lui-même par <code>P</code> : c'est ainsi que Drury s'écrit <code>P 1S</code>.</span></div>
+    </div>
+  </section>
+
+  <section id="motifs">
+    <div class="head">
+      <span class="eyebrow">3 · Le langage des motifs</span>
+      <h2>Comment un motif reconnaît une séquence</h2>
+      <p>Un motif est une suite de jetons séparés par des espaces. Sans joker de tête, il doit avoir exactement autant de jetons que la séquence.</p>
+    </div>
+    <div class="panel scroll">
+      <table class="match">
+        <thead><tr><th>Jeton</th><th>Correspond à</th><th>Exemples</th></tr></thead>
+        <tbody>
+          <tr><td>1H</td><td>exactement cette enchère de la paire</td><td><div class="ex"><span class="mono">1H</span><span class="verdict yes">1H ✓</span><span class="verdict no">1S ✗</span></div></td></tr>
+          <tr><td>1C|1D</td><td>l'une des enchères listées</td><td><div class="ex"><span class="mono">1C|1D 1H</span><span class="verdict yes">1D 1H ✓</span><span class="verdict no">1S 1H ✗</span></div></td></tr>
+          <tr><td>(2H)</td><td>cette enchère adverse</td><td><div class="ex"><span class="mono">1S (2H)</span><span class="verdict yes">1S (2H) ✓</span><span class="verdict no">1S 2H ✗</span></div></td></tr>
+          <tr><td>*</td><td>une enchère quelconque, à nous ou à eux</td><td><div class="ex"><span class="mono">1NT * </span><span class="verdict yes">1NT (2C) ✓</span><span class="verdict no">1NT ✗</span></div></td></tr>
+          <tr><td>**</td><td>en tête : n'importe quel début, même vide ; le reste doit finir la séquence</td><td><div class="ex"><span class="mono">** 4NT</span><span class="verdict yes">1H 3H 4NT ✓</span><span class="verdict yes">4NT ✓</span></div></td></tr>
+          <tr><td>BW:H</td><td>comme <code>**</code>, si l'atout convenu de la paire est ♥</td><td><div class="ex"><span class="mono">BW:H 4NT</span><span class="verdict yes">atout ♥ ✓</span><span class="verdict no">atout ♠ ✗</span></div></td></tr>
+          <tr><td>""</td><td>la séquence vide : une ouverture</td><td><div class="ex"><span class="verdict yes">personne n'a parlé ✓</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="conditions">
+    <div class="head">
+      <span class="eyebrow">4 · Le langage des conditions</span>
+      <h2>Ce que <code>cond</code> peut lire</h2>
+      <p>Une condition est un petit sous-ensemble d'expressions Python : <code>and</code>, <code>or</code>, <code>not</code>, comparaisons chaînées (<code>9 &lt;= hl &lt;= 12</code>), <code>+</code>, <code>-</code>, <code>in</code>. Elle ne lit que la main de celui qui parle. Ce que le partenaire a montré, la séquence le dit déjà.</p>
+    </div>
+    <div class="vocab">
+      <div><h3>Points</h3><div class="chips"><span class="chip">hcp</span><span class="chip">hl</span><span class="chip">dh</span><span class="chip">hld</span></div><p>H (A 4, R 3, D 2, V 1), HL avec les cartes au-delà de la 4e, DH et HLD avec les courtes.</p></div>
+      <div><h3>Longueurs et forme</h3><div class="chips"><span class="chip">S</span><span class="chip">H</span><span class="chip">D</span><span class="chip">C</span><span class="chip">shape</span><span class="chip">balanced</span><span class="chip">semibalanced</span></div><p><code>shape</code> vaut par exemple <code>'5332'</code>.</p></div>
+      <div><h3>Levées et contrôles</h3><div class="chips"><span class="chip">ptricks</span><span class="chip">qtricks</span><span class="chip">sidetricks</span><span class="chip">losers</span><span class="chip">aces</span><span class="chip">kings</span></div><p>Levées de jeu, de défense, perdantes.</p></div>
+      <div><h3>Par couleur</h3><div class="chips"><span class="chip">stop('H')</span><span class="chip">keycards('S')</span><span class="chip">top(s)</span><span class="chip">hcp_in(s)</span><span class="chip">short(s)</span><span class="chip">ctrl1(s)</span></div><p>Arrêt, clés, honneurs, courte, contrôles.</p></div>
+      <div><h3>Contexte</h3><div class="chips"><span class="chip">vul</span><span class="chip">opp_vul</span><span class="chip">seat</span></div><p>Vulnérabilité des deux camps, rang du joueur depuis le donneur : la règle des 15 lit <code>seat == 4</code>.</p></div>
+    </div>
+  </section>
+
+  <section id="simulateur">
+    <div class="head">
+      <span class="eyebrow">5 · L'ordre décide</span>
+      <h2>La première règle applicable l'emporte</h2>
+      <p>Le moteur parcourt le fichier de haut en bas et s'arrête à la première règle dont le motif et la condition conviennent. L'ordre est donc une priorité : les cas particuliers d'abord, la règle générale ensuite, et souvent un <code>cond: "true"</code> pour finir. Ci-dessous, les 21 règles du SEF qui répondent à une ouverture de 1SA, dans l'ordre du fichier. Choisissez une main de répondant.</p>
+    </div>
+    <div class="sim">
+      <div class="controls">
+        <div class="hands" id="hands" role="group" aria-label="Mains d'exemple"></div>
+        <form class="custom" id="custom" novalidate>
+          <label for="hand-input">Ou votre main : piques.cœurs.carreaux.trèfles</label>
+          <div class="row"><input id="hand-input" autocomplete="off" spellcheck="false" placeholder="AK32.Q4.J32.K432"><button type="submit">Tester</button></div>
+          <div class="err" id="hand-err" role="status"></div>
+        </form>
+      </div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="felt handcard" id="handcard"></div>
+        <ol class="ruleslist" id="ruleslist" aria-live="polite"></ol>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="step"><span class="n">Étape 1</span><h3>Séquence</h3><p>Construire la séquence vue par la paire, sans ses passes d'entrée.</p></div>
+      <div class="step"><span class="n">Étape 2</span><h3>Motif</h3><p>Pour chaque règle, dans l'ordre : son <code>seq</code> correspond-il ? Sinon, règle suivante.</p></div>
+      <div class="step"><span class="n">Étape 3</span><h3>Condition</h3><p>Son <code>cond</code> est-il vrai sur la main ? Sinon, règle suivante.</p></div>
+      <div class="step end"><span class="n" style="color:var(--gold)">Résultat</span><h3>Enchère</h3><p>La première règle retenue donne <code>call</code>. Aucune règle, ou une enchère illégale : passe par défaut, signalé comme tel.</p></div>
+    </div>
+  </section>
+
+  <section id="modeles">
+    <div class="head">
+      <span class="eyebrow">6 · Écrire moins</span>
+      <h2>Les modèles <code>for:</code></h2>
+      <p>Une règle qui porte <code>for:</code> est un modèle : elle est dupliquée pour chaque ligne de la liste, et chaque <code>{clé}</code> est remplacée par sa valeur. Le SEF compte 830 règles écrites, et 2 738 une fois expansées.</p>
+    </div>
+    <div class="fan">
+<pre class="yaml"><span class="k">- id:</span> "open.4e.<b>{c}</b>"
+  <span class="k">for:</span> [{c: 1S, x: "S &gt;= 5 and S &gt;= H"},
+        {c: 1H, x: "H &gt;= 5"},
+        {c: 1D, x: "D &gt;= 3 and …"},
+        {c: 1C, x: "true"}]
+  <span class="k">seq:</span> ""
+  <span class="k">call:</span> "<b>{c}</b>"
+  <span class="k">cond:</span> "seat == 4 and 10 &lt;= hcp &lt;= 11
+         and hcp + S &gt;= 15 and (<b>{x}</b>)"
+  <span class="c"># règle des 15, en 4e position</span></pre>
+      <div class="arrow" aria-hidden="true" style="color:var(--muted)">→</div>
+      <div class="out">
+        <div><b>open.4e.1S</b> · call 1S · … and (S &gt;= 5 and S &gt;= H)</div>
+        <div><b>open.4e.1H</b> · call 1H · … and (H &gt;= 5)</div>
+        <div><b>open.4e.1D</b> · call 1D · … and (D &gt;= 3 and …)</div>
+        <div><b>open.4e.1C</b> · call 1C · … and (true)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="atout">
+    <div class="head">
+      <span class="eyebrow">7 · Une mémoire</span>
+      <h2>L'atout convenu</h2>
+      <p>Les conditions ne voient que la main. Pour savoir quelle couleur est l'atout, une règle peut porter <code>trump:</code> : quand elle est choisie, l'atout convenu de la paire devient cette couleur. Les motifs <code>BW:X</code> le lisent, ce qui permet d'écrire une seule fois les réponses au Blackwood pour chaque atout, quelle que soit la séquence.</p>
+    </div>
+    <div class="felt timeline">
+      <div><span class="who">Nord</span><span class="bid">1SA</span><p>15-17 HL régulier</p></div>
+      <div><span class="who">Sud</span><span class="bid">2♣</span><p>Stayman</p></div>
+      <div><span class="who">Nord</span><span class="bid">2SA</span><p>Pas de majeure 4e</p></div>
+      <div class="key"><span class="who">Sud</span><span class="bid">3♠</span><p><code>1NT.2C.2NT.slamS</code> porte <code>trump: S</code> : l'atout convenu devient ♠</p></div>
+      <div><span class="who">Plus tard</span><span class="bid">4SA</span><p>La réponse suit les règles <code>BW:S 4NT</code> : clés à ♠</p></div>
+    </div>
+  </section>
+
+  <section id="cycle">
+    <div class="head">
+      <span class="eyebrow">8 · Du fichier au site</span>
+      <h2>Modifier un système</h2>
+      <p>On édite <code>rules.yaml</code> et on recharge la page : il n'y a rien à recompiler. Avant de publier, une commande met à jour tout ce qui dérive du fichier.</p>
+    </div>
+    <div class="pipe">
+      <div class="panel"><h3>Éditer</h3><ul><li><code>cli/systems/&lt;id&gt;/rules.yaml</code></li><li>Ordre : du particulier au général</li><li><code>meaning</code> et <code>meaning_en</code> obligatoires</li></ul></div>
+      <div class="panel"><h3>Mettre à jour</h3><pre class="cmd">./update-system.sh sef</pre><ul><li>Validation (un fichier invalide est refusé en entier)</li><li>Cas de test et enchères de référence</li><li>PDF français et anglais</li><li>Tests, dont le banc du par</li></ul></div>
+      <div class="panel"><h3>Publier</h3><pre class="cmd">./update-system.sh -p sef</pre><ul><li>Branche, commit, push</li><li>Pull request</li><li>Le site suit à la fusion</li></ul></div>
+    </div>
+  </section>
+
+  <footer>Règles, exemples et décisions du simulateur : SEF 2024 de <span class="mono">cli/systems/sef/rules.yaml</span>, vérifiés avec le moteur de référence <span class="mono">sef_rules.py</span>. Sémantique complète : <span class="mono">tools/python_tools/SEF_2024_spec.md</span>.</footer>
+</main>
+
+<script>
+(() => {
+  // Les 21 règles du SEF dont le motif correspond à « 1NT », dans l'ordre du
+  // fichier ; chaque condition est la traduction exacte de son cond.
+  const RULES = [
+    ["1NT.r.5NT", "5NT", "18 <= hl <= 19 and S < 4 and H < 4", f => 18 <= f.hl && f.hl <= 19 && f.S < 4 && f.H < 4, "18-19 HL : l'ouvreur dit 6SA (ou repart en Baron)"],
+    ["1NT.r.4NT", "4NT", "hl == 17 and S < 4 and H < 4", f => f.hl === 17 && f.S < 4 && f.H < 4, "Quantitatif 17 HL : proposition de petit chelem"],
+    ["1NT.r.4D", "4D", "H >= 5 and S >= 5 and 9 <= hcp <= 12", f => f.H >= 5 && f.S >= 5 && 9 <= f.hcp && f.hcp <= 12, "Bicolore ♥/♠ 5-5, 9-12 H : l'ouvreur choisit la majeure"],
+    ["1NT.r.3S.slam", "3S", "S >= 6 and hl >= 17", f => f.S >= 6 && f.hl >= 17, "Espoir de chelem dans la couleur (6+ cartes)"],
+    ["1NT.r.3H.slam", "3H", "H >= 6 and hl >= 17", f => f.H >= 6 && f.hl >= 17, "Espoir de chelem dans la couleur (6+ cartes)"],
+    ["1NT.r.3D.slam", "3D", "D >= 6 and hl >= 17", f => f.D >= 6 && f.hl >= 17, "Espoir de chelem dans la couleur (6+ cartes)"],
+    ["1NT.r.4S", "4S", "S >= 6 and S >= max(S, H) and 9 <= hl <= 16", f => f.S >= 6 && f.S >= Math.max(f.S, f.H) && 9 <= f.hl && f.hl <= 16, "Naturel, 6+ cartes, pour jouer"],
+    ["1NT.r.4H", "4H", "H >= 6 and H >= max(S, H) and 9 <= hl <= 16", f => f.H >= 6 && f.H >= Math.max(f.S, f.H) && 9 <= f.hl && f.hl <= 16, "Naturel, 6+ cartes, pour jouer"],
+    ["1NT.r.2D.55weak", "2D", "H == 5 and S == 5 and 7 <= hl <= 8", f => f.H === 5 && f.S === 5 && 7 <= f.hl && f.hl <= 8, "Texas ♥ (suivi de 2♠ : 5-5 majeur 7-8 H)"],
+    ["1NT.r.2C.54", "2C", "max(H, S) == 5 and min(H, S) == 4 and hl >= 7", f => Math.max(f.H, f.S) === 5 && Math.min(f.H, f.S) === 4 && f.hl >= 7, "Stayman (5-4 majeur, 7+ H)"],
+    ["1NT.r.2C.misere", "2C", "max(H, S) == 5 and 7 <= hl <= 8 and min(S, H, D, C) <= 1", f => Math.max(f.H, f.S) === 5 && 7 <= f.hl && f.hl <= 8 && Math.min(f.S, f.H, f.D, f.C) <= 1, "Stayman « misère dorée » : majeure 5e et singleton, 7-8 HL"],
+    ["1NT.r.2C", "2C", "(H == 4 or S == 4) and max(H, S) < 5 and hl >= 8 and not (shape == '4333' and hcp < 12)", f => (f.H === 4 || f.S === 4) && Math.max(f.H, f.S) < 5 && f.hl >= 8 && !(f.shape === "4333" && f.hcp < 12), "Stayman 4 réponses : majeure 4e, 8+ H (4333 : 12+ H)"],
+    ["1NT.r.2H", "2H", "S >= 5 and S >= H", f => f.S >= 5 && f.S >= f.H, "Texas ♠ : 5+ piques"],
+    ["1NT.r.2D", "2D", "H >= 5", f => f.H >= 5, "Texas ♥ : 5+ cœurs"],
+    ["1NT.r.2S.minors", "2S", "C >= 5 and D >= 5 and hl >= 9", f => f.C >= 5 && f.D >= 5 && f.hl >= 9, "Texas ♣ (bicolore mineur 5/5 de manche : ♦ annoncés ensuite)"],
+    ["1NT.r.2S", "2S", "C >= 6 and C >= D and (hl < 8 or (hl >= 12 and min(S, H, D) <= 1))", f => f.C >= 6 && f.C >= f.D && (f.hl < 8 || (f.hl >= 12 && Math.min(f.S, f.H, f.D) <= 1)), "Texas ♣ : 6+ trèfles, faible ou avec courte (ambition)"],
+    ["1NT.r.3C", "3C", "D >= 6 and (hl < 8 or (hl >= 12 and min(S, H, C) <= 1))", f => f.D >= 6 && (f.hl < 8 || (f.hl >= 12 && Math.min(f.S, f.H, f.C) <= 1)), "Texas ♦ : 6+ carreaux, faible ou avec courte (ambition)"],
+    ["1NT.r.2NT", "2NT", "hl == 8", f => f.hl === 8, "8 H, proposition de manche"],
+    ["1NT.r.3NT", "3NT", "9 <= hl <= 16", f => 9 <= f.hl && f.hl <= 16, "9-16 HL, pour jouer"],
+    ["1NT.r.6NT", "6NT", "hl >= 20", f => f.hl >= 20, "20+ HL : petit chelem direct"],
+    ["1NT.r.pass", "P", "true", () => true, "Moins de 8 H, sans couleur à montrer"],
+  ];
+
+  // Mains d'exemple : l'enchère attendue est celle que choisit sef_rules.py.
+  const HANDS = [
+    ["KJ32.Q4.J32.K432", "Majeure 4e, 10 H", "2C"],
+    ["K2.QJ432.K32.432", "Cinq cœurs, 9 H", "2D"],
+    ["QJ432.K5432.32.2", "5-5 majeur, 6 H", "2D"],
+    ["K32.Q32.J32.Q432", "Régulière, 8 H", "2NT"],
+    ["Q4.KJ8762.32.Q32", "Six cœurs, 8 H", "4H"],
+    ["AQ2.KJ2.KQ32.Q32", "Régulière, 17 H", "4NT"],
+    ["Q2.J43.98765.432", "3 H", "P"],
+  ];
+
+  const SUITS = ["S", "H", "D", "C"];
+  const SYMBOL = { S: "♠", H: "♥", D: "♦", C: "♣" };
+  const FR_RANK = { A: "A", K: "R", Q: "D", J: "V", T: "10" };
+  const POINTS = { A: 4, K: 3, Q: 2, J: 1 };
+
+  function features(hand) {
+    const parts = hand.split(".");
+    const f = { hcp: 0, hl: 0 };
+    parts.forEach((p, i) => {
+      const cards = p === "-" ? "" : p;
+      f[SUITS[i]] = cards.length;
+      for (const c of cards) f.hcp += POINTS[c] || 0;
+    });
+    f.hl = f.hcp + SUITS.reduce((n, s) => n + Math.max(0, f[s] - 4), 0);
+    f.shape = SUITS.map((s) => f[s]).sort((a, b) => b - a).join("");
+    f.balanced = ["4333", "4432", "5332"].includes(f.shape);
+    return f;
+  }
+
+  function callLabel(call) {
+    if (call === "P") return "Passe";
+    const m = call.match(/^(\d)(NT|[SHDC])$/);
+    if (!m) return call;
+    if (m[2] === "NT") return m[1] + "SA";
+    return m[1] + SYMBOL[m[2]];
+  }
+  function callHtml(call) {
+    const label = callLabel(call);
+    return /[♥♦]/.test(label) ? label.replace(/([♥♦])/, '<span class="red">$1</span>') : label;
+  }
+
+  function parseHand(text) {
+    const t = text.trim().toUpperCase().replace(/10/g, "T").replace(/\s+/g, "");
+    const parts = t.split(".");
+    if (parts.length !== 4) return { error: "Quatre couleurs séparées par des points : piques.cœurs.carreaux.trèfles." };
+    const seen = new Set();
+    let count = 0;
+    for (const p of parts) {
+      if (p === "-" || p === "") continue;
+      for (const c of p) {
+        if (!"AKQJT98765432".includes(c)) return { error: "Carte inconnue « " + c + " » : utilisez A K Q J T 9 … 2." };
+        count++;
+      }
+    }
+    if (count !== 13) return { error: count + " cartes : il en faut 13." };
+    const norm = parts.map((p) => (p === "" ? "-" : p)).map((p, i) => {
+      if (p === "-") return p;
+      const sorted = [...p].sort((a, b) => "AKQJT98765432".indexOf(a) - "AKQJT98765432".indexOf(b)).join("");
+      for (const c of sorted) {
+        const key = SUITS[i] + c;
+        if (seen.has(key)) throw new Error("dup");
+        seen.add(key);
+      }
+      return sorted;
+    });
+    return { hand: norm.join(".") };
+  }
+
+  const handsBox = document.getElementById("hands");
+  const list = document.getElementById("ruleslist");
+  const card = document.getElementById("handcard");
+  let timer = null;
+
+  function renderList() {
+    list.replaceChildren(...RULES.map(([id, call, cond]) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="call">${callHtml(call)}</span><span class="cond"></span><span class="id"></span><span class="mark"></span>`;
+      li.querySelector(".cond").textContent = cond;
+      li.querySelector(".id").textContent = id;
+      return li;
+    }));
+  }
+
+  function show(hand) {
+    clearTimeout(timer);
+    const f = features(hand);
+    const hit = RULES.findIndex((r) => r[3](f));
+    const rule = RULES[hit];
+    const suitRows = hand.split(".").map((p, i) => {
+      const s = SUITS[i];
+      const cards = p === "-" ? "—" : [...p].map((c) => FR_RANK[c] || c).join(" ");
+      const sym = s === "H" || s === "D" ? `<span style="color:#ff9d8f">${SYMBOL[s]}</span>` : SYMBOL[s];
+      return `<div>${sym} ${cards}</div>`;
+    }).join("");
+    card.innerHTML = `
+      <div class="simhead">
+        <div class="suits">${suitRows}</div>
+        <div class="verdictbox">
+          <span class="eyebrow" style="color:var(--felt-muted)">Après 1SA, le répondant dit</span>
+          <span class="big">${callLabel(rule[1])}</span>
+          <span style="color:var(--felt-muted);font-size:.9rem">règle n° ${hit + 1} · ${rule[0]}</span>
+        </div>
+      </div>
+      <div class="feat"><span>hcp ${f.hcp}</span><span>hl ${f.hl}</span><span>S ${f.S}</span><span>H ${f.H}</span><span>D ${f.D}</span><span>C ${f.C}</span><span>shape '${f.shape}'</span><span>balanced ${f.balanced ? "true" : "false"}</span></div>
+      <div style="font-size:.92rem">${rule[4]}</div>`;
+    const items = [...list.children];
+    items.forEach((li) => { li.className = ""; li.querySelector(".mark").textContent = ""; });
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const paint = (i) => {
+      const li = items[i];
+      if (i < hit) { li.className = "fail"; li.querySelector(".mark").textContent = "✗"; }
+      else if (i === hit) { li.className = "hit"; li.querySelector(".mark").textContent = "✓ retenue"; }
+      else { li.className = "later"; li.querySelector(".mark").textContent = "non lue"; }
+    };
+    if (reduce) { items.forEach((_, i) => paint(i)); return; }
+    let i = 0;
+    const step = () => {
+      paint(i);
+      if (i === hit) { for (let j = hit + 1; j < items.length; j++) paint(j); return; }
+      i++;
+      timer = setTimeout(step, 55);
+    };
+    step();
+  }
+
+  function select(hand, btn) {
+    for (const b of handsBox.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b === btn));
+    show(hand);
+  }
+
+  HANDS.forEach(([hand, label, expected]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `<span></span><small>${callLabel(expected)}</small>`;
+    b.firstChild.textContent = label;
+    b.addEventListener("click", () => select(hand, b));
+    handsBox.append(b);
+  });
+
+  document.getElementById("custom").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const err = document.getElementById("hand-err");
+    let res;
+    try { res = parseHand(document.getElementById("hand-input").value); }
+    catch (e) { res = { error: "Une carte apparaît deux fois." }; }
+    if (res.error) { err.textContent = res.error; return; }
+    err.textContent = "";
+    select(res.hand, null);
+  });
+
+  renderList();
+  select(HANDS[0][0], handsBox.querySelector("button"));
+})();
+</script>
+
+</body></html>

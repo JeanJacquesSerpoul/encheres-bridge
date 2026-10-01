@@ -3,7 +3,7 @@ package engine
 // Hand features the rule conditions read (tools/python_tools/SEF_2024_spec.md
 // §4). Every formula is a line-for-line port of features(), ptricks() and
 // quick_tricks() in tools/python_tools/sef_rules.py: the conformance test
-// replays the feature dump of sef_tests.json, so any drift shows at once.
+// replays the feature dump of tests.json, so any drift shows at once.
 
 import "sort"
 

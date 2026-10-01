@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Moteur de lecture des règles SEF 2024 : cli/rules/default.yaml (source), ou blocs ```yaml sef-rules d'un .md.
+"""Moteur de lecture des règles d'enchères : cli/systems/<id>/rules.yaml (source), ou blocs ```yaml sef-rules d'un .md.
 
-Le fichier de règles vit dans cli/rules/, où le moteur Go/WASM de la page le lit au chargement.
+Chaque système d'enchères vit dans cli/systems/<id>/, où le moteur Go/WASM de la page lit ses règles au
+chargement ; le SEF 2024 est cli/systems/sef/rules.yaml. Ses données de référence sont dans
+engine/testdata/systems/<id>/ (tools/python_tools/regen_system.py les régénère toutes).
 
 Usage :
-  python3 sef_rules.py ../../cli/rules/default.yaml --validate          # vérifie le fichier
-  python3 sef_rules.py ../../cli/rules/default.yaml --json rules.json   # exporte les règles expansées
-  python3 sef_rules.py ../../cli/rules/default.yaml --simulate 1000     # enchères sans intervention sur donnes aléatoires
-  python3 sef_rules.py ../../cli/rules/default.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C"
-  python3 sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json   # génère les cas de test
-  python3 sef_rules.py ../../cli/rules/default.yaml --check-tests sef_tests.json      # rejoue les cas de test
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --validate          # vérifie le fichier
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --json rules.json   # exporte les règles expansées
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --simulate 1000     # enchères sans intervention sur donnes aléatoires
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --hand "AK32.KQ4.A32.J32" --seq "1NT 2C"
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --gen-tests 1500 tests.json   # génère les cas de test
+  python3 sef_rules.py ../../cli/systems/sef/rules.yaml --check-tests tests.json      # rejoue les cas de test
 """
 import argparse, ast, itertools, json, os, random, re, sys
 from collections import Counter
@@ -17,7 +19,7 @@ from collections import Counter
 import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_RULES = os.path.normpath(os.path.join(HERE, '..', '..', 'cli', 'rules', 'default.yaml'))
+DEFAULT_RULES = os.path.normpath(os.path.join(HERE, '..', '..', 'cli', 'systems', 'sef', 'rules.yaml'))
 
 SUITS = 'SHDC'
 RANKS = 'AKQJT98765432'

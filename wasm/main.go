@@ -99,7 +99,7 @@ func wasmBids(_ js.Value, args []js.Value) any {
 	return call(args, engine.BidsJSON)
 }
 
-// wasmLoadRules installs the rules file (the text of cli/rules/default.yaml,
+// wasmLoadRules installs the rules file (the text of cli/systems/<id>/rules.yaml,
 // fetched by the page) that every later auction bids with.
 func wasmLoadRules(_ js.Value, args []js.Value) (out any) {
 	defer func() {

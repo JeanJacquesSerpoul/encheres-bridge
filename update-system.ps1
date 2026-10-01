@@ -1,5 +1,5 @@
 ﻿# update-system.ps1 — met à jour un système d'enchères après modification de
-# son fichier de règles (cli\rules\<système>.yaml).
+# ses règles (cli\systems\<système>\rules.yaml).
 #
 # Régénère tout ce qui en dérive (données de test, enchères de référence,
 # PDF, référence du banc du par s'il n'en a pas), puis lance les tests.
@@ -7,7 +7,7 @@
 # main), commit, push et pull request.
 #
 # Usage : .\update-system.ps1 <système> [-AcceptPar] [-Publish] [-Message "..."]
-#   <système>    nom du système : new, ou new.yaml (voir cli\rules\index.json)
+#   <système>    identifiant du système : sef, new... (voir cli\systems\index.json)
 #   -AcceptPar   accepter une hausse de l'écart au par (réécrit la référence du banc)
 #   -Publish     publier : branche, commit, push et pull request (gh)
 #   -Message     message du commit et titre de la PR (défaut : « Système <nom> : mise à jour des règles »)
@@ -27,10 +27,10 @@ function Invoke-Checked([string]$what, [scriptblock]$cmd) {
     if ($LASTEXITCODE -ne 0) { throw "$what a échoué (code $LASTEXITCODE)." }
 }
 
-$stem = [IO.Path]::GetFileNameWithoutExtension((Split-Path $System -Leaf))
-$file = "$stem.yaml"
-if (-not (Test-Path (Join-Path $root "cli\rules\$file"))) {
-    throw "cli\rules\$file est introuvable."
+$stem = Split-Path $System -Leaf
+$file = "cli/systems/$stem/rules.yaml"
+if (-not (Test-Path (Join-Path $root $file))) {
+    throw "$file est introuvable."
 }
 if (-not $Message) { $Message = "Système $stem : mise à jour des règles" }
 
@@ -47,8 +47,8 @@ foreach ($p in "python", "python3") {
 if (-not $python) { throw "Aucun Python avec PyYAML dans le PATH (pip install pyyaml)." }
 if (-not (Get-Command go -ErrorAction SilentlyContinue)) { throw "Go est introuvable dans le PATH." }
 
-Write-Host "== Régénération de $file"
-$regenArgs = @("regen_system.py", "../../cli/rules/$file")
+Write-Host "== Régénération du système $stem"
+$regenArgs = @("regen_system.py", $stem)
 if ($AcceptPar) { $regenArgs += "--par-update" }
 Push-Location (Join-Path $root "tools\python_tools")
 try {
@@ -70,7 +70,7 @@ try {
 
     if (-not $Publish) {
         Write-Host ""
-        Write-Host "$file est à jour et les tests passent. Pour publier : .\update-system.ps1 $stem -Publish"
+        Write-Host "Le système $stem est à jour et les tests passent. Pour publier : .\update-system.ps1 $stem -Publish"
         exit 0
     }
 
@@ -80,9 +80,9 @@ try {
         $branch = "rules/$stem-" + (Get-Date -Format "yyyyMMdd-HHmm")
         Invoke-Checked "git switch" { git switch -c $branch }
     }
-    # Seuls les fichiers des systèmes d'enchères : règles, PDF, index et données
-    # de test. Les motifs sont appliqués par git, fichiers supprimés compris.
-    Invoke-Checked "git add" { git add -A -- cli/rules "engine/testdata/*.json" "tools/python_tools/*.json" }
+    # Seuls les fichiers des systèmes d'enchères : règles, PDF, donnes
+    # thématiques, index et données de test, fichiers supprimés compris.
+    Invoke-Checked "git add" { git add -A -- cli/systems engine/testdata/systems }
     git diff --cached --quiet
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Rien à publier : aucun changement."
@@ -95,7 +95,7 @@ try {
         if ($LASTEXITCODE -ne 0) {
             Invoke-Checked "gh pr create" {
                 gh pr create --base main --title $Message `
-                    --body "Mise à jour du système d'enchères ``$file``, données de test et PDF régénérés par update-system.ps1."
+                    --body "Mise à jour du système d'enchères ``$stem`` (``$file``), données de test et PDF régénérés par update-system.ps1."
             }
         }
     } else {

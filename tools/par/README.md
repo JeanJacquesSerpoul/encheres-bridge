@@ -37,7 +37,7 @@ IMP. Le tout prend moins d'une seconde, sans solveur.
 
 **La règle** : le moteur est déterministe, le total est exact, et le test
 échoue dès qu'il dépasse la référence
-([`par_bench_baseline.json`](../../engine/testdata/par_bench_baseline.json)).
+([`par_baseline.json`](../../engine/testdata/systems/sef/par_baseline.json)).
 Un total plus bas passe, et le test rappelle de verrouiller le gain. Le banc
 fait partie de `go test ./...`, qui tourne sur chaque PR (workflow `Tests`).
 
@@ -47,7 +47,7 @@ PAR_BENCH_UPDATE=1 go test -run TestParBenchmark ./engine   # réécrire la réf
 ```
 
 Réécrire la référence est le seul moyen de faire accepter une dégradation : le
-changement de `par_bench_baseline.json` apparaît alors dans le diff de la PR,
+changement de `par_baseline.json` apparaît alors dans le diff de la PR,
 avec son chiffre.
 
 **Comparer deux versions du moteur en quelques secondes** : `PAR_BENCH_OUT`

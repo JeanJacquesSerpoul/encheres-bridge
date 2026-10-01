@@ -9,15 +9,15 @@ package engine
 //
 // The score is the total distance to the par, in IMPs, over the whole bench.
 // The engine is deterministic, so the figure is exact: the test fails as soon
-// as it grows beyond testdata/par_bench_baseline.json. A lower figure passes,
+// as it grows beyond testdata/systems/<id>/par_baseline.json. A lower figure passes,
 // with a reminder to lock the gain in (PAR_BENCH_UPDATE=1 rewrites the
 // baseline). PAR_BENCH_OUT=<file> writes the replayed deals in the par.json
 // shape tools/par/compare.js reads, so two engine versions compare in seconds.
 //
-// Each system of cli/rules/index.json is held to its own baseline
-// (par_bench_baseline.mon-systeme.json for mon-systeme.yaml): two systems bid
-// differently, and neither is a regression of the other. Run one with
-// -run TestParBenchmark/<stem>; PAR_BENCH_OUT gets the stem the same way.
+// Each system of cli/systems/index.json is held to its own baseline: two
+// systems bid differently, and neither is a regression of the other. Run one
+// with -run TestParBenchmark/<id>; with several systems, PAR_BENCH_OUT gets
+// the id before its extension.
 
 import (
 	"bufio"
@@ -25,13 +25,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
 
 const (
-	parBenchData     = "testdata/par_bench.jsonl.gz"
-	parBenchBaseline = "testdata/par_bench_baseline.json"
+	parBenchData = "testdata/par_bench.jsonl.gz"
 )
 
 // benchDeal is one line of the bench: the deal and everything that follows
@@ -335,19 +335,21 @@ func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 	t.Log(describe(got))
 
 	if out := os.Getenv("PAR_BENCH_OUT"); out != "" {
-		out = s.dataFile(out)
+		if s.ID != defaultSystem {
+			out = strings.TrimSuffix(out, filepath.Ext(out)) + "." + s.ID + filepath.Ext(out)
+		}
 		writeJSON(t, out, map[string]any{"meta": map[string]any{"source": "par_bench"}, "deals": results})
 		t.Logf("donnes rejouées écrites dans %s", out)
 	}
 	if os.Getenv("PAR_BENCH_UPDATE") != "" {
-		writeJSON(t, s.parBaseline(), got)
-		t.Logf("référence réécrite : %s", s.parBaseline())
+		writeJSON(t, s.data("par_baseline.json"), got)
+		t.Logf("référence réécrite : %s", s.data("par_baseline.json"))
 		return
 	}
 
-	data, err := os.ReadFile(s.parBaseline())
+	data, err := os.ReadFile(s.data("par_baseline.json"))
 	if err != nil {
-		t.Fatalf("%v (PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine crée la référence)", err, s.Stem)
+		t.Fatalf("%v (PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine crée la référence)", err, s.ID)
 	}
 	var want benchSummary
 	if err := json.Unmarshal(data, &want); err != nil {
@@ -362,9 +364,9 @@ func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 		t.Fatalf("l'écart au par augmente : %d → %d IMP (+%d)\nréférence : %s\nactuel : %s\n"+
 			"pour voir les donnes qui changent : PAR_BENCH_OUT=… sur les deux versions, puis tools/par/compare.js ;\n"+
 			"une dégradation voulue se valide avec PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine (visible dans le diff de la PR)",
-			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, describe(want), describe(got), s.Stem)
+			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, describe(want), describe(got), s.ID)
 	case got.TotalIMP < want.TotalIMP:
 		t.Logf("l'écart au par baisse : %d → %d IMP (%d). Verrouiller le gain : PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine",
-			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, s.Stem)
+			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, s.ID)
 	}
 }

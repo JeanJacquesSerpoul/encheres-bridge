@@ -22,32 +22,43 @@
   const q = (sel) => document.querySelector(sel);
   const WASM_URL = "bids.wasm";
   // Les règles d'enchères, lues par le moteur à chaque chargement de la page :
-  // on les modifie sans recompiler bids.wasm (cli/rules/README.md). Le système
-  // choisi dans les réglages est mémorisé ; default.yaml sinon.
-  const RULES_DIR = "rules/";
-  const DEFAULT_RULES = "default.yaml";
+  // on les modifie sans recompiler bids.wasm (cli/systems/README.md). Chaque
+  // système est un dossier de systems/, désigné par son identifiant ; celui
+  // choisi dans les réglages est mémorisé, le SEF sinon.
+  const SYSTEMS_DIR = "systems/";
+  const DEFAULT_SYSTEM = "sef";
   const RULES_KEY = "bids.rules";
-  // Un nom de fichier du dossier rules/, rien d'autre : ni chemin, ni URL.
-  const RULES_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*\.ya?ml$/;
+  // Un nom de dossier de systems/, rien d'autre : ni chemin, ni URL.
+  const SYSTEM_ID = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
+
+  function rulesUrl(id) {
+    return SYSTEMS_DIR + id + "/rules.yaml";
+  }
 
   let modulePromise = null; // le module WASM, instancié une fois pour toutes
   let loaded = false;
-  let rules = null; // { file, promise } : les règles installées dans le module
+  let rules = null; // { id, promise } : les règles installées dans le module
 
   function rulesChoice() {
     try {
-      const saved = localStorage.getItem(RULES_KEY);
-      if (saved && RULES_NAME.test(saved)) return saved;
+      let saved = localStorage.getItem(RULES_KEY);
+      // Avant les dossiers par système, le choix retenu était un fichier de
+      // rules/ : default.yaml (le SEF) ou new.yaml.
+      if (saved && /\.ya?ml$/.test(saved)) {
+        saved = saved.replace(/\.ya?ml$/, "");
+        if (saved === "default") saved = DEFAULT_SYSTEM;
+      }
+      if (saved && SYSTEM_ID.test(saved)) return saved;
     } catch (err) {
       /* stockage inaccessible : le système par défaut */
     }
-    return DEFAULT_RULES;
+    return DEFAULT_SYSTEM;
   }
 
-  function saveRulesChoice(file) {
+  function saveRulesChoice(id) {
     try {
-      if (file === DEFAULT_RULES) localStorage.removeItem(RULES_KEY);
-      else localStorage.setItem(RULES_KEY, file);
+      if (id === DEFAULT_SYSTEM) localStorage.removeItem(RULES_KEY);
+      else localStorage.setItem(RULES_KEY, id);
     } catch (err) {
       /* rien à faire : le choix vaudra pour cette session seulement */
     }
@@ -92,26 +103,26 @@
   }
 
   function loadModule() {
-    const file = rulesChoice();
+    const id = rulesChoice();
     // Les règles se téléchargent pendant que le module s'instancie ; leur
     // erreur éventuelle n'est levée qu'après, pour ne pas laisser de rejet
     // sans gestionnaire.
-    const text = rules && rules.file === file ? null : fetchRules(file).then(
+    const text = rules && rules.id === id ? null : fetchRules(id).then(
       (body) => ({ body }),
       (error) => ({ error })
     );
     return loadWasm().then((api) => {
-      if (!rules || rules.file !== file) {
+      if (!rules || rules.id !== id) {
         const promise = text.then((got) => {
           if (got.error) throw got.error;
           const res = api.loadRules(got.body);
           if (!res || !res.ok) {
             const detail = (res && res.error) || tr("wasmFailed");
-            console.error(RULES_DIR + file + " :", detail);
-            throw new Error(tr("rulesInvalid").replace("{file}", file) + " " + detail);
+            console.error(rulesUrl(id) + " :", detail);
+            throw new Error(tr("rulesInvalid").replace("{file}", rulesUrl(id)) + " " + detail);
           }
         });
-        rules = { file, promise };
+        rules = { id, promise };
         promise.catch(() => {
           if (rules && rules.promise === promise) rules = null;
         });
@@ -140,10 +151,10 @@
 
   // Le texte des règles. no-cache : une règle modifiée doit servir dès le
   // rechargement de la page, pas quand le cache du navigateur expire.
-  async function fetchRules(file) {
-    const resp = await fetch(RULES_DIR + file, { cache: "no-cache" });
+  async function fetchRules(id) {
+    const resp = await fetch(rulesUrl(id), { cache: "no-cache" });
     if (!resp.ok) {
-      throw new Error(tr("rulesMissing").replace("{file}", file) + " (HTTP " + resp.status + ")");
+      throw new Error(tr("rulesMissing").replace("{file}", rulesUrl(id)) + " (HTTP " + resp.status + ")");
     }
     return resp.text();
   }
@@ -195,15 +206,16 @@
   }
 
   window.bidsLocal = {
-    // Le système d'enchères : le fichier de rules/ que le moteur applique.
-    // set() mémorise le choix ; les règles sont (re)chargées au prochain
-    // appel au moteur — selfCheck, d'ordinaire, que la page relance aussitôt.
+    // Le système d'enchères, par son identifiant : le dossier de systems/
+    // dont le moteur applique les règles. set() mémorise le choix ; les
+    // règles sont (re)chargées au prochain appel au moteur — selfCheck,
+    // d'ordinaire, que la page relance aussitôt.
     rules: {
-      defaultFile: DEFAULT_RULES,
+      defaultId: DEFAULT_SYSTEM,
       current: rulesChoice,
-      set(file) {
-        if (!RULES_NAME.test(file)) throw new Error("invalid rules file name: " + file);
-        saveRulesChoice(file);
+      set(id) {
+        if (!SYSTEM_ID.test(id)) throw new Error("invalid system id: " + id);
+        saveRulesChoice(id);
       },
     },
     bid: (pbn, lang) => call("bid", pbn, lang).then(JSON.parse),

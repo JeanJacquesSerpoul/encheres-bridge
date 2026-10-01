@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Description lisible d'un système d'enchères : un fichier de règles YAML rendu en PDF.
 
-Usage : python rules_pdf.py ../../cli/rules/default.yaml [-o default.pdf] [--lang FR|EN] [--title "SEF 2024"]
+Usage : python rules_pdf.py ../../cli/systems/sef/rules.yaml [-o rules.pdf] [--lang FR|EN] [--title "SEF 2024"]
 
 Les règles sont présentées dans l'ordre du fichier, section par section : la séquence (vue par la
 paire qui parle), l'enchère, sa condition traduite en clair, sa signification et son caractère forcing.
@@ -494,7 +494,7 @@ class Doc:
 
 
 def fingerprint(path):
-    """Empreinte du fichier de règles, fins de ligne ramenées à LF (comme sef_tests.json)."""
+    """Empreinte du fichier de règles, fins de ligne ramenées à LF (comme tests.json)."""
     return hashlib.sha256(open(path, "rb").read().replace(b"\r\n", b"\n")).hexdigest()
 
 
@@ -534,7 +534,7 @@ def build(src, out, lang, title):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("rules", help="fichier de règles YAML (ex. ../../cli/rules/default.yaml)")
+    ap.add_argument("rules", help="fichier de règles YAML (ex. ../../cli/systems/sef/rules.yaml)")
     ap.add_argument("-o", "--output", help="PDF à écrire (défaut : même nom que les règles, .pdf ; .en.pdf en anglais)")
     ap.add_argument("--lang", default="FR", type=str.upper, choices=["FR", "EN"])
     ap.add_argument("--title", default="SEF 2024", help="nom du système, en tête du document")

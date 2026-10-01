@@ -4,7 +4,8 @@ package engine
 // bids the deals of testdata/*.pbn and the start of the par bench with
 // pbn_auction.py (all four hands, so competition, legality, the end of the
 // auction and the agreed trump are all exercised), and this test replays them,
-// for every system of cli/rules/index.json, each against its own file.
+// for every system of cli/systems/index.json, each against its own
+// testdata/systems/<id>/golden.json.
 
 import (
 	"encoding/json"
@@ -12,8 +13,6 @@ import (
 	"os"
 	"testing"
 )
-
-const goldenPython = "testdata/golden_python.json"
 
 type goldenCase struct {
 	Name       string `json:"name"`
@@ -42,7 +41,7 @@ func TestGoldenPython(t *testing.T) {
 }
 
 func testGoldenPython(t *testing.T, s *testSystem) {
-	ref := s.goldenPython()
+	ref := s.data("golden.json")
 	data, err := os.ReadFile(ref)
 	if err != nil {
 		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())

@@ -1,6 +1,6 @@
 package engine
 
-// Loading the bidding rules: the YAML file of cli/rules/ (format described in
+// Loading the bidding rules: a system's cli/systems/<id>/rules.yaml (format described in
 // tools/python_tools/SEF_2024_spec.md §2-3), its `for:` templates expanded and
 // every rule validated -- a port of load() and validate() in
 // tools/python_tools/sef_rules.py, down to the order the substitutions run in.
@@ -400,7 +400,7 @@ func LoadRulesText(data []byte) (int, error) {
 	return len(rs.Rules), nil
 }
 
-var errNoRules = errors.New("no bidding rules loaded (rules/default.yaml)")
+var errNoRules = errors.New("no bidding rules loaded (systems/<id>/rules.yaml)")
 
 func currentRules() (*RuleSet, error) {
 	rs := activeRules.Load()

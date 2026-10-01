@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # update-system.sh — met à jour un système d'enchères après modification de
-# son fichier de règles (cli/rules/<système>.yaml).
+# ses règles (cli/systems/<système>/rules.yaml).
 #
 # Régénère tout ce qui en dérive (données de test, enchères de référence,
 # PDF, référence du banc du par s'il n'en a pas), puis lance les tests.
@@ -8,7 +8,7 @@
 # commit, push et pull request.
 #
 # Usage : ./update-system.sh [-a] [-p] [-m message] [-h] <système>
-#   <système>  nom du système : new, ou new.yaml (voir cli/rules/index.json)
+#   <système>  identifiant du système : sef, new... (voir cli/systems/index.json)
 #   -a  accepter une hausse de l'écart au par (réécrit la référence du banc)
 #   -p  publier : branche, commit, push et pull request (gh)
 #   -m  message du commit et titre de la PR (défaut : « Système <nom> : mise à jour des règles »)
@@ -35,11 +35,9 @@ shift $((OPTIND - 1))
 [ $# -eq 1 ] || { usage >&2; exit 1; }
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-name="$(basename "$1")"
-stem="${name%.yaml}"
-stem="${stem%.yml}"
-file="$stem.yaml"
-[ -f "$root/cli/rules/$file" ] || { echo "cli/rules/$file est introuvable." >&2; exit 1; }
+stem="$(basename "$1")"
+file="cli/systems/$stem/rules.yaml"
+[ -f "$root/$file" ] || { echo "$file est introuvable." >&2; exit 1; }
 [ -n "$message" ] || message="Système $stem : mise à jour des règles"
 
 # Le premier Python qui sait lire le YAML : python3 et python ne sont pas
@@ -54,8 +52,8 @@ done
 [ -n "$python" ] || { echo "Aucun Python avec PyYAML dans le PATH (pip install pyyaml)." >&2; exit 1; }
 command -v go >/dev/null 2>&1 || { echo "Go est introuvable dans le PATH." >&2; exit 1; }
 
-echo "== Régénération de $file"
-regen_args=("../../cli/rules/$file")
+echo "== Régénération du système $stem"
+regen_args=("$stem")
 [ "$accept_par" -eq 1 ] && regen_args+=(--par-update)
 (cd "$root/tools/python_tools" && "$python" regen_system.py "${regen_args[@]}")
 
@@ -69,7 +67,7 @@ fi
 
 if [ "$publish" -eq 0 ]; then
     echo
-    echo "$file est à jour et les tests passent. Pour publier : ./update-system.sh -p $stem"
+    echo "Le système $stem est à jour et les tests passent. Pour publier : ./update-system.sh -p $stem"
     exit 0
 fi
 
@@ -80,9 +78,9 @@ if [ "$branch" = "main" ]; then
     branch="rules/$stem-$(date +%Y%m%d-%H%M)"
     git switch -c "$branch"
 fi
-# Seuls les fichiers des systèmes d'enchères : règles, PDF, index et données de test.
-# Motifs entre guillemets : git les applique lui-même, fichiers supprimés compris.
-git add -A -- cli/rules 'engine/testdata/*.json' 'tools/python_tools/*.json'
+# Seuls les fichiers des systèmes d'enchères : règles, PDF, donnes thématiques,
+# index et données de test, fichiers supprimés compris.
+git add -A -- cli/systems engine/testdata/systems
 if git diff --cached --quiet; then
     echo "Rien à publier : aucun changement."
     exit 0
@@ -91,7 +89,7 @@ git commit -m "$message"
 git push -u origin "$branch"
 if command -v gh >/dev/null 2>&1; then
     gh pr view "$branch" >/dev/null 2>&1 || gh pr create --base main --title "$message" \
-        --body "Mise à jour du système d'enchères \`$file\`, données de test et PDF régénérés par update-system.sh."
+        --body "Mise à jour du système d'enchères \`$stem\` (\`$file\`), données de test et PDF régénérés par update-system.sh."
 else
     echo "gh est introuvable : ouvrir la pull request de $branch sur GitHub."
 fi

@@ -1,4 +1,4 @@
-"""Génère un fichier PBN de donnes thématiques pour cli/pbn/.
+"""Génère un fichier PBN de donnes thématiques pour cli/systems/<id>/pbn/.
 
 Tire des donnes au hasard et garde celles dont les enchères, selon les règles,
 emploient une règle dont l'id correspond à l'expression donnée. Le fichier
@@ -8,8 +8,11 @@ thématiques » de l'application affiche :
     % Titre-FR: 4e couleur forcing
     % Titre-EN: Fourth suit forcing
 
+Les donnes sont enchéries avec les règles du système (--rules, le SEF par défaut) : un
+thème se range dans le dossier pbn/ de ce système, et se déclare dans son index.json.
+
 Exemple :
-    python gen_theme_pbn.py "^fcf\\.[a-z]+\\.ask$" ../../cli/pbn/4e-couleur-forcing.pbn \\
+    python gen_theme_pbn.py "^fcf\\.[a-z]+\\.ask$" ../../cli/systems/sef/pbn/4e-couleur-forcing.pbn \\
         --fr "4e couleur forcing" --en "Fourth suit forcing"
 """
 import argparse
@@ -51,7 +54,7 @@ def main():
     ap.add_argument("--seed", type=int, default=2024, help="graine du tirage (2024)")
     ap.add_argument("--max-per-rule", type=int, default=0,
                     help="au plus N donnes par règle retenue, pour équilibrer les variantes du thème (0 : sans limite)")
-    ap.add_argument("--rules", default=os.path.normpath(os.path.join(HERE, "../../cli/rules/default.yaml")))
+    ap.add_argument("--rules", default=os.path.normpath(os.path.join(HERE, "../../cli/systems/sef/rules.yaml")))
     args = ap.parse_args()
 
     rules = sr.load(args.rules)

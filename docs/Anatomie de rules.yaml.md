@@ -32,9 +32,43 @@ Chaque règle répond à une seule question : *dans cette séquence, avec cette 
 2. 2**seq**Le motif de la séquence déjà enchérie, vue par la paire. `""` pour une ouverture ; une liste pour plusieurs séquences équivalentes, ici 1SA, contré ou non.
 3. 3**call**L'enchère proposée : `1C` à `7NT`, `P`, `X`, `XX`.
 4. 4**cond**La condition sur la main de celui qui parle. Une expression : points, longueurs, forme, levées…
-5. 5**forcing**La force de l'enchère.
+5. 5**forcing**La force de l'enchère : ce qu'elle impose au partenaire.
 
-   NFF1FMSOINVRELASKTOPEN
+   NF
+
+   non forcing : le partenaire peut passer
+
+   F1
+
+   forcing un tour : le partenaire doit reparler
+
+   FM
+
+   forcing de manche : on ne s'arrête pas avant la manche
+
+   SO
+
+   conclusion : pour jouer, le partenaire passe
+
+   INV
+
+   invitation : le partenaire choisit entre s'arrêter et conclure
+
+   REL
+
+   relais ou Texas : demande au partenaire une enchère précise
+
+   ASK
+
+   question : Blackwood, demande de clés ou de contrôles
+
+   TO
+
+   contre d'appel : demande au partenaire de choisir une couleur
+
+   PEN
+
+   contre punitif : pour jouer le contrat adverse contré
 6. 6**meaning, meaning_en**Le commentaire affiché, en français et en anglais, dans la séquence commentée.
 7. 7**status**L'origine de la règle.
 
@@ -88,35 +122,179 @@ Un motif est une suite de jetons séparés par des espaces. Sans joker de tête,
 
 Une condition est un petit sous-ensemble d'expressions Python : `and`, `or`, `not`, comparaisons chaînées (`9 <= hl <= 12`), `+`, `-`, `in`. Elle ne lit que la main de celui qui parle. Ce que le partenaire a montré, la séquence le dit déjà.
 
+Main d'exemple : les pastilles à droite de chaque nom donnent sa valeur pour cette main
+
+♠ A R V 5 3♥ R D 4 3♦ 2♣ V 3 2
+
 ### Points
 
-hcphldhhld
+hcp
 
-H (A 4, R 3, D 2, V 1), HL avec les cartes au-delà de la 4e, DH et HLD avec les courtes.
+Points d'honneur, H : As 4, Roi 3, Dame 2, Valet 1.
+
+14
+
+hl
+
+H + 1 point par carte au-delà de la 4e dans chaque couleur (5e pique : +1).
+
+15
+
+dh
+
+H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2).
+
+16
+
+hld
+
+HL + les mêmes points de courte.
+
+17
 
 ### Longueurs et forme
 
-SHDCshapebalancedsemibalanced
+S H D C
 
-`shape` vaut par exemple `'5332'`.
+Longueur à pique, cœur, carreau, trèfle.
+
+5 4 1 3
+
+shape
+
+Les quatre longueurs, de la plus longue à la plus courte, écrites d'un bloc ; se compare à une chaîne.
+
+'5431'
+
+balanced
+
+Main régulière : 4333, 4432 ou 5332.
+
+false
+
+semibalanced
+
+Main semi-régulière : 5422 ou 6322.
+
+false
 
 ### Levées et contrôles
 
-ptricksqtrickssidetrickslosersaceskings
+ptricks
 
-Levées de jeu, de défense, perdantes.
+Levées de jeu estimées : par couleur, les cartes au-delà de la 3e plus les honneurs qui font levée.
+
+6
+
+qtricks
+
+Levées de défense : par couleur, A R 2, A D 1,5, A 1, R D 1, R second 0,5.
+
+3
+
+sidetricks
+
+`qtricks` sans compter la couleur la plus longue.
+
+1
+
+losers
+
+Perdantes : dans les trois premières cartes de chaque couleur, les As, Rois et Dames qui manquent.
+
+6
+
+aces, kings
+
+Nombre d'As, nombre de Rois.
+
+1, 2
 
 ### Par couleur
 
-stop('H')keycards('S')top(s)hcp_in(s)short(s)ctrl1(s)
+Ces fonctions prennent une couleur : `'S'`, `'H'`, `'D'` ou `'C'`.
 
-Arrêt, clés, honneurs, courte, contrôles.
+stop(s)
+
+Arrêt : As, Roi second, Dame troisième ou Valet quatrième.
+
+stop('C') false
+
+keycards(s)
+
+Clés pour le Blackwood : les As, plus le Roi de la couleur `s`.
+
+keycards('S') 2
+
+ace(s), king(s), queen(s)
+
+La couleur contient l'As, le Roi, la Dame.
+
+queen('H') true
+
+top(s)
+
+Nombre d'honneurs parmi As, Roi, Dame.
+
+top('S') 2
+
+solid(s)
+
+As, Roi et Dame ensemble.
+
+solid('S') false
+
+hcp_in(s)
+
+Points d'honneur de la couleur.
+
+hcp_in('S') 8
+
+short(s)
+
+Singleton ou chicane.
+
+short('D') true
+
+ctrl1(s)
+
+Contrôle de premier tour : As ou chicane.
+
+ctrl1('H') false
+
+ctrl2(s)
+
+Contrôle de deuxième tour : As, Roi, singleton ou chicane.
+
+ctrl2('D') true
+
+max(…), min(…)
+
+Le plus grand, le plus petit de leurs arguments.
+
+max(S, H) 5
 
 ### Contexte
 
-vulopp_vulseat
+Pas la main, mais la donne : vulnérabilité (tag PBN `[Vulnerable]`) et position.
 
-Vulnérabilité des deux camps, rang du joueur depuis le donneur : la règle des 15 lit `seat == 4`.
+vul
+
+Le camp de celui qui parle est vulnérable.
+
+true / false
+
+opp_vul
+
+Le camp adverse est vulnérable : un barrage peut être plus léger en vulnérabilité favorable, `opp_vul and not vul`.
+
+true / false
+
+seat
+
+Rang de celui qui parle, compté depuis le donneur : 1 à 4. Les passes adverses n'étant pas dans la séquence, c'est lui qui distingue une ouverture en 1re ou en 4e position (règle des 15 : `seat == 4`).
+
+1 à 4
 
 5 · L'ordre décide
 

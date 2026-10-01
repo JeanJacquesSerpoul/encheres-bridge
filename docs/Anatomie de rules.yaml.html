@@ -112,6 +112,9 @@ pre.yaml {
 .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); margin-right: 6px; vertical-align: -1px; }
 .legend i.opt { background: transparent; border: 1.5px dashed var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.codes { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; margin: 4px 0 0; font-size: .9rem; }
+.codes dt { font-family: var(--font-mono); font-size: .78rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--tint); border: 1px solid var(--line); justify-self: start; align-self: start; }
+.codes dd { margin: 0; color: var(--muted); }
 .chip { font-family: var(--font-mono); font-size: .78rem; padding: 2px 8px; border-radius: 999px; background: var(--tint); border: 1px solid var(--line); }
 
 /* ---------- séquence vue par la paire ---------- */
@@ -146,8 +149,18 @@ pre.yaml {
 .verdict.no { background: var(--ko-bg); color: var(--red); }
 
 /* ---------- vocabulaire des conditions ---------- */
-.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
-.vocab > div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 8px; align-content: start; }
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 12px; }
+.vocab > div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.exhand { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding: 14px 22px; }
+.exsuits { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--font-mono); font-size: 1.02rem; font-weight: 600; }
+.defs { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px 12px; margin: 0; align-items: baseline; }
+.defs dt { font-family: var(--font-mono); font-size: .82rem; font-weight: 600; color: var(--accent); }
+.defs dd { margin: 0; font-size: .9rem; color: var(--muted); }
+.defs dd.here { font-family: var(--font-mono); font-size: .78rem; color: var(--ink); background: var(--tint); padding: 1px 7px; border-radius: 6px; justify-self: end; white-space: nowrap; }
+@media (max-width: 520px) {
+  .defs { grid-template-columns: minmax(0, 1fr) auto; }
+  .defs dt { grid-column: 1 / -1; margin-top: 4px; }
+}
 .vocab h3 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .vocab p { font-size: .88rem; color: var(--muted); }
 
@@ -290,7 +303,17 @@ footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--lin
         <li><span class="pin">2</span><b>seq</b><span>Le motif de la séquence déjà enchérie, vue par la paire. <code>""</code> pour une ouverture ; une liste pour plusieurs séquences équivalentes, ici 1SA, contré ou non.</span></li>
         <li><span class="pin">3</span><b>call</b><span>L'enchère proposée : <code>1C</code> à <code>7NT</code>, <code>P</code>, <code>X</code>, <code>XX</code>.</span></li>
         <li><span class="pin">4</span><b>cond</b><span>La condition sur la main de celui qui parle. Une expression : points, longueurs, forme, levées…</span></li>
-        <li><span class="pin">5</span><b>forcing</b><span>La force de l'enchère.</span><div class="chips" style="grid-column:2"><span class="chip">NF</span><span class="chip">F1</span><span class="chip">FM</span><span class="chip">SO</span><span class="chip">INV</span><span class="chip">REL</span><span class="chip">ASK</span><span class="chip">TO</span><span class="chip">PEN</span></div></li>
+        <li><span class="pin">5</span><b>forcing</b><span>La force de l'enchère : ce qu'elle impose au partenaire.</span><dl class="codes" style="grid-column:2">
+          <dt>NF</dt><dd>non forcing : le partenaire peut passer</dd>
+          <dt>F1</dt><dd>forcing un tour : le partenaire doit reparler</dd>
+          <dt>FM</dt><dd>forcing de manche : on ne s'arrête pas avant la manche</dd>
+          <dt>SO</dt><dd>conclusion : pour jouer, le partenaire passe</dd>
+          <dt>INV</dt><dd>invitation : le partenaire choisit entre s'arrêter et conclure</dd>
+          <dt>REL</dt><dd>relais ou Texas : demande au partenaire une enchère précise</dd>
+          <dt>ASK</dt><dd>question : Blackwood, demande de clés ou de contrôles</dd>
+          <dt>TO</dt><dd>contre d'appel : demande au partenaire de choisir une couleur</dd>
+          <dt>PEN</dt><dd>contre punitif : pour jouer le contrat adverse contré</dd>
+        </dl></li>
         <li><span class="pin">6</span><b>meaning, meaning_en</b><span>Le commentaire affiché, en français et en anglais, dans la séquence commentée.</span></li>
         <li><span class="pin">7</span><b>status</b><span>L'origine de la règle.</span><div class="chips" style="grid-column:2"><span class="chip">sef</span><span class="chip">choix</span><span class="chip">sef2018</span><span class="chip">infere</span><span class="chip">a_verifier</span></div></li>
         <li><span class="pin opt">8</span><b>alert, trump, option, for</b><span>Facultatifs : enchère à alerter, atout convenu (§ 6), règle réservée à une option, modèle à dupliquer (§ 5).</span></li>
@@ -356,12 +379,64 @@ footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--lin
       <h2>Ce que <code>cond</code> peut lire</h2>
       <p>Une condition est un petit sous-ensemble d'expressions Python : <code>and</code>, <code>or</code>, <code>not</code>, comparaisons chaînées (<code>9 &lt;= hl &lt;= 12</code>), <code>+</code>, <code>-</code>, <code>in</code>. Elle ne lit que la main de celui qui parle. Ce que le partenaire a montré, la séquence le dit déjà.</p>
     </div>
+    <div class="felt exhand">
+      <span class="eyebrow" style="color:var(--felt-muted)">Main d'exemple : les pastilles à droite de chaque nom donnent sa valeur pour cette main</span>
+      <div class="exsuits"><span>♠ A R V 5 3</span><span><span style="color:#ff9d8f">♥</span> R D 4 3</span><span><span style="color:#ff9d8f">♦</span> 2</span><span>♣ V 3 2</span></div>
+    </div>
     <div class="vocab">
-      <div><h3>Points</h3><div class="chips"><span class="chip">hcp</span><span class="chip">hl</span><span class="chip">dh</span><span class="chip">hld</span></div><p>H (A 4, R 3, D 2, V 1), HL avec les cartes au-delà de la 4e, DH et HLD avec les courtes.</p></div>
-      <div><h3>Longueurs et forme</h3><div class="chips"><span class="chip">S</span><span class="chip">H</span><span class="chip">D</span><span class="chip">C</span><span class="chip">shape</span><span class="chip">balanced</span><span class="chip">semibalanced</span></div><p><code>shape</code> vaut par exemple <code>'5332'</code>.</p></div>
-      <div><h3>Levées et contrôles</h3><div class="chips"><span class="chip">ptricks</span><span class="chip">qtricks</span><span class="chip">sidetricks</span><span class="chip">losers</span><span class="chip">aces</span><span class="chip">kings</span></div><p>Levées de jeu, de défense, perdantes.</p></div>
-      <div><h3>Par couleur</h3><div class="chips"><span class="chip">stop('H')</span><span class="chip">keycards('S')</span><span class="chip">top(s)</span><span class="chip">hcp_in(s)</span><span class="chip">short(s)</span><span class="chip">ctrl1(s)</span></div><p>Arrêt, clés, honneurs, courte, contrôles.</p></div>
-      <div><h3>Contexte</h3><div class="chips"><span class="chip">vul</span><span class="chip">opp_vul</span><span class="chip">seat</span></div><p>Vulnérabilité des deux camps, rang du joueur depuis le donneur : la règle des 15 lit <code>seat == 4</code>.</p></div>
+      <div>
+        <h3>Points</h3>
+        <dl class="defs">
+          <dt>hcp</dt><dd>Points d'honneur, H : As 4, Roi 3, Dame 2, Valet 1.</dd><dd class="here">14</dd>
+          <dt>hl</dt><dd>H + 1 point par carte au-delà de la 4e dans chaque couleur (5e pique : +1).</dd><dd class="here">15</dd>
+          <dt>dh</dt><dd>H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2).</dd><dd class="here">16</dd>
+          <dt>hld</dt><dd>HL + les mêmes points de courte.</dd><dd class="here">17</dd>
+        </dl>
+      </div>
+      <div>
+        <h3>Longueurs et forme</h3>
+        <dl class="defs">
+          <dt>S H D C</dt><dd>Longueur à pique, cœur, carreau, trèfle.</dd><dd class="here">5 4 1 3</dd>
+          <dt>shape</dt><dd>Les quatre longueurs, de la plus longue à la plus courte, écrites d'un bloc ; se compare à une chaîne.</dd><dd class="here">'5431'</dd>
+          <dt>balanced</dt><dd>Main régulière : 4333, 4432 ou 5332.</dd><dd class="here">false</dd>
+          <dt>semibalanced</dt><dd>Main semi-régulière : 5422 ou 6322.</dd><dd class="here">false</dd>
+        </dl>
+      </div>
+      <div>
+        <h3>Levées et contrôles</h3>
+        <dl class="defs">
+          <dt>ptricks</dt><dd>Levées de jeu estimées : par couleur, les cartes au-delà de la 3e plus les honneurs qui font levée.</dd><dd class="here">6</dd>
+          <dt>qtricks</dt><dd>Levées de défense : par couleur, A R 2, A D 1,5, A 1, R D 1, R second 0,5.</dd><dd class="here">3</dd>
+          <dt>sidetricks</dt><dd><code>qtricks</code> sans compter la couleur la plus longue.</dd><dd class="here">1</dd>
+          <dt>losers</dt><dd>Perdantes : dans les trois premières cartes de chaque couleur, les As, Rois et Dames qui manquent.</dd><dd class="here">6</dd>
+          <dt>aces, kings</dt><dd>Nombre d'As, nombre de Rois.</dd><dd class="here">1, 2</dd>
+        </dl>
+      </div>
+      <div>
+        <h3>Par couleur</h3>
+        <p>Ces fonctions prennent une couleur : <code>'S'</code>, <code>'H'</code>, <code>'D'</code> ou <code>'C'</code>.</p>
+        <dl class="defs">
+          <dt>stop(s)</dt><dd>Arrêt : As, Roi second, Dame troisième ou Valet quatrième.</dd><dd class="here">stop('C') false</dd>
+          <dt>keycards(s)</dt><dd>Clés pour le Blackwood : les As, plus le Roi de la couleur <code>s</code>.</dd><dd class="here">keycards('S') 2</dd>
+          <dt>ace(s), king(s), queen(s)</dt><dd>La couleur contient l'As, le Roi, la Dame.</dd><dd class="here">queen('H') true</dd>
+          <dt>top(s)</dt><dd>Nombre d'honneurs parmi As, Roi, Dame.</dd><dd class="here">top('S') 2</dd>
+          <dt>solid(s)</dt><dd>As, Roi et Dame ensemble.</dd><dd class="here">solid('S') false</dd>
+          <dt>hcp_in(s)</dt><dd>Points d'honneur de la couleur.</dd><dd class="here">hcp_in('S') 8</dd>
+          <dt>short(s)</dt><dd>Singleton ou chicane.</dd><dd class="here">short('D') true</dd>
+          <dt>ctrl1(s)</dt><dd>Contrôle de premier tour : As ou chicane.</dd><dd class="here">ctrl1('H') false</dd>
+          <dt>ctrl2(s)</dt><dd>Contrôle de deuxième tour : As, Roi, singleton ou chicane.</dd><dd class="here">ctrl2('D') true</dd>
+          <dt>max(…), min(…)</dt><dd>Le plus grand, le plus petit de leurs arguments.</dd><dd class="here">max(S, H) 5</dd>
+        </dl>
+      </div>
+      <div>
+        <h3>Contexte</h3>
+        <p>Pas la main, mais la donne : vulnérabilité (tag PBN <code>[Vulnerable]</code>) et position.</p>
+        <dl class="defs">
+          <dt>vul</dt><dd>Le camp de celui qui parle est vulnérable.</dd><dd class="here">true / false</dd>
+          <dt>opp_vul</dt><dd>Le camp adverse est vulnérable : un barrage peut être plus léger en vulnérabilité favorable, <code>opp_vul and not vul</code>.</dd><dd class="here">true / false</dd>
+          <dt>seat</dt><dd>Rang de celui qui parle, compté depuis le donneur : 1 à 4. Les passes adverses n'étant pas dans la séquence, c'est lui qui distingue une ouverture en 1re ou en 4e position (règle des 15 : <code>seat == 4</code>).</dd><dd class="here">1 à 4</dd>
+        </dl>
+      </div>
     </div>
   </section>
 

@@ -60,7 +60,7 @@ func TestRulesPDFUpToDate(t *testing.T) {
 				continue
 			}
 			if !bytes.Contains(body, want) {
-				t.Errorf("%s ne décrit plus %s : le régénérer (cd tools/python_tools && python rules_pdf.py ../../cli/rules/%s [--lang EN])",
+				t.Errorf("%s ne décrit plus %s : le régénérer (cd tools/python_tools && python regen_system.py ../../cli/rules/%s)",
 					p, sys.File, sys.File)
 			}
 		}

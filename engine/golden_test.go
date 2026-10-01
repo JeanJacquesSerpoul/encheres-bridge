@@ -3,7 +3,8 @@ package engine
 // Whole auctions against the Python reference: tools/python_tools/gen_golden.py
 // bids the deals of testdata/*.pbn and the start of the par bench with
 // pbn_auction.py (all four hands, so competition, legality, the end of the
-// auction and the agreed trump are all exercised), and this test replays them.
+// auction and the agreed trump are all exercised), and this test replays them,
+// for every system of cli/rules/index.json, each against its own file.
 
 import (
 	"encoding/json"
@@ -37,10 +38,14 @@ func pyCall(c Call) string {
 }
 
 func TestGoldenPython(t *testing.T) {
-	loadTestRules(t)
-	data, err := os.ReadFile(goldenPython)
+	forEachSystem(t, testGoldenPython)
+}
+
+func testGoldenPython(t *testing.T, s *testSystem) {
+	ref := s.goldenPython()
+	data, err := os.ReadFile(ref)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())
 	}
 	var suite struct {
 		Cases []goldenCase `json:"cases"`
@@ -49,7 +54,7 @@ func TestGoldenPython(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(suite.Cases) < 300 {
-		t.Fatalf("%d donnes seulement dans %s", len(suite.Cases), goldenPython)
+		t.Fatalf("%d donnes seulement dans %s", len(suite.Cases), ref)
 	}
 	for _, c := range suite.Cases {
 		d := mustParsePBN(t, fmt.Sprintf("[Dealer %q]\n[Vulnerable %q]\n[Deal %q]\n", c.Dealer, c.Vulnerable, c.Deal))

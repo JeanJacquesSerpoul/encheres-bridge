@@ -3,6 +3,7 @@ package engine
 // The Go engine against the Python reference of tools/python_tools: the
 // expansion of the YAML against sef_rules.json, and the 9 326 cases of
 // sef_tests.json (hand features and chosen rule) against features/choose.
+// Both run for every system of cli/rules/index.json (see systems_test.go).
 
 import (
 	"bytes"
@@ -10,6 +11,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"sync"
@@ -17,11 +19,9 @@ import (
 )
 
 const (
-	rulesPath     = "../cli/rules/default.yaml"
-	pyRulesJSON   = "../tools/python_tools/sef_rules.json"
-	pyTestsJSON   = "../tools/python_tools/sef_tests.json"
-	regenerateCmd = "cd tools/python_tools && python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json " +
-		"--gen-tests 1500 sef_tests.json --seed 2024"
+	rulesPath   = "../cli/rules/default.yaml"
+	pyRulesJSON = "../tools/python_tools/sef_rules.json"
+	pyTestsJSON = "../tools/python_tools/sef_tests.json"
 )
 
 var (
@@ -85,7 +85,11 @@ func plain(v any) any {
 }
 
 func TestExpansionMatchesPython(t *testing.T) {
-	data, err := os.ReadFile(rulesPath)
+	forEachSystem(t, testExpansionMatchesPython)
+}
+
+func testExpansionMatchesPython(t *testing.T, s *testSystem) {
+	data, err := os.ReadFile(filepath.Join(rulesDir, s.File))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -93,21 +97,23 @@ func TestExpansionMatchesPython(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	pyData, err := os.ReadFile(pyRulesJSON)
+	ref := s.pyRulesJSON()
+	pyData, err := os.ReadFile(ref)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())
 	}
 	var want []map[string]any
 	if err := json.Unmarshal(pyData, &want); err != nil {
 		t.Fatal(err)
 	}
+	name := filepath.Base(ref)
 	if len(raw) != len(want) {
-		t.Fatalf("%d règles expansées, sef_rules.json en compte %d (regénérer : %s)", len(raw), len(want), regenerateCmd)
+		t.Fatalf("%d règles expansées, %s en compte %d (regénérer : %s)", len(raw), name, len(want), s.regenerateCmd())
 	}
 	for i, r := range raw {
 		got := plain(r).(map[string]any)
 		if !reflect.DeepEqual(got, want[i]) {
-			t.Fatalf("règle %d diffère de sef_rules.json :\n go : %v\n py : %v\n(regénérer : %s)", i+1, got, want[i], regenerateCmd)
+			t.Fatalf("règle %d diffère de %s :\n go : %v\n py : %v\n(regénérer : %s)", i+1, name, got, want[i], s.regenerateCmd())
 		}
 		var keys []string
 		for _, k := range r.keys {
@@ -119,9 +125,8 @@ func TestExpansionMatchesPython(t *testing.T) {
 			t.Fatalf("règle %s : champs %v", got["id"], keys)
 		}
 	}
-	rs := loadTestRules(t)
-	if len(rs.Rules) != len(want) {
-		t.Fatalf("LoadRules garde %d règles sur %d", len(rs.Rules), len(want))
+	if len(s.Rules.Rules) != len(want) {
+		t.Fatalf("LoadRules garde %d règles sur %d", len(s.Rules.Rules), len(want))
 	}
 }
 
@@ -184,10 +189,15 @@ type sefCase struct {
 }
 
 func TestConformancePython(t *testing.T) {
-	rs := loadTestRules(t)
-	data, err := os.ReadFile(pyTestsJSON)
+	forEachSystem(t, testConformancePython)
+}
+
+func testConformancePython(t *testing.T, s *testSystem) {
+	rs := s.Rules
+	ref := s.pyTestsJSON()
+	data, err := os.ReadFile(ref)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())
 	}
 	var suite struct {
 		SHA   string    `json:"source_sha256"`
@@ -197,12 +207,12 @@ func TestConformancePython(t *testing.T) {
 	if err := json.Unmarshal(data, &suite); err != nil {
 		t.Fatal(err)
 	}
-	yamlData, _ := os.ReadFile(rulesPath)
+	yamlData, _ := os.ReadFile(filepath.Join(rulesDir, s.File))
 	// The fingerprint ignores line endings, as sef_rules.py computes it: a
 	// Windows checkout (CRLF) and the CI's (LF) hold the same rules.
 	sum := sha256.Sum256(bytes.ReplaceAll(yamlData, []byte("\r\n"), []byte("\n")))
 	if hex.EncodeToString(sum[:]) != suite.SHA {
-		t.Fatalf("sef_tests.json a été généré depuis une autre version de default.yaml : regénérer (%s)", regenerateCmd)
+		t.Fatalf("%s a été généré depuis une autre version de %s : regénérer (%s)", filepath.Base(ref), s.File, s.regenerateCmd())
 	}
 	if len(suite.Cases) != suite.Count {
 		t.Fatalf("%d cas lus, l'en-tête en annonce %d", len(suite.Cases), suite.Count)

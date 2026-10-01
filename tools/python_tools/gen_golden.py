@@ -2,10 +2,11 @@
 """Génère les enchères de référence du moteur Go (engine/testdata/golden_python.json).
 
 Chaque donne est enchérie par pbn_auction.generate_auction (les quatre mains, adversaires
-compris) avec cli/rules/default.yaml ; le test Go TestGoldenPython rejoue les mêmes donnes
-et compare siège, enchère, règle et commentaire.
+compris) avec un fichier de règles, cli/rules/default.yaml par défaut ; le test Go
+TestGoldenPython rejoue les mêmes donnes et compare siège, enchère, règle et commentaire.
+Un autre système écrit son propre fichier : mon-systeme.yaml → golden_python.mon-systeme.json.
 
-Usage : python gen_golden.py [--random 200] [--seed 2024]
+Usage : python gen_golden.py [--rules ../../cli/rules/mon-systeme.yaml] [--random 300]
 """
 import argparse
 import glob
@@ -21,7 +22,7 @@ import sef_rules as sr          # noqa: E402
 import pbn_auction as pa        # noqa: E402
 
 RULES = os.path.join(ROOT, "cli", "rules", "default.yaml")
-OUT = os.path.join(ROOT, "engine", "testdata", "golden_python.json")
+TESTDATA = os.path.join(ROOT, "engine", "testdata")
 BENCH = os.path.join(ROOT, "engine", "testdata", "par_bench.jsonl.gz")
 
 
@@ -44,11 +45,20 @@ def deals_from_bench(n):
             yield "bench#" + b["id"], b["dealer"], b["vul"], b["deal"]
 
 
+def out_path(rules_path):
+    """golden_python.json pour default.yaml, golden_python.<système>.json sinon (voir engine/systems_test.go)."""
+    stem = os.path.splitext(os.path.basename(rules_path))[0]
+    name = "golden_python.json" if stem == "default" else "golden_python.%s.json" % stem
+    return os.path.join(TESTDATA, name)
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--rules", default=RULES, help="fichier de règles (défaut : cli/rules/default.yaml)")
     ap.add_argument("--random", type=int, default=300, help="donnes prises au début du banc par")
     a = ap.parse_args()
-    rules = sr.load(RULES)
+    OUT = out_path(a.rules)
+    rules = sr.load(a.rules)
     errs = sr.validate(rules)
     if errs:
         sys.exit("règles invalides : %s" % errs[:5])

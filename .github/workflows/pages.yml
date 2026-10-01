@@ -57,12 +57,15 @@ jobs:
 
       # Un fichier manquant ne casserait rien au déploiement mais donnerait un
       # site à moitié mort, découvert par le premier visiteur. On vérifie ici.
+      # Les systèmes d'enchères et leurs PDF sont ceux que déclare
+      # rules/index.json ; default.yaml reste exigé, la page s'y replie toujours.
       - name: Vérifier que cli/ est complet
         run: |
           for f in index.html style.css app.js par.js bids-wasm.js wasm_exec.js \
                    bids.wasm coi-serviceworker.js dds_web_wasm.js dds_web_wasm_bin.js \
-                   rules/default.yaml rules/index.json rules/default.pdf rules/default.en.pdf \
-                   pbn/index.json; do
+                   rules/default.yaml rules/index.json pbn/index.json \
+                   $(jq -r '.systems[] | .file, (.pdf // empty | if type == "string" then . else .[] end) | "rules/" + .' \
+                       cli/rules/index.json); do
             if [ ! -s "cli/$f" ]; then
               echo "::error::cli/$f est manquant ou vide"
               exit 1

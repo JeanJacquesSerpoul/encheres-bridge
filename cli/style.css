@@ -551,6 +551,9 @@ button:disabled { opacity: .6; cursor: wait; }
   .deal-cmds > .menu:not(.split-btn) > .cmd-btn { flex: 1; }
   .deal-cmds > .split-btn > .cmd-btn:first-child { flex: 1; min-width: 0; }
   .deal-cmds > .split-btn > .split-caret { flex: none; }
+  /* Partager tombe dans la colonne de droite : ancré à gauche, son menu
+     débordait de l'écran du téléphone. Il s'aligne sur le bord droit. */
+  #share-pop { left: auto; right: 0; }
   #deal-actions .field { min-width: 0; }
   #deal-actions .field select { flex: 1; min-width: 0; }
 }

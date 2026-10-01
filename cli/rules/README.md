@@ -23,7 +23,16 @@ Un site statique ne sait pas lister un dossier : les systèmes proposés sont do
 }
 ```
 
-Si un système mémorisé disparaît de `index.json`, la page revient à `default.yaml`. Les tests du dépôt, eux, portent sur `default.yaml` uniquement.
+4. produire ses données de test et ses PDF (voir [Garder les tests à jour](#garder-les-tests-à-jour)) :
+
+```bash
+cd tools/python_tools
+python regen_system.py ../../cli/rules/mon-systeme.yaml
+```
+
+Si un système mémorisé disparaît de `index.json`, la page revient à `default.yaml`.
+
+Les tests valables pour tout système tournent une fois par système déclaré, chacun sur ses propres données : la conformité à la référence Python, les enchères complètes, la légalité des enchères, le banc du par et les PDF. Les autres tests du moteur décrivent le SEF lui-même (telle main ouvre de 1SA…) et ne portent que sur `default.yaml`.
 
 ## Description en PDF
 
@@ -89,20 +98,28 @@ python tools/python_tools/sef_rules.py cli/rules/default.yaml --validate
 
 ## Garder les tests à jour
 
-Les tests du moteur (`go test ./...`) le comparent à la référence Python sur des données générées depuis ce fichier. Après une modification, on régénère ces données depuis `tools/python_tools/` :
+Les tests du moteur (`go test ./...`) le comparent à la référence Python sur des données générées depuis chaque fichier de règles. Après une modification, on régénère ces données, et les PDF, depuis `tools/python_tools/` :
 
 ```bash
 cd tools/python_tools
-python sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json
-python sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024
-python gen_golden.py
-python rules_pdf.py ../../cli/rules/default.yaml
-python rules_pdf.py ../../cli/rules/default.yaml --lang EN
-cd ../.. && go test ./engine
+python regen_system.py ../../cli/rules/default.yaml
+cd ../.. && go test ./...
 ```
 
-Le benchmark du par (`TestParBenchmark`) échoue si la modification éloigne les contrats du par. Si cette dégradation est voulue, on l'accepte avec :
+Sans argument, `regen_system.py` traite tous les systèmes de `index.json`. Il valide le fichier, puis écrit :
+
+| Fichier | `default.yaml` | `mon-systeme.yaml` |
+|---|---|---|
+| Règles expansées | `tools/python_tools/sef_rules.json` | `tools/python_tools/sef_rules.mon-systeme.json` |
+| Cas de test | `tools/python_tools/sef_tests.json` | `tools/python_tools/sef_tests.mon-systeme.json` |
+| Enchères complètes | `engine/testdata/golden_python.json` | `engine/testdata/golden_python.mon-systeme.json` |
+| Référence du banc du par | `engine/testdata/par_bench_baseline.json` | `engine/testdata/par_bench_baseline.mon-systeme.json` |
+| PDF | ceux que déclare `index.json` | ceux que déclare `index.json` |
+
+Chaque système a sa propre référence du banc du par : deux systèmes enchérissent différemment, et aucun n'est une régression de l'autre. Le script crée la référence d'un nouveau système, mais ne réécrit jamais une référence existante. Si une modification éloigne les contrats du par, `TestParBenchmark` échoue pour ce système. Une dégradation voulue s'accepte avec :
 
 ```bash
-PAR_BENCH_UPDATE=1 go test -run TestParBenchmark ./engine
+PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/mon-systeme ./engine
 ```
+
+ou `python regen_system.py ../../cli/rules/mon-systeme.yaml --par-update`.

@@ -13,6 +13,11 @@ package engine
 // with a reminder to lock the gain in (PAR_BENCH_UPDATE=1 rewrites the
 // baseline). PAR_BENCH_OUT=<file> writes the replayed deals in the par.json
 // shape tools/par/compare.js reads, so two engine versions compare in seconds.
+//
+// Each system of cli/rules/index.json is held to its own baseline
+// (par_bench_baseline.mon-systeme.json for mon-systeme.yaml): two systems bid
+// differently, and neither is a regression of the other. Run one with
+// -run TestParBenchmark/<stem>; PAR_BENCH_OUT gets the stem the same way.
 
 import (
 	"bufio"
@@ -308,6 +313,10 @@ func writeJSON(t *testing.T, path string, v any) {
 
 func TestParBenchmark(t *testing.T) {
 	deals := loadBench(t)
+	forEachSystem(t, func(t *testing.T, s *testSystem) { testParBenchmark(t, s, deals) })
+}
+
+func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 	results := make([]benchResult, len(deals))
 	for i := range deals {
 		results[i] = replay(t, &deals[i])
@@ -326,18 +335,19 @@ func TestParBenchmark(t *testing.T) {
 	t.Log(describe(got))
 
 	if out := os.Getenv("PAR_BENCH_OUT"); out != "" {
+		out = s.dataFile(out)
 		writeJSON(t, out, map[string]any{"meta": map[string]any{"source": "par_bench"}, "deals": results})
 		t.Logf("donnes rejouées écrites dans %s", out)
 	}
 	if os.Getenv("PAR_BENCH_UPDATE") != "" {
-		writeJSON(t, parBenchBaseline, got)
-		t.Logf("référence réécrite : %s", parBenchBaseline)
+		writeJSON(t, s.parBaseline(), got)
+		t.Logf("référence réécrite : %s", s.parBaseline())
 		return
 	}
 
-	data, err := os.ReadFile(parBenchBaseline)
+	data, err := os.ReadFile(s.parBaseline())
 	if err != nil {
-		t.Fatalf("%v (PAR_BENCH_UPDATE=1 crée la référence)", err)
+		t.Fatalf("%v (PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine crée la référence)", err, s.Stem)
 	}
 	var want benchSummary
 	if err := json.Unmarshal(data, &want); err != nil {
@@ -351,10 +361,10 @@ func TestParBenchmark(t *testing.T) {
 	case got.TotalIMP > want.TotalIMP:
 		t.Fatalf("l'écart au par augmente : %d → %d IMP (+%d)\nréférence : %s\nactuel : %s\n"+
 			"pour voir les donnes qui changent : PAR_BENCH_OUT=… sur les deux versions, puis tools/par/compare.js ;\n"+
-			"une dégradation voulue se valide avec PAR_BENCH_UPDATE=1 (visible dans le diff de la PR)",
-			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, describe(want), describe(got))
+			"une dégradation voulue se valide avec PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine (visible dans le diff de la PR)",
+			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, describe(want), describe(got), s.Stem)
 	case got.TotalIMP < want.TotalIMP:
-		t.Logf("l'écart au par baisse : %d → %d IMP (%d). Verrouiller le gain : PAR_BENCH_UPDATE=1 go test -run TestParBenchmark ./engine",
-			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP)
+		t.Logf("l'écart au par baisse : %d → %d IMP (%d). Verrouiller le gain : PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine",
+			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, s.Stem)
 	}
 }

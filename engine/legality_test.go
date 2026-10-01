@@ -10,13 +10,18 @@ import (
 // TestNoIllegalRuleCalls: over the par bench, no rule may answer with a call
 // the auction does not allow. The engine would pass instead (a "default
 // pass"), which hides the gap: a rule whose pattern admits a sequence where
-// its call is insufficient, or a double of partner's bid, is a bug in
-// cli/rules/default.yaml. `python tools/python_tools/sef_rules.py
-// cli/rules/default.yaml --validate` points at the same rules statically.
+// its call is insufficient, or a double of partner's bid, is a bug in the
+// rules file. Checked for every system of cli/rules/index.json.
+// `python tools/python_tools/sef_rules.py cli/rules/<système>.yaml --validate`
+// points at the same rules statically.
 func TestNoIllegalRuleCalls(t *testing.T) {
-	loadTestRules(t)
+	deals := loadBench(t)
+	forEachSystem(t, func(t *testing.T, s *testSystem) { testNoIllegalRuleCalls(t, deals) })
+}
+
+func testNoIllegalRuleCalls(t *testing.T, deals []benchDeal) {
 	found := map[string]int{}
-	for _, b := range loadBench(t) {
+	for _, b := range deals {
 		d := mustParsePBN(t, fmt.Sprintf("[Dealer %q]\n[Vulnerable %q]\n[Deal %q]\n", b.Dealer, b.Vul, b.Deal))
 		for _, sc := range NewEngine(d).Run() {
 			if sc.Why == illegalBy {

@@ -1,0 +1,18 @@
+# new — système d'enchères en construction
+# SOURCE UNIQUE DES RÈGLES de ce système : c'est ce fichier que l'on modifie.
+# Format et sémantique : tools/python_tools/SEF_2024_spec.md.
+# Liste ordonnée : la première règle applicable donne l'enchère ; sans règle applicable, le joueur passe.
+# Après modification : ./update-system.sh new (ou .\update-system.ps1 new sous Windows).
+
+# ======================================================================
+# Ouvertures
+# ======================================================================
+# en: Openings
+- id: open.pass
+  seq: ""
+  call: P
+  cond: "hcp < 12"
+  forcing: NF
+  meaning: "Moins de 12 H"
+  meaning_en: "Fewer than 12 HCP"
+  status: choix

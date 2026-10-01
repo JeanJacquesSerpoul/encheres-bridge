@@ -24,7 +24,7 @@ Le dépôt contient quatre morceaux :
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
-Les règles appliquées par le moteur sont **[cli/rules/default.yaml](cli/rules/default.yaml)** : une liste ordonnée où la première règle applicable donne l'enchère. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
+Les règles appliquées par le moteur sont **[cli/rules/default.yaml](cli/rules/default.yaml)** (SEF 2024) ou celles d'un autre système de [cli/rules/](cli/rules/), au choix dans les Réglages : une liste ordonnée où la première règle applicable donne l'enchère. Après modification d'un système, `./update-system.sh <système>` (`.\update-system.ps1 <système>` sous Windows) régénère ses données de test et ses PDF, puis lance les tests. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
 
 ---
 

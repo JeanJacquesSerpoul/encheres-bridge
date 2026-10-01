@@ -4,6 +4,11 @@
       "file": "default.yaml",
       "name": { "fr": "SEF 2024", "en": "SEF 2024" },
       "pdf": { "fr": "default.pdf", "en": "default.en.pdf" }
+    },
+    {
+      "file": "new.yaml",
+      "name": { "fr": "new", "en": "new" },
+      "pdf": { "fr": "new.pdf", "en": "new.en.pdf" }
     }
   ]
 }

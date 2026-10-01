@@ -1,0 +1,12 @@
+[
+ {
+  "id": "open.pass",
+  "seq": "",
+  "call": "P",
+  "cond": "hcp < 12",
+  "forcing": "NF",
+  "meaning": "Moins de 12 H",
+  "meaning_en": "Fewer than 12 HCP",
+  "status": "choix"
+ }
+]

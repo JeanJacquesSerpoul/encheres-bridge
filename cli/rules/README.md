@@ -1,8 +1,15 @@
 # Règles d'enchères
 
-`default.yaml` contient toutes les règles d'enchères de l'application : les 1 189 règles du SEF 2024 une fois les modèles `for:` expansés. Le moteur d'enchères (`../bids.wasm`) ne contient **aucune** règle de bridge. À chaque chargement de la page, `../bids-wasm.js` télécharge ce fichier et le transmet au moteur.
+`default.yaml` contient les règles du système par défaut, le SEF 2024 : 1 189 règles une fois les modèles `for:` expansés. `new.yaml` est un second système, en construction. Le moteur d'enchères (`../bids.wasm`) ne contient **aucune** règle de bridge. À chaque chargement de la page, `../bids-wasm.js` télécharge ce fichier et le transmet au moteur.
 
-**Pour modifier une règle**, on édite ce fichier puis on recharge la page. Il n'y a rien à recompiler.
+**Pour modifier une règle**, on édite le fichier du système puis on recharge la page. Il n'y a rien à recompiler. Avant de publier, une seule commande, depuis la racine du dépôt, met à jour tout ce qui en dérive et lance les tests :
+
+```bash
+./update-system.sh new            # .\update-system.ps1 new sous Windows
+./update-system.sh -p new         # puis publie : branche, commit, push et pull request
+```
+
+`-a` (`-AcceptPar`) accepte une hausse voulue de l'écart au par, `-p` (`-Publish`) publie, `-m "…"` (`-Message`) donne le message du commit. Le détail est dans [Garder les tests à jour](#garder-les-tests-à-jour).
 
 ## Plusieurs systèmes
 
@@ -23,11 +30,10 @@ Un site statique ne sait pas lister un dossier : les systèmes proposés sont do
 }
 ```
 
-4. produire ses données de test et ses PDF (voir [Garder les tests à jour](#garder-les-tests-à-jour)) :
+4. produire ses données de test et ses PDF, depuis la racine du dépôt :
 
 ```bash
-cd tools/python_tools
-python regen_system.py ../../cli/rules/mon-systeme.yaml
+./update-system.sh mon-systeme    # .\update-system.ps1 mon-systeme sous Windows
 ```
 
 Si un système mémorisé disparaît de `index.json`, la page revient à `default.yaml`.
@@ -98,15 +104,7 @@ python tools/python_tools/sef_rules.py cli/rules/default.yaml --validate
 
 ## Garder les tests à jour
 
-Les tests du moteur (`go test ./...`) le comparent à la référence Python sur des données générées depuis chaque fichier de règles. Après une modification, on régénère ces données, et les PDF, depuis `tools/python_tools/` :
-
-```bash
-cd tools/python_tools
-python regen_system.py ../../cli/rules/default.yaml
-cd ../.. && go test ./...
-```
-
-Sans argument, `regen_system.py` traite tous les systèmes de `index.json`. Il valide le fichier, puis écrit :
+Les tests du moteur (`go test ./...`) le comparent à la référence Python sur des données générées depuis chaque fichier de règles. Après une modification, `update-system.sh` (ou `update-system.ps1`) les régénère, avec les PDF, puis lance les tests. Il appelle pour cela `tools/python_tools/regen_system.py`, que l'on peut aussi lancer seul ; sans argument, celui-ci traite tous les systèmes de `index.json`. Le fichier est validé, puis le script écrit :
 
 | Fichier | `default.yaml` | `mon-systeme.yaml` |
 |---|---|---|
@@ -122,4 +120,4 @@ Chaque système a sa propre référence du banc du par : deux systèmes enchéri
 PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/mon-systeme ./engine
 ```
 
-ou `python regen_system.py ../../cli/rules/mon-systeme.yaml --par-update`.
+ou `./update-system.sh -a mon-systeme` (`.\update-system.ps1 mon-systeme -AcceptPar`).

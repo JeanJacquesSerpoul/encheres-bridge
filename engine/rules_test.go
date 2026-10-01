@@ -1,9 +1,10 @@
 package engine
 
 // The Go engine against the Python reference of tools/python_tools: the
-// expansion of the YAML against sef_rules.json, and the 9 326 cases of
-// sef_tests.json (hand features and chosen rule) against features/choose.
-// Both run for every system of cli/rules/index.json (see systems_test.go).
+// expansion of the YAML against rules.json, and the 9 326 cases of the SEF's
+// tests.json (hand features and chosen rule) against features/choose. Both
+// run for every system of cli/systems/index.json, each against its own files
+// in testdata/systems/<id>/ (see systems_test.go).
 
 import (
 	"bytes"
@@ -18,11 +19,9 @@ import (
 	"testing"
 )
 
-const (
-	rulesPath   = "../cli/rules/default.yaml"
-	pyRulesJSON = "../tools/python_tools/sef_rules.json"
-	pyTestsJSON = "../tools/python_tools/sef_tests.json"
-)
+// rulesPath is the SEF, the page's default system: the rules every test of
+// the package bids with unless it says otherwise.
+const rulesPath = "../cli/systems/sef/rules.yaml"
 
 var (
 	testRulesOnce sync.Once
@@ -30,7 +29,7 @@ var (
 	testRulesErr  error
 )
 
-// loadTestRules loads cli/rules/default.yaml once and installs it, so every
+// loadTestRules loads cli/systems/sef/rules.yaml once and installs it, so every
 // test of the package bids with the rules the page ships.
 func loadTestRules(t testing.TB) *RuleSet {
 	t.Helper()
@@ -89,7 +88,7 @@ func TestExpansionMatchesPython(t *testing.T) {
 }
 
 func testExpansionMatchesPython(t *testing.T, s *testSystem) {
-	data, err := os.ReadFile(filepath.Join(rulesDir, s.File))
+	data, err := os.ReadFile(s.file("rules.yaml"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -97,7 +96,7 @@ func testExpansionMatchesPython(t *testing.T, s *testSystem) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	ref := s.pyRulesJSON()
+	ref := s.data("rules.json")
 	pyData, err := os.ReadFile(ref)
 	if err != nil {
 		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())
@@ -194,7 +193,7 @@ func TestConformancePython(t *testing.T) {
 
 func testConformancePython(t *testing.T, s *testSystem) {
 	rs := s.Rules
-	ref := s.pyTestsJSON()
+	ref := s.data("tests.json")
 	data, err := os.ReadFile(ref)
 	if err != nil {
 		t.Fatalf("%v (générer : %s)", err, s.regenerateCmd())
@@ -207,12 +206,12 @@ func testConformancePython(t *testing.T, s *testSystem) {
 	if err := json.Unmarshal(data, &suite); err != nil {
 		t.Fatal(err)
 	}
-	yamlData, _ := os.ReadFile(filepath.Join(rulesDir, s.File))
+	yamlData, _ := os.ReadFile(s.file("rules.yaml"))
 	// The fingerprint ignores line endings, as sef_rules.py computes it: a
 	// Windows checkout (CRLF) and the CI's (LF) hold the same rules.
 	sum := sha256.Sum256(bytes.ReplaceAll(yamlData, []byte("\r\n"), []byte("\n")))
 	if hex.EncodeToString(sum[:]) != suite.SHA {
-		t.Fatalf("%s a été généré depuis une autre version de %s : regénérer (%s)", filepath.Base(ref), s.File, s.regenerateCmd())
+		t.Fatalf("%s a été généré depuis une autre version de %s : regénérer (%s)", ref, s.file("rules.yaml"), s.regenerateCmd())
 	}
 	if len(suite.Cases) != suite.Count {
 		t.Fatalf("%d cas lus, l'en-tête en annonce %d", len(suite.Cases), suite.Count)

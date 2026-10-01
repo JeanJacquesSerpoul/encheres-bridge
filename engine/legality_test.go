@@ -11,8 +11,8 @@ import (
 // the auction does not allow. The engine would pass instead (a "default
 // pass"), which hides the gap: a rule whose pattern admits a sequence where
 // its call is insufficient, or a double of partner's bid, is a bug in the
-// rules file. Checked for every system of cli/rules/index.json.
-// `python tools/python_tools/sef_rules.py cli/rules/<système>.yaml --validate`
+// rules file. Checked for every system of cli/systems/index.json.
+// `python tools/python_tools/sef_rules.py cli/systems/<id>/rules.yaml --validate`
 // points at the same rules statically.
 func TestNoIllegalRuleCalls(t *testing.T) {
 	deals := loadBench(t)

@@ -1,0 +1,6 @@
+{
+  "systems": [
+    { "id": "sef", "name": { "fr": "SEF 2024", "en": "SEF 2024" } },
+    { "id": "new", "name": { "fr": "new", "en": "new" } }
+  ]
+}

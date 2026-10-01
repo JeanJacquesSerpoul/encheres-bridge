@@ -1,37 +1,37 @@
 # SEF 2024 — Spécification du moteur d'enchères
 
-Ce document décrit comment une application doit interpréter les règles d'enchères SEF 2024. Il se suffit à lui-même : les règles sont dans `cli/rules/default.yaml` (source) et `sef_rules.json` (généré), la description bridge dans `SEF_2024.md`.
+Ce document décrit comment une application doit interpréter les règles d'enchères SEF 2024. Il se suffit à lui-même : les règles sont dans `cli/systems/sef/rules.yaml` (source) et `rules.json` (généré), la description bridge dans `SEF_2024.md`.
 
 ## 1. Fichiers livrés
 
 | Fichier | Rôle | Utilisé par l'application |
 |---|---|---|
-| `cli/rules/default.yaml` | **Source unique des règles**, éditée à la main (modèles `for`, commentaires) | Non (sert à générer le JSON) |
-| `sef_rules.json` | Les règles, expansées et ordonnées (données) | **Oui**, chargé au démarrage |
-| `sef_rules.schema.json` | Schéma JSON (draft 2020-12) de `sef_rules.json` | Oui, pour valider le fichier au chargement |
+| `cli/systems/sef/rules.yaml` | **Source unique des règles**, éditée à la main (modèles `for`, commentaires) | Non (sert à générer le JSON) |
+| `rules.json` | Les règles, expansées et ordonnées (données) | **Oui**, chargé au démarrage |
+| `sef_rules.schema.json` | Schéma JSON (draft 2020-12) de `rules.json` | Oui, pour valider le fichier au chargement |
 | `SEF_2024_spec.md` | Ce document : sémantique des règles | Par le développeur |
-| `sef_tests.json` | Cas de test de référence | Par les tests automatiques de l'application |
+| `tests.json` | Cas de test de référence | Par les tests automatiques de l'application |
 | `sef_rules.py` | Implémentation de référence (Python 3) et outil de génération | Facultatif |
-| `sef_engine.js` | Seconde implémentation (Node.js), écrite d'après ce document seul ; rejoue `sef_tests.json` | Facultatif (exemple de portage) |
+| `sef_engine.js` | Seconde implémentation (Node.js), écrite d'après ce document seul ; rejoue `tests.json` | Facultatif (exemple de portage) |
 | `SEF_2024.md` | Description bridge du système, pour la lecture (sans règles) | Non |
 
-Chaîne de production : on modifie **uniquement** `cli/rules/default.yaml`, puis on régénère :
+Chaîne de production : on modifie **uniquement** `cli/systems/sef/rules.yaml`, puis on régénère :
 
 ```
-python3 sef_rules.py ../../cli/rules/default.yaml --validate
-python3 sef_rules.py ../../cli/rules/default.yaml --json sef_rules.json
-python3 sef_rules.py ../../cli/rules/default.yaml --gen-tests 1500 sef_tests.json --seed 2024
+python3 sef_rules.py ../../cli/systems/sef/rules.yaml --validate
+python3 sef_rules.py ../../cli/systems/sef/rules.yaml --json ../../engine/testdata/systems/sef/rules.json
+python3 sef_rules.py ../../cli/systems/sef/rules.yaml --gen-tests 1500 ../../engine/testdata/systems/sef/tests.json --seed 2024
 ```
 
-`sef_tests.json` porte l'empreinte SHA-256 du fichier de règles d'origine (`source_sha256`) : les tests et les règles doivent provenir de la même version.
+`tests.json` porte l'empreinte SHA-256 du fichier de règles d'origine (`source_sha256`) : les tests et les règles doivent provenir de la même version.
 
 ### Substitution `for` (fichier YAML seulement)
 
-Dans `cli/rules/default.yaml`, une règle peut porter `for:` (liste de dictionnaires). Elle est dupliquée pour chaque dictionnaire, et chaque `{clé}` est remplacée par sa valeur dans tous les champs texte (y compris les éléments d'une `seq` en liste). `sef_rules.json` contient les règles déjà expansées, sans `for`.
+Dans `cli/systems/sef/rules.yaml`, une règle peut porter `for:` (liste de dictionnaires). Elle est dupliquée pour chaque dictionnaire, et chaque `{clé}` est remplacée par sa valeur dans tous les champs texte (y compris les éléments d'une `seq` en liste). `rules.json` contient les règles déjà expansées, sans `for`.
 
 ## 2. Structure d'une règle
 
-`sef_rules.json` est un **tableau ordonné** de règles. L'ordre est une priorité : c'est la première règle applicable qui donne l'enchère.
+`rules.json` est un **tableau ordonné** de règles. L'ordre est une priorité : c'est la première règle applicable qui donne l'enchère.
 
 | Champ | Obligatoire | Type | Description |
 |---|---|---|---|
@@ -140,7 +140,7 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 
 Les conditions ne portent que sur la main du joueur qui parle, sur la vulnérabilité (`vul`, `opp_vul`) et sur son rang (`seat`) : ce que le partenaire a montré est contenu dans `seq`. Les passes adverses n'apparaissant pas dans `seq`, seul `seat` distingue une ouverture en 1re, 3e ou 4e position ; exemple, la règle des 15 : `cond: "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15"`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
 
-Dans `sef_tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) et `seat` (Nord parle en 1re ou 2e position, Sud en 3e ou 4e) ; `sef_rules.py --hand` accepte `--vul`, `--opp-vul` et `--seat`.
+Dans `tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) et `seat` (Nord parle en 1re ou 2e position, Sud en 3e ou 4e) ; `sef_rules.py --hand` accepte `--vul`, `--opp-vul` et `--seat`.
 
 ## 5. État de l'enchère : atout convenu
 
@@ -162,7 +162,7 @@ renvoyer « séquence non codée »
 - Les règles ne vérifient pas la légalité : une enchère renvoyée qui ne serait pas supérieure à la précédente est un défaut des règles et doit être signalée.
 - Les adversaires : le moteur ne décrit que les enchères de la paire. Leur comportement relève de l'application (dans les tests, ils passent toujours).
 
-## 7. Fichier de tests `sef_tests.json`
+## 7. Fichier de tests `tests.json`
 
 En-tête : `format` (`sef-tests/1`), `source`, `source_sha256`, `seed`, `deals` (donnes tirées), `strong_deals` (dont donnes fortes), `count` (nombre de cas), puis `cases`, un objet par ligne :
 
@@ -184,8 +184,8 @@ En-tête : `format` (`sef-tests/1`), `source`, `source_sha256`, `seed`, `deals` 
 Une réimplémentation est conforme quand, pour **chaque** cas, elle calcule les mêmes `features` et renvoie la même règle. Vérifier d'abord `features` (erreurs de calcul), puis `expected` (erreurs de correspondance ou de priorité). La version de référence se contrôle par :
 
 ```
-python3 sef_rules.py ../../cli/rules/default.yaml --check-tests sef_tests.json
-node sef_engine.js sef_rules.json sef_tests.json
+python3 sef_rules.py ../../cli/systems/sef/rules.yaml --check-tests ../../engine/testdata/systems/sef/tests.json
+node sef_engine.js ../../engine/testdata/systems/sef/rules.json ../../engine/testdata/systems/sef/tests.json
 ```
 
 Les deux implémentations fournies passent les 9 331 cas sans écart.

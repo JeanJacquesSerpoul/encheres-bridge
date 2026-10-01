@@ -153,8 +153,8 @@ const UI_TEXT = {
     wasmMissingExec: "wasm_exec.js absent — lancez build-wasm.sh pour le moteur du navigateur.",
     wasmFailed: "Le moteur d'enchères n'a pas répondu.",
     wasmUnsupported: "Ce navigateur ne gère pas WebAssembly.",
-    rulesMissing: "Règles d'enchères introuvables (rules/{file}).",
-    rulesInvalid: "Règles d'enchères invalides (rules/{file}) :",
+    rulesMissing: "Règles d'enchères introuvables ({file}).",
+    rulesInvalid: "Règles d'enchères invalides ({file}) :",
     serverIa: "Serveur IA",
     serverIaPlaceholder: "https://exemple.net/openrouter-proxy",
     iaFeature: "Serveur IA de reconnaissance des cartes",
@@ -212,7 +212,7 @@ const UI_TEXT = {
     language: "Langue",
     theme: "Thème",
     rulesSystem: "Système",
-    rulesSystemTitle: "Système d'enchères : le fichier de règles que le moteur applique (dossier rules/).",
+    rulesSystemTitle: "Système d'enchères : les règles que le moteur applique et les donnes thématiques proposées (dossier systems/).",
     rulesHelp: "Description du système (PDF)",
     rulesPdfTitle: "Système {name}",
     rulesPdfTab: "Ouvrir le PDF dans un nouvel onglet",
@@ -362,8 +362,8 @@ const UI_TEXT = {
     wasmMissingExec: "wasm_exec.js is missing — run build-wasm.sh for the in-browser engine.",
     wasmFailed: "The bidding engine did not answer.",
     wasmUnsupported: "This browser does not support WebAssembly.",
-    rulesMissing: "Bidding rules not found (rules/{file}).",
-    rulesInvalid: "Invalid bidding rules (rules/{file}):",
+    rulesMissing: "Bidding rules not found ({file}).",
+    rulesInvalid: "Invalid bidding rules ({file}):",
     serverIa: "AI server",
     serverIaPlaceholder: "https://example.net/openrouter-proxy",
     iaFeature: "AI card-recognition server",
@@ -421,7 +421,7 @@ const UI_TEXT = {
     language: "Language",
     theme: "Theme",
     rulesSystem: "System",
-    rulesSystemTitle: "Bidding system: the rules file the engine applies (rules/ folder).",
+    rulesSystemTitle: "Bidding system: the rules the engine applies and the themed deals offered (systems/ folder).",
     rulesHelp: "System description (PDF)",
     rulesPdfTitle: "{name} system",
     rulesPdfTab: "Open the PDF in a new tab",
@@ -665,38 +665,38 @@ $("#theme").addEventListener("change", () => {
   applyTheme();
 });
 
-// Le système d'enchères : l'un des fichiers de règles de rules/, que liste
-// rules/index.json (un site statique ne sait pas lister un dossier). Le choix
-// est mémorisé par bids-wasm.js ; default.yaml par défaut. Changer de système
-// recharge les règles dans le moteur — sans le réinstancier — puis relance le
-// contrôle d'état, qui recalcule la donne affichée.
-const RULES_INDEX_URL = "rules/index.json";
-var rulesSystems = [{ file: "default.yaml", name: { fr: "SEF 2024", en: "SEF 2024" } }];
+// Le système d'enchères : l'un des dossiers de systems/, que liste
+// systems/index.json (un site statique ne sait pas lister un dossier). Chacun
+// porte ses règles (rules.yaml), leur description (rules.pdf, rules.en.pdf) et
+// ses donnes thématiques (pbn/). Le choix est mémorisé par bids-wasm.js ; le
+// SEF par défaut. Changer de système recharge les règles dans le moteur — sans
+// le réinstancier —, oublie les donnes thématiques de l'autre système, puis
+// relance le contrôle d'état, qui recalcule la donne affichée.
+const SYSTEMS_INDEX_URL = "systems/index.json";
+const SYSTEM_ID = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
+var rulesSystems = [{ id: "sef", name: { fr: "SEF 2024", en: "SEF 2024" } }];
 
-function rulesSystemName(file, lang) {
-  const sys = rulesSystems.find((s) => s.file === file);
-  return (sys && (sys.name[lang] || sys.name.fr || sys.name.en)) || file;
+function systemDir(id) {
+  return "systems/" + id + "/";
+}
+
+function rulesSystemName(id, lang) {
+  const sys = rulesSystems.find((s) => s.id === id);
+  return (sys && (sys.name[lang] || sys.name.fr || sys.name.en)) || id;
 }
 
 function renderRulesSystems() {
   const lang = $("#lang").value;
   const sel = $("#rules-system");
   const current = bidsLocal.rules.current();
-  sel.replaceChildren(...rulesSystems.map((s) => new Option(rulesSystemName(s.file, lang), s.file)));
+  sel.replaceChildren(...rulesSystems.map((s) => new Option(rulesSystemName(s.id, lang), s.id)));
   sel.value = current;
-  const pdf = rulesSystemPdf(current, lang);
-  $("#rules-help").hidden = !pdf;
 }
 
-// La description PDF d'un système, dans la langue demandée si elle existe :
-// champ pdf de rules/index.json, un nom de fichier ou { fr, en }.
-const RULES_PDF_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pdf$/;
-
-function rulesSystemPdf(file, lang) {
-  const sys = rulesSystems.find((s) => s.file === file);
-  const pdf = sys && sys.pdf;
-  const name = typeof pdf === "string" ? pdf : pdf && (pdf[lang] || pdf.fr || pdf.en);
-  return name && RULES_PDF_NAME.test(name) ? name : null;
+// La description PDF d'un système, dans la langue de la page : chaque dossier
+// de système porte rules.pdf (français) et rules.en.pdf (anglais).
+function rulesSystemPdf(id, lang) {
+  return systemDir(id) + (lang === "en" ? "rules.en.pdf" : "rules.pdf");
 }
 
 // Le PDF s'ouvre dans une fenêtre modale, affiché par le lecteur du navigateur.
@@ -718,10 +718,8 @@ function isMobileOS() {
 function openRulesPdf() {
   const lang = $("#lang").value;
   const current = bidsLocal.rules.current();
-  const pdf = rulesSystemPdf(current, lang);
-  if (!pdf) return;
   closeMenus();
-  const url = "rules/" + pdf;
+  const url = rulesSystemPdf(current, lang);
   if (isMobileOS() || navigator.pdfViewerEnabled === false) {
     window.open(url, "_blank", "noopener");
     return;
@@ -750,20 +748,21 @@ rulesPdfDialog.addEventListener("close", stopRulesPdf);
 
 async function initRulesSystems() {
   try {
-    const resp = await fetch(RULES_INDEX_URL, { cache: "no-cache" });
+    const resp = await fetch(SYSTEMS_INDEX_URL, { cache: "no-cache" });
     if (resp.ok) {
       const body = await resp.json();
       const list = (body && Array.isArray(body.systems) ? body.systems : [])
-        .filter((s) => s && typeof s.file === "string")
-        .map((s) => ({ file: s.file, name: (s.name && typeof s.name === "object") ? s.name : {}, pdf: s.pdf }));
+        .filter((s) => s && typeof s.id === "string" && SYSTEM_ID.test(s.id))
+        .map((s) => ({ id: s.id, name: (s.name && typeof s.name === "object") ? s.name : {} }));
       if (list.length) rulesSystems = list;
     }
   } catch (err) {
     /* pas de manifeste : seul le système par défaut est proposé */
   }
   // Un choix mémorisé que le manifeste ne propose plus revient au défaut.
-  if (!rulesSystems.some((s) => s.file === bidsLocal.rules.current())) {
-    bidsLocal.rules.set(bidsLocal.rules.defaultFile);
+  if (!rulesSystems.some((s) => s.id === bidsLocal.rules.current())) {
+    bidsLocal.rules.set(bidsLocal.rules.defaultId);
+    forgetThemes();
     checkHealth();
   }
   renderRulesSystems();
@@ -772,6 +771,7 @@ async function initRulesSystems() {
 
 $("#rules-system").addEventListener("change", async () => {
   bidsLocal.rules.set($("#rules-system").value);
+  forgetThemes();
   renderVersion();
   const run = healthRun + 1;
   await checkHealth();
@@ -1120,8 +1120,10 @@ $("#random-btn").addEventListener("click", drawRandomDeal);
 
 // ---------- donnes thématiques ----------
 
-// Les fichiers PBN de pbn/, que liste pbn/index.json (un site statique ne sait
-// pas lister un dossier). Chacun porte son libellé en tête, une ligne par
+// Les fichiers PBN du dossier pbn/ du système d'enchères choisi
+// (systems/<id>/pbn/), que liste son index.json (un site statique ne sait pas
+// lister un dossier). Les thèmes sont propres au système : changer de système
+// les oublie (forgetThemes), et la liste suivante se lit dans l'autre dossier. Chacun porte son libellé en tête, une ligne par
 // langue, avant la première donne :
 //   % Titre-FR: 4e couleur forcing
 //   % Titre-EN: Fourth suit forcing
@@ -1138,14 +1140,13 @@ $("#random-btn").addEventListener("click", drawRandomDeal);
 // Pas de lecture partielle (Range) : GitHub Pages l'applique au fichier
 // compressé, et le navigateur n'en décompressait que le début — un fichier
 // de 50 donnes arrivait avec 13.
-const THEMES_INDEX_URL = "pbn/index.json";
 const THEME_FILE = /^[A-Za-z0-9][A-Za-z0-9._-]*\.pbn$/i;
 const THEMES_PAGE = 40;
 const THEMES_PARALLEL = 4;
 const themesDialog = $("#themes-dialog");
 const themesInput = $("#themes-input");
 const themesList = $("#themes-list");
-let themeFiles = null; // [{ file, title: { fr, en } | null, text, pending }]
+let themeFiles = null; // [{ file, dir, title: { fr, en } | null, text, pending }]
 let themeShown = []; // les thèmes que retient le filtre, dans l'ordre de la liste
 let themeRendered = 0; // combien de ces lignes sont dans la liste
 let themeActive = -1; // la ligne désignée au clavier
@@ -1172,9 +1173,21 @@ function sortedThemes(list, lang) {
   return [...list].sort((a, b) => coll.compare(themeName(a, lang), themeName(b, lang)));
 }
 
+// Les thèmes du système choisi, lus à la première demande.
+function themesDir() {
+  return systemDir(bidsLocal.rules.current()) + "pbn/";
+}
+
+// Changement de système : ses thèmes seront relus à la prochaine demande.
+// currentThemeFile reste : il nomme encore le fichier de la donne affichée.
+function forgetThemes() {
+  themeFiles = null;
+}
+
 async function loadThemeIndex() {
+  const dir = themesDir();
   try {
-    const resp = await fetch(THEMES_INDEX_URL, { cache: "no-cache" });
+    const resp = await fetch(dir + "index.json", { cache: "no-cache" });
     if (!resp.ok) return [];
     const body = await resp.json();
     const files = body && Array.isArray(body.files) ? body.files : [];
@@ -1187,7 +1200,7 @@ async function loadThemeIndex() {
       if (typeof file !== "string" || !THEME_FILE.test(file) || seen.has(file)) continue;
       seen.add(file);
       const title = f && typeof f === "object" && (f.fr || f.en) ? { fr: f.fr, en: f.en } : null;
-      out.push({ file, title, text: null, pending: null });
+      out.push({ file, dir, title, text: null, pending: null });
     }
     return out;
   } catch (err) {
@@ -1225,7 +1238,7 @@ function refilterSoon() {
 // partielle d'une version précédente (Range) la recomposerait de travers.
 async function loadThemeText(th) {
   if (th.text) return th.text;
-  const resp = await fetch(`pbn/${th.file}`, { cache: "reload" });
+  const resp = await fetch(th.dir + th.file, { cache: "reload" });
   if (!resp.ok) throw new Error(resp.status);
   th.text = await resp.text();
   if (!th.title) th.title = pbnTitles(th.text);
@@ -5994,7 +6007,7 @@ setPbnOpen(false);
 // premier calcul demandé est alors immédiat. Le mode navigateur reste celui
 // par défaut, un mode déjà choisi primant toujours.
 checkHealth();
-// La liste des systèmes d'enchères, lue de rules/index.json.
+// La liste des systèmes d'enchères, lue de systems/index.json.
 initRulesSystems();
 // applyIaFeature affiche ou masque tout le bloc IA selon l'option (OFF par
 // défaut) et ne sonde le serveur IA que lorsqu'elle est active.

@@ -269,6 +269,9 @@ func FuzzParsePBN(f *testing.F) {
 		f.Fatalf("read testdata dir: %v", err)
 	}
 	for _, entry := range seeds {
+		if entry.IsDir() {
+			continue // testdata/systems : les données de référence des systèmes
+		}
 		data, err := os.ReadFile("testdata/" + entry.Name())
 		if err != nil {
 			f.Fatalf("read seed %s: %v", entry.Name(), err)

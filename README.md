@@ -19,12 +19,12 @@ Le dépôt contient quatre morceaux :
 | | Quoi | Où |
 |---|------|-----|
 | **Le moteur d'enchères** | bibliothèque Go qui applique les règles SEF d'un fichier YAML, compilée en WebAssembly (`cli/bids.wasm`) par son point d'entrée [wasm/](wasm/) | [engine/](engine/) |
-| **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler | [cli/rules/](cli/rules/) |
+| **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler. Un dossier par système, avec ses donnes thématiques | [cli/systems/](cli/systems/) |
 | **Le client web** | composition de la donne, enchères commentées, entraînement, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
 | **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
 
-Les règles appliquées par le moteur sont **[cli/rules/default.yaml](cli/rules/default.yaml)** (SEF 2024) ou celles d'un autre système de [cli/rules/](cli/rules/), au choix dans les Réglages : une liste ordonnée où la première règle applicable donne l'enchère. Après modification d'un système, `./update-system.sh <système>` (`.\update-system.ps1 <système>` sous Windows) régénère ses données de test et ses PDF, puis lance les tests. Comment les modifier : [cli/rules/README.md](cli/rules/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
+Les règles appliquées par le moteur sont **[cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml)** (SEF 2024) ou celles d'un autre système de [cli/systems/](cli/systems/), au choix dans les Réglages : une liste ordonnée où la première règle applicable donne l'enchère. Chaque système est un dossier, avec ses règles, leur description en PDF et ses donnes thématiques. Après modification d'un système, `./update-system.sh <système>` (`.\update-system.ps1 <système>` sous Windows) régénère ses données de test et ses PDF, puis lance les tests. Comment les modifier : [cli/systems/README.md](cli/systems/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
 
 ---
 
@@ -82,7 +82,7 @@ go run ./serve -port 8080    # autre port (ou PORT=8080)
 
 ### Méthode 2 — Copie de `cli/` sur un hébergeur statique
 
-Le dossier [cli/](cli/) est l'application complète : onze fichiers et les dossiers `rules/` et `pbn/`, moteur d'enchères et règles compris. Aucun serveur Go, aucune compilation, aucune configuration.
+Le dossier [cli/](cli/) est l'application complète : onze fichiers et le dossier `systems/`, moteur d'enchères et règles compris. Aucun serveur Go, aucune compilation, aucune configuration.
 
 **1. Récupérer `cli/`** depuis GitHub : bouton **Code › Download ZIP** puis extraire le dossier `cli/`, ou `git clone` comme ci-dessus.
 
@@ -140,7 +140,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 ./build-wasm.sh          # ou .\build-wasm.ps1 sous Windows
 ```
 
-**2. Copier `cli/` en entier.** Ces onze fichiers et les dossiers `rules/` et `pbn/`, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
+**2. Copier `cli/` en entier.** Ces onze fichiers et le dossier `systems/`, et rien d'autre : ni le code Go, ni `server/`, ni `docs/`.
 
 | Fichier | Taille | gzip | |
 |---|---:|---:|---|
@@ -154,10 +154,11 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
 | `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
-| `rules/default.yaml` | 140 Ko | 23 Ko | les règles d'enchères, relues à chaque chargement de la page |
-| `rules/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
-| `rules/default.pdf`, `rules/default.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
-| `pbn/index.json`, `pbn/*.pbn` | 565 Ko | 125 Ko | les donnes thématiques et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
+| `systems/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
+| `systems/sef/rules.yaml` | 140 Ko | 23 Ko | les règles du SEF, relues à chaque chargement de la page |
+| `systems/sef/rules.pdf`, `rules.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
+| `systems/sef/pbn/index.json`, `pbn/*.pbn` | 565 Ko | 125 Ko | les donnes thématiques du SEF et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
+| `systems/new/…` | < 10 Ko | — | le second système, en construction : les mêmes fichiers |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.
@@ -256,7 +257,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 
 **L'écran** a deux colonnes sur grand écran (1100 px et plus) : la **table** à gauche, et à droite un panneau à onglets, **Enchères** et **PAR**, qui reste en vue quand la page défile. Sur écran plus étroit, le panneau passe sous la table ; sur téléphone, ses onglets deviennent une barre fixée au bas de l'écran, précédée d'un bouton **Donne** qui remonte à la table.
 
-**Le bandeau** porte deux boutons : la roue des **Réglages** et le **?** du **mode d'emploi**, une aide en ligne en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons et suit l'écran dans l'ordre où on le découvre — l'écran, la donne, les enchères, le PAR, l'entraînement, la photo, les réglages —, puis récapitule les **raccourcis clavier**. Les Réglages regroupent la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre), le **système d'enchères** (l'un des fichiers de règles de `cli/rules/`, listés par `cli/rules/index.json` ; `default.yaml` par défaut, le choix est mémorisé), l'option **Ne pas afficher les passes** (décochée par défaut : cochée, la séquence commentée ne liste plus que les enchères, contres et surcontres, chacun gardant son numéro de tour ; la grille garde tous les passes), l'état du moteur et tout ce qui touche au serveur IA. Ce dernier tient à une case à cocher, **décochée par défaut** (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
+**Le bandeau** porte deux boutons : la roue des **Réglages** et le **?** du **mode d'emploi**, une aide en ligne en français ou en anglais selon la langue choisie, qui reprend les icônes des boutons et suit l'écran dans l'ordre où on le découvre — l'écran, la donne, les enchères, le PAR, l'entraînement, la photo, les réglages —, puis récapitule les **raccourcis clavier**. Les Réglages regroupent la langue (`fr`/`en`, initialisée d'après le navigateur), le thème (automatique, clair ou sombre), le **système d'enchères** (l'un des dossiers de `cli/systems/`, listés par `cli/systems/index.json`, chacun avec ses règles et ses donnes thématiques ; le SEF par défaut, le choix est mémorisé), l'option **Ne pas afficher les passes** (décochée par défaut : cochée, la séquence commentée ne liste plus que les enchères, contres et surcontres, chacun gardant son numéro de tour ; la grille garde tous les passes), l'état du moteur et tout ce qui touche au serveur IA. Ce dernier tient à une case à cocher, **décochée par défaut** (voir [Reconnaissance des cartes par photo](#reconnaissance-des-cartes-par-photo-serveur-ia)) ; tant qu'elle est décochée, ni la barre du serveur IA, ni les boutons appareil photo, ni son état n'apparaissent.
 
 ### Le format PBN
 
@@ -283,7 +284,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/pbn/). Sept sont fournies, de 500 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Sept sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 500 donnes chacune :
 
 | Fichier | Thème |
 |---|---|
@@ -295,7 +296,7 @@ Les séries de **Donnes thématiques** sont des fichiers PBN de [cli/pbn/](cli/p
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
 | `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 150 donnes à 0-7 H, 200 à 8-10 H, 150 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
 
-Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare `cli/pbn/index.json`. La fenêtre les range **par ordre alphabétique** de leur libellé dans la langue de la page (sans tenir compte de la casse ni des accents) ; la liste de l'entraînement aussi.
+Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare le `pbn/index.json` du système. La fenêtre les range **par ordre alphabétique** de leur libellé dans la langue de la page (sans tenir compte de la casse ni des accents) ; la liste de l'entraînement aussi.
 
 La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se construit par pages de 40 lignes, la suivante quand on approche du bas, et ne lit que les fichiers de la page affichée, pour en tirer le libellé ; ils sont gardés, et le choix d'un thème le charge aussitôt. Quand on tape un filtre, les libellés encore inconnus se lisent en arrière-plan, quatre à la fois, et la liste se complète au fur et à mesure.
 
@@ -325,11 +326,11 @@ Chaque fichier commence par son libellé, une ligne par langue, avant la premiè
 
 Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchères selon le système choisi, et une série suit donc les règles quand elles changent.
 
-**Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans [cli/rules/default.yaml](cli/rules/default.yaml). Le tirage est reproductible (`--seed`, 2024 par défaut). `--max-per-rule N` plafonne le nombre de donnes par règle retenue, pour équilibrer les variantes d'un thème : sans lui, les ouvertures les plus fréquentes prennent presque toute la série. On déclare ensuite le fichier et ses libellés dans `cli/pbn/index.json`.
+**Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans les règles du système (`--rules`, [cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml) par défaut). Le tirage est reproductible (`--seed`, 2024 par défaut). `--max-per-rule N` plafonne le nombre de donnes par règle retenue, pour équilibrer les variantes d'un thème : sans lui, les ouvertures les plus fréquentes prennent presque toute la série. On déclare ensuite le fichier et ses libellés dans le `pbn/index.json` du système.
 
 ```bash
 cd tools/python_tools
-python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/pbn/drury.pbn \
+python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drury.pbn \
     --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 500
 ```
 
@@ -421,13 +422,13 @@ Les tests confrontent le moteur Go à la **référence Python** de [tools/python
 
 | Test | Ce qu'il vérifie |
 |---|---|
-| [rules_test.go](engine/rules_test.go) | l'expansion de `cli/rules/default.yaml` est identique à `sef_rules.json` (1 189 règles) ; les 9 326 cas de `sef_tests.json` (caractéristiques de la main, règle choisie) passent tous |
-| [golden_test.go](engine/golden_test.go) | 315 donnes enchéries par `pbn_auction.py` — les quatre mains, donc la compétition, la légalité et la fin de l'enchère — sont reproduites enchère par enchère, règle et commentaire compris ([testdata/golden_python.json](engine/testdata/golden_python.json), régénéré par `tools/python_tools/gen_golden.py`) |
+| [rules_test.go](engine/rules_test.go) | pour chaque système, l'expansion de ses règles est identique à `rules.json` (1 189 règles pour le SEF) ; les cas de `tests.json` (9 572 pour le SEF : caractéristiques de la main, règle choisie) passent tous. Ces fichiers sont dans [testdata/systems/](engine/testdata/systems/) |
+| [golden_test.go](engine/golden_test.go) | 315 donnes enchéries par `pbn_auction.py` — les quatre mains, donc la compétition, la légalité et la fin de l'enchère — sont reproduites enchère par enchère, règle et commentaire compris, pour chaque système (`testdata/systems/<id>/golden.json`, régénéré par `tools/python_tools/gen_golden.py`) |
 | [expr_test.go](engine/expr_test.go) | le langage des conditions, avec la sémantique Python (comparaisons chaînées, booléens comptés 0/1, `in`), et ce qu'il refuse |
 | [api_test.go](engine/api_test.go) | le JSON rendu à la page, les erreurs, le chargement des règles (absentes, invalides), la trace |
 | [engine_test.go](engine/engine_test.go) | le parseur PBN, et 2 000 donnes aléatoires : chaque séquence est légale, suit la rotation des joueurs et se termine |
 
-Après une modification de `default.yaml`, les jeux de référence se régénèrent avec les outils Python (voir [cli/rules/README.md](cli/rules/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
+Après une modification des règles d'un système, `./update-system.sh <système>` régénère ses jeux de référence avec les outils Python (voir [cli/systems/README.md](cli/systems/README.md)). `audit_par_test.go` n'est pas une assertion mais un **harnais** : il alimente l'audit ci-dessous.
 
 ## Audit du par
 
@@ -460,7 +461,7 @@ Le moteur expose à la page une petite API ([engine/api.go](engine/api.go)), que
 | `bid(pbn, lang)` | Enchères d'une donne : l'objet JSON décrit ci-dessous |
 | `bids(pbn, lang)` | Même chose pour chaque donne d'un fichier de tournoi : un tableau de ces objets |
 | `selfCheck()` | Rejoue une donne de référence (pastille d'état des Réglages) |
-| `loadRules(yaml)` | *(module WASM seulement)* Installe les règles : [cli/bids-wasm.js](cli/bids-wasm.js) télécharge `rules/default.yaml` et le passe au moteur avant tout calcul ; un fichier invalide est refusé avec la liste de ses erreurs |
+| `loadRules(yaml)` | *(module WASM seulement)* Installe les règles : [cli/bids-wasm.js](cli/bids-wasm.js) télécharge le `rules.yaml` du système choisi et le passe au moteur avant tout calcul ; un fichier invalide est refusé avec la liste de ses erreurs |
 | `version()` | Révision du moteur, date du commit, version de Go |
 
 `lang` vaut `en` (défaut) ou `fr`. Un PBN invalide, une langue inconnue ou l'absence de règles renvoient une erreur au lieu de la réponse.
@@ -549,7 +550,7 @@ Exemple réel (donne ci-dessus, `lang=fr`, champs `trace` omis) :
 
 ## Moteur d'enchères (SEF)
 
-Le moteur fait enchérir les quatre joueurs à tour de rôle, à partir du donneur, jusqu'à trois passes après une enchère (ou quatre passes d'entrée). Il ne code **aucune règle de bridge** : il applique celles de [cli/rules/default.yaml](cli/rules/default.yaml), exactement comme `pbn_auction.py` ([tools/python_tools/](tools/python_tools/)), dont il est le portage.
+Le moteur fait enchérir les quatre joueurs à tour de rôle, à partir du donneur, jusqu'à trois passes après une enchère (ou quatre passes d'entrée). Il ne code **aucune règle de bridge** : il applique celles du système choisi, [cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml) par défaut, exactement comme `pbn_auction.py` ([tools/python_tools/](tools/python_tools/)), dont il est le portage.
 
 À chaque tour :
 
@@ -562,7 +563,7 @@ Le format des règles, les caractéristiques de main disponibles et le langage d
 ### Ce que le moteur ne fait pas
 
 - **La vulnérabilité** (tag `[Vulnerable]`) est lue par les conditions des règles (`vul` : notre camp, `opp_vul` : les adversaires), comme le rang du joueur dans le tour d'enchères (`seat`, 1 = donneur) : l'ouverture en 4e position suit la règle des 15.
-- **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/rules/default.yaml](cli/rules/default.yaml)) :
+- **La compétition** est codée pour les séquences courantes (section A.18 bis de [cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml)) :
   - côté défense : interventions sur une ouverture au palier de 1 (1SA, couleur, saut faible, contre d'appel, contre fort) et sur un 2 faible, réveil, réponses de l'avancée et redemandes de l'intervenant ou du contreur ;
   - côté ouvreur : soutien, 2SA fitté, cue-bid, Spoutnik, Sans-Atout et couleur nouvelle après une intervention, puis les suites de l'ouvreur.
 
@@ -578,7 +579,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | Fichier | Rôle |
 |---------|------|
 | `engine/api.go` | API du moteur rendue à la page : `BidJSON`, `BidsJSON`, `SelfCheck`, `LoadRulesJSON`, `VersionJSON` |
-| `engine/rules.go` | Lecture de `default.yaml` : expansion des modèles `for:`, validation, règles actives |
+| `engine/rules.go` | Lecture des règles d'un système (`rules.yaml`) : expansion des modèles `for:`, validation, règles actives |
 | `engine/expr.go` | Langage des conditions : analyseur et évaluateur (sémantique Python) |
 | `engine/features.go` | Caractéristiques de la main lues par les conditions (H, HL, longueurs, levées, contrôles…) |
 | `engine/match.go` | Motifs de séquence et choix de la première règle applicable |
@@ -593,8 +594,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `wasm/main.go` | Point d'entrée WebAssembly (`js && wasm`) : l'API du moteur exposée à la page |
 | `serve/main.go` | Mini-serveur de fichiers de `run.*` : sert `cli/` avec les en-têtes COOP/COEP |
 | `cli/` | Le client web : `index.html`, `app.js`, `par.js`, `bids-wasm.js`, le solveur DDS et le moteur d'enchères en WebAssembly |
-| `cli/rules/` | Les règles d'enchères (`default.yaml`), modifiables sans recompiler |
-| `cli/pbn/` | Les donnes thématiques (fichiers PBN) et leur liste, `index.json` |
+| `cli/systems/` | Les systèmes d'enchères, un dossier chacun : règles (`rules.yaml`, modifiables sans recompiler), description PDF, donnes thématiques (`pbn/`) |
 | `build-wasm.sh`, `build-wasm.ps1` | Compilation du moteur en WebAssembly dans `cli/` (`bids.wasm`, `wasm_exec.js`, versionnés) |
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |

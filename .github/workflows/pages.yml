@@ -57,15 +57,21 @@ jobs:
 
       # Un fichier manquant ne casserait rien au déploiement mais donnerait un
       # site à moitié mort, découvert par le premier visiteur. On vérifie ici.
-      # Les systèmes d'enchères et leurs PDF sont ceux que déclare
-      # rules/index.json ; default.yaml reste exigé, la page s'y replie toujours.
+      # Chaque système d'enchères que déclare systems/index.json est un dossier :
+      # ses règles, leurs PDF, l'index de ses donnes thématiques et les fichiers
+      # qu'il liste. Le SEF reste exigé : la page s'y replie toujours.
       - name: Vérifier que cli/ est complet
         run: |
-          for f in index.html style.css app.js par.js bids-wasm.js wasm_exec.js \
-                   bids.wasm coi-serviceworker.js dds_web_wasm.js dds_web_wasm_bin.js \
-                   rules/default.yaml rules/index.json pbn/index.json \
-                   $(jq -r '.systems[] | .file, (.pdf // empty | if type == "string" then . else .[] end) | "rules/" + .' \
-                       cli/rules/index.json); do
+          files="index.html style.css app.js par.js bids-wasm.js wasm_exec.js
+                 bids.wasm coi-serviceworker.js dds_web_wasm.js dds_web_wasm_bin.js
+                 systems/index.json systems/sef/rules.yaml"
+          for id in $(jq -r '.systems[].id' cli/systems/index.json); do
+            files="$files systems/$id/rules.yaml systems/$id/rules.pdf systems/$id/rules.en.pdf systems/$id/pbn/index.json"
+            for pbn in $(jq -r '.files[] | if type == "string" then . else .file end' "cli/systems/$id/pbn/index.json"); do
+              files="$files systems/$id/pbn/$pbn"
+            done
+          done
+          for f in $files; do
             if [ ! -s "cli/$f" ]; then
               echo "::error::cli/$f est manquant ou vide"
               exit 1

@@ -76,7 +76,7 @@ func SelfCheck() error {
 	return nil
 }
 
-// LoadRulesJSON installs the rules file the page fetched (cli/rules/), and
+// LoadRulesJSON installs the rules file the page fetched (cli/systems/<id>/rules.yaml), and
 // answers with the number of rules it holds once expanded.
 func LoadRulesJSON(yamlText []byte) ([]byte, error) {
 	n, err := LoadRulesText(yamlText)

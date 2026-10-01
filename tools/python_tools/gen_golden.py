@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Génère les enchères de référence du moteur Go (engine/testdata/golden_python.json).
+"""Génère les enchères de référence du moteur Go (engine/testdata/systems/<id>/golden.json).
 
 Chaque donne est enchérie par pbn_auction.generate_auction (les quatre mains, adversaires
-compris) avec un fichier de règles, cli/rules/default.yaml par défaut ; le test Go
-TestGoldenPython rejoue les mêmes donnes et compare siège, enchère, règle et commentaire.
-Un autre système écrit son propre fichier : mon-systeme.yaml → golden_python.mon-systeme.json.
+compris) avec les règles d'un système, le SEF par défaut ; le test Go TestGoldenPython
+rejoue les mêmes donnes et compare siège, enchère, règle et commentaire.
 
-Usage : python gen_golden.py [--rules ../../cli/rules/mon-systeme.yaml] [--random 300]
+Usage : python gen_golden.py [--rules ../../cli/systems/new/rules.yaml --out ...golden.json] [--random 300]
 """
 import argparse
 import glob
@@ -21,8 +20,8 @@ sys.path.insert(0, HERE)
 import sef_rules as sr          # noqa: E402
 import pbn_auction as pa        # noqa: E402
 
-RULES = os.path.join(ROOT, "cli", "rules", "default.yaml")
-TESTDATA = os.path.join(ROOT, "engine", "testdata")
+RULES = os.path.join(ROOT, "cli", "systems", "sef", "rules.yaml")
+OUT = os.path.join(ROOT, "engine", "testdata", "systems", "sef", "golden.json")
 BENCH = os.path.join(ROOT, "engine", "testdata", "par_bench.jsonl.gz")
 
 
@@ -45,19 +44,12 @@ def deals_from_bench(n):
             yield "bench#" + b["id"], b["dealer"], b["vul"], b["deal"]
 
 
-def out_path(rules_path):
-    """golden_python.json pour default.yaml, golden_python.<système>.json sinon (voir engine/systems_test.go)."""
-    stem = os.path.splitext(os.path.basename(rules_path))[0]
-    name = "golden_python.json" if stem == "default" else "golden_python.%s.json" % stem
-    return os.path.join(TESTDATA, name)
-
-
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rules", default=RULES, help="fichier de règles (défaut : cli/rules/default.yaml)")
+    ap.add_argument("--rules", default=RULES, help="fichier de règles (défaut : cli/systems/sef/rules.yaml)")
+    ap.add_argument("--out", default=OUT, help="fichier écrit (défaut : engine/testdata/systems/sef/golden.json)")
     ap.add_argument("--random", type=int, default=300, help="donnes prises au début du banc par")
     a = ap.parse_args()
-    OUT = out_path(a.rules)
     rules = sr.load(a.rules)
     errs = sr.validate(rules)
     if errs:
@@ -76,11 +68,11 @@ def main():
             case["bids"] = [{"seat": b["seat"], "call": b["call"], "rule": b["rule"]} for b in bids]
             case["meaning_" + lang.lower()] = [b["meaning"] for b in bids]
         out.append(case)
-    with open(OUT, "w", encoding="utf-8") as f:
+    with open(a.out, "w", encoding="utf-8") as f:
         f.write('{"source": "tools/python_tools/gen_golden.py", "count": %d, "cases": [\n' % len(out))
         f.write(",\n".join(json.dumps(c, ensure_ascii=False, separators=(",", ":")) for c in out))
         f.write("\n]}\n")
-    print("écrit %s : %d donnes" % (OUT, len(out)))
+    print("écrit %s : %d donnes" % (a.out, len(out)))
 
 
 if __name__ == "__main__":

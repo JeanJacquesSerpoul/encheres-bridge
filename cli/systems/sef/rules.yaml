@@ -15,16 +15,16 @@
 - id: open.2D
   seq: ""
   call: 2D
-  cond: "(balanced and hcp >= 24) or (hcp >= 16 and ptricks >= 9 and sidetricks >= 2)"
+  cond: "(balanced and hcp >= 24) or (hcp >= 16 and ptricks >= 8 and sidetricks >= 2)"
   forcing: FM
-  meaning: "Fort, forcing de manche : 9 levées de jeu et 2 levées de défense annexes (ou régulier 24+ H)"
-  meaning_en: "Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or balanced 24+ HCP)"
+  meaning: "Fort, forcing de manche : 8 levées de jeu et 2 levées de défense annexes (ou régulier 24+ H)"
+  meaning_en: "Strong, game-forcing: 8 playing tricks and 2 side defensive tricks (or balanced 24+ HCP)"
   status: choix
   alert: true
 - id: open.2C
   seq: ""
   call: 2C
-  cond: "(balanced and 22 <= hl <= 23) or (max(S, H) >= 5 and 18 <= hl <= 21 and ptricks >= 8) or (max(C, D) >= 7 and 15 <= hcp <= 16 and ptricks >= 8.5)"
+  cond: "(balanced and 22 <= hl <= 23) or (max(S, H) >= 5 and 18 <= hl <= 21 and ptricks >= 7) or (max(C, D) >= 7 and 15 <= hcp <= 16 and ptricks >= 7.5)"
   forcing: F1
   meaning: "Fort indéterminé : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL régulier"
   meaning_en: "Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL"
@@ -161,18 +161,18 @@
 - id: 1NT.r.5NT
   seq: ["1NT", "1NT (X)"]
   call: 5NT
-  cond: "18 <= hl <= 19 and S < 4 and H < 4"
+  cond: "17 <= hl <= 19 and S < 4 and H < 4"
   forcing: F1
-  meaning: "18-19 HL : l'ouvreur dit 6SA (ou repart en Baron)"
-  meaning_en: "18-19 HL: opener bids 6NT (or continues with Baron)"
+  meaning: "17-19 HL : l'ouvreur dit 6SA (ou repart en Baron)"
+  meaning_en: "17-19 HL: opener bids 6NT (or continues with Baron)"
   status: sef
 - id: 1NT.r.4NT
   seq: ["1NT", "1NT (X)"]
   call: 4NT
-  cond: "hl == 17 and S < 4 and H < 4"
+  cond: "hl == 16 and S < 4 and H < 4"
   forcing: INV
-  meaning: "Quantitatif 17 HL : proposition de petit chelem"
-  meaning_en: "Quantitative 17 HL: invitation to small slam"
+  meaning: "Quantitatif 16 HL : proposition de petit chelem"
+  meaning_en: "Quantitative 16 HL: invitation to small slam"
   status: choix
 - id: 1NT.r.4D
   seq: ["1NT", "1NT (X)"]
@@ -187,7 +187,7 @@
   for: [{M: S}, {M: H}, {M: D}]
   seq: ["1NT", "1NT (X)"]
   call: "3{M}"
-  cond: "{M} >= 6 and hl >= 17"
+  cond: "{M} >= 6 and hl >= 16"
   forcing: FM
   meaning: "Espoir de chelem dans la couleur (6+ cartes)"
   meaning_en: "Slam interest in the suit (6+ cards)"
@@ -196,7 +196,7 @@
   for: [{M: S}, {M: H}]
   seq: ["1NT", "1NT (X)"]
   call: "4{M}"
-  cond: "{M} >= 6 and {M} >= max(S, H) and 9 <= hl <= 16"
+  cond: "{M} >= 6 and {M} >= max(S, H) and 8 <= hl <= 16"
   forcing: SO
   meaning: "Naturel, 6+ cartes, pour jouer"
   meaning_en: "Natural, 6+ cards, to play"
@@ -204,37 +204,37 @@
 - id: 1NT.r.2D.55weak
   seq: ["1NT", "1NT (X)"]
   call: 2D
-  cond: "H == 5 and S == 5 and 7 <= hl <= 8"
+  cond: "H == 5 and S == 5 and 6 <= hl <= 7"
   forcing: REL
-  meaning: "Texas ♥ (suivi de 2♠ : 5-5 majeur 7-8 H)"
-  meaning_en: "Texas ♥ (followed by 2♠: 5-5 majors, 7-8 HCP)"
+  meaning: "Texas ♥ (suivi de 2♠ : 5-5 majeur 6-7 H)"
+  meaning_en: "Texas ♥ (followed by 2♠: 5-5 majors, 6-7 HCP)"
   status: sef
   alert: true
 - id: 1NT.r.2C.54
   seq: ["1NT", "1NT (X)"]
   call: 2C
-  cond: "max(H, S) == 5 and min(H, S) == 4 and hl >= 7"
+  cond: "max(H, S) == 5 and min(H, S) == 4 and hl >= 6"
   forcing: F1
-  meaning: "Stayman (5-4 majeur, 7+ H)"
-  meaning_en: "Stayman (5-4 in the majors, 7+ HCP)"
+  meaning: "Stayman (5-4 majeur, 6+ H)"
+  meaning_en: "Stayman (5-4 in the majors, 6+ HCP)"
   status: sef
   alert: true
 - id: 1NT.r.2C.misere
   seq: ["1NT", "1NT (X)"]
   call: 2C
-  cond: "max(H, S) == 5 and 7 <= hl <= 8 and min(S, H, D, C) <= 1"
+  cond: "max(H, S) == 5 and 6 <= hl <= 8 and min(S, H, D, C) <= 1"
   forcing: F1
-  meaning: "Stayman « misère dorée » : majeure 5e et singleton, 7-8 HL"
-  meaning_en: "Golden Misery Stayman: 5-card major and singleton, 7-8 HL"
+  meaning: "Stayman « misère dorée » : majeure 5e et singleton, 6-8 HL"
+  meaning_en: "Golden Misery Stayman: 5-card major and singleton, 6-8 HL"
   status: sef
   alert: true
 - id: 1NT.r.2C
   seq: ["1NT", "1NT (X)"]
   call: 2C
-  cond: "(H == 4 or S == 4) and max(H, S) < 5 and hl >= 8 and not (shape == '4333' and hcp < 12)"
+  cond: "(H == 4 or S == 4) and max(H, S) < 5 and hl >= 7 and not (shape == '4333' and hcp < 12)"
   forcing: F1
-  meaning: "Stayman 4 réponses : majeure 4e, 8+ H (4333 : 12+ H)"
-  meaning_en: "4-response Stayman: 4-card major, 8+ HCP (4333: 12+ HCP)"
+  meaning: "Stayman 4 réponses : majeure 4e, 7+ H (4333 : 12+ H)"
+  meaning_en: "4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP)"
   status: sef
   alert: true
 - id: 1NT.r.2H
@@ -258,7 +258,7 @@
 - id: 1NT.r.2S.minors
   seq: ["1NT", "1NT (X)"]
   call: 2S
-  cond: "C >= 5 and D >= 5 and hl >= 9"
+  cond: "C >= 5 and D >= 5 and hl >= 8"
   forcing: REL
   meaning: "Texas ♣ (bicolore mineur 5/5 de manche : ♦ annoncés ensuite)"
   meaning_en: "Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next)"
@@ -267,7 +267,7 @@
 - id: 1NT.r.2S
   seq: ["1NT", "1NT (X)"]
   call: 2S
-  cond: "C >= 6 and C >= D and (hl < 8 or (hl >= 12 and min(S, H, D) <= 1))"
+  cond: "C >= 6 and C >= D and (hl < 8 or (hl >= 11 and min(S, H, D) <= 1))"
   forcing: REL
   meaning: "Texas ♣ : 6+ trèfles, faible ou avec courte (ambition)"
   meaning_en: "Texas ♣: 6+ clubs, weak or with shortness (ambitious)"
@@ -276,7 +276,7 @@
 - id: 1NT.r.3C
   seq: ["1NT", "1NT (X)"]
   call: 3C
-  cond: "D >= 6 and (hl < 8 or (hl >= 12 and min(S, H, C) <= 1))"
+  cond: "D >= 6 and (hl < 8 or (hl >= 11 and min(S, H, C) <= 1))"
   forcing: REL
   meaning: "Texas ♦ : 6+ carreaux, faible ou avec courte (ambition)"
   meaning_en: "Texas ♦: 6+ diamonds, weak or with shortness (ambitious)"
@@ -285,26 +285,26 @@
 - id: 1NT.r.2NT
   seq: ["1NT", "1NT (X)"]
   call: 2NT
-  cond: "hl == 8"
+  cond: "hl == 7"
   forcing: INV
-  meaning: "8 H, proposition de manche"
-  meaning_en: "8 HCP, game invitation"
+  meaning: "7 H, proposition de manche"
+  meaning_en: "7 HCP, game invitation"
   status: sef
 - id: 1NT.r.3NT
   seq: ["1NT", "1NT (X)"]
   call: 3NT
-  cond: "9 <= hl <= 16"
+  cond: "8 <= hl <= 16"
   forcing: SO
-  meaning: "9-16 HL, pour jouer"
-  meaning_en: "9-16 HL, to play"
+  meaning: "8-16 HL, pour jouer"
+  meaning_en: "8-16 HL, to play"
   status: sef
 - id: 1NT.r.6NT
   seq: ["1NT", "1NT (X)"]
   call: 6NT
-  cond: "hl >= 20"
+  cond: "hl >= 19"
   forcing: SO
-  meaning: "20+ HL : petit chelem direct"
-  meaning_en: "20+ HL: direct small slam"
+  meaning: "19+ HL : petit chelem direct"
+  meaning_en: "19+ HL: direct small slam"
   status: infere
 - id: 1NT.r.pass
   seq: ["1NT", "1NT (X)"]
@@ -354,7 +354,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T}", "1NT (X) {T}"]
   call: "3{M}"
-  cond: "{M} >= 4 and hl >= 17"
+  cond: "{M} >= 4 and hl >= 16"
   forcing: INV
   meaning: "Rectification à saut : maximum avec 4 atouts"
   meaning_en: "Jump correction: maximum with 4-card support"
@@ -403,7 +403,7 @@
 - id: 1NT.2NT.3NT
   seq: ["1NT 2NT", "1NT (X) 2NT"]
   call: 3NT
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
@@ -411,10 +411,10 @@
 - id: 1NT.4NT.6NT
   seq: ["1NT 4NT", "1NT (X) 4NT"]
   call: 6NT
-  cond: "hl >= 16"
+  cond: "hl >= 15"
   forcing: SO
-  meaning: "16-17 HL : accepte le petit chelem"
-  meaning_en: "16-17 HL: accepts the small-slam invitation"
+  meaning: "15-17 HL : accepte le petit chelem"
+  meaning_en: "15-17 HL: accepts the small-slam invitation"
   status: choix
 - id: 1NT.5NT.6NT
   seq: ["1NT 5NT", "1NT (X) 5NT"]
@@ -438,15 +438,15 @@
   for: [{M: H, oM: S}, {M: S, oM: H}]
   seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: "2{M}"
-  cond: "{M} == 5 and {oM} == 4 and hl <= 8"
+  cond: "{M} == 5 and {oM} == 4 and hl <= 7"
   forcing: NF
-  meaning: "5-4 majeur 7-8 H (ou misère dorée) : pour jouer"
-  meaning_en: "5-4 in the majors, 7-8 HCP (or Golden Misery): to play"
+  meaning: "5-4 majeur 6-7 H (ou misère dorée) : pour jouer"
+  meaning_en: "5-4 in the majors, 6-7 HCP (or Golden Misery): to play"
   status: sef
 - id: 1NT.2C.2D.2M.misere
   seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: 2H
-  cond: "H == 5 and hl <= 8"
+  cond: "H == 5 and hl <= 7"
   forcing: NF
   meaning: "Misère dorée : pour jouer 2♥"
   meaning_en: "Golden Misery: to play 2♥"
@@ -454,7 +454,7 @@
 - id: 1NT.2C.2D.2S.misere
   seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: 2S
-  cond: "S == 5 and hl <= 8"
+  cond: "S == 5 and hl <= 7"
   forcing: NF
   meaning: "Misère dorée : pour jouer 2♠"
   meaning_en: "Golden Misery: to play 2♠"
@@ -463,27 +463,27 @@
   for: [{call: 3H, M: S, oM: H}, {call: 3S, M: H, oM: S}]
   seq: ["1NT 2C 2D", "1NT (X) 2C 2D"]
   call: "{call}"
-  cond: "{M} == 5 and {oM} == 4 and hl >= 9"
+  cond: "{M} == 5 and {oM} == 4 and hl >= 8"
   forcing: FM
-  meaning: "Chassé-croisé : 5 cartes dans l'autre majeure, 4 dans celle-ci, 9+ H"
-  meaning_en: "Crisscross: 5 cards in the other major, 4 in this one, 9+ HCP"
+  meaning: "Chassé-croisé : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H"
+  meaning_en: "Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP"
   status: sef
   alert: true
 - id: "1NT.2C.2{M}.splinter{s}"
   for: [{M: H, s: C}, {M: H, s: D}, {M: S, s: C}, {M: S, s: D}]
   seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "4{s}"
-  cond: "{M} >= 4 and 13 <= hl <= 14 and short('{s}')"
+  cond: "{M} >= 4 and 12 <= hl <= 14 and short('{s}')"
   forcing: FM
-  meaning: "Splinter fitté, 13-14 H environ, courte à la couleur"
-  meaning_en: "Fit splinter, about 13-14 HCP, shortness in the suit"
+  meaning: "Splinter fitté, 12-14 H environ, courte à la couleur"
+  meaning_en: "Fit splinter, about 12-14 HCP, shortness in the suit"
   status: sef
   alert: true
 - id: "1NT.2C.2{M}.slam"
   for: [{M: H, x: 3S}, {M: S, x: 3H}]
   seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "{x}"
-  cond: "{M} >= 4 and hl >= 15"
+  cond: "{M} >= 4 and hl >= 14"
   forcing: FM
   meaning: "Fit dans la majeure de l'ouvreur, espoir de chelem"
   meaning_en: "Fit in opener's major, slam interest"
@@ -493,7 +493,7 @@
   for: [{M: H}, {M: S}]
   seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "4{M}"
-  cond: "{M} >= 4 and hl >= 9"
+  cond: "{M} >= 4 and hl >= 8"
   forcing: SO
   meaning: "Fit, manche"
   meaning_en: "Fit, game"
@@ -502,7 +502,7 @@
   for: [{M: H}, {M: S}]
   seq: ["1NT 2C 2{M}", "1NT (X) 2C 2{M}"]
   call: "3{M}"
-  cond: "{M} >= 4 and hl == 8"
+  cond: "{M} >= 4 and hl == 7"
   forcing: INV
   meaning: "Fit, invitation"
   meaning_en: "Fit, invitation"
@@ -519,7 +519,7 @@
 - id: 1NT.2C.x.4NT
   seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 4NT
-  cond: "hl == 17"
+  cond: "hl == 16"
   forcing: INV
   meaning: "Quantitatif (pas de fit)"
   meaning_en: "Quantitative (no fit)"
@@ -535,10 +535,10 @@
 - id: 1NT.2C.x.6NT
   seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
   call: 6NT
-  cond: "hl >= 18"
+  cond: "hl >= 17"
   forcing: SO
-  meaning: "Pas de fit, 18+ HL : petit chelem à SA"
-  meaning_en: "No fit, 18+ HL: small slam in NT"
+  meaning: "Pas de fit, 17+ HL : petit chelem à SA"
+  meaning_en: "No fit, 17+ HL: small slam in NT"
   status: infere
 - id: 1NT.2C.x.3NT
   seq: ["1NT 2C 2D|2H|2S", "1NT (X) 2C 2D|2H|2S"]
@@ -551,7 +551,7 @@
 - id: 1NT.2C.2NT.slamS
   seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3S
-  cond: "S >= 4 and H < 4 and hl >= 15"
+  cond: "S >= 4 and H < 4 and hl >= 14"
   forcing: FM
   meaning: "Naturel, forcing de manche, espoir de chelem à ♠"
   meaning_en: "Natural, game-forcing, slam interest with ♠"
@@ -560,7 +560,7 @@
 - id: 1NT.2C.2NT.slam
   seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 3H
-  cond: "H >= 4 and hl >= 15"
+  cond: "H >= 4 and hl >= 14"
   forcing: FM
   meaning: "Naturel, forcing de manche, espoir de chelem"
   meaning_en: "Natural, game-forcing, slam interest"
@@ -568,7 +568,7 @@
 - id: 1NT.2C.2NT.4C
   seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 4C
-  cond: "H >= 4 and hl >= 9"
+  cond: "H >= 4 and hl >= 8"
   forcing: REL
   meaning: "Texas pour 4♥"
   meaning_en: "Transfer to 4♥"
@@ -577,7 +577,7 @@
 - id: 1NT.2C.2NT.4D
   seq: ["1NT 2C 2NT", "1NT (X) 2C 2NT"]
   call: 4D
-  cond: "S >= 4 and hl >= 9"
+  cond: "S >= 4 and hl >= 8"
   forcing: REL
   meaning: "Texas pour 4♠"
   meaning_en: "Transfer to 4♠"
@@ -638,7 +638,7 @@
 - id: 1NT.2C.2S.2NT.3H
   seq: ["1NT 2C 2S 2NT", "1NT (X) 2C 2S 2NT"]
   call: 3H
-  cond: "H == 3 and hl >= 16"
+  cond: "H == 3 and hl >= 15"
   forcing: F1
   meaning: "3 cartes à ♥ et maximum (le répondant peut avoir 5♥)"
   meaning_en: "3 hearts and maximum (responder may have 5 hearts)"
@@ -646,7 +646,7 @@
 - id: 1NT.2C.x.2NT.3NT
   seq: ["1NT 2C 2D|2H|2S 2NT", "1NT (X) 2C 2D|2H|2S 2NT"]
   call: 3NT
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
@@ -663,7 +663,7 @@
   for: [{M: H}, {M: S}]
   seq: ["1NT 2C 2{M} 3{M}", "1NT (X) 2C 2{M} 3{M}"]
   call: "4{M}"
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
@@ -700,18 +700,18 @@
   for: [{T: 2D, M: H}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 2S
-  cond: "H == 5 and S == 5 and 7 <= hl <= 8"
+  cond: "H == 5 and S == 5 and 6 <= hl <= 8"
   forcing: NF
-  meaning: "Bicolore 5-5 majeur, 7-8 H"
-  meaning_en: "5-5 in the majors, 7-8 HCP"
+  meaning: "Bicolore 5-5 majeur, 6-8 H"
+  meaning_en: "5-5 in the majors, 6-8 HCP"
   status: sef
 - id: 1NT.2H.2S.55.3H
   seq: ["1NT 2H 2S", "1NT (X) 2H 2S"]
   call: 3H
-  cond: "H >= 5 and S >= 5 and hl >= 15"
+  cond: "H >= 5 and S >= 5 and hl >= 14"
   forcing: FM
-  meaning: "Bicolore 5-5 majeur, 15+ H"
-  meaning_en: "5-5 in the majors, 15+ HCP"
+  meaning: "Bicolore 5-5 majeur, 14+ H"
+  meaning_en: "5-5 in the majors, 14+ HCP"
   status: sef
 # L'ouvreur choisit la majeure de la manche : le 5-5 est forcing de manche.
 # en: Opener picks the major for game: the 5-5 is game forcing.
@@ -735,10 +735,10 @@
 - id: 1NT.2H.2S.55.4H
   seq: ["1NT 2H 2S", "1NT (X) 2H 2S"]
   call: 4H
-  cond: "H >= 5 and S >= 5 and 13 <= hl <= 14"
+  cond: "H >= 5 and S >= 5 and 12 <= hl <= 14"
   forcing: NF
-  meaning: "Bicolore 5-5 majeur, 13-14 H : l'ouvreur choisit la manche"
-  meaning_en: "5-5 in the majors, 13-14 HCP: opener chooses the game"
+  meaning: "Bicolore 5-5 majeur, 12-14 H : l'ouvreur choisit la manche"
+  meaning_en: "5-5 in the majors, 12-14 HCP: opener chooses the game"
   status: sef
 - id: "1NT.tex{M}.pass"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
@@ -753,7 +753,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: "3{M}"
-  cond: "{M} >= 6 and hl == 8"
+  cond: "{M} >= 6 and hl == 7"
   forcing: INV
   meaning: "6+ cartes, invitation"
   meaning_en: "6+ cards, invitation"
@@ -762,7 +762,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 2NT
-  cond: "hl == 8"
+  cond: "hl == 7"
   forcing: INV
   meaning: "5 cartes, invitation"
   meaning_en: "5 cards, invitation"
@@ -789,7 +789,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M} 2NT", "1NT (X) {T} 2{M} 2NT"]
   call: "4{M}"
-  cond: "{M} >= 3 and hl >= 17"
+  cond: "{M} >= 3 and hl >= 16"
   forcing: SO
   meaning: "Maximum avec fit"
   meaning_en: "Maximum with a fit"
@@ -798,7 +798,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M} 2NT", "1NT (X) {T} 2{M} 2NT"]
   call: 3NT
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Maximum sans fit"
   meaning_en: "Maximum without a fit"
@@ -816,7 +816,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M} 3{M}", "1NT (X) {T} 2{M} 3{M}"]
   call: "4{M}"
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Maximum : accepte"
   meaning_en: "Maximum: accepts"
@@ -882,7 +882,7 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 3{M}", "1NT (X) {T} 3{M}"]
   call: "4{M}"
-  cond: "hl >= 4"
+  cond: "hl >= 3"
   forcing: SO
   meaning: "Après rectification à saut : manche"
   meaning_en: "After jump correction: game"
@@ -901,7 +901,7 @@
 - id: 1NT.2S.3C.3D
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 3D
-  cond: "C >= 5 and D >= 5 and hl >= 9"
+  cond: "C >= 5 and D >= 5 and hl >= 8"
   forcing: FM
   meaning: "Bicolore mineur 5/5 de manche"
   meaning_en: "Game-going 5/5 minor two-suiter"
@@ -910,7 +910,7 @@
   for: [{s: H, call: 3H}, {s: S, call: 3S}]
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: "{call}"
-  cond: "hl >= 12 and short('{s}')"
+  cond: "hl >= 11 and short('{s}')"
   forcing: FM
   meaning: "Courte dans la couleur nommée"
   meaning_en: "Shortness in the suit named"
@@ -919,7 +919,7 @@
 - id: 1NT.2S.3C.4D
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 4D
-  cond: "hl >= 16 and short('D')"
+  cond: "hl >= 15 and short('D')"
   forcing: FM
   meaning: "6♣ et singleton ♦"
   meaning_en: "6♣ and singleton ♦"
@@ -927,7 +927,7 @@
 - id: 1NT.2S.3C.3NT
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 3NT
-  cond: "hl >= 12 and short('D')"
+  cond: "hl >= 11 and short('D')"
   forcing: FM
   meaning: "Courte dans l'autre mineure (♦)"
   meaning_en: "Shortness in the other minor (♦)"
@@ -936,7 +936,7 @@
 - id: 1NT.2S.3C.4C
   seq: ["1NT 2S 3C", "1NT (X) 2S 3C"]
   call: 4C
-  cond: "hl >= 12"
+  cond: "hl >= 11"
   forcing: F1
   meaning: "6♣ sans singleton"
   meaning_en: "6♣ without a singleton"
@@ -952,7 +952,7 @@
 - id: 1NT.3C.3D.4C
   seq: ["1NT 3C 3D", "1NT (X) 3C 3D"]
   call: 4C
-  cond: "hl >= 12 and short('C')"
+  cond: "hl >= 11 and short('C')"
   forcing: FM
   meaning: "6♦ et courte ♣, espoir de chelem"
   meaning_en: "6♦ and short ♣, slam interest"
@@ -960,7 +960,7 @@
 - id: 1NT.3C.3D.4D
   seq: ["1NT 3C 3D", "1NT (X) 3C 3D"]
   call: 4D
-  cond: "hl >= 12"
+  cond: "hl >= 11"
   forcing: F1
   meaning: "6♦ sans courte"
   meaning_en: "6♦ without shortness"
@@ -983,7 +983,7 @@
 - id: 2NT.r.5NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 5NT
-  cond: "hl >= 13 and S < 4 and H < 4"
+  cond: "hl >= 12 and S < 4 and H < 4"
   forcing: INV
   meaning: "Quantitatif fort : invitation à 6SA"
   meaning_en: "Strong quantitative: invitation to 6NT"
@@ -991,7 +991,7 @@
 - id: 2NT.r.4NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 4NT
-  cond: "hl == 12 and S < 4 and H < 4"
+  cond: "hl == 11 and S < 4 and H < 4"
   forcing: INV
   meaning: "Quantitatif"
   meaning_en: "Quantitative"
@@ -999,7 +999,7 @@
 - id: 2NT.r.3D
   seq: ["2NT", "2C 2D 2NT"]
   call: 3D
-  cond: "H >= 5 and H >= S and hl >= 4"
+  cond: "H >= 5 and H >= S and hl >= 3"
   forcing: REL
   meaning: "Texas ♥ : l'ouvreur rectifie s'il est fitté, sinon 3SA"
   meaning_en: "Texas ♥: opener corrects with a fit, otherwise 3NT"
@@ -1008,7 +1008,7 @@
 - id: 2NT.r.3H
   seq: ["2NT", "2C 2D 2NT"]
   call: 3H
-  cond: "S >= 5 and hl >= 4"
+  cond: "S >= 5 and hl >= 3"
   forcing: REL
   meaning: "Texas ♠ : l'ouvreur rectifie s'il est fitté, sinon 3SA"
   meaning_en: "Texas ♠: opener corrects with a fit, otherwise 3NT"
@@ -1017,7 +1017,7 @@
 - id: 2NT.r.3C
   seq: ["2NT", "2C 2D 2NT"]
   call: 3C
-  cond: "(H == 4 or S == 4) and hl >= 4 and not (shape == '4333' and hcp < 8)"
+  cond: "(H == 4 or S == 4) and hl >= 3 and not (shape == '4333' and hcp < 8)"
   forcing: F1
   meaning: "Stayman 4 réponses"
   meaning_en: "4-response Stayman"
@@ -1026,7 +1026,7 @@
 - id: 2NT.r.3NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 3NT
-  cond: "hl >= 4"
+  cond: "hl >= 3"
   forcing: SO
   meaning: "Manche"
   meaning_en: "Game"
@@ -1113,10 +1113,10 @@
   for: [{M: H}, {M: S}]
   seq: ["2NT 3C 3{M}", "2C 2D 2NT 3C 3{M}"]
   call: "6{M}"
-  cond: "{M} >= 4 and hl >= 12"
+  cond: "{M} >= 4 and hl >= 11"
   forcing: SO
-  meaning: "Fit et 12+ HL : petit chelem"
-  meaning_en: "Fit and 12+ HL: small slam"
+  meaning: "Fit et 11+ HL : petit chelem"
+  meaning_en: "Fit and 11+ HL: small slam"
   status: infere
   trump: "{M}"
 - id: "2NT.3C.3{M}.4{M}"
@@ -1131,23 +1131,23 @@
 - id: 2NT.3C.x.6NT
   seq: ["2NT 3C 3D|3H|3S", "2C 2D 2NT 3C 3D|3H|3S"]
   call: 6NT
-  cond: "hl >= 13"
+  cond: "hl >= 12"
   forcing: SO
-  meaning: "Pas de fit, 13+ HL : petit chelem à SA"
-  meaning_en: "No fit, 13+ HL: small slam in NT"
+  meaning: "Pas de fit, 12+ HL : petit chelem à SA"
+  meaning_en: "No fit, 12+ HL: small slam in NT"
   status: infere
 - id: 2NT.3C.x.4NT
   seq: ["2NT 3C 3D|3H|3S", "2C 2D 2NT 3C 3D|3H|3S"]
   call: 4NT
-  cond: "hl == 12"
+  cond: "hl == 11"
   forcing: INV
-  meaning: "Pas de fit, 12 HL : quantitatif"
-  meaning_en: "No fit, 12 HL: quantitative"
+  meaning: "Pas de fit, 11 HL : quantitatif"
+  meaning_en: "No fit, 11 HL: quantitative"
   status: infere
 - id: 2NT.3C.x.4NT.acc
   seq: ["2NT 3C 3D|3H|3S 4NT", "2C 2D 2NT 3C 3D|3H|3S 4NT"]
   call: 6NT
-  cond: "hl >= 21"
+  cond: "hl >= 20"
   forcing: SO
   meaning: "Maximum : accepte"
   meaning_en: "Maximum: accepts"
@@ -1190,10 +1190,10 @@
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T} 3{M}", "2C 2D 2NT {T} 3{M}"]
   call: 4NT
-  cond: "hl >= 10"
+  cond: "hl >= 9"
   forcing: ASK
-  meaning: "Fit et 10+ HL : Blackwood"
-  meaning_en: "Fit and 10+ HL: Blackwood"
+  meaning: "Fit et 9+ HL : Blackwood"
+  meaning_en: "Fit and 9+ HL: Blackwood"
   status: infere
   alert: true
   trump: "{M}"
@@ -1210,10 +1210,10 @@
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T} 3NT", "2C 2D 2NT {T} 3NT"]
   call: 4NT
-  cond: "{M} >= 6 and hl >= 10"
+  cond: "{M} >= 6 and hl >= 9"
   forcing: ASK
-  meaning: "6+ cartes et 10+ HL : Blackwood"
-  meaning_en: "6+ cards and 10+ HL: Blackwood"
+  meaning: "6+ cartes et 9+ HL : Blackwood"
+  meaning_en: "6+ cards and 9+ HL: Blackwood"
   status: infere
   alert: true
   trump: "{M}"
@@ -1259,10 +1259,10 @@
 - id: 1C.r.2D.strong
   seq: "1C"
   call: 2D
-  cond: "D >= 6 and hl >= 16"
+  cond: "D >= 6 and hl >= 15"
   forcing: FM
-  meaning: "6+ carreaux, 16+ HL : proposition de chelem"
-  meaning_en: "6+ diamonds, 16+ HL: slam try"
+  meaning: "6+ carreaux, 15+ HL : proposition de chelem"
+  meaning_en: "6+ diamonds, 15+ HL: slam try"
   status: sef
 - id: 1D.r.3C.strong
   seq: "1D"
@@ -1327,7 +1327,7 @@
 - id: 1C.r.1D
   seq: "1C"
   call: 1D
-  cond: "D >= 4 and hcp >= 5 and (hl < 11 or hl > 15 or not balanced)"
+  cond: "D >= 4 and hcp >= 5 and (hl < 10 or hl > 14 or not balanced)"
   forcing: F1
   meaning: "4+ carreaux, 5+ H, pas de majeure 4e"
   meaning_en: "4+ diamonds, 5+ HCP, no 4-card major"
@@ -1363,10 +1363,10 @@
   for: [{m: C}, {m: D}]
   seq: "1{m}"
   call: 4NT
-  cond: "19 <= hl <= 20"
+  cond: "18 <= hl <= 19"
   forcing: INV
-  meaning: "Quantitatif 19-20 HL"
-  meaning_en: "Quantitative 19-20 HL"
+  meaning: "Quantitatif 18-19 HL"
+  meaning_en: "Quantitative 18-19 HL"
   status: sef
 - id: "1{m}.r.3NT"
   for: [{m: C}, {m: D}]
@@ -1398,7 +1398,7 @@
 - id: 1C.r.1D.fallback
   seq: "1C"
   call: 1D
-  cond: "hl >= 16"
+  cond: "hl >= 15"
   forcing: F1
   meaning: "Repli : main forte régulière 16-18 (couleur d'attente)"
   meaning_en: "Fallback: strong balanced hand 16-18 (waiting suit)"
@@ -1481,10 +1481,10 @@
   for: [{M: H}, {M: S}]
   seq: "1C 1{M}"
   call: 2D
-  cond: "C >= 5 and D >= 4 and hl >= 17"
+  cond: "C >= 5 and D >= 4 and hl >= 16"
   forcing: F1
-  meaning: "Bicolore cher, 17+ H"
-  meaning_en: "Expensive two-suiter, 17+ HCP"
+  meaning: "Bicolore cher, 16+ H"
+  meaning_en: "Expensive two-suiter, 16+ HCP"
   status: sef
 - id: "1{m}.1S.2H.reverse"
   for: [{m: C}, {m: D}]
@@ -1774,7 +1774,7 @@
   for: [{M: H, km: "keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))"}, {M: S, km: "true"}]
   seq: "1{M}"
   call: 4NT
-  cond: "{M} >= 4 and hl >= 18 and ({km})"
+  cond: "{M} >= 4 and hl >= 17 and ({km})"
   forcing: ASK
   meaning: "Blackwood 5 clés"
   meaning_en: "5-keycard Blackwood"
@@ -1794,18 +1794,18 @@
 - id: 1H.r.2S.strong
   seq: "1H"
   call: 2S
-  cond: "S >= 6 and hl >= 16"
+  cond: "S >= 6 and hl >= 15"
   forcing: FM
-  meaning: "6 piques, 16+ HL : proposition de chelem"
-  meaning_en: "6 spades, 16+ HL: slam try"
+  meaning: "6 piques, 15+ HL : proposition de chelem"
+  meaning_en: "6 spades, 15+ HL: slam try"
   status: sef
 - id: 1S.r.3H.strong
   seq: "1S"
   call: 3H
-  cond: "H >= 6 and hl >= 16"
+  cond: "H >= 6 and hl >= 15"
   forcing: FM
-  meaning: "6 cœurs, 16+ HL : proposition de chelem"
-  meaning_en: "6 hearts, 16+ HL: slam try"
+  meaning: "6 cœurs, 15+ HL : proposition de chelem"
+  meaning_en: "6 hearts, 15+ HL: slam try"
   status: sef
 - id: "1{M}.r.3{m}.strong"
   for: [{M: H, m: C}, {M: H, m: D}, {M: S, m: C}, {M: S, m: D}]
@@ -1867,7 +1867,7 @@
 - id: 1H.r.1S
   seq: "1H"
   call: 1S
-  cond: "S >= 4 and hcp >= 5 and (H < 3 or hl >= 13)"
+  cond: "S >= 4 and hcp >= 5 and (H < 3 or hl >= 12)"
   forcing: F1
   meaning: "4+ piques, 5+ H"
   meaning_en: "4+ spades, 5+ HCP"
@@ -1875,10 +1875,10 @@
 - id: 1S.r.2H
   seq: "1S"
   call: 2H
-  cond: "H >= 5 and hl >= 11"
+  cond: "H >= 5 and hl >= 10"
   forcing: F1
-  meaning: "5+ cœurs, 11+ points (HL), forcing"
-  meaning_en: "5+ hearts, 11+ points (HL), forcing"
+  meaning: "5+ cœurs, 10+ points (HL), forcing"
+  meaning_en: "5+ hearts, 10+ points (HL), forcing"
   status: choix
 - id: "1{M}.r.2{m}"
   for: [{M: H, m: D}, {M: H, m: C}, {M: S, m: D}, {M: S, m: C}]
@@ -2239,7 +2239,7 @@
   for: [{M: H}, {M: S}]
   seq: "2{M} 2NT"
   call: 3NT
-  cond: "hl >= 9"
+  cond: "hl >= 8"
   forcing: NF
   meaning: "Maximum sans force annexe"
   meaning_en: "Maximum without side strength"
@@ -2664,7 +2664,7 @@
   for: [{M: H, x: 3S, c: C}, {M: H, x: 3S, c: D}, {M: S, x: 3H, c: C}, {M: S, x: 3H, c: D}, {M: S, x: 3H, c: H}]
   seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}", "1NT (X) 2C 2{M} {x}", "1NT (X) 2C 2NT 3{M}"]
   call: "4{c}"
-  cond: "hl >= 16 and ctrl1('{c}')"
+  cond: "hl >= 15 and ctrl1('{c}')"
   forcing: F1
   meaning: "Maximum : contrôle du 1er tour dans la couleur"
   meaning_en: "Maximum: first-round control in the suit"
@@ -2704,7 +2704,7 @@
   for: [{M: H, x: 3S, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, x: 3H, km: "true"}]
   seq: ["1NT 2C 2{M} {x} 4{M}", "1NT 2C 2NT 3{M} 4{M}", "1NT (X) 2C 2{M} {x} 4{M}", "1NT (X) 2C 2NT 3{M} 4{M}"]
   call: 4NT
-  cond: "hl >= 18 and ({km})"
+  cond: "hl >= 17 and ({km})"
   forcing: ASK
   meaning: "Chelem malgré le minimum : Blackwood"
   meaning_en: "Slam despite the minimum: Blackwood"
@@ -2725,7 +2725,7 @@
   for: [{M: H, s: C, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: H, s: D, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, s: C, km: "true"}, {M: S, s: D, km: "true"}]
   seq: ["1NT 2C 2{M} 4{s}", "1NT (X) 2C 2{M} 4{s}"]
   call: 4NT
-  cond: "hl >= 16 and hcp_in('{s}') <= 1 and ({km})"
+  cond: "hl >= 15 and hcp_in('{s}') <= 1 and ({km})"
   forcing: ASK
   meaning: "Maximum sans points perdus dans la courte : Blackwood"
   meaning_en: "Maximum with no points wasted in the short suit: Blackwood"
@@ -2858,16 +2858,16 @@
   for: [{X: S, r: "2H|2NT", a: 0}, {X: S, r: "2S|3C|3D", a: 1}, {X: S, r: "3H|3S|3NT", a: 2}, {X: S, r: "4C|4D|4H|4S", a: 3}, {X: S, r: "4NT", a: 4}, {X: H, r: "2H|2NT", a: 0}, {X: H, r: "2S|3C|3D", a: 1}, {X: H, r: "3H|3S|3NT", a: 2}, {X: H, r: "4C|4D|4H|4S", a: 3}, {X: H, r: "4NT", a: 4}, {X: D, r: "2H|2NT", a: 0}, {X: D, r: "2S|3C|3D", a: 1}, {X: D, r: "3H|3S|3NT", a: 2}, {X: D, r: "4C|4D|4H|4S", a: 3}, {X: D, r: "4NT", a: 4}, {X: C, r: "2H|2NT", a: 0}, {X: C, r: "2S|3C|3D", a: 1}, {X: C, r: "3H|3S|3NT", a: 2}, {X: C, r: "4C|4D|4H|4S", a: 3}, {X: C, r: "4NT", a: 4}]
   seq: "2D {r}"
   call: "7{X}"
-  cond: "{X} >= 5 and {X} == max(S, H, D, C) and aces + {a} == 4 and ptricks >= 12"
+  cond: "{X} >= 5 and {X} == max(S, H, D, C) and aces + {a} == 4 and ptricks >= 11"
   forcing: SO
-  meaning: "Les 4 As et 12 levées de jeu : grand chelem"
-  meaning_en: "All 4 aces and 12 playing tricks: grand slam"
+  meaning: "Les 4 As et 11 levées de jeu : grand chelem"
+  meaning_en: "All 4 aces and 11 playing tricks: grand slam"
   status: infere
 - id: "sl.2D.{X}.{a}.6"
   for: [{X: S, r: "2H|2NT", a: 0}, {X: S, r: "2S|3C|3D", a: 1}, {X: S, r: "3H|3S|3NT", a: 2}, {X: S, r: "4C|4D|4H|4S", a: 3}, {X: S, r: "4NT", a: 4}, {X: H, r: "2H|2NT", a: 0}, {X: H, r: "2S|3C|3D", a: 1}, {X: H, r: "3H|3S|3NT", a: 2}, {X: H, r: "4C|4D|4H|4S", a: 3}, {X: H, r: "4NT", a: 4}, {X: D, r: "2H|2NT", a: 0}, {X: D, r: "2S|3C|3D", a: 1}, {X: D, r: "3H|3S|3NT", a: 2}, {X: D, r: "4C|4D|4H|4S", a: 3}, {X: D, r: "4NT", a: 4}, {X: C, r: "2H|2NT", a: 0}, {X: C, r: "2S|3C|3D", a: 1}, {X: C, r: "3H|3S|3NT", a: 2}, {X: C, r: "4C|4D|4H|4S", a: 3}, {X: C, r: "4NT", a: 4}]
   seq: "2D {r}"
   call: "6{X}"
-  cond: "{X} >= 5 and {X} == max(S, H, D, C) and aces + {a} >= 3 and ptricks >= 10.5"
+  cond: "{X} >= 5 and {X} == max(S, H, D, C) and aces + {a} >= 3 and ptricks >= 9.5"
   forcing: SO
   meaning: "Un As au plus manque : petit chelem"
   meaning_en: "At most one ace missing: small slam"
@@ -2994,19 +2994,19 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m} 1{M} 1NT"
   call: 2C
-  cond: "{M} >= 5 and hl >= 11"
+  cond: "{M} >= 5 and hl >= 10"
   forcing: F1
-  meaning: "Roudi : 11+ HL, majeure 5e, demande le soutien"
-  meaning_en: "Roudi: 11+ HL, five-card major, asks for support"
+  meaning: "Roudi : 10+ HL, majeure 5e, demande le soutien"
+  meaning_en: "Roudi: 10+ HL, five-card major, asks for support"
   status: sef
   alert: true
 - id: roudi.H.S
   seq: "1H 1S 1NT"
   call: 2C
-  cond: "S >= 5 and hl >= 11"
+  cond: "S >= 5 and hl >= 10"
   forcing: F1
-  meaning: "Roudi : 11+ HL, 5 piques, demande le soutien"
-  meaning_en: "Roudi: 11+ HL, five spades, asks for support"
+  meaning: "Roudi : 10+ HL, 5 piques, demande le soutien"
+  meaning_en: "Roudi: 10+ HL, five spades, asks for support"
   status: choix
   alert: true
 # --- réponses de l'ouvreur : Roudi à 3 paliers
@@ -3015,7 +3015,7 @@
   for: [{m: C}, {m: D}]
   seq: "1{m} 1H 1NT 2C"
   call: 2S
-  cond: "H == 3 and hl >= 14"
+  cond: "H == 3 and hl >= 13"
   forcing: F1
   meaning: "Fitté maximum : 3 cartes à ♥, 13-14 H"
   meaning_en: "Fit, maximum: three hearts, 13-14 HCP"
@@ -3034,7 +3034,7 @@
   for: [{m: C}, {m: D}, {m: H}]
   seq: "1{m} 1S 1NT 2C"
   call: 2S
-  cond: "S == 3 and hl >= 14"
+  cond: "S == 3 and hl >= 13"
   forcing: F1
   meaning: "Fitté maximum : 3 cartes à ♠, 13-14 H"
   meaning_en: "Fit, maximum: three spades, 13-14 HCP"
@@ -3075,7 +3075,7 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
   seq: "1{m} 1{M} 1NT 2C 2H"
   call: "4{M}"
-  cond: "hl >= 13"
+  cond: "hl >= 12"
   forcing: SO
   meaning: "Fit : manche"
   meaning_en: "Fit: game"
@@ -3111,7 +3111,7 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
   seq: "1{m} 1{M} 1NT 2C 2D"
   call: "4{M}"
-  cond: "{M} >= 6 and hl >= 13"
+  cond: "{M} >= 6 and hl >= 12"
   forcing: SO
   meaning: "6 cartes, manche"
   meaning_en: "Six cards, game"
@@ -3120,7 +3120,7 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
   seq: "1{m} 1{M} 1NT 2C 2D"
   call: 3NT
-  cond: "hl >= 13"
+  cond: "hl >= 12"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
@@ -3138,7 +3138,7 @@
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
   seq: "1{m} 1{M} 1NT 2C 2D 2NT"
   call: 3NT
-  cond: "hl >= 14"
+  cond: "hl >= 13"
   forcing: SO
   meaning: "Maximum : accepte l'invitation"
   meaning_en: "Maximum: accepts the invitation"
@@ -3164,7 +3164,7 @@
 - id: 1C.1S.2C.2H
   seq: "1C 1S 2C"
   call: 2H
-  cond: "S >= 5 and H >= 4 and hl >= 11"
+  cond: "S >= 5 and H >= 4 and hl >= 10"
   forcing: F1
   meaning: "5+♠ et 4+♥, forcing"
   meaning_en: "5+♠ and 4+♥, forcing"
@@ -3236,7 +3236,7 @@
 - id: 1C.1S.2C.2H.3H.4H
   seq: "1C 1S 2C 2H 3H"
   call: 4H
-  cond: "hl >= 12"
+  cond: "hl >= 11"
   forcing: SO
   meaning: "Manche à ♥"
   meaning_en: "Game in ♥"
@@ -3338,7 +3338,7 @@
   for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C"}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H"}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C"}]
   seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}"]
   call: 3NT
-  cond: "hl >= 12"
+  cond: "hl >= 11"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
@@ -3448,7 +3448,7 @@
   for: [{k: a, s: "1C 1H 1S", call: 2D, F: D, M: H, o2: S}, {k: b, s: "1D 1H 1S", call: 2C, F: C, M: H, o2: S}, {k: c, s: "1D 1S 2C", call: 2H, F: H, M: S, o2: C}, {k: e, s: "1H 1S 2C", call: 2D, F: D, M: S, o2: C}, {k: f, s: "1H 1S 2D", call: 3C, F: C, M: S, o2: D}]
   seq: "{s}"
   call: "{call}"
-  cond: "hl >= 12 and not ({o2} >= 4 and '{o2}' in ('H', 'S')) and {M} < 6 and not ((balanced or semibalanced) and stop('{F}'))"
+  cond: "hl >= 11 and not ({o2} >= 4 and '{o2}' in ('H', 'S')) and {M} < 6 and not ((balanced or semibalanced) and stop('{F}'))"
   forcing: FM
   meaning: "4e couleur forcing"
   meaning_en: "Fourth suit forcing"
@@ -3487,7 +3487,7 @@
   for: [{k: a, s: "1C 1H 1S 2D", F: D}, {k: b, s: "1D 1H 1S 2C", F: C}, {k: e, s: "1H 1S 2C 2D", F: D}]
   seq: "{s}"
   call: "3{F}"
-  cond: "{F} >= 3 and ace('{F}') and hl >= 14"
+  cond: "{F} >= 3 and ace('{F}') and hl >= 13"
   forcing: FM
   meaning: "As troisième dans la 4e couleur, ouverture non minimum"
   meaning_en: "Third-round ace in the fourth suit, non-minimum opening"
@@ -3562,7 +3562,7 @@
   for: [{k: a, s: "1C 1H 1S 2D", M: H}, {k: b, s: "1D 1H 1S 2C", M: H}, {k: c, s: "1D 1S 2C 2H", M: S}, {k: e, s: "1H 1S 2C 2D", M: S}]
   seq: "{s} 2NT 3NT"
   call: "4{M}"
-  cond: "hl >= 18 and {M} >= 3"
+  cond: "hl >= 17 and {M} >= 3"
   forcing: NF
   meaning: "18-19 avec 3 cartes dans la majeure"
   meaning_en: "18-19 with 3 cards in the major"
@@ -3571,7 +3571,7 @@
   for: [{k: a, s: "1C 1H 1S 2D"}, {k: b, s: "1D 1H 1S 2C"}, {k: c, s: "1D 1S 2C 2H"}, {k: e, s: "1H 1S 2C 2D"}]
   seq: "{s} 2NT 3NT"
   call: 4NT
-  cond: "hl >= 18"
+  cond: "hl >= 17"
   forcing: INV
   meaning: "18-19 : quantitatif"
   meaning_en: "18-19: quantitative"
@@ -3580,7 +3580,7 @@
   for: [{k: a, s: "1C 1H 1S 2D"}, {k: b, s: "1D 1H 1S 2C"}, {k: c, s: "1D 1S 2C 2H"}, {k: e, s: "1H 1S 2C 2D"}]
   seq: "{s} 2NT 3NT 4NT"
   call: 6NT
-  cond: "hl >= 14"
+  cond: "hl >= 13"
   forcing: SO
   meaning: "Accepte"
   meaning_en: "Accepts"
@@ -4886,7 +4886,7 @@
         {x: 1H, y: 2S, xs: H, r2: 3H}]
   seq: "{x} ({y}) P"
   call: "{r2}"
-  cond: "{xs} >= 6 and hl <= 15"
+  cond: "{xs} >= 6 and hl <= 14"
   forcing: NF
   meaning: "Répétition : 6 cartes"
   meaning_en: "Rebid: 6 cards"
@@ -4908,27 +4908,27 @@
         {x: 1S, y: 2D, xs: S, r2: 2S}, {x: 1S, y: 2H, xs: S, r2: 2S}, {x: 1H, y: 2S, xs: H, r2: 3H}]
   seq: "{x} ({y}) {r2}"
   call: "4{xs}"
-  cond: "hl >= 18"
+  cond: "hl >= 17"
   forcing: SO
-  meaning: "Manche : 18+ HL"
-  meaning_en: "Game: 18+ HL"
+  meaning: "Manche : 17+ HL"
+  meaning_en: "Game: 17+ HL"
   status: infere
 - id: "ouv.{x}.{y}.raise.3"
   for: [{x: 1H, y: 1S, xs: H, r2: 2H}, {x: 1H, y: 2C, xs: H, r2: 2H}, {x: 1H, y: 2D, xs: H, r2: 2H}, {x: 1S, y: 2C, xs: S, r2: 2S},
         {x: 1S, y: 2D, xs: S, r2: 2S}, {x: 1S, y: 2H, xs: S, r2: 2S}]
   seq: "{x} ({y}) {r2}"
   call: "3{xs}"
-  cond: "16 <= hl <= 17"
+  cond: "15 <= hl <= 16"
   forcing: INV
-  meaning: "Invitation : 16-17 HL"
-  meaning_en: "Invitation: 16-17 HL"
+  meaning: "Invitation : 15-16 HL"
+  meaning_en: "Invitation: 15-16 HL"
   status: infere
 - id: "ouv.{x}.{y}.raise.3.4"
   for: [{x: 1H, y: 1S, xs: H, r2: 2H}, {x: 1H, y: 2C, xs: H, r2: 2H}, {x: 1H, y: 2D, xs: H, r2: 2H}, {x: 1S, y: 2C, xs: S, r2: 2S},
         {x: 1S, y: 2D, xs: S, r2: 2S}, {x: 1S, y: 2H, xs: S, r2: 2S}]
   seq: "{x} ({y}) {r2} 3{xs}"
   call: "4{xs}"
-  cond: "hld >= 9"
+  cond: "hld >= 8"
   forcing: SO
   meaning: "Accepte l'invitation"
   meaning_en: "Accepts the invitation"
@@ -4938,7 +4938,7 @@
         {x: 1H, y: 2S, xs: H}]
   seq: "{x} ({y}) 2NT"
   call: "3{xs}"
-  cond: "hl <= 14"
+  cond: "hl <= 13"
   forcing: NF
   meaning: "Minimum"
   meaning_en: "Minimum"
@@ -4958,7 +4958,7 @@
         {x: 1H, y: 2S, xs: H}]
   seq: "{x} ({y}) 2NT 3{xs}"
   call: "4{xs}"
-  cond: "hld >= 14"
+  cond: "hld >= 13"
   forcing: SO
   meaning: "Manche : maximum du 2SA fitté"
   meaning_en: "Game: top of the fitted 2NT"
@@ -5009,7 +5009,7 @@
   for: [{x: 1C, y: 1D}, {x: 1C, y: 1H}, {x: 1C, y: 1S}, {x: 1D, y: 1H}, {x: 1D, y: 1S}, {x: 1H, y: 1S}]
   seq: "{x} ({y}) 1NT"
   call: "3NT"
-  cond: "hl >= 17"
+  cond: "hl >= 16"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in notrump"
@@ -5035,7 +5035,7 @@
         {x: 1H, y: 2S, ys: S, nt: 2NT}]
   seq: "{x} ({y}) X"
   call: "{nt}"
-  cond: "stop('{ys}') and hl <= 14"
+  cond: "stop('{ys}') and hl <= 13"
   forcing: NF
   meaning: "SA avec l'arrêt, minimum"
   meaning_en: "Notrump with the stopper, minimum"
@@ -5907,19 +5907,19 @@
   for: [{i: 2C, M: S}, {i: 2C, M: H}, {i: 2D, M: S}, {i: 2D, M: H}]
   seq: "1NT ({i})"
   call: "4{M}"
-  cond: "{M} >= 6 and {M} >= max(S, H) and 9 <= hl <= 16"
+  cond: "{M} >= 6 and {M} >= max(S, H) and 8 <= hl <= 16"
   forcing: SO
-  meaning: "Majeure 6e, 9+ HL : manche"
-  meaning_en: "Six-card major, 9+ HL: game"
+  meaning: "Majeure 6e, 8+ HL : manche"
+  meaning_en: "Six-card major, 8+ HL: game"
   status: infere
 - id: "1NT.int{i}.3NT"
   for: [{i: 2C}, {i: 2D}]
   seq: "1NT ({i})"
   call: 3NT
-  cond: "9 <= hl <= 16"
+  cond: "8 <= hl <= 16"
   forcing: SO
-  meaning: "Manche à SA : 9+ HL"
-  meaning_en: "Game in notrump: 9+ HL"
+  meaning: "Manche à SA : 8+ HL"
+  meaning_en: "Game in notrump: 8+ HL"
   status: infere
 - id: "1NT.int{i}.2{M}"
   for: [{i: 2C, M: S}, {i: 2C, M: H}, {i: 2D, M: S}, {i: 2D, M: H}]
@@ -6332,26 +6332,26 @@
 - id: 1C.1D.2NT
   seq: "1C 1D"
   call: 2NT
-  cond: "balanced and 18 <= hl <= 19"
+  cond: "balanced and 17 <= hl <= 18"
   forcing: INV
-  meaning: "Régulier 18-19 HL"
-  meaning_en: "Balanced 18-19 HL"
+  meaning: "Régulier 17-18 HL"
+  meaning_en: "Balanced 17-18 HL"
   status: infere
 - id: 1C.1D.1NT
   seq: "1C 1D"
   call: 1NT
-  cond: "balanced and hl <= 14"
+  cond: "balanced and hl <= 13"
   forcing: NF
-  meaning: "Régulier 12-14 HL"
-  meaning_en: "Balanced 12-14 HL"
+  meaning: "Régulier 12-13 HL"
+  meaning_en: "Balanced 12-13 HL"
   status: infere
 - id: 1C.1D.3D
   seq: "1C 1D"
   call: 3D
-  cond: "D >= 4 and hl >= 15"
+  cond: "D >= 4 and hl >= 14"
   forcing: INV
-  meaning: "Fit ♦, 15-17 HL"
-  meaning_en: "♦ fit, 15-17 HL"
+  meaning: "Fit ♦, 14-17 HL"
+  meaning_en: "♦ fit, 14-17 HL"
   status: infere
 - id: 1C.1D.2D
   seq: "1C 1D"
@@ -6364,10 +6364,10 @@
 - id: 1C.1D.3C
   seq: "1C 1D"
   call: 3C
-  cond: "C >= 6 and hl >= 15"
+  cond: "C >= 6 and hl >= 14"
   forcing: INV
-  meaning: "6 trèfles, 15-17 HL"
-  meaning_en: "6 clubs, 15-17 HL"
+  meaning: "6 trèfles, 14-17 HL"
+  meaning_en: "6 clubs, 14-17 HL"
   status: infere
 - id: 1C.1D.2C
   seq: "1C 1D"
@@ -6383,7 +6383,7 @@
 - id: 1H.1S.4S
   seq: "1H 1S"
   call: 4S
-  cond: "S >= 4 and hld >= 19"
+  cond: "S >= 4 and hld >= 18"
   forcing: SO
   meaning: "Fit ♠, 18+"
   meaning_en: "♠ fit, 18+"
@@ -6391,7 +6391,7 @@
 - id: 1H.1S.3S
   seq: "1H 1S"
   call: 3S
-  cond: "S >= 4 and hld >= 16"
+  cond: "S >= 4 and hld >= 15"
   forcing: INV
   meaning: "Fit ♠, 15-17"
   meaning_en: "♠ fit, 15-17"
@@ -6407,10 +6407,10 @@
 - id: 1H.1S.2NT
   seq: "1H 1S"
   call: 2NT
-  cond: "balanced and 18 <= hl <= 19"
+  cond: "balanced and 17 <= hl <= 19"
   forcing: INV
-  meaning: "Régulier 18-19 HL"
-  meaning_en: "Balanced 18-19 HL"
+  meaning: "Régulier 17-19 HL"
+  meaning_en: "Balanced 17-19 HL"
   status: infere
 - id: 1H.1S.1NT
   seq: "1H 1S"
@@ -6423,7 +6423,7 @@
 - id: 1H.1S.3H
   seq: "1H 1S"
   call: 3H
-  cond: "H >= 6 and hl >= 16"
+  cond: "H >= 6 and hl >= 15"
   forcing: INV
   meaning: "6 cœurs, 15-17 HL"
   meaning_en: "6 hearts, 15-17 HL"
@@ -6432,10 +6432,10 @@
   for: [{m: C}, {m: D}]
   seq: "1H 1S"
   call: "3{m}"
-  cond: "H >= 5 and {m} >= 4 and {m} >= max(C, D) and hl >= 18"
+  cond: "H >= 5 and {m} >= 4 and {m} >= max(C, D) and hl >= 17"
   forcing: FM
-  meaning: "Bicolore à saut : 18+ HL, forcing de manche"
-  meaning_en: "Jump shift: 18+ HL, game forcing"
+  meaning: "Bicolore à saut : 17+ HL, forcing de manche"
+  meaning_en: "Jump shift: 17+ HL, game forcing"
   status: infere
 - id: "1H.1S.2{m}"
   for: [{m: C}, {m: D}]
@@ -6690,7 +6690,7 @@
 - id: 1C.1D.3C.3NT
   seq: "1C 1D 3C"
   call: 3NT
-  cond: "hl >= 8"
+  cond: "hl >= 7"
   forcing: SO
   meaning: "Manche"
   meaning_en: "Game"
@@ -6717,7 +6717,7 @@
 - id: 1S.2H.x.4S
   seq: "1S 2H 2S|2NT|3H"
   call: 4S
-  cond: "S >= 3 and hl >= 13"
+  cond: "S >= 3 and hl >= 12"
   forcing: SO
   meaning: "Fit ♠, manche"
   meaning_en: "♠ fit, game"
@@ -6725,7 +6725,7 @@
 - id: 1S.2H.x.4H
   seq: "1S 2H 2NT|3H"
   call: 4H
-  cond: "H >= 5 and hl >= 11"
+  cond: "H >= 5 and hl >= 10"
   forcing: SO
   meaning: "Manche à ♥"
   meaning_en: "Game in ♥"
@@ -6733,7 +6733,7 @@
 - id: 1S.2H.x.3NT
   seq: "1S 2H 2S|2NT|3H"
   call: 3NT
-  cond: "hl >= 13"
+  cond: "hl >= 12"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
@@ -6982,55 +6982,55 @@
   for: [{o: "1D", r: "1H", x: "2C", rs: "H"}, {o: "1D", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2D", rs: "S"}]
   seq: "{o} {r} {x}"
   call: "4{rs}"
-  cond: "{rs} >= 6 and hl >= 13"
+  cond: "{rs} >= 6 and hl >= 12"
   forcing: SO
-  meaning: "Majeure 6e, 13+ HL : manche"
-  meaning_en: "Six-card major, 13+ HL: game"
+  meaning: "Majeure 6e, 12+ HL : manche"
+  meaning_en: "Six-card major, 12+ HL: game"
   status: infere
 - id: "eco.{o}.{r}.{x}.4{os}"
   for: [{o: "1H", r: "1S", x: "2C", os: "H"}, {o: "1H", r: "1S", x: "2D", os: "H"}]
   seq: "{o} {r} {x}"
   call: "4{os}"
-  cond: "{os} >= 3 and hld >= 13"
+  cond: "{os} >= 3 and hld >= 12"
   forcing: SO
-  meaning: "Fit dans la majeure d'ouverture, 13+ HLD : manche"
-  meaning_en: "Fit in the opening major, 13+ HLD: game"
+  meaning: "Fit dans la majeure d'ouverture, 12+ HLD : manche"
+  meaning_en: "Fit in the opening major, 12+ HLD: game"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{os}"
   for: [{o: "1H", r: "1S", x: "2C", os: "H"}, {o: "1H", r: "1S", x: "2D", os: "H"}]
   seq: "{o} {r} {x}"
   call: "3{os}"
-  cond: "{os} >= 3 and 10 <= hld <= 12"
+  cond: "{os} >= 3 and 9 <= hld <= 11"
   forcing: INV
-  meaning: "Préférence à saut : 3 cartes, 10-12 HLD, invitation"
-  meaning_en: "Jump preference: 3 cards, 10-12 HLD, invitational"
+  meaning: "Préférence à saut : 3 cartes, 9-11 HLD, invitation"
+  meaning_en: "Jump preference: 3 cards, 9-11 HLD, invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{rs}"
   for: [{o: "1D", r: "1H", x: "2C", rs: "H"}, {o: "1D", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2D", rs: "S"}]
   seq: "{o} {r} {x}"
   call: "3{rs}"
-  cond: "{rs} >= 6 and 10 <= hl <= 12"
+  cond: "{rs} >= 6 and 9 <= hl <= 11"
   forcing: INV
-  meaning: "Majeure 6e, 10-12 HL : invitation"
-  meaning_en: "Six-card major, 10-12 HL: invitational"
+  meaning: "Majeure 6e, 9-11 HL : invitation"
+  meaning_en: "Six-card major, 9-11 HL: invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{xs}"
   for: [{o: "1D", r: "1H", x: "2C", xs: "C"}, {o: "1D", r: "1S", x: "2C", xs: "C"}, {o: "1H", r: "1S", x: "2C", xs: "C"}, {o: "1H", r: "1S", x: "2D", xs: "D"}]
   seq: "{o} {r} {x}"
   call: "3{xs}"
-  cond: "{xs} >= 4 and 10 <= hld <= 12"
+  cond: "{xs} >= 4 and 9 <= hld <= 11"
   forcing: INV
-  meaning: "Soutien de la seconde couleur, 10-12 HLD : invitation"
-  meaning_en: "Raise of the second suit, 10-12 HLD: invitational"
+  meaning: "Soutien de la seconde couleur, 9-11 HLD : invitation"
+  meaning_en: "Raise of the second suit, 9-11 HLD: invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{os}.m"
   for: [{o: "1D", r: "1H", x: "2C", os: "D"}, {o: "1D", r: "1S", x: "2C", os: "D"}]
   seq: "{o} {r} {x}"
   call: "3{os}"
-  cond: "{os} >= 3 and 10 <= hl <= 12"
+  cond: "{os} >= 3 and 9 <= hl <= 11"
   forcing: INV
-  meaning: "Préférence à saut : 10-12 HL, invitation"
-  meaning_en: "Jump preference: 10-12 HL, invitational"
+  meaning: "Préférence à saut : 9-11 HL, invitation"
+  meaning_en: "Jump preference: 9-11 HL, invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.2{rs}"
   for: [{o: "1D", r: "1H", x: "2C", rs: "H", xs: "C"}, {o: "1D", r: "1S", x: "2C", rs: "S", xs: "C"}, {o: "1H", r: "1S", x: "2C", rs: "S", xs: "C"}, {o: "1H", r: "1S", x: "2D", rs: "S", xs: "D"}]
@@ -7056,16 +7056,16 @@
   for: [{o: "1S", x: "2H", xs: "H"}]
   seq: "{o} 1NT {x}"
   call: 4H
-  cond: "H >= 4 and hld >= 12"
+  cond: "H >= 4 and hld >= 11"
   forcing: SO
-  meaning: "Fit ♥, 12+ HLD : manche"
-  meaning_en: "Heart fit, 12+ HLD: game"
+  meaning: "Fit ♥, 11+ HLD : manche"
+  meaning_en: "Heart fit, 11+ HLD: game"
   status: infere
 - id: "eco.{o}.1NT.{x}.3{xs}"
   for: [{o: "1H", x: "2C", xs: "C"}, {o: "1H", x: "2D", xs: "D"}, {o: "1S", x: "2C", xs: "C"}, {o: "1S", x: "2D", xs: "D"}, {o: "1S", x: "2H", xs: "H"}]
   seq: "{o} 1NT {x}"
   call: "3{xs}"
-  cond: "{xs} >= 4 and 9 <= hld <= 11"
+  cond: "{xs} >= 4 and 8 <= hld <= 10"
   forcing: INV
   meaning: "Soutien de la seconde couleur : invitation"
   meaning_en: "Raise of the second suit: invitational"
@@ -7110,7 +7110,7 @@
 - id: "gen.lim.3NT"
   seq: "1C|1D|1H|1S 1D|1H|1S|1NT 1NT|2C|2D|2H|2S"
   call: 3NT
-  cond: "hl >= 13 and (balanced or semibalanced)"
+  cond: "hl >= 12 and (balanced or semibalanced)"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
@@ -7651,18 +7651,18 @@
 - id: 1S.2H.4H
   seq: "1S 2H"
   call: 4H
-  cond: "H >= 4 and 15 <= hld <= 17"
+  cond: "H >= 4 and 14 <= hld <= 16"
   forcing: SO
-  meaning: "5♠ et 4♥, 15-17 HLD"
-  meaning_en: "5♠ and 4♥, 15-17 HLD"
+  meaning: "5♠ et 4♥, 14-16 HLD"
+  meaning_en: "5♠ and 4♥, 14-16 HLD"
   status: sef
 - id: 1S.2H.3H
   seq: "1S 2H"
   call: 3H
-  cond: "H == 3 and hld >= 14"
+  cond: "H == 3 and hld >= 13"
   forcing: FM
-  meaning: "5♠ et 3♥, 14-19 HLD"
-  meaning_en: "5♠ and 3♥, 14-19 HLD"
+  meaning: "5♠ et 3♥, 13-19 HLD"
+  meaning_en: "5♠ and 3♥, 13-19 HLD"
   status: sef
 - id: 1S.2H.2NT
   seq: "1S 2H"
@@ -7784,7 +7784,7 @@
 - id: 1C.1D.3D.r
   seq: "1C 1D 3D"
   call: 3NT
-  cond: "hl >= 9 and (balanced or semibalanced)"
+  cond: "hl >= 8 and (balanced or semibalanced)"
   forcing: SO
   meaning: "Manche à SA"
   meaning_en: "Game in NT"
@@ -7792,7 +7792,7 @@
 - id: 1C.1D.3D.5D
   seq: "1C 1D 3D"
   call: 5D
-  cond: "hld >= 12"
+  cond: "hld >= 11"
   forcing: SO
   meaning: "Manche à ♦"
   meaning_en: "Game in ♦"
@@ -7809,7 +7809,7 @@
   for: [{x: 3S}, {x: 2NT}]
   seq: "1H 1S {x}"
   call: 4S
-  cond: "S >= 5 or (S >= 4 and hld >= 9)"
+  cond: "S >= 5 or (S >= 4 and hld >= 8)"
   forcing: SO
   meaning: "Manche à ♠"
   meaning_en: "Game in ♠"
@@ -7818,7 +7818,7 @@
   for: [{x: 3S}, {x: 2NT}]
   seq: "1H 1S {x}"
   call: 3NT
-  cond: "hl >= 7"
+  cond: "hl >= 6"
   forcing: SO
   meaning: "Manche"
   meaning_en: "Game"

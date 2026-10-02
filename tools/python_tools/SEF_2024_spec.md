@@ -113,15 +113,15 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 |---|---|---|
 | `S`, `H`, `D`, `C` | int | Longueur de la couleur |
 | `hcp` | int | A = 4, R = 3, D = 2, V = 1 |
-| `hl` | int | `hcp` + somme sur les couleurs de max(0, n − 4) |
-| `dh` | int | `hcp` + points de courte : chicane 3, singleton 2, doubleton 1 (toutes couleurs) |
+| `hl` | int | `hcp` + points de longueur − dévaluation. Points de longueur : max(0, n − 4) dans chaque couleur qui contient au moins deux honneurs parmi A R D V (« commandée par au moins D V »). Dévaluation : 1 point par couleur faite d'un honneur sec (As compris) ou de deux honneurs secs (A R D V) |
+| `dh` | int | `hcp` + points de courte : chicane 3, singleton 2, doubleton 1 (toutes couleurs) − même dévaluation que `hl` |
 | `hld` | int | `hl` + mêmes points de courte |
 | `shape` | str | Les 4 longueurs triées par ordre décroissant, concaténées (ex. `"5332"`) |
 | `balanced` | bool | `shape` ∈ {`4333`, `4432`, `5332`} |
 | `semibalanced` | bool | `shape` ∈ {`5422`, `6322`} |
 | `aces`, `kings` | int | Nombre d'As, de Rois |
 | `losers` | int | Somme par couleur : on prend les min(n, 3) premières cartes et on compte combien des min(n, 3) premiers honneurs de `A K D` y manquent |
-| `ptricks` | float | Somme par couleur de min(n, t) + max(0, n − 3), où t = 1 pour l'As ; + 1 pour le Roi si As aussi, + 0,5 si Roi sans As (Roi au moins second) ; + 1 pour la Dame si A et R, + 0,5 si A ou R (Dame au moins troisième) |
+| `ptricks` | float | Somme par couleur de min(n, t) + 0,5 si n ≥ 4 + max(0, n − 4) (demi-levée pour la 4e carte, une levée par carte à partir de la 5e), où t = 1 pour l'As ; + 1 pour le Roi si As aussi, + 0,5 si Roi sans As (Roi au moins second) ; + 1 pour la Dame si A et R, + 0,5 si A ou R (Dame au moins troisième) |
 | `qtricks` | float | Levées de défense : somme par couleur de 2 (A R), 1,5 (A D), 1 (A seul ou avec V…), 1 (R D), 0,5 (R au moins second sans A ni D), 0 sinon |
 | `sidetricks` | float | Levées de défense annexes : `qtricks` sans la couleur la plus longue (à égalité de longueur, la plus haute : ♠ > ♥ > ♦ > ♣) |
 | `ace(s)`, `king(s)`, `queen(s)` | bool | La couleur `s` contient l'As / le Roi / la Dame |
@@ -169,8 +169,8 @@ En-tête : `format` (`sef-tests/1`), `source`, `source_sha256`, `seed`, `deals` 
 ```json
 {"id":6,"hand":"KQJ3.9654.Q86.AK","seq":"1C","trump":null,"options":[],
  "expected":{"call":"1H","rule":"1C.r.1H"},
- "features":{"S":4,"H":4,"D":3,"C":2,"hcp":15,"hl":15,"dh":16,"hld":16,"shape":"4432",
-             "balanced":true,"semibalanced":false,"aces":1,"kings":2,"losers":6,"ptricks":5.0,
+ "features":{"S":4,"H":4,"D":3,"C":2,"hcp":15,"hl":14,"dh":15,"hld":15,"shape":"4432",
+             "balanced":true,"semibalanced":false,"aces":1,"kings":2,"losers":6,"ptricks":4.0,
              "ace":{"S":false,"H":false,"D":false,"C":true}, "…":"…"}}
 ```
 

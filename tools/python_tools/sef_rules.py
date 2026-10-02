@@ -182,8 +182,19 @@ def ptricks(h, L):
             t += 1 if a else 0.5
         if q and n >= 3:
             t += 1 if (a and k) else (0.5 if (a or k) else 0)
-        tot += min(n, t) + max(0, n - 3)
+        tot += min(n, t) + (0.5 + n - 4 if n >= 4 else 0)
     return tot
+
+
+def length_points(c, n):
+    """1 point par carte à partir de la 5e, dans une couleur commandée par au moins D V
+    (deux honneurs parmi A R D V)."""
+    return max(0, n - 4) if sum(1 for x in c if x in 'AKQJ') >= 2 else 0
+
+
+def devalued(c, n):
+    """Honneur sec (As compris) ou deux honneurs secs : 1 point de moins."""
+    return 1 <= n <= 2 and all(x in 'AKQJ' for x in c)
 
 
 def quick_tricks(c, n):
@@ -201,7 +212,8 @@ def features(h):
     hcp_in = {s: sum(hv.get(c, 0) for c in h[s]) for s in SUITS}
     hcp = sum(hcp_in.values())
     shortp = sum({0: 3, 1: 2, 2: 1}.get(L[s], 0) for s in SUITS)
-    hl = hcp + sum(max(0, L[s] - 4) for s in SUITS)
+    deval = sum(1 for s in SUITS if devalued(h[s], L[s]))
+    hl = hcp + sum(length_points(h[s], L[s]) for s in SUITS) - deval
     shape = ''.join(str(x) for x in sorted(L.values(), reverse=True))
 
     def losers_suit(s):
@@ -220,7 +232,7 @@ def features(h):
     env = dict(L)
     env.update(
         qtricks=sum(qt.values()), sidetricks=sum(qt.values()) - qt[longest],
-        hcp=hcp, hl=hl, dh=hcp + shortp, hld=hl + shortp, shape=shape,
+        hcp=hcp, hl=hl, dh=hcp + shortp - deval, hld=hl + shortp, shape=shape,
         balanced=shape in ('4333', '4432', '5332'), semibalanced=shape in ('5422', '6322'),
         aces=sum(h[s].count('A') for s in SUITS), kings=sum(h[s].count('K') for s in SUITS),
         losers=losers, ptricks=ptricks(h, L),

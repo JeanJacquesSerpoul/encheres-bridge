@@ -136,13 +136,13 @@ Points d'honneur, H : As 4, Roi 3, Dame 2, Valet 1.
 
 hl
 
-H + 1 point par carte au-delà de la 4e dans chaque couleur (5e pique : +1).
+H + 1 point par carte à partir de la 5e dans une couleur commandée par au moins D V (5e pique : +1) ; − 1 par honneur sec ou paire d'honneurs secs.
 
 15
 
 dh
 
-H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2).
+H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2) ; même dévaluation que HL.
 
 16
 
@@ -182,9 +182,9 @@ false
 
 ptricks
 
-Levées de jeu estimées : par couleur, les cartes au-delà de la 3e plus les honneurs qui font levée.
+Levées de jeu estimées : par couleur, les honneurs qui font levée, une demi-levée pour la 4e carte et une levée par carte à partir de la 5e.
 
-6
+5
 
 qtricks
 

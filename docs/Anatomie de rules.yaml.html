@@ -388,8 +388,8 @@ footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--lin
         <h3>Points</h3>
         <dl class="defs">
           <dt>hcp</dt><dd>Points d'honneur, H : As 4, Roi 3, Dame 2, Valet 1.</dd><dd class="here">14</dd>
-          <dt>hl</dt><dd>H + 1 point par carte au-delà de la 4e dans chaque couleur (5e pique : +1).</dd><dd class="here">15</dd>
-          <dt>dh</dt><dd>H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2).</dd><dd class="here">16</dd>
+          <dt>hl</dt><dd>H + 1 point par carte à partir de la 5e dans une couleur commandée par au moins D V (5e pique : +1) ; − 1 par honneur sec ou paire d'honneurs secs.</dd><dd class="here">15</dd>
+          <dt>dh</dt><dd>H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2) ; même dévaluation que HL.</dd><dd class="here">16</dd>
           <dt>hld</dt><dd>HL + les mêmes points de courte.</dd><dd class="here">17</dd>
         </dl>
       </div>
@@ -405,7 +405,7 @@ footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--lin
       <div>
         <h3>Levées et contrôles</h3>
         <dl class="defs">
-          <dt>ptricks</dt><dd>Levées de jeu estimées : par couleur, les cartes au-delà de la 3e plus les honneurs qui font levée.</dd><dd class="here">6</dd>
+          <dt>ptricks</dt><dd>Levées de jeu estimées : par couleur, les honneurs qui font levée, une demi-levée pour la 4e carte et une levée par carte à partir de la 5e.</dd><dd class="here">5</dd>
           <dt>qtricks</dt><dd>Levées de défense : par couleur, A R 2, A D 1,5, A 1, R D 1, R second 0,5.</dd><dd class="here">3</dd>
           <dt>sidetricks</dt><dd><code>qtricks</code> sans compter la couleur la plus longue.</dd><dd class="here">1</dd>
           <dt>losers</dt><dd>Perdantes : dans les trois premières cartes de chaque couleur, les As, Rois et Dames qui manquent.</dd><dd class="here">6</dd>
@@ -575,10 +575,13 @@ footer { color: var(--muted); font-size: .86rem; border-top: 1px solid var(--lin
     const f = { hcp: 0, hl: 0 };
     parts.forEach((p, i) => {
       const cards = p === "-" ? "" : p;
-      f[SUITS[i]] = cards.length;
+      const n = cards.length, honors = [...cards].filter((c) => c in POINTS).length;
+      f[SUITS[i]] = n;
       for (const c of cards) f.hcp += POINTS[c] || 0;
+      if (honors >= 2) f.hl += Math.max(0, n - 4);     // longueur : couleur commandée par D V au moins
+      if (n >= 1 && n <= 2 && honors === n) f.hl -= 1; // dévaluation : honneur(s) sec(s)
     });
-    f.hl = f.hcp + SUITS.reduce((n, s) => n + Math.max(0, f[s] - 4), 0);
+    f.hl += f.hcp;
     f.shape = SUITS.map((s) => f[s]).sort((a, b) => b - a).join("");
     f.balanced = ["4333", "4432", "5332"].includes(f.shape);
     return f;

@@ -4115,10 +4115,10 @@
   for: [{o: 1C, s: S, a: H, b: D}, {o: 1C, s: H, a: S, b: D}, {o: 1C, s: D, a: H, b: S}, {o: 1D, s: S, a: H, b: C}, {o: 1D, s: H, a: S, b: C}, {o: 1H, s: S, a: C, b: D}]
   seq: "({o}) P"
   call: "1{s}"
-  cond: "{s} >= 5 and {s} >= {a} and {s} >= {b} and hcp_in('{s}') >= 3 and 8 <= hl <= 13"
+  cond: "{s} >= 5 and {s} >= {a} and {s} >= {b} and (hcp_in('{s}') >= 3 or ({s} >= 6 and hcp_in('{s}') >= 2)) and 8 <= hl <= 13"
   forcing: NF
-  meaning: "Réveil : 5 cartes, 8-13 HL"
-  meaning_en: "Balancing overcall: 5 cards, 8-13 HL"
+  meaning: "Réveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL"
+  meaning_en: "Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL"
   status: sef
 - id: "rev.{o}.1NT"
   for: [{o: 1C, os: C}, {o: 1D, os: D}, {o: 1H, os: H}, {o: 1S, os: S}]

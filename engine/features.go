@@ -66,7 +66,8 @@ func count(cards string, rank byte) int {
 }
 
 // suitPtricks is one suit's share of ptricks(): the sure tricks of its top
-// honours, capped by its length, plus one per card beyond the third.
+// honours, capped by its length, plus half a trick for the fourth card and
+// one per card from the fifth.
 func suitPtricks(c string, n int) float64 {
 	a, k, q := has(c, 'A'), has(c, 'K'), has(c, 'Q')
 	t := 0.0
@@ -88,7 +89,40 @@ func suitPtricks(c string, n int) float64 {
 			t += 0.5
 		}
 	}
-	return min(float64(n), t) + float64(max(0, n-3))
+	t = min(float64(n), t)
+	if n >= 4 {
+		t += 0.5 + float64(n-4)
+	}
+	return t
+}
+
+// isHonor: the A, K, Q and J of the evaluation.
+func isHonor(r byte) bool { return r == 'A' || r == 'K' || r == 'Q' || r == 'J' }
+
+// lengthPoints: one point per card from the fifth, in a suit headed by at
+// least Q-J (two of its A, K, Q, J).
+func lengthPoints(c string, n int) int {
+	h := 0
+	for i := 0; i < n; i++ {
+		if isHonor(c[i]) {
+			h++
+		}
+	}
+	if h < 2 {
+		return 0
+	}
+	return max(0, n-4)
+}
+
+// devalued: a bare honour (the ace too) or two bare honours cost a point.
+func devalued(c string, n int) bool {
+	switch n {
+	case 1:
+		return isHonor(c[0])
+	case 2:
+		return isHonor(c[0]) && isHonor(c[1])
+	}
+	return false
 }
 
 // quickTricks: AK 2; AQ 1.5; A 1; KQ 1; K (at least second) 0.5.
@@ -110,7 +144,7 @@ func quickTricks(c string, n int) float64 {
 
 func newFeatures(h *Hand) *features {
 	f := &features{h: h}
-	shortp := 0
+	shortp, deval := 0, 0
 	for s := Clubs; s <= Spades; s++ {
 		c := h.Suits[s]
 		n := len(c)
@@ -127,7 +161,10 @@ func newFeatures(h *Hand) *features {
 		case 2:
 			shortp += 1
 		}
-		f.hl += max(0, n-4)
+		f.hl += lengthPoints(c, n)
+		if devalued(c, n) {
+			deval++
+		}
 		f.aces += count(c, 'A')
 		f.kings += count(c, 'K')
 		f.ptricks += suitPtricks(c, n)
@@ -142,8 +179,8 @@ func newFeatures(h *Hand) *features {
 			}
 		}
 	}
-	f.hl += f.hcp
-	f.dh = f.hcp + shortp
+	f.hl += f.hcp - deval
+	f.dh = f.hcp + shortp - deval
 	f.hld = f.hl + shortp
 
 	lens := []int{f.lens[0], f.lens[1], f.lens[2], f.lens[3]}

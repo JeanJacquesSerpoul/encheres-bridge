@@ -534,7 +534,7 @@ Exemple réel (donne ci-dessus, `lang=fr`, champs `trace` omis) :
 | `lang` | Langue effective de la réponse |
 | `hands.<siège>.spades/hearts/diamonds/clubs` | Cartes de la main, rangs en ordre décroissant |
 | `hands.<siège>.h_points` | Points d'honneurs (A=4, R=3, D=2, V=1) |
-| `hands.<siège>.hl_points` | Points H + points de longueur (1 point par carte au-delà de la 4ᵉ) |
+| `hands.<siège>.hl_points` | Points H + points de longueur (1 point par carte à partir de la 5ᵉ, dans une couleur commandée par au moins D V), moins 1 point par honneur sec ou paire d'honneurs secs |
 | `hands.<siège>.type` | Type de main : `régulière`, `unicolore`, `bicolore`, `tricolore` (`en` : `regular`, `single-suited`, `two-suited`, `three-suited`) |
 | `auction[].player` | Joueur : `N`, `E`, `S`, `W` (dans l'ordre, en commençant par le donneur) |
 | `auction[].bid` | Enchère dans la notation de la langue demandée |

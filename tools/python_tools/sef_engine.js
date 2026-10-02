@@ -6,18 +6,19 @@ const SUITS = 'SHDC', RANKS = 'AKQJT98765432';
 function parseHand(s) { const p = s.split('.'); const h = {};
   SUITS.split('').forEach((k, i) => h[k] = (p[i] === '-' ? '' : p[i]).split('').sort((a, b) => RANKS.indexOf(a) - RANKS.indexOf(b)).join('')); return h; }
 function feats(h) {
-  const L = {}, hv = { A: 4, K: 3, Q: 2, J: 1 }, hin = {}; let hcp = 0, hl = 0, sp = 0, losers = 0, pt = 0, qtr = 0, longest = 'S', qlong = 0;
+  const L = {}, hv = { A: 4, K: 3, Q: 2, J: 1 }, hin = {}; let hcp = 0, hl = 0, sp = 0, dv = 0, losers = 0, pt = 0, qtr = 0, longest = 'S', qlong = 0;
   for (const s of SUITS) { const c = h[s], n = c.length; L[s] = n; hin[s] = [...c].reduce((a, x) => a + (hv[x] || 0), 0); hcp += hin[s];
-    hl += Math.max(0, n - 4); sp += ({ 0: 3, 1: 2, 2: 1 })[n] || 0;
+    const hon = [...c].filter(x => 'AKQJ'.includes(x)).length;
+    if (hon >= 2) hl += Math.max(0, n - 4); if ((n === 1 || n === 2) && hon === n) dv++; sp += ({ 0: 3, 1: 2, 2: 1 })[n] || 0;
     const k = Math.min(n, 3), top = c.slice(0, k); losers += [...'AKQ'.slice(0, k)].filter(w => !top.includes(w)).length;
     const A = c.includes('A'), K = c.includes('K'), Q = c.includes('Q'); let t = A ? 1 : 0;
     if (K && n >= 2) t += A ? 1 : 0.5; if (Q && n >= 3) t += (A && K) ? 1 : ((A || K) ? 0.5 : 0);
-    pt += Math.min(n, t) + Math.max(0, n - 3);
+    pt += Math.min(n, t) + (n >= 4 ? n - 3.5 : 0);
     const q = A ? (K ? 2 : (Q ? 1.5 : 1)) : (K ? (Q ? 1 : (n >= 2 ? 0.5 : 0)) : 0); qtr += q;
     if (s === 'S' || n > L[longest]) { longest = s; qlong = q; } }
-  hl += hcp; const shape = Object.values(L).sort((a, b) => b - a).join('');
+  hl += hcp - dv; const shape = Object.values(L).sort((a, b) => b - a).join('');
   const aces = SUITS.split('').filter(s => h[s].includes('A')).length;
-  return { S: L.S, H: L.H, D: L.D, C: L.C, hcp, hl, dh: hcp + sp, hld: hl + sp, shape,
+  return { S: L.S, H: L.H, D: L.D, C: L.C, hcp, hl, dh: hcp + sp - dv, hld: hl + sp, shape,
     balanced: ['4333', '4432', '5332'].includes(shape), semibalanced: ['5422', '6322'].includes(shape),
     aces, kings: SUITS.split('').filter(s => h[s].includes('K')).length, losers, ptricks: pt, qtricks: qtr, sidetricks: qtr - qlong,
     ace: s => h[s].includes('A'), king: s => h[s].includes('K'), queen: s => h[s].includes('Q'),

@@ -1,8 +1,8 @@
-# new — système d'enchères en construction
+# test — système d'enchères en construction
 # SOURCE UNIQUE DES RÈGLES de ce système : c'est ce fichier que l'on modifie.
 # Format et sémantique : tools/python_tools/SEF_2024_spec.md.
 # Liste ordonnée : la première règle applicable donne l'enchère ; sans règle applicable, le joueur passe.
-# Après modification : ./update-system.sh new (ou .\update-system.ps1 new sous Windows).
+# Après modification : ./update-system.sh test (ou .\update-system.ps1 test sous Windows).
 
 # ======================================================================
 # Ouvertures

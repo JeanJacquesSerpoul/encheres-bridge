@@ -4,7 +4,7 @@ Encheres-bridge · systèmes d'enchères
 
 Le moteur ne connaît aucune règle de bridge. Tout ce qu'il enchérit vient d'un fichier : une liste ordonnée de règles, où la première qui convient à la main donne l'enchère. Voici comment ce fichier se lit.
 
-cli/systems/ index.json les systèmes proposés sef/ SEF 2024, par défaut rules.yaml 830 règles écrites, 2 738 une fois expansées rules.pdf description, en clair rules.en.pdf pbn/ donnes thématiques new/ système en construction rules.yaml 1 règle
+cli/systems/ index.json les systèmes proposés sef/ SEF 2024, par défaut rules.yaml 830 règles écrites, 2 738 une fois expansées rules.pdf description, en clair rules.en.pdf pbn/ donnes thématiques test/ système en construction rules.yaml 1 règle
 
 1 · La brique de base
 

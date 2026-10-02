@@ -5,7 +5,7 @@ Chaque donne est enchérie par pbn_auction.generate_auction (les quatre mains, a
 compris) avec les règles d'un système, le SEF par défaut ; le test Go TestGoldenPython
 rejoue les mêmes donnes et compare siège, enchère, règle et commentaire.
 
-Usage : python gen_golden.py [--rules ../../cli/systems/new/rules.yaml --out ...golden.json] [--random 300]
+Usage : python gen_golden.py [--rules ../../cli/systems/test/rules.yaml --out ...golden.json] [--random 300]
 """
 import argparse
 import glob

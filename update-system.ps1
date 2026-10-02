@@ -7,7 +7,7 @@
 # main), commit, push et pull request.
 #
 # Usage : .\update-system.ps1 <système> [-AcceptPar] [-Publish] [-Message "..."]
-#   <système>    identifiant du système : sef, new... (voir cli\systems\index.json)
+#   <système>    identifiant du système : sef, test... (voir cli\systems\index.json)
 #   -AcceptPar   accepter une hausse de l'écart au par (réécrit la référence du banc)
 #   -Publish     publier : branche, commit, push et pull request (gh)
 #   -Message     message du commit et titre de la PR (défaut : « Système <nom> : mise à jour des règles »)

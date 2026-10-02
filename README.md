@@ -158,7 +158,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `systems/sef/rules.yaml` | 140 Ko | 23 Ko | les règles du SEF, relues à chaque chargement de la page |
 | `systems/sef/rules.pdf`, `rules.en.pdf` | 370 Ko | — | la description du système en PDF (bouton ? des Réglages), produite par `tools/python_tools/rules_pdf.py` |
 | `systems/sef/pbn/index.json`, `pbn/*.pbn` | 565 Ko | 125 Ko | les donnes thématiques du SEF et leur liste (voir [Donnes thématiques](#donnes-thématiques)) |
-| `systems/new/…` | < 10 Ko | — | le second système, en construction : les mêmes fichiers |
+| `systems/test/…` | < 10 Ko | — | le second système, en construction : les mêmes fichiers |
 | `animation.html` | 43 Ko | 12 Ko | vidéo de présentation, affichée dans une fenêtre de l'application (bandeau, écran d'accueil) |
 
 Tous les chemins du client sont **relatifs** : le dossier se dépose à la racine du site comme dans un sous-répertoire, sans rien à régler.

@@ -10,7 +10,7 @@ systems/
     rules.pdf           leur description en PDF (bouton ? des Réglages)
     rules.en.pdf        la même, en anglais
     pbn/                ses donnes thématiques : index.json et fichiers .pbn
-  new/                  un second système, en construction
+  test/                 un second système, en construction
     …                   les mêmes fichiers
 ```
 

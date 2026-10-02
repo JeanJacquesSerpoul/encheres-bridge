@@ -8,7 +8,7 @@
 # commit, push et pull request.
 #
 # Usage : ./update-system.sh [-a] [-p] [-m message] [-h] <système>
-#   <système>  identifiant du système : sef, new... (voir cli/systems/index.json)
+#   <système>  identifiant du système : sef, test... (voir cli/systems/index.json)
 #   -a  accepter une hausse de l'écart au par (réécrit la référence du banc)
 #   -p  publier : branche, commit, push et pull request (gh)
 #   -m  message du commit et titre de la PR (défaut : « Système <nom> : mise à jour des règles »)

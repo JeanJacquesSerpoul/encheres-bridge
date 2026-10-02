@@ -63,6 +63,8 @@ python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drur
     --rules ../../cli/systems/sef/rules.yaml --fr "Drury" --en "Drury"
 ```
 
+Après une modification des règles, [tools/python_tools/regen_themes.py](../../tools/python_tools/regen_themes.py) régénère les séries d'un système à partir de leurs recettes (`python regen_themes.py sef`).
+
 ## Description en PDF
 
 Le bouton **?** à côté de la liste des systèmes ouvre la description du système choisi, `rules.pdf` ou `rules.en.pdf` selon la langue : un PDF lisible, règle par règle, section par section, avec les conditions traduites en clair. `update-system` les produit à partir de `rules.yaml`, avec le nom que `index.json` donne au système.

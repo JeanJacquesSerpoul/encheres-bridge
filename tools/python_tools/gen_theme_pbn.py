@@ -57,33 +57,52 @@ def main():
     ap.add_argument("--rules", default=os.path.normpath(os.path.join(HERE, "../../cli/systems/sef/rules.yaml")))
     args = ap.parse_args()
 
-    rules = sr.load(args.rules)
+    rules = load_rules(args.rules)
+    deals, tried, per_rule = draw(rules, args.rule, args.count, args.seed, args.max_per_rule)
+    write_pbn(args.output, args.fr, args.en, deals)
+    print(f"{len(deals)} donnes retenues sur {tried} tirées -> {args.output}")
+    print("par règle : " + ", ".join(f"{k} {v}" for k, v in sorted(per_rule.items())))
+
+
+def load_rules(path):
+    rules = sr.load(path)
     errs = sr.validate(rules)
     if errs:
         sys.exit("; ".join(errs[:3]))
-    want = re.compile(args.rule)
-    rng = random.Random(args.seed)
+    return rules
 
-    games, tried, per_rule = [], 0, {}
-    while len(games) < args.count:
+
+def draw(rules, rule, count, seed=2024, max_per_rule=0):
+    """`count` donnes dont l'enchère emploie une règle d'id `rule` (expression
+    régulière) : une liste de (donneur, vulnérabilité, mains), le nombre de
+    donnes tirées, et combien de donnes chaque règle retenue a fournies. La
+    donne n reçoit le donneur et la vulnérabilité du plateau n."""
+    want = re.compile(rule)
+    rng = random.Random(seed)
+    deals, tried, per_rule = [], 0, {}
+    while len(deals) < count:
         tried += 1
-        n = len(games) + 1
+        n = len(deals) + 1
         dealer, vul = SEATS[(n - 1) % 4], VUL[(n - 1) % 16]
         hands = random_deal(rng)
         bids = generate_auction(rules, dict(zip(SEATS, hands)), dealer, (), "FR", False, vul)
         hit = next((b["rule"] for b in bids if b["rule"] and want.search(b["rule"])), None)
-        if hit is None or (args.max_per_rule and per_rule.get(hit, 0) >= args.max_per_rule):
+        if hit is None or (max_per_rule and per_rule.get(hit, 0) >= max_per_rule):
             continue
         per_rule[hit] = per_rule.get(hit, 0) + 1
-        games.append("\n".join([
-            f'[Event "{args.fr}"]', f'[Board "{n}"]', f'[Dealer "{dealer}"]',
-            f'[Vulnerable "{vul}"]', f'[Deal "N:{" ".join(hands)}"]']))
+        deals.append((dealer, vul, hands))
+    return deals, tried, per_rule
 
-    head = f"% Titre-FR: {args.fr}\n% Titre-EN: {args.en}\n"
-    with open(args.output, "w", encoding="utf-8", newline="\n") as f:
+
+def write_pbn(path, fr, en, deals):
+    """Le fichier : son libellé, puis les donnes numérotées de 1 à n."""
+    games = ["\n".join([
+        f'[Event "{fr}"]', f'[Board "{n}"]', f'[Dealer "{dealer}"]',
+        f'[Vulnerable "{vul}"]', f'[Deal "N:{" ".join(hands)}"]'])
+        for n, (dealer, vul, hands) in enumerate(deals, 1)]
+    head = f"% Titre-FR: {fr}\n% Titre-EN: {en}\n"
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(head + "\n" + "\n\n".join(games) + "\n")
-    print(f"{len(games)} donnes retenues sur {tried} tirées -> {args.output}")
-    print("par règle : " + ", ".join(f"{k} {v}" for k, v in sorted(per_rule.items())))
 
 
 if __name__ == "__main__":

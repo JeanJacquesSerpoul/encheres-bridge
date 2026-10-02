@@ -284,7 +284,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Sept sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 500 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Sept sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 25 donnes chacune :
 
 | Fichier | Thème |
 |---|---|
@@ -292,9 +292,9 @@ Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque s
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 | `2-trefle-fort.pbn` | ouverture de 2♣ fort indéterminé |
 | `roudi.pbn` | le répondant emploie le Roudi (2♣) après la redemande de 1SA de l'ouvreur |
-| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages fusionnés : 380 donnes variées, 30 au plus par action, et 120 donnes avec le 2SA de Lévy) |
+| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages mêlés : 19 donnes variées, 2 au plus par action, et 6 donnes avec le 2SA de Lévy) |
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
-| `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 150 donnes à 0-7 H, 200 à 8-10 H, 150 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
+| `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 8 donnes à 0-7 H, 10 à 8-10 H, 7 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare le `pbn/index.json` du système. La fenêtre les range **par ordre alphabétique** de leur libellé dans la langue de la page (sans tenir compte de la casse ni des accents) ; la liste de l'entraînement aussi.
 
@@ -331,8 +331,10 @@ Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchère
 ```bash
 cd tools/python_tools
 python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drury.pbn \
-    --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 500
+    --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 25
 ```
+
+**Régénérer les séries.** Quand les règles changent, certaines donnes n'emploient plus leur convention. [tools/python_tools/regen_themes.py](tools/python_tools/regen_themes.py) garde la recette de chaque série du SEF (expression, nombre de donnes, graine, plafond par règle, tirages à mêler) et les rejoue toutes avec les règles actuelles : `python regen_themes.py sef` (ou `--only drury roudi` pour quelques-unes). Une nouvelle série s'y ajoute avec sa recette.
 
 Pour un autre système, on passe ses règles et on écrit dans son dossier : `--rules ../../cli/systems/<id>/rules.yaml` et `../../cli/systems/<id>/pbn/<fichier>.pbn`.
 

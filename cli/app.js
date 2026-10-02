@@ -179,6 +179,10 @@ const UI_TEXT = {
     themesSearching: "Recherche…",
     themesNone: "Aucun thème ne correspond.",
     themesReadError: "Impossible de lire {file}.",
+    themesAll: "Toutes",
+    themesNoChoice: "Aucune",
+    randomFromAll: "Tirée parmi toutes les donnes thématiques",
+    randomFromTheme: "Tirée parmi les donnes du thème « {theme} »",
     fileSave: "Sauver le PBN",
     fileSaveStem: "donne",
     photoDeal: "Photographier les quatre mains",
@@ -388,6 +392,10 @@ const UI_TEXT = {
     themesSearching: "Searching…",
     themesNone: "No topic matches.",
     themesReadError: "Could not read {file}.",
+    themesAll: "All",
+    themesNoChoice: "None",
+    randomFromAll: "Drawn from all themed deals",
+    randomFromTheme: "Drawn from the deals of the topic “{theme}”",
     fileSave: "Save the PBN",
     fileSaveStem: "deal",
     photoDeal: "Photograph the four hands",
@@ -864,7 +872,34 @@ function applyLang() {
 // la donne porte alors le libellé du thème). Toute autre donne l'efface.
 let currentThemeFile = null;
 
-function loadPbn(text, fileName) {
+// D'où « Donne aléatoire » tire ses donnes : null, distribuées au hasard (l'état
+// initial, « Aucune » dans la fenêtre des thèmes) ; ALL_THEMES, toutes les
+// donnes thématiques ; ou le fichier d'un thème. Comme à l'entraînement, une
+// donne thématique déjà tirée ne revient pas tant que la source ne change pas.
+const ALL_THEMES = "*";
+let randomSource = null;
+let randomUsed = new Set();
+
+function setRandomSource(source) {
+  randomSource = source;
+  randomUsed = new Set();
+  renderRandomSource();
+}
+
+// L'infobulle de « Donne aléatoire » dit d'où viendra la prochaine donne.
+function renderRandomSource() {
+  const lang = $("#lang").value;
+  const t = UI_TEXT[lang];
+  const th = themeFiles && themeFiles.find((x) => x.file === randomSource);
+  $("#random-btn").title = randomSource === null ? ""
+    : randomSource === ALL_THEMES ? t.randomFromAll
+      : t.randomFromTheme.replace("{theme}", th ? themeName(th, lang) : randomSource);
+}
+
+// `label`, à défaut de `fileName` : un titre pour la donne, qui ne la
+// présente pas comme lue d'un fichier (donneur et vulnérabilité restent
+// libres, comme pour une donne distribuée).
+function loadPbn(text, fileName, label) {
   pushUndo();
   currentThemeFile = null;
   $("#pbn").value = text;
@@ -880,7 +915,7 @@ function loadPbn(text, fileName) {
   hideResult();
   refreshDealSelector(true);
   setPbnOpen(false);
-  $("#file-name").textContent = fileName || "";
+  $("#file-name").textContent = fileName || label || "";
   settlePbn();
 }
 
@@ -1050,6 +1085,16 @@ async function drawRandomDeal() {
   if (errEl.textContent) return false;
   const fini = showBusy($("#random-btn"), CONS_TEXT[lang].busyDeal);
   try {
+    if (randomSource !== null) {
+      const pick = await pickThemedBlock(randomSource === ALL_THEMES ? null : randomSource, randomUsed);
+      if (!pick || pick.exhausted) {
+        setBoundsError(errEl, UI_TEXT[lang][pick ? "trainNoMoreDeals" : "trainNoThemed"]);
+        return false;
+      }
+      randomUsed.add(pick.key);
+      loadPbn(pick.block, null, pick.label);
+      return true;
+    }
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
     if (!pbn) {
       setBoundsError(errEl, CONS_TEXT[lang].errNoDeal);
@@ -1180,8 +1225,27 @@ function themesDir() {
 
 // Changement de système : ses thèmes seront relus à la prochaine demande.
 // currentThemeFile reste : il nomme encore le fichier de la donne affichée.
+// « Donne aléatoire » revient au hasard : les thèmes choisis étaient ceux de
+// l'autre système.
 function forgetThemes() {
   themeFiles = null;
+  setRandomSource(null);
+}
+
+// Les deux lignes de tête de la liste, « Toutes » et « Aucune » : elles
+// choisissent la source de « Donne aléatoire » sans charger de fichier.
+function specialThemes() {
+  const name = (key) => ({ fr: UI_TEXT.fr[key], en: UI_TEXT.en[key] });
+  return [
+    { file: "", special: ALL_THEMES, title: name("themesAll") },
+    { file: "", special: "none", title: name("themesNoChoice") },
+  ];
+}
+
+// La ligne de la source choisie est cochée.
+function isRandomSource(th) {
+  if (th.special) return th.special === ALL_THEMES ? randomSource === ALL_THEMES : randomSource === null;
+  return th.file === randomSource;
 }
 
 async function loadThemeIndex() {
@@ -1297,8 +1361,8 @@ function fillThemeRow(li, th) {
   const lang = $("#lang").value;
   li.textContent = themeName(th, lang);
   li.classList.toggle("loading", !th.title);
-  // Le thème chargé : coché, et annoncé comme tel.
-  if (th.file === currentThemeFile) li.setAttribute("aria-current", "true");
+  // La source de « Donne aléatoire » : cochée, et annoncée comme telle.
+  if (isRandomSource(th)) li.setAttribute("aria-current", "true");
   else li.removeAttribute("aria-current");
 }
 
@@ -1335,7 +1399,8 @@ function filterThemes(resetActive) {
   const t = UI_TEXT[$("#lang").value];
   const words = foldText(themesInput.value).split(/\s+/).filter(Boolean);
   const before = themeActive >= 0 ? themeShown[themeActive] : null;
-  themeShown = sortedThemes(themeFiles.filter((th) => themeMatches(th, words)), $("#lang").value);
+  const themes = sortedThemes(themeFiles.filter((th) => themeMatches(th, words)), $("#lang").value);
+  themeShown = themeFiles.length ? [...specialThemes().filter((th) => themeMatches(th, words)), ...themes] : [];
   themeMoreObserver.disconnect();
   themesList.replaceChildren();
   themeRendered = 0;
@@ -1343,10 +1408,10 @@ function filterThemes(resetActive) {
   const status = $("#themes-status");
   const searching = words.length && themeSweep;
   status.textContent = !themeFiles.length ? t.themesEmpty
-    : themeShown.length ? "" : searching ? t.themesSearching : t.themesNone;
+    : themes.length ? "" : searching ? t.themesSearching : t.themesNone;
   status.hidden = !status.textContent;
-  // Sans désignation à suivre, elle part du thème chargé, sinon du premier.
-  const current = themeShown.findIndex((th) => th.file === currentThemeFile);
+  // Sans désignation à suivre, elle part de la source choisie, sinon du premier.
+  const current = themeShown.findIndex(isRandomSource);
   let next = before && !resetActive ? themeShown.indexOf(before) : !themesInput.value.trim() ? current : 0;
   if (next < 0) next = 0;
   setThemeActive(themeShown.length ? next : -1);
@@ -1372,15 +1437,26 @@ function setThemeActive(pos) {
   li.scrollIntoView({ block: "nearest" });
 }
 
+// Un thème charge sa série et devient la source de « Donne aléatoire » ;
+// « Toutes » tire aussitôt une donne parmi tous les thèmes ; « Aucune » rend
+// « Donne aléatoire » au hasard, sans toucher à la donne affichée.
 async function chooseTheme(th) {
   const t = UI_TEXT[$("#lang").value];
   const status = $("#themes-status");
+  if (th.special) {
+    themesDialog.close();
+    setError($("#cons-error"), "");
+    setRandomSource(th.special === ALL_THEMES ? ALL_THEMES : null);
+    if (randomSource !== null) drawRandomDeal();
+    return;
+  }
   try {
     const text = await loadThemeText(th);
     themesDialog.close();
     setError($("#cons-error"), "");
     loadPbn(text, themeName(th, $("#lang").value));
     currentThemeFile = th.file;
+    setRandomSource(th.file);
   } catch (err) {
     status.textContent = t.themesReadError.replace("{file}", th.file);
     status.hidden = false;
@@ -2573,6 +2649,7 @@ function renderDealActions() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
   setCommandButton("#random-btn", DICE_SVG, t.randomDeal, true);
+  renderRandomSource();
   setCommandButton("#new-deal-more-btn", CHEVRON_SVG, t.moreDeals);
   setCommandButton("#deal-prev-btn", PREV_SVG, t.dealPrev);
   setCommandButton("#deal-next-btn", NEXT_SVG, t.dealNext);
@@ -5729,8 +5806,8 @@ const TUTORIAL_STEPS = [
     en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, two tabs: Auction and Par.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
-    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, distribuée au hasard.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne)."],
-    en: ["Getting a deal", "Random deal draws a complete deal, dealt at random.\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal)."],
+    fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, distribuée au hasard.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne).\nUn thème choisi, ou « Toutes », fait tirer Donne aléatoire parmi ses donnes, sans répétition ; « Aucune » revient au hasard."],
+    en: ["Getting a deal", "Random deal draws a complete deal, dealt at random.\nThe arrow next to it offers themed deals or a .pbn file (a tournament file too: a selector then picks the deal).\nOnce a topic, or “All”, is chosen, Random deal draws from its deals, without repeats; “None” goes back to random."],
   },
   {
     fr: ["Partager la donne", "Copiez un lien qui contient la donne, sauvez-la dans un fichier .pbn, ou affichez son texte PBN pour le copier ou y coller une donne reçue.\nDonneur et Vulnérabilité s'imposent ou se tirent au sort."],

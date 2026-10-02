@@ -177,6 +177,18 @@ func TestForcingBidsGetAnAnswer(t *testing.T) {
 	}
 }
 
+// TestBalancingWithSixCardSuit: 1♥ P P, East (passed hand, 11 H) holds
+// six spades headed by the queen alone: 1♠ in balancing seat, not a pass.
+func TestBalancingWithSixCardSuit(t *testing.T) {
+	d := mustParsePBN(t, `[Dealer "E"]
+[Vulnerable "All"]
+[Deal "E:QT9543.3.93.AKQT AJ6.KJT94.AQ84.7 K2.A875.KT5.8542 87.Q62.J762.J963"]`)
+	const want = "E:Passe S:1C W:Passe N:Passe E:1P"
+	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
+		t.Fatalf("enchères :\n %s\nattendu :\n %s …", got, want)
+	}
+}
+
 // TestNoThreeNTOverJumpRebidWithVoid: 1♠ 1SA 3♠, responder void in spades
 // with 7 H: the spades will not run, no 3SA.
 func TestNoThreeNTOverJumpRebidWithVoid(t *testing.T) {

@@ -188,12 +188,12 @@ python3 sef_rules.py ../../cli/systems/sef/rules.yaml --check-tests ../../engine
 node sef_engine.js ../../engine/testdata/systems/sef/rules.json ../../engine/testdata/systems/sef/tests.json
 ```
 
-Les deux implémentations fournies passent les 9 331 cas sans écart.
+Les deux implémentations fournies passent tous les cas sans écart.
 
-Le jeu fourni (graine 2024) compte 9 331 cas issus de 2 250 donnes, dont 750 donnes fortes (31+ H dans la paire) pour couvrir Blackwood, contrôles et chelems ; un quart des donnes active l'option `checkback2018`. Il utilise 665 règles différentes.
+Le jeu fourni (graine 2024) est tiré de 2 250 donnes, dont 750 donnes fortes (31+ H dans la paire) pour couvrir Blackwood, contrôles et chelems ; un quart des donnes active l'option `checkback2018`. Son en-tête donne le nombre de cas (`count`), qui suit les règles.
 
 ## 8. Limites connues
 
-- Environ 57 % des règles sont des complétions (`status: infere`) : suites naturelles non décrites par les fiches, à revoir en priorité.
+- Plus de la moitié des règles (environ 55 %) sont des complétions (`status: infere`) : suites naturelles non décrites par les fiches, à revoir en priorité. Sur le banc du par, elles ne donnent que 28 % des enchères, mais 62 % (en IMP) des dernières enchères des manches et chelems manqués ou surenchéris.
 - La compétition n'est codée qu'en partie (Landy, Michaëls précisés, Rubensohl, Truscott, Spoutnik simple) ; Joséphine, le Blackwood d'exclusion et le Blackwood sur barrage ne sont pas codés.
 - Mesures sur donnes aléatoires, adversaires muets : 100 % des enchères arrivent à un contrat ; au double mort, 70 % des chelems demandés sont réussis.

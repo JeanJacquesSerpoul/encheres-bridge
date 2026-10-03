@@ -25251,6 +25251,32 @@
   "status": "infere"
  },
  {
+  "id": "advX.4C.pass",
+  "seq": [
+   "(4C) X",
+   "(4C) P X"
+  ],
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Sans majeure 4e : transforme le contre en punitif",
+  "meaning_en": "No four-card major: leaves the double in for penalties",
+  "status": "infere"
+ },
+ {
+  "id": "advX.4D.pass",
+  "seq": [
+   "(4D) X",
+   "(4D) P X"
+  ],
+  "call": "P",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Sans majeure 4e : transforme le contre en punitif",
+  "meaning_en": "No four-card major: leaves the double in for penalties",
+  "status": "infere"
+ },
+ {
   "id": "1C.1D.1H",
   "seq": "1C 1D",
   "call": "1H",

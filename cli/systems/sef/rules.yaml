@@ -6304,6 +6304,15 @@
   meaning: "Réponse au contre d'un barrage de 4"
   meaning_en: "Answer to the double of a four-level preempt"
   status: infere
+- id: "advX.{o}.pass"
+  for: [{o: 4C}, {o: 4D}]
+  seq: ["({o}) X", "({o}) P X"]
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Sans majeure 4e : transforme le contre en punitif"
+  meaning_en: "No four-card major: leaves the double in for penalties"
+  status: infere
 
 # ======================================================================
 # A.19 Suites naturelles (complétions)

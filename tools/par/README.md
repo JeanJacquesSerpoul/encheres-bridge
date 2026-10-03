@@ -50,9 +50,19 @@ Réécrire la référence est le seul moyen de faire accepter une dégradation :
 changement de `par_baseline.json` apparaît alors dans le diff de la PR,
 avec son chiffre.
 
+**Enchères forcing sans suite** : le banc compte aussi les enchères forcing
+(F1, FM, REL, ASK, TO) suivies d'une passe adverse, après lesquelles le
+partenaire passe faute de règle : une séquence que les règles ont oubliée. Le
+compte est dans la référence (`forcingGaps`, zéro aujourd'hui) et le test
+échoue dès qu'il augmente, en listant les règles en cause. Si l'on intervient
+par-dessus, le partenaire est libre et rien n'est compté.
+
 **Comparer deux versions du moteur en quelques secondes** : `PAR_BENCH_OUT`
 écrit les donnes rejouées au format de `par.json`, que lit
-[`compare.js`](compare.js).
+[`compare.js`](compare.js). Chaque donne y porte en plus `rules`, l'identifiant
+de la règle de chaque enchère dans l'ordre de la table (`""` pour une passe
+faute de règle), et `forcingGaps` s'il y a lieu : de quoi rattacher une perte
+aux règles qui l'ont produite.
 
 ```bash
 PAR_BENCH_OUT=/tmp/avant.json go test -run TestParBenchmark -count=1 ./engine

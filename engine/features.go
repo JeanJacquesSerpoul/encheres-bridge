@@ -125,6 +125,16 @@ func devalued(c string, n int) bool {
 	return false
 }
 
+// twoSuiterBonus: a 6-5 two-suiter or longer (the two longest suits make
+// eleven cards or more, the second has at least five) is worth 4 more HLD
+// once a fit is found, its second suit being set up by ruffs.
+func twoSuiterBonus(longest, second int) int {
+	if second >= 5 && longest+second >= 11 {
+		return 4
+	}
+	return 0
+}
+
 // quickTricks: AK 2; AQ 1.5; A 1; KQ 1; K (at least second) 0.5.
 func quickTricks(c string, n int) float64 {
 	switch {
@@ -188,6 +198,7 @@ func newFeatures(h *Hand) *features {
 	for _, n := range lens {
 		f.shape += string(rune('0' + n))
 	}
+	f.hld += twoSuiterBonus(lens[0], lens[1])
 	f.balanced = f.shape == "4333" || f.shape == "4432" || f.shape == "5332"
 	f.semibalanced = f.shape == "5422" || f.shape == "6322"
 

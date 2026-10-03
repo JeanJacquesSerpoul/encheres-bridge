@@ -115,7 +115,7 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 | `hcp` | int | A = 4, R = 3, D = 2, V = 1 |
 | `hl` | int | `hcp` + points de longueur − dévaluation. Points de longueur : max(0, n − 4) dans chaque couleur qui contient au moins deux honneurs parmi A R D V (« commandée par au moins D V »). Dévaluation : 1 point par couleur faite d'un honneur sec (As compris) ou de deux honneurs secs (A R D V) |
 | `dh` | int | `hcp` + points de courte : chicane 3, singleton 2, doubleton 1 (toutes couleurs) − même dévaluation que `hl` |
-| `hld` | int | `hl` + mêmes points de courte |
+| `hld` | int | `hl` + mêmes points de courte + 4 pour un bicolore 6-5 ou plus (les deux couleurs les plus longues totalisent au moins 11 cartes, la seconde en a au moins 5) |
 | `shape` | str | Les 4 longueurs triées par ordre décroissant, concaténées (ex. `"5332"`) |
 | `balanced` | bool | `shape` ∈ {`4333`, `4432`, `5332`} |
 | `semibalanced` | bool | `shape` ∈ {`5422`, `6322`} |

@@ -16,9 +16,10 @@ function feats(h) {
     pt += Math.min(n, t) + (n >= 4 ? n - 3.5 : 0);
     const q = A ? (K ? 2 : (Q ? 1.5 : 1)) : (K ? (Q ? 1 : (n >= 2 ? 0.5 : 0)) : 0); qtr += q;
     if (s === 'S' || n > L[longest]) { longest = s; qlong = q; } }
-  hl += hcp - dv; const shape = Object.values(L).sort((a, b) => b - a).join('');
+  hl += hcp - dv; const ls = Object.values(L).sort((a, b) => b - a), shape = ls.join('');
+  const bico = ls[1] >= 5 && ls[0] + ls[1] >= 11 ? 4 : 0;   // bicolore 6-5 ou plus : +4 HLD
   const aces = SUITS.split('').filter(s => h[s].includes('A')).length;
-  return { S: L.S, H: L.H, D: L.D, C: L.C, hcp, hl, dh: hcp + sp - dv, hld: hl + sp, shape,
+  return { S: L.S, H: L.H, D: L.D, C: L.C, hcp, hl, dh: hcp + sp - dv, hld: hl + sp + bico, shape,
     balanced: ['4333', '4432', '5332'].includes(shape), semibalanced: ['5422', '6322'].includes(shape),
     aces, kings: SUITS.split('').filter(s => h[s].includes('K')).length, losers, ptricks: pt, qtricks: qtr, sidetricks: qtr - qlong,
     ace: s => h[s].includes('A'), king: s => h[s].includes('K'), queen: s => h[s].includes('Q'),

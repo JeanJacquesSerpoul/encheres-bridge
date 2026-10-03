@@ -148,7 +148,7 @@ H + points de courte : chicane 3, singleton 2, doubleton 1 (singleton ♦ : +2) 
 
 hld
 
-HL + les mêmes points de courte.
+HL + les mêmes points de courte, + 4 pour un bicolore 6-5 ou plus.
 
 17
 

@@ -44,7 +44,7 @@ TXT = {
             "Points : H = points d'honneur (A 4, R 3, D 2, V 1) ; HL = H + un point par carte à partir de la 5e "
             "dans une couleur commandée par au moins D V, moins un point par honneur sec ou paire d'honneurs secs ; "
             "DH = H + points de courte (chicane 3, singleton 2, doubleton 1), même dévaluation ; HLD = HL + "
-            "points de courte. ♠ ♥ ♦ ♣ seuls désignent la longueur de la couleur. Position : rang du joueur dans le "
+            "points de courte, + 4 pour un bicolore 6-5 ou plus. ♠ ♥ ♦ ♣ seuls désignent la longueur de la couleur. Position : rang du joueur dans le "
             "tour d'enchères (1 = donneur, 4 = 4e position).",
             "Forcing : NF non forcing, F1 forcing un tour, FM forcing de manche, INV invitation, SO conclusion, "
             "REL relais, ASK question, TO contre d'appel, PEN punitif. Statut : SEF (fiches SEF 2024), SEF 2018, "
@@ -85,7 +85,7 @@ TXT = {
             "Points: HCP = high-card points (A 4, K 3, Q 2, J 1); HL = HCP + one point per card from the fifth "
             "in a suit headed by at least Q-J, less one point per bare honour or bare pair of honours; "
             "DH = HCP + shortness points (void 3, singleton 2, doubleton 1), same deduction; HLD = HL + shortness "
-            "points. ♠ ♥ ♦ ♣ alone mean the length of the suit. Seat: the player's rank in the auction (1 = dealer, "
+            "points, + 4 for a 6-5 two-suiter or longer. ♠ ♥ ♦ ♣ alone mean the length of the suit. Seat: the player's rank in the auction (1 = dealer, "
             "4 = fourth seat).",
             "Forcing: NF non-forcing, F1 forcing one round, FM game forcing, INV invitational, SO sign-off, "
             "REL relay, ASK asking bid, TO takeout double, PEN penalty. Status: SEF (SEF 2024 cards), SEF 2018, "

@@ -214,7 +214,9 @@ def features(h):
     shortp = sum({0: 3, 1: 2, 2: 1}.get(L[s], 0) for s in SUITS)
     deval = sum(1 for s in SUITS if devalued(h[s], L[s]))
     hl = hcp + sum(length_points(h[s], L[s]) for s in SUITS) - deval
-    shape = ''.join(str(x) for x in sorted(L.values(), reverse=True))
+    ls = sorted(L.values(), reverse=True)
+    shape = ''.join(str(x) for x in ls)
+    bico = 4 if ls[1] >= 5 and ls[0] + ls[1] >= 11 else 0     # bicolore 6-5 ou plus : +4 HLD
 
     def losers_suit(s):
         cards, n = h[s], L[s]
@@ -232,7 +234,7 @@ def features(h):
     env = dict(L)
     env.update(
         qtricks=sum(qt.values()), sidetricks=sum(qt.values()) - qt[longest],
-        hcp=hcp, hl=hl, dh=hcp + shortp - deval, hld=hl + shortp, shape=shape,
+        hcp=hcp, hl=hl, dh=hcp + shortp - deval, hld=hl + shortp + bico, shape=shape,
         balanced=shape in ('4333', '4432', '5332'), semibalanced=shape in ('5422', '6322'),
         aces=sum(h[s].count('A') for s in SUITS), kings=sum(h[s].count('K') for s in SUITS),
         losers=losers, ptricks=ptricks(h, L),

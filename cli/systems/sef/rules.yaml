@@ -2174,18 +2174,18 @@
 - id: 2D.r.2NT
   seq: "2D"
   call: 2NT
-  cond: "hcp >= 8 and balanced"
+  cond: "hcp >= 8"
   forcing: F1
-  meaning: "Pas d'As, 8+ H régulier"
-  meaning_en: "No aces, 8+ HCP balanced"
+  meaning: "Pas d'As, 8+ H"
+  meaning_en: "No aces, 8+ HCP"
   status: choix
 - id: 2D.r.2H
   seq: "2D"
   call: 2H
   cond: "true"
   forcing: F1
-  meaning: "Pas d'As"
-  meaning_en: "No aces"
+  meaning: "Pas d'As, 0 à 7 H"
+  meaning_en: "No aces, 0 to 7 HCP"
   status: choix
   alert: true
 - id: "2{M}.r.2NT"
@@ -7288,10 +7288,10 @@
 - id: 2D.x.3NT
   seq: "2D 2H|2S|2NT|3C|3D"
   call: 3NT
-  cond: "balanced"
+  cond: "balanced or (semibalanced and max(S, H) <= 4)"
   forcing: NF
-  meaning: "Régulier : 3SA (suites de chelem non codées)"
-  meaning_en: "Balanced: 3NT (slam continuations not coded)"
+  meaning: "Régulier, ou 5422 / 6322 par une mineure : 3SA"
+  meaning_en: "Balanced, or 5422 / 6322 with a long minor: 3NT"
   status: infere
 - id: "2D.x.4{M}"
   for: [{M: S}, {M: H}]

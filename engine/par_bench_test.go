@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"testing"
 )
@@ -81,6 +82,12 @@ type benchResult struct {
 	ParScore int    `json:"parScore"`
 	IMP      int    `json:"imp"`
 	Cats     []int  `json:"cats"`
+	// Rules: the id of the rule behind each call, in auction order ("" for a
+	// default pass), so that a loss can be traced back to its rules.
+	Rules []string `json:"rules"`
+	// ForcingGaps: the forcing rules (see forcingGaps) that the partner left
+	// without an answer on this deal.
+	ForcingGaps []string `json:"forcingGaps,omitempty"`
 }
 
 // benchSummary is what the baseline stores: the total the test gates on, and
@@ -90,6 +97,29 @@ type benchSummary struct {
 	TotalIMP int     `json:"totalImp"`
 	MeanIMP  float64 `json:"meanImp"`
 	Cats     [6]int  `json:"cats"`
+	// ForcingGaps counts the forcing calls answered by a default pass: the
+	// test fails as soon as it grows, like the total.
+	ForcingGaps int `json:"forcingGaps"`
+}
+
+// forcingKinds are the rules that the partner may not pass: forcing for one
+// round, game forcing, relay, asking bid, takeout double.
+var forcingKinds = map[string]bool{"F1": true, "FM": true, "REL": true, "ASK": true, "TO": true}
+
+// forcingGaps lists the forcing rules left unanswered: a rule of forcingKinds,
+// the opponent passes, and no rule covers the partner's sequence, so he
+// passes by default. An opponent's bid in between frees the partner, and is
+// not counted.
+func forcingGaps(calls []SeatCall) []string {
+	var gaps []string
+	for k := 2; k < len(calls); k++ {
+		p, opp, c := calls[k-2], calls[k-1], calls[k]
+		if c.Rule == nil && c.Why == noRule && opp.Call.Kind == KindPass &&
+			p.Rule != nil && forcingKinds[p.Rule.Forcing] {
+			gaps = append(gaps, p.Rule.ID)
+		}
+	}
+	return gaps
 }
 
 // ddsStrain maps the engine's strain (C D H S NT) to DDS's row (S H D C NT).
@@ -283,6 +313,13 @@ func replay(t *testing.T, b *benchDeal) benchResult {
 	if r.Cats == nil {
 		r.Cats = []int{}
 	}
+	r.Rules = make([]string, len(calls))
+	for i, c := range calls {
+		if c.Rule != nil {
+			r.Rules[i] = c.Rule.ID
+		}
+	}
+	r.ForcingGaps = forcingGaps(calls)
 	return r
 }
 
@@ -290,6 +327,7 @@ func summarise(results []benchResult) benchSummary {
 	s := benchSummary{Deals: len(results)}
 	for _, r := range results {
 		s.TotalIMP += max(r.IMP, -r.IMP)
+		s.ForcingGaps += len(r.ForcingGaps)
 		for _, c := range r.Cats {
 			s.Cats[c-1]++
 		}
@@ -326,13 +364,16 @@ func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 		"chelem manqué", "manche impossible", "manche manquée"}
 	describe := func(s benchSummary) string {
 		var b strings.Builder
-		fmt.Fprintf(&b, "%d donnes, %d IMP (%.3f par donne)", s.Deals, s.TotalIMP, s.MeanIMP)
+		fmt.Fprintf(&b, "%d donnes, %d IMP (%.3f par donne), %d enchères forcing sans suite", s.Deals, s.TotalIMP, s.MeanIMP, s.ForcingGaps)
 		for i, n := range s.Cats {
 			fmt.Fprintf(&b, "\n  %d %-20s %5d", i+1, catNames[i], n)
 		}
 		return b.String()
 	}
 	t.Log(describe(got))
+	if got.ForcingGaps > 0 {
+		t.Logf("enchères forcing sans suite, par règle :%s", gapsByRule(results))
+	}
 
 	if out := os.Getenv("PAR_BENCH_OUT"); out != "" {
 		if s.ID != defaultSystem {
@@ -359,6 +400,14 @@ func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 		t.Fatalf("la référence porte sur %d donnes, le banc en compte %d : relancer avec PAR_BENCH_UPDATE=1",
 			want.Deals, got.Deals)
 	}
+	if got.ForcingGaps > want.ForcingGaps {
+		t.Errorf("enchères forcing laissées sans suite : %d → %d (+%d) ; le partenaire passe faute de règle.\nPar règle :%s\n"+
+			"un trou voulu se valide avec PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine",
+			want.ForcingGaps, got.ForcingGaps, got.ForcingGaps-want.ForcingGaps, gapsByRule(results), s.ID)
+	} else if got.ForcingGaps < want.ForcingGaps {
+		t.Logf("enchères forcing sans suite : %d → %d. Verrouiller : PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine",
+			want.ForcingGaps, got.ForcingGaps, s.ID)
+	}
 	switch {
 	case got.TotalIMP > want.TotalIMP:
 		t.Fatalf("l'écart au par augmente : %d → %d IMP (+%d)\nréférence : %s\nactuel : %s\n"+
@@ -369,4 +418,24 @@ func testParBenchmark(t *testing.T, s *testSystem, deals []benchDeal) {
 		t.Logf("l'écart au par baisse : %d → %d IMP (%d). Verrouiller le gain : PAR_BENCH_UPDATE=1 go test -run TestParBenchmark/%s ./engine",
 			want.TotalIMP, got.TotalIMP, got.TotalIMP-want.TotalIMP, s.ID)
 	}
+}
+
+// gapsByRule: the forcing rules left unanswered, most frequent first.
+func gapsByRule(results []benchResult) string {
+	n := map[string]int{}
+	for _, r := range results {
+		for _, id := range r.ForcingGaps {
+			n[id]++
+		}
+	}
+	ids := make([]string, 0, len(n))
+	for id := range n {
+		ids = append(ids, id)
+	}
+	sort.Slice(ids, func(i, j int) bool { return n[ids[i]] > n[ids[j]] || n[ids[i]] == n[ids[j]] && ids[i] < ids[j] })
+	var b strings.Builder
+	for _, id := range ids {
+		fmt.Fprintf(&b, "\n  %4d  %s", n[id], id)
+	}
+	return b.String()
 }

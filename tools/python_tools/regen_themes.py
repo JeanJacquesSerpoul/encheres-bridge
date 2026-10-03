@@ -12,9 +12,17 @@ d'appel et ses réponses ») : chacun a sa graine, les donnes en double sont
 donne garde le donneur et la vulnérabilité de son tirage, dont dépend
 l'enchère.
 
-Usage : python regen_themes.py [sef] [--only drury roudi ...]
+Les recettes sont écrites pour 25 donnes ; SCALE les multiplie (nombre de
+donnes et plafond par règle), proportions gardées : 500 donnes par série. Le
+tirage se répartit sur plusieurs processus (--jobs) : chaque tirage est coupé
+en tranches, chacune avec sa graine dérivée, et le résultat reste
+reproductible pour un nombre de tranches donné.
+
+Usage : python regen_themes.py [sef] [--only drury roudi ...] [--jobs N]
 """
 import argparse
+import math
+import multiprocessing
 import os
 import random
 
@@ -24,6 +32,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SYSTEMS = os.path.normpath(os.path.join(HERE, "..", "..", "cli", "systems"))
 MIX_SEED = 2024
 
+# Chaque série : 25 × SCALE donnes.
+SCALE = 20
 # Recettes à 25 donnes par série : (expression, nombre, graine, plafond par règle).
 THEMES = {
     "sef": [
@@ -85,15 +95,44 @@ THEMES = {
 }
 
 
-def regen(system, theme, rules):
+_rules = None
+
+
+def _init(path):
+    global _rules
+    _rules = gt.load_rules(path)
+
+
+def _draw(job):
+    rule, count, seed, cap = job
+    return gt.draw(_rules, rule, count, seed, cap)
+
+
+def slices(rule, count, seed, cap, n):
+    """Le tirage (rule, count, seed, cap) coupé en n tranches au plus : les
+    donnes se répartissent, le plafond par règle aussi, et chaque tranche a sa
+    graine dérivée de celle du tirage."""
+    n = max(1, min(n, count))
+    sizes = [count // n + (1 if i < count % n else 0) for i in range(n)]
+    sub_cap = math.ceil(cap / n) if cap else 0
+    return [(rule, c, seed * 1000 + i, sub_cap) for i, c in enumerate(sizes)]
+
+
+def regen(system, theme, pool, jobs):
     deals, seen = [], set()
     for rule, count, seed, cap in theme["parts"]:
-        got, tried, per_rule = gt.draw(rules, rule, count, seed, cap)
+        count, cap = count * SCALE, cap * SCALE
+        got, tried, per_rule = [], 0, {}
+        for g, t, pr in pool.map(_draw, slices(rule, count, seed, cap, jobs)):
+            got += g
+            tried += t
+            for k, v in pr.items():
+                per_rule[k] = per_rule.get(k, 0) + v
         fresh = [d for d in got if tuple(d[2]) not in seen]
         seen.update(tuple(d[2]) for d in fresh)
         deals += fresh
         print(f"  {rule} : {len(fresh)}/{count} donnes sur {tried} tirées ; "
-              + ", ".join(f"{k} {v}" for k, v in sorted(per_rule.items())))
+              + ", ".join(f"{k} {v}" for k, v in sorted(per_rule.items())), flush=True)
     if len(theme["parts"]) > 1:
         random.Random(MIX_SEED).shuffle(deals)
     out = os.path.join(SYSTEMS, system, "pbn", theme["file"])
@@ -105,13 +144,16 @@ def main():
     ap = argparse.ArgumentParser(description="Régénère les donnes thématiques d'un système")
     ap.add_argument("system", nargs="?", default="sef", choices=sorted(THEMES))
     ap.add_argument("--only", nargs="*", help="fichiers à régénérer (tous par défaut)")
+    ap.add_argument("--jobs", type=int, default=max(1, (os.cpu_count() or 2) - 1),
+                    help="processus de tirage (défaut : les cœurs moins un)")
     args = ap.parse_args()
-    rules = gt.load_rules(os.path.join(SYSTEMS, args.system, "rules.yaml"))
-    for theme in THEMES[args.system]:
-        if args.only and theme["file"] not in args.only and theme["file"][:-4] not in args.only:
-            continue
-        print(f"== {theme['file']}", flush=True)
-        regen(args.system, theme, rules)
+    path = os.path.join(SYSTEMS, args.system, "rules.yaml")
+    with multiprocessing.Pool(args.jobs, initializer=_init, initargs=(path,)) as pool:
+        for theme in THEMES[args.system]:
+            if args.only and theme["file"] not in args.only and theme["file"][:-4] not in args.only:
+                continue
+            print(f"== {theme['file']}", flush=True)
+            regen(args.system, theme, pool, args.jobs)
 
 
 if __name__ == "__main__":

@@ -1531,7 +1531,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .seat-choice[data-seat="W"] { grid-area: w; }
 .seat-choice[data-seat="E"] { grid-area: e; }
 .seat-choice[data-seat="S"] { grid-area: s; }
-.seat-compass-center { grid-area: c; border-radius: 8px; background: var(--felt); }
+.seat-choice[data-seat="D"] { grid-area: c; padding: 4px; font-size: .8rem; line-height: 1.2; }
 .train-seat-actions { display: flex; justify-content: center; }
 .train-seat-actions button { margin: 0; }
 

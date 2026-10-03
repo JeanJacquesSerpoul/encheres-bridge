@@ -179,8 +179,17 @@ const UI_TEXT = {
     themesSearching: "Recherche…",
     themesNone: "Aucun thème ne correspond.",
     themesReadError: "Impossible de lire {file}.",
-    themesAll: "Toutes",
-    themesNoChoice: "Aucune",
+    themesAll: "Toutes les donnes thématiques",
+    themesAllHint: "« Donne aléatoire » tire parmi tous les thèmes",
+    themesNoChoice: "Donnes distribuées au hasard",
+    themesNoChoiceHint: "Aucun thème : « Donne aléatoire » distribue les cartes",
+    themesCount: (n) => `${n} donne${n > 1 ? "s" : ""}`,
+    themeBar: "Thème : {theme}",
+    themeBarAll: "Thème : toutes les donnes thématiques",
+    themeBarChange: "Changer",
+    themeBarQuit: "Quitter le thème : revenir aux donnes distribuées au hasard",
+    randomFromThemeBtn: "Donne du thème",
+    randomFromAllBtn: "Donne thématique",
     randomFromAll: "Tirée parmi toutes les donnes thématiques",
     randomFromTheme: "Tirée parmi les donnes du thème « {theme} »",
     fileSave: "Sauver le PBN",
@@ -392,8 +401,17 @@ const UI_TEXT = {
     themesSearching: "Searching…",
     themesNone: "No topic matches.",
     themesReadError: "Could not read {file}.",
-    themesAll: "All",
-    themesNoChoice: "None",
+    themesAll: "All themed deals",
+    themesAllHint: "“Random deal” draws from every topic",
+    themesNoChoice: "Randomly dealt deals",
+    themesNoChoiceHint: "No topic: “Random deal” deals the cards",
+    themesCount: (n) => `${n} deal${n > 1 ? "s" : ""}`,
+    themeBar: "Topic: {theme}",
+    themeBarAll: "Topic: all themed deals",
+    themeBarChange: "Change",
+    themeBarQuit: "Leave the topic: back to randomly dealt deals",
+    randomFromThemeBtn: "Topic deal",
+    randomFromAllBtn: "Themed deal",
     randomFromAll: "Drawn from all themed deals",
     randomFromTheme: "Drawn from the deals of the topic “{theme}”",
     fileSave: "Save the PBN",
@@ -871,6 +889,14 @@ function applyLang() {
 // dans la fenêtre, et c'est son nom que garde « Sauver le PBN » (le titre de
 // la donne porte alors le libellé du thème). Toute autre donne l'efface.
 let currentThemeFile = null;
+// Le thème (et le numéro de donne) d'où vient la donne affichée : son titre
+// se réécrit quand la langue change. null pour toute autre donne.
+let currentThemePick = null;
+
+function themePickTitle(pick, lang) {
+  const name = themeName(pick.th, lang);
+  return pick.n ? UI_TEXT[lang].themeDealTitle.replace("{theme}", name).replace("{n}", pick.n) : name;
+}
 
 // D'où « Donne aléatoire » tire ses donnes : null, distribuées au hasard (l'état
 // initial, « Aucune » dans la fenêtre des thèmes) ; ALL_THEMES, toutes les
@@ -886,14 +912,29 @@ function setRandomSource(source) {
   renderRandomSource();
 }
 
-// L'infobulle de « Donne aléatoire » dit d'où viendra la prochaine donne.
+// D'où viendra la prochaine donne de « Donne aléatoire » : son libellé
+// (« Donne du thème » quand elle sort d'un thème), son infobulle, et le
+// bandeau du thème sous le titre du panneau, avec le nombre de donnes dès
+// que le fichier est lu.
 function renderRandomSource() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
   const th = themeFiles && themeFiles.find((x) => x.file === randomSource);
+  const all = randomSource === ALL_THEMES;
+  setCommandButton("#random-btn", DICE_SVG,
+    randomSource === null ? t.randomDeal : all ? t.randomFromAllBtn : t.randomFromThemeBtn, true);
   $("#random-btn").title = randomSource === null ? ""
-    : randomSource === ALL_THEMES ? t.randomFromAll
+    : all ? t.randomFromAll
       : t.randomFromTheme.replace("{theme}", th ? themeName(th, lang) : randomSource);
+  const bar = $("#theme-bar");
+  bar.hidden = randomSource === null;
+  if (bar.hidden) return;
+  let text = all ? t.themeBarAll : t.themeBar.replace("{theme}", th ? themeName(th, lang) : randomSource);
+  const counted = all ? themeFiles || [] : th ? [th] : [];
+  if (counted.length && counted.every((x) => x.count)) {
+    text += " · " + t.themesCount(counted.reduce((n, x) => n + x.count, 0));
+  }
+  $("#theme-bar-text").textContent = text;
 }
 
 // `label`, à défaut de `fileName` : un titre pour la donne, qui ne la
@@ -902,6 +943,7 @@ function renderRandomSource() {
 function loadPbn(text, fileName, label) {
   pushUndo();
   currentThemeFile = null;
+  currentThemePick = null;
   $("#pbn").value = text;
   // Quitter une donne chargée remet les sélecteurs sur « Aléatoire » : ce
   // qu'ils affichaient venait du fichier, ce n'était pas une préférence de
@@ -1093,6 +1135,7 @@ async function drawRandomDeal() {
       }
       randomUsed.add(pick.key);
       loadPbn(pick.block, null, pick.label);
+      currentThemePick = { th: pick.th, n: pick.n };
       return true;
     }
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
@@ -1155,10 +1198,8 @@ async function pickThemedBlock(onlyFile, used) {
   const fresh = used ? pool.filter((p) => !used.has(`${p.th.file}#${p.n}`)) : pool;
   if (!fresh.length) return { exhausted: true };
   const pick = pickRandom(fresh);
-  const lang = $("#lang").value;
-  const label = UI_TEXT[lang].themeDealTitle
-    .replace("{theme}", themeName(pick.th, lang)).replace("{n}", pick.n);
-  return { block: pick.block, label, key: `${pick.th.file}#${pick.n}` };
+  const label = themePickTitle(pick, $("#lang").value);
+  return { block: pick.block, label, key: `${pick.th.file}#${pick.n}`, th: pick.th, n: pick.n };
 }
 
 $("#random-btn").addEventListener("click", drawRandomDeal);
@@ -1237,8 +1278,8 @@ function forgetThemes() {
 function specialThemes() {
   const name = (key) => ({ fr: UI_TEXT.fr[key], en: UI_TEXT.en[key] });
   return [
-    { file: "", special: ALL_THEMES, title: name("themesAll") },
-    { file: "", special: "none", title: name("themesNoChoice") },
+    { file: "", special: ALL_THEMES, title: name("themesAll"), hint: name("themesAllHint") },
+    { file: "", special: "none", title: name("themesNoChoice"), hint: name("themesNoChoiceHint") },
   ];
 }
 
@@ -1273,8 +1314,10 @@ async function loadThemeIndex() {
 }
 
 // Le libellé d'un thème, lu de l'en-tête de son fichier.
+// Le fichier est lu même quand l'index donne le libellé : la ligne affiche
+// aussi le nombre de donnes.
 function loadThemeTitle(th) {
-  if (th.title || th.pending) return th.pending;
+  if (th.text || th.pending) return th.pending;
   th.pending = loadThemeText(th)
     .catch(() => {
       th.title = {}; // illisible : le nom du fichier en tiendra lieu
@@ -1305,7 +1348,9 @@ async function loadThemeText(th) {
   const resp = await fetch(th.dir + th.file, { cache: "reload" });
   if (!resp.ok) throw new Error(resp.status);
   th.text = await resp.text();
+  th.count = splitPbnGames(th.text).length;
   if (!th.title) th.title = pbnTitles(th.text);
+  if (randomSource === ALL_THEMES || randomSource === th.file) renderRandomSource();
   return th.text;
 }
 
@@ -1357,9 +1402,27 @@ function themeRow(th, pos) {
   return li;
 }
 
+// Une ligne : le libellé (et, pour « Toutes » et « Aucune », ce qu'elles font),
+// puis le nombre de donnes du thème, une fois son fichier lu.
 function fillThemeRow(li, th) {
   const lang = $("#lang").value;
-  li.textContent = themeName(th, lang);
+  const label = document.createElement("span");
+  label.className = "themes-label";
+  label.textContent = themeName(th, lang);
+  if (th.hint) {
+    const hint = document.createElement("span");
+    hint.className = "themes-hint";
+    hint.textContent = th.hint[lang];
+    label.append(hint);
+  }
+  li.replaceChildren(label);
+  if (th.count) {
+    const count = document.createElement("span");
+    count.className = "themes-count";
+    count.textContent = UI_TEXT[lang].themesCount(th.count);
+    li.append(count);
+  }
+  li.classList.toggle("themes-special", !!th.special);
   li.classList.toggle("loading", !th.title);
   // La source de « Donne aléatoire » : cochée, et annoncée comme telle.
   if (isRandomSource(th)) li.setAttribute("aria-current", "true");
@@ -1380,7 +1443,7 @@ function renderThemePage() {
   const end = Math.min(themeShown.length, themeRendered + THEMES_PAGE);
   for (let pos = themeRendered; pos < end; pos++) {
     themesList.append(themeRow(themeShown[pos], pos));
-    if (!themeShown[pos].title) loadThemeTitle(themeShown[pos]);
+    if (!themeShown[pos].special && !themeShown[pos].text) loadThemeTitle(themeShown[pos]);
   }
   themeRendered = end;
   if (themeRendered < themeShown.length) {
@@ -1456,6 +1519,7 @@ async function chooseTheme(th) {
     setError($("#cons-error"), "");
     loadPbn(text, themeName(th, $("#lang").value));
     currentThemeFile = th.file;
+    currentThemePick = { th, n: 0 };
     setRandomSource(th.file);
   } catch (err) {
     status.textContent = t.themesReadError.replace("{file}", th.file);
@@ -1488,6 +1552,7 @@ themesInput.addEventListener("keydown", (ev) => {
 
 // Les libellés changent de langue avec la page.
 function renderThemes() {
+  if (currentThemePick) $("#file-name").textContent = themePickTitle(currentThemePick, $("#lang").value);
   if (!themeFiles) return;
   themesInput.placeholder = UI_TEXT[$("#lang").value].themesFilter;
   if (themesDialog.open) filterThemes(false);
@@ -1513,6 +1578,11 @@ async function openThemes() {
 }
 
 $("#themes-btn").addEventListener("click", openThemes);
+$("#theme-bar-change").addEventListener("click", openThemes);
+$("#theme-bar-quit").addEventListener("click", () => {
+  setError($("#cons-error"), "");
+  setRandomSource(null);
+});
 $("#themes-close").addEventListener("click", () => themesDialog.close());
 themesDialog.addEventListener("click", (ev) => {
   if (ev.target === themesDialog) themesDialog.close();
@@ -2648,8 +2718,9 @@ function setCommandButton(sel, svg, name, labeled) {
 function renderDealActions() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
-  setCommandButton("#random-btn", DICE_SVG, t.randomDeal, true);
-  renderRandomSource();
+  renderRandomSource(); // pose aussi le bouton « Donne aléatoire »
+  $("#theme-bar .theme-bar-icon").innerHTML = BOOK_SVG;
+  setCommandButton("#theme-bar-quit", CLOSE_SVG, t.themeBarQuit);
   setCommandButton("#new-deal-more-btn", CHEVRON_SVG, t.moreDeals);
   setCommandButton("#deal-prev-btn", PREV_SVG, t.dealPrev);
   setCommandButton("#deal-next-btn", NEXT_SVG, t.dealNext);

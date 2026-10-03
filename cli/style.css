@@ -2033,7 +2033,55 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 /* Libellé pas encore lu : le nom du fichier, en retrait. */
 .themes-item.loading { color: var(--muted); }
 .themes-item[aria-current="true"]::after { content: "✓"; margin-left: auto; color: var(--accent); }
+.themes-label { flex: 1; min-width: 0; }
+/* « Toutes » et « Aucune » : ce qu'elles font, sous leur libellé ; un filet
+   les sépare des thèmes. */
+.themes-hint { display: block; margin-top: 2px; color: var(--muted); font-size: .85rem; }
+.themes-special + .themes-item:not(.themes-special) { margin-top: 9px; }
+.themes-special + .themes-item:not(.themes-special)::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: -5px;
+  border-top: 1px solid var(--border);
+}
+.themes-item { position: relative; }
+.themes-count { flex: none; color: var(--muted); font-size: .85rem; white-space: nowrap; }
 .themes-more { height: 1px; }
+
+/* Bandeau du thème actif, sous le titre du panneau « Donne » (voir
+   renderRandomSource). */
+.theme-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 560px;
+  margin: 4px auto 10px;
+  padding: 6px 6px 6px 12px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--tint);
+  font-size: .9rem;
+}
+.theme-bar[hidden] { display: none; }
+.theme-bar-icon { display: inline-flex; color: var(--accent); }
+.theme-bar-icon svg { width: 18px; height: 18px; }
+.theme-bar-text { flex: 1; min-width: 0; text-align: left; overflow-wrap: anywhere; }
+.theme-bar-btn {
+  flex: none;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.theme-bar-btn:hover { border-color: var(--accent); }
+.theme-bar-quit { display: inline-flex; padding: 4px; }
+.theme-bar-quit svg { width: 16px; height: 16px; }
 
 /* ---------- tutoriel ---------- */
 

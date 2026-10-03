@@ -1572,6 +1572,12 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   flex: 1;
   min-height: 0;
   display: grid;
+  /* Une rangée garde au moins la hauteur de son contenu : sans cela, quand le
+     tapis et le panneau latéral ne tiennent plus dans la fenêtre (petits
+     écrans, une fois le tableau du PAR affiché), `auto` les tassait sur leur
+     hauteur minimale et le tapis laissait déborder ses sièges — la main par
+     dessus le panneau. Le corps défile alors, comme l'entend son overflow. */
+  grid-auto-rows: minmax(max-content, auto);
   grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 560px);
   gap: 16px;
   padding: 16px;

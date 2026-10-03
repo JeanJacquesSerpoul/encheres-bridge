@@ -310,9 +310,12 @@ const UI_TEXT = {
     trainClose: "Fermer l'entraînement",
     trainSeatTitle: "Votre main",
     trainSource: "Donnes",
-    trainSrcRandom: "Aléatoires",
+    trainSrcRandom: "Au hasard",
     trainSrcAll: "Tous les thèmes",
     trainSrcTheme: "Un thème",
+    trainSrcHintRandom: "Donnes distribuées au hasard",
+    trainSrcHintAll: (n) => `Tirées parmi les ${n} donnes thématiques`,
+    trainSrcHintTheme: (n) => `Tirées parmi les ${n} donnes du thème`,
     trainNoThemed: "Aucune donne de ce choix ne respecte le donneur, la vulnérabilité et les bornes de points choisis.",
     trainNoMoreDeals: "Plus de donnes disponibles.",
     trainCancel: "Annuler",
@@ -528,9 +531,12 @@ const UI_TEXT = {
     trainClose: "Close the practice",
     trainSeatTitle: "Your hand",
     trainSource: "Deals",
-    trainSrcRandom: "Random",
+    trainSrcRandom: "At random",
     trainSrcAll: "All topics",
     trainSrcTheme: "One topic",
+    trainSrcHintRandom: "Randomly dealt deals",
+    trainSrcHintAll: (n) => `Drawn from the ${n} themed deals`,
+    trainSrcHintTheme: (n) => `Drawn from the topic's ${n} deals`,
     trainNoThemed: "No deal of this choice fits the dealer, vulnerability and point bounds you chose.",
     trainNoMoreDeals: "No more deals available.",
     trainCancel: "Cancel",
@@ -5577,8 +5583,18 @@ function trainSource() {
   return picked ? picked.value : "random";
 }
 
+// Sous le choix, ce qu'il donne : d'où viennent les donnes, et combien il y
+// en a une fois les fichiers lus.
 function renderTrainSource() {
-  $("#train-theme").hidden = trainSource() !== "theme";
+  const t = UI_TEXT[$("#lang").value];
+  const src = trainSource();
+  $("#train-theme").hidden = src !== "theme";
+  const files = themeFiles || [];
+  const th = files.find((x) => x.file === $("#train-theme").value);
+  const total = files.reduce((n, x) => n + (x.count || 0), 0);
+  $("#train-source-hint").textContent = src === "random" ? t.trainSrcHintRandom
+    : src === "all" ? (total ? t.trainSrcHintAll(total) : "")
+      : th && th.count ? t.trainSrcHintTheme(th.count) : "";
 }
 
 // La liste des thèmes, avec leur libellé dans la langue de la page.
@@ -5586,8 +5602,12 @@ async function fillTrainThemes() {
   const lang = $("#lang").value;
   const sel = $("#train-theme");
   const files = await loadAllThemes();
-  const keep = sel.value || readStored(TRAIN_THEME_KEY, "");
-  sel.replaceChildren(...sortedThemes(files, lang).map((th) => new Option(themeName(th, lang), th.file)));
+  // Le thème actif de la page passe avant le dernier choix retenu.
+  const active = randomSource !== null && randomSource !== ALL_THEMES ? randomSource : "";
+  const keep = active || sel.value || readStored(TRAIN_THEME_KEY, "");
+  const t = UI_TEXT[lang];
+  sel.replaceChildren(...sortedThemes(files, lang).map((th) =>
+    new Option(th.count ? `${themeName(th, lang)} — ${t.themesCount(th.count)}` : themeName(th, lang), th.file)));
   if (files.some((th) => th.file === keep)) sel.value = keep;
   // Aucun thème joignable : seules les donnes aléatoires restent possibles.
   for (const input of trainSeatDialog.querySelectorAll('input[name="train-source"]')) {
@@ -5600,6 +5620,7 @@ async function fillTrainThemes() {
 for (const input of document.querySelectorAll('input[name="train-source"]')) {
   input.addEventListener("change", renderTrainSource);
 }
+$("#train-theme").addEventListener("change", renderTrainSource);
 
 // Le choix de la main : les quatre sièges autour d'une table, le dernier
 // retenu mis en avant.
@@ -5607,10 +5628,13 @@ function renderTrainSeatChoices() {
   const lang = $("#lang").value;
   const t = UI_TEXT[lang];
   const last = readStored(TRAIN_SEAT_KEY, "S");
-  const src = readStored(TRAIN_SOURCE_KEY, "random");
+  // Un thème choisi sur la page (bandeau du thème) est repris d'office ;
+  // sinon, le dernier choix retenu.
+  const active = randomSource === null ? null : randomSource === ALL_THEMES ? "all" : "theme";
+  const src = active || readStored(TRAIN_SOURCE_KEY, "random");
   const radio = trainSeatDialog.querySelector(`input[name="train-source"][value="${src}"]`)
     || trainSeatDialog.querySelector('input[value="random"]');
-  if (!trainSeatDialog.querySelector('input[name="train-source"]:checked')) radio.checked = true;
+  if (active || !trainSeatDialog.querySelector('input[name="train-source"]:checked')) radio.checked = true;
   renderTrainSource();
   for (const btn of trainSeatDialog.querySelectorAll(".seat-choice")) {
     const seat = btn.dataset.seat;

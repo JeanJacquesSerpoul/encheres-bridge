@@ -160,6 +160,7 @@ const UI_TEXT = {
     iaFeature: "Serveur IA de reconnaissance des cartes",
     hidePasses: "Ne pas afficher les passes",
     themeDealTitle: "{theme} — donne {n}",
+    themeDealNumber: "donne {n}",
     serverTest: "Tester",
     healthUnknown: "état inconnu",
     versionWasm: "Moteur d'enchères",
@@ -385,6 +386,7 @@ const UI_TEXT = {
     iaFeature: "AI card-recognition server",
     hidePasses: "Hide passes",
     themeDealTitle: "{theme} — deal {n}",
+    themeDealNumber: "deal {n}",
     serverTest: "Test",
     healthUnknown: "unknown state",
     versionWasm: "Bidding engine",
@@ -904,6 +906,17 @@ function themePickTitle(pick, lang) {
   return pick.n ? UI_TEXT[lang].themeDealTitle.replace("{theme}", name).replace("{n}", pick.n) : name;
 }
 
+// Le titre de la donne thématique affichée. Quand le bandeau nomme déjà son
+// thème, il ne garde que ce que le bandeau ne dit pas : le numéro de la
+// donne (rien pour la série entière, que « Donne à utiliser » parcourt).
+function retitleThemeDeal() {
+  if (!currentThemePick) return;
+  const lang = $("#lang").value;
+  const inBar = randomSource === currentThemePick.th.file;
+  $("#file-name").textContent = !inBar ? themePickTitle(currentThemePick, lang)
+    : currentThemePick.n ? UI_TEXT[lang].themeDealNumber.replace("{n}", currentThemePick.n) : "";
+}
+
 // D'où « Donne aléatoire » tire ses donnes : null, distribuées au hasard (l'état
 // initial, « Aucune » dans la fenêtre des thèmes) ; ALL_THEMES, toutes les
 // donnes thématiques ; ou le fichier d'un thème. Comme à l'entraînement, une
@@ -932,6 +945,7 @@ function renderRandomSource() {
   $("#random-btn").title = randomSource === null ? ""
     : all ? t.randomFromAll
       : t.randomFromTheme.replace("{theme}", th ? themeName(th, lang) : randomSource);
+  retitleThemeDeal();
   const bar = $("#theme-bar");
   bar.hidden = randomSource === null;
   if (bar.hidden) return;
@@ -1142,6 +1156,7 @@ async function drawRandomDeal() {
       randomUsed.add(pick.key);
       loadPbn(pick.block, null, pick.label);
       currentThemePick = { th: pick.th, n: pick.n };
+      retitleThemeDeal();
       return true;
     }
     const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
@@ -1558,7 +1573,7 @@ themesInput.addEventListener("keydown", (ev) => {
 
 // Les libellés changent de langue avec la page.
 function renderThemes() {
-  if (currentThemePick) $("#file-name").textContent = themePickTitle(currentThemePick, $("#lang").value);
+  retitleThemeDeal();
   if (!themeFiles) return;
   themesInput.placeholder = UI_TEXT[$("#lang").value].themesFilter;
   if (themesDialog.open) filterThemes(false);

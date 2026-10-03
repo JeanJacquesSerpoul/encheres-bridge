@@ -983,19 +983,27 @@
 - id: 2NT.r.5NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 5NT
-  cond: "hl >= 12 and S < 4 and H < 4"
+  cond: "balanced and hl >= 16 and S < 4 and H < 4"
   forcing: INV
-  meaning: "Quantitatif fort : invitation à 6SA"
-  meaning_en: "Strong quantitative: invitation to 6NT"
-  status: a_verifier
+  meaning: "16+ HL régulier : proposition de grand chelem"
+  meaning_en: "16+ HL balanced: grand-slam invitation"
+  status: choix
+- id: 2NT.r.6NT
+  seq: ["2NT", "2C 2D 2NT"]
+  call: 6NT
+  cond: "balanced and 13 <= hl <= 15 and S < 4 and H < 4"
+  forcing: SO
+  meaning: "13-15 HL régulier : petit chelem"
+  meaning_en: "13-15 HL balanced: small slam"
+  status: choix
 - id: 2NT.r.4NT
   seq: ["2NT", "2C 2D 2NT"]
   call: 4NT
-  cond: "hl == 11 and S < 4 and H < 4"
+  cond: "balanced and hl == 12 and S < 4 and H < 4"
   forcing: INV
-  meaning: "Quantitatif"
-  meaning_en: "Quantitative"
-  status: a_verifier
+  meaning: "12 HL régulier : proposition de petit chelem"
+  meaning_en: "12 HL balanced: small-slam invitation"
+  status: choix
 - id: 2NT.r.3D
   seq: ["2NT", "2C 2D 2NT"]
   call: 3D
@@ -1172,19 +1180,19 @@
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T}", "2C 2D 2NT {T}"]
   call: "3{M}"
-  cond: "{M} >= 3 and top('{M}') >= 1"
+  cond: "{M} >= 3"
   forcing: NF
-  meaning: "Rectification fittée (fit avec gros honneur)"
-  meaning_en: "Fit correction (fit with a high honor)"
-  status: a_verifier
+  meaning: "Rectification : fit par 3 cartes ou plus"
+  meaning_en: "Correction: a fit of three cards or more"
+  status: choix
 - id: "2NT.tex.{M}.3NT"
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T}", "2C 2D 2NT {T}"]
   call: 3NT
   cond: "true"
   forcing: NF
-  meaning: "Minimum ou non fitté"
-  meaning_en: "Minimum or no fit"
+  meaning: "Sans fit : 3SA, le palier le plus bas"
+  meaning_en: "No fit: 3NT, the lowest level"
   status: sef
 - id: "2NT.tex.{M}.bw"
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
@@ -2326,9 +2334,9 @@
   call: 4D
   cond: "hcp >= 17"
   forcing: ASK
-  meaning: "Pour jouer 6♣/6♦ (ou interrogatif au singleton, à vérifier)"
-  meaning_en: "To play 6♣/6♦ (or singleton ask, to be verified)"
-  status: a_verifier
+  meaning: "Interrogatif forcing : l'ouvreur nomme sa courte (4♥/4♠ : courte nommée, 5♣ : courte en mineure, 4SA : pas de courte)"
+  meaning_en: "Forcing ask: opener names his shortness (4♥/4♠: that suit, 5♣: shortness in a minor, 4NT: none)"
+  status: choix
   alert: true
 - id: 3NT.r.4C
   seq: "3NT"
@@ -2345,8 +2353,8 @@
   call: "4{M}"
   cond: "{M} >= 7"
   forcing: SO
-  meaning: "Naturel"
-  meaning_en: "Natural"
+  meaning: "Arrêt formel : pour jouer"
+  meaning_en: "Sign-off: to play"
   status: sef
 - id: 3NT.r.pass
   seq: "3NT"
@@ -2372,15 +2380,95 @@
   meaning: "La mineure est ♣"
   meaning_en: "The minor is ♣"
   status: sef
-- id: "3NT.4D.6{m}"
-  for: [{m: C}, {m: D}]
+- id: "3NT.4D.4{M}"
+  for: [{M: H, s: "♥"}, {M: S, s: "♠"}]
   seq: "3NT 4D"
-  call: "6{m}"
-  cond: "{m} >= 7"
+  call: "4{M}"
+  cond: "{M} <= 1"
+  forcing: F1
+  meaning: "Courte à {s}"
+  meaning_en: "Shortness in {s}"
+  status: choix
+- id: 3NT.4D.5C
+  seq: "3NT 4D"
+  call: 5C
+  cond: "min(C, D) <= 1"
+  forcing: F1
+  meaning: "Courte dans l'autre mineure"
+  meaning_en: "Shortness in the other minor"
+  status: choix
+- id: 3NT.4D.4NT
+  seq: "3NT 4D"
+  call: 4NT
+  cond: "true"
+  forcing: F1
+  meaning: "Pas de courte"
+  meaning_en: "No shortness"
+  status: choix
+# Le répondant conclut sans connaître la mineure : 5♣ ou 6♣, que l'ouvreur corrige à ♦. Face à une
+# courte majeure, il demande le chelem s'il n'y a pas d'honneurs perdus (un V au plus).
+# en: Responder concludes without knowing the minor: 5♣ or 6♣, which opener corrects to ♦. Opposite a
+# en: major shortness, he bids the slam when he has no wasted honours there (a jack at most).
+- id: "3NT.4D.4{M}.6C"
+  for: [{M: H}, {M: S}]
+  seq: "3NT 4D 4{M}"
+  call: 6C
+  cond: "hcp_in('{M}') <= 1"
+  forcing: REL
+  meaning: "Pas d'honneurs perdus face à la courte : 6♣, l'ouvreur corrige à ♦"
+  meaning_en: "No wasted honours opposite the shortness: 6♣, opener corrects to ♦"
+  status: choix
+- id: "3NT.4D.4{M}.5C"
+  for: [{M: H}, {M: S}]
+  seq: "3NT 4D 4{M}"
+  call: 5C
+  cond: "true"
+  forcing: REL
+  meaning: "Honneurs perdus face à la courte : 5♣, l'ouvreur corrige à ♦"
+  meaning_en: "Wasted honours opposite the shortness: 5♣, opener corrects to ♦"
+  status: choix
+- id: 3NT.4D.5C.6C
+  seq: "3NT 4D 5C"
+  call: 6C
+  cond: "true"
+  forcing: REL
+  meaning: "6♣, l'ouvreur corrige à ♦"
+  meaning_en: "6♣, opener corrects to ♦"
+  status: choix
+- id: 3NT.4D.4NT.6C
+  seq: "3NT 4D 4NT"
+  call: 6C
+  cond: "hcp >= 19"
+  forcing: REL
+  meaning: "19+ H : 6♣, l'ouvreur corrige à ♦"
+  meaning_en: "19+ HCP: 6♣, opener corrects to ♦"
+  status: choix
+- id: 3NT.4D.4NT.5C
+  seq: "3NT 4D 4NT"
+  call: 5C
+  cond: "true"
+  forcing: REL
+  meaning: "5♣, l'ouvreur corrige à ♦"
+  meaning_en: "5♣, opener corrects to ♦"
+  status: choix
+- id: "3NT.4D.x.{l}C.{l}D"
+  for: [{l: 5, s: "4H|4S|4NT"}, {l: 6, s: "4H|4S|4NT|5C"}]
+  seq: "3NT 4D {s} {l}C"
+  call: "{l}D"
+  cond: "D >= 7"
   forcing: SO
-  meaning: "Nomme sa mineure au chelem"
-  meaning_en: "Names his minor for slam"
-  status: a_verifier
+  meaning: "La mineure est ♦"
+  meaning_en: "The minor is ♦"
+  status: choix
+- id: "3NT.4D.x.{l}C.P"
+  for: [{l: 5, s: "4H|4S|4NT"}, {l: 6, s: "4H|4S|4NT|5C"}]
+  seq: "3NT 4D {s} {l}C"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "La mineure est ♣"
+  meaning_en: "The minor is ♣"
+  status: choix
 - id: 4NT.r.5D
   seq: "4NT"
   call: 5D
@@ -2883,14 +2971,22 @@
   status: infere
 # --- chelems à SA par les points (règle de la fiche : 4SA qui suit directement une enchère à SA est quantitatif)
 # en: notrump slams on points (card rule: 4NT directly over a notrump bid is quantitative)
+- id: q.2NT.5NT.7NT
+  seq: ["2NT 5NT", "2C 2D 2NT 5NT"]
+  call: 7NT
+  cond: "hl >= 21"
+  forcing: SO
+  meaning: "Maximum : accepte le grand chelem"
+  meaning_en: "Maximum: accepts the grand slam"
+  status: choix
 - id: q.2NT.5NT
   seq: ["2NT 5NT", "2C 2D 2NT 5NT"]
   call: 6NT
   cond: "true"
   forcing: SO
-  meaning: "Dit 6SA (7SA non codé)"
-  meaning_en: "Bids 6NT (7NT not coded)"
-  status: sef
+  meaning: "Minimum : petit chelem"
+  meaning_en: "Minimum: small slam"
+  status: choix
 - id: q.2NT.4NT
   seq: ["2NT 4NT", "2C 2D 2NT 4NT"]
   call: 6NT
@@ -3741,7 +3837,7 @@
   meaning_en: "Prefers ♠"
   status: infere
 - id: "michaels.{o}"
-  for: [{o: 1C, call: 2D, a: H, b: S, st: sef}, {o: 1D, call: 2D, a: H, b: S, st: sef}, {o: 1H, call: 2H, a: S, b: C, st: sef}, {o: 1S, call: 2S, a: H, b: C, st: a_verifier}]
+  for: [{o: 1C, call: 2D, a: H, b: S, st: sef}, {o: 1D, call: 2D, a: H, b: S, st: sef}, {o: 1H, call: 2H, a: S, b: C, st: sef}, {o: 1S, call: 2S, a: H, b: C, st: choix}]
   seq: "({o})"
   call: "{call}"
   cond: "{a} >= 5 and {b} >= 5 and hcp >= 10"

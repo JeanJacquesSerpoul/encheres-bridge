@@ -257,6 +257,15 @@
   <main class="workspace">
     <section class="panel" id="input-panel">
       <h2><span data-i18n="dealPanel">Donne</span> <span id="file-name" class="file-name"></span></h2>
+      <!-- Le thème d'où « Donne aléatoire » tire ses donnes, tant qu'il y en a
+           un : son nom, son nombre de donnes, de quoi en changer ou revenir aux
+           donnes distribuées au hasard. Rempli par renderRandomSource. -->
+      <div id="theme-bar" class="theme-bar" role="status" hidden>
+        <span class="theme-bar-icon" aria-hidden="true"></span>
+        <span id="theme-bar-text" class="theme-bar-text"></span>
+        <button id="theme-bar-change" type="button" class="theme-bar-btn" data-i18n="themeBarChange">Changer</button>
+        <button id="theme-bar-quit" type="button" class="theme-bar-btn theme-bar-quit"></button>
+      </div>
       <!-- Une phrase, et une seule : la page s'ouvrait sur un tapis de cartes
            sans que rien ne dise à quoi elle sert. -->
       <p class="panel-intro" data-i18n="intro">Composez une donne — l'application déroule les enchères du système français et les commente, enchère par enchère.</p>
@@ -608,7 +617,7 @@
         </ul>
         <p>La <b>flèche</b> à côté de ce bouton ouvre les autres façons d'obtenir une donne :</p>
         <ul class="help-icons">
-          <li><span data-help-icon="book"></span><span><b>Donnes thématiques</b> : des séries de donnes choisies pour travailler un thème d'enchères (4e couleur forcing, Drury…). Une fenêtre liste les thèmes, par ordre alphabétique ; le champ en tête filtre la liste (sans tenir compte des accents), les flèches ↑ ↓ la parcourent et Entrée — ou un clic — charge la série ; le sélecteur <b>Donne à utiliser</b> et ses boutons <b>‹</b> <b>›</b> passent d'une donne à l'autre. Le thème chargé est coché dans la liste, et son nom s'affiche en titre de la donne. Les enchères n'y sont pas écrites : l'application les calcule.</span></li>
+          <li><span data-help-icon="book"></span><span><b>Donnes thématiques</b> : des séries de donnes choisies pour travailler un thème d'enchères (4e couleur forcing, Drury…). Une fenêtre liste les thèmes, par ordre alphabétique ; le champ en tête filtre la liste (sans tenir compte des accents), les flèches ↑ ↓ la parcourent et Entrée — ou un clic — charge la série ; le sélecteur <b>Donne à utiliser</b> et ses boutons <b>‹</b> <b>›</b> passent d'une donne à l'autre. Chaque thème indique son nombre de donnes. Le thème chargé est coché dans la liste, et son nom s'affiche en titre de la donne. Tant qu'un thème est choisi, <b>Donne aléatoire</b> devient <b>Donne du thème</b> et tire parmi ses donnes, et un bandeau sous le titre le rappelle : <b>Changer</b> rouvre la liste, <b>×</b> revient aux donnes distribuées au hasard. En tête de liste, <b>Toutes les donnes thématiques</b> tire parmi tous les thèmes, et <b>Donnes distribuées au hasard</b> quitte les thèmes. Les enchères n'y sont pas écrites : l'application les calcule.</span></li>
           <li><span data-help-icon="file"></span><span><b>Charger un fichier .pbn</b> : une donne ou un fichier de tournoi. S'il contient plusieurs donnes, un sélecteur <b>Donne à utiliser</b> apparaît, encadré de deux boutons <b>‹</b> <b>›</b> qui passent à la donne précédente ou suivante.</span></li>
         </ul>
         <p>Le menu <b>Partager</b> sert à emporter la donne hors de la page :</p>
@@ -733,7 +742,7 @@
         </ul>
         <p>The <b>arrow</b> next to that button opens the other ways to get a deal:</p>
         <ul class="help-icons">
-          <li><span data-help-icon="book"></span><span><b>Themed deals</b>: sets of deals picked to work on a bidding topic (fourth suit forcing, Drury…). A window lists the topics, in alphabetical order; the field at the top filters the list (ignoring accents), the ↑ ↓ arrows move through it and Enter — or a click — loads the set; the <b>Deal to use</b> selector and its <b>‹</b> <b>›</b> buttons move from one deal to the next. The loaded topic is ticked in the list, and its name shows as the deal's title. The auctions are not written in them: the app works them out.</span></li>
+          <li><span data-help-icon="book"></span><span><b>Themed deals</b>: sets of deals picked to work on a bidding topic (fourth suit forcing, Drury…). A window lists the topics, in alphabetical order; the field at the top filters the list (ignoring accents), the ↑ ↓ arrows move through it and Enter — or a click — loads the set; the <b>Deal to use</b> selector and its <b>‹</b> <b>›</b> buttons move from one deal to the next. Each topic shows its number of deals. The loaded topic is ticked in the list, and its name shows as the deal's title. While a topic is chosen, <b>Random deal</b> becomes <b>Topic deal</b> and draws from its deals, and a banner under the title says so: <b>Change</b> reopens the list, <b>×</b> goes back to randomly dealt deals. At the top of the list, <b>All themed deals</b> draws from every topic, and <b>Randomly dealt deals</b> leaves the topics. The auctions are not written in them: the app works them out.</span></li>
           <li><span data-help-icon="file"></span><span><b>Load a .pbn file</b>: a single deal or a tournament file. If it holds several deals, a <b>Deal to use</b> picker appears, between two <b>‹</b> <b>›</b> buttons that go to the previous or next deal.</span></li>
         </ul>
         <p>The <b>Share</b> menu takes the deal out of the page:</p>

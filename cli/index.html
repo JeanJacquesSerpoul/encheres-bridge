@@ -683,7 +683,7 @@
 
         <h3>6. S'entraîner</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, après Partager, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest), puis la table d'entraînement. Il choisit aussi les <b>donnes</b> : <b>Au hasard</b> (distribuées au hasard), <b>Tous les thèmes</b> (tirées parmi toutes les donnes thématiques) ou <b>Un thème</b> (celui de la liste, avec son nombre de donnes) ; une phrase sous le choix rappelle d'où viendront les donnes. Si un thème est choisi sur la page (bandeau du thème), il est repris d'office. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, « Plus de donnes disponibles » s'affiche. Le donneur, la vulnérabilité et les bornes choisis s'appliquent. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
+          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, après Partager, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest, ou au centre <b>Camp du déclarant</b> : à chaque donne, votre main est tirée au hasard dans le camp qui joue le contrat), puis la table d'entraînement. Il choisit aussi les <b>donnes</b> : <b>Au hasard</b> (distribuées au hasard), <b>Tous les thèmes</b> (tirées parmi toutes les donnes thématiques) ou <b>Un thème</b> (celui de la liste, avec son nombre de donnes) ; une phrase sous le choix rappelle d'où viendront les donnes. Si un thème est choisi sur la page (bandeau du thème), il est repris d'office. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, « Plus de donnes disponibles » s'affiche. Le donneur, la vulnérabilité et les bornes choisis s'appliquent. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite.</span></li>
         </ul>
         <ul>
           <li>Votre main est toujours <b>en bas</b>, face visible ; les trois autres joueurs ont le dos tourné (à gauche, celui qui parle après vous ; en face, votre partenaire). Au centre, la boîte des enchères : les sièges vulnérables y sont en rouge, et un <b>?</b> marque le tour de parole. La plaque du joueur qui parle s'éclaire en jaune.</li>
@@ -808,7 +808,7 @@
 
         <h3>6. Practising</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, after Share, opens the choice of <b>your hand</b> (North, East, South or West), then the practice table. It also picks the <b>deals</b>: <b>At random</b> (dealt at random), <b>All topics</b> (drawn among all the themed deals) or <b>One topic</b> (the one in the list, with its number of deals); a line under the choice says where the deals will come from. If a topic is chosen on the page (topic banner), it is picked up at once. A themed deal never comes back in the same session: once all have been played, “No more deals available” is shown. The dealer, vulnerability and bounds you chose apply. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
+          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, after Share, opens the choice of <b>your hand</b> (North, East, South or West, or in the middle <b>Declaring side</b>: for each deal, your hand is drawn at random in the side that plays the contract), then the practice table. It also picks the <b>deals</b>: <b>At random</b> (dealt at random), <b>All topics</b> (drawn among all the themed deals) or <b>One topic</b> (the one in the list, with its number of deals); a line under the choice says where the deals will come from. If a topic is chosen on the page (topic banner), it is picked up at once. A themed deal never comes back in the same session: once all have been played, “No more deals available” is shown. The dealer, vulnerability and bounds you chose apply. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it.</span></li>
         </ul>
         <ul>
           <li>Your hand is always <b>at the bottom</b>, face up; the other three players' cards are face down (on your left, the player who bids after you; opposite, your partner). In the middle, the auction box: vulnerable seats are shown in red, and a <b>?</b> marks whose turn it is. The plate of the player to bid lights up in yellow.</li>
@@ -997,7 +997,9 @@
       <div class="seat-compass" role="group" data-i18n-label="trainSeatTitle">
         <button type="button" class="seat-choice" data-seat="N"></button>
         <button type="button" class="seat-choice" data-seat="W"></button>
-        <span class="seat-compass-center" aria-hidden="true"></span>
+        <!-- Au centre : la main tirée dans le camp qui joue le contrat, à
+             chaque donne (voir declaringSeat dans app.js). -->
+        <button type="button" class="seat-choice seat-choice-declarer" data-seat="D"></button>
         <button type="button" class="seat-choice" data-seat="E"></button>
         <button type="button" class="seat-choice" data-seat="S"></button>
       </div>

@@ -310,6 +310,8 @@ const UI_TEXT = {
     trainTitle: "S'entraîner",
     trainClose: "Fermer l'entraînement",
     trainSeatTitle: "Votre main",
+    trainSeatDeclarer: "Camp du déclarant",
+    trainSeatDeclarerTip: "Votre main dans le camp qui joue le contrat : Nord ou Sud, Est ou Ouest, tirée au hasard à chaque donne",
     trainSource: "Donnes",
     trainSrcRandom: "Au hasard",
     trainSrcAll: "Tous les thèmes",
@@ -532,6 +534,8 @@ const UI_TEXT = {
     trainTitle: "Practise",
     trainClose: "Close the practice",
     trainSeatTitle: "Your hand",
+    trainSeatDeclarer: "Declaring side",
+    trainSeatDeclarerTip: "Your hand in the side that plays the contract: North or South, East or West, drawn at random for each deal",
     trainSource: "Deals",
     trainSrcRandom: "At random",
     trainSrcAll: "All topics",
@@ -5461,6 +5465,17 @@ async function drawPracticePBN(lang) {
   return { pbn, label: "" };
 }
 
+// « Camp du déclarant » : la main n'est pas fixée pour la séance, elle se tire
+// à chaque donne, une fois l'enchère calculée, parmi les deux mains du camp
+// qui joue le contrat. Donne passée : l'une des quatre.
+const TRAIN_DECLARER = "D";
+
+function declaringSeat(result) {
+  if (isPass(result.contract) || !SEATS.includes(result.declarer)) return pickRandom(SEATS);
+  const i = SEATS.indexOf(result.declarer);
+  return pickRandom([result.declarer, SEATS[(i + 2) % 4]]);
+}
+
 async function newTrainTable() {
   const lang = train.lang;
   const t = UI_TEXT[lang];
@@ -5473,7 +5488,8 @@ async function newTrainTable() {
   try {
     const { pbn, label } = await drawPracticePBN(lang);
     const result = await bidsLocal.bid(pbn, lang);
-    train.tables.push({ result, seat: train.seat, lang, calls: [], idx: 0,
+    const seat = train.seat === TRAIN_DECLARER ? declaringSeat(result) : train.seat;
+    train.tables.push({ result, seat, lang, calls: [], idx: 0,
       correctCount: 0, totalUser: 0, done: false, label, pbn });
     showTrainTable(train.tables.length - 1);
   } catch (err) {
@@ -5653,8 +5669,10 @@ function renderTrainSeatChoices() {
   renderTrainSource();
   for (const btn of trainSeatDialog.querySelectorAll(".seat-choice")) {
     const seat = btn.dataset.seat;
-    btn.textContent = SEAT_LABEL[lang][seat];
-    btn.setAttribute("aria-label", t.seatTip(SEAT_LABEL[lang][seat]));
+    const declarer = seat === TRAIN_DECLARER;
+    btn.textContent = declarer ? t.trainSeatDeclarer : SEAT_LABEL[lang][seat];
+    btn.setAttribute("aria-label", declarer ? t.trainSeatDeclarerTip : t.seatTip(SEAT_LABEL[lang][seat]));
+    btn.title = declarer ? t.trainSeatDeclarerTip : "";
     btn.classList.toggle("is-last", seat === last);
   }
 }

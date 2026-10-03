@@ -276,7 +276,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 - **Copier le lien** copie une adresse qui porte la donne dans son fragment (`#pbn=…`, jamais envoyé au serveur) : qui l'ouvre retrouve la donne, puis l'adresse redevient celle de la page.
 - **Donne aléatoire** tire une donne complète, les 52 cartes distribuées au hasard ; **Donneur** et **Vulnérabilité** se choisissent ou se tirent au sort. Un fichier chargé impose les siens jusqu'au prochain tirage.
 - **À la première visite**, la table porte la **donne exemple**. Ensuite, la **dernière donne complète** (quatre mains de 13 cartes) est retenue dans le navigateur et revient à chaque ouverture de la page — jamais la donne exemple.
-- **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…) ; un champ filtre la liste, les flèches la parcourent, Entrée ou un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Le thème chargé devient la source de **Donne aléatoire**, qui tire alors ses donnes parmi celles du thème, sans répétition tant que la source ne change pas (comme à l'entraînement), en respectant donneur, vulnérabilité et bornes de points. En tête de liste, **Toutes** tire parmi toutes les donnes thématiques et **Aucune** revient à l'état initial (donnes distribuées au hasard). La source choisie est cochée dans la liste, et le libellé du thème tient lieu de nom de fichier en titre de la donne. Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
+- **Donnes thématiques** ouvre une fenêtre qui liste des séries de donnes choisies sur un thème d'enchères (4e couleur forcing, Drury…) ; un champ filtre la liste, les flèches la parcourent, Entrée ou un clic charge la série, et le sélecteur **Donne à utiliser** en parcourt les donnes. Le thème chargé devient la source de **Donne aléatoire**, qui tire alors ses donnes parmi celles du thème, sans répétition tant que la source ne change pas (comme à l'entraînement), en respectant donneur, vulnérabilité et bornes de points. Chaque thème indique son nombre de donnes. En tête de liste, **Toutes les donnes thématiques** tire parmi tous les thèmes et **Donnes distribuées au hasard** revient à l'état initial. La source choisie est cochée dans la liste ; tant que c'est un thème, **Donne aléatoire** devient **Donne du thème** et un bandeau sous le titre le rappelle, avec **Changer** et **×** (retour aux donnes distribuées au hasard). Voir [Donnes thématiques](#donnes-thématiques) pour en ajouter.
 - **La table en lecture, la table en édition** : la table se lit par défaut, quatre mains compactes autour du tapis avec leurs points. **Modifier la donne** la passe en édition, avec les zones de cartes et leurs commandes ; **Terminer** revient à la lecture (éteint tant que la donne est incomplète). Une donne incomplète s'ouvre d'elle-même en édition, une nouvelle donne tirée ou chargée en lecture, et un message sur les bornes rouvre l'édition pour les montrer.
 - **Composer à la main** (en édition) : chaque carte se glisse d'une main à l'autre ou vers **Cartes non affectées** ; au doigt, on touche la carte puis sa destination ; au clavier, Tab passe d'une main à l'autre, les flèches parcourent les cartes, Entrée ou Espace prend puis dépose, Échap repose. Le tag `[Deal]` est réécrit à chaque déplacement. Sur écran étroit (téléphone), la zone **Cartes non affectées** reste épinglée en haut de l'écran pendant qu'on fait défiler les mains.
 - Chaque main porte deux **bornes de points d'honneur** (mini/maxi), repliées par défaut : le bouton **Bornes de points** sous la table les affiche (un message d'erreur sur les bornes les rouvre de lui-même). Elles contraignent le tirage aléatoire et la distribution automatique, et signalent en rouge les mains hors bornes.
@@ -284,7 +284,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Sept sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 25 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Seize sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 25 donnes chacune :
 
 | Fichier | Thème |
 |---|---|
@@ -295,6 +295,15 @@ Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque s
 | `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages mêlés : 19 donnes variées, 2 au plus par action, et 6 donnes avec le 2SA de Lévy) |
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
 | `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 8 donnes à 0-7 H, 10 à 8-10 H, 7 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
+| `barrages.pbn` | ouverture de barrage au palier de 3 ou de 4 (4 donnes au plus par barrage) |
+| `reponses-mineure.pbn` | réponse à une ouverture de 1♣ ou 1♦ (passe exclu, 3 donnes au plus par réponse) |
+| `reponses-majeure.pbn` | réponse à une ouverture de 1♥ ou 1♠ (passe exclu, 3 donnes au plus par réponse) |
+| `reponses-1sa-2sa.pbn` | réponse à l'ouverture de 1SA (17 donnes : Stayman, Texas, 2SA, 3SA…) et de 2SA (8 donnes) |
+| `spoutnik.pbn` | contre Spoutnik du répondant sur 1♣ (1♦), 1♣ (1♠) et 1♦ (1♠) |
+| `interventions.pbn` | intervention par une couleur, à saut ou à 1SA sur une ouverture au palier de 1 (le contre d'appel a sa série) |
+| `reveils.pbn` | réveil en 4e position sur une ouverture au palier de 1 : couleur, saut, 1SA, contre |
+| `redemandes-ouvreur.pbn` | deuxième enchère de l'ouvreur après la réponse du partenaire (une donne par redemande) |
+| `landy.pbn` | Landy (2♣ bicolore majeur) sur l'ouverture adverse de 1SA : 18 donnes en intervention, 7 en réveil |
 
 Un site statique ne sait pas lister un dossier : les fichiers proposés sont ceux que déclare le `pbn/index.json` du système. La fenêtre les range **par ordre alphabétique** de leur libellé dans la langue de la page (sans tenir compte de la casse ni des accents) ; la liste de l'entraînement aussi.
 

@@ -58,4 +58,22 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add cli/bids.wasm cli/wasm_exec.js
           git commit -m "Mettre à jour le moteur WebAssembly de cli/ ($(git rev-parse --short HEAD))"
-          git push
+          # main a pu avancer pendant la compilation (une PR sans Go fusionnée
+          # entre-temps ne relance pas ce workflow, et le push serait refusé).
+          # Si les sources Go n'ont pas bougé, le moteur compilé reste le bon :
+          # on rejoue le commit par-dessus et on pousse. Sinon, le run lancé
+          # par ce nouveau push Go s'en charge.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git diff --quiet HEAD origin/main -- '*.go' go.mod build-wasm.sh; then
+              echo "Les sources Go de main ont changé : le run suivant recompile."
+              exit 0
+            fi
+            if ! git rebase origin/main; then
+              git rebase --abort
+              echo "Un moteur plus récent est déjà sur main."
+              exit 0
+            fi
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1

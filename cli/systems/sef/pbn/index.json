@@ -6,6 +6,15 @@
     { "file": "roudi.pbn", "fr": "Roudi", "en": "Roudi (checkback after 1NT rebid)" },
     { "file": "2-faible.pbn", "fr": "2 faible (2♥ / 2♠) et sa défense", "en": "Weak two (2♥ / 2♠) and its defence" },
     { "file": "2-carreau-fm.pbn", "fr": "2♦ forcing de manche", "en": "Game-forcing 2♦" },
-    { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" }
+    { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" },
+    { "file": "barrages.pbn", "fr": "Ouvertures de barrage au palier de 3 et de 4", "en": "Preemptive openings at the 3 and 4 level" },
+    { "file": "reponses-mineure.pbn", "fr": "Réponses sur une ouverture mineure", "en": "Responses to a minor-suit opening" },
+    { "file": "reponses-majeure.pbn", "fr": "Réponses sur une ouverture majeure", "en": "Responses to a major-suit opening" },
+    { "file": "reponses-1sa-2sa.pbn", "fr": "Réponses à l'ouverture d'1SA et de 2SA", "en": "Responses to 1NT and 2NT openings" },
+    { "file": "spoutnik.pbn", "fr": "Spoutnik", "en": "Negative double (Spoutnik)" },
+    { "file": "interventions.pbn", "fr": "Interventions", "en": "Overcalls" },
+    { "file": "reveils.pbn", "fr": "Réveils", "en": "Balancing (reopening) bids" },
+    { "file": "redemandes-ouvreur.pbn", "fr": "Redemandes de l'ouvreur", "en": "Opener's rebids" },
+    { "file": "landy.pbn", "fr": "Landy", "en": "Landy (over 1NT)" }
   ]
 }

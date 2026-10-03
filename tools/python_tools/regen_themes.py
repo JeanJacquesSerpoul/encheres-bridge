@@ -52,6 +52,35 @@ THEMES = {
                    (r"^advX\.1[CDHS]\.(saut\.[CDHS]|dsaut\.[HS]|cue\.2M|1NT)$", 10, 2025, 2),
                    (r"^advX\.1[CDHS]\.(cue|2NT|4[HS])$", 6, 2026, 2),
                    (r"^advX\.1[CDHS]\.3NT$", 1, 2027, 0)]},
+        # Les huit barrages, trois donnes au plus pour chacun.
+        {"file": "barrages.pbn", "fr": "Ouvertures de barrage au palier de 3 et de 4",
+         "en": "Preemptive openings at the 3 and 4 level",
+         "parts": [(r"^open\.[34][CDHS]$", 25, 2024, 4)]},
+        # Toutes les réponses autres que passe, variées (trois donnes au plus par réponse).
+        {"file": "reponses-mineure.pbn", "fr": "Réponses sur une ouverture mineure",
+         "en": "Responses to a minor-suit opening",
+         "parts": [(r"^1[CD]\.r\.(?!pass$)", 25, 2024, 3)]},
+        {"file": "reponses-majeure.pbn", "fr": "Réponses sur une ouverture majeure",
+         "en": "Responses to a major-suit opening",
+         "parts": [(r"^1[HS]\.r\.(?!pass$)", 25, 2024, 3)]},
+        {"file": "reponses-1sa-2sa.pbn", "fr": "Réponses à l'ouverture d'1SA et de 2SA",
+         "en": "Responses to 1NT and 2NT openings",
+         "parts": [(r"^1NT\.r\.(?!pass$)", 17, 2024, 2),
+                   (r"^2NT\.r\.(?!pass$)", 8, 2025, 3)]},
+        {"file": "spoutnik.pbn", "fr": "Spoutnik", "en": "Negative double (Spoutnik)",
+         "parts": [(r"^spoutnik\.1[CD]\.1[DS]$", 25, 2024, 9)]},
+        # Interventions par une couleur ou à 1SA ; le contre d'appel a sa série.
+        {"file": "interventions.pbn", "fr": "Interventions", "en": "Overcalls",
+         "parts": [(r"^def\.1[CDHS]\.(?!pass$|X)", 25, 2024, 2)]},
+        {"file": "reveils.pbn", "fr": "Réveils", "en": "Balancing (reopening) bids",
+         "parts": [(r"^rev\.1[CDHS]\.(?!pass$)", 25, 2024, 2)]},
+        # La deuxième enchère de l'ouvreur après une réponse (passe exclu).
+        {"file": "redemandes-ouvreur.pbn", "fr": "Redemandes de l'ouvreur", "en": "Opener's rebids",
+         "parts": [(r"^1[CDHS]\.(1[DHS]|1NT|2[CDHS]|2NT)\.(?!pass$)[^.]+(\.(reverse|fort))?$", 25, 2024, 1)]},
+        # Landy en intervention et en réveil sur 1SA.
+        {"file": "landy.pbn", "fr": "Landy", "en": "Landy (over 1NT)",
+         "parts": [(r"^def1NT\.2C$", 18, 2024, 0),
+                   (r"^rev1NT\.2C$", 7, 2025, 0)]},
     ],
 }
 

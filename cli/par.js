@@ -529,6 +529,17 @@
     if (dealHands && !lastTable) onCompute();
   };
 
+  // Pour l'entraînement : la table double-mort d'une donne quelconque (mains
+  // au format de renderResult), sans toucher à celle de l'onglet. Même file
+  // d'attente que les entames : le solveur ne fait qu'un calcul à la fois.
+  window.parTableFor = function (hands) {
+    const pbn = pbnFromHands(hands);
+    const run = () => calcTable(pbn);
+    const p = solveQueue.then(run, run);
+    solveQueue = p.catch(() => {});
+    return p;
+  };
+
   const btn = $("#par-btn");
   if (btn) btn.addEventListener("click", onCompute);
   bindTip();

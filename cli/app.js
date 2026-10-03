@@ -331,6 +331,11 @@ const UI_TEXT = {
     trainCount: (k, n) => `Donne ${k} / ${n}`,
     trainYou: "(vous)",
     trainAuctionOver: "Enchère terminée : les quatre mains sont dévoilées.",
+    trainParTitle: "PAR : levées au double mort",
+    trainParBusy: "Calcul du PAR…",
+    trainParResult: (contract, seat, n) => `${contract} par ${seat} : ${n} levée${n > 1 ? "s" : ""} au double mort`,
+    trainParMade: (over) => over ? `réussi +${over}` : "réussi",
+    trainParDown: (n) => `chute de ${n}`,
     trainPassedOut: "Passe générale",
     trainUnfinished: "en cours",
     trainBusy: "Tirage de la donne…",
@@ -555,6 +560,11 @@ const UI_TEXT = {
     trainCount: (k, n) => `Deal ${k} / ${n}`,
     trainYou: "(you)",
     trainAuctionOver: "Auction over: all four hands are shown.",
+    trainParTitle: "PAR: double-dummy tricks",
+    trainParBusy: "Computing the PAR…",
+    trainParResult: (contract, seat, n) => `${contract} by ${seat}: ${n} trick${n > 1 ? "s" : ""} double dummy`,
+    trainParMade: (over) => over ? `made +${over}` : "made",
+    trainParDown: (n) => `down ${n}`,
     trainPassedOut: "Passed out",
     trainUnfinished: "in progress",
     trainBusy: "Drawing the deal…",
@@ -5412,6 +5422,68 @@ function onQuizContinue() {
   renderQuizStep();
 }
 
+// ---------- PAR de la table d'entraînement ----------
+
+// Index de couleur du solveur (♠ ♥ ♦ ♣ SA), d'après la lettre de l'enchère
+// dans la langue de la table.
+const DDS_STRAIN = { P: 0, C: 1, K: 2, T: 3, SA: 4, S: 0, H: 1, D: 2, NT: 4 };
+const DDS_STRAIN_EN = { S: 0, H: 1, D: 2, C: 3, NT: 4 };
+const DDS_HAND = { N: 0, E: 1, S: 2, W: 3 };
+
+// La table du PAR, sous le panneau latéral, une fois l'enchère d'une table
+// finie : calculée une fois par table (la promesse est gardée sur la table),
+// la case du contrat atteint mise en avant, et ce qu'il y fait.
+function renderTrainPar(table) {
+  const box = $("#train-par");
+  if (!table || !table.done || typeof parTableFor !== "function") {
+    box.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  const lang = table.lang;
+  const t = UI_TEXT[lang];
+  box.hidden = false;
+  if (!table.par) {
+    box.innerHTML = `<p class="muted">${esc(t.trainParBusy)}</p>`;
+    table.parPromise = table.parPromise || parTableFor(table.result.hands);
+    table.parPromise.then((dd) => {
+      table.par = dd;
+      if (quiz === table) renderTrainPar(table);
+    }, (err) => {
+      table.parPromise = null;
+      if (quiz === table) box.innerHTML = `<p class="error">${esc(err && err.message ? err.message : String(err))}</p>`;
+    });
+    return;
+  }
+  const r = table.result;
+  let mark = null;
+  let line = "";
+  const m = !isPass(r.contract) && r.contract.match(/^([1-7])(SA|NT|[A-Z])$/);
+  if (m && DDS_HAND[r.declarer] !== undefined) {
+    const strain = (lang === "en" ? DDS_STRAIN_EN : DDS_STRAIN)[m[2]];
+    const hand = DDS_HAND[r.declarer];
+    mark = { strain, hand };
+    const n = table.par[strain * 4 + hand];
+    const over = n - (+m[1] + 6);
+    const verdict = over >= 0 ? t.trainParMade(over) : t.trainParDown(-over);
+    line = `<p class="train-par-line ${over >= 0 ? "made" : "down"}">` +
+      `${t.trainParResult(bidHTML(r.contract, lang) + (r.doubled ? " X" : ""), esc(SEAT_SHORT[lang][r.declarer]), n)} — ${esc(verdict)}</p>`;
+  }
+  const cols = [[3, "♣"], [2, "♦"], [1, "♥"], [0, "♠"], [4, lang === "en" ? "NT" : "SA"]];
+  const head = cols.map(([s, l]) => `<th${s === 1 || s === 2 ? ' class="red"' : ""}>${l}</th>`).join("");
+  const rows = ["N", "S", "E", "W"].map((seat) => {
+    const hand = DDS_HAND[seat];
+    const cells = cols.map(([s]) => {
+      const cls = [s === 1 || s === 2 ? "red" : "", mark && mark.strain === s && mark.hand === hand ? "contract" : ""]
+        .filter(Boolean).join(" ");
+      return `<td${cls ? ` class="${cls}"` : ""}>${table.par[s * 4 + hand]}</td>`;
+    }).join("");
+    return `<tr><th>${esc(SEAT_SHORT[lang][seat])}</th>${cells}</tr>`;
+  }).join("");
+  box.innerHTML = `<h3>${esc(t.trainParTitle)}</h3>` +
+    `<table class="par-table train-par-table"><thead><tr><th></th>${head}</tr></thead><tbody>${rows}</tbody></table>${line}`;
+}
+
 // L'enchère est finie : les quatre mains se dévoilent, le contrat s'affiche.
 // Pas de score ici : il attend « Terminer ».
 function finishQuiz() {
@@ -5420,6 +5492,7 @@ function finishQuiz() {
   const t = UI_TEXT[quiz.lang];
   $("#train-turn").textContent = t.trainAuctionOver;
   $("#bidding-box").classList.add("hidden");
+  renderTrainPar(quiz);
   renderTrainNav();
   const next = $("#train-new-btn");
   if (!next.classList.contains("hidden")) next.focus();
@@ -5436,6 +5509,7 @@ function showTrainTable(k) {
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
   $("#train-error").textContent = "";
+  renderTrainPar(quiz);
   if (quiz.done) {
     renderTrainTable(null);
     $("#bidding-box").classList.add("hidden");
@@ -5588,6 +5662,7 @@ function startTraining(seat) {
   quiz = null;
   for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
   $("#tcenter").innerHTML = "";
+  renderTrainPar(null);
   $("#train-summary").hidden = true;
   $("#train-body").hidden = false;
   $("#quiz-feedback").classList.add("hidden");

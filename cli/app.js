@@ -4695,6 +4695,14 @@ $("#lang").addEventListener("change", () => {
 // Builds a S/W/N/E auction grid (head + body rows) from a list of calls,
 // padding the first row up to the dealer's column. `cellRenderer(call)`
 // returns the <td> HTML for a played call.
+// Une case d'enchère ne reçoit d'infobulle que si elle a quelque chose à dire.
+// Le moteur commente aussi les passes — « pas de quoi intervenir », « passe par
+// défaut » : la case dit déjà tout, et l'infobulle n'y ferait que cribler la
+// grille de bulles vides.
+function hasBidTip(call) {
+  return !!call.comment && !isPass(call.bid);
+}
+
 function auctionGridHTML(dealer, calls, lang, cellRenderer) {
   const columns = ["S", "W", "N", "E"];
   const headHTML = columns.map((s) => `<th>${esc(SEAT_SHORT[lang][s])}</th>`).join("");
@@ -4738,13 +4746,13 @@ function renderResult(r) {
   // Auction grid: columns S W N E, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de
   // celle du PAR (auctionTip, plus bas) : la case le porte elle-même, avec
-  // l'enchère et le siège qui l'accompagnent.
+  // l'enchère et le siège qui l'accompagnent. Un passe s'en passe.
   auctionTip.hide();
   // Chaque case porte l'indice de son enchère : la case, la ligne commentée
   // et la main de l'enchérisseur s'éclairent ensemble (voir linkCall).
   const grid = auctionGridHTML(r.dealer, r.auction, lang, (a) => {
     const i = r.auction.indexOf(a);
-    if (!a.comment) return `<td class="bid-cell" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
+    if (!hasBidTip(a)) return `<td class="bid-cell" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
     return `<td class="bid-cell has-tip" tabindex="0" data-i="${i}" ` +
       `data-seat="${esc(SEAT_SHORT[lang][a.player])}" ` +
       `data-comment="${esc(a.comment)}">${bidHTML(a.bid, lang)}</td>`;
@@ -4915,11 +4923,11 @@ const auctionTip = {
 
   sheetMode() { return tipSheetMode(); },
 
-  // La grille d'une table d'entraînement (data-tip-above) est en bas du
-  // panneau, sous les mains : sa boîte se pose au-dessus de l'enchère. Celle
-  // de la page se pose en dessous, comme le PAR.
+  // L'infobulle se pose au-dessus de l'enchère, dans les deux grilles : la case
+  // reste lisible, et sous celle de la page s'ouvre la séquence commentée, que
+  // la bulle masquerait — c'est elle qui s'éclaire avec la case (voir linkCall).
   place(tip, cell) {
-    placeTip(tip, cell, !!(cell.closest && cell.closest("[data-tip-above]")));
+    placeTip(tip, cell, true);
   },
 
   show(cell) {
@@ -5779,14 +5787,14 @@ function renderTrainAuction(table) {
   }
   const lang = table.lang;
   const grid = auctionGridHTML(table.result.dealer, table.result.auction, lang, (call) =>
-    call.comment
+    hasBidTip(call)
       ? `<td class="bid-cell has-tip" tabindex="0" ` +
         `data-seat="${esc(SEAT_SHORT[lang][call.player])}" ` +
         `data-comment="${esc(call.comment)}">${bidHTML(call.bid, lang)}</td>`
       : `<td class="bid-cell">${bidHTML(call.bid, lang)}</td>`);
   box.hidden = false;
   box.innerHTML = `<h3>${esc(UI_TEXT[lang].auctionSeq)}</h3>` +
-    `<table class="auction" data-tip-above><thead><tr>${grid.headHTML}</tr></thead>` +
+    `<table class="auction"><thead><tr>${grid.headHTML}</tr></thead>` +
     `<tbody>${grid.bodyHTML}</tbody></table>`;
 }
 
@@ -6447,8 +6455,8 @@ const TUTORIAL_STEPS = [
     en: ["The table", "Your hand at the bottom, the other three face down; in the middle the auction box, vulnerable seats in red. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {
-    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent, et l'enchère se relit au-dessus du PAR : chaque appel commenté y dit son commentaire en infobulle. ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
-    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown, and the auction is read again above the par: every commented call tells its comment in a tooltip. ‹ and › scroll through the deals played, Next deal draws a new one."],
+    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent, et l'enchère se relit au-dessus du PAR : chaque appel commenté — sauf un passe — y dit son commentaire en infobulle. ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
+    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown, and the auction is read again above the par: every commented call — except a pass — tells its comment in a tooltip. ‹ and › scroll through the deals played, Next deal draws a new one."],
   },
   {
     fr: ["Le score", "Terminer affiche votre score sur toute la séance, puis donne par donne : contrat, score et enchères ratées avec l'enchère attendue.\nRevoir rouvre une donne ; Reprendre l'entraînement revient à la table."],

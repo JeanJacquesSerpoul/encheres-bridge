@@ -1534,14 +1534,16 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .seat-choice[data-seat="D"] { grid-area: c; padding: 4px; font-size: .8rem; line-height: 1.2; }
 /* L'enchère de la table d'entraînement, relue au-dessus du PAR en fin
    d'exercice (voir renderTrainAuction) : la grille de la page, son commentaire
-   en infobulle. */
+   en infobulle, son titre centré au-dessus du tableau. */
 .train-auction { margin-top: 14px; }
-.train-auction h3 { margin: 0 0 6px; font-size: .95rem; }
+.train-auction h3 { margin: 0 0 6px; font-size: .95rem; text-align: center; }
 .train-auction .auction { margin-bottom: 0; }
 
-/* Le PAR de la table d'entraînement, sous les actions (voir renderTrainPar). */
+/* Le PAR de la table d'entraînement, sous les actions (voir renderTrainPar) :
+   son titre aussi est centré, les deux surtitres de la fin d'exercice se
+   répondant ainsi au-dessus de leurs tableaux. */
 .train-par { margin-top: 14px; }
-.train-par h3 { margin: 0 0 6px; font-size: .95rem; }
+.train-par h3 { margin: 0 0 6px; font-size: .95rem; text-align: center; }
 .train-par-table { margin: 0; }
 .train-par-table td.contract { outline: 2px solid var(--accent); outline-offset: -2px; background: var(--tint); }
 .train-par-line { margin: 8px 0 0; font-weight: 600; }

@@ -62,11 +62,15 @@ def generate_response_minor_deal():
         elif ouv_suit == 'D' and n_dist['C'] >= 4 and n_h >= 11:
             rep_nord, desc = "2C", "Changement de couleur au niveau de 2 forcing pour un tour (11+H à Trèfle)"
             
-        # Règle 3 : Pas de majeure, soutien de la mineure (demande un beau fit et 6-10 H/HL)
+        # Règle 3 : Pas de majeure, changement de couleur au niveau de 1 (1♦ sur 1♣, dès 6 points H)
+        elif ouv_suit == 'C' and n_dist['D'] >= 4:
+            rep_nord, desc = "1D", "Changement de couleur à 1♦ sur 1♣ (4+ Carreaux, pas de majeure 4ème)"
+
+        # Règle 4 : Pas de majeure, soutien de la mineure (demande un beau fit et 6-10 H/HL)
         elif n_dist[ouv_suit] >= 4 and n_h <= 10:
             rep_nord, desc = f"2{ouv_suit}", f"Soutien simple fitté à 2{ouv_suit} sans majeure 4ème (6-10 H/HL)"
             
-        # Règle 4 : Pas de majeure, pas de fit long, main régulière
+        # Règle 5 : Pas de majeure, pas de fit long, main régulière
         else:
             if 6 <= n_h <= 10:
                 rep_nord, desc = "1NT", "Enchère de 1SA par défaut (Main régulière de 6-10H, sans majeure 4ème)"

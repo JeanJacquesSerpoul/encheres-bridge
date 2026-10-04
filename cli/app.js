@@ -4696,11 +4696,13 @@ $("#lang").addEventListener("change", () => {
 // padding the first row up to the dealer's column. `cellRenderer(call)`
 // returns the <td> HTML for a played call.
 // Une case d'enchère ne reçoit d'infobulle que si elle a quelque chose à dire.
-// Le moteur commente aussi les passes — « pas de quoi intervenir », « passe par
-// défaut » : la case dit déjà tout, et l'infobulle n'y ferait que cribler la
-// grille de bulles vides.
-function hasBidTip(call) {
-  return !!call.comment && !isPass(call.bid);
+// Le moteur, lui, commente tous les passes — « pas de quoi intervenir », « passe
+// par défaut » : sur la page, où ils n'apprennent rien de la donne, ces cases
+// s'en passent, sans quoi la grille se criblerait de bulles vides. La table
+// d'entraînement les garde (keepPasses) : un passe n'y est commenté que lorsque
+// le fichier a vraiment quelque chose à en dire.
+function hasBidTip(call, keepPasses) {
+  return !!call.comment && (keepPasses || !isPass(call.bid));
 }
 
 function auctionGridHTML(dealer, calls, lang, cellRenderer) {
@@ -4746,7 +4748,8 @@ function renderResult(r) {
   // Auction grid: columns S W N E, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de
   // celle du PAR (auctionTip, plus bas) : la case le porte elle-même, avec
-  // l'enchère et le siège qui l'accompagnent. Un passe s'en passe.
+  // l'enchère et le siège qui l'accompagnent. Un passe de la page s'en passe :
+  // le moteur le commente toujours, et la grille s'en trouverait criblée.
   auctionTip.hide();
   // Chaque case porte l'indice de son enchère : la case, la ligne commentée
   // et la main de l'enchérisseur s'éclairent ensemble (voir linkCall).
@@ -5787,7 +5790,9 @@ function renderTrainAuction(table) {
   }
   const lang = table.lang;
   const grid = auctionGridHTML(table.result.dealer, table.result.auction, lang, (call) =>
-    hasBidTip(call)
+    // Les passes commentés y gardent leur infobulle : dans un fichier, un passe
+    // n'est commenté que quand il a quelque chose à dire (voir hasBidTip).
+    hasBidTip(call, true)
       ? `<td class="bid-cell has-tip" tabindex="0" ` +
         `data-seat="${esc(SEAT_SHORT[lang][call.player])}" ` +
         `data-comment="${esc(call.comment)}">${bidHTML(call.bid, lang)}</td>`
@@ -6455,8 +6460,8 @@ const TUTORIAL_STEPS = [
     en: ["The table", "Your hand at the bottom, the other three face down; in the middle the auction box, vulnerable seats in red. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {
-    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent, et l'enchère se relit au-dessus du PAR : chaque appel commenté — sauf un passe — y dit son commentaire en infobulle. ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
-    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown, and the auction is read again above the par: every commented call — except a pass — tells its comment in a tooltip. ‹ and › scroll through the deals played, Next deal draws a new one."],
+    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent, et l'enchère se relit au-dessus du PAR : chaque appel qui porte un commentaire — un passe compris — le dit en infobulle. ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
+    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown, and the auction is read again above the par: every call that carries a comment — a pass included — tells it in a tooltip. ‹ and › scroll through the deals played, Next deal draws a new one."],
   },
   {
     fr: ["Le score", "Terminer affiche votre score sur toute la séance, puis donne par donne : contrat, score et enchères ratées avec l'enchère attendue.\nRevoir rouvre une donne ; Reprendre l'entraînement revient à la table."],

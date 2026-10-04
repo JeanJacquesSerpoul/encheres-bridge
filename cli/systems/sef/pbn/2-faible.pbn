@@ -1,7 +1,8 @@
 % PBN 2.1
-% Donnes 1 à 50 d'entraînement au 2 faible conformes au SEF 2024
+% Donnes 1 à 14 d'entraînement au 2 faible conformes au SEF 2024
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 1"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "1"]
 [West "-"]
@@ -12,17 +13,16 @@
 [Vulnerable "None"]
 [Deal "S:.AT8632.K64.J864 532.KQJ4.JT53.52 AQJ76..AQ982.AQ3 KT984.975.7.KT97"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 3NT =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 19H, demande la force et la qualité de la couleur."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur (un seul gros honneur)."]
-[Note "5:Nord : 3SA - Conclusion à Sans-Atout grâce aux arrêts extérieurs et à l'As de Cœur de Sud."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 2NT {Relais Ogust forcing, 19H, demande la force et la qualite.} Pass
+3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur.} Pass 3NT {Conclusion a Sans-Atout grace aux arrets exterieurs.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 2"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "2"]
 [West "-"]
@@ -33,12 +33,14 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:J84.KQJT86.T.QT5 KQ976.97543.Q83. AT53..9762.AJ864 2.A2.AKJ54.K9732"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 9H.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 3"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "3"]
 [West "-"]
@@ -49,17 +51,16 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:JT8732.T.Q986.A2 4.KQ9532.K54.964 AKQ5.J8.A32.JT73 96.A764.JT7.KQ85"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3C =4= Pass =2= 3S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 15H, demande la force et la qualité."]
-[Note "4:Sud : 3T - Réponse Ogust montrant une main minimale (6-7 H) et une mauvaise couleur."]
-[Note "5:Nord : 3P - Arrêt au niveau de 3, Sud étant minimal avec une couleur fragile."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 15H.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3S {Arret au niveau de 3, Sud etant minimal avec une couleur fragile.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 4"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "4"]
 [West "-"]
@@ -70,14 +71,15 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:A4.K98643.6.JT93 KQ95.Q.T954.A842 T8763.AJT2.AQJ.7 J2.75.K8732.KQ65"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 4H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4C - Conclusion directe à la manche avec 12H et un fit 10e."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 5"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "5"]
 [West "-"]
@@ -88,17 +90,16 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:A9.QT8542.J42.84 JT542.KJ7.Q8.KQ7 Q7.63.AKT765.A53 K863.A9.93.JT962"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3C =4= Pass =2= 3H =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 13H, limite de manche sans certitude de fit."]
-[Note "4:Sud : 3T - Réponse Ogust montrant une main minimale (6-7 H) et une mauvaise couleur."]
-[Note "5:Nord : 3C - Arrêt en partiel, la manche étant compromise face à un minimum."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 13H.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3H {Arret en partiel, la manche etant compromise face a un minimum.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 6"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "6"]
 [West "-"]
@@ -109,12 +110,14 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:KQJ952.75.QJ4.52 T643.AKJT.K53.86 8.9863.A86.KJT94 A7.Q42.T972.AQ73"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 9H.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 7"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "7"]
 [West "-"]
@@ -125,14 +128,15 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:Q42.JT7432.5.AT2 JT8.5.K9743.8743 K63.AK98.QT862.6 A975.Q6.AJ.KQJ95"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 4H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4C - Conclusion directe à la manche avec 12H et un fit 10e."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 8"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "8"]
 [West "-"]
@@ -143,17 +147,16 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:J63.JT9875.7.AT3 Q9872.643.KQ2.84 AK.AQ2.AT654.QJ5 T54.K.J983.K9762"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3C =4= Pass =2= 4H =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 6H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 20H, ambition de manche/chelem."]
-[Note "4:Sud : 3T - Réponse Ogust montrant une main minimale (6-7 H) et une mauvaise couleur."]
-[Note "5:Nord : 4C - Conclusion à la manche, la puissance de Nord (20H) compensant le minimum de Sud."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 6H.} Pass 2NT {Relais Ogust forcing, 20H.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 4H {Conclusion a la manche, la puissance de Nord compensant le minimum.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 9"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "9"]
 [West "-"]
@@ -164,17 +167,16 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:AJT543.K.J84.J97 K872.A32.96.KT85 9.J975.KQT73.AQ2 Q6.QT864.A52.643"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 3S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 12H, demande la force et la qualité."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur."]
-[Note "5:Nord : 3P - Arrêt au niveau de 3, Nord étant singleton à Pique sans tenue suffisante pour 3SA."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H.} Pass 2NT {Relais Ogust forcing, 12H.} Pass
+3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur.} Pass 3S {Arret au niveau de 3, Nord etant singleton sans tenue Sans-Atout.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 10"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "10"]
 [West "-"]
@@ -185,14 +187,15 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:AJ.QT9752.5.J962 KQT9753.A4.A.AT8 8.K83.KJ643.Q743 642.J6.QT9872.K5"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "3H"]
+[Result ""]
 [Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage (Loi des levées totales, au moins 3 atouts, main faible)."]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 3H {Prolongation de barrage tactique (Loi des levees totales).} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 11"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "11"]
 [West "-"]
@@ -203,12 +206,14 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:QJ9874.J3.A64.73 T65.KQ4.J9832.Q5 2.A765.KT7.T9862 AK3.T982.Q5.AKJ4"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 8H.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 12"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "12"]
 [West "-"]
@@ -219,14 +224,15 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:AKJ732.T5.6.QT85 QT.AQJ4.Q9852.96 865.K9862.J74.A2 94.73.AKT3.KJ743"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "3S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= 3S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3P - Prolongation de barrage tactique (3 atouts, main faible)."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H.} Pass 3S {Prolongation de barrage tactique (3 atouts, main faible).} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 13"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "13"]
 [West "-"]
@@ -237,17 +243,16 @@ Pass =2= Pass =2=
 [Vulnerable "None"]
 [Deal "S:JT8532.7.T4.AQ83 KQ6.QJ542.752.J2 A.A98.AKQJ96.975 974.KT63.83.KT64"]
 [Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3C =4= Pass =2= 3NT =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 18H, espoir de manche ou chelem."]
-[Note "4:Sud : 3T - Réponse Ogust montrant une main minimale (6-7 H) et une mauvaise couleur."]
-[Note "5:Nord : 3SA - Conclusion à 3SA, Nord tablant sur sa longue à Carreau maîtresse et les rentrées annexes."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 18H.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3NT {Conclusion a 3SA, la mineure maitresse de Nord compensant.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 14"]
+[Site "La Baule-Escoublac"]
 [Date "2026.10.04"]
 [Board "14"]
 [West "-"]
@@ -256,663 +261,10 @@ Pass =2= Pass =2=
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AQ9865.54.Q.QT93 K43.T8762.T43.A4 JT7.KJ9.K982.K72 2.AQ3.AJ765.J865"]
+[Deal "S:AQ9865.54.Q.QT93 K43.T8762.T43.A4 JT7.KJ9.K982.K75 2.AQ3.AJ765.J862"]
 [Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
 [Auction "S"]
-2S =1= Pass =2= 4S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4P - Conclusion directe à la manche avec 11H et un bon fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 15"]
-[Date "2026.10.04"]
-[Board "15"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KQT973.J42.JT.43 A82.AQT.K8.AKJ87 J5.8765.AQ42.T62 64.K93.97653.Q95"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 16"]
-[Date "2026.10.04"]
-[Board "16"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:Q84.J98754.QJ9.9 J63.AKT.A843.KQ8 KT975.Q62.K6.T74 A2.3.T752.AJ6532"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 6H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 17"]
-[Date "2026.10.04"]
-[Board "17"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KJ8732.94..KJT64 96.T3.985432.853 .A872.KQT76.Q972 AQT54.KQJ65.AJ.A"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 3S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 11H, demande la force et la qualité."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur."]
-[Note "5:Nord : 3P - Arrêt au niveau de 3, Nord étant chicane à Pique sans tenue générale pour 3SA."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 18"]
-[Date "2026.10.04"]
-[Board "18"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AK8765.T.3.J6543 T43.632.QJT2.AK2 .AQJ95.AK754.T87 QJ92.K874.986.Q9"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3S =4= Pass =2= 4S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 14H, demande la force et la qualité."]
-[Note "4:Sud : 3P - Réponse Ogust montrant une main maximale (8-10 H) et une belle couleur (A-R)."]
-[Note "5:Nord : 4P - Conclusion à la manche grâce à la couleur autonome de Sud et aux contrôles de Nord."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 19"]
-[Date "2026.10.04"]
-[Board "19"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:T5.AT9432.8.KQ73 2.Q8.T7543.A9854 A987643.KJ7.J.T2 KQJ.65.AKQ962.J6"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 20"]
-[Date "2026.10.04"]
-[Board "20"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:T64.QJT987.5.AK3 K2.AK53.AK92.Q42 AQJ8.62.QT7.8765 9753.4.J8643.JT9"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 21"]
-[Date "2026.10.04"]
-[Board "21"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AQT732.93.K432.4 KJ8.KT.AQT6.K862 54.AQ764.7.QJT95 96.J852.J985.A73"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 22"]
-[Date "2026.10.04"]
-[Board "22"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:T2.AQ9743.5.T753 AQJ43..AKJ986.92 K976.862.42.K864 85.KJT5.QT73.AQJ"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 6H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 23"]
-[Date "2026.10.04"]
-[Board "23"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AQJT86.J5.642.J9 43.AK74.KT98.A85 K9752.T2.A53.K64 .Q9863.QJ7.QT732"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 3S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3P - Prolongation de barrage tactique (5 atouts, main sans espoir de manche)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 24"]
-[Date "2026.10.04"]
-[Board "24"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:73.KQ9543.Q3.T32 KQJT5.876.J95.95 A9842.JT.T4.A764 6.A2.AK8762.KQJ8"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 25"]
-[Date "2026.10.04"]
-[Board "25"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QJ7652.A.QJ4.632 K.KQT43.AKT52.74 A94.J75.876.AQ85 T83.9862.93.KJT9"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 4S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4P - Conclusion directe à la manche avec 11H et un bon fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 26"]
-[Date "2026.10.04"]
-[Board "26"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:7.KQJ643.A75.943 KQ532.T52.J.AQ52 AJT984..K96.KJ76 6.A987.QT8432.T8"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3S =4= Pass =2= 3NT =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 12H, demande la force et la qualité."]
-[Note "4:Sud : 3P - Réponse Ogust montrant une main maximale (8-10 H) et une belle couleur (R-D-V)."]
-[Note "5:Nord : 3SA - Conclusion à 3SA, Nord exploitant la couleur maîtresse de Sud et ses tenues extérieures."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 27"]
-[Date "2026.10.04"]
-[Board "27"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KQJT63.J3.T2.KT2 9.QT.KQJ98.J7543 A52.985.6543.A86 874.AK7642.A7.Q9"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 3S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3P - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 28"]
-[Date "2026.10.04"]
-[Board "28"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:Q87653.65.K974.J 4.Q43.J8.AQT9532 K92.AJ87.Q653.K4 AJT.KT92.AT2.876"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 4S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 6H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4P - Conclusion directe à la manche avec 13H et un bon fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 29"]
-[Date "2026.10.04"]
-[Board "29"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:43.QJT754.K8.652 KQJ52.98.Q2.KQJT 987.2.AJ9643.A97 AT6.AK63.T75.843"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 6H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 30"]
-[Date "2026.10.04"]
-[Board "30"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:K95432.2.A874.K3 AQJ8.J9873..AT92 6.AT54.QT65.J765 T7.KQ6.KJ932.Q84"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 31"]
-[Date "2026.10.04"]
-[Board "31"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QT3.AT8653.T5.J6 AJ9754.9.J87.872 2.742.K43.AQT954 K86.KQJ.AQ962.K3"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 32"]
-[Date "2026.10.04"]
-[Board "32"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:K86.AQ9732.64.74 Q32.85.T982.AJT3 T954.T6.A75.K985 AJ7.KJ4.KQJ3.Q62"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 33"]
-[Date "2026.10.04"]
-[Board "33"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:987.AQ9832.72.K4 AJT32.KT6.A4.AQ5 Q65.74.JT653.972 K4.J5.KQ98.JT863"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 34"]
-[Date "2026.10.04"]
-[Board "34"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KJT987.64.J4.K85 Q532..963.A76432 A4.KQ53.AKQ752.J 6.AJT9872.T8.QT9"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 4S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 19H, espoir de chelem."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur."]
-[Note "5:Nord : 4P - Conclusion prudente à la manche, la couleur d'atout de Sud manquant d'honneurs maîtres."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 35"]
-[Date "2026.10.04"]
-[Board "35"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:3.K87532.J3.AJT6 J762.6.AT98652.4 QT9854.Q4.Q4.K87 AK.AJT9.K7.Q9532"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 36"]
-[Date "2026.10.04"]
-[Board "36"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QT4.QJ9872.87.A9 K87652.5.A654.76 A9.KT63.KJ.KQJT8 J3.A4.QT932.5432"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 4H =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 17H, espoir de manche ou chelem."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur."]
-[Note "5:Nord : 4C - Conclusion à la manche avec le fit 10e et les 17H de Nord."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 37"]
-[Date "2026.10.04"]
-[Board "37"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:6.AJT852.JT43.K7 2.K9764.AK7.JT96 AKQJ5.Q.Q9652.Q5 T98743.3.8.A8432"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3H =4= Pass =2= 3NT =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 16H, espoir de manche."]
-[Note "4:Sud : 3C - Réponse Ogust montrant une main maximale (8-10 H) et une mauvaise couleur."]
-[Note "5:Nord : 3SA - Conclusion à Sans-Atout, Nord disposant de 5 levées de Pique autonomes et de la rentrée de Sud."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 38"]
-[Date "2026.10.04"]
-[Board "38"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:763.AQJT73.2.862 AT82.964.8.KJ975 KJ.K52.KJ9765.Q4 Q954.8.AQT43.AT3"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 4H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4C - Conclusion directe à la manche avec 13H et un fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 39"]
-[Date "2026.10.04"]
-[Board "39"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QJ8742.A.8753.Q9 K63.KT962.AT96.K 9.J753.Q.AJ87543 AT5.Q84.KJ42.T62"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 40"]
-[Date "2026.10.04"]
-[Board "40"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:K87543.Q64.J4.KJ .AKJ7532.T8632.Q JT962..AK95.T954 AQ.T98.Q7.A87632"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 3S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3P - Prolongation de barrage tactique (5 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 41"]
-[Date "2026.10.04"]
-[Board "41"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KQ6532.6.7643.A3 AJT4.AJ73.Q9.Q72 87.Q9542.J.T8654 9.KT8.AKT852.KJ9"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 42"]
-[Date "2026.10.04"]
-[Board "42"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:T98643.AJ9.KJ.65 7.KT863.A86.AT97 AK2.Q.Q543.J8432 QJ5.7542.T972.KQ"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 4S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4P - Conclusion directe à la manche avec 12H et un fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 43"]
-[Date "2026.10.04"]
-[Board "43"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:32.KJ8542.7.AT94 AKJ9.QT3.AQ8.QJ2 QT876.76.KT9.863 54.A9.J65432.K75"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 44"]
-[Date "2026.10.04"]
-[Board "44"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AK9652.754.42.J3 J.T9863.T97.AT52 743.KQ.AK865.Q74 QT8.AJ2.QJ3.K986"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 4S =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 4P - Conclusion directe à la manche avec 14H et un fit 9e."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 45"]
-[Date "2026.10.04"]
-[Board "45"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:93.K98643.Q932.Q AKQ64.QT2.J.KT97 J72.A.AT54.AJ854 T85.J75.K876.632"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3C =4= Pass =2= 3H =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 7H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 14H, demande la force et la qualité."]
-[Note "4:Sud : 3T - Réponse Ogust montrant une main minimale (6-7 H) et une mauvaise couleur."]
-[Note "5:Nord : 3C - Arrêt au niveau de 3 face à un Sud minimal avec une couleur fragile."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 46"]
-[Date "2026.10.04"]
-[Board "46"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QJ6.AQJT82.754.5 A432.763.Q63.AQ2 T9.K94.AKT98.T76 K875.5.J2.KJ9843"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 3H =3= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 10H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 3C - Prolongation de barrage tactique (3 atouts, main faible)."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 47"]
-[Date "2026.10.04"]
-[Board "47"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KQJ872.92.Q964.3 A9643.A764.87.52 5.KQJ.KJ5.KQJ974 T.T853.AT32.AT86"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3S =4= Pass =2= 3NT =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 16H, espoir de manche ou chelem."]
-[Note "4:Sud : 3P - Réponse Ogust montrant une main maximale (8-10 H) et une belle couleur (R-D-V)."]
-[Note "5:Nord : 3SA - Conclusion à Sans-Atout, tablant sur les 6 levées de Pique affranchies de Sud et ses propres rentrées."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 48"]
-[Date "2026.10.04"]
-[Board "48"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AQJ872.J75.8.J87 T.AT93.J95.96542 64.Q8.K6432.AKQ3 K953.K642.AQT7.T"]
-[Scoring "MP"]
-[Auction "S"]
-2S =1= Pass =2= 2NT =3= Pass =2=
-3S =4= Pass =2= 4S =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2P - Ouverture de 2 faible (6 cartes à Pique, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust. Forcing un tour, 14H, demande la force et la qualité de la couleur."]
-[Note "4:Sud : 3P - Réponse Ogust montrant une main maximale (8-10 H) et une belle couleur (au moins 2 des 3 gros honneurs A-R-D)."]
-[Note "5:Nord : 4P - Conclusion à la manche en sachant le fit 8e et les valeurs maximales en Sud."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 49"]
-[Date "2026.10.04"]
-[Board "49"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:65.KJ9432.Q54.K3 AK72.Q8.7.AQ9754 T4.5.AJT986.JT86 QJ983.AT76.K32.2"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 9H)."]
-[Note "2:Passe."]
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 50"]
-[Date "2026.10.04"]
-[Board "50"]
-[West "-"]
-[North "-"]
-[East "-"]
-[South "-"]
-[Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:T9.AQ9652.3.Q975 AK82.J.K964.J832 QJ75.74.AQT85.AT 643.KT83.J72.K64"]
-[Scoring "MP"]
-[Auction "S"]
-2H =1= Pass =2= 2NT =3= Pass =2=
-3S =4= Pass =2= 4H =5= Pass =2=
-Pass =2= Pass =2=
-[Note "1:Sud : 2C - Ouverture de 2 faible (6 cartes à Cœur, 6-10 H, ici 8H)."]
-[Note "2:Passe."]
-[Note "3:Nord : 2SA - Relais Ogust forcing, 13H, demande la force et la qualité."]
-[Note "4:Sud : 3P - Réponse Ogust montrant une main maximale (8-10 H) et une belle couleur (A-D)."]
-[Note "5:Nord : 4C - Conclusion à la manche en sachant le fit 8e et les valeurs maximales de Sud."]
+2S {Ouverture de 2 faible, 6 cartes a Pique, 8H.} Pass Pass Pass

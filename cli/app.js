@@ -4926,11 +4926,6 @@ const auctionTip = {
     const tip = this.el();
     const comment = cell && cell.dataset.comment;
     if (!tip || !comment || this.open === cell) return;
-    // Grille de la page : sur grand écran, la séquence commentée est juste
-    // dessous et s'éclaire avec la case (voir linkCall) — l'infobulle ne
-    // ferait que la masquer. La grille de la table d'entraînement n'a pas de
-    // séquence commentée : la sienne se montre à toutes les largeurs.
-    if (wideLayout.matches && cell.closest("#auction-body")) return;
     this.hide();
     this.open = cell;
     cell.classList.add("is-open");

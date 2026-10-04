@@ -4728,18 +4728,17 @@ function renderResult(r) {
 
   // Auction grid: columns S W N E, first row padded up to the dealer.
   // Une enchère commentée porte son commentaire en infobulle, au dessin de
-  // celle du PAR (auctionTip, plus bas).
+  // celle du PAR (auctionTip, plus bas) : la case le porte elle-même, avec
+  // l'enchère et le siège qui l'accompagnent.
   auctionTip.hide();
-  auctionTip.calls = r.auction;
-  auctionTip.lang = lang;
   // Chaque case porte l'indice de son enchère : la case, la ligne commentée
   // et la main de l'enchérisseur s'éclairent ensemble (voir linkCall).
   const grid = auctionGridHTML(r.dealer, r.auction, lang, (a) => {
-    if (!a.comment) {
-      return `<td class="bid-cell" data-i="${r.auction.indexOf(a)}">${bidHTML(a.bid, lang)}</td>`;
-    }
-    return `<td class="bid-cell has-tip" tabindex="0" data-i="${r.auction.indexOf(a)}">` +
-      `${bidHTML(a.bid, lang)}</td>`;
+    const i = r.auction.indexOf(a);
+    if (!a.comment) return `<td class="bid-cell" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
+    return `<td class="bid-cell has-tip" tabindex="0" data-i="${i}" ` +
+      `data-seat="${esc(SEAT_SHORT[lang][a.player])}" ` +
+      `data-comment="${esc(a.comment)}">${bidHTML(a.bid, lang)}</td>`;
   });
   $("#auction-head").innerHTML = grid.headHTML;
   $("#auction-body").innerHTML = grid.bodyHTML;
@@ -4782,10 +4781,6 @@ function renderResult(r) {
   if (!$("#tabpanel-par").hidden && typeof parCompute === "function") parCompute();
 }
 
-// Infobulle de la séquence d'enchères : même boîte que celle du PAR (styles
-// .par-tip), même conduite — survol à la souris, tape au doigt (une deuxième
-// referme), focus au clavier, Échap ; bandeau en bas d'écran quand l'écran est
-// étroit ou sans survol.
 // La position d'une infobulle, et son repli en bandeau bas quand il n'y a pas
 // de survol — un doigt n'en a pas. Partagé par l'infobulle des enchères et
 // celle des boutons, qui la plaçaient sinon deux fois du même code.
@@ -4794,7 +4789,7 @@ function tipSheetMode() {
   return noHover || window.innerWidth <= 720;
 }
 
-function placeTip(tip, anchor) {
+function placeTip(tip, anchor, above) {
   if (tipSheetMode()) {
     tip.classList.add("sheet");
     tip.style.left = "";
@@ -4806,8 +4801,11 @@ function placeTip(tip, anchor) {
   const w = tip.offsetWidth;
   const h = tip.offsetHeight;
   const left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
-  let top = r.bottom + 8;
-  if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+  // `above` : au-dessus de l'ancre plutôt qu'en dessous. Elle bascule de
+  // l'autre côté quand la place manque, dans les deux sens.
+  let top = above ? r.top - h - 8 : r.bottom + 8;
+  if (above && top < 8) top = r.bottom + 8;
+  else if (!above && top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
   tip.style.left = Math.round(left) + "px";
   tip.style.top = Math.round(top) + "px";
 }
@@ -4878,38 +4876,45 @@ const buttonTip = {
 };
 buttonTip.bind();
 
+// L'infobulle d'une enchère commentée : les grilles d'enchères de la page et
+// de la table d'entraînement s'en servent toutes les deux. Le commentaire est
+// porté par la case elle-même (data-comment), l'enchère par son contenu : rien
+// n'est à retenir d'une grille à l'autre, elles se remplacent sans se gêner.
 const auctionTip = {
-  calls: [],
-  lang: "fr",
   open: null,
   pointer: "mouse",
 
   el() { return $("#auction-tip"); },
 
   cellOf(node) {
-    return (node && node.closest) ? node.closest("#auction-body td.has-tip") : null;
+    return (node && node.closest) ? node.closest(".auction td.has-tip[data-comment]") : null;
   },
 
   sheetMode() { return tipSheetMode(); },
 
-  place(tip, cell) { placeTip(tip, cell); },
+  // La grille d'une table d'entraînement (data-tip-above) est en bas du
+  // panneau, sous les mains : sa boîte se pose au-dessus de l'enchère. Celle
+  // de la page se pose en dessous, comme le PAR.
+  place(tip, cell) {
+    placeTip(tip, cell, !!(cell.closest && cell.closest("[data-tip-above]")));
+  },
 
   show(cell) {
     const tip = this.el();
-    const call = this.calls[Number(cell && cell.dataset.i)];
-    if (!tip || !call || this.open === cell) return;
-    // Sur grand écran, la ligne commentée est juste sous la grille et
-    // s'éclaire avec la case (voir linkCall) : l'infobulle ne ferait que
-    // masquer la grille.
-    if (wideLayout.matches) return;
+    const comment = cell && cell.dataset.comment;
+    if (!tip || !comment || this.open === cell) return;
+    // Grille de la page : sur grand écran, la séquence commentée est juste
+    // dessous et s'éclaire avec la case (voir linkCall) — l'infobulle ne
+    // ferait que la masquer. La grille de la table d'entraînement n'a pas de
+    // séquence commentée : la sienne se montre à toutes les largeurs.
+    if (wideLayout.matches && cell.closest("#auction-body")) return;
     this.hide();
     this.open = cell;
     cell.classList.add("is-open");
-    const lang = this.lang;
-    const seat = (SEAT_SHORT[lang] && SEAT_SHORT[lang][call.player]) || call.player;
     tip.innerHTML =
-      `<div class="par-tip-head"><b>${esc(seat)}</b><span>${bidHTML(call.bid, lang)}</span></div>` +
-      `<div>${esc(call.comment)}</div>`;
+      `<div class="par-tip-head"><b>${esc(cell.dataset.seat)}</b>` +
+      `<span>${cell.innerHTML}</span></div>` +
+      `<div>${esc(comment)}</div>`;
     tip.classList.remove("hidden");
     this.place(tip, cell);
   },
@@ -4925,29 +4930,27 @@ const auctionTip = {
   },
 
   bind() {
-    const body = $("#auction-body");
-    if (!body) return;
-    body.addEventListener("pointerover", (e) => {
+    document.addEventListener("pointerover", (e) => {
       if (e.pointerType && e.pointerType !== "mouse") return;
       const cell = this.cellOf(e.target);
       if (cell) this.show(cell);
     });
-    body.addEventListener("pointerout", (e) => {
+    document.addEventListener("pointerout", (e) => {
       if (e.pointerType && e.pointerType !== "mouse") return;
       const cell = this.cellOf(e.target);
       if (cell && cell === this.open && !cell.contains(e.relatedTarget)) this.hide();
     });
-    body.addEventListener("click", (e) => {
+    document.addEventListener("click", (e) => {
       const cell = this.cellOf(e.target);
       if (!cell) return;
       if (cell === this.open && this.pointer !== "mouse") this.hide();
       else this.show(cell);
     });
-    body.addEventListener("focusin", (e) => {
+    document.addEventListener("focusin", (e) => {
       const cell = this.cellOf(e.target);
       if (cell) this.show(cell);
     });
-    body.addEventListener("focusout", (e) => {
+    document.addEventListener("focusout", (e) => {
       const cell = this.cellOf(e.target);
       if (cell && cell === this.open) this.hide();
     });
@@ -5737,6 +5740,41 @@ function onQuizContinue() {
   renderQuizStep();
 }
 
+// ---------- fin de l'enchère : l'enchère relue, puis le PAR ----------
+
+// L'enchère de la table, relue au-dessus du PAR une fois l'enchère finie : la
+// grille de la page, chaque case disant son commentaire en infobulle — et,
+// seule la trace du moteur manquant, c'est le seul endroit où l'on retrouve,
+// après coup, le pourquoi de chaque appel de la donne.
+function renderTrainAuction(table) {
+  const box = $("#train-auction");
+  // Une infobulle ouverte sur l'ancienne grille n'a plus lieu d'être.
+  auctionTip.hide();
+  if (!table || !table.done) {
+    box.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  const lang = table.lang;
+  const grid = auctionGridHTML(table.result.dealer, table.result.auction, lang, (call) =>
+    call.comment
+      ? `<td class="bid-cell has-tip" tabindex="0" ` +
+        `data-seat="${esc(SEAT_SHORT[lang][call.player])}" ` +
+        `data-comment="${esc(call.comment)}">${bidHTML(call.bid, lang)}</td>`
+      : `<td class="bid-cell">${bidHTML(call.bid, lang)}</td>`);
+  box.hidden = false;
+  box.innerHTML = `<h3>${esc(UI_TEXT[lang].auctionSeq)}</h3>` +
+    `<table class="auction" data-tip-above><thead><tr>${grid.headHTML}</tr></thead>` +
+    `<tbody>${grid.bodyHTML}</tbody></table>`;
+}
+
+// Ce que la table montre une fois l'enchère finie : l'enchère relue, puis le
+// PAR.
+function renderTrainEnd(table) {
+  renderTrainAuction(table);
+  renderTrainPar(table);
+}
+
 // ---------- PAR de la table d'entraînement ----------
 
 // Index de couleur du solveur (♠ ♥ ♦ ♣ SA), d'après la lettre de l'enchère
@@ -5807,7 +5845,7 @@ function finishQuiz() {
   const t = UI_TEXT[quiz.lang];
   $("#train-turn").textContent = t.trainAuctionOver;
   $("#bidding-box").classList.add("hidden");
-  renderTrainPar(quiz);
+  renderTrainEnd(quiz);
   renderTrainNav();
   const next = $("#train-new-btn");
   if (!next.classList.contains("hidden")) next.focus();
@@ -5824,7 +5862,7 @@ function showTrainTable(k) {
   $("#quiz-feedback").classList.add("hidden");
   $("#quiz-continue-btn").classList.add("hidden");
   $("#train-error").textContent = "";
-  renderTrainPar(quiz);
+  renderTrainEnd(quiz);
   if (quiz.done) {
     renderTrainTable(null);
     $("#bidding-box").classList.add("hidden");
@@ -5979,7 +6017,7 @@ function startTraining(seat) {
   quiz = null;
   for (const place of ["top", "left", "right", "bottom"]) $("#tseat-" + place).innerHTML = "";
   $("#tcenter").innerHTML = "";
-  renderTrainPar(null);
+  renderTrainEnd(null);
   $("#train-summary").hidden = true;
   $("#train-body").hidden = false;
   $("#quiz-feedback").classList.add("hidden");
@@ -6129,6 +6167,9 @@ $("#train-copy-btn").addEventListener("click", async () => {
 });
 trainDialog.addEventListener("close", () => {
   cancelAutoReveal();
+  // Une infobulle ouverte sur une enchère de la table resterait sinon flottante
+  // au-dessus de la page.
+  auctionTip.hide();
   train = null;
   quiz = null;
 });
@@ -6384,8 +6425,8 @@ const TUTORIAL_STEPS = [
     en: ["The table", "Your hand at the bottom, the other three face down; in the middle the auction box, vulnerable seats in red. The other players' calls come in by themselves.\nOn your turn, the bidding box: a level (1 to 7), then a suit or NT; or Pass, Double, Redouble. By keyboard: 1 to 7, then C D H S N, P, X."],
   },
   {
-    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent ; ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
-    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown; ‹ and › scroll through the deals played, Next deal draws a new one."],
+    fr: ["La réponse", "Une enchère conforme au SEF passe sans rien afficher : la donne continue. Une erreur arrête la table : l'enchère attendue et son explication, et l'arbre de décision sur votre main ; Continuer passe à la suite.\nL'enchère finie, les quatre mains se dévoilent, et l'enchère se relit au-dessus du PAR : chaque appel commenté y dit son commentaire en infobulle. ‹ et › font défiler les donnes jouées, Donne suivante en tire une nouvelle."],
+    en: ["The answer", "A call matching the SEF goes through silently: the deal goes on. A mistake stops the table: the expected call with its explanation, and the decision tree on your hand; Continue moves on.\nOnce the auction is over, all four hands are shown, and the auction is read again above the par: every commented call tells its comment in a tooltip. ‹ and › scroll through the deals played, Next deal draws a new one."],
   },
   {
     fr: ["Le score", "Terminer affiche votre score sur toute la séance, puis donne par donne : contrat, score et enchères ratées avec l'enchère attendue.\nRevoir rouvre une donne ; Reprendre l'entraînement revient à la table."],

@@ -1532,6 +1532,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .seat-choice[data-seat="E"] { grid-area: e; }
 .seat-choice[data-seat="S"] { grid-area: s; }
 .seat-choice[data-seat="D"] { grid-area: c; padding: 4px; font-size: .8rem; line-height: 1.2; }
+/* L'enchère de la table d'entraînement, relue au-dessus du PAR en fin
+   d'exercice (voir renderTrainAuction) : la grille de la page, son commentaire
+   en infobulle. */
+.train-auction { margin-top: 14px; }
+.train-auction h3 { margin: 0 0 6px; font-size: .95rem; }
+.train-auction .auction { margin-bottom: 0; }
+
 /* Le PAR de la table d'entraînement, sous les actions (voir renderTrainPar). */
 .train-par { margin-top: 14px; }
 .train-par h3 { margin: 0 0 6px; font-size: .95rem; }

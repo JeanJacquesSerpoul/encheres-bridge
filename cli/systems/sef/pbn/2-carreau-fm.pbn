@@ -1,502 +1,926 @@
-[Event "2 Carreau FM SEF - Donne 1"]
+[Event "2 carreau forcing de manche - Donne 1"]
 [Board "1"]
-[Dealer "N"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
 [Vulnerable "None"]
-[Deal "N:AK.AKQJ.AKJ8.A92 T86.874.965.8643 Q9752.6532.74.T5 J43.T9.QT32.KQJ7"]
-[Auction "N"]
-2D {2 Carreau FM, 24+ H regulier. | Game forcing 2D, 24+ HCP balanced.} Pass 2H {Relais negatif 0-7 H. | Waiting/negative relay 0-7 HCP.} Pass
-2NT {Decrit 24-25 H regulier. | Shows 24-25 HCP balanced.} Pass 3H {Transfert pour les Piques (5 cartes). | Transfer to Spades (5 cards).} Pass
-3S {Rectification automatique. | Automatic transfer completion.} Pass 4S {Conclusion a la manche. | Sign-off in game.} Pass
+[Deal "S:AKQ2.AK4.AQ5.KJ4 T87.Q982.97.9873 J64.T63.T863.T62 953.J75.KJ42.AQ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {Ouverture de 2K FM, 24+ H regulier. | 2D game forcing opening, 24+ HCP balanced.} Pass 2H {Relais obligatoire / negatif 0-7 H. | Waiting/negative relay 0-7 HCP.} Pass
+2NT {Zone 24-25 H regulier. | Shows 24-25 HCP balanced.} Pass 3NT {Conclusion a la manche sans espoir de chelem. | To play, no slam interest.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 2"]
+[Event "2 carreau forcing de manche - Donne 2"]
 [Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AKQJ985.AK.A.AK4 72.QJT9.986.J982 T6.87432.7543.T6 43.65.KQJT2.Q753"]
+[Deal "S:AKQJT9.AK.AK.A72 752.T87.Q64.T985 864.J642.9852.63 3.Q953.JT73.KQJ4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM, unifilaire de Pique autonome. | Game forcing 2D, self-sufficient Spades.} Pass 2H {Relais d'attente 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Nomination de la couleur maitresse. | Shows master suit Spades.} Pass Pass {0 point et pas de fit utile, arret. | 0 HCP, passes in panic.} Pass
+2D {2K FM, unicolore Pique indetermine. | 2D GF, major unicolor.} Pass 2H {Relais 0-7 H. | Relay 0-7 HCP.} Pass
+2S {Nomination naturelle du bicolore/unicolore Pique. | Natural 2S rebid.} Pass 3S {Soutien simple avec 3 atouts et main nulle. | Simple preference with 3 trumps and weak hand.} Pass
+4S {Conclusion a la manche. | Sign-off in game.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 3"]
+[Event "2 carreau forcing de manche - Donne 3"]
 [Board "3"]
-[Dealer "N"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
 [Vulnerable "EW"]
-[Deal "N:AK.AKQ985.AK.QJ3 T97.J7.J864.AT94 J8542.42.7532.86 Q63.T63.QT9.K752"]
-[Auction "N"]
-2D {2 Carreau FM, unifilaire de Coeur tres fort. | Game forcing 2D, solid Heart suit.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Couleur autonome auto-suffisante forcing. | Solid self-sufficient Hearts.} Pass 3S {Tentative naturelle / soutien economique. | Natural spade showing.} Pass
-4H {Conclusion a Coeur. | Closes in 4 Hearts.} Pass Pass Pass
+[Deal "S:AK.AKQJ94.A2.AK3 T96.85.Q987.9862 J875.762.643.754 Q432.T3.KJT5.QJT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM, gros unicolore Coeur. | 2D GF opening, big heart suit.} Pass 2H {Relais neutre 0-7 H. | Relay 0-7 HCP.} Pass
+3H {Saut a 3C pour fixer l atout Coeur. | Jump to 3H setting hearts as trumps.} Pass 4H {Preference obligatoire pour conclure la manche. | Minimum relay completing the game.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 4"]
+[Event "2 carreau forcing de manche - Donne 4"]
 [Board "4"]
-[Dealer "E"]
-[Vulnerable "All"]
-[Deal "E:AKQJ.AK.AQJ4.AQ5 T84.J87.T876.864 7652.T63.K93.J92 93.Q9542.52.KT73"]
-[Auction "E"]
-2D {2 Carreau FM, 28+ H regulier. | Game forcing 2D, 28+ HCP balanced.} Pass 2H {Relais 0-7 H. | 0-7 HCP relay.} Pass
-2NT {28+ H regulier. | Balanced 28+ HCP.} Pass 3C {Stayman de detresse. | Stayman seeking 4-4 fit.} Pass
-3S {Reponse de 4 cartes a Pique. | Shows 4 Spades.} Pass 4S {Conclusion a la manche. | Sign-off in 4 Spades.} Pass
-Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AK4.AQ2.AKQ3.AK5 T98.T75.T84.T842 7632.J64.972.763 QJ5.K983.J65.QJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM, main de 26+ H reguliere. | 2D GF, 26+ HCP balanced.} Pass 2H {Relais 0-7 H. | Relay 0-7 HCP.} Pass
+3NT {Rebid montrant 26-27 H regulier. | Rebid showing 26-27 HCP balanced.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 5"]
+[Event "2 carreau forcing de manche - Donne 5"]
 [Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "NS"]
-[Deal "S:A.AKQJ98.AKQ8.A3 J863.64.T95.T875 T752.7532.742.64 KQ94.T.J63.KQJ92"]
+[Vulnerable "None"]
+[Deal "S:AKQJ8.AKQ4.A3.K2 7652.87.T87.T874 T4.T63.J9542.963 93.J952.KQ6.AQJ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM, bicolore cher ou unifilaire. | Game forcing 2D, big two-suiter.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Enchere forcing avec couleur autonome. | Autonomous game-forcing Hearts.} Pass 4H {Fit 4e meme avec 0 H. | 4-card support despite 0 HCP.} Pass
+2D {2K FM bicolore majeur puissant. | 2D GF strong major two-suiter.} Pass 2H {Relais 0-7 H. | Relay 0-7 HCP.} Pass
+2S {Couleur la plus longue ou de rang superieur. | Highest ranking suit.} Pass 2NT {Deuxieme negatif montrant la faiblesse extreme. | Second negative showing weak hand.} Pass
+3H {Description du bicolore Pique-Coeur. | Describing Spade-Heart two-suiter.} Pass 4S {Preference a Pique pour clore a la manche. | Preference for Spades ending in game.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 6"]
+[Event "2 carreau forcing de manche - Donne 6"]
 [Board "6"]
-[Dealer "W"]
-[Vulnerable "EW"]
-[Deal "W:AKQJ2.A.AKQ9.AK3 987.876.864.8764 543.KJ94.752.T92 T6.QT532.JT3.QJ5"]
-[Auction "W"]
-2D {2 Carreau FM bicolore Majeure-Mineure. | Game forcing 2D, Spades and Diamonds.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur principale. | Primary suit Spades.} Pass 3S {Fit 3e avec 3 H. | 3-card support with 3 HCP.} Pass
-4C {Controle Trefle en vue du chelem. | Club cue-bid targeting slam.} Pass 4S {Pas d'autre controle a montrer. | No further cue-bid to give.} Pass
-6S {Conclusion au chelem sur la force. | Bids slam on raw power.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK2.AQ3.AKQJ2.A8 985.875.98.JT764 743.T64.T754.952 QJT6.KJ92.63.KQ3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM. | 2D GF.} Pass 2H {Relais neutre. | Neutral relay.} Pass
+3D {Naturel forcing Carreaux. | Natural diamond suit.} Pass 3NT {Pas de fit, conclusion a 3SA. | No diamond fit, bidding 3NT.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 7"]
+[Event "2 carreau forcing de manche - Donne 7"]
 [Board "7"]
-[Dealer "N"]
-[Vulnerable "None"]
-[Deal "N:AKQ.AKJ.AQJ2.AKQ 987.986.T87.T875 T642.542.9654.43 J53.QT73.K3.J962"]
-[Auction "N"]
-2D {Main record 30+ H. | Record 30+ HCP hand.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3NT {Zone 28-30 SA regulier. | Shows 28-30 NT range.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQJ74.A.KQ4.AK2 62.JT954.987.863 T98.8732.T52.954 53.KQ6.J63.QJT71"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique. | 2D GF Spade unicolor.} Pass 2H {Relais obligatoire. | Mandatory relay.} Pass
+2S {Naturel et forcing. | Natural and forcing.} Pass 3S {Soutien a 3P avec 3 atouts. | Raise with 3 trumps.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 8"]
+[Event "2 carreau forcing de manche - Donne 8"]
 [Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "NS"]
-[Deal "S:AKQJ87.AKQ4.A.A8 64.T952.T976.QJ4 T52.873.854.7632 93.J6.KQJ32.KT95"]
+[Vulnerable "Both"]
+[Deal "S:AQ.AKQ3.AK5.AK62 T982.972.842.874 764.T65.Q763.T53 KJ53.J84.JT9.QJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM 24+ H bicolore. | Game forcing 2D, two-suiter.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur chere. | Primary Spade suit.} Pass 3S {Fit Pique modeste. | Modest 3-card Spade fit.} Pass
-4NT {Blackwood 5 cles. | Roman Key Card Blackwood.} Pass 5C {0 ou 3 cles (ici 0). | Shows 0 or 3 keycards (0 here).} Pass
-6S {Conclusion directe a 6 Piques. | Direct leap to 6 Spades.} Pass Pass Pass
+2D {2K FM regulier 26+ H. | 2D GF balanced 26+ HCP.} Pass 2H {Relais 0-7 H. | Negative relay 0-7.} Pass
+3NT {26-27 H regulier. | 26-27 HCP balanced.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 9"]
+[Event "2 carreau forcing de manche - Donne 9"]
 [Board "9"]
-[Dealer "N"]
-[Vulnerable "EW"]
-[Deal "N:AK9.AQJ.AKJ2.AK8 T87.765.986.T965 J632.T932.74.J74 Q54.K84.QT53.Q32"]
-[Auction "N"]
-2D {24+ H regulier FM. | 24+ HCP balanced Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {24-25 H regulier. | 24-25 HCP balanced.} Pass Pass {Moins de 3 H, passe 2SA. | Under 3 HCP, passes 2NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQ8.AK4.AQ2.KJ3 643.T862.T96.864 JT52.95.8754.T75 97.QJ73.KJ3.AQ92"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM regulier. | 2D GF balanced.} Pass 2H {Relais neutre. | Neutral relay.} Pass
+2NT {24-25 H regulier. | 24-25 HCP balanced.} Pass 3C {Stayman avec 4 Piques. | Stayman with 4 Spades.} Pass
+3S {Reponse 4 cartes a Pique. | 4-card spade answer.} Pass 4S {Conclusion a la manche. | Sign-off in 4S.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 10"]
+[Event "2 carreau forcing de manche - Donne 10"]
 [Board "10"]
-[Dealer "E"]
-[Vulnerable "All"]
-[Deal "E:AK.AKQJ87.AK.A53 986.43.9876.J987 T753.T52.432.T62 QJ42.96.QJT5.KQ4"]
-[Auction "E"]
-2D {2 Carreau FM, unifilaire de Coeur autonome. | 2D Game Force, solid Hearts.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Affirmation unifilaire autonome. | Autonomous solid Heart suit.} Pass 4H {Fit 3e minimum requis. | 3-card minimum fit given.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK.AKQJ85.AQ3.K4 T87.73.9872.9863 652.T62.JT6.T752 QJ943.94.K54.AQJ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeurs autonomes. | 2D GF self-sufficient hearts.} Pass 2H {Relais 0-7 H. | Relay 0-7 HCP.} Pass
+3H {Impose les Coeurs forcing de manche. | Forcing jump in hearts.} Pass 4H {Manche obligatoire. | Mandatory game contract.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 11"]
+[Event "2 carreau forcing de manche - Donne 11"]
 [Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AKQJ94.A.AKQ.AK3 T76.J87.T865.T84 85.T6543.942.752 32.KQ92.J73.QJ96"]
+[Vulnerable "EW"]
+[Deal "S:A.AKQJ2.AKQJ2.A3 9864.87.875.9864 732.T54.964.T752 KQJT5.963.T3.KQJ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM unifilaire Pique geant. | Huge single-suited Spade Game Force.} Pass 2H {Relais 0-7 H. | 0-7 HCP waiting relay.} Pass
-2S {Piques forts. | Strong Spade suit.} Pass 3S {Doubleton et un rien. | Doubleton and minimal values.} Pass
-6S {Demande de chelem direct. | Direct slam shot.} Pass Pass Pass
+2D {2K FM bicolore rouge. | 2D GF red two-suiter.} Pass 2H {Relais. | Relay.} Pass
+3H {Bicolore cher ou unicolore. | Strong heart suit.} Pass 3NT {Pas de fit Coeur, forcing. | Forcing bid, no fit.} Pass
+4D {Deuxieme couleur Carreaux. | Natural 4D second suit.} Pass 5D {Preference et conclusion a la manche mineure. | Minor game preference.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 12"]
+[Event "2 carreau forcing de manche - Donne 12"]
 [Board "12"]
-[Dealer "N"]
-[Vulnerable "NS"]
-[Deal "N:AKQ.AKQJ.AJ8.KJ8 87.T98.T96.T9653 T9632.532.743.74 J54.764.KQ52.AQ2"]
-[Auction "N"]
-2D {2 Carreau FM 26-27 H. | 2D Game Force, 26-27 HCP.} Pass 2H {Relais d'attente 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass 3H {Texas Pique avec 5 cartes. | Spade transfer with 5 cards.} Pass
-3S {Rectification automatique. | Automatic transfer accept.} Pass 3NT {Proposition de jouer a SA ou Pique. | Choice of games 3NT.} Pass
-4S {Ouvreur prefere le contrat en 5-3. | Opener picks 5-3 fit.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AKQJ95.A.AK4.AK2 62.T9865.T86.974 874.J732.972.653 T3.KQ4.QJ53.QJT8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique. | 2D GF spade unicolor.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Naturel forcing. | Natural forcing.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 13"]
+[Event "2 carreau forcing de manche - Donne 13"]
 [Board "13"]
-[Dealer "W"]
-[Vulnerable "EW"]
-[Deal "W:AKQJ9.AKQJ2.A.A8 652.87.T985.KJ74 T87.54.J7432.963 43.T963.KQ6.QT52"]
-[Auction "W"]
-2D {Bicolore Majeur FM. | Major two-suiter Game Force.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Bicolore cher, 1ere couleur. | Higher-ranking major.} Pass 3S {Fit 3e preferentiel. | 3-card preference.} Pass
-4H {Controle Coeur naturel. | Heart cue/suit.} Pass 4S {Pas de jeu pour encherir plus haut. | Weak responder signs off.} Pass
-6S {L'ouvreur conclut sur son total de levées. | Opener bids slam on high tricks.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQ2.AQ4.AK3.AJ8 863.T97.9862.973 754.J8632.74.T52 JT9.K5.QJT5.KQ64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 24+ regulier. | 2D GF balanced 24+ HCP.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2NT {24-25 regulier. | 24-25 balanced.} Pass 3D {Texas Coeur avec 5 cartes. | Transfer to hearts.} Pass
+3H {Acceptation obligatoire du Texas. | Mandatory transfer acceptance.} Pass 4H {Manche atteinte malgre le peu de points. | Game reached with 5-card suit.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 14"]
+[Event "2 carreau forcing de manche - Donne 14"]
 [Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "All"]
-[Deal "S:A.AKQJ65.AKQ.AK5 874.T97.9854.872 9652.842.763.Q94 KQJT3.3.JT2.JT63"]
+[Vulnerable "NS"]
+[Deal "S:AK.AK.AKQJ94.A62 875.9865.65.T874 9642.T74.832.953 QJT3.QJ32.T7.KQJ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM 24+ H. | Game forcing 2D, 24+ HCP.} Pass 2H {Relais 0-7 H. | 0-7 HCP waiting relay.} Pass
-3H {Autonome a Coeur. | Solid autonomous Hearts.} Pass 4H {Fit 3 cartes avec Dame de Trefle. | 3 hearts with QC.} Pass
-6H {Conclusion directe au chelem. | Direct leap to 6 Hearts.} Pass Pass Pass
+2D {2K FM Carreaux. | 2D GF diamonds.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3D {Naturel forcing. | Natural diamonds forcing.} Pass 3NT {Arrets exterieurs et main nulle. | No fit, bid 3NT.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 15"]
+[Event "2 carreau forcing de manche - Donne 15"]
 [Board "15"]
-[Dealer "N"]
-[Vulnerable "None"]
-[Deal "N:AKQ.AQJ.AKJ4.AJ8 T87.K87.T87.T973 J954.965.65.6542 632.T432.Q932.KQ"]
-[Auction "N"]
-2D {2 Carreau FM regulier 26 H. | Game forcing 2D, 26 HCP balanced.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | Balanced 26-27 HCP.} Pass Pass {Moins de 2 H, abandonne a 2SA. | Under 2 HCP, passes out 2NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQJ9.AKQJ2.A.K4 754.87.9865.T873 86.T65.Q7432.962 T32.943.KJT.AQJ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM bicolore majeur. | 2D GF major two-suiter.} Pass 2H {Relais negatif. | Negative relay.} Pass
+2S {Majeure superieure. | Higher major first.} Pass 2NT {Deuxieme negatif. | Second negative.} Pass
+3H {Majeure seconde. | Second major.} Pass 3S {Preference pour les Piques. | Spade preference.} Pass
+4S {Conclusion a la manche. | Sign-off in 4S.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 16"]
+[Event "2 carreau forcing de manche - Donne 16"]
 [Board "16"]
-[Dealer "E"]
-[Vulnerable "NS"]
-[Deal "E:AKQJ987.A.AK.AK4 532.T986.T85.865 64.7543.J943.JT9 T.KQJ2.Q762.Q732"]
-[Auction "E"]
-2D {Unifilaire Pique geant FM. | Monster single-suited Spade Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur maitresse. | Master Spade suit.} Pass Pass {Passe de securite avec 0 point. | Drops with 0 HCP.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AK.AK3.AKQ2.AK74 9872.874.T96.863 T54.T962.753.T52 QJ63.QJ5.J84.QJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 26+ regulier. | 2D GF 26+ balanced.} Pass 2H {Relais neutre. | Neutral relay.} Pass
+3NT {Rebid montrant la superpuissance reguliere. | Rebid showing super-maximum balanced.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 17"]
+[Event "2 carreau forcing de manche - Donne 17"]
 [Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "EW"]
-[Deal "S:AQ.AKQJ.AKQ.AKJ2 764.T98.875.9876 K853.765.964.T53 JT92.432.JT32.Q4"]
+[Vulnerable "None"]
+[Deal "S:AKQJ73.AK.A.AK42 842.T976.986.T86 T95.843.J754.753 6.QJ52.KQT32.QJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {Main pleine de 29 H. | Massive 29 HCP hand.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass 3C {Stayman avec 3-4 H. | Stayman seeking major fit.} Pass
-3H {Reponse 4 cartes a Coeur. | Opener has 4 Hearts.} Pass 3NT {Pas de fit, conclusion a SA. | No heart fit, bids 3NT.} Pass
-Pass Pass
+2D {2K FM unicolore Pique fort. | 2D GF big spade suit.} Pass 2H {Relais. | Relay.} Pass
+2S {Nomination de la couleur d atout. | Natural spade bid.} Pass 3S {Fit Pique acquis avec 3 cartes. | Fit confirmed with 3 trumps.} Pass
+4S {Conclusion a la manche. | Sign-off at game.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 18"]
+[Event "2 carreau forcing de manche - Donne 18"]
 [Board "18"]
-[Dealer "N"]
-[Vulnerable "All"]
-[Deal "N:A.AKQ987.AKQ.AK7 J986.T.JT84.QJ84 T752.6532.753.53 KQ43.J4.962.T962"]
-[Auction "N"]
-2D {FM unifilaire autonome Coeur. | Solid single-suiter Heart Game Force.} Pass 2H {Relais d'attente 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome, forcing. | Autonomous Heart suit.} Pass 4H {Fit 4e meme a blanc. | 4-card fit despite 0 HCP.} Pass
-6H {Conclusion au chelem. | Settles in 6 Hearts slam.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK2.AQ3.AKQ4.AJ3 986.987.8732.982 743.T62.JT9.T654 QJT5.KJ54.65.KQ7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 24-25 regulier. | 2D GF 24-25 balanced.} Pass 2H {Relais. | Relay.} Pass
+2NT {24-25 regulier. | 24-25 balanced rebid.} Pass 3NT {Pas d opposition, conclusion manche. | Sign-off in 3NT.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 19"]
+[Event "2 carreau forcing de manche - Donne 19"]
 [Board "19"]
-[Dealer "W"]
-[Vulnerable "None"]
-[Deal "W:AKJ.AKQ.AK8.AQ94 875.986.987.J763 Q964.754.T54.T85 T32.JT32.QJ632.K"]
-[Auction "W"]
-2D {FM 27 H regulier. | Game forcing 2D, 27 HCP balanced.} Pass 2H {Relais 0-7 H. | 0-7 HCP relay.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass Pass {Passe raisonnable avec 1 H. | Passes with 1 HCP.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ.AKQJ94.AK3.K3 874.T65.876.9874 9632.73.Q952.T62 KJT5.82.JT4.AQJ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeur autonome. | 2D GF Heart solid suit.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3H {Impose les Coeurs. | Confirms solid hearts.} Pass 4H {Pas de controles, fin des encheres. | No controls, game contract.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 20"]
+[Event "2 carreau forcing de manche - Donne 20"]
 [Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "NS"]
-[Deal "S:AKQJ94.AK.A.AK87 872.986.QJ87.J94 T65.J543.T964.63 3.QT72.K532.QT52"]
+[Vulnerable "Both"]
+[Deal "S:AKQJ2.A.AKQ3.AK2 875.986.986.T874 T63.T754.752.653 94.KQJ32.JT4.QJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {FM Bicolore Pique-Trefle fort. | Game forcing 2D, strong Spades/Clubs.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur principale. | Primary suit Spades.} Pass 3S {Fit 3 cartes. | Modest 3-card fit.} Pass
-4C {Bicolore Pique/Trefle en controle. | Shows Club control / second suit.} Pass 4S {Pas de controle, conclusion manche. | Signs off in 4S.} Pass
-Pass Pass
+2D {2K FM bicolore cher ou unicolore. | 2D GF major/minor.} Pass 2H {Relais obligatoire. | Mandatory relay.} Pass
+2S {Naturel Piques. | Natural spades.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 21"]
+[Event "2 carreau forcing de manche - Donne 21"]
 [Board "21"]
-[Dealer "N"]
-[Vulnerable "EW"]
-[Deal "N:AK.AKQJ65.AKQ.K2 J85.T9.JT85.AT97 9743.743.943.854 QT62.82.762.QJ63"]
-[Auction "N"]
-2D {FM unifilaire Coeur 26 H. | Game forcing 2D, single-suiter Hearts 26 HCP.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 3 cartes minimum. | 3-card minimum fit.} Pass
-6H {Chelem direct sur le compte de levées. | Slam bid on high card trick count.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK4.AQ2.AKQ.AKJ3 9872.875.986.874 T53.T964.753.T62 QJ6.KJ3.JT42.Q95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM puissance absolue reguliere. | 2D GF super-maximum balanced.} Pass 2H {Relais neutre. | Neutral relay.} Pass
+3NT {Conclusion directe a 3SA. | Direct jump to 3NT.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 22"]
+[Event "2 carreau forcing de manche - Donne 22"]
 [Board "22"]
-[Dealer "E"]
-[Vulnerable "All"]
-[Deal "E:AKQ.AKQ.AKJ9.AQ7 T86.J98.876.JT98 97532.765.43.642 J4.T432.QT52.K53"]
-[Auction "E"]
-2D {2 Carreau FM 28 H. | Game forcing 2D, 28 HCP.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass 3H {Texas Pique avec 5 cartes. | Transfer to Spades with 5 cards.} Pass
-3S {Rectification. | Transfer accepted.} Pass 3NT {Proposition de jouer SA. | Suggests 3NT.} Pass
-4S {Choix du contrat en 5-3. | Picks 5-3 Major fit.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKQJT8.AK.AK.K43 75.876.T976.9876 962.T953.842.T52 43.QJ42.QJ53.AQJ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique. | 2D GF Spade unicolor.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Naturel forcing. | Natural forcing.} Pass 3S {Soutien simple. | Simple preference.} Pass
+4S {Conclusion a la manche. | Sign-off in 4S.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 23"]
+[Event "2 carreau forcing de manche - Donne 23"]
 [Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AKQJ982.A.AK.AK4 74.T9864.875.986 T63.J752.T96.JT5 5.KQ3.QJ432.Q732"]
+[Vulnerable "EW"]
+[Deal "S:AK2.AKQ3.AQJ.AJ2 986.97.9864.9874 754.T865.7532.63 QJT3.J42.KT.KQT5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2D {FM unifilaire de Pique. | Game forcing 2D, strong single-suiter Spades.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur principale autonome. | Autonomous Spades.} Pass 3S {Fit 3 cartes Pique avec 1 H. | 3-card Spade fit with 1 HCP.} Pass
-6S {Conclusion directe a 6 Piques. | Direct leap to 6 Spades.} Pass Pass Pass
+2D {2K FM regulier. | 2D GF balanced.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2NT {24-25 regulier. | 24-25 balanced.} Pass 3C {Stayman de detresse avec 4 Coeurs. | Weak Stayman with 4 Hearts.} Pass
+3H {Reponse de 4 cartes a Coeur. | 4-card heart rebid.} Pass 4H {Conclusion a la manche. | Sign-off in game.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 24"]
+[Event "2 carreau forcing de manche - Donne 24"]
 [Board "24"]
-[Dealer "N"]
-[Vulnerable "NS"]
-[Deal "N:AK.AKQ.AQJ.AKJ83 J87.J98.876.T764 9642.753.K953.52 QT53.T642.T42.Q9"]
-[Auction "N"]
-2D {FM regulier 27 H. | Game forcing 2D, balanced 27 HCP.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass 3NT {Avec le Roi de Carreau (3 H), conclusion a 3SA. | With KD (3 HCP), raises to 3NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AK.A.AKQJT8.AKQ2 8752.986.64.T984 JT63.754.752.763 Q94.KQJT32.93.J5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+2D {2K FM bicolore mineur maitre. | 2D GF strong minor two-suiter.} Pass 2H {Relais. | Relay.} Pass
+3D {Nomination naturelle des Carreaux. | Natural diamond suit.} Pass 3NT {Pas de fit Carreaux. | No fit, 3NT bid.} Pass
+4C {Bicolore Carreaux-Trefles. | Describing Diamond-Club two-suiter.} Pass 5D {Preference finale pour la manche mineure. | Preference to 5D game.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 25"]
+[Event "2 carreau forcing de manche - Donne 25"]
 [Board "25"]
-[Dealer "W"]
-[Vulnerable "EW"]
-[Deal "W:AKQJ8.AKQJ8.A.AQ 975.76.T987.9864 642.954.6543.T72 T3.T32.KQJ2.KJ53"]
-[Auction "W"]
-2D {Bicolore Majeur FM surpuissant. | Powerhouse Major two-suiter Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Bicolore cher, nomination Pique. | Higher major first.} Pass 3S {Fit 3 cartes a Pique. | 3-card Spade support.} Pass
-4H {Deuxieme couleur autonome. | Autonomous second suit Hearts.} Pass 4S {Preference a Pique. | Preference for Spades.} Pass
-6S {Conclusion au chelem. | Signs off in 6 Spades slam.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQJ94.A.AK3.AK4 85.9862.9875.987 763.JT54.64.T652 T2.KQ73.QJT2.QJ3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique. | 2D GF spade one-suiter.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Naturel Pique. | Natural spades.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 26"]
+[Event "2 carreau forcing de manche - Donne 26"]
 [Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "All"]
-[Deal "S:A.AKQJ987.AK.AK6 J97.T.8764.QJ985 T863.654.T953.72 KQ542.32.QJ2.T43"]
+[Vulnerable "NS"]
+[Deal "S:AKQ.AK2.AKQ4.A93 8642.875.986.T84 753.JT63.752.762 JT9.Q94.JT3.KQJ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2D {FM autonome a Coeur. | Solid autonomous Heart Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 3 cartes avec 0 H. | 3-card fit with 0 HCP.} Pass
-6H {Conclusion de chelem en force. | Powers to 6 Hearts.} Pass Pass Pass
+2D {2K FM 26+ regulier. | 2D GF 26+ balanced.} Pass 2H {Relais. | Relay.} Pass
+3NT {Affirmation de la puissance reguliere. | Direct balanced game rebid.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 27"]
+[Event "2 carreau forcing de manche - Donne 27"]
 [Board "27"]
-[Dealer "N"]
-[Vulnerable "None"]
-[Deal "N:AKQ.AKJ.AKQ2.AQ8 764.T87.986.T754 T982.953.754.J63 J53.Q642.JT3.K92"]
-[Auction "N"]
-2D {Main de 28 H reguliere. | 28 HCP balanced hand.} Pass 2H {Relais d'attente 0-7 H. | 0-7 HCP relay.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass Pass {Moins de 2 H, passe immediat. | Drops immediately under 2 HCP.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A.AKQJ97.AQ4.AK3 975.864.J985.T84 8642.T52.762.762 KQJT3.3.KT3.QJ95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Coeur. | 2D GF Heart one-suiter.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3H {Impose l atout Coeur. | Forcing jump in hearts.} Pass 4H {Obligation de conclure a la manche. | Required game contract.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 28"]
+[Event "2 carreau forcing de manche - Donne 28"]
 [Board "28"]
-[Dealer "E"]
-[Vulnerable "NS"]
-[Deal "E:AKQJ96.AK.AK.AJ7 T8.Q98.JT87.9654 752.765.964.T832 43.JT432.Q532.KQ"]
-[Auction "E"]
-2D {FM Pique autonome. | Solid Spades Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur principale. | Primary suit.} Pass 3S {Fit 3e avec 0 H. | 3-card fit with 0 HCP.} Pass
-4S {Arret securise a la manche. | Safe sign-off in 4 Spades.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AKQJ84.AK.AQ.A83 75.987.9863.T974 962.T642.JT52.65 T3.QJ53.K74.KQJ2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM autonome a Pique. | 2D GF Spade independent suit.} Pass 2H {Relais. | Relay.} Pass
+2S {Pique forcing. | Forcing spade suit.} Pass 3S {Soutien simple. | Simple spade preference.} Pass
+4S {Conclusion a la manche. | Game bid.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 29"]
+[Event "2 carreau forcing de manche - Donne 29"]
 [Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "EW"]
-[Deal "S:AK.AKQJ98.AKJ.A3 986.T5.9864.Q975 J543.742.753.864 QT72.63.QT2.KJT2"]
+[Vulnerable "None"]
+[Deal "S:AK4.AKQ.AQ3.KJ82 T87.982.875.9764 653.JT654.964.T3 QJ92.73.KJT2.AQ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2D {26 H avec Coeur autonome. | 26 HCP solid Hearts.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Couleur autonome. | Autonomous Hearts.} Pass 4H {Fit 3 cartes a Coeur. | 3-card Heart fit.} Pass
-6H {Conclusion a 6 Coeurs. | Closes in 6 Hearts.} Pass Pass Pass
+2D {2K FM 24+ regulier. | 2D GF balanced.} Pass 2H {Relais. | Relay.} Pass
+2NT {24-25 regulier. | 24-25 balanced.} Pass 3D {Texas Coeur avec 5 cartes faibles. | Heart transfer with 5 cards.} Pass
+3H {Acceptation du Texas. | Mandatory transfer acceptance.} Pass 4H {Passe sur 3H impossible, saut a 4H. | GF enforced, reaching 4H.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 30"]
+[Event "2 carreau forcing de manche - Donne 30"]
 [Board "30"]
-[Dealer "N"]
-[Vulnerable "All"]
-[Deal "N:AKQ.AKQ.AKJ8.KJ6 T97.986.97.Q9874 8642.754.543.T53 J53.JT32.QT62.A2"]
-[Auction "N"]
-2D {FM 26 H regulier. | Game forcing 2D, 26 HCP balanced.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass Pass {0 H, passe 2SA. | 0 HCP, passes 2NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKQ2.A.AKQJ82.A4 987.874.T96.T876 T54.9653.754.952 J63.KQJT2.3.KQJ3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Carreaux majeurs. | 2D GF big diamonds.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3D {Nomination Carreaux. | Diamonds rebid.} Pass 3NT {Pas de fit, arret recherche. | Forcing waiting bid.} Pass
+4S {Bicolore Carreaux-Piques. | Diamond-Spade two-suiter.} Pass 5D {Preference finale en Carreaux. | Game preference in diamonds.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 31"]
+[Event "2 carreau forcing de manche - Donne 31"]
 [Board "31"]
-[Dealer "W"]
-[Vulnerable "None"]
-[Deal "W:AKQJ97.A.AKQ.AK8 T8.JT98.J876.J94 653.65432.952.75 42.KQ7.T43.QT632"]
-[Auction "W"]
-2D {Unifilaire Pique tres puissant. | Huge single-suiter Spades.} Pass 2H {Relais 0-7 H. | 0-7 HCP relay.} Pass
-2S {Nomination des Piques. | Names Spades.} Pass 3S {Soutien 3e a blanc. | 3-card support.} Pass
-6S {Conclusion directe au chelem. | Direct slam conclusion.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AK.AKQJ82.A4.AK2 9864.74.876.9876 752.T963.9532.T3 QJT3.5.KQJT.QJ54"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeurs autonomes. | 2D GF Heart suit.} Pass 2H {Relais. | Relay.} Pass
+3H {Saut a 3C fixant la couleur. | Heart jump.} Pass 4H {Conclusion manche. | Sign-off in 4H.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 32"]
+[Event "2 carreau forcing de manche - Donne 32"]
 [Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "NS"]
-[Deal "S:AK.AKQ.AK98.AKJ2 987.876.T76.T986 T643.J94.Q54.754 QJ52.T532.J32.Q3"]
+[Vulnerable "Both"]
+[Deal "S:AKQ8.AK3.AK4.AJ2 965.982.986.T876 JT74.T65.7532.93 32.QJ74.QJT.KQ54"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM 27 H. | Game forcing 2D, 27 HCP.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass 3NT {Avec la Dame de Carreau et le Valet de Coeur (5 H). | With QD and JH (5 HCP), raises to 3NT.} Pass
+2D {2K FM 24+ regulier. | 2D GF 24+ balanced.} Pass 2H {Relais. | Relay.} Pass
+2NT {24-25 regulier. | 24-25 balanced.} Pass 3C {Stayman. | Stayman.} Pass
+3S {Reponse 4 Piques. | 4-card spade response.} Pass 4S {Conclusion manche. | Game sign-off.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 33"]
+[Event "2 carreau forcing de manche - Donne 33"]
 [Board "33"]
-[Dealer "N"]
-[Vulnerable "EW"]
-[Deal "N:AKQJ94.AK.AK.AQ6 T8.Q987.987.9875 762.6532.J643.42 53.JT4.QT52.KJT3"]
-[Auction "N"]
-2D {Pique autonome FM. | Autonomous Spades Game Force.} Pass 2H {Relais negatif 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Piques autonomes. | Names master suit.} Pass 3S {Soutien avec 3 atouts. | 3-card trump support.} Pass
-6S {Conclusion rapide au chelem. | Direct leap to 6 Spades.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQJT7.AK2.A.KQ4 85.876.9876.T986 642.J543.T542.52 93.QT9.KQJ3.AJ73"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique fort. | 2D GF strong spade one-suiter.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Naturel Piques. | Natural spades.} Pass 3S {Soutien avec 3 atouts. | Spade support.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 34"]
+[Event "2 carreau forcing de manche - Donne 34"]
 [Board "34"]
-[Dealer "E"]
-[Vulnerable "All"]
-[Deal "E:A.AKQJ984.AK.AK3 9876.T.9875.JT84 T532.763.J64.762 KQJ4.52.QT32.Q95"]
-[Auction "E"]
-2D {FM unifilaire Coeur surpuissant. | Solid autonomous Hearts Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 3 cartes avec 1 H. | 3-card fit with 1 HCP.} Pass
-6H {Conclusion de chelem en securite. | Concludes in 6 Hearts.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK2.AK.AKQJ2.AJ3 986.T87.T87.9864 753.9642.964.T72 QJT4.QJ53.53.KQ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Carreaux ou 26+ regulier. | 2D GF balanced 26+.} Pass 2H {Relais neutre. | Neutral relay.} Pass
+3NT {Conclusion manche a Sans-Atout. | Natural 3NT rebid.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 35"]
+[Event "2 carreau forcing de manche - Donne 35"]
 [Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AKQ.AKQ.AKJ2.AQJ 76.T98.876.98763 J9843.543.T54.52 T52.J762.Q93.KT4"]
+[Vulnerable "EW"]
+[Deal "S:A.AKQJ94.AK.AK42 9864.87.986.9863 752.T63.J7542.75 KQJT3.52.QT3.QJT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
 [Auction "S"]
-2D {Main mythique de 30 H. | Mythic 30 HCP hand.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass 3H {Texas Pique avec 5 cartes. | Spade transfer with 5 cards.} Pass
-3S {Rectification. | Transfer accepted.} Pass 3NT {Proposition de jouer a SA. | Choice of game 3NT.} Pass
-4S {Choix du fit 5-3. | Opts for 5-3 Major fit.} Pass Pass Pass
+2D {2K FM Coeurs puissants. | 2D GF strong hearts.} Pass 2H {Relais. | Relay.} Pass
+3H {Imposition des Coeurs. | Hearts imposed.} Pass 4H {Manche obligatoire. | Mandatory game contract.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 36"]
+[Event "2 carreau forcing de manche - Donne 36"]
 [Board "36"]
-[Dealer "N"]
-[Vulnerable "NS"]
-[Deal "N:AKQJ9.AKQ9.AK.A5 874.T6.9875.9863 T52.8753.T63.T72 63.J42.QJ42.KQJ4"]
-[Auction "N"]
-2D {Bicolore Majeur FM. | Major two-suiter Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Pique en premier. | Higher major Spades.} Pass 3S {Fit 3 cartes a Pique. | 3-card Spade fit.} Pass
-4H {Deuxieme couleur naturelle. | Shows second suit Hearts.} Pass 4S {Preference pour Pique. | Preference to Spades.} Pass
-6S {Conclusion directe au chelem. | Direct slam shot.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AKQJ92.AQ.A.AQ32 87.8764.T976.987 653.J952.8542.64 T4.KT3.KQJ3.KJT5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Pique/Trefle puissant. | 2D GF strong Spade/Club.} Pass 2H {Relais. | Relay.} Pass
+2S {Pique d abord. | Spades first.} Pass 3S {Soutien 3 atouts. | 3 trumps preference.} Pass
+4S {Conclusion a la manche. | Sign-off in 4S.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 37"]
+[Event "2 carreau forcing de manche - Donne 37"]
 [Board "37"]
-[Dealer "W"]
-[Vulnerable "EW"]
-[Deal "W:AK.AKQJ96.AK.AJ7 T96.84.J876.9653 8743.753.543.842 QJ52.T2.QT92.KQT"]
-[Auction "W"]
-2D {FM Coeur autonome. | Solid Hearts Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 3 cartes avec 0 H. | 3-card fit with 0 HCP.} Pass
-Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK3.AK4.AQ2.AK94 9872.982.875.T87 654.T763.J963.62 QJT.QJ5.KT4.QJ53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 26+ regulier. | 2D GF 26+ balanced.} Pass 2H {Relais. | Relay.} Pass
+3NT {Affirmation manche a SA. | Direct game in NT.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 38"]
+[Event "2 carreau forcing de manche - Donne 38"]
 [Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "All"]
-[Deal "S:AKQJ875.AK.A.AK4 T2.QJT9.986.J982 96.8743.J754.763 43.652.KQT32.QT5"]
+[Vulnerable "NS"]
+[Deal "S:AKQJ85.A.KQ4.AK3 762.T986.T86.T86 943.J752.953.952 T.KQ43.AJ72.QJ74"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {Unifilaire Pique maitre FM. | Master Spade Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Piques forts. | Strong Spade suit.} Pass Pass {Passe d'arret avec 1 Valet. | Drops with only a Jack.} Pass
+2D {2K FM Pique maitre. | 2D GF strong spades.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Pique forcing. | Natural forcing spades.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 39"]
+[Event "2 carreau forcing de manche - Donne 39"]
 [Board "39"]
-[Dealer "N"]
-[Vulnerable "None"]
-[Deal "N:AK.AKQ.AKJ7.AK98 T98.876.864.JT75 7654.542.T93.642 QJ32.JT93.Q52.Q3"]
-[Auction "N"]
-2D {FM 28 H regulier. | Balanced 28 HCP Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass Pass {0 H, passe 2SA. | 0 HCP, passes 2NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AK.AKQJ95.AK.A62 865.T8.T986.T984 J973.74.7542.753 QT42.632.QJ3.KQJ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeur autonome. | 2D GF independent heart suit.} Pass 2H {Relais. | Relay.} Pass
+3H {Saut a 3C montrant unicolor autonome. | Jump to 3H one-suiter.} Pass 4H {Conclusion manche obligatoire. | Game contract reached.} Pass
+Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 40"]
+[Event "2 carreau forcing de manche - Donne 40"]
 [Board "40"]
-[Dealer "E"]
-[Vulnerable "NS"]
-[Deal "E:A.AKQJ982.AKQ.A5 J98.T6.J875.T986 7642.754.642.742 KQT53.3.T93.KQJ3"]
-[Auction "E"]
-2D {FM unifilaire Coeur surpuissant. | Powerhouse single-suiter Hearts.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Affirmation autonome. | Solid autonomous Hearts.} Pass 4H {Fit 3 cartes avec 0 H. | 3-card fit with 0 HCP.} Pass
-6H {Conclusion directe au chelem. | Direct leap to 6 Hearts.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AK2.AQ4.AK3.AK85 987.973.987.9763 654.8652.JT64.42 QJT3.KJT.Q52.QJT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 26+ regulier. | 2D GF 26+ balanced.} Pass 2H {Relais. | Relay.} Pass
+3NT {Conclusion directe a 3SA. | Direct jump to 3NT.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 41"]
+[Event "2 carreau forcing de manche - Donne 41"]
 [Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "EW"]
-[Deal "S:AKQJ94.A.AKQ.AJ7 T8.JT97.876.9854 763.8654.J94.632 52.KQ32.T532.KQT"]
+[Vulnerable "None"]
+[Deal "S:AKQJ94.AK.A.AK83 875.986.9864.T97 632.T543.JT52.62 T.QJ72.KQ73.QJ54"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {FM Pique de 24 H. | 24 HCP Spade Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Couleur principale Pique. | Primary Spade suit.} Pass 3S {Fit 3 cartes avec 1 H. | 3-card fit with 1 HCP.} Pass
-6S {Conclusion au chelem. | Bids 6 Spades slam.} Pass Pass Pass
+2D {2K FM unicolore Pique. | 2D GF Spade suit.} Pass 2H {Relais. | Relay.} Pass
+2S {Naturel Pique. | Natural spades.} Pass 3S {Soutien 3 atouts. | 3-card support.} Pass
+4S {Conclusion manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 42"]
+[Event "2 carreau forcing de manche - Donne 42"]
 [Board "42"]
-[Dealer "N"]
-[Vulnerable "All"]
-[Deal "N:AKQ.AK.AKQJ.AK94 765.986.T87.T876 JT84.753.642.J53 932.QJT42.953.Q2"]
-[Auction "N"]
-2D {Main d'exception 29 H. | Exceptional 29 HCP hand.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass 3C {Stayman avec 3 H (Valet double). | Stayman with 3 HCP.} Pass
-3D {Pas de Majeure 4e. | No 4-card major.} Pass 3NT {Conclusion a Sans-Atout. | Settles in 3NT.} Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A.AKQJ84.AK3.AQ2 9864.95.876.T986 752.T63.J9542.75 KQJT3.72.QT.KJ43"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeurs autonomes. | 2D GF Hearts.} Pass 2H {Relais. | Relay.} Pass
+3H {Imposition des Coeurs. | Heart jump forcing.} Pass 4H {Manche obligatoire. | Mandatory game.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 43"]
+[Event "2 carreau forcing de manche - Donne 43"]
 [Board "43"]
-[Dealer "W"]
-[Vulnerable "None"]
-[Deal "W:AKQJ9.AKQJ.A.AK8 874.T8.JT97.T754 T63.765.86432.96 52.9432.KQ5.QJ32"]
-[Auction "W"]
-2D {Bicolore Majeur FM. | Major two-suiter Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Piques en premier. | Higher major first.} Pass 3S {Fit 3e avec 0 H. | 3-card fit with 0 HCP.} Pass
-4H {Deuxieme couleur autonome. | Natural Heart cue/suit.} Pass 4S {Preference a Pique. | Spade preference.} Pass
-6S {Conclusion au chelem sur la force. | Concludes in 6 Spades.} Pass Pass Pass
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AK4.AQ2.AKJ.AQJ4 987.876.T98.T986 653.954.76432.52 QJT2.KJT3.Q5.K73"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 26+ regulier. | 2D GF 26+ balanced.} Pass 2H {Relais. | Relay.} Pass
+3NT {Conclusion manche. | Sign-off in 3NT.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 44"]
+[Event "2 carreau forcing de manche - Donne 44"]
 [Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "NS"]
-[Deal "S:A.AKQJ976.AK.AK4 J986.T.JT84.QJ86 T742.843.765.952 KQ53.52.Q932.T73"]
+[Vulnerable "Both"]
+[Deal "S:AKQJ96.A.AK4.AK3 84.T876.876.T986 753.J543.T532.72 T2.KQ92.QJ9.QJ54"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {FM Coeur autonome de 24 H. | Solid Hearts Game Force 24 HCP.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 3 cartes sans point. | 3-card fit with 0 HCP.} Pass
-Pass Pass
+2D {2K FM unicolore Pique fort. | 2D GF strong spade suit.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+2S {Pique forcing. | Forcing spade suit.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion manche. | Game sign-off.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 45"]
+[Event "2 carreau forcing de manche - Donne 45"]
 [Board "45"]
-[Dealer "N"]
-[Vulnerable "EW"]
-[Deal "N:AK.AKQ.AKJ4.AQ93 T98.876.875.JT74 Q764.953.962.862 J532.JT42.QT3.K5"]
-[Auction "N"]
-2D {FM regulier 26 H. | Game forcing 2D, 26 HCP balanced.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {26-27 H regulier. | 26-27 HCP balanced.} Pass Pass {Moins de 3 H, passe 2SA. | Less than 3 HCP, passes 2NT.} Pass
-
-[Event "2 Carreau FM SEF - Donne 46"]
-[Board "46"]
-[Dealer "E"]
-[Vulnerable "All"]
-[Deal "E:AKQJ95.AK.AK.AQ4 T8.987.JT86.JT85 762.6542.753.963 43.QJT3.Q942.K72"]
-[Auction "E"]
-2D {FM Pique de 25 H. | 25 HCP Spade Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Pique autonome. | Master Spade suit.} Pass 3S {Fit 3 cartes avec 0 H. | 3-card fit with 0 HCP.} Pass
-6S {Chelem conclu en confiance. | Confidently bids 6 Spades.} Pass Pass Pass
-
-[Event "2 Carreau FM SEF - Donne 47"]
-[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AK.AKQJ95.AKQ.K2 J85.T.T986.AT974 9743.7432.742.85 QT62.86.J53.QJ63"]
+[Deal "S:AK2.AKQ4.AK3.AK4 987.865.986.T876 T64.9732.T54.952 QJ53.JT.QJ72.QJ3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
 [Auction "S"]
-2D {FM Coeur autonome de 25 H. | 25 HCP solid Hearts Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Autonome a Coeur. | Autonomous Hearts.} Pass 4H {Fit 4e meme avec 0 H. | 4-card fit despite 0 HCP.} Pass
-6H {Chelem direct sur le total de levees. | Slam bid on high trick count.} Pass Pass Pass
+2D {2K FM 26+ regulier. | 2D GF balanced 26+.} Pass 2H {Relais. | Relay.} Pass
+3NT {Conclusion en manche a SA. | Balanced game rebid.} Pass Pass
+Pass
 
-[Event "2 Carreau FM SEF - Donne 48"]
-[Board "48"]
-[Dealer "N"]
+[Event "2 carreau forcing de manche - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
 [Vulnerable "NS"]
-[Deal "N:AKQ.AK.AKQ8.AK94 765.JT9.764.T876 T843.864.J532.J5 J92.Q7532.T9.Q32"]
-[Auction "N"]
-2D {28 H regulier. | 28 HCP balanced.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2NT {28+ H regulier. | 28+ HCP balanced.} Pass 3NT {Avec 2 Valets et belle repartition, met 3SA. | With two Jacks and balanced shape, bids 3NT.} Pass
+[Deal "S:AQ.AKQJ92.AK.AK4 875.87.9864.9876 9642.T64.T752.52 KJT3.53.QJ3.QJT3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM Coeurs autonomes. | 2D GF Heart one-suiter.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3H {Impose les Coeurs. | Jump in hearts.} Pass 4H {Fin des encheres a la manche. | Game sign-off.} Pass
 Pass Pass
 
-[Event "2 Carreau FM SEF - Donne 49"]
-[Board "49"]
-[Dealer "W"]
-[Vulnerable "EW"]
-[Deal "W:AKQJ87.AKQ.AK.A5 95.986.T865.T984 T43.754.J943.J62 62.JT32.Q72.KQ73"]
-[Auction "W"]
-2D {FM Pique autonome de 26 H. | 26 HCP solid Spades Game Force.} Pass 2H {Relais 0-7 H. | Waiting relay 0-7 HCP.} Pass
-2S {Piques autonomes. | Names autonomous Spades.} Pass 3S {Fit 3e avec deux Valets. | 3-card support with two Jacks.} Pass
-6S {Conclusion directe au chelem. | Direct leap to 6 Spades.} Pass Pass Pass
-
-[Event "2 Carreau FM SEF - Donne 50"]
-[Board "50"]
+[Event "2 carreau forcing de manche - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
-[Vulnerable "All"]
-[Deal "S:AK.AKQJ984.A.AK2 T86.7.JT984.JT97 J953.532.763.854 Q742.T6.KQ52.Q63"]
+[Vulnerable "EW"]
+[Deal "S:AKQJ82.AK.A.AK92 75.976.T986.T876 964.T852.7532.53 T3.QJ43.KQJ4.QJ4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
 [Auction "S"]
-2D {2 Carreau FM, 8 levées de jeu et Coeur autonome. | 2D Game Force, solid autonomous Hearts.} Pass 2H {Relais d'attente 0-7 H. | Waiting relay 0-7 HCP.} Pass
-3H {Affirmation unifilaire autonome. | Autonomous solid Heart suit.} Pass 4H {Fit 3 cartes avec 1 H. | 3-card fit with 1 HCP.} Pass
-6H {Conclusion victorieuse a 6 Coeurs. | Closes in 6 Hearts slam.} Pass Pass Pass
+2D {2K FM Pique/Trefle puissant. | 2D GF strong Spades/Clubs.} Pass 2H {Relais. | Relay.} Pass
+2S {Pique d abord. | Natural spade bid.} Pass 3S {Soutien Pique. | Spade support.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
+
+[Event "2 carreau forcing de manche - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "Both"]
+[Deal "S:AK3.AK2.AKQ4.AJ2 986.975.875.9876 JT74.863.T62.T53 Q52.QJT4.J93.KQ4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2K FM 24-25 regulier. | 2D GF 24-25 balanced.} Pass 2H {Relais. | Relay.} Pass
+2NT {24-25 regulier. | 24-25 balanced.} Pass 3C {Stayman de detresse avec 4 Piques. | Weak Stayman with 4 Spades.} Pass
+3D {Reponse pas de majeure 4eme. | No 4-card major.} Pass 3NT {Conclusion manche obligatoire. | Game mandatory.} Pass
+Pass Pass
+
+[Event "2 carreau forcing de manche - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQJ75.A.AK2.AK3 96.T986.9864.987 842.J742.JT5.652 T3.KQ53.Q73.QJT4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Pique fort. | 2D GF strong spade suit.} Pass 2H {Relais. | Relay.} Pass
+2S {Pique forcing. | Natural forcing spades.} Pass 3S {Soutien avec 3 atouts. | Support with 3 trumps.} Pass
+4S {Conclusion a la manche. | Game sign-off.} Pass Pass
+Pass
+
+[Event "2 carreau forcing de manche - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK.AKQJ93.AK4.K2 T86.84.986.T9874 9742.T62.T752.63 QJ53.75.QJ3.AQJ5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2D {2K FM unicolore Coeur autonome. | 2D GF independent heart suit.} Pass 2H {Relais 0-7. | Relay 0-7.} Pass
+3H {Impose les Coeurs forcing. | Forcing jump in hearts.} Pass 4H {Conclusion a la manche. | Sign-off in 4H game.} Pass
+Pass Pass

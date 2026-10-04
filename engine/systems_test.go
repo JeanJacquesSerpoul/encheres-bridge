@@ -84,6 +84,37 @@ func loadSystems(t *testing.T) []*testSystem {
 	return out
 }
 
+// TestThemeDealsAreComplete parses every deal of every thematic series of the
+// systems (cli/systems/<id>/pbn/*.pbn): each one must be a complete deal, four
+// 13-card hands without a duplicated card. ParsePBNBoards is what the page's
+// data goes through, so a truncated or mistyped [Deal] tag fails here instead
+// of reaching the players.
+func TestThemeDealsAreComplete(t *testing.T) {
+	files, err := filepath.Glob(filepath.Join(systemsDir, "*", "pbn", "*.pbn"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(files) == 0 {
+		t.Fatalf("aucune série de donnes sous %s", filepath.Join(systemsDir, "*", "pbn"))
+	}
+	for _, path := range files {
+		name := filepath.ToSlash(path)
+		t.Run(name, func(t *testing.T) {
+			data, err := os.ReadFile(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			deals, err := ParsePBNBoards(data)
+			if err != nil {
+				t.Fatalf("%s : %v", name, err)
+			}
+			if len(deals) == 0 {
+				t.Fatalf("%s : aucune donne", name)
+			}
+		})
+	}
+}
+
 // forEachSystem runs fn as a subtest per system (go test -run 'Test…/id'
 // picks one), with that system's rules installed; the SEF is put back
 // afterwards for the tests that follow.

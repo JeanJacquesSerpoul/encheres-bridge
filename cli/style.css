@@ -1785,7 +1785,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .train-side .quiz-turn { margin: 0; }
 .train-side .quiz-turn:empty { display: none; }
 .train-side .bidding-box { margin: 0; }
-.train-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Centrées : Continuer et Donne suivante sont l'action à cliquer de l'instant,
+   elles ne doivent pas rester collées au bord du panneau. */
+.train-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .train-actions button { margin: 0; }
 .train-actions:not(:has(button:not(.hidden))) { display: none; }
 

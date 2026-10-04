@@ -1466,7 +1466,9 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .train-seat-dialog::backdrop { background: var(--overlay); }
 .train-seat-box { padding: 16px 18px 12px; text-align: center; }
 .train-seat-box h2 { margin: 0 0 10px; font-size: 1.15rem; }
-/* Les donnes : trois choix en contrôle segmenté, puis la liste des thèmes. */
+/* Les donnes : deux choix en contrôle segmenté — tous les thèmes, ou un
+   thème —, puis la liste des thèmes. Deux colonnes, exactement : le contrôle
+   occupe alors toute la largeur du panneau, sans case vide à droite. */
 .train-source { margin: 0; padding: 0; border: 0; min-width: 0; }
 .train-source legend,
 .train-seat-label {
@@ -1481,7 +1483,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 .train-source legend { width: 100%; text-align: center; }
 .train-source-pills {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;

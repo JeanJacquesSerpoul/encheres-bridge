@@ -3287,9 +3287,6 @@ function renderBoundsCards() {
   setCommandButton("#train-finish", CHECK_SVG, UI_TEXT[lang].trainFinish, true);
   setCommandButton("#train-copy-btn", COPY_SVG, UI_TEXT[lang].trainCopy);
   setCommandButton("#train-rotate-btn", ROTATE_SVG, UI_TEXT[lang].trainRotate);
-  // Dans la fenêtre modale, l'infobulle de la page passe dessous : le nom
-  // s'affiche aussi par l'infobulle native.
-  for (const id of ["#train-copy-btn", "#train-rotate-btn"]) $(id).title = $(id).dataset.tip || "";
   // Posé ici et non par [data-i18n] : applyLang ne lit que UI_TEXT, et ce
   // texte appartient au panneau des contraintes, donc à CONS_TEXT.
   $("#cards-help").textContent = t.cardsHelp;
@@ -4801,6 +4798,16 @@ function tipSheetMode() {
   return noHover || window.innerWidth <= 720;
 }
 
+// Où poser une infobulle pour qu'elle se voie. Un <dialog> ouvert vit dans la
+// couche supérieure, qui recouvre tout z-index du document : une infobulle
+// restée dans le corps de la page passe derrière la fenêtre modale, et
+// personne ne la voit. Elle entre donc dans la fenêtre qui la demande — la
+// grille d'enchères de la table d'entraînement comme ses boutons —, et
+// retourne au corps de la page pour l'infobulle de celle-ci.
+function tipHost(anchor) {
+  return (anchor && anchor.closest && anchor.closest("dialog[open]")) || document.body;
+}
+
 function placeTip(tip, anchor, above) {
   if (tipSheetMode()) {
     tip.classList.add("sheet");
@@ -4841,6 +4848,10 @@ const buttonTip = {
     if (!tip || !text || this.open === btn) return;
     this.hide();
     this.open = btn;
+    // Dans la fenêtre modale, l'infobulle doit entrer dedans pour se voir
+    // (voir tipHost).
+    const host = tipHost(btn);
+    if (tip.parentElement !== host) host.appendChild(tip);
     tip.textContent = text;
     tip.classList.remove("hidden");
     placeTip(tip, btn);
@@ -4923,6 +4934,10 @@ const auctionTip = {
     this.hide();
     this.open = cell;
     cell.classList.add("is-open");
+    // Dans la fenêtre modale, l'infobulle doit entrer dedans pour se voir
+    // (voir tipHost).
+    const host = tipHost(cell);
+    if (tip.parentElement !== host) host.appendChild(tip);
     tip.innerHTML =
       `<div class="par-tip-head"><b>${esc(cell.dataset.seat)}</b>` +
       `<span>${cell.innerHTML}</span></div>` +

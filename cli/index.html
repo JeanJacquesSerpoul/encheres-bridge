@@ -977,16 +977,16 @@
     </div>
   </dialog>
 
-  <!-- S'entraîner, 1 : les donnes (aléatoires, tous les thèmes ou un thème),
-       puis la main, en rose des vents autour de la table. Choisir la main
-       lance l'entraînement. Les deux choix sont retenus. -->
+  <!-- S'entraîner, 1 : les donnes (tous les thèmes, ou un thème), puis la
+       main, en rose des vents autour de la table. Choisir la main lance
+       l'entraînement. Les deux choix sont retenus. Les donnes viennent des
+       fichiers PBN du système, qui portent leur enchère : voir app.js. -->
   <dialog id="train-seat-dialog" class="train-seat-dialog" aria-labelledby="train-seat-title">
     <div class="train-seat-box">
       <h2 id="train-seat-title" data-i18n="trainTitle">S'entraîner</h2>
       <fieldset class="train-source">
         <legend data-i18n="trainSource">Donnes</legend>
         <div class="train-source-pills">
-          <label><input type="radio" name="train-source" value="random"><span data-i18n="trainSrcRandom">Au hasard</span></label>
           <label><input type="radio" name="train-source" value="all"><span data-i18n="trainSrcAll">Tous les thèmes</span></label>
           <label><input type="radio" name="train-source" value="theme"><span data-i18n="trainSrcTheme">Un thème</span></label>
         </div>

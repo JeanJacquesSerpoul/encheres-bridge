@@ -1241,6 +1241,18 @@ function callToken(call, lang) {
   return `${call.level}${STRAIN_ORDER[lang][call.strain]}`;
 }
 
+// Le commentaire d'un appel, dans la langue de la page. Le fichier peut porter
+// les deux, séparés par une barre verticale : « français | anglais ». Sans
+// barre, le commentaire est rendu tel quel — une série d'une seule langue reste
+// lisible —, et si l'une des deux manque, c'est l'autre qui parle.
+function localizedComment(text, lang) {
+  const cut = String(text).indexOf("|");
+  if (cut < 0) return String(text).trim();
+  const fr = String(text).slice(0, cut).trim();
+  const en = String(text).slice(cut + 1).trim();
+  return lang === "en" ? en || fr : fr || en;
+}
+
 // Les jetons de la section [Auction "…"], dans l'ordre du fichier, chacun avec
 // les commentaires qui le suivent. Rend null quand le bloc n'a pas de section.
 function pbnAuctionTokens(block) {
@@ -1487,7 +1499,7 @@ function pbnTrainingResult(block, lang) {
     hands: Object.fromEntries(SEATS.map((seat) =>
       [seat, { ...hands[seat], ...analyzeHand(hands[seat], lang) }])),
     auction: auction.calls.map((c) => ({
-      player: c.player, bid: callToken(c.call, lang), comment: c.comment,
+      player: c.player, bid: callToken(c.call, lang), comment: localizedComment(c.comment, lang),
     })),
     contract: auction.contract ? callToken(auction.contract, lang) : PASS_TOKEN[lang],
     declarer: auction.declarer,

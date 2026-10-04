@@ -17,8 +17,8 @@
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 2NT {Relais Ogust forcing, 19H, demande la force et la qualite.} Pass
-3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur.} Pass 3NT {Conclusion a Sans-Atout grace aux arrets exterieurs.} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 2NT {Relais Ogust forcing, 19H, demande la force et la qualite. | Forcing Ogust relay, 19 HCP, asking for strength and suit quality.} Pass
+3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur. | Ogust answer: maximum hand (8-10 HCP) with a poor suit.} Pass 3NT {Conclusion a Sans-Atout grace aux arrets exterieurs. | Settles in no-trump thanks to the outside stops.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 2"]
@@ -37,7 +37,7 @@ Pass Pass
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 9H.} Pass Pass Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 9H. | Weak two opening, 6 hearts, 6-10 HCP, 9 here.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 3"]
 [Site "La Baule-Escoublac"]
@@ -55,8 +55,8 @@ Pass Pass
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 15H.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3S {Arret au niveau de 3, Sud etant minimal avec une couleur fragile.} Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H. | Weak two opening, 6 spades, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 15H. | Forcing Ogust relay, 15 HCP.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3S {Arret au niveau de 3, Sud etant minimal avec une couleur fragile. | Stops at the 3 level: South is minimum with a fragile suit.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 4"]
@@ -75,7 +75,7 @@ Pass Pass
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e.} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e. | Direct raise to game with 12 HCP and a 10-card fit.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 5"]
@@ -94,8 +94,8 @@ Pass Pass
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 13H.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3H {Arret en partiel, la manche etant compromise face a un minimum.} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H. | Weak two opening, 6 hearts, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 13H. | Forcing Ogust relay, 13 HCP.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3H {Arret en partiel, la manche etant compromise face a un minimum. | Stops in a part-score: game would be compromised facing a minimum.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 6"]
@@ -114,7 +114,7 @@ Pass Pass
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 9H.} Pass Pass Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 9H. | Weak two opening, 6 spades, 6-10 HCP, 9 here.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 7"]
 [Site "La Baule-Escoublac"]
@@ -132,7 +132,7 @@ Pass Pass
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e.} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H. | Weak two opening, 6 hearts, 6-10 HCP, 7 here.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e. | Direct raise to game with 12 HCP and a 10-card fit.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 8"]
@@ -151,8 +151,8 @@ Pass Pass
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 6H.} Pass 2NT {Relais Ogust forcing, 20H.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 4H {Conclusion a la manche, la puissance de Nord compensant le minimum.} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 6H. | Weak two opening, 6 hearts, 6-10 HCP, 6 here.} Pass 2NT {Relais Ogust forcing, 20H. | Forcing Ogust relay, 20 HCP.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 4H {Conclusion a la manche, la puissance de Nord compensant le minimum. | Raise to game, North's strength making up for the minimum.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 9"]
@@ -171,8 +171,8 @@ Pass Pass
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H.} Pass 2NT {Relais Ogust forcing, 12H.} Pass
-3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur.} Pass 3S {Arret au niveau de 3, Nord etant singleton sans tenue Sans-Atout.} Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H. | Weak two opening, 6 spades, 6-10 HCP, 10 here.} Pass 2NT {Relais Ogust forcing, 12H. | Forcing Ogust relay, 12 HCP.} Pass
+3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur. | Ogust answer: maximum hand (8-10 HCP) with a poor suit.} Pass 3S {Arret au niveau de 3, Nord etant singleton sans tenue Sans-Atout. | Stops at the 3 level: North is singleton, with no no-trump stop.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 10"]
@@ -191,7 +191,7 @@ Pass Pass
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 3H {Prolongation de barrage tactique (Loi des levees totales).} Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 3H {Prolongation de barrage tactique (Loi des levees totales). | Tactical pre-emptive raise (Law of Total Tricks).} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 11"]
@@ -210,7 +210,7 @@ Pass Pass
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 8H.} Pass Pass Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 8H. | Weak two opening, 6 spades, 6-10 HCP, 8 here.} Pass Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 12"]
 [Site "La Baule-Escoublac"]
@@ -228,7 +228,7 @@ Pass Pass
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H.} Pass 3S {Prolongation de barrage tactique (3 atouts, main faible).} Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H. | Weak two opening, 6 spades, 6-10 HCP, 10 here.} Pass 3S {Prolongation de barrage tactique (3 atouts, main faible). | Tactical pre-emptive raise (3 trumps, weak hand).} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 13"]
@@ -247,8 +247,8 @@ Pass Pass
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H.} Pass 2NT {Relais Ogust forcing, 18H.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur.} Pass 3NT {Conclusion a 3SA, la mineure maitresse de Nord compensant.} Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H. | Weak two opening, 6 spades, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 18H. | Forcing Ogust relay, 18 HCP.} Pass
+3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3NT {Conclusion a 3SA, la mineure maitresse de Nord compensant. | Settles in 3NT, North's running minor making up for it.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Faible (0-20H) - Donne 14"]
@@ -267,4 +267,4 @@ Pass Pass
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 8H.} Pass Pass Pass
+2S {Ouverture de 2 faible, 6 cartes a Pique, 8H. | Weak two opening, 6 spades, 8 HCP.} Pass Pass Pass

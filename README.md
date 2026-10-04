@@ -353,6 +353,8 @@ Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soi
 
 Une donne peut porter son enchère, et c'est ce qui rend **l'entraînement** possible sans moteur d'enchères : la séquence, le commentaire de chaque enchère et le contrat sont alors dans le fichier. C'est la section `[Auction "<donneur>"]` de PBN, ses appels à la suite, chacun suivi de son commentaire **entre accolades** — la convention des commentaires de PBN 2.1, que les autres logiciels de bridge lisent et écrivent. Un commentaire porte sur l'appel qui le précède ; les appels sont en **notation PBN standard** (`1C` … `7NT`, `Pass`, `X`, `XX`), jamais dans la notation française (`Passe`, `SA`, `T`) : `C` y vaut ♣ d'un côté, ♥ de l'autre, et rien ne les distingue dans une seule enchère.
 
+Un commentaire peut porter **les deux langues, séparées par une barre verticale** — `{français | anglais}`. L'application affiche celle de la langue choisie dans ses Réglages, et se rabat sur l'autre quand elle manque ; sans barre, le commentaire s'affiche tel quel, si bien qu'une série d'une seule langue reste lisible.
+
 ```
 [Event "Entrainement 2 Faible (0-20H) - Donne 1"]
 [Board "1"]
@@ -362,9 +364,10 @@ Une donne peut porter son enchère, et c'est ce qui rend **l'entraînement** pos
 [Declarer "N"]
 [Contract "3NT"]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 2NT {Relais Ogust forcing, 19H.} Pass
-3H {Reponse Ogust : main maximale et mauvaise couleur.} Pass 3NT {Conclusion a Sans-Atout.} Pass
-Pass Pass
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass
+2NT {Relais Ogust forcing, 19H. | Forcing Ogust relay, 19 HCP.} Pass
+3H {Reponse Ogust : main maximale et mauvaise couleur. | Ogust answer: maximum hand with a poor suit.} Pass
+3NT {Conclusion a Sans-Atout. | Settles in no-trump.} Pass Pass Pass
 ```
 
 `[Auction "…"]` porte le donneur, et sa valeur doit être celle de `[Dealer]` : c'est la règle PBN, et la donne est écartée sinon. L'entraînement ne retient que les donnes dont l'enchère est **lisible, légale et finie**, et dont les quatre mains sont complètes ; `[Declarer]` et `[Contract]` sont alors déduits de la séquence, qui fait foi.

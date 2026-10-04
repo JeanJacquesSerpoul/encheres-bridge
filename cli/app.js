@@ -313,13 +313,14 @@ const UI_TEXT = {
     trainSeatDeclarer: "Camp du déclarant",
     trainSeatDeclarerTip: "Votre main dans le camp qui joue le contrat : Nord ou Sud, Est ou Ouest, tirée au hasard à chaque donne",
     trainSource: "Donnes",
-    trainSrcRandom: "Au hasard",
     trainSrcAll: "Tous les thèmes",
     trainSrcTheme: "Un thème",
-    trainSrcHintRandom: "Donnes distribuées au hasard",
-    trainSrcHintAll: (n) => `Tirées parmi les ${n} donnes thématiques`,
-    trainSrcHintTheme: (n) => `Tirées parmi les ${n} donnes du thème`,
-    trainNoThemed: "Aucune donne de ce choix ne respecte le donneur, la vulnérabilité et les bornes de points choisis.",
+    trainSrcHintAll: (n) => `Tirées parmi les ${n} donnes d'entraînement`,
+    trainSrcHintTheme: (n) => `Tirées parmi les ${n} donnes d'entraînement du thème`,
+    trainSrcNoEnriched: "aucune donne enrichie",
+    trainNoEnriched: "Aucune donne d'entraînement : l'enchère de la donne doit être dans son fichier PBN (section [Auction]).",
+    trainThemeNoEnriched: "Ce thème n'a aucune donne d'entraînement : l'enchère de la donne doit être dans son fichier PBN (section [Auction]).",
+    trainNoThemed: "Aucune donne ne respecte le donneur, la vulnérabilité et les bornes de points choisis.",
     trainNoMoreDeals: "Plus de donnes disponibles.",
     trainCancel: "Annuler",
     trainNextDeal: "Donne suivante",
@@ -542,13 +543,14 @@ const UI_TEXT = {
     trainSeatDeclarer: "Declaring side",
     trainSeatDeclarerTip: "Your hand in the side that plays the contract: North or South, East or West, drawn at random for each deal",
     trainSource: "Deals",
-    trainSrcRandom: "At random",
     trainSrcAll: "All topics",
     trainSrcTheme: "One topic",
-    trainSrcHintRandom: "Randomly dealt deals",
-    trainSrcHintAll: (n) => `Drawn from the ${n} themed deals`,
-    trainSrcHintTheme: (n) => `Drawn from the topic's ${n} deals`,
-    trainNoThemed: "No deal of this choice fits the dealer, vulnerability and point bounds you chose.",
+    trainSrcHintAll: (n) => `Drawn from the ${n} practice deals`,
+    trainSrcHintTheme: (n) => `Drawn from the topic's ${n} practice deals`,
+    trainSrcNoEnriched: "no enriched deal",
+    trainNoEnriched: "No practice deal: each deal's auction must be in its PBN file ([Auction] section).",
+    trainThemeNoEnriched: "This topic has no practice deal: each deal's auction must be in its PBN file ([Auction] section).",
+    trainNoThemed: "No deal fits the dealer, vulnerability and point bounds you chose.",
     trainNoMoreDeals: "No more deals available.",
     trainCancel: "Cancel",
     trainNextDeal: "Next deal",
@@ -1199,7 +1201,301 @@ function dealHCP(block) {
   return hcp;
 }
 
-// Tire une donne au hasard parmi les donnes thématiques — toutes, ou celles
+// ---------- l'enchère lue dans le fichier (nouveau format) ----------
+//
+// Un fichier de donnes d'entraînement peut porter l'enchère de chaque donne :
+// la section [Auction "<donneur>"] du bloc PBN, ses appels à la suite, chacun
+// suivi de son commentaire entre accolades — la convention des commentaires de
+// PBN 2.1 (docs/pbn.txt § 3.8), que les autres logiciels de bridge lisent et
+// écrivent. Un commentaire porte sur l'appel qui le précède. Tout est alors
+// dans le fichier — la séquence, ses commentaires, le contrat —, et
+// l'entraînement n'a plus besoin du moteur d'enchères pour la donner.
+//
+// Les appels y sont en notation PBN standard — 1C, 2NT, Pass, X, XX —, la
+// seule que ce lecteur accepte : les lettres françaises (T, K, C, P) ne se
+// distinguent des anglaises que par la convention de tout le fichier, et « C »
+// y vaut ♣ d'un côté, ♥ de l'autre.
+
+// Les dénominations du PBN, dans l'ordre de l'échelle (♣ ♦ ♥ ♠ SA).
+const PBN_STRAINS = { C: 0, D: 1, H: 2, S: 3, NT: 4 };
+const PASS_TOKEN = { fr: "Passe", en: "Pass" };
+
+// Un appel du PBN sous sa forme canonique — sa nature, son palier, sa
+// dénomination —, indépendante de la langue : celle-ci n'entre qu'à
+// l'affichage (callToken). Rend null si le jeton n'est pas un appel.
+function parsePbnCall(text) {
+  const t = text.toUpperCase();
+  if (t === "PASS" || t === "AP") return { kind: "pass" };
+  if (t === "X") return { kind: "x" };
+  if (t === "XX") return { kind: "xx" };
+  const m = t.match(/^([1-7])(NT|C|D|H|S)$/);
+  return m ? { kind: "bid", level: +m[1], strain: PBN_STRAINS[m[2]] } : null;
+}
+
+// L'appel écrit dans la langue de la page, comme le moteur le rendrait :
+// « 3SA » en français, « 3NT » en anglais (voir STRAIN_ORDER).
+function callToken(call, lang) {
+  if (call.kind === "pass") return PASS_TOKEN[lang];
+  if (call.kind === "x") return "X";
+  if (call.kind === "xx") return "XX";
+  return `${call.level}${STRAIN_ORDER[lang][call.strain]}`;
+}
+
+// Les jetons de la section [Auction "…"], dans l'ordre du fichier, chacun avec
+// les commentaires qui le suivent. Rend null quand le bloc n'a pas de section.
+function pbnAuctionTokens(block) {
+  const m = block.match(/\[Auction\s+"\s*([NESW])\s*"\s*\]/i);
+  if (!m) return null;
+  const rest = block.slice(m.index + m[0].length);
+  // La section va jusqu'au tag suivant, ou jusqu'à la fin du bloc.
+  const next = rest.search(/\n[ \t]*\[/);
+  const section = next < 0 ? rest : rest.slice(0, next);
+  const tokens = [];
+  let i = 0;
+  while (i < section.length) {
+    const ch = section[i];
+    if (/\s/.test(ch)) {
+      i++;
+      continue;
+    }
+    // Entre accolades : le commentaire de l'appel qui précède.
+    if (ch === "{") {
+      const end = section.indexOf("}", i + 1);
+      const text = section.slice(i + 1, end < 0 ? section.length : end).replace(/\s+/g, " ").trim();
+      if (tokens.length && text) tokens[tokens.length - 1].comments.push(text);
+      i = end < 0 ? section.length : end + 1;
+      continue;
+    }
+    // Un point-virgule commente jusqu'à la fin de la ligne.
+    if (ch === ";") {
+      const end = section.indexOf("\n", i);
+      i = end < 0 ? section.length : end + 1;
+      continue;
+    }
+    let j = i;
+    while (j < section.length && !/[\s{};]/.test(section[j])) j++;
+    tokens.push({ call: section.slice(i, j), comments: [] });
+    i = j;
+  }
+  return { first: m[1].toUpperCase(), tokens };
+}
+
+// L'appel est-il permis après ceux déjà faits ? Le même contrôle que la boîte
+// à enchères (voir computeLegalCalls), porté sur les appels canoniques.
+function callLegal(call, history, player) {
+  if (call.kind === "pass") return true;
+  let last = null;
+  for (let i = history.length - 1; i >= 0; i--) {
+    if (history[i].call.kind !== "pass") { last = history[i]; break; }
+  }
+  if (call.kind === "x" || call.kind === "xx") {
+    if (!last || TEAM[last.player] === TEAM[player]) return false;
+    return call.kind === "x" ? last.call.kind === "bid" : last.call.kind === "x";
+  }
+  const rank = call.level * 5 + call.strain;
+  for (let i = history.length - 1; i >= 0; i--) {
+    const seen = history[i].call;
+    if (seen.kind === "bid") return rank > seen.level * 5 + seen.strain;
+  }
+  return true;
+}
+
+// L'enchère est finie : quatre passes d'entrée, ou trois passes après une
+// enchère (voir auctionOver du moteur).
+function auctionOver(calls) {
+  const n = calls.length;
+  if (n < 3) return false;
+  if (calls.some((c) => c.call.kind !== "pass")) {
+    return calls.slice(-3).every((c) => c.call.kind === "pass");
+  }
+  return n >= 4;
+}
+
+// Le contrat, son déclarant et le contre, comme le moteur : la dernière
+// enchère, et le premier joueur du camp qui en a nommé la dénomination.
+function finalContract(calls) {
+  let contract = null;
+  let bidder = null;
+  let doubled = false;
+  for (const c of calls) {
+    if (c.call.kind === "bid") {
+      contract = c.call;
+      bidder = c.player;
+      doubled = false;
+    } else if (c.call.kind === "x" || c.call.kind === "xx") {
+      doubled = true;
+    }
+  }
+  if (!contract) return { contract: null, declarer: "", doubled: false };
+  for (const c of calls) {
+    if (c.call.kind === "bid" && c.call.strain === contract.strain &&
+        TEAM[c.player] === TEAM[bidder]) {
+      return { contract, declarer: c.player, doubled };
+    }
+  }
+  return { contract, declarer: bidder, doubled };
+}
+
+// L'enchère d'une donne, lue dans son bloc : ses appels — joueur, appel,
+// commentaire — et son contrat. Rend null quand la section manque, quand sa
+// valeur n'est pas le donneur du bloc, quand un appel est illisible ou
+// illégal, ou quand l'enchère n'est pas finie : une donne qu'on ne peut pas
+// jouer jusqu'au bout ne peut pas servir à l'entraînement.
+function pbnAuction(block) {
+  const dealer = (block.match(/\[Dealer\s+"\s*([NESW])\s*"\s*\]/i) || [])[1];
+  const section = pbnAuctionTokens(block);
+  if (!dealer || !section || !section.tokens.length) return null;
+
+  const calls = [];
+  let seat = SEATS.indexOf(section.first);
+  for (const token of section.tokens) {
+    const text = token.call.toUpperCase();
+    // Un tiret passe un siège : la convention PBN des appels avant le donneur.
+    if (text === "-") {
+      seat = (seat + 1) % 4;
+      continue;
+    }
+    const call = parsePbnCall(text);
+    if (!call) return null;
+    // « AP » vaut les quatre passes d'entrée.
+    const repeat = text === "AP" ? 4 : 1;
+    for (let k = 0; k < repeat; k++) {
+      const player = SEATS[seat];
+      if (!callLegal(call, calls, player)) return null;
+      calls.push({ player, call, comment: k === 0 ? token.comments.join(" ") : "" });
+      seat = (seat + 1) % 4;
+    }
+  }
+  // L'enchère commence au donneur : la valeur d'[Auction] le dit — c'est la
+  // règle PBN —, et les tirets de la forme d'import la rejoignent.
+  if (!calls.length || calls[0].player !== dealer.toUpperCase()) return null;
+  if (!auctionOver(calls)) return null;
+  return { calls, ...finalContract(calls) };
+}
+
+// Les mains du bloc, dans la forme du moteur : une chaîne de rangs par couleur,
+// les quatre mains de treize cartes. Rend null si le tag [Deal] manque ou ne
+// décrit pas quatre mains complètes.
+function pbnHands(block) {
+  const m = block.match(/\[Deal\s+"\s*([NESW])\s*:\s*([^"]*)"\s*\]/i);
+  if (!m) return null;
+  const parts = m[2].trim().split(/\s+/);
+  if (parts.length !== 4) return null;
+  const hands = {};
+  const start = SEATS.indexOf(m[1].toUpperCase());
+  for (let i = 0; i < parts.length; i++) {
+    const suits = parts[i].split(".");
+    if (suits.length !== 4) return null;
+    const hand = {};
+    let total = 0;
+    for (let s = 0; s < suits.length; s++) {
+      const cards = suits[s].toUpperCase();
+      if (!/^[AKQJT98765432]*$/.test(cards)) return null;
+      hand[SUIT_KEYS[s]] = cards;
+      total += cards.length;
+    }
+    if (total !== HAND_SIZE) return null;
+    hands[SEATS[(start + i) % 4]] = hand;
+  }
+  return hands;
+}
+
+// Un point par carte à partir de la cinquième, dans une couleur tenue par au
+// moins deux de ses honneurs (voir lengthPoints du moteur).
+function suitLengthPoints(cards) {
+  const honours = [...cards].filter((r) => HONOUR_POINTS[r]).length;
+  return honours < 2 ? 0 : Math.max(0, cards.length - 4);
+}
+
+// Un honneur sec — l'As comme les autres — ou deux honneurs secs : un point de
+// moins (voir devalued du moteur).
+function suitDevalued(cards) {
+  const n = cards.length;
+  if (n === 1) return HONOUR_POINTS[cards[0]] ? 1 : 0;
+  if (n === 2) return HONOUR_POINTS[cards[0]] && HONOUR_POINTS[cards[1]] ? 1 : 0;
+  return 0;
+}
+
+// Le type de main du SEF, d'après ses longueurs (voir Hand.Type du moteur).
+function handTypeKey(lens) {
+  const atLeast4 = lens.filter((n) => n >= 4).length;
+  const sorted = [...lens].sort((a, b) => b - a);
+  if (atLeast4 >= 3) return "three-suited";
+  if (sorted[0] >= 6 && sorted[1] < 4) return "single-suited";
+  if (sorted[0] >= 5 && atLeast4 >= 2) return "two-suited";
+  return "regular";
+}
+
+const HAND_TYPE = {
+  fr: { regular: "régulière", "single-suited": "unicolore", "two-suited": "bicolore",
+        "three-suited": "tricolore" },
+  en: { regular: "regular", "single-suited": "single-suited", "two-suited": "two-suited",
+        "three-suited": "three-suited" },
+};
+
+// L'analyse du moteur sur une main — points H et HL, type —, recalculée ici
+// pour les donnes dont l'enchère vient d'un fichier (engine/features.go).
+function analyzeHand(hand, lang) {
+  let h_points = 0;
+  let hl_points = 0;
+  for (const suit of SUIT_KEYS) {
+    const cards = hand[suit] || "";
+    h_points += suitHCP(cards);
+    hl_points += suitLengthPoints(cards) - suitDevalued(cards);
+  }
+  hl_points += h_points;
+  const lens = SUIT_KEYS.map((suit) => (hand[suit] || "").length);
+  return { h_points, hl_points, type: HAND_TYPE[lang][handTypeKey(lens)] };
+}
+
+// La donne est-elle jouable ? Il y faut ses mains et son enchère : c'est ce
+// que l'entraînement demande, sans rien au moteur.
+function pbnTrainable(block) {
+  return !!pbnHands(block) && !!pbnAuction(block);
+}
+
+// Les donnes d'une série, avec leur numéro dans le fichier. Lues à la première
+// demande, et gardées : le tirage et l'entraînement les relisent.
+function themeDeals(th) {
+  if (!th.deals && th.text) {
+    th.deals = splitPbnGames(th.text).map((block, i) => ({ block, n: i + 1 }));
+  }
+  return th.deals || [];
+}
+
+// Les donnes que l'entraînement peut jouer : celles qui portent leur enchère
+// (voir pbnTrainable). La fenêtre des thèmes n'en a pas besoin, d'où la lecture
+// à la première demande plutôt qu'à celle du fichier.
+function trainableDeals(th) {
+  if (!th.trainable && th.text) th.trainable = themeDeals(th).filter((d) => pbnTrainable(d.block));
+  return th.trainable || [];
+}
+
+// L'objet que rendait le moteur — donneur, vulnérabilité, mains, enchère,
+// contrat, déclarant —, reconstruit depuis le bloc du fichier. Rend null quand
+// la donne ne peut pas être jouée (voir pbnTrainable).
+function pbnTrainingResult(block, lang) {
+  const hands = pbnHands(block);
+  const auction = pbnAuction(block);
+  if (!hands || !auction) return null;
+  const dealer = (block.match(/\[Dealer\s+"\s*([NESW])\s*"\s*\]/i) || [])[1].toUpperCase();
+  const vul = (block.match(/\[Vulnerable\s+"([^"]*)"\]/i) || [])[1] || "";
+  return {
+    dealer,
+    vulnerable: normalizeVul(vul),
+    lang,
+    hands: Object.fromEntries(SEATS.map((seat) =>
+      [seat, { ...hands[seat], ...analyzeHand(hands[seat], lang) }])),
+    auction: auction.calls.map((c) => ({
+      player: c.player, bid: callToken(c.call, lang), comment: c.comment,
+    })),
+    contract: auction.contract ? callToken(auction.contract, lang) : PASS_TOKEN[lang],
+    declarer: auction.declarer,
+    doubled: auction.doubled,
+  };
+}
+
+// Tire une donne au hasard parmi les donnes d'entraînement — toutes, ou celles
 // du fichier `onlyFile` —, en respectant le donneur, la vulnérabilité et les
 // bornes de points choisis. Rend null si aucune ne convient, ou si les
 // fichiers ne sont pas joignables.
@@ -1211,24 +1507,33 @@ async function loadAllThemes() {
 
 // `used` (facultatif) : les donnes déjà données, par leur clé « fichier#n » ;
 // elles sont écartées, et s'il ne reste qu'elles, la réponse porte
-// `exhausted`.
-async function pickThemedBlock(onlyFile, used) {
+// `exhausted`. `enriched` ne retient que les donnes jouables sans moteur —
+// l'entraînement lit l'enchère dans le fichier ; sans lui, toutes les donnes
+// du fichier sont tirées (Donne aléatoire sur un thème, dont le moteur calcule
+// l'enchère). `available` compte les donnes ainsi offertes, et distingue
+// « aucune donne de ce genre » de « aucune dans les bornes choisies ».
+async function pickThemedBlock(onlyFile, used, enriched) {
   await loadAllThemes();
   const dealer = chosenDealer();
   const vul = chosenVul();
   const pool = [];
+  let available = 0;
   for (const th of themeFiles) {
     if (!th.text || (onlyFile && th.file !== onlyFile)) continue;
-    splitPbnGames(th.text).forEach((block, i) => {
+    const deals = enriched ? trainableDeals(th) : themeDeals(th);
+    available += deals.length;
+    for (const deal of deals) {
+      const block = deal.block;
       const d = block.match(/\[Dealer\s+"([NESW])"\]/i);
       const v = block.match(/\[Vulnerable\s+"([^"]*)"\]/i);
-      if (dealer && (!d || d[1].toUpperCase() !== dealer)) return;
-      if (vul && normalizeVul(v ? v[1] : "") !== vul) return;
+      if (dealer && (!d || d[1].toUpperCase() !== dealer)) continue;
+      if (vul && normalizeVul(v ? v[1] : "") !== vul) continue;
       const hcp = dealHCP(block);
-      if (!hcp || !SEATS.every((seat) => isWithinBounds(hcp[seat], hcpBounds[seat]))) return;
-      pool.push({ th, block, n: i + 1 });
-    });
+      if (!hcp || !SEATS.every((seat) => isWithinBounds(hcp[seat], hcpBounds[seat]))) continue;
+      pool.push({ th, block, n: deal.n });
+    }
   }
+  if (enriched && !available) return { noAuction: onlyFile ? "theme" : "all" };
   if (!pool.length) return null;
   const fresh = used ? pool.filter((p) => !used.has(`${p.th.file}#${p.n}`)) : pool;
   if (!fresh.length) return { exhausted: true };
@@ -1383,7 +1688,7 @@ async function loadThemeText(th) {
   const resp = await fetch(th.dir + th.file, { cache: "reload" });
   if (!resp.ok) throw new Error(resp.status);
   th.text = await resp.text();
-  th.count = splitPbnGames(th.text).length;
+  th.count = themeDeals(th).length;
   if (!th.title) th.title = pbnTitles(th.text);
   if (randomSource === ALL_THEMES || randomSource === th.file) renderRandomSource();
   return th.text;
@@ -5283,9 +5588,11 @@ function renderQuizStep() {
 // la main (champ « trace » de la réponse, voir engine/trace.go). Seules les
 // situations déjà instrumentées en portent un : sans trace, pas de lien.
 
-// Le lien qui déplie l'arbre, suivi de l'arbre replié.
+// Le lien qui déplie l'arbre, suivi de l'arbre replié. Une enchère lue dans un
+// fichier n'a pas de trace — le moteur seul en traçait une —, mais elle a son
+// commentaire : c'est lui qui s'y déplie.
 function decisionTreeToggleHTML(entry, lang) {
-  if (!entry.trace || !entry.trace.length) return "";
+  if (!(entry.trace && entry.trace.length) && !entry.comment) return "";
   const t = UI_TEXT[lang];
   return `
     <button type="button" class="link-btn tree-toggle" aria-expanded="false">${esc(t.treeShow)}</button>
@@ -5301,16 +5608,24 @@ function decisionTreeHTML(entry, lang, hands = quiz && quiz.result.hands) {
       [hand.spades, hand.hearts, hand.diamonds, hand.clubs].map((s) => s.length).join("-"))
     : "";
   const q = lang === "fr" ? " ?" : "?";
-  const steps = entry.trace.map((s) => {
-    const cls = s.note ? "note" : s.ok ? "ok" : "ko";
-    const mark = s.note ? "•" : s.ok ? "✓" : "✗";
-    return `
+  // Le chemin du moteur, test par test, ou — pour une enchère qui vient d'un
+  // fichier — son commentaire, seul mot du fichier sur elle.
+  const steps = entry.trace && entry.trace.length
+    ? entry.trace.map((s) => {
+      const cls = s.note ? "note" : s.ok ? "ok" : "ko";
+      const mark = s.note ? "•" : s.ok ? "✓" : "✗";
+      return `
       <li class="${cls}" style="--depth:${s.depth || 0}">
         <span class="tree-mark" aria-hidden="true">${mark}</span>
         <span class="tree-label">${esc(s.label)}</span>
         ${s.value ? `<span class="tree-value">${esc(s.value)}</span>` : ""}
       </li>`;
-  }).join("");
+    }).join("")
+    : `
+      <li class="note" style="--depth:0">
+        <span class="tree-mark" aria-hidden="true">•</span>
+        <span class="tree-label">${esc(entry.comment || "")}</span>
+      </li>`;
   return `
     <div class="tree-head">${esc(t.treeWhy)} <b>${bidHTML(entry.bid, lang)}</b>${q}
       ${handLine ? `<span class="muted">(${esc(handLine)})</span>` : ""}</div>
@@ -5520,23 +5835,22 @@ function showTrainTable(k) {
   }
 }
 
-// La donne d'une nouvelle table, selon le choix fait au départ : distribuée
-// au hasard, ou tirée parmi toutes les donnes thématiques, ou parmi celles
-// d'un thème. Donneur, vulnérabilité et bornes de points choisis s'appliquent.
-// Une donne thématique ne revient pas dans la même séance.
+// La donne d'une nouvelle table, selon le choix fait au départ : tirée parmi
+// toutes les donnes d'entraînement, ou parmi celles d'un thème. Donneur,
+// vulnérabilité et bornes de points choisis s'appliquent. Une donne ne revient
+// pas dans la même séance. Seules les donnes qui portent leur enchère sont
+// tirées : le moteur d'enchères n'est pas appelé.
 async function drawPracticePBN(lang) {
   const bad = validateBounds(lang);
   if (bad) throw new Error(bad);
-  if (train.source !== "random") {
-    const pick = await pickThemedBlock(train.source === "theme" ? train.theme : null, train.used);
-    if (!pick) throw new Error(UI_TEXT[lang].trainNoThemed);
-    if (pick.exhausted) throw new Error(UI_TEXT[lang].trainNoMoreDeals);
-    train.used.add(pick.key);
-    return { pbn: pick.block, label: pick.label };
+  const pick = await pickThemedBlock(train.source === "theme" ? train.theme : null, train.used, true);
+  if (!pick) throw new Error(UI_TEXT[lang].trainNoThemed);
+  if (pick.noAuction) {
+    throw new Error(UI_TEXT[lang][pick.noAuction === "theme" ? "trainThemeNoEnriched" : "trainNoEnriched"]);
   }
-  const pbn = await randomPBN(chosenDealer() || pickRandom(SEATS), chosenVul() || pickRandom(VULS));
-  if (!pbn) throw new Error(CONS_TEXT[lang].errNoDeal);
-  return { pbn, label: "" };
+  if (pick.exhausted) throw new Error(UI_TEXT[lang].trainNoMoreDeals);
+  train.used.add(pick.key);
+  return { pbn: pick.block, label: pick.label };
 }
 
 // « Camp du déclarant » : la main n'est pas fixée pour la séance, elle se tire
@@ -5561,7 +5875,10 @@ async function newTrainTable() {
   $("#train-turn").textContent = t.trainBusy;
   try {
     const { pbn, label } = await drawPracticePBN(lang);
-    const result = await bidsLocal.bid(pbn, lang);
+    // L'enchère vient du fichier, avec ses commentaires : le moteur d'enchères
+    // n'est pas appelé (voir pbnTrainingResult).
+    const result = pbnTrainingResult(pbn, lang);
+    if (!result) throw new Error(t.trainNoEnriched);
     const seat = train.seat === TRAIN_DECLARER ? declaringSeat(result) : train.seat;
     train.tables.push({ result, seat, lang, calls: [], idx: 0,
       correctCount: 0, totalUser: 0, done: false, label, pbn });
@@ -5678,32 +5995,37 @@ function startTraining(seat) {
   newTrainTable();
 }
 
-// Les donnes de l'entraînement : « random » (distribuées au hasard), « all »
-// (tous les thèmes) ou « theme » (le thème choisi dans la liste). Retenu d'une
-// visite à l'autre, comme la main et le thème.
+// Les donnes de l'entraînement : « all » (toutes les donnes d'entraînement du
+// système) ou « theme » (le thème choisi dans la liste). Retenu d'une visite à
+// l'autre, comme la main et le thème.
 const TRAIN_SOURCE_KEY = "bids.trainSource";
 const TRAIN_THEME_KEY = "bids.trainTheme";
 
 function trainSource() {
   const picked = trainSeatDialog.querySelector('input[name="train-source"]:checked');
-  return picked ? picked.value : "random";
+  return picked && !picked.disabled ? picked.value : "all";
 }
 
-// Sous le choix, ce qu'il donne : d'où viennent les donnes, et combien il y
-// en a une fois les fichiers lus.
+// Sous le choix, ce qu'il donne : d'où viennent les donnes, et combien il y en
+// a une fois les fichiers lus. Un thème n'offre que ses donnes d'entraînement,
+// celles qui portent leur enchère.
 function renderTrainSource() {
   const t = UI_TEXT[$("#lang").value];
   const src = trainSource();
   $("#train-theme").hidden = src !== "theme";
   const files = themeFiles || [];
   const th = files.find((x) => x.file === $("#train-theme").value);
-  const total = files.reduce((n, x) => n + (x.count || 0), 0);
-  $("#train-source-hint").textContent = src === "random" ? t.trainSrcHintRandom
-    : src === "all" ? (total ? t.trainSrcHintAll(total) : "")
-      : th && th.count ? t.trainSrcHintTheme(th.count) : "";
+  const total = files.reduce((n, x) => n + trainableDeals(x).length, 0);
+  const hint = !total ? t.trainNoEnriched
+    : src === "all" ? t.trainSrcHintAll(total)
+      : th ? t.trainSrcHintTheme(trainableDeals(th).length) : "";
+  $("#train-source-hint").textContent = hint;
 }
 
-// La liste des thèmes, avec leur libellé dans la langue de la page.
+// La liste des thèmes, avec leur libellé dans la langue de la page, et le
+// nombre de leurs donnes d'entraînement. Un thème qui n'en a aucune reste dans
+// la liste — son absence serait un silence —, s'annonce tel quel et ne se
+// choisit pas.
 async function fillTrainThemes() {
   const lang = $("#lang").value;
   const sel = $("#train-theme");
@@ -5712,14 +6034,23 @@ async function fillTrainThemes() {
   const active = randomSource !== null && randomSource !== ALL_THEMES ? randomSource : "";
   const keep = active || sel.value || readStored(TRAIN_THEME_KEY, "");
   const t = UI_TEXT[lang];
-  sel.replaceChildren(...sortedThemes(files, lang).map((th) =>
-    new Option(th.count ? `${themeName(th, lang)} — ${t.themesCount(th.count)}` : themeName(th, lang), th.file)));
-  if (files.some((th) => th.file === keep)) sel.value = keep;
-  // Aucun thème joignable : seules les donnes aléatoires restent possibles.
+  const countOf = (th) => trainableDeals(th).length;
+  const usable = files.filter((th) => countOf(th) > 0);
+  sel.replaceChildren(...sortedThemes(files, lang).map((th) => {
+    const n = countOf(th);
+    const label = n ? `${themeName(th, lang)} — ${t.themesCount(n)}`
+      : `${themeName(th, lang)} — ${t.trainSrcNoEnriched}`;
+    const opt = new Option(label, th.file);
+    opt.disabled = !n;
+    return opt;
+  }));
+  const kept = usable.find((th) => th.file === keep) || sortedThemes(usable, lang)[0];
+  if (kept) sel.value = kept.file;
+  // Aucune donne d'entraînement dans le système : ni « Tous les thèmes », ni
+  // « Un thème » n'ont quoi que ce soit à tirer.
   for (const input of trainSeatDialog.querySelectorAll('input[name="train-source"]')) {
-    if (input.value !== "random") input.disabled = !files.length;
+    input.disabled = !usable.length;
   }
-  if (!files.length) trainSeatDialog.querySelector('input[value="random"]').checked = true;
   renderTrainSource();
 }
 
@@ -5737,9 +6068,9 @@ function renderTrainSeatChoices() {
   // Un thème choisi sur la page (bandeau du thème) est repris d'office ;
   // sinon, le dernier choix retenu.
   const active = randomSource === null ? null : randomSource === ALL_THEMES ? "all" : "theme";
-  const src = active || readStored(TRAIN_SOURCE_KEY, "random");
+  const src = active || readStored(TRAIN_SOURCE_KEY, "all");
   const radio = trainSeatDialog.querySelector(`input[name="train-source"][value="${src}"]`)
-    || trainSeatDialog.querySelector('input[value="random"]');
+    || trainSeatDialog.querySelector('input[value="all"]');
   if (active || !trainSeatDialog.querySelector('input[name="train-source"]:checked')) radio.checked = true;
   renderTrainSource();
   for (const btn of trainSeatDialog.querySelectorAll(".seat-choice")) {
@@ -6037,16 +6368,16 @@ const TUTORIAL_STEPS = [
     en: ["The auction", "As soon as the deal is complete, the engine runs the auction in the French bidding system (SEF).\nThe commented auction explains every call. Hover one (or tap it): its line lights up and its bidder's hand is circled on the table.\nThe printer prints the table, the auction and the par."],
   },
   {
-    fr: ["L'arbre de décision", "L'icône en tête d'une ligne déplie l'arbre de décision : les règles examinées par le moteur sur la main, dans l'ordre, avec ✓ ou ✗ et la valeur mesurée, jusqu'à l'enchère choisie.\nC'est le meilleur moyen de comprendre pourquoi une enchère a été faite."],
-    en: ["The decision tree", "The icon at the start of a line opens the decision tree: the rules the engine checked on the hand, in order, with ✓ or ✗ and the measured value, down to the chosen call.\nIt is the best way to understand why a call was made."],
+    fr: ["L'arbre de décision", "L'icône en tête d'une ligne déplie l'arbre de décision : les règles examinées par le moteur sur la main, dans l'ordre, avec ✓ ou ✗ et la valeur mesurée, jusqu'à l'enchère choisie.\nPour une enchère lue dans un fichier (voir S'entraîner), il déplie son commentaire : c'est lui qui explique l'enchère.\nC'est le meilleur moyen de comprendre pourquoi une enchère a été faite."],
+    en: ["The decision tree", "The icon at the start of a line opens the decision tree: the rules the engine checked on the hand, in order, with ✓ or ✗ and the measured value, down to the chosen call.\nFor a call read from a file (see Practise) it opens its comment: that is what explains the call.\nIt is the best way to understand why a call was made."],
   },
   {
     fr: ["Le PAR", "L'onglet PAR donne les levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul double-mort).\nSurvolez ou touchez une case : les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres."],
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {
-    fr: ["S'entraîner", "Le bouton S'entraîner, après Partager : choisissez les donnes (Aléatoires, Tous les thèmes ou Un thème), puis votre main (Nord, Est, Sud ou Ouest).\nVous ne voyez que votre main."],
-    en: ["Practise", "The Practise button, after Share: choose the deals (Random, All topics or One topic), then your hand (North, East, South or West).\nYou only see your own hand."],
+    fr: ["S'entraîner", "Le bouton S'entraîner, après Partager : choisissez les donnes (Tous les thèmes ou Un thème), puis votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont celles des fichiers PBN du système qui portent leur enchère : l'enchère, ses commentaires et le contrat viennent du fichier, et le moteur n'est pas appelé. Un thème sans aucune donne de ce genre s'annonce et ne se choisit pas.\nVous ne voyez que votre main."],
+    en: ["Practise", "The Practise button, after Share: choose the deals (All topics or One topic), then your hand (North, East, South or West).\nThe deals are those of the system's PBN files that carry their auction: the auction, its comments and the contract come from the file, and the engine is not called. A topic with no such deal says so and cannot be chosen.\nYou only see your own hand."],
   },
   {
     fr: ["La table", "Votre main en bas, les trois autres dos tournés ; au centre la boîte des enchères, sièges vulnérables en rouge. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],

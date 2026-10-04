@@ -10,7 +10,7 @@
 
 **L'application est en ligne : <https://jeanjacquesserpoul.github.io/encheres-bridge/>**
 
-Application web qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), et la commente enchère par enchère ; **S'entraîner** fait enchérir à la place d'un joueur, sur des donnes tirées au hasard. Les donnes s'échangent au format **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
+Application web qui simule la séquence d'enchères complète d'une donne de bridge, selon le système français d'enchères (SEF), et la commente enchère par enchère ; **S'entraîner** fait enchérir à la place d'un joueur, sur des donnes d'entraînement tirées des fichiers PBN du système, qui portent leur enchère. Les donnes s'échangent au format **PBN** (voir [docs/pbn.txt](docs/pbn.txt)).
 
 Le moteur d'enchères, écrit en Go, est compilé en **WebAssembly** et tourne entièrement dans le navigateur : rien n'est installé, aucun serveur n'est interrogé. La page est publiée sur GitHub Pages à chaque poussée sur `main` (voir [Hébergement statique](#hébergement-statique)).
 
@@ -284,7 +284,7 @@ Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le mote
 
 ### Donnes thématiques
 
-Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Seize sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 500 donnes chacune :
+Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque système d'enchères, dans son dossier `pbn/` : la fenêtre propose celles du système choisi. Seize sont fournies pour le SEF, dans [cli/systems/sef/pbn/](cli/systems/sef/pbn/), de 500 donnes chacune — sauf `2-faible.pbn`, dont les 14 donnes portent leur enchère (voir [Le nouveau format](#le-nouveau-format)) :
 
 | Fichier | Thème |
 |---|---|
@@ -292,7 +292,7 @@ Les séries de **Donnes thématiques** sont des fichiers PBN propres à chaque s
 | `drury.pbn` | le répondant, main passée, répond 2♣ Drury ou 2SA Super Drury |
 | `2-trefle-fort.pbn` | ouverture de 2♣ fort indéterminé |
 | `roudi.pbn` | le répondant emploie le Roudi (2♣) après la redemande de 1SA de l'ouvreur |
-| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et défense adverse : contre d'appel et 2SA forcing de manche de Lévy, 2SA, interventions, bicolores, réveil (deux tirages mêlés : 380 donnes variées, 40 au plus par action, et 120 donnes avec le 2SA de Lévy) |
+| `2-faible.pbn` | ouverture de 2♥ ou 2♠ faible et réponse du partenaire : relais Ogust, prolongation de barrage, conclusion à la manche ou à 3SA (les 14 donnes du nouveau format, avec leur enchère et ses commentaires) |
 | `2-carreau-fm.pbn` | ouverture de 2♦ forcing de manche, suivie de la réponse en As |
 | `contre-appel.pbn` | contre d'appel sur une ouverture au palier de 1 et réponse du partenaire, dans les trois zones du tableau : 160 donnes à 0-7 H, 200 à 8-10 H, 140 à 11 H et plus (cue-bid, 2SA, 3SA, manche en majeure) |
 | `barrages.pbn` | ouverture de barrage au palier de 3 ou de 4 (80 donnes au plus par barrage) |
@@ -333,7 +333,7 @@ Chaque fichier commence par son libellé, une ligne par langue, avant la premiè
 [Deal "N:…"]
 ```
 
-Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchères selon le système choisi, et une série suit donc les règles quand elles changent.
+Les donnes n'ont pas de section `[Auction]` : l'application calcule les enchères selon le système choisi, et une série suit donc les règles quand elles changent. Une série peut cependant porter les enchères de ses donnes : voir [Le nouveau format](#le-nouveau-format) en fin de section.
 
 **Ajouter une série.** [tools/python_tools/gen_theme_pbn.py](tools/python_tools/gen_theme_pbn.py) tire des donnes au hasard et garde celles dont les enchères emploient une règle donnée — une expression régulière sur l'id de la règle, dans les règles du système (`--rules`, [cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml) par défaut). Le tirage est reproductible (`--seed`, 2024 par défaut). `--max-per-rule N` plafonne le nombre de donnes par règle retenue, pour équilibrer les variantes d'un thème : sans lui, les ouvertures les plus fréquentes prennent presque toute la série. On déclare ensuite le fichier et ses libellés dans le `pbn/index.json` du système.
 
@@ -349,6 +349,28 @@ Pour un autre système, on passe ses règles et on écrit dans son dossier : `--
 
 Un fichier écrit à la main ou venu d'ailleurs convient aussi, pourvu qu'il soit déclaré dans `index.json` ; son nom ne prend que des lettres, chiffres, `.`, `-` et `_`, avec l'extension `.pbn`.
 
+#### Le nouveau format
+
+Une donne peut porter son enchère, et c'est ce qui rend **l'entraînement** possible sans moteur d'enchères : la séquence, le commentaire de chaque enchère et le contrat sont alors dans le fichier. C'est la section `[Auction "<donneur>"]` de PBN, ses appels à la suite, chacun suivi de son commentaire **entre accolades** — la convention des commentaires de PBN 2.1, que les autres logiciels de bridge lisent et écrivent. Un commentaire porte sur l'appel qui le précède ; les appels sont en **notation PBN standard** (`1C` … `7NT`, `Pass`, `X`, `XX`), jamais dans la notation française (`Passe`, `SA`, `T`) : `C` y vaut ♣ d'un côté, ♥ de l'autre, et rien ne les distingue dans une seule enchère.
+
+```
+[Event "Entrainement 2 Faible (0-20H) - Donne 1"]
+[Board "1"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:….AT8632.K64.J864 … … …"]
+[Declarer "N"]
+[Contract "3NT"]
+[Auction "S"]
+2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H.} Pass 2NT {Relais Ogust forcing, 19H.} Pass
+3H {Reponse Ogust : main maximale et mauvaise couleur.} Pass 3NT {Conclusion a Sans-Atout.} Pass
+Pass Pass
+```
+
+`[Auction "…"]` porte le donneur, et sa valeur doit être celle de `[Dealer]` : c'est la règle PBN, et la donne est écartée sinon. L'entraînement ne retient que les donnes dont l'enchère est **lisible, légale et finie**, et dont les quatre mains sont complètes ; `[Declarer]` et `[Contract]` sont alors déduits de la séquence, qui fait foi.
+
+[cli/systems/sef/pbn/2-faible.pbn](cli/systems/sef/pbn/2-faible.pbn) et ses 14 donnes en sont l'exemple ; les autres séries du SEF n'ont pas encore leur `[Auction]`, et l'entraînement ne peut donc pas encore les proposer.
+
 ### Voir les enchères
 
 Les enchères se calculent **d'elles-mêmes** dès que la donne est complète — au chargement, après un tirage, un fichier, un lien ou un déplacement de carte —, dans la page et sans délai ; **Afficher les enchères** reste là pour le demander explicitement. Le recalcul s'abstient avant que le moteur ne soit prêt, et quand un message sur la donne attend d'être lu. Survoler une enchère de la grille — ou l'atteindre au clavier — éclaire sa ligne commentée et cercle de doré la main de son auteur sur la table ; un clic amène la ligne à l'écran. Sur grand écran, où la liste est sous la grille, l'infobulle de la case s'efface ; elle reste sur téléphone. Le contrat et son déclarant s'inscrivent au centre de la table en lecture, dont chaque main reçoit l'analyse du moteur (points H et HL, type de main) : les mains ne sont pas redites ailleurs. La page affiche aussi, dans l'onglet **Enchères** (à droite de la table, ou dessous sur écran étroit, où **Revenir à la donne** y remonte ; l'icône d'imprimante l'imprime seul, en thème clair), la grille d'enchères (survolez ou touchez une enchère pour lire sa signification) et la séquence commentée, dont chaque ligne porte à gauche une icône qui déplie l'**arbre de décision** de l'enchère (voir le champ `trace` ci-dessous).
@@ -363,7 +385,8 @@ La pastille d'état des Réglages rejoue une donne de référence au chargement 
 
 Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **votre main** : Nord, Est, Sud ou Ouest, disposés autour d'une table. Le dernier choix est retenu. Il ouvre ensuite la **table d'entraînement**, en plein écran. La donne affichée sur la page n'est pas touchée.
 
-- **Les donnes** se choisissent dans la même boîte, en tête : **Aléatoires** (distribuées au hasard), **Tous les thèmes** (tirées parmi toutes les donnes thématiques du système choisi) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, **Plus de donnes disponibles** s'affiche. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
+- **Les donnes** se choisissent dans la même boîte, en tête : **Tous les thèmes** (tirées parmi toutes les donnes d'entraînement du système choisi) ou **Un thème** (celui de la liste qui s'affiche alors). Le choix est retenu ; si aucune donne du choix ne respecte les réglages, un message le dit. Une donne ne revient pas dans la même séance : quand toutes ont été jouées, **Plus de donnes disponibles** s'affiche. Le donneur, la vulnérabilité et les bornes de points choisis s'appliquent. Le thème de la donne n'apparaît pas à la table, pour ne rien souffler : seul le score de **Terminer** le cite.
+- **Les donnes d'entraînement sont celles qui portent leur enchère** : la section `[Auction]` du fichier PBN, avec le commentaire de chaque enchère entre accolades (voir [Donnes thématiques](#donnes-thématiques)). L'enchère, ses commentaires et le contrat sont donc **lus dans le fichier** : l'entraînement n'appelle pas le moteur d'enchères. Les autres donnes d'une série sont simplement écartées — la liste des thèmes donne, pour chacun, le nombre de ses donnes d'entraînement, et un thème qui n'en a aucune s'annonce et ne se choisit pas.
 - **La table** reprend l'allure d'une table en ligne :
   - votre main est toujours **en bas**, étalée carte par carte ;
   - les trois autres joueurs ont le dos tourné : à gauche celui qui parle après vous, en face le partenaire ;
@@ -373,7 +396,7 @@ Le bouton **S'entraîner**, après **Partager**, ouvre d'abord le choix de **vot
 - **À votre tour**, une **boîte à enchères** à deux étages, comme en club : une rangée de **paliers** (1 à 7, le plus bas encore permis présélectionné), une rangée de **dénominations** (♣ ♦ ♥ ♠ SA), puis Passe, X (contre) et XX (surcontre).
   - Au clavier : un chiffre, puis C D H S N ; P passe, X contre (ou surcontre).
   - Elle n'ouvre que les enchères **légales**.
-- **Seule l'erreur s'affiche** : votre enchère est comparée à celle du moteur. Conforme, elle passe sans message et la donne continue ; sinon la table s'arrête sur l'enchère attendue et son commentaire, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le chemin suivi par le moteur sur la main (voir le champ `trace` ci-dessous).
+- **Seule l'erreur s'affiche** : votre enchère est comparée à celle du système. Conforme, elle passe sans message et la donne continue ; sinon la table s'arrête sur l'enchère attendue et son commentaire, puis **Continuer**. Après une mauvaise réponse, **Voir l'arbre de décision** déplie le **pourquoi** de l'enchère : la main de son auteur (points H et HL, forme) et son explication — le commentaire lu dans le fichier PBN.
 - **L'enchère finie**, les quatre mains se dévoilent et le contrat s'affiche, **sans score**. **Donne suivante** tire la donne suivante.
 - **‹ et ›** font défiler les donnes déjà jouées, dans leur état final. › ne tire une nouvelle donne qu'une fois l'enchère en cours finie.
 - **Terminer** affiche le **score de la séance** : les enchères conformes au système choisi sur toutes vos enchères, en nombre et en pourcentage. Suit la liste donne par donne (contrat, score, enchères ratées avec l'enchère attendue).
@@ -391,7 +414,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 | `bids.lang`, `bids.theme` | Langue et thème |
 | `bids.rules` | Système d'enchères choisi, par son identifiant (`new`…) ; absent pour le SEF, système par défaut |
 | `bids.trainSeat` | Main choisie pour s'entraîner (Sud par défaut) |
-| `bids.trainSource` | Donnes de l'entraînement : `random`, `all` ou `theme` |
+| `bids.trainSource` | Donnes de l'entraînement : `all` ou `theme` (`random` d'une version antérieure retombe sur `all`) |
 | `bids.trainTheme` | Fichier du thème choisi pour l'entraînement |
 | `bids.hidePasses` | Passes masqués ou non dans la séquence commentée |
 | `bids.lastDeal` | Dernière donne complète (bloc PBN), rechargée à l'ouverture |

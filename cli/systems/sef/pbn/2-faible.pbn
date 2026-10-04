@@ -1,9 +1,4 @@
-% PBN 2.1
-% Donnes 1 à 14 d'entraînement au 2 faible conformes au SEF 2024
-
-[Event "Entrainement 2 Faible (0-20H) - Donne 1"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 1"]
 [Board "1"]
 [West "-"]
 [North "-"]
@@ -11,76 +6,63 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:.AT8632.K64.J864 532.KQJ4.JT53.52 AQJ76..AQ982.AQ3 KT984.975.7.KT97"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "3NT"]
+[Deal "S:J3.KQ9764.84.J85 A74.J5.A962.KQT2 T952.T8.KQ75.963 KQ86.A32.JT3.A74"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 2NT {Relais Ogust forcing, 19H, demande la force et la qualite. | Forcing Ogust relay, 19 HCP, asking for strength and suit quality.} Pass
-3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur. | Ogust answer: maximum hand (8-10 HCP) with a poor suit.} Pass 3NT {Conclusion a Sans-Atout grace aux arrets exterieurs. | Settles in no-trump thanks to the outside stops.} Pass
-Pass Pass
+2H {2 faible standard, 6 cartes, 7H. | Standard weak two, 6 cards, 7 HCP.} Pass Pass {Repondant faible (4H) et sans fit : Passe logique. | Weak responder (4 HCP) without fit: Logical Pass.} Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 2"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 2"]
 [Board "2"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:J84.KQJT86.T.QT5 KQ976.97543.Q83. AT53..9762.AJ864 2.A2.AKJ54.K9732"]
-[Scoring "MP"]
+[Vulnerable "NS"]
+[Deal "S:KQ8762.5.984.T73 AJ.KQ96.AJ2.J984 T953.842.K76.652 4.AJT73.QT53.AKQ"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "2H"]
+[Contract "3S"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 9H. | Weak two opening, 6 hearts, 6-10 HCP, 9 here.} Pass Pass Pass
+2S {2 faible a Pique, 6H. | Weak two in Spades, 6 HCP.} Pass 3S {Loi des levees totales : 4 atouts, main nulle (1H). | Law of Total Tricks: 4 trumps, null hand (1 HCP).} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 3"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 3"]
 [Board "3"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:JT8732.T.Q986.A2 4.KQ9532.K54.964 AKQ5.J8.A32.JT73 96.A764.JT7.KQ85"]
-[Scoring "MP"]
+[Vulnerable "EW"]
+[Deal "S:4.K9.QJT863.8542 AK86.QJ7.A5.AKQ6 JT75.A842.74.T93 Q932.T653.K92.J7"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "3S"]
+[Contract "3D"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H. | Weak two opening, 6 spades, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 15H. | Forcing Ogust relay, 15 HCP.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3S {Arret au niveau de 3, Sud etant minimal avec une couleur fragile. | Stops at the 3 level: South is minimum with a fragile suit.} Pass
-Pass Pass
+2D {2 faible a Carreau, 6H. | Weak two in Diamonds, 6 HCP.} Pass 3D {Soutien de barrage, 4 atouts et 5H. | Preemptive raise, 4 trumps and 5 HCP.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 4"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 4"]
 [Board "4"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:A4.K98643.6.JT93 KQ95.Q.T954.A842 T8763.AJT2.AQJ.7 J2.75.K8732.KQ65"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "4H"]
+[Vulnerable "All"]
+[Deal "S:KQJ763.8.T85.J94 A5.A975.KJ4.AKQ2 T842.T63.AQ96.63 9.KQJ42.732.T875"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e. | Direct raise to game with 12 HCP and a 10-card fit.} Pass
-Pass Pass
+2S {2 faible, belle couleur, 8H. | Weak two, good suit, 8 HCP.} Pass 4S {Barrage pur : 4 atouts et chicane Coeur (5H). | Pure preempt: 4 trumps and heart void (5 HCP).} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 5"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 5"]
 [Board "5"]
 [West "-"]
 [North "-"]
@@ -88,76 +70,63 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A9.QT8542.J42.84 JT542.KJ7.Q8.KQ7 Q7.63.AKT765.A53 K863.A9.93.JT962"]
-[Scoring "MP"]
+[Deal "S:7.AJT764.954.Q93 AKT8.Q5.A86.KT82 Q954.82.QJ73.J64 J632.K93.KT2.A75"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "3H"]
+[Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H. | Weak two opening, 6 hearts, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 13H. | Forcing Ogust relay, 13 HCP.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3H {Arret en partiel, la manche etant compromise face a un minimum. | Stops in a part-score: game would be compromised facing a minimum.} Pass
-Pass Pass
+2H {2 faible en premiere position, 7H. | Weak two in 1st seat, 7 HCP.} Pass Pass {Repondant regulier de 5H, non fitte : Passe. | Balanced responder with 5 HCP, no fit: Pass.} Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 6"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 6"]
 [Board "6"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:KQJ952.75.QJ4.52 T643.AKJT.K53.86 8.9863.A86.KJT94 A7.Q42.T972.AQ73"]
-[Scoring "MP"]
+[Vulnerable "NS"]
+[Deal "S:9.52.KQJ753.T862 A864.AT94.A8.A94 T532.76.T964.QJ5 KQJ7.KQJ83.2.K73"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "2S"]
+[Contract "3D"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 9H. | Weak two opening, 6 spades, 6-10 HCP, 9 here.} Pass Pass Pass
+2D {2 faible a Carreau, 7H. | Weak two in Diamonds, 7 HCP.} Pass 3D {Soutien preventif avec 4 atouts. | Preemptive raise with 4 trumps.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 7"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 7"]
 [Board "7"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:Q42.JT7432.5.AT2 JT8.5.K9743.8743 K63.AK98.QT862.6 A975.Q6.AJ.KQJ95"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "4H"]
+[Vulnerable "EW"]
+[Deal "S:AT8752.4.985.862 K4.AJ63.AQ7.KQJT QJ93.985.J42.973 6.KQT72.KT63.A54"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 7H. | Weak two opening, 6 hearts, 6-10 HCP, 7 here.} Pass 4H {Conclusion directe a la manche avec 12H et un fit 10e. | Direct raise to game with 12 HCP and a 10-card fit.} Pass
-Pass Pass
+2S {2 faible standard, 5H. | Standard weak two, 5 HCP.} Pass 3S {Loi des levees totales avec 4 atouts et 4H. | Law of total tricks with 4 trumps and 4 HCP.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 8"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 8"]
 [Board "8"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:J63.JT9875.7.AT3 Q9872.643.KQ2.84 AK.AQ2.AT654.QJ5 T54.K.J983.K9762"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "4H"]
+[Vulnerable "All"]
+[Deal "S:6.QJT853.864.K93 A83.A64.AQ7.AT82 954.72.K9532.Q76 KQJT72.K9.JT.J54"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 6H. | Weak two opening, 6 hearts, 6-10 HCP, 6 here.} Pass 2NT {Relais Ogust forcing, 20H. | Forcing Ogust relay, 20 HCP.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 4H {Conclusion a la manche, la puissance de Nord compensant le minimum. | Raise to game, North's strength making up for the minimum.} Pass
-Pass Pass
+2H {2 faible classique, 7H. | Classic weak two, 7 HCP.} Pass Pass {Main trop faible pour intervenir ou relayer (5H). | Too weak to act or relay (5 HCP).} Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 9"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 9"]
 [Board "9"]
 [West "-"]
 [North "-"]
@@ -165,75 +134,63 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AJT543.K.J84.J97 K872.A32.96.KT85 9.J975.KQT73.AQ2 Q6.QT864.A52.643"]
-[Scoring "MP"]
+[Deal "S:J9.5.AQT874.8763 AK5.AJ86.95.AK94 T863.KQ93.J3.T52 Q742.T742.K62.QJ"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "3S"]
+[Contract "2D"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H. | Weak two opening, 6 spades, 6-10 HCP, 10 here.} Pass 2NT {Relais Ogust forcing, 12H. | Forcing Ogust relay, 12 HCP.} Pass
-3H {Reponse Ogust : main maximale (8-10 H) et mauvaise couleur. | Ogust answer: maximum hand (8-10 HCP) with a poor suit.} Pass 3S {Arret au niveau de 3, Nord etant singleton sans tenue Sans-Atout. | Stops at the 3 level: North is singleton, with no no-trump stop.} Pass
-Pass Pass
+2D {2 faible a Carreau, 7H. | Weak two in Diamonds, 7 HCP.} Pass Pass {7H reguliers avec doubleton : passe prudent. | 7 HCP balanced with doubleton: prudent pass.} Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 10"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 10"]
 [Board "10"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AJ.QT9752.5.J962 KQT9753.A4.A.AT8 8.K83.KJ643.Q743 642.J6.QT9872.K5"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "3H"]
+[Vulnerable "NS"]
+[Deal "S:KQ9642.8.964.Q62 AJ.AT97.AK3.JT95 T875.Q532.Q75.84 3.KJ64.JT82.AK73"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
 [Result ""]
 [Auction "S"]
-2H {Ouverture de 2 faible, 6 cartes a Coeur, 6-10 H, ici 8H. | Weak two opening, 6 hearts, 6-10 HCP, 8 here.} Pass 3H {Prolongation de barrage tactique (Loi des levees totales). | Tactical pre-emptive raise (Law of Total Tricks).} Pass
-Pass Pass
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 3S {Soutien tactique de barrage avec 4 atouts. | Tactical preemptive raise with 4 trumps.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 11"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 11"]
 [Board "11"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:QJ9874.J3.A64.73 T65.KQ4.J9832.Q5 2.A765.KT7.T9862 AK3.T982.Q5.AKJ4"]
-[Scoring "MP"]
+[Vulnerable "EW"]
+[Deal "S:7.KJT752.A94.872 AQ84.Q6.KJ3.KQJ6 JT63.984.862.A54 K952.A3.QT75.T93"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "2S"]
+[Contract "2H"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 8H. | Weak two opening, 6 spades, 6-10 HCP, 8 here.} Pass Pass Pass
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass Pass {10H mais sans fit franc (3 petits atouts) ni couleur 5e. | 10 HCP but no clear fit or 5-card suit.} Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 12"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 12"]
 [Board "12"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AKJ732.T5.6.QT85 QT.AQJ4.Q9852.96 865.K9862.J74.A2 94.73.AKT3.KJ743"]
-[Scoring "MP"]
-[Declarer "N"]
+[Vulnerable "All"]
+[Deal "S:QJ9864.84.K7.T63 K7.AK92.AJ5.Q872 T532.76.9632.A94 A.QJT53.QT84.KJ5"]
+[Scoring "IMP"]
+[Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 10H. | Weak two opening, 6 spades, 6-10 HCP, 10 here.} Pass 3S {Prolongation de barrage tactique (3 atouts, main faible). | Tactical pre-emptive raise (3 trumps, weak hand).} Pass
-Pass Pass
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 3S {Barrage constructif avec 4 atouts et 10H. | Constructive preempt with 4 trumps and 10 HCP.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 13"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 13"]
 [Board "13"]
 [West "-"]
 [North "-"]
@@ -241,30 +198,665 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:JT8532.7.T4.AQ83 KQ6.QJ542.752.J2 A.A98.AKQJ96.975 974.KT63.83.KT64"]
-[Scoring "MP"]
-[Declarer "N"]
-[Contract "3NT"]
+[Deal "S:5.84.KQJT83.8643 KQJ8.KQ5.A9.AKJ7 T963.763.542.T92 A742.AJT92.76.Q5"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3D"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 6-10 H, ici 7H. | Weak two opening, 6 spades, 6-10 HCP, 7 here.} Pass 2NT {Relais Ogust forcing, 18H. | Forcing Ogust relay, 18 HCP.} Pass
-3C {Reponse Ogust : main minimale (6-7 H) et mauvaise couleur. | Ogust answer: minimum hand (6-7 HCP) with a poor suit.} Pass 3NT {Conclusion a 3SA, la mineure maitresse de Nord compensant. | Settles in 3NT, North's running minor making up for it.} Pass
-Pass Pass
+2D {2 faible a Carreau, 6H. | Weak two in Diamonds, 6 HCP.} Pass 3D {Soutien avec 3 atouts pour gener les adversaires. | Raise with 3 trumps to disrupt opponents.} Pass Pass Pass
 
-[Event "Entrainement 2 Faible (0-20H) - Donne 14"]
-[Site "La Baule-Escoublac"]
-[Date "2026.10.04"]
+[Event "Entrainement 2 Faible SEF - Donne 14"]
 [Board "14"]
 [West "-"]
 [North "-"]
 [East "-"]
 [South "-"]
 [Dealer "S"]
-[Vulnerable "None"]
-[Deal "S:AQ9865.54.Q.QT93 K43.T8762.T43.A4 JT7.KJ9.K982.K75 2.AQ3.AJ765.J862"]
-[Scoring "MP"]
+[Vulnerable "NS"]
+[Deal "S:KJT763.9.873.K92 A8.QJ86.AK5.AJ74 9542.AK4.T96.863 Q.T7532.QJ42.QT5"]
+[Scoring "IMP"]
 [Declarer "S"]
-[Contract "2S"]
+[Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {Ouverture de 2 faible, 6 cartes a Pique, 8H. | Weak two opening, 6 spades, 8 HCP.} Pass Pass Pass
+2S {2 faible classique, 8H. | Classic weak two, 8 HCP.} Pass 3S {Barrage a 3P avec 4 atouts et 11H. | 3S barrage with 4 trumps and 11 HCP.} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:6.QJT873.K98.T74 KQ74.A4.A63.AK92 A952.96.Q74.J863 JT83.K52.JT52.Q5"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 7H. | Weak two in Hearts, 7 HCP.} Pass Pass {11H mal distribues et pas de tenue suffisante. | 11 HCP poorly distributed, no safe bid.} Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQJT82.4.986.T85 A9.KQJ6.AQ5.A974 6543.T98.K432.K3 7.A7532.JT7.QJ62"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 3S {Soutien defensif avec 4 cartes a Pique. | Defensive raise with 4 cards in Spades.} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:8.AJT874.862.K73 AQ95.62.KQJ.AJ82 J763.K95.T54.954 KT42.Q3.A973.QT6"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 3H {Soutien avec 3 atouts et un honneur utile (11H). | Raise with 3 trumps and useful honor (11 HCP).} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQ9874.7.J86.T62 AJ.AK84.A93.KQ74 T653.652.QT7.A85 2.QJT93.K542.J93"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 6H. | Weak two in Spades, 6 HCP.} Pass 3S {Loi des atouts avec 4 cartes (11H). | Law of total tricks with 4 cards (11 HCP).} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:5.73.KQJT94.9753 AQ84.AK9.A7.KQ86 JT732.T64.63.AT4 K96.QJ852.852.J2"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 6H. | Weak two in Diamonds, 6 HCP.} Pass 3D {Soutien barrage naturel. | Natural preemptive raise.} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AJT872.95.84.T74 KQ4.AJ8.AJ96.AK9 9653.Q64.K73.652 2.KT732.QT52.QJ8"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 6H. | Weak two in Spades, 6 HCP.} Pass 3S {Barrage avec 4 atouts. | Barrage with 4 trumps.} Pass Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:6.QJT862.A84.853 A752.A4.KJ92.AQ4 K94.K75.T75.KJ76 QJT83.93.Q63.T92"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust (15H) demandant force et couleur. | Ogust relay (15 HCP) asking strength & suit.} Pass
+3C {Reponse Ogust : Couleur Mauvaise, Main Minimale. | Ogust: Poor suit, Minimum hand.} Pass 3H {Conclusion sans espoir de manche. | Sign-off with no game prospect.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQJ863.6.852.964 AT.AJ75.AK9.AJ73 974.T94.Q74.KQT8 52.KQ832.JT63.52"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust avec 15H et fit 3e. | Ogust relay with 15 HCP and 3-card fit.} Pass
+3D {Reponse Ogust : Bonne Couleur, Main Minimale. | Ogust: Good suit, Minimum hand.} Pass 3S {Arret au palier de 3 face au minimum. | Sign-off at 3-level facing minimum.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:8.AJ9743.K85.862 AQ7.Q8.A964.AKQ4 KT5.T62.Q73.JT95 J96432.K5.JT2.73"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust avec 16H. | Ogust relay with 16 HCP.} Pass
+3H {Reponse Ogust : Mauvaise Couleur, Main Maximale (8-10H). | Ogust: Poor suit, Maximum hand (8-10 HCP).} Pass 4H {La manche est declaree grace au maximum. | Game bid thanks to opener's maximum.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ852.74.85.864 96.Q95.KQ64.AJ93 QT4.K86.AT97.KT7 73.AJT32.J32.Q52"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 9H. | Weak two in Spades, 9 HCP.} Pass 2NT {Relais Ogust (15H). | Ogust relay (15 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Main Maximale. | Ogust: Good suit, Maximum hand.} Pass 4S {Conclusion immediate a la manche. | Direct game conversion.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:7.52.KQJT84.T84 K62.AK84.97.KQ92 A95.Q96.A63.AJ63 QJT843.JT73.52.7"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 6H. | Weak two in Diamonds, 6 HCP.} Pass 2NT {Relais Ogust avec 16H reguliers. | Ogust relay with balanced 16 HCP.} Pass
+3D {Reponse Ogust : Bonne Couleur, Main Minimale. | Ogust: Good suit, Minimum hand.} Pass 3NT {Avec la bonne couleur a K, 3SA est jouable. | Facing good diamonds, 3NT is viable.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KJT762.63.85.Q73 A4.AK97.KJ6.KT95 985.852.AQ74.AJ6 Q3.QJT4.T932.842"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (16H). | Ogust relay (16 HCP).} Pass
+3C {Reponse Ogust : Couleur Mauvaise, Main Minimale. | Ogust: Poor suit, Minimum hand.} Pass 3S {Pas de manche en vue, retour au calme. | No game possible, safe retreat to 3S.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:9.AQ9863.J75.962 A842.T2.AQ4.KQ83 KJ7.KJ5.K96.AJ74 QT653.74.T832.T5"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust (17H). | Ogust relay (17 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Main Maximale. | Ogust: Good suit, Maximum hand.} Pass 4H {Manche tendue sur le fit 5-3/6-3. | Clear game on the fit.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:8.KQJ964.84.K73 AQ75.T7.AKJ3.AT4 JT6.A82.Q62.Q865 K9432.53.T975.J2"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 9H. | Weak two in Hearts, 9 HCP.} Pass 2NT {Relais Ogust (14H). | Ogust relay (14 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Main Maximale. | Ogust: Good suit, Maximum hand.} Pass 4H {Fit et points suffisants pour la manche. | Fit and values sufficient for 4H.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:QJT875.83.K92.85 K9.AK75.A75.A762 A43.Q96.QJT4.KJ4 762.JT42.863.QT9"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (16H). | Ogust relay (16 HCP).} Pass
+3C {Reponse Ogust : Mauvaise Couleur, Minimum. | Ogust: Poor suit, Minimum.} Pass 3S {Stop a 3P. | Stop at 3S.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:7.K8.AQJT74.752 AT6.A954.96.KJ84 KJ8.Q72.K85.AT63 Q95432.JT63.32.Q"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 9H. | Weak two in Diamonds, 9 HCP.} Pass 2NT {Relais Ogust (15H). | Ogust relay (15 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Main Maximale. | Ogust: Good suit, Maximum hand.} Pass 3NT {3SA sur la couleur source affranchie. | 3NT based on running diamond suit.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQJT72.93.T6.853 84.AK76.KJ8.QJ72 A95.Q84.A954.AKT 63.JT52.Q732.964"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (18H). | Ogust relay (18 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 4S {18H et une couleur autonome justifient la manche. | 18 HCP facing a solid suit warrants game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:7.AJT984.93.K94 AT5.K62.AK8.AQ82 KQ8.75.QJT7.T765 J96432.Q3.6542.J"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust (14H). | Ogust relay (14 HCP).} Pass
+3H {Reponse Ogust : Mauvaise Couleur, Maximum. | Ogust: Poor suit, Maximum.} Pass 3NT {Le repondant choisit 3SA avec les arrets. | Responder opts for 3NT with outside stops.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AJ9754.7.J83.T62 K8.AQ92.AK6.KJ83 QT2.K85.Q754.A97 63.JT643.T92.Q54"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 6H. | Weak two in Spades, 6 HCP.} Pass 2NT {Relais Ogust (14H). | Ogust relay (14 HCP).} Pass
+3C {Reponse Ogust : Mauvaise Couleur, Minimum. | Ogust: Poor suit, Minimum.} Pass 3S {Prudence imposee, fin des encheres. | Caution required, end of auction.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:8.KQJ864.T95.A72 A94.T7.AJ7.KJT98 JT6.A95.KQ82.Q63 KQ7532.32.643.54"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 9H. | Weak two in Hearts, 9 HCP.} Pass 2NT {Relais Ogust (15H). | Ogust relay (15 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 4H {Manche atteinte avec confiance. | Confidently bidding the game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQJT93.7.854.J94 A7.AQ84.AKJ2.KT8 852.K93.Q76.AQ73 64.JT652.T93.652"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (15H). | Ogust relay (15 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 4S {Le repondant pousse a 4P grace a la belle couleur. | Pushing to 4S due to good trumps.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:6.KJT874.J84.A72 J95.AQ.AT73.QJ86 AK874.96.KQ9.K54 QT32.532.652.T93"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2S {Changement de couleur Forcing 1 tour (17H, 5 cartes). | New suit F1 (17 HCP, 5 cards).} Pass
+3H {Repetition de la couleur : main minimale sans fit Pique. | Minimum hand with no spade fit, rebids hearts.} Pass 3NT {Conclusion a Sans-Atout. | NT conclusion.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:J5.83.KQJT86.Q52 T84.K76.754.AKJ7 AK73.AQJ5.A9.T98 Q962.T942.32.643"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 8H. | Weak two in Diamonds, 8 HCP.} Pass 2NT {Relais Ogust (19H). | Ogust relay (19 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Main Maximale. | Ogust: Good suit, Maximum hand.} Pass 3NT {3SA sur table. | Natural 3NT.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KJT984.7.T75.K82 A5.KQ84.AJ9.JT95 Q72.AJ65.KQ8.AQ7 63.T932.6432.643"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (20H). | Ogust relay (20 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 4S {Conclusion a 4P sans chercher de chelem. | Settling for 4S without slam search.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:7.QJT974.J83.K72 KT83.K5.AK7.J984 AJ62.A8.Q964.AQ5 Q954.632.T52.T63"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 7H. | Weak two in Hearts, 7 HCP.} Pass 2NT {Relais Ogust (19H). | Ogust relay (19 HCP).} Pass
+3C {Reponse Ogust : Mauvaise Couleur, Minimum. | Ogust: Poor suit, Minimum.} Pass 4H {19H permettent de jouer la manche meme face au minimum. | 19 HCP carries minimum to game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQJT83.92.86.874 97.KT75.KJ4.AK65 K6.AJ83.AQ52.Q92 542.Q64.T973.JT3"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 8H. | Weak two in Spades, 8 HCP.} Pass 2NT {Relais Ogust (18H). | Ogust relay (18 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 4S {Manche evidente. | Obvious game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:8.KQJ973.T86.T84 KJ94.84.A93.AK62 AQ7.A62.KQJ7.QJ5 T6532.T5.542.973"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 7H. | Weak two in Hearts, 7 HCP.} Pass 2NT {Relais Ogust (20H). | Ogust relay (20 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 4H {Le repondant stoppe a la manche. | Responder stops at game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:5.73.AQJT84.J86 K86.KQ85.K7.AT74 AQJ74.AJ4.95.KQ5 T932.T962.632.92"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 8H. | Weak two in Diamonds, 8 HCP.} Pass 2S {Changement de couleur F1 (21H). | New suit F1 (21 HCP).} Pass
+3D {Pas de fit Pique, re-enchere a Carreau. | No spade fit, rebid diamonds.} Pass 3NT {Conclusion a Sans-Atout. | Sign-off in 3NT.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQJT94.84.J5.986 73.AQ52.Q97.J743 A85.KJ7.AK82.AK5 62.T963.T643.QT2"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (22H). | Ogust relay (22 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 4NT {Blackwood 5 cles (RKCB 30-41). | RKCB 30-41.} Pass
+Pass 5C {1 cle (le Roi d'atout). | 1 keycard (King of trumps).} Pass 6S {Conclusion au chelem. | Slam conversion.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:6.AQJ875.84.T84 JT8.T4.Q973.Q963 AK95.K96.AK5.AK5 Q7432.32.JT62.J7"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust (24H). | Ogust relay (24 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 4NT {Blackwood RKCB 30-41. | RKCB 30-41.} Pass
+Pass 5D {2 cles sans la Dame d'atout. | 2 keycards without Queen of trumps.} Pass 6H {Chelem certain sur la qualite annoncee. | Sure slam given suit quality.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AJT872.64.93.J75 Q5.T985.J85.Q843 K4.AKQ7.AK74.AK2 9763.J32.QT62.T9"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust avec une main gigantesque (25H). | Ogust with monster hand (25 HCP).} Pass
+3C {Reponse Ogust : Mauvaise Couleur, Minimum. | Ogust: Poor suit, Minimum.} Pass 4NT {Blackwood RKCB 30-41. | RKCB 30-41.} Pass
+Pass 5C {1 cle (l'As de Pique). | 1 keycard (Ace of spades).} Pass 6S {Suffisant pour declarer 6P. | Enough to bid 6S.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:5.KQJT83.84.865 T764.A7.T96.JT93 AK9.95.AKQ5.AKQ4 QJ832.642.J732.2"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 7H. | Weak two in Hearts, 7 HCP.} Pass 2NT {Relais Ogust (26H). | Ogust relay (26 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 6NT {L'ouvreur garantit 5 a 6 levees a Coeur : 6SA direct. | Opener guarantees 5-6 hearts: 6NT.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:7.63.KQJT86.Q94 QT964.87.54.T872 AK5.AK9.A93.AKJ5 J832.QJT542.72.6"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+2D {2 faible a Carreau, 8H. | Weak two in Diamonds, 8 HCP.} Pass 2NT {Relais Ogust (27H). | Ogust relay (27 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 6NT {Les Carreaux sont maitres : 12 levees de tete. | Running diamonds guarantee 12 top tricks.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQJT74.85.94.862 963.74.T873.QT95 A5.AKQJ2.AK6.AK3 82.T963.QJ52.J74"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "7NT"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 7H. | Weak two in Spades, 7 HCP.} Pass 2NT {Relais Ogust (28H). | Ogust relay (28 HCP).} Pass
+3D {Reponse Ogust : Bonne Couleur, Minimum. | Ogust: Good suit, Minimum.} Pass 7NT {Affranchissement direct de la couleur : 13 levees sures. | 13 cold tricks with running suit.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:6.KQJ964.84.J85 T74.A3.T9762.T74 AK5.T7.AKQ5.AKQ6 QJ9832.852.J3.92"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+2H {2 faible a Coeur, 8H. | Weak two in Hearts, 8 HCP.} Pass 2NT {Relais Ogust (27H). | Ogust relay (27 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 6NT {Grand Chelem exclu sans l'As de Coeur. | 6NT bid; grand slam impossible without Ace of trumps.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Faible SEF - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKJT73.84.95.842 5.T7652.8763.975 Q8.AKQ.AKQ4.AKQJ 9642.J93.JT2.T63"]
+[Scoring "IMP"]
+[Declarer "N"]
+[Contract "7NT"]
+[Result ""]
+[Auction "S"]
+2S {2 faible a Pique, 9H. | Weak two in Spades, 9 HCP.} Pass 2NT {Relais Ogust avec la main theorique absolue (30H). | Ogust with ultimate theoretical hand (30 HCP).} Pass
+3S {Reponse Ogust : Bonne Couleur, Maximum. | Ogust: Good suit, Maximum.} Pass 7NT {Tous les honneurs majeurs sont reunis : 13 levees sur table. | All major honors held: 13 cold top tricks.} Pass
+Pass Pass

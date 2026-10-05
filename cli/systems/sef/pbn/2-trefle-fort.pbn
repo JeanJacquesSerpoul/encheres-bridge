@@ -836,14 +836,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQ74.AKQ86.73.8 T3.4.AT865.AT743 852.T7.QJ94.K652 J96.J9532.K2.QJ9"]
+[Deal "N:852.T7.QJ94.K652 T4.J98.T62.AQJ74 AK963.KQ432.AK5. QJ7.A65.873.T983"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici bicolore majeur 5-5, 18H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 18 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass 4S {3 Piques contre 2 Coeurs : choisit Pique. | 3 spades against 2 hearts: picks spades.} Pass
+2C {Fort indetermine : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL regulier. Ici 19H (21 HL), 5-5-3-0. | Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL. Here 19 HCP (21 HL), 5-5-3-0.} Pass 2D {Relais obligatoire. Ici 6H (6 HL), 3-2-4-4. | Compulsory relay. Here 6 HCP (6 HL), 3-2-4-4.} Pass
+3NT {5♥ et 5♠, 3 a 3,5 perdantes. Ici 19H (21 HL), 5-5-3-0. | 5♥ and 5♠, 3 to 3.5 losers. Here 19 HCP (21 HL), 5-5-3-0.} Pass 4S {Preference ♠ (sur le bicolore majeur). Ici 6H (6 HL), 3-2-4-4. | Spade preference (over the major two-suiter). Here 6 HCP (6 HL), 3-2-4-4.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 48"]
@@ -854,14 +854,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKQ95.AKQ74.6.43 J43..J93.AQT8652 762.J832.KQ85.J9 T8.T965.AT742.K7"]
+[Deal "N:762.J832.KQ85.J9 83.T96.AJ9762.65 AKJ94.AKQ74..Q83 QT5.5.T43.AKT742"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici bicolore majeur 5-5, 18H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 18 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass 4H {4 Coeurs : choisit Coeur. | 4 hearts: picks hearts.} Pass
+2C {Fort indetermine : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL regulier. Ici 19H (21 HL), 5-5-0-3. | Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL. Here 19 HCP (21 HL), 5-5-0-3.} Pass 2D {Relais obligatoire. Ici 7H (7 HL), 3-4-4-2. | Compulsory relay. Here 7 HCP (7 HL), 3-4-4-2.} Pass
+3NT {5♥ et 5♠, 3 a 3,5 perdantes. Ici 19H (21 HL), 5-5-0-3. | 5♥ and 5♠, 3 to 3.5 losers. Here 19 HCP (21 HL), 5-5-0-3.} Pass 4H {Preference ♥ (sur le bicolore majeur). Ici 7H (7 HL), 3-4-4-2. | Heart preference (over the major two-suiter). Here 7 HCP (7 HL), 3-4-4-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 49"]

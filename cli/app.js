@@ -305,6 +305,10 @@ const UI_TEXT = {
     tutorialZoom: "Agrandir l'image",
     trainBtn: "S'entraîner",
     trainTitle: "S'entraîner",
+    modesLabel: "Que voulez-vous faire ?",
+    modeDealTitle: "Simuler les enchères",
+    modeDealDesc: "Tirez, composez ou chargez vos donnes : le système les annonce et commente chaque enchère.",
+    modeTrainDesc: "Enchérissez à la place d'un joueur sur des donnes thématiques, et comparez au système.",
     trainClose: "Fermer l'entraînement",
     trainSeatTitle: "Votre main",
     trainSeatDeclarer: "Camp du déclarant",
@@ -532,6 +536,10 @@ const UI_TEXT = {
     tutorialZoom: "Enlarge the picture",
     trainBtn: "Practise",
     trainTitle: "Practise",
+    modesLabel: "What would you like to do?",
+    modeDealTitle: "Simulate auctions",
+    modeDealDesc: "Draw, build or load your deals: the system bids them and explains every call.",
+    modeTrainDesc: "Bid in place of one player on themed deals, and compare with the system.",
     trainClose: "Close the practice",
     trainSeatTitle: "Your hand",
     trainSeatDeclarer: "Declaring side",
@@ -3278,7 +3286,6 @@ function renderBoundsCards() {
     $(sel).title = long;
   }
   setCommandButton("#bid-btn", PLAY_SVG, UI_TEXT[lang].runAuction, true);
-  setCommandButton("#train-btn", QUIZ_SVG, UI_TEXT[lang].trainBtn, true);
   setCommandButton("#train-prev", PREV_SVG, UI_TEXT[lang].trainPrev);
   setCommandButton("#train-next", NEXT_SVG, UI_TEXT[lang].trainNextTip);
   setCommandButton("#train-finish", CHECK_SVG, UI_TEXT[lang].trainFinish, true);
@@ -6378,6 +6385,12 @@ for (const tab of document.querySelectorAll('[role="tab"]')) {
 }
 
 $("#nav-deal-btn").addEventListener("click", () => revealPane($("#input-panel")));
+// La carte « Simuler les enchères » mène à la table et y place le focus, sur
+// la commande qui fait naître une donne.
+$("#mode-deal-btn").addEventListener("click", () => {
+  $("#input-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  $("#random-btn").focus({ preventScroll: true });
+});
 
 // ---------- mode d'emploi ----------
 

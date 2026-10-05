@@ -1262,7 +1262,7 @@
   seq: "P 1{m}"
   call: "2{M}"
   cond: "{m} >= 4 and {M} >= 5 and hcp_in('{M}') >= 4 and hld >= 12 and hcp <= 11"
-  forcing: F1
+  forcing: NF
   meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {Ms} (4+ H), 12+ HLD, main passée"
   meaning_en: "Fit-showing jump: four {ms} and a good five-card {Ms} suit (4+ HCP), 12+ HLD, passed hand"
   status: sef
@@ -1637,7 +1637,7 @@
   seq: "P 1{M}"
   call: "3{s}"
   cond: "{M} >= 4 and {s} >= 5 and hcp_in('{s}') >= 3 and hld >= 11 and hcp <= 11"
-  forcing: F1
+  forcing: NF
   meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {ss}, 11+ HLD, main passée"
   meaning_en: "Fit-showing jump: four {ms} and a good five-card {ss} suit, 11+ HLD, passed hand"
   status: sef
@@ -5860,12 +5860,14 @@
 # --- le répondant conclut sur les autres redemandes du contreur
 # en: responder concludes over the doubler's other rebids
 - id: "d2f.{o}.X.2NT.3D.{r}"
-  for: [{o: 2H, M: H, r: 3S, t: "S >= 4"}, {o: 2H, M: H, r: 3NT, t: "stop('H')"}, {o: 2H, M: H, r: 5D, t: "D >= 3"}, {o: 2H, M: H, r: 3H, t: "true"},
-        {o: 2S, M: S, r: 3H, t: "H >= 4"}, {o: 2S, M: S, r: 3NT, t: "stop('S')"}, {o: 2S, M: S, r: 5D, t: "D >= 3"}, {o: 2S, M: S, r: 3S, t: "true"}]
+  # 3SA et 5♦ concluent (SO) ; l'autre majeure et le cue-bid restent forcing.
+  # en: 3NT and 5♦ conclude (SO); the other major and the cue-bid stay forcing.
+  for: [{o: 2H, M: H, r: 3S, t: "S >= 4", f: FM}, {o: 2H, M: H, r: 3NT, t: "stop('H')", f: SO}, {o: 2H, M: H, r: 5D, t: "D >= 3", f: SO}, {o: 2H, M: H, r: 3H, t: "true", f: FM},
+        {o: 2S, M: S, r: 3H, t: "H >= 4", f: FM}, {o: 2S, M: S, r: 3NT, t: "stop('S')", f: SO}, {o: 2S, M: S, r: 5D, t: "D >= 3", f: SO}, {o: 2S, M: S, r: 3S, t: "true", f: FM}]
   seq: ["({o}) X 2NT 3D", "({o}) P X 2NT 3D"]
   call: "{r}"
   cond: "{t}"
-  forcing: FM
+  forcing: "{f}"
   meaning: "Sur 5 cartes à ♦ : l'autre majeure à 4 cartes, 3SA avec la tenue, le fit ♦, sinon le cue-bid demande l'arrêt"
   meaning_en: "Over five diamonds: the four-card other major, 3NT with the stopper, the ♦ fit, otherwise the cue-bid asks for a stopper"
   status: choix
@@ -7157,11 +7159,15 @@
   meaning_en: "Balanced 12-14 or 18-19 (2NT mini-maxi)"
   status: sef
 - id: "{o}.2{m}.3{m}"
-  for: [{o: 1H, m: C}, {o: 1H, m: D}, {o: 1S, m: C}, {o: 1S, m: D}, {o: 1D, m: C}]
+  # Sur 1♥/1♠, le soutien est une invitation (le répondant 11-12 peut passer) ;
+  # sur 1♦ – 2♣, il est forcing de manche (fiche).
+  # en: Over 1♥/1♠ the raise invites (an 11-12 responder may pass); over
+  # 1♦ – 2♣ it is game forcing (SEF card).
+  for: [{o: 1H, m: C, f: INV}, {o: 1H, m: D, f: INV}, {o: 1S, m: C, f: INV}, {o: 1S, m: D, f: INV}, {o: 1D, m: C, f: FM}]
   seq: "{o} 2{m}"
   call: "3{m}"
   cond: "{m} >= 4"
-  forcing: F1
+  forcing: "{f}"
   meaning: "Fit 4e"
   meaning_en: "4-card fit"
   status: infere

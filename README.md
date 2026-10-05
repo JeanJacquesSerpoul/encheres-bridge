@@ -312,13 +312,15 @@ La liste peut être longue : la fenêtre ne lit pas tout d'avance. Elle se const
 ```json
 {
   "files": [
-    { "file": "4e-couleur-forcing.pbn", "fr": "4e couleur forcing", "en": "Fourth suit forcing" },
-    { "file": "drury.pbn", "fr": "Drury", "en": "Drury" }
+    { "file": "4e-couleur-forcing.pbn", "fr": "4e couleur forcing", "en": "Fourth suit forcing", "deals": 50 },
+    { "file": "drury.pbn", "fr": "Drury", "en": "Drury", "deals": 50 }
   ]
 }
 ```
 
 Chaque entrée donne le fichier et ses libellés : la liste se trie ainsi sans lire les fichiers. Une entrée peut aussi n'être que le nom du fichier (`"drury.pbn"`) : le libellé est alors lu dans l'en-tête du fichier, et le thème se range à son nom de fichier tant qu'il n'est pas lu.
+
+`deals` est le nombre de donnes du fichier qui portent leur enchère (`[Auction]`), celles que l'entraînement peut jouer. La carte **S'entraîner** affiche leur somme et le nombre de thèmes sans lire les fichiers. Le test `TestThemeIndexDealCounts` (`engine/systems_test.go`) échoue si un nombre ne correspond plus à son fichier : à mettre à jour à chaque ajout ou retrait de donnes.
 
 Chaque fichier commence par son libellé, une ligne par langue, avant la première donne. Ce sont des lignes de commentaire PBN (`%`), que les autres logiciels ignorent. Sans elles, la liste affiche le nom du fichier.
 

@@ -309,6 +309,8 @@ const UI_TEXT = {
     modeDealTitle: "Simuler les enchères",
     modeDealDesc: "Tirez, composez ou chargez vos donnes : le système les annonce et commente chaque enchère.",
     modeTrainDesc: "Enchérissez à la place d'un joueur sur des donnes thématiques, et comparez au système.",
+    trainDealsCount: (n) => `${n.toLocaleString("fr-FR")} donnes`,
+    trainThemesCount: (k) => `${k} thème${k > 1 ? "s" : ""}`,
     trainClose: "Fermer l'entraînement",
     trainSeatTitle: "Votre main",
     trainSeatDeclarer: "Camp du déclarant",
@@ -540,6 +542,8 @@ const UI_TEXT = {
     modeDealTitle: "Simulate auctions",
     modeDealDesc: "Draw, build or load your deals: the system bids them and explains every call.",
     modeTrainDesc: "Bid in place of one player on themed deals, and compare with the system.",
+    trainDealsCount: (n) => `${n.toLocaleString("en-GB")} deals`,
+    trainThemesCount: (k) => `${k} theme${k > 1 ? "s" : ""}`,
     trainClose: "Close the practice",
     trainSeatTitle: "Your hand",
     trainSeatDeclarer: "Declaring side",
@@ -895,6 +899,7 @@ function applyLang() {
   renderRulesSystems();
   renderDealActions();
   renderThemes();
+  renderTrainDealsCount();
   renderIaHint();
   renderTrainSeatChoices();
   for (const opt of $("#dealer").options) {
@@ -1625,6 +1630,27 @@ function themesDir() {
 function forgetThemes() {
   themeFiles = null;
   setRandomSource(null);
+  renderTrainDealsCount();
+}
+
+// Sur la carte S'entraîner, le nombre de donnes d'entraînement du système et
+// celui de leurs thèmes, lus de l'index des thèmes : aucun fichier de donnes
+// n'est chargé pour cela. Rien ne s'affiche tant que l'index n'est pas lu, ni
+// s'il n'offre aucune donne. `trainDealsRun` écarte la réponse d'un système
+// quitté entre-temps.
+let trainDealsRun = 0;
+async function renderTrainDealsCount() {
+  const run = ++trainDealsRun;
+  const files = themeFiles || await loadThemeIndex();
+  if (run !== trainDealsRun) return;
+  const counted = files.filter((th) => th.deals > 0);
+  const total = counted.reduce((n, th) => n + th.deals, 0);
+  const t = UI_TEXT[$("#lang").value];
+  const el = $("#train-deals-count");
+  // Le nombre de thèmes à part : sur téléphone, la pastille n'a de place que
+  // pour celui des donnes.
+  el.innerHTML = total ? `${esc(t.trainDealsCount(total))}<span class="mode-count-themes"> · ${esc(t.trainThemesCount(counted.length))}</span>` : "";
+  el.hidden = !total;
 }
 
 // Les deux lignes de tête de la liste, « Toutes » et « Aucune » : elles
@@ -1659,7 +1685,10 @@ async function loadThemeIndex() {
       if (typeof file !== "string" || !THEME_FILE.test(file) || seen.has(file)) continue;
       seen.add(file);
       const title = f && typeof f === "object" && (f.fr || f.en) ? { fr: f.fr, en: f.en } : null;
-      out.push({ file, dir, title, text: null, pending: null });
+      // « deals » : le nombre de donnes d'entraînement du fichier, tenu à jour
+      // par le test TestThemeIndexDealCounts (voir renderTrainDealsCount).
+      const deals = f && Number.isInteger(f.deals) ? f.deals : null;
+      out.push({ file, dir, title, deals, text: null, pending: null });
     }
     return out;
   } catch (err) {

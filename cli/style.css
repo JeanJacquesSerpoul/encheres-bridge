@@ -2611,20 +2611,29 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   white-space: nowrap;
 }
 .mode-count[hidden] { display: none; }
+/* La flèche : un trait dessiné (et non le caractère →, maigre et mal centré
+   selon la police) dans une pastille blanche translucide. Au survol, la
+   pastille devient dorée et la flèche avance. */
 .mode-go {
   flex: none;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, .35);
   border-radius: 50%;
-  background: rgba(255, 255, 255, .16);
-  font-size: 1.2rem;
-  font-weight: 700;
-  transition: transform .15s;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.mode-card:hover .mode-go { transform: translateX(3px); }
+.mode-go svg { width: 20px; height: 20px; transition: transform .15s; }
+.mode-card:hover .mode-go {
+  border-color: var(--gold-soft);
+  background: var(--gold-soft);
+  color: #1d2b1f;
+}
+.mode-card:hover .mode-go svg { transform: translateX(2px); }
 @media (max-width: 720px) {
   .modes { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
   .mode-card { min-height: 0; padding: 14px 16px; gap: 12px; border-radius: 18px; }
@@ -2646,7 +2655,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 }
 @media (prefers-reduced-motion: reduce) {
   .mode-card, .mode-go { transition: none; }
-  .mode-card:hover, .mode-card:hover .mode-go { transform: none; }
+  .mode-card:hover, .mode-card:hover .mode-go svg { transform: none; }
 }
 
 /* Moins carré : les panneaux flottent sur une ombre douce, le tapis prend un

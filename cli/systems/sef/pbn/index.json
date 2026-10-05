@@ -4,7 +4,7 @@
     { "file": "drury.pbn", "fr": "Drury", "en": "Drury" },
     { "file": "2-trefle-fort.pbn", "fr": "2♣ fort indéterminé", "en": "Strong 2♣ (catch-all)" },
     { "file": "roudi.pbn", "fr": "Roudi", "en": "Roudi (checkback after 1NT rebid)" },
-    { "file": "2-faible.pbn", "fr": "2 faible (2♥ / 2♠) et sa défense", "en": "Weak two (2♥ / 2♠) and its defence" },
+    { "file": "2-faible.pbn", "fr": "2 faible (2♥ / 2♠)", "en": "Weak two (2♥ / 2♠)" },
     { "file": "2-carreau-fm.pbn", "fr": "2♦ forcing de manche", "en": "Game-forcing 2♦" },
     { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" },
     { "file": "barrages.pbn", "fr": "Ouvertures de barrage au palier de 3 et de 4", "en": "Preemptive openings at the 3 and 4 level" },

@@ -3249,7 +3249,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 #par-table thead th.red { color: #ffb4ab; }
 #par-table tbody th { background: none; }
 #par-table tr.side-ns + tr.side-ew th,
-#par-table tr.side-ns + tr.side-ew td { border-top: 2px solid var(--muted); }
+#par-table tr.side-ns + tr.side-ew td { border-top: 2px solid var(--border); }
 #par-table td.tier-down { color: var(--muted); font-weight: 500; }
 /* Survolée ou ouverte, une case garde sa teinte : le fond clair du survol
    (.par-table td.par-cell:hover) rendait illisible le chiffre blanc d'une

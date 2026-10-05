@@ -218,9 +218,9 @@ const UI_TEXT = {
     photoConfirm: "Lire les cartes",
     photoCropTooSmall: "Zone de recadrage trop petite.",
     dealer: "Donneur",
-    dealerTitle: "Donneur des donnes générées ; « Aléatoire » en tire un à chaque fois.",
+    dealerTitle: "Donneur des donnes générées ; « Aléatoire » en tire un à chaque fois. Le changer sur la donne affichée la recalcule aussitôt.",
     vulnerability: "Vulnérabilité",
-    vulTitle: "Vulnérabilité des donnes générées ; « Aléatoire » en tire une à chaque fois.",
+    vulTitle: "Vulnérabilité des donnes générées ; « Aléatoire » en tire une à chaque fois. La changer sur la donne affichée la recalcule aussitôt.",
     lockedTitle: "Donné par le fichier PBN chargé. Modifier directement le texte la donne (PBN).",
     optRandom: "Aléatoire",
     language: "Langue",
@@ -449,9 +449,9 @@ const UI_TEXT = {
     photoConfirm: "Read the cards",
     photoCropTooSmall: "The crop area is too small.",
     dealer: "Dealer",
-    dealerTitle: "Dealer of the generated deals; “Random” draws one every time.",
+    dealerTitle: "Dealer of the generated deals; “Random” draws one every time. Changing it on the displayed deal recomputes it at once.",
     vulnerability: "Vulnerability",
-    vulTitle: "Vulnerability of the generated deals; “Random” draws one every time.",
+    vulTitle: "Vulnerability of the generated deals; “Random” draws one every time. Changing it on the displayed deal recomputes it at once.",
     lockedTitle: "Set by the loaded PBN file. Directly edit the deal text (PBN).",
     optRandom: "Random",
     language: "Language",
@@ -1938,14 +1938,17 @@ $("#dealer").addEventListener("change", () => {
   const seat = chosenDealer();
   if (!seat) return; // « Aléatoire » : le donneur sera tiré à la génération.
   setBlockDealer(seat);
-  hideResult();
+  // Le donneur ouvre l'enchère : le résultat affiché décrit une autre donne.
+  closeStaleResult();
 });
 
 $("#vul").addEventListener("change", () => {
   const vul = chosenVul();
   if (!vul) return; // Idem : tirée à la génération.
   setBlockVul(vul);
-  hideResult();
+  // La vulnérabilité ne change pas la séquence, mais elle pèse sur le PAR :
+  // les deux se redemandent d'un même geste.
+  closeStaleResult();
 });
 
 // ---------- multi-deal PBN files ----------
@@ -3426,6 +3429,16 @@ function scheduleAutoBid() {
     autoBidTimer = null;
     if (autoBidAllowed()) simulate({ auto: true });
   }, 150);
+}
+
+// Le donneur ou la vulnérabilité vient de changer : le résultat affiché ne
+// décrit plus la donne. On le referme, puis on redemande le calcul — dans cet
+// ordre, car un résultat encore ouvert interdit le recalcul automatique (voir
+// autoBidAllowed). Sans cette relance, l'onglet des enchères restait sur son
+// message d'attente, comme si la donne n'était pas complète.
+function closeStaleResult() {
+  hideResult();
+  scheduleAutoBid();
 }
 
 // Le redessin ci-dessus remplace tout le tableau : l'élément qui avait le

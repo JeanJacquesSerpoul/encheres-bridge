@@ -1037,9 +1037,30 @@
        fichiers PBN du système, qui portent leur enchère : voir app.js. -->
   <dialog id="train-seat-dialog" class="train-seat-dialog" aria-labelledby="train-seat-title">
     <div class="train-seat-box">
-      <h2 id="train-seat-title" data-i18n="trainTitle">S'entraîner</h2>
+      <!-- En tête : l'icône de l'entraînement, le titre, et la croix qui
+           referme (elle remplace le bouton Annuler du bas). -->
+      <div class="train-seat-head">
+        <span class="train-seat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 9.2 12 4.4l10 4.8-10 4.8z"/>
+            <path d="M6.5 11.4V16c0 1.4 2.5 2.6 5.5 2.6s5.5-1.2 5.5-2.6v-4.6"/>
+            <path d="M21.4 9.5v4.6"/>
+          </svg>
+        </span>
+        <h2 id="train-seat-title" data-i18n="trainTitle">S'entraîner</h2>
+        <button id="train-seat-cancel" type="button" class="icon-btn train-seat-close"
+                data-i18n-title="trainCancel" data-i18n-label="trainCancel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Deux étapes numérotées : les donnes, puis la main, qui lance
+           l'entraînement. -->
       <fieldset class="train-source">
-        <legend data-i18n="trainSource">Donnes</legend>
+        <legend><span class="step-num" aria-hidden="true">1</span><span data-i18n="trainSource">Donnes</span></legend>
         <div class="train-source-pills">
           <label><input type="radio" name="train-source" value="all"><span data-i18n="trainSrcAll">Tous les thèmes</span></label>
           <label><input type="radio" name="train-source" value="theme"><span data-i18n="trainSrcTheme">Un thème</span></label>
@@ -1047,7 +1068,8 @@
         <select id="train-theme" data-i18n-label="trainSrcTheme" hidden></select>
         <p id="train-source-hint" class="train-source-hint" aria-live="polite"></p>
       </fieldset>
-      <p class="train-seat-label" data-i18n="trainSeatTitle">Votre main</p>
+      <p class="train-seat-label"><span class="step-num" aria-hidden="true">2</span><span data-i18n="trainSeatTitle">Votre main</span></p>
+      <!-- Les mains autour d'un petit tapis, comme à la table. -->
       <div class="seat-compass" role="group" data-i18n-label="trainSeatTitle">
         <button type="button" class="seat-choice" data-seat="N"></button>
         <button type="button" class="seat-choice" data-seat="W"></button>
@@ -1057,9 +1079,7 @@
         <button type="button" class="seat-choice" data-seat="E"></button>
         <button type="button" class="seat-choice" data-seat="S"></button>
       </div>
-      <div class="train-seat-actions">
-        <button id="train-seat-cancel" type="button" data-i18n="trainCancel">Annuler</button>
-      </div>
+      <p class="train-seat-hint" data-i18n="trainSeatHint">Choisissez votre main pour commencer.</p>
     </div>
   </dialog>
 

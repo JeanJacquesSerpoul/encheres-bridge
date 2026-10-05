@@ -3412,3 +3412,119 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   clip-path: inset(50%);
   white-space: nowrap;
 }
+/* ---------- le choix de l'entraînement, mis en forme ---------- */
+
+.train-seat-dialog { width: min(440px, calc(100vw - 24px)); border-radius: 20px; }
+.train-seat-box { padding: 18px 20px 16px; }
+/* En tête : l'icône dorée, le titre, la croix à droite. */
+.train-seat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+.train-seat-head h2 { flex: 1; margin: 0; font-size: 1.2rem; text-align: left; }
+.train-seat-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--gold-soft);
+  color: #1d2b1f;
+}
+.train-seat-icon svg { width: 22px; height: 22px; }
+.train-seat-close {
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: var(--muted);
+}
+.train-seat-close:hover { color: var(--ink); }
+
+/* Les deux étapes : un numéro en pastille devant chaque intitulé, alignés à
+   gauche comme le reste de la fenêtre. */
+.train-source legend,
+.train-seat-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: .8rem;
+  text-align: left;
+}
+.train-source legend { text-align: left; }
+.step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--on-accent);
+  font-size: .72rem;
+  letter-spacing: 0;
+}
+.train-seat-label { margin-top: 18px; }
+
+/* Tous les thèmes / Un thème : la même commande segmentée que les onglets. */
+.train-source-pills {
+  gap: 4px;
+  padding: 4px;
+  border: none;
+  border-radius: 14px;
+  background: var(--tint);
+}
+.train-source-pills label + label { border-left: none; }
+.train-source-pills span { padding: 9px 6px; border-radius: 10px; transition: background .15s, color .15s; }
+.train-source-pills label:hover span { background: var(--hover); }
+.train-source-pills input:checked + span,
+.train-source-pills label:hover input:checked + span {
+  background: var(--accent-bg);
+  color: var(--on-accent);
+  box-shadow: 0 2px 8px rgba(var(--accent-rgb), .35);
+}
+#train-theme { margin-top: 10px; padding: 0 12px; border-radius: 12px; }
+.train-source-hint { text-align: left; padding-left: 2px; }
+
+/* Les mains autour d'un petit tapis vert, comme à la table. La dernière main
+   choisie est en avant ; au centre, « Camp du déclarant », en doré. */
+.seat-compass {
+  max-width: none;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 14px;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 50% 40%, #3a7d54 0%, var(--felt) 55%, var(--felt-dark) 100%);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, .25);
+}
+.seat-choice {
+  min-height: 46px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--surface-2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  transition: transform .12s, border-color .12s, background .12s;
+}
+.seat-choice:hover,
+.seat-choice:focus-visible {
+  border-color: var(--gold-soft);
+  background: var(--surface-2);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.seat-choice.is-last { border-color: var(--accent-bg); color: var(--accent); }
+.seat-choice.seat-choice-declarer,
+.seat-choice.seat-choice-declarer:hover,
+.seat-choice.seat-choice-declarer:focus-visible {
+  background: var(--gold-soft);
+  color: #1d2b1f;
+}
+.seat-choice.seat-choice-declarer:hover,
+.seat-choice.seat-choice-declarer:focus-visible { border-color: #fff; }
+.train-seat-hint { margin: 0; color: var(--muted); font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) {
+  .seat-choice, .train-source-pills span { transition: none; }
+  .seat-choice:hover, .seat-choice:focus-visible { transform: none; }
+}

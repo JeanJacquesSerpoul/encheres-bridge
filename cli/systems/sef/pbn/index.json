@@ -21,6 +21,7 @@
     { "file": "michaels.pbn", "fr": "Michaëls précisé", "en": "Michaels cue-bid and unusual 2NT" },
     { "file": "reveils.pbn", "fr": "Réveils", "en": "Balancing (reopening) bids" },
     { "file": "redemandes-ouvreur.pbn", "fr": "Redemandes de l'ouvreur", "en": "Opener's rebids" },
+    { "file": "stayman.pbn", "fr": "Stayman", "en": "Stayman" },
     { "file": "landy.pbn", "fr": "Landy", "en": "Landy (over 1NT)" },
     { "file": "rencontre.pbn", "fr": "Rencontre", "en": "Fit-showing jumps" },
     { "file": "controles.pbn", "fr": "Contrôles", "en": "Control bids (cue-bids)" }

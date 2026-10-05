@@ -35,7 +35,7 @@ est vérifié contre le moteur, décision par décision et enchère par enchère
 | A | Règles jamais choisies : masquées par une règle antérieure (nommée), condition jamais vraie, séquence jamais rencontrée ; règles d'option, non évaluées |
 | B | Séquences sans règle (passe par défaut) : les plus fréquentes, celles des mains de 12 H et plus, celles qui suivent un forcing |
 | C | Passe donné par une règle juste après un forcing du partenaire |
-| D | Libellé contre condition : tranche de points ou levées de jeu du libellé qu'aucune borne de la condition ne reprend ; chiffres différents entre le français et l'anglais |
+| D | Libellé contre condition : tranche de points ou levées de jeu du libellé qu'aucune borne de la condition ne reprend ; tranche de points du français absente de l'anglais |
 | E | Traductions vides, identiques au français ou en français |
 | F | Les tableaux « enchère \| signification » de `SEF_2024.md`, chaque ligne à côté des règles aux mêmes chiffres, pour la relecture |
 | G | Thèmes PBN : l'enchère du fichier contre celle du moteur, avec le premier appel divergent |

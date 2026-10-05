@@ -1374,6 +1374,20 @@
   meaning: "4+ piques, 5+ H"
   meaning_en: "4+ spades, 5+ HCP"
   status: sef
+# 2SA régulier avant 2♣ et le soutien à 3♦ : sans majeure 4e, une main a
+# forcément 4 cartes à ♣ ou à ♦, et 1{m}.r.2NT, placé après eux, ne pouvait
+# jamais être choisi sur 1♦.
+# en: Balanced 2NT before 2♣ and the 3♦ raise: without a four-card major, a
+# hand always holds four clubs or four diamonds, and 1{m}.r.2NT, placed after
+# them, could never be chosen over 1♦.
+- id: 1D.r.2NT.reg
+  seq: "1D"
+  call: 2NT
+  cond: "hl == 11 and balanced and H < 4 and S < 4"
+  forcing: INV
+  meaning: "11 HL régulier, pas de majeure 4e"
+  meaning_en: "11 HL balanced, no 4-card major"
+  status: sef
 - id: 1D.r.2C
   seq: "1D"
   call: 2C

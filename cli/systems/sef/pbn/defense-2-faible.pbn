@@ -1,0 +1,875 @@
+% Titre-FR: Défense contre le 2 faible
+% Titre-EN: Defence against the weak two
+
+[Event "Entrainement Defense contre le 2 faible - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:T5.AKJ762.84.T65 AQ94.5.KJ63.K942 K83.Q93.AQT9.AJ7 J762.T84.752.Q83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 13H. | Takeout double: singleton in hearts, 4 spades, 13 HCP.} Pass 2S {Reponse au contre : 4 cartes a Pique, 3H (0-8), la majeure d'abord. | Answer to the double: 4 spades, 3 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:T75.KQ5432.T9.Q2 KQ83.A.QJ74.KT95 A642.J76.A53.A83 J9.T98.K862.J764"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 7H. | Weak two opening: 6 hearts, 7 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 15H. | Takeout double: singleton in hearts, 4 spades, 15 HCP.} Pass 3C {Reponse au contre : 4 cartes a Trefle, 5H (0-8), la majeure d'abord. | Answer to the double: 4 clubs, 5 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:QT86.AKT732..J65 KJ97.Q.AK84.QT93 A43.864.J732.A72 52.J95.QT965.K84"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 15H. | Takeout double: singleton in hearts, 4 spades, 15 HCP.} Pass 3D {Reponse au contre : 5 cartes a Carreau, 6H (0-8), la majeure d'abord. | Answer to the double: 5 diamonds, 6 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:5.AQ9532.AT5.T73 AJ84.K.QJ8.AJ962 T72.J76.K643.K84 KQ963.T84.972.Q5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 16H. | Takeout double: singleton in hearts, 4 spades, 16 HCP.} Pass 3S {Reponse a saut : 5 cartes a Pique et 7H (6-8). | Jump answer: 5 spades and 7 HCP (6-8).}
+Pass 4S {Manche : fit a Pique (4 cartes), 16H. | Game: fit in spades (4 cards), 16 HCP.} Pass Pass {Passe : le contrat est trouve (7H). | Pass: the contract is found (7 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:AQ9764.953.A2.T4 5.AQ84.KJ63.KQ92 K2.KT.Q975.AJ873 JT83.J762.T84.65"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 3H {Reponse au contre : 4 cartes a Coeur, 2H (0-8), la majeure d'abord. | Answer to the double: 4 hearts, 2 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:AJ9853.JT64..752 7.KQ95.AJ84.KJ93 KQ2.A72.KT63.AQ6 T64.83.Q9752.T84"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 6H. | Weak two opening: 6 spades, 6 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 14H. | Takeout double: singleton in spades, 4 hearts, 14 HCP.} Pass 3D {Reponse au contre : 5 cartes a Carreau, 2H (0-8), la majeure d'abord. | Answer to the double: 5 diamonds, 2 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (14H). | Pass: the contract is found (14 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:AKJT74.972.32.Q2 2.AJ83.KQ64.AJ95 86.KQ65.AJ75.KT3 Q953.T4.T98.8764"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 3C {Reponse au contre : 4 cartes a Trefle, 2H (0-8), la majeure d'abord. | Answer to the double: 4 clubs, 2 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:K97643.T2.KJ2.T3 A.KQJ4.Q984.K985 J5.9765.A63.AQ72 QT82.A83.T75.J64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 7H. | Weak two opening: 6 spades, 7 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 3H {Reponse au contre : 3 cartes a Coeur, 7H (0-8), la majeure d'abord. | Answer to the double: 3 hearts, 7 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:863.AKT754.T53.T AQJ4.2.K984.AK95 K5.Q96.AJ.QJ7432 T972.J83.Q762.86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 7H. | Weak two opening: 6 hearts, 7 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 17H. | Takeout double: singleton in hearts, 4 spades, 17 HCP.} Pass 2S {Reponse au contre : 4 cartes a Pique, 3H (0-8), la majeure d'abord. | Answer to the double: 4 spades, 3 HCP (0-8), the major first.}
+Pass 4S {Manche : fit a Pique (4 cartes), 17H. | Game: fit in spades (4 cards), 17 HCP.} Pass Pass {Passe : le contrat est trouve (3H). | Pass: the contract is found (3 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:32.AJT652.84.JT2 AQJ.K3.KQ96.A985 K764.98.AT5.KQ73 T985.Q74.J732.64"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 6H. | Weak two opening: 6 hearts, 6 HCP.} X {Contre fort, toutes distributions : 19H. | Strong double, any shape: 19 HCP.} Pass 2S {Reponse au contre : 4 cartes a Pique, 3H (0-8), la majeure d'abord. | Answer to the double: 4 spades, 3 HCP (0-8), the major first.}
+Pass 3NT {3SA : 19H et la tenue a Coeur (K3). | 3NT: 19 HCP and the heart stopper (K3).} Pass Pass {Passe : le contrat est trouve (3H). | Pass: the contract is found (3 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:T4.AKT742.J9.T85 K863.5.AQ84.KJ93 Q5.J96.T732.A762 AJ972.Q83.K65.Q4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 13H. | Takeout double: singleton in hearts, 4 spades, 13 HCP.} Pass 4S {Manche : 5 cartes a Pique et 12H, sans espoir de chelem. | Game: 5 spades and 12 HCP, no slam interest.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:AKJT97.T5.JT7.52 5.K863.AQ84.KJ93 642.Q4.932.AT876 Q83.AJ972.K65.Q4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 9H. | Weak two opening: 6 spades, 9 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 13H. | Takeout double: singleton in spades, 4 hearts, 13 HCP.} Pass 4H {Manche : 5 cartes a Coeur et 12H, sans espoir de chelem. | Game: 5 hearts and 12 HCP, no slam interest.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:T85.AT9752.AJ92. AJ93.4.KQ84.Q832 KQ62.KJ6.T53.T74 74.Q83.76.AKJ965"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4C"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 12H. | Takeout double: singleton in hearts, 4 spades, 12 HCP.} Pass 4C {Unicolore mineur puissant : 6 cartes a Trefle avec deux gros honneurs (AKJ965), 10H. | Strong minor one-suiter: 6 clubs with two top honours (AKJ965), 10 HCP.}
+Pass Pass {Passe : le contrat est trouve (12H). | Pass: the contract is found (12 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:AQJ982.K.96.9762 5.AQ93.842.KQJ83 KT43.JT765.T3.A5 76.842.AKQJ75.T4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4D"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 12H. | Takeout double: singleton in spades, 4 hearts, 12 HCP.} Pass 4D {Unicolore mineur puissant : 6 cartes a Carreau avec deux gros honneurs (AKQJ75), 10H. | Strong minor one-suiter: 6 diamonds with two top honours (AKQJ75), 10 HCP.}
+Pass Pass {Passe : le contrat est trouve (12H). | Pass: the contract is found (12 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:K8.AQJT76.T3.742 AJ93.5.KQ84.KQ93 T652.943.J52.AT6 Q74.K82.A976.J85"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 15H. | Takeout double: singleton in hearts, 4 spades, 15 HCP.} Pass 3NT {3SA : 10H, tenue a Coeur (K82), pas 4 cartes a Pique. | 3NT: 10 HCP, hearts stopper (K82), no four-card spade suit.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:AQJT76.6.J52.T72 5.AJ93.KQ84.KQ93 943.KT852.T3.A64 K82.Q74.A976.J85"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 8H. | Weak two opening: 6 spades, 8 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 3NT {3SA : 10H, tenue a Pique (K82), pas 4 cartes a Coeur. | 3NT: 10 HCP, spades stopper (K82), no four-card heart suit.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:6.QT7432.952.A94 AQ93.6.KJ84.KQ75 T8752.AK9.T7.T32 KJ4.J85.AQ63.J86"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 6H. | Weak two opening: 6 hearts, 6 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 15H. | Takeout double: singleton in hearts, 4 spades, 15 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 12H. | 2NT (Levy): game forcing, 12 HCP.}
+Pass 3C {Contre d'appel banal : on attend les precisions du repondant (15H). | Ordinary takeout double: waits for partner's description (15 HCP).} Pass 3D {Ni 4 cartes a Pique ni tenue a Coeur : 3 Carreau. | Neither four spades nor a heart stopper: 3 diamonds.}
+Pass 4S {Manche : 4 cartes a Pique. | Game: 4 spades.} Pass Pass {Passe : le contrat est trouve (12H). | Pass: the contract is found (12 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:7.JT7642.72.AK42 AKQ.K5.AJ84.QJ93 T8643.Q9.T953.76 J952.A83.KQ6.T85"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} X {Contre fort, toutes distributions : 20H. | Strong double, any shape: 20 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 10H. | 2NT (Levy): game forcing, 10 HCP.}
+Pass 3NT {3SA : 20H regulier (18-20), tenue a Coeur (K5), pas 4 cartes a Pique. | 3NT: 20 HCP balanced (18-20), heart stopper (K5), no four-card spade suit.} Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:7.KQJT97.T54.A97 AKQJ.4.AKJ9.Q853 8643.652.832.J42 T952.A83.Q76.KT6"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} X {Contre fort, toutes distributions : 20H. | Strong double, any shape: 20 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 9H. | 2NT (Levy): game forcing, 9 HCP.}
+Pass 3H {Cue-bid : 20H sans tenue a Coeur (4) : demande de preciser. | Cue-bid: 20 HCP with no heart stopper (4): asks partner to describe.} Pass 4S {Manche : 4 cartes a Pique, 9H. | Game: 4 spades, 9 HCP.}
+Pass Pass {Passe : le contrat est trouve (20H). | Pass: the contract is found (20 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:AKQ862.872.T7.43 5.AQ94.KJ84.KQ75 T93.T53.952.AT96 J74.KJ6.AQ63.J82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 9H. | Weak two opening: 6 spades, 9 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 12H. | 2NT (Levy): game forcing, 12 HCP.}
+Pass 3C {Contre d'appel banal : on attend les precisions du repondant (15H). | Ordinary takeout double: waits for partner's description (15 HCP).} Pass 3D {Ni 4 cartes a Coeur ni tenue a Pique : 3 Carreau. | Neither four hearts nor a spade stopper: 3 diamonds.}
+Pass 4H {Manche : 4 cartes a Coeur. | Game: 4 hearts.} Pass Pass {Passe : le contrat est trouve (12H). | Pass: the contract is found (12 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:QJT742.843.97.A6 K5.AKQ.AJ84.QJ93 96.T76.T532.K742 A83.J952.KQ6.T85"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 7H. | Weak two opening: 6 spades, 7 HCP.} X {Contre fort, toutes distributions : 20H. | Strong double, any shape: 20 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 10H. | 2NT (Levy): game forcing, 10 HCP.}
+Pass 3NT {3SA : 20H regulier (18-20), tenue a Pique (K5), pas 4 cartes a Coeur. | 3NT: 20 HCP balanced (18-20), spade stopper (K5), no four-card heart suit.} Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:JT7542..632.AJ82 6.KQ93.AQJ84.K93 KQ9.AT854.T9.764 A83.J762.K75.QT5"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 6H. | Weak two opening: 6 spades, 6 HCP.} X {Contre d'appel : singleton a Pique, 4 cartes a Coeur, 15H. | Takeout double: singleton in spades, 4 hearts, 15 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 10H. | 2NT (Levy): game forcing, 10 HCP.}
+Pass 3D {5 cartes a Carreau (AQJ84). | Five diamonds (AQJ84).} Pass 3H {4 cartes a Coeur : propose la majeure. | 4 hearts: suggests the major.}
+Pass 4H {Manche : fit a Coeur (4 cartes), 15H. | Game: heart fit (4 cards), 15 HCP.} Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:763.AQ9742.63.AT AQ84.5.AKJ84.Q93 T9.JT6.T92.K7542 KJ52.K83.Q75.J86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} X {Contre d'appel : singleton a Coeur, 4 cartes a Pique, 16H. | Takeout double: singleton in hearts, 4 spades, 16 HCP.} Pass 2NT {2SA (Levy) : forcing de manche, 10H. | 2NT (Levy): game forcing, 10 HCP.}
+Pass 3D {5 cartes a Carreau (AKJ84). | Five diamonds (AKJ84).} Pass 3S {4 cartes a Pique : propose la majeure. | 4 spades: suggests the major.}
+Pass 4S {Manche : fit a Pique (4 cartes), 16H. | Game: spade fit (4 cards), 16 HCP.} Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:94.AQ6532.Q6.T74 AQ5.K.AJ984.KJ92 T72.J97.K532.A86 KJ863.T84.T7.Q53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} X {Contre d'appel : singleton a Coeur, 3 cartes a Pique, 18H. | Takeout double: singleton in hearts, 3 spades, 18 HCP.} Pass 3S {Reponse a saut : 5 cartes a Pique et 6H (6-8). | Jump answer: 5 spades and 6 HCP (6-8).}
+Pass 4S {Manche : fit a Pique (3 cartes), 18H. | Game: fit in spades (3 cards), 18 HCP.} Pass Pass {Passe : le contrat est trouve (6H). | Pass: the contract is found (6 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:AQ7652.972.653.A K.AQ5.AJ984.KJ92 J93.T4.KQ2.T8764 T84.KJ863.T7.Q53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} X {Contre d'appel : singleton a Pique, 3 cartes a Coeur, 18H. | Takeout double: singleton in spades, 3 hearts, 18 HCP.} Pass 3H {Reponse au contre : 5 cartes a Coeur, 6H (0-8), la majeure d'abord. | Answer to the double: 5 hearts, 6 HCP (0-8), the major first.}
+Pass Pass {Passe : le contrat est trouve (18H). | Pass: the contract is found (18 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:Q9832.AQ9764.T4. AKJ4.K3.Q98.AJ94 7.T2.AKJ52.KT753 T65.J85.763.Q862"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "2NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} 2NT {2SA naturel : 18H regulier (15-18), tenue a Coeur (K3). | Natural 2NT: 18 HCP balanced (15-18), hearts stopper (K3).} Pass Pass {Passe : le contrat est trouve (3H). | Pass: the contract is found (3 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:542.AQJ973.J987. AQJ96.4.3.KQJ842 T8.K6.AQT54.T763 K73.T852.K62.A95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} 4C {Bicolore 5-5 Trefle et Pique, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in clubs and spades, 4 losers (forcing): 6-5, 13 HCP.} Pass 4S {Sur le bicolore : 3 cartes a Pique (fit), la manche. | Over the two-suiter: 3 spades (fit), game.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:543.KQJ976.Q974. AQJ96.4.3.KQJ842 KT7.A3.AJT85.T76 82.T852.K62.A953"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "5C"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} 4C {Bicolore 5-5 Trefle et Pique, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in clubs and spades, 4 losers (forcing): 6-5, 13 HCP.} Pass 5C {Sur le bicolore : pas de fit majeur, 4 cartes a Trefle : manche a la mineure. | Over the two-suiter: no major fit, 4 clubs: game in the minor.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:2.AKJ763.7.QT754 AQJ96.4.KQJ842.3 T854.Q9.T63.AJ98 K73.T852.A95.K62"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} 4D {Bicolore 5-5 Carreau et Pique, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in diamonds and spades, 4 losers (forcing): 6-5, 13 HCP.} Pass 4S {Sur le bicolore : 3 cartes a Pique (fit), la manche. | Over the two-suiter: 3 spades (fit), game.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:QJ9763.T54.AJ5.T 4.AQJ96.3.KQJ842 AK.82.QT9874.763 T852.K73.K62.A95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 8H. | Weak two opening: 6 spades, 8 HCP.} 4C {Bicolore 5-5 Trefle et Coeur, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in clubs and hearts, 4 losers (forcing): 6-5, 13 HCP.} Pass 4H {Sur le bicolore : 3 cartes a Coeur (fit), la manche. | Over the two-suiter: 3 hearts (fit), game.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:AKQ763.T42.7.JT9 4.AQJ96.KQJ842.3 J9.85.T63.AQ8754 T852.K73.A95.K62"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} 4D {Bicolore 5-5 Carreau et Coeur, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in diamonds and hearts, 4 losers (forcing): 6-5, 13 HCP.} Pass 4H {Sur le bicolore : 3 cartes a Coeur (fit), la manche. | Over the two-suiter: 3 hearts (fit), game.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:T75.AQ9763.T.Q94 AQJ96.4.KQJ842.3 K43.KJ.76.AJT875 82.T852.A953.K62"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "5D"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} 4D {Bicolore 5-5 Carreau et Pique, 4 perdantes (forcing) : 6-5, 13H. | 5-5 two-suiter in diamonds and spades, 4 losers (forcing): 6-5, 13 HCP.} Pass 5D {Sur le bicolore : pas de fit majeur, 4 cartes a Carreau : manche a la mineure. | Over the two-suiter: no major fit, 4 diamonds: game in the minor.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:72.AT9862.A42.32 A4.3.KQJ85.AKJ95 KJT86.Q75.96.T74 Q953.KJ4.T73.Q86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} 3H {Cue-bid : bicolore mineur 5-5, 20 HL, main de manche ; demande 3SA avec l'arret. | Cue-bid: minor two-suiter 5-5, 20 HL, game-going; asks for 3NT with a stopper.} Pass 3NT {3SA : tenue a Coeur (KJ4), 8H. | 3NT: heart stopper (KJ4), 8 HCP.}
+Pass Pass {Passe : le contrat est trouve (18H). | Pass: the contract is found (18 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:AQ7652.K762.4.74 3.A4.KQJ85.AKJ95 T98.JT8.A962.T32 KJ4.Q953.T73.Q86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 9H. | Weak two opening: 6 spades, 9 HCP.} 3S {Cue-bid : bicolore mineur 5-5, 20 HL, main de manche ; demande 3SA avec l'arret. | Cue-bid: minor two-suiter 5-5, 20 HL, game-going; asks for 3NT with a stopper.} Pass 3NT {3SA : tenue a Pique (KJ4), 8H. | 3NT: spade stopper (KJ4), 8 HCP.}
+Pass Pass {Passe : le contrat est trouve (18H). | Pass: the contract is found (18 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:T874.AK9765.K42. AK.3.AJ985.KQJ52 Q62.QJT.Q63.AT73 J953.842.T7.9864"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} 3H {Cue-bid : bicolore mineur 5-5, 19 HL, main de manche ; demande 3SA avec l'arret. | Cue-bid: minor two-suiter 5-5, 19 HL, game-going; asks for 3NT with a stopper.} Pass 4C {Pas de tenue a Coeur : la plus longue mineure, 4C. | No heart stopper: the longer minor, 4C.}
+Pass 5C {Main de manche : la manche a la mineure. | Game-going hand: game in the minor.} Pass Pass {Passe : le contrat est trouve (1H). | Pass: the contract is found (1 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:T2.AQ9763.T4.KT7 AQ5.KJ4.AJ73.Q96 874.2.Q952.AJ543 KJ963.T85.K86.82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Coeur (KJ4). | Natural 2NT: 17 HCP balanced (15-18), hearts stopper (KJ4).} Pass 3H {Texas : 5 piques, demande 3P (7H). | Transfer: 5 spades, asks for 3S (7 HCP).}
+Pass 3S {Complete le Texas (17H). | Completes the transfer (17 HCP).} Pass Pass {Passe : le contrat est trouve (7H). | Pass: the contract is found (7 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:T872.Q97632.9.KJ AQ5.KJ4.AJ73.Q96 4.A.QT6542.T7543 KJ963.T85.K8.A82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 6H. | Weak two opening: 6 hearts, 6 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Coeur (KJ4). | Natural 2NT: 17 HCP balanced (15-18), hearts stopper (KJ4).} Pass 3H {Texas : 5 piques, demande 3P (11H). | Transfer: 5 spades, asks for 3S (11 HCP).}
+Pass 3S {Complete le Texas (17H). | Completes the transfer (17 HCP).} Pass 4S {Manche : fit a Pique, 11H. | Game: spade fit, 11 HCP.}
+Pass Pass {Passe : le contrat est trouve (17H). | Pass: the contract is found (17 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:3.AQ7652.T9.KT53 AQ54.KJ4.AJ7.Q96 T872.9.Q6432.J74 KJ96.T83.K85.A82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Coeur (KJ4). | Natural 2NT: 17 HCP balanced (15-18), hearts stopper (KJ4).} Pass 3D {Stayman (le Texas Coeur est impossible) : 4 piques, 11H. | Stayman (the heart transfer is impossible): four spades, 11 HCP.}
+Pass 3S {Repond au Stayman : 4 piques. | Answers the Stayman: 4 spades.} Pass 4S {Manche : fit a Pique, 11H. | Game: spade fit, 11 HCP.}
+Pass Pass {Passe : le contrat est trouve (17H). | Pass: the contract is found (17 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:T2.AQ9752.94.K74 AQ5.KJ4.AJ73.Q96 8743.6.QT62.JT53 KJ96.T83.K85.A82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Coeur (KJ4). | Natural 2NT: 17 HCP balanced (15-18), hearts stopper (KJ4).} Pass 3D {Stayman (le Texas Coeur est impossible) : 4 piques, 11H. | Stayman (the heart transfer is impossible): four spades, 11 HCP.}
+Pass 3NT {Pas 4 piques : 3SA. | No four spades: 3NT.} Pass Pass {Passe : le contrat est trouve (11H). | Pass: the contract is found (11 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:AQ7653.74.Q92.54 KJ4.AQ5.AJ73.Q96 9.T82.T64.AKJT73 T82.KJ963.K85.82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 8H. | Weak two opening: 6 spades, 8 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Pique (KJ4). | Natural 2NT: 17 HCP balanced (15-18), spades stopper (KJ4).} Pass 3D {Texas : 5 coeurs, demande 3C (7H). | Transfer: 5 hearts, asks for 3H (7 HCP).}
+Pass 3H {Complete le Texas (17H). | Completes the transfer (17 HCP).} Pass Pass {Passe : le contrat est trouve (7H). | Pass: the contract is found (7 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:AQ9653.T3.9.KJ75 KJ4.AQ5.AJ73.Q96 7.K8742.T642.T43 T82.J96.KQ85.A82"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 10H. | Weak two opening: 6 spades, 10 HCP.} 2NT {2SA naturel : 17H regulier (15-18), tenue a Pique (KJ4). | Natural 2NT: 17 HCP balanced (15-18), spades stopper (KJ4).} Pass 3NT {Manche a SA : 10H. | Game in NT: 10 HCP.}
+Pass Pass {Passe : le contrat est trouve (17H). | Pass: the contract is found (17 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:652.AKQT76.65.43 AKJ84.82.Q93.K76 T9.J943.T87.AQT5 Q73.5.AKJ42.J982"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} 2S {Intervention : belle couleur de 5 cartes a Pique (AKJ84), 13H. | Overcall: good 5-card spade suit (AKJ84), 13 HCP.} Pass 4S {Manche : fit a Pique (3 cartes), 14 HLD. | Game: spade fit (3 cards), 14 HLD.}
+Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:T62.KJ9642.AJT6. A4.83.Q93.AKQ962 QJ975.T5.842.T73 K83.AQ7.K75.J854"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 9H. | Weak two opening: 6 hearts, 9 HCP.} 3C {Intervention : belle couleur de 6 cartes a Trefle (AKQ962), 15H. | Overcall: good 6-card club suit (AKQ962), 15 HCP.} Pass 3NT {3SA : tenue a Coeur (AQ7) et 13H face a la belle mineure. | 3NT: heart stopper (AQ7) and 13 HCP opposite the good minor.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:AKT742.T7.8.T862 83.AKJ96.Q93.A74 Q965.32.JT75.KQ5 J.Q854.AK642.J93"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 7H. | Weak two opening: 6 spades, 7 HCP.} 3H {Intervention : belle couleur de 5 cartes a Coeur (AKJ96), 14H. | Overcall: good 5-card heart suit (AKJ96), 14 HCP.} Pass 4H {Manche : fit a Coeur (4 cartes), 13 HLD. | Game: heart fit (4 cards), 13 HLD.}
+Pass Pass {Passe : le contrat est trouve (14H). | Pass: the contract is found (14 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:AJT972.KT986.86. 83.A4.Q93.AKQ962 54.J52.AJT42.T73 KQ6.Q73.K75.J854"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 8H. | Weak two opening: 6 spades, 8 HCP.} 3C {Intervention : belle couleur de 6 cartes a Trefle (AKQ962), 15H. | Overcall: good 6-card club suit (AKQ962), 15 HCP.} Pass 3NT {3SA : tenue a Pique (KQ6) et 11H face a la belle mineure. | 3NT: spade stopper (KQ6) and 11 HCP opposite the good minor.}
+Pass Pass {Passe : le contrat est trouve (15H). | Pass: the contract is found (15 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:KT2.AQ9753.6.J43 J963.862.Q54.K85 874.T.AT982.AT72 AQ5.KJ4.KJ73.Q96"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 10H. | Weak two opening: 6 hearts, 10 HCP.} Pass {Passe : 6H, pas de quoi intervenir. | Pass: 6 HCP, nothing to overcall with.} Pass 2NT {Reveil a 2SA : 16H regulier (13-16), tenue a Coeur (KJ4). | Balancing 2NT: 16 HCP balanced (13-16), hearts stopper (KJ4).}
+Pass Pass {Passe : le contrat est trouve (6H). | Pass: the contract is found (6 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "EW"]
+[Deal "W:QT32.KQJT96.8.32 K96.A842.QJ4.T86 75.75.AT753.AJ74 AJ84.3.K962.KQ95"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 8H. | Weak two opening: 6 hearts, 8 HCP.} Pass {Passe : 10H, pas de quoi intervenir. | Pass: 10 HCP, nothing to overcall with.} Pass X {Contre de reveil : 1 carte a Coeur (courte), 4 a Pique, 13H : pas forcement la valeur d'une ouverture. | Balancing double: 1 heart in hearts (short), 4 spades, 13 HCP, not necessarily opening values.}
+Pass 3NT {3SA : 10H, tenue a Coeur (A842), pas 4 cartes a Pique. | 3NT: 10 HCP, hearts stopper (A842), no four-card spade suit.} Pass Pass {Passe : le contrat est trouve (13H). | Pass: the contract is found (13 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "All"]
+[Deal "W:52.KQJ963.76.J83 J63.A74.K852.QT9 AT8.T5.AT94.A542 KQ974.82.QJ3.K76"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "W"]
+2H {Ouverture de 2 faible : 6 cartes a Coeur, 7H. | Weak two opening: 6 hearts, 7 HCP.} Pass {Passe : 10H, pas de quoi intervenir. | Pass: 10 HCP, nothing to overcall with.} Pass 2S {Reveil : belle couleur de 5 cartes a Pique (KQ974), 11H (9-15). | Balancing: good 5-card spade suit (KQ974), 11 HCP (9-15).}
+Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).} Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "None"]
+[Deal "W:AT8743.T5.T5.AJ2 J962.K963.QJ4.T8 KQ.Q72.A873.K743 5.AJ84.K962.Q965"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3H"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 9H. | Weak two opening: 6 spades, 9 HCP.} Pass {Passe : 7H, pas de quoi intervenir. | Pass: 7 HCP, nothing to overcall with.} Pass X {Contre de reveil : 1 carte a Pique (courte), 4 a Coeur, 10H : pas forcement la valeur d'une ouverture. | Balancing double: 1 spade in spades (short), 4 hearts, 10 HCP, not necessarily opening values.}
+Pass 3H {Reponse au contre : 4 cartes a Coeur, 7H (0-8), la majeure d'abord. | Answer to the double: 4 hearts, 7 HCP (0-8), the major first.} Pass Pass {Passe : le contrat est trouve (10H). | Pass: the contract is found (10 HCP).}
+Pass
+
+[Event "Entrainement Defense contre le 2 faible - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:AQ8752.93.6.7432 T963.862.Q54.K85 .KJT74.AT982.AJT KJ4.AQ5.KJ73.Q96"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2NT"]
+[Result ""]
+[Auction "W"]
+2S {Ouverture de 2 faible : 6 cartes a Pique, 6H. | Weak two opening: 6 spades, 6 HCP.} Pass {Passe : 5H, pas de quoi intervenir. | Pass: 5 HCP, nothing to overcall with.} Pass 2NT {Reveil a 2SA : 16H regulier (13-16), tenue a Pique (KJ4). | Balancing 2NT: 16 HCP balanced (13-16), spades stopper (KJ4).}
+Pass Pass {Passe : le contrat est trouve (5H). | Pass: the contract is found (5 HCP).} Pass

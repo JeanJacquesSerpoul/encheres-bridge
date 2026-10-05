@@ -12,6 +12,7 @@
     { "file": "splinters.pbn", "fr": "Splinters", "en": "Splinter bids" },
     { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" },
     { "file": "barrages.pbn", "fr": "Ouvertures de barrage au palier de 3 et de 4", "en": "Preemptive openings at the 3 and 4 level" },
+    { "file": "defense-2-faible.pbn", "fr": "Défense contre le 2 faible", "en": "Defence against the weak two" },
     { "file": "reponses-mineure.pbn", "fr": "Réponses sur une ouverture mineure", "en": "Responses to a minor-suit opening" },
     { "file": "reponses-majeure.pbn", "fr": "Réponses sur une ouverture majeure", "en": "Responses to a major-suit opening" },
     { "file": "texas-majeurs.pbn", "fr": "Texas majeurs", "en": "Major-suit transfers" },

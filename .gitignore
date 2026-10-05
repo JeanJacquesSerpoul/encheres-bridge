@@ -2,6 +2,7 @@
 bids
 bids.exe
 tools/par/out/
+tools/coherence/out/
 .env
 .env.*
 !.env.example

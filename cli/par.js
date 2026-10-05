@@ -204,6 +204,10 @@
       body.innerHTML = "";
       if (hint) hint.classList.add("hidden");
       if (credit) credit.classList.add("hidden");
+      for (const id of ["#par-summary", "#par-legend"]) {
+        const el = $(id);
+        if (el) { el.classList.add("hidden"); el.innerHTML = ""; }
+      }
       return;
     }
     const lang = dealLang;
@@ -220,18 +224,83 @@
       const hand = HAND_BY_ROW[row];
       const cells = COLS.map((c) => {
         const strain = STRAIN_BY_COL[c];
-        const cls = "par-cell" + (RED_COLS.has(c) ? " red" : "");
         const tricks = lastTable[strain * 4 + hand];
+        const cls = "par-cell tier-" + tier(tricks, strain) + (RED_COLS.has(c) ? " red" : "");
         return `<td class="${cls}" tabindex="0" data-hand="${hand}"` +
           ` data-strain="${strain}">${tricks}</td>`;
       }).join("");
       const seat = (SEAT_SHORT[lang] && SEAT_SHORT[lang][row]) || row;
-      return `<tr><th>${esc(seat)}</th>${cells}</tr>`;
+      const side = row === "N" || row === "S" ? "ns" : "ew";
+      return `<tr class="side-${side}"><th><span class="par-seat ${side}">${esc(seat)}</span></th>${cells}</tr>`;
     }).join("");
 
+    const summary = $("#par-summary");
+    if (summary) {
+      summary.innerHTML = summaryHTML(lang);
+      summary.classList.remove("hidden");
+    }
+    const legend = $("#par-legend");
+    if (legend) {
+      legend.innerHTML = ["part", "game", "slam"].map((t) =>
+        `<span class="par-legend-item"><span class="par-swatch tier-${t}" aria-hidden="true"></span>` +
+        `${esc(tr(TIER_KEYS[t]))}</span>`).join("");
+      legend.classList.remove("hidden");
+    }
     table.classList.remove("hidden");
     if (hint) hint.classList.remove("hidden");
     if (credit) credit.classList.remove("hidden");
+  }
+
+  // ---------- lecture du tableau ----------
+
+  // Ce que vaut une case : chute (moins de 7 levées), partielle, manche
+  // (3SA, 4♥/4♠, 5♣/5♦) ou chelem (12 levées et plus).
+  const TIER_KEYS = { part: "parTierPart", game: "parTierGame", slam: "parTierSlam" };
+  function tier(tricks, strain) {
+    if (tricks < 7) return "down";
+    if (tricks >= 12) return "slam";
+    const gameAt = strain === 4 ? 9 : strain <= 1 ? 10 : 11;
+    return tricks >= gameAt ? "game" : "part";
+  }
+
+  // Rang d'enchère d'une couleur DDS : ♣ < ♦ < ♥ < ♠ < SA.
+  const BID_RANK = [3, 2, 1, 0, 4];
+
+  // Le plus haut contrat que chaque camp gagne en double-mort, et qui le
+  // joue. Ce n'est pas le par au sens strict (ni sacrifice ni vulnérabilité),
+  // mais ce que le tableau dit d'un coup d'œil.
+  function summaryHTML(lang) {
+    const sides = [["ns", ["N", "S"]], ["ew", ["E", "W"]]];
+    const cards = sides.map(([side, seats]) => {
+      let best = null;
+      for (let strain = 0; strain < 5; strain++) {
+        for (const row of seats) {
+          const tricks = lastTable[strain * 4 + HAND_BY_ROW[row]];
+          if (tricks < 7) continue;
+          const rank = (tricks - 6) * 5 + BID_RANK[strain];
+          if (!best || rank > best.rank) best = { rank, strain, tricks, by: [row] };
+          else if (rank === best.rank && !best.by.includes(row)) best.by.push(row);
+        }
+      }
+      const sideLabel = esc(tr(side === "ns" ? "parSideNS" : "parSideEW"));
+      if (!best) {
+        return `<div class="par-best ${side}"><span class="par-best-side">${sideLabel}</span>` +
+          `<span class="par-best-none">${esc(tr("parNoContract"))}</span></div>`;
+      }
+      const col = COLS.find((c) => STRAIN_BY_COL[c] === best.strain);
+      const sym = col === "SA" ? strainLabel(lang) : col;
+      const symHTML = RED_COLS.has(col) ? `<span class="red">${sym}</span>` : esc(sym);
+      const by = best.by.map((r) => esc((SEAT_SHORT[lang] && SEAT_SHORT[lang][r]) || r)).join("/");
+      const t = tier(best.tricks, best.strain);
+      return `<div class="par-best ${side}">` +
+        `<span class="par-best-side">${sideLabel}</span>` +
+        `<span class="par-best-contract">${best.tricks - 6}${symHTML}</span>` +
+        `<span class="par-best-by">${esc(tr("parBy"))} ${by}</span>` +
+        `<span class="par-best-tier tier-${t}">${esc(tr(TIER_KEYS[t]))}</span></div>`;
+    });
+    return `<h3>${esc(tr("parTitle"))}</h3>` +
+      `<p class="par-best-label">${esc(tr("parBest"))}</p>` +
+      `<div class="par-best-row">${cards.join("")}</div>`;
   }
 
   // ---------- infobulle d'entame ----------

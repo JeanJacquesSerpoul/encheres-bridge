@@ -3179,3 +3179,113 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   #comments > li { border-color: #ccc; }
   #auction-table thead th { color: #000; background: #eee; }
 }
+/* ---------- l'onglet du PAR, mis en forme ---------- */
+
+/* En tête, le plus haut contrat gagnable de chaque camp : deux cartes à la
+   couleur du camp (vert pour N-S, doré pour E-O, comme les pastilles de la
+   séquence commentée). */
+.par-summary h3 { margin: 0 0 4px; text-align: center; }
+.par-best-label { margin: 0 0 10px; color: var(--muted); font-size: .85rem; text-align: center; }
+.par-best-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto 16px;
+}
+.par-best {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "side contract"
+    "by   tier";
+  align-items: center;
+  gap: 2px 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent-bg);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+.par-best.ew { border-left-color: var(--gold-soft); }
+.par-best-side { grid-area: side; font-weight: 800; font-size: .85rem; color: var(--muted); }
+.par-best-contract { grid-area: contract; justify-self: end; font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+.par-best-by { grid-area: by; font-size: .8rem; color: var(--muted); white-space: nowrap; }
+.par-best-none { grid-column: 2 / 3; grid-row: 1 / 3; justify-self: end; color: var(--muted); }
+.par-best-tier {
+  grid-area: tier;
+  justify-self: end;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+/* Les teintes des cases et de la légende : chute en gris, partielle en vert
+   pâle, manche en vert franc, chelem en or. */
+.tier-part { background: rgba(var(--accent-rgb), .24); }
+.tier-game { background: var(--accent-bg); color: var(--on-accent); }
+.tier-slam { background: var(--gold-soft); color: #1d2b1f; }
+
+/* Le tableau : coins arrondis, en-tête sur le vert du tapis, une ligne plus
+   marquée entre les deux camps, le siège en pastille. */
+#par-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+#par-table th,
+#par-table td { border: none; border-top: 1px solid var(--border); padding: 8px 10px; }
+#par-table thead th {
+  border-top: none;
+  background: var(--felt);
+  color: #fff;
+  font-size: 1.1rem;
+}
+#par-table thead th:first-child { font-size: .8rem; letter-spacing: .04em; }
+#par-table thead th.red { color: #ffb4ab; }
+#par-table tbody th { background: none; }
+#par-table tr.side-ns + tr.side-ew th,
+#par-table tr.side-ns + tr.side-ew td { border-top: 2px solid var(--muted); }
+#par-table td.tier-down { color: var(--muted); font-weight: 500; }
+#par-table td.tier-game.red,
+#par-table td.tier-slam.red { color: inherit; }
+#par-table td.tier-game { color: var(--on-accent); font-weight: 800; }
+#par-table td.tier-slam { color: #1d2b1f; font-weight: 800; }
+.par-seat {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.par-seat.ns { background: var(--accent-bg); color: var(--on-accent); }
+.par-seat.ew { background: var(--gold-soft); color: #1d2b1f; }
+
+.par-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: -2px 0 12px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+.par-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.par-swatch { width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--border); }
+.par-summary.hidden, .par-legend.hidden { display: none; }
+
+@media (max-width: 480px) {
+  .par-best { padding: 8px 10px; gap: 2px 6px; }
+  .par-best-contract { font-size: 1.3rem; }
+  #par-table th, #par-table td { padding: 7px 4px; }
+}
+@media print {
+  .par-best { box-shadow: none; }
+  #par-table thead th { color: #000; background: #eee; }
+}

@@ -14,7 +14,6 @@ Règles d'enchères du système SEF 2024 (1 189 règles après expansion), deux 
 | `pbn_auction.py` | Lit un fichier PBN et sort la séquence d'enchères d'une donne en JSON ; le moteur Go de l'application en est le portage |
 | `rules_pdf.py` | Produit la description lisible d'un système en PDF (`cli/systems/<id>/rules.pdf`, `rules.en.pdf`), ouverte par le bouton ? des Réglages ; sans dépendance |
 | `gen_theme_pbn.py` | Produit un fichier de donnes thématiques pour le dossier `pbn/` d'un système (`cli/systems/<id>/pbn/`) : des donnes tirées au hasard dont les enchères emploient une règle donnée (expression régulière sur son id) |
-| `regen_themes.py` | Régénère les séries de donnes thématiques tirées sans enchères, avec les règles actuelles, à partir de leurs recettes (expression, nombre, graine, plafond par règle, tirages mêlés). Les séries du SEF portent leurs enchères : elles n'ont plus de recette |
 | `gen_golden.py` | Génère `engine/testdata/systems/<id>/golden.json` : des enchères complètes de `pbn_auction.py` que le moteur Go doit reproduire |
 | `regen_system.py` | Régénère tout ce qui dérive des règles d'un système (données de test, PDF, référence du banc du par) ; appelé par `update-system.sh` / `update-system.ps1` à la racine |
 | `test_pbn_auction.py` | Tests de `pbn_auction.py` (38 tests, `python -m unittest test_pbn_auction -v`) |

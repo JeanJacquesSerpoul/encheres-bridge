@@ -255,6 +255,44 @@
        l'on en fait — ses enchères, ou l'entraînement — dans un panneau à
        onglets. Sur écran étroit, le panneau passe sous la table. -->
   <main class="workspace">
+    <!-- Les deux usages de l'application, en tête de page et côte à côte :
+         simuler les enchères de ses donnes, ou s'entraîner à enchérir. Deux
+         grandes cartes cliquables, pour qu'on voie d'arrivée ce que l'on peut
+         faire. La première mène à la table, la seconde ouvre l'entraînement
+         (voir « s'entraîner » dans app.js). -->
+    <nav class="modes" data-i18n-label="modesLabel">
+      <button id="mode-deal-btn" type="button" class="mode-card mode-deal">
+        <span class="mode-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="11" height="15" rx="2"/>
+            <path d="M8 3h11a2 2 0 0 1 2 2v13"/>
+            <path d="M8.5 11.5 7 14h3l-1.5 2.5"/>
+          </svg>
+        </span>
+        <span class="mode-text">
+          <span class="mode-title" data-i18n="modeDealTitle">Simuler les enchères</span>
+          <span class="mode-desc" data-i18n="modeDealDesc">Tirez, composez ou chargez vos donnes : le système les annonce et commente chaque enchère.</span>
+        </span>
+      </button>
+      <!-- L'identifiant train-btn est celui que lit app.js. -->
+      <button id="train-btn" type="button" class="mode-card mode-train">
+        <span class="mode-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 9.2 12 4.4l10 4.8-10 4.8z"/>
+            <path d="M6.5 11.4V16c0 1.4 2.5 2.6 5.5 2.6s5.5-1.2 5.5-2.6v-4.6"/>
+            <path d="M21.4 9.5v4.6"/>
+          </svg>
+        </span>
+        <span class="mode-text">
+          <span class="mode-title" data-i18n="trainBtn">S'entraîner</span>
+          <span class="mode-desc" data-i18n="modeTrainDesc">Enchérissez à la place d'un joueur sur des donnes thématiques, et comparez au système.</span>
+        </span>
+        <span class="mode-go" aria-hidden="true">→</span>
+      </button>
+    </nav>
+
     <section class="panel" id="input-panel">
       <h2><span data-i18n="dealPanel">Donne</span> <span id="file-name" class="file-name"></span></h2>
       <!-- Le thème d'où « Donne aléatoire » tire ses donnes, tant qu'il y en a
@@ -467,17 +505,6 @@
 
     </section>
 
-    <!-- S'entraîner, dans son propre bloc sous la donne : c'est la seconde
-         entrée de la page, et son bouton porte le gabarit de celui qui clôt la
-         composition (.cta-btn) pour se voir d'aussi loin que lui. On y choisit
-         sa main, puis on enchérit sur des donnes thématiques, dans une fenêtre
-         à part (voir « s'entraîner » dans app.js). -->
-    <section class="panel" id="train-panel">
-      <div class="row row-centered">
-        <button id="train-btn" type="button" class="cmd-btn cmd-primary cmd-labeled cta-btn"></button>
-      </div>
-    </section>
-
     <!-- Le panneau de droite : un onglet par usage de la donne. Onglets à la
          manière ARIA — flèches pour passer de l'un à l'autre (voir « onglets »
          dans app.js). -->
@@ -610,6 +637,7 @@
 
         <h3>1. L'écran</h3>
         <ul>
+          <li>En tête, deux grandes cartes, les deux usages de l'application : <b>Simuler les enchères</b> (mène à la table) et <b>S'entraîner</b> (voir §6).</li>
           <li>À gauche, la <b>table</b> : la donne et les boutons qui la font naître ou la modifient.</li>
           <li>À droite, un panneau à deux onglets : <b>Enchères</b> et <b>PAR</b>. Il reste en vue quand la page défile.</li>
           <li>Sur un écran plus étroit, le panneau passe sous la table. Sur téléphone, ses onglets forment une barre au bas de l'écran, précédée d'un bouton <b>Donne</b> qui remonte à la table.</li>
@@ -688,7 +716,7 @@
 
         <h3>6. S'entraîner</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>Le bouton <b>S'entraîner</b>, dans son bloc sous la donne, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest, ou au centre <b>Camp du déclarant</b> : à chaque donne, votre main est tirée au hasard dans le camp qui joue le contrat), puis la table d'entraînement. Il choisit aussi les <b>donnes</b> : <b>Tous les thèmes</b> (tirées parmi toutes les donnes thématiques) ou <b>Un thème</b> (celui de la liste, avec son nombre de donnes) ; une phrase sous le choix rappelle d'où viendront les donnes. Seules les donnes dont le fichier porte l'enchère entrent dans l'entraînement : à la table, l'application relit cette enchère au lieu d'appeler le moteur. Si un thème est choisi sur la page (bandeau du thème), il est repris d'office. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, « Plus de donnes disponibles » s'affiche. Le donneur, la vulnérabilité et les bornes choisis s'appliquent. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite. Une fois l'enchère finie, le <b>tableau du PAR</b> (levées au double mort) s'affiche à côté de la table, la case du contrat atteint encadrée, avec son résultat.</span></li>
+          <li><span data-help-icon="quiz"></span><span>La carte <b>S'entraîner</b>, en tête de page, ouvre le choix de <b>votre main</b> (Nord, Est, Sud ou Ouest, ou au centre <b>Camp du déclarant</b> : à chaque donne, votre main est tirée au hasard dans le camp qui joue le contrat), puis la table d'entraînement. Il choisit aussi les <b>donnes</b> : <b>Tous les thèmes</b> (tirées parmi toutes les donnes thématiques) ou <b>Un thème</b> (celui de la liste, avec son nombre de donnes) ; une phrase sous le choix rappelle d'où viendront les donnes. Seules les donnes dont le fichier porte l'enchère entrent dans l'entraînement : à la table, l'application relit cette enchère au lieu d'appeler le moteur. Si un thème est choisi sur la page (bandeau du thème), il est repris d'office. Une donne thématique ne revient pas dans la même séance : quand toutes ont été jouées, « Plus de donnes disponibles » s'affiche. Le donneur, la vulnérabilité et les bornes choisis s'appliquent. Le thème de la donne n'est pas affiché à la table, pour ne rien souffler ; le score de <b>Terminer</b> le cite. Une fois l'enchère finie, le <b>tableau du PAR</b> (levées au double mort) s'affiche à côté de la table, la case du contrat atteint encadrée, avec son résultat.</span></li>
         </ul>
         <ul>
           <li>Votre main est toujours <b>en bas</b>, face visible ; les trois autres joueurs ont le dos tourné (à gauche, celui qui parle après vous ; en face, votre partenaire). Au centre, la boîte des enchères : les sièges vulnérables y sont en rouge, et un <b>?</b> marque le tour de parole. La plaque du joueur qui parle s'éclaire en jaune.</li>
@@ -735,6 +763,7 @@
 
         <h3>1. The screen</h3>
         <ul>
+          <li>At the top, two large cards, the app's two uses: <b>Simulate auctions</b> (leads to the table) and <b>Practise</b> (see §6).</li>
           <li>On the left, the <b>table</b>: the deal and the buttons that create or change it.</li>
           <li>On the right, a panel with two tabs: <b>Auction</b> and <b>Par</b>. It stays in view while the page scrolls.</li>
           <li>On a narrower screen, the panel moves below the table. On a phone, its tabs become a bar at the bottom of the screen, led by a <b>Deal</b> button that scrolls back to the table.</li>
@@ -813,7 +842,7 @@
 
         <h3>6. Practising</h3>
         <ul class="help-icons">
-          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> button, in its own block under the deal, opens the choice of <b>your hand</b> (North, East, South or West, or in the middle <b>Declaring side</b>: for each deal, your hand is drawn at random in the side that plays the contract), then the practice table. It also picks the <b>deals</b>: <b>All topics</b> (drawn among all the themed deals) or <b>One topic</b> (the one in the list, with its number of deals); a line under the choice says where the deals will come from. Only deals whose file carries the auction enter the practice session: at the table the app reads that auction back instead of calling the engine. If a topic is chosen on the page (topic banner), it is picked up at once. A themed deal never comes back in the same session: once all have been played, “No more deals available” is shown. The dealer, vulnerability and bounds you chose apply. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it. Once the auction is over, the <b>PAR table</b> (double-dummy tricks) shows beside the table, with the contract reached outlined and its result.</span></li>
+          <li><span data-help-icon="quiz"></span><span>The <b>Practise</b> card, at the top of the page, opens the choice of <b>your hand</b> (North, East, South or West, or in the middle <b>Declaring side</b>: for each deal, your hand is drawn at random in the side that plays the contract), then the practice table. It also picks the <b>deals</b>: <b>All topics</b> (drawn among all the themed deals) or <b>One topic</b> (the one in the list, with its number of deals); a line under the choice says where the deals will come from. Only deals whose file carries the auction enter the practice session: at the table the app reads that auction back instead of calling the engine. If a topic is chosen on the page (topic banner), it is picked up at once. A themed deal never comes back in the same session: once all have been played, “No more deals available” is shown. The dealer, vulnerability and bounds you chose apply. The deal's topic is not shown at the table, so as to give nothing away; the <b>Finish</b> score names it. Once the auction is over, the <b>PAR table</b> (double-dummy tricks) shows beside the table, with the contract reached outlined and its result.</span></li>
         </ul>
         <ul>
           <li>Your hand is always <b>at the bottom</b>, face up; the other three players' cards are face down (on your left, the player who bids after you; opposite, your partner). In the middle, the auction box: vulnerable seats are shown in red, and a <b>?</b> marks whose turn it is. The plate of the player to bid lights up in yellow.</li>

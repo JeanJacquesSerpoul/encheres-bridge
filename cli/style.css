@@ -56,7 +56,7 @@
   --shadow-pop: 0 4px 12px rgba(0, 0, 0, .25);
   --shadow-modal: 0 6px 18px rgba(0, 0, 0, .16);
 
-  --radius: 10px;
+  --radius: 16px;
 
   /* Les contrôles natifs — sélecteurs, champs, zones de texte — se rendent
      d'eux-mêmes selon ce réglage. Sans lui, un système en sombre les peignait
@@ -627,7 +627,7 @@ button:disabled { opacity: .6; cursor: wait; }
 @media print {
   header, footer, dialog, #boot-loading, #engine-loading,
   button, select, .file-btn, .pbn-details,
-  #deal-select-row, #cons-actions, #bid-row, #train-panel, .tabs, .tab-empty { display: none !important; }
+  #deal-select-row, #cons-actions, #bid-row, .modes, .tabs, .tab-empty { display: none !important; }
   .tabpanel[hidden] { display: none !important; }
   body { background: #fff; }
   main { margin: 0; max-width: none; padding: 0; }
@@ -2507,20 +2507,19 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    enchères se lisent en regard des mains. Sous 1100 px, il passe sous la
    table. */
 @media (min-width: 1100px) {
-  /* Trois blocs en deux colonnes : la donne et, sous elle, l'entraînement ;
-     le panneau à onglets à droite, sur les deux lignes, pour rester en vue
-     quel que soit celui des deux blocs de gauche que l'on regarde. */
+  /* Les deux usages en tête, sur toute la largeur ; dessous, la donne à
+     gauche et le panneau à onglets à droite. */
   main.workspace {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     grid-template-areas:
-      "deal side"
-      "train side";
+      "modes modes"
+      "deal side";
     column-gap: 24px;
     align-items: start;
   }
   #input-panel { grid-area: deal; }
-  #train-panel { grid-area: train; }
+  .modes { grid-area: modes; }
   .side-pane {
     grid-area: side;
     position: sticky;
@@ -2532,11 +2531,119 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   #back-to-deal-btn { display: none; }
 }
 
-/* Le bloc de l'entraînement, sous celui de la donne : même carte, et dedans le
-   bouton de l'action au gabarit de celui qui clôt la composition (.cta-btn).
-   La rangée n'a pas les marges des autres : elle est seule dans la carte, dont
-   la marge intérieure suffit. */
-#train-panel .row { margin: 0; }
+/* ---------- les deux usages, en tête de page ---------- */
+
+/* Deux grandes cartes côte à côte : simuler les enchères de ses donnes, ou
+   s'entraîner. La première sur le vert du tapis, la seconde sur un vert plus
+   vif bordé d'or, avec une flèche : c'est l'entraînement que l'on met en
+   avant. */
+.modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.mode-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 96px;
+  padding: 18px 22px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+  transition: transform .15s, box-shadow .15s, filter .15s;
+}
+.mode-deal {
+  background: radial-gradient(120% 140% at 0% 0%, #3d8a5c 0%, var(--felt) 45%, var(--felt-dark) 100%);
+}
+.mode-train {
+  background: linear-gradient(135deg, #2f9a5f 0%, #1f7346 55%, #185c38 100%);
+  border-color: rgba(255, 209, 102, .6);
+}
+/* Un reflet en arc, en haut à droite : la carte n'est pas un aplat. */
+.mode-card::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .07);
+  pointer-events: none;
+}
+.mode-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, .26); filter: brightness(1.06); }
+.mode-card:active { transform: translateY(0); }
+.mode-card:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+.mode-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .14);
+}
+.mode-train .mode-icon { background: var(--gold-soft); color: #1d2b1f; }
+.mode-icon svg { width: 28px; height: 28px; }
+.mode-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mode-title { font-size: 1.2rem; font-weight: 700; }
+.mode-desc { font-size: .9rem; line-height: 1.35; color: rgba(255, 255, 255, .9); }
+.mode-go {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: transform .15s;
+}
+.mode-card:hover .mode-go { transform: translateX(3px); }
+@media (max-width: 720px) {
+  .modes { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+  .mode-card { min-height: 0; padding: 14px 16px; gap: 12px; border-radius: 18px; }
+  .mode-icon { width: 44px; height: 44px; border-radius: 14px; }
+  .mode-icon svg { width: 24px; height: 24px; }
+  .mode-title { font-size: 1.05rem; }
+  .mode-desc { font-size: .84rem; }
+}
+/* Sur téléphone, les deux cartes restent côte à côte, réduites à leur nom :
+   la table doit paraître sans faire défiler. */
+@media (max-width: 560px) {
+  .modes { grid-template-columns: 1fr 1fr; }
+  .mode-card { padding: 12px; gap: 10px; }
+  .mode-icon { width: 38px; height: 38px; border-radius: 12px; }
+  .mode-icon svg { width: 21px; height: 21px; }
+  .mode-title { font-size: .95rem; line-height: 1.2; }
+  .mode-desc, .mode-go { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mode-card, .mode-go { transition: none; }
+  .mode-card:hover, .mode-card:hover .mode-go { transform: none; }
+}
+
+/* Moins carré : les panneaux flottent sur une ombre douce, le tapis prend un
+   éclairage, les mains s'arrondissent. */
+.panel { box-shadow: 0 4px 16px rgba(0, 0, 0, .08); }
+:root[data-theme="dark"] .panel { box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
+.table-layout {
+  background: radial-gradient(ellipse at 50% 40%, #3a7d54 0%, var(--felt) 55%, var(--felt-dark) 100%);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), inset 0 2px 14px rgba(0, 0, 0, .25);
+}
+.hand { border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, .18); }
+@media print { .panel, .hand { box-shadow: none; } }
 
 /* Les onglets du panneau, en tête : un soulignement pour celui qui est
    ouvert. */

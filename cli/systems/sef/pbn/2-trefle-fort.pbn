@@ -1,280 +1,899 @@
-[Event "SEF - 2 Trèfle fort indéterminé"]
+% Titre-FR: 2♣ fort indéterminé
+% Titre-EN: Strong 2♣ (catch-all)
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 1"]
 [Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AKJ4.KQ3.AQ5.T82 652.JT82.JT93.74 873.765.864.K653 QT9.A94.K72.AJ91"]
+[Deal "S:AKJ4.KQ3.AQ5.KJ2 T863.A952.K.AQ74 952.J876.T943.86 Q7.T4.J8762.T953"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (20-21 H regulier). | Strong 2C (20-21 HCP balanced).} Pass 2D {Relais / attente, 0-7 H (ici 3 H). | Waiting/negative 2D, 0-7 HCP (3 HCP here).} Pass
-2NT {Redemande standard montrant 20-21 H reguliers. | Standard rebid showing 20-21 HCP balanced.} Pass Pass {Passe avec 3 H, pas d'espoir de manche. | Pass with 3 HCP, no game prospect.} Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass Pass {Main nulle (1H) : 2SA est non forcing, la manche est hors d'atteinte. | Nothing (1 HCP): 2NT is non-forcing, game is out of reach.} Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 2"]
 [Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQ.AKJT84.AQ2.73 974.75.KJT8.K854 K632.962.754.T62 JT85.Q3.963.AQJ9"]
+[Deal "S:AQ5.AKJ.KQ63.K74 KJ962.Q.AT94.952 8743.954.J52.T86 T.T87632.87.AQJ3"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4H"]
+[Contract "2NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, unicolore de Coeur de 21 HL. | Strong 2C, Heart one-suiter, 21 total pts.} Pass 2D {Relais obligatoire 0-7 H (ici 3 H). | Mandatory relay, 0-7 HCP (3 HCP here).} Pass
-2H {Affirme au moins 5 cartes a Coeur, forcing. | Shows 5+ Hearts, forcing.} Pass 2S {Attente / preference mineure ou fit Coeur impossible. | Waiting bid / preference.} Pass
-4H {Conclusion a la manche en unicolore autonome. | Autonomous jump to Heart game.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass Pass {1H et 4333 : on passe. | 1 HCP and 4333: pass.} Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 3"]
 [Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQ98.AQJ5.K2.A4 742.86.QT87.JT83 J63.T432.J64.965 T5.K97.A953.KQ72"]
+[Deal "S:KQ.AKJ5.AQ7.KJ85 T843.QT43.J53.AT J9762.86.T84.973 A5.972.K962.Q642"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4S"]
+[Contract "2NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, bicolore Pique-Coeur 22 HL. | Strong 2C, 2-suiter Spades-Hearts, 22 pts.} Pass 2D {Relais 0-7 H (ici 1 H). | Relay 0-7 HCP (1 HCP here).} Pass
-2S {Nomination de la majeure 5e. | Natural 5+ Spade suit.} Pass 3S {Fit 3e avec main minimale (0-3 H). | 3-card support with weak hand (0-3 HCP).} Pass
-4S {Conclusion a la manche. | Fast arrival / game conclusion.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass Pass {1H seulement : trop faible meme pour un Texas avec 5 Piques. | Only 1 HCP: too weak even for a transfer with 5 spades.} Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 4"]
 [Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AK8.KJ4.AQ7.KQ92 T75.T85.JT98.J84 642.9732.542.T63 QJ93.AQ6.K63.A75"]
+[Deal "S:AK73.KQ4.AJ.KQ92 T98642.J32.T94.3 QJ5.T987.K632.J5 .A65.Q875.AT8764"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "2NT"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (21 H regulier). | Strong 2C (21 HCP balanced).} Pass 2D {Relais attente, 0-7 H (main nulle de 0 H). | Relay, 0-7 HCP (bust hand, 0 HCP).} Pass
-2NT {Zone 20-21 H regulier. | Shows 20-21 HCP balanced.} Pass Pass {Passe avec 0 H. | Pass with 0 HCP.} Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
+3S {4 cartes a Pique, pas 4 Coeurs. | 4 spades, not 4 hearts.} Pass 3NT {Pas de fit Coeur : manche a Sans-Atout. | No heart fit: game in no-trump.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 5"]
 [Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A4.AKQ75.AQJ6.J5 986.J4.T953.K982 K752.T82.842.643 QJT3.963.K7.AQT7"]
+[Deal "S:AQ4.AK62.KQJ.A93 J963.4.T2.KQJ754 K875.QT73.854.62 T2.J985.A9763.T8"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, bicolore 5-4 fort. | Strong 2C, strong 5-4 two-suiter.} Pass 2D {Relais 0-7 H (ici 3 H). | Relay 0-7 HCP (3 HCP here).} Pass
-2H {Couleur d'ouverture 5e forcing. | Natural 5+ Hearts, forcing.} Pass 2S {Enchere d'attente / deuxieme negatif. | Waiting bid / second negative.} Pass
-3D {Bicolore cher Coeur/Carreau. | Reverse 3D showing 5H-4D.} Pass 3H {Preference avec 3 cartes a Coeur. | Preference with 3-card Heart support.} Pass
-4H {Conclusion a la manche. | Closes the contract at 4H.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 5H. | Compulsory relay, whatever the strength: 5 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
+3H {4 cartes a Coeur. | 4 hearts.} Pass 4H {Fit Coeur 4-4 : manche. | 4-4 heart fit: game.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 6"]
 [Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQJ854.A.AK4.AQ2 73.KT86.T862.J84 A92.954.9753.T65 T6.QJ732.QJ.K973"]
+[Deal "S:AKQ2.AJ54.KQ3.K7 9.KT62.76.T98432 J863.8.T9542.Q65 T754.Q973.AJ8.AJ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, 6 Piques puissants (22 HL). | Strong 2C, powerful 6-card Spades (22 pts).} Pass 2D {Relais 0-7 H (ici 4 H). | Relay 0-7 HCP (4 HCP here).} Pass
-2S {6 cartes a Pique autoforcing. | 6-card Spade suit, self-forcing.} Pass 3S {Soutien simple encourageant avec l'As (4 H). | Simple Spade support with the Ace (4 HCP).} Pass
-4S {Conclusion a la manche. | Conclusion to 4S.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman avec 4 Piques et 3H. | Stayman with 4 spades and 3 HCP.} Pass
+3NT {Les deux majeures 4es. | Both 4-card majors.} Pass 4D {Relais pour jouer 4 Piques depuis la main forte. | Relay to play 4 spades from the strong hand.} Pass
+4S {Rectifie a 4 Piques. | Completes to 4 spades.} Pass Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 7"]
 [Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AJ6.KQ5.AK4.AJ83 982.974.J983.T62 K73.J632.765.754 QT54.AT8.QT2.KQ9"]
+[Deal "S:AK5.KQ8.AQJ4.KJ3 J873.62.KT96.A84 Q962.J974.85.T62 T4.AT53.732.Q975"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (21 H regulier). | Strong 2C (21 HCP balanced).} Pass 2D {Relais negatif (4 H). | Negative relay (4 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass 3NT {Proposition acceptee avec 4 H et un Roi bien place. | Raises to 3NT with 4 HCP and a well-placed King.} Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
+3D {Pas de majeure 4e. | No 4-card major.} Pass 3NT {Pas de fit : 3SA. | No fit: 3NT.} Pass
 Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 8"]
 [Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJ.AQJ8.AQ.JT72 T87.75.JT864.K64 964.T64.9752.983 Q532.K932.K3.AQ5"]
+[Deal "S:KQ6.AQ5.AKJ4.KT3 743.T8.983.Q7652 82.KJ9643.T62.84 AJT95.72.Q75.AJ9"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "2NT"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort (20 H regulier). | Strong 2C (20 HCP balanced).} Pass 2D {Relais 0-7 H (0 H). | Waiting bid (0 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass Pass {Passe sans espoir avec 0 H. | Pass with a bust hand.} Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3D {Texas Coeur : 6 cartes, 6 HL. | Transfer to hearts: 6 cards, 6 HL.} Pass
+3H {Rectifie avec 3 cartes a Coeur. | Completes with 3 hearts.} Pass 4H {Fit 6-3 : manche a Coeur. | 6-3 fit: game in hearts.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 9"]
 [Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A.AKQ964.AK3.K82 9864.J7.J874.T95 753.852.T652.J74 KQJT2.T3.Q9.AQ63"]
+[Deal "S:A73.AKJ.KQ84.AQ5 K4.QT652.75.KT73 QJT652.74.963.82 98.983.AJT2.J964"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4H"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, 21 HL unicolore Coeur. | Strong 2C, 21 pts Heart one-suiter.} Pass 2D {Relais attente (1 H). | Waiting relay (1 HCP).} Pass
-2H {Couleur 5e ou + forcing. | 5+ Heart suit, forcing.} Pass 2NT {Deuxieme negatif (0-3 H). | Second negative (0-3 HCP).} Pass
-4H {L'ouvreur conclut a la manche. | Opener signs off in 4H.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3H {Texas Pique : 6 cartes, 5 HL. | Transfer to spades: 6 cards, 5 HL.} Pass
+3S {Rectifie avec 3 cartes a Pique. | Completes with 3 spades.} Pass 4S {Manche a Pique. | Game in spades.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 10"]
 [Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQ4.AK2.AKJ5.K73 875.JT8.986.T854 AT3.974.7432.J92 J962.Q653.QT.AQ6"]
+[Deal "S:AK.KQ5.AKJ7.QJ64 QT5.T764.9832.A5 J97643.82.T5.K73 82.AJ93.Q64.T982"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T regulier de 21 H. | Strong balanced 21 HCP.} Pass 2D {Relais 0-7 H (ici 5 H). | Relay 0-7 HCP (5 HCP here).} Pass
-2NT {20-21 H reguliers. | 20-21 HCP balanced.} Pass 3NT {Avec 5 H reguliers, le repondant met la manche. | With 5 HCP balanced, responder bids 3NT.} Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3H {Texas Pique : 6 cartes, 4H. | Transfer to spades: 6 cards, 4 HCP.} Pass
+3NT {Seulement 2 Piques : 3SA, le palier le plus bas. | Only 2 spades: 3NT, the cheapest bid.} Pass 4S {6 cartes a Pique : la manche en majeure malgre tout (fit 6-2). | 6 spades: game in the major anyway (6-2 fit).} Pass
 Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 11"]
 [Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQJ74.K8.AJ2.A3 96.JT94.986.Q975 T53.765.7543.T62 82.AQ32.KQT.KJ84"]
+[Deal "S:AK4.AK.QJ93.KQ84 T76.96532.742.65 82.QT874.K65.J72 QJ953.J.AT8.AT93"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4S"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, unicolore Pique 22 HL. | Strong 2C, Spade one-suiter (22 pts).} Pass 2D {Relais 0-7 H (ici 0 H). | Waiting relay (0 HCP).} Pass
-2S {6 cartes a Pique autoforcing. | 6+ Spades, self-forcing.} Pass 3S {Fit minimum avec 3 atouts. | Minimum support with 3 trumps.} Pass
-4S {Conclusion a la manche. | Opener bids game.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3D {Texas Coeur : 5 cartes, 6H. | Transfer to hearts: 5 cards, 6 HCP.} Pass
+3NT {Doubleton Coeur : pas de fit. | Doubleton heart: no fit.} Pass Pass {Seulement 5 Coeurs : on reste a 3SA. | Only 5 hearts: stay in 3NT.} Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 12"]
 [Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:KQ.AK98.AQJ4.AJ2 764.764.T976.K94 T983.T52.852.863 AJ52.QJ3.K3.QT75"]
+[Deal "S:KJ8.AQ7.AKT5.KQ6 AQT3.K653.J92.A8 975.J82.Q43.J972 642.T94.876.T543"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "2NT"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (21 H). | Strong 2C (21 HCP).} Pass 2D {Relais negatif (0 H). | Negative relay (0 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass Pass {Passe obligatoire avec 0 H. | Mandatory pass with zero points.} Pass
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3NT {4H sans majeure 4e : manche a Sans-Atout. | 4 HCP with no 4-card major: game in no-trump.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 13"]
 [Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A8.AKQJ63.AQ4.J5 975.87.JT83.9874 K642.T92.765.632 QJT3.54.K92.AKQT"]
+[Deal "S:AQ.KJ84.AKQ7.KJ5 8632.762.54.Q742 K74.Q5.J9862.T63 JT95.AT93.T3.A98"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4H"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort unicolore Coeur (21 HL). | Strong 2C Heart one-suiter.} Pass 2D {Relais attente (3 H). | Waiting relay (3 HCP).} Pass
-2H {Couleur Coeur au moins 5e. | 5+ Hearts.} Pass 2S {Attente / relais d'attente. | Waiting relay.} Pass
-3H {Repetition affirmant 6 cartes. | Rebid confirming 6 Hearts.} Pass 4H {Fit 3e et Roi de Pique, conclusion. | Game raise with 3 trumps and Spade King.} Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3NT {6H, pas de majeure : manche. | 6 HCP, no major: game.} Pass
 Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 14"]
 [Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AKQ2.AQ4.K8.AJ84 976.T85.J974.752 JT54.963.652.T63 83.KJ72.AQT3.KQ9"]
-[Scoring "MP"]
-[Declarer "S"]
-[Contract "4S"]
-[Result ""]
-[Auction "S"]
-2C {2T fort indetermine (21 H). | Strong 2C (21 HCP).} Pass 2D {Relais 0-7 H (ici 1 H). | Relay 0-7 HCP (1 HCP here).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass 3C {Stayman avec 4 cartes a Pique (1 H). | Stayman with 4-card Spades (1 HCP).} Pass
-3S {Reponse de 4 cartes a Pique. | Opener shows 4 Spades.} Pass 4S {Conclusion a la manche. | Closes at game with fit.} Pass
-Pass Pass
-
-[Event "SEF - 2 Trèfle fort indéterminé"]
-[Board "15"]
-[Dealer "S"]
-[Vulnerable "EW"]
-[Deal "S:AKJ7.K6.AKJ5.A84 954.974.876.J953 Q832.J83.T94.762 T6.AQT52.Q32.KQT"]
-[Scoring "MP"]
-[Declarer "S"]
-[Contract "4S"]
-[Result ""]
-[Auction "S"]
-2C {2T fort indetermine (21 H regulier). | Strong 2C (21 HCP balanced).} Pass 2D {Relais attente (2 H). | Relay (2 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass 3C {Stayman avec 4 Piques. | Stayman with 4 Spades.} Pass
-3S {Reponse 4 cartes a Pique. | 4-card Spade response.} Pass 4S {Fit 4-4 atteint, manche demandee. | 4-4 fit found, game bid.} Pass
-Pass Pass
-
-[Event "SEF - 2 Trèfle fort indéterminé"]
-[Board "16"]
-[Dealer "S"]
-[Vulnerable "All"]
-[Deal "S:AQ.A4.AKQ763.KJ2 T854.Q97.JT9.764 J762.8632.54.T85 K93.KJT5.82.AQ93"]
+[Deal "S:AKJ.AQ94.K85.AQ6 QT97.K8.T63.T753 652.73.QJ942.K84 843.JT652.A7.J92"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, unicolore Carreau autonome (22 HL). | Strong 2C, self-sufficient Diamond suit.} Pass 2D {Relais 0-7 H (1 H). | Relay 0-7 HCP (1 HCP).} Pass
-3D {Nomination naturelle des Carreaux autoforcing. | 3D natural self-forcing.} Pass 3S {Attente / faiblesse sans fit. | Waiting bid without fit.} Pass
-3NT {Conclusion a Sans-Atout avec les arrets exterieurs. | 3NT sign-off with outside stops.} Pass Pass Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3NT {6H et 5 Carreaux : la manche a Sans-Atout. | 6 HCP and 5 diamonds: game in no-trump.} Pass
+Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQ5.AK7.AQJ4.QJ6 4.T98432.T93.AT8 AJ7.QJ5.K62.K973 T98632.6.875.542"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 14H. | Compulsory relay, whatever the strength: 14 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 6NT {14 HL regulier, sans majeure 4e : 22 + 14 = 36, le petit chelem. | 14 HL balanced, no 4-card major: 22 + 14 = 36, small slam.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ93.K7.AKJ6.KQ5 74.Q863.972.AJ98 KJ86.9542.83.742 T52.AJT.QT54.T63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
+3S {4 cartes a Pique. | 4 spades.} Pass 4S {Fit Pique 4-4 : manche. | 4-4 spade fit: game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 17"]
 [Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AQJ5.AK7.AJ4.K82 984.JT83.987.J64 K73.965.T652.973 T62.Q42.KQ3.AQT5"]
+[Deal "S:KQ5.AQJ6.AK7.KJ4 93.T9742.QJT3.82 J874.K3.9852.T63 AT62.85.64.AQ975"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T regulier 21 H. | Strong 2C (21 HCP balanced).} Pass 2D {Relais attente (3 H). | Relay (3 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass 3NT {Le repondant rajoute la manche avec 3 H et un Roi. | Responder raises to game with 3 HCP and a King.} Pass
+2C {2T fort indetermine, ici main reguliere de 23H. | Strong catch-all 2C, here a balanced hand with 23 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
+3H {4 cartes a Coeur. | 4 hearts.} Pass 3NT {Pas de fit Coeur (Nord a les Piques) : 3SA. | No heart fit (North holds spades): 3NT.} Pass
 Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 18"]
 [Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AK.KQJT94.A6.A82 J98.63.JT98.J754 753.8752.754.T63 QT642.A.KQ32.K91"]
+[Deal "S:AKQJ73.AQ4.K5.82 T9862.T7.J9.KT95 54.9832.QT74.J63 .KJ65.A8632.AQ74"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4H"]
+[Contract "2S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, unicolore Coeur de 21 HL. | Strong 2C, Heart one-suiter (21 pts).} Pass 2D {Relais negatif (0 H). | Negative relay (0 HCP).} Pass
-2H {Couleur Coeur autoforcing. | Heart suit, self-forcing.} Pass 2NT {Deuxieme negatif (0-3 H). | Second negative (0-3 HCP).} Pass
-4H {Conclusion a la manche par l'ouvreur. | Opener signs off at 4H.} Pass Pass Pass
+2C {2T fort indetermine, ici 6 cartes a Pique, 19H (21 HL). | Strong catch-all 2C, here 6 spades, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 21 HL). | 18-21 HL, 5/6 spades, non-forcing (21 HL here).} Pass Pass {Main nulle sans fit (doubleton Pique) : passe. | Nothing and no fit (doubleton spade): pass.} Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 19"]
 [Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKJ98.AK5.K4.KJ3 642.Q87.T985.864 QT7.T964.762.T92 53.J32.AQJ3.AQ75"]
+[Deal "S:A5.AKQJT4.KJ3.72 J4.853.Q976.KQT9 9762.92.T854.J63 KQT83.76.A2.A854"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass Pass {1H et doubleton Coeur : passe. | 1 HCP and a doubleton heart: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJT5.AKQ6.84.82 Q64.T84.AKJT5.K6 8.J953.Q9762.J53 9732.72.3.AQT974"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 5 cartes a Pique, 17H (18 HL). | Strong catch-all 2C, here 5 spades, 17 HCP (18 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 18 HL). | 18-21 HL, 5/6 spades, non-forcing (18 HL here).} Pass Pass {4H, singleton Pique : passe. | 4 HCP, singleton spade: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ.AKJ963.AQ5.43 T.Q84.T964.KQ876 J9853.T2.J87.952 A7642.75.K32.AJT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass Pass {2H et doubleton Coeur : passe. | 2 HCP and a doubleton heart: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AQJ94.A.AKJ6.T52 KT73.KJ83.92.Q84 86.97542.Q83.763 52.QT6.T754.AKJ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass Pass {2H et doubleton Pique : passe. | 2 HCP and a doubleton spade: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQ864.KQ5.A7.83 JT9.A9742.J6.A97 752.J863.Q94.T64 3.T.KT8532.KQJ52"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (21 H avec 5 beaux Piques). | Strong 2C (21 HCP with 5 good Spades).} Pass 2D {Relais 0-7 H (ici 2 H). | Relay 0-7 HCP (2 HCP here).} Pass
-2S {Affirme 5 cartes a Pique. | Shows 5+ Spades.} Pass 3S {Soutien simple avec 3 atouts dont la Dame (2 H). | Simple raise with 3 trumps and the Queen.} Pass
-4S {Conclusion a la manche. | Fast arrival at 4S.} Pass Pass Pass
+2C {2T fort indetermine, ici 6 cartes a Pique, 18H (20 HL). | Strong catch-all 2C, here 6 spades, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3S {Fit Pique (3 cartes), main faible : propose la manche. | Spade fit (3 cards), weak hand: invites game.} Pass
+4S {Maximum (20 HL) : accepte. | Maximum (20 HL): accepts.} Pass Pass Pass
 
-[Event "SEF - 2 Trèfle fort indéterminé"]
-[Board "20"]
+[Event "Entrainement 2 Trefle fort indetermine - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:A8.AKQ2.AQ85.AJ4 9762.87.J943.982 KT5.J963.762.753 QJ43.T54.KT.KQT6"]
+[Deal "S:AKJ74.AQ3.K6.J52 T9.KJ4.AQJ97.AQ6 Q85.T976.832.974 632.852.T54.KT83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 5 cartes a Pique, 18H (19 HL). | Strong catch-all 2C, here 5 spades, 18 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 3S {Fit par 3 cartes, 2H : soutien faible. | 3-card fit, 2 HCP: weak raise.} Pass
+Pass {19 HL seulement : refuse. | Only 19 HL: declines.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:A7.AKJ953.KQ4.76 KQJ8.T76.T8.AK93 9654.Q82.J53.T84 T32.4.A9762.QJ52"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 17H (19 HL). | Strong catch-all 2C, here 6 hearts, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 19 HL). | 18-21 HL, 5/6 hearts, non-forcing (19 HL here).} Pass 3H {Fit Coeur par 3 cartes, 3H : soutien faible. | 3-card heart fit, 3 HCP: weak raise.} Pass
+Pass {19 HL : refuse la manche. | 19 HL: declines game.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:5.AKQJ74.AQ5.K83 Q4.3.KJT743.A965 J8763.T95.862.Q7 AKT92.862.9.JT42"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine (21 H regulier). | Strong 2C (21 HCP balanced).} Pass 2D {Relais attente (4 H). | Waiting relay (4 HCP).} Pass
-2NT {20-21 H regulier. | 20-21 HCP balanced.} Pass 3C {Stayman avec 4 cartes a Coeur (4 H). | Stayman with 4 Hearts (4 HCP).} Pass
-3H {Reponse montrant 4 Coeurs. | Opener shows 4 Hearts.} Pass 4H {Conclusion a la manche avec fit 4-4. | Game bid in 4-4 fit.} Pass
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3H {Fit Coeur, 3H : soutien faible. | Heart fit, 3 HCP: weak raise.} Pass
+4H {Maximum (21 HL) : manche. | Maximum (21 HL): game.} Pass Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQT5.KQJ4.A3.92 4.96.KQT52.J7653 863.8752.J96.QT4 J972.AT3.874.AK8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3S {Fit Pique par 3 cartes, 3H. | 3-card spade fit, 3 HCP.} Pass
+4S {20 HL : accepte. | 20 HL: accepts.} Pass Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ862.A5.KQ4.72 54.JT6.J9832.QJ4 Q73.9842.A65.T83 T9.KQ73.T7.AK965"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 4S {Fit Pique et 6H : la manche directement. | Spade fit and 6 HCP: straight to game.} Pass
 Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:Q4.AKQ987.AK6.85 AKT96.T2.T87.AQ3 853.J63.QJ92.K74 J72.54.543.JT962"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass 4H {Fit Coeur et 7H : manche. | Heart fit and 7 HCP: game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKQJ6.A5.AJ74.83 832.J7642.62.J97 9754.K83.Q93.T52 T.QT9.KT85.AKQ64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 5H. | Compulsory relay, whatever the strength: 5 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 4S {4 atouts et 5H : manche. | 4 trumps and 5 HCP: game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AK5.KQT973.A.J52 Q983.8.KQJT942.K J72.AJ64.8753.94 T64.52.6.AQT8763"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 17H (19 HL). | Strong catch-all 2C, here 6 hearts, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 19 HL). | 18-21 HL, 5/6 hearts, non-forcing (19 HL here).} Pass 4H {4 atouts dont l'As et 6H : manche. | 4 trumps including the ace, 6 HCP: game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKQ985.AK7.82.Q4 T4.T64.A93.KT965 7.QJ93.KJ65.J873 J632.852.QT74.A2"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Pique, 18H (20 HL). | Strong catch-all 2C, here 6 spades, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3NT {Singleton Pique, 8H et des arrets : 3SA. | Singleton spade, 8 HCP and stoppers: 3NT.} Pass
+Pass {Pas de raison de corriger. | No reason to correct.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK7.AQJ863.KQ5.4 T94.T9754.T.AJ85 QJ5.2.J874.KQT62 8632.K.A9632.973"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 9H. | Compulsory relay, whatever the strength: 9 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Singleton Coeur, 9H, Trefles tenus : 3SA. | Singleton heart, 9 HCP, clubs held: 3NT.} Pass
+Pass {Accepte 3SA. | Accepts 3NT.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQJT74.AK.A93.65 A93.T96.JT754.AK 5.J8742.KQ8.T843 862.Q53.62.QJ972"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 3NT {Singleton Pique, 6H : 3SA. | Singleton spade, 6 HCP: 3NT.} Pass
+Pass {Accepte 3SA. | Accepts 3NT.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A4.AKQ652.KJ7.Q3 QT92.74.T8.AK965 KJ863.83.Q94.J72 75.JT9.A6532.T84"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Doubleton Coeur, 7H et 5 Piques : 3SA. | Doubleton heart, 7 HCP and 5 spades: 3NT.} Pass
+Pass {Accepte 3SA. | Accepts 3NT.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ975.A84.KQ6.5 T.QJT932.JT7.T87 Q86.K7.A853.K942 432.65.942.AQJ63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 12H. | Compulsory relay, whatever the strength: 12 HCP here.} Pass
+2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 4NT {Fit Pique et 12 HL face a 18-21 : Blackwood. | Spade fit and 12 HL opposite 18-21: Blackwood.} Pass
+5C {3 cles (As et Roi de Pique, As de Coeur). | 3 key cards (ace and king of spades, ace of hearts).} Pass 6S {4 cles sur 5 et la Dame d'atout : petit chelem. | 4 key cards out of 5 and the trump queen: small slam.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ.AKJ874.K93.Q2 3.5.JT76.KJT9865 K75.Q962.AQ84.73 JT98642.T3.52.A4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 11H. | Compulsory relay, whatever the strength: 11 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 4NT {Fit Coeur et 11 HL : Blackwood. | Heart fit and 11 HL: Blackwood.} Pass
+5C {3 cles (As de Pique, As et Roi de Coeur). | 3 key cards (ace of spades, ace and king of hearts).} Pass 6H {Il manque une seule cle : petit chelem. | Only one key card missing: small slam.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:8.AKQJ85.AK4.Q72 KT6.T9762.87.965 QJ74.3.Q9652.K83 A9532.4.JT3.AJT4"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Singleton Coeur, 8H et des arrets : 3SA. | Singleton heart, 8 HCP and stoppers: 3NT.} Pass
+Pass {Accepte 3SA. | Accepts 3NT.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A.KQJT92.AK5.J84 J932.73.JT94.K75 754.A65.Q87.9632 KQT86.84.632.AQT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass 4H {Fit Coeur avec l'As, 6H : manche. | Heart fit with the ace, 6 HCP: game.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:85.A4.AKQJ863.Q2 A962.JT73.T72.A9 KJ7.Q962.54.J843 QT43.K85.9.KT765"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Carreau, 16H. | Strong catch-all 2C, here 7 diamonds, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {7H et les majeures tenues : 3SA sur la longue Carreau. | 7 HCP and the majors held: 3NT on the long diamonds.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:Q4.A3.92.AKQJ752 T.8742.AKQT65.T9 8632.J965.J874.3 AKJ975.KQT.3.864"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Trefle, 16H. | Strong catch-all 2C, here 7 clubs, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
+3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {2H : passe. | 2 HCP: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A2.73.AKJT952.K4 74.KT98.76.QT986 9853.QJ6.Q84.J72 KQJT6.A542.3.A53"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Carreau, 15H. | Strong catch-all 2C, here 7 diamonds, 15 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {6H dont la Dame de Carreau : la couleur est affranchie, 3SA. | 6 HCP including the diamond queen: the suit runs, 3NT.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:7.AQ5.83.AKQT984 AKT4.932.AT2.J32 J9532.T86.J974.5 Q86.KJ74.KQ65.76"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Trefle, 15H. | Strong catch-all 2C, here 7 clubs, 15 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
+3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {2H : passe. | 2 HCP: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKQ9852.K4.A63.7 6.QT2.K9852.AQ54 T7.J853.QJ74.932 J43.A976.T.KJT86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Pique, 16H. | Strong catch-all 2C, here 7 spades, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
+3S {7 cartes a Pique, 15-16 H, non forcing. | 7 spades, 15-16 HCP, non-forcing.} Pass Pass {4H et doubleton Pique : passe. | 4 HCP and doubleton spade: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K3.A7.AKQ9752.83 T74.QT9854..AQ75 QJ5.KJ62.84.J964 A9862.3.JT63.KT2"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Carreau, 16H. | Strong catch-all 2C, here 7 diamonds, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
+3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {8H, Piques et Coeurs tenus : 3SA. | 8 HCP, spades and hearts held: 3NT.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:6.A5.Q74.AKQJ962 K73.QJ76.KT962.7 T9854.9832.J5.T5 AQJ2.KT4.A83.843"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici 7 cartes a Trefle, 16H. | Strong catch-all 2C, here 7 clubs, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
+3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {1H : passe. | 1 HCP: pass.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQ74.AKQ86.73.8 T3.4.AT865.AT743 852.T7.QJ94.K652 J96.J9532.K2.QJ9"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici bicolore majeur 5-5, 18H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 18 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
+3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass 4S {3 Piques contre 2 Coeurs : choisit Pique. | 3 spades against 2 hearts: picks spades.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKQ95.AKQ74.6.43 J43..J93.AQT8652 762.J832.KQ85.J9 T8.T965.AT742.K7"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici bicolore majeur 5-5, 18H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 18 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass 4H {4 Coeurs : choisit Coeur. | 4 hearts: picks hearts.} Pass
+Pass Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQT6.KQJ93.A5.4 J87542.A72.T6.A7 93.T6.J9874.Q532 .854.KQ32.KJT986"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici bicolore majeur 5-5, 19H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 19 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
+3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass Pass {Doubleton dans les deux majeures : reste a 3SA. | Doubleton in both majors: stays in 3NT.} Pass
+
+[Event "Entrainement 2 Trefle fort indetermine - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQJ74.AKQ85.A.73 T63.63.T987.AKJ8 98.J7.KJ642.QT94 A52.T942.Q53.652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2C {2T fort indetermine, ici bicolore majeur 5-5, 19H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 19 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
+3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass Pass {2-2 en majeures, mineures tenues : 3SA. | 2-2 in the majors, minors held: 3NT.} Pass

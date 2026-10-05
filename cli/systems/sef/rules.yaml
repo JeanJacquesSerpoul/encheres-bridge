@@ -753,19 +753,19 @@
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: "3{M}"
-  cond: "{M} >= 6 and hl == 7"
+  cond: "{M} >= 6 and hl == 8"
   forcing: INV
-  meaning: "6+ cartes, invitation"
-  meaning_en: "6+ cards, invitation"
+  meaning: "6+ cartes, invitation (8 HL)"
+  meaning_en: "6+ cards, invitation (8 HL)"
   status: infere
 - id: "1NT.tex{M}.2NT"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]
   seq: ["1NT {T} 2{M}", "1NT (X) {T} 2{M}"]
   call: 2NT
-  cond: "hl == 7"
+  cond: "hl == 8"
   forcing: INV
-  meaning: "5 cartes, invitation"
-  meaning_en: "5 cards, invitation"
+  meaning: "5 cartes, invitation (8 HL)"
+  meaning_en: "5 cards, invitation (8 HL)"
   status: infere
 - id: "1NT.tex{M}.4{M}"
   for: [{T: 2D, M: H}, {T: 2H, M: S}]

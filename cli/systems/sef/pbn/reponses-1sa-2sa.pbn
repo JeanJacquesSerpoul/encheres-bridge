@@ -445,15 +445,15 @@ Pass {Fin (sur 4SA/5SA : l'ouvreur maximum peut accepter, non code). Ici 19H (20
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:Q98.AK.QJ986.A72 J5.QJT942.T3.T85 AT743.73.A742.43 K62.865.K5.KQJ96"]
+[Deal "N:AT743.73.A742.43 K62.865.K5.KQJ96 Q98.AK.QJ986.A72 J5.QJT942.T3.T85"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-2-5-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 8H (8 HL), 5-2-4-2. | Texas ♠: 5+ spades. Here 8 HCP (8 HL), 5-2-4-2.} Pass
-2S {Rectifie le Texas. Ici 16H (16 HL), 3-2-5-3. | Corrects the Texas transfer. Here 16 HCP (16 HL), 3-2-5-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 8H (8 HL), 5-2-4-2. | 5 cards, game: opener chooses. Here 8 HCP (8 HL), 5-2-4-2.} Pass
-4S {Fit 5-3 : corrige en 4M. Ici 16H (16 HL), 3-2-5-3. | 5-3 fit: corrects to 4M. Here 16 HCP (16 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 5-2-4-2. | Final contract reached (default). Here 8 HCP (8 HL), 5-2-4-2.} Pass
+2S {Rectifie le Texas. Ici 16H (16 HL), 3-2-5-3. | Corrects the Texas transfer. Here 16 HCP (16 HL), 3-2-5-3.} Pass 2NT {5 cartes, invitation (8 HL). Ici 8H (8 HL), 5-2-4-2. | 5 cards, invitation (8 HL). Here 8 HCP (8 HL), 5-2-4-2.} Pass
+4S {Maximum avec fit. Ici 16H (16 HL), 3-2-5-3. | Maximum with a fit. Here 16 HCP (16 HL), 3-2-5-3.} Pass Pass Pass
 
 [Event "Entrainement Reponses a 1SA et 2SA - Donne 27"]
 [Board "27"]
@@ -741,15 +741,15 @@ Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (17 HL), 5-3-3-
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:K7.AJ9.J97.AK652 T85.543.Q865.874 QJ642.QT7.432.QJ A93.K862.AKT.T93"]
+[Deal "N:QJ642.QT7.432.QJ A93.K862.AKT.T93 K7.AJ9.J97.AK652 T85.543.Q865.874"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-3-5.} Pass 2H {Texas ♠ : 5+ piques. Ici 8H (8 HL), 5-3-3-2. | Texas ♠: 5+ spades. Here 8 HCP (8 HL), 5-3-3-2.} Pass
-2S {Rectifie le Texas. Ici 16H (17 HL), 2-3-3-5. | Corrects the Texas transfer. Here 16 HCP (17 HL), 2-3-3-5.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 8H (8 HL), 5-3-3-2. | 5 cards, game: opener chooses. Here 8 HCP (8 HL), 5-3-3-2.} Pass
-Pass {Minimum / pas de fit / conclusion. Ici 16H (17 HL), 2-3-3-5. | Minimum / no fit / signoff. Here 16 HCP (17 HL), 2-3-3-5.} Pass
+2S {Rectifie le Texas. Ici 16H (17 HL), 2-3-3-5. | Corrects the Texas transfer. Here 16 HCP (17 HL), 2-3-3-5.} Pass 2NT {5 cartes, invitation (8 HL). Ici 8H (8 HL), 5-3-3-2. | 5 cards, invitation (8 HL). Here 8 HCP (8 HL), 5-3-3-2.} Pass
+3NT {Maximum sans fit. Ici 16H (17 HL), 2-3-3-5. | Maximum without a fit. Here 16 HCP (17 HL), 2-3-3-5.} Pass Pass Pass
 
 [Event "Entrainement Reponses a 1SA et 2SA - Donne 44"]
 [Board "44"]

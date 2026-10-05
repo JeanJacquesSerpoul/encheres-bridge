@@ -1436,10 +1436,10 @@
    "1NT (X) 2D 2H"
   ],
   "call": "3H",
-  "cond": "H >= 6 and hl == 7",
+  "cond": "H >= 6 and hl == 8",
   "forcing": "INV",
-  "meaning": "6+ cartes, invitation",
-  "meaning_en": "6+ cards, invitation",
+  "meaning": "6+ cartes, invitation (8 HL)",
+  "meaning_en": "6+ cards, invitation (8 HL)",
   "status": "infere"
  },
  {
@@ -1449,10 +1449,10 @@
    "1NT (X) 2H 2S"
   ],
   "call": "3S",
-  "cond": "S >= 6 and hl == 7",
+  "cond": "S >= 6 and hl == 8",
   "forcing": "INV",
-  "meaning": "6+ cartes, invitation",
-  "meaning_en": "6+ cards, invitation",
+  "meaning": "6+ cartes, invitation (8 HL)",
+  "meaning_en": "6+ cards, invitation (8 HL)",
   "status": "infere"
  },
  {
@@ -1462,10 +1462,10 @@
    "1NT (X) 2D 2H"
   ],
   "call": "2NT",
-  "cond": "hl == 7",
+  "cond": "hl == 8",
   "forcing": "INV",
-  "meaning": "5 cartes, invitation",
-  "meaning_en": "5 cards, invitation",
+  "meaning": "5 cartes, invitation (8 HL)",
+  "meaning_en": "5 cards, invitation (8 HL)",
   "status": "infere"
  },
  {
@@ -1475,10 +1475,10 @@
    "1NT (X) 2H 2S"
   ],
   "call": "2NT",
-  "cond": "hl == 7",
+  "cond": "hl == 8",
   "forcing": "INV",
-  "meaning": "5 cartes, invitation",
-  "meaning_en": "5 cards, invitation",
+  "meaning": "5 cartes, invitation (8 HL)",
+  "meaning_en": "5 cards, invitation (8 HL)",
   "status": "infere"
  },
  {

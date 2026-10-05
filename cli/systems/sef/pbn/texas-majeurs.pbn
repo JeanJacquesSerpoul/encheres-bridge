@@ -1,0 +1,894 @@
+% Titre-FR: Texas majeurs
+% Titre-EN: Major-suit transfers
+
+[Event "Entrainement Texas majeurs - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T8.KJT4.A86.AK53 J9.Q92.J74.QJT74 A7642.A8763.KQ5. KQ53.5.T932.9862"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-4-3-4.} Pass 2H {Texas ♠ : 5+ piques. Ici 13H (13 HL), 5-5-3-0. | Texas ♠: 5+ spades. Here 13 HCP (13 HL), 5-5-3-0.} Pass
+2S {Rectifie le Texas. Ici 15H (15 HL), 2-4-3-4. | Corrects the Texas transfer. Here 15 HCP (15 HL), 2-4-3-4.} Pass 4H {Bicolore 5-5 majeur, 12-14 H : l'ouvreur choisit la manche. Ici 13H (13 HL), 5-5-3-0. | 5-5 in the majors, 12-14 HCP: opener chooses the game. Here 13 HCP (13 HL), 5-5-3-0.} Pass
+Pass {Minimum / pas de fit / conclusion. Ici 15H (15 HL), 2-4-3-4. | Minimum / no fit / signoff. Here 15 HCP (15 HL), 2-4-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQJ8.A6.K53.AQ53 T976.QJ54.Q.JT82 K43.T9832.A7.974 52.K7.JT98642.K6"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 4-2-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 4-2-3-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 7H (7 HL), 3-5-2-3. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 7 HCP (7 HL), 3-5-2-3.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 4-2-3-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 4-2-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 7H (7 HL), 3-5-2-3. | Final contract reached (default). Here 7 HCP (7 HL), 3-5-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:K64.AQ.A9632.KJ6 75.64.T7.QT98532 AQT98.T9753.KQ.A J32.KJ82.J854.74"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 3-2-5-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 15H (14 HL), 5-5-2-1. | Texas ♠: 5+ spades. Here 15 HCP (14 HL), 5-5-2-1.} Pass
+2S {Rectifie le Texas. Ici 17H (16 HL), 3-2-5-3. | Corrects the Texas transfer. Here 17 HCP (16 HL), 3-2-5-3.} Pass 3H {Bicolore 5-5 majeur, 14+ H. Ici 15H (14 HL), 5-5-2-1. | 5-5 in the majors, 14+ HCP. Here 15 HCP (14 HL), 5-5-2-1.} Pass
+4S {Choisit la majeure de la manche (3 cartes au moins). Ici 17H (16 HL), 3-2-5-3. | Picks the major for game (at least 3 cards). Here 17 HCP (16 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 15H (14 HL), 5-5-2-1. | Final contract reached (default). Here 15 HCP (14 HL), 5-5-2-1.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AT2.AQ.AQ943.A63 98.652.T72.KJ982 QJ654.JT73.KJ86. K73.K984.5.QT754"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 3-2-5-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 3-2-5-3.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (9 HL), 5-4-4-0. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 8 HCP (9 HL), 5-4-4-0.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 3-2-5-3. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 3-2-5-3.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 8H (9 HL), 5-4-4-0. | Fit and 9+ HL: Blackwood. Here 8 HCP (9 HL), 5-4-4-0.} Pass
+5D {4 ou 1 cle. Ici 20H (20 HL), 3-2-5-3. | 4 or 1 keycard. Here 20 HCP (20 HL), 3-2-5-3.} Pass 6S {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 8H (9 HL), 5-4-4-0. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 8 HCP (9 HL), 5-4-4-0.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 3-2-5-3. | Final contract reached (default). Here 20 HCP (20 HL), 3-2-5-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q97.KQJ.AQ82.J93 .987643.K94.AT87 KJ652.T52.63.Q52 AT843.A.JT75.K64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-4-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 6H (7 HL), 5-3-2-3. | Texas ♠: 5+ spades. Here 6 HCP (7 HL), 5-3-2-3.} Pass
+2S {Rectifie le Texas. Ici 15H (15 HL), 3-3-4-3. | Corrects the Texas transfer. Here 15 HCP (15 HL), 3-3-4-3.} Pass Pass {Faible : pour jouer. Ici 6H (7 HL), 5-3-2-3. | Weak: to play. Here 6 HCP (7 HL), 5-3-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK9.KQJT4.K98.AT 8643.63..KQ97542 QJT75.A52.AT7.J6 2.987.QJ65432.83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (21 HL), 3-5-3-2. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (21 HL), 3-5-3-2.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 12H (13 HL), 5-3-3-2. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 12 HCP (13 HL), 5-3-3-2.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 20H (21 HL), 3-5-3-2. | Correction: a fit of three cards or more. Here 20 HCP (21 HL), 3-5-3-2.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 12H (13 HL), 5-3-3-2. | Fit and 9+ HL: Blackwood. Here 12 HCP (13 HL), 5-3-3-2.} Pass
+5C {3 ou 0 cle. Ici 20H (21 HL), 3-5-3-2. | 3 or 0 keycards. Here 20 HCP (21 HL), 3-5-3-2.} Pass 6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 12H (13 HL), 5-3-3-2. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 12 HCP (13 HL), 5-3-3-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (21 HL), 3-5-3-2. | Final contract reached (default). Here 20 HCP (21 HL), 3-5-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KT94.A7.A97.AKQ8 Q876.543.Q63.J75 2.QJT962.KJ4.T63 AJ53.K8.T852.942"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "5H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 4-2-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 4-2-3-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 7H (9 HL), 1-6-3-3. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 7 HCP (9 HL), 1-6-3-3.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 4-2-3-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 4-2-3-4.} Pass 4NT {6+ cartes et 9+ HL : Blackwood. Ici 7H (9 HL), 1-6-3-3. | 6+ cards and 9+ HL: Blackwood. Here 7 HCP (9 HL), 1-6-3-3.} Pass
+5C {3 ou 0 cle. Ici 20H (20 HL), 4-2-3-4. | 3 or 0 keycards. Here 20 HCP (20 HL), 4-2-3-4.} Pass 5H {Deux cles manquent : on s'arrete a 5. Ici 7H (9 HL), 1-6-3-3. | Two keycards missing: stop at 5. Here 7 HCP (9 HL), 1-6-3-3.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 4-2-3-4. | Final contract reached (default). Here 20 HCP (20 HL), 4-2-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A95.AJT4.A97.A72 Q76.52.KT85.6543 KJT82.K7.J42.J98 43.Q9863.Q63.KQT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 9H (10 HL), 5-2-3-3. | Texas ♠: 5+ spades. Here 9 HCP (10 HL), 5-2-3-3.} Pass
+2S {Rectifie le Texas. Ici 17H (17 HL), 3-4-3-3. | Corrects the Texas transfer. Here 17 HCP (17 HL), 3-4-3-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 9H (10 HL), 5-2-3-3. | 5 cards, game: opener chooses. Here 9 HCP (10 HL), 5-2-3-3.} Pass
+4S {Fit 5-3 : corrige en 4M. Ici 17H (17 HL), 3-4-3-3. | 5-3 fit: corrects to 4M. Here 17 HCP (17 HL), 3-4-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 5-2-3-3. | Final contract reached (default). Here 9 HCP (10 HL), 5-2-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A94.AJ53.AT7.K97 KT.864.95432.653 QJ863.KT9.KQJ.JT 752.Q72.86.AQ842"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-4-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 13H (14 HL), 5-3-3-2. | Texas ♠: 5+ spades. Here 13 HCP (14 HL), 5-3-3-2.} Pass
+2S {Rectifie le Texas. Ici 16H (16 HL), 3-4-3-3. | Corrects the Texas transfer. Here 16 HCP (16 HL), 3-4-3-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 13H (14 HL), 5-3-3-2. | 5 cards, game: opener chooses. Here 13 HCP (14 HL), 5-3-3-2.} Pass
+4S {Fit 5-3 : corrige en 4M. Ici 16H (16 HL), 3-4-3-3. | 5-3 fit: corrects to 4M. Here 16 HCP (16 HL), 3-4-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 5-3-3-2. | Final contract reached (default). Here 13 HCP (14 HL), 5-3-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK2.A764.JT6.A84 843.QT52.Q9.QJT3 JT9.KJ983.A54.97 Q765..K8732.K652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-4-3-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 9H (10 HL), 3-5-3-2. | Texas ♥: 5+ hearts. Here 9 HCP (10 HL), 3-5-3-2.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 3-4-3-3. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 3-4-3-3.} Pass 4H {Apres rectification a saut : manche. Ici 9H (10 HL), 3-5-3-2. | After jump correction: game. Here 9 HCP (10 HL), 3-5-3-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 16H (16 HL), 3-4-3-3. | Final contract reached (default). Here 16 HCP (16 HL), 3-4-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQ3.QT97.AK3.QJ2 T964.K6.QT62.AK7 J87.85432.85.543 A52.AJ.J974.T986"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 1H (1 HL), 3-5-2-3. | Texas ♥: 5+ hearts. Here 1 HCP (1 HL), 3-5-2-3.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 17H (17 HL), 3-4-3-3. | Jump correction: maximum with 4-card support. Here 17 HCP (17 HL), 3-4-3-3.} Pass Pass {Nul : passe. Ici 1H (1 HL), 3-5-2-3. | Nothing: pass. Here 1 HCP (1 HL), 3-5-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KT65.AJ3.AK5.J76 7.Q975.Q94.T5432 AQ.KT864.J873.98 J98432.2.T62.AKQ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-3-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 10H (9 HL), 2-5-4-2. | Texas ♥: 5+ hearts. Here 10 HCP (9 HL), 2-5-4-2.} Pass
+2H {Rectifie le Texas. Ici 16H (16 HL), 4-3-3-3. | Corrects the Texas transfer. Here 16 HCP (16 HL), 4-3-3-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 10H (9 HL), 2-5-4-2. | 5 cards, game: opener chooses. Here 10 HCP (9 HL), 2-5-4-2.} Pass
+4H {Fit 5-3 : corrige en 4M. Ici 16H (16 HL), 4-3-3-3. | 5-3 fit: corrects to 4M. Here 16 HCP (16 HL), 4-3-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (9 HL), 2-5-4-2. | Final contract reached (default). Here 10 HCP (9 HL), 2-5-4-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQ85.AJ9.Q63.KQ6 974.K8764.42.J92 JT632.Q3.A985.75 A.T52.KJT7.AT843"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 7H (7 HL), 5-2-4-2. | Texas ♠: 5+ spades. Here 7 HCP (7 HL), 5-2-4-2.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 17H (17 HL), 4-3-3-3. | Jump correction: maximum with 4-card support. Here 17 HCP (17 HL), 4-3-3-3.} Pass 4S {Apres rectification a saut : manche. Ici 7H (7 HL), 5-2-4-2. | After jump correction: game. Here 7 HCP (7 HL), 5-2-4-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 17H (17 HL), 4-3-3-3. | Final contract reached (default). Here 17 HCP (17 HL), 4-3-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A762.AJ6.K8.K876 KQJ4.852.J43.AT9 T.QT974.AT5.QJ52 9853.K3.Q9762.43"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-3-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-3-2-4.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 9H (9 HL), 1-5-3-4. | Texas ♥: 5+ hearts. Here 9 HCP (9 HL), 1-5-3-4.} Pass
+2H {Rectifie le Texas. Ici 15H (15 HL), 4-3-2-4. | Corrects the Texas transfer. Here 15 HCP (15 HL), 4-3-2-4.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 9H (9 HL), 1-5-3-4. | 5 cards, game: opener chooses. Here 9 HCP (9 HL), 1-5-3-4.} Pass
+4H {Fit 5-3 : corrige en 4M. Ici 15H (15 HL), 4-3-2-4. | 5-3 fit: corrects to 4M. Here 15 HCP (15 HL), 4-3-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 9H (9 HL), 1-5-3-4. | Final contract reached (default). Here 9 HCP (9 HL), 1-5-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:K632.K764.AQJ.A7 AT95..976542.Q42 8.QJT95.KT3.KJT6 QJ74.A832.8.9853"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-4-3-2.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 10H (11 HL), 1-5-3-4. | Texas ♥: 5+ hearts. Here 10 HCP (11 HL), 1-5-3-4.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 17H (17 HL), 4-4-3-2. | Jump correction: maximum with 4-card support. Here 17 HCP (17 HL), 4-4-3-2.} Pass 4H {Apres rectification a saut : manche. Ici 10H (11 HL), 1-5-3-4. | After jump correction: game. Here 10 HCP (11 HL), 1-5-3-4.} Pass
+Pass {Contrat final atteint (defaut). Ici 17H (17 HL), 4-4-3-2. | Final contract reached (default). Here 17 HCP (17 HL), 4-4-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:864.AK7.A6.AKQ97 KQ52.8542.32.652 AJT9.QJT963.95.4 73..KQJT874.JT83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (21 HL), 3-3-2-5. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (21 HL), 3-3-2-5.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (10 HL), 4-6-2-1. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 8 HCP (10 HL), 4-6-2-1.} Pass
+3H {Rectification : fit par 3 cartes ou plus. Ici 20H (21 HL), 3-3-2-5. | Correction: a fit of three cards or more. Here 20 HCP (21 HL), 3-3-2-5.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 8H (10 HL), 4-6-2-1. | Fit and 9+ HL: Blackwood. Here 8 HCP (10 HL), 4-6-2-1.} Pass
+5D {4 ou 1 cle. Ici 20H (21 HL), 3-3-2-5. | 4 or 1 keycard. Here 20 HCP (21 HL), 3-3-2-5.} Pass 6H {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 8H (10 HL), 4-6-2-1. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 8 HCP (10 HL), 4-6-2-1.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (21 HL), 3-3-2-5. | Final contract reached (default). Here 20 HCP (21 HL), 3-3-2-5.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQT.986.AQ9.AQ92 J4.T532.T542.T64 A7632.AKQJ4..J87 985.7.KJ8763.K53"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-3-4.} Pass 2H {Texas ♠ : 5+ piques. Ici 15H (16 HL), 5-5-0-3. | Texas ♠: 5+ spades. Here 15 HCP (16 HL), 5-5-0-3.} Pass
+2S {Rectifie le Texas. Ici 17H (17 HL), 3-3-3-4. | Corrects the Texas transfer. Here 17 HCP (17 HL), 3-3-3-4.} Pass 3H {Bicolore 5-5 majeur, 14+ H. Ici 15H (16 HL), 5-5-0-3. | 5-5 in the majors, 14+ HCP. Here 15 HCP (16 HL), 5-5-0-3.} Pass
+4H {Choisit la majeure de la manche (3 cartes au moins). Ici 17H (17 HL), 3-3-3-4. | Picks the major for game (at least 3 cards). Here 17 HCP (17 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 15H (16 HL), 5-5-0-3. | Final contract reached (default). Here 15 HCP (16 HL), 5-5-0-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKQT.62.AKJ7.KT3 4.J95.QT64.A9842 .AK873.952.QJ765 J9876532.QT4.83."]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 4-2-4-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 4-2-4-3.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 10H (12 HL), 0-5-3-5. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 10 HCP (12 HL), 0-5-3-5.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 4-2-4-3. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 4-2-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 0-5-3-5. | Final contract reached (default). Here 10 HCP (12 HL), 0-5-3-5.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A4.K73.AKJ.AJ872 97.AQ96.T7652.64 QJ8532.T42.98.Q3 KT6.J85.Q43.KT95"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (21 HL), 2-3-3-5. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (21 HL), 2-3-3-5.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (7 HL), 6-3-2-2. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 5 HCP (7 HL), 6-3-2-2.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (21 HL), 2-3-3-5. | No fit: 3NT, the lowest level. Here 20 HCP (21 HL), 2-3-3-5.} Pass 4S {6+ cartes : manche en majeure. Ici 5H (7 HL), 6-3-2-2. | 6+ cards: game in the major. Here 5 HCP (7 HL), 6-3-2-2.} Pass
+Pass {Fin. Ici 20H (21 HL), 2-3-3-5. | End. Here 20 HCP (21 HL), 2-3-3-5.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K2.KJ95.AQ65.AK3 T763.T873.KJ97.4 AQJ854.62.32.T62 9.AQ4.T84.QJ9875"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 2-4-4-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 2-4-4-3.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 7H (9 HL), 6-2-2-3. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 7 HCP (9 HL), 6-2-2-3.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 2-4-4-3. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 2-4-4-3.} Pass 4NT {6+ cartes et 9+ HL : Blackwood. Ici 7H (9 HL), 6-2-2-3. | 6+ cards and 9+ HL: Blackwood. Here 7 HCP (9 HL), 6-2-2-3.} Pass
+5C {3 ou 0 cle. Ici 20H (20 HL), 2-4-4-3. | 3 or 0 keycards. Here 20 HCP (20 HL), 2-4-4-3.} Pass 6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 7H (9 HL), 6-2-2-3. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 7 HCP (9 HL), 6-2-2-3.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 2-4-4-3. | Final contract reached (default). Here 20 HCP (20 HL), 2-4-4-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKT.Q84.Q6.AJT94 J654.9532.J2.K75 Q9832.AKJT7.A7.6 7.6.KT98543.Q832"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-3-2-5.} Pass 2H {Texas ♠ : 5+ piques. Ici 14H (15 HL), 5-5-2-1. | Texas ♠: 5+ spades. Here 14 HCP (15 HL), 5-5-2-1.} Pass
+2S {Rectifie le Texas. Ici 16H (17 HL), 3-3-2-5. | Corrects the Texas transfer. Here 16 HCP (17 HL), 3-3-2-5.} Pass 3H {Bicolore 5-5 majeur, 14+ H. Ici 14H (15 HL), 5-5-2-1. | 5-5 in the majors, 14+ HCP. Here 14 HCP (15 HL), 5-5-2-1.} Pass
+4H {Choisit la majeure de la manche (3 cartes au moins). Ici 16H (17 HL), 3-3-2-5. | Picks the major for game (at least 3 cards). Here 16 HCP (17 HL), 3-3-2-5.} Pass Pass {Contrat final atteint (defaut). Ici 14H (15 HL), 5-5-2-1. | Final contract reached (default). Here 14 HCP (15 HL), 5-5-2-1.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:632.AQJ.K87.KQ65 KQJ98.2.543.A972 A74.9876543.62.4 T5.KT.AQJT9.JT83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-3-4.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 4H (4 HL), 3-7-2-1. | Texas ♥: 5+ hearts. Here 4 HCP (4 HL), 3-7-2-1.} Pass
+2H {Rectifie le Texas. Ici 15H (15 HL), 3-3-3-4. | Corrects the Texas transfer. Here 15 HCP (15 HL), 3-3-3-4.} Pass Pass {Faible : pour jouer. Ici 4H (4 HL), 3-7-2-1. | Weak: to play. Here 4 HCP (4 HL), 3-7-2-1.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJ6.QT86.AQ3.AK5 T95.KJ.K875.8764 K8742.974.T6.J92 Q3.A532.J942.QT3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 3-4-3-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 3-4-3-3.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 4H (4 HL), 5-3-2-3. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 4 HCP (4 HL), 5-3-2-3.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 3-4-3-3. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 3-4-3-3.} Pass 4S {Manche. Ici 4H (4 HL), 5-3-2-3. | Game. Here 4 HCP (4 HL), 5-3-2-3.} Pass
+Pass {Fin. Ici 20H (20 HL), 3-4-3-3. | End. Here 20 HCP (20 HL), 3-4-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A7.AKJT.KJ6.A972 KT95.Q6.AQ53.854 QJ862.83.87.KQT6 43.97542.T942.J3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 2-4-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 2-4-3-4.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (9 HL), 5-2-2-4. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 8 HCP (9 HL), 5-2-2-4.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 2-4-3-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 2-4-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 5-2-2-4. | Final contract reached (default). Here 8 HCP (9 HL), 5-2-2-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A4.KT8.AKQ3.AT84 QJ.AQ973.J987.Q3 T96532.J2.T.KJ65 K87.654.6542.972"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 2-3-4-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 2-3-4-4.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (5 HL), 6-2-1-4. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 5 HCP (5 HL), 6-2-1-4.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 2-3-4-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 2-3-4-4.} Pass 4S {6+ cartes : manche en majeure. Ici 5H (5 HL), 6-2-1-4. | 6+ cards: game in the major. Here 5 HCP (5 HL), 6-2-1-4.} Pass
+Pass {Fin. Ici 20H (20 HL), 2-3-4-4. | End. Here 20 HCP (20 HL), 2-3-4-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK52.A8.T853.KQ5 J8.QJT76.AK7.T94 T9743.952.Q2.872 Q6.K43.J964.AJ63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-2-4-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 2H (2 HL), 5-3-2-3. | Texas ♠: 5+ spades. Here 2 HCP (2 HL), 5-3-2-3.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 4-2-4-3. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 4-2-4-3.} Pass Pass {Nul : passe. Ici 2H (2 HL), 5-3-2-3. | Nothing: pass. Here 2 HCP (2 HL), 5-3-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:83.AKJ8.AJ87.AKT A54.3.Q2.Q876542 QJT.QT764.K964.J K9762.952.T53.93"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 2-4-4-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 2-4-4-3.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 9H (8 HL), 3-5-4-1. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 9 HCP (8 HL), 3-5-4-1.} Pass
+3H {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 2-4-4-3. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 2-4-4-3.} Pass 4H {Manche. Ici 9H (8 HL), 3-5-4-1. | Game. Here 9 HCP (8 HL), 3-5-4-1.} Pass
+Pass {Fin. Ici 20H (20 HL), 2-4-4-3. | End. Here 20 HCP (20 HL), 2-4-4-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ972.AT8.QJ5.QJ T.KQJ2.AT93.AK43 K8654.654.K64.97 J3.973.872.T8652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 5-3-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 5-3-3-2.} Pass 2H {Texas ♠ : 5+ piques. Ici 6H (6 HL), 5-3-3-2. | Texas ♠: 5+ spades. Here 6 HCP (6 HL), 5-3-3-2.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 5-3-3-2. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 5-3-3-2.} Pass 4S {Apres rectification a saut : manche. Ici 6H (6 HL), 5-3-3-2. | After jump correction: game. Here 6 HCP (6 HL), 5-3-3-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 16H (16 HL), 5-3-3-2. | Final contract reached (default). Here 16 HCP (16 HL), 5-3-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:JT97.AQ53.KQ8.AJ K32.K9.J954.K962 854.JT762.T3.T85 AQ6.84.A762.Q743"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 4-4-3-2.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 1H (1 HL), 3-5-2-3. | Texas ♥: 5+ hearts. Here 1 HCP (1 HL), 3-5-2-3.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 17H (16 HL), 4-4-3-2. | Jump correction: maximum with 4-card support. Here 17 HCP (16 HL), 4-4-3-2.} Pass Pass {Nul : passe. Ici 1H (1 HL), 3-5-2-3. | Nothing: pass. Here 1 HCP (1 HL), 3-5-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AT.AK2.AK762.Q96 K3.Q974.4.A87532 QJ742.J853.985.J 9865.T6.QJT3.KT4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (21 HL), 2-3-5-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (21 HL), 2-3-5-3.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (5 HL), 5-4-3-1. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 5 HCP (5 HL), 5-4-3-1.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (21 HL), 2-3-5-3. | No fit: 3NT, the lowest level. Here 20 HCP (21 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 5H (5 HL), 5-4-3-1. | Final contract reached (default). Here 5 HCP (5 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJ.AKJ8.542.K754 632.T94.J963.J92 KQ874.Q6532.A.Q8 T95.7.KQT87.AT63"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 2-4-3-4.} Pass 2H {Texas ♠ : 5+ piques. Ici 13H (13 HL), 5-5-1-2. | Texas ♠: 5+ spades. Here 13 HCP (13 HL), 5-5-1-2.} Pass
+2S {Rectifie le Texas. Ici 16H (15 HL), 2-4-3-4. | Corrects the Texas transfer. Here 16 HCP (15 HL), 2-4-3-4.} Pass 4H {Bicolore 5-5 majeur, 12-14 H : l'ouvreur choisit la manche. Ici 13H (13 HL), 5-5-1-2. | 5-5 in the majors, 12-14 HCP: opener chooses the game. Here 13 HCP (13 HL), 5-5-1-2.} Pass
+Pass {Minimum / pas de fit / conclusion. Ici 16H (15 HL), 2-4-3-4. | Minimum / no fit / signoff. Here 16 HCP (15 HL), 2-4-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AJ43.KT.A732.AJ4 K.9743.KQT9.KT86 T9752.J8.J64.972 Q86.AQ652.85.Q53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-2-4-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 2H (2 HL), 5-2-3-3. | Texas ♠: 5+ spades. Here 2 HCP (2 HL), 5-2-3-3.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 17H (17 HL), 4-2-4-3. | Jump correction: maximum with 4-card support. Here 17 HCP (17 HL), 4-2-4-3.} Pass Pass {Nul : passe. Ici 2H (2 HL), 5-2-3-3. | Nothing: pass. Here 2 HCP (2 HL), 5-2-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KT83.K82.AK43.K9 Q2.T9764.T976.Q3 A97654.J.J5.T876 J.AQ53.Q82.AJ542"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-4-2.} Pass 2H {Texas ♠ : 5+ piques. Ici 6H (5 HL), 6-1-2-4. | Texas ♠: 5+ spades. Here 6 HCP (5 HL), 6-1-2-4.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 4-3-4-2. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 4-3-4-2.} Pass 4S {Apres rectification a saut : manche. Ici 6H (5 HL), 6-1-2-4. | After jump correction: game. Here 6 HCP (5 HL), 6-1-2-4.} Pass
+Pass {Contrat final atteint (defaut). Ici 16H (16 HL), 4-3-4-2. | Final contract reached (default). Here 16 HCP (16 HL), 4-3-4-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:K543.AKT2.QT9.A6 T72.QJ.A42.J9874 9.987654.75.QT53 AQJ86.3.KJ863.K2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-3-2.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 2H (2 HL), 1-6-2-4. | Texas ♥: 5+ hearts. Here 2 HCP (2 HL), 1-6-2-4.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 4-4-3-2. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 4-4-3-2.} Pass Pass {Nul : passe. Ici 2H (2 HL), 1-6-2-4. | Nothing: pass. Here 2 HCP (2 HL), 1-6-2-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:QT.QJT42.AQ4.A32 942.AK987.KJ9.94 K7653.653.653.KT AJ8..T872.QJ8765"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-5-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-5-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 6H (6 HL), 5-3-3-2. | Texas ♠: 5+ spades. Here 6 HCP (6 HL), 5-3-3-2.} Pass
+2S {Rectifie le Texas. Ici 15H (16 HL), 2-5-3-3. | Corrects the Texas transfer. Here 15 HCP (16 HL), 2-5-3-3.} Pass Pass {Faible : pour jouer. Ici 6H (6 HL), 5-3-3-2. | Weak: to play. Here 6 HCP (6 HL), 5-3-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:32.AK52.AQ7.AK95 Q64.63.K9643.Q42 AK9875.T97.T8.86 JT.QJ84.J52.JT73"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 2-4-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 2-4-3-4.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 7H (9 HL), 6-3-2-2. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 7 HCP (9 HL), 6-3-2-2.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 2-4-3-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 2-4-3-4.} Pass 4NT {6+ cartes et 9+ HL : Blackwood. Ici 7H (9 HL), 6-3-2-2. | 6+ cards and 9+ HL: Blackwood. Here 7 HCP (9 HL), 6-3-2-2.} Pass
+5C {3 ou 0 cle. Ici 20H (20 HL), 2-4-3-4. | 3 or 0 keycards. Here 20 HCP (20 HL), 2-4-3-4.} Pass 6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 7H (9 HL), 6-3-2-2. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 7 HCP (9 HL), 6-3-2-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 2-4-3-4. | Final contract reached (default). Here 20 HCP (20 HL), 2-4-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ93.K98.A72.QT6 6.J72.Q643.A9843 KJT85.A43.KJ.K75 742.QT65.T985.J2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-3-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 15H (15 HL), 5-3-2-3. | Texas ♠: 5+ spades. Here 15 HCP (15 HL), 5-3-2-3.} Pass
+2S {Rectifie le Texas. Ici 15H (15 HL), 4-3-3-3. | Corrects the Texas transfer. Here 15 HCP (15 HL), 4-3-3-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 15H (15 HL), 5-3-2-3. | 5 cards, game: opener chooses. Here 15 HCP (15 HL), 5-3-2-3.} Pass
+4S {Fit 5-3 : corrige en 4M. Ici 15H (15 HL), 4-3-3-3. | 5-3 fit: corrects to 4M. Here 15 HCP (15 HL), 4-3-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 5-3-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 5-3-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AJ97.AJ9.J8.AKQ5 Q8.KT7654.Q74.T2 K6542.Q82.K93.98 T3.3.AT652.J7643"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 4-3-2-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 4-3-2-4.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (8 HL), 5-3-3-2. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 8 HCP (8 HL), 5-3-3-2.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 4-3-2-4. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 4-3-2-4.} Pass 4S {Manche. Ici 8H (8 HL), 5-3-3-2. | Game. Here 8 HCP (8 HL), 5-3-3-2.} Pass
+Pass {Fin. Ici 20H (20 HL), 4-3-2-4. | End. Here 20 HCP (20 HL), 4-3-2-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KJ5.KJ82.AQ5.K52 A943.QT3.K84.T64 QT8762.94.T96.73 .A765.J732.AQJ98"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 2H (2 HL), 6-2-3-2. | Texas ♠: 5+ spades. Here 2 HCP (2 HL), 6-2-3-2.} Pass
+2S {Rectifie le Texas. Ici 17H (17 HL), 3-4-3-3. | Corrects the Texas transfer. Here 17 HCP (17 HL), 3-4-3-3.} Pass Pass {Faible : pour jouer. Ici 2H (2 HL), 6-2-3-2. | Weak: to play. Here 2 HCP (2 HL), 6-2-3-2.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T764.A43.AKJ.A62 J82.K65.82.QT743 3.QJT98.653.J985 AKQ95.72.QT974.K"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-3-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 4H (5 HL), 1-5-3-4. | Texas ♥: 5+ hearts. Here 4 HCP (5 HL), 1-5-3-4.} Pass
+2H {Rectifie le Texas. Ici 16H (16 HL), 4-3-3-3. | Corrects the Texas transfer. Here 16 HCP (16 HL), 4-3-3-3.} Pass Pass {Faible : pour jouer. Ici 4H (5 HL), 1-5-3-4. | Weak: to play. Here 4 HCP (5 HL), 1-5-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:J8.AQ85.K94.KQJ2 K965.K764.A3.T65 AQT74.JT932.Q7.A 32..JT8652.98743"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-4-3-4.} Pass 2H {Texas ♠ : 5+ piques. Ici 13H (13 HL), 5-5-2-1. | Texas ♠: 5+ spades. Here 13 HCP (13 HL), 5-5-2-1.} Pass
+2S {Rectifie le Texas. Ici 16H (16 HL), 2-4-3-4. | Corrects the Texas transfer. Here 16 HCP (16 HL), 2-4-3-4.} Pass 4H {Bicolore 5-5 majeur, 12-14 H : l'ouvreur choisit la manche. Ici 13H (13 HL), 5-5-2-1. | 5-5 in the majors, 12-14 HCP: opener chooses the game. Here 13 HCP (13 HL), 5-5-2-1.} Pass
+Pass {Minimum / pas de fit / conclusion. Ici 16H (16 HL), 2-4-3-4. | Minimum / no fit / signoff. Here 16 HCP (16 HL), 2-4-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKT6.KQ3.AJ2.T97 3.A97.K8765.KQJ3 Q8542.854.T9.542 J97.JT62.Q43.A86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-3-3.} Pass 2H {Texas ♠ : 5+ piques. Ici 2H (2 HL), 5-3-2-3. | Texas ♠: 5+ spades. Here 2 HCP (2 HL), 5-3-2-3.} Pass
+3S {Rectification a saut : maximum avec 4 atouts. Ici 17H (17 HL), 4-3-3-3. | Jump correction: maximum with 4-card support. Here 17 HCP (17 HL), 4-3-3-3.} Pass Pass {Nul : passe. Ici 2H (2 HL), 5-3-2-3. | Nothing: pass. Here 2 HCP (2 HL), 5-3-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:A93.972.AK843.A7 42.J6.QJT972.964 76.AQ843.65.T853 KQJT85.KT5..KQJ2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-3-5-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-3-5-2.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 6H (7 HL), 2-5-2-4. | Texas ♥: 5+ hearts. Here 6 HCP (7 HL), 2-5-2-4.} Pass
+2H {Rectifie le Texas. Ici 15H (16 HL), 3-3-5-2. | Corrects the Texas transfer. Here 15 HCP (16 HL), 3-3-5-2.} Pass Pass {Faible : pour jouer. Ici 6H (7 HL), 2-5-2-4. | Weak: to play. Here 6 HCP (7 HL), 2-5-2-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K83.74.AK52.AKQJ QJ974.Q3.Q976.94 T5.AJT8652.3.652 A62.K9.JT84.T873"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 3-2-4-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 3-2-4-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (8 HL), 2-7-1-3. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 5 HCP (8 HL), 2-7-1-3.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 20H (20 HL), 3-2-4-4. | No fit: 3NT, the lowest level. Here 20 HCP (20 HL), 3-2-4-4.} Pass 4H {6+ cartes : manche en majeure. Ici 5H (8 HL), 2-7-1-3. | 6+ cards: game in the major. Here 5 HCP (8 HL), 2-7-1-3.} Pass
+Pass {Fin. Ici 20H (20 HL), 3-2-4-4. | End. Here 20 HCP (20 HL), 3-2-4-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ5.AQ3.QT4.AQ92 K2.T64.K86.KT863 J943.K8752.2.J54 T876.J9.AJ9753.7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 3-3-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 3-3-3-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (5 HL), 4-5-1-3. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 5 HCP (5 HL), 4-5-1-3.} Pass
+3H {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 3-3-3-4. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 3-3-3-4.} Pass 4H {Manche. Ici 5H (5 HL), 4-5-1-3. | Game. Here 5 HCP (5 HL), 4-5-1-3.} Pass
+Pass {Fin. Ici 20H (20 HL), 3-3-3-4. | End. Here 20 HCP (20 HL), 3-3-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ63.K2.AQT.AQ85 942.T6.K764.K642 T75.AQJ9873.J.93 KJ8.54.98532.JT7"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 21H (21 HL), 4-2-3-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 21 HCP (21 HL), 4-2-3-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (10 HL), 3-7-1-2. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 8 HCP (10 HL), 3-7-1-2.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 21H (21 HL), 4-2-3-4. | No fit: 3NT, the lowest level. Here 21 HCP (21 HL), 4-2-3-4.} Pass 4NT {6+ cartes et 9+ HL : Blackwood. Ici 8H (10 HL), 3-7-1-2. | 6+ cards and 9+ HL: Blackwood. Here 8 HCP (10 HL), 3-7-1-2.} Pass
+5D {4 ou 1 cle. Ici 21H (21 HL), 4-2-3-4. | 4 or 1 keycard. Here 21 HCP (21 HL), 4-2-3-4.} Pass 6H {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 8H (10 HL), 3-7-1-2. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 8 HCP (10 HL), 3-7-1-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 21H (21 HL), 4-2-3-4. | Final contract reached (default). Here 21 HCP (21 HL), 4-2-3-4.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQT32.A84.K7.K76 J875.K7.T653.Q43 9.QJ932.AJ82.JT2 K64.T65.Q94.A985"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 5-3-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 5-3-2-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 9H (10 HL), 1-5-4-3. | Texas ♥: 5+ hearts. Here 9 HCP (10 HL), 1-5-4-3.} Pass
+2H {Rectifie le Texas. Ici 16H (17 HL), 5-3-2-3. | Corrects the Texas transfer. Here 16 HCP (17 HL), 5-3-2-3.} Pass 3NT {5 cartes, manche : l'ouvreur choisit. Ici 9H (10 HL), 1-5-4-3. | 5 cards, game: opener chooses. Here 9 HCP (10 HL), 1-5-4-3.} Pass
+4H {Fit 5-3 : corrige en 4M. Ici 16H (17 HL), 5-3-2-3. | 5-3 fit: corrects to 4M. Here 16 HCP (17 HL), 5-3-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 1-5-4-3. | Final contract reached (default). Here 9 HCP (10 HL), 1-5-4-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKQ5.Q875.J4.KJ2 JT3.A2.9632.QT98 9876.JT643.A7.74 42.K9.KQT85.A653"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-2-3.} Pass 2D {Texas ♥ : 5+ cœurs. Ici 5H (5 HL), 4-5-2-2. | Texas ♥: 5+ hearts. Here 5 HCP (5 HL), 4-5-2-2.} Pass
+3H {Rectification a saut : maximum avec 4 atouts. Ici 16H (16 HL), 4-4-2-3. | Jump correction: maximum with 4-card support. Here 16 HCP (16 HL), 4-4-2-3.} Pass 4H {Apres rectification a saut : manche. Ici 5H (5 HL), 4-5-2-2. | After jump correction: game. Here 5 HCP (5 HL), 4-5-2-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 16H (16 HL), 4-4-2-3. | Final contract reached (default). Here 16 HCP (16 HL), 4-4-2-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQT2.QT2.A63.AKJ KJ.4.J954.Q97542 743.AJ8753.Q8.63 9865.K96.KT72.T8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (20 HL), 4-3-3-3. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (20 HL), 4-3-3-3.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 7H (9 HL), 3-6-2-2. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 7 HCP (9 HL), 3-6-2-2.} Pass
+3H {Rectification : fit par 3 cartes ou plus. Ici 20H (20 HL), 4-3-3-3. | Correction: a fit of three cards or more. Here 20 HCP (20 HL), 4-3-3-3.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 7H (9 HL), 3-6-2-2. | Fit and 9+ HL: Blackwood. Here 7 HCP (9 HL), 3-6-2-2.} Pass
+5C {3 ou 0 cle. Ici 20H (20 HL), 4-3-3-3. | 3 or 0 keycards. Here 20 HCP (20 HL), 4-3-3-3.} Pass 6H {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 7H (9 HL), 3-6-2-2. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 7 HCP (9 HL), 3-6-2-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 4-3-3-3. | Final contract reached (default). Here 20 HCP (20 HL), 4-3-3-3.} Pass
+
+[Event "Entrainement Texas majeurs - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ9.A7.A983.AKJ3 AJ.K.KT652.T8542 86432.QJ8654.7.Q T75.T932.QJ4.976"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 21H (21 HL), 3-2-4-4. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 21 HCP (21 HL), 3-2-4-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 5H (6 HL), 5-6-1-1. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 5 HCP (6 HL), 5-6-1-1.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 21H (21 HL), 3-2-4-4. | No fit: 3NT, the lowest level. Here 21 HCP (21 HL), 3-2-4-4.} Pass 4H {6+ cartes : manche en majeure. Ici 5H (6 HL), 5-6-1-1. | 6+ cards: game in the major. Here 5 HCP (6 HL), 5-6-1-1.} Pass
+Pass {Fin. Ici 21H (21 HL), 3-2-4-4. | End. Here 21 HCP (21 HL), 3-2-4-4.} Pass

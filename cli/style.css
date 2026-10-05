@@ -3399,3 +3399,16 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    plus de place en tête des enchères. */
 @media (min-width: 1100px) { .back-to-deal { display: none; } }
 @media (prefers-reduced-motion: reduce) { .mini-btn.print-btn { transition: none; } }
+/* Le titre de la donne, sans « Donne » à l'écran : il ne reste que le nom du
+   fichier ou du thème chargé. Sans lui, la ligne entière disparaît à l'œil,
+   le titre restant lisible par les lecteurs d'écran. */
+.deal-title .file-name { margin-left: 0; }
+.deal-title:has(#file-name:empty) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

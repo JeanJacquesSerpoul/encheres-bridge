@@ -3,10 +3,10 @@
   "id": "open.2D",
   "seq": "",
   "call": "2D",
-  "cond": "(balanced and hcp >= 24) or (hcp >= 16 and ptricks >= 8 and sidetricks >= 2)",
+  "cond": "hcp >= 24 or (hcp >= 16 and ptricks >= 9 and sidetricks >= 2)",
   "forcing": "FM",
-  "meaning": "Fort, forcing de manche : 8 levées de jeu et 2 levées de défense annexes (ou régulier 24+ H)",
-  "meaning_en": "Strong, game-forcing: 8 playing tricks and 2 side defensive tricks (or balanced 24+ HCP)",
+  "meaning": "Fort, forcing de manche : 9 levées de jeu et 2 levées de défense annexes (ou 24+ H)",
+  "meaning_en": "Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP)",
   "status": "choix",
   "alert": true
  },

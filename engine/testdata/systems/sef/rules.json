@@ -30291,13 +30291,23 @@
   "status": "infere"
  },
  {
-  "id": "1D.2C.3C.P",
+  "id": "1D.2C.3C.3NT",
   "seq": "1D 2C 3C",
-  "call": "P",
+  "call": "3NT",
+  "cond": "stop('H') and stop('S')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux majeures : 3SA",
+  "meaning_en": "Both majors stopped: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "1D.2C.3C.5C",
+  "seq": "1D 2C 3C",
+  "call": "5C",
   "cond": "true",
-  "forcing": "NF",
-  "meaning": "11-12 : on joue 3♣",
-  "meaning_en": "11-12: play 3♣",
+  "forcing": "SO",
+  "meaning": "Pas d'arrêt dans une majeure : manche à ♣",
+  "meaning_en": "A major unstopped: game in clubs",
   "status": "infere"
  },
  {

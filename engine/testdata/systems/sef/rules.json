@@ -5203,16 +5203,6 @@
   "status": "sef"
  },
  {
-  "id": "2H.2NT.4S",
-  "seq": "2H 2NT",
-  "call": "4S",
-  "cond": "hl >= 9 and short('S')",
-  "forcing": "FM",
-  "meaning": "Maximum avec singleton ou chicane",
-  "meaning_en": "Maximum with a singleton or void",
-  "status": "sef"
- },
- {
   "id": "2S.2NT.4C",
   "seq": "2S 2NT",
   "call": "4C",
@@ -5240,6 +5230,16 @@
   "forcing": "FM",
   "meaning": "Maximum avec singleton ou chicane",
   "meaning_en": "Maximum with a singleton or void",
+  "status": "sef"
+ },
+ {
+  "id": "2H.2NT.4H.courteS",
+  "seq": "2H 2NT",
+  "call": "4H",
+  "cond": "hl >= 9 and short('S')",
+  "forcing": "SO",
+  "meaning": "Maximum avec singleton ou chicane à ♠",
+  "meaning_en": "Maximum with a singleton or void in spades",
   "status": "sef"
  },
  {

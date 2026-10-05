@@ -2560,10 +2560,13 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
   transition: transform .15s, box-shadow .15s, filter .15s;
 }
-.mode-deal {
+/* Le survol est repris ici : la règle générale button:hover, plus précise
+   qu'une classe seule, remplaçait le dégradé par le fond clair des boutons,
+   et le texte blanc disparaissait. */
+.mode-deal, .mode-deal:hover {
   background: radial-gradient(120% 140% at 0% 0%, #3d8a5c 0%, var(--felt) 45%, var(--felt-dark) 100%);
 }
-.mode-train {
+.mode-train, .mode-train:hover {
   background: linear-gradient(135deg, #2f9a5f 0%, #1f7346 55%, #185c38 100%);
   border-color: rgba(255, 209, 102, .6);
 }

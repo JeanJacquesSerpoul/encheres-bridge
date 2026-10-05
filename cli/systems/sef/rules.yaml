@@ -2153,7 +2153,7 @@
 - id: 2C.2D.3NT
   seq: "2C 2D"
   call: 3NT
-  cond: "H >= 5 and S >= 5"
+  cond: "H >= 5 and S >= 5 and losers <= 3"
   forcing: NF
   meaning: "5♥ et 5♠, 3 à 3,5 perdantes"
   meaning_en: "5♥ and 5♠, 3 to 3.5 losers"
@@ -7900,6 +7900,38 @@
   forcing: SO
   meaning: "Manche"
   meaning_en: "Game"
+  status: infere
+# 3SA de l'ouvreur : les deux majeures 5-5, 3 à 3½ perdantes. Le répondant,
+# qui peut n'avoir aucun point, choisit la majeure à 4 (la plus longue, ♥ à
+# égalité) dès qu'il en a 3 cartes ; avec 2-2 en majeures, aucun fit : il
+# reste à 3SA.
+# en: Opener's 3NT shows both majors 5-5, 3 to 3½ losers. Responder, who may
+# hold nothing, picks the major at the four level (the longer, hearts if equal)
+# as soon as he holds three cards in one; with 2-2 in the majors, no fit: he
+# stays in 3NT.
+- id: 2C.2D.3NT.P
+  seq: "2C 2D 3NT"
+  call: P
+  cond: "H <= 2 and S <= 2"
+  forcing: NF
+  meaning: "2-2 en majeures : reste à 3SA"
+  meaning_en: "2-2 in the majors: stays in 3NT"
+  status: infere
+- id: 2C.2D.3NT.4H
+  seq: "2C 2D 3NT"
+  call: 4H
+  cond: "H >= S"
+  forcing: SO
+  meaning: "Préférence ♥ (sur le bicolore majeur)"
+  meaning_en: "Heart preference (over the major two-suiter)"
+  status: infere
+- id: 2C.2D.3NT.4S
+  seq: "2C 2D 3NT"
+  call: 4S
+  cond: "true"
+  forcing: SO
+  meaning: "Préférence ♠ (sur le bicolore majeur)"
+  meaning_en: "Spade preference (over the major two-suiter)"
   status: infere
 - id: "2C.2D.3x.r"
   seq: "2C 2D 3C|3D|3H|3S"

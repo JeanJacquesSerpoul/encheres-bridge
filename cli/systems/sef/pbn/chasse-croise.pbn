@@ -1,0 +1,902 @@
+% Titre-FR: Transfert chassé-croisé
+% Titre-EN: Smolen (crossed transfer after Stayman)
+
+[Event "Entrainement Transfert chasse-croise - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A2.T86.K85.AKJ96 T943.7432.AJ942. KQJ86.AQJ9.63.73 75.K5.QT7.QT8542"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 13H (14 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 13 HCP (14 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 2-3-3-5. | No fit. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 5-4-2-2. | Final contract reached (default). Here 13 HCP (14 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:Q2.654.AKJ9.AJ64 53.J873.654.T832 AJ764.AKQT.Q2.95 KT98.92.T873.KQ7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 16H (17 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 16 HCP (17 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 16H (17 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 16 HCP (17 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 2-3-4-4. | No fit. Here 15 HCP (15 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 16H (17 HL), 5-4-2-2. | Final contract reached (default). Here 16 HCP (17 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KJ9.Q65.QJ53.AK7 AT.JT7.AT96.Q642 7532.AK943.K72.9 Q864.82.84.JT853"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 4-5-3-1.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 4-5-3-1. | Final contract reached (default). Here 10 HCP (11 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A85.AKJ.9872.K53 6.T4.AT54.AQT986 KQT3.Q9873.3.J42 J9742.652.KQJ6.7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (8 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (8 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-3-4-3. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-3-4-3.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (8 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (8 HL), 4-5-1-3.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (15 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 15 HCP (15 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 4-5-1-3. | Final contract reached (default). Here 8 HCP (8 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK3.KQ3.J2.A8753 JT7.T5.K983.T962 Q9852.9874.A76.K 64.AJ62.QT54.QJ4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-2-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (8 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (8 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-3-2-5. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-3-2-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (8 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (8 HL), 5-4-3-1.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-3-2-5. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-3-2-5.} Pass Pass {Contrat final atteint (defaut). Ici 9H (8 HL), 5-4-3-1. | Final contract reached (default). Here 9 HCP (8 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AJ4.K5.KQ6.QJT95 T93.9764.A8.AK72 K852.AJT32.42.64 Q76.Q8.JT9753.83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-2-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-2-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (9 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (9 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 3-2-3-5. | Stayman: no 4-card major. Here 16 HCP (17 HL), 3-2-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (9 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (9 HL), 4-5-2-2.} Pass
+3NT {Pas de fit. Ici 16H (17 HL), 3-2-3-5. | No fit. Here 16 HCP (17 HL), 3-2-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 4-5-2-2. | Final contract reached (default). Here 8 HCP (9 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:62.AQ8.KQT97.KQ8 T.97653.4.JT7652 AK973.KJT4.AJ3.9 QJ854.2.8652.A43"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 16H (17 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 16 HCP (17 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 2-3-5-3. | Stayman: no 4-card major. Here 16 HCP (17 HL), 2-3-5-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 16H (17 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 16 HCP (17 HL), 5-4-3-1.} Pass
+3NT {Pas de fit. Ici 16H (17 HL), 2-3-5-3. | No fit. Here 16 HCP (17 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 16H (17 HL), 5-4-3-1. | Final contract reached (default). Here 16 HCP (17 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQ.64.QT764.AT8 T52.A9832.K53.Q3 J9843.KJ75.A.KJ9 76.QT.J982.76542"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (12 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (12 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-5-3. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-5-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 13H (12 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 13 HCP (12 HL), 5-4-1-3.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (15 HL), 3-2-5-3. | 5-3 fit in responder's 5-card major. Here 15 HCP (15 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 13H (12 HL), 5-4-1-3. | Final contract reached (default). Here 13 HCP (12 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ6.AT2.K82.AJ92 8.QJ85.J53.KT654 AJ543.9743.A976. T972.K6.QT4.Q873"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-3-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 5-4-4-0. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 5-4-4-0.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-3-3-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (10 HL), 5-4-4-0. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (10 HL), 5-4-4-0.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-3-3-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 5-4-4-0. | Final contract reached (default). Here 9 HCP (10 HL), 5-4-4-0.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A84.K75.AKT98.J2 96.932.QJ72.KQ98 KQJ3.AJT84.543.5 T752.Q6.6.AT7643"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-3-5-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-3-5-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (12 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (12 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 3-3-5-2. | Stayman: no 4-card major. Here 15 HCP (16 HL), 3-3-5-2.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (12 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (12 HL), 4-5-3-1.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (16 HL), 3-3-5-2. | 5-3 fit in responder's 5-card major. Here 15 HCP (16 HL), 3-3-5-2.} Pass Pass {Contrat final atteint (defaut). Ici 11H (12 HL), 4-5-3-1. | Final contract reached (default). Here 11 HCP (12 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A2.Q96.532.AKQ83 KT5.JT.J87.T9654 J9873.A875.K64.2 Q64.K432.AQT9.J7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (8 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (8 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (8 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (8 HL), 5-4-3-1.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 2-3-3-5. | No fit. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 5-4-3-1. | Final contract reached (default). Here 8 HCP (8 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:97.AJ3.K982.AK75 AQJ4.KT4.T76.QJ3 K832.Q8762.AJ3.T T65.95.Q54.98642"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 4-5-3-1.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (15 HL), 2-3-4-4. | 5-3 fit in responder's 5-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 4-5-3-1. | Final contract reached (default). Here 10 HCP (10 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A84.K8.KJ842.A65 K75.T53.T5.QJ973 QJT62.AQJ2.63.T2 93.9764.AQ97.K84"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-2-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 3-2-5-3. | Stayman: no 4-card major. Here 15 HCP (16 HL), 3-2-5-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 5-4-2-2.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (16 HL), 3-2-5-3. | 5-3 fit in responder's 5-card major. Here 15 HCP (16 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 5-4-2-2. | Final contract reached (default). Here 10 HCP (11 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQT.93.AK83.KJ74 A42.QT65.J54.Q98 9853.AKJ82.2.T62 J76.74.QT976.A53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (9 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (9 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-2-4-4. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (9 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (9 HL), 4-5-1-3.} Pass
+3NT {Pas de fit. Ici 16H (16 HL), 3-2-4-4. | No fit. Here 16 HCP (16 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 4-5-1-3. | Final contract reached (default). Here 8 HCP (9 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:A95.43.AKT7.AT95 QJ84.Q65.J82.QJ8 KT72.AT982.4.K64 63.KJ7.Q9653.732"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 4-5-1-3.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 4-5-1-3. | Final contract reached (default). Here 10 HCP (10 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ9.K5.A32.QJT93 T763.9743..K6542 K854.AJT86.KJ86. J2.Q2.QT9754.A87"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-2-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-2-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (13 HL), 4-5-4-0. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (13 HL), 4-5-4-0.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 3-2-3-5. | Stayman: no 4-card major. Here 16 HCP (17 HL), 3-2-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (13 HL), 4-5-4-0. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (13 HL), 4-5-4-0.} Pass
+3NT {Pas de fit. Ici 16H (17 HL), 3-2-3-5. | No fit. Here 16 HCP (17 HL), 3-2-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 4-5-4-0. | Final contract reached (default). Here 12 HCP (13 HL), 4-5-4-0.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJ4.A5.KJ62.A932 T6.JT2.T3.JT8764 K9832.KQ96.874.5 Q75.8743.AQ95.KQ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (8 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (8 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-2-4-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-2-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (8 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (8 HL), 5-4-3-1.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-2-4-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 5-4-3-1. | Final contract reached (default). Here 8 HCP (8 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A6.T82.AKJ.AT742 T932.AK97.9643.K KQJ8.QJ653.8.QJ8 754.4.QT752.9653"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (13 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (13 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 16 HCP (16 HL), 2-3-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (13 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (13 HL), 4-5-1-3.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 2-3-3-5. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 4-5-1-3. | Final contract reached (default). Here 12 HCP (13 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A9.974.KT3.AKJ85 JT.AK6.AJ75.QT97 KQ765.Q852.6.642 8432.JT3.Q9842.3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (8 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (8 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 7H (8 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 7 HCP (8 HL), 5-4-1-3.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 2-3-3-5. | No fit. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 7H (8 HL), 5-4-1-3. | Final contract reached (default). Here 7 HCP (8 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:762.A9.KJ98.AQJ3 843.K75.QT7642.9 AKT9.QJT42.5.T52 QJ5.863.A3.K8764"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 4-5-1-3.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 4-5-1-3. | Final contract reached (default). Here 10 HCP (11 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KJ6.QJT.KQ95.KJ5 T952.92.J62.A632 AQ874.7643.A.T98 3.AK85.T8743.Q74"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 5-4-1-3.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 5-4-1-3. | Final contract reached (default). Here 10 HCP (10 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A9.QJ4.AKT76.Q75 Q65.K863.432.962 JT832.A952.9.A43 K74.T7.QJ85.KJT8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (9 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (9 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 2-3-5-3. | Stayman: no 4-card major. Here 16 HCP (17 HL), 2-3-5-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (9 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (9 HL), 5-4-1-3.} Pass
+3NT {Pas de fit. Ici 16H (17 HL), 2-3-5-3. | No fit. Here 16 HCP (17 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (9 HL), 5-4-1-3. | Final contract reached (default). Here 9 HCP (9 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKT.Q82.A84.KJ54 52.JT965.J9.AQT8 9843.AK743.3.632 QJ76..KQT7652.97"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-3-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (8 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (8 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-3-3-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 7H (8 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 7 HCP (8 HL), 4-5-1-3.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-3-3-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 7H (8 HL), 4-5-1-3. | Final contract reached (default). Here 7 HCP (8 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A54.AK.AT984.QT7 986.J5.K532.K985 QJT7.T9872.J.AJ4 K32.Q643.Q76.632"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 3-2-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (8 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (8 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (16 HL), 3-2-5-3. | Stayman: no 4-card major. Here 17 HCP (16 HL), 3-2-5-3.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (8 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (8 HL), 4-5-1-3.} Pass
+3NT {Pas de fit. Ici 17H (16 HL), 3-2-5-3. | No fit. Here 17 HCP (16 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (8 HL), 4-5-1-3. | Final contract reached (default). Here 9 HCP (8 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:876.AJ4.A942.AK5 KT.K9.Q753.QT986 AQJ42.Q875.J86.4 953.T632.KT.J732"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 5-4-3-1.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 5-4-3-1. | Final contract reached (default). Here 10 HCP (11 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ4.T4.KT8.AQJT5 T8.J987.AJ93.732 9752.AKQ32.Q764. AJ63.65.52.K9864"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-2-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-2-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (12 HL), 4-5-4-0. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (12 HL), 4-5-4-0.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 3-2-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 3-2-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (12 HL), 4-5-4-0. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (12 HL), 4-5-4-0.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 3-2-3-5. | No fit. Here 15 HCP (16 HL), 3-2-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 11H (12 HL), 4-5-4-0. | Final contract reached (default). Here 11 HCP (12 HL), 4-5-4-0.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:98.AQJ.J92.AQJ72 A3.K63.Q875.T985 QJ652.T952.AKT3. KT74.874.64.K643"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 5-4-4-0. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 5-4-4-0.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 5-4-4-0. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 5-4-4-0.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 2-3-3-5. | No fit. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 5-4-4-0. | Final contract reached (default). Here 10 HCP (11 HL), 5-4-4-0.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:72.T63.AKJ.AQJT3 J98.5.87642.8652 AKQ63.AKJ9.T5.74 T54.Q8742.Q93.K9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 17H (18 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 17 HCP (18 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 17H (18 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 17 HCP (18 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 15H (16 HL), 2-3-3-5. | No fit. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 17H (18 HL), 5-4-2-2. | Final contract reached (default). Here 17 HCP (18 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:96.K65.AKQT2.AT7 KJ874.8.873.Q932 A532.AT732.65.K4 QT.QJ94.J94.J865"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (11 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (11 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 2-3-5-3. | Stayman: no 4-card major. Here 16 HCP (17 HL), 2-3-5-3.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (11 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (11 HL), 4-5-2-2.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (17 HL), 2-3-5-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (17 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (11 HL), 4-5-2-2. | Final contract reached (default). Here 11 HCP (11 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:J8.K92.AQ7.KQJ73 A764.54.KT52.986 QT932.AJ76.J8.A4 K5.QT83.9643.T52"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (12 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (12 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 2-3-3-5. | Stayman: no 4-card major. Here 16 HCP (17 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (12 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (12 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 16H (17 HL), 2-3-3-5. | No fit. Here 16 HCP (17 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 12H (12 HL), 5-4-2-2. | Final contract reached (default). Here 12 HCP (12 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AJ8.K5.QT43.KQ82 T543.QJ7.96.7643 KQ62.T9843.752.A 97.A62.AKJ8.JT95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (8 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (8 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (8 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (8 HL), 4-5-3-1.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 9H (8 HL), 4-5-3-1. | Final contract reached (default). Here 9 HCP (8 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K87.JT2.AJ52.AKT J654.K4.74.J9865 AQ932.A853.T.Q32 T.Q976.KQ9863.74"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (13 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (13 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (13 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (13 HL), 5-4-1-3.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 5-4-1-3. | Final contract reached (default). Here 12 HCP (13 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:QJ5.Q86.K52.AKQ6 863.A4.9763.9753 AKT94.JT72.A8.T8 72.K953.QJT4.J42"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-3-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (13 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (13 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-3-3-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (13 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (13 HL), 5-4-2-2.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-3-3-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 5-4-2-2. | Final contract reached (default). Here 12 HCP (13 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:54.K73.AK96.KQJ9 82.QT42.Q32.T432 AQ963.AJ65.JT5.8 KJT7.98.874.A765"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (13 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (13 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 2-3-4-4. | Stayman: no 4-card major. Here 16 HCP (16 HL), 2-3-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (13 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (13 HL), 5-4-3-1.} Pass
+3NT {Pas de fit. Ici 16H (16 HL), 2-3-4-4. | No fit. Here 16 HCP (16 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 5-4-3-1. | Final contract reached (default). Here 12 HCP (13 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:K2.A96.A982.KJ84 J763.42.T76.AT95 A9854.J753.K5.Q2 QT.KQT8.QJ43.763"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 2-3-4-4. | No fit. Here 15 HCP (15 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 5-4-2-2. | Final contract reached (default). Here 10 HCP (10 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:QJ.A42.KQ5.A9632 K872.T8.986.KQJ7 A543.KJ953.32.T5 T96.Q76.AJT74.84"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (9 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (9 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (15 HL), 2-3-3-5. | Stayman: no 4-card major. Here 16 HCP (15 HL), 2-3-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (9 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (9 HL), 4-5-2-2.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (15 HL), 2-3-3-5. | 5-3 fit in responder's 5-card major. Here 16 HCP (15 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 4-5-2-2. | Final contract reached (default). Here 8 HCP (9 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:QT7.J8.AK65.KQ42 J.7532.J73.A8765 A932.AKQT6.82.T3 K8654.94.QT94.J9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 13H (14 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 13 HCP (14 HL), 4-5-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 4-5-2-2. | Final contract reached (default). Here 13 HCP (14 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K8.J62.AK65.AJ84 QJT4.T7.Q32.7532 A9652.Q984.94.K6 73.AK53.JT87.QT9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (9 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (9 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 2-3-4-4. | Stayman: no 4-card major. Here 16 HCP (16 HL), 2-3-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (9 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (9 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 16H (16 HL), 2-3-4-4. | No fit. Here 16 HCP (16 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 9H (9 HL), 5-4-2-2. | Final contract reached (default). Here 9 HCP (9 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:T2.AK4.Q652.AQ98 AJ85.53.KJ8.K653 K976.QJT97.74.J4 Q43.862.AT93.T72"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (8 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (8 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 7H (8 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 7 HCP (8 HL), 4-5-2-2.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (15 HL), 2-3-4-4. | 5-3 fit in responder's 5-card major. Here 15 HCP (15 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 7H (8 HL), 4-5-2-2. | Final contract reached (default). Here 7 HCP (8 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AQ2.84.Q8742.AK4 T98.Q95.KJ9.T652 K543.AK763.53.93 J76.JT2.AT6.QJ87"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-5-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (11 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (11 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-5-3. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-5-3.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (11 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (11 HL), 4-5-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-5-3. | No fit. Here 15 HCP (15 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 4-5-2-2. | Final contract reached (default). Here 10 HCP (11 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:J98.KJ8.AQJT.A62 AT4.642.K853.KT5 KQ753.Q975.9.Q74 62.AT3.7642.J983"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 5-4-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (10 HL), 5-4-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (10 HL), 5-4-1-3.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 5-4-1-3. | Final contract reached (default). Here 9 HCP (10 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:J83.54.AK8.AKJT2 965.86.JT73.8754 AQ742.KQ73.Q54.6 KT.AJT92.962.Q93"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-2-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-2-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 3-2-3-5. | Stayman: no 4-card major. Here 16 HCP (17 HL), 3-2-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 13H (14 HL), 5-4-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 13 HCP (14 HL), 5-4-3-1.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (17 HL), 3-2-3-5. | 5-3 fit in responder's 5-card major. Here 16 HCP (17 HL), 3-2-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 5-4-3-1. | Final contract reached (default). Here 13 HCP (14 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q7.K86.AQ6.AT843 J8652.A4.KJ9.976 AKT93.J952.54.QJ 4.QT73.T8732.K52"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (11 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (11 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-3-5. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-3-5.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (11 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (11 HL), 5-4-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 2-3-3-5. | No fit. Here 15 HCP (15 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 11H (11 HL), 5-4-2-2. | Final contract reached (default). Here 11 HCP (11 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q65.K76.AKT43.A3 AJ2.AQ.8652.JT75 KT943.JT94..KQ92 87.8532.QJ97.864"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-3-5-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-3-5-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (9 HL), 5-4-0-4. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (9 HL), 5-4-0-4.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 3-3-5-2. | Stayman: no 4-card major. Here 16 HCP (17 HL), 3-3-5-2.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 9H (9 HL), 5-4-0-4. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 9 HCP (9 HL), 5-4-0-4.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (17 HL), 3-3-5-2. | 5-3 fit in responder's 5-card major. Here 16 HCP (17 HL), 3-3-5-2.} Pass Pass {Contrat final atteint (defaut). Ici 9H (9 HL), 5-4-0-4. | Final contract reached (default). Here 9 HCP (9 HL), 5-4-0-4.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A96.Q8.AK84.Q952 T8754.K6.J32.A87 KQ32.AT542.9.JT6 J.J973.QT765.K43"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 4-5-1-3.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 4-5-1-3. | Final contract reached (default). Here 10 HCP (10 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K95.72.A432.AKJ7 J2.A3.Q9875.8542 AT73.K9654.JT.Q3 Q864.QJT8.K6.T96"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 10H (10 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 10 HCP (10 HL), 4-5-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-2-4-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-2-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 10H (10 HL), 4-5-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 10 HCP (10 HL), 4-5-2-2.} Pass
+3NT {Pas de fit. Ici 15H (15 HL), 3-2-4-4. | No fit. Here 15 HCP (15 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 4-5-2-2. | Final contract reached (default). Here 10 HCP (10 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:T98.AQ4.86.AKQ74 7652.J93.QJ53.32 KJ43.KT875..JT98 AQ.62.AKT9742.65"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-3-2-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (8 HL), 4-5-0-4. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (8 HL), 4-5-0-4.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 3-3-2-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 3-3-2-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (8 HL), 4-5-0-4. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (8 HL), 4-5-0-4.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (16 HL), 3-3-2-5. | 5-3 fit in responder's 5-card major. Here 15 HCP (16 HL), 3-3-2-5.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 4-5-0-4. | Final contract reached (default). Here 8 HCP (8 HL), 4-5-0-4.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AT2.T6.AQT6.AQJ5 J95.K7.J9753.K87 K8764.Q842.K2.62 Q3.AJ953.84.T943"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 8H (8 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 8 HCP (8 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 3-2-4-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 3-2-4-4.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 8H (8 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 8 HCP (8 HL), 5-4-2-2.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 3-2-4-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 3-2-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 5-4-2-2. | Final contract reached (default). Here 8 HCP (8 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K9.A83.A832.AQ43 T853.6.KJ.JT9652 AQ72.KQ952.974.7 J64.JT74.QT65.K8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 2-3-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (12 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (12 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (17 HL), 2-3-4-4. | Stayman: no 4-card major. Here 17 HCP (17 HL), 2-3-4-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (12 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (12 HL), 4-5-3-1.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 17H (17 HL), 2-3-4-4. | 5-3 fit in responder's 5-card major. Here 17 HCP (17 HL), 2-3-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 11H (12 HL), 4-5-3-1. | Final contract reached (default). Here 11 HCP (12 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Transfert chasse-croise - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T63.983.KQJ.AKQ7 Q842.72.A76.J863 AKJ9.AT654.854.2 75.KQJ.T932.T954"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-3-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (12 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (12 HL), 4-5-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-3-3-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-3-3-4.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 12H (12 HL), 4-5-3-1. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 12 HCP (12 HL), 4-5-3-1.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 15H (15 HL), 3-3-3-4. | 5-3 fit in responder's 5-card major. Here 15 HCP (15 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (12 HL), 4-5-3-1. | Final contract reached (default). Here 12 HCP (12 HL), 4-5-3-1.} Pass

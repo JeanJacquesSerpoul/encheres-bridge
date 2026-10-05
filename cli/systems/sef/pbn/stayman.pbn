@@ -1,0 +1,914 @@
+% Titre-FR: Stayman
+% Titre-EN: Stayman
+
+[Event "Entrainement Stayman - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KJ843.T42.AK.A54 QT762.KJ3.T653.7 A9.AQ97.QJ4.KQ98 5.865.9872.JT632"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-3-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-3-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 18H (18 HL), 2-4-3-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 18 HCP (18 HL), 2-4-3-4.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 5-3-2-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 5-3-2-3.} Pass 6NT {Pas de fit, 17+ HL : petit chelem a SA. Ici 18H (18 HL), 2-4-3-4. | No fit, 17+ HL: small slam in NT. Here 18 HCP (18 HL), 2-4-3-4.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 5-3-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 5-3-2-3.} Pass
+
+[Event "Entrainement Stayman - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q42.AQJ2.QJ6.AJT AT83..T87542.K53 KJ75.KT865.AK.Q7 96.9743.93.98642"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 16H (15 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 16 HCP (15 HL), 4-5-2-2.} Pass
+2H {Stayman : 4 cœurs. Ici 17H (17 HL), 3-4-3-3. | Stayman: 4 hearts. Here 17 HCP (17 HL), 3-4-3-3.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 16H (15 HL), 4-5-2-2. | Fit in opener's major, slam interest. Here 16 HCP (15 HL), 4-5-2-2.} Pass
+4C {Maximum : controle du 1er tour dans la couleur. Ici 17H (17 HL), 3-4-3-3. | Maximum: first-round control in the suit. Here 17 HCP (17 HL), 3-4-3-3.} Pass 4NT {Apres un controle : Blackwood. Ici 16H (15 HL), 4-5-2-2. | After a control: Blackwood. Here 16 HCP (15 HL), 4-5-2-2.} Pass
+5S {2 cles avec la Dame d'atout. Ici 17H (17 HL), 3-4-3-3. | 2 keycards with the trump queen. Here 17 HCP (17 HL), 3-4-3-3.} Pass 6H {Reponse 2 cles avec la Dame : au plus une cle manque, petit chelem. Ici 16H (15 HL), 4-5-2-2. | Answer 2 keycards with the queen: at most one keycard missing, small slam. Here 16 HCP (15 HL), 4-5-2-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 17H (17 HL), 3-4-3-3. | Final contract reached (default). Here 17 HCP (17 HL), 3-4-3-3.} Pass
+
+[Event "Entrainement Stayman - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:53.AJT8.AK63.A98 AJ.973.98752.KQJ KQ94.KQ64.J.5432 T8762.52.QT4.T76"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-4-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-4-4-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 11H (10 HL), 4-4-1-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 11 HCP (10 HL), 4-4-1-4.} Pass
+2H {Stayman : 4 cœurs. Ici 16H (16 HL), 2-4-4-3. | Stayman: 4 hearts. Here 16 HCP (16 HL), 2-4-4-3.} Pass 4D {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 11H (10 HL), 4-4-1-4. | Fit splinter, 12-14 HLD, shortness in the suit. Here 11 HCP (10 HL), 4-4-1-4.} Pass
+4H {Conclusion. Ici 16H (16 HL), 2-4-4-3. | Signoff. Here 16 HCP (16 HL), 2-4-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (10 HL), 4-4-1-4. | Final contract reached (default). Here 11 HCP (10 HL), 4-4-1-4.} Pass
+
+[Event "Entrainement Stayman - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:J8.AKT6.AQ64.JT4 A6.7.JT9853.9865 K975.J9853.K7.73 QT432.Q42.2.AKQ2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-4-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-4-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (7 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (7 HL), 4-5-2-2.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (15 HL), 2-4-4-3. | Stayman: 4 hearts. Here 15 HCP (15 HL), 2-4-4-3.} Pass 3H {Fit, invitation. Ici 7H (7 HL), 4-5-2-2. | Fit, invitation. Here 7 HCP (7 HL), 4-5-2-2.} Pass
+Pass {Minimum : refuse l'invitation. Ici 15H (15 HL), 2-4-4-3. | Minimum: declines the invitation. Here 15 HCP (15 HL), 2-4-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:J4.AQJT.KQ7.QJT8 A976.K4.AJ54.953 K853.8765.982.A7 QT2.932.T63.K642"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-4-3-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 7H (7 HL), 4-4-3-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 7 HCP (7 HL), 4-4-3-2.} Pass
+2H {Stayman : 4 cœurs. Ici 16H (16 HL), 2-4-3-4. | Stayman: 4 hearts. Here 16 HCP (16 HL), 2-4-3-4.} Pass 3H {Fit, invitation. Ici 7H (7 HL), 4-4-3-2. | Fit, invitation. Here 7 HCP (7 HL), 4-4-3-2.} Pass
+4H {Accepte l'invitation. Ici 16H (16 HL), 2-4-3-4. | Accepts the invitation. Here 16 HCP (16 HL), 2-4-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 7H (7 HL), 4-4-3-2. | Final contract reached (default). Here 7 HCP (7 HL), 4-4-3-2.} Pass
+
+[Event "Entrainement Stayman - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KJ62.KJ92.AJ7.Q9 93.QT84.82.JT743 QT85.A.Q9654.AK6 A74.7653.KT3.852"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-3-2.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 15H (14 HL), 4-1-5-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 15 HCP (14 HL), 4-1-5-3.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 15H (15 HL), 4-4-3-2. | Stayman: 4 cards in both hearts AND spades. Here 15 HCP (15 HL), 4-4-3-2.} Pass 3S {Naturel, forcing de manche, espoir de chelem a ♠. Ici 15H (14 HL), 4-1-5-3. | Natural, game-forcing, slam interest with ♠. Here 15 HCP (14 HL), 4-1-5-3.} Pass
+4D {Maximum : controle du 1er tour dans la couleur. Ici 15H (15 HL), 4-4-3-2. | Maximum: first-round control in the suit. Here 15 HCP (15 HL), 4-4-3-2.} Pass 4NT {Apres un controle : Blackwood. Ici 15H (14 HL), 4-1-5-3. | After a control: Blackwood. Here 15 HCP (14 HL), 4-1-5-3.} Pass
+5H {2 cles sans la Dame d'atout. Ici 15H (15 HL), 4-4-3-2. | 2 keycards without the trump queen. Here 15 HCP (15 HL), 4-4-3-2.} Pass 6S {Reponse 2 cles sans la Dame : au plus une cle manque, petit chelem. Ici 15H (14 HL), 4-1-5-3. | Answer 2 keycards without the queen: at most one keycard missing, small slam. Here 15 HCP (14 HL), 4-1-5-3.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 4-4-3-2. | Final contract reached (default). Here 15 HCP (15 HL), 4-4-3-2.} Pass
+
+[Event "Entrainement Stayman - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K865.QJ83.A4.AK7 T72.T95.K972.863 QJ9.K762.Q6.J952 A43.A4.JT853.QT4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-4-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 9H (9 HL), 3-4-2-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 9 HCP (9 HL), 3-4-2-4.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 17H (17 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 17 HCP (17 HL), 4-4-2-3.} Pass 4C {Texas pour 4♥. Ici 9H (9 HL), 3-4-2-4. | Transfer to 4♥. Here 9 HCP (9 HL), 3-4-2-4.} Pass
+4H {Rectifie le Texas. Ici 17H (17 HL), 4-4-2-3. | Corrects the Texas transfer. Here 17 HCP (17 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (9 HL), 3-4-2-4. | Final contract reached (default). Here 9 HCP (9 HL), 3-4-2-4.} Pass
+
+[Event "Entrainement Stayman - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:QJ.A94.KQ74.AT93 KT54.JT85.JT62.5 A973.K763.A.KQJ7 862.Q2.9853.8642"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 2-3-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 2-3-4-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 17H (16 HL), 4-4-1-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 17 HCP (16 HL), 4-4-1-4.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (15 HL), 2-3-4-4. | Stayman: no 4-card major. Here 16 HCP (15 HL), 2-3-4-4.} Pass 4NT {Quantitatif (pas de fit). Ici 17H (16 HL), 4-4-1-4. | Quantitative (no fit). Here 17 HCP (16 HL), 4-4-1-4.} Pass
+Pass {Refuse. Ici 16H (15 HL), 2-3-4-4. | Declines. Here 16 HCP (15 HL), 2-3-4-4.} Pass
+
+[Event "Entrainement Stayman - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AQ86.J8.KJ32.A73 JT3.K64.954.KT86 52.QT75.A87.J952 K974.A932.QT6.Q4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-2-4-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 7H (7 HL), 2-4-3-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 7 HCP (7 HL), 2-4-3-4.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 4-2-4-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 4-2-4-3.} Pass 2NT {Invitation sans fit. Ici 7H (7 HL), 2-4-3-4. | Invitation without a fit. Here 7 HCP (7 HL), 2-4-3-4.} Pass
+Pass {Minimum. Ici 15H (15 HL), 4-2-4-3. | Minimum. Here 15 HCP (15 HL), 4-2-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ72.KJ5.J6.AQJ2 985.84.984.K8764 A643.AT6.AKQ5.T3 JT.Q9732.T732.95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-2-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 17H (17 HL), 4-3-4-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 17 HCP (17 HL), 4-3-4-2.} Pass
+2S {Stayman : 4 piques. Ici 17H (17 HL), 4-3-2-4. | Stayman: 4 spades. Here 17 HCP (17 HL), 4-3-2-4.} Pass 3H {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 17H (17 HL), 4-3-4-2. | Fit in opener's major, slam interest. Here 17 HCP (17 HL), 4-3-4-2.} Pass
+4C {Maximum : controle du 1er tour dans la couleur. Ici 17H (17 HL), 4-3-2-4. | Maximum: first-round control in the suit. Here 17 HCP (17 HL), 4-3-2-4.} Pass 4NT {Apres un controle : Blackwood. Ici 17H (17 HL), 4-3-4-2. | After a control: Blackwood. Here 17 HCP (17 HL), 4-3-4-2.} Pass
+5S {2 cles avec la Dame d'atout. Ici 17H (17 HL), 4-3-2-4. | 2 keycards with the trump queen. Here 17 HCP (17 HL), 4-3-2-4.} Pass 6S {Reponse 2 cles avec la Dame : au plus une cle manque, petit chelem. Ici 17H (17 HL), 4-3-4-2. | Answer 2 keycards with the queen: at most one keycard missing, small slam. Here 17 HCP (17 HL), 4-3-4-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 17H (17 HL), 4-3-2-4. | Final contract reached (default). Here 17 HCP (17 HL), 4-3-2-4.} Pass
+
+[Event "Entrainement Stayman - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A96.T3.AKJ2.AT52 K754.A8.T43.J874 QT832.K642.Q76.9 J.QJ975.985.KQ63"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-2-4-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (7 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (7 HL), 5-4-3-1.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-2-4-4. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-2-4-4.} Pass 2S {5-4 majeur 6-7 H (ou misere doree) : pour jouer. Ici 7H (7 HL), 5-4-3-1. | 5-4 in the majors, 6-7 HCP (or Golden Misery): to play. Here 7 HCP (7 HL), 5-4-3-1.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 3-2-4-4. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 3-2-4-4.} Pass
+
+[Event "Entrainement Stayman - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ3.KT6.AQ5.Q432 T4.J43.J93.KJ975 J9762.Q87.KT642. A85.A952.87.AT86"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-3-4.} Pass 2C {Stayman " misere doree " : majeure 5e et singleton, 6-8 HL. Ici 6H (6 HL), 5-3-5-0. | Golden Misery Stayman: 5-card major and singleton, 6-8 HL. Here 6 HCP (6 HL), 5-3-5-0.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-3-4. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-3-4.} Pass 2S {Misere doree : pour jouer 2♠. Ici 6H (6 HL), 5-3-5-0. | Golden Misery: to play 2♠. Here 6 HCP (6 HL), 5-3-5-0.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 3-3-3-4. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 3-3-3-4.} Pass
+
+[Event "Entrainement Stayman - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK96.AQ8.Q842.J5 52.J9754.K9.QT62 QJT83.KT62.J53.A 74.3.AT76.K98743"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-4-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (11 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (11 HL), 5-4-3-1.} Pass
+2S {Stayman : 4 piques. Ici 16H (16 HL), 4-3-4-2. | Stayman: 4 spades. Here 16 HCP (16 HL), 4-3-4-2.} Pass 4C {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 11H (11 HL), 5-4-3-1. | Fit splinter, 12-14 HLD, shortness in the suit. Here 11 HCP (11 HL), 5-4-3-1.} Pass
+4NT {Maximum sans points perdus dans la courte : Blackwood. Ici 16H (16 HL), 4-3-4-2. | Maximum with no points wasted in the short suit: Blackwood. Here 16 HCP (16 HL), 4-3-4-2.} Pass 5D {4 ou 1 cle. Ici 11H (11 HL), 5-4-3-1. | 4 or 1 keycard. Here 11 HCP (11 HL), 5-4-3-1.} Pass
+6S {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 16H (16 HL), 4-3-4-2. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 16 HCP (16 HL), 4-3-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 11H (11 HL), 5-4-3-1. | Final contract reached (default). Here 11 HCP (11 HL), 5-4-3-1.} Pass
+
+[Event "Entrainement Stayman - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK72.KT76.Q7.K73 654.J3.K832.AQ65 QJ98.AQ942.T6.T2 T3.85.AJ954.J984"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-2-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 4-5-2-2.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 15H (15 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 15 HCP (15 HL), 4-4-2-3.} Pass 4C {Texas pour 4♥. Ici 9H (10 HL), 4-5-2-2. | Transfer to 4♥. Here 9 HCP (10 HL), 4-5-2-2.} Pass
+4H {Rectifie le Texas. Ici 15H (15 HL), 4-4-2-3. | Corrects the Texas transfer. Here 15 HCP (15 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 4-5-2-2. | Final contract reached (default). Here 9 HCP (10 HL), 4-5-2-2.} Pass
+
+[Event "Entrainement Stayman - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KJ74.A5.AQJ.Q852 82.KT643.T875.J9 T653.82.964.AK74 AQ9.QJ97.K32.T63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-2-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-2-3-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 7H (7 HL), 4-2-3-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 7 HCP (7 HL), 4-2-3-4.} Pass
+2S {Stayman : 4 piques. Ici 17H (17 HL), 4-2-3-4. | Stayman: 4 spades. Here 17 HCP (17 HL), 4-2-3-4.} Pass 3S {Fit, invitation. Ici 7H (7 HL), 4-2-3-4. | Fit, invitation. Here 7 HCP (7 HL), 4-2-3-4.} Pass
+4S {Accepte l'invitation. Ici 17H (17 HL), 4-2-3-4. | Accepts the invitation. Here 17 HCP (17 HL), 4-2-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 7H (7 HL), 4-2-3-4. | Final contract reached (default). Here 7 HCP (7 HL), 4-2-3-4.} Pass
+
+[Event "Entrainement Stayman - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:82.AJT5.KQT8.KQ4 T65.874.765.T852 KQJ7.KQ2.AJ2.AJ6 A943.963.943.973"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-4-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-4-4-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 21H (21 HL), 4-3-3-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 21 HCP (21 HL), 4-3-3-3.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (15 HL), 2-4-4-3. | Stayman: 4 hearts. Here 15 HCP (15 HL), 2-4-4-3.} Pass 6NT {Pas de fit, 17+ HL : petit chelem a SA. Ici 21H (21 HL), 4-3-3-3. | No fit, 17+ HL: small slam in NT. Here 21 HCP (21 HL), 4-3-3-3.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 2-4-4-3. | Final contract reached (default). Here 15 HCP (15 HL), 2-4-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ83.J853.J2.AK5 T972.2.8764.QJ76 K65.AK76.AKQ5.42 J4.QT94.T93.T983"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 19H (19 HL), 3-4-4-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 19 HCP (19 HL), 3-4-4-2.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 15H (15 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 15 HCP (15 HL), 4-4-2-3.} Pass 3H {Naturel, forcing de manche, espoir de chelem. Ici 19H (19 HL), 3-4-4-2. | Natural, game-forcing, slam interest. Here 19 HCP (19 HL), 3-4-4-2.} Pass
+4C {Maximum : controle du 1er tour dans la couleur. Ici 15H (15 HL), 4-4-2-3. | Maximum: first-round control in the suit. Here 15 HCP (15 HL), 4-4-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 19H (19 HL), 3-4-4-2. | After a control: Blackwood. Here 19 HCP (19 HL), 3-4-4-2.} Pass
+5H {2 cles sans la Dame d'atout. Ici 15H (15 HL), 4-4-2-3. | 2 keycards without the trump queen. Here 15 HCP (15 HL), 4-4-2-3.} Pass 6H {Reponse 2 cles sans la Dame : au plus une cle manque, petit chelem. Ici 19H (19 HL), 3-4-4-2. | Answer 2 keycards without the queen: at most one keycard missing, small slam. Here 19 HCP (19 HL), 3-4-4-2.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 4-4-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 4-4-2-3.} Pass
+
+[Event "Entrainement Stayman - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ42.AKT6.43.A92 85.98432.AJ96.65 J73.QJ75.T5.KT83 KT96..KQ872.QJ74"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-4-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 7H (7 HL), 3-4-2-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 7 HCP (7 HL), 3-4-2-4.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 17H (17 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 17 HCP (17 HL), 4-4-2-3.} Pass 3C {Relais pour 3♥ (non forcing de manche). Ici 7H (7 HL), 3-4-2-4. | Relay to 3♥ (not game-forcing). Here 7 HCP (7 HL), 3-4-2-4.} Pass
+3H {Repond au relais. Ici 17H (17 HL), 4-4-2-3. | Answers the relay. Here 17 HCP (17 HL), 4-4-2-3.} Pass Pass {Fin. Ici 7H (7 HL), 3-4-2-4. | End. Here 7 HCP (7 HL), 3-4-2-4.} Pass
+
+[Event "Entrainement Stayman - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:T98.Q8.AK863.AQJ 654.T73.Q754.863 AKJ2.AKJ4.J.KT75 Q73.9652.T92.942"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-2-5-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 20H (19 HL), 4-4-1-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 20 HCP (19 HL), 4-4-1-4.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (17 HL), 3-2-5-3. | Stayman: no 4-card major. Here 16 HCP (17 HL), 3-2-5-3.} Pass 6NT {Pas de fit, 17+ HL : petit chelem a SA. Ici 20H (19 HL), 4-4-1-4. | No fit, 17+ HL: small slam in NT. Here 20 HCP (19 HL), 4-4-1-4.} Pass
+Pass {Contrat final atteint (defaut). Ici 16H (17 HL), 3-2-5-3. | Final contract reached (default). Here 16 HCP (17 HL), 3-2-5-3.} Pass
+
+[Event "Entrainement Stayman - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A653.AT.KT2.AT63 K42.Q754.9765.K2 QT87.K862.AQ43.J J9.J93.J8.Q98754"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-2-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-2-3-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 12H (11 HL), 4-4-4-1. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 12 HCP (11 HL), 4-4-4-1.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 4-2-3-4. | Stayman: 4 spades. Here 15 HCP (15 HL), 4-2-3-4.} Pass 4C {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 12H (11 HL), 4-4-4-1. | Fit splinter, 12-14 HLD, shortness in the suit. Here 12 HCP (11 HL), 4-4-4-1.} Pass
+4S {Conclusion. Ici 15H (15 HL), 4-2-3-4. | Signoff. Here 15 HCP (15 HL), 4-2-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (11 HL), 4-4-4-1. | Final contract reached (default). Here 12 HCP (11 HL), 4-4-4-1.} Pass
+
+[Event "Entrainement Stayman - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T743.AKJ3.A5.K75 8.Q76.QJ83.QJ862 AQJ62.T952.KT4.A K95.84.9762.T943"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-2-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 14H (14 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 14 HCP (14 HL), 5-4-3-1.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 15H (15 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 15 HCP (15 HL), 4-4-2-3.} Pass 3H {Naturel, forcing de manche, espoir de chelem. Ici 14H (14 HL), 5-4-3-1. | Natural, game-forcing, slam interest. Here 14 HCP (14 HL), 5-4-3-1.} Pass
+4D {Maximum : controle du 1er tour dans la couleur. Ici 15H (15 HL), 4-4-2-3. | Maximum: first-round control in the suit. Here 15 HCP (15 HL), 4-4-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 5-4-3-1. | After a control: Blackwood. Here 14 HCP (14 HL), 5-4-3-1.} Pass
+5C {3 ou 0 cle. Ici 15H (15 HL), 4-4-2-3. | 3 or 0 keycards. Here 15 HCP (15 HL), 4-4-2-3.} Pass 6H {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 14H (14 HL), 5-4-3-1. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 14 HCP (14 HL), 5-4-3-1.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 4-4-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 4-4-2-3.} Pass
+
+[Event "Entrainement Stayman - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KJ72.AQJ4.Q98.A9 A94.T32.JT73.T43 QT85.96.K542.KQ7 63.K875.A6.J8652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-4-3-2.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 10H (10 HL), 4-2-4-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 10 HCP (10 HL), 4-2-4-3.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 17H (17 HL), 4-4-3-2. | Stayman: 4 cards in both hearts AND spades. Here 17 HCP (17 HL), 4-4-3-2.} Pass 4D {Texas pour 4♠. Ici 10H (10 HL), 4-2-4-3. | Transfer to 4♠. Here 10 HCP (10 HL), 4-2-4-3.} Pass
+4S {Rectifie le Texas. Ici 17H (17 HL), 4-4-3-2. | Corrects the Texas transfer. Here 17 HCP (17 HL), 4-4-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 10H (10 HL), 4-2-4-3. | Final contract reached (default). Here 10 HCP (10 HL), 4-2-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:JT5.KJ8.AT83.AK9 .A74.J964.QJ8764 AQ942.QT62.K5.53 K8763.953.Q72.T2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 11H (12 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 11 HCP (12 HL), 5-4-2-2.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 3-3-4-3. | Stayman: no 4-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass 3H {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 11H (12 HL), 5-4-2-2. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 11 HCP (12 HL), 5-4-2-2.} Pass
+4S {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 3-3-4-3. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (12 HL), 5-4-2-2. | Final contract reached (default). Here 11 HCP (12 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Stayman - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ7.KJ94.AQ53.76 A432.763.82.AQ93 JT985.QT82.94.KJ 6.A5.KJT76.T8542"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (6 HL), 5-4-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (6 HL), 5-4-2-2.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (15 HL), 3-4-4-2. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Misere doree : pour jouer. Ici 7H (6 HL), 5-4-2-2. | Golden Misery: to play. Here 7 HCP (6 HL), 5-4-2-2.} Pass
+
+[Event "Entrainement Stayman - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:K865.A7.KT84.AK9 Q93.KQT2.62.T654 AT42.J9854.3.Q87 J7.63.AQJ975.J32"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-2-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (7 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (7 HL), 4-5-1-3.} Pass
+2S {Stayman : 4 piques. Ici 17H (17 HL), 4-2-4-3. | Stayman: 4 spades. Here 17 HCP (17 HL), 4-2-4-3.} Pass 3S {Fit, invitation. Ici 7H (7 HL), 4-5-1-3. | Fit, invitation. Here 7 HCP (7 HL), 4-5-1-3.} Pass
+4S {Accepte l'invitation. Ici 17H (17 HL), 4-2-4-3. | Accepts the invitation. Here 17 HCP (17 HL), 4-2-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 7H (7 HL), 4-5-1-3. | Final contract reached (default). Here 7 HCP (7 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:Q7.AT3.KQJ.AT872 K964.9.976542.93 AJT3.QJ652.T.KQ6 852.K874.A83.J54"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 16H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 16 HCP (16 HL), 2-3-3-5.} Pass 3S {Chasse-croise : 5 cartes dans l'autre majeure, 4 dans celle-ci, 8+ H. Ici 13H (14 HL), 4-5-1-3. | Crisscross: 5 cards in the other major, 4 in this one, 8+ HCP. Here 13 HCP (14 HL), 4-5-1-3.} Pass
+4H {Fit 5-3 dans la majeure 5e du repondant. Ici 16H (16 HL), 2-3-3-5. | 5-3 fit in responder's 5-card major. Here 16 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 4-5-1-3. | Final contract reached (default). Here 13 HCP (14 HL), 4-5-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:Q93.AQ7.KT74.A73 KT854.K43.J52.K6 .J8652.96.QJ9854 AJ762.T9.AQ83.T2"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-4-3.} Pass 2C {Stayman " misere doree " : majeure 5e et singleton, 6-8 HL. Ici 4H (6 HL), 0-5-2-6. | Golden Misery Stayman: 5-card major and singleton, 6-8 HL. Here 4 HCP (6 HL), 0-5-2-6.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-3-4-3. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-3-4-3.} Pass 2H {Misere doree : pour jouer 2♥. Ici 4H (6 HL), 0-5-2-6. | Golden Misery: to play 2♥. Here 4 HCP (6 HL), 0-5-2-6.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 15H (15 HL), 3-3-4-3. | End (slam continuations not coded: see Part B). Here 15 HCP (15 HL), 3-3-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK3.KT64.A542.Q8 85.AJ952.T3.T642 Q972.Q.KQ987.A97 JT64.873.J6.KJ53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-4-4-2.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 13H (13 HL), 4-1-5-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 13 HCP (13 HL), 4-1-5-3.} Pass
+2H {Stayman : 4 cœurs. Ici 16H (16 HL), 3-4-4-2. | Stayman: 4 hearts. Here 16 HCP (16 HL), 3-4-4-2.} Pass 3NT {Manche sans fit. Ici 13H (13 HL), 4-1-5-3. | Game without a fit. Here 13 HCP (13 HL), 4-1-5-3.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 3-4-4-2. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 3-4-4-2.} Pass
+
+[Event "Entrainement Stayman - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KJ8.KQJ76.J52.AJ 763.A5.643.QT953 AQ952.T982.KT98. T4.43.AQ7.K87642"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-5-3-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 5-4-4-0. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 5-4-4-0.} Pass
+2H {Stayman : 4 cœurs. Ici 16H (16 HL), 3-5-3-2. | Stayman: 4 hearts. Here 16 HCP (16 HL), 3-5-3-2.} Pass 4C {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 9H (10 HL), 5-4-4-0. | Fit splinter, 12-14 HLD, shortness in the suit. Here 9 HCP (10 HL), 5-4-4-0.} Pass
+4H {Conclusion. Ici 16H (16 HL), 3-5-3-2. | Signoff. Here 16 HCP (16 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 5-4-4-0. | Final contract reached (default). Here 9 HCP (10 HL), 5-4-4-0.} Pass
+
+[Event "Entrainement Stayman - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ3.K975.AJ96.QJ T72.83.Q2.AKT643 KJ84.QJT64.743.9 965.A2.KT85.8752"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 3-4-4-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (8 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (8 HL), 4-5-3-1.} Pass
+2H {Stayman : 4 cœurs. Ici 17H (16 HL), 3-4-4-2. | Stayman: 4 hearts. Here 17 HCP (16 HL), 3-4-4-2.} Pass 4H {Fit, manche. Ici 7H (8 HL), 4-5-3-1. | Fit, game. Here 7 HCP (8 HL), 4-5-3-1.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 17H (16 HL), 3-4-4-2. | End (slam continuations not coded: see Part B). Here 17 HCP (16 HL), 3-4-4-2.} Pass
+
+[Event "Entrainement Stayman - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:QJT8.AKT6.J5.AJ8 97.73.KQT9763.62 K6542.Q842.4.QT4 A3.J95.A82.K9753"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-2-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 7H (7 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 7 HCP (7 HL), 5-4-1-3.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 16H (16 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 16 HCP (16 HL), 4-4-2-3.} Pass 3C {Relais pour 3♥ (non forcing de manche). Ici 7H (7 HL), 5-4-1-3. | Relay to 3♥ (not game-forcing). Here 7 HCP (7 HL), 5-4-1-3.} Pass
+3H {Repond au relais. Ici 16H (16 HL), 4-4-2-3. | Answers the relay. Here 16 HCP (16 HL), 4-4-2-3.} Pass Pass {Fin. Ici 7H (7 HL), 5-4-1-3. | End. Here 7 HCP (7 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A76.AK872.T3.AT8 JT3.QJT9.K85.Q72 KQ84.63.AQJ76.K9 952.54.942.J6543"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-5-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-5-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 15H (16 HL), 4-2-5-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 15 HCP (16 HL), 4-2-5-2.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (16 HL), 3-5-2-3. | Stayman: 4 hearts. Here 15 HCP (16 HL), 3-5-2-3.} Pass 4NT {Quantitatif (pas de fit). Ici 15H (16 HL), 4-2-5-2. | Quantitative (no fit). Here 15 HCP (16 HL), 4-2-5-2.} Pass
+6NT {Accepte le quantitatif. Ici 15H (16 HL), 3-5-2-3. | Accepts the quantitative bid. Here 15 HCP (16 HL), 3-5-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 15H (16 HL), 4-2-5-2. | Final contract reached (default). Here 15 HCP (16 HL), 4-2-5-2.} Pass
+
+[Event "Entrainement Stayman - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:63.AK9.KT984.KQ4 AKQT.T852.763.65 87.Q7643.2.AJT82 J9542.J.AQJ5.973"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-3-5-3.} Pass 2C {Stayman " misere doree " : majeure 5e et singleton, 6-8 HL. Ici 7H (8 HL), 2-5-1-5. | Golden Misery Stayman: 5-card major and singleton, 6-8 HL. Here 7 HCP (8 HL), 2-5-1-5.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 2-3-5-3. | Stayman: no 4-card major. Here 15 HCP (15 HL), 2-3-5-3.} Pass 2NT {Invitation sans fit. Ici 7H (8 HL), 2-5-1-5. | Invitation without a fit. Here 7 HCP (8 HL), 2-5-1-5.} Pass
+Pass {Minimum. Ici 15H (15 HL), 2-3-5-3. | Minimum. Here 15 HCP (15 HL), 2-3-5-3.} Pass
+
+[Event "Entrainement Stayman - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KJ84.KQJT.A4.Q85 T95.A72.Q9.KJ974 Q632.65.KJ876.T2 A7.9843.T532.A63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 6H (7 HL), 4-2-5-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 6 HCP (7 HL), 4-2-5-2.} Pass
+2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 16H (16 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 16 HCP (16 HL), 4-4-2-3.} Pass 3D {Relais pour 3♠ (non forcing de manche). Ici 6H (7 HL), 4-2-5-2. | Relay to 3♠ (not game-forcing). Here 6 HCP (7 HL), 4-2-5-2.} Pass
+3S {Repond au relais. Ici 16H (16 HL), 4-4-2-3. | Answers the relay. Here 16 HCP (16 HL), 4-4-2-3.} Pass Pass {Fin. Ici 6H (7 HL), 4-2-5-2. | End. Here 6 HCP (7 HL), 4-2-5-2.} Pass
+
+[Event "Entrainement Stayman - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ3.AQ8.QJ84.T5 65.KJT6.A63.J764 Q872.743.2.AK932 T94.952.KT975.Q8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-4-2.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 9H (10 HL), 4-3-1-5. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 9 HCP (10 HL), 4-3-1-5.} Pass
+2S {Stayman : 4 piques. Ici 17H (17 HL), 4-3-4-2. | Stayman: 4 spades. Here 17 HCP (17 HL), 4-3-4-2.} Pass 4D {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 9H (10 HL), 4-3-1-5. | Fit splinter, 12-14 HLD, shortness in the suit. Here 9 HCP (10 HL), 4-3-1-5.} Pass
+4S {Conclusion. Ici 17H (17 HL), 4-3-4-2. | Signoff. Here 17 HCP (17 HL), 4-3-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 4-3-1-5. | Final contract reached (default). Here 9 HCP (10 HL), 4-3-1-5.} Pass
+
+[Event "Entrainement Stayman - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:QT7.KJ76.AQ.AJ54 62.T982.K765.K97 A8543.AQ54.3.Q82 KJ9.3.JT9842.T63"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 3-4-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 3-4-2-4.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 12H (12 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 12 HCP (12 HL), 5-4-1-3.} Pass
+2H {Stayman : 4 cœurs. Ici 17H (16 HL), 3-4-2-4. | Stayman: 4 hearts. Here 17 HCP (16 HL), 3-4-2-4.} Pass 4D {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 12H (12 HL), 5-4-1-3. | Fit splinter, 12-14 HLD, shortness in the suit. Here 12 HCP (12 HL), 5-4-1-3.} Pass
+4H {Conclusion. Ici 17H (16 HL), 3-4-2-4. | Signoff. Here 17 HCP (16 HL), 3-4-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (12 HL), 5-4-1-3. | Final contract reached (default). Here 12 HCP (12 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A853.A73.AK75.Q5 T42.J642.Q42.KJ3 KQJ96.KT98.6.974 7.Q5.JT983.AT862"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-4-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 5-4-1-3.} Pass
+2S {Stayman : 4 piques. Ici 17H (17 HL), 4-3-4-2. | Stayman: 4 spades. Here 17 HCP (17 HL), 4-3-4-2.} Pass 4D {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 9H (10 HL), 5-4-1-3. | Fit splinter, 12-14 HLD, shortness in the suit. Here 9 HCP (10 HL), 5-4-1-3.} Pass
+4S {Conclusion. Ici 17H (17 HL), 4-3-4-2. | Signoff. Here 17 HCP (17 HL), 4-3-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 9H (10 HL), 5-4-1-3. | Final contract reached (default). Here 9 HCP (10 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KJ.AKQ.942.A8762 Q65.J86432.QT.Q4 9843.5.A8653.KJ3 AT72.T97.KJ7.T95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (16 HL), 2-3-3-5.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 8H (8 HL), 4-1-5-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 8 HCP (8 HL), 4-1-5-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 17H (16 HL), 2-3-3-5. | Stayman: no 4-card major. Here 17 HCP (16 HL), 2-3-3-5.} Pass 2NT {Invitation sans fit. Ici 8H (8 HL), 4-1-5-3. | Invitation without a fit. Here 8 HCP (8 HL), 4-1-5-3.} Pass
+3NT {Accepte l'invitation. Ici 17H (16 HL), 2-3-3-5. | Accepts the invitation. Here 17 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 8H (8 HL), 4-1-5-3. | Final contract reached (default). Here 8 HCP (8 HL), 4-1-5-3.} Pass
+
+[Event "Entrainement Stayman - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJT6.K92.KQ74.QT 852.854.A8.AK943 KQ97.JT763.T52.8 43.AQ.J963.J7652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "2S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-3-4-2.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 6H (6 HL), 4-5-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 6 HCP (6 HL), 4-5-3-1.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 4-3-4-2. | Stayman: 4 spades. Here 15 HCP (15 HL), 4-3-4-2.} Pass Pass {Misere doree : pour jouer. Ici 6H (6 HL), 4-5-3-1. | Golden Misery: to play. Here 6 HCP (6 HL), 4-5-3-1.} Pass
+
+[Event "Entrainement Stayman - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:6432.A7.AK54.AJ9 A98.Q942.92.Q743 KJ75.83.QJ863.82 QT.KJT65.T7.KT65"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-2-4-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 7H (8 HL), 4-2-5-2. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 7 HCP (8 HL), 4-2-5-2.} Pass
+2S {Stayman : 4 piques. Ici 16H (16 HL), 4-2-4-3. | Stayman: 4 spades. Here 16 HCP (16 HL), 4-2-4-3.} Pass 4S {Fit, manche. Ici 7H (8 HL), 4-2-5-2. | Fit, game. Here 7 HCP (8 HL), 4-2-5-2.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 4-2-4-3. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 4-2-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K93.KQJ97.KJ.QT8 AJT8742.82.7.543 65.AT64.AQ93.KJ2 Q.53.T86542.A976"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-5-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-5-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 14H (14 HL), 2-4-4-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 14 HCP (14 HL), 2-4-4-3.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (15 HL), 3-5-2-3. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-5-2-3.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 14H (14 HL), 2-4-4-3. | Fit in opener's major, slam interest. Here 14 HCP (14 HL), 2-4-4-3.} Pass
+4H {Minimum ou pas de controle : conclusion. Ici 15H (15 HL), 3-5-2-3. | Minimum or no control: signoff. Here 15 HCP (15 HL), 3-5-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 2-4-4-3. | After a control: Blackwood. Here 14 HCP (14 HL), 2-4-4-3.} Pass
+5D {4 ou 1 cle. Ici 15H (15 HL), 3-5-2-3. | 4 or 1 keycard. Here 15 HCP (15 HL), 3-5-2-3.} Pass 5H {Deux cles manquent : on s'arrete a 5. Ici 14H (14 HL), 2-4-4-3. | Two keycards missing: stop at 5. Here 14 HCP (14 HL), 2-4-4-3.} Pass
+Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 3-5-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 3-5-2-3.} Pass
+
+[Event "Entrainement Stayman - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:K86.AJ75.63.AKQ5 954.63.KJT87.J32 AJT7.K.954.T9764 Q32.QT9842.AQ2.8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-2-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 8H (7 HL), 4-1-3-5. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 8 HCP (7 HL), 4-1-3-5.} Pass
+2H {Stayman : 4 cœurs. Ici 17H (17 HL), 3-4-2-4. | Stayman: 4 hearts. Here 17 HCP (17 HL), 3-4-2-4.} Pass 2NT {Invitation sans fit. Ici 8H (7 HL), 4-1-3-5. | Invitation without a fit. Here 8 HCP (7 HL), 4-1-3-5.} Pass
+3NT {Accepte l'invitation. Ici 17H (17 HL), 3-4-2-4. | Accepts the invitation. Here 17 HCP (17 HL), 3-4-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 8H (7 HL), 4-1-3-5. | Final contract reached (default). Here 8 HCP (7 HL), 4-1-3-5.} Pass
+
+[Event "Entrainement Stayman - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AT952.K8.KT7.KQT 3.A6432.J9654.84 KQJ87.QJT5.3.A73 64.97.AQ82.J9652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-2-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-2-3-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 5-4-1-3.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 5-2-3-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 5-2-3-3.} Pass 3H {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 13H (14 HL), 5-4-1-3. | Fit in opener's major, slam interest. Here 13 HCP (14 HL), 5-4-1-3.} Pass
+4S {Minimum ou pas de controle : conclusion. Ici 15H (15 HL), 5-2-3-3. | Minimum or no control: signoff. Here 15 HCP (15 HL), 5-2-3-3.} Pass Pass {Pas de chelem. Ici 13H (14 HL), 5-4-1-3. | No slam. Here 13 HCP (14 HL), 5-4-1-3.} Pass
+
+[Event "Entrainement Stayman - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ874.KQ.T63.A82 KT5.7653.AQ97.T9 3.A984.K8.KQJ643 J962.JT2.J542.75"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-2-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-2-3-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 13H (15 HL), 1-4-2-6. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 13 HCP (15 HL), 1-4-2-6.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 5-2-3-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 5-2-3-3.} Pass 3NT {Manche sans fit. Ici 13H (15 HL), 1-4-2-6. | Game without a fit. Here 13 HCP (15 HL), 1-4-2-6.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 15H (15 HL), 5-2-3-3. | End (slam continuations not coded: see Part B). Here 15 HCP (15 HL), 5-2-3-3.} Pass
+
+[Event "Entrainement Stayman - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:JT4.A98.J6.AKQ52 A976.42.AKQ9.T83 Q532.KT763.2.J74 K8.QJ5.T87543.96"]
+[Scoring "MP"]
+[Declarer "N"]
+[Contract "2H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-3-2-5.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 6H (6 HL), 4-5-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 6 HCP (6 HL), 4-5-1-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (16 HL), 3-3-2-5. | Stayman: no 4-card major. Here 15 HCP (16 HL), 3-3-2-5.} Pass 2H {5-4 majeur 6-7 H (ou misere doree) : pour jouer. Ici 6H (6 HL), 4-5-1-3. | 5-4 in the majors, 6-7 HCP (or Golden Misery): to play. Here 6 HCP (6 HL), 4-5-1-3.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 15H (16 HL), 3-3-2-5. | End (slam continuations not coded: see Part B). Here 15 HCP (16 HL), 3-3-2-5.} Pass
+
+[Event "Entrainement Stayman - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKT9.T5.AJ92.A63 QJ4.A32.8653.QT8 8752.KQJ98.K4.75 63.764.QT7.KJ942"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-2-4-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 9H (10 HL), 4-5-2-2. | Stayman (5-4 in the majors, 6+ HCP). Here 9 HCP (10 HL), 4-5-2-2.} Pass
+2S {Stayman : 4 piques. Ici 16H (16 HL), 4-2-4-3. | Stayman: 4 spades. Here 16 HCP (16 HL), 4-2-4-3.} Pass 4S {Fit, manche. Ici 9H (10 HL), 4-5-2-2. | Fit, game. Here 9 HCP (10 HL), 4-5-2-2.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 4-2-4-3. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 4-2-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK95.KQ3.876.K83 T86.T87.T42.9754 J3.AJ62.QJ9.AQJ2 Q742.954.AK53.T6"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-3-3-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 16H (16 HL), 2-4-3-4. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 16 HCP (16 HL), 2-4-3-4.} Pass
+2S {Stayman : 4 piques. Ici 15H (15 HL), 4-3-3-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 4-3-3-3.} Pass 4NT {Quantitatif (pas de fit). Ici 16H (16 HL), 2-4-3-4. | Quantitative (no fit). Here 16 HCP (16 HL), 2-4-3-4.} Pass
+Pass {Refuse. Ici 15H (15 HL), 4-3-3-3. | Declines. Here 15 HCP (15 HL), 4-3-3-3.} Pass
+
+[Event "Entrainement Stayman - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KJ4.T98.KQ2.AQ62 Q987.652.63.JT75 32.J743.AJ94.K94 AT65.AKQ.T875.83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-3-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 9H (9 HL), 2-4-4-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 9 HCP (9 HL), 2-4-4-3.} Pass
+2D {Stayman : pas de majeure 4e. Ici 15H (15 HL), 3-3-3-4. | Stayman: no 4-card major. Here 15 HCP (15 HL), 3-3-3-4.} Pass 3NT {Manche sans fit. Ici 9H (9 HL), 2-4-4-3. | Game without a fit. Here 9 HCP (9 HL), 2-4-4-3.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 15H (15 HL), 3-3-3-4. | End (slam continuations not coded: see Part B). Here 15 HCP (15 HL), 3-3-3-4.} Pass
+
+[Event "Entrainement Stayman - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:54.KQ95.AKJ7.K73 83.AJT42.6543.Q9 AT72.8763.82.AT2 KQJ96..QT9.J8654"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 2-4-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 2-4-4-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 8H (8 HL), 4-4-2-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 8 HCP (8 HL), 4-4-2-3.} Pass
+2H {Stayman : 4 cœurs. Ici 16H (16 HL), 2-4-4-3. | Stayman: 4 hearts. Here 16 HCP (16 HL), 2-4-4-3.} Pass 4H {Fit, manche. Ici 8H (8 HL), 4-4-2-3. | Fit, game. Here 8 HCP (8 HL), 4-4-2-3.} Pass
+Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 2-4-4-3. | End (slam continuations not coded: see Part B). Here 16 HCP (16 HL), 2-4-4-3.} Pass
+
+[Event "Entrainement Stayman - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KJ3.A874.AQJ2.T6 Q9.K9.9865.K9852 A542.JT62.KT74.A T876.Q53.3.QJ743"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 12H (11 HL), 4-4-4-1. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 12 HCP (11 HL), 4-4-4-1.} Pass
+2H {Stayman : 4 cœurs. Ici 15H (15 HL), 3-4-4-2. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-4-4-2.} Pass 4C {Splinter fitte, 12-14 HLD, courte a la couleur. Ici 12H (11 HL), 4-4-4-1. | Fit splinter, 12-14 HLD, shortness in the suit. Here 12 HCP (11 HL), 4-4-4-1.} Pass
+4NT {Maximum sans points perdus dans la courte : Blackwood. Ici 15H (15 HL), 3-4-4-2. | Maximum with no points wasted in the short suit: Blackwood. Here 15 HCP (15 HL), 3-4-4-2.} Pass 5H {2 cles sans la Dame d'atout. Ici 12H (11 HL), 4-4-4-1. | 2 keycards without the trump queen. Here 12 HCP (11 HL), 4-4-4-1.} Pass
+6H {Reponse 2 cles sans la Dame : au plus une cle manque, petit chelem. Ici 15H (15 HL), 3-4-4-2. | Answer 2 keycards without the queen: at most one keycard missing, small slam. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 12H (11 HL), 4-4-4-1. | Final contract reached (default). Here 12 HCP (11 HL), 4-4-4-1.} Pass

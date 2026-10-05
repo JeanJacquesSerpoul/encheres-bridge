@@ -1,0 +1,886 @@
+% Titre-FR: Splinters
+% Titre-EN: Splinter bids
+
+[Event "Entrainement Splinters - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AJ4.KT765.K6.Q43 Q7632.3.Q7.T9862 K985.Q984.AJ853. T.AJ2.T942.AKJ75"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (q43) : manche. | Values wasted in the short suit (q43): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A8.AQT86.KJ72.J8 KJT9432.3.4.Q962 Q7.KJ974.A8653.5 65.52.QT9.AKT743"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 15H. | 1H opening: 5 hearts, 15 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J8), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (J8), 16 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A54.KJ986.Q72.K6 KQ63.542.J.QJT87 J982.AQ73.K9854. T7.T.AT63.A95432"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (k6) : manche. | Values wasted in the short suit (k6): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ.AKJ84.T862.J3 J764.73.A5.AQ765 A8.Q9652.KJ743.2 T9532.T.Q9.KT984"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 14H. | 1H opening: 5 hearts, 14 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Main minimum (14 hl) : manche. | Minimum hand (14 hl): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ.K8532.K84.QT6 T8532.A.J6.K9753 K96.JT74.AQ9752. J74.Q96.T3.AJ842"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 14H. | 1H opening: 5 hearts, 14 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (qt6) : manche. | Values wasted in the short suit (qt6): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK5.KQ976.A82.J4 862.42.JT97.QT52 97.AJ853.KQ643.8 QJT43.T.5.AK9763"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 17H. | 1H opening: 5 hearts, 17 HCP.} Pass 4C {Splinter : 4 atouts a Coeur, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J4), 18 HL et des cles : Blackwood. | Nothing wasted in the short suit (J4), 18 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A62.AK753.QJ4.K6 Q.2.AT96532.QJ42 KJ95.Q984..A9853 T8743.JT6.K87.T7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 17H. | 1H opening: 5 hearts, 17 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (qj4) : manche. | Values wasted in the short suit (qj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK.AQT86.J642.Q2 JT53.32.KQT93.K4 Q7.KJ974.5.A8653 98642.5.A87.JT97"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 16H. | 1H opening: 5 hearts, 16 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J642), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (J642), 16 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K54.K9865.QJ4.A6 Q7.T42.K8753.J32 J982.AQ73..K9854 AT63.J.AT962.QT7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (qj4) : manche. | Values wasted in the short suit (qj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQ.AKJ84.J3.T862 T7654.T.Q9754.Q5 A8.Q9652.2.KJ743 J932.73.AKT86.A9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 14H. | 1H opening: 5 hearts, 14 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Main minimum (14 hl) : manche. | Minimum hand (14 hl): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ.K8532.QJ8.T64 JT75.AQ6.T7652.J K96.JT74..AQ9752 8432.9.AK943.K83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 12H. | 1H opening: 5 hearts, 12 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (qj8) : manche. | Values wasted in the short suit (qj8): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK5.KQ976.742.AJ JT86.T2.K96.8752 97.AJ853.8.KQ643 Q432.4.AQJT53.T9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 17H. | 1H opening: 5 hearts, 17 HCP.} Pass 4D {Splinter : 4 atouts a Coeur, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (742), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (742), 17 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KJ4.AT765.Q62.K6 T98762.K3.A43.T4 .Q984.KJ95.A9853 AQ53.J2.T87.QJ72"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, chicane a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (kj4) : manche. | Values wasted in the short suit (kj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T4.AQT86.AK62.J4 A86.32.T9543.T72 5.KJ974.Q7.A8653 KQJ9732.5.J8.KQ9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 14H. | 1H opening: 5 hearts, 14 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, singleton a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (T4), 15 HL et des cles : Blackwood. | Nothing wasted in the short suit (T4), 15 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQ4.K9865.A74.76 JT875.T42.KT3.Q3 .AQ73.J982.K9854 A9632.J.Q65.AJT2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 12H. | 1H opening: 5 hearts, 12 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, chicane a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (kq4) : manche. | Values wasted in the short suit (kq4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:T5.AKJ84.KQ52.Q2 KQ84.T73.JT7.T96 2.Q9652.A8.KJ743 AJ9763..9643.A85"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 15H. | 1H opening: 5 hearts, 15 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, singleton a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (T5), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (T5), 16 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+5H {Deux cles manquent : on s'arrete a 5H. | Two keycards are missing: stop at 5H.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ4.KQ865.J85.64 JT532.A93.T73.K8 .JT74.K96.AQ9752 K9876.2.AQ42.JT3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 12H. | 1H opening: 5 hearts, 12 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, chicane a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, void in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4H {Points perdus dans la courte (aq4) : manche. | Values wasted in the short suit (aq4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T5.KQ976.AK82.AJ KQ963.2.QJT6.975 8.AJ853.97.KQ643 AJ742.T4.543.T82"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1H {Ouverture de 1C : 5 cartes a Coeur, 17H. | 1H opening: 5 hearts, 17 HCP.} Pass 3S {Splinter : 4 atouts a Coeur, singleton a Pique, 13 DH (13-15), 10H (10 max). | Splinter: 4 hearts, singleton in spades, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (T5), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (T5), 17 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KT765.AJ4.K6.Q43 AJ.73.QT942.AJ52 Q984.K985.AJ853. 32.QT62.7.KT9876"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 13H. | 1S opening: 5 spades, 13 HCP.} Pass 4C {Splinter : 4 atouts a Pique, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (q43) : manche. | Values wasted in the short suit (q43): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQT86.A8.KJ72.J8 53.KJ4.QT4.KT762 KJ974.Q7.A8653.5 2.T96532.9.AQ943"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 15H. | 1S opening: 5 spades, 15 HCP.} Pass 4C {Splinter : 4 atouts a Pique, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J8), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (J8), 16 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KJ986.A54.Q72.K6 T52.K76.J3.AJ543 AQ73.J982.K9854. 4.QT3.AT6.QT9872"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 13H. | 1S opening: 5 spades, 13 HCP.} Pass 4C {Splinter : 4 atouts a Pique, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (k6) : manche. | Values wasted in the short suit (k6): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKJ84.KQ.T862.J3 T7.T53.AQ5.KQ854 Q9652.A8.KJ743.2 3.J97642.9.AT976"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 14H. | 1S opening: 5 spades, 14 HCP.} Pass 4C {Splinter : 4 atouts a Pique, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Main minimum (14 hl) : manche. | Minimum hand (14 hl): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K8532.AQ.K84.QT6 .JT8742.63.J9874 JT74.K96.AQ9752. AQ96.53.JT.AK532"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 14H. | 1S opening: 5 spades, 14 HCP.} Pass 4C {Splinter : 4 atouts a Pique, chicane a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (qt6) : manche. | Values wasted in the short suit (qt6): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ976.AK5.A82.J4 2.Q63.T75.AQT953 AJ853.97.KQ643.8 T4.JT842.J9.K762"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 17H. | 1S opening: 5 spades, 17 HCP.} Pass 4C {Splinter : 4 atouts a Pique, singleton a Trefle, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in clubs, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J4), 18 HL et des cles : Blackwood. | Nothing wasted in the short suit (J4), 18 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KT765.AJ4.QJ4.K6 J2.73.T98765.QT4 Q984.K985..AJ853 A3.QT62.AK32.972"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 14H. | 1S opening: 5 spades, 14 HCP.} Pass 4D {Splinter : 4 atouts a Pique, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (qj4) : manche. | Values wasted in the short suit (qj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AQT86.A8.J642.KQ 5.KJ9542.AK98.T4 KJ974.Q7.5.A8653 32.T63.QT73.J972"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 16H. | 1S opening: 5 spades, 16 HCP.} Pass 4D {Splinter : 4 atouts a Pique, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J642), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (J642), 16 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K9865.K54.QJ4.A6 4.Q3.KT8765.JT32 AQ73.J982..K9854 JT2.AT76.A932.Q7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 13H. | 1S opening: 5 spades, 13 HCP.} Pass 4D {Splinter : 4 atouts a Pique, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (qj4) : manche. | Values wasted in the short suit (qj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ84.KQ.J3.T862 3.J96.A87654.A95 Q9652.A8.2.KJ743 T7.T75432.KQT9.Q"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 14H. | 1S opening: 5 spades, 14 HCP.} Pass 4D {Splinter : 4 atouts a Pique, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Main minimum (14 hl) : manche. | Minimum hand (14 hl): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K8532.AQ.QJ8.T64 A.T842.KT962.KJ8 JT74.K96..AQ9752 Q96.J753.A7543.3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 12H. | 1S opening: 5 spades, 12 HCP.} Pass 4D {Splinter : 4 atouts a Pique, chicane a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (qj8) : manche. | Values wasted in the short suit (qj8): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:KQ976.AK5.742.AJ 42.J83.KT653.752 AJ853.97.8.KQ643 T.QT642.AQJ9.T98"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 17H. | 1S opening: 5 spades, 17 HCP.} Pass 4D {Splinter : 4 atouts a Pique, singleton a Carreau, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in diamonds, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (742), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (742), 17 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KT765.KJ4.A6.Q42 2.QT97653.QT43.K Q984..K985.AJ853 AJ3.A82.J72.T976"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 13H. | 1S opening: 5 spades, 13 HCP.} Pass 4H {Splinter : 4 atouts a Pique, chicane a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (kj4) : manche. | Values wasted in the short suit (kj4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQT86.J2.KJ42.KQ 2.T8643.T853.JT7 KJ974.5.Q7.A8653 53.AKQ97.A96.942"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 16H. | 1S opening: 5 spades, 16 HCP.} Pass 4H {Splinter : 4 atouts a Pique, singleton a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J2), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (J2), 16 HL and keycards: Blackwood.} Pass 5H {2 cles sans la Dame d'atout. | 2 keycards without the trump queen.} Pass
+5S {Deux cles manquent : on s'arrete a 5S. | Two keycards are missing: stop at 5S.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K9865.KQ4.A74.76 J.JT932.KT5.AQT3 AQ73..J982.K9854 T42.A8765.Q63.J2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 12H. | 1S opening: 5 spades, 12 HCP.} Pass 4H {Splinter : 4 atouts a Pique, chicane a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (kq4) : manche. | Values wasted in the short suit (kq4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKJ84.J3.KQ52.T2 73.Q8765.JT3.Q86 Q9652.2.A8.KJ743 T.AKT94.9764.A95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 14H. | 1S opening: 5 spades, 14 HCP.} Pass 4H {Splinter : 4 atouts a Pique, singleton a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (J3), 15 HL et des cles : Blackwood. | Nothing wasted in the short suit (J3), 15 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+5S {Deux cles manquent : on s'arrete a 5S. | Two keycards are missing: stop at 5S.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K8532.QJ8.AQ.T64 .AK932.JT7543.K8 JT74..K96.AQ9752 AQ96.T7654.82.J3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 12H. | 1S opening: 5 spades, 12 HCP.} Pass 4H {Splinter : 4 atouts a Pique, chicane a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, void in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4S {Points perdus dans la courte (qj8) : manche. | Values wasted in the short suit (qj8): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ976.T5.AK82.AJ .A976432.J53.872 AJ853.8.97.KQ643 T42.KQJ.QT64.T95"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1S {Ouverture de 1P : 5 cartes a Pique, 17H. | 1S opening: 5 spades, 17 HCP.} Pass 4H {Splinter : 4 atouts a Pique, singleton a Coeur, 13 DH (13-15), 10H (10 max). | Splinter: 4 spades, singleton in hearts, 13 DH (13-15), 10 HCP (10 max).} Pass
+4NT {Rien de perdu dans la courte (T5), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (T5), 17 HL and keycards: Blackwood.} Pass 5D {4 ou 1 cle : ici 1. | 4 or 1 keycard: 1 here.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AJ4.AK75.K62.Q43 T63.63.7.AKJT952 K985.Q984.AJ853. Q72.JT2.QT94.876"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Coeur, chicane a Trefle, 14 HLD (12-14). | Fit splinter: 4 hearts, void in clubs, 14 HLD (12-14).} Pass
+4H {Points perdus dans la courte (q43) : manche. | Values wasted in the short suit (q43): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A64.KQ75.AK2.J43 QT97.2.J4.QT9865 KJ85.AJ93.Q9853. 32.T864.T76.AK72"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 11H, pour chercher un fit. | Stayman: a 4-card major, 11 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Coeur, chicane a Trefle, 14 HLD (12-14). | Fit splinter: 4 hearts, void in clubs, 14 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (J43), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (J43), 17 HL and keycards: Blackwood.} Pass 6C {3 ou 1 cle (1 ici) et une chicane a Trefle. | 3 or 1 keycard (1 here) and a void in clubs.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AJ4.AQ73.QJ4.K98 T8762.T2.AT76.J6 Q95.KJ84.K98532. K3.965..AQT75432"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 9H, pour chercher un fit. | Stayman: a 4-card major, 9 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Coeur, chicane a Trefle, 12 HLD (12-14). | Fit splinter: 4 hearts, void in clubs, 12 HLD (12-14).} Pass
+4H {Points perdus dans la courte (k98) : manche. | Values wasted in the short suit (k98): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ4.KJ75.A62.J43 963.64.QJT.QT972 J85.AQ93.K98543. KT72.T82.7.AK865"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 15H. | 1NT opening: 15-17 HCP balanced, 15 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Coeur, chicane a Trefle, 13 HLD (12-14). | Fit splinter: 4 hearts, void in clubs, 13 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (J43), 15 HL et des cles : Blackwood. | Nothing wasted in the short suit (J43), 15 HL and keycards: Blackwood.} Pass 6C {3 ou 1 cle (1 ici) et une chicane a Trefle. | 3 or 1 keycard (1 here) and a void in clubs.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AJ4.AK75.K62.Q42 T763.JT3.AQJ4.K6 K985.Q984..AJ853 Q2.62.T98753.T97"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Coeur, chicane a Carreau, 14 HLD (12-14). | Fit splinter: 4 hearts, void in diamonds, 14 HLD (12-14).} Pass
+4H {Points perdus dans la courte (k62) : manche. | Values wasted in the short suit (k62): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A64.KQ75.652.AK4 973.T82.KQJ94.62 KJ85.AJ93..Q9853 QT2.64.AT873.JT7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 16H. | 1NT opening: 15-17 HCP balanced, 16 here.} Pass 2C {Stayman : 4 cartes a majeure, 11H, pour chercher un fit. | Stayman: a 4-card major, 11 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Coeur, chicane a Carreau, 14 HLD (12-14). | Fit splinter: 4 hearts, void in diamonds, 14 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (652), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (652), 16 HL and keycards: Blackwood.} Pass 6D {3 ou 1 cle (1 ici) et une chicane a Carreau. | 3 or 1 keycard (1 here) and a void in diamonds.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AJ6.AQ73.KQ4.T42 7.T652.A96532.J6 Q954.KJ84..K9853 KT832.9.JT87.AQ7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 16H. | 1NT opening: 15-17 HCP balanced, 16 here.} Pass 2C {Stayman : 4 cartes a majeure, 9H, pour chercher un fit. | Stayman: a 4-card major, 9 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Coeur, chicane a Carreau, 12 HLD (12-14). | Fit splinter: 4 hearts, void in diamonds, 12 HLD (12-14).} Pass
+4H {Points perdus dans la courte (kq4) : manche. | Values wasted in the short suit (kq4): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AK4.KJ75.862.AQ2 Q762.862.T9743.7 J85.AQ93..K98543 T93.T4.AKQJ5.JT6"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2H {4 cartes a Coeur : fit avec le Stayman. | 4 hearts: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Coeur, chicane a Carreau, 13 HLD (12-14). | Fit splinter: 4 hearts, void in diamonds, 13 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (862), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (862), 17 HL and keycards: Blackwood.} Pass 6D {3 ou 1 cle (1 ici) et une chicane a Carreau. | 3 or 1 keycard (1 here) and a void in diamonds.} Pass
+6H {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKJ5.A76.K62.Q43 632.T4.T9.KT8752 Q984.K985.AJ853. T7.QJ32.Q74.AJ96"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Pique, chicane a Trefle, 14 HLD (12-14). | Fit splinter: 4 spades, void in clubs, 14 HLD (12-14).} Pass
+4S {Points perdus dans la courte (q43) : manche. | Values wasted in the short suit (q43): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AQ76.K54.AK2.J43 T.T87.T764.AK965 KJ85.AJ93.Q9853. 9432.Q62.J.QT872"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 11H, pour chercher un fit. | Stayman: a 4-card major, 11 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Pique, chicane a Trefle, 14 HLD (12-14). | Fit splinter: 4 spades, void in clubs, 14 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (J43), 17 HL et des cles : Blackwood. | Nothing wasted in the short suit (J43), 17 HL and keycards: Blackwood.} Pass 5NT {2 cles (ou 4) et une chicane a Trefle. | 2 keycards (or 4) and a void in clubs.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AJ76.AQ3.QJ4.K98 K3.62.AT2.QJT743 Q954.KJ84.K9853. T82.T975.76.A652"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 9H, pour chercher un fit. | Stayman: a 4-card major, 9 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4C {Splinter fitte : 4 atouts a Pique, chicane a Trefle, 12 HLD (12-14). | Fit splinter: 4 spades, void in clubs, 12 HLD (12-14).} Pass
+4S {Points perdus dans la courte (k98) : manche. | Values wasted in the short suit (k98): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AKJ5.A76.K62.Q42 T62.Q.JT98754.97 Q984.K985..AJ853 73.JT432.AQ3.KT6"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 17H. | 1NT opening: 15-17 HCP balanced, 17 here.} Pass 2C {Stayman : 4 cartes a majeure, 10H, pour chercher un fit. | Stayman: a 4-card major, 10 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Pique, chicane a Carreau, 14 HLD (12-14). | Fit splinter: 4 spades, void in diamonds, 14 HLD (12-14).} Pass
+4S {Points perdus dans la courte (k62) : manche. | Values wasted in the short suit (k62): game.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AQ76.K54.652.AK4 .T862.AQT983.762 KJ85.AJ93..Q9853 T9432.Q7.KJ74.JT"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "6S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 16H. | 1NT opening: 15-17 HCP balanced, 16 here.} Pass 2C {Stayman : 4 cartes a majeure, 11H, pour chercher un fit. | Stayman: a 4-card major, 11 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Pique, chicane a Carreau, 14 HLD (12-14). | Fit splinter: 4 spades, void in diamonds, 14 HLD (12-14).} Pass
+4NT {Rien de perdu dans la courte (652), 16 HL et des cles : Blackwood. | Nothing wasted in the short suit (652), 16 HL and keycards: Blackwood.} Pass 5NT {2 cles (ou 4) et une chicane a Carreau. | 2 keycards (or 4) and a void in diamonds.} Pass
+6S {Au plus une cle manque : petit chelem. | At most one keycard is missing: small slam.} Pass Pass Pass
+
+[Event "Entrainement Splinters - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJ76.AQ3.KQ4.T42 KT3.6.A9762.QJ76 Q954.KJ84..K9853 82.T9752.JT853.A"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "4S"]
+[Result ""]
+[Auction "S"]
+1NT {Ouverture de 1SA : 15-17 H regulier, ici 16H. | 1NT opening: 15-17 HCP balanced, 16 here.} Pass 2C {Stayman : 4 cartes a majeure, 9H, pour chercher un fit. | Stayman: a 4-card major, 9 HCP, looking for a fit.} Pass
+2S {4 cartes a Pique : fit avec le Stayman. | 4 spades: a fit for the Stayman bid.} Pass 4D {Splinter fitte : 4 atouts a Pique, chicane a Carreau, 12 HLD (12-14). | Fit splinter: 4 spades, void in diamonds, 12 HLD (12-14).} Pass
+4S {Points perdus dans la courte (kq4) : manche. | Values wasted in the short suit (kq4): game.} Pass Pass Pass

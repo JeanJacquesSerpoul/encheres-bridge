@@ -9,6 +9,7 @@
     { "file": "rubensohl.pbn", "fr": "Rubensohl", "en": "Rubensohl (after 1NT and an overcall)" },
     { "file": "2-faible.pbn", "fr": "2 faible (2♥ / 2♠)", "en": "Weak two (2♥ / 2♠)" },
     { "file": "2-carreau-fm.pbn", "fr": "2♦ forcing de manche", "en": "Game-forcing 2♦" },
+    { "file": "splinters.pbn", "fr": "Splinters", "en": "Splinter bids" },
     { "file": "contre-appel.pbn", "fr": "Contre d'appel et ses réponses", "en": "Takeout double and its answers" },
     { "file": "barrages.pbn", "fr": "Ouvertures de barrage au palier de 3 et de 4", "en": "Preemptive openings at the 3 and 4 level" },
     { "file": "reponses-mineure.pbn", "fr": "Réponses sur une ouverture mineure", "en": "Responses to a minor-suit opening" },

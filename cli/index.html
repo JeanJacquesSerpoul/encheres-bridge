@@ -533,7 +533,6 @@
       <h2 data-i18n="result">Résultat</h2>
       <p class="back-to-deal">
         <button id="back-to-deal-btn" type="button" class="link-btn" data-i18n="backToDeal">Revenir à la donne</button>
-        <button id="print-btn" type="button" class="mini-btn"></button>
       </p>
 
       <!-- La séquence et ses commentaires, côte à côte sur grand écran : l'un
@@ -552,6 +551,12 @@
           <ol class="comments" id="comments"></ol>
         </div>
       </div>
+
+      <!-- L'impression, discrète : une petite icône sans cadre en bas à droite,
+           sous ce qu'elle imprime. Nom et infobulle posés par setCommandButton. -->
+      <p class="print-row">
+        <button id="print-btn" type="button" class="mini-btn print-btn"></button>
+      </p>
 
     </section>
     </div>
@@ -708,7 +713,7 @@
           <li>Le <b>contrat</b> final et son déclarant s'inscrivent au centre de la table, et chaque main y reçoit son analyse (points H et HL, type de main).</li>
           <li><b>Séquence d'enchères</b> : survolez une enchère (ou atteignez-la au clavier) : sa ligne commentée s'éclaire, et la main de son auteur est cerclée de doré sur la table. Un clic amène la ligne à l'écran. Une enchère commentée — sauf un passe — dit son commentaire dans une infobulle posée au-dessus de sa case, au survol comme au doigt, sur grand écran comme sur téléphone.</li>
           <li><b>Séquence commentée</b> : l'explication de chaque enchère dans le SEF. L'icône à gauche d'une ligne déplie son <b>arbre de décision</b> : les règles examinées par le moteur sur la main, dans l'ordre, jusqu'à l'enchère. Pour une liste plus courte, l'option <b>Ne pas afficher les passes</b> des Réglages (voir §8) en retire les passes.</li>
-          <li>L'icône d'<b>imprimante</b> imprime la table, la séquence, les commentaires et le PAR s'il est calculé. Sur écran étroit, <b>Revenir à la donne</b> remonte à la table.</li>
+          <li>L'icône d'<b>imprimante</b>, en bas à droite de l'onglet, imprime la table, la séquence, les commentaires et le PAR s'il est calculé. Sur écran étroit, <b>Revenir à la donne</b> remonte à la table.</li>
         </ul>
         <ul class="help-icons">
           <li><span data-help-icon="play"></span><span><b>Afficher les enchères</b> : le grand bouton sous la table, qui reste en vue quand vous faites défiler les mains, pour lancer le calcul vous-même. Sur une donne incomplète, il est éteint, dit combien de mains sont incomplètes et propose <b>Compléter les mains</b>.</span></li>
@@ -835,7 +840,7 @@
           <li>The final <b>contract</b> and its declarer appear in the middle of the table, and each hand gets its analysis (H and HL points, hand type).</li>
           <li><b>Auction</b>: hover over a call (or reach it with the keyboard): its annotated line lights up, and its bidder's hand is circled in gold on the table. A click brings the line into view. A commented call — except a pass — tells its comment in a tooltip above its cell, on hover or on touch, on a wide screen as on a phone.</li>
           <li><b>Annotated auction</b>: what each call means in the SEF. The icon at the left of a line unfolds its <b>decision tree</b>: the rules the engine examined on the hand, in order, down to the call. For a shorter list, the <b>Hide passes</b> option in the Settings (see §8) removes the passes from it.</li>
-          <li>The <b>printer</b> icon prints the table, the auction, the comments and the par if computed. On a narrow screen, <b>Back to the deal</b> scrolls back to the table.</li>
+          <li>The <b>printer</b> icon, at the bottom right of the tab, prints the table, the auction, the comments and the par if computed. On a narrow screen, <b>Back to the deal</b> scrolls back to the table.</li>
         </ul>
         <ul class="help-icons">
           <li><span data-help-icon="play"></span><span><b>Run the auction</b>: the large button below the table, which stays in view while you scroll through the hands, to run the computation yourself. On an incomplete deal it is greyed out, says how many hands are incomplete and offers <b>Fill the hands</b>.</span></li>

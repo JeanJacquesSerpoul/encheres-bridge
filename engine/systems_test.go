@@ -16,6 +16,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"testing"
 )
 
@@ -112,6 +113,49 @@ func TestThemeDealsAreComplete(t *testing.T) {
 				t.Fatalf("%s : aucune donne", name)
 			}
 		})
+	}
+}
+
+// TestThemeIndexDealCounts: each entry of a thematic index
+// (cli/systems/<id>/pbn/index.json) carries "deals", the number of deals of
+// its file that hold their auction — the ones training can play. The page
+// shows their sum on the Practise card without reading the files, so a theme
+// added or changed without updating its count fails here.
+func TestThemeIndexDealCounts(t *testing.T) {
+	indexes, err := filepath.Glob(filepath.Join(systemsDir, "*", "pbn", "index.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	auctionTag := regexp.MustCompile(`\[Auction\s`)
+	for _, idx := range indexes {
+		data, err := os.ReadFile(idx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var body struct {
+			Files []struct {
+				File  string `json:"file"`
+				Deals *int   `json:"deals"`
+			} `json:"files"`
+		}
+		if err := json.Unmarshal(data, &body); err != nil {
+			t.Fatalf("%s : %v", idx, err)
+		}
+		for _, f := range body.Files {
+			text, err := os.ReadFile(filepath.Join(filepath.Dir(idx), f.File))
+			if err != nil {
+				t.Errorf("%s : %v", idx, err)
+				continue
+			}
+			want := len(auctionTag.FindAll(text, -1))
+			if f.Deals == nil || *f.Deals != want {
+				got := "absent"
+				if f.Deals != nil {
+					got = strconv.Itoa(*f.Deals)
+				}
+				t.Errorf("%s : %s : \"deals\" vaut %s, le fichier a %d donnes avec enchère", idx, f.File, got, want)
+			}
+		}
 	}
 }
 

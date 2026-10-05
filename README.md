@@ -22,7 +22,7 @@ Le dépôt contient quatre morceaux :
 | **Les règles d'enchères** | 1 189 règles SEF 2024 (après expansion des modèles), lues par le moteur à chaque chargement de la page : on les modifie sans recompiler. Un dossier par système, avec ses donnes thématiques | [cli/systems/](cli/systems/) |
 | **Le client web** | composition de la donne, enchères commentées, entraînement, calcul du PAR — des fichiers statiques, moteur compris | [cli/](cli/) |
 | **Le serveur IA** *(facultatif)* | lecture des cartes sur une photo, par un modèle de vision derrière un proxy Go | [openrouter_proxy/](openrouter_proxy/) |
-| **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par double-mort, publie un rapport HTML | [tools/par/](tools/par/) |
+| **L'audit du par** *(outil de développement)* | fait jouer un lot de donnes au moteur, compare au par à jeu ouvert, publie un rapport HTML | [tools/par/](tools/par/) |
 
 Les règles appliquées par le moteur sont **[cli/systems/sef/rules.yaml](cli/systems/sef/rules.yaml)** (SEF 2024) ou celles d'un autre système de [cli/systems/](cli/systems/), au choix dans les Réglages : une liste ordonnée où la première règle applicable donne l'enchère. Chaque système est un dossier, avec ses règles, leur description en PDF et ses donnes thématiques. Après modification d'un système, `./update-system.sh <système>` (`.\update-system.ps1 <système>` sous Windows) régénère ses données de test et ses PDF, puis lance les tests. Comment les modifier : [cli/systems/README.md](cli/systems/README.md) ; leur sémantique exacte : [tools/python_tools/SEF_2024_spec.md](tools/python_tools/SEF_2024_spec.md).
 
@@ -152,7 +152,7 @@ Rien n'attache le client à GitHub Pages. N'importe quel serveur de fichiers con
 | `coi-serviceworker.js` | 6 Ko | 2 Ko | repli COOP/COEP |
 | `bids.wasm` | **4,3 Mo** | **1,2 Mo** | **généré** — le moteur d'enchères |
 | `wasm_exec.js` | 17 Ko | 4 Ko | **généré** — glue Go |
-| `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur double-mort |
+| `dds_web_wasm_bin.js` | 701 Ko | 222 Ko | solveur à jeu ouvert |
 | `dds_web_wasm.js` | 193 Ko | 54 Ko | glue du solveur |
 | `systems/index.json` | < 1 Ko | < 1 Ko | la liste des systèmes d'enchères proposés dans les Réglages |
 | `systems/sef/rules.yaml` | 140 Ko | 23 Ko | les règles du SEF, relues à chaque chargement de la page |
@@ -264,7 +264,7 @@ Le client HTML+JS de [cli/](cli/) — aucune étape de build, aucun paquet npm �
 Le **PBN** (*Portable Bridge Notation*) est le format texte standard des donnes de bridge. Une donne y tient en quelques lignes lisibles — `[Dealer "N"]`, `[Vulnerable "NS"]`, `[Deal "N:AKQ7.T98.… …"]` —, et un fichier `.pbn` peut en contenir tout un tournoi, un bloc `[Board]` par donne. Son intérêt pour l'utilisateur : **faire passer une donne d'une application à l'autre sans la recopier carte par carte**.
 
 - **Lire ici les donnes d'ailleurs** : les fichiers de donnes distribués après un tournoi de club, ceux des machines à distribuer, ou les donnes produites par un générateur ou un logiciel de mise en page (BridgeComposer, par exemple) sont le plus souvent disponibles en PBN. **Charger un fichier .pbn** les ouvre ; un fichier de plusieurs donnes fait apparaître **Donne à utiliser**. Les **Donnes thématiques** sont elles-mêmes des fichiers PBN.
-- **Emporter ailleurs les donnes d'ici** : **Sauver le PBN** enregistre la donne affichée dans un fichier `.pbn` que les autres logiciels de bridge savent lire — pour l'analyser en double mort, l'imprimer ou la rejouer.
+- **Emporter ailleurs les donnes d'ici** : **Sauver le PBN** enregistre la donne affichée dans un fichier `.pbn` que les autres logiciels de bridge savent lire — pour l'analyser à jeu ouvert, l'imprimer ou la rejouer.
 - **L'échanger en texte** : une donne PBN se colle dans un courriel ou un message. **Texte de la donne (format PBN)** l'affiche, prête à copier, et accepte une donne collée : la table suit.
 
 Le format complet est décrit dans [docs/pbn.txt](docs/pbn.txt) ; ce que le moteur en lit, dans [Format PBN minimal attendu](#format-pbn-minimal-attendu).
@@ -428,7 +428,7 @@ Rien n'est envoyé nulle part : ces réglages vivent dans le `localStorage` du n
 
 ### Le PAR
 
-L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne  —, les levées double-mort de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
+L'onglet **PAR** donne, dès qu'on l'ouvre — puis pour chaque nouvelle donne tant qu'il reste ouvert, un seul calcul par donne  —, les levées à jeu ouvert de chaque camp dans chaque couleur, calculées dans le navigateur par le solveur DDS compilé en WebAssembly ([cli/par.js](cli/par.js)). Chaque case porte son entame : survolez-la — ou touchez-la, l'entame s'affiche alors en bandeau bas — et le solveur reprend la donne pour lister les cartes de l'entameur qui tiennent le déclarant à ce chiffre, ainsi que ce que coûtent les autres. Quand presque toutes les entames se valent, c'est la courte liste de celles qui lâchent une levée qui s'affiche.
 
 ### Reconnaissance des cartes par photo (serveur IA)
 
@@ -476,7 +476,7 @@ Après une modification des règles d'un système, `./update-system.sh <système
 
 ## Audit du par
 
-Les tests disent si une enchère est *légale* ; l'audit dit si elle est *bonne*. Il tire un lot de donnes, fait jouer l'enchère complète par le moteur, calcule le **par** de chaque donne en double-mort avec le solveur DDS du client, et publie un rapport HTML qui isole les écarts.
+Les tests disent si une enchère est *légale* ; l'audit dit si elle est *bonne*. Il tire un lot de donnes, fait jouer l'enchère complète par le moteur, calcule le **par** de chaque donne à jeu ouvert avec le solveur DDS du client, et publie un rapport HTML qui isole les écarts.
 
 ```bash
 tools/par/run.sh              # 1 000 donnes, graine 20260906
@@ -488,11 +488,11 @@ tools\par\run.ps1                        # 1 000 donnes, graine 20260906
 tools\par\run.ps1 -Deals 5000 -Seed 42   # 5 000 donnes, graine 42
 ```
 
-Le rapport (`tools/par/out/rapport.html`) donne la vue d'ensemble — contrats tenus, marque égale au par, écart moyen en IMP, distribution des paliers — puis six listes de donnes : camp déclarant inversé, couleur différente du par, chelem demandé mais impossible, chelem manqué, manche demandée mais impossible, manche manquée. Chaque ligne se déplie sur le diagramme, la séquence et la table des levées double-mort.
+Le rapport (`tools/par/out/rapport.html`) donne la vue d'ensemble — contrats tenus, marque égale au par, écart moyen en IMP, distribution des paliers — puis six listes de donnes : camp déclarant inversé, couleur différente du par, chelem demandé mais impossible, chelem manqué, manche demandée mais impossible, manche manquée. Chaque ligne se déplie sur le diagramme, la séquence et la table des levées à jeu ouvert.
 
 À graine égale les donnes sont les mêmes, donc deux révisions du moteur se comparent ligne à ligne. Le harnais Go est ignoré tant que `PAR_AUDIT_OUT` ne désigne pas un fichier : `go test ./...` n'en voit rien. Mode d'emploi complet dans [tools/par/README.md](tools/par/README.md).
 
-**Banc de non-régression.** 12 000 donnes dont la table double-mort et le par sont précalculés ([engine/testdata/par_bench.jsonl.gz](engine/testdata/par_bench.jsonl.gz)) : `go test ./...` rejoue leurs enchères en quelques secondes et **échoue si l'écart total au par augmente**, pour chaque système contre sa propre référence (`engine/testdata/systems/<id>/par_baseline.json`). Les tests tournent sur chaque pull request (workflow `Tests`). Voir [tools/par/README.md](tools/par/README.md#banc-de-non-régression).
+**Banc de non-régression.** 12 000 donnes dont la table à jeu ouvert et le par sont précalculés ([engine/testdata/par_bench.jsonl.gz](engine/testdata/par_bench.jsonl.gz)) : `go test ./...` rejoue leurs enchères en quelques secondes et **échoue si l'écart total au par augmente**, pour chaque système contre sa propre référence (`engine/testdata/systems/<id>/par_baseline.json`). Les tests tournent sur chaque pull request (workflow `Tests`). Voir [tools/par/README.md](tools/par/README.md#banc-de-non-régression).
 
 ---
 
@@ -644,7 +644,7 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 | `run.sh`, `run.ps1`, `run-macos.command` | Lancement local : compilation au besoin, mini-serveur et ouverture du navigateur |
 | `.github/workflows/pages.yml` | Publication du client sur GitHub Pages à chaque poussée sur `main` |
 | `.github/workflows/wasm.yml` | Recompile et recommite `cli/bids.wasm` quand les sources Go changent sur `main` |
-| `tools/par/` | Audit du moteur contre le par : levées double-mort (DDS), calcul du par, rapport HTML |
+| `tools/par/` | Audit du moteur contre le par : levées à jeu ouvert (DDS), calcul du par, rapport HTML |
 | `tools/python_tools/` | Référence Python du moteur (`sef_rules.py`, `pbn_auction.py`), validation des règles, génération des jeux de test (`regen_system.py`) et des donnes thématiques, spécification |
 | `openrouter_proxy/` | Serveur IA de la reconnaissance des cartes par photo : module Go autonome, proxy vers OpenRouter |
 | `openrouter_proxy/bin/` | Exécutables précompilés du serveur IA (Linux, Windows), leurs scripts de lancement et un `docker-compose.yml` qui lance le binaire Linux |
@@ -656,4 +656,4 @@ Tout le code Go est dans trois dossiers d'un même module (`go.mod`, à la racin
 
 Ce projet est distribué sous la **licence publique générale GNU, version 3** (GPL-3.0) — voir [LICENSE](LICENSE).
 
-Le moteur compilé embarque la bibliothèque Go **[yaml.v3](https://github.com/go-yaml/yaml)** (licences MIT et Apache 2.0), qui lit le fichier de règles. Il redistribue aussi un composant tiers sous sa propre licence : le solveur double-mort **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client dans l'onglet « PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.
+Le moteur compilé embarque la bibliothèque Go **[yaml.v3](https://github.com/go-yaml/yaml)** (licences MIT et Apache 2.0), qui lit le fichier de règles. Il redistribue aussi un composant tiers sous sa propre licence : le solveur à jeu ouvert **[DDS](https://github.com/dds-bridge/dds)** de Bo Haglund et Søren Hein, compilé en WebAssembly et servi par le client dans l'onglet « PAR », sous **licence Apache 2.0**. Le détail figure dans **[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)** ; l'application elle-même porte l'attribution sous le tableau du PAR.

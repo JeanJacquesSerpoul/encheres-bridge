@@ -1,6 +1,6 @@
 "use strict";
 
-// « PAR » de la donne affichée : les levées double-mort (double dummy) de
+// « PAR » de la donne affichée : les levées à jeu ouvert (double dummy) de
 // chaque camp dans chaque couleur, calculées par le solveur DDS compilé en
 // WebAssembly. Le module et ses octets .wasm sont repris tels quels de
 // dds-fork/web (dds_web_wasm.js / dds_web_wasm_bin.js) ; on appelle ici
@@ -266,7 +266,7 @@
   // Rang d'enchère d'une couleur DDS : ♣ < ♦ < ♥ < ♠ < SA.
   const BID_RANK = [3, 2, 1, 0, 4];
 
-  // Le plus haut contrat que chaque camp gagne en double-mort, et qui le
+  // Le plus haut contrat que chaque camp gagne à jeu ouvert, et qui le
   // joue. Ce n'est pas le par au sens strict (ni sacrifice ni vulnérabilité),
   // mais ce que le tableau dit d'un coup d'œil.
   function summaryHTML(lang) {
@@ -598,7 +598,7 @@
     if (dealHands && !lastTable) onCompute();
   };
 
-  // Pour l'entraînement : la table double-mort d'une donne quelconque (mains
+  // Pour l'entraînement : la table à jeu ouvert d'une donne quelconque (mains
   // au format de renderResult), sans toucher à celle de l'onglet. Même file
   // d'attente que les entames : le solveur ne fait qu'un calcul à la fois.
   window.parTableFor = function (hands) {

@@ -335,9 +335,9 @@ const UI_TEXT = {
     trainCount: (k, n) => `Donne ${k} / ${n}`,
     trainYou: "(vous)",
     trainAuctionOver: "Enchère terminée : les quatre mains sont dévoilées.",
-    trainParTitle: "PAR : levées au double mort",
+    trainParTitle: "PAR : levées à jeu ouvert",
     trainParBusy: "Calcul du PAR…",
-    trainParResult: (contract, seat, n) => `${contract} par ${seat} : ${n} levée${n > 1 ? "s" : ""} au double mort`,
+    trainParResult: (contract, seat, n) => `${contract} par ${seat} : ${n} levée${n > 1 ? "s" : ""} à jeu ouvert`,
     trainParMade: (over) => over ? `réussi +${over}` : "réussi",
     trainParDown: (n) => `chute de ${n}`,
     trainPassedOut: "Passe générale",
@@ -355,7 +355,7 @@ const UI_TEXT = {
     comments: "Séquence commentée",
     parCompute: "Calcul du PAR",
     parContracts: "Contrats",
-    parTitle: "Levées double-mort",
+    parTitle: "Levées à jeu ouvert",
     parBest: "Plus haut contrat gagnable par camp",
     parSideNS: "N-S",
     parSideEW: "E-O",
@@ -366,7 +366,7 @@ const UI_TEXT = {
     parTierSlam: "Chelem",
     parComputing: "Calcul en cours…",
     parLoading: "Chargement du solveur…",
-    parUnavailable: "Solveur double-mort (WASM) introuvable.",
+    parUnavailable: "Solveur à jeu ouvert (WASM) introuvable.",
     parNoIsolation: "Isolation cross-origine requise (SharedArrayBuffer) ; rechargez la page.",
     parLeadHint: "Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.",
     // Encadre le lien vers le projet DDS : son nom n'est pas traduit, et
@@ -380,7 +380,7 @@ const UI_TEXT = {
     appSource: "Code source sur GitHub",
     appAnimation: "Vidéo de présentation",
     videoClose: "Fermer la vidéo",
-    parCredit: "Levées double-mort calculées par",
+    parCredit: "Levées à jeu ouvert calculées par",
     parCreditAuthors: "de Bo Haglund et Søren Hein — licence",
     parLeadComputing: "Recherche de l'entame…",
     parLeadVerb: "entame",
@@ -4891,7 +4891,7 @@ function renderResult(r) {
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;
 
-  // Tableau du « PAR » (levées double-mort) : remis à zéro pour la donne qu'on
+  // Tableau du « PAR » (levées à jeu ouvert) : remis à zéro pour la donne qu'on
   // vient d'afficher, puis calculé à la demande par le bouton (voir par.js).
   if (typeof parSetDeal === "function") parSetDeal(r.hands, lang);
   setParReady(true);
@@ -6552,7 +6552,7 @@ const TUTORIAL_STEPS = [
     en: ["The decision tree", "The icon at the start of a line opens the decision tree: the rules the engine checked on the hand, in order, with ✓ or ✗ and the measured value, down to the chosen call.\nFor a call read from a file (see Practise) it opens its comment: that is what explains the call.\nIt is the best way to understand why a call was made."],
   },
   {
-    fr: ["Le PAR", "L'onglet PAR donne les levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul double-mort).\nSurvolez ou touchez une case : les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres."],
+    fr: ["Le PAR", "L'onglet PAR donne les levées que chaque camp réalise dans chaque couleur, cartes sur table (calcul à jeu ouvert).\nSurvolez ou touchez une case : les entames qui tiennent le déclarant à ce nombre de levées, et ce que coûtent les autres."],
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {

@@ -218,27 +218,13 @@ h1 { font-size: 1.25rem; margin: 0; }
 main { max-width: 1060px; margin: 24px auto; padding: 0 16px; }
 main.workspace { max-width: 1440px; }
 
-/* La phrase qui dit à quoi sert la page : présente sans peser, elle se lit
-   une fois puis s'oublie. */
 /* Le haut du panneau de la donne, centré comme son bas l'est déjà : les
    commandes des contraintes et la ligne du questionnaire passent par
-   .row-centered, mais le titre, la phrase d'accueil et le repli du texte PBN
-   restaient calés à gauche. Les deux rangées de boutons, elles, ont reçu dans
-   le HTML la classe qui existait pour cela. */
+   .row-centered, mais le titre et le repli du texte PBN restaient calés à
+   gauche. Les deux rangées de boutons, elles, ont reçu dans le HTML la classe
+   qui existait pour cela. */
 #input-panel h2,
-#input-panel .panel-intro,
 #input-panel .pbn-note { text-align: center; }
-
-/* Pas de largeur maximale : une mesure de 62 caractères repliait la phrase
-   en plein milieu — « du système / français » — alors que le panneau était
-   deux fois plus large. Une seule phrase supporte sa longueur ; elle se
-   replie d'elle-même quand la fenêtre se resserre. */
-.panel-intro {
-  margin: -4px 0 14px;
-  color: var(--muted);
-  font-size: .9rem;
-  line-height: 1.5;
-}
 
 .app-version {
   max-width: 1060px;
@@ -536,13 +522,14 @@ button:disabled { opacity: .6; cursor: wait; }
   transform: rotate(45deg);
   pointer-events: none;
 }
-/* Quand les trois boutons ne tiennent plus sur une ligne, ils passent en
-   grille de deux colonnes de largeurs égales — le dernier reste seul sur la
-   seconde : une troisième colonne serrerait « Donne aléatoire » jusqu'à
-   rogner son libellé. Les deux champs prennent la même grille. */
-@container (max-width: 820px) {
-  .deal-cmds,
-  #deal-actions .field-group {
+/* Les trois commandes tiennent sur une ligne tant que le panneau a de quoi
+   les loger : il y faut 551 px de contenu en français — « Donne aléatoire »
+   est le plus long des trois —, 471 px en anglais. En deçà, et sur
+   téléphone, elles passent en grille de deux colonnes de largeurs égales : la
+   dernière reste seule sur la seconde, une troisième colonne serrant « Donne
+   aléatoire » jusqu'à rogner son libellé. */
+@container (max-width: 560px) {
+  .deal-cmds {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
@@ -555,6 +542,18 @@ button:disabled { opacity: .6; cursor: wait; }
   /* Partager tombe dans la colonne de droite : ancré à gauche, son menu
      débordait de l'écran du téléphone. Il s'aligne sur le bord droit. */
   #share-pop { left: auto; right: 0; }
+}
+/* Donneur et Vulnérabilité gardent leur seuil, plus large que celui des
+   commandes : deux champs côte à côte dans une grille de même largeur, pour
+   que les deux rangées du panneau s'alignent ; groupés, ils ne se séparent
+   jamais au fil des largeurs d'écran (voir .field-group). */
+@container (max-width: 820px) {
+  #deal-actions .field-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: min(100%, 520px);
+  }
   #deal-actions .field { min-width: 0; }
   #deal-actions .field select { flex: 1; min-width: 0; }
 }

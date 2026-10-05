@@ -238,9 +238,6 @@ const UI_TEXT = {
     helpOpen: "Mode d'emploi",
     helpTitle: "Mode d'emploi",
     helpClose: "Fermer le mode d'emploi",
-    intro:
-      "Composez une donne — l'application déroule les enchères du système " +
-      "français et les commente, enchère par enchère.",
     pbnToggle: "Texte de la donne (format PBN)",
     moreDeals: "Autres façons d'obtenir une donne",
     editDeal: "Modifier la donne",
@@ -472,9 +469,6 @@ const UI_TEXT = {
     helpOpen: "How to use",
     helpTitle: "How to use",
     helpClose: "Close the guide",
-    intro:
-      "Build a deal — the application runs the French system's auction and " +
-      "comments on it, call by call.",
     pbnToggle: "Deal as text (PBN format)",
     moreDeals: "Other ways to get a deal",
     editDeal: "Edit the deal",

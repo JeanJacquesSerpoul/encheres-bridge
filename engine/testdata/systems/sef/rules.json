@@ -2855,6 +2855,16 @@
   "status": "sef"
  },
  {
+  "id": "1D.r.2NT.reg",
+  "seq": "1D",
+  "call": "2NT",
+  "cond": "hl == 11 and balanced and H < 4 and S < 4",
+  "forcing": "INV",
+  "meaning": "11 HL régulier, pas de majeure 4e",
+  "meaning_en": "11 HL balanced, no 4-card major",
+  "status": "sef"
+ },
+ {
   "id": "1D.r.2C",
   "seq": "1D",
   "call": "2C",

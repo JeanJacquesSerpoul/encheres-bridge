@@ -3372,3 +3372,30 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .tabbar .tab::before { width: 22px; height: 22px; }
 }
 @media (prefers-reduced-motion: reduce) { .tab { transition: none; } }
+/* ---------- l'impression, discrète ---------- */
+
+/* En bas à droite du Résultat, sous ce qu'elle imprime : une petite icône
+   grise, sans cadre ni fond, qui ne se montre franchement qu'au survol ou au
+   clavier. */
+.print-row { display: flex; justify-content: flex-end; margin: 12px 0 0; }
+.mini-btn.print-btn {
+  width: 28px;
+  height: 28px;
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+  opacity: .55;
+  transition: opacity .15s, color .15s;
+}
+.mini-btn.print-btn svg { width: 15px; height: 15px; }
+.mini-btn.print-btn:hover,
+.mini-btn.print-btn:focus-visible {
+  border-color: transparent;
+  background: var(--tint);
+  color: var(--accent);
+  opacity: 1;
+}
+/* Sur grand écran, Revenir à la donne est masqué : sa ligne, vide, ne garde
+   plus de place en tête des enchères. */
+@media (min-width: 1100px) { .back-to-deal { display: none; } }
+@media (prefers-reduced-motion: reduce) { .mini-btn.print-btn { transition: none; } }

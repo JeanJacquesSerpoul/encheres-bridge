@@ -343,7 +343,7 @@ python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drur
     --fr "Drury : réponse d'une main passée" --en "Drury: passed-hand response" -n 25
 ```
 
-**Régénérer les séries.** Quand les règles changent, certaines donnes n'emploient plus leur convention. [tools/python_tools/regen_themes.py](tools/python_tools/regen_themes.py) rejoue la recette d'une série tirée sans enchères (expression, nombre de donnes, graine, plafond par règle, tirages à mêler) avec les règles actuelles : `python regen_themes.py sef` (ou `--only <fichier>`). Les séries du SEF portent désormais leurs enchères et leurs commentaires : elles n'y ont plus de recette, et les régénérer les remplacerait par des donnes sans enchères. Une nouvelle série tirée sans enchères s'y ajoute avec sa recette.
+**Les séries du SEF** portent leurs enchères et leurs commentaires : elles s'éditent à la main (ou se complètent avec un générateur à part) et ne se régénèrent plus automatiquement quand les règles changent. `gen_theme_pbn.py` ne produit que des séries sans enchères.
 
 Pour un autre système, on passe ses règles et on écrit dans son dossier : `--rules ../../cli/systems/<id>/rules.yaml` et `../../cli/systems/<id>/pbn/<fichier>.pbn`.
 

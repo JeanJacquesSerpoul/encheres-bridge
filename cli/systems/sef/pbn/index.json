@@ -16,6 +16,7 @@
     { "file": "reveils.pbn", "fr": "Réveils", "en": "Balancing (reopening) bids" },
     { "file": "redemandes-ouvreur.pbn", "fr": "Redemandes de l'ouvreur", "en": "Opener's rebids" },
     { "file": "landy.pbn", "fr": "Landy", "en": "Landy (over 1NT)" },
-    { "file": "rencontre.pbn", "fr": "Rencontre", "en": "Fit-showing jumps" }
+    { "file": "rencontre.pbn", "fr": "Rencontre", "en": "Fit-showing jumps" },
+    { "file": "rubensohl.pbn", "fr": "Rubensohl", "en": "Rubensohl (after 1NT and an overcall)" }
   ]
 }

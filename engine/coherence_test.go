@@ -9,8 +9,8 @@ package engine
 //   B  sequences without a rule (default passes), most frequent first;
 //   C  passes given by a rule right after a forcing call of the partner;
 //   D  meaning against condition: the "a-b H", "a+ HL", "n levées de jeu" of
-//      the meaning that the condition does not bound, and numbers that differ
-//      between the French and the English meaning;
+//      the meaning that the condition does not bound, and the points ranges
+//      of the French meaning missing from the English one;
 //   E  English meanings left empty, identical to the French one, or French;
 //   F  the "call | meaning" tables of SEF_2024.md, each row beside the rules
 //      whose meaning shares its numbers, for a review by hand;
@@ -275,19 +275,30 @@ func condBounds(cond, feat string) map[string]bool {
 	return out
 }
 
-// numberWords: the small numbers the meanings spell out, both languages.
-var numberWords = strings.NewReplacer(
-	"one", "1", "two", "2", "three", "3", "four", "4", "five", "5", "six", "6", "seven", "7", "eight", "8", "nine", "9",
-	"deux", "2", "trois", "3", "quatre", "4", "cinq", "5", "sept", "7", "huit", "8", "neuf", "9")
+// enPointsRe: a points range or minimum of the English meaning, « 12-14 »,
+// « 8+ », whatever its unit.
+var enPointsRe = regexp.MustCompile(`(\d+)\s*(?:-|to)\s*(\d+)|(\d+)\s*\+`)
 
-// ordinalRe: « 4e », « 5th »… are positions or lengths written as ordinals.
-var ordinalRe = regexp.MustCompile(`\b(\d+)(e|ème|th|st|nd|rd)\b`)
-
-func meaningNumbers(s string) []string {
-	s = ordinalRe.ReplaceAllString(strings.ToLower(s), "$1")
-	n := numRe.FindAllString(numberWords.Replace(s), -1)
-	sort.Strings(n)
-	return n
+// pointsTexts: the ranges and minimums of a meaning, as « 12-14 » and « 8+ ».
+func pointsTexts(s string, fr bool) map[string]bool {
+	out := map[string]bool{}
+	if fr {
+		for _, m := range meanRangeRe.FindAllStringSubmatch(s, -1) {
+			out[m[1]+"-"+m[2]] = true
+		}
+		for _, m := range meanPlusRe.FindAllStringSubmatch(s, -1) {
+			out[m[1]+"+"] = true
+		}
+		return out
+	}
+	for _, m := range enPointsRe.FindAllStringSubmatch(s, -1) {
+		if m[3] != "" {
+			out[m[3]+"+"] = true
+		} else {
+			out[m[1]+"-"+m[2]] = true
+		}
+	}
+	return out
 }
 
 // meaningIssues: a points range or minimum of the meaning that no bound of
@@ -347,9 +358,16 @@ func meaningIssues(r *Rule) []string {
 			flag(r.Meaning[m[0]:m[1]], "ptricks de la condition : "+boundsList(b))
 		}
 	}
-	fr, en := meaningNumbers(r.Meaning), meaningNumbers(r.MeaningEN)
-	if strings.Join(fr, " ") != strings.Join(en, " ") {
-		out = append(out, fmt.Sprintf("chiffres différents : FR {%s} / EN {%s}", strings.Join(fr, " "), strings.Join(en, " ")))
+	en := pointsTexts(r.MeaningEN, false)
+	var missing []string
+	for p := range pointsTexts(r.Meaning, true) {
+		if !en[p] {
+			missing = append(missing, p)
+		}
+	}
+	if len(missing) > 0 {
+		sort.Strings(missing)
+		out = append(out, fmt.Sprintf("tranche absente de l'anglais : %s (« %s »)", strings.Join(missing, ", "), r.MeaningEN))
 	}
 	return out
 }

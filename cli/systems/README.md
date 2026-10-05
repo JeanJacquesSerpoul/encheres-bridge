@@ -63,7 +63,7 @@ python gen_theme_pbn.py '^drury\.[HS]\.(2C|2NT)$' ../../cli/systems/sef/pbn/drur
     --rules ../../cli/systems/sef/rules.yaml --fr "Drury" --en "Drury"
 ```
 
-Après une modification des règles, [tools/python_tools/regen_themes.py](../../tools/python_tools/regen_themes.py) régénère les séries d'un système à partir de leurs recettes (`python regen_themes.py sef`).
+Après une modification des règles, [tools/python_tools/regen_themes.py](../../tools/python_tools/regen_themes.py) régénère les séries tirées sans enchères à partir de leurs recettes (`python regen_themes.py sef`). Les séries du SEF portent leurs enchères et n'ont plus de recette : elles ne se régénèrent pas.
 
 Une donne peut aussi porter son enchère : la section `[Auction "<donneur>"]` du bloc, ses appels en notation PBN standard, chacun suivi de son commentaire **entre accolades**. L'enchère, ses commentaires et le contrat sont alors lus dans le fichier, sans moteur : c'est ce que demande l'**entraînement**, qui ne tire que les donnes ainsi enrichies et n'offre pas les autres. Un commentaire peut porter les deux langues, séparées par une barre verticale (`{français | anglais}`) : l'application affiche celle de la langue choisie. `2-faible.pbn` est la série d'exemple ; la description du format est dans [Donnes thématiques](../../README.md#le-nouveau-format) du README du dépôt.
 

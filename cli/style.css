@@ -465,7 +465,7 @@ button:disabled { opacity: .6; cursor: wait; }
 }
 .cmd-btn svg { width: 21px; height: 21px; }
 
-/* Les commandes de la donne : les quatre boutons sur une rangée, Donneur et
+/* Les commandes de la donne : les trois boutons sur une rangée, Donneur et
    Vulnérabilité sur la suivante. Chaque champ est une pastille de la hauteur
    et de l'arrondi des boutons : le libellé à gauche, séparé d'un filet, la
    valeur à droite avec sa flèche. */
@@ -536,9 +536,10 @@ button:disabled { opacity: .6; cursor: wait; }
   transform: rotate(45deg);
   pointer-events: none;
 }
-/* Quand les quatre boutons ne tiennent plus sur une ligne, ils passent en
-   grille 2 × 2 de largeurs égales plutôt que de laisser le dernier seul sur
-   la suivante ; les deux champs prennent la même grille. */
+/* Quand les trois boutons ne tiennent plus sur une ligne, ils passent en
+   grille de deux colonnes de largeurs égales — le dernier reste seul sur la
+   seconde : une troisième colonne serrerait « Donne aléatoire » jusqu'à
+   rogner son libellé. Les deux champs prennent la même grille. */
 @container (max-width: 820px) {
   .deal-cmds,
   #deal-actions .field-group {
@@ -645,7 +646,7 @@ button:disabled { opacity: .6; cursor: wait; }
 @media print {
   header, footer, dialog, #boot-loading, #engine-loading,
   button, select, .file-btn, .pbn-details,
-  #deal-select-row, #cons-actions, #bid-row, .tabs, .tab-empty { display: none !important; }
+  #deal-select-row, #cons-actions, #bid-row, #train-panel, .tabs, .tab-empty { display: none !important; }
   .tabpanel[hidden] { display: none !important; }
   body { background: #fff; }
   main { margin: 0; max-width: none; padding: 0; }
@@ -1285,8 +1286,8 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .panel { padding: 12px 10px; border-radius: 8px; }
   .row { gap: 8px; }
 
-  /* Sur téléphone, les quatre boutons en grille 2 × 2, de largeurs égales ;
-     les deux champs côte à côte, sur toute la largeur. */
+  /* Sur téléphone, les trois boutons en grille de deux colonnes, de largeurs
+     égales ; les deux champs côte à côte, sur toute la largeur. */
   #deal-actions { gap: 8px; }
   #deal-actions #photo-status { text-align: center; }
 
@@ -2525,13 +2526,22 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
    enchères se lisent en regard des mains. Sous 1100 px, il passe sous la
    table. */
 @media (min-width: 1100px) {
+  /* Trois blocs en deux colonnes : la donne et, sous elle, l'entraînement ;
+     le panneau à onglets à droite, sur les deux lignes, pour rester en vue
+     quel que soit celui des deux blocs de gauche que l'on regarde. */
   main.workspace {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 24px;
+    grid-template-areas:
+      "deal side"
+      "train side";
+    column-gap: 24px;
     align-items: start;
   }
+  #input-panel { grid-area: deal; }
+  #train-panel { grid-area: train; }
   .side-pane {
+    grid-area: side;
     position: sticky;
     top: 16px;
     max-height: calc(100vh - 32px);
@@ -2540,6 +2550,12 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   /* La table est à côté : rien à rejoindre. */
   #back-to-deal-btn { display: none; }
 }
+
+/* Le bloc de l'entraînement, sous celui de la donne : même carte, et dedans le
+   bouton de l'action au gabarit de celui qui clôt la composition (.cta-btn).
+   La rangée n'a pas les marges des autres : elle est seule dans la carte, dont
+   la marge intérieure suffit. */
+#train-panel .row { margin: 0; }
 
 /* Les onglets du panneau, en tête : un soulignement pour celui qui est
    ouvert. */
@@ -2782,7 +2798,7 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
 
 @media (max-width: 480px) {
   .cmd-btn.cmd-labeled { padding: 0 12px; }
-  /* Sur un téléphone, la grille 2 × 2 des commandes garde tous ses libellés,
+  /* Sur un téléphone, la grille des commandes garde tous ses libellés,
      « Partager » compris : un cran plus petits, avec moins de marge. */
   .deal-cmds .cmd-btn.cmd-labeled { gap: 6px; padding: 0 8px; font-size: .88rem; }
   .deal-cmds .cmd-btn svg { width: 18px; height: 18px; }

@@ -1255,6 +1255,56 @@
 # A.7 Ouvertures de 1♣ / 1♦ : réponses et redemandes
 # ======================================================================
 # en: A.7 1♣ / 1♦ openings: responses and rebids
+# --- Rencontre d'une main passée sur 1♣/1♦ : 2♥ ou 2♠ (4 atouts mineurs et une belle majeure 5e), avant les réponses ordinaires
+# en: Passed-hand fit-showing jump over 1♣/1♦: 2♥ or 2♠ (four-card minor support and a good five-card major), before the ordinary responses
+- id: "renc.p.{m}.{M}"
+  for: [{m: C, M: H, ms: "♣", Ms: "♥"}, {m: C, M: S, ms: "♣", Ms: "♠"}, {m: D, M: H, ms: "♦", Ms: "♥"}, {m: D, M: S, ms: "♦", Ms: "♠"}]
+  seq: "P 1{m}"
+  call: "2{M}"
+  cond: "{m} >= 4 and {M} >= 5 and hcp_in('{M}') >= 4 and hld >= 12 and hcp <= 11"
+  forcing: F1
+  meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {Ms} (4+ H), 12+ HLD, main passée"
+  meaning_en: "Fit-showing jump: four {ms} and a good five-card {Ms} suit (4+ HCP), 12+ HLD, passed hand"
+  status: sef
+  alert: true
+  trump: "{m}"
+- id: "renc.p.{m}.{M}.4M"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "P 1{m} 2{M}"
+  call: "4{M}"
+  cond: "{M} >= 3 and hcp >= 14"
+  forcing: SO
+  meaning: "Manche : fit majeur 5-3 et 14+ H"
+  meaning_en: "Game: 5-3 major fit and 14+ HCP"
+  status: infere
+  trump: "{M}"
+- id: "renc.p.{m}.{M}.p"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "P 1{m} 2{M}"
+  call: P
+  cond: "{M} >= 3"
+  forcing: NF
+  meaning: "Fit majeur 5-3 : on joue la partielle"
+  meaning_en: "5-3 major fit: play the part score"
+  status: infere
+- id: "renc.p.{m}.{M}.3m"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "P 1{m} 2{M}"
+  call: "3{m}"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas de fit majeur : retour à la mineure fittée"
+  meaning_en: "No major fit: back to the minor fit"
+  status: infere
+- id: "renc.p.{m}.{M}.3m.p"
+  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
+  seq: "P 1{m} 2{M} 3{m}"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Partielle"
+  meaning_en: "Part score"
+  status: infere
 - id: "1{m}.r.2{M}.strong"
   for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
   seq: "1{m}"
@@ -1564,6 +1614,49 @@
 # en: A.7 bis Drury (passed-hand responses)
 # Ces règles commencent par `P` : elles ne s'appliquent que si le répondant a déjà passé. Elles précèdent les réponses ordinaires à 1♥/1♠.
 # en: These rules start with `P`: they apply only when responder has already passed. They come before the ordinary responses to 1♥/1♠.
+# --- Rencontre d'une main passée : bicolore fitté (4 atouts et une belle couleur au moins 5e), 11 H au plus ; 11+ HLD sur 1♥/1♠, 12+ HLD sur 1♣/1♦ (seuils réglés sur le banc du par)
+# en: Passed-hand fit-showing jump: four-card support and a good suit of at least five cards, 11 HCP at most; 11+ HLD over 1♥/1♠, 12+ HLD over 1♣/1♦ (thresholds tuned on the par benchmark)
+# Sur 1♥/1♠ : 3♣ ou 3♦ ; sur 1♣/1♦ : 2♥ ou 2♠. Elle précède le Drury : plus précise, elle décrit la couleur d'accompagnement. L'ouvreur conclut : manche avec 13+ H ou 3 H dans la couleur de rencontre, sinon retour à l'atout (sur 1♣/1♦ : 4M, ou passe avec 3 cartes dans la majeure, sinon retour à la mineure).
+# en: On 1♥/1♠: 3♣ or 3♦; on 1♣/1♦: 2♥ or 2♠. It comes before Drury: more precise, it describes the side suit. Opener decides: game with 13+ HCP or 3 HCP in the fit-showing suit, otherwise back to the trump suit (over 1♣/1♦: 4M, or pass with three cards in the major, otherwise back to the minor).
+- id: "renc.p.{M}.{s}"
+  for: [{M: S, s: C, ms: "♠", ss: "♣"}, {M: S, s: D, ms: "♠", ss: "♦"}, {M: H, s: C, ms: "♥", ss: "♣"}, {M: H, s: D, ms: "♥", ss: "♦"}]
+  seq: "P 1{M}"
+  call: "3{s}"
+  cond: "{M} >= 4 and {s} >= 5 and hcp_in('{s}') >= 3 and hld >= 11 and hcp <= 11"
+  forcing: F1
+  meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {ss}, 11+ HLD, main passée"
+  meaning_en: "Fit-showing jump: four {ms} and a good five-card {ss} suit, 11+ HLD, passed hand"
+  status: sef
+  alert: true
+  trump: "{M}"
+- id: "renc.p.{M}.{s}.4M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: H, s: C}, {M: H, s: D}]
+  seq: "P 1{M} 3{s}"
+  call: "4{M}"
+  cond: "hcp >= 13 or hcp_in('{s}') >= 3"
+  forcing: SO
+  meaning: "Manche : 13+ H ou des honneurs dans la couleur de rencontre"
+  meaning_en: "Game: 13+ HCP or honours in the fit-showing suit"
+  status: infere
+  trump: "{M}"
+- id: "renc.p.{M}.{s}.3M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: H, s: C}, {M: H, s: D}]
+  seq: "P 1{M} 3{s}"
+  call: "3{M}"
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum, peu de valeurs dans la couleur de rencontre : retour à l'atout"
+  meaning_en: "Minimum, little in the fit-showing suit: back to the trump suit"
+  status: infere
+- id: "renc.p.{M}.{s}.3M.p"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: H, s: C}, {M: H, s: D}]
+  seq: "P 1{M} 3{s} 3{M}"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Partielle"
+  meaning_en: "Part score"
+  status: infere
 - id: "drury.{M}.2NT"
   for: [{M: H}, {M: S}]
   seq: "P 1{M}"
@@ -3996,6 +4089,65 @@
   meaning: "Passe"
   meaning_en: "Pass"
   status: sef
+# --- Rencontre après le contre de l'adversaire : bicolore fitté (4 atouts et une belle couleur au moins 5e), 11+ HLD, saut au palier de 3
+# en: Fit-showing jump after the opponents' double: four-card support and a good suit of at least five cards, 11+ HLD, a jump to the three level
+- id: "renc.X.{M}.{s}"
+  for: [{M: S, s: C, ms: "♠", ss: "♣"}, {M: S, s: D, ms: "♠", ss: "♦"}, {M: S, s: H, ms: "♠", ss: "♥"}, {M: H, s: C, ms: "♥", ss: "♣"}, {M: H, s: D, ms: "♥", ss: "♦"}, {M: H, s: S, ms: "♥", ss: "♠"}]
+  seq: "1{M} (X)"
+  call: "3{s}"
+  cond: "{M} >= 4 and {s} >= 5 and hcp_in('{s}') >= 3 and hld >= 11"
+  forcing: F1
+  meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {ss}, 11+ HLD"
+  meaning_en: "Fit-showing jump: four {ms} and a good five-card {ss} suit, 11+ HLD"
+  status: sef
+  alert: true
+  trump: "{M}"
+- id: "renc.X.{M}.{s}.4M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (X) 3{s}"
+  call: "4{M}"
+  cond: "hcp >= 13 or hcp_in('{s}') >= 3"
+  forcing: SO
+  meaning: "Manche : 13+ H ou des honneurs dans la couleur de rencontre"
+  meaning_en: "Game: 13+ HCP or honours in the fit-showing suit"
+  status: infere
+  trump: "{M}"
+- id: "renc.X.H.S.4M"
+  seq: "1H (X) 3S"
+  call: 4H
+  cond: "true"
+  forcing: SO
+  meaning: "Manche : le retour à 3♥ est impossible sous 3♠"
+  meaning_en: "Game: a return to 3♥ is impossible below 3♠"
+  status: infere
+  trump: H
+- id: "renc.X.{M}.{s}.3M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (X) 3{s}"
+  call: "3{M}"
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum, peu de valeurs dans la couleur de rencontre : retour à l'atout"
+  meaning_en: "Minimum, little in the fit-showing suit: back to the trump suit"
+  status: infere
+- id: "renc.X.{M}.{s}.3M.4M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (X) 3{s} 3{M}"
+  call: "4{M}"
+  cond: "hld >= 13"
+  forcing: SO
+  meaning: "Manche malgré le minimum de l'ouvreur"
+  meaning_en: "Game despite opener's minimum"
+  status: infere
+- id: "renc.X.{M}.{s}.3M.p"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (X) 3{s} 3{M}"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Partielle"
+  meaning_en: "Part score"
+  status: infere
 - id: "truscott.{M}"
   for: [{M: H}, {M: S}]
   seq: "1{M} (X)"
@@ -4069,6 +4221,65 @@
   forcing: NF
   meaning: "Passe (réponses naturelles non codées)"
   meaning_en: "Pass (natural answers not coded)"
+  status: infere
+# --- Rencontre après l'intervention à 1SA de l'adversaire : le même saut à 3 qu'après le contre (le contre est punitif)
+# en: Fit-showing jump after the opponents' 1NT overcall: the same three-level jump as after a double (the double is for penalties)
+- id: "renc.N.{M}.{s}"
+  for: [{M: S, s: C, ms: "♠", ss: "♣"}, {M: S, s: D, ms: "♠", ss: "♦"}, {M: S, s: H, ms: "♠", ss: "♥"}, {M: H, s: C, ms: "♥", ss: "♣"}, {M: H, s: D, ms: "♥", ss: "♦"}, {M: H, s: S, ms: "♥", ss: "♠"}]
+  seq: "1{M} (1NT)"
+  call: "3{s}"
+  cond: "{M} >= 4 and {s} >= 5 and hcp_in('{s}') >= 3 and hld >= 11"
+  forcing: F1
+  meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {ss}, 11+ HLD"
+  meaning_en: "Fit-showing jump: four {ms} and a good five-card {ss} suit, 11+ HLD"
+  status: sef
+  alert: true
+  trump: "{M}"
+- id: "renc.N.{M}.{s}.4M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (1NT) 3{s}"
+  call: "4{M}"
+  cond: "hcp >= 13 or hcp_in('{s}') >= 3"
+  forcing: SO
+  meaning: "Manche : 13+ H ou des honneurs dans la couleur de rencontre"
+  meaning_en: "Game: 13+ HCP or honours in the fit-showing suit"
+  status: infere
+  trump: "{M}"
+- id: "renc.N.H.S.4M"
+  seq: "1H (1NT) 3S"
+  call: 4H
+  cond: "true"
+  forcing: SO
+  meaning: "Manche : le retour à 3♥ est impossible sous 3♠"
+  meaning_en: "Game: a return to 3♥ is impossible below 3♠"
+  status: infere
+  trump: H
+- id: "renc.N.{M}.{s}.3M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (1NT) 3{s}"
+  call: "3{M}"
+  cond: "true"
+  forcing: NF
+  meaning: "Minimum, peu de valeurs dans la couleur de rencontre : retour à l'atout"
+  meaning_en: "Minimum, little in the fit-showing suit: back to the trump suit"
+  status: infere
+- id: "renc.N.{M}.{s}.3M.4M"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (1NT) 3{s} 3{M}"
+  call: "4{M}"
+  cond: "hld >= 13"
+  forcing: SO
+  meaning: "Manche malgré le minimum de l'ouvreur"
+  meaning_en: "Game despite opener's minimum"
+  status: infere
+- id: "renc.N.{M}.{s}.3M.p"
+  for: [{M: S, s: C}, {M: S, s: D}, {M: S, s: H}, {M: H, s: C}, {M: H, s: D}]
+  seq: "1{M} (1NT) 3{s} 3{M}"
+  call: P
+  cond: "true"
+  forcing: NF
+  meaning: "Partielle"
+  meaning_en: "Part score"
   status: infere
 - id: "spoutnik.{o}.1S"
   for: [{o: 1C}, {o: 1D}]
@@ -4790,6 +5001,29 @@
 # en: Major: 2NT = fit, 11-15 HLD; cue-bid = four trumps and 16+ HLD (game forcing); simple raise 6-10 HLD. Minor: five trumps.
 # Contre = Spoutnik (majeure(s) 4e non nommée(s)) ; couleur nouvelle naturelle et forcing ; SA avec l'arrêt.
 # en: Double = Sputnik (four cards in the unbid major(s)); new suit natural and forcing; NT with a stopper.
+# --- Rencontre après une intervention à la couleur : saut à 4 dans une autre couleur (4 atouts et une belle couleur au moins 5e) ; au palier de 3, un changement de couleur à saut est un barrage naturel
+# en: Fit-showing jump after a suit overcall: a jump to four in another suit (four-card support and a good suit of at least five cards); at the three level, a jump shift is a natural preempt
+- id: "renc.o.{x}.{y}.{s}"
+  for: [{x: 1S, y: 2C, M: S, s: D, ms: "♠", ss: "♦"}, {x: 1S, y: 2C, M: S, s: H, ms: "♠", ss: "♥"}, {x: 1S, y: 2D, M: S, s: C, ms: "♠", ss: "♣"}, {x: 1S, y: 2D, M: S, s: H, ms: "♠", ss: "♥"}, {x: 1S, y: 2H, M: S, s: C, ms: "♠", ss: "♣"}, {x: 1S, y: 2H, M: S, s: D, ms: "♠", ss: "♦"}, {x: 1H, y: 2C, M: H, s: D, ms: "♥", ss: "♦"}, {x: 1H, y: 2D, M: H, s: C, ms: "♥", ss: "♣"}, {x: 1H, y: 2S, M: H, s: C, ms: "♥", ss: "♣"}, {x: 1H, y: 2S, M: H, s: D, ms: "♥", ss: "♦"}]
+  seq: "{x} ({y})"
+  call: "4{s}"
+  cond: "{M} >= 4 and {s} >= 5 and hcp_in('{s}') >= 3 and hld >= 12"
+  forcing: FM
+  meaning: "Rencontre : 4 atouts {ms} et belle couleur 5e à {ss}, 12+ HLD"
+  meaning_en: "Fit-showing jump: four {ms} and a good five-card {ss} suit, 12+ HLD"
+  status: sef
+  alert: true
+  trump: "{M}"
+- id: "renc.o.{x}.{y}.{s}.4M"
+  for: [{x: 1S, y: 2C, M: S, s: D}, {x: 1S, y: 2C, M: S, s: H}, {x: 1S, y: 2D, M: S, s: C}, {x: 1S, y: 2D, M: S, s: H}, {x: 1S, y: 2H, M: S, s: C}, {x: 1S, y: 2H, M: S, s: D}, {x: 1H, y: 2C, M: H, s: D}, {x: 1H, y: 2D, M: H, s: C}, {x: 1H, y: 2S, M: H, s: C}, {x: 1H, y: 2S, M: H, s: D}]
+  seq: "{x} ({y}) 4{s}"
+  call: "4{M}"
+  cond: "true"
+  forcing: SO
+  meaning: "La rencontre est forcing de manche : 4 dans la majeure"
+  meaning_en: "The fit-showing jump is game forcing: four of the major"
+  status: infere
+  trump: "{M}"
 - id: "rep.{x}.{y}.cue"
   for: [{x: 1H, y: 1S, xs: H, cue: 2S}, {x: 1H, y: 2C, xs: H, cue: 3C}, {x: 1H, y: 2D, xs: H, cue: 3D}, {x: 1S, y: 2C, xs: S, cue: 3C},
         {x: 1S, y: 2D, xs: S, cue: 3D}, {x: 1S, y: 2H, xs: S, cue: 3H}, {x: 1H, y: 2S, xs: H, cue: 3S}]

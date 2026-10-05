@@ -297,7 +297,10 @@
     </nav>
 
     <section class="panel" id="input-panel">
-      <h2><span data-i18n="dealPanel">Donne</span> <span id="file-name" class="file-name"></span></h2>
+      <!-- Le titre « Donne » ne s'affiche plus : la table parle d'elle-même.
+           Il reste pour les lecteurs d'écran. Le nom du fichier ou du thème
+           chargé, lui, reste visible quand il y en a un (voir style.css). -->
+      <h2 class="deal-title"><span class="sr-only" data-i18n="dealPanel">Donne</span> <span id="file-name" class="file-name"></span></h2>
       <!-- Le thème d'où « Donne aléatoire » tire ses donnes, tant qu'il y en a
            un : son nom, son nombre de donnes, de quoi en changer ou revenir aux
            donnes distribuées au hasard. Rempli par renderRandomSource. -->

@@ -1661,8 +1661,8 @@ async function renderTrainDealsCount() {
   const run = ++trainDealsRun;
   const files = themeFiles || await loadThemeIndex();
   if (run !== trainDealsRun) return;
-  const counted = files.filter((th) => th.deals > 0);
-  const total = counted.reduce((n, th) => n + th.deals, 0);
+  const counted = files.filter((th) => th.dealCount > 0);
+  const total = counted.reduce((n, th) => n + th.dealCount, 0);
   const t = UI_TEXT[$("#lang").value];
   const el = $("#train-deals-count");
   // Le nombre de thèmes à part : sur téléphone, la pastille n'a de place que
@@ -1705,8 +1705,10 @@ async function loadThemeIndex() {
       const title = f && typeof f === "object" && (f.fr || f.en) ? { fr: f.fr, en: f.en } : null;
       // « deals » : le nombre de donnes d'entraînement du fichier, tenu à jour
       // par le test TestThemeIndexDealCounts (voir renderTrainDealsCount).
-      const deals = f && Number.isInteger(f.deals) ? f.deals : null;
-      out.push({ file, dir, title, deals, text: null, pending: null });
+      // Gardé sous dealCount : th.deals est la liste des donnes lues du
+      // fichier (voir themeDeals), qu'un nombre rendait inutilisable.
+      const dealCount = f && Number.isInteger(f.deals) ? f.deals : null;
+      out.push({ file, dir, title, dealCount, text: null, pending: null });
     }
     return out;
   } catch (err) {

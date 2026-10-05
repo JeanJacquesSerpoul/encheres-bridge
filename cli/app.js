@@ -6516,8 +6516,8 @@ helpDialog.addEventListener("click", (ev) => {
 // une étape ajoutée ici demande sa scène là-bas.
 const TUTORIAL_STEPS = [
   {
-    fr: ["L'écran", "À gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, deux onglets : Enchères et PAR.\nEn haut, la roue dentée ouvre les réglages, l'écran ▶ ce tutoriel et ? le mode d'emploi."],
-    en: ["The screen", "On the left, the table: the deal and the buttons that create or change it.\nOn the right, two tabs: Auction and Par.\nAt the top, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
+    fr: ["L'écran", "En haut, deux cartes : Simuler les enchères (la table) et S'entraîner.\nÀ gauche, la table : la donne et les boutons qui la font naître ou la modifient.\nÀ droite, deux onglets : Enchères et PAR.\nDans le bandeau, la roue dentée ouvre les réglages, l'écran ▶ ce tutoriel et ? le mode d'emploi."],
+    en: ["The screen", "At the top, two cards: Simulate auctions (the table) and Practise.\nOn the left, the table: the deal and the buttons that create or change it.\nOn the right, two tabs: Auction and Par.\nIn the top bar, the cog opens the settings, the ▶ screen this tutorial and ? the guide."],
   },
   {
     fr: ["Obtenir une donne", "Donne aléatoire tire une donne complète, distribuée au hasard.\nLa flèche à côté propose les donnes thématiques ou un fichier .pbn (un fichier de tournoi aussi : un sélecteur choisit alors la donne).\nUn thème choisi, ou « Toutes », fait tirer Donne aléatoire parmi ses donnes, sans répétition ; « Aucune » revient au hasard."],
@@ -6556,8 +6556,8 @@ const TUTORIAL_STEPS = [
     en: ["The par", "The Par tab gives the tricks each side makes in each denomination, cards face up (double dummy).\nHover or tap a cell: the leads that hold declarer to that number of tricks, and what the others cost."],
   },
   {
-    fr: ["S'entraîner", "Le bouton S'entraîner, dans son bloc sous la donne : choisissez les donnes (Tous les thèmes ou Un thème), puis votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont celles des fichiers PBN du système qui portent leur enchère : l'enchère, ses commentaires et le contrat viennent du fichier, et le moteur n'est pas appelé. Un thème sans aucune donne de ce genre s'annonce et ne se choisit pas.\nVous ne voyez que votre main."],
-    en: ["Practise", "The Practise button, in its own block under the deal: choose the deals (All topics or One topic), then your hand (North, East, South or West).\nThe deals are those of the system's PBN files that carry their auction: the auction, its comments and the contract come from the file, and the engine is not called. A topic with no such deal says so and cannot be chosen.\nYou only see your own hand."],
+    fr: ["S'entraîner", "La carte S'entraîner, en haut de la page (avec le nombre de donnes disponibles) : choisissez les donnes (Tous les thèmes ou Un thème), puis votre main (Nord, Est, Sud ou Ouest).\nLes donnes sont celles des fichiers PBN du système qui portent leur enchère : l'enchère, ses commentaires et le contrat viennent du fichier, et le moteur n'est pas appelé. Un thème sans aucune donne de ce genre s'annonce et ne se choisit pas.\nVous ne voyez que votre main."],
+    en: ["Practise", "The Practise card, at the top of the page (with the number of deals available): choose the deals (All topics or One topic), then your hand (North, East, South or West).\nThe deals are those of the system's PBN files that carry their auction: the auction, its comments and the contract come from the file, and the engine is not called. A topic with no such deal says so and cannot be chosen.\nYou only see your own hand."],
   },
   {
     fr: ["La table", "Votre main en bas, les trois autres dos tournés ; au centre la boîte des enchères, sièges vulnérables en rouge. Les enchères des autres arrivent d'elles-mêmes.\nÀ votre tour, la boîte à enchères : un palier (1 à 7), puis une couleur ou SA ; ou Passe, X (contre), XX (surcontre). Au clavier : 1 à 7, puis C D H S N, P, X."],

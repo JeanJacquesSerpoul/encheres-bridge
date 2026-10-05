@@ -1,13 +1,13 @@
 {
  "deals": 12000,
- "totalImp": 58848,
- "meanImp": 4.904,
+ "totalImp": 58801,
+ "meanImp": 4.9,
  "cats": [
   3042,
-  6709,
+  6705,
   62,
   1384,
-  2002,
+  1998,
   2200
  ],
  "forcingGaps": 0

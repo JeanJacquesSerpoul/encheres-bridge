@@ -1,0 +1,891 @@
+% Titre-FR: Texas mineurs
+% Titre-EN: Minor-suit transfers
+
+[Event "Entrainement Texas mineurs - Donne 1"]
+[Board "1"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AJT.Q865.AJ.KJ52 K976.J74.73.T876 853.AK3.KQT984.4 Q42.T92.652.AQ93"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 3-4-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 3-4-2-4.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 12H (14 HL), 3-3-6-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 12 HCP (14 HL), 3-3-6-1.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (15 HL), 3-4-2-4. | Corrects the Texas ♦. Here 16 HCP (15 HL), 3-4-2-4.} Pass 4C {6♦ et courte ♣, espoir de chelem. Ici 12H (14 HL), 3-3-6-1. | 6♦ and short ♣, slam interest. Here 12 HCP (14 HL), 3-3-6-1.} Pass
+5D {Conclusion minimale. Ici 16H (15 HL), 3-4-2-4. | Minimal signoff. Here 16 HCP (15 HL), 3-4-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 12H (14 HL), 3-3-6-1. | Final contract reached (default). Here 12 HCP (14 HL), 3-3-6-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 2"]
+[Board "2"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:J76.KQ6.KJT.AQ95 KQ42.853.9432.86 A.97.Q876.KJT743 T9853.AJT42.A5.2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-3-4.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (11 HL), 1-2-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (11 HL), 1-2-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 3-3-3-4. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 3-3-3-4.} Pass 3S {Courte dans la couleur nommee. Ici 10H (11 HL), 1-2-4-6. | Shortness in the suit named. Here 10 HCP (11 HL), 1-2-4-6.} Pass
+5C {Manche a ♣. Ici 16H (16 HL), 3-3-3-4. | Game in ♣. Here 16 HCP (16 HL), 3-3-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 1-2-4-6. | Final contract reached (default). Here 10 HCP (11 HL), 1-2-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 3"]
+[Board "3"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:K98.AQ432.KT4.K9 T762.T98.Q53.A63 J4.KJ7.6.QJT7542 AQ53.65.AJ9872.8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-5-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 8H (11 HL), 2-3-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 8 HCP (11 HL), 2-3-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (16 HL), 3-5-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (16 HL), 3-5-3-2.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 8H (11 HL), 2-3-1-7. | Shortness in the other minor (♦). Here 8 HCP (11 HL), 2-3-1-7.} Pass
+5C {Manche a ♣. Ici 15H (16 HL), 3-5-3-2. | Game in ♣. Here 15 HCP (16 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 8H (11 HL), 2-3-1-7. | Final contract reached (default). Here 8 HCP (11 HL), 2-3-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 4"]
+[Board "4"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:763.AQ932.A94.KQ J92.7654.JT86.76 4..K532.AJT95432 AKQT85.KJT8.Q7.8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-5-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 8H (12 HL), 1-0-4-8. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 8 HCP (12 HL), 1-0-4-8.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-5-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-5-3-2.} Pass 3H {Courte dans la couleur nommee. Ici 8H (12 HL), 1-0-4-8. | Shortness in the suit named. Here 8 HCP (12 HL), 1-0-4-8.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (15 HL), 3-5-3-2. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (15 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 8H (12 HL), 1-0-4-8. | Final contract reached (default). Here 8 HCP (12 HL), 1-0-4-8.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 5"]
+[Board "5"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQ7.QJ73.K62.KQ3 T6.KT862.AQJ84.5 4.A95.975.JT9876 AJ98532.4.T3.A42"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-4-3-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 5H (5 HL), 1-3-3-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 5 HCP (5 HL), 1-3-3-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 3-4-3-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 3-4-3-3.} Pass Pass {Faible : pour jouer 3♣. Ici 5H (5 HL), 1-3-3-6. | Weak: to play 3♣. Here 5 HCP (5 HL), 1-3-3-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 6"]
+[Board "6"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:KQ52.AKT.A975.73 JT863.QJ7.JT83.T A9.943.Q.KJ98654 74.8652.K642.AQ2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-4-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (12 HL), 2-3-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (12 HL), 2-3-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 4-3-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 4-3-4-2.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 10H (12 HL), 2-3-1-7. | Shortness in the other minor (♦). Here 10 HCP (12 HL), 2-3-1-7.} Pass
+5C {Manche a ♣. Ici 16H (16 HL), 4-3-4-2. | Game in ♣. Here 16 HCP (16 HL), 4-3-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 2-3-1-7. | Final contract reached (default). Here 10 HCP (12 HL), 2-3-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 7"]
+[Board "7"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:K642.AT87.A4.KQ6 853.KJ5.2.A97542 Q7.92.KQJ97653.T AJT9.Q643.T8.J83"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-2-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 8H (12 HL), 2-2-8-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 8 HCP (12 HL), 2-2-8-1.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 4-4-2-3. | Corrects the Texas ♦. Here 16 HCP (16 HL), 4-4-2-3.} Pass 4C {6♦ et courte ♣, espoir de chelem. Ici 8H (12 HL), 2-2-8-1. | 6♦ and short ♣, slam interest. Here 8 HCP (12 HL), 2-2-8-1.} Pass
+5D {Conclusion minimale. Ici 16H (16 HL), 4-4-2-3. | Minimal signoff. Here 16 HCP (16 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (12 HL), 2-2-8-1. | Final contract reached (default). Here 8 HCP (12 HL), 2-2-8-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 8"]
+[Board "8"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q43.AQ3.AQJ87.53 T8.T98754.T94.K9 6.K62.632.AQJT62 AKJ9752.J.K5.874"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 3-3-5-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 3-3-5-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (12 HL), 1-3-3-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (12 HL), 1-3-3-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (16 HL), 3-3-5-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (16 HL), 3-3-5-2.} Pass 3S {Courte dans la couleur nommee. Ici 10H (12 HL), 1-3-3-6. | Shortness in the suit named. Here 10 HCP (12 HL), 1-3-3-6.} Pass
+5C {Manche a ♣. Ici 15H (16 HL), 3-3-5-2. | Game in ♣. Here 15 HCP (16 HL), 3-3-5-2.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 1-3-3-6. | Final contract reached (default). Here 10 HCP (12 HL), 1-3-3-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 9"]
+[Board "9"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:Q72.AQ974.KQ4.K7 KJT986.T6.J52.T5 4.J83.83.AQJ9832 A53.K52.AT976.64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-5-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 8H (11 HL), 1-3-2-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 8 HCP (11 HL), 1-3-2-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (17 HL), 3-5-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (17 HL), 3-5-3-2.} Pass 3S {Courte dans la couleur nommee. Ici 8H (11 HL), 1-3-2-7. | Shortness in the suit named. Here 8 HCP (11 HL), 1-3-2-7.} Pass
+5C {Manche a ♣. Ici 16H (17 HL), 3-5-3-2. | Game in ♣. Here 16 HCP (17 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 8H (11 HL), 1-3-2-7. | Final contract reached (default). Here 8 HCP (11 HL), 1-3-2-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 10"]
+[Board "10"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:K64.KJT84.KQ.QJ2 JT853.A3.AJ965.5 Q92.72.3.AKT9743 A7.Q965.T8742.86"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-5-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-5-2-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 9H (12 HL), 3-2-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 9 HCP (12 HL), 3-2-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-5-2-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-5-2-3.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 9H (12 HL), 3-2-1-7. | Shortness in the other minor (♦). Here 9 HCP (12 HL), 3-2-1-7.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 3-5-2-3. | Game in ♣. Here 15 HCP (15 HL), 3-5-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (12 HL), 3-2-1-7. | Final contract reached (default). Here 9 HCP (12 HL), 3-2-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 11"]
+[Board "11"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:854.AKJ73.A74.A6 AK2.8654.J83.974 Q.9.KT95.KQJT532 JT9763.QT2.Q62.8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-5-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 11H (13 HL), 1-1-4-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 11 HCP (13 HL), 1-1-4-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (17 HL), 3-5-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (17 HL), 3-5-3-2.} Pass 3H {Courte dans la couleur nommee. Ici 11H (13 HL), 1-1-4-7. | Shortness in the suit named. Here 11 HCP (13 HL), 1-1-4-7.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 16H (17 HL), 3-5-3-2. | Stop (points wasted) in the short suit: 3NT. Here 16 HCP (17 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 11H (13 HL), 1-1-4-7. | Final contract reached (default). Here 11 HCP (13 HL), 1-1-4-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 12"]
+[Board "12"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:A854.93.AK73.A92 J72.Q64.Q6542.53 KQ9.AK8.J.KQJT87 T63.JT752.T98.64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-2-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-2-4-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 19H (20 HL), 3-3-1-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 19 HCP (20 HL), 3-3-1-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 4-2-4-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 4-2-4-3.} Pass 4D {6♣ et singleton ♦. Ici 19H (20 HL), 3-3-1-6. | 6♣ and singleton ♦. Here 19 HCP (20 HL), 3-3-1-6.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 4-2-4-3. | Game in ♣. Here 15 HCP (15 HL), 4-2-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 19H (20 HL), 3-3-1-6. | Final contract reached (default). Here 19 HCP (20 HL), 3-3-1-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 13"]
+[Board "13"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKJ9.KQ65.K84.T4 Q2.832.A7653.Q73 874.AJ.9.AKJ9865 T653.T974.QJT2.2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 13H (15 HL), 3-2-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 13 HCP (15 HL), 3-2-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 4-4-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 4-4-3-2.} Pass 4D {6♣ et singleton ♦. Ici 13H (15 HL), 3-2-1-7. | 6♣ and singleton ♦. Here 13 HCP (15 HL), 3-2-1-7.} Pass
+5C {Manche a ♣. Ici 16H (16 HL), 4-4-3-2. | Game in ♣. Here 16 HCP (16 HL), 4-4-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 13H (15 HL), 3-2-1-7. | Final contract reached (default). Here 13 HCP (15 HL), 3-2-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 14"]
+[Board "14"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKQJ9.A83.JT6.J9 2.J742.Q9854.AT6 764.T.A32.K75432 T853.KQ965.K7.Q8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 5-3-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 5-3-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 7H (7 HL), 3-1-3-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 7 HCP (7 HL), 3-1-3-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (17 HL), 5-3-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (17 HL), 5-3-3-2.} Pass Pass {Faible : pour jouer 3♣. Ici 7H (7 HL), 3-1-3-6. | Weak: to play 3♣. Here 7 HCP (7 HL), 3-1-3-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 15"]
+[Board "15"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:QJ.AQ84.QJ2.A643 KT842.K97.653.KQ 75.3.AT84.T98752 A963.JT652.K97.J"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 2-4-3-4.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 4H (4 HL), 2-1-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 4 HCP (4 HL), 2-1-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (15 HL), 2-4-3-4. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (15 HL), 2-4-3-4.} Pass Pass {Faible : pour jouer 3♣. Ici 4H (4 HL), 2-1-4-6. | Weak: to play 3♣. Here 4 HCP (4 HL), 2-1-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 16"]
+[Board "16"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AJ9.KJ9.Q54.AJ92 Q87642.842.2.KQ3 K3.Q73.JT9876.84 T5.AT65.AK3.T765"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-3-3-4.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 6H (6 HL), 2-3-6-2. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 6 HCP (6 HL), 2-3-6-2.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 3-3-3-4. | Corrects the Texas ♦. Here 16 HCP (16 HL), 3-3-3-4.} Pass Pass {Faible : pour jouer 3♦. Ici 6H (6 HL), 2-3-6-2. | Weak: to play 3♦. Here 6 HCP (6 HL), 2-3-6-2.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 17"]
+[Board "17"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK95.A85.A2.QT42 62.KQJT974.43.87 J4.6.K976.AJ9653 QT873.32.QJT85.K"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-3-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-3-2-4.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 9H (11 HL), 2-1-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 9 HCP (11 HL), 2-1-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 17H (17 HL), 4-3-2-4. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 17 HCP (17 HL), 4-3-2-4.} Pass 3H {Courte dans la couleur nommee. Ici 9H (11 HL), 2-1-4-6. | Shortness in the suit named. Here 9 HCP (11 HL), 2-1-4-6.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 17H (17 HL), 4-3-2-4. | Stop (points wasted) in the short suit: 3NT. Here 17 HCP (17 HL), 4-3-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 9H (11 HL), 2-1-4-6. | Final contract reached (default). Here 9 HCP (11 HL), 2-1-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 18"]
+[Board "18"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A9853.Q2.AQT.QJ6 KT64.97654.K97.9 J2.KT3..AKT87543 Q7.AJ8.J865432.2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-2-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-2-3-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 11H (15 HL), 2-3-0-8. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 11 HCP (15 HL), 2-3-0-8.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 5-2-3-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 5-2-3-3.} Pass 4D {6♣ et singleton ♦. Ici 11H (15 HL), 2-3-0-8. | 6♣ and singleton ♦. Here 11 HCP (15 HL), 2-3-0-8.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 5-2-3-3. | Game in ♣. Here 15 HCP (15 HL), 5-2-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (15 HL), 2-3-0-8. | Final contract reached (default). Here 11 HCP (15 HL), 2-3-0-8.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 19"]
+[Board "19"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AQ84.K76.KQ98.Q9 JT9532.T2.7.A743 6.A.AJT532.KJT85 K7.QJ98543.64.62"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-4-2.} Pass 2S {Texas ♣ (bicolore mineur 5/5 de manche : ♦ annonces ensuite). Ici 13H (15 HL), 1-1-6-5. | Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next). Here 13 HCP (15 HL), 1-1-6-5.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 4-3-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 4-3-4-2.} Pass 3D {Bicolore mineur 5/5 de manche. Ici 13H (15 HL), 1-1-6-5. | Game-going 5/5 minor two-suiter. Here 13 HCP (15 HL), 1-1-6-5.} Pass
+3NT {Arrets majeurs : 3SA. Ici 16H (16 HL), 4-3-4-2. | Major-suit stoppers: 3NT. Here 16 HCP (16 HL), 4-3-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 13H (15 HL), 1-1-6-5. | Final contract reached (default). Here 13 HCP (15 HL), 1-1-6-5.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 20"]
+[Board "20"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:K53.K754.AK98.Q3 J7.T86.JT432.986 Q92.AQJ.7.KJT542 AT864.932.Q65.A7"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 13H (15 HL), 3-3-1-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 13 HCP (15 HL), 3-3-1-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-4-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-4-4-2.} Pass 4D {6♣ et singleton ♦. Ici 13H (15 HL), 3-3-1-6. | 6♣ and singleton ♦. Here 13 HCP (15 HL), 3-3-1-6.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 3-4-4-2. | Game in ♣. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 13H (15 HL), 3-3-1-6. | Final contract reached (default). Here 13 HCP (15 HL), 3-3-1-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 21"]
+[Board "21"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AKQ3.A842.Q9.JT4 72.53.KJ8742.865 J95..AT53.KQ9732 T864.KQJT976.6.A"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-2-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (12 HL), 3-0-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (12 HL), 3-0-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 4-4-2-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 4-4-2-3.} Pass 3H {Courte dans la couleur nommee. Ici 10H (12 HL), 3-0-4-6. | Shortness in the suit named. Here 10 HCP (12 HL), 3-0-4-6.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 16H (16 HL), 4-4-2-3. | Stop (points wasted) in the short suit: 3NT. Here 16 HCP (16 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 3-0-4-6. | Final contract reached (default). Here 10 HCP (12 HL), 3-0-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 22"]
+[Board "22"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:Q8.AKJ8.AK75.T42 K975.T763.J84.J6 632.542.6.AKQ753 AJT4.Q9.QT932.98"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 2-4-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 2-4-4-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 9H (11 HL), 3-3-1-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 9 HCP (11 HL), 3-3-1-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 17H (17 HL), 2-4-4-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 17 HCP (17 HL), 2-4-4-3.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 9H (11 HL), 3-3-1-6. | Shortness in the other minor (♦). Here 9 HCP (11 HL), 3-3-1-6.} Pass
+5C {Manche a ♣. Ici 17H (17 HL), 2-4-4-3. | Game in ♣. Here 17 HCP (17 HL), 2-4-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 9H (11 HL), 3-3-1-6. | Final contract reached (default). Here 9 HCP (11 HL), 3-3-1-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 23"]
+[Board "23"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:9874.AKJ9.A43.A6 JT652.764.K.K852 .QT5.T875.QJT974 AKQ3.832.QJ962.3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-4-3-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 5H (7 HL), 0-3-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 5 HCP (7 HL), 0-3-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (16 HL), 4-4-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (16 HL), 4-4-3-2.} Pass Pass {Faible : pour jouer 3♣. Ici 5H (7 HL), 0-3-4-6. | Weak: to play 3♣. Here 5 HCP (7 HL), 0-3-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 24"]
+[Board "24"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A7.KQJ4.T74.AJT4 QJ932.A53.532.87 K.T87.AKJ986.Q53 T8654.962.Q.K962"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 2-4-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 2-4-3-4.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 13H (14 HL), 1-3-6-3. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 13 HCP (14 HL), 1-3-6-3.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (15 HL), 2-4-3-4. | Corrects the Texas ♦. Here 15 HCP (15 HL), 2-4-3-4.} Pass 4D {6♦ sans courte. Ici 13H (14 HL), 1-3-6-3. | 6♦ without shortness. Here 13 HCP (14 HL), 1-3-6-3.} Pass
+5D {Conclusion minimale. Ici 15H (15 HL), 2-4-3-4. | Minimal signoff. Here 15 HCP (15 HL), 2-4-3-4.} Pass Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 1-3-6-3. | Final contract reached (default). Here 13 HCP (14 HL), 1-3-6-3.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 25"]
+[Board "25"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:A85.AK43.AT5.Q97 K42.Q.QJ843.KT32 96.T.K9762.AJ654 QJT73.J987652..8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2S {Texas ♣ (bicolore mineur 5/5 de manche : ♦ annonces ensuite). Ici 8H (9 HL), 2-1-5-5. | Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next). Here 8 HCP (9 HL), 2-1-5-5.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 17H (17 HL), 3-4-3-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 17 HCP (17 HL), 3-4-3-3.} Pass 3D {Bicolore mineur 5/5 de manche. Ici 8H (9 HL), 2-1-5-5. | Game-going 5/5 minor two-suiter. Here 8 HCP (9 HL), 2-1-5-5.} Pass
+3NT {Arrets majeurs : 3SA. Ici 17H (17 HL), 3-4-3-3. | Major-suit stoppers: 3NT. Here 17 HCP (17 HL), 3-4-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 2-1-5-5. | Final contract reached (default). Here 8 HCP (9 HL), 2-1-5-5.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 26"]
+[Board "26"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:K865.KQ6.KJ7.A85 3.AJ872.Q5.QT743 J97.T93.T98632.K AQT42.54.A4.J962"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-3-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 4H (3 HL), 3-3-6-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 4 HCP (3 HL), 3-3-6-1.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 4-3-3-3. | Corrects the Texas ♦. Here 16 HCP (16 HL), 4-3-3-3.} Pass Pass {Faible : pour jouer 3♦. Ici 4H (3 HL), 3-3-6-1. | Weak: to play 3♦. Here 4 HCP (3 HL), 3-3-6-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 27"]
+[Board "27"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKT6.AT73.654.KQ 432.KQJ82.QT7.92 5.4.AK982.A87653 QJ987.965.J3.JT4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (15 HL), 4-4-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (15 HL), 4-4-3-2.} Pass 2S {Texas ♣ (bicolore mineur 5/5 de manche : ♦ annonces ensuite). Ici 11H (12 HL), 1-1-5-6. | Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next). Here 11 HCP (12 HL), 1-1-5-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (15 HL), 4-4-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (15 HL), 4-4-3-2.} Pass 3D {Bicolore mineur 5/5 de manche. Ici 11H (12 HL), 1-1-5-6. | Game-going 5/5 minor two-suiter. Here 11 HCP (12 HL), 1-1-5-6.} Pass
+3NT {Arrets majeurs : 3SA. Ici 16H (15 HL), 4-4-3-2. | Major-suit stoppers: 3NT. Here 16 HCP (15 HL), 4-4-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 11H (12 HL), 1-1-5-6. | Final contract reached (default). Here 11 HCP (12 HL), 1-1-5-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 28"]
+[Board "28"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KJ7.AKQJ.K54.976 AQ653.T7.J3.QJT4 84.5.98762.AK852 T92.986432.AQT.3"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-4-3-3.} Pass 2S {Texas ♣ (bicolore mineur 5/5 de manche : ♦ annonces ensuite). Ici 7H (8 HL), 2-1-5-5. | Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next). Here 7 HCP (8 HL), 2-1-5-5.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 17H (17 HL), 3-4-3-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 17 HCP (17 HL), 3-4-3-3.} Pass 3D {Bicolore mineur 5/5 de manche. Ici 7H (8 HL), 2-1-5-5. | Game-going 5/5 minor two-suiter. Here 7 HCP (8 HL), 2-1-5-5.} Pass
+3NT {Arrets majeurs : 3SA. Ici 17H (17 HL), 3-4-3-3. | Major-suit stoppers: 3NT. Here 17 HCP (17 HL), 3-4-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 7H (8 HL), 2-1-5-5. | Final contract reached (default). Here 7 HCP (8 HL), 2-1-5-5.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 29"]
+[Board "29"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AJT3.AJ64.96.AK4 Q852.Q95.4.QT532 97.T87.AKQJT752. K64.K32.83.J9876"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-4-2-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 10H (14 HL), 2-3-8-0. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 10 HCP (14 HL), 2-3-8-0.} Pass
+3D {Rectifie le Texas ♦. Ici 17H (17 HL), 4-4-2-3. | Corrects the Texas ♦. Here 17 HCP (17 HL), 4-4-2-3.} Pass 4C {6♦ et courte ♣, espoir de chelem. Ici 10H (14 HL), 2-3-8-0. | 6♦ and short ♣, slam interest. Here 10 HCP (14 HL), 2-3-8-0.} Pass
+5D {Conclusion minimale. Ici 17H (17 HL), 4-4-2-3. | Minimal signoff. Here 17 HCP (17 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (14 HL), 2-3-8-0. | Final contract reached (default). Here 10 HCP (14 HL), 2-3-8-0.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 30"]
+[Board "30"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A74.A987.K9.KJ53 JT83.6432.J.9876 5.JT5.QT86542.T2 KQ962.KQ.A73.AQ4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-2-4.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 3H (3 HL), 1-3-7-2. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 3 HCP (3 HL), 1-3-7-2.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (15 HL), 3-4-2-4. | Corrects the Texas ♦. Here 15 HCP (15 HL), 3-4-2-4.} Pass Pass {Faible : pour jouer 3♦. Ici 3H (3 HL), 1-3-7-2. | Weak: to play 3♦. Here 3 HCP (3 HL), 1-3-7-2.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 31"]
+[Board "31"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q853.AT6.KQ3.KQ5 AKT.532.A72.AJT8 976.98.JT98654.4 J42.KQJ74..97632"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-3-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 1H (1 HL), 3-2-7-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 1 HCP (1 HL), 3-2-7-1.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 4-3-3-3. | Corrects the Texas ♦. Here 16 HCP (16 HL), 4-3-3-3.} Pass Pass {Faible : pour jouer 3♦. Ici 1H (1 HL), 3-2-7-1. | Weak: to play 3♦. Here 1 HCP (1 HL), 3-2-7-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 32"]
+[Board "32"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "All"]
+[Deal "S:AT4.AJ98.Q952.A9 875.Q532.KJT7.T5 6.T64.A43.KQJ832 KQJ932.K7.86.764"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (12 HL), 1-3-3-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (12 HL), 1-3-3-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-4-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-4-4-2.} Pass 3S {Courte dans la couleur nommee. Ici 10H (12 HL), 1-3-3-6. | Shortness in the suit named. Here 10 HCP (12 HL), 1-3-3-6.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (15 HL), 3-4-4-2. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 1-3-3-6. | Final contract reached (default). Here 10 HCP (12 HL), 1-3-3-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 33"]
+[Board "33"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:T9.AJ8.AKJ98.QT7 KJ8.T765.QT762.9 642.3.3.AKJ86543 AQ753.KQ942.54.2"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-5-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 8H (12 HL), 3-1-1-8. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 8 HCP (12 HL), 3-1-1-8.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (16 HL), 2-3-5-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (16 HL), 2-3-5-3.} Pass 3H {Courte dans la couleur nommee. Ici 8H (12 HL), 3-1-1-8. | Shortness in the suit named. Here 8 HCP (12 HL), 3-1-1-8.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (16 HL), 2-3-5-3. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (16 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (12 HL), 3-1-1-8. | Final contract reached (default). Here 8 HCP (12 HL), 3-1-1-8.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 34"]
+[Board "34"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:K97.QT5.AQ75.A72 J4.976432.K842.3 T85.AK.9.KQJT865 AQ632.J8.JT63.94"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-4-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-4-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 13H (15 HL), 3-2-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 13 HCP (15 HL), 3-2-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-3-4-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-3-4-3.} Pass 4D {6♣ et singleton ♦. Ici 13H (15 HL), 3-2-1-7. | 6♣ and singleton ♦. Here 13 HCP (15 HL), 3-2-1-7.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 3-3-4-3. | Game in ♣. Here 15 HCP (15 HL), 3-3-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 13H (15 HL), 3-2-1-7. | Final contract reached (default). Here 13 HCP (15 HL), 3-2-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 35"]
+[Board "35"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:98.KQ8.AQ864.AT7 7654.T95..KQ8532 AQ3.76.KJT7532.9 KJT2.AJ432.9.J64"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-5-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 10H (13 HL), 3-2-7-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 10 HCP (13 HL), 3-2-7-1.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (16 HL), 2-3-5-3. | Corrects the Texas ♦. Here 15 HCP (16 HL), 2-3-5-3.} Pass 4C {6♦ et courte ♣, espoir de chelem. Ici 10H (13 HL), 3-2-7-1. | 6♦ and short ♣, slam interest. Here 10 HCP (13 HL), 3-2-7-1.} Pass
+5D {Conclusion minimale. Ici 15H (16 HL), 2-3-5-3. | Minimal signoff. Here 15 HCP (16 HL), 2-3-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (13 HL), 3-2-7-1. | Final contract reached (default). Here 10 HCP (13 HL), 3-2-7-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 36"]
+[Board "36"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:KQJ7.K42.AJ43.J5 94.T975.KT98.863 53.Q63.72.AT9742 AT862.AJ8.Q65.KQ"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-3-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-3-4-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 6H (6 HL), 2-3-2-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 6 HCP (6 HL), 2-3-2-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 4-3-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 4-3-4-2.} Pass Pass {Faible : pour jouer 3♣. Ici 6H (6 HL), 2-3-2-6. | Weak: to play 3♣. Here 6 HCP (6 HL), 2-3-2-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 37"]
+[Board "37"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQJ5.AJ92.K2.T72 T942.763.AQT76.5 83.5.J983.AKQJ96 K76.KQT84.54.843"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-2-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 11H (13 HL), 2-1-4-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 11 HCP (13 HL), 2-1-4-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 4-4-2-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 4-4-2-3.} Pass 3H {Courte dans la couleur nommee. Ici 11H (13 HL), 2-1-4-6. | Shortness in the suit named. Here 11 HCP (13 HL), 2-1-4-6.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (15 HL), 4-4-2-3. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (15 HL), 4-4-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (13 HL), 2-1-4-6. | Final contract reached (default). Here 11 HCP (13 HL), 2-1-4-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 38"]
+[Board "38"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ93.AQ6.T3.KQT4 T6.KJ7532.8764.7 J75.8.AKQJ95.852 A842.T94.2.AJ963"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-2-4.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 11H (13 HL), 3-1-6-3. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 11 HCP (13 HL), 3-1-6-3.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 4-3-2-4. | Corrects the Texas ♦. Here 16 HCP (16 HL), 4-3-2-4.} Pass 4D {6♦ sans courte. Ici 11H (13 HL), 3-1-6-3. | 6♦ without shortness. Here 11 HCP (13 HL), 3-1-6-3.} Pass
+5D {Conclusion minimale. Ici 16H (16 HL), 4-3-2-4. | Minimal signoff. Here 16 HCP (16 HL), 4-3-2-4.} Pass Pass {Contrat final atteint (defaut). Ici 11H (13 HL), 3-1-6-3. | Final contract reached (default). Here 11 HCP (13 HL), 3-1-6-3.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 39"]
+[Board "39"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AK9.JT7.Q85.KQ92 82.Q942.T9763.73 T63.53.42.AJ8654 QJ754.AK86.AKJ.T"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-3-4.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 5H (7 HL), 3-2-2-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 5 HCP (7 HL), 3-2-2-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-3-3-4. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-3-3-4.} Pass Pass {Faible : pour jouer 3♣. Ici 5H (7 HL), 3-2-2-6. | Weak: to play 3♣. Here 5 HCP (7 HL), 3-2-2-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 40"]
+[Board "40"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:A74.A84.A9.KJT93 KT3.6532.JT8654. Q2.QT.2.AQ876542 J9865.KJ97.KQ73."]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 3-3-2-5.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (14 HL), 2-2-1-8. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (14 HL), 2-2-1-8.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 16H (17 HL), 3-3-2-5. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 16 HCP (17 HL), 3-3-2-5.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 10H (14 HL), 2-2-1-8. | Shortness in the other minor (♦). Here 10 HCP (14 HL), 2-2-1-8.} Pass
+5C {Manche a ♣. Ici 16H (17 HL), 3-3-2-5. | Game in ♣. Here 16 HCP (17 HL), 3-3-2-5.} Pass Pass {Contrat final atteint (defaut). Ici 10H (14 HL), 2-2-1-8. | Final contract reached (default). Here 10 HCP (14 HL), 2-2-1-8.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 41"]
+[Board "41"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AKT62.K62.J6.A82 J753.9843.KQ9.65 9.T5.A42.KQJ9743 Q84.AQJ7.T8753.T"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 5-3-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 5-3-2-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 10H (13 HL), 1-2-3-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 10 HCP (13 HL), 1-2-3-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (16 HL), 5-3-2-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (16 HL), 5-3-2-3.} Pass 3S {Courte dans la couleur nommee. Ici 10H (13 HL), 1-2-3-7. | Shortness in the suit named. Here 10 HCP (13 HL), 1-2-3-7.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (16 HL), 5-3-2-3. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (16 HL), 5-3-2-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (13 HL), 1-2-3-7. | Final contract reached (default). Here 10 HCP (13 HL), 1-2-3-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 42"]
+[Board "42"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:J5.KQJ.Q74.KQJ62 KQT8764.542.J6.5 A3.A.AT9532.9873 92.T98763.K8.AT4"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (16 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (16 HL), 2-3-3-5.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 12H (11 HL), 2-1-6-4. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 12 HCP (11 HL), 2-1-6-4.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (16 HL), 2-3-3-5. | Corrects the Texas ♦. Here 15 HCP (16 HL), 2-3-3-5.} Pass 4D {6♦ sans courte. Ici 12H (11 HL), 2-1-6-4. | 6♦ without shortness. Here 12 HCP (11 HL), 2-1-6-4.} Pass
+5D {Conclusion minimale. Ici 15H (16 HL), 2-3-3-5. | Minimal signoff. Here 15 HCP (16 HL), 2-3-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 12H (11 HL), 2-1-6-4. | Final contract reached (default). Here 12 HCP (11 HL), 2-1-6-4.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 43"]
+[Board "43"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQT.K643.AQ64.53 86432.QJ872.5.KJ J5.9.KJT832.A982 K97.AT5.97.QT764"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 9H (11 HL), 2-1-6-4. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 9 HCP (11 HL), 2-1-6-4.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (15 HL), 3-4-4-2. | Corrects the Texas ♦. Here 15 HCP (15 HL), 3-4-4-2.} Pass 4D {6♦ sans courte. Ici 9H (11 HL), 2-1-6-4. | 6♦ without shortness. Here 9 HCP (11 HL), 2-1-6-4.} Pass
+5D {Conclusion minimale. Ici 15H (15 HL), 3-4-4-2. | Minimal signoff. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 9H (11 HL), 2-1-6-4. | Final contract reached (default). Here 9 HCP (11 HL), 2-1-6-4.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 44"]
+[Board "44"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:QJ2.KT974.AQJ.Q2 AT763.532.97.KJ9 9.AQ.T6543.A8764 K854.J86.K82.T53"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-5-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-5-3-2.} Pass 2S {Texas ♣ (bicolore mineur 5/5 de manche : ♦ annonces ensuite). Ici 10H (9 HL), 1-2-5-5. | Texas ♣ (game-going 5/5 minor two-suiter: diamonds bid next). Here 10 HCP (9 HL), 1-2-5-5.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-5-3-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-5-3-2.} Pass 3D {Bicolore mineur 5/5 de manche. Ici 10H (9 HL), 1-2-5-5. | Game-going 5/5 minor two-suiter. Here 10 HCP (9 HL), 1-2-5-5.} Pass
+3NT {Arrets majeurs : 3SA. Ici 15H (15 HL), 3-5-3-2. | Major-suit stoppers: 3NT. Here 15 HCP (15 HL), 3-5-3-2.} Pass Pass {Contrat final atteint (defaut). Ici 10H (9 HL), 1-2-5-5. | Final contract reached (default). Here 10 HCP (9 HL), 1-2-5-5.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 45"]
+[Board "45"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:KQ2.AJ74.Q92.K32 T54.KQ83.K7.9874 A73.T62.T.AQJT65 J986.95.AJ86543."]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-3-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 11H (13 HL), 3-3-1-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 11 HCP (13 HL), 3-3-1-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-4-3-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-4-3-3.} Pass 3NT {Courte dans l'autre mineure (♦). Ici 11H (13 HL), 3-3-1-6. | Shortness in the other minor (♦). Here 11 HCP (13 HL), 3-3-1-6.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 3-4-3-3. | Game in ♣. Here 15 HCP (15 HL), 3-4-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 11H (13 HL), 3-3-1-6. | Final contract reached (default). Here 11 HCP (13 HL), 3-3-1-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 46"]
+[Board "46"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "EW"]
+[Deal "S:AQ7.Q4.K64.AT953 J85.AJ98.J97.QJ6 942.KT2.AQ8532.8 KT63.7653.T.K742"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-3-5.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 9H (11 HL), 3-3-6-1. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 9 HCP (11 HL), 3-3-6-1.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (15 HL), 3-2-3-5. | Corrects the Texas ♦. Here 15 HCP (15 HL), 3-2-3-5.} Pass 4C {6♦ et courte ♣, espoir de chelem. Ici 9H (11 HL), 3-3-6-1. | 6♦ and short ♣, slam interest. Here 9 HCP (11 HL), 3-3-6-1.} Pass
+5D {Conclusion minimale. Ici 15H (15 HL), 3-2-3-5. | Minimal signoff. Here 15 HCP (15 HL), 3-2-3-5.} Pass Pass {Contrat final atteint (defaut). Ici 9H (11 HL), 3-3-6-1. | Final contract reached (default). Here 9 HCP (11 HL), 3-3-6-1.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 47"]
+[Board "47"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AKT.J3.KT986.KJ6 Q65.KT76.J3.Q732 3.AQ8.A54.AT9854 J98742.9542.Q72."]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-2-5-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-2-5-3.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 14H (14 HL), 1-3-3-6. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 14 HCP (14 HL), 1-3-3-6.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-2-5-3. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-2-5-3.} Pass 3S {Courte dans la couleur nommee. Ici 14H (14 HL), 1-3-3-6. | Shortness in the suit named. Here 14 HCP (14 HL), 1-3-3-6.} Pass
+3NT {Arret (points perdus) dans la courte : 3SA. Ici 15H (15 HL), 3-2-5-3. | Stop (points wasted) in the short suit: 3NT. Here 15 HCP (15 HL), 3-2-5-3.} Pass Pass {Contrat final atteint (defaut). Ici 14H (14 HL), 1-3-3-6. | Final contract reached (default). Here 14 HCP (14 HL), 1-3-3-6.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 48"]
+[Board "48"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:AK53.KQ9.876.A65 T64.A7642.Q4.QT8 Q92.3.AJT532.K94 J87.JT85.K9.J732"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 4-3-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 4-3-3-3.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 10H (12 HL), 3-1-6-3. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 10 HCP (12 HL), 3-1-6-3.} Pass
+3D {Rectifie le Texas ♦. Ici 16H (16 HL), 4-3-3-3. | Corrects the Texas ♦. Here 16 HCP (16 HL), 4-3-3-3.} Pass 4D {6♦ sans courte. Ici 10H (12 HL), 3-1-6-3. | 6♦ without shortness. Here 10 HCP (12 HL), 3-1-6-3.} Pass
+5D {Conclusion minimale. Ici 16H (16 HL), 4-3-3-3. | Minimal signoff. Here 16 HCP (16 HL), 4-3-3-3.} Pass Pass {Contrat final atteint (defaut). Ici 10H (12 HL), 3-1-6-3. | Final contract reached (default). Here 10 HCP (12 HL), 3-1-6-3.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 49"]
+[Board "49"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "None"]
+[Deal "S:AK7.AJT6.KT92.43 962.K7532.65.Q75 Q43.Q8.3.AKJT962 JT85.94.AQJ874.8"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "5C"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-4-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-4-2.} Pass 2S {Texas ♣ : 6+ trefles, faible ou avec courte (ambition). Ici 12H (15 HL), 3-2-1-7. | Texas ♣: 6+ clubs, weak or with shortness (ambitious). Here 12 HCP (15 HL), 3-2-1-7.} Pass
+3C {Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non detaillee). Ici 15H (15 HL), 3-4-4-2. | Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed). Here 15 HCP (15 HL), 3-4-4-2.} Pass 4D {6♣ et singleton ♦. Ici 12H (15 HL), 3-2-1-7. | 6♣ and singleton ♦. Here 12 HCP (15 HL), 3-2-1-7.} Pass
+5C {Manche a ♣. Ici 15H (15 HL), 3-4-4-2. | Game in ♣. Here 15 HCP (15 HL), 3-4-4-2.} Pass Pass {Contrat final atteint (defaut). Ici 12H (15 HL), 3-2-1-7. | Final contract reached (default). Here 12 HCP (15 HL), 3-2-1-7.} Pass
+
+[Event "Entrainement Texas mineurs - Donne 50"]
+[Board "50"]
+[West "-"]
+[North "-"]
+[East "-"]
+[South "-"]
+[Dealer "S"]
+[Vulnerable "NS"]
+[Deal "S:Q82.Q54.KJ.AKT64 A6.AJ2.AQ84.Q832 KT9.93.T97652.75 J7543.KT876.3.J9"]
+[Scoring "MP"]
+[Declarer "S"]
+[Contract "3D"]
+[Result ""]
+[Auction "S"]
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-2-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-2-5.} Pass 3C {Texas ♦ : 6+ carreaux, faible ou avec courte (ambition). Ici 3H (3 HL), 3-2-6-2. | Texas ♦: 6+ diamonds, weak or with shortness (ambitious). Here 3 HCP (3 HL), 3-2-6-2.} Pass
+3D {Rectifie le Texas ♦. Ici 15H (15 HL), 3-3-2-5. | Corrects the Texas ♦. Here 15 HCP (15 HL), 3-3-2-5.} Pass Pass {Faible : pour jouer 3♦. Ici 3H (3 HL), 3-2-6-2. | Weak: to play 3♦. Here 3 HCP (3 HL), 3-2-6-2.} Pass

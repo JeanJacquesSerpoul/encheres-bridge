@@ -16,6 +16,7 @@
     { "file": "texas-majeurs.pbn", "fr": "Texas majeurs", "en": "Major-suit transfers" },
     { "file": "reponses-1sa-2sa.pbn", "fr": "Réponses à l'ouverture d'1SA et de 2SA", "en": "Responses to 1NT and 2NT openings" },
     { "file": "spoutnik.pbn", "fr": "Spoutnik", "en": "Negative double (Spoutnik)" },
+    { "file": "texas-mineurs.pbn", "fr": "Texas mineurs", "en": "Minor-suit transfers" },
     { "file": "interventions.pbn", "fr": "Interventions", "en": "Overcalls" },
     { "file": "michaels.pbn", "fr": "Michaëls précisé", "en": "Michaels cue-bid and unusual 2NT" },
     { "file": "reveils.pbn", "fr": "Réveils", "en": "Balancing (reopening) bids" },

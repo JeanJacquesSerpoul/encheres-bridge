@@ -3407,6 +3407,23 @@ function readCenterHTML(lang) {
     <div class="vul-line">${vulHTML(vul ? normalizeVul(vul[1]) : "None", lang)}</div>`;
 }
 
+// Les sièges vulnérables d'une vulnérabilité normalisée (voir normalizeVul).
+function vulSeats(vul) {
+  return { NS: "NS", EW: "EW", All: "NESW" }[vul] || "";
+}
+
+// Les mains de la table en lecture portent leur situation, comme les étuis de
+// bridge : un liseré rouge si leur camp est vulnérable, vert sinon, et le
+// jeton « D » du donneur à côté du nom.
+function markSeats(dealer, vul) {
+  const seats = vulSeats(vul);
+  for (const seat of SEATS) {
+    const el = $("#hand-" + seat);
+    el.classList.toggle("is-vul", seats.includes(seat));
+    el.classList.toggle("is-dealer", seat === dealer);
+  }
+}
+
 // Remplit la table en lecture depuis la donne. Un résultat affiché l'a déjà
 // remplie avec l'analyse du moteur (points H/HL, type de main, contrat) : on
 // ne l'écrase pas.
@@ -3414,6 +3431,10 @@ function renderReadTable() {
   if (!$("#result-panel").classList.contains("hidden")) return;
   const lang = $("#lang").value;
   const hands = currentDealHands();
+  const block = pbnGames[selectedGameIdx] || "";
+  const dealer = (block.match(/\[Dealer\s+"([NESW])"\]/i) || [])[1];
+  const vul = block.match(/\[Vulnerable\s+"([^"]*)"\]/i);
+  markSeats(dealer ? dealer.toUpperCase() : "", vul ? normalizeVul(vul[1]) : "None");
   const ph = CONS_TEXT[lang].ph;
   for (const seat of SEATS) {
     const hand = hands && hands[seat];
@@ -4750,7 +4771,7 @@ function hasBidTip(call, keepPasses) {
 
 function auctionGridHTML(dealer, calls, lang, cellRenderer) {
   const columns = ["S", "W", "N", "E"];
-  const headHTML = columns.map((s) => `<th>${esc(SEAT_SHORT[lang][s])}</th>`).join("");
+  const headHTML = columns.map((s) => `<th data-seat="${s}">${esc(SEAT_SHORT[lang][s])}</th>`).join("");
   const cells = [];
   for (let i = 0; i < columns.indexOf(dealer); i++) cells.push(null);
   for (const c of calls) cells.push(c);
@@ -4772,6 +4793,7 @@ function renderResult(r) {
   for (const seat of ["N", "E", "S", "W"]) {
     $("#hand-" + seat).innerHTML = handHTML(seat, r.hands[seat], lang);
   }
+  markSeats(r.dealer, r.vulnerable);
 
   // Centre de la table : le contrat et son déclarant d'abord — c'est la
   // réponse, tout le reste n'est que le contexte qui la date. Donneur et
@@ -4796,15 +4818,25 @@ function renderResult(r) {
   auctionTip.hide();
   // Chaque case porte l'indice de son enchère : la case, la ligne commentée
   // et la main de l'enchérisseur s'éclairent ensemble (voir linkCall).
+  // Les passes s'effacent, le contrat final se détache : la case de la
+  // dernière enchère de palier.
+  let finalIdx = -1;
+  r.auction.forEach((a, i) => { if (/^[1-7]/.test(a.bid)) finalIdx = i; });
   const grid = auctionGridHTML(r.dealer, r.auction, lang, (a) => {
     const i = r.auction.indexOf(a);
-    if (!hasBidTip(a)) return `<td class="bid-cell" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
-    return `<td class="bid-cell has-tip" tabindex="0" data-i="${i}" ` +
+    const cls = "bid-cell" + (isPass(a.bid) ? " pass" : "") + (i === finalIdx ? " final" : "");
+    if (!hasBidTip(a)) return `<td class="${cls}" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
+    return `<td class="${cls} has-tip" tabindex="0" data-i="${i}" ` +
       `data-seat="${esc(SEAT_SHORT[lang][a.player])}" ` +
       `data-comment="${esc(a.comment)}">${bidHTML(a.bid, lang)}</td>`;
   });
   $("#auction-head").innerHTML = grid.headHTML;
   $("#auction-body").innerHTML = grid.bodyHTML;
+  // En tête de colonne, le siège vulnérable en rouge, comme sur la table.
+  const vulnerable = vulSeats(r.vulnerable);
+  for (const th of $("#auction-head").children) {
+    th.classList.toggle("vul", vulnerable.includes(th.dataset.seat));
+  }
 
   // Séquence commentée : toute l'enchère, dans l'ordre. Les enchères que le
   // moteur ne commente pas — les passes d'attente, les trois passes finales —
@@ -4826,12 +4858,15 @@ function renderResult(r) {
         ? `<button type="button" class="tree-icon" data-i="${i}" data-tip="${esc(tip)}" ` +
           `aria-label="${esc(tip)}" aria-expanded="false">${TREE_ICON}</button>`
         : `<span class="tree-icon-gap" aria-hidden="true"></span>`;
-      const head = `<span class="who">${esc(SEAT_SHORT[lang][a.player])}</span> - ` +
-        bidHTML(a.bid, lang);
+      // Le siège en pastille, à la couleur de son camp, puis l'enchère en
+      // jeton : la ligne se lit d'un coup d'œil, sans tiret ni deux-points.
+      const side = "NS".includes(a.player) ? "ns" : "ew";
+      const head = `<span class="who ${side}">${esc(SEAT_SHORT[lang][a.player])}</span>` +
+        `<span class="call">${bidHTML(a.bid, lang)}</span>`;
       const attrs = `data-i="${i}" value="${i + 1}"`;
       if (isPass(a.bid)) return `<li class="silent pass" ${attrs}>${icon}${head}</li>`;
       return a.comment
-        ? `<li ${attrs}>${icon}${withColon(head, lang)} ${esc(a.comment)}</li>`
+        ? `<li ${attrs}>${icon}${head}<span class="text">${esc(a.comment)}</span></li>`
         : `<li class="silent" ${attrs}>${icon}${head}</li>`;
     })
     .join("") || `<li class="muted">${lang === "fr" ? "aucune" : "none"}</li>`;

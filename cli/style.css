@@ -3054,3 +3054,128 @@ select:disabled { background: var(--disabled-bg); color: var(--muted); cursor: n
   .par-tip.sheet { bottom: calc(64px + env(safe-area-inset-bottom)); }
 }
 @media print { .tabbar { display: none !important; } }
+
+/* ---------- la table et les enchères, mises en forme ---------- */
+
+/* Chaque main porte en tête un liseré à la couleur de son camp : rouge s'il
+   est vulnérable, vert sinon, comme les étuis de bridge. Le donneur porte un
+   jeton « D » doré à côté de son nom. */
+.read-layout .hand { border-top: 4px solid var(--accent-bg); }
+.read-layout .hand.is-vul { border-top-color: var(--red-bg); }
+.read-layout .hand .seat-name > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.read-layout .hand.is-vul .seat-name > span:first-child { color: var(--red); }
+.read-layout .hand.is-dealer .seat-name > span:first-child::after {
+  content: "D";
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: #1d2b1f;
+  font-size: .68rem;
+  font-weight: 800;
+}
+/* Le contrat sur une plaque translucide, au centre du tapis. */
+#table-center .big {
+  min-width: 88px;
+  padding: 6px 18px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  font-size: 1.9rem;
+  line-height: 1.2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+}
+#table-center .big .red { color: #ffb4ab; }
+
+/* La séquence : un tableau aux coins arrondis, l'en-tête sur le vert du tapis
+   (rouge pour un siège vulnérable), des lignes sans quadrillage vertical. Les
+   passes s'effacent ; le contrat final se détache sur un fond vert pâle. */
+#auction-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+#auction-table th,
+#auction-table td { border: none; border-top: 1px solid var(--border); padding: 8px 10px; }
+#auction-table thead th {
+  border-top: none;
+  background: var(--felt);
+  color: #fff;
+  letter-spacing: .05em;
+}
+#auction-table thead th.vul { background: var(--red-bg); }
+#auction-table td.pass { color: var(--muted); font-weight: 500; }
+#auction-table td.final:not(.linked) {
+  background: var(--success-bg);
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* La séquence commentée : une carte par enchère commentée. Le siège en
+   pastille (vert pour Nord-Sud, doré pour Est-Ouest), l'enchère en jeton,
+   puis le commentaire. Les passes et enchères sans commentaire restent sur
+   une ligne discrète. L'arbre de décision se déplie sous la carte. */
+#result-panel #comments { width: 100%; }
+#comments {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#comments > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  line-height: 1.4;
+}
+#comments > li.silent { padding: 2px 10px; border-color: transparent; background: none; }
+#comments > li.linked { background: var(--tint); border-color: var(--accent); }
+#comments .tree-icon,
+#comments .tree-icon-gap { margin-right: 0; }
+#comments .who {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  min-width: 0;
+  border-radius: 50%;
+  font-size: .78rem;
+  font-weight: 800;
+}
+#comments .who.ns { background: var(--accent-bg); color: var(--on-accent); }
+#comments .who.ew { background: var(--gold-soft); color: #1d2b1f; }
+#comments .call {
+  flex: none;
+  min-width: 2.8em;
+  padding: 1px 8px;
+  border-radius: 8px;
+  background: var(--tint);
+  font-weight: 700;
+  text-align: center;
+}
+#comments > li.silent .who { opacity: .55; }
+#comments > li.silent .call { background: none; font-weight: 500; }
+#comments .text { flex: 1 1 14em; min-width: 0; }
+#comments .decision-tree { flex-basis: 100%; margin: 4px 0 2px; }
+@media print {
+  #comments > li { border-color: #ccc; }
+  #auction-table thead th { color: #000; background: #eee; }
+}

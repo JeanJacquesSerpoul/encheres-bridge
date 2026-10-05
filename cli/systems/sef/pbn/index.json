@@ -2,6 +2,7 @@
   "files": [
     { "file": "4e-couleur-forcing.pbn", "fr": "4e couleur forcing", "en": "Fourth suit forcing" },
     { "file": "drury.pbn", "fr": "Drury", "en": "Drury" },
+    { "file": "blackwood-5-cles.pbn", "fr": "Blackwood 5 clés", "en": "Roman Key Card Blackwood" },
     { "file": "2-trefle-fort.pbn", "fr": "2♣ fort indéterminé", "en": "Strong 2♣ (catch-all)" },
     { "file": "roudi.pbn", "fr": "Roudi", "en": "Roudi (checkback after 1NT rebid)" },
     { "file": "rubensohl.pbn", "fr": "Rubensohl", "en": "Rubensohl (after 1NT and an overcall)" },

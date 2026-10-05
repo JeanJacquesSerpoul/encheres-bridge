@@ -4288,14 +4288,15 @@ Pass {Contrat final atteint (defaut). Ici 12H (14 HL), 3-7-1-2. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:J.A874.9765.AK63 84.QJ952.KQT83.8 A96.K63.AJ4.9752 KQT7532.T.2.QJT4"]
+[Deal "N:A96.K63.AJ4.9752 KQT7532.T.2.QJT4 J.A874.9765.AK63 84.QJ952.KQT83.8"]
 [Scoring "MP"]
 [Declarer "N"]
-[Contract "3C"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
 1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (11 HL), 1-4-4-4. | Longest minor (4-4: 1♦). Here 12 HCP (11 HL), 1-4-4-4.} Pass 2C {4+ trefles, 11+ HL (forcing de manche sauf 2 sequences). Ici 12H (12 HL), 3-3-3-4. | 4+ clubs, 11+ HL (game-forcing except in 2 sequences). Here 12 HCP (12 HL), 3-3-3-4.} Pass
-3C {Fit 4e. Ici 12H (11 HL), 1-4-4-4. | 4-card fit. Here 12 HCP (11 HL), 1-4-4-4.} Pass Pass {11-12 : on joue 3♣. Ici 12H (12 HL), 3-3-3-4. | 11-12: play 3♣. Here 12 HCP (12 HL), 3-3-3-4.} Pass
+3C {Fit 4e. Ici 12H (11 HL), 1-4-4-4. | 4-card fit. Here 12 HCP (11 HL), 1-4-4-4.} Pass 3NT {Arrets dans les deux majeures : 3SA. Ici 12H (12 HL), 3-3-3-4. | Both majors stopped: 3NT. Here 12 HCP (12 HL), 3-3-3-4.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 244"]
 [Board "244"]
@@ -7067,11 +7068,12 @@ Pass {Contrat final atteint (defaut). Ici 18H (19 HL), 3-2-2-6. | Final contract
 [Deal "N:Q42.K42.752.AK85 KT65.AQ975.A4.J2 A9.3.KQJ83.QT763 J873.JT86.T96.94"]
 [Scoring "MP"]
 [Declarer "N"]
-[Contract "3C"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
 1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (13 HL), 2-1-5-5. | Longest minor (4-4: 1♦). Here 12 HCP (13 HL), 2-1-5-5.} Pass 2C {4+ trefles, 11+ HL (forcing de manche sauf 2 sequences). Ici 12H (12 HL), 3-3-3-4. | 4+ clubs, 11+ HL (game-forcing except in 2 sequences). Here 12 HCP (12 HL), 3-3-3-4.} Pass
-3C {Fit 4e. Ici 12H (13 HL), 2-1-5-5. | 4-card fit. Here 12 HCP (13 HL), 2-1-5-5.} Pass Pass Pass
+3C {Fit 4e. Ici 12H (13 HL), 2-1-5-5. | 4-card fit. Here 12 HCP (13 HL), 2-1-5-5.} Pass 3NT {Arrets dans les deux majeures : 3SA. Ici 12H (12 HL), 3-3-3-4. | Both majors stopped: 3NT. Here 12 HCP (12 HL), 3-3-3-4.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 401"]
 [Board "401"]

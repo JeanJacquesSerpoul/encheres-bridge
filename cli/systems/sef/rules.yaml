@@ -1449,8 +1449,12 @@
   meaning: "12-15 HL, pas de majeure 4e"
   meaning_en: "12-15 HL, no 4-card major"
   status: sef
+# Sur 1♦, 1D.r.2NT.reg, 1D.r.2C et le soutien 3♦ couvrent toutes les mains sans
+# majeure 4e : seul 1♣ garde cette règle.
+# en: Over 1♦, 1D.r.2NT.reg, 1D.r.2C and the 3♦ raise cover every hand without
+# a four-card major: only 1♣ keeps this rule.
 - id: "1{m}.r.2NT"
-  for: [{m: C}, {m: D}]
+  for: [{m: C}]
   seq: "1{m}"
   call: 2NT
   cond: "hl == 11"
@@ -7535,8 +7539,12 @@
   meaning: "Les 4 As et 13 levées comptées : grand chelem"
   meaning_en: "All four aces and 13 tricks counted: grand slam"
   status: infere
+# Sans les cas 0 As (et 0-1 As à SA) : sl.2D.* les traite avant, avec une
+# condition qui contient celle-ci ; ces règles ne pouvaient jamais servir.
+# en: Without the 0-ace cases (and 0-1 ace in NT): sl.2D.* handles them first
+# with a condition that contains this one; these rules could never apply.
 - id: "2D.{g}.{t}.6"
-  for: [{t: S, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: S, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: S, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: S, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: S, g: 4as, r: "4NT", n: 0, p: 6}, {t: H, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: H, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: H, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: H, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: H, g: 4as, r: "4NT", n: 0, p: 6}, {t: D, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: D, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: D, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: D, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: D, g: 4as, r: "4NT", n: 0, p: 6}, {t: C, g: 0as, r: "2H|2NT", n: 3, p: 10}, {t: C, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: C, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: C, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: C, g: 4as, r: "4NT", n: 0, p: 6}]
+  for: [{t: S, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: S, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: S, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: S, g: 4as, r: "4NT", n: 0, p: 6}, {t: H, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: H, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: H, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: H, g: 4as, r: "4NT", n: 0, p: 6}, {t: D, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: D, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: D, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: D, g: 4as, r: "4NT", n: 0, p: 6}, {t: C, g: 1as, r: "2S|3C|3D", n: 2, p: 9}, {t: C, g: 2as, r: "3H|3S|3NT", n: 1, p: 8}, {t: C, g: 3as, r: "4C|4D|4H|4S", n: 0, p: 7}, {t: C, g: 4as, r: "4NT", n: 0, p: 6}]
   seq: "2D {r}"
   call: "6{t}"
   cond: "{t} >= 5 and {t} >= max(S, H, D, C) and aces >= {n} and ptricks >= {p}"
@@ -7554,7 +7562,7 @@
   meaning_en: "Balanced, all four aces and 37 HCP together: grand slam in NT"
   status: infere
 - id: "2D.{g}.6NT"
-  for: [{g: 0as, r: "2H|2NT", n: 3, h: 25}, {g: 1as, r: "2S|3C|3D", n: 2, h: 26}, {g: 2as, r: "3H|3S|3NT", n: 1, h: 22}, {g: 3as, r: "4C|4D|4H|4S", n: 0, h: 18}, {g: 4as, r: "4NT", n: 0, h: 14}]
+  for: [{g: 2as, r: "3H|3S|3NT", n: 1, h: 22}, {g: 3as, r: "4C|4D|4H|4S", n: 0, h: 18}, {g: 4as, r: "4NT", n: 0, h: 14}]
   seq: "2D {r}"
   call: 6NT
   cond: "balanced and aces >= {n} and hcp >= {h}"

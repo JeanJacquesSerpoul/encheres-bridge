@@ -2924,21 +2924,1505 @@
 # A.13 Contrôles et suites de chelem
 # ======================================================================
 # en: A.13 Controls and slam continuations
-# Contrôle du 1er tour : As ou chicane (`ctrl1`). Contrôle du 2e tour : Roi ou singleton (`ctrl2`). On nomme les contrôles **du moins cher au plus cher**, en commençant par ceux du 1er tour. Un Splinter est valorisé quand le partenaire n'a pas de points perdus dans la courte (`hcp_in(courte) <= 1`).
-# en: First-round control: Ace or void (`ctrl1`). Second-round control: King or singleton (`ctrl2`). Controls are bid **cheapest first**, starting with first-round controls. A Splinter is upgraded when partner has no wasted points in the short suit (`hcp_in(short) <= 1`).
-# --- 1M – 3M (11-12 DH) : Blackwood de l'ouvreur
-# en: 1M – 3M (11-12 DH): opener's Blackwood
-- id: "sl.1{M}.3{M}.bw"
-  for: [{M: H, km: "(keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"}, {M: S, km: "true"}]
-  seq: "1{M} 3{M}"
-  call: 4NT
-  cond: "hld >= 20 and ({km})"
+# Contrôle = As, Roi, singleton ou chicane (`ctrl2`), sans hiérarchie entre 1er et 2e tour (gestion moderne, fiche « Contrôles »). Le capitaine commence au palier de son choix ; le partenaire nomme son contrôle **le plus économique**, tout contrôle sauté est dénié. Un Splinter est valorisé quand le partenaire n'a pas de points perdus dans la courte (`hcp_in(courte) <= 1`).
+# en: Control = ace, king, singleton or void (`ctrl2`), with no first/second-round hierarchy (modern method, "Controls" in the card). The captain starts at the level of his choice; partner names his **cheapest** control, and any skipped control is denied. A Splinter is upgraded when partner has no wasted points in the short suit (`hcp_in(short) <= 1`).
+# --- Soutien limité au palier de 3 (1M – 3M ; 1m – 1M – 3M) : le capitaine vérifie les contrôles.
+# Contrôle = As, Roi, singleton ou chicane (`ctrl2`), sans hiérarchie ; l'atout est contrôlé d'office.
+# Le capitaine commence au palier de son choix, juste sous la couleur qu'il doit découvrir : 3SA demande ♣,
+# 4♣ demande ♦, 4♦ demande ♥ (atout ♠) ; à l'atout ♥, 3♠ demande ♠ (réponse 3SA = oui). Le partenaire
+# nomme son contrôle le plus économique : tout contrôle sauté est dénié. Avec tous les contrôles : Blackwood.
+# en: Limit raise to the three level: the captain checks controls (A, K, singleton or void, no hierarchy;
+# trumps count as controlled). He starts just below the suit he must find out about: 3NT asks ♣, 4♣ asks ♦,
+# 4♦ asks ♥ (♠ trumps); with ♥ trumps 3♠ asks ♠ (3NT = yes). Partner bids his cheapest control: any skipped
+# control is denied. With all controls: Blackwood.
+- id: "ctl.1S.3S.bw"
+  seq: "1S 3S"
+  call: "4NT"
+  cond: "hld >= 20 and ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
   forcing: ASK
-  meaning: "Blackwood 5 clés"
-  meaning_en: "5-keycard Blackwood"
-  status: infere
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
   alert: true
-  trump: "{M}"
+  trump: "S"
+- id: "ctl.1S.3S.askC"
+  seq: "1S 3S"
+  call: "3NT"
+  cond: "hld >= 20 and not ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.3S.askC.4C"
+  seq: "1S 3S 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askC.4D"
+  seq: "1S 3S 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askC.4H"
+  seq: "1S 3S 3NT"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askC.4S"
+  seq: "1S 3S 3NT"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1S.3S.askC.4C.bw"
+  seq: "1S 3S 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askC.4D.4S"
+  seq: "1S 3S 3NT 4D"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1S.3S.askC.4H.4S"
+  seq: "1S 3S 3NT 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1S.3S.askD"
+  seq: "1S 3S"
+  call: "4C"
+  cond: "hld >= 20 and not ctrl2('D') and ctrl2('C') and ctrl2('H') and true and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.3S.askD.4D"
+  seq: "1S 3S 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askD.4H"
+  seq: "1S 3S 4C"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askD.4S"
+  seq: "1S 3S 4C"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1S.3S.askD.4D.bw"
+  seq: "1S 3S 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askD.4H.4S"
+  seq: "1S 3S 4C 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♦ : manche"
+  meaning_en: "No ♦ control: game"
+  status: sef
+- id: "ctl.1S.3S.askH"
+  seq: "1S 3S"
+  call: "4D"
+  cond: "hld >= 20 and not ctrl2('H') and ctrl2('C') and ctrl2('D') and true and ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦, demande le contrôle ♥"
+  meaning_en: "♦ control, asks for a ♥ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.3S.askH.4H"
+  seq: "1S 3S 4D"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1S.3S.askH.4S"
+  seq: "1S 3S 4D"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1S.3S.askH.4H.bw"
+  seq: "1S 3S 4D 4H"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.bw"
+  seq: "1H 3H"
+  call: "4NT"
+  cond: "hld >= 20 and ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.3H.askC"
+  seq: "1H 3H"
+  call: "3NT"
+  cond: "hld >= 20 and not ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.3H.askC.4C"
+  seq: "1H 3H 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askC.4D"
+  seq: "1H 3H 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askC.4H"
+  seq: "1H 3H 3NT"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1H.3H.askC.4C.bw"
+  seq: "1H 3H 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askC.4D.4H"
+  seq: "1H 3H 3NT 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1H.3H.askD"
+  seq: "1H 3H"
+  call: "4C"
+  cond: "hld >= 20 and not ctrl2('D') and ctrl2('C') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))) and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.3H.askD.4D"
+  seq: "1H 3H 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askD.4H"
+  seq: "1H 3H 4C"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1H.3H.askD.4D.bw"
+  seq: "1H 3H 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askS"
+  seq: "1H 3H"
+  call: "3S"
+  cond: "hld >= 20 and not ctrl2('S') and ctrl2('C') and ctrl2('D') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Demande de contrôle ♠ (3SA = oui)"
+  meaning_en: "Asks for a ♠ control (3NT = yes)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.3H.askS.3NT"
+  seq: "1H 3H 3S"
+  call: "3NT"
+  cond: "ctrl2('S')"
+  forcing: F1
+  meaning: "Contrôle ♠ (contrôle le plus économique)"
+  meaning_en: "♠ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askS.4C"
+  seq: "1H 3H 3S"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askS.4D"
+  seq: "1H 3H 3S"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askS.4H"
+  seq: "1H 3H 3S"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1H.3H.askS.3NT.bw"
+  seq: "1H 3H 3S 3NT"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.3H.askS.4C.4H"
+  seq: "1H 3H 3S 4C"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1H.3H.askS.4D.4H"
+  seq: "1H 3H 3S 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1C.1H.3H.bw"
+  seq: "1C 1H 3H"
+  call: "4NT"
+  cond: "hld >= 16 and ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1C.1H.3H.askC"
+  seq: "1C 1H 3H"
+  call: "3NT"
+  cond: "hld >= 16 and not ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1C.1H.3H.askC.4C"
+  seq: "1C 1H 3H 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askC.4D"
+  seq: "1C 1H 3H 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askC.4H"
+  seq: "1C 1H 3H 3NT"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1H.3H.askC.4C.bw"
+  seq: "1C 1H 3H 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askC.4D.4H"
+  seq: "1C 1H 3H 3NT 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1C.1H.3H.askD"
+  seq: "1C 1H 3H"
+  call: "4C"
+  cond: "hld >= 16 and not ctrl2('D') and ctrl2('C') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))) and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1C.1H.3H.askD.4D"
+  seq: "1C 1H 3H 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askD.4H"
+  seq: "1C 1H 3H 4C"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1H.3H.askD.4D.bw"
+  seq: "1C 1H 3H 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askS"
+  seq: "1C 1H 3H"
+  call: "3S"
+  cond: "hld >= 16 and not ctrl2('S') and ctrl2('C') and ctrl2('D') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Demande de contrôle ♠ (3SA = oui)"
+  meaning_en: "Asks for a ♠ control (3NT = yes)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1C.1H.3H.askS.3NT"
+  seq: "1C 1H 3H 3S"
+  call: "3NT"
+  cond: "ctrl2('S')"
+  forcing: F1
+  meaning: "Contrôle ♠ (contrôle le plus économique)"
+  meaning_en: "♠ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askS.4C"
+  seq: "1C 1H 3H 3S"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askS.4D"
+  seq: "1C 1H 3H 3S"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askS.4H"
+  seq: "1C 1H 3H 3S"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1H.3H.askS.3NT.bw"
+  seq: "1C 1H 3H 3S 3NT"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1C.1H.3H.askS.4C.4H"
+  seq: "1C 1H 3H 3S 4C"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1C.1H.3H.askS.4D.4H"
+  seq: "1C 1H 3H 3S 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1C.1S.3S.bw"
+  seq: "1C 1S 3S"
+  call: "4NT"
+  cond: "hld >= 16 and ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1C.1S.3S.askC"
+  seq: "1C 1S 3S"
+  call: "3NT"
+  cond: "hld >= 16 and not ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1C.1S.3S.askC.4C"
+  seq: "1C 1S 3S 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askC.4D"
+  seq: "1C 1S 3S 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askC.4H"
+  seq: "1C 1S 3S 3NT"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askC.4S"
+  seq: "1C 1S 3S 3NT"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1S.3S.askC.4C.bw"
+  seq: "1C 1S 3S 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askC.4D.4S"
+  seq: "1C 1S 3S 3NT 4D"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1C.1S.3S.askC.4H.4S"
+  seq: "1C 1S 3S 3NT 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1C.1S.3S.askD"
+  seq: "1C 1S 3S"
+  call: "4C"
+  cond: "hld >= 16 and not ctrl2('D') and ctrl2('C') and ctrl2('H') and true and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1C.1S.3S.askD.4D"
+  seq: "1C 1S 3S 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askD.4H"
+  seq: "1C 1S 3S 4C"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askD.4S"
+  seq: "1C 1S 3S 4C"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1S.3S.askD.4D.bw"
+  seq: "1C 1S 3S 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askD.4H.4S"
+  seq: "1C 1S 3S 4C 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♦ : manche"
+  meaning_en: "No ♦ control: game"
+  status: sef
+- id: "ctl.1C.1S.3S.askH"
+  seq: "1C 1S 3S"
+  call: "4D"
+  cond: "hld >= 16 and not ctrl2('H') and ctrl2('C') and ctrl2('D') and true and ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦, demande le contrôle ♥"
+  meaning_en: "♦ control, asks for a ♥ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1C.1S.3S.askH.4H"
+  seq: "1C 1S 3S 4D"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1C.1S.3S.askH.4S"
+  seq: "1C 1S 3S 4D"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1C.1S.3S.askH.4H.bw"
+  seq: "1C 1S 3S 4D 4H"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.bw"
+  seq: "1D 1H 3H"
+  call: "4NT"
+  cond: "hld >= 16 and ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1D.1H.3H.askC"
+  seq: "1D 1H 3H"
+  call: "3NT"
+  cond: "hld >= 16 and not ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1D.1H.3H.askC.4C"
+  seq: "1D 1H 3H 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askC.4D"
+  seq: "1D 1H 3H 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askC.4H"
+  seq: "1D 1H 3H 3NT"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1H.3H.askC.4C.bw"
+  seq: "1D 1H 3H 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askC.4D.4H"
+  seq: "1D 1H 3H 3NT 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1D.1H.3H.askD"
+  seq: "1D 1H 3H"
+  call: "4C"
+  cond: "hld >= 16 and not ctrl2('D') and ctrl2('C') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H'))) and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1D.1H.3H.askD.4D"
+  seq: "1D 1H 3H 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askD.4H"
+  seq: "1D 1H 3H 4C"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1H.3H.askD.4D.bw"
+  seq: "1D 1H 3H 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askS"
+  seq: "1D 1H 3H"
+  call: "3S"
+  cond: "hld >= 16 and not ctrl2('S') and ctrl2('C') and ctrl2('D') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: F1
+  meaning: "Demande de contrôle ♠ (3SA = oui)"
+  meaning_en: "Asks for a ♠ control (3NT = yes)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1D.1H.3H.askS.3NT"
+  seq: "1D 1H 3H 3S"
+  call: "3NT"
+  cond: "ctrl2('S')"
+  forcing: F1
+  meaning: "Contrôle ♠ (contrôle le plus économique)"
+  meaning_en: "♠ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askS.4C"
+  seq: "1D 1H 3H 3S"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askS.4D"
+  seq: "1D 1H 3H 3S"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askS.4H"
+  seq: "1D 1H 3H 3S"
+  call: "4H"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1H.3H.askS.3NT.bw"
+  seq: "1D 1H 3H 3S 3NT"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1H.3H.askS.4C.4H"
+  seq: "1D 1H 3H 3S 4C"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1D.1H.3H.askS.4D.4H"
+  seq: "1D 1H 3H 3S 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♠ : manche"
+  meaning_en: "No ♠ control: game"
+  status: sef
+- id: "ctl.1D.1S.3S.bw"
+  seq: "1D 1S 3S"
+  call: "4NT"
+  cond: "hld >= 16 and ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood 5 clés"
+  meaning_en: "All controls: 5-keycard Blackwood"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1D.1S.3S.askC"
+  seq: "1D 1S 3S"
+  call: "3NT"
+  cond: "hld >= 16 and not ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: F1
+  meaning: "Relais-contrôle : demande le contrôle ♣"
+  meaning_en: "Control relay: asks for a ♣ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1D.1S.3S.askC.4C"
+  seq: "1D 1S 3S 3NT"
+  call: "4C"
+  cond: "ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣ (contrôle le plus économique)"
+  meaning_en: "♣ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askC.4D"
+  seq: "1D 1S 3S 3NT"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askC.4H"
+  seq: "1D 1S 3S 3NT"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askC.4S"
+  seq: "1D 1S 3S 3NT"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1S.3S.askC.4C.bw"
+  seq: "1D 1S 3S 3NT 4C"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askC.4D.4S"
+  seq: "1D 1S 3S 3NT 4D"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1D.1S.3S.askC.4H.4S"
+  seq: "1D 1S 3S 3NT 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♣ : manche"
+  meaning_en: "No ♣ control: game"
+  status: sef
+- id: "ctl.1D.1S.3S.askD"
+  seq: "1D 1S 3S"
+  call: "4C"
+  cond: "hld >= 16 and not ctrl2('D') and ctrl2('C') and ctrl2('H') and true and ctrl2('C')"
+  forcing: F1
+  meaning: "Contrôle ♣, demande le contrôle ♦"
+  meaning_en: "♣ control, asks for a ♦ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1D.1S.3S.askD.4D"
+  seq: "1D 1S 3S 4C"
+  call: "4D"
+  cond: "ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦ (contrôle le plus économique)"
+  meaning_en: "♦ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askD.4H"
+  seq: "1D 1S 3S 4C"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askD.4S"
+  seq: "1D 1S 3S 4C"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1S.3S.askD.4D.bw"
+  seq: "1D 1S 3S 4C 4D"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askD.4H.4S"
+  seq: "1D 1S 3S 4C 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Pas de contrôle ♦ : manche"
+  meaning_en: "No ♦ control: game"
+  status: sef
+- id: "ctl.1D.1S.3S.askH"
+  seq: "1D 1S 3S"
+  call: "4D"
+  cond: "hld >= 16 and not ctrl2('H') and ctrl2('C') and ctrl2('D') and true and ctrl2('D')"
+  forcing: F1
+  meaning: "Contrôle ♦, demande le contrôle ♥"
+  meaning_en: "♦ control, asks for a ♥ control"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1D.1S.3S.askH.4H"
+  seq: "1D 1S 3S 4D"
+  call: "4H"
+  cond: "ctrl2('H')"
+  forcing: F1
+  meaning: "Contrôle ♥ (contrôle le plus économique)"
+  meaning_en: "♥ control (cheapest control)"
+  status: sef
+  alert: true
+- id: "ctl.1D.1S.3S.askH.4S"
+  seq: "1D 1S 3S 4D"
+  call: "4S"
+  cond: "true"
+  forcing: NF
+  meaning: "Pas d'autre contrôle : conclusion"
+  meaning_en: "No further control: sign-off"
+  status: sef
+- id: "ctl.1D.1S.3S.askH.4H.bw"
+  seq: "1D 1S 3S 4D 4H"
+  call: "4NT"
+  cond: "true"
+  forcing: ASK
+  meaning: "Contrôle trouvé : Blackwood 5 clés"
+  meaning_en: "Control found: 5-keycard Blackwood"
+  status: sef
+  alert: true
+# --- Soutien forcing au palier de 3 après une réponse à 2 (1M – 2m – x – 3M) : l'ouvreur minimum dit 4M ;
+# maximum, il nomme son contrôle le plus économique (pas une courte dans la mineure du partenaire) ; moyen,
+# avec un défaut, 3SA. Le répondant, capitaine, pose le Blackwood s'il a les contrôles qui manquent.
+# en: Forcing raise to the three level after a two-level response: a minimum opener bids 4M; a maximum one
+# names his cheapest control (never a shortness in partner's minor); a medium one with a flaw bids 3NT.
+# Responder, the captain, asks for keycards when he holds the missing controls.
+- id: "ctl.1H.2C.x.3H.4C"
+  seq: "1H 2C * 3H"
+  call: "4C"
+  cond: "hld >= 18 and (ace('C') or king('C'))"
+  forcing: F1
+  meaning: "Maximum : contrôle ♣ (le plus économique)"
+  meaning_en: "Maximum: ♣ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2C.x.3H.4D"
+  seq: "1H 2C * 3H"
+  call: "4D"
+  cond: "hld >= 18 and ctrl2('D')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♦ (le plus économique)"
+  meaning_en: "Maximum: ♦ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2C.x.3H.3S"
+  seq: "1H 2C * 3H"
+  call: "3S"
+  cond: "hld >= 18 and ctrl2('S')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♠ (le plus économique)"
+  meaning_en: "Maximum: ♠ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2C.x.3H.3NT"
+  seq: "1H 2C * 3H"
+  call: "3NT"
+  cond: "hld >= 15"
+  forcing: F1
+  meaning: "Chelem possible, avec un défaut"
+  meaning_en: "Slam possible, with a flaw"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2C.x.3H.4H"
+  seq: "1H 2C * 3H"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Minimum : manche"
+  meaning_en: "Minimum: game"
+  status: sef
+  trump: "H"
+- id: "ctl.1H.2C.x.3H.4C.bw"
+  seq: "1H 2C * 3H 4C"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2C.x.3H.4C.4H"
+  seq: "1H 2C * 3H 4C"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2C.x.3H.4D.bw"
+  seq: "1H 2C * 3H 4D"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2C.x.3H.4D.4H"
+  seq: "1H 2C * 3H 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2C.x.3H.3S.bw"
+  seq: "1H 2C * 3H 3S"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('D') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2C.x.3H.3S.4H"
+  seq: "1H 2C * 3H 3S"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2C.x.3H.3NT.bw"
+  seq: "1H 2C * 3H 3NT"
+  call: "4NT"
+  cond: "hld >= 15 and ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood"
+  meaning_en: "All controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2C.x.3H.3NT.4H"
+  seq: "1H 2C * 3H 3NT"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2D.x.3H.4C"
+  seq: "1H 2D * 3H"
+  call: "4C"
+  cond: "hld >= 18 and ctrl2('C')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♣ (le plus économique)"
+  meaning_en: "Maximum: ♣ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2D.x.3H.4D"
+  seq: "1H 2D * 3H"
+  call: "4D"
+  cond: "hld >= 18 and (ace('D') or king('D'))"
+  forcing: F1
+  meaning: "Maximum : contrôle ♦ (le plus économique)"
+  meaning_en: "Maximum: ♦ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2D.x.3H.3S"
+  seq: "1H 2D * 3H"
+  call: "3S"
+  cond: "hld >= 18 and ctrl2('S')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♠ (le plus économique)"
+  meaning_en: "Maximum: ♠ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2D.x.3H.3NT"
+  seq: "1H 2D * 3H"
+  call: "3NT"
+  cond: "hld >= 15"
+  forcing: F1
+  meaning: "Chelem possible, avec un défaut"
+  meaning_en: "Slam possible, with a flaw"
+  status: sef
+  alert: true
+  trump: "H"
+- id: "ctl.1H.2D.x.3H.4H"
+  seq: "1H 2D * 3H"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Minimum : manche"
+  meaning_en: "Minimum: game"
+  status: sef
+  trump: "H"
+- id: "ctl.1H.2D.x.3H.4C.bw"
+  seq: "1H 2D * 3H 4C"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2D.x.3H.4C.4H"
+  seq: "1H 2D * 3H 4C"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2D.x.3H.4D.bw"
+  seq: "1H 2D * 3H 4D"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2D.x.3H.4D.4H"
+  seq: "1H 2D * 3H 4D"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2D.x.3H.3S.bw"
+  seq: "1H 2D * 3H 3S"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('D') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2D.x.3H.3S.4H"
+  seq: "1H 2D * 3H 3S"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1H.2D.x.3H.3NT.bw"
+  seq: "1H 2D * 3H 3NT"
+  call: "4NT"
+  cond: "hld >= 15 and ctrl2('C') and ctrl2('D') and ctrl2('S') and (keycards('H') >= 2 or (keycards('H') >= 1 and queen('H')))"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood"
+  meaning_en: "All controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1H.2D.x.3H.3NT.4H"
+  seq: "1H 2D * 3H 3NT"
+  call: "4H"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2C.x.3S.4C"
+  seq: "1S 2C * 3S"
+  call: "4C"
+  cond: "hld >= 18 and (ace('C') or king('C'))"
+  forcing: F1
+  meaning: "Maximum : contrôle ♣ (le plus économique)"
+  meaning_en: "Maximum: ♣ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2C.x.3S.4D"
+  seq: "1S 2C * 3S"
+  call: "4D"
+  cond: "hld >= 18 and ctrl2('D')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♦ (le plus économique)"
+  meaning_en: "Maximum: ♦ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2C.x.3S.4H"
+  seq: "1S 2C * 3S"
+  call: "4H"
+  cond: "hld >= 18 and ctrl2('H')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♥ (le plus économique)"
+  meaning_en: "Maximum: ♥ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2C.x.3S.3NT"
+  seq: "1S 2C * 3S"
+  call: "3NT"
+  cond: "hld >= 15"
+  forcing: F1
+  meaning: "Chelem possible, avec un défaut"
+  meaning_en: "Slam possible, with a flaw"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2C.x.3S.4S"
+  seq: "1S 2C * 3S"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Minimum : manche"
+  meaning_en: "Minimum: game"
+  status: sef
+  trump: "S"
+- id: "ctl.1S.2C.x.3S.4C.bw"
+  seq: "1S 2C * 3S 4C"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2C.x.3S.4C.4S"
+  seq: "1S 2C * 3S 4C"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2C.x.3S.4D.bw"
+  seq: "1S 2C * 3S 4D"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2C.x.3S.4D.4S"
+  seq: "1S 2C * 3S 4D"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2C.x.3S.4H.bw"
+  seq: "1S 2C * 3S 4H"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('D') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2C.x.3S.4H.4S"
+  seq: "1S 2C * 3S 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2C.x.3S.3NT.bw"
+  seq: "1S 2C * 3S 3NT"
+  call: "4NT"
+  cond: "hld >= 15 and ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood"
+  meaning_en: "All controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2C.x.3S.3NT.4S"
+  seq: "1S 2C * 3S 3NT"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2D.x.3S.4C"
+  seq: "1S 2D * 3S"
+  call: "4C"
+  cond: "hld >= 18 and ctrl2('C')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♣ (le plus économique)"
+  meaning_en: "Maximum: ♣ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2D.x.3S.4D"
+  seq: "1S 2D * 3S"
+  call: "4D"
+  cond: "hld >= 18 and (ace('D') or king('D'))"
+  forcing: F1
+  meaning: "Maximum : contrôle ♦ (le plus économique)"
+  meaning_en: "Maximum: ♦ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2D.x.3S.4H"
+  seq: "1S 2D * 3S"
+  call: "4H"
+  cond: "hld >= 18 and ctrl2('H')"
+  forcing: F1
+  meaning: "Maximum : contrôle ♥ (le plus économique)"
+  meaning_en: "Maximum: ♥ control (cheapest)"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2D.x.3S.3NT"
+  seq: "1S 2D * 3S"
+  call: "3NT"
+  cond: "hld >= 15"
+  forcing: F1
+  meaning: "Chelem possible, avec un défaut"
+  meaning_en: "Slam possible, with a flaw"
+  status: sef
+  alert: true
+  trump: "S"
+- id: "ctl.1S.2D.x.3S.4S"
+  seq: "1S 2D * 3S"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Minimum : manche"
+  meaning_en: "Minimum: game"
+  status: sef
+  trump: "S"
+- id: "ctl.1S.2D.x.3S.4C.bw"
+  seq: "1S 2D * 3S 4C"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2D.x.3S.4C.4S"
+  seq: "1S 2D * 3S 4C"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2D.x.3S.4D.bw"
+  seq: "1S 2D * 3S 4D"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2D.x.3S.4D.4S"
+  seq: "1S 2D * 3S 4D"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2D.x.3S.4H.bw"
+  seq: "1S 2D * 3S 4H"
+  call: "4NT"
+  cond: "hld >= 13 and ctrl2('C') and ctrl2('D') and true"
+  forcing: ASK
+  meaning: "Les contrôles qui manquent : Blackwood"
+  meaning_en: "Holds the missing controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2D.x.3S.4H.4S"
+  seq: "1S 2D * 3S 4H"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
+- id: "ctl.1S.2D.x.3S.3NT.bw"
+  seq: "1S 2D * 3S 3NT"
+  call: "4NT"
+  cond: "hld >= 15 and ctrl2('C') and ctrl2('D') and ctrl2('H') and true"
+  forcing: ASK
+  meaning: "Tous les contrôles : Blackwood"
+  meaning_en: "All controls: Blackwood"
+  status: sef
+  alert: true
+- id: "ctl.1S.2D.x.3S.3NT.4S"
+  seq: "1S 2D * 3S 3NT"
+  call: "4S"
+  cond: "true"
+  forcing: SO
+  meaning: "Conclusion"
+  meaning_en: "Sign-off"
+  status: sef
 # --- Splinter du répondant : l'ouvreur sans points perdus dans la courte pose le Blackwood
 # en: Responder's splinter: opener with no wasted values in the shortness asks for keycards
 - id: "sl.spl.{M}.{s}.bw"
@@ -2968,10 +4452,10 @@
   for: [{M: H, x: 3S, c: C}, {M: H, x: 3S, c: D}, {M: S, x: 3H, c: C}, {M: S, x: 3H, c: D}, {M: S, x: 3H, c: H}]
   seq: ["1NT 2C 2{M} {x}", "1NT 2C 2NT 3{M}", "1NT (X) 2C 2{M} {x}", "1NT (X) 2C 2NT 3{M}"]
   call: "4{c}"
-  cond: "hl >= 15 and ctrl1('{c}')"
+  cond: "hl >= 15 and ctrl2('{c}')"
   forcing: F1
-  meaning: "Maximum : contrôle du 1er tour dans la couleur"
-  meaning_en: "Maximum: first-round control in the suit"
+  meaning: "Maximum : contrôle dans la couleur (As, Roi, singleton ou chicane), le plus économique"
+  meaning_en: "Maximum: control in the suit (ace, king, singleton or void), the cheapest"
   status: infere
   alert: true
   trump: "{M}"

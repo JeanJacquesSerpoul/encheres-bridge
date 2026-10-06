@@ -919,17 +919,17 @@ Pass {Contrat final atteint (defaut). Ici 12H (14 HL), 6-4-0-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AT2.Q743.A9.KQT9 KQ97.T8.86432.53 3.AK95.Q5.AJ8764 J8654.J62.KJT7.2"]
+[Deal "N:3.AK95.Q5.AJ8764 J8654.J62.KJT7.2 AT2.Q743.A9.KQT9 KQ97.T8.86432.53"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6H"]
 [Result ""]
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-4-2-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-4-2-4.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 14H (16 HL), 1-4-2-6. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 14 HCP (16 HL), 1-4-2-6.} Pass
-2H {Stayman : 4 cœurs. Ici 15H (15 HL), 3-4-2-4. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-4-2-4.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 14H (16 HL), 1-4-2-6. | Fit in opener's major, slam interest. Here 14 HCP (16 HL), 1-4-2-6.} Pass
-4D {Maximum : controle du 1er tour dans la couleur. Ici 15H (15 HL), 3-4-2-4. | Maximum: first-round control in the suit. Here 15 HCP (15 HL), 3-4-2-4.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (16 HL), 1-4-2-6. | After a control: Blackwood. Here 14 HCP (16 HL), 1-4-2-6.} Pass
+2H {Stayman : 4 coeurs. Ici 15H (15 HL), 3-4-2-4. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-4-2-4.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 14H (16 HL), 1-4-2-6. | Fit in opener's major, slam interest. Here 14 HCP (16 HL), 1-4-2-6.} Pass
+4C {Maximum : controle dans la couleur (As, Roi, singleton ou chicane), le plus economique. Ici 15H (15 HL), 3-4-2-4. | Maximum: control in the suit (ace, king, singleton or void), the cheapest. Here 15 HCP (15 HL), 3-4-2-4.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (16 HL), 1-4-2-6. | After a control: Blackwood. Here 14 HCP (16 HL), 1-4-2-6.} Pass
 5S {2 cles avec la Dame d'atout. Ici 15H (15 HL), 3-4-2-4. | 2 keycards with the trump queen. Here 15 HCP (15 HL), 3-4-2-4.} Pass 6H {Reponse 2 cles avec la Dame : au plus une cle manque, petit chelem. Ici 14H (16 HL), 1-4-2-6. | Answer 2 keycards with the queen: at most one keycard missing, small slam. Here 14 HCP (16 HL), 1-4-2-6.} Pass
-Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 3-4-2-4. | Final contract reached (default). Here 15 HCP (15 HL), 3-4-2-4.} Pass
+Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 50"]
 [Board "50"]

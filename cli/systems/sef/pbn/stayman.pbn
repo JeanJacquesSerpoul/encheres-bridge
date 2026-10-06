@@ -378,7 +378,7 @@ Pass {Contrat final atteint (defaut). Ici 16H (17 HL), 3-2-5-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:T743.AKJ3.A5.K75 8.Q76.QJ83.QJ862 AQJ62.T952.KT4.A K95.84.9762.T943"]
+[Deal "N:AQJ62.T952.KT4.A K95.84.9762.T943 T743.AKJ3.A5.K75 8.Q76.QJ83.QJ862"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "6H"]
@@ -386,9 +386,9 @@ Pass {Contrat final atteint (defaut). Ici 16H (17 HL), 3-2-5-3. | Final contract
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 4-4-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 4-4-2-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 14H (14 HL), 5-4-3-1. | Stayman (5-4 in the majors, 6+ HCP). Here 14 HCP (14 HL), 5-4-3-1.} Pass
 2NT {Stayman : 4 cartes a ♥ ET a ♠. Ici 15H (15 HL), 4-4-2-3. | Stayman: 4 cards in both hearts AND spades. Here 15 HCP (15 HL), 4-4-2-3.} Pass 3H {Naturel, forcing de manche, espoir de chelem. Ici 14H (14 HL), 5-4-3-1. | Natural, game-forcing, slam interest. Here 14 HCP (14 HL), 5-4-3-1.} Pass
-4D {Maximum : controle du 1er tour dans la couleur. Ici 15H (15 HL), 4-4-2-3. | Maximum: first-round control in the suit. Here 15 HCP (15 HL), 4-4-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 5-4-3-1. | After a control: Blackwood. Here 14 HCP (14 HL), 5-4-3-1.} Pass
+4C {Maximum : controle dans la couleur (As, Roi, singleton ou chicane), le plus economique. Ici 15H (15 HL), 4-4-2-3. | Maximum: control in the suit (ace, king, singleton or void), the cheapest. Here 15 HCP (15 HL), 4-4-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 5-4-3-1. | After a control: Blackwood. Here 14 HCP (14 HL), 5-4-3-1.} Pass
 5C {3 ou 0 cle. Ici 15H (15 HL), 4-4-2-3. | 3 or 0 keycards. Here 15 HCP (15 HL), 4-4-2-3.} Pass 6H {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 14H (14 HL), 5-4-3-1. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 14 HCP (14 HL), 5-4-3-1.} Pass
-Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 4-4-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 4-4-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Stayman - Donne 22"]
 [Board "22"]
@@ -738,17 +738,17 @@ Pass {Fin (suites de chelem non codees : voir Partie B). Ici 16H (16 HL), 4-2-4-
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:K93.KQJ97.KJ.QT8 AJT8742.82.7.543 65.AT64.AQ93.KJ2 Q.53.T86542.A976"]
+[Deal "N:65.AT64.AQ93.KJ2 Q.53.T86542.A976 K93.KQJ97.KJ.QT8 AJT8742.82.7.543"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "5H"]
 [Result ""]
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-5-2-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-5-2-3.} Pass 2C {Stayman 4 reponses : majeure 4e, 7+ H (4333 : 12+ H). Ici 14H (14 HL), 2-4-4-3. | 4-response Stayman: 4-card major, 7+ HCP (4333: 12+ HCP). Here 14 HCP (14 HL), 2-4-4-3.} Pass
-2H {Stayman : 4 cœurs. Ici 15H (15 HL), 3-5-2-3. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-5-2-3.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 14H (14 HL), 2-4-4-3. | Fit in opener's major, slam interest. Here 14 HCP (14 HL), 2-4-4-3.} Pass
-4H {Minimum ou pas de controle : conclusion. Ici 15H (15 HL), 3-5-2-3. | Minimum or no control: signoff. Here 15 HCP (15 HL), 3-5-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 2-4-4-3. | After a control: Blackwood. Here 14 HCP (14 HL), 2-4-4-3.} Pass
+2H {Stayman : 4 coeurs. Ici 15H (15 HL), 3-5-2-3. | Stayman: 4 hearts. Here 15 HCP (15 HL), 3-5-2-3.} Pass 3S {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 14H (14 HL), 2-4-4-3. | Fit in opener's major, slam interest. Here 14 HCP (14 HL), 2-4-4-3.} Pass
+4D {Maximum : controle dans la couleur (As, Roi, singleton ou chicane), le plus economique. Ici 15H (15 HL), 3-5-2-3. | Maximum: control in the suit (ace, king, singleton or void), the cheapest. Here 15 HCP (15 HL), 3-5-2-3.} Pass 4NT {Apres un controle : Blackwood. Ici 14H (14 HL), 2-4-4-3. | After a control: Blackwood. Here 14 HCP (14 HL), 2-4-4-3.} Pass
 5D {4 ou 1 cle. Ici 15H (15 HL), 3-5-2-3. | 4 or 1 keycard. Here 15 HCP (15 HL), 3-5-2-3.} Pass 5H {Deux cles manquent : on s'arrete a 5. Ici 14H (14 HL), 2-4-4-3. | Two keycards missing: stop at 5. Here 14 HCP (14 HL), 2-4-4-3.} Pass
-Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 3-5-2-3. | Final contract reached (default). Here 15 HCP (15 HL), 3-5-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Stayman - Donne 42"]
 [Board "42"]
@@ -776,15 +776,17 @@ Pass {Contrat final atteint (defaut). Ici 15H (15 HL), 3-5-2-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AT952.K8.KT7.KQT 3.A6432.J9654.84 KQJ87.QJT5.3.A73 64.97.AQ82.J9652"]
+[Deal "N:KQJ87.QJT5.3.A73 64.97.AQ82.J9652 AT952.K8.KT7.KQT 3.A6432.J9654.84"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4S"]
+[Contract "5S"]
 [Result ""]
 [Auction "S"]
 1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-2-3-3. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-2-3-3.} Pass 2C {Stayman (5-4 majeur, 6+ H). Ici 13H (14 HL), 5-4-1-3. | Stayman (5-4 in the majors, 6+ HCP). Here 13 HCP (14 HL), 5-4-1-3.} Pass
 2S {Stayman : 4 piques. Ici 15H (15 HL), 5-2-3-3. | Stayman: 4 spades. Here 15 HCP (15 HL), 5-2-3-3.} Pass 3H {Fit dans la majeure de l'ouvreur, espoir de chelem. Ici 13H (14 HL), 5-4-1-3. | Fit in opener's major, slam interest. Here 13 HCP (14 HL), 5-4-1-3.} Pass
-4S {Minimum ou pas de controle : conclusion. Ici 15H (15 HL), 5-2-3-3. | Minimum or no control: signoff. Here 15 HCP (15 HL), 5-2-3-3.} Pass Pass {Pas de chelem. Ici 13H (14 HL), 5-4-1-3. | No slam. Here 13 HCP (14 HL), 5-4-1-3.} Pass
+4C {Maximum : controle dans la couleur (As, Roi, singleton ou chicane), le plus economique. Ici 15H (15 HL), 5-2-3-3. | Maximum: control in the suit (ace, king, singleton or void), the cheapest. Here 15 HCP (15 HL), 5-2-3-3.} Pass 4NT {Apres un controle : Blackwood. Ici 13H (14 HL), 5-4-1-3. | After a control: Blackwood. Here 13 HCP (14 HL), 5-4-1-3.} Pass
+5D {4 ou 1 cle. Ici 15H (15 HL), 5-2-3-3. | 4 or 1 keycard. Here 15 HCP (15 HL), 5-2-3-3.} Pass 5S {Deux cles manquent : on s'arrete a 5. Ici 13H (14 HL), 5-4-1-3. | Two keycards missing: stop at 5. Here 13 HCP (14 HL), 5-4-1-3.} Pass
+Pass Pass
 
 [Event "Entrainement Stayman - Donne 44"]
 [Board "44"]

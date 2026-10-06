@@ -45,15 +45,16 @@ Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 2-5-3-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:4.AQJ87.Q2.QJ932 952.T53.KT6.AK76 KT873.K642.AJ7.5 AQJ6.9.98543.T84"]
+[Deal "N:KT873.K642.AJ7.5 AQJ6.9.98543.T84 4.AQJ87.Q2.QJ932 952.T53.KT6.AK76"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1H {5+ cœurs, 12+ H. Ici 12H (14 HL), 1-5-2-5. | 5+ hearts, 12+ HCP. Here 12 HCP (14 HL), 1-5-2-5.} Pass 2D {Repli : 2♦ (3+ cartes), main forte. Ici 11H (11 HL), 5-4-3-1. | Fallback: 2♦ (3+ cards), strong hand. Here 11 HCP (11 HL), 5-4-3-1.} Pass
+1H {5+ coeurs, 12+ H. Ici 12H (14 HL), 1-5-2-5. | 5+ hearts, 12+ HCP. Here 12 HCP (14 HL), 1-5-2-5.} Pass 2D {Repli : 2♦ (3+ cartes), main forte. Ici 11H (11 HL), 5-4-3-1. | Fallback: 2♦ (3+ cards), strong hand. Here 11 HCP (11 HL), 5-4-3-1.} Pass
 2H {Repetition de la couleur d'ouverture. Ici 12H (14 HL), 1-5-2-5. | Rebid of the opening suit. Here 12 HCP (14 HL), 1-5-2-5.} Pass 3H {Fit, 11-12. Ici 11H (11 HL), 5-4-3-1. | Fit, 11-12. Here 11 HCP (11 HL), 5-4-3-1.} Pass
-4H {Accepte l'invitation. Ici 12H (14 HL), 1-5-2-5. | Accepts the invitation. Here 12 HCP (14 HL), 1-5-2-5.} Pass Pass {Contrat final atteint (defaut). Ici 11H (11 HL), 5-4-3-1. | Final contract reached (default). Here 11 HCP (11 HL), 5-4-3-1.} Pass
+3NT {Chelem possible, avec un defaut. Ici 12H (14 HL), 1-5-2-5. | Slam possible, with a flaw. Here 12 HCP (14 HL), 1-5-2-5.} Pass 4H {Conclusion. Ici 11H (11 HL), 5-4-3-1. | Sign-off. Here 11 HCP (11 HL), 5-4-3-1.} Pass
+Pass Pass
 
 [Event "Entrainement Reponses sur une ouverture majeure - Donne 4"]
 [Board "4"]
@@ -131,15 +132,16 @@ Pass {Contrat final atteint (defaut). Ici 13H (14 HL), 5-2-4-2. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:.QJ975.AT76.AJ92 KJT873.8.Q54.Q43 A9542.AKT4.93.T8 Q6.632.KJ82.K765"]
+[Deal "N:A9542.AKT4.93.T8 Q6.632.KJ82.K765 .QJ975.AT76.AJ92 KJT873.8.Q54.Q43"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1H {5+ cœurs, 12+ H. Ici 12H (13 HL), 0-5-4-4. | 5+ hearts, 12+ HCP. Here 12 HCP (13 HL), 0-5-4-4.} Pass 2C {Repli : 2♣ (3+ cartes), main forte. Ici 11H (11 HL), 5-4-2-2. | Fallback: 2♣ (3+ cards), strong hand. Here 11 HCP (11 HL), 5-4-2-2.} Pass
+1H {5+ coeurs, 12+ H. Ici 12H (13 HL), 0-5-4-4. | 5+ hearts, 12+ HCP. Here 12 HCP (13 HL), 0-5-4-4.} Pass 2C {Repli : 2♣ (3+ cartes), main forte. Ici 11H (11 HL), 5-4-2-2. | Fallback: 2♣ (3+ cards), strong hand. Here 11 HCP (11 HL), 5-4-2-2.} Pass
 3C {Fit 4e. Ici 12H (13 HL), 0-5-4-4. | 4-card fit. Here 12 HCP (13 HL), 0-5-4-4.} Pass 3H {Fit, 11-12. Ici 11H (11 HL), 5-4-2-2. | Fit, 11-12. Here 11 HCP (11 HL), 5-4-2-2.} Pass
-4H {Accepte l'invitation. Ici 12H (13 HL), 0-5-4-4. | Accepts the invitation. Here 12 HCP (13 HL), 0-5-4-4.} Pass Pass {Contrat final atteint (defaut). Ici 11H (11 HL), 5-4-2-2. | Final contract reached (default). Here 11 HCP (11 HL), 5-4-2-2.} Pass
+3NT {Chelem possible, avec un defaut. Ici 12H (13 HL), 0-5-4-4. | Slam possible, with a flaw. Here 12 HCP (13 HL), 0-5-4-4.} Pass 4H {Conclusion. Ici 11H (11 HL), 5-4-2-2. | Sign-off. Here 11 HCP (11 HL), 5-4-2-2.} Pass
+Pass Pass
 
 [Event "Entrainement Reponses sur une ouverture majeure - Donne 9"]
 [Board "9"]

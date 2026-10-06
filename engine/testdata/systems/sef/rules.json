@@ -14,10 +14,10 @@
   "id": "open.2C",
   "seq": "",
   "call": "2C",
-  "cond": "(balanced and 22 <= hl <= 23) or (max(S, H) >= 5 and 18 <= hl <= 21 and ptricks >= 7) or (max(C, D) >= 7 and 15 <= hcp <= 16 and ptricks >= 7.5)",
+  "cond": "((balanced or semibalanced) and 22 <= hl <= 23) or (H >= 5 and S >= 5 and losers <= 3) or (max(S, H) >= 5 and 21 <= hl <= 23) or (max(S, H) >= 6 and ptricks >= 8 and qtricks >= 2) or (max(S, H) >= 7 and ptricks >= 8) or (max(C, D) >= 7 and hcp >= 15 and ptricks >= 8.5)",
   "forcing": "F1",
-  "meaning": "Fort indéterminé : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL régulier",
-  "meaning_en": "Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL",
+  "meaning": "Fort indéterminé : majeure 6e (8-8½ levées de jeu, 2 levées de défense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)régulier",
+  "meaning_en": "Strong, undefined: 6-card major (8-8½ playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL",
   "status": "sef",
   "alert": true
  },
@@ -1929,11 +1929,38 @@
   "status": "sef"
  },
  {
+  "id": "2C.2D.2NT.5NT",
+  "seq": "2C 2D 2NT",
+  "call": "5NT",
+  "cond": "balanced and hl >= 15 and S < 4 and H < 4",
+  "forcing": "INV",
+  "meaning": "15+ HL régulier : proposition de grand chelem",
+  "meaning_en": "15+ HL balanced: grand-slam invitation",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2NT.6NT",
+  "seq": "2C 2D 2NT",
+  "call": "6NT",
+  "cond": "balanced and 12 <= hl <= 14 and S < 4 and H < 4",
+  "forcing": "SO",
+  "meaning": "12-14 HL régulier : petit chelem",
+  "meaning_en": "12-14 HL balanced: small slam",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2NT.4NT",
+  "seq": "2C 2D 2NT",
+  "call": "4NT",
+  "cond": "balanced and hl == 11 and S < 4 and H < 4",
+  "forcing": "INV",
+  "meaning": "11 HL régulier : proposition de petit chelem",
+  "meaning_en": "11 HL balanced: small-slam invitation",
+  "status": "sef"
+ },
+ {
   "id": "2NT.r.5NT",
-  "seq": [
-   "2NT",
-   "2C 2D 2NT"
-  ],
+  "seq": "2NT",
   "call": "5NT",
   "cond": "balanced and hl >= 16 and S < 4 and H < 4",
   "forcing": "INV",
@@ -1943,10 +1970,7 @@
  },
  {
   "id": "2NT.r.6NT",
-  "seq": [
-   "2NT",
-   "2C 2D 2NT"
-  ],
+  "seq": "2NT",
   "call": "6NT",
   "cond": "balanced and 13 <= hl <= 15 and S < 4 and H < 4",
   "forcing": "SO",
@@ -1956,10 +1980,7 @@
  },
  {
   "id": "2NT.r.4NT",
-  "seq": [
-   "2NT",
-   "2C 2D 2NT"
-  ],
+  "seq": "2NT",
   "call": "4NT",
   "cond": "balanced and hl == 12 and S < 4 and H < 4",
   "forcing": "INV",
@@ -4893,11 +4914,33 @@
   "id": "2C.2D.2NT",
   "seq": "2C 2D",
   "call": "2NT",
-  "cond": "balanced and 22 <= hl <= 23",
+  "cond": "(balanced or semibalanced) and 22 <= hl <= 23",
   "forcing": "NF",
-  "meaning": "22-23 HL régulier (suites comme sur 2SA)",
-  "meaning_en": "22-23 HL balanced (continuations as over 2NT)",
+  "meaning": "22-23 HL (semi-)régulier, majeure 5e possible (suites comme sur 2SA)",
+  "meaning_en": "22-23 HL (semi-)balanced, possibly a 5-card major (continuations as over 2NT)",
   "status": "choix"
+ },
+ {
+  "id": "2C.2D.4C",
+  "seq": "2C 2D",
+  "call": "4C",
+  "cond": "H >= 6 and S >= 5 and H >= S and losers <= 3",
+  "forcing": "F1",
+  "meaning": "6♥-5♠, bicolore de 3 perdantes",
+  "meaning_en": "6♥-5♠, two-suiter with 3 losers",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.4D",
+  "seq": "2C 2D",
+  "call": "4D",
+  "cond": "S >= 6 and H >= 5 and losers <= 3",
+  "forcing": "F1",
+  "meaning": "6♠-5♥, bicolore de 3 perdantes",
+  "meaning_en": "6♠-5♥, two-suiter with 3 losers",
+  "status": "sef",
+  "alert": true
  },
  {
   "id": "2C.2D.3NT",
@@ -4905,8 +4948,8 @@
   "call": "3NT",
   "cond": "H >= 5 and S >= 5 and losers <= 3",
   "forcing": "NF",
-  "meaning": "5♥ et 5♠, 3 à 3,5 perdantes",
-  "meaning_en": "5♥ and 5♠, 3 to 3.5 losers",
+  "meaning": "5♠-5♥, bicolore de 3 perdantes",
+  "meaning_en": "5♠-5♥, two-suiter with 3 losers",
   "status": "sef"
  },
  {
@@ -4915,8 +4958,8 @@
   "call": "3S",
   "cond": "S >= 7",
   "forcing": "NF",
-  "meaning": "7 cartes, 15-16 H",
-  "meaning_en": "7 cards, 15-16 HCP",
+  "meaning": "7 très belles cartes : 8-8½ levées de jeu en majeure, 8½-9½ en mineure",
+  "meaning_en": "7 very good cards: 8-8½ playing tricks in a major, 8½-9½ in a minor",
   "status": "sef"
  },
  {
@@ -4925,8 +4968,8 @@
   "call": "3H",
   "cond": "H >= 7",
   "forcing": "NF",
-  "meaning": "7 cartes, 15-16 H",
-  "meaning_en": "7 cards, 15-16 HCP",
+  "meaning": "7 très belles cartes : 8-8½ levées de jeu en majeure, 8½-9½ en mineure",
+  "meaning_en": "7 very good cards: 8-8½ playing tricks in a major, 8½-9½ in a minor",
   "status": "sef"
  },
  {
@@ -4935,8 +4978,8 @@
   "call": "3D",
   "cond": "D >= 7",
   "forcing": "NF",
-  "meaning": "7 cartes, 15-16 H",
-  "meaning_en": "7 cards, 15-16 HCP",
+  "meaning": "7 très belles cartes : 8-8½ levées de jeu en majeure, 8½-9½ en mineure",
+  "meaning_en": "7 very good cards: 8-8½ playing tricks in a major, 8½-9½ in a minor",
   "status": "sef"
  },
  {
@@ -4945,8 +4988,8 @@
   "call": "3C",
   "cond": "C >= 7",
   "forcing": "NF",
-  "meaning": "7 cartes, 15-16 H",
-  "meaning_en": "7 cards, 15-16 HCP",
+  "meaning": "7 très belles cartes : 8-8½ levées de jeu en majeure, 8½-9½ en mineure",
+  "meaning_en": "7 very good cards: 8-8½ playing tricks in a major, 8½-9½ in a minor",
   "status": "sef"
  },
  {
@@ -4955,8 +4998,8 @@
   "call": "2S",
   "cond": "S >= 5 and S >= max(S, H)",
   "forcing": "NF",
-  "meaning": "18-21 HL, 5/6 cartes",
-  "meaning_en": "18-21 HL, 5/6 cards",
+  "meaning": "6 cartes et 8-8½ levées de jeu (2 levées de défense), ou 5 cartes et 21-23 HL (5-4 possible)",
+  "meaning_en": "6 cards and 8-8½ playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible)",
   "status": "sef"
  },
  {
@@ -4965,8 +5008,8 @@
   "call": "2H",
   "cond": "H >= 5 and H >= max(S, H)",
   "forcing": "NF",
-  "meaning": "18-21 HL, 5/6 cartes",
-  "meaning_en": "18-21 HL, 5/6 cards",
+  "meaning": "6 cartes et 8-8½ levées de jeu (2 levées de défense), ou 5 cartes et 21-23 HL (5-4 possible)",
+  "meaning_en": "6 cards and 8-8½ playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible)",
   "status": "sef"
  },
  {
@@ -30584,27 +30627,137 @@
   "status": "infere"
  },
  {
-  "id": "2C.2D.2H.bw",
+  "id": "2C.2D.4C.4S",
+  "seq": "2C 2D 4C",
+  "call": "4S",
+  "cond": "S >= H + 2",
+  "forcing": "SO",
+  "meaning": "Préférence ♠ (2 cartes de plus qu'à ♥)",
+  "meaning_en": "Spade preference (2 more cards than in hearts)",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.4C.4H",
+  "seq": "2C 2D 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Préférence ♥",
+  "meaning_en": "Heart preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.4D.4H",
+  "seq": "2C 2D 4D",
+  "call": "4H",
+  "cond": "H >= S + 2",
+  "forcing": "SO",
+  "meaning": "Préférence ♥ (2 cartes de plus qu'à ♠)",
+  "meaning_en": "Heart preference (2 more cards than in spades)",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.4D.4S",
+  "seq": "2C 2D 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Préférence ♠",
+  "meaning_en": "Spade preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.spl.S",
   "seq": "2C 2D 2H",
-  "call": "4NT",
-  "cond": "H >= 3 and hl >= 11",
-  "forcing": "ASK",
-  "meaning": "Fit et 11+ HL face à 18-21 : Blackwood",
-  "meaning_en": "Fit and 11+ HL opposite 18-21: Blackwood",
-  "status": "infere",
+  "call": "3S",
+  "cond": "H >= 4 and short('S') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
   "alert": true,
   "trump": "H"
  },
  {
-  "id": "2C.2D.2S.bw",
-  "seq": "2C 2D 2S",
-  "call": "4NT",
-  "cond": "S >= 3 and hl >= 11",
-  "forcing": "ASK",
-  "meaning": "Fit et 11+ HL face à 18-21 : Blackwood",
-  "meaning_en": "Fit and 11+ HL opposite 18-21: Blackwood",
-  "status": "infere",
+  "id": "2C.2D.2H.spl.C",
+  "seq": "2C 2D 2H",
+  "call": "4C",
+  "cond": "H >= 4 and short('C') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
   "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.2H.spl.D",
+  "seq": "2C 2D 2H",
+  "call": "4D",
+  "cond": "H >= 4 and short('D') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.2S.spl.C",
+  "seq": "2C 2D 2S",
+  "call": "4C",
+  "cond": "S >= 4 and short('C') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.2S.spl.D",
+  "seq": "2C 2D 2S",
+  "call": "4D",
+  "cond": "S >= 4 and short('D') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.2S.spl.H",
+  "seq": "2C 2D 2S",
+  "call": "4H",
+  "cond": "S >= 4 and short('H') and hcp >= 3 and aces + kings <= 1",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, un contrôle d'honneur au plus",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, at most one honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.2H.3H",
+  "seq": "2C 2D 2H",
+  "call": "3H",
+  "cond": "H >= 3 and hl >= 9",
+  "forcing": "F1",
+  "meaning": "Soutien au palier de 3 : espoir de chelem",
+  "meaning_en": "Raise to the three level: slam interest",
+  "status": "sef",
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.2S.3S",
+  "seq": "2C 2D 2S",
+  "call": "3S",
+  "cond": "S >= 3 and hl >= 9",
+  "forcing": "F1",
+  "meaning": "Soutien au palier de 3 : espoir de chelem",
+  "meaning_en": "Raise to the three level: slam interest",
+  "status": "sef",
   "trump": "S"
  },
  {
@@ -30613,8 +30766,8 @@
   "call": "4H",
   "cond": "H >= 3 and hcp >= 5",
   "forcing": "SO",
-  "meaning": "Fit, manche",
-  "meaning_en": "Fit, game",
+  "meaning": "Fit, saut à la manche : conclusion",
+  "meaning_en": "Fit, jump to game: sign-off",
   "status": "infere"
  },
  {
@@ -30623,28 +30776,8 @@
   "call": "4S",
   "cond": "S >= 3 and hcp >= 5",
   "forcing": "SO",
-  "meaning": "Fit, manche",
-  "meaning_en": "Fit, game",
-  "status": "infere"
- },
- {
-  "id": "2C.2D.2H.3H",
-  "seq": "2C 2D 2H",
-  "call": "3H",
-  "cond": "H >= 3",
-  "forcing": "INV",
-  "meaning": "Fit, faible",
-  "meaning_en": "Fit, weak",
-  "status": "infere"
- },
- {
-  "id": "2C.2D.2S.3S",
-  "seq": "2C 2D 2S",
-  "call": "3S",
-  "cond": "S >= 3",
-  "forcing": "INV",
-  "meaning": "Fit, faible",
-  "meaning_en": "Fit, weak",
+  "meaning": "Fit, saut à la manche : conclusion",
+  "meaning_en": "Fit, jump to game: sign-off",
   "status": "infere"
  },
  {
@@ -30668,24 +30801,74 @@
   "status": "infere"
  },
  {
-  "id": "2C.2D.2H.3NT",
+  "id": "2C.2D.2H.C",
   "seq": "2C 2D 2H",
-  "call": "3NT",
-  "cond": "hcp >= 6",
-  "forcing": "SO",
-  "meaning": "Pas de fit, du jeu",
-  "meaning_en": "No fit, with values",
-  "status": "infere"
+  "call": "3C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 7",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : cinq cartes correctes, 7+ H",
+  "meaning_en": "New suit: five decent cards, 7+ HCP",
+  "status": "sef"
  },
  {
-  "id": "2C.2D.2S.3NT",
+  "id": "2C.2D.2H.D",
+  "seq": "2C 2D 2H",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 7",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : cinq cartes correctes, 7+ H",
+  "meaning_en": "New suit: five decent cards, 7+ HCP",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2S.C",
   "seq": "2C 2D 2S",
-  "call": "3NT",
-  "cond": "hcp >= 6",
-  "forcing": "SO",
-  "meaning": "Pas de fit, du jeu",
-  "meaning_en": "No fit, with values",
-  "status": "infere"
+  "call": "3C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 7",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : cinq cartes correctes, 7+ H",
+  "meaning_en": "New suit: five decent cards, 7+ HCP",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2S.D",
+  "seq": "2C 2D 2S",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 7",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : cinq cartes correctes, 7+ H",
+  "meaning_en": "New suit: five decent cards, 7+ HCP",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2S.H",
+  "seq": "2C 2D 2S",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 7",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : cinq cartes correctes, 7+ H",
+  "meaning_en": "New suit: five decent cards, 7+ HCP",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2H.2NT",
+  "seq": "2C 2D 2H",
+  "call": "2NT",
+  "cond": "hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Forcing, 5+ H",
+  "meaning_en": "Forcing, 5+ HCP",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.2S.2NT",
+  "seq": "2C 2D 2S",
+  "call": "2NT",
+  "cond": "hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Forcing, 5+ H",
+  "meaning_en": "Forcing, 5+ HCP",
+  "status": "sef"
  },
  {
   "id": "2C.2D.2H.pass",
@@ -30693,8 +30876,8 @@
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Main nulle",
-  "meaning_en": "Nothing",
+  "meaning": "Moins de 5 H",
+  "meaning_en": "Less than 5 HCP",
   "status": "infere"
  },
  {
@@ -30703,25 +30886,623 @@
   "call": "P",
   "cond": "true",
   "forcing": "NF",
-  "meaning": "Main nulle",
-  "meaning_en": "Nothing",
+  "meaning": "Moins de 5 H",
+  "meaning_en": "Less than 5 HCP",
   "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.3H.4NT",
+  "seq": "2C 2D 2H 3H",
+  "call": "4NT",
+  "cond": "hl >= 20",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2S.3S.4NT",
+  "seq": "2C 2D 2S 3S",
+  "call": "4NT",
+  "cond": "hl >= 20",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
  },
  {
   "id": "2C.2D.2H.3H.4H",
   "seq": "2C 2D 2H 3H",
   "call": "4H",
-  "cond": "hl >= 20",
+  "cond": "true",
   "forcing": "SO",
-  "meaning": "Manche",
-  "meaning_en": "Game",
+  "meaning": "Pas d'intérêt pour le chelem",
+  "meaning_en": "No slam interest",
   "status": "infere"
  },
  {
   "id": "2C.2D.2S.3S.4S",
   "seq": "2C 2D 2S 3S",
   "call": "4S",
-  "cond": "hl >= 20",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas d'intérêt pour le chelem",
+  "meaning_en": "No slam interest",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.spl.S.4NT",
+  "seq": "2C 2D 2H 3S",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('S') == 0 or (ace('S') and hcp_in('S') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2H.spl.C.4NT",
+  "seq": "2C 2D 2H 4C",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('C') == 0 or (ace('C') and hcp_in('C') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2H.spl.D.4NT",
+  "seq": "2C 2D 2H 4D",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('D') == 0 or (ace('D') and hcp_in('D') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2S.spl.C.4NT",
+  "seq": "2C 2D 2S 4C",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('C') == 0 or (ace('C') and hcp_in('C') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2S.spl.D.4NT",
+  "seq": "2C 2D 2S 4D",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('D') == 0 or (ace('D') and hcp_in('D') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2S.spl.H.4NT",
+  "seq": "2C 2D 2S 4H",
+  "call": "4NT",
+  "cond": "hl >= 20 and aces >= 2 and (hcp_in('H') == 0 or (ace('H') and hcp_in('H') == 4))",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face au singleton : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.2H.spl.S.4H",
+  "seq": "2C 2D 2H 3S",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.spl.C.4H",
+  "seq": "2C 2D 2H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.spl.D.4H",
+  "seq": "2C 2D 2H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.spl.C.4S",
+  "seq": "2C 2D 2S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.spl.D.4S",
+  "seq": "2C 2D 2S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.4H.4S",
+  "seq": "2C 2D 2S 4H",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3H",
+  "seq": "2C 2D 2H 2NT",
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3S",
+  "seq": "2C 2D 2S 2NT",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3S",
+  "seq": "2C 2D 2H 2NT",
+  "call": "3S",
+  "cond": "S >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3C",
+  "seq": "2C 2D 2H 2NT",
+  "call": "3C",
+  "cond": "C >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3D",
+  "seq": "2C 2D 2H 2NT",
+  "call": "3D",
+  "cond": "D >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3H",
+  "seq": "2C 2D 2S 2NT",
+  "call": "3H",
+  "cond": "H >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3C",
+  "seq": "2C 2D 2S 2NT",
+  "call": "3C",
+  "cond": "C >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3D",
+  "seq": "2C 2D 2S 2NT",
+  "call": "3D",
+  "cond": "D >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3NT",
+  "seq": "2C 2D 2H 2NT",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "5 cartes, main régulière",
+  "meaning_en": "5 cards, balanced",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3NT",
+  "seq": "2C 2D 2S 2NT",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "5 cartes, main régulière",
+  "meaning_en": "5 cards, balanced",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3H.4H",
+  "seq": "2C 2D 2H 2NT 3H",
+  "call": "4H",
+  "cond": "H >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3S.4S",
+  "seq": "2C 2D 2S 2NT 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3S.4S",
+  "seq": "2C 2D 2H 2NT 3S",
+  "call": "4S",
+  "cond": "S >= 4",
+  "forcing": "SO",
+  "meaning": "Fit dans la seconde majeure",
+  "meaning_en": "Fit in the second major",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3H.4H",
+  "seq": "2C 2D 2S 2NT 3H",
+  "call": "4H",
+  "cond": "H >= 4",
+  "forcing": "SO",
+  "meaning": "Fit dans la seconde majeure",
+  "meaning_en": "Fit in the second major",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3S.4H",
+  "seq": "2C 2D 2H 2NT 3S",
+  "call": "4H",
+  "cond": "H >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3C.4H",
+  "seq": "2C 2D 2H 2NT 3C",
+  "call": "4H",
+  "cond": "H >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.3D.4H",
+  "seq": "2C 2D 2H 2NT 3D",
+  "call": "4H",
+  "cond": "H >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3H.4S",
+  "seq": "2C 2D 2S 2NT 3H",
+  "call": "4S",
+  "cond": "S >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3C.4S",
+  "seq": "2C 2D 2S 2NT 3C",
+  "call": "4S",
+  "cond": "S >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.3D.4S",
+  "seq": "2C 2D 2S 2NT 3D",
+  "call": "4S",
+  "cond": "S >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.2NT.x.3NT",
+  "seq": "2C 2D 2H 2NT 3C|3D|3H|3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.2NT.x.3NT",
+  "seq": "2C 2D 2S 2NT 3C|3D|3H|3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.C.3H",
+  "seq": "2C 2D 2H 3C",
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.D.3H",
+  "seq": "2C 2D 2H 3D",
+  "call": "3H",
+  "cond": "H >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.C.3S",
+  "seq": "2C 2D 2S 3C",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.D.3S",
+  "seq": "2C 2D 2S 3D",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.H.3S",
+  "seq": "2C 2D 2S 3H",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.H.4H",
+  "seq": "2C 2D 2S 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit ♥",
+  "meaning_en": "Heart fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.C.4C",
+  "seq": "2C 2D 2H 3C",
+  "call": "4C",
+  "cond": "C >= 3 and not balanced",
+  "forcing": "F1",
+  "meaning": "Fit, main irrégulière",
+  "meaning_en": "Fit, unbalanced hand",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.D.4D",
+  "seq": "2C 2D 2H 3D",
+  "call": "4D",
+  "cond": "D >= 3 and not balanced",
+  "forcing": "F1",
+  "meaning": "Fit, main irrégulière",
+  "meaning_en": "Fit, unbalanced hand",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.C.4C",
+  "seq": "2C 2D 2S 3C",
+  "call": "4C",
+  "cond": "C >= 3 and not balanced",
+  "forcing": "F1",
+  "meaning": "Fit, main irrégulière",
+  "meaning_en": "Fit, unbalanced hand",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.D.4D",
+  "seq": "2C 2D 2S 3D",
+  "call": "4D",
+  "cond": "D >= 3 and not balanced",
+  "forcing": "F1",
+  "meaning": "Fit, main irrégulière",
+  "meaning_en": "Fit, unbalanced hand",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.C.3NT",
+  "seq": "2C 2D 2H 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.D.3NT",
+  "seq": "2C 2D 2H 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.C.3NT",
+  "seq": "2C 2D 2S 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.D.3NT",
+  "seq": "2C 2D 2S 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.H.3NT",
+  "seq": "2C 2D 2S 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.x.3H.4H",
+  "seq": "2C 2D 2H 3C|3D 3H",
+  "call": "4H",
+  "cond": "H >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.x.3S.4S",
+  "seq": "2C 2D 2S 3C|3D|3H 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.x.3H.3NT",
+  "seq": "2C 2D 2H 3C|3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.x.3S.3NT",
+  "seq": "2C 2D 2S 3C|3D|3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.C.4C.5C",
+  "seq": "2C 2D 2H 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.D.4D.5D",
+  "seq": "2C 2D 2H 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.C.4C.5C",
+  "seq": "2C 2D 2S 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.D.4D.5D",
+  "seq": "2C 2D 2S 3D 4D",
+  "call": "5D",
+  "cond": "true",
   "forcing": "SO",
   "meaning": "Manche",
   "meaning_en": "Game",
@@ -30758,13 +31539,399 @@
   "status": "infere"
  },
  {
+  "id": "2C.2D.3H.S",
+  "seq": "2C 2D 3H",
+  "call": "3S",
+  "cond": "hcp >= 9 and (ace('S') or king('S'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.3H.C",
+  "seq": "2C 2D 3H",
+  "call": "4C",
+  "cond": "hcp >= 9 and (ace('C') or king('C'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.3H.D",
+  "seq": "2C 2D 3H",
+  "call": "4D",
+  "cond": "hcp >= 9 and (ace('D') or king('D'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "H"
+ },
+ {
+  "id": "2C.2D.3S.C",
+  "seq": "2C 2D 3S",
+  "call": "4C",
+  "cond": "hcp >= 9 and (ace('C') or king('C'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.3S.D",
+  "seq": "2C 2D 3S",
+  "call": "4D",
+  "cond": "hcp >= 9 and (ace('D') or king('D'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.3S.H",
+  "seq": "2C 2D 3S",
+  "call": "4H",
+  "cond": "hcp >= 9 and (ace('H') or king('H'))",
+  "forcing": "F1",
+  "meaning": "Contrôle, fit implicite : espoir de chelem",
+  "meaning_en": "Control, implied fit: slam interest",
+  "status": "sef",
+  "trump": "S"
+ },
+ {
+  "id": "2C.2D.3H.4H",
+  "seq": "2C 2D 3H",
+  "call": "4H",
+  "cond": "hcp >= 6 or (H >= 2 and hcp >= 3)",
+  "forcing": "SO",
+  "meaning": "Fit au palier de 4 : conclusion",
+  "meaning_en": "Raise to the four level: sign-off",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3S.4S",
+  "seq": "2C 2D 3S",
+  "call": "4S",
+  "cond": "hcp >= 6 or (S >= 2 and hcp >= 3)",
+  "forcing": "SO",
+  "meaning": "Fit au palier de 4 : conclusion",
+  "meaning_en": "Raise to the four level: sign-off",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3C.4C",
+  "seq": "2C 2D 3C",
+  "call": "4C",
+  "cond": "C >= 3 and hcp >= 9",
+  "forcing": "F1",
+  "meaning": "Fit au palier de 4 : espoir de chelem",
+  "meaning_en": "Raise to the four level: slam interest",
+  "status": "sef",
+  "trump": "C"
+ },
+ {
+  "id": "2C.2D.3D.4D",
+  "seq": "2C 2D 3D",
+  "call": "4D",
+  "cond": "D >= 3 and hcp >= 9",
+  "forcing": "F1",
+  "meaning": "Fit au palier de 4 : espoir de chelem",
+  "meaning_en": "Raise to the four level: slam interest",
+  "status": "sef",
+  "trump": "D"
+ },
+ {
+  "id": "2C.2D.3C.D",
+  "seq": "2C 2D 3C",
+  "call": "3D",
+  "cond": "hcp >= 6 and hcp_in('D') >= 4 and not (stop('C') and stop('D') and stop('H') and stop('S'))",
+  "forcing": "F1",
+  "meaning": "Force dans la couleur, pas forcément de longueur",
+  "meaning_en": "Values in the suit, not necessarily length",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3C.H",
+  "seq": "2C 2D 3C",
+  "call": "3H",
+  "cond": "hcp >= 6 and hcp_in('H') >= 4 and not (stop('C') and stop('D') and stop('H') and stop('S'))",
+  "forcing": "F1",
+  "meaning": "Force dans la couleur, pas forcément de longueur",
+  "meaning_en": "Values in the suit, not necessarily length",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3C.S",
+  "seq": "2C 2D 3C",
+  "call": "3S",
+  "cond": "hcp >= 6 and hcp_in('S') >= 4 and not (stop('C') and stop('D') and stop('H') and stop('S'))",
+  "forcing": "F1",
+  "meaning": "Force dans la couleur, pas forcément de longueur",
+  "meaning_en": "Values in the suit, not necessarily length",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3D.H",
+  "seq": "2C 2D 3D",
+  "call": "3H",
+  "cond": "hcp >= 6 and hcp_in('H') >= 4 and not (stop('C') and stop('D') and stop('H') and stop('S'))",
+  "forcing": "F1",
+  "meaning": "Force dans la couleur, pas forcément de longueur",
+  "meaning_en": "Values in the suit, not necessarily length",
+  "status": "sef"
+ },
+ {
+  "id": "2C.2D.3D.S",
+  "seq": "2C 2D 3D",
+  "call": "3S",
+  "cond": "hcp >= 6 and hcp_in('S') >= 4 and not (stop('C') and stop('D') and stop('H') and stop('S'))",
+  "forcing": "F1",
+  "meaning": "Force dans la couleur, pas forcément de longueur",
+  "meaning_en": "Values in the suit, not necessarily length",
+  "status": "sef"
+ },
+ {
   "id": "2C.2D.3x.r",
-  "seq": "2C 2D 3C|3D|3H|3S",
+  "seq": "2C 2D 3C|3D",
   "call": "3NT",
   "cond": "hcp >= 6",
   "forcing": "SO",
   "meaning": "Manche à SA",
   "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3H.S.4NT",
+  "seq": "2C 2D 3H 3S",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3H.C.4NT",
+  "seq": "2C 2D 3H 4C",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3H.D.4NT",
+  "seq": "2C 2D 3H 4D",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3S.C.4NT",
+  "seq": "2C 2D 3S 4C",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3S.D.4NT",
+  "seq": "2C 2D 3S 4D",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3S.H.4NT",
+  "seq": "2C 2D 3S 4H",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3H.x.4H",
+  "seq": "2C 2D 3H 3S|4C|4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3S.x.4S",
+  "seq": "2C 2D 3S 4C|4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3S.4H.4S",
+  "seq": "2C 2D 3S 4H",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.4C.4NT",
+  "seq": "2C 2D 3C 4C",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3D.4D.4NT",
+  "seq": "2C 2D 3D 4D",
+  "call": "4NT",
+  "cond": "aces + kings >= 3",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2C.2D.3C.4C.5C",
+  "seq": "2C 2D 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3D.4D.5D",
+  "seq": "2C 2D 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.D.3NT",
+  "seq": "2C 2D 3C 3D",
+  "call": "3NT",
+  "cond": "stop('H') and stop('S')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux autres couleurs : 3SA",
+  "meaning_en": "Stoppers in the other two suits: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.H.3NT",
+  "seq": "2C 2D 3C 3H",
+  "call": "3NT",
+  "cond": "stop('D') and stop('S')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux autres couleurs : 3SA",
+  "meaning_en": "Stoppers in the other two suits: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.S.3NT",
+  "seq": "2C 2D 3C 3S",
+  "call": "3NT",
+  "cond": "stop('D') and stop('H')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux autres couleurs : 3SA",
+  "meaning_en": "Stoppers in the other two suits: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3D.H.3NT",
+  "seq": "2C 2D 3D 3H",
+  "call": "3NT",
+  "cond": "stop('C') and stop('S')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux autres couleurs : 3SA",
+  "meaning_en": "Stoppers in the other two suits: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3D.S.3NT",
+  "seq": "2C 2D 3D 3S",
+  "call": "3NT",
+  "cond": "stop('C') and stop('H')",
+  "forcing": "SO",
+  "meaning": "Arrêts dans les deux autres couleurs : 3SA",
+  "meaning_en": "Stoppers in the other two suits: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.x.4C",
+  "seq": "2C 2D 3C 3D|3H|3S",
+  "call": "4C",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas d'arrêt pour 3SA",
+  "meaning_en": "No stopper for 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3D.x.4D",
+  "seq": "2C 2D 3D 3H|3S",
+  "call": "4D",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas d'arrêt pour 3SA",
+  "meaning_en": "No stopper for 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3C.x.4C.5C",
+  "seq": "2C 2D 3C 3D|3H|3S 4C",
+  "call": "5C",
+  "cond": "hcp >= 8",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.3D.x.4D.5D",
+  "seq": "2C 2D 3D 3H|3S 4D",
+  "call": "5D",
+  "cond": "hcp >= 8",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
   "status": "infere"
  },
  {

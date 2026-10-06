@@ -98,16 +98,16 @@ Pass {Contrat final atteint (defaut). Ici 20H (20 HL), 3-2-5-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AK9.KQJT4.K98.AT 8643.63..KQ97542 QJT75.A52.AT7.J6 2.987.QJ65432.83"]
+[Deal "N:T9832.AQ.2.KQ874 64.K9652.K8.JT32 AKQJ.73.AJ954.A6 75.JT84.QT763.95"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6S"]
 [Result ""]
 [Auction "S"]
-2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 20H (21 HL), 3-5-3-2. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 20 HCP (21 HL), 3-5-3-2.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 12H (13 HL), 5-3-3-2. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 12 HCP (13 HL), 5-3-3-2.} Pass
-3S {Rectification : fit par 3 cartes ou plus. Ici 20H (21 HL), 3-5-3-2. | Correction: a fit of three cards or more. Here 20 HCP (21 HL), 3-5-3-2.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 12H (13 HL), 5-3-3-2. | Fit and 9+ HL: Blackwood. Here 12 HCP (13 HL), 5-3-3-2.} Pass
-5C {3 ou 0 cle. Ici 20H (21 HL), 3-5-3-2. | 3 or 0 keycards. Here 20 HCP (21 HL), 3-5-3-2.} Pass 6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 12H (13 HL), 5-3-3-2. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 12 HCP (13 HL), 5-3-3-2.} Pass
-Pass {Contrat final atteint (defaut). Ici 20H (21 HL), 3-5-3-2. | Final contract reached (default). Here 20 HCP (21 HL), 3-5-3-2.} Pass
+2NT {20-21 HL, regulier (5M, 5422 ou 6322 avec 6 cartes mineures possibles). Ici 19H (20 HL), 4-2-5-2. | 20-21 HL, balanced (5-card major, 5422 or 6322 with a 6-card minor possible). Here 19 HCP (20 HL), 4-2-5-2.} Pass 3H {Texas ♠ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 11H (11 HL), 5-2-1-5. | Texas ♠: opener corrects with a fit, otherwise 3NT. Here 11 HCP (11 HL), 5-2-1-5.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 19H (20 HL), 4-2-5-2. | Correction: a fit of three cards or more. Here 19 HCP (20 HL), 4-2-5-2.} Pass 4NT {Fit et 9+ HL : Blackwood. Ici 11H (11 HL), 5-2-1-5. | Fit and 9+ HL: Blackwood. Here 11 HCP (11 HL), 5-2-1-5.} Pass
+5D {4 ou 1 cle. Ici 19H (20 HL), 4-2-5-2. | 4 or 1 keycard. Here 19 HCP (20 HL), 4-2-5-2.} Pass 6S {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 11H (11 HL), 5-2-1-5. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 11 HCP (11 HL), 5-2-1-5.} Pass
+Pass Pass
 
 [Event "Entrainement Texas majeurs - Donne 7"]
 [Board "7"]

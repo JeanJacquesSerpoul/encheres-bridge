@@ -9,15 +9,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKJ965..T.KQ9754 7.T4.9876532.J83 Q842.QJ6.AKQJ4.A T3.AK987532..T62"]
+[Deal "N:A753.KQ3.AKJ.653 98.AT8764.987.Q7 KQJT642.52.Q.KJ8 .J9.T65432.AT942"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "6S"]
+[Contract "5S"]
 [Result ""]
 [Auction "S"]
-1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 13H (17 HL), 6-0-1-6. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 13 HCP (17 HL), 6-0-1-6.} Pass 4NT {Blackwood 5 cles. Ici 19H (19 HL), 4-3-5-1. | 5-keycard Blackwood. Here 19 HCP (19 HL), 4-3-5-1.} Pass
-5NT {2 cles (ou 4) et une chicane. Ici 13H (17 HL), 6-0-1-6. | 2 keycards (or 4) and a void. Here 13 HCP (17 HL), 6-0-1-6.} Pass 6S {Petit chelem (ou pas de palier de 5 disponible). Ici 19H (19 HL), 4-3-5-1. | Small slam (or no 5-level available). Here 19 HCP (19 HL), 4-3-5-1.} Pass
-Pass {Contrat final atteint (defaut). Ici 13H (17 HL), 6-0-1-6. | Final contract reached (default). Here 13 HCP (17 HL), 6-0-1-6.} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (14 HL), 7-2-1-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (14 HL), 7-2-1-3.} Pass 4NT {Blackwood 5 cles. Ici 17H (17 HL), 4-3-3-3. | 5-keycard Blackwood. Here 17 HCP (17 HL), 4-3-3-3.} Pass
+5D {4 ou 1 cle. Ici 12H (14 HL), 7-2-1-3. | 4 or 1 keycard. Here 12 HCP (14 HL), 7-2-1-3.} Pass 5S {Deux cles manquent : on s'arrete a 5. Ici 17H (17 HL), 4-3-3-3. | Two keycards missing: stop at 5. Here 17 HCP (17 HL), 4-3-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 2"]
 [Board "2"]
@@ -351,16 +351,16 @@ Pass {Contrat final atteint (defaut). Ici 14H (14 HL), 3-3-3-4. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKQT6.QJT7543..J 985.6.QJT9872.Q8 J43.AK98.6.AKT65 72.2.AK543.97432"]
+[Deal "N:AJT982.98762.A.Q 4.J.KJ9542.KJT96 KQ73.AKQ53.T83.4 65.T4.Q76.A87532"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6H"]
 [Result ""]
 [Auction "S"]
-1H {5+ cœurs, 12+ H. Ici 13H (16 HL), 5-7-0-1. | 5+ hearts, 12+ HCP. Here 13 HCP (16 HL), 5-7-0-1.} Pass 2C {4+ cartes, 11+ HL. Ici 15H (16 HL), 3-4-1-5. | 4+ cards, 11+ HL. Here 15 HCP (16 HL), 3-4-1-5.} Pass
-2H {Repetition de la couleur d'ouverture. Ici 13H (16 HL), 5-7-0-1. | Rebid of the opening suit. Here 13 HCP (16 HL), 5-7-0-1.} Pass 4NT {Fit et 16+ HLD : Blackwood. Ici 15H (16 HL), 3-4-1-5. | Fit and 16+ HLD: Blackwood. Here 15 HCP (16 HL), 3-4-1-5.} Pass
-6D {3 ou 1 cle + chicane ♦. Ici 13H (16 HL), 5-7-0-1. | 3 or 1 keycard + ♦ void. Here 13 HCP (16 HL), 5-7-0-1.} Pass 6H {Petit chelem (ou pas de palier de 5 disponible). Ici 15H (16 HL), 3-4-1-5. | Small slam (or no 5-level available). Here 15 HCP (16 HL), 3-4-1-5.} Pass
-Pass {Contrat final atteint (defaut). Ici 13H (16 HL), 5-7-0-1. | Final contract reached (default). Here 13 HCP (16 HL), 5-7-0-1.} Pass
+1H {5+ coeurs, 12+ H. Ici 14H (15 HL), 4-5-3-1. | 5+ hearts, 12+ HCP. Here 14 HCP (15 HL), 4-5-3-1.} Pass 2C {Repli : 2♣ (3+ cartes), main forte. Ici 11H (11 HL), 6-5-1-1. | Fallback: 2♣ (3+ cards), strong hand. Here 11 HCP (11 HL), 6-5-1-1.} Pass
+2H {Repetition de la couleur d'ouverture. Ici 14H (15 HL), 4-5-3-1. | Rebid of the opening suit. Here 14 HCP (15 HL), 4-5-3-1.} Pass 4NT {Fit et 16+ HLD : Blackwood. Ici 11H (11 HL), 6-5-1-1. | Fit and 16+ HLD: Blackwood. Here 11 HCP (11 HL), 6-5-1-1.} Pass
+5S {2 cles avec la Dame d'atout. Ici 14H (15 HL), 4-5-3-1. | 2 keycards with the trump queen. Here 14 HCP (15 HL), 4-5-3-1.} Pass 6H {Reponse 2 cles avec la Dame : au plus une cle manque, petit chelem. Ici 11H (11 HL), 6-5-1-1. | Answer 2 keycards with the queen: at most one keycard missing, small slam. Here 11 HCP (11 HL), 6-5-1-1.} Pass
+Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 20"]
 [Board "20"]
@@ -389,16 +389,16 @@ Pass {Contrat final atteint (defaut). Ici 12H (14 HL), 5-3-0-5. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AKQ8.KQ982.AJ83. JT954.7.T765.K87 763.AT6.K9.QJ952 2.J543.Q42.AT643"]
+[Deal "N:QT6.963.KQJ32.83 J75432.Q75.T5.42 AK9.AKJ42.87.KQ6 8.T8.A964.AJT975"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "6H"]
+[Contract "5H"]
 [Result ""]
 [Auction "S"]
-2C {Fort indetermine : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL regulier. Ici 19H (20 HL), 4-5-4-0. | Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL. Here 19 HCP (20 HL), 4-5-4-0.} Pass 2D {Relais obligatoire. Ici 10H (11 HL), 3-3-2-5. | Compulsory relay. Here 10 HCP (11 HL), 3-3-2-5.} Pass
-2H {18-21 HL, 5/6 cartes. Ici 19H (20 HL), 4-5-4-0. | 18-21 HL, 5/6 cards. Here 19 HCP (20 HL), 4-5-4-0.} Pass 4NT {Fit et 11+ HL face a 18-21 : Blackwood. Ici 10H (11 HL), 3-3-2-5. | Fit and 11+ HL opposite 18-21: Blackwood. Here 10 HCP (11 HL), 3-3-2-5.} Pass
-6C {3 ou 1 cle + chicane ♣. Ici 19H (20 HL), 4-5-4-0. | 3 or 1 keycard + ♣ void. Here 19 HCP (20 HL), 4-5-4-0.} Pass 6H {Petit chelem (ou pas de palier de 5 disponible). Ici 10H (11 HL), 3-3-2-5. | Small slam (or no 5-level available). Here 10 HCP (11 HL), 3-3-2-5.} Pass
-Pass {Contrat final atteint (defaut). Ici 19H (20 HL), 4-5-4-0. | Final contract reached (default). Here 19 HCP (20 HL), 4-5-4-0.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 3-5-2-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 3-5-2-3.} Pass 2D {Relais obligatoire. Ici 8H (9 HL), 3-3-5-2. | Compulsory relay. Here 8 HCP (9 HL), 3-3-5-2.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 3-5-2-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 3-5-2-3.} Pass 3H {Soutien au palier de 3 : espoir de chelem. Ici 8H (9 HL), 3-3-5-2. | Raise to the three level: slam interest. Here 8 HCP (9 HL), 3-3-5-2.} Pass
+4NT {Blackwood. Ici 20H (21 HL), 3-5-2-3. | Blackwood. Here 20 HCP (21 HL), 3-5-2-3.} Pass 5C {3 ou 0 cle. Ici 8H (9 HL), 3-3-5-2. | 3 or 0 keycards. Here 8 HCP (9 HL), 3-3-5-2.} Pass
+5H {Deux cles manquent : on s'arrete a 5. Ici 20H (21 HL), 3-5-2-3. | Two keycards missing: stop at 5. Here 20 HCP (21 HL), 3-5-2-3.} Pass Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 22"]
 [Board "22"]
@@ -446,16 +446,16 @@ Pass {Contrat final atteint (defaut). Ici 14H (15 HL), 4-2-1-6. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQT75.6.KJ84.AT 2.Q974.Q7652.J42 986.AKT.3.KQ8763 J43.J8532.AT9.95"]
+[Deal "N:Q72.KJ93.AJ8.K32 T963.T75.QT6.JT4 AKJ854.A2.K52.A8 .Q864.9743.Q9765"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6S"]
 [Result ""]
 [Auction "S"]
-2C {Fort indetermine : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL regulier. Ici 17H (19 HL), 6-1-4-2. | Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL. Here 17 HCP (19 HL), 6-1-4-2.} Pass 2D {Relais obligatoire. Ici 12H (14 HL), 3-3-1-6. | Compulsory relay. Here 12 HCP (14 HL), 3-3-1-6.} Pass
-2S {18-21 HL, 5/6 cartes. Ici 17H (19 HL), 6-1-4-2. | 18-21 HL, 5/6 cards. Here 17 HCP (19 HL), 6-1-4-2.} Pass 4NT {Fit et 11+ HL face a 18-21 : Blackwood. Ici 12H (14 HL), 3-3-1-6. | Fit and 11+ HL opposite 18-21: Blackwood. Here 12 HCP (14 HL), 3-3-1-6.} Pass
-5C {3 ou 0 cle. Ici 17H (19 HL), 6-1-4-2. | 3 or 0 keycards. Here 17 HCP (19 HL), 6-1-4-2.} Pass 6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 12H (14 HL), 3-3-1-6. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 12 HCP (14 HL), 3-3-1-6.} Pass
-Pass {Contrat final atteint (defaut). Ici 17H (19 HL), 6-1-4-2. | Final contract reached (default). Here 17 HCP (19 HL), 6-1-4-2.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 19H (21 HL), 6-2-3-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 19 HCP (21 HL), 6-2-3-2.} Pass 2D {Relais obligatoire. Ici 14H (14 HL), 3-4-3-3. | Compulsory relay. Here 14 HCP (14 HL), 3-4-3-3.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 19H (21 HL), 6-2-3-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 19 HCP (21 HL), 6-2-3-2.} Pass 3S {Soutien au palier de 3 : espoir de chelem. Ici 14H (14 HL), 3-4-3-3. | Raise to the three level: slam interest. Here 14 HCP (14 HL), 3-4-3-3.} Pass
+4NT {Blackwood. Ici 19H (21 HL), 6-2-3-2. | Blackwood. Here 19 HCP (21 HL), 6-2-3-2.} Pass 5D {4 ou 1 cle. Ici 14H (14 HL), 3-4-3-3. | 4 or 1 keycard. Here 14 HCP (14 HL), 3-4-3-3.} Pass
+6S {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 19H (21 HL), 6-2-3-2. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 19 HCP (21 HL), 6-2-3-2.} Pass Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 25"]
 [Board "25"]
@@ -844,16 +844,16 @@ Pass {Contrat final atteint (defaut). Ici 21H (21 HL), 4-4-1-4. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQ43.A875.KQ96. 76.QJ.J754.QT763 JT5.96.AT3.AK982 982.KT432.82.J54"]
+[Deal "N:J752.Q983.KQJ96. T98.J42.83.KT986 AKQ63.AKT.AT4.75 4.765.752.AQJ432"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6S"]
 [Result ""]
 [Auction "S"]
-2C {Fort indetermine : 5/6 cartes majeures 18-21 HL, ou 7 cartes mineures, ou 22-23 HL regulier. Ici 18H (19 HL), 5-4-4-0. | Strong, undefined: 5/6-card major 18-21 HL, or 7-card minor, or balanced 22-23 HL. Here 18 HCP (19 HL), 5-4-4-0.} Pass 2D {Relais obligatoire. Ici 12H (13 HL), 3-2-3-5. | Compulsory relay. Here 12 HCP (13 HL), 3-2-3-5.} Pass
-2S {18-21 HL, 5/6 cartes. Ici 18H (19 HL), 5-4-4-0. | 18-21 HL, 5/6 cards. Here 18 HCP (19 HL), 5-4-4-0.} Pass 4NT {Fit et 11+ HL face a 18-21 : Blackwood. Ici 12H (13 HL), 3-2-3-5. | Fit and 11+ HL opposite 18-21: Blackwood. Here 12 HCP (13 HL), 3-2-3-5.} Pass
-6C {3 ou 1 cle + chicane ♣. Ici 18H (19 HL), 5-4-4-0. | 3 or 1 keycard + ♣ void. Here 18 HCP (19 HL), 5-4-4-0.} Pass 6S {Petit chelem (ou pas de palier de 5 disponible). Ici 12H (13 HL), 3-2-3-5. | Small slam (or no 5-level available). Here 12 HCP (13 HL), 3-2-3-5.} Pass
-Pass {Contrat final atteint (defaut). Ici 18H (19 HL), 5-4-4-0. | Final contract reached (default). Here 18 HCP (19 HL), 5-4-4-0.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 5-3-3-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 5-3-3-2.} Pass 2D {Relais obligatoire. Ici 9H (10 HL), 4-4-5-0. | Compulsory relay. Here 9 HCP (10 HL), 4-4-5-0.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 5-3-3-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 5-3-3-2.} Pass 4C {Splinter : singleton ou chicane, 4+ atouts, un controle d'honneur au plus. Ici 9H (10 HL), 4-4-5-0. | Splinter: singleton or void, 4+ trumps, at most one honour control. Here 9 HCP (10 HL), 4-4-5-0.} Pass
+4NT {Pas d'honneur perdu face au singleton : Blackwood. Ici 20H (21 HL), 5-3-3-2. | No wasted honour opposite the shortness: Blackwood. Here 20 HCP (21 HL), 5-3-3-2.} Pass 5C {3 ou 0 cle. Ici 9H (10 HL), 4-4-5-0. | 3 or 0 keycards. Here 9 HCP (10 HL), 4-4-5-0.} Pass
+6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 20H (21 HL), 5-3-3-2. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 20 HCP (21 HL), 5-3-3-2.} Pass Pass Pass
 
 [Event "Entrainement Blackwood 5 cles - Donne 46"]
 [Board "46"]

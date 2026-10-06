@@ -180,6 +180,7 @@ func (st *coherenceStats) bid(t *testing.T, rs *RuleSet, d *Deal) []SeatCall {
 			stripped = stripped[1:]
 		}
 		tr := trump[sideOf(seat)]
+		setContext(feats[seat], history, seat)
 		chosen := -1
 		for idx, r := range st.rules {
 			if r.Option != "" {

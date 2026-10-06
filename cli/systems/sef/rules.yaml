@@ -368,6 +368,7 @@
   meaning: "Rectifie le Texas"
   meaning_en: "Corrects the Texas transfer"
   status: sef
+  natural: false
 - id: 1NT.2S.3C
   seq: ["1NT 2S", "1NT (X) 2S"]
   call: 3C
@@ -376,6 +377,7 @@
   meaning: "Rectifie le Texas ♣ (la fiche mentionne une modulation avec gros honneur 3e, non détaillée)"
   meaning_en: "Corrects the Texas ♣ (the card mentions a variation with a 3-card high honor, not detailed)"
   status: sef
+  natural: false
 - id: 1NT.3C.3D
   seq: ["1NT 3C", "1NT (X) 3C"]
   call: 3D
@@ -384,6 +386,7 @@
   meaning: "Rectifie le Texas ♦"
   meaning_en: "Corrects the Texas ♦"
   status: sef
+  natural: false
 - id: 1NT.4D.4H
   seq: ["1NT 4D", "1NT (X) 4D"]
   call: 4H
@@ -611,6 +614,7 @@
   meaning: "Répond au relais"
   meaning_en: "Answers the relay"
   status: sef
+  natural: false
 - id: 1NT.2C.2NT.3D.3S
   seq: ["1NT 2C 2NT 3D", "1NT (X) 2C 2NT 3D"]
   call: 3S
@@ -619,6 +623,7 @@
   meaning: "Répond au relais"
   meaning_en: "Answers the relay"
   status: sef
+  natural: false
 - id: 1NT.2C.2NT.4C.4H
   seq: ["1NT 2C 2NT 4C", "1NT (X) 2C 2NT 4C"]
   call: 4H
@@ -627,6 +632,7 @@
   meaning: "Rectifie le Texas"
   meaning_en: "Corrects the Texas transfer"
   status: sef
+  natural: false
 - id: 1NT.2C.2NT.4D.4S
   seq: ["1NT 2C 2NT 4D", "1NT (X) 2C 2NT 4D"]
   call: 4S
@@ -635,6 +641,7 @@
   meaning: "Rectifie le Texas"
   meaning_en: "Corrects the Texas transfer"
   status: sef
+  natural: false
 - id: 1NT.2C.2S.2NT.3H
   seq: ["1NT 2C 2S 2NT", "1NT (X) 2C 2S 2NT"]
   call: 3H
@@ -1133,6 +1140,7 @@
   meaning: "Rectifie"
   meaning_en: "Corrects"
   status: choix
+  natural: false
 - id: 2NT.3C.3NT.4D.4S
   seq: ["2NT 3C 3NT 4D", "2C 2D 2NT 3C 3NT 4D", "2D 2H|2S 2NT 3C 3NT 4D"]
   call: 4S
@@ -1141,6 +1149,7 @@
   meaning: "Rectifie"
   meaning_en: "Corrects"
   status: choix
+  natural: false
 # Fit majeur trouvé en face d'un 2SA (20-21 HL) : avec 12 HL, les 32-33 HL de la ligne et le fit valent le petit chelem. Mesuré sur le banc du par.
 # en: Major fit found opposite 2NT (20-21 HL): with 12 HL, the line's 32-33 HL and the fit are worth the small slam. Measured on the par benchmark.
 - id: "2NT.3C.3{M}.6{M}"
@@ -1211,6 +1220,7 @@
   meaning: "Rectification : fit par 3 cartes ou plus"
   meaning_en: "Correction: a fit of three cards or more"
   status: choix
+  natural: false
 - id: "2NT.tex.{M}.3NT"
   for: [{T: 3D, M: H}, {T: 3H, M: S}]
   seq: ["2NT {T}", "2C 2D 2NT {T}", "2D 2H|2S 2NT {T}"]
@@ -2303,6 +2313,7 @@
   meaning: "3 As, sauf celui de ♣"
   meaning_en: "3 aces, except the ♣ ace"
   status: choix
+  natural: false
 - id: 2D.r.3aces.D
   seq: "2D"
   call: 4D
@@ -2311,6 +2322,7 @@
   meaning: "3 As, sauf celui de ♦"
   meaning_en: "3 aces, except the ♦ ace"
   status: choix
+  natural: false
 - id: 2D.r.3aces.H
   seq: "2D"
   call: 4H
@@ -2319,6 +2331,7 @@
   meaning: "3 As, sauf celui de ♥"
   meaning_en: "3 aces, except the ♥ ace"
   status: choix
+  natural: false
 - id: 2D.r.3aces.S
   seq: "2D"
   call: 4S
@@ -2327,6 +2340,7 @@
   meaning: "3 As, sauf celui de ♠"
   meaning_en: "3 aces, except the ♠ ace"
   status: choix
+  natural: false
 - id: 2D.r.3H
   seq: "2D"
   call: 3H
@@ -2335,6 +2349,7 @@
   meaning: "2 As de même couleur"
   meaning_en: "2 aces of the same color"
   status: choix
+  natural: false
 - id: 2D.r.3S
   seq: "2D"
   call: 3S
@@ -2343,6 +2358,7 @@
   meaning: "2 As de même rang"
   meaning_en: "2 aces of the same rank"
   status: choix
+  natural: false
 - id: 2D.r.3NT
   seq: "2D"
   call: 3NT
@@ -2359,6 +2375,7 @@
   meaning: "Un As majeur"
   meaning_en: "One major ace"
   status: choix
+  natural: false
 - id: 2D.r.3C
   seq: "2D"
   call: 3C
@@ -2367,6 +2384,7 @@
   meaning: "As de ♣"
   meaning_en: "♣ ace"
   status: choix
+  natural: false
 - id: 2D.r.3D
   seq: "2D"
   call: 3D
@@ -2375,6 +2393,7 @@
   meaning: "As de ♦"
   meaning_en: "♦ ace"
   status: choix
+  natural: false
 - id: 2D.r.2NT
   seq: "2D"
   call: 2NT
@@ -2459,6 +2478,7 @@
   meaning: "Maximum : As ou Roi dans la couleur"
   meaning_en: "Maximum: ace or king in the suit"
   status: sef
+  natural: false
 - id: "2{M}.2NT.3NT"
   for: [{M: H}, {M: S}]
   seq: "2{M} 2NT"
@@ -2726,6 +2746,7 @@
   meaning: "3 ou 1 clé + chicane ♦"
   meaning_en: "3 or 1 keycard + ♦ void"
   status: sef
+  natural: false
 - id: "bw.{t}.6C"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2735,6 +2756,7 @@
   meaning: "3 ou 1 clé + chicane ♣"
   meaning_en: "3 or 1 keycard + ♣ void"
   status: sef
+  natural: false
 - id: "bw.{t}.5NT"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2753,6 +2775,7 @@
   meaning: "2 clés avec la Dame d'atout"
   meaning_en: "2 keycards with the trump queen"
   status: sef
+  natural: false
 - id: "bw.{t}.5H"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2762,6 +2785,7 @@
   meaning: "2 clés sans la Dame d'atout"
   meaning_en: "2 keycards without the trump queen"
   status: sef
+  natural: false
 - id: "bw.{t}.5D"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2771,6 +2795,7 @@
   meaning: "4 ou 1 clé"
   meaning_en: "4 or 1 keycard"
   status: sef
+  natural: false
 - id: "bw.{t}.5C"
   for: [{t: S}, {t: H}, {t: D}, {t: C}]
   seq: "BW:{t} 4NT"
@@ -2780,6 +2805,7 @@
   meaning: "3 ou 0 clé"
   meaning_en: "3 or 0 keycards"
   status: sef
+  natural: false
 
 # ======================================================================
 # A.12 Blackwood : entrées, demandeur, grand chelem
@@ -5288,6 +5314,7 @@
   meaning: "As troisième dans la 4e couleur, ouverture non minimum"
   meaning_en: "Third-round ace in the fourth suit, non-minimum opening"
   status: sef
+  natural: false
 - id: fcf.b.jump
   seq: ["1D 1H 1S 2C", "1D (X) 1H 1S 2C"]
   call: 3D
@@ -9221,6 +9248,7 @@
   meaning: "Réponse de l'intervenant au texas ou au Stayman"
   meaning_en: "Overcaller's answer to the transfer or Stayman"
   status: choix
+  natural: false
 - id: "d2f.{o}.2NT.{a}.{b}.{r}"
   for: [{o: 2H, a: 3D, b: 3S, r: 4S, t: "true"}, {o: 2H, a: 3H, b: 3S, r: 4S, t: "hcp >= 8"}, {o: 2S, a: 3D, b: 3H, r: 4H, t: "hcp >= 8"}]
   seq: ["({o}) 2NT {a} {b}", "({o}) P 2NT {a} {b}"]
@@ -9432,6 +9460,7 @@
   meaning: "Complète le Texas"
   meaning_en: "Completes the transfer"
   status: sef
+  natural: false
 - id: "rub.{i}.X.{r}"
   for: [{i: 2H, r: 2S, t: "S >= 4"}, {i: 2H, r: 2NT, t: "stop('H')"}, {i: 2H, r: 3C, t: "C >= D"}, {i: 2H, r: 3D, t: "true"},
         {i: 2S, r: 3H, t: "H >= 4"}, {i: 2S, r: 2NT, t: "stop('S')"}, {i: 2S, r: 3C, t: "C >= D"}, {i: 2S, r: 3D, t: "true"}]
@@ -14290,6 +14319,7 @@
   meaning: "Contrôle, fit implicite : espoir de chelem"
   meaning_en: "Control, implied fit: slam interest"
   status: sef
+  natural: false
   trump: "{M}"
 - id: "2C.2D.3{M}.4{M}"
   for: [{M: H}, {M: S}]

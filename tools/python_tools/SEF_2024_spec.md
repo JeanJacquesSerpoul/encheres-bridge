@@ -44,6 +44,7 @@ Dans `cli/systems/sef/rules.yaml`, une règle peut porter `for:` (liste de dicti
 | `meaning_en` | oui | chaîne | Traduction anglaise de `meaning` (langue `EN` ; `FR` = `meaning`, langue par défaut) |
 | `status` | oui | énumération | `sef` fiche SEF 2024 · `choix` choix validé · `sef2018` convention SEF 2018 · `infere` complétion non écrite dans la fiche · `a_verifier` |
 | `alert` | non | booléen | Enchère conventionnelle, à alerter (défaut `false`) |
+| `natural` | non | booléen | `false` pour une enchère à la couleur conventionnelle qui n'est pas alertée (rectification de Texas, réponse à l'As, réponse au Blackwood…) : elle ne compte pas comme couleur du partenaire (`p_suit`, § 4.3). Défaut `true` |
 | `option` | non | chaîne | La règle n'existe que si cette option est activée pour la paire (ex. `checkback2018`) |
 | `trump` | non | `S`/`H`/`D`/`C` | Quand cette enchère est choisie, l'atout convenu de la paire devient cette couleur (§ 5) |
 
@@ -137,10 +138,26 @@ La main est donnée par couleur (`S`, `H`, `D`, `C`), cartes triées de la plus 
 | `vul` | bool | Le camp du joueur qui parle est vulnérable (tag PBN `[Vulnerable]` : `NS`, `EW`, `All`/`Both`) |
 | `opp_vul` | bool | Le camp adverse est vulnérable |
 | `seat` | int | Rang du joueur qui parle dans le tour d'enchères, compté depuis le donneur : 1 à 4 (4 = 4e position) |
+| `lvl` | int | Palier le plus élevé atteint dans l'enchère (les deux camps), 0 avant toute enchère |
+| `p_suit` | chaîne | Dernière couleur nommée naturellement par le partenaire : `'S'`, `'H'`, `'D'`, `'C'`, ou `''` (§ 4.3) |
+| `p_len` | int | Longueur promise dans `p_suit` (§ 4.3), 0 sans couleur |
+| `fit` | int | Atouts du camp dans `p_suit` : longueur de la main dans `p_suit` + `p_len` ; 0 sans couleur |
+| `p_forcing` | bool | La dernière enchère du partenaire est `F1`, `FM`, `REL`, `ASK` ou `TO` |
 
-Les conditions ne portent que sur la main du joueur qui parle, sur la vulnérabilité (`vul`, `opp_vul`) et sur son rang (`seat`) : ce que le partenaire a montré est contenu dans `seq`. Les passes adverses n'apparaissant pas dans `seq`, seul `seat` distingue une ouverture en 1re, 3e ou 4e position ; exemple, la règle des 15 : `cond: "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15"`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
+Les conditions portent sur la main du joueur qui parle, sur la vulnérabilité (`vul`, `opp_vul`), sur son rang (`seat`) et sur le contexte de l'enchère (§ 4.3) : le reste de ce que le partenaire a montré est contenu dans `seq`. Les passes adverses n'apparaissant pas dans `seq`, seul `seat` distingue une ouverture en 1re, 3e ou 4e position ; exemple, la règle des 15 : `cond: "seat == 4 and 10 <= hcp <= 11 and hcp + S >= 15"`. Exemple, un barrage plus léger en vulnérabilité favorable : `cond: "{X} == 7 and (hcp <= 10 or (opp_vul and not vul and hcp <= 11))"`.
 
 Dans `tests.json`, chaque cas porte `vul` et `opp_vul` (les quatre combinaisons en rotation) et `seat` (Nord parle en 1re ou 2e position, Sud en 3e ou 4e) ; `sef_rules.py --hand` accepte `--vul`, `--opp-vul` et `--seat`.
+
+### 4.3 Contexte de l'enchère
+
+`lvl`, `p_suit`, `p_len`, `fit` et `p_forcing` se calculent sur toute l'enchère déjà faite (les quatre joueurs), avec la règle choisie pour chaque appel :
+
+- **Couleur naturelle** : un appel `1C` … `7S` dont la règle n'est ni `alert: true` ni `natural: false`. Un passe par défaut (aucune règle) ou une enchère illégale refusée n'ont pas de règle.
+- `p_suit` : la plus récente des couleurs nommées naturellement par le partenaire (une enchère conventionnelle ou à SA plus récente ne l'efface pas).
+- `p_len` : si cette enchère est l'**ouverture** (première enchère de l'enchère), 5 pour 1♥/1♠, 4 pour 1♣/1♦, 6 au palier de 2 ou plus ; si le camp du partenaire n'a pas ouvert (**intervention**), 5 ; sinon 4. Si le partenaire a nommé naturellement cette couleur au moins deux fois, `p_len` devient `min(max(p_len + 1, 5), 6)`.
+- `p_forcing` : porte sur le **dernier appel** du partenaire, quel qu'il soit (faux s'il n'a pas de règle).
+
+Le moteur Go (`setContext`), `sef_rules.py` (`context`) et `pbn_auction.py` calculent ce contexte ; `golden.json` le donne pour chaque appel (`ctx` : `[lvl, p_suit, p_len, p_forcing]`) et `TestGoldenPython` vérifie que Go retrouve les mêmes valeurs. Sans historique (`sef_rules.py --hand`), `lvl` est lu dans `seq` et il n'y a pas de couleur du partenaire.
 
 ## 5. État de l'enchère : atout convenu
 
@@ -178,6 +195,8 @@ En-tête : `format` (`sef-tests/1`), `source`, `source_sha256`, `seed`, `deals` 
 |---|---|
 | `hand` | Main `♠.♥.♦.♣`, `T` pour le 10, `-` pour une chicane |
 | `seq`, `trump`, `options` | Entrées de l'algorithme (§ 6) |
+| `vul`, `opp_vul`, `seat` | Contexte de la table (§ 4.2) |
+| `lvl`, `p_suit`, `p_len`, `p_forcing` | Contexte de l'enchère (§ 4.3), calculé pendant le tirage ; `fit` s'en déduit avec la main |
 | `expected.call`, `expected.rule` | Enchère et `id` de la règle attendus ; `null` pour une séquence non codée |
 | `features` | Valeurs attendues du vocabulaire (§ 4.2) pour cette main, fonctions données couleur par couleur |
 

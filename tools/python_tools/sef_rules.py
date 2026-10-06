@@ -26,11 +26,12 @@ RANKS = 'AKQJT98765432'
 CALL_RE = re.compile(r'^(P|X|XX|[1-7](C|D|H|S|NT))$')
 FORCING = {'NF', 'F1', 'FM', 'SO', 'INV', 'REL', 'ASK', 'TO', 'PEN'}
 STATUS = {'sef', 'choix', 'sef2018', 'infere', 'a_verifier'}
-FIELDS = {'id', 'seq', 'call', 'cond', 'forcing', 'meaning', 'meaning_en', 'status', 'alert', 'option', 'for', 'trump'}
+FIELDS = {'id', 'seq', 'call', 'cond', 'forcing', 'meaning', 'meaning_en', 'status', 'alert', 'option', 'for', 'trump',
+          'natural'}
 NAMES = {'S', 'H', 'D', 'C', 'hcp', 'hl', 'dh', 'hld', 'shape', 'balanced', 'semibalanced',
          'aces', 'kings', 'losers', 'ptricks', 'qtricks', 'sidetricks', 'ace', 'king', 'queen', 'top', 'solid', 'stop',
          'short', 'hcp_in', 'keycards', 'ctrl1', 'ctrl2', 'max', 'min', 'true', 'false', 'True', 'False',
-         'vul', 'opp_vul', 'seat'}
+         'vul', 'opp_vul', 'seat', 'lvl', 'p_suit', 'p_len', 'fit', 'p_forcing'}
 NODES = (ast.Expression, ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not, ast.USub, ast.Compare,
          ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE, ast.In, ast.NotIn, ast.BinOp, ast.Add,
          ast.Sub, ast.Name, ast.Load, ast.Constant, ast.Call, ast.Tuple)
@@ -100,6 +101,8 @@ def validate(rules):
             errs.append('%s : trump invalide %r' % (rid, r['trump']))
         if r['status'] not in STATUS:
             errs.append('%s : status invalide %r' % (rid, r['status']))
+        if 'natural' in r and not isinstance(r['natural'], bool):
+            errs.append('%s : natural doit valoir true ou false' % rid)
         if any(isinstance(v, str) and k != '_src' and re.search(r'\{[A-Za-z]+\}', v) for k, v in r.items()):
             errs.append('%s : substitution non résolue' % rid)
         pats = r['seq'] if isinstance(r['seq'], list) else [r['seq']]
@@ -285,11 +288,65 @@ def rule_matches(r, seq, trump=None):
     return False
 
 
-def choose(rules, seq, hand, options=(), trump=None, vul=False, opp_vul=False, seat=1):
+# Enchères qui obligent le partenaire à reparler (p_forcing).
+CTX_FORCING = {'F1', 'FM', 'REL', 'ASK', 'TO'}
+
+
+def is_natural(rule):
+    """Une enchère à la couleur est naturelle si sa règle n'est ni alertée ni marquée natural: false."""
+    return bool(rule) and not rule.get('alert') and rule.get('natural', True)
+
+
+def context(history, seat):
+    """Contexte de l'enchère vu par le joueur `seat` (0 = Nord … 3 = Ouest).
+    history : liste de (siège, appel, règle ou None), dans l'ordre. Rend lvl, p_suit, p_len, p_forcing
+    (fit se déduit de la main : longueur dans p_suit plus p_len). Voir SEF_2024_spec.md."""
+    lvl, opening = 0, None
+    for i, (_, call, _r) in enumerate(history):
+        if call[0].isdigit():
+            lvl = max(lvl, int(call[0]))
+            if opening is None:
+                opening = i
+    partner = (seat + 2) % 4
+    p_forcing = False
+    for who, _call, r in reversed(history):
+        if who == partner:
+            p_forcing = bool(r) and r['forcing'] in CTX_FORCING
+            break
+    p_suit, p_len = '', 0
+    for i in range(len(history) - 1, -1, -1):
+        who, call, r = history[i]
+        if who == partner and call[0].isdigit() and call[1:] in ('C', 'D', 'H', 'S') and is_natural(r):
+            p_suit, level = call[1:], int(call[0])
+            if i == opening:
+                p_len = (5 if p_suit in 'HS' else 4) if level == 1 else 6
+            elif (who % 2) != (history[opening][0] % 2):
+                p_len = 5
+            else:
+                p_len = 4
+            again = sum(1 for w, c, rr in history
+                        if w == partner and c[0].isdigit() and c[1:] == p_suit and is_natural(rr))
+            if again >= 2:
+                p_len = min(max(p_len + 1, 5), 6)
+            break
+    return {'lvl': lvl, 'p_suit': p_suit, 'p_len': p_len, 'p_forcing': p_forcing}
+
+
+def seq_level(seq):
+    """Palier le plus élevé d'une séquence, quand l'historique complet manque."""
+    lv = [int(a[0]) for t in seq.split() for a in t.strip('()').split('|') if a[:1].isdigit()]
+    return max(lv or [0])
+
+
+def choose(rules, seq, hand, options=(), trump=None, vul=False, opp_vul=False, seat=1, ctx=None):
     """vul / opp_vul : vulnérabilité du camp qui parle / du camp adverse.
-    seat : rang du joueur qui parle dans le tour d'enchères (1 = donneur … 4)."""
+    seat : rang du joueur qui parle dans le tour d'enchères (1 = donneur … 4).
+    ctx : contexte de l'enchère (voir context) ; par défaut, lvl lu dans seq, sans couleur du partenaire."""
     env = features(hand)
     env.update(vul=bool(vul), opp_vul=bool(opp_vul), seat=int(seat))
+    ctx = ctx or {'lvl': seq_level(seq), 'p_suit': '', 'p_len': 0, 'p_forcing': False}
+    env.update(lvl=int(ctx['lvl']), p_suit=ctx['p_suit'], p_len=int(ctx['p_len']), p_forcing=bool(ctx['p_forcing']))
+    env['fit'] = env[ctx['p_suit']] + int(ctx['p_len']) if ctx['p_suit'] else 0
     for r in rules:
         if r.get('option') and r['option'] not in options:
             continue
@@ -371,22 +428,24 @@ def gen_tests(rules, md, n, seed, path):
         if i >= n:   # donnes fortes : couvrent Blackwood, contrôles et chelems
             while features(hands[0])['hcp'] + features(hands[1])['hcp'] < 31:
                 hands = deal(rng)
-        calls, who, opened, trump = [], 0, False, None
+        calls, who, opened, trump, history = [], 0, False, None, []
         for _ in range(24):
             seq = ' '.join(calls)
             seat = north + 2 * who
-            r = choose(rules, seq, hands[who], opts, trump, vul, opp_vul, seat)
-            key = (fmt(hands[who]), seq, trump, opts, vul, opp_vul, seat)
+            ctx = context(history, 2 * who)          # Nord = siège 0, Sud = siège 2 ; E-O passent
+            r = choose(rules, seq, hands[who], opts, trump, vul, opp_vul, seat, ctx)
+            key = (fmt(hands[who]), seq, trump, opts, vul, opp_vul, seat, tuple(ctx.values()))
             if key not in seen:
                 seen.add(key)
                 cases.append({'id': len(cases) + 1, 'hand': fmt(hands[who]), 'seq': seq, 'trump': trump,
-                              'options': list(opts), 'vul': vul, 'opp_vul': opp_vul, 'seat': seat,
+                              'options': list(opts), 'vul': vul, 'opp_vul': opp_vul, 'seat': seat, **ctx,
                               'expected': {'call': r['call'] if r else None, 'rule': r['id'] if r else None},
                               'features': feature_dump(hands[who])})
             if r is None:
                 break
             if r.get('trump'):
                 trump = r['trump']
+            history.append((2 * who, r['call'], r))
             calls.append(r['call'])
             if r['call'] == 'P' and (opened or len(calls) >= 2):
                 break
@@ -410,8 +469,9 @@ def check_tests(rules, path):
     bad = 0
     for c in data['cases']:
         h = parse_hand(c['hand'])
+        ctx = {k: c[k] for k in ('lvl', 'p_suit', 'p_len', 'p_forcing')} if 'lvl' in c else None
         r = choose(rules, c['seq'], h, tuple(c['options']), c['trump'], c.get('vul', False), c.get('opp_vul', False),
-                   c.get('seat', 1))
+                   c.get('seat', 1), ctx)
         got = {'call': r['call'] if r else None, 'rule': r['id'] if r else None}
         if got != c['expected'] or feature_dump(h) != c['features']:
             bad += 1

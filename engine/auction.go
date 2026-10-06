@@ -123,6 +123,67 @@ func auctionOver(history []SeatCall) bool {
 		history[n-3].Call.Kind == KindPass
 }
 
+// contextForcing are the forcing kinds read as p_forcing.
+var contextForcing = map[string]bool{"F1": true, "FM": true, "REL": true, "ASK": true, "TO": true}
+
+// natural reports whether a chosen rule names its suit naturally: neither
+// alerted nor marked natural: false.
+func natural(r *Rule) bool { return r != nil && !r.Alert && r.Natural }
+
+// setContext fills f's auction context, seen by seat, from the calls so far
+// (sef_rules.py context, SEF_2024_spec.md): lvl, p_suit, p_len, p_forcing.
+func setContext(f *features, history []SeatCall, seat int) {
+	f.lvl, f.pSuit, f.pLen, f.pForcing = 0, "", 0, false
+	opening := -1
+	for i, c := range history {
+		if c.Call.Kind == KindBid {
+			f.lvl = max(f.lvl, c.Call.Level)
+			if opening < 0 {
+				opening = i
+			}
+		}
+	}
+	partner := (seat + 2) % 4
+	for i := len(history) - 1; i >= 0; i-- {
+		if history[i].Seat == partner {
+			f.pForcing = history[i].Rule != nil && contextForcing[history[i].Rule.Forcing]
+			break
+		}
+	}
+	isSuit := func(c SeatCall) bool {
+		return c.Seat == partner && c.Call.Kind == KindBid && c.Call.Strain != SNoTrump && natural(c.Rule)
+	}
+	for i := len(history) - 1; i >= 0; i-- {
+		c := history[i]
+		if !isSuit(c) {
+			continue
+		}
+		f.pSuit = string("CDHS"[c.Call.Strain])
+		switch {
+		case i == opening && c.Call.Level == 1 && (c.Call.Strain == SHearts || c.Call.Strain == SSpades):
+			f.pLen = 5
+		case i == opening && c.Call.Level == 1:
+			f.pLen = 4
+		case i == opening:
+			f.pLen = 6
+		case sideOf(c.Seat) != sideOf(history[opening].Seat):
+			f.pLen = 5
+		default:
+			f.pLen = 4
+		}
+		again := 0
+		for _, o := range history {
+			if isSuit(o) && o.Call.Strain == c.Call.Strain {
+				again++
+			}
+		}
+		if again >= 2 {
+			f.pLen = min(max(f.pLen+1, 5), 6)
+		}
+		break
+	}
+}
+
 // Run bids the deal from the dealer until the auction ends.
 func (e *Engine) Run() []SeatCall {
 	var feats [4]*features
@@ -138,6 +199,7 @@ func (e *Engine) Run() []SeatCall {
 		seat := (e.deal.Dealer + i) % 4
 		seq := pairSequence(history, seat)
 		sc := SeatCall{Seat: seat, Call: passCall, Seq: seq}
+		setContext(feats[seat], history, seat)
 		r := e.rules.choose(seq, feats[seat], e.options, trump[sideOf(seat)])
 		switch {
 		case r == nil:

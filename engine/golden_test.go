@@ -23,6 +23,7 @@ type goldenCase struct {
 		Seat string  `json:"seat"`
 		Call string  `json:"call"`
 		Rule *string `json:"rule"`
+		Ctx  []any   `json:"ctx"` // lvl, p_suit, p_len, p_forcing before the call
 	} `json:"bids"`
 	MeaningFR []string `json:"meaning_fr"`
 	MeaningEN []string `json:"meaning_en"`
@@ -64,6 +65,12 @@ func testGoldenPython(t *testing.T, s *testSystem) {
 		}
 		for i, sc := range calls {
 			want := c.Bids[i]
+			var f features
+			setContext(&f, calls[:i], sc.Seat)
+			got := fmt.Sprint([]any{float64(f.lvl), f.pSuit, float64(f.pLen), f.pForcing})
+			if exp := fmt.Sprint(want.Ctx); got != exp {
+				t.Errorf("%s enchère %d : contexte %s, Python %s", c.Name, i+1, got, exp)
+			}
 			rule := ""
 			if sc.Rule != nil {
 				rule = sc.Rule.ID

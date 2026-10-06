@@ -65,7 +65,9 @@ def main():
         case = {"name": name, "dealer": dealer, "vulnerable": vul, "deal": deal}
         for lang in ("FR", "EN"):
             bids = pa.generate_auction(rules, hands, dealer, (), lang, vulnerable=vul)
-            case["bids"] = [{"seat": b["seat"], "call": b["call"], "rule": b["rule"]} for b in bids]
+            case["bids"] = [{"seat": b["seat"], "call": b["call"], "rule": b["rule"],
+                             "ctx": [b["ctx"]["lvl"], b["ctx"]["p_suit"], b["ctx"]["p_len"], b["ctx"]["p_forcing"]]}
+                            for b in bids]
             case["meaning_" + lang.lower()] = [b["meaning"] for b in bids]
         out.append(case)
     with open(a.out, "w", encoding="utf-8") as f:

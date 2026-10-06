@@ -221,6 +221,7 @@ def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=Fals
     start = SEATS.index(dealer)
     parsed = {seat: sr.parse_hand(h) for seat, h in hands.items()}
     history, out = [], []            # history : (siège 0-3, annonce)
+    ruled = []                       # (siège, annonce, règle ou None) : contexte des conditions
     trump = {0: None, 1: None}       # atout convenu par paire (NS=0, EW=1)
     for i in range(60):
         seat = (start + i) % 4
@@ -233,8 +234,9 @@ def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=Fals
                 seq.append(f"({c})")
         opener = next((w % 2 for w, c in history if c != "P"), None)  # paire qui a ouvert
         forced = opps_pass and opener is not None and pair != opener
+        ctx = sr.context(ruled, seat)
         r = None if forced else sr.choose(rules, " ".join(seq), parsed[SEATS[seat]], options, trump[pair],
-                                          vuln[pair], vuln[1 - pair], (seat - start) % 4 + 1)
+                                          vuln[pair], vuln[1 - pair], (seat - start) % 4 + 1, ctx)
         note = None
         if forced:
             note = MSG[lang]["opp_pass"]
@@ -246,12 +248,14 @@ def generate_auction(rules, hands, dealer, options=(), lang="FR", opps_pass=Fals
         if r and r.get("trump"):
             trump[pair] = r["trump"]
         history.append((seat, call))
+        ruled.append((seat, call, r))
         alerted = bool(r and r.get("alert"))
         text = (r["meaning_en"] if lang == "EN" else r["meaning"]) if r else note
         out.append({
             "seat": SEATS[seat], "call": normalize(call),
             "alerted": alerted, "alert": text if alerted else None,
             "rule": r["id"] if r else ("opponents.pass" if forced else None), "meaning": text,
+            "ctx": ctx,
         })
         calls = [c for _, c in history]
         if (len(calls) >= 4 and all(c == "P" for c in calls)) or            (any(c != "P" for c in calls) and calls[-3:] == ["P"] * 3):

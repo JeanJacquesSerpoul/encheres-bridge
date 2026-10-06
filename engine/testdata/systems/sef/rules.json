@@ -27194,20 +27194,20 @@
   "id": "rev.a.6NT",
   "seq": "1C|1D 1S 2H",
   "call": "6NT",
-  "cond": "hl >= 16 and (balanced or semibalanced)",
+  "cond": "hl >= 13 and (balanced or semibalanced)",
   "forcing": "SO",
-  "meaning": "16+ HL face au bicolore cher : petit chelem à SA",
-  "meaning_en": "16+ HL opposite a reverse: small slam in NT",
+  "meaning": "13+ HL face au bicolore cher : petit chelem à SA",
+  "meaning_en": "13+ HL opposite a reverse: small slam in NT",
   "status": "infere"
  },
  {
   "id": "rev.b.6NT",
   "seq": "1C 1H|1S 2D",
   "call": "6NT",
-  "cond": "hl >= 16 and (balanced or semibalanced)",
+  "cond": "hl >= 13 and (balanced or semibalanced)",
   "forcing": "SO",
-  "meaning": "16+ HL face au bicolore cher : petit chelem à SA",
-  "meaning_en": "16+ HL opposite a reverse: small slam in NT",
+  "meaning": "13+ HL face au bicolore cher : petit chelem à SA",
+  "meaning_en": "13+ HL opposite a reverse: small slam in NT",
   "status": "infere"
  },
  {
@@ -30645,6 +30645,26 @@
   "forcing": "INV",
   "meaning": "Fit, faible",
   "meaning_en": "Fit, weak",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2H.6NT",
+  "seq": "2C 2D 2H",
+  "call": "6NT",
+  "cond": "H < 3 and hcp >= 14 and (balanced or semibalanced)",
+  "forcing": "SO",
+  "meaning": "Pas de fit, 14+ H face à 18-21 HL : petit chelem à SA",
+  "meaning_en": "No fit, 14+ HCP opposite 18-21 HL: small slam in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2C.2D.2S.6NT",
+  "seq": "2C 2D 2S",
+  "call": "6NT",
+  "cond": "S < 3 and hcp >= 14 and (balanced or semibalanced)",
+  "forcing": "SO",
+  "meaning": "Pas de fit, 14+ H face à 18-21 HL : petit chelem à SA",
+  "meaning_en": "No fit, 14+ HCP opposite 18-21 HL: small slam in NT",
   "status": "infere"
  },
  {

@@ -6926,10 +6926,10 @@
   for: [{i: a, s: "1C|1D 1S 2H"}, {i: b, s: "1C 1H|1S 2D"}]
   seq: "{s}"
   call: 6NT
-  cond: "hl >= 16 and (balanced or semibalanced)"
+  cond: "hl >= 13 and (balanced or semibalanced)"
   forcing: SO
-  meaning: "16+ HL face au bicolore cher : petit chelem à SA"
-  meaning_en: "16+ HL opposite a reverse: small slam in NT"
+  meaning: "13+ HL face au bicolore cher : petit chelem à SA"
+  meaning_en: "13+ HL opposite a reverse: small slam in NT"
   status: infere
 - id: "rev.{i}.3NT"
   for: [{i: a, s: "1C|1D 1S 2H"}, {i: b, s: "1C 1H|1S 2D"}]
@@ -7936,6 +7936,15 @@
   forcing: INV
   meaning: "Fit, faible"
   meaning_en: "Fit, weak"
+  status: infere
+- id: "2C.2D.2{M}.6NT"
+  for: [{M: H}, {M: S}]
+  seq: "2C 2D 2{M}"
+  call: 6NT
+  cond: "{M} < 3 and hcp >= 14 and (balanced or semibalanced)"
+  forcing: SO
+  meaning: "Pas de fit, 14+ H face à 18-21 HL : petit chelem à SA"
+  meaning_en: "No fit, 14+ HCP opposite 18-21 HL: small slam in NT"
   status: infere
 - id: "2C.2D.2{M}.3NT"
   for: [{M: H}, {M: S}]

@@ -511,14 +511,15 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:A5.A432.K.AKT852 K82.QJ7.Q852.J63 T43.T96.JT964.Q7 QJ976.K85.A73.94"]
+[Deal "N:K82.QJ7.Q852.J63 T43.T96.JT964.Q7 QJ976.K85.A73.94 A5.A432.K.AKT852"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "1S"]
+[Contract "2S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 1S {Reveil : 5 cartes a Pique (QJ976), 11 HL. | Balancing: 5 spades (QJ976), 11 HL.}
-Pass Pass {9H et 3 cartes a Pique : rien a ajouter. | 9 HCP and 3 spades: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (19 HL), 2-4-1-6. | Longest minor (3-3: 1♣). Here 18 HCP (19 HL), 2-4-1-6.} Pass Pass 1S {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 10H (11 HL), 5-3-3-2. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 10 HCP (11 HL), 5-3-3-2.}
+Pass 2S {Soutien. Ici 9H (9 HL), 3-3-4-3. | Raise. Here 9 HCP (9 HL), 3-3-4-3.} Pass Pass
+Pass
 
 [Event "Entrainement Reveils - Donne 30"]
 [Board "30"]

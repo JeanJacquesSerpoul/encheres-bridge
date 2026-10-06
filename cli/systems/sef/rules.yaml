@@ -6927,6 +6927,394 @@
   meaning: "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes"
   meaning_en: "Natural at the three level: 6 cards, or 5 good cards"
   status: infere
+# --- l'ouvreur après le SA naturel du répondant sur intervention (1SA : 8-10 H ; 2SA : 11-12 H, arrêt)
+# en: opener after responder's natural notrump over an overcall (1NT: 8-10 HCP; 2NT: 11-12 HCP, stopper)
+- id: "cmp.1C.ov.2NT.3NT"
+  seq: "1C (1D|1H|1S|2H|2S) 2NT"
+  call: "3NT"
+  cond: "hl >= 14"
+  forcing: SO
+  meaning: "14+ HL : manche"
+  meaning_en: "14+ HL: game"
+  status: infere
+- id: "cmp.1C.ov.1NT.3NT"
+  seq: "1C (1D|1H|1S) 1NT"
+  call: "3NT"
+  cond: "hl >= 18 and (balanced or semibalanced)"
+  forcing: SO
+  meaning: "18+ HL : manche"
+  meaning_en: "18+ HL: game"
+  status: infere
+- id: "cmp.1C.ov.1NT.2NT"
+  seq: "1C (1D|1H|1S) 1NT"
+  call: "2NT"
+  cond: "hl >= 16 and (balanced or semibalanced)"
+  forcing: INV
+  meaning: "16-17 HL : proposition de manche"
+  meaning_en: "16-17 HL: game invitation"
+  status: infere
+- id: "cmp.1C.ov.1NT.2NT.3NT"
+  seq: "1C (1D|1H|1S) 1NT 2NT"
+  call: "3NT"
+  cond: "hcp >= 10"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
+- id: "cmp.1D.ov.2NT.3NT"
+  seq: "1D (1H|1S|2C|2H|2S) 2NT"
+  call: "3NT"
+  cond: "hl >= 14"
+  forcing: SO
+  meaning: "14+ HL : manche"
+  meaning_en: "14+ HL: game"
+  status: infere
+- id: "cmp.1D.ov.1NT.3NT"
+  seq: "1D (1H|1S) 1NT"
+  call: "3NT"
+  cond: "hl >= 18 and (balanced or semibalanced)"
+  forcing: SO
+  meaning: "18+ HL : manche"
+  meaning_en: "18+ HL: game"
+  status: infere
+- id: "cmp.1D.ov.1NT.2NT"
+  seq: "1D (1H|1S) 1NT"
+  call: "2NT"
+  cond: "hl >= 16 and (balanced or semibalanced)"
+  forcing: INV
+  meaning: "16-17 HL : proposition de manche"
+  meaning_en: "16-17 HL: game invitation"
+  status: infere
+- id: "cmp.1D.ov.1NT.2NT.3NT"
+  seq: "1D (1H|1S) 1NT 2NT"
+  call: "3NT"
+  cond: "hcp >= 10"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
+# --- le partenaire du réveil (il a passé sur l'ouverture)
+# en: the balancer's partner (he passed over the opening)
+- id: "ar.1C.1NT.4H"
+  seq: "(1C) P 1NT"
+  call: "4H"
+  cond: "H >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1C.1NT.4S"
+  seq: "(1C) P 1NT"
+  call: "4S"
+  cond: "S >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1C.1NT.3NT"
+  seq: "(1C) P 1NT"
+  call: "3NT"
+  cond: "hl >= 15"
+  forcing: SO
+  meaning: "15+ HL face au réveil à 1SA : manche"
+  meaning_en: "15+ HL opposite the balancing 1NT: game"
+  status: infere
+- id: "ar.1C.1NT.2NT"
+  seq: "(1C) P 1NT"
+  call: "2NT"
+  cond: "hl >= 12"
+  forcing: INV
+  meaning: "Proposition de manche"
+  meaning_en: "Game invitation"
+  status: infere
+- id: "ar.1C.1NT.2NT.3NT"
+  seq: "(1C) P 1NT 2NT"
+  call: "3NT"
+  cond: "hl >= 12"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
+- id: "ar.1C.1S.4S"
+  seq: "(1C) P 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 14"
+  forcing: SO
+  meaning: "Fit : manche"
+  meaning_en: "Fit: game"
+  status: infere
+- id: "ar.1C.1S.3S"
+  seq: "(1C) P 1S"
+  call: "3S"
+  cond: "S >= 3 and hld >= 11"
+  forcing: INV
+  meaning: "Fit : proposition de manche"
+  meaning_en: "Fit: game invitation"
+  status: infere
+- id: "ar.1C.1S.3NT"
+  seq: "(1C) P 1S"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1C.1S.2S"
+  seq: "(1C) P 1S"
+  call: "2S"
+  cond: "S >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1C.1H.4H"
+  seq: "(1C) P 1H"
+  call: "4H"
+  cond: "H >= 3 and hld >= 14"
+  forcing: SO
+  meaning: "Fit : manche"
+  meaning_en: "Fit: game"
+  status: infere
+- id: "ar.1C.1H.3H"
+  seq: "(1C) P 1H"
+  call: "3H"
+  cond: "H >= 3 and hld >= 11"
+  forcing: INV
+  meaning: "Fit : proposition de manche"
+  meaning_en: "Fit: game invitation"
+  status: infere
+- id: "ar.1C.1H.3NT"
+  seq: "(1C) P 1H"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1C.1H.2H"
+  seq: "(1C) P 1H"
+  call: "2H"
+  cond: "H >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1C.1D.3NT"
+  seq: "(1C) P 1D"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1C.1D.2D"
+  seq: "(1C) P 1D"
+  call: "2D"
+  cond: "D >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1D.1NT.4H"
+  seq: "(1D) P 1NT"
+  call: "4H"
+  cond: "H >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1D.1NT.4S"
+  seq: "(1D) P 1NT"
+  call: "4S"
+  cond: "S >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1D.1NT.3NT"
+  seq: "(1D) P 1NT"
+  call: "3NT"
+  cond: "hl >= 15"
+  forcing: SO
+  meaning: "15+ HL face au réveil à 1SA : manche"
+  meaning_en: "15+ HL opposite the balancing 1NT: game"
+  status: infere
+- id: "ar.1D.1NT.2NT"
+  seq: "(1D) P 1NT"
+  call: "2NT"
+  cond: "hl >= 12"
+  forcing: INV
+  meaning: "Proposition de manche"
+  meaning_en: "Game invitation"
+  status: infere
+- id: "ar.1D.1NT.2NT.3NT"
+  seq: "(1D) P 1NT 2NT"
+  call: "3NT"
+  cond: "hl >= 12"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
+- id: "ar.1D.1S.4S"
+  seq: "(1D) P 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 14"
+  forcing: SO
+  meaning: "Fit : manche"
+  meaning_en: "Fit: game"
+  status: infere
+- id: "ar.1D.1S.3S"
+  seq: "(1D) P 1S"
+  call: "3S"
+  cond: "S >= 3 and hld >= 11"
+  forcing: INV
+  meaning: "Fit : proposition de manche"
+  meaning_en: "Fit: game invitation"
+  status: infere
+- id: "ar.1D.1S.3NT"
+  seq: "(1D) P 1S"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('D')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1D.1S.2S"
+  seq: "(1D) P 1S"
+  call: "2S"
+  cond: "S >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1D.1H.4H"
+  seq: "(1D) P 1H"
+  call: "4H"
+  cond: "H >= 3 and hld >= 14"
+  forcing: SO
+  meaning: "Fit : manche"
+  meaning_en: "Fit: game"
+  status: infere
+- id: "ar.1D.1H.3H"
+  seq: "(1D) P 1H"
+  call: "3H"
+  cond: "H >= 3 and hld >= 11"
+  forcing: INV
+  meaning: "Fit : proposition de manche"
+  meaning_en: "Fit: game invitation"
+  status: infere
+- id: "ar.1D.1H.3NT"
+  seq: "(1D) P 1H"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('D')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1D.1H.2H"
+  seq: "(1D) P 1H"
+  call: "2H"
+  cond: "H >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1H.1NT.4S"
+  seq: "(1H) P 1NT"
+  call: "4S"
+  cond: "S >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1H.1NT.3NT"
+  seq: "(1H) P 1NT"
+  call: "3NT"
+  cond: "hl >= 15"
+  forcing: SO
+  meaning: "15+ HL face au réveil à 1SA : manche"
+  meaning_en: "15+ HL opposite the balancing 1NT: game"
+  status: infere
+- id: "ar.1H.1NT.2NT"
+  seq: "(1H) P 1NT"
+  call: "2NT"
+  cond: "hl >= 12"
+  forcing: INV
+  meaning: "Proposition de manche"
+  meaning_en: "Game invitation"
+  status: infere
+- id: "ar.1H.1NT.2NT.3NT"
+  seq: "(1H) P 1NT 2NT"
+  call: "3NT"
+  cond: "hl >= 12"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
+- id: "ar.1H.1S.4S"
+  seq: "(1H) P 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 14"
+  forcing: SO
+  meaning: "Fit : manche"
+  meaning_en: "Fit: game"
+  status: infere
+- id: "ar.1H.1S.3S"
+  seq: "(1H) P 1S"
+  call: "3S"
+  cond: "S >= 3 and hld >= 11"
+  forcing: INV
+  meaning: "Fit : proposition de manche"
+  meaning_en: "Fit: game invitation"
+  status: infere
+- id: "ar.1H.1S.3NT"
+  seq: "(1H) P 1S"
+  call: "3NT"
+  cond: "hcp >= 15 and stop('H')"
+  forcing: SO
+  meaning: "Arrêt : manche à SA"
+  meaning_en: "Stopper: game in NT"
+  status: infere
+- id: "ar.1H.1S.2S"
+  seq: "(1H) P 1S"
+  call: "2S"
+  cond: "S >= 3 and hld >= 9"
+  forcing: NF
+  meaning: "Soutien"
+  meaning_en: "Raise"
+  status: infere
+- id: "ar.1S.1NT.4H"
+  seq: "(1S) P 1NT"
+  call: "4H"
+  cond: "H >= 6 and hl >= 11"
+  forcing: SO
+  meaning: "Majeure 6e : manche"
+  meaning_en: "Six-card major: game"
+  status: infere
+- id: "ar.1S.1NT.3NT"
+  seq: "(1S) P 1NT"
+  call: "3NT"
+  cond: "hl >= 15"
+  forcing: SO
+  meaning: "15+ HL face au réveil à 1SA : manche"
+  meaning_en: "15+ HL opposite the balancing 1NT: game"
+  status: infere
+- id: "ar.1S.1NT.2NT"
+  seq: "(1S) P 1NT"
+  call: "2NT"
+  cond: "hl >= 12"
+  forcing: INV
+  meaning: "Proposition de manche"
+  meaning_en: "Game invitation"
+  status: infere
+- id: "ar.1S.1NT.2NT.3NT"
+  seq: "(1S) P 1NT 2NT"
+  call: "3NT"
+  cond: "hl >= 12"
+  forcing: SO
+  meaning: "Maximum : manche"
+  meaning_en: "Maximum: game"
+  status: infere
 # --- réponses à l'intervention du partenaire (l'adversaire de droite a passé)
 # en: answers to partner's overcall (right-hand opponent passed)
 # Loi des levées totales (J.-R. Vernes) : en compétition, on peut disputer jusqu'au palier égal au nombre d'atouts de la ligne moins 6 — 8 atouts au palier de 2, 9 au palier de 3, 10 au palier de 4.

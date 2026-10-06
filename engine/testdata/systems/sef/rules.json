@@ -7935,7 +7935,8 @@
   "id": "q.1m.3NT.4NT",
   "seq": [
    "1C|1D 3NT",
-   "1C|1D 1D|1H|1S 1H|1S 3NT"
+   "1C|1D 1D|1H|1S 1H|1S 3NT",
+   "1C|1D (X) 1D|1H|1S 1H|1S 3NT"
   ],
   "call": "4NT",
   "cond": "hl >= 18 and (balanced or semibalanced)",
@@ -7948,7 +7949,8 @@
   "id": "q.1m.3NT.4NT.acc",
   "seq": [
    "1C|1D 3NT 4NT",
-   "1C|1D 1D|1H|1S 1H|1S 3NT 4NT"
+   "1C|1D 1D|1H|1S 1H|1S 3NT 4NT",
+   "1C|1D (X) 1D|1H|1S 1H|1S 3NT 4NT"
   ],
   "call": "6NT",
   "cond": "hl >= 14",
@@ -7961,7 +7963,8 @@
   "id": "q.1m.3NT.4NT.p",
   "seq": [
    "1C|1D 3NT 4NT",
-   "1C|1D 1D|1H|1S 1H|1S 3NT 4NT"
+   "1C|1D 1D|1H|1S 1H|1S 3NT 4NT",
+   "1C|1D (X) 1D|1H|1S 1H|1S 3NT 4NT"
   ],
   "call": "P",
   "cond": "true",
@@ -8193,7 +8196,10 @@
  },
  {
   "id": "roudi.H.S",
-  "seq": "1H 1S 1NT",
+  "seq": [
+   "1H 1S 1NT",
+   "1H (X) 1S 1NT"
+  ],
   "call": "2C",
   "cond": "S >= 5 and hl >= 10",
   "forcing": "F1",
@@ -8797,7 +8803,10 @@
  },
  {
   "id": "1C.1S.2C.2H",
-  "seq": "1C 1S 2C",
+  "seq": [
+   "1C 1S 2C",
+   "1C (X) 1S 2C"
+  ],
   "call": "2H",
   "cond": "S >= 5 and H >= 4 and hl >= 10",
   "forcing": "F1",
@@ -8807,7 +8816,10 @@
  },
  {
   "id": "1D.1S.2D.3C",
-  "seq": "1D 1S 2D",
+  "seq": [
+   "1D 1S 2D",
+   "1D (X) 1S 2D"
+  ],
   "call": "3C",
   "cond": "S == 4 and C >= 4 and hl >= 12",
   "forcing": "FM",
@@ -9021,7 +9033,10 @@
  },
  {
   "id": "1C.1S.2C.2H.r",
-  "seq": "1C 1S 2C 2H",
+  "seq": [
+   "1C 1S 2C 2H",
+   "1C (X) 1S 2C 2H"
+  ],
   "call": "3H",
   "cond": "H >= 4",
   "forcing": "NF",
@@ -9031,7 +9046,10 @@
  },
  {
   "id": "1C.1S.2C.2H.3H.4H",
-  "seq": "1C 1S 2C 2H 3H",
+  "seq": [
+   "1C 1S 2C 2H 3H",
+   "1C (X) 1S 2C 2H 3H"
+  ],
   "call": "4H",
   "cond": "hl >= 11",
   "forcing": "SO",
@@ -9041,7 +9059,10 @@
  },
  {
   "id": "1C.1S.2C.2H.3H.p",
-  "seq": "1C 1S 2C 2H 3H",
+  "seq": [
+   "1C 1S 2C 2H 3H",
+   "1C (X) 1S 2C 2H 3H"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -9051,7 +9072,10 @@
  },
  {
   "id": "1C.1S.2C.2H.2S",
-  "seq": "1C 1S 2C 2H",
+  "seq": [
+   "1C 1S 2C 2H",
+   "1C (X) 1S 2C 2H"
+  ],
   "call": "2S",
   "cond": "S >= 3",
   "forcing": "NF",
@@ -9061,7 +9085,10 @@
  },
  {
   "id": "1C.1S.2C.2H.2NT",
-  "seq": "1C 1S 2C 2H",
+  "seq": [
+   "1C 1S 2C 2H",
+   "1C (X) 1S 2C 2H"
+  ],
   "call": "2NT",
   "cond": "stop('D')",
   "forcing": "NF",
@@ -9071,7 +9098,10 @@
  },
  {
   "id": "1C.1S.2C.2H.3C",
-  "seq": "1C 1S 2C 2H",
+  "seq": [
+   "1C 1S 2C 2H",
+   "1C (X) 1S 2C 2H"
+  ],
   "call": "3C",
   "cond": "true",
   "forcing": "NF",
@@ -9081,7 +9111,10 @@
  },
  {
   "id": "1D.1S.2D.3C.r",
-  "seq": "1D 1S 2D 3C",
+  "seq": [
+   "1D 1S 2D 3C",
+   "1D (X) 1S 2D 3C"
+  ],
   "call": "3NT",
   "cond": "stop('H')",
   "forcing": "SO",
@@ -9091,7 +9124,10 @@
  },
  {
   "id": "1D.1S.2D.3C.4S",
-  "seq": "1D 1S 2D 3C",
+  "seq": [
+   "1D 1S 2D 3C",
+   "1D (X) 1S 2D 3C"
+  ],
   "call": "3S",
   "cond": "S >= 3",
   "forcing": "FM",
@@ -9101,7 +9137,10 @@
  },
  {
   "id": "1D.1S.2D.3C.4C",
-  "seq": "1D 1S 2D 3C",
+  "seq": [
+   "1D 1S 2D 3C",
+   "1D (X) 1S 2D 3C"
+  ],
   "call": "4C",
   "cond": "C >= 4",
   "forcing": "FM",
@@ -9111,7 +9150,10 @@
  },
  {
   "id": "1D.1S.2D.3C.3D",
-  "seq": "1D 1S 2D 3C",
+  "seq": [
+   "1D 1S 2D 3C",
+   "1D (X) 1S 2D 3C"
+  ],
   "call": "3D",
   "cond": "true",
   "forcing": "FM",
@@ -9443,7 +9485,10 @@
  },
  {
   "id": "tcf.2H.2NT.r",
-  "seq": "1C 1S 2C 2H 2NT",
+  "seq": [
+   "1C 1S 2C 2H 2NT",
+   "1C (X) 1S 2C 2H 2NT"
+  ],
   "call": "3NT",
   "cond": "hl >= 12",
   "forcing": "SO",
@@ -9453,7 +9498,10 @@
  },
  {
   "id": "tcf.2H.2S.r",
-  "seq": "1C 1S 2C 2H 2S",
+  "seq": [
+   "1C 1S 2C 2H 2S",
+   "1C (X) 1S 2C 2H 2S"
+  ],
   "call": "4S",
   "cond": "hl >= 12",
   "forcing": "SO",
@@ -9464,7 +9512,8 @@
  {
   "id": "tcf.2H.p",
   "seq": [
-   "1C 1S 2C 2H 2NT|2S"
+   "1C 1S 2C 2H 2NT|2S",
+   "1C (X) 1S 2C 2H 2NT|2S"
   ],
   "call": "P",
   "cond": "true",
@@ -9508,7 +9557,10 @@
   "seq": [
    "1C 1S 2C 2D 2S 3S",
    "1D 1S 2D 2H 2S 3S",
-   "1C 1H 2C 2D 2H 3H"
+   "1C 1H 2C 2D 2H 3H",
+   "1C (X) 1S 2C 2D 2S 3S",
+   "1D (X) 1S 2D 2H 2S 3S",
+   "1C (X) 1H 2C 2D 2H 3H"
   ],
   "call": "P",
   "cond": "true",
@@ -9791,7 +9843,10 @@
  },
  {
   "id": "fcf.b.jump",
-  "seq": "1D 1H 1S 2C",
+  "seq": [
+   "1D 1H 1S 2C",
+   "1D (X) 1H 1S 2C"
+  ],
   "call": "3D",
   "cond": "D >= 6",
   "forcing": "FM",
@@ -10192,7 +10247,10 @@
  {
   "id": "1D.1S.2NT.3C",
   "option": "checkback2018",
-  "seq": "1D 1S 2NT",
+  "seq": [
+   "1D 1S 2NT",
+   "1D (X) 1S 2NT"
+  ],
   "call": "3C",
   "cond": "hcp >= 6 and (S == 5 or H >= 4)",
   "forcing": "F1",
@@ -10204,7 +10262,10 @@
  {
   "id": "1D.1S.2NT.3C.3D",
   "option": "checkback2018",
-  "seq": "1D 1S 2NT 3C",
+  "seq": [
+   "1D 1S 2NT 3C",
+   "1D (X) 1S 2NT 3C"
+  ],
   "call": "3D",
   "cond": "D >= 5",
   "forcing": "F1",
@@ -10215,7 +10276,10 @@
  {
   "id": "1D.1S.2NT.3C.3H",
   "option": "checkback2018",
-  "seq": "1D 1S 2NT 3C",
+  "seq": [
+   "1D 1S 2NT 3C",
+   "1D (X) 1S 2NT 3C"
+  ],
   "call": "3H",
   "cond": "H >= 4",
   "forcing": "F1",
@@ -10226,7 +10290,10 @@
  {
   "id": "1D.1S.2NT.3C.3S",
   "option": "checkback2018",
-  "seq": "1D 1S 2NT 3C",
+  "seq": [
+   "1D 1S 2NT 3C",
+   "1D (X) 1S 2NT 3C"
+  ],
   "call": "3S",
   "cond": "S == 3",
   "forcing": "F1",
@@ -10237,7 +10304,10 @@
  {
   "id": "1D.1S.2NT.3C.3NT",
   "option": "checkback2018",
-  "seq": "1D 1S 2NT 3C",
+  "seq": [
+   "1D 1S 2NT 3C",
+   "1D (X) 1S 2NT 3C"
+  ],
   "call": "3NT",
   "cond": "true",
   "forcing": "NF",
@@ -10270,7 +10340,10 @@
  {
   "id": "1C.1S.2NT.3H",
   "option": "checkback2018",
-  "seq": "1C 1S 2NT",
+  "seq": [
+   "1C 1S 2NT",
+   "1C (X) 1S 2NT"
+  ],
   "call": "3H",
   "cond": "S >= 5 and H >= 5 and hcp >= 12",
   "forcing": "FM",
@@ -14014,6 +14087,56 @@
   "forcing": "NF",
   "meaning": "Passe",
   "meaning_en": "Pass",
+  "status": "infere"
+ },
+ {
+  "id": "ovr.1D.2C.3NT",
+  "seq": "(1D) 2C 3C",
+  "call": "3NT",
+  "cond": "stop('D') and hl >= 15",
+  "forcing": "SO",
+  "meaning": "Soutenu en mineure : 3SA avec l'arrêt et 15+ HL",
+  "meaning_en": "Raised in a minor: 3NT with the stopper and 15+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "ovr.1H.2C.3NT",
+  "seq": "(1H) 2C 3C",
+  "call": "3NT",
+  "cond": "stop('H') and hl >= 15",
+  "forcing": "SO",
+  "meaning": "Soutenu en mineure : 3SA avec l'arrêt et 15+ HL",
+  "meaning_en": "Raised in a minor: 3NT with the stopper and 15+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "ovr.1S.2C.3NT",
+  "seq": "(1S) 2C 3C",
+  "call": "3NT",
+  "cond": "stop('S') and hl >= 15",
+  "forcing": "SO",
+  "meaning": "Soutenu en mineure : 3SA avec l'arrêt et 15+ HL",
+  "meaning_en": "Raised in a minor: 3NT with the stopper and 15+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "ovr.1H.2D.3NT",
+  "seq": "(1H) 2D 3D",
+  "call": "3NT",
+  "cond": "stop('H') and hl >= 15",
+  "forcing": "SO",
+  "meaning": "Soutenu en mineure : 3SA avec l'arrêt et 15+ HL",
+  "meaning_en": "Raised in a minor: 3NT with the stopper and 15+ HL",
+  "status": "infere"
+ },
+ {
+  "id": "ovr.1S.2D.3NT",
+  "seq": "(1S) 2D 3D",
+  "call": "3NT",
+  "cond": "stop('S') and hl >= 15",
+  "forcing": "SO",
+  "meaning": "Soutenu en mineure : 3SA avec l'arrêt et 15+ HL",
+  "meaning_en": "Raised in a minor: 3NT with the stopper and 15+ HL",
   "status": "infere"
  },
  {
@@ -26624,7 +26747,10 @@
  },
  {
   "id": "1C.1D.1H",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "1H",
   "cond": "H >= 4",
   "forcing": "NF",
@@ -26634,7 +26760,10 @@
  },
  {
   "id": "1C.1D.1S",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "1S",
   "cond": "S >= 4",
   "forcing": "NF",
@@ -26644,7 +26773,10 @@
  },
  {
   "id": "1C.1D.2NT",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "2NT",
   "cond": "balanced and 17 <= hl <= 18",
   "forcing": "INV",
@@ -26654,7 +26786,10 @@
  },
  {
   "id": "1C.1D.1NT",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "1NT",
   "cond": "balanced and hl <= 13",
   "forcing": "NF",
@@ -26664,7 +26799,10 @@
  },
  {
   "id": "1C.1D.3D",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "3D",
   "cond": "D >= 4 and hl >= 14",
   "forcing": "INV",
@@ -26674,7 +26812,10 @@
  },
  {
   "id": "1C.1D.2D",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "2D",
   "cond": "D >= 4",
   "forcing": "NF",
@@ -26684,7 +26825,10 @@
  },
  {
   "id": "1C.1D.3C",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "3C",
   "cond": "C >= 6 and hl >= 14",
   "forcing": "INV",
@@ -26694,7 +26838,10 @@
  },
  {
   "id": "1C.1D.2C",
-  "seq": "1C 1D",
+  "seq": [
+   "1C 1D",
+   "1C (X) 1D"
+  ],
   "call": "2C",
   "cond": "true",
   "forcing": "NF",
@@ -26704,7 +26851,10 @@
  },
  {
   "id": "1H.1S.4S",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "4S",
   "cond": "S >= 4 and hld >= 18",
   "forcing": "SO",
@@ -26714,7 +26864,10 @@
  },
  {
   "id": "1H.1S.3S",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "3S",
   "cond": "S >= 4 and hld >= 15",
   "forcing": "INV",
@@ -26724,7 +26877,10 @@
  },
  {
   "id": "1H.1S.2S",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "2S",
   "cond": "S >= 4",
   "forcing": "NF",
@@ -26734,7 +26890,10 @@
  },
  {
   "id": "1H.1S.2NT",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "2NT",
   "cond": "balanced and 17 <= hl <= 19",
   "forcing": "INV",
@@ -26744,7 +26903,10 @@
  },
  {
   "id": "1H.1S.1NT",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "1NT",
   "cond": "balanced and hl <= 14",
   "forcing": "NF",
@@ -26754,7 +26916,10 @@
  },
  {
   "id": "1H.1S.3H",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "3H",
   "cond": "H >= 6 and hl >= 15",
   "forcing": "INV",
@@ -26804,7 +26969,10 @@
  },
  {
   "id": "1H.1S.2H",
-  "seq": "1H 1S",
+  "seq": [
+   "1H 1S",
+   "1H (X) 1S"
+  ],
   "call": "2H",
   "cond": "true",
   "forcing": "NF",
@@ -27583,7 +27751,10 @@
  },
  {
   "id": "1C.1D.3C.3NT",
-  "seq": "1C 1D 3C",
+  "seq": [
+   "1C 1D 3C",
+   "1C (X) 1D 3C"
+  ],
   "call": "3NT",
   "cond": "hl >= 7",
   "forcing": "SO",
@@ -27605,7 +27776,8 @@
   "id": "gen.r.2NT.p",
   "seq": [
    "1C|1D|1H|1S 1D|1NT 2NT",
-   "1C 1D 3C"
+   "1C 1D 3C",
+   "1C (X) 1D 3C"
   ],
   "call": "P",
   "cond": "true",
@@ -28246,7 +28418,10 @@
  },
  {
   "id": "1D.1S.2C.3H",
-  "seq": "1D 1S 2C",
+  "seq": [
+   "1D 1S 2C",
+   "1D (X) 1S 2C"
+  ],
   "call": "3H",
   "cond": "H >= 5 and S >= 5 and 9 <= hcp <= 11",
   "forcing": "INV",
@@ -28256,7 +28431,10 @@
  },
  {
   "id": "1D.1S.2C.3H.4H",
-  "seq": "1D 1S 2C 3H",
+  "seq": [
+   "1D 1S 2C 3H",
+   "1D (X) 1S 2C 3H"
+  ],
   "call": "4H",
   "cond": "H >= 3 and H >= S and hl >= 14",
   "forcing": "SO",
@@ -28266,7 +28444,10 @@
  },
  {
   "id": "1D.1S.2C.3H.4S",
-  "seq": "1D 1S 2C 3H",
+  "seq": [
+   "1D 1S 2C 3H",
+   "1D (X) 1S 2C 3H"
+  ],
   "call": "4S",
   "cond": "S >= 3 and hl >= 14",
   "forcing": "SO",
@@ -28276,7 +28457,10 @@
  },
  {
   "id": "1D.1S.2C.3H.3S",
-  "seq": "1D 1S 2C 3H",
+  "seq": [
+   "1D 1S 2C 3H",
+   "1D (X) 1S 2C 3H"
+  ],
   "call": "3S",
   "cond": "S > H",
   "forcing": "NF",
@@ -28286,7 +28470,10 @@
  },
  {
   "id": "1D.1S.2C.3H.P",
-  "seq": "1D 1S 2C 3H",
+  "seq": [
+   "1D 1S 2C 3H",
+   "1D (X) 1S 2C 3H"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",
@@ -29086,7 +29273,10 @@
  },
  {
   "id": "gen.lim.2NT",
-  "seq": "1C|1D|1H|1S 1D|1H|1S 1NT|2C|2D|2H|2S",
+  "seq": [
+   "1C|1D|1H|1S 1D|1H|1S 1NT|2C|2D|2H|2S",
+   "1C|1D|1H|1S (X) 1D|1H|1S 1NT|2C|2D|2H|2S"
+  ],
   "call": "2NT",
   "cond": "11 <= hl <= 12 and (balanced or semibalanced)",
   "forcing": "INV",
@@ -29096,7 +29286,10 @@
  },
  {
   "id": "gen.lim.game",
-  "seq": "1C|1D 1H|1S 1NT|2C|2D",
+  "seq": [
+   "1C|1D 1H|1S 1NT|2C|2D",
+   "1C|1D (X) 1H|1S 1NT|2C|2D"
+  ],
   "call": "3NT",
   "cond": "hl >= 13",
   "forcing": "SO",
@@ -31072,7 +31265,10 @@
  },
  {
   "id": "1C.1D.3D.r",
-  "seq": "1C 1D 3D",
+  "seq": [
+   "1C 1D 3D",
+   "1C (X) 1D 3D"
+  ],
   "call": "3NT",
   "cond": "hl >= 8 and (balanced or semibalanced)",
   "forcing": "SO",
@@ -31082,7 +31278,10 @@
  },
  {
   "id": "1C.1D.3D.5D",
-  "seq": "1C 1D 3D",
+  "seq": [
+   "1C 1D 3D",
+   "1C (X) 1D 3D"
+  ],
   "call": "5D",
   "cond": "hld >= 11",
   "forcing": "SO",
@@ -31092,7 +31291,10 @@
  },
  {
   "id": "1C.1D.3D.p",
-  "seq": "1C 1D 3D",
+  "seq": [
+   "1C 1D 3D",
+   "1C (X) 1D 3D"
+  ],
   "call": "P",
   "cond": "true",
   "forcing": "NF",

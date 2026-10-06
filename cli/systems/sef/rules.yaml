@@ -1522,11 +1522,60 @@
   meaning: "Moins de 5-6 H"
   meaning_en: "Fewer than 5-6 HCP"
   status: sef
+# Après une intervention en sandwich (1x 1y (z)), l'ouvreur contre avec 3 cartes dans la majeure du répondant
+# (contre Spoutnik) ; sinon il redemande comme sans intervention (variantes « (z) » des règles qui suivent).
+# en: After a sandwich overcall (1x 1y (z)), opener doubles with three cards in responder's major
+# (support double); otherwise he rebids as without the overcall (the « (z) » variants of the rules below).
+- id: "cmp.1C.1H.X"
+  seq: "1C 1H (1S|2D)"
+  call: "X"
+  cond: "H == 3 and hl <= 17"
+  forcing: F1
+  meaning: "Contre Spoutnik : 3 cartes dans la majeure du répondant"
+  meaning_en: "Support double: three cards in responder's major"
+  status: sef
+  alert: true
+- id: "cmp.1D.1H.X"
+  seq: "1D 1H (1S|2C)"
+  call: "X"
+  cond: "H == 3 and hl <= 17"
+  forcing: F1
+  meaning: "Contre Spoutnik : 3 cartes dans la majeure du répondant"
+  meaning_en: "Support double: three cards in responder's major"
+  status: sef
+  alert: true
+- id: "cmp.1C.1S.X"
+  seq: "1C 1S (2H|2D)"
+  call: "X"
+  cond: "S == 3 and hl <= 17"
+  forcing: F1
+  meaning: "Contre Spoutnik : 3 cartes dans la majeure du répondant"
+  meaning_en: "Support double: three cards in responder's major"
+  status: sef
+  alert: true
+- id: "cmp.1D.1S.X"
+  seq: "1D 1S (2H|2C)"
+  call: "X"
+  cond: "S == 3 and hl <= 17"
+  forcing: F1
+  meaning: "Contre Spoutnik : 3 cartes dans la majeure du répondant"
+  meaning_en: "Support double: three cards in responder's major"
+  status: sef
+  alert: true
+- id: "cmp.1H.1S.X"
+  seq: "1H 1S (2D|2C)"
+  call: "X"
+  cond: "S == 3 and hl <= 17"
+  forcing: F1
+  meaning: "Contre Spoutnik : 3 cartes dans la majeure du répondant"
+  meaning_en: "Support double: three cards in responder's major"
+  status: sef
+  alert: true
 # Redemandes de l'ouvreur après 1♣/♦ – 1♥/♠
 # en: Opener's rebids after 1♣/♦ – 1♥/♠
 - id: "1{m}.1{M}.4{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: "4{M}"
   cond: "{M} >= 4 and hld >= 18 and not balanced"
   forcing: SO
@@ -1534,8 +1583,8 @@
   meaning_en: "4-card fit, 18+ HLD, unbalanced"
   status: sef
 - id: "1{m}.1{M}.3NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: 3NT
   cond: "{M} >= 4 and 18 <= hl <= 19"
   forcing: NF
@@ -1544,8 +1593,8 @@
   status: sef
   alert: true
 - id: "1{m}.1{M}.3{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: "3{M}"
   cond: "{M} >= 4 and 15 <= hld <= 17"
   forcing: INV
@@ -1553,8 +1602,8 @@
   meaning_en: "4-card fit, 15-17 HLD"
   status: infere
 - id: "1{m}.1{M}.2{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: "2{M}"
   cond: "{M} >= 4 and hld <= 14"
   forcing: NF
@@ -1562,8 +1611,8 @@
   meaning_en: "4-card fit, 12-14 HLD"
   status: infere
 - id: "1{m}.1{M}.2NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: 2NT
   cond: "balanced and 18 <= hl <= 19"
   forcing: INV
@@ -1580,8 +1629,8 @@
   meaning_en: "4+ spades"
   status: sef
 - id: "1C.1{M}.2D.reverse"
-  for: [{M: H}, {M: S}]
-  seq: "1C 1{M}"
+  for: [{M: H, iv: 1S}, {M: S, iv: X}]
+  seq: ["1C 1{M}", "1C 1{M} ({iv})"]
   call: 2D
   cond: "C >= 5 and D >= 4 and hl >= 16"
   forcing: F1
@@ -1589,8 +1638,8 @@
   meaning_en: "Expensive two-suiter, 16+ HCP"
   status: sef
 - id: "1{m}.1S.2H.reverse"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1S"
+  for: [{m: C, iv: 2D}, {m: D, iv: 2C}]
+  seq: ["1{m} 1S", "1{m} 1S ({iv})"]
   call: 2H
   cond: "{m} >= 5 and H >= 4 and hl >= 17"
   forcing: F1
@@ -1598,8 +1647,8 @@
   meaning_en: "Expensive two-suiter, 17+ HCP"
   status: sef
 - id: "1{m}.1{M}.1NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: 1NT
   cond: "balanced and hl <= 14"
   forcing: NF
@@ -1607,8 +1656,8 @@
   meaning_en: "Balanced 12-14 HL"
   status: infere
 - id: "1{m}.1{M}.3NT.long"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: 3NT
   cond: "{m} >= 6 and hl >= 18"
   forcing: SO
@@ -1616,8 +1665,8 @@
   meaning_en: "Six-card minor, 18+ HL: 3NT"
   status: infere
 - id: "1{m}.1{M}.3{m}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: "3{m}"
   cond: "{m} >= 6 and 15 <= hl <= 17"
   forcing: INV
@@ -1625,8 +1674,8 @@
   meaning_en: "6 cards, 15-17 HL"
   status: infere
 - id: "1D.1{M}.3C.fort"
-  for: [{M: H}, {M: S}]
-  seq: "1D 1{M}"
+  for: [{M: H, iv: "1S|2C"}, {M: S, iv: "2H|2C"}]
+  seq: ["1D 1{M}", "1D 1{M} ({iv})"]
   call: 3C
   cond: "D >= 5 and C >= 4 and hl >= 18"
   forcing: FM
@@ -1634,8 +1683,8 @@
   meaning_en: "Jump shift ♦/♣: 18+ HL, game forcing"
   status: infere
 - id: "1D.1{M}.2C"
-  for: [{M: H}, {M: S}]
-  seq: "1D 1{M}"
+  for: [{M: H, iv: 1S}, {M: S, iv: X}]
+  seq: ["1D 1{M}", "1D 1{M} ({iv})"]
   call: 2C
   cond: "C >= 4"
   forcing: NF
@@ -1643,8 +1692,8 @@
   meaning_en: "♦/♣ two-suiter"
   status: infere
 - id: "1{m}.1{M}.2{m}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M}"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: 2C}]
+  seq: ["1{m} 1{M}", "1{m} 1{M} ({iv})"]
   call: "2{m}"
   cond: "true"
   forcing: NF
@@ -3203,8 +3252,8 @@
   meaning_en: "Declines"
   status: infere
 - id: "q.{m}{M}.2NT.6NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT", "1{m} 1{M} ({iv}) 2NT"]
   call: 6NT
   cond: "hl >= 15 and {M} < 6"
   forcing: SO
@@ -3212,8 +3261,8 @@
   meaning_en: "18-19 opposite: small slam"
   status: infere
 - id: "q.{m}{M}.2NT.4NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT", "1{m} 1{M} ({iv}) 2NT"]
   call: 4NT
   cond: "hl >= 13 and {M} < 6"
   forcing: INV
@@ -3221,8 +3270,8 @@
   meaning_en: "Quantitative"
   status: infere
 - id: "q.{m}{M}.2NT.4NT.r"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT 4NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT 4NT", "1{m} 1{M} ({iv}) 2NT 4NT"]
   call: 6NT
   cond: "hl >= 19"
   forcing: SO
@@ -3230,8 +3279,8 @@
   meaning_en: "Maximum: accepts"
   status: infere
 - id: "q.{m}{M}.2NT.4NT.p"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT 4NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT 4NT", "1{m} 1{M} ({iv}) 2NT 4NT"]
   call: P
   cond: "true"
   forcing: NF
@@ -3254,8 +3303,8 @@
 # Après 1♣/♦ – 1♥/♠ – 1SA (ou 1♥ – 1♠ – 1SA), 2♣ du répondant (11+ HL, majeure 5e) demande à l'ouvreur son soutien et sa force. Roudi à 3 paliers : 2♦ = 2 cartes dans la majeure (minimum ou maximum), 2♥ = 3 cartes minimum, 2♠ = 3 cartes maximum. SEF 2024 : toutes les enchères du répondant au niveau de 3 après le Roudi sont forcing de manche.
 # en: After 1♣/♦ – 1♥/♠ – 1NT (or 1♥ – 1♠ – 1NT), responder's 2♣ (11+ HL, five-card major) asks opener about support and strength. Three-step Roudi: 2♦ = two cards in the major (minimum or maximum), 2♥ = three cards, minimum, 2♠ = three cards, maximum. SEF 2024: every responder's bid at the three level after Roudi is game forcing.
 - id: "roudi.{m}.{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 1NT"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT", "1{m} 1{M} ({iv}) 1NT"]
   call: 2C
   cond: "{M} >= 5 and hl >= 10"
   forcing: F1
@@ -3275,8 +3324,8 @@
 # --- réponses de l'ouvreur : Roudi à 3 paliers
 # en: opener's answers: three-step Roudi
 - id: "roudi.{m}.H.2S"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1H 1NT 2C"
+  for: [{m: C, iv: 1S}, {m: D, iv: 1S}]
+  seq: ["1{m} 1H 1NT 2C", "1{m} 1H ({iv}) 1NT 2C"]
   call: 2S
   cond: "H == 3 and hld >= 13"
   forcing: F1
@@ -3285,8 +3334,8 @@
   status: sef
   alert: true
 - id: "roudi.{m}.H.2H"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1H 1NT 2C"
+  for: [{m: C, iv: 1S}, {m: D, iv: 1S}]
+  seq: ["1{m} 1H 1NT 2C", "1{m} 1H ({iv}) 1NT 2C"]
   call: 2H
   cond: "H == 3"
   forcing: NF
@@ -3314,8 +3363,8 @@
   status: choix
   alert: true
 - id: "roudi.{m}.{M}.2D"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C", "1{m} 1{M} ({iv}) 1NT 2C"]
   call: 2D
   cond: "true"
   forcing: F1
@@ -3326,8 +3375,8 @@
 # --- suites du répondant
 # en: responder's continuations
 - id: "roudi.{m}.{M}.max.4"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2S"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2S", "1{m} 1{M} ({iv}) 1NT 2C 2S"]
   call: "4{M}"
   cond: "true"
   forcing: SO
@@ -3335,8 +3384,8 @@
   meaning_en: "Fit and a maximum opposite: game"
   status: infere
 - id: "roudi.{m}.{M}.min.4"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2H"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2H", "1{m} 1{M} ({iv}) 1NT 2C 2H"]
   call: "4{M}"
   cond: "hld >= 12"
   forcing: SO
@@ -3344,8 +3393,8 @@
   meaning_en: "Fit: game"
   status: infere
 - id: "roudi.{m}.H.min.p"
-  for: [{m: C}, {m: D}]
-  seq: "1{m} 1H 1NT 2C 2H"
+  for: [{m: C, iv: 1S}, {m: D, iv: 1S}]
+  seq: ["1{m} 1H 1NT 2C 2H", "1{m} 1H ({iv}) 1NT 2C 2H"]
   call: P
   cond: "true"
   forcing: NF
@@ -3371,8 +3420,8 @@
   meaning_en: "Partscore"
   status: infere
 - id: "roudi.{m}.{M}.2D.4M"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2D", "1{m} 1{M} ({iv}) 1NT 2C 2D"]
   call: "4{M}"
   cond: "{M} >= 6 and hld >= 12"
   forcing: SO
@@ -3380,8 +3429,8 @@
   meaning_en: "Six cards, game"
   status: infere
 - id: "roudi.{m}.{M}.2D.3NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2D", "1{m} 1{M} ({iv}) 1NT 2C 2D"]
   call: 3NT
   cond: "hl >= 12"
   forcing: SO
@@ -3389,8 +3438,8 @@
   meaning_en: "Game in NT"
   status: infere
 - id: "roudi.{m}.{M}.2D.2NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2D", "1{m} 1{M} ({iv}) 1NT 2C 2D"]
   call: 2NT
   cond: "true"
   forcing: INV
@@ -3398,8 +3447,8 @@
   meaning_en: "Natural, 11-12 HCP: opener decides on strength"
   status: sef
 - id: "roudi.{m}.{M}.2NT.o"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D 2NT"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2D 2NT", "1{m} 1{M} ({iv}) 1NT 2C 2D 2NT"]
   call: 3NT
   cond: "hl >= 13"
   forcing: SO
@@ -3407,8 +3456,8 @@
   meaning_en: "Maximum: accepts the invitation"
   status: infere
 - id: "roudi.{m}.{M}.2NT.op"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}, {m: H, M: S}]
-  seq: "1{m} 1{M} 1NT 2C 2D 2NT"
+  for: [{m: C, M: H, iv: 1S}, {m: C, M: S, iv: X}, {m: D, M: H, iv: 1S}, {m: D, M: S, iv: X}, {m: H, M: S, iv: X}]
+  seq: ["1{m} 1{M} 1NT 2C 2D 2NT", "1{m} 1{M} ({iv}) 1NT 2C 2D 2NT"]
   call: P
   cond: "true"
   forcing: NF
@@ -3441,8 +3490,8 @@
   meaning_en: "Denies 5♠, forces with ♣"
   status: sef
 - id: "tcf.{o}{M}.ask"
-  for: [{o: C, M: H, t: D, f: S, call: 2D}, {o: C, M: S, t: D, f: H, call: 2D}, {o: D, M: H, t: S, f: C, call: 2S}, {o: D, M: S, t: H, f: C, call: 2H}]
-  seq: "1{o} 1{M} 2{o}"
+  for: [{o: C, M: H, t: D, f: S, call: 2D, iv: 1S}, {o: C, M: S, t: D, f: H, call: 2D, iv: X}, {o: D, M: H, t: S, f: C, call: 2S, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, call: 2H, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o}", "1{o} 1{M} ({iv}) 2{o}"]
   call: "{call}"
   cond: "hl >= 11 and not ((balanced or semibalanced) and stop('{t}') and stop('{f}'))"
   forcing: F1
@@ -3453,8 +3502,8 @@
 # --- réponses de l'ouvreur
 # en: opener's answers
 - id: "tcf.{o}{M}.fit3"
-  for: [{o: C, M: H, t: D, f: S, fit: 2H}, {o: C, M: S, t: D, f: H, fit: 2S}, {o: D, M: H, t: S, f: C, fit: 3H}, {o: D, M: S, t: H, f: C, fit: 2S}]
-  seq: "1{o} 1{M} 2{o} 2{t}"
+  for: [{o: C, M: H, t: D, f: S, fit: 2H, iv: 1S}, {o: C, M: S, t: D, f: H, fit: 2S, iv: X}, {o: D, M: H, t: S, f: C, fit: 3H, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, fit: 2S, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t}", "1{o} 1{M} ({iv}) 2{o} 2{t}"]
   call: "{fit}"
   cond: "{M} >= 3"
   forcing: NF
@@ -3462,8 +3511,8 @@
   meaning_en: "3 cards in responder's major"
   status: sef
 - id: "tcf.{o}{M}.raise"
-  for: [{o: C, M: H, t: D, f: S}, {o: C, M: S, t: D, f: H}, {o: D, M: H, t: S, f: C}, {o: D, M: S, t: H, f: C}]
-  seq: "1{o} 1{M} 2{o} 2{t}"
+  for: [{o: C, M: H, t: D, f: S, iv: 1S}, {o: C, M: S, t: D, f: H, iv: X}, {o: D, M: H, t: S, f: C, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t}", "1{o} 1{M} ({iv}) 2{o} 2{t}"]
   call: "3{t}"
   cond: "{t} >= 4"
   forcing: NF
@@ -3471,8 +3520,8 @@
   meaning_en: "Natural support of the third suit (4 cards)"
   status: sef
 - id: "tcf.{o}{M}.2NT"
-  for: [{o: C, M: H, t: D, f: S}, {o: C, M: S, t: D, f: H}, {o: D, M: H, t: S, f: C}, {o: D, M: S, t: H, f: C}]
-  seq: "1{o} 1{M} 2{o} 2{t}"
+  for: [{o: C, M: H, t: D, f: S, iv: 1S}, {o: C, M: S, t: D, f: H, iv: X}, {o: D, M: H, t: S, f: C, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t}", "1{o} 1{M} ({iv}) 2{o} 2{t}"]
   call: 2NT
   cond: "stop('{f}')"
   forcing: NF
@@ -3480,8 +3529,8 @@
   meaning_en: "Stopper in the fourth suit"
   status: sef
 - id: "tcf.{o}{M}.rebid"
-  for: [{o: C, M: H, t: D, f: S}, {o: C, M: S, t: D, f: H}, {o: D, M: H, t: S, f: C}, {o: D, M: S, t: H, f: C}]
-  seq: "1{o} 1{M} 2{o} 2{t}"
+  for: [{o: C, M: H, t: D, f: S, iv: 1S}, {o: C, M: S, t: D, f: H, iv: X}, {o: D, M: H, t: S, f: C, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t}", "1{o} 1{M} ({iv}) 2{o} 2{t}"]
   call: "3{o}"
   cond: "true"
   forcing: NF
@@ -3571,8 +3620,8 @@
 # --- conclusion du répondant
 # en: responder's conclusion
 - id: "tcf.{o}{M}.c4Mfit"
-  for: [{o: C, M: H, t: D, x: 2H}, {o: C, M: S, t: D, x: 2S}, {o: D, M: H, t: S, x: 3H}, {o: D, M: S, t: H, x: 2S}]
-  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C 3{M}", "1C 1S 2C 2H 2S"]
+  for: [{o: C, M: H, t: D, x: 2H, iv: 1S, iv2: 1S}, {o: C, M: S, t: D, x: 2S, iv: X, iv2: X}, {o: D, M: H, t: S, x: 3H, iv: "1S|2C", iv2: "1S|2C"}, {o: D, M: S, t: H, x: 2S, iv: 2C, iv2: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C 3{M}", "1C 1S 2C 2H 2S", "1{o} 1{M} ({iv}) 2{o} 2{t} {x}", "1{o} 1{M} ({iv2}) 2{o} 3C 3{M}"]
   call: "4{M}"
   cond: "hl >= 12 and {M} >= 5"
   forcing: SO
@@ -3580,8 +3629,8 @@
   meaning_en: "5-3 fit: game"
   status: infere
 - id: "tcf.{o}{M}.c3Mfit"
-  for: [{o: C, M: H, t: D, x: 2H}, {o: C, M: S, t: D, x: 2S}, {o: D, M: S, t: H, x: 2S}]
-  seq: "1{o} 1{M} 2{o} 2{t} {x}"
+  for: [{o: C, M: H, t: D, x: 2H, iv: 1S}, {o: C, M: S, t: D, x: 2S, iv: X}, {o: D, M: S, t: H, x: 2S, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} ({iv}) 2{o} 2{t} {x}"]
   call: "3{M}"
   cond: "{M} >= 5"
   forcing: INV
@@ -3589,8 +3638,8 @@
   meaning_en: "5-3 fit, 11 HCP: invitation"
   status: infere
 - id: "tcf.{o}{M}.c4M6"
-  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C"}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H"}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C"}]
-  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}"]
+  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C", iv: 1S, iv2: 1S}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H", iv: X, iv2: X}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D", iv: "1S|2C", iv2: "1S|2C"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C", iv: 2C, iv2: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}", "1{o} 1{M} ({iv}) 2{o} 2{t} {x}", "1{o} 1{M} ({iv2}) 2{o} 3C {x}"]
   call: "4{M}"
   cond: "hl >= 12 and {M} >= 6"
   forcing: SO
@@ -3598,8 +3647,8 @@
   meaning_en: "6 cards: game in the major"
   status: infere
 - id: "tcf.{o}{M}.c3NT"
-  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C"}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H"}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C"}]
-  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}"]
+  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C", iv: 1S, iv2: 1S}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H", iv: X, iv2: X}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D", iv: "1S|2C", iv2: "1S|2C"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C", iv: 2C, iv2: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}", "1{o} 1{M} ({iv}) 2{o} 2{t} {x}", "1{o} 1{M} ({iv2}) 2{o} 3C {x}"]
   call: 3NT
   cond: "hl >= 11"
   forcing: SO
@@ -3609,8 +3658,8 @@
 # L'ouvreur a soutenu la 3e couleur : il a 5 cartes dans sa mineure (répétée) et 4 dans la 3e couleur. Sans fit dans la 3e couleur (2 cartes au plus), le répondant ne la laisse pas jouer : 3SA avec l'arrêt dans la 4e couleur, sinon retour à la mineure de l'ouvreur.
 # en: Opener raised the third suit: 5 cards in the rebid minor and 4 in the third suit. With no fit in the third suit (2 cards at most), responder does not leave it in: 3NT with a stopper in the fourth suit, otherwise back to opener's minor.
 - id: "tcf.{o}{M}.nofit.3NT"
-  for: [{o: C, M: H, t: D, f: S}, {o: C, M: S, t: D, f: H}, {o: D, M: H, t: S, f: C}, {o: D, M: S, t: H, f: C}]
-  seq: "1{o} 1{M} 2{o} 2{t} 3{t}"
+  for: [{o: C, M: H, t: D, f: S, iv: 1S}, {o: C, M: S, t: D, f: H, iv: X}, {o: D, M: H, t: S, f: C, iv: "1S|2C"}, {o: D, M: S, t: H, f: C, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} 3{t}", "1{o} 1{M} ({iv}) 2{o} 2{t} 3{t}"]
   call: 3NT
   cond: "{t} <= 2 and stop('{f}')"
   forcing: SO
@@ -3618,8 +3667,8 @@
   meaning_en: "No fit in the third suit, fourth suit stopped: 3NT"
   status: infere
 - id: "tcf.{o}{M}.nofit.4o"
-  for: [{o: C, M: H, t: D}, {o: C, M: S, t: D}, {o: D, M: H, t: S}, {o: D, M: S, t: H}]
-  seq: "1{o} 1{M} 2{o} 2{t} 3{t}"
+  for: [{o: C, M: H, t: D, iv: 1S}, {o: C, M: S, t: D, iv: X}, {o: D, M: H, t: S, iv: "1S|2C"}, {o: D, M: S, t: H, iv: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} 3{t}", "1{o} 1{M} ({iv}) 2{o} 2{t} 3{t}"]
   call: "4{o}"
   cond: "{t} <= 2"
   forcing: NF
@@ -3627,8 +3676,8 @@
   meaning_en: "No fit in the third suit and no fourth-suit stopper: back to opener's 5-card minor"
   status: infere
 - id: "tcf.{o}{M}.cp"
-  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C"}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H"}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C"}]
-  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}"]
+  for: [{o: C, M: H, t: D, x: "2H|3H|3D|2NT|3C", iv: 1S, iv2: 1S}, {o: C, M: S, t: D, x: "2S|3S|3D|2NT|3C|2H", iv: X, iv2: X}, {o: D, M: H, t: S, x: "3H|3S|2NT|3D", iv: "1S|2C", iv2: "1S|2C"}, {o: D, M: S, t: H, x: "2S|3S|3H|2NT|3D|3C", iv: 2C, iv2: 2C}]
+  seq: ["1{o} 1{M} 2{o} 2{t} {x}", "1{o} 1{M} 2{o} 3C {x}", "1{o} 1{M} ({iv}) 2{o} 2{t} {x}", "1{o} 1{M} ({iv2}) 2{o} 3C {x}"]
   call: P
   cond: "true"
   forcing: NF
@@ -3660,8 +3709,8 @@
   meaning_en: "Partscore"
   status: infere
 - id: "tcf.inv.{k}"
-  for: [{k: a, M: S, s: "1C 1S 2C 2D 2S 3S"}, {k: b, M: S, s: "1D 1S 2D 2H 2S 3S"}, {k: c, M: H, s: "1C 1H 2C 2D 2H 3H"}]
-  seq: "{s}"
+  for: [{k: a, M: S, s: "1C 1S 2C 2D 2S 3S", iv: X}, {k: b, M: S, s: "1D 1S 2D 2H 2S 3S", iv: 2C}, {k: c, M: H, s: "1C 1H 2C 2D 2H 3H", iv: 1S}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "4{M}"
   cond: "hl >= 14"
   forcing: SO
@@ -3708,8 +3757,8 @@
 # Le répondant nomme la 4e couleur pour rallonger sa couleur, demander l'arrêt pour SA ou rendre l'enchère forcing ; elle est forcing de manche. Réponses de l'ouvreur, par ordre de priorité : 3 cartes dans la majeure du répondant, 2SA (ou 3SA) avec l'arrêt dans la 4e couleur (mini-maxi : 12-15 ou 18-19 HL), répétition de la 2e couleur avec 5 cartes, soutien de la 4e couleur mineure au palier de 3 avec As troisième et ouverture non minimum, répétition de la 1re couleur sans autre enchère possible. La répétition à saut de la mineure promet 6 cartes au moins.
 # en: Responder bids the fourth suit to show extra length, ask for a stopper for NT, or make the auction forcing; it is game forcing. Opener's answers, in order of priority: three cards in responder's major, 2NT (or 3NT) with the fourth-suit stopper (mini-maxi: 12-15 or 18-19 HL), rebid of the second suit with 5 cards, raise of a fourth-suit minor at the three level with Axx and a non-minimum opening, rebid of the first suit with nothing else to bid. A jump rebid of the minor promises at least 6 cards.
 - id: "fcf.{k}.ask"
-  for: [{k: a, s: "1C 1H 1S", call: 2D, F: D, M: H, o2: S}, {k: b, s: "1D 1H 1S", call: 2C, F: C, M: H, o2: S}, {k: c, s: "1D 1S 2C", call: 2H, F: H, M: S, o2: C}, {k: e, s: "1H 1S 2C", call: 2D, F: D, M: S, o2: C}, {k: f, s: "1H 1S 2D", call: 3C, F: C, M: S, o2: D}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S", call: 2D, F: D, M: H, o2: S, iv: X}, {k: b, s: "1D 1H 1S", call: 2C, F: C, M: H, o2: S, iv: X}, {k: c, s: "1D 1S 2C", call: 2H, F: H, M: S, o2: C, iv: X}, {k: e, s: "1H 1S 2C", call: 2D, F: D, M: S, o2: C, iv: X}, {k: f, s: "1H 1S 2D", call: 3C, F: C, M: S, o2: D, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "{call}"
   cond: "hl >= 11 and not ({o2} >= 4 and '{o2}' in ('H', 'S')) and {M} < 6 and not ((balanced or semibalanced) and stop('{F}'))"
   forcing: FM
@@ -3720,8 +3769,8 @@
 # --- réponses de l'ouvreur, par ordre de priorité (forcing de manche)
 # en: opener's answers, in order of priority (game forcing)
 - id: "fcf.{k}.fitM"
-  for: [{k: a, s: "1C 1H 1S 2D", M: H, c: 2H}, {k: b, s: "1D 1H 1S 2C", M: H, c: 2H}, {k: c, s: "1D 1S 2C 2H", M: S, c: 2S}, {k: e, s: "1H 1S 2C 2D", M: S, c: 2S}, {k: f, s: "1H 1S 2D 3C", M: S, c: 3S}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S 2D", M: H, c: 2H, iv: X}, {k: b, s: "1D 1H 1S 2C", M: H, c: 2H, iv: X}, {k: c, s: "1D 1S 2C 2H", M: S, c: 2S, iv: X}, {k: e, s: "1H 1S 2C 2D", M: S, c: 2S, iv: X}, {k: f, s: "1H 1S 2D 3C", M: S, c: 3S, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "{c}"
   cond: "{M} >= 3"
   forcing: FM
@@ -3729,8 +3778,8 @@
   meaning_en: "3 cards in responder's major"
   status: sef
 - id: "fcf.{k}.nt"
-  for: [{k: a, s: "1C 1H 1S 2D", F: D, nt: 2NT, fo: FM}, {k: b, s: "1D 1H 1S 2C", F: C, nt: 2NT, fo: FM}, {k: c, s: "1D 1S 2C 2H", F: H, nt: 2NT, fo: FM}, {k: e, s: "1H 1S 2C 2D", F: D, nt: 2NT, fo: FM}, {k: f, s: "1H 1S 2D 3C", F: C, nt: 3NT, fo: SO}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S 2D", F: D, nt: 2NT, fo: FM, iv: X}, {k: b, s: "1D 1H 1S 2C", F: C, nt: 2NT, fo: FM, iv: X}, {k: c, s: "1D 1S 2C 2H", F: H, nt: 2NT, fo: FM, iv: X}, {k: e, s: "1H 1S 2C 2D", F: D, nt: 2NT, fo: FM, iv: X}, {k: f, s: "1H 1S 2D 3C", F: C, nt: 3NT, fo: SO, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "{nt}"
   cond: "stop('{F}')"
   forcing: "{fo}"
@@ -3738,8 +3787,8 @@
   meaning_en: "Stopper in the fourth suit (2NT: 12-15 or 18-19 HL)"
   status: sef
 - id: "fcf.{k}.rebid2"
-  for: [{k: a, s: "1C 1H 1S 2D", o2: S, c: 2S}, {k: b, s: "1D 1H 1S 2C", o2: S, c: 2S}, {k: c, s: "1D 1S 2C 2H", o2: C, c: 3C}, {k: e, s: "1H 1S 2C 2D", o2: C, c: 3C}, {k: f, s: "1H 1S 2D 3C", o2: D, c: 3D}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S 2D", o2: S, c: 2S, iv: X}, {k: b, s: "1D 1H 1S 2C", o2: S, c: 2S, iv: X}, {k: c, s: "1D 1S 2C 2H", o2: C, c: 3C, iv: X}, {k: e, s: "1H 1S 2C 2D", o2: C, c: 3C, iv: X}, {k: f, s: "1H 1S 2D 3C", o2: D, c: 3D, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "{c}"
   cond: "{o2} >= 5"
   forcing: FM
@@ -3764,8 +3813,8 @@
   meaning_en: "Jump rebid of the minor: 6+ cards"
   status: sef
 - id: "fcf.{k}.rebid"
-  for: [{k: a, s: "1C 1H 1S 2D", c: 3C}, {k: b, s: "1D 1H 1S 2C", c: 2D}, {k: c, s: "1D 1S 2C 2H", c: 3D}, {k: e, s: "1H 1S 2C 2D", c: 2H}, {k: f, s: "1H 1S 2D 3C", c: 3H}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S 2D", c: 3C, iv: X}, {k: b, s: "1D 1H 1S 2C", c: 2D, iv: X}, {k: c, s: "1D 1S 2C 2H", c: 3D, iv: X}, {k: e, s: "1H 1S 2C 2D", c: 2H, iv: X}, {k: f, s: "1H 1S 2D 3C", c: 3H, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "{c}"
   cond: "true"
   forcing: FM
@@ -3775,8 +3824,8 @@
 # --- conclusion du répondant
 # en: responder's conclusion
 - id: "fcf.{k}.c4Mfit"
-  for: [{k: a, s: "1C 1H 1S 2D 2H", M: H}, {k: b, s: "1D 1H 1S 2C 2H", M: H}, {k: c, s: "1D 1S 2C 2H 2S", M: S}, {k: e, s: "1H 1S 2C 2D 2S", M: S}, {k: f, s: "1H 1S 2D 3C 3S", M: S}]
-  seq: "{s}"
+  for: [{k: a, s: "1C 1H 1S 2D 2H", M: H, iv: X}, {k: b, s: "1D 1H 1S 2C 2H", M: H, iv: X}, {k: c, s: "1D 1S 2C 2H 2S", M: S, iv: X}, {k: e, s: "1H 1S 2C 2D 2S", M: S, iv: X}, {k: f, s: "1H 1S 2D 3C 3S", M: S, iv: 2C}]
+  seq: ["{s}", "{s} ({iv})"]
   call: "4{M}"
   cond: "{M} >= 5"
   forcing: SO
@@ -3802,8 +3851,8 @@
   meaning_en: "5-3 fit in opener's second suit: game"
   status: infere
 - id: "fcf.{k}.c3NT"
-  for: [{k: a, s: "1C 1H 1S 2D"}, {k: b, s: "1D 1H 1S 2C"}, {k: c, s: "1D 1S 2C 2H"}, {k: e, s: "1H 1S 2C 2D"}, {k: f, s: "1H 1S 2D 3C"}]
-  seq: "{s} 2NT|2D|2H|2S|3C|3D|3H|3S"
+  for: [{k: a, s: "1C 1H 1S 2D", iv: X}, {k: b, s: "1D 1H 1S 2C", iv: X}, {k: c, s: "1D 1S 2C 2H", iv: X}, {k: e, s: "1H 1S 2C 2D", iv: X}, {k: f, s: "1H 1S 2D 3C", iv: 2C}]
+  seq: ["{s} 2NT|2D|2H|2S|3C|3D|3H|3S", "{s} 2NT|2D|2H|2S|3C|3D|3H|3S ({iv})"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -3811,8 +3860,8 @@
   meaning_en: "Game in NT"
   status: infere
 - id: "fcf.{k}.c3NT.p"
-  for: [{k: f, s: "1H 1S 2D 3C"}]
-  seq: "{s} 3NT"
+  for: [{k: f, s: "1H 1S 2D 3C", iv: 2C}]
+  seq: ["{s} 3NT", "{s} 3NT ({iv})"]
   call: P
   cond: "true"
   forcing: NF
@@ -3912,8 +3961,8 @@
   status: sef2018
 - id: "1D.1{M}.2NT.4{M}"
   option: checkback2018
-  for: [{M: H}, {M: S}]
-  seq: "1D 1{M} 2NT"
+  for: [{M: H, iv: "1S|2C"}, {M: S, iv: "2H|2C"}]
+  seq: ["1D 1{M} 2NT", "1D 1{M} ({iv}) 2NT"]
   call: "4{M}"
   cond: "{M} >= 6"
   forcing: SO
@@ -4496,6 +4545,406 @@
   forcing: NF
   meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
   meaning_en: "Sandwich overcall: 5+ cards, good suit"
+  status: infere
+- id: "cmp.1C.1H.1S.X.4H"
+  seq: "1C 1H (1S) X"
+  call: "4H"
+  cond: "H >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1C.1H.1S.X.3NT"
+  seq: "1C 1H (1S) X"
+  call: "3NT"
+  cond: "H == 4 and hl >= 13 and stop('S')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1C.1H.1S.X.3H"
+  seq: "1C 1H (1S) X"
+  call: "3H"
+  cond: "H >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1C.1H.1S.X.1NT"
+  seq: "1C 1H (1S) X"
+  call: "1NT"
+  cond: "H == 4 and stop('S') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1C.1H.1S.X.2H"
+  seq: "1C 1H (1S) X"
+  call: "2H"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1C.1H.2D.X.4H"
+  seq: "1C 1H (2D) X"
+  call: "4H"
+  cond: "H >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1C.1H.2D.X.3NT"
+  seq: "1C 1H (2D) X"
+  call: "3NT"
+  cond: "H == 4 and hl >= 13 and stop('D')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1C.1H.2D.X.3H"
+  seq: "1C 1H (2D) X"
+  call: "3H"
+  cond: "H >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1C.1H.2D.X.2NT"
+  seq: "1C 1H (2D) X"
+  call: "2NT"
+  cond: "H == 4 and stop('D') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1C.1H.2D.X.2H"
+  seq: "1C 1H (2D) X"
+  call: "2H"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1D.1H.1S.X.4H"
+  seq: "1D 1H (1S) X"
+  call: "4H"
+  cond: "H >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1D.1H.1S.X.3NT"
+  seq: "1D 1H (1S) X"
+  call: "3NT"
+  cond: "H == 4 and hl >= 13 and stop('S')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1D.1H.1S.X.3H"
+  seq: "1D 1H (1S) X"
+  call: "3H"
+  cond: "H >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1D.1H.1S.X.1NT"
+  seq: "1D 1H (1S) X"
+  call: "1NT"
+  cond: "H == 4 and stop('S') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1D.1H.1S.X.2H"
+  seq: "1D 1H (1S) X"
+  call: "2H"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1D.1H.2C.X.4H"
+  seq: "1D 1H (2C) X"
+  call: "4H"
+  cond: "H >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1D.1H.2C.X.3NT"
+  seq: "1D 1H (2C) X"
+  call: "3NT"
+  cond: "H == 4 and hl >= 13 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1D.1H.2C.X.3H"
+  seq: "1D 1H (2C) X"
+  call: "3H"
+  cond: "H >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1D.1H.2C.X.2NT"
+  seq: "1D 1H (2C) X"
+  call: "2NT"
+  cond: "H == 4 and stop('C') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1D.1H.2C.X.2H"
+  seq: "1D 1H (2C) X"
+  call: "2H"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1C.1S.2H.X.4S"
+  seq: "1C 1S (2H) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1C.1S.2H.X.3NT"
+  seq: "1C 1S (2H) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('H')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1C.1S.2H.X.3S"
+  seq: "1C 1S (2H) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1C.1S.2H.X.2NT"
+  seq: "1C 1S (2H) X"
+  call: "2NT"
+  cond: "S == 4 and stop('H') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1C.1S.2H.X.2S"
+  seq: "1C 1S (2H) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1C.1S.2D.X.4S"
+  seq: "1C 1S (2D) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1C.1S.2D.X.3NT"
+  seq: "1C 1S (2D) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('D')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1C.1S.2D.X.3S"
+  seq: "1C 1S (2D) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1C.1S.2D.X.2NT"
+  seq: "1C 1S (2D) X"
+  call: "2NT"
+  cond: "S == 4 and stop('D') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1C.1S.2D.X.2S"
+  seq: "1C 1S (2D) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1D.1S.2H.X.4S"
+  seq: "1D 1S (2H) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1D.1S.2H.X.3NT"
+  seq: "1D 1S (2H) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('H')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1D.1S.2H.X.3S"
+  seq: "1D 1S (2H) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1D.1S.2H.X.2NT"
+  seq: "1D 1S (2H) X"
+  call: "2NT"
+  cond: "S == 4 and stop('H') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1D.1S.2H.X.2S"
+  seq: "1D 1S (2H) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1D.1S.2C.X.4S"
+  seq: "1D 1S (2C) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1D.1S.2C.X.3NT"
+  seq: "1D 1S (2C) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1D.1S.2C.X.3S"
+  seq: "1D 1S (2C) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1D.1S.2C.X.2NT"
+  seq: "1D 1S (2C) X"
+  call: "2NT"
+  cond: "S == 4 and stop('C') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1D.1S.2C.X.2S"
+  seq: "1D 1S (2C) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1H.1S.2D.X.4S"
+  seq: "1H 1S (2D) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1H.1S.2D.X.3NT"
+  seq: "1H 1S (2D) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('D')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1H.1S.2D.X.3S"
+  seq: "1H 1S (2D) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1H.1S.2D.X.2NT"
+  seq: "1H 1S (2D) X"
+  call: "2NT"
+  cond: "S == 4 and stop('D') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1H.1S.2D.X.2S"
+  seq: "1H 1S (2D) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
+  status: infere
+- id: "cmp.1H.1S.2C.X.4S"
+  seq: "1H 1S (2C) X"
+  call: "4S"
+  cond: "S >= 5 and hl >= 13"
+  forcing: SO
+  meaning: "Fit 5-3 : manche"
+  meaning_en: "5-3 fit: game"
+  status: infere
+- id: "cmp.1H.1S.2C.X.3NT"
+  seq: "1H 1S (2C) X"
+  call: "3NT"
+  cond: "S == 4 and hl >= 13 and stop('C')"
+  forcing: SO
+  meaning: "Arrêt, manche à SA"
+  meaning_en: "Stopper, game in NT"
+  status: infere
+- id: "cmp.1H.1S.2C.X.3S"
+  seq: "1H 1S (2C) X"
+  call: "3S"
+  cond: "S >= 5 and 11 <= hl <= 12"
+  forcing: INV
+  meaning: "Fit 5-3, invitation"
+  meaning_en: "5-3 fit, invitation"
+  status: infere
+- id: "cmp.1H.1S.2C.X.2NT"
+  seq: "1H 1S (2C) X"
+  call: "2NT"
+  cond: "S == 4 and stop('C') and hl <= 10"
+  forcing: NF
+  meaning: "Arrêt, pas de fit 5-3"
+  meaning_en: "Stopper, no 5-3 fit"
+  status: infere
+- id: "cmp.1H.1S.2C.X.2S"
+  seq: "1H 1S (2C) X"
+  call: "2S"
+  cond: "true"
+  forcing: NF
+  meaning: "Préférence dans sa majeure"
+  meaning_en: "Preference for his major"
   status: infere
 # --- réveil : l'ouverture revient après deux passes (le partenaire a passé)
 # en: balancing: the opening comes round after two passes (partner has passed)
@@ -6266,8 +6715,8 @@
 # --- le répondant après le bicolore à saut de l'ouvreur (forcing de manche)
 # en: responder after opener's jump shift (game forcing)
 - id: "js.{o}.{r}.{j}.4{o2}"
-  for: [{o: 1H, o2: H, r: 1S, j: 3C}, {o: 1H, o2: H, r: 1S, j: 3D}]
-  seq: "{o} {r} {j}"
+  for: [{o: 1H, o2: H, r: 1S, j: 3C, iv: "2D|2C"}, {o: 1H, o2: H, r: 1S, j: 3D, iv: "2D|2C"}]
+  seq: ["{o} {r} {j}", "{o} {r} ({iv}) {j}"]
   call: "4{o2}"
   cond: "{o2} >= 3"
   forcing: SO
@@ -6275,8 +6724,8 @@
   meaning_en: "Fit in the opening major: game"
   status: infere
 - id: "js.{o}.{r}.{j}.4{r2}"
-  for: [{o: 1D, r: 1H, r2: H, j: 3C}, {o: 1D, r: 1S, r2: S, j: 3C}, {o: 1H, r: 1S, r2: S, j: 3C}, {o: 1H, r: 1S, r2: S, j: 3D}]
-  seq: "{o} {r} {j}"
+  for: [{o: 1D, r: 1H, r2: H, j: 3C, iv: "1S|2C"}, {o: 1D, r: 1S, r2: S, j: 3C, iv: "2H|2C"}, {o: 1H, r: 1S, r2: S, j: 3C, iv: "2D|2C"}, {o: 1H, r: 1S, r2: S, j: 3D, iv: "2D|2C"}]
+  seq: ["{o} {r} {j}", "{o} {r} ({iv}) {j}"]
   call: "4{r2}"
   cond: "{r2} >= 6"
   forcing: SO
@@ -6284,8 +6733,8 @@
   meaning_en: "Six-card major: game"
   status: infere
 - id: "js.{o}.{r}.{j}.3NT"
-  for: [{o: 1D, r: 1H, j: 3C}, {o: 1D, r: 1S, j: 3C}, {o: 1H, r: 1S, j: 3C}, {o: 1H, r: 1S, j: 3D}]
-  seq: "{o} {r} {j}"
+  for: [{o: 1D, r: 1H, j: 3C, iv: "1S|2C"}, {o: 1D, r: 1S, j: 3C, iv: "2H|2C"}, {o: 1H, r: 1S, j: 3C, iv: "2D|2C"}, {o: 1H, r: 1S, j: 3D, iv: "2D|2C"}]
+  seq: ["{o} {r} {j}", "{o} {r} ({iv}) {j}"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -6296,8 +6745,8 @@
 # --- l'ouvreur après le 1SA de son partenaire au deuxième tour
 # en: opener after partner's 1NT at the second round
 - id: "o4.{s}.1NT.3NT"
-  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
-  seq: "{s} 1NT"
+  for: [{s: "1C 1D 1H", iv: X}, {s: "1C 1D 1S", iv: 1H}, {s: "1C 1H 1S", iv: X}, {s: "1D 1H 1S", iv: X}]
+  seq: ["{s} 1NT", "{s} 1NT ({iv})"]
   call: 3NT
   cond: "hl >= 18"
   forcing: SO
@@ -6305,8 +6754,8 @@
   meaning_en: "18+ HL: game in notrump"
   status: infere
 - id: "o4.{s}.1NT.2NT"
-  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
-  seq: "{s} 1NT"
+  for: [{s: "1C 1D 1H", iv: X}, {s: "1C 1D 1S", iv: 1H}, {s: "1C 1H 1S", iv: X}, {s: "1D 1H 1S", iv: X}]
+  seq: ["{s} 1NT", "{s} 1NT ({iv})"]
   call: 2NT
   cond: "16 <= hl <= 17"
   forcing: INV
@@ -6314,8 +6763,8 @@
   meaning_en: "16-17 HL: invitation"
   status: infere
 - id: "o4.{s}.1NT.2NT.3NT"
-  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
-  seq: "{s} 1NT 2NT"
+  for: [{s: "1C 1D 1H", iv: X}, {s: "1C 1D 1S", iv: 1H}, {s: "1C 1H 1S", iv: X}, {s: "1D 1H 1S", iv: X}]
+  seq: ["{s} 1NT 2NT", "{s} 1NT ({iv}) 2NT"]
   call: 3NT
   cond: "hcp >= 8"
   forcing: SO
@@ -6323,8 +6772,8 @@
   meaning_en: "Maximum: 3NT"
   status: infere
 - id: "o4.{s}.1NT.2NT.P"
-  for: [{s: "1C 1D 1H"}, {s: "1C 1D 1S"}, {s: "1C 1H 1S"}, {s: "1D 1H 1S"}]
-  seq: "{s} 1NT 2NT"
+  for: [{s: "1C 1D 1H", iv: X}, {s: "1C 1D 1S", iv: 1H}, {s: "1C 1H 1S", iv: X}, {s: "1D 1H 1S", iv: X}]
+  seq: ["{s} 1NT 2NT", "{s} 1NT ({iv}) 2NT"]
   call: P
   cond: "true"
   forcing: NF
@@ -6889,8 +7338,8 @@
   meaning_en: "6 hearts, 15-17 HL"
   status: infere
 - id: "1H.1S.3{m}.fort"
-  for: [{m: C}, {m: D}]
-  seq: "1H 1S"
+  for: [{m: C, iv: "2D|2C"}, {m: D, iv: "2D|2C"}]
+  seq: ["1H 1S", "1H 1S ({iv})"]
   call: "3{m}"
   cond: "H >= 5 and {m} >= 4 and {m} >= max(C, D) and hl >= 17"
   forcing: FM
@@ -6898,8 +7347,8 @@
   meaning_en: "Jump shift: 17+ HL, game forcing"
   status: infere
 - id: "1H.1S.2{m}"
-  for: [{m: C}, {m: D}]
-  seq: "1H 1S"
+  for: [{m: C, iv: X}, {m: D, iv: 2C}]
+  seq: ["1H 1S", "1H 1S ({iv})"]
   call: "2{m}"
   cond: "{m} >= 4 and {m} >= max(C, D)"
   forcing: NF
@@ -7288,8 +7737,8 @@
 # (1{m} 1H 1S est déjà codé ; ici : 3e enchère du répondant)
 # en: (1{m} 1H 1S is already coded; here: responder's third bid)
 - id: "{o}.{r}.{b}.3NT"
-  for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, iv: X}, {o: 1C, r: 1D, b: 1S, iv: 1H}, {o: 1C, r: 1H, b: 1S, iv: X}, {o: 1D, r: 1H, b: 1S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: 3NT
   cond: "hl >= 13 and balanced"
   forcing: SO
@@ -7297,8 +7746,8 @@
   meaning_en: "Game in NT"
   status: infere
 - id: "{o}.{r}.{b}.raise"
-  for: [{o: 1C, r: 1D, b: 1H, M: H}, {o: 1C, r: 1D, b: 1S, M: S}, {o: 1C, r: 1H, b: 1S, M: S}, {o: 1D, r: 1H, b: 1S, M: S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, M: H, iv: X}, {o: 1C, r: 1D, b: 1S, M: S, iv: 1H}, {o: 1C, r: 1H, b: 1S, M: S, iv: X}, {o: 1D, r: 1H, b: 1S, M: S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: "2{M}"
   cond: "{M} >= 4 and hld <= 10"
   forcing: NF
@@ -7306,8 +7755,8 @@
   meaning_en: "4-card fit, minimum"
   status: infere
 - id: "{o}.{r}.{b}.raise4"
-  for: [{o: 1C, r: 1D, b: 1H, M: H}, {o: 1C, r: 1D, b: 1S, M: S}, {o: 1C, r: 1H, b: 1S, M: S}, {o: 1D, r: 1H, b: 1S, M: S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, M: H, iv: X}, {o: 1C, r: 1D, b: 1S, M: S, iv: 1H}, {o: 1C, r: 1H, b: 1S, M: S, iv: X}, {o: 1D, r: 1H, b: 1S, M: S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: "4{M}"
   cond: "{M} >= 4 and hld >= 13"
   forcing: SO
@@ -7315,8 +7764,8 @@
   meaning_en: "4-card fit, game"
   status: infere
 - id: "{o}.{r}.{b}.raise3"
-  for: [{o: 1C, r: 1D, b: 1H, M: H}, {o: 1C, r: 1D, b: 1S, M: S}, {o: 1C, r: 1H, b: 1S, M: S}, {o: 1D, r: 1H, b: 1S, M: S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, M: H, iv: X}, {o: 1C, r: 1D, b: 1S, M: S, iv: 1H}, {o: 1C, r: 1H, b: 1S, M: S, iv: X}, {o: 1D, r: 1H, b: 1S, M: S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: "3{M}"
   cond: "{M} >= 4"
   forcing: INV
@@ -7324,8 +7773,8 @@
   meaning_en: "4-card fit, invitation"
   status: infere
 - id: "{o}.{r}.{b}.2NT"
-  for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, iv: X}, {o: 1C, r: 1D, b: 1S, iv: 1H}, {o: 1C, r: 1H, b: 1S, iv: X}, {o: 1D, r: 1H, b: 1S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: 2NT
   cond: "11 <= hl <= 12"
   forcing: INV
@@ -7333,8 +7782,8 @@
   meaning_en: "Invitation to NT"
   status: infere
 - id: "{o}.{r}.{b}.1NT"
-  for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, iv: X}, {o: 1C, r: 1D, b: 1S, iv: 1H}, {o: 1C, r: 1H, b: 1S, iv: X}, {o: 1D, r: 1H, b: 1S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: 1NT
   cond: "hl <= 10"
   forcing: NF
@@ -7342,8 +7791,8 @@
   meaning_en: "Minimum"
   status: infere
 - id: "{o}.{r}.{b}.3NTx"
-  for: [{o: 1C, r: 1D, b: 1H}, {o: 1C, r: 1D, b: 1S}, {o: 1C, r: 1H, b: 1S}, {o: 1D, r: 1H, b: 1S}]
-  seq: "{o} {r} {b}"
+  for: [{o: 1C, r: 1D, b: 1H, iv: X}, {o: 1C, r: 1D, b: 1S, iv: 1H}, {o: 1C, r: 1H, b: 1S, iv: X}, {o: 1D, r: 1H, b: 1S, iv: X}]
+  seq: ["{o} {r} {b}", "{o} {r} ({iv}) {b}"]
   call: 3NT
   cond: "true"
   forcing: SO
@@ -7443,8 +7892,8 @@
 # --- le répondant après le bicolore économique de l'ouvreur (12-17 HL, non forcing)
 # en: responder after opener's economical two-suiter (12-17 HL, non-forcing)
 - id: "eco.{o}.{r}.{x}.4{rs}"
-  for: [{o: "1D", r: "1H", x: "2C", rs: "H"}, {o: "1D", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2D", rs: "S"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, rs: H, iv: 1S}, {o: 1D, r: 1S, x: 2C, rs: S, iv: X}, {o: 1H, r: 1S, x: 2C, rs: S, iv: X}, {o: 1H, r: 1S, x: 2D, rs: S, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "4{rs}"
   cond: "{rs} >= 6 and hl >= 12"
   forcing: SO
@@ -7452,8 +7901,8 @@
   meaning_en: "Six-card major, 12+ HL: game"
   status: infere
 - id: "eco.{o}.{r}.{x}.4{os}"
-  for: [{o: "1H", r: "1S", x: "2C", os: "H"}, {o: "1H", r: "1S", x: "2D", os: "H"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1H, r: 1S, x: 2C, os: H, iv: X}, {o: 1H, r: 1S, x: 2D, os: H, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "4{os}"
   cond: "{os} >= 3 and hld >= 12"
   forcing: SO
@@ -7461,8 +7910,8 @@
   meaning_en: "Fit in the opening major, 12+ HLD: game"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{os}"
-  for: [{o: "1H", r: "1S", x: "2C", os: "H"}, {o: "1H", r: "1S", x: "2D", os: "H"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1H, r: 1S, x: 2C, os: H, iv: X}, {o: 1H, r: 1S, x: 2D, os: H, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "3{os}"
   cond: "{os} >= 3 and 9 <= hld <= 11"
   forcing: INV
@@ -7470,8 +7919,8 @@
   meaning_en: "Jump preference: 3 cards, 9-11 HLD, invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{rs}"
-  for: [{o: "1D", r: "1H", x: "2C", rs: "H"}, {o: "1D", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2C", rs: "S"}, {o: "1H", r: "1S", x: "2D", rs: "S"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, rs: H, iv: 1S}, {o: 1D, r: 1S, x: 2C, rs: S, iv: X}, {o: 1H, r: 1S, x: 2C, rs: S, iv: X}, {o: 1H, r: 1S, x: 2D, rs: S, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "3{rs}"
   cond: "{rs} >= 6 and 9 <= hl <= 11"
   forcing: INV
@@ -7479,8 +7928,8 @@
   meaning_en: "Six-card major, 9-11 HL: invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{xs}"
-  for: [{o: "1D", r: "1H", x: "2C", xs: "C"}, {o: "1D", r: "1S", x: "2C", xs: "C"}, {o: "1H", r: "1S", x: "2C", xs: "C"}, {o: "1H", r: "1S", x: "2D", xs: "D"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, xs: C, iv: 1S}, {o: 1D, r: 1S, x: 2C, xs: C, iv: X}, {o: 1H, r: 1S, x: 2C, xs: C, iv: X}, {o: 1H, r: 1S, x: 2D, xs: D, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "3{xs}"
   cond: "{xs} >= 4 and 9 <= hld <= 11"
   forcing: INV
@@ -7488,8 +7937,8 @@
   meaning_en: "Raise of the second suit, 9-11 HLD: invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.3{os}.m"
-  for: [{o: "1D", r: "1H", x: "2C", os: "D"}, {o: "1D", r: "1S", x: "2C", os: "D"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, os: D, iv: 1S}, {o: 1D, r: 1S, x: 2C, os: D, iv: X}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "3{os}"
   cond: "{os} >= 3 and 9 <= hl <= 11"
   forcing: INV
@@ -7497,8 +7946,8 @@
   meaning_en: "Jump preference: 9-11 HL, invitational"
   status: infere
 - id: "eco.{o}.{r}.{x}.2{rs}"
-  for: [{o: "1D", r: "1H", x: "2C", rs: "H", xs: "C"}, {o: "1D", r: "1S", x: "2C", rs: "S", xs: "C"}, {o: "1H", r: "1S", x: "2C", rs: "S", xs: "C"}, {o: "1H", r: "1S", x: "2D", rs: "S", xs: "D"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, rs: H, xs: C, iv: 1S}, {o: 1D, r: 1S, x: 2C, rs: S, xs: C, iv: X}, {o: 1H, r: 1S, x: 2C, rs: S, xs: C, iv: X}, {o: 1H, r: 1S, x: 2D, rs: S, xs: D, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "2{rs}"
   cond: "{rs} >= 6 and {xs} <= 2"
   forcing: NF
@@ -7506,8 +7955,8 @@
   meaning_en: "Six-card major, minimum"
   status: infere
 - id: "eco.{o}.{r}.{x}.pref"
-  for: [{o: "1D", r: "1H", x: "2C", os: "D", xs: "C"}, {o: "1D", r: "1S", x: "2C", os: "D", xs: "C"}, {o: "1H", r: "1S", x: "2C", os: "H", xs: "C"}, {o: "1H", r: "1S", x: "2D", os: "H", xs: "D"}]
-  seq: "{o} {r} {x}"
+  for: [{o: 1D, r: 1H, x: 2C, os: D, xs: C, iv: 1S}, {o: 1D, r: 1S, x: 2C, os: D, xs: C, iv: X}, {o: 1H, r: 1S, x: 2C, os: H, xs: C, iv: X}, {o: 1H, r: 1S, x: 2D, os: H, xs: D, iv: 2C}]
+  seq: ["{o} {r} {x}", "{o} {r} ({iv}) {x}"]
   call: "2{os}"
   cond: "{os} >= 2 and {os} > {xs} - 1 and {xs} <= 3"
   forcing: NF
@@ -10592,8 +11041,8 @@
 # --- répondant après 1♣/♦ – 1♥/♠ – 4♥/♠ (18+ HLD fitté)
 # en: responder after 1♣/♦ – 1♥/♠ – 4♥/♠ (18+ HLD with a fit)
 - id: "1{m}.1{M}.4{M}.bw"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 4{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 4{M}", "1{m} 1{M} ({iv}) 4{M}"]
   call: 4NT
   cond: "hl >= 12"
   forcing: ASK
@@ -11257,8 +11706,8 @@
 # --- répondant après un soutien à saut ou 2SA 18-19 de l'ouvreur
 # en: responder after opener's jump raise or 18-19 2NT
 - id: "1{m}.1{M}.3{M}.4{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 3{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 3{M}", "1{m} 1{M} ({iv}) 3{M}"]
   call: "4{M}"
   cond: "hld >= 9"
   forcing: SO
@@ -11266,8 +11715,8 @@
   meaning_en: "Accepts"
   status: infere
 - id: "1{m}.1{M}.2NT.r4{M}"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT", "1{m} 1{M} ({iv}) 2NT"]
   call: "4{M}"
   cond: "{M} >= 6 and hl >= 6"
   forcing: SO
@@ -11275,8 +11724,8 @@
   meaning_en: "6 cards, game"
   status: infere
 - id: "1{m}.1{M}.2NT.3NT"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT", "1{m} 1{M} ({iv}) 2NT"]
   call: 3NT
   cond: "hl >= 6"
   forcing: SO
@@ -11284,8 +11733,8 @@
   meaning_en: "Game"
   status: infere
 - id: "1{m}.1{M}.x.pass"
-  for: [{m: C, M: H}, {m: C, M: S}, {m: D, M: H}, {m: D, M: S}]
-  seq: "1{m} 1{M} 2NT|3{M}"
+  for: [{m: C, M: H, iv: "1S|2D"}, {m: C, M: S, iv: "2H|2D"}, {m: D, M: H, iv: "1S|2C"}, {m: D, M: S, iv: "2H|2C"}]
+  seq: ["1{m} 1{M} 2NT|3{M}", "1{m} 1{M} ({iv}) 2NT|3{M}"]
   call: P
   cond: "true"
   forcing: NF
@@ -11453,8 +11902,8 @@
   meaning_en: "Minimum"
   status: infere
 - id: "1H.1S.{x}.4S"
-  for: [{x: 3S}, {x: 2NT}]
-  seq: "1H 1S {x}"
+  for: [{x: 3S, iv: "2D|2C"}, {x: 2NT, iv: "2D|2C"}]
+  seq: ["1H 1S {x}", "1H 1S ({iv}) {x}"]
   call: 4S
   cond: "S >= 5 or (S >= 4 and hld >= 8)"
   forcing: SO
@@ -11462,8 +11911,8 @@
   meaning_en: "Game in ♠"
   status: infere
 - id: "1H.1S.{x}.3NT"
-  for: [{x: 3S}, {x: 2NT}]
-  seq: "1H 1S {x}"
+  for: [{x: 3S, iv: "2D|2C"}, {x: 2NT, iv: "2D|2C"}]
+  seq: ["1H 1S {x}", "1H 1S ({iv}) {x}"]
   call: 3NT
   cond: "hl >= 6"
   forcing: SO
@@ -11471,8 +11920,8 @@
   meaning_en: "Game"
   status: infere
 - id: "1H.1S.{x}.p"
-  for: [{x: 3S}, {x: 2NT}]
-  seq: "1H 1S {x}"
+  for: [{x: 3S, iv: "2D|2C"}, {x: 2NT, iv: "2D|2C"}]
+  seq: ["1H 1S {x}", "1H 1S ({iv}) {x}"]
   call: P
   cond: "true"
   forcing: NF

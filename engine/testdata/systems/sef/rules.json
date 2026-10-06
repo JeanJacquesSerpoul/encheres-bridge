@@ -2995,16 +2995,6 @@
   "status": "sef"
  },
  {
-  "id": "1D.r.2NT",
-  "seq": "1D",
-  "call": "2NT",
-  "cond": "hl == 11",
-  "forcing": "INV",
-  "meaning": "11 HL, pas de majeure 4e",
-  "meaning_en": "11 HL, no 4-card major",
-  "status": "sef"
- },
- {
   "id": "1C.r.1NT",
   "seq": "1C",
   "call": "1NT",
@@ -29245,16 +29235,6 @@
   "status": "infere"
  },
  {
-  "id": "2D.0as.S.6",
-  "seq": "2D 2H|2NT",
-  "call": "6S",
-  "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
-  "forcing": "SO",
-  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
-  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
-  "status": "infere"
- },
- {
   "id": "2D.1as.S.6",
   "seq": "2D 2S|3C|3D",
   "call": "6S",
@@ -29289,16 +29269,6 @@
   "seq": "2D 4NT",
   "call": "6S",
   "cond": "S >= 5 and S >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
-  "forcing": "SO",
-  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
-  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
-  "status": "infere"
- },
- {
-  "id": "2D.0as.H.6",
-  "seq": "2D 2H|2NT",
-  "call": "6H",
-  "cond": "H >= 5 and H >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
   "forcing": "SO",
   "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
   "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
@@ -29345,16 +29315,6 @@
   "status": "infere"
  },
  {
-  "id": "2D.0as.D.6",
-  "seq": "2D 2H|2NT",
-  "call": "6D",
-  "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
-  "forcing": "SO",
-  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
-  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
-  "status": "infere"
- },
- {
   "id": "2D.1as.D.6",
   "seq": "2D 2S|3C|3D",
   "call": "6D",
@@ -29389,16 +29349,6 @@
   "seq": "2D 4NT",
   "call": "6D",
   "cond": "D >= 5 and D >= max(S, H, D, C) and aces >= 0 and ptricks >= 6",
-  "forcing": "SO",
-  "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
-  "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
-  "status": "infere"
- },
- {
-  "id": "2D.0as.C.6",
-  "seq": "2D 2H|2NT",
-  "call": "6C",
-  "cond": "C >= 5 and C >= max(S, H, D, C) and aces >= 3 and ptricks >= 10",
   "forcing": "SO",
   "meaning": "Au plus un As manque et 12 levées comptées : petit chelem",
   "meaning_en": "At most one ace missing and 12 tricks counted: small slam",
@@ -29472,26 +29422,6 @@
   "forcing": "SO",
   "meaning": "Régulier, les 4 As et 37 H à deux : grand chelem à SA",
   "meaning_en": "Balanced, all four aces and 37 HCP together: grand slam in NT",
-  "status": "infere"
- },
- {
-  "id": "2D.0as.6NT",
-  "seq": "2D 2H|2NT",
-  "call": "6NT",
-  "cond": "balanced and aces >= 3 and hcp >= 25",
-  "forcing": "SO",
-  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
-  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
-  "status": "infere"
- },
- {
-  "id": "2D.1as.6NT",
-  "seq": "2D 2S|3C|3D",
-  "call": "6NT",
-  "cond": "balanced and aces >= 2 and hcp >= 26",
-  "forcing": "SO",
-  "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
-  "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
   "status": "infere"
  },
  {

@@ -142,15 +142,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AQ85.7.J4.AKT962 632.AT32.T6.8743 9.KQJ84.Q873.QJ5 KJT74.965.AK952."]
+[Deal "N:K.AKQ98.AK87.J87 973.J32.96532.Q4 AQ85.7.J4.AKT962 JT642.T654.QT.53"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 6 cartes a Trefle, 14H. | 1C opening: 6 clubs, 14 HCP.} Pass 1H {Reponse naturelle : 5 cartes a Coeur, 11H. | Natural response: 5 hearts, 11 HCP.} Pass
-1S {Redemande a 1 Pique : 4 cartes, pas 4 Coeurs. | 1S rebid: 4 spades, not 4 hearts.} Pass 2D {4e couleur forcing de manche (12 HL) : main irreguliere, la 4e couleur cherche le meilleur contrat. | Fourth suit forcing to game (12 HL): unbalanced hand, the fourth suit looks for the best contract.} Pass
-3C {Repetition des Trefles (6 cartes) : ni 3 cartes a Coeur, ni arret a Carreau. | Rebids clubs (6 cards): neither 3 hearts nor a diamond stopper.} Pass 3NT {Arret a Carreau dans la main (Q873) : 3SA. | Diamond stopper in hand (Q873): 3NT.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (16 HL), 4-1-2-6. | Longest minor (3-3: 1♣). Here 14 HCP (16 HL), 4-1-2-6.} Pass 1H {4+ coeurs, 5+ H. Ici 20H (20 HL), 1-5-4-3. | 4+ hearts, 5+ HCP. Here 20 HCP (20 HL), 1-5-4-3.} Pass
+1S {4+ piques. Ici 14H (16 HL), 4-1-2-6. | 4+ spades. Here 14 HCP (16 HL), 4-1-2-6.} Pass 2D {4e couleur forcing. Ici 20H (20 HL), 1-5-4-3. | Fourth suit forcing. Here 20 HCP (20 HL), 1-5-4-3.} Pass
+3C {Repetition de la couleur d'ouverture, sans autre enchere possible. Ici 14H (16 HL), 4-1-2-6. | Rebid of the opening suit, nothing else to bid. Here 14 HCP (16 HL), 4-1-2-6.} Pass 3NT {Manche a SA. Ici 20H (20 HL), 1-5-4-3. | Game in NT. Here 20 HCP (20 HL), 1-5-4-3.} Pass
 Pass Pass
 
 [Event "Entrainement 4e couleur forcing - Donne 9"]
@@ -352,15 +352,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AQ62.Q73.KJ864.5 T5.J42.T952.QJT9 84.AK965.A73.762 KJ973.T8.Q.AK843"]
+[Deal "N:KT3.KJT42.9.K962 87.A95.AQT3.T873 AQ62.Q73.KJ864.5 J954.86.752.AQJ4"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1D {Ouverture 1K : 5 cartes a Carreau, 12H. | 1D opening: 5 diamonds, 12 HCP.} Pass 1H {Reponse naturelle : 5 cartes a Coeur, 11H. | Natural response: 5 hearts, 11 HCP.} Pass
-1S {Redemande a 1 Pique : 4 cartes, pas 4 Coeurs. | 1S rebid: 4 spades, not 4 hearts.} Pass 2C {4e couleur forcing de manche (12 HL) : pas d'arret a Trefle pour dire SA. | Fourth suit forcing to game (12 HL): no club stopper to bid NT.} Pass
-2H {3 cartes a Coeur : la priorite. | 3-card heart support: first priority.} Pass 4H {5 cartes a Coeur face a 3 : fit 5-3, manche. | 5 hearts opposite 3: 5-3 fit, game.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (13 HL), 4-3-5-1. | Longest minor (4-4: 1♦). Here 12 HCP (13 HL), 4-3-5-1.} Pass 1H {4+ coeurs, 5+ H. Ici 10H (11 HL), 3-5-1-4. | 4+ hearts, 5+ HCP. Here 10 HCP (11 HL), 3-5-1-4.} Pass
+1S {4+ piques. Ici 12H (13 HL), 4-3-5-1. | 4+ spades. Here 12 HCP (13 HL), 4-3-5-1.} Pass 2C {4e couleur forcing. Ici 10H (11 HL), 3-5-1-4. | Fourth suit forcing. Here 10 HCP (11 HL), 3-5-1-4.} Pass
+2H {3 cartes dans la majeure du repondant. Ici 12H (13 HL), 4-3-5-1. | 3 cards in responder's major. Here 12 HCP (13 HL), 4-3-5-1.} Pass 4H {Fit 5-3 : manche. Ici 10H (11 HL), 3-5-1-4. | 5-3 fit: game. Here 10 HCP (11 HL), 3-5-1-4.} Pass
 Pass Pass
 
 [Event "Entrainement 4e couleur forcing - Donne 20"]

@@ -169,15 +169,15 @@ Pass {Contrat final atteint (defaut). Ici 18H (19 HL), 3-5-1-4. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:KJ65.A95.JT3.A53 A742.T843.96.K92 T83.Q.KQ752.J864 Q9.KJ762.A84.QT7"]
+[Deal "N:42.J72.AQ74.J876 AQ73.KQ83.K65.94 KJ65.A95.JT3.A53 T98.T64.982.KQT2"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "1NT"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 4-3-3-3. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 4-3-3-3.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 8H (8 HL), 3-1-5-4. | 4+ diamonds, 5+ HCP, no 4-card major. Here 8 HCP (8 HL), 3-1-5-4.} Pass
-1S {4+ piques. Ici 13H (13 HL), 4-3-3-3. | 4+ spades. Here 13 HCP (13 HL), 4-3-3-3.} Pass 1NT {Minimum. Ici 8H (8 HL), 3-1-5-4. | Minimum. Here 8 HCP (8 HL), 3-1-5-4.} Pass
-Pass {Minimum : passe. Ici 13H (13 HL), 4-3-3-3. | Minimum: pass. Here 13 HCP (13 HL), 4-3-3-3.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 4-3-3-3. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 4-3-3-3.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 8H (8 HL), 2-3-4-4. | 4+ diamonds, 5+ HCP, no 4-card major. Here 8 HCP (8 HL), 2-3-4-4.} Pass
+1S {4+ piques. Ici 13H (13 HL), 4-3-3-3. | 4+ spades. Here 13 HCP (13 HL), 4-3-3-3.} Pass 1NT {Minimum. Ici 8H (8 HL), 2-3-4-4. | Minimum. Here 8 HCP (8 HL), 2-3-4-4.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 11"]
 [Board "11"]
@@ -561,16 +561,16 @@ Pass {Minimum : passe. Ici 16H (18 HL), 6-2-3-2. | Minimum: pass. Here 16 HCP (1
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:K82.Q3.QJT42.A92 Q643.65.763.Q765 T.AJ9872.AK985.T AJ975.KT4..KJ843"]
+[Deal "N:AJ63.KJ8764.K.T6 54.T52.A965.7543 K82.Q3.QJT42.A92 QT97.A9.873.KQJ8"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (13 HL), 3-2-5-3. | Longest minor (4-4: 1♦). Here 12 HCP (13 HL), 3-2-5-3.} Pass 1H {4+ cœurs, 5+ H. Ici 12H (15 HL), 1-6-5-1. | 4+ hearts, 5+ HCP. Here 12 HCP (15 HL), 1-6-5-1.} Pass
-1NT {Regulier 12-14 HL. Ici 12H (13 HL), 3-2-5-3. | Balanced 12-14 HL. Here 12 HCP (13 HL), 3-2-5-3.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 12H (15 HL), 1-6-5-1. | Roudi: 10+ HL, five-card major, asks for support. Here 12 HCP (15 HL), 1-6-5-1.} Pass
-2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 12H (13 HL), 3-2-5-3. | No fit: two cards in the major, minimum or maximum. Here 12 HCP (13 HL), 3-2-5-3.} Pass 4H {6 cartes, manche. Ici 12H (15 HL), 1-6-5-1. | Six cards, game. Here 12 HCP (15 HL), 1-6-5-1.} Pass
-Pass {Contrat final atteint (defaut). Ici 12H (13 HL), 3-2-5-3. | Final contract reached (default). Here 12 HCP (13 HL), 3-2-5-3.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (13 HL), 3-2-5-3. | Longest minor (4-4: 1♦). Here 12 HCP (13 HL), 3-2-5-3.} Pass 1H {4+ coeurs, 5+ H. Ici 12H (13 HL), 4-6-1-2. | 4+ hearts, 5+ HCP. Here 12 HCP (13 HL), 4-6-1-2.} Pass
+1NT {Regulier 12-14 HL. Ici 12H (13 HL), 3-2-5-3. | Balanced 12-14 HL. Here 12 HCP (13 HL), 3-2-5-3.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 12H (13 HL), 4-6-1-2. | Roudi: 10+ HL, five-card major, asks for support. Here 12 HCP (13 HL), 4-6-1-2.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 12H (13 HL), 3-2-5-3. | No fit: two cards in the major, minimum or maximum. Here 12 HCP (13 HL), 3-2-5-3.} Pass 4H {6 cartes, manche. Ici 12H (13 HL), 4-6-1-2. | Six cards, game. Here 12 HCP (13 HL), 4-6-1-2.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 33"]
 [Board "33"]
@@ -1057,15 +1057,15 @@ Pass {Contrat final atteint (defaut). Ici 12H (14 HL), 6-4-3-0. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:T2.5.AQ875.AKJ74 K8.Q87.T4.QT9865 643.AKJ963.J963. AQJ975.T42.K2.32"]
+[Deal "N:K8.QJT762.JT643. A764.AK94.K.Q832 T2.5.AQ875.AKJ74 QJ953.83.92.T965"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (16 HL), 2-1-5-5. | Longest minor (4-4: 1♦). Here 14 HCP (16 HL), 2-1-5-5.} Pass 1H {4+ cœurs, 5+ H. Ici 9H (11 HL), 3-6-4-0. | 4+ hearts, 5+ HCP. Here 9 HCP (11 HL), 3-6-4-0.} Pass
-2C {Bicolore ♦/♣. Ici 14H (16 HL), 2-1-5-5. | ♦/♣ two-suiter. Here 14 HCP (16 HL), 2-1-5-5.} Pass 3H {Majeure 6e, 9-11 HL : invitation. Ici 9H (11 HL), 3-6-4-0. | Six-card major, 9-11 HL: invitational. Here 9 HCP (11 HL), 3-6-4-0.} Pass
-Pass {Refuse l'invitation. Ici 14H (16 HL), 2-1-5-5. | Declines the invitation. Here 14 HCP (16 HL), 2-1-5-5.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (16 HL), 2-1-5-5. | Longest minor (4-4: 1♦). Here 14 HCP (16 HL), 2-1-5-5.} Pass 1H {4+ coeurs, 5+ H. Ici 7H (9 HL), 2-6-5-0. | 4+ hearts, 5+ HCP. Here 7 HCP (9 HL), 2-6-5-0.} Pass
+2C {Bicolore ♦/♣. Ici 14H (16 HL), 2-1-5-5. | ♦/♣ two-suiter. Here 14 HCP (16 HL), 2-1-5-5.} Pass 3H {Majeure 6e, 9-11 HL : invitation. Ici 7H (9 HL), 2-6-5-0. | Six-card major, 9-11 HL: invitational. Here 7 HCP (9 HL), 2-6-5-0.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 61"]
 [Board "61"]
@@ -1393,14 +1393,14 @@ Pass {Contrat final atteint (defaut). Ici 19H (19 HL), 3-2-4-4. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:KJ76.AQ87.KJT.85 4.9642.Q8762.AKQ T.JT53.A53.JT742 AQ98532.K.94.963"]
+[Deal "N:543.J653.8643.KQ A98.9.975.AJT742 KJ76.AQ87.KJT.85 QT2.KT42.AQ2.963"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (14 HL), 4-4-3-2. | Longest minor (4-4: 1♦). Here 14 HCP (14 HL), 4-4-3-2.} Pass 1H {4+ cœurs, 5+ H. Ici 6H (6 HL), 1-4-3-5. | 4+ hearts, 5+ HCP. Here 6 HCP (6 HL), 1-4-3-5.} Pass
-3H {Fit 4e, 15-17 HLD. Ici 14H (14 HL), 4-4-3-2. | 4-card fit, 15-17 HLD. Here 14 HCP (14 HL), 4-4-3-2.} Pass Pass {Minimum. Ici 6H (6 HL), 1-4-3-5. | Minimum. Here 6 HCP (6 HL), 1-4-3-5.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (14 HL), 4-4-3-2. | Longest minor (4-4: 1♦). Here 14 HCP (14 HL), 4-4-3-2.} Pass 1H {4+ coeurs, 5+ H. Ici 6H (5 HL), 3-4-4-2. | 4+ hearts, 5+ HCP. Here 6 HCP (5 HL), 3-4-4-2.} Pass
+3H {Fit 4e, 15-17 HLD. Ici 14H (14 HL), 4-4-3-2. | 4-card fit, 15-17 HLD. Here 14 HCP (14 HL), 4-4-3-2.} Pass Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 80"]
 [Board "80"]
@@ -2981,15 +2981,15 @@ Pass {Minimum : passe. Ici 12H (15 HL), 5-1-1-6. | Minimum: pass. Here 12 HCP (1
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:K92.KQ83.A.QT875 T3.J542.J875.AK6 Q4.96.KQT6432.J4 AJ8765.AT7.9.932"]
+[Deal "N:AJ8.A72.J9832.J9 QT643.9.754.K642 K92.KQ83.A.QT875 75.JT654.KQT6.A3"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2NT"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (13 HL), 3-4-1-5. | Longest minor (3-3: 1♣). Here 14 HCP (13 HL), 3-4-1-5.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 8H (11 HL), 2-2-7-2. | 4+ diamonds, 5+ HCP, no 4-card major. Here 8 HCP (11 HL), 2-2-7-2.} Pass
-1H {4+ cœurs. Ici 14H (13 HL), 3-4-1-5. | 4+ hearts. Here 14 HCP (13 HL), 3-4-1-5.} Pass 2NT {Invitation a SA. Ici 8H (11 HL), 2-2-7-2. | Invitation to NT. Here 8 HCP (11 HL), 2-2-7-2.} Pass
-Pass {Minimum : passe. Ici 14H (13 HL), 3-4-1-5. | Minimum: pass. Here 14 HCP (13 HL), 3-4-1-5.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (13 HL), 3-4-1-5. | Longest minor (3-3: 1♣). Here 14 HCP (13 HL), 3-4-1-5.} Pass 1D {4+ carreaux (couleur la plus longue, main forte). Ici 11H (11 HL), 3-3-5-2. | 4+ diamonds (longest suit, strong hand). Here 11 HCP (11 HL), 3-3-5-2.} Pass
+1H {4+ coeurs. Ici 14H (13 HL), 3-4-1-5. | 4+ hearts. Here 14 HCP (13 HL), 3-4-1-5.} Pass 2NT {Invitation a SA. Ici 11H (11 HL), 3-3-5-2. | Invitation to NT. Here 11 HCP (11 HL), 3-3-5-2.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 170"]
 [Board "170"]
@@ -5929,15 +5929,15 @@ Pass {Contrat final atteint (defaut). Ici 12H (12 HL), 4-5-3-1. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:A.T6.AJ74.AJ8742 J63.KJ9.T9853.T6 T87.A872.KQ2.Q53 KQ9542.Q543.6.K9"]
+[Deal "N:K3.AKQJ5.KQ2.KQ5 T9742.972.9863.6 A.T6.AJ74.AJ8742 QJ865.843.T5.T93"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (15 HL), 1-2-4-6. | Longest minor (3-3: 1♣). Here 14 HCP (15 HL), 1-2-4-6.} Pass 1H {4+ cœurs, 5+ H. Ici 11H (11 HL), 3-4-3-3. | 4+ hearts, 5+ HCP. Here 11 HCP (11 HL), 3-4-3-3.} Pass
-3C {6 cartes, 15-17 HL. Ici 14H (15 HL), 1-2-4-6. | 6 cards, 15-17 HL. Here 14 HCP (15 HL), 1-2-4-6.} Pass 3NT {Manche a SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL. Ici 11H (11 HL), 3-4-3-3. | Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL. Here 11 HCP (11 HL), 3-4-3-3.} Pass
-Pass {Contrat final atteint (defaut). Ici 14H (15 HL), 1-2-4-6. | Final contract reached (default). Here 14 HCP (15 HL), 1-2-4-6.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (15 HL), 1-2-4-6. | Longest minor (3-3: 1♣). Here 14 HCP (15 HL), 1-2-4-6.} Pass 1H {4+ coeurs, 5+ H. Ici 23H (24 HL), 2-5-3-3. | 4+ hearts, 5+ HCP. Here 23 HCP (24 HL), 2-5-3-3.} Pass
+3C {6 cartes, 15-17 HL. Ici 14H (15 HL), 1-2-4-6. | 6 cards, 15-17 HL. Here 14 HCP (15 HL), 1-2-4-6.} Pass 3NT {Manche a SA : 9+ HL, et 2 cartes dans la couleur de l'ouvreur ou 11+ HL. Ici 23H (24 HL), 2-5-3-3. | Game in NT: 9+ HL, and 2 cards in opener's suit or 11+ HL. Here 23 HCP (24 HL), 2-5-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 337"]
 [Board "337"]
@@ -6303,15 +6303,15 @@ Pass {Contrat final atteint (defaut). Ici 14H (13 HL), 5-2-4-2. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q6.Q974.KJ62.AJ9 K72.A3.QT973.764 T54.KT52.5.KQ532 AJ983.J86.A84.T8"]
+[Deal "N:J954.AK53.Q984.2 AT87.2.AT.KQ7643 Q6.Q974.KJ62.AJ9 K32.JT86.753.T85"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1D {Mineure la plus longue (4-4 : 1♦). Ici 13H (13 HL), 2-4-4-3. | Longest minor (4-4: 1♦). Here 13 HCP (13 HL), 2-4-4-3.} Pass 1H {4+ cœurs, 5+ H. Ici 8H (9 HL), 3-4-1-5. | 4+ hearts, 5+ HCP. Here 8 HCP (9 HL), 3-4-1-5.} Pass
-2H {Fit 4e, 12-14 HLD. Ici 13H (13 HL), 2-4-4-3. | 4-card fit, 12-14 HLD. Here 13 HCP (13 HL), 2-4-4-3.} Pass 3H {Invitation. Ici 8H (9 HL), 3-4-1-5. | Invitation. Here 8 HCP (9 HL), 3-4-1-5.} Pass
-4H {Accepte l'invitation. Ici 13H (13 HL), 2-4-4-3. | Accepts the invitation. Here 13 HCP (13 HL), 2-4-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 3-4-1-5. | Final contract reached (default). Here 8 HCP (9 HL), 3-4-1-5.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 13H (13 HL), 2-4-4-3. | Longest minor (4-4: 1♦). Here 13 HCP (13 HL), 2-4-4-3.} Pass 1H {4+ coeurs, 5+ H. Ici 10H (10 HL), 4-4-4-1. | 4+ hearts, 5+ HCP. Here 10 HCP (10 HL), 4-4-4-1.} Pass
+2H {Fit 4e, 12-14 HLD. Ici 13H (13 HL), 2-4-4-3. | 4-card fit, 12-14 HLD. Here 13 HCP (13 HL), 2-4-4-3.} Pass 3H {Invitation. Ici 10H (10 HL), 4-4-4-1. | Invitation. Here 10 HCP (10 HL), 4-4-4-1.} Pass
+4H {Accepte l'invitation. Ici 13H (13 HL), 2-4-4-3. | Accepts the invitation. Here 13 HCP (13 HL), 2-4-4-3.} Pass Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 358"]
 [Board "358"]
@@ -7382,15 +7382,15 @@ Pass {Contrat final atteint (defaut). Ici 15H (16 HL), 1-3-4-5. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQ.KJ.A832.KQ876 JT9864.732.T76.J 3.T65.KQ94.AT932 K752.AQ984.J5.54"]
+[Deal "N:853.A.KQ654.A532 KJ976.QT42.T.J94 AQ.KJ.A832.KQ876 T42.987653.J97.T"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "5D"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (18 HL), 2-2-4-5. | Longest minor (3-3: 1♣). Here 19 HCP (18 HL), 2-2-4-5.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 9H (9 HL), 1-3-4-5. | 4+ diamonds, 5+ HCP, no 4-card major. Here 9 HCP (9 HL), 1-3-4-5.} Pass
-3D {Fit ♦, 14-17 HL. Ici 19H (18 HL), 2-2-4-5. | ♦ fit, 14-17 HL. Here 19 HCP (18 HL), 2-2-4-5.} Pass 5D {Manche a ♦. Ici 9H (9 HL), 1-3-4-5. | Game in ♦. Here 9 HCP (9 HL), 1-3-4-5.} Pass
-Pass {Contrat final atteint (defaut). Ici 19H (18 HL), 2-2-4-5. | Final contract reached (default). Here 19 HCP (18 HL), 2-2-4-5.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (18 HL), 2-2-4-5. | Longest minor (3-3: 1♣). Here 19 HCP (18 HL), 2-2-4-5.} Pass 1D {4+ carreaux (couleur la plus longue, main forte). Ici 13H (13 HL), 3-1-5-4. | 4+ diamonds (longest suit, strong hand). Here 13 HCP (13 HL), 3-1-5-4.} Pass
+3D {Fit ♦, 14-17 HL. Ici 19H (18 HL), 2-2-4-5. | ♦ fit, 14-17 HL. Here 19 HCP (18 HL), 2-2-4-5.} Pass 5D {Manche a ♦. Ici 13H (13 HL), 3-1-5-4. | Game in ♦. Here 13 HCP (13 HL), 3-1-5-4.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 419"]
 [Board "419"]

@@ -357,15 +357,15 @@ Pass {Contrat final atteint (defaut). Ici 13H (13 HL), 2-4-4-3. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q6.Q974.KJ62.AJ9 K72.A3.QT973.764 T54.KT52.5.KQ532 AJ983.J86.A84.T8"]
+[Deal "N:95.AJ83.Q8753.Q4 A874.KT52.AT4.63 Q6.Q974.KJ62.AJ9 KJT32.6.9.KT8752"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1D {Mineure la plus longue (4-4 : 1♦). Ici 13H (13 HL), 2-4-4-3. | Longest minor (4-4: 1♦). Here 13 HCP (13 HL), 2-4-4-3.} Pass 1H {4+ cœurs, 5+ H. Ici 8H (9 HL), 3-4-1-5. | 4+ hearts, 5+ HCP. Here 8 HCP (9 HL), 3-4-1-5.} Pass
-2H {Fit 4e, 12-14 HLD. Ici 13H (13 HL), 2-4-4-3. | 4-card fit, 12-14 HLD. Here 13 HCP (13 HL), 2-4-4-3.} Pass 3H {Invitation. Ici 8H (9 HL), 3-4-1-5. | Invitation. Here 8 HCP (9 HL), 3-4-1-5.} Pass
-4H {Accepte l'invitation. Ici 13H (13 HL), 2-4-4-3. | Accepts the invitation. Here 13 HCP (13 HL), 2-4-4-3.} Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 3-4-1-5. | Final contract reached (default). Here 8 HCP (9 HL), 3-4-1-5.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 13H (13 HL), 2-4-4-3. | Longest minor (4-4: 1♦). Here 13 HCP (13 HL), 2-4-4-3.} Pass 1H {4+ coeurs, 5+ H. Ici 9H (9 HL), 2-4-5-2. | 4+ hearts, 5+ HCP. Here 9 HCP (9 HL), 2-4-5-2.} Pass
+2H {Fit 4e, 12-14 HLD. Ici 13H (13 HL), 2-4-4-3. | 4-card fit, 12-14 HLD. Here 13 HCP (13 HL), 2-4-4-3.} Pass 3H {Invitation. Ici 9H (9 HL), 2-4-5-2. | Invitation. Here 9 HCP (9 HL), 2-4-5-2.} Pass
+4H {Accepte l'invitation. Ici 13H (13 HL), 2-4-4-3. | Accepts the invitation. Here 13 HCP (13 HL), 2-4-4-3.} Pass Pass Pass
 
 [Event "Entrainement Reponses sur une ouverture mineure - Donne 22"]
 [Board "22"]

@@ -3,10 +3,10 @@
   "id": "open.2D",
   "seq": "",
   "call": "2D",
-  "cond": "hcp >= 24 or (hcp >= 16 and ptricks >= 9 and sidetricks >= 2)",
+  "cond": "hl >= 24 or (qtricks >= 2 and ((max(S, H) >= max(D, C) and ptricks >= 9) or (max(D, C) > max(S, H) and ptricks >= 10)))",
   "forcing": "FM",
-  "meaning": "Fort, forcing de manche : 9 levées de jeu et 2 levées de défense annexes (ou 24+ H)",
-  "meaning_en": "Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP)",
+  "meaning": "Forcing de manche : 24+ HL, ou la manche à une levée près (9 levées de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levées de défense",
+  "meaning_en": "Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks",
   "status": "choix",
   "alert": true
  },
@@ -2060,7 +2060,8 @@
   "id": "2NT.3C.3NT",
   "seq": [
    "2NT 3C",
-   "2C 2D 2NT 3C"
+   "2C 2D 2NT 3C",
+   "2D 2H|2S 2NT 3C"
   ],
   "call": "3NT",
   "cond": "H >= 4 and S >= 4",
@@ -2074,7 +2075,8 @@
   "id": "2NT.3C.3H",
   "seq": [
    "2NT 3C",
-   "2C 2D 2NT 3C"
+   "2C 2D 2NT 3C",
+   "2D 2H|2S 2NT 3C"
   ],
   "call": "3H",
   "cond": "H >= 4",
@@ -2087,7 +2089,8 @@
   "id": "2NT.3C.3S",
   "seq": [
    "2NT 3C",
-   "2C 2D 2NT 3C"
+   "2C 2D 2NT 3C",
+   "2D 2H|2S 2NT 3C"
   ],
   "call": "3S",
   "cond": "S >= 4",
@@ -2100,7 +2103,8 @@
   "id": "2NT.3C.3D",
   "seq": [
    "2NT 3C",
-   "2C 2D 2NT 3C"
+   "2C 2D 2NT 3C",
+   "2D 2H|2S 2NT 3C"
   ],
   "call": "3D",
   "cond": "true",
@@ -2114,7 +2118,8 @@
   "id": "2NT.3C.3NT.4C",
   "seq": [
    "2NT 3C 3NT",
-   "2C 2D 2NT 3C 3NT"
+   "2C 2D 2NT 3C 3NT",
+   "2D 2H|2S 2NT 3C 3NT"
   ],
   "call": "4C",
   "cond": "H >= 4",
@@ -2128,7 +2133,8 @@
   "id": "2NT.3C.3NT.4D",
   "seq": [
    "2NT 3C 3NT",
-   "2C 2D 2NT 3C 3NT"
+   "2C 2D 2NT 3C 3NT",
+   "2D 2H|2S 2NT 3C 3NT"
   ],
   "call": "4D",
   "cond": "true",
@@ -2142,7 +2148,8 @@
   "id": "2NT.3C.3NT.4C.4H",
   "seq": [
    "2NT 3C 3NT 4C",
-   "2C 2D 2NT 3C 3NT 4C"
+   "2C 2D 2NT 3C 3NT 4C",
+   "2D 2H|2S 2NT 3C 3NT 4C"
   ],
   "call": "4H",
   "cond": "true",
@@ -2155,7 +2162,8 @@
   "id": "2NT.3C.3NT.4D.4S",
   "seq": [
    "2NT 3C 3NT 4D",
-   "2C 2D 2NT 3C 3NT 4D"
+   "2C 2D 2NT 3C 3NT 4D",
+   "2D 2H|2S 2NT 3C 3NT 4D"
   ],
   "call": "4S",
   "cond": "true",
@@ -2168,7 +2176,8 @@
   "id": "2NT.3C.3H.6H",
   "seq": [
    "2NT 3C 3H",
-   "2C 2D 2NT 3C 3H"
+   "2C 2D 2NT 3C 3H",
+   "2D 2H|2S 2NT 3C 3H"
   ],
   "call": "6H",
   "cond": "H >= 4 and hld >= 11",
@@ -2182,7 +2191,8 @@
   "id": "2NT.3C.3S.6S",
   "seq": [
    "2NT 3C 3S",
-   "2C 2D 2NT 3C 3S"
+   "2C 2D 2NT 3C 3S",
+   "2D 2H|2S 2NT 3C 3S"
   ],
   "call": "6S",
   "cond": "S >= 4 and hld >= 11",
@@ -2196,7 +2206,8 @@
   "id": "2NT.3C.3H.4H",
   "seq": [
    "2NT 3C 3H",
-   "2C 2D 2NT 3C 3H"
+   "2C 2D 2NT 3C 3H",
+   "2D 2H|2S 2NT 3C 3H"
   ],
   "call": "4H",
   "cond": "H >= 4",
@@ -2209,7 +2220,8 @@
   "id": "2NT.3C.3S.4S",
   "seq": [
    "2NT 3C 3S",
-   "2C 2D 2NT 3C 3S"
+   "2C 2D 2NT 3C 3S",
+   "2D 2H|2S 2NT 3C 3S"
   ],
   "call": "4S",
   "cond": "S >= 4",
@@ -2222,7 +2234,8 @@
   "id": "2NT.3C.x.6NT",
   "seq": [
    "2NT 3C 3D|3H|3S",
-   "2C 2D 2NT 3C 3D|3H|3S"
+   "2C 2D 2NT 3C 3D|3H|3S",
+   "2D 2H|2S 2NT 3C 3D|3H|3S"
   ],
   "call": "6NT",
   "cond": "hl >= 12",
@@ -2235,7 +2248,8 @@
   "id": "2NT.3C.x.4NT",
   "seq": [
    "2NT 3C 3D|3H|3S",
-   "2C 2D 2NT 3C 3D|3H|3S"
+   "2C 2D 2NT 3C 3D|3H|3S",
+   "2D 2H|2S 2NT 3C 3D|3H|3S"
   ],
   "call": "4NT",
   "cond": "hl == 11",
@@ -2248,7 +2262,8 @@
   "id": "2NT.3C.x.4NT.acc",
   "seq": [
    "2NT 3C 3D|3H|3S 4NT",
-   "2C 2D 2NT 3C 3D|3H|3S 4NT"
+   "2C 2D 2NT 3C 3D|3H|3S 4NT",
+   "2D 2H|2S 2NT 3C 3D|3H|3S 4NT"
   ],
   "call": "6NT",
   "cond": "hl >= 20",
@@ -2261,7 +2276,8 @@
   "id": "2NT.3C.x.4NT.p",
   "seq": [
    "2NT 3C 3D|3H|3S 4NT",
-   "2C 2D 2NT 3C 3D|3H|3S 4NT"
+   "2C 2D 2NT 3C 3D|3H|3S 4NT",
+   "2D 2H|2S 2NT 3C 3D|3H|3S 4NT"
   ],
   "call": "P",
   "cond": "true",
@@ -2274,7 +2290,8 @@
   "id": "2NT.3C.x.3NT",
   "seq": [
    "2NT 3C 3D|3H|3S",
-   "2C 2D 2NT 3C 3D|3H|3S"
+   "2C 2D 2NT 3C 3D|3H|3S",
+   "2D 2H|2S 2NT 3C 3D|3H|3S"
   ],
   "call": "3NT",
   "cond": "true",
@@ -2287,7 +2304,8 @@
   "id": "2NT.tex.H",
   "seq": [
    "2NT 3D",
-   "2C 2D 2NT 3D"
+   "2C 2D 2NT 3D",
+   "2D 2H|2S 2NT 3D"
   ],
   "call": "3H",
   "cond": "H >= 3",
@@ -2300,7 +2318,8 @@
   "id": "2NT.tex.S",
   "seq": [
    "2NT 3H",
-   "2C 2D 2NT 3H"
+   "2C 2D 2NT 3H",
+   "2D 2H|2S 2NT 3H"
   ],
   "call": "3S",
   "cond": "S >= 3",
@@ -2313,7 +2332,8 @@
   "id": "2NT.tex.H.3NT",
   "seq": [
    "2NT 3D",
-   "2C 2D 2NT 3D"
+   "2C 2D 2NT 3D",
+   "2D 2H|2S 2NT 3D"
   ],
   "call": "3NT",
   "cond": "true",
@@ -2326,7 +2346,8 @@
   "id": "2NT.tex.S.3NT",
   "seq": [
    "2NT 3H",
-   "2C 2D 2NT 3H"
+   "2C 2D 2NT 3H",
+   "2D 2H|2S 2NT 3H"
   ],
   "call": "3NT",
   "cond": "true",
@@ -2339,7 +2360,8 @@
   "id": "2NT.tex.H.bw",
   "seq": [
    "2NT 3D 3H",
-   "2C 2D 2NT 3D 3H"
+   "2C 2D 2NT 3D 3H",
+   "2D 2H|2S 2NT 3D 3H"
   ],
   "call": "4NT",
   "cond": "hl >= 9",
@@ -2354,7 +2376,8 @@
   "id": "2NT.tex.S.bw",
   "seq": [
    "2NT 3H 3S",
-   "2C 2D 2NT 3H 3S"
+   "2C 2D 2NT 3H 3S",
+   "2D 2H|2S 2NT 3H 3S"
   ],
   "call": "4NT",
   "cond": "hl >= 9",
@@ -2369,7 +2392,8 @@
   "id": "2NT.tex.H.r",
   "seq": [
    "2NT 3D 3H",
-   "2C 2D 2NT 3D 3H"
+   "2C 2D 2NT 3D 3H",
+   "2D 2H|2S 2NT 3D 3H"
   ],
   "call": "4H",
   "cond": "true",
@@ -2382,7 +2406,8 @@
   "id": "2NT.tex.S.r",
   "seq": [
    "2NT 3H 3S",
-   "2C 2D 2NT 3H 3S"
+   "2C 2D 2NT 3H 3S",
+   "2D 2H|2S 2NT 3H 3S"
   ],
   "call": "4S",
   "cond": "true",
@@ -2395,7 +2420,8 @@
   "id": "2NT.tex.H.3NT.bw",
   "seq": [
    "2NT 3D 3NT",
-   "2C 2D 2NT 3D 3NT"
+   "2C 2D 2NT 3D 3NT",
+   "2D 2H|2S 2NT 3D 3NT"
   ],
   "call": "4NT",
   "cond": "H >= 6 and hl >= 9",
@@ -2410,7 +2436,8 @@
   "id": "2NT.tex.S.3NT.bw",
   "seq": [
    "2NT 3H 3NT",
-   "2C 2D 2NT 3H 3NT"
+   "2C 2D 2NT 3H 3NT",
+   "2D 2H|2S 2NT 3H 3NT"
   ],
   "call": "4NT",
   "cond": "S >= 6 and hl >= 9",
@@ -2425,7 +2452,8 @@
   "id": "2NT.tex.H.3NT.r",
   "seq": [
    "2NT 3D 3NT",
-   "2C 2D 2NT 3D 3NT"
+   "2C 2D 2NT 3D 3NT",
+   "2D 2H|2S 2NT 3D 3NT"
   ],
   "call": "4H",
   "cond": "H >= 6",
@@ -2438,7 +2466,8 @@
   "id": "2NT.tex.S.3NT.r",
   "seq": [
    "2NT 3H 3NT",
-   "2C 2D 2NT 3H 3NT"
+   "2C 2D 2NT 3H 3NT",
+   "2D 2H|2S 2NT 3H 3NT"
   ],
   "call": "4S",
   "cond": "S >= 6",
@@ -2451,7 +2480,8 @@
   "id": "2NT.end.pass",
   "seq": [
    "2NT 3C|3D|3H 3D|3H|3S|3NT 3NT|4H|4S",
-   "2C 2D 2NT 3C|3D|3H 3D|3H|3S|3NT 3NT|4H|4S"
+   "2C 2D 2NT 3C|3D|3H 3D|3H|3S|3NT 3NT|4H|4S",
+   "2D 2H|2S 2NT 3C|3D|3H 3D|3H|3S|3NT 3NT|4H|4S"
   ],
   "call": "P",
   "cond": "true",
@@ -2464,7 +2494,8 @@
   "id": "2NT.end2.pass",
   "seq": [
    "2NT 3NT|4NT|5NT",
-   "2C 2D 2NT 3NT|4NT|5NT"
+   "2C 2D 2NT 3NT|4NT|5NT",
+   "2D 2H|2S 2NT 3NT|4NT|5NT"
   ],
   "call": "P",
   "cond": "true",
@@ -5126,10 +5157,10 @@
   "id": "2D.r.2NT",
   "seq": "2D",
   "call": "2NT",
-  "cond": "hcp >= 8",
+  "cond": "hcp >= 8 and min(S, H, D, C) >= 2",
   "forcing": "F1",
-  "meaning": "Pas d'As, 8+ H",
-  "meaning_en": "No aces, 8+ HCP",
+  "meaning": "Pas d'As, 8+ H, au moins deux cartes par couleur",
+  "meaning_en": "No aces, 8+ HCP, at least two cards in every suit",
   "status": "choix"
  },
  {
@@ -5138,8 +5169,8 @@
   "call": "2H",
   "cond": "true",
   "forcing": "F1",
-  "meaning": "Pas d'As, 0 à 7 H",
-  "meaning_en": "No aces, 0 to 7 HCP",
+  "meaning": "Pas d'As : 0-7 H, ou 8+ H avec une courte",
+  "meaning_en": "No aces: 0-7 HCP, or 8+ HCP with a short suit",
   "status": "choix",
   "alert": true
  },
@@ -7916,7 +7947,8 @@
   "id": "q.2NT.5NT.7NT",
   "seq": [
    "2NT 5NT",
-   "2C 2D 2NT 5NT"
+   "2C 2D 2NT 5NT",
+   "2D 2H|2S 2NT 5NT"
   ],
   "call": "7NT",
   "cond": "hl >= 21",
@@ -7929,7 +7961,8 @@
   "id": "q.2NT.5NT",
   "seq": [
    "2NT 5NT",
-   "2C 2D 2NT 5NT"
+   "2C 2D 2NT 5NT",
+   "2D 2H|2S 2NT 5NT"
   ],
   "call": "6NT",
   "cond": "true",
@@ -7942,7 +7975,8 @@
   "id": "q.2NT.4NT",
   "seq": [
    "2NT 4NT",
-   "2C 2D 2NT 4NT"
+   "2C 2D 2NT 4NT",
+   "2D 2H|2S 2NT 4NT"
   ],
   "call": "6NT",
   "cond": "hl >= 21",
@@ -7955,7 +7989,8 @@
   "id": "q.2NT.4NT.p",
   "seq": [
    "2NT 4NT",
-   "2C 2D 2NT 4NT"
+   "2C 2D 2NT 4NT",
+   "2D 2H|2S 2NT 4NT"
   ],
   "call": "P",
   "cond": "true",
@@ -29689,6 +29724,3474 @@
   "meaning": "Régulier, au plus un As manque et 33 H à deux : petit chelem à SA",
   "meaning_en": "Balanced, at most one ace missing and 33 HCP together: small slam in NT",
   "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S",
+  "seq": "2D 2H",
+  "call": "2S",
+  "cond": "S >= 5 and S == max(S, H, D, C)",
+  "forcing": "FM",
+  "meaning": "Naturel, 5+ cartes",
+  "meaning_en": "Natural, 5+ cards",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3H",
+  "seq": "2D 2H",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and (H >= 6 or (H >= 5 and top('H') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3D",
+  "seq": "2D 2H",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and (D >= 6 or (D >= 5 and top('D') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3C",
+  "seq": "2D 2H",
+  "call": "3C",
+  "cond": "C == max(S, H, D, C) and (C >= 6 or (C >= 5 and top('C') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2NT",
+  "seq": "2D 2H",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "FM",
+  "meaning": "Redemande par défaut, souvent régulière",
+  "meaning_en": "Default rebid, often balanced",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3S",
+  "seq": "2D 2S",
+  "call": "3S",
+  "cond": "S == max(S, H, D, C) and (S >= 6 or (S >= 5 and top('S') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3H",
+  "seq": "2D 2S",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and (H >= 6 or (H >= 5 and top('H') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3D",
+  "seq": "2D 2S",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and (D >= 6 or (D >= 5 and top('D') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3C",
+  "seq": "2D 2S",
+  "call": "3C",
+  "cond": "C == max(S, H, D, C) and (C >= 6 or (C >= 5 and top('C') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.2NT",
+  "seq": "2D 2S",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "FM",
+  "meaning": "Redemande par défaut, souvent régulière",
+  "meaning_en": "Default rebid, often balanced",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3S",
+  "seq": "2D 2NT",
+  "call": "3S",
+  "cond": "S == max(S, H, D, C) and (S >= 6 or (S >= 5 and top('S') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3H",
+  "seq": "2D 2NT",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and (H >= 6 or (H >= 5 and top('H') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3D",
+  "seq": "2D 2NT",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and (D >= 6 or (D >= 5 and top('D') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3C",
+  "seq": "2D 2NT",
+  "call": "3C",
+  "cond": "C == max(S, H, D, C) and (C >= 6 or (C >= 5 and top('C') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3NT",
+  "seq": "2D 2NT",
+  "call": "3NT",
+  "cond": "balanced or semibalanced",
+  "forcing": "FM",
+  "meaning": "Régulier : 3SA sans saut, forcing sur 2SA",
+  "meaning_en": "Balanced: non-jump 3NT, forcing over 2NT",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3S",
+  "seq": "2D 3C",
+  "call": "3S",
+  "cond": "S == max(S, H, D, C) and (S >= 6 or (S >= 5 and top('S') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3H",
+  "seq": "2D 3C",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and (H >= 6 or (H >= 5 and top('H') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3D",
+  "seq": "2D 3C",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and (D >= 6 or (D >= 5 and top('D') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.4C",
+  "seq": "2D 3C",
+  "call": "4C",
+  "cond": "C == max(S, H, D, C) and (C >= 6 or (C >= 5 and top('C') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3S",
+  "seq": "2D 3D",
+  "call": "3S",
+  "cond": "S == max(S, H, D, C) and (S >= 6 or (S >= 5 and top('S') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3H",
+  "seq": "2D 3D",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and (H >= 6 or (H >= 5 and top('H') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.4D",
+  "seq": "2D 3D",
+  "call": "4D",
+  "cond": "D == max(S, H, D, C) and (D >= 6 or (D >= 5 and top('D') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.4C",
+  "seq": "2D 3D",
+  "call": "4C",
+  "cond": "C == max(S, H, D, C) and (C >= 6 or (C >= 5 and top('C') >= 2 and not balanced))",
+  "forcing": "FM",
+  "meaning": "Naturel : 6 cartes, ou 5 belles cartes et main irrégulière",
+  "meaning_en": "Natural: 6 cards, or 5 good cards and an unbalanced hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.splH",
+  "seq": "2D 2H 2S",
+  "call": "4H",
+  "cond": "S >= 4 and short('H') and not ace('H') and not king('H') and not ace('D') and not king('D') and not ace('C') and not king('C')",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, sans contrôle d'honneur extérieur",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, no outside honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2D.2H.2S.splD",
+  "seq": "2D 2H 2S",
+  "call": "4D",
+  "cond": "S >= 4 and short('D') and not ace('H') and not king('H') and not ace('D') and not king('D') and not ace('C') and not king('C')",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, sans contrôle d'honneur extérieur",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, no outside honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2D.2H.2S.splC",
+  "seq": "2D 2H 2S",
+  "call": "4C",
+  "cond": "S >= 4 and short('C') and not ace('H') and not king('H') and not ace('D') and not king('D') and not ace('C') and not king('C')",
+  "forcing": "F1",
+  "meaning": "Splinter : singleton ou chicane, 4+ atouts, sans contrôle d'honneur extérieur",
+  "meaning_en": "Splinter: singleton or void, 4+ trumps, no outside honour control",
+  "status": "sef",
+  "alert": true,
+  "trump": "S"
+ },
+ {
+  "id": "2D.2H.2S.3S",
+  "seq": "2D 2H 2S",
+  "call": "3S",
+  "cond": "S >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "S"
+ },
+ {
+  "id": "2D.2H.2S.4S",
+  "seq": "2D 2H 2S",
+  "call": "4S",
+  "cond": "S >= 4 and hcp - hcp_in('S') <= 2",
+  "forcing": "SO",
+  "meaning": "Saut à la manche : bon fit sans valeur extérieure",
+  "meaning_en": "Jump to game: good fit, no outside values",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.3H",
+  "seq": "2D 2H 2S",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.3D",
+  "seq": "2D 2H 2S",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.3C",
+  "seq": "2D 2H 2S",
+  "call": "3C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.2NT",
+  "seq": "2D 2H 2S",
+  "call": "2NT",
+  "cond": "true",
+  "forcing": "F1",
+  "meaning": "Enchère par défaut",
+  "meaning_en": "Default bid",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.2S.3S.4NT",
+  "seq": "2D 2H 2S 3S",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.2S.3S.4S",
+  "seq": "2D 2H 2S 3S",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.splH.4NT",
+  "seq": "2D 2H 2S 4H",
+  "call": "4NT",
+  "cond": "hcp_in('H') == 0 or (ace('H') and hcp_in('H') == 4)",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face à la courte : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.2S.splH.4S",
+  "seq": "2D 2H 2S 4H",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.splD.4NT",
+  "seq": "2D 2H 2S 4D",
+  "call": "4NT",
+  "cond": "hcp_in('D') == 0 or (ace('D') and hcp_in('D') == 4)",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face à la courte : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.2S.splD.4S",
+  "seq": "2D 2H 2S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.splC.4NT",
+  "seq": "2D 2H 2S 4C",
+  "call": "4NT",
+  "cond": "hcp_in('C') == 0 or (ace('C') and hcp_in('C') == 4)",
+  "forcing": "ASK",
+  "meaning": "Pas d'honneur perdu face à la courte : Blackwood",
+  "meaning_en": "No wasted honour opposite the shortness: Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.2S.splC.4S",
+  "seq": "2D 2H 2S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3H.4H",
+  "seq": "2D 2H 2S 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3H.3S",
+  "seq": "2D 2H 2S 3H",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3H.3NT",
+  "seq": "2D 2H 2S 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3H.3S.4S",
+  "seq": "2D 2H 2S 3H 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3H.3S.3NT",
+  "seq": "2D 2H 2S 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3D.5D",
+  "seq": "2D 2H 2S 3D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3D.3S",
+  "seq": "2D 2H 2S 3D",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3D.3NT",
+  "seq": "2D 2H 2S 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3D.3S.4S",
+  "seq": "2D 2H 2S 3D 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3D.3S.3NT",
+  "seq": "2D 2H 2S 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3C.5C",
+  "seq": "2D 2H 2S 3C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3C.3S",
+  "seq": "2D 2H 2S 3C",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3C.3NT",
+  "seq": "2D 2H 2S 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3C.3S.4S",
+  "seq": "2D 2H 2S 3C 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.3C.3S.3NT",
+  "seq": "2D 2H 2S 3C 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit",
+  "meaning_en": "No fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3S",
+  "seq": "2D 2H 2S 2NT",
+  "call": "3S",
+  "cond": "S >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3H",
+  "seq": "2D 2H 2S 2NT",
+  "call": "3H",
+  "cond": "H >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3D",
+  "seq": "2D 2H 2S 2NT",
+  "call": "3D",
+  "cond": "D >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3C",
+  "seq": "2D 2H 2S 2NT",
+  "call": "3C",
+  "cond": "C >= 4",
+  "forcing": "F1",
+  "meaning": "4+ cartes",
+  "meaning_en": "4+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3NT",
+  "seq": "2D 2H 2S 2NT",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "5 cartes, régulier",
+  "meaning_en": "5 cards, balanced",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3S.4S",
+  "seq": "2D 2H 2S 2NT 3S",
+  "call": "4S",
+  "cond": "S >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.3H.4H",
+  "seq": "2D 2H 2S 2NT 3H",
+  "call": "4H",
+  "cond": "H >= 4",
+  "forcing": "SO",
+  "meaning": "Fit ♥",
+  "meaning_en": "Heart fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.x.4S",
+  "seq": "2D 2H 2S 2NT 3H|3D|3C",
+  "call": "4S",
+  "cond": "S >= 2 and not balanced",
+  "forcing": "SO",
+  "meaning": "Préférence",
+  "meaning_en": "Preference",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.2S.2NT.x.3NT",
+  "seq": "2D 2H 2S 2NT 3C|3D|3H|3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche à SA",
+  "meaning_en": "Game in NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3S",
+  "seq": "2D 2H 3H",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3H.4D",
+  "seq": "2D 2H 3H",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3H.4C",
+  "seq": "2D 2H 3H",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3H.4H",
+  "seq": "2D 2H 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3NT",
+  "seq": "2D 2H 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3S.4S",
+  "seq": "2D 2H 3H 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3S.4H",
+  "seq": "2D 2H 3H 3S",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3S.3NT",
+  "seq": "2D 2H 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4D.5D",
+  "seq": "2D 2H 3H 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4D.4H",
+  "seq": "2D 2H 3H 4D",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4D.4H.def",
+  "seq": "2D 2H 3H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4C.5C",
+  "seq": "2D 2H 3H 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4C.4H",
+  "seq": "2D 2H 3H 4C",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.4C.4H.def",
+  "seq": "2D 2H 3H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3H.3NT.4H",
+  "seq": "2D 2H 3H 3NT",
+  "call": "4H",
+  "cond": "H >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4D",
+  "seq": "2D 2H 3D",
+  "call": "4D",
+  "cond": "D >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "D"
+ },
+ {
+  "id": "2D.2H.3D.3S",
+  "seq": "2D 2H 3D",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3D.3H",
+  "seq": "2D 2H 3D",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3D.4C",
+  "seq": "2D 2H 3D",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3D.3NT",
+  "seq": "2D 2H 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4D.4NT",
+  "seq": "2D 2H 3D 4D",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.3D.4D.5D",
+  "seq": "2D 2H 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3S.4S",
+  "seq": "2D 2H 3D 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3S.4D",
+  "seq": "2D 2H 3D 3S",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3S.3NT",
+  "seq": "2D 2H 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3S.4D.5D",
+  "seq": "2D 2H 3D 3S 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3H.4H",
+  "seq": "2D 2H 3D 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3H.4D",
+  "seq": "2D 2H 3D 3H",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3H.3NT",
+  "seq": "2D 2H 3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3H.4D.5D",
+  "seq": "2D 2H 3D 3H 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4C.5C",
+  "seq": "2D 2H 3D 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4C.4D",
+  "seq": "2D 2H 3D 4C",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4C.4D.5D",
+  "seq": "2D 2H 3D 4C 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.4C.5D.def",
+  "seq": "2D 2H 3D 4C",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3D.3NT.5D",
+  "seq": "2D 2H 3D 3NT",
+  "call": "5D",
+  "cond": "D >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.4C",
+  "seq": "2D 2H 3C",
+  "call": "4C",
+  "cond": "C >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "C"
+ },
+ {
+  "id": "2D.2H.3C.3S",
+  "seq": "2D 2H 3C",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3C.3H",
+  "seq": "2D 2H 3C",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3C.3D",
+  "seq": "2D 2H 3C",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2H.3C.3NT",
+  "seq": "2D 2H 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.4C.4NT",
+  "seq": "2D 2H 3C 4C",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2H.3C.4C.5C",
+  "seq": "2D 2H 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3S.4S",
+  "seq": "2D 2H 3C 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3S.4C",
+  "seq": "2D 2H 3C 3S",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3S.3NT",
+  "seq": "2D 2H 3C 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3S.4C.5C",
+  "seq": "2D 2H 3C 3S 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3H.4H",
+  "seq": "2D 2H 3C 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3H.4C",
+  "seq": "2D 2H 3C 3H",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3H.3NT",
+  "seq": "2D 2H 3C 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3H.4C.5C",
+  "seq": "2D 2H 3C 3H 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3D.5D",
+  "seq": "2D 2H 3C 3D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3D.4C",
+  "seq": "2D 2H 3C 3D",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3D.3NT",
+  "seq": "2D 2H 3C 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3D.4C.5C",
+  "seq": "2D 2H 3C 3D 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2H.3C.3NT.5C",
+  "seq": "2D 2H 3C 3NT",
+  "call": "5C",
+  "cond": "C >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4D",
+  "seq": "2D 2S 3S",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3S.4C",
+  "seq": "2D 2S 3S",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3S.4S",
+  "seq": "2D 2S 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.3NT",
+  "seq": "2D 2S 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4D.5D",
+  "seq": "2D 2S 3S 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4D.4S",
+  "seq": "2D 2S 3S 4D",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4D.4S.def",
+  "seq": "2D 2S 3S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4C.5C",
+  "seq": "2D 2S 3S 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4C.4S",
+  "seq": "2D 2S 3S 4C",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.4C.4S.def",
+  "seq": "2D 2S 3S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3S.3NT.4S",
+  "seq": "2D 2S 3S 3NT",
+  "call": "4S",
+  "cond": "S >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3S",
+  "seq": "2D 2S 3H",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3H.4D",
+  "seq": "2D 2S 3H",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3H.4C",
+  "seq": "2D 2S 3H",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3H.4H",
+  "seq": "2D 2S 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3NT",
+  "seq": "2D 2S 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3S.4S",
+  "seq": "2D 2S 3H 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3S.4H",
+  "seq": "2D 2S 3H 3S",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3S.3NT",
+  "seq": "2D 2S 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4D.5D",
+  "seq": "2D 2S 3H 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4D.4H",
+  "seq": "2D 2S 3H 4D",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4D.4H.def",
+  "seq": "2D 2S 3H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4C.5C",
+  "seq": "2D 2S 3H 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4C.4H",
+  "seq": "2D 2S 3H 4C",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.4C.4H.def",
+  "seq": "2D 2S 3H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3H.3NT.4H",
+  "seq": "2D 2S 3H 3NT",
+  "call": "4H",
+  "cond": "H >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4D",
+  "seq": "2D 2S 3D",
+  "call": "4D",
+  "cond": "D >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "D"
+ },
+ {
+  "id": "2D.2S.3D.3S",
+  "seq": "2D 2S 3D",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3D.3H",
+  "seq": "2D 2S 3D",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3D.4C",
+  "seq": "2D 2S 3D",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3D.3NT",
+  "seq": "2D 2S 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4D.4NT",
+  "seq": "2D 2S 3D 4D",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2S.3D.4D.5D",
+  "seq": "2D 2S 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3S.4S",
+  "seq": "2D 2S 3D 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3S.4D",
+  "seq": "2D 2S 3D 3S",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3S.3NT",
+  "seq": "2D 2S 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3S.4D.5D",
+  "seq": "2D 2S 3D 3S 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3H.4H",
+  "seq": "2D 2S 3D 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3H.4D",
+  "seq": "2D 2S 3D 3H",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3H.3NT",
+  "seq": "2D 2S 3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3H.4D.5D",
+  "seq": "2D 2S 3D 3H 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4C.5C",
+  "seq": "2D 2S 3D 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4C.4D",
+  "seq": "2D 2S 3D 4C",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4C.4D.5D",
+  "seq": "2D 2S 3D 4C 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.4C.5D.def",
+  "seq": "2D 2S 3D 4C",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3D.3NT.5D",
+  "seq": "2D 2S 3D 3NT",
+  "call": "5D",
+  "cond": "D >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.4C",
+  "seq": "2D 2S 3C",
+  "call": "4C",
+  "cond": "C >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "C"
+ },
+ {
+  "id": "2D.2S.3C.3S",
+  "seq": "2D 2S 3C",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3C.3H",
+  "seq": "2D 2S 3C",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3C.3D",
+  "seq": "2D 2S 3C",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2S.3C.3NT",
+  "seq": "2D 2S 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.4C.4NT",
+  "seq": "2D 2S 3C 4C",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2S.3C.4C.5C",
+  "seq": "2D 2S 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3S.4S",
+  "seq": "2D 2S 3C 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3S.4C",
+  "seq": "2D 2S 3C 3S",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3S.3NT",
+  "seq": "2D 2S 3C 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3S.4C.5C",
+  "seq": "2D 2S 3C 3S 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3H.4H",
+  "seq": "2D 2S 3C 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3H.4C",
+  "seq": "2D 2S 3C 3H",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3H.3NT",
+  "seq": "2D 2S 3C 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3H.4C.5C",
+  "seq": "2D 2S 3C 3H 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3D.5D",
+  "seq": "2D 2S 3C 3D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3D.4C",
+  "seq": "2D 2S 3C 3D",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3D.3NT",
+  "seq": "2D 2S 3C 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3D.4C.5C",
+  "seq": "2D 2S 3C 3D 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2S.3C.3NT.5C",
+  "seq": "2D 2S 3C 3NT",
+  "call": "5C",
+  "cond": "C >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4D",
+  "seq": "2D 2NT 3S",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3S.4C",
+  "seq": "2D 2NT 3S",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3S.4S",
+  "seq": "2D 2NT 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.3NT",
+  "seq": "2D 2NT 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4D.5D",
+  "seq": "2D 2NT 3S 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4D.4S",
+  "seq": "2D 2NT 3S 4D",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4D.4S.def",
+  "seq": "2D 2NT 3S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4C.5C",
+  "seq": "2D 2NT 3S 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4C.4S",
+  "seq": "2D 2NT 3S 4C",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.4C.4S.def",
+  "seq": "2D 2NT 3S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3S.3NT.4S",
+  "seq": "2D 2NT 3S 3NT",
+  "call": "4S",
+  "cond": "S >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3S",
+  "seq": "2D 2NT 3H",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3H.4D",
+  "seq": "2D 2NT 3H",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3H.4C",
+  "seq": "2D 2NT 3H",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3H.4H",
+  "seq": "2D 2NT 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3NT",
+  "seq": "2D 2NT 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3S.4S",
+  "seq": "2D 2NT 3H 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3S.4H",
+  "seq": "2D 2NT 3H 3S",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3S.3NT",
+  "seq": "2D 2NT 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4D.5D",
+  "seq": "2D 2NT 3H 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4D.4H",
+  "seq": "2D 2NT 3H 4D",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4D.4H.def",
+  "seq": "2D 2NT 3H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4C.5C",
+  "seq": "2D 2NT 3H 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4C.4H",
+  "seq": "2D 2NT 3H 4C",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.4C.4H.def",
+  "seq": "2D 2NT 3H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3H.3NT.4H",
+  "seq": "2D 2NT 3H 3NT",
+  "call": "4H",
+  "cond": "H >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4D",
+  "seq": "2D 2NT 3D",
+  "call": "4D",
+  "cond": "D >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "D"
+ },
+ {
+  "id": "2D.2NT.3D.3S",
+  "seq": "2D 2NT 3D",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3D.3H",
+  "seq": "2D 2NT 3D",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3D.4C",
+  "seq": "2D 2NT 3D",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3D.3NT",
+  "seq": "2D 2NT 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4D.4NT",
+  "seq": "2D 2NT 3D 4D",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2NT.3D.4D.5D",
+  "seq": "2D 2NT 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3S.4S",
+  "seq": "2D 2NT 3D 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3S.4D",
+  "seq": "2D 2NT 3D 3S",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3S.3NT",
+  "seq": "2D 2NT 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3S.4D.5D",
+  "seq": "2D 2NT 3D 3S 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3H.4H",
+  "seq": "2D 2NT 3D 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3H.4D",
+  "seq": "2D 2NT 3D 3H",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3H.3NT",
+  "seq": "2D 2NT 3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3H.4D.5D",
+  "seq": "2D 2NT 3D 3H 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4C.5C",
+  "seq": "2D 2NT 3D 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4C.4D",
+  "seq": "2D 2NT 3D 4C",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4C.4D.5D",
+  "seq": "2D 2NT 3D 4C 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.4C.5D.def",
+  "seq": "2D 2NT 3D 4C",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3D.3NT.5D",
+  "seq": "2D 2NT 3D 3NT",
+  "call": "5D",
+  "cond": "D >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.4C",
+  "seq": "2D 2NT 3C",
+  "call": "4C",
+  "cond": "C >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "C"
+ },
+ {
+  "id": "2D.2NT.3C.3S",
+  "seq": "2D 2NT 3C",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3C.3H",
+  "seq": "2D 2NT 3C",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3C.3D",
+  "seq": "2D 2NT 3C",
+  "call": "3D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.2NT.3C.3NT",
+  "seq": "2D 2NT 3C",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.4C.4NT",
+  "seq": "2D 2NT 3C 4C",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.2NT.3C.4C.5C",
+  "seq": "2D 2NT 3C 4C",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3S.4S",
+  "seq": "2D 2NT 3C 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3S.4C",
+  "seq": "2D 2NT 3C 3S",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3S.3NT",
+  "seq": "2D 2NT 3C 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3S.4C.5C",
+  "seq": "2D 2NT 3C 3S 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3H.4H",
+  "seq": "2D 2NT 3C 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3H.4C",
+  "seq": "2D 2NT 3C 3H",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3H.3NT",
+  "seq": "2D 2NT 3C 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3H.4C.5C",
+  "seq": "2D 2NT 3C 3H 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3D.5D",
+  "seq": "2D 2NT 3C 3D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3D.4C",
+  "seq": "2D 2NT 3C 3D",
+  "call": "4C",
+  "cond": "C >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3D.3NT",
+  "seq": "2D 2NT 3C 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3D.4C.5C",
+  "seq": "2D 2NT 3C 3D 4C",
+  "call": "5C",
+  "cond": "C >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3C.3NT.5C",
+  "seq": "2D 2NT 3C 3NT",
+  "call": "5C",
+  "cond": "C >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4D",
+  "seq": "2D 3C 3S",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3S.4C",
+  "seq": "2D 3C 3S",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3S.4S",
+  "seq": "2D 3C 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.3NT",
+  "seq": "2D 3C 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4D.5D",
+  "seq": "2D 3C 3S 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4D.4S",
+  "seq": "2D 3C 3S 4D",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4D.4S.def",
+  "seq": "2D 3C 3S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4C.5C",
+  "seq": "2D 3C 3S 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4C.4S",
+  "seq": "2D 3C 3S 4C",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.4C.4S.def",
+  "seq": "2D 3C 3S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3S.3NT.4S",
+  "seq": "2D 3C 3S 3NT",
+  "call": "4S",
+  "cond": "S >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3S",
+  "seq": "2D 3C 3H",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3H.4D",
+  "seq": "2D 3C 3H",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3H.4C",
+  "seq": "2D 3C 3H",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3H.4H",
+  "seq": "2D 3C 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3NT",
+  "seq": "2D 3C 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3S.4S",
+  "seq": "2D 3C 3H 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3S.4H",
+  "seq": "2D 3C 3H 3S",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3S.3NT",
+  "seq": "2D 3C 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4D.5D",
+  "seq": "2D 3C 3H 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4D.4H",
+  "seq": "2D 3C 3H 4D",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4D.4H.def",
+  "seq": "2D 3C 3H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4C.5C",
+  "seq": "2D 3C 3H 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4C.4H",
+  "seq": "2D 3C 3H 4C",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.4C.4H.def",
+  "seq": "2D 3C 3H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3H.3NT.4H",
+  "seq": "2D 3C 3H 3NT",
+  "call": "4H",
+  "cond": "H >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4D",
+  "seq": "2D 3C 3D",
+  "call": "4D",
+  "cond": "D >= 3 and hcp >= 3",
+  "forcing": "F1",
+  "meaning": "Soutien sous la manche : espoir de chelem",
+  "meaning_en": "Raise below game: slam interest",
+  "status": "sef",
+  "trump": "D"
+ },
+ {
+  "id": "2D.3C.3D.3S",
+  "seq": "2D 3C 3D",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3D.3H",
+  "seq": "2D 3C 3D",
+  "call": "3H",
+  "cond": "H >= 5 and top('H') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3D.4C",
+  "seq": "2D 3C 3D",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.3D.3NT",
+  "seq": "2D 3C 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4D.4NT",
+  "seq": "2D 3C 3D 4D",
+  "call": "4NT",
+  "cond": "ptricks >= 10",
+  "forcing": "ASK",
+  "meaning": "Blackwood",
+  "meaning_en": "Blackwood",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "2D.3C.3D.4D.5D",
+  "seq": "2D 3C 3D 4D",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Conclusion",
+  "meaning_en": "Sign-off",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3S.4S",
+  "seq": "2D 3C 3D 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3S.4D",
+  "seq": "2D 3C 3D 3S",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3S.3NT",
+  "seq": "2D 3C 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3S.4D.5D",
+  "seq": "2D 3C 3D 3S 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3H.4H",
+  "seq": "2D 3C 3D 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3H.4D",
+  "seq": "2D 3C 3D 3H",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3H.3NT",
+  "seq": "2D 3C 3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3H.4D.5D",
+  "seq": "2D 3C 3D 3H 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4C.5C",
+  "seq": "2D 3C 3D 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4C.4D",
+  "seq": "2D 3C 3D 4C",
+  "call": "4D",
+  "cond": "D >= 6",
+  "forcing": "F1",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4C.4D.5D",
+  "seq": "2D 3C 3D 4C 4D",
+  "call": "5D",
+  "cond": "D >= 2",
+  "forcing": "SO",
+  "meaning": "Fit",
+  "meaning_en": "Fit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.4C.5D.def",
+  "seq": "2D 3C 3D 4C",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.3D.3NT.5D",
+  "seq": "2D 3C 3D 3NT",
+  "call": "5D",
+  "cond": "D >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.4C.4D",
+  "seq": "2D 3C 4C",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3C.4C.4NT",
+  "seq": "2D 3C 4C",
+  "call": "4NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.4C.4D.5D",
+  "seq": "2D 3C 4C 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.4C.4D.5C",
+  "seq": "2D 3C 4C 4D",
+  "call": "5C",
+  "cond": "C >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.4C.4D.5C.def",
+  "seq": "2D 3C 4C 4D",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3C.4C.3NT.5C",
+  "seq": "2D 3C 4C 3NT",
+  "call": "5C",
+  "cond": "C >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4D",
+  "seq": "2D 3D 3S",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3S.4C",
+  "seq": "2D 3D 3S",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3S.4S",
+  "seq": "2D 3D 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.3NT",
+  "seq": "2D 3D 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4D.5D",
+  "seq": "2D 3D 3S 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4D.4S",
+  "seq": "2D 3D 3S 4D",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4D.4S.def",
+  "seq": "2D 3D 3S 4D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4C.5C",
+  "seq": "2D 3D 3S 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4C.4S",
+  "seq": "2D 3D 3S 4C",
+  "call": "4S",
+  "cond": "S >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.4C.4S.def",
+  "seq": "2D 3D 3S 4C",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3S.3NT.4S",
+  "seq": "2D 3D 3S 3NT",
+  "call": "4S",
+  "cond": "S >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3S",
+  "seq": "2D 3D 3H",
+  "call": "3S",
+  "cond": "S >= 5 and top('S') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3H.4D",
+  "seq": "2D 3D 3H",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3H.4C",
+  "seq": "2D 3D 3H",
+  "call": "4C",
+  "cond": "C >= 5 and top('C') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.3H.4H",
+  "seq": "2D 3D 3H",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3NT",
+  "seq": "2D 3D 3H",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3S.4S",
+  "seq": "2D 3D 3H 3S",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3S.4H",
+  "seq": "2D 3D 3H 3S",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3S.3NT",
+  "seq": "2D 3D 3H 3S",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : SA",
+  "meaning_en": "No fit: NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4D.5D",
+  "seq": "2D 3D 3H 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4D.4H",
+  "seq": "2D 3D 3H 4D",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4D.4H.def",
+  "seq": "2D 3D 3H 4D",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4C.5C",
+  "seq": "2D 3D 3H 4C",
+  "call": "5C",
+  "cond": "C >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4C.4H",
+  "seq": "2D 3D 3H 4C",
+  "call": "4H",
+  "cond": "H >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.4C.4H.def",
+  "seq": "2D 3D 3H 4C",
+  "call": "4H",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.3H.3NT.4H",
+  "seq": "2D 3D 3H 3NT",
+  "call": "4H",
+  "cond": "H >= 6 or not balanced",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4D.4NT",
+  "seq": "2D 3D 4D",
+  "call": "4NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4D.3NT.5D",
+  "seq": "2D 3D 4D 3NT",
+  "call": "5D",
+  "cond": "D >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4C.4D",
+  "seq": "2D 3D 4C",
+  "call": "4D",
+  "cond": "D >= 5 and top('D') >= 2 and hcp >= 5",
+  "forcing": "F1",
+  "meaning": "Nouvelle couleur : 5 cartes correctes, main positive",
+  "meaning_en": "New suit: five decent cards, positive hand",
+  "status": "sef"
+ },
+ {
+  "id": "2D.3D.4C.4NT",
+  "seq": "2D 3D 4C",
+  "call": "4NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit : 3SA",
+  "meaning_en": "No fit: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4C.4D.5D",
+  "seq": "2D 3D 4C 4D",
+  "call": "5D",
+  "cond": "D >= 3",
+  "forcing": "SO",
+  "meaning": "Fit : manche",
+  "meaning_en": "Fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4C.4D.5C",
+  "seq": "2D 3D 4C 4D",
+  "call": "5C",
+  "cond": "C >= 6",
+  "forcing": "SO",
+  "meaning": "6 cartes",
+  "meaning_en": "6 cards",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4C.4D.5C.def",
+  "seq": "2D 3D 4C 4D",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Pas de fit : manche dans sa couleur",
+  "meaning_en": "No fit: game in own suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.3D.4C.3NT.5C",
+  "seq": "2D 3D 4C 3NT",
+  "call": "5C",
+  "cond": "C >= 6 and min(S, H, D, C) <= 1",
+  "forcing": "SO",
+  "meaning": "Main irrégulière : manche dans la couleur",
+  "meaning_en": "Unbalanced hand: game in the suit",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3NT.6NT",
+  "seq": "2D 2NT 3NT",
+  "call": "6NT",
+  "cond": "hcp >= 10",
+  "forcing": "SO",
+  "meaning": "10+ H : 6SA",
+  "meaning_en": "10+ HCP: 6NT",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3NT.4NT",
+  "seq": "2D 2NT 3NT",
+  "call": "4NT",
+  "cond": "true",
+  "forcing": "INV",
+  "meaning": "8-9 H : proposition de chelem",
+  "meaning_en": "8-9 HCP: slam invitation",
+  "status": "infere"
+ },
+ {
+  "id": "2D.2NT.3NT.4NT.6NT",
+  "seq": "2D 2NT 3NT 4NT",
+  "call": "6NT",
+  "cond": "hl >= 26",
+  "forcing": "SO",
+  "meaning": "Accepte",
+  "meaning_en": "Accepts",
+  "status": "infere"
+ },
+ {
+  "id": "2D.x.2NT.3D",
+  "seq": "2D 2H|2S 2NT",
+  "call": "3D",
+  "cond": "H >= 5 and H >= S",
+  "forcing": "REL",
+  "meaning": "Texas ♥, sans minimum de points",
+  "meaning_en": "Texas ♥, no point minimum",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "2D.x.2NT.3H",
+  "seq": "2D 2H|2S 2NT",
+  "call": "3H",
+  "cond": "S >= 5",
+  "forcing": "REL",
+  "meaning": "Texas ♠, sans minimum de points",
+  "meaning_en": "Texas ♠, no point minimum",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "2D.x.2NT.3C",
+  "seq": "2D 2H|2S 2NT",
+  "call": "3C",
+  "cond": "H == 4 or S == 4",
+  "forcing": "F1",
+  "meaning": "Stayman, sans minimum de points",
+  "meaning_en": "Stayman, no point minimum",
+  "status": "sef",
+  "alert": true
+ },
+ {
+  "id": "2D.x.2NT.3NT",
+  "seq": "2D 2H|2S 2NT",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "sef"
  },
  {
   "id": "2D.x.3NT",

@@ -3197,10 +3197,44 @@ function flashCopied(btn, ok, okMsg, failMsg) {
   }, 1500);
 }
 
-// Copie tout le texte PBN.
+// Le résultat affiché (renderResult), effacé avec lui (hideResult) : il décrit
+// toujours la donne du texte PBN.
+let shownResult = null;
+
+// Un appel du moteur, écrit dans la langue de la page (« 4P », « 3SA »,
+// « Passe »), en notation PBN standard : 4S, 3NT, Pass.
+function pbnCallToken(bid, lang) {
+  if (isPass(bid)) return "Pass";
+  const m = bid.match(/^([1-7])(SA|NT|[A-Z])$/);
+  if (!m) return bid; // X, XX
+  return m[1] + ["C", "D", "H", "S", "NT"][STRAIN_ORDER[lang].indexOf(m[2])];
+}
+
+// Les tags d'une enchère calculée — [Declarer], [Contract] et la section
+// [Auction], quatre appels par ligne —, à ajouter au texte PBN. Rien si aucune
+// enchère n'est affichée, ou si le texte porte déjà la sienne.
+function pbnAuctionTags(text) {
+  const r = shownResult;
+  if (!r || !r.auction || /\[Auction\s/i.test(text)) return "";
+  const calls = r.auction.map((a) => pbnCallToken(a.bid, r.lang));
+  const lines = [];
+  for (let i = 0; i < calls.length; i += 4) lines.push(calls.slice(i, i + 4).join(" "));
+  const passedOut = isPass(r.contract);
+  const tags = [];
+  if (!/\[Declarer\s/i.test(text)) tags.push(`[Declarer "${passedOut ? "" : r.declarer}"]`);
+  if (!/\[Contract\s/i.test(text)) {
+    tags.push(`[Contract "${passedOut ? "Pass" : pbnCallToken(r.contract, r.lang) + (r.doubled ? "X" : "")}"]`);
+  }
+  tags.push(`[Auction "${r.dealer}"]`, ...lines);
+  return tags.join("\n");
+}
+
+// Copie tout le texte PBN, avec l'enchère calculée si elle est affichée.
 async function copyPbn() {
   const t = UI_TEXT[$("#lang").value];
-  const ok = await copyToClipboard($("#pbn").value);
+  const text = $("#pbn").value.trim();
+  const extra = pbnAuctionTags(text);
+  const ok = await copyToClipboard(extra ? `${text}\n${extra}\n` : $("#pbn").value);
   flashCopied($("#pbn-copy-btn"), ok, t.pbnCopied, t.pbnCopyFailed);
 }
 
@@ -4809,6 +4843,7 @@ function auctionGridHTML(dealer, calls, lang, cellRenderer) {
 
 function renderResult(r) {
   const lang = r.lang;
+  shownResult = r;
   $("#result-panel").classList.remove("hidden");
 
   // Hands around the table.
@@ -5382,6 +5417,7 @@ function setParReady(on) {
 }
 
 function hideResult() {
+  shownResult = null;
   $("#result-panel").classList.add("hidden");
   setParReady(false);
   // La table en lecture perd le contrat et l'analyse du moteur, qui ne

@@ -9,13 +9,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:J3.KQ9764.84.J85 KQ764.J52.A2.AT4 T952.T8.KQ75.963 A8.A3.JT963.KQ72"]
+[Deal "N:T952.T8.KQ75.963 AKQ6.J32.J63.KQ2 J3.KQ9764.84.J85 874.A5.AT92.AT74"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {2 faible : 6 cartes a Coeur, 7H, 2 gros honneurs (vulnerable : 7-10 H et 2 gros honneurs). | Weak two: 6 hearts, 7 HCP, 2 top honours (vulnerable: 7-10 HCP and 2 top honours).} Pass Pass {5H et 2 cartes a Coeur : pas de manche, passe. | 5 HCP and 2 hearts: no game, pass.} Pass
+2H {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 7H (9 HL), 2-6-2-3. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 7 HCP (9 HL), 2-6-2-3.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 2"]
 [Board "2"]
@@ -25,13 +25,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:KJ8752.Q4.T63.85 AQ963.K.Q98.A742 4.AT853.KJ72.Q96 T.J9762.A54.KJT3"]
+[Deal "N:4.AT853.KJ72.Q96 A63.J7.A985.JT74 KJ8752.Q4.T63.85 QT9.K962.Q4.AK32"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 6H, 1 gros honneur (non vulnerable : 6-10 H). | Weak two: 6 spades, 6 HCP, 1 top honour (not vulnerable: 6-10 HCP).} Pass Pass {10H et 1 carte a Pique : pas de manche, passe. | 10 HCP and 1 spade: no game, pass.} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 6H (8 HL), 6-2-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 6 HCP (8 HL), 6-2-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 3"]
 [Board "3"]
@@ -41,13 +41,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:84.AJT973.Q52.94 JT732.K64.J74.K8 KQ65.5.A863.QJ72 A9.Q82.KT9.AT653"]
+[Deal "N:KQ65.5.A863.QJ72 JT7.K82.T974.AT3 84.AJT973.Q52.94 A932.Q64.KJ.K865"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-2H {2 faible : 6 cartes a Coeur, 7H, 1 gros honneur (non vulnerable contre vulnerable : 5-10 H). | Weak two: 6 hearts, 7 HCP, 1 top honour (not vulnerable against vulnerable: 5-10 HCP).} Pass Pass {12H et 1 carte a Coeur : pas de manche, passe. | 12 HCP and 1 heart: no game, pass.} Pass
+2H {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 7H (9 HL), 2-6-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 7 HCP (9 HL), 2-6-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 4"]
 [Board "4"]
@@ -57,13 +57,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AQT984.763.J5.82 KJ7532.Q85.T92.3 6.K942.AQ63.T754 .AJT.K874.AKQJ96"]
+[Deal "N:6.K942.AQ63.T754 J732.QJT5.82.AJ9 AQT984.763.J5.82 K5.A8.KT974.KQ63"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 7H, 2 gros honneurs (vulnerable : 7-10 H et 2 gros honneurs). | Weak two: 6 spades, 7 HCP, 2 top honours (vulnerable: 7-10 HCP and 2 top honours).} Pass Pass {9H et 1 carte a Pique : pas de manche, passe. | 9 HCP and 1 spade: no game, pass.} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 7H (9 HL), 6-3-2-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 7 HCP (9 HL), 6-3-2-2.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 5"]
 [Board "5"]
@@ -121,13 +121,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:KQT842.95.763.J4 5.KQT8.AJ4.A8765 7.AJ63.KQ85.Q932 AJ963.742.T92.KT"]
+[Deal "N:7.AJ63.KQ85.Q932 AJ953.QT8.J.AT85 KQT842.95.763.J4 6.K742.AT942.K76"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 6H, 2 gros honneurs (non vulnerable contre vulnerable : 5-10 H). | Weak two: 6 spades, 6 HCP, 2 top honours (not vulnerable against vulnerable: 5-10 HCP).} Pass Pass {12H et 1 carte a Pique : pas de manche, passe. | 12 HCP and 1 spade: no game, pass.} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 6H (8 HL), 6-2-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 6 HCP (8 HL), 6-2-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 9"]
 [Board "9"]
@@ -169,13 +169,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q4.KJ9853.T6.K73 T65.62.AKQ2.AQ54 A872.Q74.J853.96 KJ93.AT.974.JT82"]
+[Deal "N:A872.Q74.J853.96 JT9653..A942.J54 Q4.KJ9853.T6.K73 K.AT62.KQ7.AQT82"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-2H {2 faible : 6 cartes a Coeur, 9H, 1 gros honneur (non vulnerable : 6-10 H). | Weak two: 6 hearts, 9 HCP, 1 top honour (not vulnerable: 6-10 HCP).} Pass 3H {Fit 3e et 7H : soutien barrage. | 3-card fit and 7 HCP: preemptive raise.} Pass
+2H {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 9H (11 HL), 2-6-2-3. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 9 HCP (11 HL), 2-6-2-3.} Pass 3H {Soutien barrage. Ici 7H (7 HL), 4-3-4-2. | Preemptive support. Here 7 HCP (7 HL), 4-3-4-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 faible - Donne 12"]
@@ -220,13 +220,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AJT852.K6.983.74 KQ7.A93.5.AQT863 943.J842.A762.K5 6.QT75.KQJT4.J92"]
+[Deal "N:943.J842.A762.K5 Q.A5.KJT4.AJT632 AJT852.K6.983.74 K76.QT973.Q5.Q98"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 8H, 1 gros honneur (non vulnerable contre vulnerable : 5-10 H). | Weak two: 6 spades, 8 HCP, 1 top honour (not vulnerable against vulnerable: 5-10 HCP).} Pass 3S {Fit 3e et 8H : soutien barrage. | 3-card fit and 8 HCP: preemptive raise.} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 8H (10 HL), 6-2-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 8 HCP (10 HL), 6-2-3-2.} Pass 3S {Soutien barrage. Ici 8H (8 HL), 3-4-4-2. | Preemptive support. Here 8 HCP (8 HL), 3-4-4-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 faible - Donne 15"]
@@ -288,13 +288,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQ9753.84.J62.95 J62.AKT92.A.KT84 KT84.7.Q8743.J62 .QJ653.KT95.AQ73"]
+[Deal "N:KT84.7.Q8743.J62 J.AT32.KT5.AKQ73 AQ9753.84.J62.95 62.KQJ965.A9.T84"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 7H, 2 gros honneurs (vulnerable : 7-10 H et 2 gros honneurs). | Weak two: 6 spades, 7 HCP, 2 top honours (vulnerable: 7-10 HCP and 2 top honours).} Pass 4S {4 atouts : la manche, pour la gagner ou en barrage (6H). | 4 trumps: game, to make or as a preempt (6 HCP).} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 7H (9 HL), 6-2-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 7 HCP (9 HL), 6-2-3-2.} Pass 4S {Soutien : manche ou barrage. Ici 6H (6 HL), 4-1-5-3. | Support: game or preempt. Here 6 HCP (6 HL), 4-1-5-3.} Pass
 Pass Pass
 
 [Event "Entrainement 2 faible - Donne 19"]
@@ -322,13 +322,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:KJT864.Q72.85.T4 A.AK863.QJ742.J3 Q752.J4.AT963.K5 93.T95.K.AQ98762"]
+[Deal "N:Q752.J4.AT963.K5 A9.AKT3.KQJ7.A72 KJT864.Q72.85.T4 3.9865.42.QJ9863"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2S {2 faible : 6 cartes a Pique, 6H, 1 gros honneur (non vulnerable : 6-10 H). | Weak two: 6 spades, 6 HCP, 1 top honour (not vulnerable: 6-10 HCP).} Pass 4S {4 atouts : la manche, pour la gagner ou en barrage (10H). | 4 trumps: game, to make or as a preempt (10 HCP).} Pass
+2S {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 6H (8 HL), 6-3-2-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 6 HCP (8 HL), 6-3-2-2.} Pass 4S {Soutien : manche ou barrage. Ici 10H (10 HL), 4-2-5-2. | Support: game or preempt. Here 10 HCP (10 HL), 4-2-5-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 faible - Donne 21"]
@@ -582,14 +582,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:76.Q98654.K52.84 QJT4.T7.AT.AK965 AK93.A2.QJ74.QT3 852.KJ3.9863.J72"]
+[Deal "N:AK93.A2.QJ74.QT3 J42.T73.A863.AK7 76.Q98654.K52.84 QT85.KJ.T9.J9652"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-2H {2 faible : 6 cartes a Coeur, 5H, 1 gros honneur (non vulnerable contre vulnerable : 5-10 H). | Weak two: 6 hearts, 5 HCP, 1 top honour (not vulnerable against vulnerable: 5-10 HCP).} Pass 2NT {Relais 2SA : 16 HL, espoir de manche. | 2NT relay: 16 HL, game interest.} Pass
-3H {Minimum (5 HL). | Minimum (5 HL).} Pass Pass {16H seulement face au minimum : on reste a 3C. | Only 16 HCP opposite a minimum: stay in 3H.} Pass
+2H {2 faible : 6 cartes, 6-10 H (vulnerable : 7-10 H et 2 gros honneurs ; vulnerabilite favorable : 5-10 H). Ici 5H (5 HL), 2-6-3-2. | Weak two: 6 cards, 6-10 HCP (vulnerable: 7-10 HCP and 2 high honors; favorable vulnerability: 5-10 HCP). Here 5 HCP (5 HL), 2-6-3-2.} Pass 2NT {Relais avec espoir de manche, 15 HL et plus. Ici 16H (16 HL), 4-2-4-3. | Relay with game interest, 15+ HL. Here 16 HCP (16 HL), 4-2-4-3.} Pass
+3H {Minimum. Ici 5H (5 HL), 2-6-3-2. | Minimum. Here 5 HCP (5 HL), 2-6-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 faible - Donne 36"]
 [Board "36"]

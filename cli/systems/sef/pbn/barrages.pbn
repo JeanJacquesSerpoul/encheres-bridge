@@ -9,13 +9,13 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:7.854.92.KQJ8743 KJ864.KQ97.86.A5 QT53.AJ6.AT74.96 A92.T32.KQJ53.T2"]
+[Deal "N:QT53.AJ6.AT74.96 A92.Q72.J853.AT5 7.854.92.KQJ8743 KJ864.KT93.KQ6.2"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3C"]
 [Result ""]
 [Auction "S"]
-3C {Barrage : 7 cartes a Trefle, 6H, 2 gros honneurs (vulnerable, il en faut 2). | Preempt: 7 clubs, 6 HCP, 2 top honours (vulnerable, 2 are needed).} Pass Pass {Pas de fit (2 cartes a Trefle) et 11H sans 3SA : passe. | No fit (2 clubs) and 11 HCP, no 3NT: pass.} Pass
+3C {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 1-3-2-7. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 1-3-2-7.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 2"]
 [Board "2"]
@@ -211,13 +211,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:K5.94.QJ97643.T2 762.Q63.AT8.K654 QJ83.AK75.5.Q873 AT94.JT82.K2.AJ9"]
+[Deal "N:QJ83.AK75.5.Q873 742.862.K8.AJ964 K5.94.QJ97643.T2 AT96.QJT3.AT2.K5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "S"]
-3D {Barrage : 7 cartes a Carreau, 6H, 1 gros honneur (non vulnerable, 1 suffit). | Preempt: 7 diamonds, 6 HCP, 1 top honour (not vulnerable, 1 is enough).} Pass Pass {Pas de fit (1 carte a Carreau) et 12H sans 3SA : passe. | No fit (1 diamond) and 12 HCP, no 3NT: pass.} Pass
+3D {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 2-2-7-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 2-2-7-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 14"]
 [Board "14"]
@@ -293,13 +293,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:5.KJT9843.Q6.952 AKJT93.Q.J9.QT84 Q842.A765.T874.6 76.2.AK532.AKJ73"]
+[Deal "N:Q842.A765.T874.6 JT9763.Q.AK95.AQ 5.KJT9843.Q6.952 AK.2.J32.KJT8743"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-3H {Barrage : 7 cartes a Coeur, 6H, 1 gros honneur (non vulnerable, 1 suffit). | Preempt: 7 hearts, 6 HCP, 1 top honour (not vulnerable, 1 is enough).} Pass 4H {4 atouts : on prolonge le barrage a la manche (6H). | 4 trumps: extends the preempt to game (6 HCP).} Pass
+3H {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 1-7-2-3. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 1-7-2-3.} Pass 4H {Soutien a la manche ou prolongation du barrage. Ici 6H (6 HL), 4-4-4-1. | Support to game or extension of the preempt. Here 6 HCP (6 HL), 4-4-4-1.} Pass
 Pass Pass
 
 [Event "Entrainement Barrages - Donne 19"]
@@ -310,13 +310,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQ98642.7.832.T5 .AT5.KQT975.KQ98 KT53.Q9842.6.J64 J7.KJ63.AJ4.A732"]
+[Deal "N:KT53.Q9842.6.J64 .K53.AKQJ5.KQ873 AQ98642.7.832.T5 J7.AJT6.T974.A92"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-3S {Barrage : 7 cartes a Pique, 6H, 2 gros honneurs (vulnerable, il en faut 2). | Preempt: 7 spades, 6 HCP, 2 top honours (vulnerable, 2 are needed).} Pass 4S {4 atouts : on prolonge le barrage a la manche (6H). | 4 trumps: extends the preempt to game (6 HCP).} Pass
+3S {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 7-1-3-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 7-1-3-2.} Pass 4S {Soutien a la manche ou prolongation du barrage. Ici 6H (6 HL), 4-5-1-3. | Support to game or extension of the preempt. Here 6 HCP (6 HL), 4-5-1-3.} Pass
 Pass Pass
 
 [Event "Entrainement Barrages - Donne 20"]
@@ -497,13 +497,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:QJT8642.5.K73.84 973.Q8632.84.T96 K5.AJ74.Q962.J72 A.KT9.AJT5.AKQ53"]
+[Deal "N:K5.AJ74.Q962.J72 A7.T9863.8.AQT63 QJT8642.5.K73.84 93.KQ2.AJT54.K95"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-3S {Barrage : 7 cartes a Pique, 6H, 1 gros honneur (non vulnerable, 1 suffit). | Preempt: 7 spades, 6 HCP, 1 top honour (not vulnerable, 1 is enough).} Pass Pass {2 cartes a Pique et 11H : pas de manche, passe. | 2 spades and 11 HCP: no game, pass.} Pass
+3S {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 7-1-3-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 7-1-3-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 31"]
 [Board "31"]
@@ -513,13 +513,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:8.KJ97543.A82.T6 KT932.86.QJT54.K AQ74.Q2.K973.J85 J65.AT.6.AQ97432"]
+[Deal "N:AQ74.Q2.K973.J85 T52.AT6.Q65.A932 8.KJ97543.A82.T6 KJ963.8.JT4.KQ74"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "S"]
-3H {Barrage : 7 cartes a Coeur, 8H, 1 gros honneur (non vulnerable, 1 suffit). | Preempt: 7 hearts, 8 HCP, 1 top honour (not vulnerable, 1 is enough).} Pass Pass {2 cartes a Coeur et 12H : pas de manche, passe. | 2 hearts and 12 HCP: no game, pass.} Pass
+3H {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 8H (11 HL), 1-7-3-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 8 HCP (11 HL), 1-7-3-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 32"]
 [Board "32"]
@@ -529,13 +529,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:KQ97653.J4.83.72 J8.T83.A92.KJT64 2.AQ65.KJ74.Q985 AT4.K972.QT65.A3"]
+[Deal "N:2.AQ65.KJ74.Q985 A84.93.QT52.AT43 KQ97653.J4.83.72 JT.KT872.A96.KJ6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-3S {Barrage : 7 cartes a Pique, 6H, 2 gros honneurs (vulnerable, il en faut 2). | Preempt: 7 spades, 6 HCP, 2 top honours (vulnerable, 2 are needed).} Pass Pass {1 carte a Pique et 12H : pas de manche, passe. | 1 spade and 12 HCP: no game, pass.} Pass
+3S {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 6H (9 HL), 7-2-2-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 6 HCP (9 HL), 7-2-2-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 33"]
 [Board "33"]
@@ -561,13 +561,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AJ98654.7.Q52.94 QT.A954.AKT63.KT K3.KQ86.J874.QJ5 72.JT32.9.A87632"]
+[Deal "N:K3.KQ86.J874.QJ5 QT7.A952.963.A87 AJ98654.7.Q52.94 2.JT43.AKT.KT632"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "S"]
-3S {Barrage : 7 cartes a Pique, 7H, 1 gros honneur (non vulnerable, 1 suffit). | Preempt: 7 spades, 7 HCP, 1 top honour (not vulnerable, 1 is enough).} Pass Pass {2 cartes a Pique et 12H : pas de manche, passe. | 2 spades and 12 HCP: no game, pass.} Pass
+3S {Barrage : 7 cartes, 10 H max ; non vulnerable, 1 gros honneur ; vulnerable, 2 gros honneurs. Ici 7H (10 HL), 7-1-3-2. | Preempt: 7-card suit, 10 HCP max; not vulnerable, 1 high honor; vulnerable, 2 high honors. Here 7 HCP (10 HL), 7-1-3-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 35"]
 [Board "35"]
@@ -609,13 +609,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQJ97643.5.82.T4 .72.KJ97.KQJ8763 A52.KJ83.QT65.95 T8.AQT964.A43.A2"]
+[Deal "N:A52.KJ83.QT65.95 8.97.AKJ3.AQJ872 KQJ97643.5.82.T4 T.AQT642.974.K63"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-4S {Barrage a 4 : 8 cartes a Pique dont 2 gros honneurs, 6H. | Four-level preempt: 8 spades with 2 top honours, 6 HCP.} Pass Pass {Le barrage a 4 est conclusif : passe (10H). | The four-level preempt is to play: pass (10 HCP).} Pass
+4S {Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnerable). Ici 6H (10 HL), 8-1-2-2. | Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable). Here 6 HCP (10 HL), 8-1-2-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 38"]
 [Board "38"]
@@ -625,13 +625,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:6.AKT98742.J5.83 JT7.J65.AT43.965 KQ85.Q3.K962.A74 A9432..Q87.KQJT2"]
+[Deal "N:KQ85.Q3.K962.A74 JT943.6.874.Q962 6.AKT98742.J5.83 A72.J5.AQT3.KJT5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-4H {Barrage a 4 : 8 cartes a Coeur dont 2 gros honneurs, 8H. | Four-level preempt: 8 hearts with 2 top honours, 8 HCP.} Pass Pass {Le barrage a 4 est conclusif : passe (14H). | The four-level preempt is to play: pass (14 HCP).} Pass
+4H {Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnerable). Ici 8H (12 HL), 1-8-2-2. | Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable). Here 8 HCP (12 HL), 1-8-2-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 39"]
 [Board "39"]
@@ -673,13 +673,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:KQ98653.8.QJ64.7 .A2.KT9732.AQJ98 A42.KJ95.A85.K63 JT7.QT7643..T542"]
+[Deal "N:A42.KJ95.A85.K63 7.Q43.K973.QJ842 KQ98653.8.QJ64.7 JT.AT762.T2.AT95"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-4S {Barrage a 4 non vulnerable : 7 cartes a Pique et 4 a Carreau (7-4-1-1), 8H. | Non-vulnerable four-level preempt: 7 spades and 4 diamonds (7-4-1-1), 8 HCP.} Pass Pass {Le barrage a 4 est conclusif : passe (15H). | The four-level preempt is to play: pass (15 HCP).} Pass
+4S {Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnerable). Ici 8H (11 HL), 7-1-4-1. | Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable). Here 8 HCP (11 HL), 7-1-4-1.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 42"]
 [Board "42"]
@@ -689,13 +689,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:5.AJT9764.K863.4 74.K852.74.QJ865 KQ82.Q3.AJ5.KT97 AJT963..QT92.A32"]
+[Deal "N:KQ82.Q3.AJ5.KT97 J743.82.QT972.Q2 5.AJT9764.K863.4 AT96.K5.4.AJ8653"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-4H {Barrage a 4 non vulnerable : 7 cartes a Coeur et 4 a Carreau (7-4-1-1), 8H. | Non-vulnerable four-level preempt: 7 hearts and 4 diamonds (7-4-1-1), 8 HCP.} Pass Pass {Le barrage a 4 est conclusif : passe (15H). | The four-level preempt is to play: pass (15 HCP).} Pass
+4H {Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnerable). Ici 8H (11 HL), 1-7-4-1. | Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable). Here 8 HCP (11 HL), 1-7-4-1.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 43"]
 [Board "43"]
@@ -705,13 +705,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:QJT8752..AT64.93 K63.J72.J93.QT52 A9.K865.KQ72.J84 4.AQT943.85.AK76"]
+[Deal "N:A9.K865.KQ72.J84 64.AQ742.J983.KQ QJT8752..AT64.93 K3.JT93.5.AT7652"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-4S {Barrage a 4 non vulnerable : 7 cartes a Pique et 4 a Carreau (7-4-2-0), 7H. | Non-vulnerable four-level preempt: 7 spades and 4 diamonds (7-4-2-0), 7 HCP.} Pass Pass {Le barrage a 4 est conclusif : passe (13H). | The four-level preempt is to play: pass (13 HCP).} Pass
+4S {Barrage : 8 cartes dont 2 gros honneurs, ou main 7/4 (non vulnerable). Ici 7H (10 HL), 7-0-4-2. | Preempt: 8 cards including 2 high honors, or 7/4 hand (not vulnerable). Here 7 HCP (10 HL), 7-0-4-2.} Pass Pass Pass
 
 [Event "Entrainement Barrages - Donne 44"]
 [Board "44"]

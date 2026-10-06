@@ -96,13 +96,13 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AT4.72.AK9.KQJ63 K9852.AQ63.J74.5 J76.JT8.T53.A842 Q3.K954.Q862.T97"]
+[Deal "N:K9852.AQ63.J74.5 T64.T7.K53.K8432 Q3.K954.Q862.T97 AJ7.J82.AT9.AQJ6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 4 Coeurs et 5 Piques, 10H. | Landy: 4 hearts and 5 spades, 10 HCP.} Pass 2H {Preference Coeur : 4 Coeurs contre 2 Piques (7H). | Heart preference: 4 hearts against 2 spades (7 HCP).}
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 3-3-3-4.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 10H (10 HL), 5-4-3-1. | Landy: 5/5 or 5/4 in the majors. Here 10 HCP (10 HL), 5-4-3-1.} Pass 2H {Preference ♥. Ici 7H (7 HL), 2-4-4-3. | Prefers ♥. Here 7 HCP (7 HL), 2-4-4-3.}
 Pass Pass Pass
 
 [Event "Entrainement Landy - Donne 7"]
@@ -217,13 +217,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:KT8.Q2.AQ4.AQ983 J9642.AKJ5.K3.74 753.986.T76.JT52 AQ.T743.J9852.K6"]
+[Deal "N:J9642.AKJ5.K3.74 T73.Q62.T7.98532 AQ.T743.J9852.K6 K85.98.AQ64.AQJT"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 4 Coeurs et 5 Piques, 12H. | Landy: 4 hearts and 5 spades, 12 HCP.} Pass 2H {Preference Coeur : 4 Coeurs contre 2 Piques (10H). | Heart preference: 4 hearts against 2 spades (10 HCP).}
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (16 HL), 3-2-4-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (16 HL), 3-2-4-4.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 12H (12 HL), 5-4-2-2. | Landy: 5/5 or 5/4 in the majors. Here 12 HCP (12 HL), 5-4-2-2.} Pass 2H {Preference ♥. Ici 10H (9 HL), 2-4-5-2. | Prefers ♥. Here 10 HCP (9 HL), 2-4-5-2.}
 Pass Pass Pass
 
 [Event "Entrainement Landy - Donne 14"]
@@ -251,14 +251,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:Q72.A4.KJ8.AQJ64 AJT86.Q9752.A3.8 K5.T83.9652.T732 943.KJ6.QT74.K95"]
+[Deal "N:AJT86.Q9752.A3.8 7.843.9862.QJ743 943.KJ6.QT74.K95 KQ52.AT.KJ5.AT62"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 5 Coeurs et 5 Piques, 11H. | Landy: 5 hearts and 5 spades, 11 HCP.} Pass 2D {Relais : majeures egales (3 Piques, 3 Coeurs), l'intervenant choisit. | Relay: equal majors (3 spades, 3 hearts), the overcaller chooses.}
-Pass 2H {Majeures 5-5 : Coeur a egalite. | 5-5 in the majors: hearts on a tie.} Pass Pass
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 17H (17 HL), 4-2-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 17 HCP (17 HL), 4-2-3-4.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 11H (12 HL), 5-5-2-1. | Landy: 5/5 or 5/4 in the majors. Here 11 HCP (12 HL), 5-5-2-1.} Pass 2D {Relais : l'intervenant choisit sa majeure. Ici 9H (9 HL), 3-3-4-3. | Relay: overcaller chooses his major. Here 9 HCP (9 HL), 3-3-4-3.}
+Pass 2H {Majeure la plus longue (♥ a egalite). Ici 11H (12 HL), 5-5-2-1. | Longer major (♥ if equal). Here 11 HCP (12 HL), 5-5-2-1.} Pass Pass
 Pass
 
 [Event "Entrainement Landy - Donne 16"]
@@ -269,13 +269,13 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AT4.A7.A93.KQ642 KQ63.KJT84.K72.5 52.9652.QT6.JT98 J987.Q3.J854.A73"]
+[Deal "N:KQ63.KJT84.K72.5 T42.765.QT3.Q982 J987.Q3.J854.A73 A5.A92.A96.KJT64"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 5 Coeurs et 4 Piques, 12H. | Landy: 5 hearts and 4 spades, 12 HCP.} Pass 2S {Preference Pique : 4 Piques contre 2 Coeurs (8H). | Spade preference: 4 spades against 2 hearts (8 HCP).}
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 16H (17 HL), 2-3-3-5. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 16 HCP (17 HL), 2-3-3-5.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 12H (13 HL), 4-5-3-1. | Landy: 5/5 or 5/4 in the majors. Here 12 HCP (13 HL), 4-5-3-1.} Pass 2S {Preference ♠. Ici 8H (8 HL), 4-2-4-3. | Prefers ♠. Here 8 HCP (8 HL), 4-2-4-3.}
 Pass Pass Pass
 
 [Event "Entrainement Landy - Donne 17"]
@@ -372,13 +372,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:T952.Q43.AQ.AK76 A643.AJT85.92.Q4 K87.76.T764.T982 QJ.K92.KJ853.J53"]
+[Deal "N:A643.AJT85.92.Q4 97.74.764.KT9762 QJ.K92.KJ853.J53 KT852.Q63.AQT.A8"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 5 Coeurs et 4 Piques, 11H. | Landy: 5 hearts and 4 spades, 11 HCP.} Pass 2H {Preference Coeur : 3 Coeurs contre 2 Piques (11H). | Heart preference: 3 hearts against 2 spades (11 HCP).}
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 5-3-3-2. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 5-3-3-2.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 11H (12 HL), 4-5-2-2. | Landy: 5/5 or 5/4 in the majors. Here 11 HCP (12 HL), 4-5-2-2.} Pass 2H {Preference ♥. Ici 11H (11 HL), 2-3-5-3. | Prefers ♥. Here 11 HCP (11 HL), 2-3-5-3.}
 Pass Pass Pass
 
 [Event "Entrainement Landy - Donne 23"]
@@ -389,13 +389,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:AT9.A7.QT8.AKT43 KQJ84.KT62.A75.8 52.J53.9643.9762 763.Q984.KJ2.QJ5"]
+[Deal "N:KQJ84.KT62.A75.8 52.53.T963.KT964 763.Q984.KJ2.QJ5 AT9.AJ7.Q84.A732"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1NT {Ouverture adverse de 1SA (15-17 H). | Opponent opens 1NT (15-17 HCP).} 2C {Landy : 4 Coeurs et 5 Piques, 13H. | Landy: 4 hearts and 5 spades, 13 HCP.} Pass 2H {Preference Coeur : 4 Coeurs contre 3 Piques (9H). | Heart preference: 4 hearts against 3 spades (9 HCP).}
+1NT {15-17 HL regulier ; 5332 avec majeure 5e : 15-16 H. Ici 15H (15 HL), 3-3-3-4. | 15-17 HL balanced; 5332 with 5-card major: 15-16 HCP. Here 15 HCP (15 HL), 3-3-3-4.} 2C {Landy : 5/5 ou 5/4 majeur. Ici 13H (14 HL), 5-4-3-1. | Landy: 5/5 or 5/4 in the majors. Here 13 HCP (14 HL), 5-4-3-1.} Pass 2H {Preference ♥. Ici 9H (9 HL), 3-4-3-3. | Prefers ♥. Here 9 HCP (9 HL), 3-4-3-3.}
 Pass Pass Pass
 
 [Event "Entrainement Landy - Donne 24"]

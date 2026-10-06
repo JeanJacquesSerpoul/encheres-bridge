@@ -28,15 +28,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AJ5.K72.Q63.KJ84 QT7632..KJ92.762 K84.AQ953.T84.95 9.JT864.A75.AQT3"]
+[Deal "N:K84.AQ953.T84.95 QT32.J84.AJ2.Q32 AJ5.K72.Q63.KJ84 976.T6.K975.AT76"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 4 cartes a Trefle, 14H. | 1C opening: 4 clubs, 14 HCP.} Pass 1H {5 cartes a Coeur, 9H. | 5 hearts, 9 HCP.} Pass
-1NT {12-14 H regulier, 3 cartes a Coeur (ici 14H). | 12-14 HCP balanced, 3 hearts (14 HCP here).} Pass 2C {Roudi : 5 cartes a Coeur et 10 HL, demande le soutien et la force. | Roudi: 5 hearts and 10 HL, asks for support and strength.} Pass
-2S {Fitte maximum : 3 cartes a Coeur, 14 HLD. | Maximum with support: 3 hearts, 14 HLD.} Pass 4H {Fit 5-3 et maximum en face : manche. | 5-3 fit opposite a maximum: game.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (14 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 14 HCP (14 HL), 3-3-3-4.} Pass 1H {4+ coeurs, 5+ H. Ici 9H (10 HL), 3-5-3-2. | 4+ hearts, 5+ HCP. Here 9 HCP (10 HL), 3-5-3-2.} Pass
+1NT {Regulier 12-14 HL. Ici 14H (14 HL), 3-3-3-4. | Balanced 12-14 HL. Here 14 HCP (14 HL), 3-3-3-4.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 9H (10 HL), 3-5-3-2. | Roudi: 10+ HL, five-card major, asks for support. Here 9 HCP (10 HL), 3-5-3-2.} Pass
+2S {Fitte maximum : 3 cartes a ♥, 13+ HLD. Ici 14H (14 HL), 3-3-3-4. | Fit, maximum: three hearts, 13+ HLD. Here 14 HCP (14 HL), 3-3-3-4.} Pass 4H {Fit et maximum en face : manche. Ici 9H (10 HL), 3-5-3-2. | Fit and a maximum opposite: game. Here 9 HCP (10 HL), 3-5-3-2.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 3"]
@@ -47,15 +47,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:Q6.J73.AK5.KJ852 T97532.96.T64.AT AK4.KT842.J72.73 J8.AQ5.Q983.Q964"]
+[Deal "N:AK4.KT842.J72.73 T865.A73.T84.T62 973.QJ9.KQ6.AJ98 QJ2.65.A953.KQ54"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 5 cartes a Trefle, 14H. | 1C opening: 5 clubs, 14 HCP.} Pass 1H {5 cartes a Coeur, 11H. | 5 hearts, 11 HCP.} Pass
-1NT {12-14 H regulier, 3 cartes a Coeur (ici 14H). | 12-14 HCP balanced, 3 hearts (14 HCP here).} Pass 2C {Roudi : 5 cartes a Coeur et 11 HL, demande le soutien et la force. | Roudi: 5 hearts and 11 HL, asks for support and strength.} Pass
-2S {Fitte maximum : 3 cartes a Coeur, 16 HLD. | Maximum with support: 3 hearts, 16 HLD.} Pass 4H {Fit 5-3 et maximum en face : manche. | 5-3 fit opposite a maximum: game.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 3-3-3-4.} Pass 1H {4+ coeurs, 5+ H. Ici 11H (11 HL), 3-5-3-2. | 4+ hearts, 5+ HCP. Here 11 HCP (11 HL), 3-5-3-2.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (13 HL), 3-3-3-4. | Balanced 12-14 HL. Here 13 HCP (13 HL), 3-3-3-4.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 11H (11 HL), 3-5-3-2. | Roudi: 10+ HL, five-card major, asks for support. Here 11 HCP (11 HL), 3-5-3-2.} Pass
+2S {Fitte maximum : 3 cartes a ♥, 13+ HLD. Ici 13H (13 HL), 3-3-3-4. | Fit, maximum: three hearts, 13+ HLD. Here 13 HCP (13 HL), 3-3-3-4.} Pass 4H {Fit et maximum en face : manche. Ici 11H (11 HL), 3-5-3-2. | Fit and a maximum opposite: game. Here 11 HCP (11 HL), 3-5-3-2.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 4"]
@@ -216,15 +216,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:Q94.KJ3.A6.KJ852 JT8.A942.QJT3.A9 AK763.Q85.982.Q4 52.T76.K754.T763"]
+[Deal "N:AK763.Q85.982.Q4 J8.T4.AKT6.JT965 Q94.K76.J75.AK87 T52.AJ932.Q43.32"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 5 cartes a Trefle, 14H. | 1C opening: 5 clubs, 14 HCP.} Pass 1S {5 cartes a Pique, 11H. | 5 spades, 11 HCP.} Pass
-1NT {12-14 H regulier, 3 cartes a Pique (ici 14H). | 12-14 HCP balanced, 3 spades (14 HCP here).} Pass 2C {Roudi : 5 cartes a Pique et 12 HL, demande le soutien et la force. | Roudi: 5 spades and 12 HL, asks for support and strength.} Pass
-2S {Fitte maximum : 3 cartes a Pique, 15 HL. | Maximum with support: 3 spades, 15 HL.} Pass 4S {Fit 5-3 et maximum en face : manche. | 5-3 fit opposite a maximum: game.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 3-3-3-4.} Pass 1S {4+ piques, 5+ H. Ici 11H (12 HL), 5-3-3-2. | 4+ spades, 5+ HCP. Here 11 HCP (12 HL), 5-3-3-2.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (13 HL), 3-3-3-4. | Balanced 12-14 HL. Here 13 HCP (13 HL), 3-3-3-4.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 11H (12 HL), 5-3-3-2. | Roudi: 10+ HL, five-card major, asks for support. Here 11 HCP (12 HL), 5-3-3-2.} Pass
+2S {Fitte maximum : 3 cartes a ♠, 13-14 H. Ici 13H (13 HL), 3-3-3-4. | Fit, maximum: three spades, 13-14 HCP. Here 13 HCP (13 HL), 3-3-3-4.} Pass 4S {Fit et maximum en face : manche. Ici 11H (12 HL), 5-3-3-2. | Fit and a maximum opposite: game. Here 11 HCP (12 HL), 5-3-3-2.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 13"]
@@ -311,15 +311,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:K8.QJ4.A73.KJ952 52.T963.KQT92.83 AQT973.K82.J65.6 J64.A75.84.AQT74"]
+[Deal "N:AQT973.K82.J65.6 64.AJ943.A982.Q8 J2.QT5.KT3.AKT42 K85.76.Q74.J9753"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 5 cartes a Trefle, 14H. | 1C opening: 5 clubs, 14 HCP.} Pass 1S {6 cartes a Pique, 10H. | 6 spades, 10 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 14H). | 12-14 HCP balanced, 2 spades (14 HCP here).} Pass 2C {Roudi : 6 cartes a Pique et 12 HL, demande le soutien et la force. | Roudi: 6 spades and 12 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 4S {6 cartes a Pique et 14 HLD : manche, le fit 6-2 suffit. | 6 spades and 14 HLD: game, the 6-2 fit is enough.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (14 HL), 2-3-3-5. | Longest minor (3-3: 1♣). Here 13 HCP (14 HL), 2-3-3-5.} Pass 1S {4+ piques, 5+ H. Ici 10H (12 HL), 6-3-3-1. | 4+ spades, 5+ HCP. Here 10 HCP (12 HL), 6-3-3-1.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (14 HL), 2-3-3-5. | Balanced 12-14 HL. Here 13 HCP (14 HL), 2-3-3-5.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 10H (12 HL), 6-3-3-1. | Roudi: 10+ HL, five-card major, asks for support. Here 10 HCP (12 HL), 6-3-3-1.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 13H (14 HL), 2-3-3-5. | No fit: two cards in the major, minimum or maximum. Here 13 HCP (14 HL), 2-3-3-5.} Pass 4S {6 cartes, manche. Ici 10H (12 HL), 6-3-3-1. | Six cards, game. Here 10 HCP (12 HL), 6-3-3-1.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 18"]
@@ -368,16 +368,16 @@ Pass {Minimum (12 HL) : refuse. | Minimum (12 HL): declines.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:83.AJ4.KQ5.KJ972 A65.T972.AT973.5 KT974.Q63.J82.A4 QJ2.K85.64.QT863"]
+[Deal "N:KT974.Q63.J82.A4 Q52.K5.63.KJ9873 J6.AJT7.KQ5.Q652 A83.9842.AT974.T"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture 1T : 5 cartes a Trefle, 14H. | 1C opening: 5 clubs, 14 HCP.} Pass 1S {5 cartes a Pique, 10H. | 5 spades, 10 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 14H). | 12-14 HCP balanced, 2 spades (14 HCP here).} Pass 2C {Roudi : 5 cartes a Pique et 10 HL, demande le soutien et la force. | Roudi: 5 spades and 10 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 2NT {Pas de fit, 10 HL : invitation a 3SA. | No fit, 10 HL: invites 3NT.} Pass
-3NT {Maximum (15 HL) : accepte. | Maximum (15 HL): accepts.} Pass Pass Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 2-4-3-4. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 2-4-3-4.} Pass 1S {4+ piques, 5+ H. Ici 10H (10 HL), 5-3-3-2. | 4+ spades, 5+ HCP. Here 10 HCP (10 HL), 5-3-3-2.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (13 HL), 2-4-3-4. | Balanced 12-14 HL. Here 13 HCP (13 HL), 2-4-3-4.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 10H (10 HL), 5-3-3-2. | Roudi: 10+ HL, five-card major, asks for support. Here 10 HCP (10 HL), 5-3-3-2.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 13H (13 HL), 2-4-3-4. | No fit: two cards in the major, minimum or maximum. Here 13 HCP (13 HL), 2-4-3-4.} Pass 2NT {Naturel, 11-12 H : l'ouvreur conclut selon sa force. Ici 10H (10 HL), 5-3-3-2. | Natural, 11-12 HCP: opener decides on strength. Here 10 HCP (10 HL), 5-3-3-2.} Pass
+3NT {Maximum : accepte l'invitation. Ici 13H (13 HL), 2-4-3-4. | Maximum: accepts the invitation. Here 13 HCP (13 HL), 2-4-3-4.} Pass Pass Pass
 
 [Event "Entrainement Roudi - Donne 21"]
 [Board "21"]
@@ -463,15 +463,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q83.A72.KJ54.Q93 KT96.QJ8.A9.AK74 AJ4.KT963.Q72.T5 752.54.T863.J862"]
+[Deal "N:AJ4.KT963.Q72.T5 T6.J84.AT98.K876 Q83.A72.KJ54.Q93 K9752.Q5.63.AJ42"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-1D {Ouverture 1K : 4 cartes a Carreau, 12H. | 1D opening: 4 diamonds, 12 HCP.} Pass 1H {5 cartes a Coeur, 10H. | 5 hearts, 10 HCP.} Pass
-1NT {12-14 H regulier, 3 cartes a Coeur (ici 12H). | 12-14 HCP balanced, 3 hearts (12 HCP here).} Pass 2C {Roudi : 5 cartes a Coeur et 10 HL, demande le soutien et la force. | Roudi: 5 hearts and 10 HL, asks for support and strength.} Pass
-2H {Fitte minimum : 3 cartes a Coeur, 12 HLD. | Minimum with support: 3 hearts, 12 HLD.} Pass Pass {Fit mais 11 HLD seulement face au minimum : on passe. | Fit but only 11 HLD opposite a minimum: pass.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (12 HL), 3-3-4-3. | Longest minor (4-4: 1♦). Here 12 HCP (12 HL), 3-3-4-3.} Pass 1H {4+ coeurs, 5+ H. Ici 10H (10 HL), 3-5-3-2. | 4+ hearts, 5+ HCP. Here 10 HCP (10 HL), 3-5-3-2.} Pass
+1NT {Regulier 12-14 HL. Ici 12H (12 HL), 3-3-4-3. | Balanced 12-14 HL. Here 12 HCP (12 HL), 3-3-4-3.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 10H (10 HL), 3-5-3-2. | Roudi: 10+ HL, five-card major, asks for support. Here 10 HCP (10 HL), 3-5-3-2.} Pass
+2H {Fitte minimum : 3 cartes a ♥, 12-13 H. Ici 12H (12 HL), 3-3-4-3. | Fit, minimum: three hearts, 12-13 HCP. Here 12 HCP (12 HL), 3-3-4-3.} Pass Pass Pass
 
 [Event "Entrainement Roudi - Donne 26"]
 [Board "26"]
@@ -689,15 +689,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:92.AK4.KQ85.J963 .T62.AT93.AKQT74 AKJ874.Q73.J2.85 QT653.J985.764.2"]
+[Deal "N:AKJ874.Q73.J2.85 T63.95.AT963.K74 92.AK4.KQ85.J963 Q5.JT862.74.AQT2"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-1D {Ouverture 1K : 4 cartes a Carreau, 13H. | 1D opening: 4 diamonds, 13 HCP.} Pass 1S {6 cartes a Pique, 11H. | 6 spades, 11 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 13H). | 12-14 HCP balanced, 2 spades (13 HCP here).} Pass 2C {Roudi : 6 cartes a Pique et 13 HL, demande le soutien et la force. | Roudi: 6 spades and 13 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 4S {6 cartes a Pique et 15 HLD : manche, le fit 6-2 suffit. | 6 spades and 15 HLD: game, the 6-2 fit is enough.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 13H (13 HL), 2-3-4-4. | Longest minor (4-4: 1♦). Here 13 HCP (13 HL), 2-3-4-4.} Pass 1S {4+ piques, 5+ H. Ici 11H (13 HL), 6-3-2-2. | 4+ spades, 5+ HCP. Here 11 HCP (13 HL), 6-3-2-2.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (13 HL), 2-3-4-4. | Balanced 12-14 HL. Here 13 HCP (13 HL), 2-3-4-4.} Pass 2C {Roudi : 10+ HL, majeure 5e, demande le soutien. Ici 11H (13 HL), 6-3-2-2. | Roudi: 10+ HL, five-card major, asks for support. Here 11 HCP (13 HL), 6-3-2-2.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 13H (13 HL), 2-3-4-4. | No fit: two cards in the major, minimum or maximum. Here 13 HCP (13 HL), 2-3-4-4.} Pass 4S {6 cartes, manche. Ici 11H (13 HL), 6-3-2-2. | Six cards, game. Here 11 HCP (13 HL), 6-3-2-2.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 38"]
@@ -879,15 +879,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:J6.KQ852.AJ4.K73 T3.94.T8752.T654 AQ974.J3.K96.Q82 K852.AT76.Q3.AJ9"]
+[Deal "N:AQ974.J3.K96.Q82 6.Q6.QJT853.K743 82.AK754.A74.JT6 KJT53.T982.2.A95"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1H {Ouverture 1C : 5 cartes a Coeur, 14H. | 1H opening: 5 hearts, 14 HCP.} Pass 1S {5 cartes a Pique, 12H. | 5 spades, 12 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 14H). | 12-14 HCP balanced, 2 spades (14 HCP here).} Pass 2C {Roudi : 5 cartes a Pique et 13 HL, demande le soutien et la force. | Roudi: 5 spades and 13 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 3NT {Pas de fit, 13 HL : manche a SA. | No fit, 13 HL: game in NT.} Pass
+1H {5+ coeurs, 12+ H. Ici 12H (13 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 12 HCP (13 HL), 2-5-3-3.} Pass 1S {4+ piques, 5+ H. Ici 12H (13 HL), 5-2-3-3. | 4+ spades, 5+ HCP. Here 12 HCP (13 HL), 5-2-3-3.} Pass
+1NT {Regulier 12-14 HL. Ici 12H (13 HL), 2-5-3-3. | Balanced 12-14 HL. Here 12 HCP (13 HL), 2-5-3-3.} Pass 2C {Roudi : 10+ HL, 5 piques, demande le soutien. Ici 12H (13 HL), 5-2-3-3. | Roudi: 10+ HL, five spades, asks for support. Here 12 HCP (13 HL), 5-2-3-3.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 12H (13 HL), 2-5-3-3. | No fit: two cards in the major, minimum or maximum. Here 12 HCP (13 HL), 2-5-3-3.} Pass 3NT {Manche a SA. Ici 12H (13 HL), 5-2-3-3. | Game in NT. Here 12 HCP (13 HL), 5-2-3-3.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 48"]
@@ -898,15 +898,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:72.AQ953.K84.KJ6 A65.4.Q95.AQT542 KQJ83.K6.A72.983 T94.JT872.JT63.7"]
+[Deal "N:KQJ83.K6.A72.983 A96..QT53.AQT754 72.AQ953.K84.KJ6 T54.JT8742.J96.2"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1H {Ouverture 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 1S {5 cartes a Pique, 13H. | 5 spades, 13 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 13H). | 12-14 HCP balanced, 2 spades (13 HCP here).} Pass 2C {Roudi : 5 cartes a Pique et 14 HL, demande le soutien et la force. | Roudi: 5 spades and 14 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 3NT {Pas de fit, 14 HL : manche a SA. | No fit, 14 HL: game in NT.} Pass
+1H {5+ coeurs, 12+ H. Ici 13H (14 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 13 HCP (14 HL), 2-5-3-3.} Pass 1S {4+ piques, 5+ H. Ici 13H (14 HL), 5-2-3-3. | 4+ spades, 5+ HCP. Here 13 HCP (14 HL), 5-2-3-3.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (14 HL), 2-5-3-3. | Balanced 12-14 HL. Here 13 HCP (14 HL), 2-5-3-3.} Pass 2C {Roudi : 10+ HL, 5 piques, demande le soutien. Ici 13H (14 HL), 5-2-3-3. | Roudi: 10+ HL, five spades, asks for support. Here 13 HCP (14 HL), 5-2-3-3.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 13H (14 HL), 2-5-3-3. | No fit: two cards in the major, minimum or maximum. Here 13 HCP (14 HL), 2-5-3-3.} Pass 3NT {Manche a SA. Ici 13H (14 HL), 5-2-3-3. | Game in NT. Here 13 HCP (14 HL), 5-2-3-3.} Pass
 Pass Pass
 
 [Event "Entrainement Roudi - Donne 49"]
@@ -917,16 +917,16 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q4.AJ762.KJ3.Q85 AT9762.K94.984.3 KJ853.Q3.A72.T64 .T85.QT65.AKJ972"]
+[Deal "N:KJ853.Q3.A72.T64 AT9762.85.9.KJ32 Q4.AJ762.KJ3.Q85 .KT94.QT8654.A97"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-1H {Ouverture 1C : 5 cartes a Coeur, 13H. | 1H opening: 5 hearts, 13 HCP.} Pass 1S {5 cartes a Pique, 10H. | 5 spades, 10 HCP.} Pass
-1NT {12-14 H regulier, 2 cartes a Pique (ici 13H). | 12-14 HCP balanced, 2 spades (13 HCP here).} Pass 2C {Roudi : 5 cartes a Pique et 11 HL, demande le soutien et la force. | Roudi: 5 spades and 11 HL, asks for support and strength.} Pass
-2D {Pas fitte : 2 cartes a Pique (minimum ou maximum). | No support: 2 spades (minimum or maximum).} Pass 2NT {Pas de fit, 11 HL : invitation a 3SA. | No fit, 11 HL: invites 3NT.} Pass
-3NT {Maximum (14 HL) : accepte. | Maximum (14 HL): accepts.} Pass Pass Pass
+1H {5+ coeurs, 12+ H. Ici 13H (14 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 13 HCP (14 HL), 2-5-3-3.} Pass 1S {4+ piques, 5+ H. Ici 10H (11 HL), 5-2-3-3. | 4+ spades, 5+ HCP. Here 10 HCP (11 HL), 5-2-3-3.} Pass
+1NT {Regulier 12-14 HL. Ici 13H (14 HL), 2-5-3-3. | Balanced 12-14 HL. Here 13 HCP (14 HL), 2-5-3-3.} Pass 2C {Roudi : 10+ HL, 5 piques, demande le soutien. Ici 10H (11 HL), 5-2-3-3. | Roudi: 10+ HL, five spades, asks for support. Here 10 HCP (11 HL), 5-2-3-3.} Pass
+2D {Pas fitte : 2 cartes dans la majeure, minimum ou maximum. Ici 13H (14 HL), 2-5-3-3. | No fit: two cards in the major, minimum or maximum. Here 13 HCP (14 HL), 2-5-3-3.} Pass 2NT {Naturel, 11-12 H : l'ouvreur conclut selon sa force. Ici 10H (11 HL), 5-2-3-3. | Natural, 11-12 HCP: opener decides on strength. Here 10 HCP (11 HL), 5-2-3-3.} Pass
+3NT {Maximum : accepte l'invitation. Ici 13H (14 HL), 2-5-3-3. | Maximum: accepts the invitation. Here 13 HCP (14 HL), 2-5-3-3.} Pass Pass Pass
 
 [Event "Entrainement Roudi - Donne 50"]
 [Board "50"]

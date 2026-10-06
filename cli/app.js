@@ -287,6 +287,7 @@ const UI_TEXT = {
     quizWrong: "✗ Différent du système SEF",
     quizExpected: "Enchère attendue",
     treeShow: "Voir l'arbre de décision",
+    alertTip: "Enchère alertée (conventionnelle)",
     treeHide: "Masquer l'arbre de décision",
     treeWhy: "Pourquoi",
     treeHand: (seat, h, hl, shape) => `main de ${seat} : ${h} H, ${hl} HL, ${shape}`,
@@ -530,6 +531,7 @@ const UI_TEXT = {
     quizWrong: "✗ Not what the SEF system bids",
     quizExpected: "Expected call",
     treeShow: "Show the decision tree",
+    alertTip: "Alerted call (conventional)",
     treeHide: "Hide the decision tree",
     treeWhy: "Why",
     treeHand: (seat, h, hl, shape) => `${seat}'s hand: ${h} H, ${hl} HL, ${shape}`,
@@ -4825,6 +4827,13 @@ function hasBidTip(call, keepPasses) {
   return !!call.comment && (keepPasses || !isPass(call.bid));
 }
 
+// Le signe d'alerte posé après une enchère conventionnelle (règle `alert: true`
+// du moteur) : un « ! » dans une pastille, avec son infobulle.
+function alertMarkHTML(lang) {
+  const tip = UI_TEXT[lang].alertTip;
+  return `<span class="alert-mark" title="${esc(tip)}" aria-label="${esc(tip)}">!</span>`;
+}
+
 function auctionGridHTML(dealer, calls, lang, cellRenderer) {
   const columns = ["S", "W", "N", "E"];
   const headHTML = columns.map((s) => `<th data-seat="${s}">${esc(SEAT_SHORT[lang][s])}</th>`).join("");
@@ -4882,10 +4891,11 @@ function renderResult(r) {
   const grid = auctionGridHTML(r.dealer, r.auction, lang, (a) => {
     const i = r.auction.indexOf(a);
     const cls = "bid-cell" + (isPass(a.bid) ? " pass" : "") + (i === finalIdx ? " final" : "");
-    if (!hasBidTip(a)) return `<td class="${cls}" data-i="${i}">${bidHTML(a.bid, lang)}</td>`;
+    const bid = bidHTML(a.bid, lang) + (a.alert ? alertMarkHTML(lang) : "");
+    if (!hasBidTip(a)) return `<td class="${cls}" data-i="${i}">${bid}</td>`;
     return `<td class="${cls} has-tip" tabindex="0" data-i="${i}" ` +
       `data-seat="${esc(SEAT_SHORT[lang][a.player])}" ` +
-      `data-comment="${esc(a.comment)}">${bidHTML(a.bid, lang)}</td>`;
+      `data-comment="${esc(a.comment)}">${bid}</td>`;
   });
   $("#auction-head").innerHTML = grid.headHTML;
   $("#auction-body").innerHTML = grid.bodyHTML;
@@ -4919,7 +4929,7 @@ function renderResult(r) {
       // jeton : la ligne se lit d'un coup d'œil, sans tiret ni deux-points.
       const side = "NS".includes(a.player) ? "ns" : "ew";
       const head = `<span class="who ${side}">${esc(SEAT_SHORT[lang][a.player])}</span>` +
-        `<span class="call">${bidHTML(a.bid, lang)}</span>`;
+        `<span class="call">${bidHTML(a.bid, lang)}${a.alert ? alertMarkHTML(lang) : ""}</span>`;
       const attrs = `data-i="${i}" value="${i + 1}"`;
       if (isPass(a.bid)) return `<li class="silent pass" ${attrs}>${icon}${head}</li>`;
       return a.comment

@@ -33,7 +33,7 @@ est vérifié contre le moteur, décision par décision et enchère par enchère
 | | Contrôle |
 |---|---|
 | A | Règles jamais choisies : masquées par une règle antérieure (nommée), condition jamais vraie, séquence jamais rencontrée ; règles d'option, non évaluées |
-| B | Séquences sans règle (passe par défaut) : les plus fréquentes, celles des mains de 12 H et plus, celles qui suivent un forcing |
+| B | Passes faute de règle (`noRule`), par séquence de la paire : camp de l'ouvreur ou défense, force moyenne (H, HL), plus longue couleur, longueur dans la dernière couleur naturelle du partenaire, et IMP du banc perdus par le camp qui a passé (plafond et part). Classements : les plus coûteuses (toutes, camp de l'ouvreur, défense), les plus fréquentes, mains de 12 H et plus, après un forcing |
 | C | Passe donné par une règle juste après un forcing du partenaire |
 | D | Libellé contre condition : tranche de points ou levées de jeu du libellé qu'aucune borne de la condition ne reprend ; tranche de points du français absente de l'anglais |
 | E | Traductions vides, identiques au français ou en français |

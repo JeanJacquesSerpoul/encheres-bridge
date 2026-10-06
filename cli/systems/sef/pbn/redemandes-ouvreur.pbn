@@ -774,15 +774,15 @@ Pass {Contrat final atteint (defaut). Ici 14H (16 HL), 2-3-2-6. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:7.AK3.A763.AKT43 T98.J82.T985.985 AQ6432.Q4.Q4.QJ7 KJ5.T9765.KJ2.62"]
+[Deal "N:AQ6432.Q4.Q4.QJ7 KJ5.T9765.KJ2.62 7.AK3.A763.AKT43 T98.J82.T985.985"]
 [Scoring "MP"]
 [Declarer "N"]
-[Contract "3NT"]
+[Contract "6NT"]
 [Result ""]
 [Auction "S"]
 1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (19 HL), 1-3-4-5. | Longest minor (3-3: 1♣). Here 18 HCP (19 HL), 1-3-4-5.} Pass 1S {4+ piques, 5+ H. Ici 13H (15 HL), 6-2-2-3. | 4+ spades, 5+ HCP. Here 13 HCP (15 HL), 6-2-2-3.} Pass
-2D {Bicolore cher, 16+ H. Ici 18H (19 HL), 1-3-4-5. | Expensive two-suiter, 16+ HCP. Here 18 HCP (19 HL), 1-3-4-5.} Pass 3NT {Manche a SA. Ici 13H (15 HL), 6-2-2-3. | Game in NT. Here 13 HCP (15 HL), 6-2-2-3.} Pass
-Pass {Contrat final atteint (defaut). Ici 18H (19 HL), 1-3-4-5. | Final contract reached (default). Here 18 HCP (19 HL), 1-3-4-5.} Pass
+2D {Bicolore cher, 16+ H. Ici 18H (19 HL), 1-3-4-5. | Expensive two-suiter, 16+ HCP. Here 18 HCP (19 HL), 1-3-4-5.} Pass 6NT {13+ HL face au bicolore cher : petit chelem a SA. Ici 13H (15 HL), 6-2-2-3. | 13+ HL opposite a reverse: small slam in NT. Here 13 HCP (15 HL), 6-2-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 45"]
 [Board "45"]

@@ -17100,6 +17100,66 @@
   "status": "infere"
  },
  {
+  "id": "ovn.1C.1D.2D",
+  "seq": "(1C) 1D 1NT",
+  "call": "2D",
+  "cond": "D >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
+  "id": "ovn.1C.1H.2H",
+  "seq": "(1C) 1H 1NT",
+  "call": "2H",
+  "cond": "H >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
+  "id": "ovn.1C.1S.2S",
+  "seq": "(1C) 1S 1NT",
+  "call": "2S",
+  "cond": "S >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
+  "id": "ovn.1D.1H.2H",
+  "seq": "(1D) 1H 1NT",
+  "call": "2H",
+  "cond": "H >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
+  "id": "ovn.1D.1S.2S",
+  "seq": "(1D) 1S 1NT",
+  "call": "2S",
+  "cond": "S >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
+  "id": "ovn.1H.1S.2S",
+  "seq": "(1H) 1S 1NT",
+  "call": "2S",
+  "cond": "S >= 6 and hl <= 15",
+  "forcing": "NF",
+  "meaning": "Couleur 6e, pas de manche",
+  "meaning_en": "Six-card suit, no game",
+  "status": "infere"
+ },
+ {
   "id": "advI.lt.1C.H.4",
   "seq": "(1C) 1H",
   "call": "4H",

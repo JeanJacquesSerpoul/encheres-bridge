@@ -7342,6 +7342,56 @@
   meaning: "Maximum : manche"
   meaning_en: "Maximum: game"
   status: infere
+# --- l'intervenant après le 1SA de son partenaire : couleur 6e répétée
+# en: the overcaller after partner's 1NT: rebids a six-card suit
+- id: "ovn.1C.1D.2D"
+  seq: "(1C) 1D 1NT"
+  call: "2D"
+  cond: "D >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
+- id: "ovn.1C.1H.2H"
+  seq: "(1C) 1H 1NT"
+  call: "2H"
+  cond: "H >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
+- id: "ovn.1C.1S.2S"
+  seq: "(1C) 1S 1NT"
+  call: "2S"
+  cond: "S >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
+- id: "ovn.1D.1H.2H"
+  seq: "(1D) 1H 1NT"
+  call: "2H"
+  cond: "H >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
+- id: "ovn.1D.1S.2S"
+  seq: "(1D) 1S 1NT"
+  call: "2S"
+  cond: "S >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
+- id: "ovn.1H.1S.2S"
+  seq: "(1H) 1S 1NT"
+  call: "2S"
+  cond: "S >= 6 and hl <= 15"
+  forcing: NF
+  meaning: "Couleur 6e, pas de manche"
+  meaning_en: "Six-card suit, no game"
+  status: infere
 # --- réponses à l'intervention du partenaire (l'adversaire de droite a passé)
 # en: answers to partner's overcall (right-hand opponent passed)
 # Loi des levées totales (J.-R. Vernes) : en compétition, on peut disputer jusqu'au palier égal au nombre d'atouts de la ligne moins 6 — 8 atouts au palier de 2, 9 au palier de 3, 10 au palier de 4.

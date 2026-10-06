@@ -3433,7 +3433,7 @@
   meaning_en: "5+♠ and 4+♥, forcing"
   status: sef
 - id: 1D.1S.2D.3C
-  seq: ["1D 1S 2D", "1D (X) 1S 2D"]
+  seq: ["1D 1S 2D", "1D (X) 1S 2D", "1D 1S (2C) 2D"]
   call: 3C
   cond: "S == 4 and C >= 4 and hl >= 12"
   forcing: FM
@@ -3537,7 +3537,7 @@
   meaning_en: "Rebid of ♣"
   status: infere
 - id: 1D.1S.2D.3C.r
-  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C"]
+  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C", "1D 1S (2C) 2D 3C"]
   call: 3NT
   cond: "stop('H')"
   forcing: SO
@@ -3545,7 +3545,7 @@
   meaning_en: "♥ stopper"
   status: infere
 - id: 1D.1S.2D.3C.4S
-  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C"]
+  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C", "1D 1S (2C) 2D 3C"]
   call: 3S
   cond: "S >= 3"
   forcing: FM
@@ -3553,7 +3553,7 @@
   meaning_en: "3 spades"
   status: infere
 - id: 1D.1S.2D.3C.4C
-  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C"]
+  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C", "1D 1S (2C) 2D 3C"]
   call: 4C
   cond: "C >= 4"
   forcing: FM
@@ -3561,7 +3561,7 @@
   meaning_en: "♣ fit"
   status: infere
 - id: 1D.1S.2D.3C.3D
-  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C"]
+  seq: ["1D 1S 2D 3C", "1D (X) 1S 2D 3C", "1D 1S (2C) 2D 3C"]
   call: 3D
   cond: "true"
   forcing: FM
@@ -3669,7 +3669,7 @@
   meaning_en: "Accepts the invitation"
   status: infere
 - id: tcf.inv.p
-  seq: ["1C 1S 2C 2D 2S 3S", "1D 1S 2D 2H 2S 3S", "1C 1H 2C 2D 2H 3H", "1C (X) 1S 2C 2D 2S 3S", "1D (X) 1S 2D 2H 2S 3S", "1C (X) 1H 2C 2D 2H 3H"]
+  seq: ["1C 1S 2C 2D 2S 3S", "1D 1S 2D 2H 2S 3S", "1C 1H 2C 2D 2H 3H", "1C (X) 1S 2C 2D 2S 3S", "1D (X) 1S 2D 2H 2S 3S", "1C (X) 1H 2C 2D 2H 3H", "1D 1S (2C) 2D 2H 2S 3S", "1C 1H (1S) 2C 2D 2H 3H"]
   call: P
   cond: "true"
   forcing: NF
@@ -3866,7 +3866,7 @@
 # en: Active only when the `checkback2018` option is enabled.
 - id: 1D.1S.2NT.3C
   option: checkback2018
-  seq: ["1D 1S 2NT", "1D (X) 1S 2NT"]
+  seq: ["1D 1S 2NT", "1D (X) 1S 2NT", "1D 1S (2H) 2NT", "1D 1S (2C) 2NT"]
   call: 3C
   cond: "hcp >= 6 and (S == 5 or H >= 4)"
   forcing: F1
@@ -3876,7 +3876,7 @@
   alert: true
 - id: 1D.1S.2NT.3C.3D
   option: checkback2018
-  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C"]
+  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C", "1D 1S (2H) 2NT 3C", "1D 1S (2C) 2NT 3C"]
   call: 3D
   cond: "D >= 5"
   forcing: F1
@@ -3885,7 +3885,7 @@
   status: sef2018
 - id: 1D.1S.2NT.3C.3H
   option: checkback2018
-  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C"]
+  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C", "1D 1S (2H) 2NT 3C", "1D 1S (2C) 2NT 3C"]
   call: 3H
   cond: "H >= 4"
   forcing: F1
@@ -3894,7 +3894,7 @@
   status: sef2018
 - id: 1D.1S.2NT.3C.3S
   option: checkback2018
-  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C"]
+  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C", "1D 1S (2H) 2NT 3C", "1D 1S (2C) 2NT 3C"]
   call: 3S
   cond: "S == 3"
   forcing: F1
@@ -3903,7 +3903,7 @@
   status: sef2018
 - id: 1D.1S.2NT.3C.3NT
   option: checkback2018
-  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C"]
+  seq: ["1D 1S 2NT 3C", "1D (X) 1S 2NT 3C", "1D 1S (2H) 2NT 3C", "1D 1S (2C) 2NT 3C"]
   call: 3NT
   cond: "true"
   forcing: NF
@@ -3922,7 +3922,7 @@
   status: choix
 - id: 1C.1S.2NT.3H
   option: checkback2018
-  seq: ["1C 1S 2NT", "1C (X) 1S 2NT"]
+  seq: ["1C 1S 2NT", "1C (X) 1S 2NT", "1C 1S (2H) 2NT", "1C 1S (2D) 2NT"]
   call: 3H
   cond: "S >= 5 and H >= 5 and hcp >= 12"
   forcing: FM
@@ -4463,6 +4463,40 @@
   meaning: "Pas d'intervention"
   meaning_en: "No overcall"
   status: sef
+# --- intervention en sandwich : les deux adversaires ont parlé (1x – Passe – 1y)
+# en: sandwich overcall: both opponents have bid (1x – Pass – 1y)
+- id: "sw.1C.1D.1S"
+  seq: "(1C) P (1D)"
+  call: "1S"
+  cond: "S >= 5 and S >= H and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  forcing: NF
+  meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
+  meaning_en: "Sandwich overcall: 5+ cards, good suit"
+  status: infere
+- id: "sw.1C.1D.1H"
+  seq: "(1C) P (1D)"
+  call: "1H"
+  cond: "H >= 5 and H >= S and hcp_in('H') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  forcing: NF
+  meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
+  meaning_en: "Sandwich overcall: 5+ cards, good suit"
+  status: infere
+- id: "sw.1C.1H.1S"
+  seq: "(1C) P (1H)"
+  call: "1S"
+  cond: "S >= 5 and S >= D and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  forcing: NF
+  meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
+  meaning_en: "Sandwich overcall: 5+ cards, good suit"
+  status: infere
+- id: "sw.1D.1H.1S"
+  seq: "(1D) P (1H)"
+  call: "1S"
+  cond: "S >= 5 and S >= C and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  forcing: NF
+  meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
+  meaning_en: "Sandwich overcall: 5+ cards, good suit"
+  status: infere
 # --- réveil : l'ouverture revient après deux passes (le partenaire a passé)
 # en: balancing: the opening comes round after two passes (partner has passed)
 - id: "rev.{o}.2NT"
@@ -6748,7 +6782,7 @@
   meaning_en: "4+ hearts"
   status: infere
 - id: 1C.1D.1S
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1H)"]
   call: 1S
   cond: "S >= 4"
   forcing: NF
@@ -6756,7 +6790,7 @@
   meaning_en: "4+ spades"
   status: infere
 - id: 1C.1D.2NT
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 2NT
   cond: "balanced and 17 <= hl <= 18"
   forcing: INV
@@ -6764,7 +6798,7 @@
   meaning_en: "Balanced 17-18 HL"
   status: infere
 - id: 1C.1D.1NT
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 1NT
   cond: "balanced and hl <= 13"
   forcing: NF
@@ -6772,7 +6806,7 @@
   meaning_en: "Balanced 12-13 HL"
   status: infere
 - id: 1C.1D.3D
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 3D
   cond: "D >= 4 and hl >= 14"
   forcing: INV
@@ -6780,7 +6814,7 @@
   meaning_en: "♦ fit, 14-17 HL"
   status: infere
 - id: 1C.1D.2D
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 2D
   cond: "D >= 4"
   forcing: NF
@@ -6788,7 +6822,7 @@
   meaning_en: "♦ fit, minimum"
   status: infere
 - id: 1C.1D.3C
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 3C
   cond: "C >= 6 and hl >= 14"
   forcing: INV
@@ -6796,7 +6830,7 @@
   meaning_en: "6 clubs, 14-17 HL"
   status: infere
 - id: 1C.1D.2C
-  seq: ["1C 1D", "1C (X) 1D"]
+  seq: ["1C 1D", "1C (X) 1D", "1C 1D (1S)", "1C 1D (1H)"]
   call: 2C
   cond: "true"
   forcing: NF
@@ -6807,7 +6841,7 @@
 # --- ouvreur après 1♥ – 1♠
 # en: opener after 1♥ – 1♠
 - id: 1H.1S.4S
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 4S
   cond: "S >= 4 and hld >= 18"
   forcing: SO
@@ -6815,7 +6849,7 @@
   meaning_en: "♠ fit, 18+"
   status: infere
 - id: 1H.1S.3S
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 3S
   cond: "S >= 4 and hld >= 15"
   forcing: INV
@@ -6823,7 +6857,7 @@
   meaning_en: "♠ fit, 15-17"
   status: infere
 - id: 1H.1S.2S
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 2S
   cond: "S >= 4"
   forcing: NF
@@ -6831,7 +6865,7 @@
   meaning_en: "♠ fit, minimum"
   status: infere
 - id: 1H.1S.2NT
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 2NT
   cond: "balanced and 17 <= hl <= 19"
   forcing: INV
@@ -6847,7 +6881,7 @@
   meaning_en: "Balanced 12-14 HL"
   status: infere
 - id: 1H.1S.3H
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 3H
   cond: "H >= 6 and hl >= 15"
   forcing: INV
@@ -6873,7 +6907,7 @@
   meaning_en: "Two-suiter, 4+ cards"
   status: infere
 - id: 1H.1S.2H
-  seq: ["1H 1S", "1H (X) 1S"]
+  seq: ["1H 1S", "1H (X) 1S", "1H 1S (2D)", "1H 1S (2C)"]
   call: 2H
   cond: "true"
   forcing: NF
@@ -7114,7 +7148,7 @@
 # --- répondant après 1♣ – 1♦ – 3♣ et après 2SA 18-19 de l'ouvreur
 # en: responder after 1♣ – 1♦ – 3♣ and after opener's 18-19 2NT
 - id: 1C.1D.3C.3NT
-  seq: ["1C 1D 3C", "1C (X) 1D 3C"]
+  seq: ["1C 1D 3C", "1C (X) 1D 3C", "1C 1D (1S) 3C", "1C 1D (1H) 3C"]
   call: 3NT
   cond: "hl >= 7"
   forcing: SO
@@ -7130,7 +7164,7 @@
   meaning_en: "Accepts the 18-19 invitation"
   status: infere
 - id: gen.r.2NT.p
-  seq: ["1C|1D|1H|1S 1D|1NT 2NT", "1C 1D 3C", "1C (X) 1D 3C"]
+  seq: ["1C|1D|1H|1S 1D|1NT 2NT", "1C 1D 3C", "1C (X) 1D 3C", "1C 1D (1S) 3C", "1C 1D (1H) 3C"]
   call: P
   cond: "true"
   forcing: NF
@@ -11395,7 +11429,7 @@
   meaning_en: "Minimal signoff"
   status: infere
 - id: 1C.1D.3D.r
-  seq: ["1C 1D 3D", "1C (X) 1D 3D"]
+  seq: ["1C 1D 3D", "1C (X) 1D 3D", "1C 1D (1S) 3D", "1C 1D (1H) 3D"]
   call: 3NT
   cond: "hl >= 8 and (balanced or semibalanced)"
   forcing: SO
@@ -11403,7 +11437,7 @@
   meaning_en: "Game in NT"
   status: infere
 - id: 1C.1D.3D.5D
-  seq: ["1C 1D 3D", "1C (X) 1D 3D"]
+  seq: ["1C 1D 3D", "1C (X) 1D 3D", "1C 1D (1S) 3D", "1C 1D (1H) 3D"]
   call: 5D
   cond: "hld >= 11"
   forcing: SO
@@ -11411,7 +11445,7 @@
   meaning_en: "Game in ♦"
   status: infere
 - id: 1C.1D.3D.p
-  seq: ["1C 1D 3D", "1C (X) 1D 3D"]
+  seq: ["1C 1D 3D", "1C (X) 1D 3D", "1C 1D (1S) 3D", "1C 1D (1H) 3D"]
   call: P
   cond: "true"
   forcing: NF

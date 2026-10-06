@@ -1321,15 +1321,15 @@ Pass {Contrat final atteint (defaut). Ici 18H (18 HL), 4-3-2-4. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A875.KJ5.J6.KJ64 QJ6.T87.Q943.732 T94.4.AKT875.T85 K32.AQ9632.2.AQ9"]
+[Deal "N:JT6.T92.7543.AQ2 K.Q863.AKQT82.75 A875.KJ5.J6.KJ64 Q9432.A74.9.T983"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "1NT"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 4-3-2-4. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 4-3-2-4.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 7H (9 HL), 3-1-6-3. | 4+ diamonds, 5+ HCP, no 4-card major. Here 7 HCP (9 HL), 3-1-6-3.} Pass
-1S {4+ piques. Ici 13H (13 HL), 4-3-2-4. | 4+ spades. Here 13 HCP (13 HL), 4-3-2-4.} Pass 1NT {Minimum. Ici 7H (9 HL), 3-1-6-3. | Minimum. Here 7 HCP (9 HL), 3-1-6-3.} Pass
-Pass {Minimum : passe. Ici 13H (13 HL), 4-3-2-4. | Minimum: pass. Here 13 HCP (13 HL), 4-3-2-4.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (13 HL), 4-3-2-4. | Longest minor (3-3: 1♣). Here 13 HCP (13 HL), 4-3-2-4.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 7H (7 HL), 3-3-4-3. | 4+ diamonds, 5+ HCP, no 4-card major. Here 7 HCP (7 HL), 3-3-4-3.} Pass
+1S {4+ piques. Ici 13H (13 HL), 4-3-2-4. | 4+ spades. Here 13 HCP (13 HL), 4-3-2-4.} Pass 1NT {Minimum. Ici 7H (7 HL), 3-3-4-3. | Minimum. Here 7 HCP (7 HL), 3-3-4-3.} Pass
+Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 76"]
 [Board "76"]
@@ -2314,14 +2314,14 @@ Pass {Contrat final atteint (defaut). Ici 14H (14 HL), 4-2-2-5. | Final contract
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:43.5.AK52.AKJT76 J876.AT98.Q87.98 95.K32.JT43.Q543 AKQT2.QJ764.96.2"]
+[Deal "N:K8.92.Q9874.9432 J9765.AQJT74.T3. 43.5.AK52.AKJT76 AQT2.K863.J6.Q85"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3D"]
 [Result ""]
 [Auction "S"]
-1C {Mineure la plus longue (3-3 : 1♣). Ici 15H (17 HL), 2-1-4-6. | Longest minor (3-3: 1♣). Here 15 HCP (17 HL), 2-1-4-6.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 6H (6 HL), 2-3-4-4. | 4+ diamonds, 5+ HCP, no 4-card major. Here 6 HCP (6 HL), 2-3-4-4.} Pass
-3D {Fit ♦, 14-17 HL. Ici 15H (17 HL), 2-1-4-6. | ♦ fit, 14-17 HL. Here 15 HCP (17 HL), 2-1-4-6.} Pass Pass {Minimum. Ici 6H (6 HL), 2-3-4-4. | Minimum. Here 6 HCP (6 HL), 2-3-4-4.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 15H (17 HL), 2-1-4-6. | Longest minor (3-3: 1♣). Here 15 HCP (17 HL), 2-1-4-6.} Pass 1D {4+ carreaux, 5+ H, pas de majeure 4e. Ici 5H (5 HL), 2-2-5-4. | 4+ diamonds, 5+ HCP, no 4-card major. Here 5 HCP (5 HL), 2-2-5-4.} Pass
+3D {Fit ♦, 14-17 HL. Ici 15H (17 HL), 2-1-4-6. | ♦ fit, 14-17 HL. Here 15 HCP (17 HL), 2-1-4-6.} Pass Pass Pass
 
 [Event "Entrainement Redemandes de l'ouvreur - Donne 132"]
 [Board "132"]

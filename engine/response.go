@@ -67,6 +67,7 @@ type auctionJSON struct {
 	Player  string      `json:"player"`
 	Bid     string      `json:"bid"`
 	Comment string      `json:"comment"`
+	Alert   bool        `json:"alert,omitempty"` // the rule is a conventional call, to be alerted
 	Trace   []traceJSON `json:"trace,omitempty"` // decision path, when traced (see trace.go)
 }
 
@@ -140,6 +141,7 @@ func buildResponse(deal *Deal, calls []SeatCall, lang string) bidResponse {
 			Player:  seatNames[sc.Seat],
 			Bid:     sc.Call.Format(lang),
 			Comment: sc.comment(lang),
+			Alert:   sc.Rule != nil && sc.Rule.Alert,
 			Trace:   trace,
 		})
 	}

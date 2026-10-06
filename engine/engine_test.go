@@ -310,14 +310,14 @@ func TestWeakTwoCountsHonourPoints(t *testing.T) {
 	}
 }
 
-// TestStrong2DSemiBalancedRebid3NT: 2♦ – 2♥ (no ace, 0-7 HCP), opener 24 HCP
-// 2-4-5-2: a 5422 with a long minor rebids 3NT, not 5♦. (North may then
-// show his six spades.)
-func TestStrong2DSemiBalancedRebid3NT(t *testing.T) {
+// TestStrong2DSemiBalancedRebid2NT: 2♦ – 2♥ (no ace, 0-7 HCP), opener 24 HCP
+// 2-4-5-2: a 5422 with a long minor makes the default rebid 2NT, not 5♦.
+// North then shows his six spades with a Texas, with no point minimum.
+func TestStrong2DSemiBalancedRebid2NT(t *testing.T) {
 	d := mustParsePBN(t, `[Dealer "S"]
 [Vulnerable "NS"]
 [Deal "S:A9.AKQ8.AJT54.AQ 84.97643.963.875 JT7632.J.Q2.T943 KQ5.T52.K87.KJ62"]`)
-	const want = "S:2K W:Passe N:2C E:Passe S:3SA"
+	const want = "S:2K W:Passe N:2C E:Passe S:2SA W:Passe N:3C E:Passe S:3SA W:Passe N:4P"
 	if got := formatAuction(NewEngine(d).Run()); !strings.HasPrefix(got, want) {
 		t.Fatalf("enchères :\n %s\nattendu :\n %s", got, want)
 	}

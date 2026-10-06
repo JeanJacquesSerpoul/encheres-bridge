@@ -9,14 +9,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AKJ2.AQ4.KQ5.AJ4 T74.KT65.AT.QT73 9853.J972.J763.6 Q6.83.9842.K9852"]
+[Deal "N:9853.J972.J763.6 Q6.83.9842.K9852 AKJ2.AQ4.KQ5.AJ4 T74.KT65.AT.QT73"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3NT"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2H {Pas d'As, 2H (0-7). | No ace, 2 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 1 As) : 3SA. | No slam (1 ace missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 4-3-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 4-3-3-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 2H (2 HL), 4-4-4-1. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 2 HCP (2 HL), 4-4-4-1.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 4-3-3-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 4-3-3-3.} Pass 3C {Stayman, sans minimum de points. Ici 2H (2 HL), 4-4-4-1. | Stayman, no point minimum. Here 2 HCP (2 HL), 4-4-4-1.} Pass
+3S {4 piques. Ici 24H (24 HL), 4-3-3-3. | 4 spades. Here 24 HCP (24 HL), 4-3-3-3.} Pass 4S {Fit, manche. Ici 2H (2 HL), 4-4-4-1. | Fit, game. Here 2 HCP (2 HL), 4-4-4-1.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 2"]
 [Board "2"]
@@ -26,14 +28,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQ5.AKJ3.AQ4.KQ6 AT63.T8.987.A842 J8742.Q95.J63.75 9.7642.KT52.JT93"]
+[Deal "N:J8742.Q95.J63.75 9.7642.KT52.JT93 KQ5.AKJ3.AQ4.KQ6 AT63.T8.987.A842"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3NT"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2H {Pas d'As, 4H (0-7). | No ace, 4 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 3-4-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 3-4-3-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 4H (4 HL), 5-3-3-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 3-4-3-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 3-4-3-3.} Pass 3H {Texas ♠, sans minimum de points. Ici 4H (4 HL), 5-3-3-2. | Texas ♠, no point minimum. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 24H (24 HL), 3-4-3-3. | Correction: a fit of three cards or more. Here 24 HCP (24 HL), 3-4-3-3.} Pass 4S {Manche. Ici 4H (4 HL), 5-3-3-2. | Game. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 3"]
 [Board "3"]
@@ -43,14 +47,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AQJ.KQ74.AKJ.KQ3 T853.AT3.T62.A97 9742.J852.Q74.J5 K6.96.9853.T8642"]
+[Deal "N:9742.J852.Q74.J5 K6.96.9853.T8642 AQJ.KQ74.AKJ.KQ3 T853.AT3.T62.A97"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 25H (24+). | Game-forcing 2D: balanced hand with 25 HCP (24+).} Pass 2H {Pas d'As, 4H (0-7). | No ace, 4 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 25H (25 HL), 3-4-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 25 HCP (25 HL), 3-4-3-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 4H (4 HL), 4-4-3-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 4 HCP (4 HL), 4-4-3-2.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 25H (25 HL), 3-4-3-3. | Default rebid, often balanced. Here 25 HCP (25 HL), 3-4-3-3.} Pass 3C {Stayman, sans minimum de points. Ici 4H (4 HL), 4-4-3-2. | Stayman, no point minimum. Here 4 HCP (4 HL), 4-4-3-2.} Pass
+3H {4 coeurs. Ici 25H (25 HL), 3-4-3-3. | 4 hearts. Here 25 HCP (25 HL), 3-4-3-3.} Pass 4H {Fit, manche. Ici 4H (4 HL), 4-4-3-2. | Fit, game. Here 4 HCP (4 HL), 4-4-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 4"]
 [Board "4"]
@@ -60,14 +66,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AK5.KQJ.AQ84.KQ6 T97632.T42.T7.J2 QJ84.9753.J962.5 .A86.K53.AT98743"]
+[Deal "N:QJ84.9753.J962.5 .A86.K53.AT98743 AK5.KQJ.AQ84.KQ6 T97632.T42.T7.J2"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2H {Pas d'As, 4H (0-7). | No ace, 4 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 3-3-4-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 3-3-4-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 4H (4 HL), 4-4-4-1. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 4 HCP (4 HL), 4-4-4-1.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 3-3-4-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 3-3-4-3.} Pass 3C {Stayman, sans minimum de points. Ici 4H (4 HL), 4-4-4-1. | Stayman, no point minimum. Here 4 HCP (4 HL), 4-4-4-1.} Pass
+3D {Pas de majeure 4e. Ici 24H (24 HL), 3-3-4-3. | No 4-card major. Here 24 HCP (24 HL), 3-3-4-3.} Pass 3NT {Pas de fit. Ici 4H (4 HL), 4-4-4-1. | No fit. Here 4 HCP (4 HL), 4-4-4-1.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 5"]
 [Board "5"]
@@ -77,14 +85,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AKQ4.KQ5.KJ6.AQ7 T653.2.T3.T98432 J872.J843.Q72.KJ 9.AT976.A9854.65"]
+[Deal "N:J872.J843.Q72.KJ 9.AT976.A9854.65 AKQ4.KQ5.KJ6.AQ7 T653.2.T3.T98432"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2NT {Pas d'As, 8H (8+). | No ace, 8 HCP (8+).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 4-3-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 4-3-3-3.} Pass 2NT {Pas d'As, 8+ H, au moins deux cartes par couleur. Ici 8H (7 HL), 4-4-3-2. | No aces, 8+ HCP, at least two cards in every suit. Here 8 HCP (7 HL), 4-4-3-2.} Pass
+3NT {Regulier : 3SA sans saut, forcing sur 2SA. Ici 24H (24 HL), 4-3-3-3. | Balanced: non-jump 3NT, forcing over 2NT. Here 24 HCP (24 HL), 4-3-3-3.} Pass 4NT {8-9 H : proposition de chelem. Ici 8H (7 HL), 4-4-3-2. | 8-9 HCP: slam invitation. Here 8 HCP (7 HL), 4-4-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 6"]
 [Board "6"]
@@ -230,14 +239,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQ7.KJ5.AKQ4.KQ8 KJT5.T4.732.T765 9842.Q973.J5.J43 63.A862.T986.A92"]
+[Deal "N:9842.Q973.J5.J43 63.A862.T986.A92 AQ7.KJ5.AKQ4.KQ8 KJT5.T4.732.T765"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2H {Pas d'As, 4H (0-7). | No ace, 4 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 3-3-4-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 3-3-4-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 4H (4 HL), 4-4-2-3. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 4 HCP (4 HL), 4-4-2-3.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 3-3-4-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 3-3-4-3.} Pass 3C {Stayman, sans minimum de points. Ici 4H (4 HL), 4-4-2-3. | Stayman, no point minimum. Here 4 HCP (4 HL), 4-4-2-3.} Pass
+3D {Pas de majeure 4e. Ici 24H (24 HL), 3-3-4-3. | No 4-card major. Here 24 HCP (24 HL), 3-3-4-3.} Pass 3NT {Pas de fit. Ici 4H (4 HL), 4-4-2-3. | No fit. Here 4 HCP (4 HL), 4-4-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 15"]
 [Board "15"]
@@ -247,14 +258,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:KQJ4.AK5.AQ6.KQ8 3.8762.T987.AT97 9762.QJ4.KJ3.J52 AT85.T93.542.643"]
+[Deal "N:9762.QJ4.KJ3.J52 AT85.T93.542.643 KQJ4.AK5.AQ6.KQ8 3.8762.T987.AT97"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2NT {Pas d'As, 8H (8+). | No ace, 8 HCP (8+).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 4-3-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 4-3-3-3.} Pass 2NT {Pas d'As, 8+ H, au moins deux cartes par couleur. Ici 8H (8 HL), 4-3-3-3. | No aces, 8+ HCP, at least two cards in every suit. Here 8 HCP (8 HL), 4-3-3-3.} Pass
+3NT {Regulier : 3SA sans saut, forcing sur 2SA. Ici 24H (24 HL), 4-3-3-3. | Balanced: non-jump 3NT, forcing over 2NT. Here 24 HCP (24 HL), 4-3-3-3.} Pass 4NT {8-9 H : proposition de chelem. Ici 8H (8 HL), 4-3-3-3. | 8-9 HCP: slam invitation. Here 8 HCP (8 HL), 4-3-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 16"]
 [Board "16"]
@@ -264,14 +276,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:KQ74.AKJ.KQ8.AQ6 T6.T53.A65.KJT74 A953.8642.J73.85 J82.Q97.T942.932"]
+[Deal "N:A953.8642.J73.85 J82.Q97.T942.932 KQ74.AKJ.KQ8.AQ6 T6.T53.A65.KJT74"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2S {Un As majeur : ici l'As de Pique. | One major ace: here the spade ace.} Pass
-3NT {Pas de chelem (il manque 1 As) : 3SA. | No slam (1 ace missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 4-3-3-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 4-3-3-3.} Pass 2S {Un As majeur. Ici 5H (5 HL), 4-4-3-2. | One major ace. Here 5 HCP (5 HL), 4-4-3-2.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 4-3-3-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 4-3-3-3.} Pass 3C {Stayman, sans minimum de points. Ici 5H (5 HL), 4-4-3-2. | Stayman, no point minimum. Here 5 HCP (5 HL), 4-4-3-2.} Pass
+3S {4 piques. Ici 24H (24 HL), 4-3-3-3. | 4 spades. Here 24 HCP (24 HL), 4-3-3-3.} Pass 4S {Fit, manche. Ici 5H (5 HL), 4-4-3-2. | Fit, game. Here 5 HCP (5 HL), 4-4-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 17"]
 [Board "17"]
@@ -315,14 +329,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AQ5.AKJ74.KQ.KQ6 9.T6.AT8643.JT97 J8742.Q93.J75.83 KT63.852.92.A542"]
+[Deal "N:J8742.Q93.J75.83 KT63.852.92.A542 AQ5.AKJ74.KQ.KQ6 9.T6.AT8643.JT97"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3NT"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 24H (24+). | Game-forcing 2D: balanced hand with 24 HCP (24+).} Pass 2H {Pas d'As, 4H (0-7). | No ace, 4 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 3-5-2-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 3-5-2-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 4H (4 HL), 5-3-3-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 3-5-2-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 3-5-2-3.} Pass 3H {Texas ♠, sans minimum de points. Ici 4H (4 HL), 5-3-3-2. | Texas ♠, no point minimum. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+3S {Rectification : fit par 3 cartes ou plus. Ici 24H (24 HL), 3-5-2-3. | Correction: a fit of three cards or more. Here 24 HCP (24 HL), 3-5-2-3.} Pass 4S {Manche. Ici 4H (4 HL), 5-3-3-2. | Game. Here 4 HCP (4 HL), 5-3-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 20"]
 [Board "20"]
@@ -332,14 +348,16 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJ.KQ5.AQJ6.KQ4 T54.T96.T9874.A6 Q763.J842.K5.T53 982.A73.32.J9872"]
+[Deal "N:Q763.J842.K5.T53 982.A73.32.J9872 AKJ.KQ5.AQJ6.KQ4 T54.T96.T9874.A6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : main reguliere de 25H (24+). | Game-forcing 2D: balanced hand with 25 HCP (24+).} Pass 2H {Pas d'As, 6H (0-7). | No ace, 6 HCP (0-7).} Pass
-3NT {Pas de chelem (il manque 2 As) : 3SA. | No slam (2 aces missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 25H (25 HL), 3-3-4-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 25 HCP (25 HL), 3-3-4-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 6H (6 HL), 4-4-2-3. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 6 HCP (6 HL), 4-4-2-3.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 25H (25 HL), 3-3-4-3. | Default rebid, often balanced. Here 25 HCP (25 HL), 3-3-4-3.} Pass 3C {Stayman, sans minimum de points. Ici 6H (6 HL), 4-4-2-3. | Stayman, no point minimum. Here 6 HCP (6 HL), 4-4-2-3.} Pass
+3D {Pas de majeure 4e. Ici 25H (25 HL), 3-3-4-3. | No 4-card major. Here 25 HCP (25 HL), 3-3-4-3.} Pass 3NT {Pas de fit. Ici 6H (6 HL), 4-4-2-3. | No fit. Here 6 HCP (6 HL), 4-4-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 21"]
 [Board "21"]
@@ -366,14 +384,14 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "N:Q4.K973.Q852.J43 KT652.8.3.AK9862 A.AQT62.AKJT976. J9873.J54.4.QT75"]
+[Deal "N:KQ87.KQ96.982.76 6542.JT842.J3.83 .A5.AKQT654.AKQ4 AJT93.73.7.JT952"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6D"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 18H (21 HL), 1-5-7-0. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 18 HCP (21 HL), 1-5-7-0.} Pass 2NT {Pas d'As, 8+ H. Ici 8H (8 HL), 2-4-4-3. | No aces, 8+ HCP. Here 8 HCP (8 HL), 2-4-4-3.} Pass
-6D {Un As au plus manque : petit chelem. Ici 18H (21 HL), 1-5-7-0. | At most one ace missing: small slam. Here 18 HCP (21 HL), 1-5-7-0.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 22H (25 HL), 0-2-7-4. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 22 HCP (25 HL), 0-2-7-4.} Pass 2NT {Pas d'As, 8+ H, au moins deux cartes par couleur. Ici 10H (10 HL), 4-4-3-2. | No aces, 8+ HCP, at least two cards in every suit. Here 10 HCP (10 HL), 4-4-3-2.} Pass
+6D {Un As au plus manque : petit chelem. Ici 22H (25 HL), 0-2-7-4. | At most one ace missing: small slam. Here 22 HCP (25 HL), 0-2-7-4.} Pass Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 23"]
 [Board "23"]
@@ -519,14 +537,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:A5.K4.AKQJ863.A5 KT92.A853.T72.Q9 Q873.J9762.94.KT J64.QT.5.J876432"]
+[Deal "N:Q873.J9762.94.KT J64.QT.5.J876432 A5.K4.AKQJ863.A5 KT92.A853.T72.Q9"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "5D"]
+[Declarer "N"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : 7 cartes a Carreau, 21H, 9 levees de jeu et 2,5 levees de defense annexes. | Game-forcing 2D: 7 diamonds, 21 HCP, 9 playing tricks and 2.5 side defensive tricks.} Pass 2H {Pas d'As, 6H (0-7). | No ace, 6 HCP (0-7).} Pass
-5D {Il manque 1 As, 9 levees de jeu seulement : manche a Carreau. | 1 ace missing, only 9 playing tricks: game in diamonds.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 21H (24 HL), 2-2-7-2. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 21 HCP (24 HL), 2-2-7-2.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 6H (6 HL), 4-5-2-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 6 HCP (6 HL), 4-5-2-2.} Pass
+3D {Naturel : 6 cartes, ou 5 belles cartes et main irreguliere. Ici 21H (24 HL), 2-2-7-2. | Natural: 6 cards, or 5 good cards and an unbalanced hand. Here 21 HCP (24 HL), 2-2-7-2.} Pass 3NT {Pas de fit : 3SA. Ici 6H (6 HL), 4-5-2-2. | No fit: 3NT. Here 6 HCP (6 HL), 4-5-2-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 32"]
 [Board "32"]
@@ -536,14 +555,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "N:9852.J763.J8.973 J43.T84.9753.QT8 AT76.AQ.AK2.AK64 KQ.K952.QT64.J52"]
+[Deal "N:T8732.64.J432.T9 KJ965.A973.T.652 .KJT.AKQ5.AKQ843 AQ4.Q852.9876.J7"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3NT"]
+[Contract "5C"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 24H (23 HL), 4-2-3-4. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 24 HCP (23 HL), 4-2-3-4.} Pass 2H {Pas d'As, 0 a 7 H. Ici 2H (2 HL), 4-4-2-3. | No aces, 0 to 7 HCP. Here 2 HCP (2 HL), 4-4-2-3.} Pass
-3NT {Regulier, ou 5422 / 6322 par une mineure : 3SA. Ici 24H (23 HL), 4-2-3-4. | Balanced, or 5422 / 6322 with a long minor: 3NT. Here 24 HCP (23 HL), 4-2-3-4.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 22H (24 HL), 0-3-4-6. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 22 HCP (24 HL), 0-3-4-6.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 1H (1 HL), 5-2-4-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 1 HCP (1 HL), 5-2-4-2.} Pass
+3C {Naturel : 6 cartes, ou 5 belles cartes et main irreguliere. Ici 22H (24 HL), 0-3-4-6. | Natural: 6 cards, or 5 good cards and an unbalanced hand. Here 22 HCP (24 HL), 0-3-4-6.} Pass 3NT {Pas de fit : 3SA. Ici 1H (1 HL), 5-2-4-2. | No fit: 3NT. Here 1 HCP (1 HL), 5-2-4-2.} Pass
+5C {Main irreguliere : manche dans la couleur. Ici 22H (24 HL), 0-3-4-6. | Unbalanced hand: game in the suit. Here 22 HCP (24 HL), 0-3-4-6.} Pass Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 33"]
 [Board "33"]
@@ -576,8 +596,10 @@
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 24H (24 HL), 3-2-5-3. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 24 HCP (24 HL), 3-2-5-3.} Pass 2H {Pas d'As, 0 a 7 H. Ici 6H (6 HL), 4-3-4-2. | No aces, 0 to 7 HCP. Here 6 HCP (6 HL), 4-3-4-2.} Pass
-3NT {Regulier, ou 5422 / 6322 par une mineure : 3SA. Ici 24H (24 HL), 3-2-5-3. | Balanced, or 5422 / 6322 with a long minor: 3NT. Here 24 HCP (24 HL), 3-2-5-3.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 3-2-5-3. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 3-2-5-3.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 6H (6 HL), 4-3-4-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 6 HCP (6 HL), 4-3-4-2.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 3-2-5-3. | Default rebid, often balanced. Here 24 HCP (24 HL), 3-2-5-3.} Pass 3C {Stayman, sans minimum de points. Ici 6H (6 HL), 4-3-4-2. | Stayman, no point minimum. Here 6 HCP (6 HL), 4-3-4-2.} Pass
+3D {Pas de majeure 4e. Ici 24H (24 HL), 3-2-5-3. | No 4-card major. Here 24 HCP (24 HL), 3-2-5-3.} Pass 3NT {Pas de fit. Ici 6H (6 HL), 4-3-4-2. | No fit. Here 6 HCP (6 HL), 4-3-4-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 35"]
 [Board "35"]
@@ -621,14 +643,14 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "N:A962.A74.853.J62 QT.QT9653.QJ962. 7.K8.AK7.AKQ9854 KJ8543.J2.T4.T73"]
+[Deal "N:AQ3.AJ8742.52.97 KT64.T953.983.T2 J9..AKQ74.AKQ653 8752.KQ6.JT6.J84"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6C"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 19H (22 HL), 1-2-3-7. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 19 HCP (22 HL), 1-2-3-7.} Pass 3S {2 As de meme rang. Ici 9H (9 HL), 4-3-3-3. | 2 aces of the same rank. Here 9 HCP (9 HL), 4-3-3-3.} Pass
-6C {Au plus un As manque et 12 levees comptees : petit chelem. Ici 19H (22 HL), 1-2-3-7. | At most one ace missing and 12 tricks counted: small slam. Here 19 HCP (22 HL), 1-2-3-7.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 19H (22 HL), 2-0-5-6. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 19 HCP (22 HL), 2-0-5-6.} Pass 3S {2 As de meme rang. Ici 11H (13 HL), 3-6-2-2. | 2 aces of the same rank. Here 11 HCP (13 HL), 3-6-2-2.} Pass
+6C {Un As au plus manque : petit chelem. Ici 19H (22 HL), 2-0-5-6. | At most one ace missing: small slam. Here 19 HCP (22 HL), 2-0-5-6.} Pass Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 38"]
 [Board "38"]
@@ -672,14 +694,14 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "N:A932.84.A75.A862 864.Q7652.8.T753 KQ.AKJ3.KQ96.KQJ JT75.T9.JT432.94"]
+[Deal "N:A3.84.AT6.AKT876 J987.T96.Q75.532 KQT652.AKQ532.J. 4.J7.K98432.QJ94"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "7NT"]
+[Contract "7S"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 24H (23 HL), 2-4-4-3. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 24 HCP (23 HL), 2-4-4-3.} Pass 4H {3 As, sauf celui de ♥. Ici 12H (12 HL), 4-2-3-4. | 3 aces, except the ♥ ace. Here 12 HCP (12 HL), 4-2-3-4.} Pass
-7NT {Regulier, les 4 As et 37 H a deux : grand chelem a SA. Ici 24H (23 HL), 2-4-4-3. | Balanced, all four aces and 37 HCP together: grand slam in NT. Here 24 HCP (23 HL), 2-4-4-3.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 15H (18 HL), 6-6-1-0. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 15 HCP (18 HL), 6-6-1-0.} Pass 4H {3 As, sauf celui de ♥. Ici 15H (17 HL), 2-2-3-6. | 3 aces, except the ♥ ace. Here 15 HCP (17 HL), 2-2-3-6.} Pass
+7S {Les 4 As et 13 levees comptees : grand chelem. Ici 15H (18 HL), 6-6-1-0. | All four aces and 13 tricks counted: grand slam. Here 15 HCP (18 HL), 6-6-1-0.} Pass Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 41"]
 [Board "41"]
@@ -712,8 +734,9 @@
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 24H (24 HL), 4-3-4-2. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 24 HCP (24 HL), 4-3-4-2.} Pass 2H {Pas d'As, 0 a 7 H. Ici 7H (7 HL), 3-2-5-3. | No aces, 0 to 7 HCP. Here 7 HCP (7 HL), 3-2-5-3.} Pass
-3NT {Regulier, ou 5422 / 6322 par une mineure : 3SA. Ici 24H (24 HL), 4-3-4-2. | Balanced, or 5422 / 6322 with a long minor: 3NT. Here 24 HCP (24 HL), 4-3-4-2.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 4-3-4-2. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 4-3-4-2.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 7H (7 HL), 3-2-5-3. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 7 HCP (7 HL), 3-2-5-3.} Pass
+2NT {Redemande par defaut, souvent reguliere. Ici 24H (24 HL), 4-3-4-2. | Default rebid, often balanced. Here 24 HCP (24 HL), 4-3-4-2.} Pass 3NT {Manche. Ici 7H (7 HL), 3-2-5-3. | Game. Here 7 HCP (7 HL), 3-2-5-3.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 43"]
 [Board "43"]
@@ -740,14 +763,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AK.A4.K5.AKJT973 J42.862.AJT93.52 9653.QJ73.Q874.4 QT87.KT95.62.Q86"]
+[Deal "N:9653.QJ73.Q874.4 QT87.KT95.62.Q86 AK.A4.K5.AKJT973 J42.862.AJT93.52"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "5C"]
+[Declarer "N"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : 7 cartes a Trefle, 22H, 9 levees de jeu et 3,5 levees de defense annexes. | Game-forcing 2D: 7 clubs, 22 HCP, 9 playing tricks and 3.5 side defensive tricks.} Pass 2H {Pas d'As, 5H (0-7). | No ace, 5 HCP (0-7).} Pass
-5C {Il manque 1 As, 9 levees de jeu seulement : manche a Trefle. | 1 ace missing, only 9 playing tricks: game in clubs.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 22H (24 HL), 2-2-2-7. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 22 HCP (24 HL), 2-2-2-7.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 5H (5 HL), 4-4-4-1. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 5 HCP (5 HL), 4-4-4-1.} Pass
+3C {Naturel : 6 cartes, ou 5 belles cartes et main irreguliere. Ici 22H (24 HL), 2-2-2-7. | Natural: 6 cards, or 5 good cards and an unbalanced hand. Here 22 HCP (24 HL), 2-2-2-7.} Pass 3NT {Pas de fit : 3SA. Ici 5H (5 HL), 4-4-4-1. | No fit: 3NT. Here 5 HCP (5 HL), 4-4-4-1.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 45"]
 [Board "45"]
@@ -757,14 +781,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AK.KQJ.KQ.AKJ986 J62.T8743.J3.T43 8743.9652.A74.Q5 QT95.A.T98652.72"]
+[Deal "N:8743.9652.A74.Q5 QT95.A.T98652.72 AK.KQJ.KQ.AKJ986 J62.T8743.J3.T43"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4NT"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : 6 cartes a Trefle, 26H, 8 levees de jeu et 4 levees de defense annexes. | Game-forcing 2D: 6 clubs, 26 HCP, 8 playing tricks and 4 side defensive tricks.} Pass 3D {Un As : l'As de Carreau. | One ace: the diamond ace.} Pass
-3NT {Pas de chelem (il manque 1 As) : 3SA. | No slam (1 ace missing): 3NT.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 26H (26 HL), 2-3-2-6. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 26 HCP (26 HL), 2-3-2-6.} Pass 3D {As de ♦. Ici 6H (6 HL), 4-4-3-2. | ♦ ace. Here 6 HCP (6 HL), 4-4-3-2.} Pass
+4C {Naturel : 6 cartes, ou 5 belles cartes et main irreguliere. Ici 26H (26 HL), 2-3-2-6. | Natural: 6 cards, or 5 good cards and an unbalanced hand. Here 26 HCP (26 HL), 2-3-2-6.} Pass 4NT {Pas de fit : 3SA. Ici 6H (6 HL), 4-4-3-2. | No fit: 3NT. Here 6 HCP (6 HL), 4-4-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 46"]
 [Board "46"]
@@ -791,14 +816,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AK74.AKQT65.A3.4 T3.4.T7642.K8532 J852.83.QJ95.QJ6 Q96.J972.K8.AT97"]
+[Deal "N:J852.83.QJ95.QJ6 Q96.J972.K8.AT97 AK74.AKQT65.A3.4 T3.4.T7642.K8532"]
 [Scoring "MP"]
-[Declarer "S"]
+[Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2D {2K forcing de manche : 6 cartes a Coeur, 20H, 9 levees de jeu et 3 levees de defense annexes. | Game-forcing 2D: 6 hearts, 20 HCP, 9 playing tricks and 3 side defensive tricks.} Pass 2H {Pas d'As, 7H (0-7). | No ace, 7 HCP (0-7).} Pass
-4H {Il manque 1 As, 9 levees de jeu seulement : manche a Coeur. | 1 ace missing, only 9 playing tricks: game in hearts.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 20H (22 HL), 4-6-2-1. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 20 HCP (22 HL), 4-6-2-1.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 7H (7 HL), 4-2-4-3. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 7 HCP (7 HL), 4-2-4-3.} Pass
+3H {Naturel : 6 cartes, ou 5 belles cartes et main irreguliere. Ici 20H (22 HL), 4-6-2-1. | Natural: 6 cards, or 5 good cards and an unbalanced hand. Here 20 HCP (22 HL), 4-6-2-1.} Pass 3NT {Pas de fit : 3SA. Ici 7H (7 HL), 4-2-4-3. | No fit: 3NT. Here 7 HCP (7 HL), 4-2-4-3.} Pass
+4H {Main irreguliere : manche dans la couleur. Ici 20H (22 HL), 4-6-2-1. | Unbalanced hand: game in the suit. Here 20 HCP (22 HL), 4-6-2-1.} Pass Pass Pass
 
 [Event "Entrainement 2 Carreau forcing de manche - Donne 48"]
 [Board "48"]
@@ -848,6 +874,7 @@
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2D {Fort, forcing de manche : 9 levees de jeu et 2 levees de defense annexes (ou 24+ H). Ici 24H (24 HL), 5-1-3-4. | Strong, game-forcing: 9 playing tricks and 2 side defensive tricks (or 24+ HCP). Here 24 HCP (24 HL), 5-1-3-4.} Pass 2H {Pas d'As, 0 a 7 H. Ici 3H (3 HL), 3-4-4-2. | No aces, 0 to 7 HCP. Here 3 HCP (3 HL), 3-4-4-2.} Pass
-4S {Manche dans la couleur longue. Ici 24H (24 HL), 5-1-3-4. | Game in the long suit. Here 24 HCP (24 HL), 5-1-3-4.} Pass Pass Pass
+2D {Forcing de manche : 24+ HL, ou la manche a une levee pres (9 levees de jeu avec une majeure longue, 10 avec une mineure longue) et 2 levees de defense. Ici 24H (24 HL), 5-1-3-4. | Game-forcing: 24+ HL, or game within one trick (9 playing tricks with a long major, 10 with a long minor) and 2 defensive tricks. Here 24 HCP (24 HL), 5-1-3-4.} Pass 2H {Pas d'As : 0-7 H, ou 8+ H avec une courte. Ici 3H (3 HL), 3-4-4-2. | No aces: 0-7 HCP, or 8+ HCP with a short suit. Here 3 HCP (3 HL), 3-4-4-2.} Pass
+2S {Naturel, 5+ cartes. Ici 24H (24 HL), 5-1-3-4. | Natural, 5+ cards. Here 24 HCP (24 HL), 5-1-3-4.} Pass 3S {Soutien sous la manche : espoir de chelem. Ici 3H (3 HL), 3-4-4-2. | Raise below game: slam interest. Here 3 HCP (3 HL), 3-4-4-2.} Pass
+4S {Conclusion. Ici 24H (24 HL), 5-1-3-4. | Sign-off. Here 24 HCP (24 HL), 5-1-3-4.} Pass Pass Pass
 

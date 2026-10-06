@@ -16171,6 +16171,402 @@
   "status": "sef"
  },
  {
+  "id": "cmp.1H.lt3.4H",
+  "seq": "1H (1S|2C|2D) 3H",
+  "call": "4H",
+  "cond": "hld >= 18",
+  "forcing": "SO",
+  "meaning": "18+ HLD face au barrage : manche",
+  "meaning_en": "18+ HLD opposite the preemptive raise: game",
+  "status": "infere"
+ },
+ {
+  "id": "cmp.1S.lt3.4S",
+  "seq": "1S (2C|2D|2H) 3S",
+  "call": "4S",
+  "cond": "hld >= 18",
+  "forcing": "SO",
+  "meaning": "18+ HLD face au barrage : manche",
+  "meaning_en": "18+ HLD opposite the preemptive raise: game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1C.3D",
+  "seq": "1C (2NT)",
+  "call": "3D",
+  "cond": "C >= 4 and hld >= 11",
+  "forcing": "F1",
+  "meaning": "Cue-bid : soutien fort de l'ouverture",
+  "meaning_en": "Cue-bid: strong raise of the opening",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1C.3S",
+  "seq": "1C (2NT)",
+  "call": "3S",
+  "cond": "S >= 5 and hcp >= 7",
+  "forcing": "NF",
+  "meaning": "Naturel",
+  "meaning_en": "Natural",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1C.3C",
+  "seq": "1C (2NT)",
+  "call": "3C",
+  "cond": "C >= 5 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Soutien compétitif",
+  "meaning_en": "Competitive raise",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1C.3D.3NT",
+  "seq": "1C (2NT) 3D",
+  "call": "3NT",
+  "cond": "stop('H')",
+  "forcing": "SO",
+  "meaning": "Arrêt : 3SA",
+  "meaning_en": "Stopper: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1C.3D.5C",
+  "seq": "1C (2NT) 3D",
+  "call": "5C",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1D.3C",
+  "seq": "1D (2NT)",
+  "call": "3C",
+  "cond": "D >= 4 and hld >= 11",
+  "forcing": "F1",
+  "meaning": "Cue-bid : soutien fort de l'ouverture",
+  "meaning_en": "Cue-bid: strong raise of the opening",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1D.3S",
+  "seq": "1D (2NT)",
+  "call": "3S",
+  "cond": "S >= 5 and hcp >= 7",
+  "forcing": "NF",
+  "meaning": "Naturel",
+  "meaning_en": "Natural",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1D.3D",
+  "seq": "1D (2NT)",
+  "call": "3D",
+  "cond": "D >= 5 and 5 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Soutien compétitif",
+  "meaning_en": "Competitive raise",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1D.3C.3NT",
+  "seq": "1D (2NT) 3C",
+  "call": "3NT",
+  "cond": "stop('H')",
+  "forcing": "SO",
+  "meaning": "Arrêt : 3SA",
+  "meaning_en": "Stopper: 3NT",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1D.3C.5D",
+  "seq": "1D (2NT) 3C",
+  "call": "5D",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3C",
+  "seq": "1H (2NT)",
+  "call": "3C",
+  "cond": "H >= 3 and hld >= 11",
+  "forcing": "F1",
+  "meaning": "Cue-bid : soutien fort de l'ouverture",
+  "meaning_en": "Cue-bid: strong raise of the opening",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1H.3D",
+  "seq": "1H (2NT)",
+  "call": "3D",
+  "cond": "S >= 5 and hcp >= 12",
+  "forcing": "FM",
+  "meaning": "Cue-bid : 5+ ♠, forcing de manche",
+  "meaning_en": "Cue-bid: 5+ ♠, game-forcing",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1H.3S",
+  "seq": "1H (2NT)",
+  "call": "3S",
+  "cond": "S >= 5 and 7 <= hcp <= 11",
+  "forcing": "NF",
+  "meaning": "Naturel, encourageant",
+  "meaning_en": "Natural, encouraging",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.4H",
+  "seq": "1H (2NT)",
+  "call": "4H",
+  "cond": "H >= 4 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 4+ atouts",
+  "meaning_en": "Preemptive raise: 4+ trumps",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3H",
+  "seq": "1H (2NT)",
+  "call": "3H",
+  "cond": "H >= 3 and 6 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Soutien compétitif",
+  "meaning_en": "Competitive raise",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3C.4H",
+  "seq": "1H (2NT) 3C",
+  "call": "4H",
+  "cond": "hld >= 14",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3C.3H",
+  "seq": "1H (2NT) 3C",
+  "call": "3H",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum",
+  "meaning_en": "Minimum",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3C.3H.4H",
+  "seq": "1H (2NT) 3C 3H",
+  "call": "4H",
+  "cond": "hld >= 13",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3D.4S",
+  "seq": "1H (2NT) 3D",
+  "call": "4S",
+  "cond": "S >= 3",
+  "forcing": "SO",
+  "meaning": "Fit ♠ : manche",
+  "meaning_en": "♠ fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3D.3NT",
+  "seq": "1H (2NT) 3D",
+  "call": "3NT",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Pas de fit ♠",
+  "meaning_en": "No ♠ fit",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1H.3D.3NT.4H",
+  "seq": "1H (2NT) 3D 3NT",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit ♥",
+  "meaning_en": "♥ fit",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3C",
+  "seq": "1S (2NT)",
+  "call": "3C",
+  "cond": "S >= 3 and hld >= 11",
+  "forcing": "F1",
+  "meaning": "Cue-bid : soutien fort de l'ouverture",
+  "meaning_en": "Cue-bid: strong raise of the opening",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1S.3D",
+  "seq": "1S (2NT)",
+  "call": "3D",
+  "cond": "H >= 5 and hcp >= 10",
+  "forcing": "F1",
+  "meaning": "Cue-bid : 5+ ♥, main forte",
+  "meaning_en": "Cue-bid: 5+ ♥, strong hand",
+  "status": "infere",
+  "alert": true
+ },
+ {
+  "id": "def2NT.1S.3H",
+  "seq": "1S (2NT)",
+  "call": "3H",
+  "cond": "H >= 6 and hcp <= 9",
+  "forcing": "NF",
+  "meaning": "6 ♥, compétitif",
+  "meaning_en": "Six ♥, competitive",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.4S",
+  "seq": "1S (2NT)",
+  "call": "4S",
+  "cond": "S >= 4 and 5 <= hld <= 10",
+  "forcing": "SO",
+  "meaning": "Barrage : 4+ atouts",
+  "meaning_en": "Preemptive raise: 4+ trumps",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3S",
+  "seq": "1S (2NT)",
+  "call": "3S",
+  "cond": "S >= 3 and 6 <= hld <= 10",
+  "forcing": "NF",
+  "meaning": "Soutien compétitif",
+  "meaning_en": "Competitive raise",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3C.4S",
+  "seq": "1S (2NT) 3C",
+  "call": "4S",
+  "cond": "hld >= 14",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3C.3S",
+  "seq": "1S (2NT) 3C",
+  "call": "3S",
+  "cond": "true",
+  "forcing": "NF",
+  "meaning": "Minimum",
+  "meaning_en": "Minimum",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3C.3S.4S",
+  "seq": "1S (2NT) 3C 3S",
+  "call": "4S",
+  "cond": "hld >= 13",
+  "forcing": "SO",
+  "meaning": "Manche",
+  "meaning_en": "Game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3D.4H",
+  "seq": "1S (2NT) 3D",
+  "call": "4H",
+  "cond": "H >= 3",
+  "forcing": "SO",
+  "meaning": "Fit ♥ : manche",
+  "meaning_en": "♥ fit: game",
+  "status": "infere"
+ },
+ {
+  "id": "def2NT.1S.3D.4S",
+  "seq": "1S (2NT) 3D",
+  "call": "4S",
+  "cond": "true",
+  "forcing": "SO",
+  "meaning": "Retour à ♠",
+  "meaning_en": "Back to ♠",
+  "status": "infere"
+ },
+ {
+  "id": "rv.H.2S",
+  "seq": "(1H) P (2H) P",
+  "call": "2S",
+  "cond": "S >= 5 and S == max(S, H, D, C) and hcp_in('S') >= 4 and hl >= 8",
+  "forcing": "NF",
+  "meaning": "Naturel : 5+ cartes",
+  "meaning_en": "Natural: 5+ cards",
+  "status": "infere"
+ },
+ {
+  "id": "rv.H.3D",
+  "seq": "(1H) P (2H) P",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and ((D >= 6 and hl >= 8) or (D >= 5 and hcp_in('D') >= 5 and hl >= 9))",
+  "forcing": "NF",
+  "meaning": "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes",
+  "meaning_en": "Natural at the three level: 6 cards, or 5 good cards",
+  "status": "infere"
+ },
+ {
+  "id": "rv.H.3C",
+  "seq": "(1H) P (2H) P",
+  "call": "3C",
+  "cond": "C == max(S, H, D, C) and ((C >= 6 and hl >= 8) or (C >= 5 and hcp_in('C') >= 5 and hl >= 9))",
+  "forcing": "NF",
+  "meaning": "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes",
+  "meaning_en": "Natural at the three level: 6 cards, or 5 good cards",
+  "status": "infere"
+ },
+ {
+  "id": "rv.S.3H",
+  "seq": "(1S) P (2S) P",
+  "call": "3H",
+  "cond": "H == max(S, H, D, C) and ((H >= 6 and hl >= 8) or (H >= 5 and hcp_in('H') >= 5 and hl >= 9))",
+  "forcing": "NF",
+  "meaning": "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes",
+  "meaning_en": "Natural at the three level: 6 cards, or 5 good cards",
+  "status": "infere"
+ },
+ {
+  "id": "rv.S.3D",
+  "seq": "(1S) P (2S) P",
+  "call": "3D",
+  "cond": "D == max(S, H, D, C) and ((D >= 6 and hl >= 8) or (D >= 5 and hcp_in('D') >= 5 and hl >= 9))",
+  "forcing": "NF",
+  "meaning": "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes",
+  "meaning_en": "Natural at the three level: 6 cards, or 5 good cards",
+  "status": "infere"
+ },
+ {
+  "id": "rv.S.3C",
+  "seq": "(1S) P (2S) P",
+  "call": "3C",
+  "cond": "C == max(S, H, D, C) and ((C >= 6 and hl >= 8) or (C >= 5 and hcp_in('C') >= 5 and hl >= 9))",
+  "forcing": "NF",
+  "meaning": "Naturel au palier de 3 : 6 cartes, ou 5 belles cartes",
+  "meaning_en": "Natural at the three level: 6 cards, or 5 good cards",
+  "status": "infere"
+ },
+ {
   "id": "advI.lt.1C.H.4",
   "seq": "(1C) 1H",
   "call": "4H",

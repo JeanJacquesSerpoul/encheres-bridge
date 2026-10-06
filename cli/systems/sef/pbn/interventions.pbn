@@ -95,14 +95,14 @@ Pass Pass {Minimum (12 HL) : passe. | Minimum (12 HL): pass.} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AT4.873.KT5.AQ94 KQ985.AK64.Q3.82 62.QJ9.J97.JT763 J73.T52.A8642.K5"]
+[Deal "N:KQ985.AK64.Q3.82 T62.J7.KT97.JT63 J73.T52.A8642.K5 A4.Q983.J5.AQ974"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} 1S {Intervention : 5 cartes a Pique (KQ985), 15 HL. | Overcall: 5 spades (KQ985), 15 HL.} Pass 2S {Soutien simple : 3 atouts, 9 HLD (7-10). | Simple raise: 3 trumps, 9 HLD (7-10).}
-Pass 4S {Manche (17 HLD). | Game (17 HLD).} Pass Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (14 HL), 2-4-2-5. | Longest minor (3-3: 1♣). Here 13 HCP (14 HL), 2-4-2-5.} 1S {Intervention : 5+ cartes, belle couleur, 10-17 HL. Ici 14H (15 HL), 5-4-2-2. | Overcall: 5+ cards, good suit, 10-17 HL. Here 14 HCP (15 HL), 5-4-2-2.} Pass 2S {Soutien simple : 7-10 HLD. Ici 8H (8 HL), 3-3-5-2. | Simple raise: 7-10 HLD. Here 8 HCP (8 HL), 3-3-5-2.}
+Pass 4S {Manche : 17+ HLD. Ici 14H (15 HL), 5-4-2-2. | Game: 17+ HLD. Here 14 HCP (15 HL), 5-4-2-2.} Pass Pass
 Pass
 
 [Event "Entrainement Interventions - Donne 7"]
@@ -165,14 +165,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:75.QJ874.AJ6.KQ6 AKT84.62.Q95.J74 J3.KT95.T832.T93 Q962.A3.K74.A852"]
+[Deal "N:AKT84.62.Q95.J74 J53.Q75.JT632.T6 Q962.A3.K74.A852 7.KJT984.A8.KQ93"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} 1S {Intervention : 5 cartes a Pique (AKT84), 11 HL. | Overcall: 5 spades (AKT84), 11 HL.} Pass 2H {Cue-bid : fit 4e et 14 HLD. | Cue-bid: 4-card fit and 14 HLD.}
-Pass 2S {Intervention minimum (11 HL). | Minimum overcall (11 HL).} Pass 4S {Fit et 14 HLD : manche. | Fit and 14 HLD: game.}
+1H {5+ coeurs, 12+ H. Ici 13H (15 HL), 1-6-2-4. | 5+ hearts, 12+ HCP. Here 13 HCP (15 HL), 1-6-2-4.} 1S {Intervention : 5+ cartes, belle couleur, 10-17 HL. Ici 10H (11 HL), 5-2-3-3. | Overcall: 5+ cards, good suit, 10-17 HL. Here 10 HCP (11 HL), 5-2-3-3.} Pass 2H {Cue-bid : fitte, 13+ HLD. Ici 13H (13 HL), 4-2-3-4. | Cue-bid: fit, 13+ HLD. Here 13 HCP (13 HL), 4-2-3-4.}
+Pass 2S {Intervention minimum. Ici 10H (11 HL), 5-2-3-3. | Minimum overcall. Here 10 HCP (11 HL), 5-2-3-3.} Pass 4S {Manche en majeure. Ici 13H (13 HL), 4-2-3-4. | Major-suit game. Here 13 HCP (13 HL), 4-2-3-4.}
 Pass Pass Pass
 
 [Event "Entrainement Interventions - Donne 11"]
@@ -201,14 +201,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:A98.63.KQJT3.AT6 KJT74.AQ5.82.K93 52.JT97.A54.8742 Q63.K842.976.QJ5"]
+[Deal "N:KJT74.AQ5.82.K93 A85.JT76.T.T7642 Q63.K842.976.QJ5 92.93.AKQJ543.A8"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} 1S {Intervention avec la valeur d'une ouverture (13H), couleur 5e moyenne. | Overcall on opening values (13 HCP), a modest five-card suit.} Pass 2S {Soutien simple : 3 atouts, 8 HLD (7-10). | Simple raise: 3 trumps, 8 HLD (7-10).}
-Pass Pass {Minimum (14 HL) : passe. | Minimum (14 HL): pass.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (17 HL), 2-2-7-2. | Longest minor (4-4: 1♦). Here 14 HCP (17 HL), 2-2-7-2.} 1S {Intervention : 5 cartes et la valeur d'une ouverture. Ici 13H (14 HL), 5-3-2-3. | Overcall: 5 cards and opening values. Here 13 HCP (14 HL), 5-3-2-3.} Pass 2S {Soutien simple : 7-10 HLD. Ici 8H (8 HL), 3-4-3-3. | Simple raise: 7-10 HLD. Here 8 HCP (8 HL), 3-4-3-3.}
+Pass Pass Pass
 
 [Event "Entrainement Interventions - Donne 13"]
 [Board "13"]
@@ -530,14 +530,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:KQJ62.J73.A42.K9 84.A6.KQJ953.A72 T3.QT95.87.T8643 A975.K842.T6.QJ5"]
+[Deal "N:84.A6.KQJ953.A72 3.QT753.8742.T43 A975.K842.T6.QJ5 KQJT62.J9.A.K986"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} 2D {Intervention au palier de 2 : 6 cartes a Carreau (KQJ953), 16 HL. | Two-level overcall: 6 diamonds (KQJ953), 16 HL.} Pass 3D {Soutien : 2 atouts, 11 HLD (8-12). | Raise: 2 trumps, 11 HLD (8-12).}
-Pass Pass {Minimum (16 HL) : passe. | Minimum (16 HL): pass.} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 14H (15 HL), 6-2-1-4. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 14 HCP (15 HL), 6-2-1-4.} 2D {Intervention au palier de 2 : belle couleur, 6 cartes ou 14+ HL. Ici 14H (16 HL), 2-2-6-3. | Two-level overcall: good suit, 6 cards or 14+ HL. Here 14 HCP (16 HL), 2-2-6-3.} Pass 3D {Soutien : 8-12 HLD. Ici 10H (10 HL), 4-4-2-3. | Raise: 8-12 HLD. Here 10 HCP (10 HL), 4-4-2-3.}
+Pass Pass Pass
 
 [Event "Entrainement Interventions - Donne 32"]
 [Board "32"]
@@ -807,13 +807,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:T4.AQT52.JT3.AQ8 AJ8753.6.K94.T52 Q9.J97.Q865.9743 K62.K843.A72.KJ6"]
+[Deal "N:AJ8753.6.K94.T52 T94.Q92.T85.Q983 K62.K843.A72.KJ6 Q.AJT75.QJ63.A74"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} 2S {Saut faible : 6 cartes a Pique, 8H. | Weak jump overcall: 6 spades, 8 HCP.} Pass Pass {Fit 3e mais 14 HLD seulement : pas de manche, passe. | 3-card fit but only 14 HLD: no game, pass.}
+1H {5+ coeurs, 12+ H. Ici 14H (14 HL), 1-5-4-3. | 5+ hearts, 12+ HCP. Here 14 HCP (14 HL), 1-5-4-3.} 2S {Intervention a saut : barrage, 6 cartes, 6-10 H. Ici 8H (10 HL), 6-1-3-3. | Weak jump overcall: 6 cards, 6-10 HCP. Here 8 HCP (10 HL), 6-1-3-3.} Pass Pass
 Pass
 
 [Event "Entrainement Interventions - Donne 48"]
@@ -824,13 +824,13 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:QJ64.T753.A2.AQJ 92.KQJ864.T73.85 KT83..Q965.T9742 A75.A92.KJ84.K63"]
+[Deal "N:92.KQJ864.T73.85 KQJT84.7.652.T74 A75.A92.KJ84.K63 63.T53.AQ9.AQJ92"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} 2H {Saut faible : 6 cartes a Coeur, 6H. | Weak jump overcall: 6 hearts, 6 HCP.} Pass 4H {Fit et 15 HLD face au saut faible : manche. | Fit and 15 HLD opposite the weak jump: game.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 13H (14 HL), 2-3-3-5. | Longest minor (3-3: 1♣). Here 13 HCP (14 HL), 2-3-3-5.} 2H {Intervention a saut : barrage, 6 cartes, 6-10 H. Ici 6H (8 HL), 2-6-3-2. | Weak jump overcall: 6 cards, 6-10 HCP. Here 6 HCP (8 HL), 2-6-3-2.} Pass 4H {Manche face au saut faible : fitte, 15+ HLD. Ici 15H (15 HL), 3-3-4-3. | Game over the weak jump: fit, 15+ HLD. Here 15 HCP (15 HL), 3-3-4-3.}
 Pass Pass Pass
 
 [Event "Entrainement Interventions - Donne 49"]

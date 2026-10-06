@@ -469,15 +469,15 @@ Pass {Passe : 2C est une conclusion. | Pass: 2H is a sign-off.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:74.AQ5.K83.AJ962 AKQ82.T72.Q64.K5 963.KJ864.A52.T4 JT5.93.JT97.Q873"]
+[Deal "N:963.KJ864.A52.T4 J72.975.QJT73.52 K8.AT3.K9.KQJ876 AQT54.Q2.864.A93"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-1C {Ouverture de 1T : 5 cartes a Trefle, 14H. | 1C opening: 5 clubs, 14 HCP.} 1S {Intervention adverse a 1P. | Opponent overcalls 1S.} X {Spoutnik : 5 Coeurs et 8H (10 max, ils seront repetes). | Negative double: 5 hearts and 8 HCP (10 max, to be rebid).} Pass
-2C {Repete sa couleur (5 cartes) : pas d'arret a Pique. | Rebids the suit (5 cards): no spade stopper.} Pass 2H {Repete les Coeurs : 5 cartes, 8H (10 max). | Rebids the hearts: 5 cards, 8 HCP (10 max).} Pass
-Pass {Passe : 2C est une conclusion. | Pass: 2H is a sign-off.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 16H (18 HL), 2-3-2-6. | Longest minor (3-3: 1♣). Here 16 HCP (18 HL), 2-3-2-6.} 1S {Intervention : 5+ cartes, belle couleur, 10-17 HL. Ici 12H (13 HL), 5-2-3-3. | Overcall: 5+ cards, good suit, 10-17 HL. Here 12 HCP (13 HL), 5-2-3-3.} X {Spoutnik : 4♥ et 8+ H, ou 5-6♥ et 10 H max (repetes ensuite). Ici 8H (9 HL), 3-5-3-2. | Sputnik: 4♥ and 8+ HCP, or 5-6♥ and 10 HCP max (rebid next). Here 8 HCP (9 HL), 3-5-3-2.} Pass
+2C {Repete sa couleur. Ici 16H (18 HL), 2-3-2-6. | Rebids his suit. Here 16 HCP (18 HL), 2-3-2-6.} Pass 2H {Repete les coeurs : 5-6 cartes, 10 H max. Ici 8H (9 HL), 3-5-3-2. | Rebids the hearts: 5-6 cards, 10 HCP max. Here 8 HCP (9 HL), 3-5-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement Spoutnik - Donne 28"]
 [Board "28"]
@@ -487,15 +487,15 @@ Pass {Passe : 2C est une conclusion. | Pass: 2H is a sign-off.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:82.AJ6.AKJ53.J94 AQJ96.98.642.AQ3 T53.KQT75.98.K62 K74.432.QT7.T875"]
+[Deal "N:T53.KQT75.98.K62 2.A9843.KT3.JT93 J84.2.AQJ654.A84 AKQ976.J6.72.Q75"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-1D {Ouverture de 1K : 5 cartes a Carreau, 14H. | 1D opening: 5 diamonds, 14 HCP.} 1S {Intervention adverse a 1P. | Opponent overcalls 1S.} X {Spoutnik : 5 Coeurs et 8H (10 max, ils seront repetes). | Negative double: 5 hearts and 8 HCP (10 max, to be rebid).} Pass
-2D {Repete sa couleur (5 cartes) : pas d'arret a Pique. | Rebids the suit (5 cards): no spade stopper.} Pass 2H {Repete les Coeurs : 5 cartes, 8H (10 max). | Rebids the hearts: 5 cards, 8 HCP (10 max).} Pass
-Pass {Passe : 2C est une conclusion. | Pass: 2H is a sign-off.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (14 HL), 3-1-6-3. | Longest minor (4-4: 1♦). Here 12 HCP (14 HL), 3-1-6-3.} 1S {Intervention : 5+ cartes, belle couleur, 10-17 HL. Ici 12H (14 HL), 6-2-2-3. | Overcall: 5+ cards, good suit, 10-17 HL. Here 12 HCP (14 HL), 6-2-2-3.} X {Spoutnik : 4♥ et 8+ H, ou 5-6♥ et 10 H max (repetes ensuite). Ici 8H (9 HL), 3-5-2-3. | Sputnik: 4♥ and 8+ HCP, or 5-6♥ and 10 HCP max (rebid next). Here 8 HCP (9 HL), 3-5-2-3.} Pass
+2D {Repete sa couleur. Ici 12H (14 HL), 3-1-6-3. | Rebids his suit. Here 12 HCP (14 HL), 3-1-6-3.} Pass 2H {Repete les coeurs : 5-6 cartes, 10 H max. Ici 8H (9 HL), 3-5-2-3. | Rebids the hearts: 5-6 cards, 10 HCP max. Here 8 HCP (9 HL), 3-5-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Spoutnik - Donne 29"]
 [Board "29"]

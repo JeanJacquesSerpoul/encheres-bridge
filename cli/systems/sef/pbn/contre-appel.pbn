@@ -9,14 +9,14 @@
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:KQ9.8.KJ74.KQ932 AJ74.KQ52.A93.84 T5.AT963.T6.AJ75 8632.J74.Q852.T6"]
+[Deal "N:AJ74.KQ52.A93.84 9.T3.KJT764.J953 8632.J74.Q852.T6 KQT5.A986..AKQ72"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 14H, 4 Piques et 4 Coeurs. | Takeout double: 14 HCP, 4 spades and 4 hearts.} Pass 1S {Reponse obligatoire sans saut : 4 cartes a Pique, 3H (0-7). | Compulsory answer, no jump: 4 spades, 3 HCP (0-7).}
-Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (19 HL), 4-4-0-5. | Longest minor (3-3: 1♣). Here 18 HCP (19 HL), 4-4-0-5.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 4-4-3-2.} Pass 1S {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 4-3-4-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 4-3-4-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 2"]
 [Board "2"]
@@ -26,14 +26,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AJ6.T.AK9743.Q53 KQ93.A762.5.KJ84 T72.K84.QT.AT962 854.QJ953.J862.7"]
+[Deal "N:KQ93.A762.5.KJ84 T72.K8.93.AQ9652 854.QJ953.J862.7 AJ6.T4.AKQT74.T3"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} X {Contre d'appel : 13H, 4 Piques et 4 Coeurs. | Takeout double: 13 HCP, 4 spades and 4 hearts.} Pass 1H {Reponse obligatoire sans saut : 5 cartes a Coeur, 4H (0-7). | Compulsory answer, no jump: 5 hearts, 4 HCP (0-7).}
-Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 14H (16 HL), 3-2-6-2. | Longest minor (4-4: 1♦). Here 14 HCP (16 HL), 3-2-6-2.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 13H (13 HL), 4-4-1-4. | Takeout double: 13+ HCP, the unbid suits. Here 13 HCP (13 HL), 4-4-1-4.} Pass 1H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 4H (5 HL), 3-5-4-1. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 4 HCP (5 HL), 3-5-4-1.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 3"]
 [Board "3"]
@@ -43,14 +43,14 @@ Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:J72.KQ753.A64.K7 AQ85.4.KJ73.A962 KT.AJ9.T92.QT853 9643.T862.Q85.J4"]
+[Deal "N:AQ85.4.KJ73.A962 J72.KQ7.9642.QT3 9643.T862.Q85.J4 KT.AJ953.AT.K875"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 14H, 4 Piques, court a Coeur. | Takeout double: 14 HCP, 4 spades, short in hearts.} Pass 1S {Reponse obligatoire sans saut : 4 cartes a Pique, 3H (0-7). | Compulsory answer, no jump: 4 spades, 3 HCP (0-7).}
-Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
+1H {5+ coeurs, 12+ H. Ici 15H (16 HL), 2-5-2-4. | 5+ hearts, 12+ HCP. Here 15 HCP (16 HL), 2-5-2-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 4-1-4-4.} Pass 1S {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 4-4-3-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 4-4-3-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 4"]
 [Board "4"]
@@ -60,14 +60,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AKQT2.62.94.KT53 7.AQ95.K863.AJ74 85.JT84.AQJ7.Q92 J9643.K73.T52.86"]
+[Deal "N:7.AQ95.K863.AJ74 A5.T86.Q94.KT932 J9643.K73.T52.86 KQT82.J42.AJ7.Q5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} X {Contre d'appel : 14H, 4 Coeurs, court a Pique. | Takeout double: 14 HCP, 4 hearts, short in spades.} Pass 2H {Reponse obligatoire sans saut : 3 cartes a Coeur, 4H (0-7). | Compulsory answer, no jump: 3 hearts, 4 HCP (0-7).}
-Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 13H (14 HL), 5-3-3-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 13 HCP (14 HL), 5-3-3-2.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 1-4-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 1-4-4-4.} Pass 2H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 4H (4 HL), 5-3-3-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 4 HCP (4 HL), 5-3-3-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 5"]
 [Board "5"]
@@ -77,14 +77,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:AQT.K7.Q96.K9843 K874.AQ63.KJ5.Q2 J96.T92.A2.AJT75 532.J854.T8743.6"]
+[Deal "N:K874.AQ63.KJ5.Q2 QJT96.97.Q2.T875 532.J854.T8743.6 A.KT2.A96.AKJ943"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 15H, 4 Piques et 4 Coeurs. | Takeout double: 15 HCP, 4 spades and 4 hearts.} Pass 1H {Reponse obligatoire sans saut : 4 cartes a Coeur, 1H (0-7). | Compulsory answer, no jump: 4 hearts, 1 HCP (0-7).}
-Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (20 HL), 1-3-3-6. | Longest minor (3-3: 1♣). Here 19 HCP (20 HL), 1-3-3-6.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 4-4-3-2.} Pass 1H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 1H (1 HL), 3-4-5-1. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 1 HCP (1 HL), 3-4-5-1.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 6"]
 [Board "6"]
@@ -94,14 +94,14 @@ Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:QT53.AQT.K965.Q2 AK62.KJ74.83.A95 J874.6.AJT.KT874 9.98532.Q742.J63"]
+[Deal "N:AK62.KJ74.83.A95 J843.Q6.J65.T874 9.98532.Q742.J63 QT75.AT.AKT9.KQ2"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} X {Contre d'appel : 15H, 4 Piques et 4 Coeurs. | Takeout double: 15 HCP, 4 spades and 4 hearts.} Pass 1H {Reponse obligatoire sans saut : 5 cartes a Coeur, 3H (0-7). | Compulsory answer, no jump: 5 hearts, 3 HCP (0-7).}
-Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 18H (18 HL), 4-2-4-3. | Longest minor (4-4: 1♦). Here 18 HCP (18 HL), 4-2-4-3.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 4-4-2-3. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 4-4-2-3.} Pass 1H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 1-5-4-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 1-5-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 7"]
 [Board "7"]
@@ -111,14 +111,14 @@ Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:KT96.2.A97.KQ864 AJ53.AK84.KQ62.2 Q.JT75.J43.AT953 8742.Q963.T85.J7"]
+[Deal "N:AJ53.AK84.KQ62.2 T.JT752.J43.9543 8742.Q963.T85.J7 KQ96..A97.AKQT86"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 17H, 4 Piques et 4 Coeurs. | Takeout double: 17 HCP, 4 spades and 4 hearts.} Pass 1S {Reponse obligatoire sans saut : 4 cartes a Pique, 3H (0-7). | Compulsory answer, no jump: 4 spades, 3 HCP (0-7).}
-Pass 3S {Soutien a saut : 4 atouts, 17H (17+). | Jump raise: 4 trumps, 17 HCP (17+).} Pass Pass {Minimum (3H) : passe. | Minimum (3 HCP): pass.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (20 HL), 4-0-3-6. | Longest minor (3-3: 1♣). Here 18 HCP (20 HL), 4-0-3-6.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 17H (17 HL), 4-4-4-1. | Takeout double: 13+ HCP, the unbid suits. Here 17 HCP (17 HL), 4-4-4-1.} Pass 1S {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 4-4-3-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 4-4-3-2.}
+Pass 3S {Soutien a saut : 17+ H, 4 atouts. Ici 17H (17 HL), 4-4-4-1. | Jump raise: 17+ HCP, 4-card support. Here 17 HCP (17 HL), 4-4-4-1.} Pass Pass
 Pass
 
 [Event "Entrainement Contre d'appel - Donne 8"]
@@ -165,14 +165,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:K3.AQ2.Q43.K8742 AQ5.KJ84.AK7.Q63 JT87.975.JT6.AT9 9642.T63.9852.J5"]
+[Deal "N:AQ5.KJ84.AK7.Q63 KJT7.952.JT43.T4 9642.T63.9852.J5 83.AQ7.Q6.AK9872"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "2NT"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre fort, toutes distributions : 19H. | Strong double, any shape: 19 HCP.} Pass 1S {Reponse obligatoire sans saut : 4 cartes a Pique, 1H (0-7). | Compulsory answer, no jump: 4 spades, 1 HCP (0-7).}
-Pass 2NT {18-19 H regulier avec l'arret : 2SA. | 18-19 HCP balanced with a stopper: 2NT.} Pass Pass {Minimum (1H) : passe. | Minimum (1 HCP): pass.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 15H (17 HL), 2-3-2-6. | Longest minor (3-3: 1♣). Here 15 HCP (17 HL), 2-3-2-6.} X {Contre « toutes distributions » : 18 H et plus. Ici 19H (19 HL), 3-4-3-3. | Strong double: 18+ HCP, any shape. Here 19 HCP (19 HL), 3-4-3-3.} Pass 1S {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 1H (1 HL), 4-3-4-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 1 HCP (1 HL), 4-3-4-2.}
+Pass 2NT {18-19 H, regulier, arret. Ici 19H (19 HL), 3-4-3-3. | 18-19 HCP, balanced, stopper. Here 19 HCP (19 HL), 3-4-3-3.} Pass Pass
 Pass
 
 [Event "Entrainement Contre d'appel - Donne 11"]
@@ -201,14 +201,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AKQJT7.T86.K9.54 52.KQ74.AJ63.KQ8 4.A932.Q72.AT963 9863.J5.T854.J72"]
+[Deal "N:52.KQ74.AJ63.KQ8 T4.AT83.9.AT9643 9863.J5.T854.J72 AKQJ7.962.KQ72.5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2D"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} X {Contre d'appel : 15H, 4 Coeurs, court a Pique. | Takeout double: 15 HCP, 4 hearts, short in spades.} Pass 2D {Reponse obligatoire sans saut : 4 cartes a Carreau, 2H (0-7). | Compulsory answer, no jump: 4 diamonds, 2 HCP (0-7).}
-Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 15H (16 HL), 5-3-4-1. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 15 HCP (16 HL), 5-3-4-1.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 2-4-4-3. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 2-4-4-3.} Pass 2D {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 2H (2 HL), 4-2-4-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 2 HCP (2 HL), 4-2-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 13"]
 [Board "13"]
@@ -218,14 +218,14 @@ Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:T95.AKQJ42.K.973 KQ73.5.AJ84.KJ62 A642.T8.T965.AQT J8.9763.Q732.854"]
+[Deal "N:KQ73.5.AJ84.KJ62 AT62.J82.K965.93 J8.9763.Q732.854 954.AKQT4.T.AQT7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2D"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 14H, 4 Piques, court a Coeur. | Takeout double: 14 HCP, 4 spades, short in hearts.} Pass 2D {Reponse obligatoire sans saut : 4 cartes a Carreau, 3H (0-7). | Compulsory answer, no jump: 4 diamonds, 3 HCP (0-7).}
-Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
+1H {5+ coeurs, 12+ H. Ici 15H (16 HL), 3-5-1-4. | 5+ hearts, 12+ HCP. Here 15 HCP (16 HL), 3-5-1-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 4-1-4-4.} Pass 2D {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 2-4-4-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 2-4-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 14"]
 [Board "14"]
@@ -235,14 +235,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:97.AKT5.A83.Q752 AK82.Q973.KJ5.83 QJT4.J62.T4.AKT6 653.84.Q9762.J94"]
+[Deal "N:AK82.Q973.KJ5.83 T94.KT6.T843.QT6 653.84.Q9762.J94 QJ7.AJ52.A.AK752"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1D"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 13H, 4 Piques et 4 Coeurs. | Takeout double: 13 HCP, 4 spades and 4 hearts.} Pass 1D {Reponse obligatoire sans saut : 5 cartes a Carreau, 3H (0-7). | Compulsory answer, no jump: 5 diamonds, 3 HCP (0-7).}
-Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (19 HL), 3-4-1-5. | Longest minor (3-3: 1♣). Here 19 HCP (19 HL), 3-4-1-5.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 13H (13 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 13 HCP (13 HL), 4-4-3-2.} Pass 1D {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 3H (3 HL), 3-2-5-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 3 HCP (3 HL), 3-2-5-3.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 15"]
 [Board "15"]
@@ -252,14 +252,14 @@ Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:KQ72.AQT.KT74.65 AJ93.K852.6.AQ74 85.J64.AQ93.JT83 T64.973.J852.K92"]
+[Deal "N:AJ93.K852.6.AQ74 K87.JT4.T7.JT863 T64.973.J852.K92 Q52.AQ6.AKQ943.5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} X {Contre d'appel : 14H, 4 Piques et 4 Coeurs. | Takeout double: 14 HCP, 4 spades and 4 hearts.} Pass 1H {Reponse obligatoire sans saut : 3 cartes a Coeur, 4H (0-7). | Compulsory answer, no jump: 3 hearts, 4 HCP (0-7).}
-Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 17H (19 HL), 3-3-6-1. | Longest minor (4-4: 1♦). Here 17 HCP (19 HL), 3-3-6-1.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 4-4-1-4. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 4-4-1-4.} Pass 1H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 4H (4 HL), 3-3-4-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 4 HCP (4 HL), 3-3-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 16"]
 [Board "16"]
@@ -286,14 +286,14 @@ Pass Pass {Rien de plus a dire (15H). | Nothing more to say (15 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:T82.K964.AT5.AK9 KQ74.AJ83.K92.65 93.Q5.J76.QT8432 AJ65.T72.Q843.J7"]
+[Deal "N:KQ74.AJ83.K92.65 9.KQ9654.76.T943 AJ65.T72.Q843.J7 T832..AJT5.AKQ82"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 13H, 4 Piques et 4 Coeurs. | Takeout double: 13 HCP, 4 spades and 4 hearts.} Pass 2S {Reponse a saut : 4 cartes a Pique, 8H (8-10). | Jump answer: 4 spades, 8 HCP (8-10).}
-Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 14H (15 HL), 4-0-4-5. | Longest minor (3-3: 1♣). Here 14 HCP (15 HL), 4-0-4-5.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 13H (13 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 13 HCP (13 HL), 4-4-3-2.} Pass 2S {Reponse a saut : majeure 4e (5e sur 1♠), 8-10 H. Ici 8H (8 HL), 4-3-4-2. | Jump answer: four-card major (five-card over 1♠), 8-10 HCP. Here 8 HCP (8 HL), 4-3-4-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 18"]
 [Board "18"]
@@ -320,14 +320,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:T63.AKQ73.JT.AT4 KQ74.6.AK92.QJ83 92.J94.87653.975 AJ85.T852.Q4.K62"]
+[Deal "N:KQ74.6.AK92.QJ83 T9632.Q3.J875.54 AJ85.T852.Q4.K62 .AKJ974.T63.AT97"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 15H, 4 Piques, court a Coeur. | Takeout double: 15 HCP, 4 spades, short in hearts.} Pass 2S {Reponse a saut : 4 cartes a Pique, 10H (8-10). | Jump answer: 4 spades, 10 HCP (8-10).}
-Pass 4S {Fit et 15H : manche. | Fit and 15 HCP: game.} Pass Pass
+1H {5+ coeurs, 12+ H. Ici 12H (14 HL), 0-6-3-4. | 5+ hearts, 12+ HCP. Here 12 HCP (14 HL), 0-6-3-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 4-1-4-4.} Pass 2S {Reponse a saut : majeure 4e (5e sur 1♠), 8-10 H. Ici 10H (10 HL), 4-4-2-3. | Jump answer: four-card major (five-card over 1♠), 8-10 HCP. Here 10 HCP (10 HL), 4-4-2-3.}
+Pass 4S {Manche : fitte, 15+ H. Ici 15H (15 HL), 4-1-4-4. | Game: fit, 15+ HCP. Here 15 HCP (15 HL), 4-1-4-4.} Pass Pass
 Pass
 
 [Event "Entrainement Contre d'appel - Donne 20"]
@@ -409,14 +409,14 @@ Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:75.AQJ94.AJ.Q943 AJ84.7.KQ63.AJ52 T2.T653.T972.K86 KQ963.K82.854.T7"]
+[Deal "N:AJ84.7.KQ63.AJ52 T2.543.JT97.K843 KQ963.K82.854.T7 75.AQJT96.A2.Q96"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 15H, 4 Piques, court a Coeur. | Takeout double: 15 HCP, 4 spades, short in hearts.} Pass 3S {Reponse a double saut : 5 cartes a Pique, 8H (8-10). | Double jump answer: 5 spades, 8 HCP (8-10).}
-Pass 4S {Fit et 15H : manche. | Fit and 15 HCP: game.} Pass Pass
+1H {5+ coeurs, 12+ H. Ici 13H (15 HL), 2-6-2-3. | 5+ hearts, 12+ HCP. Here 13 HCP (15 HL), 2-6-2-3.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 4-1-4-4.} Pass 3S {Reponse a double saut : majeure 5e, 8-10 H. Ici 8H (9 HL), 5-3-3-2. | Double-jump answer: five-card major, 8-10 HCP. Here 8 HCP (9 HL), 5-3-3-2.}
+Pass 4S {Manche : fit et 14+ H en face de la majeure 5e (8-10 H). Ici 15H (15 HL), 4-1-4-4. | Game: fit and 14+ HCP opposite the five-card major (8-10 HCP). Here 15 HCP (15 HL), 4-1-4-4.} Pass Pass
 Pass
 
 [Event "Entrainement Contre d'appel - Donne 25"]
@@ -444,14 +444,14 @@ Pass Pass {Rien de plus a dire (14H). | Nothing more to say (14 HCP).} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AQT6.AKT93.6.JT2 KJ93.Q.AJ74.KQ85 854.7642.93.9764 72.J85.KQT852.A3"]
+[Deal "N:KJ93.Q.AJ74.KQ85 QT854.742.63.964 72.J85.KQT852.A3 A6.AKT963.9.JT72"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 16H, 4 Piques, court a Coeur. | Takeout double: 16 HCP, 4 spades, short in hearts.} Pass 3D {Reponse a saut : 6 cartes a Carreau, 10H (8-10). | Jump answer: 6 diamonds, 10 HCP (8-10).}
-Pass Pass {Rien de plus a dire (16H). | Nothing more to say (16 HCP).} Pass
+1H {5+ coeurs, 12+ H. Ici 12H (14 HL), 2-6-1-4. | 5+ hearts, 12+ HCP. Here 12 HCP (14 HL), 2-6-1-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 16H (15 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 16 HCP (15 HL), 4-1-4-4.} Pass 3D {Reponse a saut : mineure 5e, 8-10 H. Ici 10H (12 HL), 2-3-6-2. | Jump answer: five-card minor, 8-10 HCP. Here 10 HCP (12 HL), 2-3-6-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 27"]
 [Board "27"]
@@ -479,15 +479,15 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:T9.J7.AT3.AKT653 KQ73.A985.KJ4.72 854.Q42.Q876.QJ9 AJ62.KT63.952.84"]
+[Deal "N:KQ73.A985.KJ4.72 T9854.4.QT7.QT93 AJ62.KT63.952.84 .QJ72.A863.AKJ65"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 13H, 4 Piques et 4 Coeurs. | Takeout double: 13 HCP, 4 spades and 4 hearts.} Pass 2C {Cue-bid : 8H et les deux majeures 4es. | Cue-bid: 8 HCP and both four-card majors.}
-Pass 2H {Majeure 4e, la moins chere. | Cheapest four-card major.} Pass 3H {Fit 4-4 et 8-10 H : invitation. | 4-4 fit and 8-10 HCP: invitation.}
-Pass Pass {Rien de plus a dire (13H). | Nothing more to say (13 HCP).} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 15H (16 HL), 0-4-4-5. | Longest minor (3-3: 1♣). Here 15 HCP (16 HL), 0-4-4-5.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 13H (13 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 13 HCP (13 HL), 4-4-3-2.} Pass 2C {Cue-bid : 8-10 H et les deux majeures 4e. Ici 8H (8 HL), 4-4-3-2. | Cue-bid: 8-10 HCP and both four-card majors. Here 8 HCP (8 HL), 4-4-3-2.}
+Pass 2H {Majeure 4e (la moins chere). Ici 13H (13 HL), 4-4-3-2. | 4-card major (cheapest first). Here 13 HCP (13 HL), 4-4-3-2.} Pass 3H {Fit 4-4 avec 8-10 H : invitation. Ici 8H (8 HL), 4-4-3-2. | 4-4 fit with 8-10 HCP: invitation. Here 8 HCP (8 HL), 4-4-3-2.}
+Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 29"]
 [Board "29"]
@@ -568,14 +568,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:AQT93.J4.AT5.K42 72.AK93.KQ84.A65 86.T872.972.JT97 KJ54.Q65.J63.Q83"]
+[Deal "N:72.AK93.KQ84.A65 96.T742.T52.KT94 KJ54.Q65.J63.Q83 AQT83.J8.A97.J72"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} X {Contre d'appel : 16H, 4 Coeurs, court a Pique. | Takeout double: 16 HCP, 4 hearts, short in spades.} Pass 1NT {1SA : 8-10 H (9), regulier. | 1NT: 8-10 HCP (9), balanced.}
-Pass 2NT {15-16 H : invitation. | 15-16 HCP: invitation.} Pass 3NT {Accepte (9H). | Accepts (9 HCP).}
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (13 HL), 5-2-3-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (13 HL), 5-2-3-3.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 16H (16 HL), 2-4-4-3. | Takeout double: 13+ HCP, the unbid suits. Here 16 HCP (16 HL), 2-4-4-3.} Pass 1NT {1SA : 8-10 H, regulier. Ici 9H (9 HL), 4-3-3-3. | 1NT: 8-10 HCP, balanced. Here 9 HCP (9 HL), 4-3-3-3.}
+Pass 2NT {Invitation : 15-16 H. Ici 16H (16 HL), 2-4-4-3. | Invitation: 15-16 HCP. Here 16 HCP (16 HL), 2-4-4-3.} Pass 3NT {Maximum : 3SA. Ici 9H (9 HL), 4-3-3-3. | Maximum: 3NT. Here 9 HCP (9 HL), 4-3-3-3.}
 Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 34"]
@@ -638,13 +638,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:6.AKJ84.973.A953 KJ84.73.AQ65.KJ2 T3.QT62.JT4.T876 AQ9752.95.K82.Q4"]
+[Deal "N:KJ84.73.AQ65.KJ2 63.KT2.T973.T653 AQ9752.95.K82.Q4 T.AQJ864.J4.A987"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 14H, 4 Piques, court a Coeur. | Takeout double: 14 HCP, 4 spades, short in hearts.} Pass 4S {6 cartes a Pique et 11H : la manche. | 6 spades and 11 HCP: game.}
+1H {5+ coeurs, 12+ H. Ici 12H (14 HL), 1-6-2-4. | 5+ hearts, 12+ HCP. Here 12 HCP (14 HL), 1-6-2-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 14H (14 HL), 4-2-4-3. | Takeout double: 13+ HCP, the unbid suits. Here 14 HCP (14 HL), 4-2-4-3.} Pass 4S {Manche : majeure 6e avec 8-10 H, ou majeure 5e avec 11+ H. Ici 11H (13 HL), 6-2-3-2. | Game: six-card major with 8-10 HCP, or five-card major with 11+ HCP. Here 11 HCP (13 HL), 6-2-3-2.}
 Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 38"]
@@ -793,14 +793,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:T73.AKJ64.T87.A9 KQ84.7.AJ93.K852 95.T932.652.JT64 AJ62.Q85.KQ4.Q73"]
+[Deal "N:KQ84.7.AJ93.K852 T973.943.87.T964 AJ62.Q85.KQ4.Q73 5.AKJT62.T652.AJ"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "4S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} X {Contre d'appel : 13H, 4 Piques, court a Coeur. | Takeout double: 13 HCP, 4 spades, short in hearts.} Pass 2H {Cue-bid forcing : 14H, 11+ H sans manche directe. | Forcing cue-bid: 14 HCP, 11+ HCP without a direct game.}
-Pass 2S {Majeure 4e, la moins chere. | Cheapest four-card major.} Pass 4S {Fit 4-4 : manche (14H). | 4-4 fit: game (14 HCP).}
+1H {5+ coeurs, 12+ H. Ici 13H (14 HL), 1-6-4-2. | 5+ hearts, 12+ HCP. Here 13 HCP (14 HL), 1-6-4-2.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 13H (13 HL), 4-1-4-4. | Takeout double: 13+ HCP, the unbid suits. Here 13 HCP (13 HL), 4-1-4-4.} Pass 2H {Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arret, ou espoir de chelem). Ici 14H (14 HL), 4-3-3-3. | Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes). Here 14 HCP (14 HL), 4-3-3-3.}
+Pass 2S {Majeure 4e (la moins chere). Ici 13H (13 HL), 4-1-4-4. | 4-card major (cheapest first). Here 13 HCP (13 HL), 4-1-4-4.} Pass 4S {Fit 4-4 : manche. Ici 14H (14 HL), 4-3-3-3. | 4-4 fit: game. Here 14 HCP (14 HL), 4-3-3-3.}
 Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 47"]
@@ -829,14 +829,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:J972.J86.A92.AQ6 A853.KQ74.QJ6.K5 T4.T53.T74.T9842 KQ6.A92.K853.J73"]
+[Deal "N:A853.KQ74.QJ6.K5 T97.T85.T42.T964 KQ6.A92.K853.J73 J42.J63.A97.AQ82"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} X {Contre d'appel : 15H, 4 Piques et 4 Coeurs. | Takeout double: 15 HCP, 4 spades and 4 hearts.} Pass 2C {Cue-bid forcing : 13H, 11+ H sans manche directe. | Forcing cue-bid: 13 HCP, 11+ HCP without a direct game.}
-Pass 2H {Majeure 4e, la moins chere. | Cheapest four-card major.} Pass 3NT {Pas de fit dans la majeure du contreur : 3SA. | No fit in the doubler's major: 3NT.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 12H (12 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 12 HCP (12 HL), 3-3-3-4.} X {Contre d'appel : 13+ H, les couleurs non nommees. Ici 15H (15 HL), 4-4-3-2. | Takeout double: 13+ HCP, the unbid suits. Here 15 HCP (15 HL), 4-4-3-2.} Pass 2C {Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arret, ou espoir de chelem). Ici 13H (13 HL), 3-3-4-3. | Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes). Here 13 HCP (13 HL), 3-3-4-3.}
+Pass 2H {Majeure 4e (la moins chere). Ici 15H (15 HL), 4-4-3-2. | 4-card major (cheapest first). Here 15 HCP (15 HL), 4-4-3-2.} Pass 3NT {Manche a SA. Ici 13H (13 HL), 3-3-4-3. | Game in notrump. Here 13 HCP (13 HL), 3-3-4-3.}
 Pass Pass Pass
 
 [Event "Entrainement Contre d'appel - Donne 49"]

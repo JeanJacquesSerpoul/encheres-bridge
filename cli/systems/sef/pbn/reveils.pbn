@@ -9,14 +9,14 @@
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:9.AT52.AJT.KQJ65 J852.J974.Q73.T4 QT63.8.K8642.973 AK74.KQ63.95.A82"]
+[Deal "N:J852.J974.Q73.T4 Q63.T.JT8642.953 AK74.KQ63.95.A82 T9.A852.AK.KQJ76"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass X {Contre de reveil fort : la valeur d'une ouverture (16 HL). | Strong balancing double: opening values (16 HL).}
-Pass 1S {Reponse obligatoire sans saut : 4 cartes a Pique, 4H (0-7). | Compulsory answer, no jump: 4 spades, 4 HCP (0-7).} Pass Pass {Rien de plus a dire (16H). | Nothing more to say (16 HCP).}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 17H (17 HL), 2-4-2-5. | Longest minor (3-3: 1♣). Here 17 HCP (17 HL), 2-4-2-5.} Pass Pass X {Contre de reveil : la valeur d'une ouverture (14+ HL). Ici 16H (16 HL), 4-4-2-3. | Balancing double: opening values (14+ HL). Here 16 HCP (16 HL), 4-4-2-3.}
+Pass 1S {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 4H (4 HL), 4-4-3-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 4 HCP (4 HL), 4-4-3-2.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 2"]
@@ -64,15 +64,15 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AKJ42.93.A52.T87 QT83.Q752.J84.93 975.T64.T96.KQ62 6.AKJ8.KQ73.AJ54"]
+[Deal "N:QT83.Q752.J84.93 5.T9643.962.Q762 6.AKJ8.KQ73.AJ54 AKJ9742..AT5.KT8"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3H"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} Pass Pass X {Contre de reveil fort : la valeur d'une ouverture (18 HL). | Strong balancing double: opening values (18 HL).}
-Pass 2H {Reponse obligatoire sans saut : 4 cartes a Coeur, 5H (0-7). | Compulsory answer, no jump: 4 hearts, 5 HCP (0-7).} Pass 3H {Soutien a saut : 4 atouts, 18H (17+). | Jump raise: 4 trumps, 18 HCP (17+).}
-Pass Pass {Minimum (5H) : passe. | Minimum (5 HCP): pass.} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 15H (18 HL), 7-0-3-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 15 HCP (18 HL), 7-0-3-3.} Pass Pass X {Contre de reveil : la valeur d'une ouverture (14+ HL). Ici 18H (18 HL), 1-4-4-4. | Balancing double: opening values (14+ HL). Here 18 HCP (18 HL), 1-4-4-4.}
+Pass 2H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 5H (5 HL), 4-4-3-2. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 5 HCP (5 HL), 4-4-3-2.} Pass 3H {Soutien a saut : 17+ H, 4 atouts. Ici 18H (18 HL), 1-4-4-4. | Jump raise: 17+ HCP, 4-card support. Here 18 HCP (18 HL), 1-4-4-4.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 5"]
 [Board "5"]
@@ -137,15 +137,15 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:KQ743.AT.4.AT752 J862.J85.Q73.J64 AT9.9632.T9852.8 5.KQ74.AKJ6.KQ93"]
+[Deal "N:J862.J85.Q73.J64 73.T62.T852.T875 5.KQ74.AKJ6.KQ93 AKQT94.A93.94.A2"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3H"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} Pass Pass X {Contre de reveil fort : la valeur d'une ouverture (18 HL). | Strong balancing double: opening values (18 HL).}
-Pass 2H {Reponse obligatoire sans saut : 3 cartes a Coeur, 5H (0-7). | Compulsory answer, no jump: 3 hearts, 5 HCP (0-7).} Pass 3H {Soutien a saut : 4 atouts, 18H (17+). | Jump raise: 4 trumps, 18 HCP (17+).}
-Pass Pass {Minimum (5H) : passe. | Minimum (5 HCP): pass.} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 17H (19 HL), 6-3-2-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 17 HCP (19 HL), 6-3-2-2.} Pass Pass X {Contre de reveil : la valeur d'une ouverture (14+ HL). Ici 18H (18 HL), 1-4-4-4. | Balancing double: opening values (14+ HL). Here 18 HCP (18 HL), 1-4-4-4.}
+Pass 2H {Reponse obligatoire au contre : couleur 4e au moins, sans saut, la majeure d'abord. Ici 5H (5 HL), 4-3-3-3. | Compulsory answer to the double: a suit of at least 4 cards, no jump, the major first. Here 5 HCP (5 HL), 4-3-3-3.} Pass 3H {Soutien a saut : 17+ H, 4 atouts. Ici 18H (18 HL), 1-4-4-4. | Jump raise: 17+ HCP, 4-card support. Here 18 HCP (18 HL), 1-4-4-4.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 9"]
 [Board "9"]
@@ -193,14 +193,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:32.AJT8.A3.AQJ62 AJ5.K42.Q874.T93 QT96.75.T96.K754 K874.Q963.KJ52.8"]
+[Deal "N:AJ5.K42.Q874.T93 T9632.87.96.K762 K874.Q963.KJ52.8 Q.AJT5.AT3.AQJ54"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass X {Contre de reveil : 9H, 1 carte a Trefle. | Balancing double: 9 HCP, 1 club.}
-Pass 1NT {1SA : 8-10 H (10), regulier. | 1NT: 8-10 HCP (10), balanced.} Pass Pass {Rien de plus a dire (9H). | Nothing more to say (9 HCP).}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (18 HL), 1-4-3-5. | Longest minor (3-3: 1♣). Here 18 HCP (18 HL), 1-4-3-5.} Pass Pass X {Contre de reveil : 8+ H, court dans leur couleur. Ici 9H (9 HL), 4-4-4-1. | Balancing double: 8+ HCP, short in their suit. Here 9 HCP (9 HL), 4-4-4-1.}
+Pass 1NT {1SA : 8-10 H, regulier. Ici 10H (10 HL), 3-3-4-3. | 1NT: 8-10 HCP, balanced. Here 10 HCP (10 HL), 3-3-4-3.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 12"]
@@ -211,15 +211,15 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:62.AQT8.KQT7.K76 KQ8.J752.J963.A4 T953.4.A842.JT93 AJ74.K963.5.Q852"]
+[Deal "N:KQ8.J752.J963.A4 T652.QT4.T.T9763 AJ74.K963.5.Q852 93.A8.AKQ8742.KJ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} Pass Pass X {Contre de reveil : 10H, 1 carte a Carreau. | Balancing double: 10 HCP, 1 diamond.}
-Pass 2D {Cue-bid forcing : 11H, 11+ H sans manche directe. | Forcing cue-bid: 11 HCP, 11+ HCP without a direct game.} Pass 2H {Majeure 4e, la moins chere. | Cheapest four-card major.}
-Pass 4H {Fit 4-4 : manche (11H). | 4-4 fit: game (11 HCP).} Pass Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 17H (19 HL), 2-2-7-2. | Longest minor (4-4: 1♦). Here 17 HCP (19 HL), 2-2-7-2.} Pass Pass X {Contre de reveil : 8+ H, court dans leur couleur. Ici 10H (10 HL), 4-4-1-4. | Balancing double: 8+ HCP, short in their suit. Here 10 HCP (10 HL), 4-4-1-4.}
+Pass 2D {Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arret, ou espoir de chelem). Ici 11H (11 HL), 3-4-4-2. | Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes). Here 11 HCP (11 HL), 3-4-4-2.} Pass 2H {Majeure 4e (la moins chere). Ici 10H (10 HL), 4-4-1-4. | 4-card major (cheapest first). Here 10 HCP (10 HL), 4-4-1-4.}
+Pass 4H {Fit 4-4 : manche. Ici 11H (11 HL), 3-4-4-2. | 4-4 fit: game. Here 11 HCP (11 HL), 3-4-4-2.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 13"]
@@ -230,14 +230,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:Q4.AKQT653.Q.KT2 A9852.J84.K3.J64 T7.92.JT9764.A85 KJ63.7.A852.Q973"]
+[Deal "N:A9852.J84.K3.J64 QT4.632.Q974.T82 KJ63.7.A852.Q973 7.AKQT95.JT6.AK5"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass X {Contre de reveil : 10H, 1 carte a Coeur. | Balancing double: 10 HCP, 1 heart.}
-Pass 3S {Reponse a double saut : 5 cartes a Pique, 9H (8-10). | Double jump answer: 5 spades, 9 HCP (8-10).} Pass Pass {Rien de plus a dire (10H). | Nothing more to say (10 HCP).}
+1H {5+ coeurs, 12+ H. Ici 17H (19 HL), 1-6-3-3. | 5+ hearts, 12+ HCP. Here 17 HCP (19 HL), 1-6-3-3.} Pass Pass X {Contre de reveil : 8+ H, court dans leur couleur. Ici 10H (10 HL), 4-1-4-4. | Balancing double: 8+ HCP, short in their suit. Here 10 HCP (10 HL), 4-1-4-4.}
+Pass 3S {Reponse a double saut : majeure 5e, 8-10 H. Ici 9H (9 HL), 5-3-2-3. | Double-jump answer: five-card major, 8-10 HCP. Here 9 HCP (9 HL), 5-3-2-3.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 14"]
@@ -320,14 +320,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AJ843.AT6.K65.Q7 Q65.J842.A73.K92 KT97.95.J92.T843 2.KQ73.QT84.AJ65"]
+[Deal "N:Q65.J842.A73.K92 K43.T65.J652.T84 2.KQ73.QT84.AJ65 AJT987.A9.K9.Q73"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} Pass Pass X {Contre de reveil : 12H, 1 carte a Pique. | Balancing double: 12 HCP, 1 spade.}
-Pass 1NT {1SA : 8-10 H (10), regulier. | 1NT: 8-10 HCP (10), balanced.} Pass Pass {Rien de plus a dire (12H). | Nothing more to say (12 HCP).}
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 14H (16 HL), 6-2-2-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 14 HCP (16 HL), 6-2-2-3.} Pass Pass X {Contre de reveil : 8+ H, court dans leur couleur. Ici 12H (12 HL), 1-4-4-4. | Balancing double: 8+ HCP, short in their suit. Here 12 HCP (12 HL), 1-4-4-4.}
+Pass 1NT {1SA : 8-10 H, regulier. Ici 10H (10 HL), 3-4-3-3. | 1NT: 8-10 HCP, balanced. Here 10 HCP (10 HL), 3-4-3-3.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 19"]
@@ -338,15 +338,15 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:3.Q752.AK3.KQ872 QJ5.AK94.8762.J3 T9864.J.T95.AT64 AK72.T863.QJ4.95"]
+[Deal "N:QJ5.AK94.8762.J3 T643.5.T93.87642 AK72.T863.QJ4.95 98.QJ72.AK5.AKQT"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass X {Contre de reveil : 10H, 2 cartes a Trefle. | Balancing double: 10 HCP, 2 clubs.}
-Pass 2C {Cue-bid forcing : 11H, 11+ H sans manche directe. | Forcing cue-bid: 11 HCP, 11+ HCP without a direct game.} Pass 2H {Majeure 4e, la moins chere. | Cheapest four-card major.}
-Pass 4H {Fit 4-4 : manche (11H). | 4-4 fit: game (11 HCP).} Pass Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (19 HL), 2-4-3-4. | Longest minor (3-3: 1♣). Here 19 HCP (19 HL), 2-4-3-4.} Pass Pass X {Contre de reveil : 8+ H, court dans leur couleur. Ici 10H (10 HL), 4-4-3-2. | Balancing double: 8+ HCP, short in their suit. Here 10 HCP (10 HL), 4-4-3-2.}
+Pass 2C {Cue-bid : 11+ H, forcing (majeure seulement 4e, pas d'arret, ou espoir de chelem). Ici 11H (11 HL), 3-4-4-2. | Cue-bid: 11+ HCP, forcing (only a four-card major, no stopper, or slam hopes). Here 11 HCP (11 HL), 3-4-4-2.} Pass 2H {Majeure 4e (la moins chere). Ici 10H (10 HL), 4-4-3-2. | 4-card major (cheapest first). Here 10 HCP (10 HL), 4-4-3-2.}
+Pass 4H {Fit 4-4 : manche. Ici 11H (11 HL), 3-4-4-2. | 4-4 fit: game. Here 11 HCP (11 HL), 3-4-4-2.} Pass Pass
 Pass
 
 [Event "Entrainement Reveils - Donne 20"]
@@ -375,14 +375,14 @@ Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:AQ2.J3.A4.AKJ942 94.QT52.KJ63.T75 T75.K986.QT87.63 KJ863.A74.952.Q8"]
+[Deal "N:94.QT52.KJ63.T75 T52.J63.T87.KJ62 KJ863.A74.952.Q8 AQ7.K98.AQ4.A943"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 1S {Reveil : 5 cartes a Pique (KJ863), 11 HL. | Balancing: 5 spades (KJ863), 11 HL.}
-Pass Pass {6H et 2 cartes a Pique : rien a ajouter. | 6 HCP and 2 spades: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (19 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 19 HCP (19 HL), 3-3-3-4.} Pass Pass 1S {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 10H (11 HL), 5-3-3-2. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 10 HCP (11 HL), 5-3-3-2.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 22"]
 [Board "22"]
@@ -409,14 +409,14 @@ Pass Pass {8H et 2 cartes a Coeur : rien a ajouter. | 8 HCP and 2 hearts: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:A.AKT92.95.AKT84 85.QJ63.K874.Q73 J9642.75.QJT3.J6 KQT73.84.A62.952"]
+[Deal "N:85.QJ63.K874.Q73 9642.92.93.KT864 KQT73.84.A62.952 AJ.AKT75.QJT5.AJ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass 1S {Reveil : 5 cartes a Pique (KQT73), 10 HL. | Balancing: 5 spades (KQT73), 10 HL.}
-Pass Pass {8H et 2 cartes a Pique : rien a ajouter. | 8 HCP and 2 spades: nothing to add.} Pass
+1H {5+ coeurs, 12+ H. Ici 20H (19 HL), 2-5-4-2. | 5+ hearts, 12+ HCP. Here 20 HCP (19 HL), 2-5-4-2.} Pass Pass 1S {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 9H (10 HL), 5-2-3-3. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 9 HCP (10 HL), 5-2-3-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 24"]
 [Board "24"]
@@ -426,14 +426,14 @@ Pass Pass {8H et 2 cartes a Pique : rien a ajouter. | 8 HCP and 2 spades: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AK52.AJ.86.AJT75 QJ84.T3.QJ75.K83 T96.7642.KT93.Q4 73.KQ985.A42.962"]
+[Deal "N:QJ84.T3.QJ75.K83 A65.76.T983.T754 73.KQ985.A42.962 KT92.AJ42.K6.AQJ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 1H {Reveil : 5 cartes a Coeur (KQ985), 10 HL. | Balancing: 5 hearts (KQ985), 10 HL.}
-Pass Pass {9H et 2 cartes a Coeur : rien a ajouter. | 9 HCP and 2 hearts: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (18 HL), 4-4-2-3. | Longest minor (3-3: 1♣). Here 18 HCP (18 HL), 4-4-2-3.} Pass Pass 1H {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 9H (10 HL), 2-5-3-3. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 9 HCP (10 HL), 2-5-3-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 25"]
 [Board "25"]
@@ -494,14 +494,14 @@ Pass Pass {9H et 2 cartes a Pique : rien a ajouter. | 9 HCP and 2 spades: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:A92.J3.AKQ72.KQ3 QJ53.A74.85.T862 T864.T95.J6.A974 K7.KQ862.T943.J5"]
+[Deal "N:QJ53.A74.85.T862 962.J953.Q62.743 K7.KQ862.T943.J5 AT84.T.AKJ7.AKQ9"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} Pass Pass 1H {Reveil : 5 cartes a Coeur (KQ862), 10 HL. | Balancing: 5 hearts (KQ862), 10 HL.}
-Pass Pass {7H et 3 cartes a Coeur : rien a ajouter. | 7 HCP and 3 hearts: nothing to add.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 21H (21 HL), 4-1-4-4. | Longest minor (4-4: 1♦). Here 21 HCP (21 HL), 4-1-4-4.} Pass Pass 1H {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 9H (10 HL), 2-5-4-2. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 9 HCP (10 HL), 2-5-4-2.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 29"]
 [Board "29"]
@@ -528,14 +528,14 @@ Pass Pass {9H et 3 cartes a Pique : rien a ajouter. | 9 HCP and 3 spades: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:T9.AKQ65.AJ5.KJT A6.T832.K974.Q73 J42.97.T83.A9642 KQ8753.J4.Q62.85"]
+[Deal "N:A6.T832.K974.Q73 92.96.JT853.KT62 KQ8753.J4.Q62.85 JT4.AKQ75.A.AJ94"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass 1S {Reveil : 6 cartes a Pique (KQ8753), 10 HL. | Balancing: 6 spades (KQ8753), 10 HL.}
-Pass Pass {9H et 2 cartes a Pique : rien a ajouter. | 9 HCP and 2 spades: nothing to add.} Pass
+1H {5+ coeurs, 12+ H. Ici 19H (19 HL), 3-5-1-4. | 5+ hearts, 12+ HCP. Here 19 HCP (19 HL), 3-5-1-4.} Pass Pass 1S {Reveil : 5 cartes (dont 3 H) ou 6 cartes (dont 2 H), 8-13 HL. Ici 8H (10 HL), 6-2-3-2. | Balancing overcall: 5 cards (3 HCP in the suit) or 6 cards (2 HCP), 8-13 HL. Here 8 HCP (10 HL), 6-2-3-2.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 31"]
 [Board "31"]
@@ -545,14 +545,14 @@ Pass Pass {9H et 2 cartes a Pique : rien a ajouter. | 9 HCP and 2 spades: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:AT62.A75.Q.AKT96 Q873.J962.KT4.85 94.KT3.J8752.J43 KJ5.Q84.A963.Q72"]
+[Deal "N:Q873.J962.KT4.85 T62.T75.J87.K943 KJ5.Q84.A963.Q72 A94.AK3.Q52.AJT6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 1NT {Reveil a 1SA : 12 HL, regulier, Q72 a Trefle. | Balancing 1NT: 12 HL, balanced, Q72 in clubs.}
-Pass Pass {6H : rien a ajouter. | 6 HCP: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (18 HL), 3-3-3-4. | Longest minor (3-3: 1♣). Here 18 HCP (18 HL), 3-3-3-4.} Pass Pass 1NT {Reveil a 1SA : 9-13 HL, arret ou trois cartes. Ici 12H (12 HL), 3-3-4-3. | Balancing 1NT: 9-13 HL, stopper or three cards. Here 12 HCP (12 HL), 3-3-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 32"]
 [Board "32"]
@@ -579,14 +579,14 @@ Pass Pass {6H : rien a ajouter. | 6 HCP: nothing to add.} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:AT76.K9652.AQT.A J982.Q4.K863.J72 53.JT7.94.KT8543 KQ4.A83.J752.Q96"]
+[Deal "N:J982.Q4.K863.J72 T53.T95.T4.KT843 KQ4.A83.J752.Q96 A76.KJ762.AQ9.A5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass 1NT {Reveil a 1SA : 12 HL, regulier, A83 a Coeur. | Balancing 1NT: 12 HL, balanced, A83 in hearts.}
-Pass Pass {7H : rien a ajouter. | 7 HCP: nothing to add.} Pass
+1H {5+ coeurs, 12+ H. Ici 18H (19 HL), 3-5-3-2. | 5+ hearts, 12+ HCP. Here 18 HCP (19 HL), 3-5-3-2.} Pass Pass 1NT {Reveil a 1SA : 9-13 HL, arret ou trois cartes. Ici 12H (12 HL), 3-3-4-3. | Balancing 1NT: 9-13 HL, stopper or three cards. Here 12 HCP (12 HL), 3-3-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 34"]
 [Board "34"]
@@ -613,14 +613,14 @@ Pass Pass {8H : rien a ajouter. | 8 HCP: nothing to add.} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:A65.A82.K.AJT632 J972.QJ53.T84.Q4 KT4.T76.Q9753.98 Q83.K94.AJ62.K75"]
+[Deal "N:J972.QJ53.T84.Q4 54.T8.Q753.J9862 Q83.K94.AJ62.K75 AKT6.A762.K9.AT3"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 1NT {Reveil a 1SA : 13 HL, regulier, K75 a Trefle. | Balancing 1NT: 13 HL, balanced, K75 in clubs.}
-Pass Pass {6H : rien a ajouter. | 6 HCP: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 18H (18 HL), 4-4-2-3. | Longest minor (3-3: 1♣). Here 18 HCP (18 HL), 4-4-2-3.} Pass Pass 1NT {Reveil a 1SA : 9-13 HL, arret ou trois cartes. Ici 13H (13 HL), 3-3-4-3. | Balancing 1NT: 9-13 HL, stopper or three cards. Here 13 HCP (13 HL), 3-3-4-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 36"]
 [Board "36"]
@@ -630,14 +630,14 @@ Pass Pass {6H : rien a ajouter. | 6 HCP: nothing to add.} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AT3.QT87.AK953.A Q852.KJ4.J7.T862 964.53.T62.KQ974 KJ7.A962.Q84.J53"]
+[Deal "N:Q852.KJ4.J7.T862 T963.875.T953.A4 KJ7.A962.Q84.J53 A4.QT3.AK62.KQ97"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "1NT"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} Pass Pass 1NT {Reveil a 1SA : 11 HL, regulier, Q84 a Carreau. | Balancing 1NT: 11 HL, balanced, Q84 in diamonds.}
-Pass Pass {7H : rien a ajouter. | 7 HCP: nothing to add.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 18H (18 HL), 2-3-4-4. | Longest minor (4-4: 1♦). Here 18 HCP (18 HL), 2-3-4-4.} Pass Pass 1NT {Reveil a 1SA : 9-13 HL, arret ou trois cartes. Ici 11H (11 HL), 3-4-3-3. | Balancing 1NT: 9-13 HL, stopper or three cards. Here 11 HCP (11 HL), 3-4-3-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 37"]
 [Board "37"]
@@ -664,14 +664,14 @@ Pass Pass {8H et 2 cartes a Carreau : rien a ajouter. | 8 HCP and 2 diamonds: no
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AT9.AKQT64.96.K9 QJ62.J9852.K3.T5 8753..AJT74.8732 K4.73.Q852.AQJ64"]
+[Deal "N:QJ62.J9852.K3.T5 T9873.4.T6.K9732 K4.73.Q852.AQJ64 A5.AKQT6.AJ974.8"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2C"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass 2C {Reveil au palier de 2 : 5 cartes a Trefle (AQJ64), 13 HL. | Balancing at the two level: 5 clubs (AQJ64), 13 HL.}
-Pass Pass {7H et 2 cartes a Trefle : rien a ajouter. | 7 HCP and 2 clubs: nothing to add.} Pass
+1H {5+ coeurs, 12+ H. Ici 18H (20 HL), 2-5-5-1. | 5+ hearts, 12+ HCP. Here 18 HCP (20 HL), 2-5-5-1.} Pass Pass 2C {Reveil au palier de 2 : 5 cartes, 8-13 HL. Ici 12H (13 HL), 2-2-4-5. | Two-level balancing overcall: 5 cards, 8-13 HL. Here 12 HCP (13 HL), 2-2-4-5.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 39"]
 [Board "39"]
@@ -681,14 +681,14 @@ Pass Pass {7H et 2 cartes a Trefle : rien a ajouter. | 7 HCP and 2 clubs: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:AJ63.A4.AJ982.A5 K954.QJ72.QT4.T7 T8.T963.K753.Q62 Q72.K85.6.KJ9843"]
+[Deal "N:K954.QJ72.QT4.T7 83.T96.K8732.652 Q72.K85.6.KJ9843 AJT6.A43.AJ95.AQ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2C"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} Pass Pass 2C {Reveil au palier de 2 : 6 cartes a Trefle (KJ9843), 11 HL. | Balancing at the two level: 6 clubs (KJ9843), 11 HL.}
-Pass Pass {8H et 2 cartes a Trefle : rien a ajouter. | 8 HCP and 2 clubs: nothing to add.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 20H (19 HL), 4-3-4-2. | Longest minor (4-4: 1♦). Here 20 HCP (19 HL), 4-3-4-2.} Pass Pass 2C {Reveil au palier de 2 : 5 cartes, 8-13 HL. Ici 9H (11 HL), 3-3-1-6. | Two-level balancing overcall: 5 cards, 8-13 HL. Here 9 HCP (11 HL), 3-3-1-6.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 40"]
 [Board "40"]
@@ -698,14 +698,14 @@ Pass Pass {8H et 2 cartes a Trefle : rien a ajouter. | 8 HCP and 2 clubs: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AQ973.A86.A.KT75 KJ86.KJ42.T75.43 T42.T93.QJ9642.Q 5.Q75.K83.AJ9862"]
+[Deal "N:KJ86.KJ42.T75.43 732.T9863.J962.K 5.Q75.K83.AJ9862 AQT94.A.AQ4.QT75"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2C"]
 [Result ""]
 [Auction "W"]
-1S {Ouverture adverse de 1P. | Opponent opens 1S.} Pass Pass 2C {Reveil au palier de 2 : 6 cartes a Trefle (AJ9862), 12 HL. | Balancing at the two level: 6 clubs (AJ9862), 12 HL.}
-Pass Pass {8H et 2 cartes a Trefle : rien a ajouter. | 8 HCP and 2 clubs: nothing to add.} Pass
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 18H (18 HL), 5-1-3-4. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 18 HCP (18 HL), 5-1-3-4.} Pass Pass 2C {Reveil au palier de 2 : 5 cartes, 8-13 HL. Ici 10H (12 HL), 1-3-3-6. | Two-level balancing overcall: 5 cards, 8-13 HL. Here 10 HCP (12 HL), 1-3-3-6.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 41"]
 [Board "41"]
@@ -732,14 +732,14 @@ Pass Pass {9H et 2 cartes a Carreau : rien a ajouter. | 9 HCP and 2 diamonds: no
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:K92.AQ76.K98.AQ5 AQ84.T3.QT75.983 JT65.4.J632.KT74 73.KJ9852.A4.J62"]
+[Deal "N:AQ84.T3.QT75.983 652.Q7.98632.Q54 73.KJ9852.A4.J62 KJT9.A64.KJ.AKT7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "W"]
-1C {Ouverture adverse de 1T. | Opponent opens 1C.} Pass Pass 2H {Reveil a saut : 6 cartes a Coeur (KJ9852), 11 HL. | Balancing jump: 6 hearts (KJ9852), 11 HL.}
-Pass Pass {8H et 2 cartes a Coeur : rien a ajouter. | 8 HCP and 2 hearts: nothing to add.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 19H (18 HL), 4-3-2-4. | Longest minor (3-3: 1♣). Here 19 HCP (18 HL), 4-3-2-4.} Pass Pass 2H {Reveil a saut : 6 cartes, 11-13 HL. Ici 9H (11 HL), 2-6-2-3. | Balancing jump: 6 cards, 11-13 HL. Here 9 HCP (11 HL), 2-6-2-3.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 43"]
 [Board "43"]
@@ -749,14 +749,14 @@ Pass Pass {8H et 2 cartes a Coeur : rien a ajouter. | 8 HCP and 2 hearts: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "EW"]
-[Deal "W:.A962.AQ984.AKQ2 92.QJ84.KJ63.T75 KJ753.T5.T7.J963 AQT864.K73.52.84"]
+[Deal "N:92.QJ84.KJ63.T75 753.T52.AT4.J632 AQT864.K73.52.84 KJ.A96.Q987.AKQ9"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1D {Ouverture adverse de 1K. | Opponent opens 1D.} Pass Pass 2S {Reveil a saut : 6 cartes a Pique (AQT864), 11 HL. | Balancing jump: 6 spades (AQT864), 11 HL.}
-Pass Pass {7H et 2 cartes a Pique : rien a ajouter. | 7 HCP and 2 spades: nothing to add.} Pass
+1D {Mineure la plus longue (4-4 : 1♦). Ici 19H (18 HL), 2-3-4-4. | Longest minor (4-4: 1♦). Here 19 HCP (18 HL), 2-3-4-4.} Pass Pass 2S {Reveil a saut : 6 cartes, 11-13 HL. Ici 9H (11 HL), 6-3-2-2. | Balancing jump: 6 cards, 11-13 HL. Here 9 HCP (11 HL), 6-3-2-2.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 44"]
 [Board "44"]
@@ -766,14 +766,14 @@ Pass Pass {7H et 2 cartes a Pique : rien a ajouter. | 7 HCP and 2 spades: nothin
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AT4.AKT973.Q53.A 82.QJ65.KT4.Q854 96.82.J97.KJT962 KQJ753.4.A862.73"]
+[Deal "N:82.QJ65.KT4.Q854 T964.972.QJ5.JT6 KQJ753.4.A862.73 A.AKT83.973.AK92"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass 2S {Reveil a saut : 6 cartes a Pique (KQJ753), 12 HL. | Balancing jump: 6 spades (KQJ753), 12 HL.}
-Pass Pass {8H et 2 cartes a Pique : rien a ajouter. | 8 HCP and 2 spades: nothing to add.} Pass
+1H {5+ coeurs, 12+ H. Ici 18H (18 HL), 1-5-3-4. | 5+ hearts, 12+ HCP. Here 18 HCP (18 HL), 1-5-3-4.} Pass Pass 2S {Reveil a saut : 6 cartes, 11-13 HL. Ici 10H (12 HL), 6-1-4-2. | Balancing jump: 6 cards, 11-13 HL. Here 10 HCP (12 HL), 6-1-4-2.}
+Pass Pass Pass
 
 [Event "Entrainement Reveils - Donne 45"]
 [Board "45"]
@@ -867,10 +867,11 @@ Pass Pass {4H : rien a ajouter. | 4 HCP: nothing to add.} Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:AKJ3.QT965.82.AK Q8642.A4.K93.Q75 T75.2.AJT74.T963 9.KJ873.Q65.J842"]
+[Deal "N:Q8642.A4.K93.Q75 JT753.T.T42.KT63 9.KJ873.Q65.J842 AK.Q9652.AJ87.A9"]
 [Scoring "MP"]
 [Declarer "W"]
 [Contract "1H"]
 [Result ""]
 [Auction "W"]
-1H {Ouverture adverse de 1C. | Opponent opens 1H.} Pass Pass Pass {Rien pour reveiller (7H, 5 cartes a Coeur). | Nothing to balance with (7 HCP, 5 hearts).}
+1H {5+ coeurs, 12+ H. Ici 18H (17 HL), 2-5-4-2. | 5+ hearts, 12+ HCP. Here 18 HCP (17 HL), 2-5-4-2.} Pass Pass Pass
+

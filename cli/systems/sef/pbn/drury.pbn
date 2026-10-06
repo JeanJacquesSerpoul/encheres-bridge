@@ -9,15 +9,15 @@
 [South "-"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:A62.AJ54.Q982.74 T5.93.T754.AJT62 KQJ84.Q72.J63.85 973.KT86.AK.KQ93"]
+[Deal "N:A62.AJ54.Q982.74 Q.QT932.J54.KQ96 98753.87.AK63.AJ KJT4.K6.T7.T8532"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 9H (ouverture legere). | Third-seat opening: 5 spades, 9 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 12 DH, main passee proche de l'ouverture. | Drury: 3-card support, 12 DH, passed hand close to an opening.} Pass 2S {Ouverture legere (11 HLD) : on s'arrete. | Light opening (11 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (11 HL), 5-2-4-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (11 HL), 5-2-4-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 11H (11 HL), 3-4-4-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 11 HCP (11 HL), 3-4-4-2.} Pass 2S {Ouverture legere : pour s'arreter. Ici 12H (11 HL), 5-2-4-2. | Light opening: to stop. Here 12 HCP (11 HL), 5-2-4-2.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 2"]
 [Board "2"]
@@ -45,15 +45,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:KJ5.A9842.Q63.85 94.T7.JT75.KT643 AQT73.65.K84.Q92 862.KQJ3.A92.AJ7"]
+[Deal "N:KJ5.A9842.Q63.85 A2.QT7.J9854.T43 T9874.KJ5.K7.AJ9 Q63.63.AT2.KQ762"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 11H (ouverture legere). | Third-seat opening: 5 spades, 11 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2S {Ouverture legere (13 HLD) : on s'arrete. | Light opening (13 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (12 HL), 5-3-2-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (12 HL), 5-3-2-3.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 3-5-3-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 3-5-3-2.} Pass 2S {Ouverture legere : pour s'arreter. Ici 12H (12 HL), 5-3-2-3. | Light opening: to stop. Here 12 HCP (12 HL), 5-3-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 4"]
 [Board "4"]
@@ -63,15 +63,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:AJ5.K73.Q9862.84 4.JT2.743.KQJ965 82.AQ964.KJ5.T73 KQT9763.85.AT.A2"]
+[Deal "N:AJ5.K73.Q9862.84 Q762.T54.T3.AQ65 K83.Q9862.A74.K3 T94.AJ.KJ5.JT972"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 10H (ouverture legere). | Third-seat opening: 5 hearts, 10 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2H {Ouverture legere (12 HLD) : on s'arrete. | Light opening (12 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (12 HL), 3-5-3-2. | 5+ hearts, 12+ HCP. Here 12 HCP (12 HL), 3-5-3-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 3-3-5-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 3-3-5-2.} Pass 2H {Ouverture legere : pour s'arreter. Ici 12H (12 HL), 3-5-3-2. | Light opening: to stop. Here 12 HCP (12 HL), 3-5-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 5"]
 [Board "5"]
@@ -81,15 +81,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:Q85.KJ743.AT6.93 T.AQT96.K9854.T7 KJ976.85.Q72.A84 A432.2.J3.KQJ652"]
+[Deal "N:Q85.KJ743.AT6.93 J92.QT2.983.A842 AT764.A6.J54.KT7 K3.985.KQ72.QJ65"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 10H (ouverture legere). | Third-seat opening: 5 spades, 10 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2S {Ouverture legere (12 HLD) : on s'arrete. | Light opening (12 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (12 HL), 5-2-3-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (12 HL), 5-2-3-3.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (11 HL), 3-5-3-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (11 HL), 3-5-3-2.} Pass 2S {Ouverture legere : pour s'arreter. Ici 12H (12 HL), 5-2-3-3. | Light opening: to stop. Here 12 HCP (12 HL), 5-2-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 6"]
 [Board "6"]
@@ -99,15 +99,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:A953.K74.QJ82.76 QT872.T93.T76.AK K4.QJ862.A93.T52 J6.A5.K54.QJ9843"]
+[Deal "N:A953.K74.QJ82.76 KQ74.J.T975.T952 J.AT865.K64.A843 T862.Q932.A3.KQJ"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 10H (ouverture legere). | Third-seat opening: 5 hearts, 10 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2H {Ouverture legere (12 HLD) : on s'arrete. | Light opening (12 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (11 HL), 1-5-3-4. | 5+ hearts, 12+ HCP. Here 12 HCP (11 HL), 1-5-3-4.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 4-3-4-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 4-3-4-2.} Pass 2H {Ouverture legere : pour s'arreter. Ici 12H (11 HL), 1-5-3-4. | Light opening: to stop. Here 12 HCP (11 HL), 1-5-3-4.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 7"]
 [Board "7"]
@@ -117,15 +117,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:K74.AQ62.J8652.3 T3.JT75.9.AJ9854 AJ852.93.T74.KQ6 Q96.K84.AKQ3.T72"]
+[Deal "N:K74.AQ62.J8652.3 J5.JT.K4.KJ97542 A98632.873.AQ7.Q QT.K954.T93.AT86"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 10H (ouverture legere). | Third-seat opening: 5 spades, 10 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 12 DH, main passee proche de l'ouverture. | Drury: 3-card support, 12 DH, passed hand close to an opening.} Pass 2S {Ouverture legere (12 HLD) : on s'arrete. | Light opening (12 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (11 HL), 6-3-3-1. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (11 HL), 6-3-3-1.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 3-4-5-1. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 3-4-5-1.} Pass 2S {Ouverture legere : pour s'arreter. Ici 12H (11 HL), 6-3-3-1. | Light opening: to stop. Here 12 HCP (11 HL), 6-3-3-1.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 8"]
 [Board "8"]
@@ -135,15 +135,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:KQ62.Q85.K973.72 AJT85.632.T6.AQT 9.AK974.Q852.J63 743.JT.AJ4.K9854"]
+[Deal "N:KQ62.Q85.K973.72 JT543.J73.J2.KT6 A8.A9642.QT4.Q54 97.KT.A865.AJ983"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 10H (ouverture legere). | Third-seat opening: 5 hearts, 10 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2H {Ouverture legere (13 HLD) : on s'arrete. | Light opening (13 HLD): signs off.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (12 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 12 HCP (12 HL), 2-5-3-3.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 4-3-4-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 4-3-4-2.} Pass 2H {Ouverture legere : pour s'arreter. Ici 12H (12 HL), 2-5-3-3. | Light opening: to stop. Here 12 HCP (12 HL), 2-5-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 9"]
 [Board "9"]
@@ -171,15 +171,15 @@ Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:AJ74.Q94.KT53.T7 9632.8.AQ4.A9652 K5.AKT73.J962.84 QT8.J652.87.KQJ3"]
+[Deal "N:AJ74.Q94.KT53.T7 K8632.862.QJ76.6 9.AJT53.942.AK32 QT5.K7.A8.QJ9854"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 11H (ouverture legere). | Third-seat opening: 5 hearts, 11 HCP (light opening).} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2D {Vraie ouverture (14 HLD) : espoir de manche, 2K ambigu. | Sound opening (14 HLD): game interest, ambiguous 2D.} Pass
-2H {Minimum (11 DH). | Minimum (11 DH).} Pass Pass {Pas assez pour insister (14 HLD). | Not enough to push on (14 HLD).} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (13 HL), 1-5-3-4. | 5+ hearts, 12+ HCP. Here 12 HCP (13 HL), 1-5-3-4.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 4-3-4-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 4-3-4-2.} Pass 2D {Ambigu : espoir de manche. Ici 12H (13 HL), 1-5-3-4. | Ambiguous: game interest. Here 12 HCP (13 HL), 1-5-3-4.} Pass
+2H {Minimum. Ici 10H (10 HL), 4-3-4-2. | Minimum. Here 10 HCP (10 HL), 4-3-4-2.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 11"]
 [Board "11"]
@@ -225,15 +225,15 @@ Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:A94.K8.K9853.J64 Q76.J764.AT.AKT9 KJT83.AQ5.Q64.72 52.T932.J72.Q853"]
+[Deal "N:A94.K8.K9853.J64 52.T972.T.AKT983 KJT83.AQ5.Q64.72 Q76.J643.AJ72.Q5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 12H. | Third-seat opening: 5 spades, 12 HCP.} Pass
-2C {Drury : soutien 3e, 12 DH, main passee proche de l'ouverture. | Drury: 3-card support, 12 DH, passed hand close to an opening.} Pass 2D {Vraie ouverture (14 HLD) : espoir de manche, 2K ambigu. | Sound opening (14 HLD): game interest, ambiguous 2D.} Pass
-4S {Maximum (12 DH) : manche. | Maximum (12 DH): game.} Pass Pass Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (13 HL), 5-3-3-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (13 HL), 5-3-3-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 11H (11 HL), 3-2-5-3. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 11 HCP (11 HL), 3-2-5-3.} Pass 2D {Ambigu : espoir de manche. Ici 12H (13 HL), 5-3-3-2. | Ambiguous: game interest. Here 12 HCP (13 HL), 5-3-3-2.} Pass
+4S {Maximum : manche. Ici 11H (11 HL), 3-2-5-3. | Maximum: game. Here 11 HCP (11 HL), 3-2-5-3.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 14"]
 [Board "14"]
@@ -243,15 +243,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:K9.Q854.AJ63.J72 T652.T72.QT8.AT3 84.AKJ63.K72.Q95 AQJ73.9.954.K864"]
+[Deal "N:K9.Q854.AJ63.J72 A763.T.QT9.K8643 84.AKJ63.K72.Q95 QJT52.972.854.AT"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 13H. | Third-seat opening: 5 hearts, 13 HCP.} Pass
-2C {Drury : soutien 4e, 12 DH, main passee proche de l'ouverture. | Drury: 4-card support, 12 DH, passed hand close to an opening.} Pass 2D {Vraie ouverture (15 HLD) : espoir de manche, 2K ambigu. | Sound opening (15 HLD): game interest, ambiguous 2D.} Pass
-4H {Maximum (12 DH) : manche. | Maximum (12 DH): game.} Pass Pass Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 13H (14 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 13 HCP (14 HL), 2-5-3-3.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 11H (11 HL), 2-4-4-3. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 11 HCP (11 HL), 2-4-4-3.} Pass 2D {Ambigu : espoir de manche. Ici 13H (14 HL), 2-5-3-3. | Ambiguous: game interest. Here 13 HCP (14 HL), 2-5-3-3.} Pass
+4H {Maximum : manche. Ici 11H (11 HL), 2-4-4-3. | Maximum: game. Here 11 HCP (11 HL), 2-4-4-3.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 15"]
 [Board "15"]
@@ -261,15 +261,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:KJ6.Q83.KQ742.95 T853.AJ5.3.AK642 AQ974.K62.A85.T3 2.T974.JT96.QJ87"]
+[Deal "N:KJ6.Q83.KQ742.95 T2.T54.J9.AKQJ72 AQ974.K62.A85.T3 853.AJ97.T63.864"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 13H. | Third-seat opening: 5 spades, 13 HCP.} Pass
-2C {Drury : soutien 3e, 12 DH, main passee proche de l'ouverture. | Drury: 3-card support, 12 DH, passed hand close to an opening.} Pass 2D {Vraie ouverture (15 HLD) : espoir de manche, 2K ambigu. | Sound opening (15 HLD): game interest, ambiguous 2D.} Pass
-4S {Maximum (12 DH) : manche. | Maximum (12 DH): game.} Pass Pass Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 13H (14 HL), 5-3-3-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 13 HCP (14 HL), 5-3-3-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 11H (12 HL), 3-3-5-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 11 HCP (12 HL), 3-3-5-2.} Pass 2D {Ambigu : espoir de manche. Ici 13H (14 HL), 5-3-3-2. | Ambiguous: game interest. Here 13 HCP (14 HL), 5-3-3-2.} Pass
+4S {Maximum : manche. Ici 11H (12 HL), 3-3-5-2. | Maximum: game. Here 11 HCP (12 HL), 3-3-5-2.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 16"]
 [Board "16"]
@@ -351,15 +351,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:K85.A64.KJ732.86 97.QT5.A.AKT9753 AQT64.KJ73.85.Q2 J32.982.QT964.J4"]
+[Deal "N:K85.A64.KJ732.86 .T982.964.AJT953 AQT64.KJ73.85.Q2 J9732.Q5.AQT.K74"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 12H. | Third-seat opening: 5 spades, 12 HCP.} Pass
-2C {Drury : soutien 3e, 12 DH, main passee proche de l'ouverture. | Drury: 3-card support, 12 DH, passed hand close to an opening.} Pass 2H {4 cartes a Coeur et une vraie ouverture (12H). | 4 hearts and a sound opening (12 HCP).} Pass
-4S {Vraie ouverture en face : manche. | Sound opening opposite: game.} Pass Pass Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (13 HL), 5-4-2-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (13 HL), 5-4-2-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 11H (12 HL), 3-3-5-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 11 HCP (12 HL), 3-3-5-2.} Pass 2H {5♠/4♥ avec une vraie ouverture. Ici 12H (13 HL), 5-4-2-2. | 5♠/4♥ with a real opening. Here 12 HCP (13 HL), 5-4-2-2.} Pass
+4S {Vraie ouverture en face : manche. Ici 11H (12 HL), 3-3-5-2. | Real opening opposite: game. Here 11 HCP (12 HL), 3-3-5-2.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 21"]
 [Board "21"]
@@ -369,15 +369,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:K82.A96.J8743.Q5 Q9653.74.A2.AK87 AJ74.KQ853.Q6.92 T.JT2.KT95.JT643"]
+[Deal "N:K82.A96.J8743.Q5 QT93.2.T952.AKT8 AJ74.KQ853.Q6.92 65.JT74.AK.J7643"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 12H. | Third-seat opening: 5 hearts, 12 HCP.} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 2S {4 cartes a Pique et une vraie ouverture (12H). | 4 spades and a sound opening (12 HCP).} Pass
-4H {Vraie ouverture en face : manche. | Sound opening opposite: game.} Pass Pass Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (13 HL), 4-5-2-2. | 5+ hearts, 12+ HCP. Here 12 HCP (13 HL), 4-5-2-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 3-3-5-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 3-3-5-2.} Pass 2S {4♠ avec une vraie ouverture. Ici 12H (13 HL), 4-5-2-2. | 4♠ with a real opening. Here 12 HCP (13 HL), 4-5-2-2.} Pass
+4H {Vraie ouverture en face : manche. Ici 10H (10 HL), 3-3-5-2. | Real opening opposite: game. Here 10 HCP (10 HL), 3-3-5-2.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 22"]
 [Board "22"]
@@ -459,15 +459,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:A74.K962.KT82.84 T93.QT873.6.QJ53 KQJ862.A4.AJ5.72 5.J5.Q9743.AKT96"]
+[Deal "N:A74.K962.KT82.84 .JT75.943.AQJ653 KQJ862.A4.AJ5.72 T953.Q83.Q76.KT9"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 6 cartes a Pique, 15H. | Third-seat opening: 6 spades, 15 HCP.} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 3C {19 HLD (16+) : la manche est assuree. | 19 HLD (16+): game is on.} Pass
-4S {Vraie ouverture en face : manche. | Sound opening opposite: game.} Pass Pass Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 15H (17 HL), 6-2-3-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 15 HCP (17 HL), 6-2-3-2.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 3-4-4-2. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 3-4-4-2.} Pass 3C {16+ HLD. Ici 15H (17 HL), 6-2-3-2. | 16+ HLD. Here 15 HCP (17 HL), 6-2-3-2.} Pass
+4S {Vraie ouverture en face : manche. Ici 10H (10 HL), 3-4-4-2. | Real opening opposite: game. Here 10 HCP (10 HL), 3-4-4-2.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 27"]
 [Board "27"]
@@ -531,15 +531,15 @@ Pass {Main passee : 11H, pas d'ouverture. | Passed hand: 11 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:Q8.K93.A72.J9642 K743.42.Q63.AK75 A6.AQT75.KJ984.3 JT952.J86.T5.QT8"]
+[Deal "N:Q8.K93.A72.J9642 9543.62.Q53.AK85 A6.AQT75.KJ984.3 KJT72.J84.T6.QT7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 14H. | Third-seat opening: 5 hearts, 14 HCP.} Pass
-2C {Drury : soutien 3e, 11 DH, main passee proche de l'ouverture. | Drury: 3-card support, 11 DH, passed hand close to an opening.} Pass 3D {Bicolore 5-5 Coeur-Carreau, 16 HL. | 5-5 two-suiter hearts and diamonds, 16 HL.} Pass
-4H {Vraie ouverture en face : manche. | Sound opening opposite: game.} Pass Pass Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 14H (16 HL), 2-5-5-1. | 5+ hearts, 12+ HCP. Here 14 HCP (16 HL), 2-5-5-1.} Pass
+2C {Drury : soutien 3 atouts (ou 4 sans singleton), 11-12 HLD. Ici 10H (10 HL), 2-3-3-5. | Drury: 3-card support (or 4 without a singleton), 11-12 HLD. Here 10 HCP (10 HL), 2-3-3-5.} Pass 3D {Bicolore 5-5, 16+ HL. Ici 14H (16 HL), 2-5-5-1. | 5-5 two-suiter, 16+ HL. Here 14 HCP (16 HL), 2-5-5-1.} Pass
+4H {Vraie ouverture en face : manche. Ici 10H (10 HL), 2-3-3-5. | Real opening opposite: game. Here 10 HCP (10 HL), 2-3-3-5.} Pass Pass Pass
 
 [Event "Entrainement Drury - Donne 31"]
 [Board "31"]
@@ -603,15 +603,15 @@ Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pa
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:AJ62.KT7.9.Q8743 53.J92.A84.KJ952 KQ974.A83.J52.T6 T8.Q654.KQT763.A"]
+[Deal "N:AJ62.KT7.9.Q8743 K5.A98.QJ8753.JT QT984.Q54.AT.A96 73.J632.K642.K52"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 10H (ouverture legere). | Third-seat opening: 5 spades, 10 HCP (light opening).} Pass
-2NT {Super Drury : 4 atouts et un singleton a Carreau, 12 HLD. | Super Drury: 4 trumps and a diamond singleton, 12 HLD.} Pass 3S {Minimum (12 HLD) : pas d'interet pour la manche. | Minimum (12 HLD): no game interest.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (12 HL), 5-3-2-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (12 HL), 5-3-2-3.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 10H (10 HL), 4-3-1-5. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 10 HCP (10 HL), 4-3-1-5.} Pass 3S {Minimum : pas d'interet. Ici 12H (12 HL), 5-3-2-3. | Minimum: no interest. Here 12 HCP (12 HL), 5-3-2-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 35"]
 [Board "35"]
@@ -621,15 +621,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:K965.AQ73.T8642. 742.T8.A95.AK973 A8.KJ964.Q73.J52 QJT3.52.KJ.QT864"]
+[Deal "N:K965.AQ73.T8642. T7.T.QJ53.QT7652 Q83.K8542.K.A843 AJ42.J96.A97.KJ9"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 9H, pas d'ouverture. | Passed hand: 9 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 11H (ouverture legere). | Third-seat opening: 5 hearts, 11 HCP (light opening).} Pass
-2NT {Super Drury : 4 atouts et une chicane a Trefle, 12 HLD. | Super Drury: 4 trumps and a club void, 12 HLD.} Pass 3H {Minimum (13 HLD) : pas d'interet pour la manche. | Minimum (13 HLD): no game interest.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (11 HL), 3-5-1-4. | 5+ hearts, 12+ HCP. Here 12 HCP (11 HL), 3-5-1-4.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 9H (9 HL), 4-4-5-0. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 9 HCP (9 HL), 4-4-5-0.} Pass 3H {Minimum : pas d'interet. Ici 12H (11 HL), 3-5-1-4. | Minimum: no interest. Here 12 HCP (11 HL), 3-5-1-4.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 36"]
 [Board "36"]
@@ -657,15 +657,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "None"]
-[Deal "N:AJ73.K962.8.J954 KT9864.J73.765.3 Q5.AQT84.K93.T62 2.5.AQJT42.AKQ87"]
+[Deal "N:AJ73.K962.8.J954 Q6.Q.KJ9642.Q873 K952.JT854.A.AT2 T84.A73.QT753.K6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 9H, pas d'ouverture. | Passed hand: 9 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 11H (ouverture legere). | Third-seat opening: 5 hearts, 11 HCP (light opening).} Pass
-2NT {Super Drury : 4 atouts et un singleton a Carreau, 11 HLD. | Super Drury: 4 trumps and a diamond singleton, 11 HLD.} Pass 3H {Minimum (13 HLD) : pas d'interet pour la manche. | Minimum (13 HLD): no game interest.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 12H (11 HL), 4-5-1-3. | 5+ hearts, 12+ HCP. Here 12 HCP (11 HL), 4-5-1-3.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 9H (9 HL), 4-4-1-4. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 9 HCP (9 HL), 4-4-1-4.} Pass 3H {Minimum : pas d'interet. Ici 12H (11 HL), 4-5-1-3. | Minimum: no interest. Here 12 HCP (11 HL), 4-5-1-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 38"]
 [Board "38"]
@@ -675,15 +675,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:AQ63.K852.J964.7 T4.T97.T52.QJT83 KJ852.QJ4.A73.92 97.A63.KQ8.AK654"]
+[Deal "N:AQ63.K852.J964.7 KT.A64.875.QJ653 J9842.QJ.QT3.AK4 75.T973.AK2.T982"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 11H (ouverture legere). | Third-seat opening: 5 spades, 11 HCP (light opening).} Pass
-2NT {Super Drury : 4 atouts et un singleton a Trefle, 12 HLD. | Super Drury: 4 trumps and a club singleton, 12 HLD.} Pass 3S {Minimum (13 HLD) : pas d'interet pour la manche. | Minimum (13 HLD): no game interest.} Pass
-Pass {Partielle. | Part score.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 13H (12 HL), 5-2-3-3. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 13 HCP (12 HL), 5-2-3-3.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 10H (10 HL), 4-4-4-1. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 10 HCP (10 HL), 4-4-4-1.} Pass 3S {Minimum : pas d'interet. Ici 13H (12 HL), 5-2-3-3. | Minimum: no interest. Here 13 HCP (12 HL), 5-2-3-3.} Pass
+Pass Pass
 
 [Event "Entrainement Drury - Donne 39"]
 [Board "39"]
@@ -711,15 +711,15 @@ Pass {Partielle. | Part score.} Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:Q852.K762.7.A953 96.JT5.Q94.QJ762 AKJ74.Q93.KJ5.84 T3.A84.AT8632.KT"]
+[Deal "N:Q852.K762.7.A953 4.QJT43.KJT6543. AK973.A.AQ.QT872 JT6.985.982.KJ64"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 9H, pas d'ouverture. | Passed hand: 9 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 14H. | Third-seat opening: 5 spades, 14 HCP.} Pass
-2NT {Super Drury : 4 atouts et un singleton a Carreau, 11 HLD. | Super Drury: 4 trumps and a diamond singleton, 11 HLD.} Pass 3C {16 HLD : interrogative au singleton. | 16 HLD: asks for the singleton.} Pass
-3D {Singleton a Carreau. | Diamond singleton.} Pass 4S {Des honneurs perdus a Carreau ou trop peu de points (15 HL) : manche. | Wasted values in diamonds or too few points (15 HL): game.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 19H (18 HL), 5-1-2-5. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 19 HCP (18 HL), 5-1-2-5.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 9H (9 HL), 4-4-1-4. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 9 HCP (9 HL), 4-4-1-4.} Pass 3C {Interrogatif au singleton. Ici 19H (18 HL), 5-1-2-5. | Singleton ask. Here 19 HCP (18 HL), 5-1-2-5.} Pass
+3D {Singleton (ou chicane) dans la couleur. Ici 9H (9 HL), 4-4-1-4. | Singleton (or void) in the suit. Here 9 HCP (9 HL), 4-4-1-4.} Pass 4S {Manche. Ici 19H (18 HL), 5-1-2-5. | Game. Here 19 HCP (18 HL), 5-1-2-5.} Pass
 Pass Pass
 
 [Event "Entrainement Drury - Donne 41"]
@@ -825,15 +825,15 @@ Pass Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "NS"]
-[Deal "N:QJ74.KJ53.5.Q962 T62.98.AT92.J843 AK853.A62.Q74.K5 9.QT74.KJ863.AT7"]
+[Deal "N:QJ74.KJ53.5.Q962 8653.8642.J763.8 AKT92.QT7.AT92.A .A9.KQ84.KJT7543"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 9H, pas d'ouverture. | Passed hand: 9 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 16H. | Third-seat opening: 5 spades, 16 HCP.} Pass
-2NT {Super Drury : 4 atouts et un singleton a Carreau, 11 HLD. | Super Drury: 4 trumps and a diamond singleton, 11 HLD.} Pass 3C {18 HLD : interrogative au singleton. | 18 HLD: asks for the singleton.} Pass
-3D {Singleton a Carreau. | Diamond singleton.} Pass 4S {Des honneurs perdus a Carreau ou trop peu de points (17 HL) : manche. | Wasted values in diamonds or too few points (17 HL): game.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 17H (17 HL), 5-3-4-1. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 17 HCP (17 HL), 5-3-4-1.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 9H (9 HL), 4-4-1-4. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 9 HCP (9 HL), 4-4-1-4.} Pass 3C {Interrogatif au singleton. Ici 17H (17 HL), 5-3-4-1. | Singleton ask. Here 17 HCP (17 HL), 5-3-4-1.} Pass
+3D {Singleton (ou chicane) dans la couleur. Ici 9H (9 HL), 4-4-1-4. | Singleton (or void) in the suit. Here 9 HCP (9 HL), 4-4-1-4.} Pass 4S {Manche. Ici 17H (17 HL), 5-3-4-1. | Game. Here 17 HCP (17 HL), 5-3-4-1.} Pass
 Pass Pass
 
 [Event "Entrainement Drury - Donne 47"]
@@ -844,15 +844,15 @@ Pass Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "EW"]
-[Deal "N:K963.A984.T8752. QT842.T52.Q.KT96 A5.KQJ73.KJ4.Q82 J7.6.A963.AJ7543"]
+[Deal "N:K963.A984.T8752. JT7.6.J43.Q98764 A54.KJ532.A.KJT3 Q82.QT7.KQ96.A52"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 7H, pas d'ouverture. | Passed hand: 7 HCP, no opening.} Pass 1H {Ouverture en 3e position : 5 cartes a Coeur, 16H. | Third-seat opening: 5 hearts, 16 HCP.} Pass
-2NT {Super Drury : 4 atouts et une chicane a Trefle, 10 HLD. | Super Drury: 4 trumps and a club void, 10 HLD.} Pass 3C {18 HLD : interrogative au singleton. | 18 HLD: asks for the singleton.} Pass
-3H {Chicane a Trefle. | Club void.} Pass 4H {Des honneurs perdus a Trefle ou trop peu de points (17 HL) : manche. | Wasted values in clubs or too few points (17 HL): game.} Pass
+Pass Pass 1H {5+ coeurs, 12+ H. Ici 16H (16 HL), 3-5-1-4. | 5+ hearts, 12+ HCP. Here 16 HCP (16 HL), 3-5-1-4.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 7H (7 HL), 4-4-5-0. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 7 HCP (7 HL), 4-4-5-0.} Pass 3C {Interrogatif au singleton. Ici 16H (16 HL), 3-5-1-4. | Singleton ask. Here 16 HCP (16 HL), 3-5-1-4.} Pass
+3H {Singleton (ou chicane) dans la couleur. Ici 7H (7 HL), 4-4-5-0. | Singleton (or void) in the suit. Here 7 HCP (7 HL), 4-4-5-0.} Pass 4H {Manche. Ici 16H (16 HL), 3-5-1-4. | Game. Here 16 HCP (16 HL), 3-5-1-4.} Pass
 Pass Pass
 
 [Event "Entrainement Drury - Donne 48"]
@@ -863,15 +863,15 @@ Pass Pass
 [South "-"]
 [Dealer "N"]
 [Vulnerable "All"]
-[Deal "N:AQ53.KT62.8.J874 86.J9875.QT964.Q KJ974.A4.AK3.952 T2.Q3.J752.AKT63"]
+[Deal "N:AQ53.KT62.8.J874 862.QJ94.Q3.KT95 KJT74.73.AK952.A 9.A85.JT764.Q632"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "N"]
-Pass {Main passee : 10H, pas d'ouverture. | Passed hand: 10 HCP, no opening.} Pass 1S {Ouverture en 3e position : 5 cartes a Pique, 15H. | Third-seat opening: 5 spades, 15 HCP.} Pass
-2NT {Super Drury : 4 atouts et un singleton a Carreau, 12 HLD. | Super Drury: 4 trumps and a diamond singleton, 12 HLD.} Pass 3C {17 HLD : interrogative au singleton. | 17 HLD: asks for the singleton.} Pass
-3D {Singleton a Carreau. | Diamond singleton.} Pass 4S {Des honneurs perdus a Carreau ou trop peu de points (16 HL) : manche. | Wasted values in diamonds or too few points (16 HL): game.} Pass
+Pass Pass 1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 15H (16 HL), 5-2-5-1. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 15 HCP (16 HL), 5-2-5-1.} Pass
+2NT {Super Drury : 4 atouts, un singleton ou une chicane, 11 HLD. Ici 10H (10 HL), 4-4-1-4. | Super Drury: 4-card support, a singleton or void, 11 HLD. Here 10 HCP (10 HL), 4-4-1-4.} Pass 3C {Interrogatif au singleton. Ici 15H (16 HL), 5-2-5-1. | Singleton ask. Here 15 HCP (16 HL), 5-2-5-1.} Pass
+3D {Singleton (ou chicane) dans la couleur. Ici 10H (10 HL), 4-4-1-4. | Singleton (or void) in the suit. Here 10 HCP (10 HL), 4-4-1-4.} Pass 4S {Manche. Ici 15H (16 HL), 5-2-5-1. | Game. Here 15 HCP (16 HL), 5-2-5-1.} Pass
 Pass Pass
 
 [Event "Entrainement Drury - Donne 49"]

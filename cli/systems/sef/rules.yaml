@@ -6711,6 +6711,564 @@
   meaning: "Passe"
   meaning_en: "Pass"
   status: infere
+# --- soutien de l'intervention en compétition : l'adversaire de droite a reparlé, ou l'intervention
+# était en sandwich. Le partenaire soutient au palier que permet l'enchère adverse ; loi des levées
+# totales : 4 atouts face à 5 (9 atouts) autorisent le palier de 3, 5 atouts (10) le palier de 4.
+# en: raising partner's overcall in competition (right-hand opponent bid again, or the overcall was a
+# sandwich). Raise to the level the opponents allow; law of total tricks: four trumps opposite five
+# (9 trumps) allow the three level, five (10) the four level.
+- id: "adv.d.1C.1H.4H.1"
+  seq: "(1C) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.d.1C.1H.4H.2"
+  seq: "(1C) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.d.1C.1H.3H.3"
+  seq: "(1C) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.d.1C.1H.3H.4"
+  seq: "(1C) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.d.1C.1H.2H.5"
+  seq: "(1C) 1H (X|1S|1NT|2C|2D)"
+  call: "2H"
+  cond: "H >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.d.1C.1S.4S.6"
+  seq: "(1C) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.d.1C.1S.4S.7"
+  seq: "(1C) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.d.1C.1S.3S.8"
+  seq: "(1C) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.d.1C.1S.3S.9"
+  seq: "(1C) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.d.1C.1S.2S.10"
+  seq: "(1C) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.d.1D.1H.4H.11"
+  seq: "(1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.d.1D.1H.4H.12"
+  seq: "(1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.d.1D.1H.3H.13"
+  seq: "(1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.d.1D.1H.3H.14"
+  seq: "(1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.d.1D.1H.2H.15"
+  seq: "(1D) 1H (X|1S|1NT|2C|2D)"
+  call: "2H"
+  cond: "H >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.d.1D.1S.4S.16"
+  seq: "(1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.d.1D.1S.4S.17"
+  seq: "(1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.d.1D.1S.3S.18"
+  seq: "(1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.d.1D.1S.3S.19"
+  seq: "(1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.d.1D.1S.2S.20"
+  seq: "(1D) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.d.1H.1S.4S.21"
+  seq: "(1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.d.1H.1S.4S.22"
+  seq: "(1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.d.1H.1S.3S.23"
+  seq: "(1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.d.1H.1S.3S.24"
+  seq: "(1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.d.1H.1S.2S.25"
+  seq: "(1H) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1D.1H.4H.26"
+  seq: "(1C) P (1D) 1H"
+  call: "4H"
+  cond: "H >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1D.1H.4H.27"
+  seq: "(1C) P (1D) 1H"
+  call: "4H"
+  cond: "H >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1D.1H.3H.28"
+  seq: "(1C) P (1D) 1H"
+  call: "3H"
+  cond: "H >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1D.1H.3H.29"
+  seq: "(1C) P (1D) 1H"
+  call: "3H"
+  cond: "H == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1D.1H.2H.30"
+  seq: "(1C) P (1D) 1H"
+  call: "2H"
+  cond: "H >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1D.1H.P.31"
+  seq: "(1C) P (1D) 1H"
+  call: "P"
+  cond: "true"
+  forcing: NF
+  meaning: "Passe"
+  meaning_en: "Pass"
+  status: infere
+- id: "adv.s.1C.1D.1H.w.4H.32"
+  seq: "(1C) P (1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1D.1H.w.4H.33"
+  seq: "(1C) P (1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D)"
+  call: "4H"
+  cond: "H >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1D.1H.w.3H.34"
+  seq: "(1C) P (1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1D.1H.w.3H.35"
+  seq: "(1C) P (1D) 1H (X|1S|1NT|2C|2D|2H|2S|2NT|3C|3D)"
+  call: "3H"
+  cond: "H == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1D.1H.w.2H.36"
+  seq: "(1C) P (1D) 1H (X|1S|1NT|2C|2D)"
+  call: "2H"
+  cond: "H >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1D.1S.4S.37"
+  seq: "(1C) P (1D) 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1D.1S.4S.38"
+  seq: "(1C) P (1D) 1S"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1D.1S.3S.39"
+  seq: "(1C) P (1D) 1S"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1D.1S.3S.40"
+  seq: "(1C) P (1D) 1S"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1D.1S.2S.41"
+  seq: "(1C) P (1D) 1S"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1D.1S.P.42"
+  seq: "(1C) P (1D) 1S"
+  call: "P"
+  cond: "true"
+  forcing: NF
+  meaning: "Passe"
+  meaning_en: "Pass"
+  status: infere
+- id: "adv.s.1C.1D.1S.w.4S.43"
+  seq: "(1C) P (1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1D.1S.w.4S.44"
+  seq: "(1C) P (1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1D.1S.w.3S.45"
+  seq: "(1C) P (1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1D.1S.w.3S.46"
+  seq: "(1C) P (1D) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1D.1S.w.2S.47"
+  seq: "(1C) P (1D) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1H.1S.4S.48"
+  seq: "(1C) P (1H) 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1H.1S.4S.49"
+  seq: "(1C) P (1H) 1S"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1H.1S.3S.50"
+  seq: "(1C) P (1H) 1S"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1H.1S.3S.51"
+  seq: "(1C) P (1H) 1S"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1H.1S.2S.52"
+  seq: "(1C) P (1H) 1S"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1C.1H.1S.P.53"
+  seq: "(1C) P (1H) 1S"
+  call: "P"
+  cond: "true"
+  forcing: NF
+  meaning: "Passe"
+  meaning_en: "Pass"
+  status: infere
+- id: "adv.s.1C.1H.1S.w.4S.54"
+  seq: "(1C) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1C.1H.1S.w.4S.55"
+  seq: "(1C) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1C.1H.1S.w.3S.56"
+  seq: "(1C) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1C.1H.1S.w.3S.57"
+  seq: "(1C) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1C.1H.1S.w.2S.58"
+  seq: "(1C) P (1H) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1D.1H.1S.4S.59"
+  seq: "(1D) P (1H) 1S"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1D.1H.1S.4S.60"
+  seq: "(1D) P (1H) 1S"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1D.1H.1S.3S.61"
+  seq: "(1D) P (1H) 1S"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1D.1H.1S.3S.62"
+  seq: "(1D) P (1H) 1S"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1D.1H.1S.2S.63"
+  seq: "(1D) P (1H) 1S"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
+- id: "adv.s.1D.1H.1S.P.64"
+  seq: "(1D) P (1H) 1S"
+  call: "P"
+  cond: "true"
+  forcing: NF
+  meaning: "Passe"
+  meaning_en: "Pass"
+  status: infere
+- id: "adv.s.1D.1H.1S.w.4S.65"
+  seq: "(1D) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 3 and hld >= 12"
+  forcing: SO
+  meaning: "Fit et la manche"
+  meaning_en: "Fit and game values"
+  status: infere
+- id: "adv.s.1D.1H.1S.w.4S.66"
+  seq: "(1D) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H|3S|3NT|4C|4D|4H)"
+  call: "4S"
+  cond: "S >= 5 and hld <= 10"
+  forcing: SO
+  meaning: "Loi des levées totales : 5 atouts (10 atouts, palier de 4)"
+  meaning_en: "Law of total tricks: five trumps (10 trumps, four level)"
+  status: infere
+- id: "adv.s.1D.1H.1S.w.3S.67"
+  seq: "(1D) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S >= 3 and 9 <= hld <= 11"
+  forcing: INV
+  meaning: "Soutien proposant la manche"
+  meaning_en: "Raise inviting game"
+  status: infere
+- id: "adv.s.1D.1H.1S.w.3S.68"
+  seq: "(1D) P (1H) 1S (X|1NT|2C|2D|2H|2S|2NT|3C|3D|3H)"
+  call: "3S"
+  cond: "S == 4 and hld <= 10"
+  forcing: NF
+  meaning: "Loi des levées totales : 4 atouts (9 atouts, palier de 3)"
+  meaning_en: "Law of total tricks: four trumps (9 trumps, three level)"
+  status: infere
+- id: "adv.s.1D.1H.1S.w.2S.69"
+  seq: "(1D) P (1H) 1S (X|1NT|2C|2D|2H)"
+  call: "2S"
+  cond: "S >= 3 and 8 <= hld <= 8"
+  forcing: NF
+  meaning: "Soutien simple"
+  meaning_en: "Simple raise"
+  status: infere
 # --- l'intervenant après le soutien simple de son partenaire (8-12 HLD)
 # en: the overcaller after partner's simple raise (8-12 HLD)
 - id: "ovr.{o}.{c}.3NT"

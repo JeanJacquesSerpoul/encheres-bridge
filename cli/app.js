@@ -369,7 +369,7 @@ const UI_TEXT = {
     parLoading: "Chargement du solveur…",
     parUnavailable: "Solveur à jeu ouvert (WASM) introuvable.",
     parNoIsolation: "Isolation cross-origine requise (SharedArrayBuffer) ; rechargez la page.",
-    parLeadHint: "Survolez une case — ou touchez-la — pour voir l'entame qui tient le contrat à ce nombre de levées.",
+    parLeadHint: "Survolez ou touchez une case pour voir l'entame qui tient le contrat à ce nombre de levées.",
     // Encadre le lien vers le projet DDS : son nom n'est pas traduit, et
     // applyLang ne peut pas poser de lien dans un [data-i18n].
     // Licence de l'application et lien vers son code, au pied de page.
@@ -612,7 +612,7 @@ const UI_TEXT = {
     parLoading: "Loading the solver…",
     parUnavailable: "Double-dummy solver (WASM) not found.",
     parNoIsolation: "Cross-origin isolation required (SharedArrayBuffer); reload the page.",
-    parLeadHint: "Hover a cell — or tap it — to see the lead that holds declarer to that many tricks.",
+    parLeadHint: "Hover or tap a cell to see the lead that holds declarer to that many tricks.",
     // « license » et non « licence » : c'est l'orthographe que l'attribution
     // du solveur emploie déjà en anglais, quelques lignes plus bas.
     appAuthor: "Bridge Bidding by Jean-Jacques Serpoul",

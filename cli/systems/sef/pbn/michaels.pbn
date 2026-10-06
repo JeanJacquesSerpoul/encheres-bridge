@@ -26,13 +26,13 @@ Pass Pass {Contrat final atteint (defaut). Ici 10H (11 HL), 5-5-1-2. | Final con
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:Q98.AT652.AK95.T AT3..QT872.A8752 J7652.K83.643.QJ K4.QJ974.J.K9643"]
+[Deal "N:AT3..QT872.A8752 J9652.62.K964.QT K4.QJ974.J.K9643 Q87.AKT853.A53.J"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3C"]
 [Result ""]
 [Auction "W"]
-1H 2NT {Les deux couleurs les moins cheres. Ici 10H (10 HL), 3-0-5-5. | The two cheapest suits. Here 10 HCP (10 HL), 3-0-5-5.} Pass 3C {Choisit la plus longue des deux couleurs. Ici 10H (10 HL), 2-5-1-5. | Picks the longer of the two suits. Here 10 HCP (10 HL), 2-5-1-5.}
+1H {5+ coeurs, 12+ H. Ici 14H (15 HL), 3-6-3-1. | 5+ hearts, 12+ HCP. Here 14 HCP (15 HL), 3-6-3-1.} 2NT {Les deux couleurs les moins cheres. Ici 10H (10 HL), 3-0-5-5. | The two cheapest suits. Here 10 HCP (10 HL), 3-0-5-5.} Pass 3C {Choisit la plus longue des deux couleurs. Ici 10H (10 HL), 2-5-1-5. | Picks the longer of the two suits. Here 10 HCP (10 HL), 2-5-1-5.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 3"]
@@ -43,13 +43,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:KQ7.Q754.J65.AT4 A4.AKJ32.KQT42.7 T9532.T98.A3.KJ3 J86.6.987.Q98652"]
+[Deal "N:A4.AKJ32.KQT42.7 T973.QT54.J5.AJT J86.6.987.Q98652 KQ52.987.A63.K43"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1C 2NT {Les deux couleurs les moins cheres. Ici 17H (19 HL), 2-5-5-1. | The two cheapest suits. Here 17 HCP (19 HL), 2-5-5-1.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 3H (3 HL), 3-1-3-6. | Picks the longer of the two suits. Here 3 HCP (3 HL), 3-1-3-6.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 12H (12 HL), 4-3-3-3. | Longest minor (3-3: 1♣). Here 12 HCP (12 HL), 4-3-3-3.} 2NT {Les deux couleurs les moins cheres. Ici 17H (19 HL), 2-5-5-1. | The two cheapest suits. Here 17 HCP (19 HL), 2-5-5-1.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 3H (3 HL), 3-1-3-6. | Picks the longer of the two suits. Here 3 HCP (3 HL), 3-1-3-6.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 4"]
@@ -145,13 +145,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "None"]
-[Deal "W:J7642.K5.KQ83.K5 AK9..JT962.J9832 QT3.QJ964.7.A764 85.AT8732.A54.QT"]
+[Deal "N:AK9..JT962.J9832 43.K954.Q87.A654 85.AT8732.A54.QT QJT762.QJ6.K3.K7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1S 2NT {Les deux couleurs les moins cheres. Ici 9H (9 HL), 3-0-5-5. | The two cheapest suits. Here 9 HCP (9 HL), 3-0-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 10H (10 HL), 2-6-3-2. | Picks the longer of the two suits. Here 10 HCP (10 HL), 2-6-3-2.}
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (14 HL), 6-3-2-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (14 HL), 6-3-2-2.} 2NT {Les deux couleurs les moins cheres. Ici 9H (9 HL), 3-0-5-5. | The two cheapest suits. Here 9 HCP (9 HL), 3-0-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 10H (10 HL), 2-6-3-2. | Picks the longer of the two suits. Here 10 HCP (10 HL), 2-6-3-2.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 10"]
@@ -162,13 +162,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:KQ864.974.AK8.J9 9.AT.T7642.AKQ42 AJ32.J863.Q95.T3 T75.KQ52.J3.8765"]
+[Deal "N:9.AT.T7642.AKQ42 832.J9743.K9.T93 T75.KQ52.J3.8765 AKQJ64.86.AQ85.J"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3C"]
 [Result ""]
 [Auction "W"]
-1S 2NT {Les deux couleurs les moins cheres. Ici 13H (14 HL), 1-2-5-5. | The two cheapest suits. Here 13 HCP (14 HL), 1-2-5-5.} Pass 3C {Choisit la plus longue des deux couleurs. Ici 6H (6 HL), 3-4-2-4. | Picks the longer of the two suits. Here 6 HCP (6 HL), 3-4-2-4.}
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 17H (18 HL), 6-2-4-1. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 17 HCP (18 HL), 6-2-4-1.} 2NT {Les deux couleurs les moins cheres. Ici 13H (14 HL), 1-2-5-5. | The two cheapest suits. Here 13 HCP (14 HL), 1-2-5-5.} Pass 3C {Choisit la plus longue des deux couleurs. Ici 6H (6 HL), 3-4-2-4. | Picks the longer of the two suits. Here 6 HCP (6 HL), 3-4-2-4.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 11"]
@@ -383,13 +383,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:J954.A762.T2.AQJ QT2.QJ983.AQ875. K.T54.KJ63.T9742 A8763.K.94.K8653"]
+[Deal "N:QT2.QJ983.AQ875. J4.T7542.JT62.AJ A8763.K.94.K8653 K95.A6.K3.QT9742"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1C 2NT {Les deux couleurs les moins cheres. Ici 11H (13 HL), 3-5-5-0. | The two cheapest suits. Here 11 HCP (13 HL), 3-5-5-0.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 10H (9 HL), 5-1-2-5. | Picks the longer of the two suits. Here 10 HCP (9 HL), 5-1-2-5.}
+1C {Mineure la plus longue (3-3 : 1♣). Ici 12H (12 HL), 3-2-2-6. | Longest minor (3-3: 1♣). Here 12 HCP (12 HL), 3-2-2-6.} 2NT {Les deux couleurs les moins cheres. Ici 11H (13 HL), 3-5-5-0. | The two cheapest suits. Here 11 HCP (13 HL), 3-5-5-0.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 10H (9 HL), 5-1-2-5. | Picks the longer of the two suits. Here 10 HCP (9 HL), 5-1-2-5.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 24"]
@@ -604,13 +604,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:75.Q.AQ98642.KQ6 J.AKT654.K.97542 K8432.9872.5.A83 AQT96.J3.JT73.JT"]
+[Deal "N:J.AKT654.K.97542 K753.Q987.864.86 AQT96.J3.JT73.JT 842.2.AQ952.AKQ3"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "W"]
-1D 2NT {Les deux couleurs les moins cheres. Ici 11H (11 HL), 1-6-1-5. | The two cheapest suits. Here 11 HCP (11 HL), 1-6-1-5.} Pass 3H {Choisit la plus longue des deux couleurs. Ici 9H (10 HL), 5-2-4-2. | Picks the longer of the two suits. Here 9 HCP (10 HL), 5-2-4-2.}
+1D {Mineure la plus longue (4-4 : 1♦). Ici 15H (16 HL), 3-1-5-4. | Longest minor (4-4: 1♦). Here 15 HCP (16 HL), 3-1-5-4.} 2NT {Les deux couleurs les moins cheres. Ici 11H (11 HL), 1-6-1-5. | The two cheapest suits. Here 11 HCP (11 HL), 1-6-1-5.} Pass 3H {Choisit la plus longue des deux couleurs. Ici 9H (10 HL), 5-2-4-2. | Picks the longer of the two suits. Here 9 HCP (10 HL), 5-2-4-2.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 37"]
@@ -638,13 +638,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "NS"]
-[Deal "W:KT.AK876.KJ.JT82 AJ.9.A7652.AK943 982.JT542.Q84.Q7 Q76543.Q3.T93.65"]
+[Deal "N:AJ.9.A7652.AK943 T92.87642.J4.JT7 Q76543.Q3.T93.65 K8.AKJT5.KQ8.Q82"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1H 2NT {Les deux couleurs les moins cheres. Ici 16H (16 HL), 2-1-5-5. | The two cheapest suits. Here 16 HCP (16 HL), 2-1-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 4H (4 HL), 6-2-3-2. | Picks the longer of the two suits. Here 4 HCP (4 HL), 6-2-3-2.}
+1H {5+ coeurs, 12+ H. Ici 18H (19 HL), 2-5-3-3. | 5+ hearts, 12+ HCP. Here 18 HCP (19 HL), 2-5-3-3.} 2NT {Les deux couleurs les moins cheres. Ici 16H (16 HL), 2-1-5-5. | The two cheapest suits. Here 16 HCP (16 HL), 2-1-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 4H (4 HL), 6-2-3-2. | Picks the longer of the two suits. Here 4 HCP (4 HL), 6-2-3-2.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 39"]
@@ -672,13 +672,13 @@ Pass Pass {Contrat final atteint (defaut). Ici 10H (9 HL), 5-5-1-2. | Final cont
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:AT976.J76.AK9.T3 4.Q2.JT652.KQJ97 QJ.AK843.8.A6542 K8532.T95.Q743.8"]
+[Deal "N:4.Q2.JT652.KQJ97 A9.K764.AK.T6432 K8532.T95.Q743.8 QJT76.AJ83.98.A5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3D"]
 [Result ""]
 [Auction "W"]
-1S 2NT {Les deux couleurs les moins cheres. Ici 9H (10 HL), 1-2-5-5. | The two cheapest suits. Here 9 HCP (10 HL), 1-2-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 5H (5 HL), 5-3-4-1. | Picks the longer of the two suits. Here 5 HCP (5 HL), 5-3-4-1.}
+1S {5+ piques, 12+ H (5-5 majeur : 1♠). Ici 12H (13 HL), 5-4-2-2. | 5+ spades, 12+ HCP (5-5 in the majors: 1♠). Here 12 HCP (13 HL), 5-4-2-2.} 2NT {Les deux couleurs les moins cheres. Ici 9H (10 HL), 1-2-5-5. | The two cheapest suits. Here 9 HCP (10 HL), 1-2-5-5.} Pass 3D {Choisit la plus longue des deux couleurs. Ici 5H (5 HL), 5-3-4-1. | Picks the longer of the two suits. Here 5 HCP (5 HL), 5-3-4-1.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 41"]
@@ -689,13 +689,13 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:72.AQ52.AT84.A85 J.KJ984.65.KQT96 9843.6.KQJ973.J3 AKQT65.T73.2.742"]
+[Deal "N:J.KJ984.65.KQT96 973.A6.9743.AJ53 AKQT65.T73.2.742 842.Q52.AKQJT8.8"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3H"]
 [Result ""]
 [Auction "W"]
-1D 2NT {Les deux couleurs les moins cheres. Ici 10H (11 HL), 1-5-2-5. | The two cheapest suits. Here 10 HCP (11 HL), 1-5-2-5.} Pass 3H {Choisit la plus longue des deux couleurs. Ici 9H (11 HL), 6-3-1-3. | Picks the longer of the two suits. Here 9 HCP (11 HL), 6-3-1-3.}
+1D {Mineure la plus longue (4-4 : 1♦). Ici 12H (14 HL), 3-3-6-1. | Longest minor (4-4: 1♦). Here 12 HCP (14 HL), 3-3-6-1.} 2NT {Les deux couleurs les moins cheres. Ici 10H (11 HL), 1-5-2-5. | The two cheapest suits. Here 10 HCP (11 HL), 1-5-2-5.} Pass 3H {Choisit la plus longue des deux couleurs. Ici 9H (11 HL), 6-3-1-3. | Picks the longer of the two suits. Here 9 HCP (11 HL), 6-3-1-3.}
 Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 42"]
@@ -740,14 +740,14 @@ Pass Pass Pass
 [South "-"]
 [Dealer "W"]
 [Vulnerable "All"]
-[Deal "W:Q863.62.AQ2.AQ86 .AQ974.J6543.JT3 AT7.J5.KT97.K542 KJ9542.KT83.8.97"]
+[Deal "N:.AQ974.J6543.JT3 QT63.J52.Q72.A62 KJ9542.KT83.8.97 A87.6.AKT9.KQ854"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "W"]
-1C 2NT {Les deux couleurs les moins cheres. Ici 8H (9 HL), 0-5-5-3. | The two cheapest suits. Here 8 HCP (9 HL), 0-5-5-3.} Pass 4H {Manche : fitte, 12+ HLD. Ici 7H (9 HL), 6-4-1-2. | Game: fit, 12+ HLD. Here 7 HCP (9 HL), 6-4-1-2.}
-Pass Pass {Contrat final atteint (defaut). Ici 8H (9 HL), 0-5-5-3. | Final contract reached (default). Here 8 HCP (9 HL), 0-5-5-3.} Pass
+1C {Mineure la plus longue (3-3 : 1♣). Ici 16H (17 HL), 3-1-4-5. | Longest minor (3-3: 1♣). Here 16 HCP (17 HL), 3-1-4-5.} 2NT {Les deux couleurs les moins cheres. Ici 8H (9 HL), 0-5-5-3. | The two cheapest suits. Here 8 HCP (9 HL), 0-5-5-3.} Pass 4H {Manche : fitte, 12+ HLD. Ici 7H (9 HL), 6-4-1-2. | Game: fit, 12+ HLD. Here 7 HCP (9 HL), 6-4-1-2.}
+Pass Pass Pass
 
 [Event "Entrainement Michaels precise - Donne 45"]
 [Board "45"]

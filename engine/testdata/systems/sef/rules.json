@@ -8896,7 +8896,8 @@
   "id": "1D.1S.2D.3C",
   "seq": [
    "1D 1S 2D",
-   "1D (X) 1S 2D"
+   "1D (X) 1S 2D",
+   "1D 1S (2C) 2D"
   ],
   "call": "3C",
   "cond": "S == 4 and C >= 4 and hl >= 12",
@@ -9191,7 +9192,8 @@
   "id": "1D.1S.2D.3C.r",
   "seq": [
    "1D 1S 2D 3C",
-   "1D (X) 1S 2D 3C"
+   "1D (X) 1S 2D 3C",
+   "1D 1S (2C) 2D 3C"
   ],
   "call": "3NT",
   "cond": "stop('H')",
@@ -9204,7 +9206,8 @@
   "id": "1D.1S.2D.3C.4S",
   "seq": [
    "1D 1S 2D 3C",
-   "1D (X) 1S 2D 3C"
+   "1D (X) 1S 2D 3C",
+   "1D 1S (2C) 2D 3C"
   ],
   "call": "3S",
   "cond": "S >= 3",
@@ -9217,7 +9220,8 @@
   "id": "1D.1S.2D.3C.4C",
   "seq": [
    "1D 1S 2D 3C",
-   "1D (X) 1S 2D 3C"
+   "1D (X) 1S 2D 3C",
+   "1D 1S (2C) 2D 3C"
   ],
   "call": "4C",
   "cond": "C >= 4",
@@ -9230,7 +9234,8 @@
   "id": "1D.1S.2D.3C.3D",
   "seq": [
    "1D 1S 2D 3C",
-   "1D (X) 1S 2D 3C"
+   "1D (X) 1S 2D 3C",
+   "1D 1S (2C) 2D 3C"
   ],
   "call": "3D",
   "cond": "true",
@@ -9638,7 +9643,9 @@
    "1C 1H 2C 2D 2H 3H",
    "1C (X) 1S 2C 2D 2S 3S",
    "1D (X) 1S 2D 2H 2S 3S",
-   "1C (X) 1H 2C 2D 2H 3H"
+   "1C (X) 1H 2C 2D 2H 3H",
+   "1D 1S (2C) 2D 2H 2S 3S",
+   "1C 1H (1S) 2C 2D 2H 3H"
   ],
   "call": "P",
   "cond": "true",
@@ -10327,7 +10334,9 @@
   "option": "checkback2018",
   "seq": [
    "1D 1S 2NT",
-   "1D (X) 1S 2NT"
+   "1D (X) 1S 2NT",
+   "1D 1S (2H) 2NT",
+   "1D 1S (2C) 2NT"
   ],
   "call": "3C",
   "cond": "hcp >= 6 and (S == 5 or H >= 4)",
@@ -10342,7 +10351,9 @@
   "option": "checkback2018",
   "seq": [
    "1D 1S 2NT 3C",
-   "1D (X) 1S 2NT 3C"
+   "1D (X) 1S 2NT 3C",
+   "1D 1S (2H) 2NT 3C",
+   "1D 1S (2C) 2NT 3C"
   ],
   "call": "3D",
   "cond": "D >= 5",
@@ -10356,7 +10367,9 @@
   "option": "checkback2018",
   "seq": [
    "1D 1S 2NT 3C",
-   "1D (X) 1S 2NT 3C"
+   "1D (X) 1S 2NT 3C",
+   "1D 1S (2H) 2NT 3C",
+   "1D 1S (2C) 2NT 3C"
   ],
   "call": "3H",
   "cond": "H >= 4",
@@ -10370,7 +10383,9 @@
   "option": "checkback2018",
   "seq": [
    "1D 1S 2NT 3C",
-   "1D (X) 1S 2NT 3C"
+   "1D (X) 1S 2NT 3C",
+   "1D 1S (2H) 2NT 3C",
+   "1D 1S (2C) 2NT 3C"
   ],
   "call": "3S",
   "cond": "S == 3",
@@ -10384,7 +10399,9 @@
   "option": "checkback2018",
   "seq": [
    "1D 1S 2NT 3C",
-   "1D (X) 1S 2NT 3C"
+   "1D (X) 1S 2NT 3C",
+   "1D 1S (2H) 2NT 3C",
+   "1D 1S (2C) 2NT 3C"
   ],
   "call": "3NT",
   "cond": "true",
@@ -10420,7 +10437,9 @@
   "option": "checkback2018",
   "seq": [
    "1C 1S 2NT",
-   "1C (X) 1S 2NT"
+   "1C (X) 1S 2NT",
+   "1C 1S (2H) 2NT",
+   "1C 1S (2D) 2NT"
   ],
   "call": "3H",
   "cond": "S >= 5 and H >= 5 and hcp >= 12",
@@ -11992,6 +12011,46 @@
   "meaning": "Pas d'intervention",
   "meaning_en": "No overcall",
   "status": "sef"
+ },
+ {
+  "id": "sw.1C.1D.1S",
+  "seq": "(1C) P (1D)",
+  "call": "1S",
+  "cond": "S >= 5 and S >= H and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17",
+  "forcing": "NF",
+  "meaning": "Intervention en sandwich : 5+ cartes, belle couleur",
+  "meaning_en": "Sandwich overcall: 5+ cards, good suit",
+  "status": "infere"
+ },
+ {
+  "id": "sw.1C.1D.1H",
+  "seq": "(1C) P (1D)",
+  "call": "1H",
+  "cond": "H >= 5 and H >= S and hcp_in('H') >= 6 and hcp >= 9 and 14 <= hl <= 17",
+  "forcing": "NF",
+  "meaning": "Intervention en sandwich : 5+ cartes, belle couleur",
+  "meaning_en": "Sandwich overcall: 5+ cards, good suit",
+  "status": "infere"
+ },
+ {
+  "id": "sw.1C.1H.1S",
+  "seq": "(1C) P (1H)",
+  "call": "1S",
+  "cond": "S >= 5 and S >= D and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17",
+  "forcing": "NF",
+  "meaning": "Intervention en sandwich : 5+ cartes, belle couleur",
+  "meaning_en": "Sandwich overcall: 5+ cards, good suit",
+  "status": "infere"
+ },
+ {
+  "id": "sw.1D.1H.1S",
+  "seq": "(1D) P (1H)",
+  "call": "1S",
+  "cond": "S >= 5 and S >= C and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17",
+  "forcing": "NF",
+  "meaning": "Intervention en sandwich : 5+ cartes, belle couleur",
+  "meaning_en": "Sandwich overcall: 5+ cards, good suit",
+  "status": "infere"
  },
  {
   "id": "rev.1C.2NT",
@@ -26840,7 +26899,8 @@
   "id": "1C.1D.1S",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1H)"
   ],
   "call": "1S",
   "cond": "S >= 4",
@@ -26853,7 +26913,9 @@
   "id": "1C.1D.2NT",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "2NT",
   "cond": "balanced and 17 <= hl <= 18",
@@ -26866,7 +26928,9 @@
   "id": "1C.1D.1NT",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "1NT",
   "cond": "balanced and hl <= 13",
@@ -26879,7 +26943,9 @@
   "id": "1C.1D.3D",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "3D",
   "cond": "D >= 4 and hl >= 14",
@@ -26892,7 +26958,9 @@
   "id": "1C.1D.2D",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "2D",
   "cond": "D >= 4",
@@ -26905,7 +26973,9 @@
   "id": "1C.1D.3C",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "3C",
   "cond": "C >= 6 and hl >= 14",
@@ -26918,7 +26988,9 @@
   "id": "1C.1D.2C",
   "seq": [
    "1C 1D",
-   "1C (X) 1D"
+   "1C (X) 1D",
+   "1C 1D (1S)",
+   "1C 1D (1H)"
   ],
   "call": "2C",
   "cond": "true",
@@ -26931,7 +27003,9 @@
   "id": "1H.1S.4S",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "4S",
   "cond": "S >= 4 and hld >= 18",
@@ -26944,7 +27018,9 @@
   "id": "1H.1S.3S",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "3S",
   "cond": "S >= 4 and hld >= 15",
@@ -26957,7 +27033,9 @@
   "id": "1H.1S.2S",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "2S",
   "cond": "S >= 4",
@@ -26970,7 +27048,9 @@
   "id": "1H.1S.2NT",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "2NT",
   "cond": "balanced and 17 <= hl <= 19",
@@ -26996,7 +27076,9 @@
   "id": "1H.1S.3H",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "3H",
   "cond": "H >= 6 and hl >= 15",
@@ -27049,7 +27131,9 @@
   "id": "1H.1S.2H",
   "seq": [
    "1H 1S",
-   "1H (X) 1S"
+   "1H (X) 1S",
+   "1H 1S (2D)",
+   "1H 1S (2C)"
   ],
   "call": "2H",
   "cond": "true",
@@ -27831,7 +27915,9 @@
   "id": "1C.1D.3C.3NT",
   "seq": [
    "1C 1D 3C",
-   "1C (X) 1D 3C"
+   "1C (X) 1D 3C",
+   "1C 1D (1S) 3C",
+   "1C 1D (1H) 3C"
   ],
   "call": "3NT",
   "cond": "hl >= 7",
@@ -27855,7 +27941,9 @@
   "seq": [
    "1C|1D|1H|1S 1D|1NT 2NT",
    "1C 1D 3C",
-   "1C (X) 1D 3C"
+   "1C (X) 1D 3C",
+   "1C 1D (1S) 3C",
+   "1C 1D (1H) 3C"
   ],
   "call": "P",
   "cond": "true",
@@ -35957,7 +36045,9 @@
   "id": "1C.1D.3D.r",
   "seq": [
    "1C 1D 3D",
-   "1C (X) 1D 3D"
+   "1C (X) 1D 3D",
+   "1C 1D (1S) 3D",
+   "1C 1D (1H) 3D"
   ],
   "call": "3NT",
   "cond": "hl >= 8 and (balanced or semibalanced)",
@@ -35970,7 +36060,9 @@
   "id": "1C.1D.3D.5D",
   "seq": [
    "1C 1D 3D",
-   "1C (X) 1D 3D"
+   "1C (X) 1D 3D",
+   "1C 1D (1S) 3D",
+   "1C 1D (1H) 3D"
   ],
   "call": "5D",
   "cond": "hld >= 11",
@@ -35983,7 +36075,9 @@
   "id": "1C.1D.3D.p",
   "seq": [
    "1C 1D 3D",
-   "1C (X) 1D 3D"
+   "1C (X) 1D 3D",
+   "1C 1D (1S) 3D",
+   "1C 1D (1H) 3D"
   ],
   "call": "P",
   "cond": "true",

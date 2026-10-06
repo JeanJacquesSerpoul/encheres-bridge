@@ -56,6 +56,50 @@ func TestExprEval(t *testing.T) {
 	}
 }
 
+// TestExprContext: the auction context names (setContext).
+func TestExprContext(t *testing.T) {
+	f := exprHand()
+	f.lvl, f.pSuit, f.pLen, f.pForcing = 2, "H", 5, true
+	for src, want := range map[string]string{
+		"lvl":                        "2",
+		"p_suit":                     "'H'",
+		"p_len":                      "5",
+		"fit":                        "8", // three hearts in hand + five promised
+		"p_forcing":                  "True",
+		"p_suit == 'H' and fit >= 8": "True",
+		"fit - 6 == 2 and lvl < 3":   "True",
+		"p_suit in ('S', 'H') and H": "3",
+	} {
+		n, err := compileCond(src)
+		if err != nil {
+			t.Errorf("%s : %v", src, err)
+			continue
+		}
+		v, err := n.eval(f)
+		if err != nil {
+			t.Errorf("%s : %v", src, err)
+			continue
+		}
+		if got := v.String(); got != want {
+			t.Errorf("%s = %s, attendu %s", src, got, want)
+		}
+	}
+	f.pSuit = ""
+	if v, _ := mustEval(t, "fit", f); v != "0" {
+		t.Errorf("fit sans couleur du partenaire = %s, attendu 0", v)
+	}
+}
+
+func mustEval(t *testing.T, src string, f *features) (string, error) {
+	t.Helper()
+	n, err := compileCond(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	v, err := n.eval(f)
+	return v.String(), err
+}
+
 func TestExprRejects(t *testing.T) {
 	for _, src := range []string{
 		"hcp * 2",         // no multiplication

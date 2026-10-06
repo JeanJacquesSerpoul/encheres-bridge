@@ -67,7 +67,9 @@ function match(pat, seq, trump) { let p = pat === '' ? [] : pat.split(' '); cons
     p = p.slice(1); if (s.length < p.length) return false; s = s.slice(s.length - p.length); }
   return p.length === s.length && p.every((t, k) => tokMatch(t, s[k])); }
 for (const r of rules) r.fn = compile(r.cond);
-function choose(hand, seq, trump, options, vul, oppVul, seat) { const e = feats(hand); e.vul = !!vul; e.opp_vul = !!oppVul; e.seat = seat || 1;
+function choose(hand, seq, trump, options, vul, oppVul, seat, ctx) { const e = feats(hand); e.vul = !!vul; e.opp_vul = !!oppVul; e.seat = seat || 1;
+  // contexte de l'enchère (§ 5 de la spécification) : fit = longueur en main dans p_suit + p_len
+  ctx = ctx || {}; e.lvl = ctx.lvl || 0; e.p_suit = ctx.p_suit || ''; e.p_len = ctx.p_len || 0; e.p_forcing = !!ctx.p_forcing; e.fit = e.p_suit ? e[e.p_suit] + e.p_len : 0;
   for (const r of rules) { if (r.option && !options.includes(r.option)) continue;
     const pats = Array.isArray(r.seq) ? r.seq : [r.seq]; if (!pats.some(p => match(p, seq, trump))) continue;
     if (r.fn(e)) return r; } return null; }
@@ -77,6 +79,6 @@ for (const c of tests.cases) { const h = parseHand(c.hand), e = feats(h);
     if (e[k] !== c.features[k]) { badF++; if (badF < 5) console.log('feature', c.id, k, e[k], c.features[k]); }
   for (const f of ['ace', 'king', 'queen', 'top', 'solid', 'stop', 'short', 'hcp_in', 'keycards', 'ctrl1', 'ctrl2'])
     for (const s of SUITS) if (e[f](s) !== c.features[f][s]) { badF++; if (badF < 5) console.log('feature', c.id, f, s, e[f](s), c.features[f][s]); }
-  const r = choose(h, c.seq, c.trump, c.options, c.vul, c.opp_vul, c.seat); const got = r ? r.id : null;
+  const r = choose(h, c.seq, c.trump, c.options, c.vul, c.opp_vul, c.seat, c); const got = r ? r.id : null;
   if (got !== c.expected.rule) { bad++; if (bad < 8) console.log('écart', c.id, c.hand, JSON.stringify(c.seq), got, c.expected.rule); } }
 console.log(`${tests.cases.length} cas : ${bad} écarts de règle, ${badF} écarts de caractéristiques`);

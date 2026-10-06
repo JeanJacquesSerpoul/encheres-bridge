@@ -29,6 +29,7 @@ type Rule struct {
 	MeaningEN string
 	Status    string
 	Alert     bool
+	Natural   bool // false for a conventional suit bid that is not alerted (natural: false)
 	Option    string
 	Trump     string // S, H, D, C or ""
 
@@ -46,7 +47,7 @@ var (
 	forcingSet    = map[string]bool{"NF": true, "F1": true, "FM": true, "SO": true, "INV": true, "REL": true, "ASK": true, "TO": true, "PEN": true}
 	statusSet     = map[string]bool{"sef": true, "choix": true, "sef2018": true, "infere": true, "a_verifier": true}
 	ruleFields    = map[string]bool{"id": true, "seq": true, "call": true, "cond": true, "forcing": true, "meaning": true,
-		"meaning_en": true, "status": true, "alert": true, "option": true, "for": true, "trump": true}
+		"meaning_en": true, "status": true, "alert": true, "option": true, "for": true, "trump": true, "natural": true}
 	requiredFields = []string{"id", "seq", "call", "cond", "forcing", "meaning", "meaning_en", "status"}
 )
 
@@ -349,6 +350,14 @@ func LoadRules(data []byte) (*RuleSet, error) {
 		}
 		if a, ok := r.get("alert"); ok {
 			rule.Alert = pyTruthy(a)
+		}
+		rule.Natural = true
+		if n, ok := r.get("natural"); ok {
+			if b, isBool := n.(bool); isBool {
+				rule.Natural = b
+			} else {
+				errs = append(errs, fmt.Sprintf("%s : natural doit valoir true ou false", rid))
+			}
 		}
 		if o, ok := r.get("option"); ok && pyTruthy(o) {
 			rule.Option = pyStr(o)

@@ -44,6 +44,15 @@ type features struct {
 	// bidder's rank in the auction (1 = dealer … 4), read as seat.
 	vul, oppVul bool
 	seat        int
+
+	// Context drawn from the auction so far (setContext): the highest level
+	// reached, the partner's last natural suit with the length it promises,
+	// and whether the partner's last call is forcing. fit adds the hand's
+	// length in that suit to the promised length.
+	lvl      int
+	pSuit    string
+	pLen     int
+	pForcing bool
 }
 
 func has(cards string, rank byte) bool {
@@ -251,6 +260,16 @@ func (f *features) scalar(name string) (value, bool) {
 		return boolVal(f.oppVul), true
 	case "seat":
 		return intVal(f.seat), true
+	case "lvl":
+		return intVal(f.lvl), true
+	case "p_suit":
+		return strVal(f.pSuit), true
+	case "p_len":
+		return intVal(f.pLen), true
+	case "fit":
+		return intVal(f.fit()), true
+	case "p_forcing":
+		return boolVal(f.pForcing), true
 	}
 	return value{}, false
 }
@@ -299,7 +318,17 @@ var featureNames = []string{"S", "H", "D", "C", "hcp", "hl", "dh", "hld", "shape
 
 // contextNames describe the table rather than the hand: they are not part
 // of a hand's feature dump.
-var contextNames = []string{"vul", "opp_vul", "seat"}
+var contextNames = []string{"vul", "opp_vul", "seat", "lvl", "p_suit", "p_len", "fit", "p_forcing"}
+
+// fit is the side's length in the partner's natural suit: the hand's own
+// length plus what the partner promised, or 0 when he has named none.
+func (f *features) fit() int {
+	if f.pSuit == "" {
+		return 0
+	}
+	s, _ := suitByLetter(f.pSuit)
+	return f.lens[s] + f.pLen
+}
 
 // funcNames are the per-suit functions, in the order of sef_rules.py's FUNCS.
 var funcNames = []string{"ace", "king", "queen", "top", "solid", "stop", "short", "hcp_in", "keycards", "ctrl1", "ctrl2"}

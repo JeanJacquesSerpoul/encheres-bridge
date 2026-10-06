@@ -134,8 +134,19 @@ type coherenceStats struct {
 	checked  int // decisions checked against the engine's choose
 }
 
+// gapStat sums, per pair sequence, the hands that passed for want of a rule.
+// Opener/defence: the side that opened the auction, or the other one. The
+// partner's suit is his last natural (non-alerted) suit bid, if any. Bench
+// columns: deals of the par bench where such a pass occurred, and their IMP —
+// the full deal (ceiling: a deal counts for every sequence it holds) and its
+// share (the deal's IMP divided among its passes for want of a rule).
 type gapStat struct {
-	n, forced, hcp, hl int
+	n, forced, hcp, hl    int
+	longest, long6        int
+	opener, defence       int
+	pSuit, pLen, pFit3    int
+	benchDeals, benchCeil int
+	benchShare            float64
 }
 
 func newCoherenceStats(rs *RuleSet) *coherenceStats {
@@ -219,8 +230,39 @@ func (st *coherenceStats) bid(t *testing.T, rs *RuleSet, d *Deal) []SeatCall {
 				st.gaps[key] = g
 			}
 			g.n++
-			g.hcp += feats[seat].hcp
-			g.hl += feats[seat].hl
+			f := feats[seat]
+			g.hcp += f.hcp
+			g.hl += f.hl
+			lg := max(f.lens[0], f.lens[1], f.lens[2], f.lens[3])
+			g.longest += lg
+			if lg >= 6 {
+				g.long6++
+			}
+			opened := -1
+			for _, c := range history {
+				if c.Call.Kind == KindBid {
+					opened = sideOf(c.Seat)
+					break
+				}
+			}
+			if opened < 0 || opened == sideOf(seat) {
+				g.opener++
+			} else {
+				g.defence++
+			}
+			for k := len(history) - 1; k >= 0; k-- {
+				c := history[k]
+				if c.Seat != (seat+2)%4 || c.Call.Kind != KindBid || c.Call.Strain == SNoTrump || c.Rule == nil || c.Rule.Alert {
+					continue
+				}
+				n := f.lens[Suit(c.Call.Strain)]
+				g.pSuit++
+				g.pLen += n
+				if n >= 3 {
+					g.pFit3++
+				}
+				break
+			}
 			if n := len(history); n >= 2 && history[n-2].Rule != nil && forcingKinds[history[n-2].Rule.Forcing] &&
 				history[n-1].Call.Kind == KindPass {
 				g.forced++
@@ -588,6 +630,9 @@ type coherenceSummary struct {
 	Shadowed      int            `json:"shadowed"`
 	OptionRules   int            `json:"optionRules"`
 	GapSequences  int            `json:"gapSequences"`
+	GapPasses     int            `json:"gapPasses"`
+	GapBenchDeals int            `json:"gapBenchDeals"`
+	GapBenchIMP   int            `json:"gapBenchImp"`
 	PassOnForcing int            `json:"passOnForcing"`
 	MeaningIssues int            `json:"meaningIssues"`
 	Translations  int            `json:"translations"`
@@ -622,6 +667,7 @@ func writeCoherence(t *testing.T, s *testSystem, bench []benchDeal, extra int, s
 	sum := coherenceSummary{System: s.ID, Rules: len(rs.Rules)}
 
 	// Corpus 1: the par bench, with the cost of each deal (H).
+	gapBenchDeals, gapBenchIMP := 0, 0
 	cost := map[string]int{}
 	costCats := map[string]map[int]int{}
 	costDeals := map[string]int{}
@@ -633,6 +679,39 @@ func writeCoherence(t *testing.T, s *testSystem, bench []benchDeal, extra int, s
 			t.Fatalf("donne %s : le relevé donne %s, le moteur %s", b.ID, got, want)
 		}
 		r := replay(t, b)
+		if r.IMP != 0 {
+			// Only the side that lost against the par (scores are seen from
+			// North-South) could have gained by bidding.
+			loser := 0
+			if r.IMP > 0 {
+				loser = 1
+			}
+			var keys []string
+			for _, c := range calls {
+				if c.Why == noRule && sideOf(c.Seat) == loser {
+					k := strings.Join(c.Seq, " ")
+					if k == "" {
+						k = "(ouverture)"
+					}
+					keys = append(keys, k)
+				}
+			}
+			imp := max(r.IMP, -r.IMP)
+			seen := map[string]bool{}
+			for _, k := range keys {
+				g := st.gaps[k]
+				g.benchShare += float64(imp) / float64(len(keys))
+				if !seen[k] {
+					seen[k] = true
+					g.benchDeals++
+					g.benchCeil += imp
+				}
+			}
+			if len(keys) > 0 {
+				gapBenchDeals++
+				gapBenchIMP += imp
+			}
+		}
 		if r.IMP == 0 || r.Declarer < 0 {
 			continue
 		}
@@ -716,25 +795,67 @@ func writeCoherence(t *testing.T, s *testSystem, bench []benchDeal, extra int, s
 		gaps = append(gaps, gapRow{k, g})
 	}
 	sum.GapSequences = len(gaps)
-	sort.Slice(gaps, func(i, j int) bool { return gaps[i].g.n > gaps[j].g.n || gaps[i].g.n == gaps[j].g.n && gaps[i].key < gaps[j].key })
-	writeGaps := func(title string, keep func(*gapStat) bool) {
-		fmt.Fprintf(&md, "%s\n\n| Séquence de la paire | Fois | H moyens | HL moyens | Après un forcing |\n|---|---|---|---|---|\n", title)
+	sort.Slice(gaps, func(i, j int) bool {
+		return gaps[i].g.n > gaps[j].g.n || gaps[i].g.n == gaps[j].g.n && gaps[i].key < gaps[j].key
+	})
+	totalGaps, opN, defN := 0, 0, 0
+	opIMP, defIMP := 0.0, 0.0
+	for _, g := range gaps {
+		totalGaps += g.g.n
+		opN += g.g.opener
+		defN += g.g.defence
+		if g.g.opener > g.g.defence {
+			opIMP += g.g.benchShare
+		} else {
+			defIMP += g.g.benchShare
+		}
+	}
+	sum.GapPasses, sum.GapBenchDeals, sum.GapBenchIMP = totalGaps, gapBenchDeals, gapBenchIMP
+	avg := func(a, n int) string {
+		if n == 0 {
+			return "—"
+		}
+		return fmt.Sprintf("%.1f", float64(a)/float64(n))
+	}
+	pct := func(a, n int) string {
+		if n == 0 {
+			return "—"
+		}
+		return fmt.Sprintf("%d %%", (100*a+n/2)/n)
+	}
+	writeGaps := func(title string, less func(a, b *gapStat) bool, keep func(*gapStat) bool, limit int) {
+		rows := append([]gapRow(nil), gaps...)
+		sort.SliceStable(rows, func(i, j int) bool { return less(rows[i].g, rows[j].g) })
+		fmt.Fprintf(&md, "%s\n\n| Séquence de la paire | Fois | Ouvreur / défense | H | HL | Plus longue | 6+ cartes | Couleur du partenaire : longueur | 3+ cartes | Après un forcing | Donnes du banc | IMP plafond | IMP part |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|\n", title)
 		n := 0
-		for _, g := range gaps {
-			if !keep(g.g) {
+		for _, r := range rows {
+			g := r.g
+			if !keep(g) {
 				continue
 			}
-			fmt.Fprintf(&md, "| `%s` | %d | %.1f | %.1f | %d |\n", g.key, g.g.n, float64(g.g.hcp)/float64(g.g.n), float64(g.g.hl)/float64(g.g.n), g.g.forced)
-			if n++; n == 50 {
+			fmt.Fprintf(&md, "| `%s` | %d | %d / %d | %s | %s | %s | %s | %s | %s | %d | %d | %d | %.0f |\n", r.key, g.n, g.opener, g.defence,
+				avg(g.hcp, g.n), avg(g.hl, g.n), avg(g.longest, g.n), pct(g.long6, g.n), avg(g.pLen, g.pSuit), pct(g.pFit3, g.pSuit),
+				g.forced, g.benchDeals, g.benchCeil, g.benchShare)
+			if n++; n == limit {
 				break
 			}
 		}
 		md.WriteString("\n")
 	}
-	fmt.Fprintf(&md, "## B. Séquences sans règle (%d séquences distinctes)\n\nLe joueur passe par défaut. La plupart sont normales (rien à dire) ; à regarder : les mains fortes et les suites de forcing.\n\n", len(gaps))
-	writeGaps("### B1. Les plus fréquentes", func(*gapStat) bool { return true })
-	writeGaps("### B2. Mains de 12 H et plus en moyenne", func(g *gapStat) bool { return g.hcp >= 12*g.n })
-	writeGaps("### B3. Juste après un forcing du partenaire", func(g *gapStat) bool { return g.forced > 0 })
+	byN := func(a, b *gapStat) bool { return a.n > b.n }
+	byIMP := func(a, b *gapStat) bool { return a.benchShare > b.benchShare }
+	all := func(*gapStat) bool { return true }
+	fmt.Fprintf(&md, "## B. Passes faute de règle (%d décisions, %d séquences distinctes)\n\n"+
+		"Le joueur passe par défaut (`noRule`). Camp de l'ouvreur : %d ; défense : %d. Sur le banc du par, %d donnes perdues contiennent un tel passe du camp perdant, pour %d IMP au total (séquences du camp de l'ouvreur : %.0f IMP ; de la défense : %.0f IMP).\n\n"+
+		"Colonnes : H, HL et plus longue couleur en moyenne ; couleur du partenaire = sa dernière couleur nommée sans alerte (longueur moyenne en main, part avec 3 cartes ou plus) ; "+
+		"les IMP du banc ne sont attribués qu'aux passes du camp perdant (celui dont le résultat est sous le par) ; IMP plafond = IMP des donnes où la séquence apparaît (une donne compte pour chacune de ses séquences) ; IMP part = IMP de la donne partagé entre ces passes (la somme fait le total ci-dessus).\n\n",
+		totalGaps, len(gaps), opN, defN, gapBenchDeals, gapBenchIMP, opIMP, defIMP)
+	writeGaps("### B1. Les plus coûteuses sur le banc (IMP part)", byIMP, func(g *gapStat) bool { return g.benchShare > 0 }, 50)
+	writeGaps("### B2. Les plus fréquentes", byN, all, 50)
+	writeGaps("### B3. Camp de l'ouvreur, les plus coûteuses", byIMP, func(g *gapStat) bool { return g.opener > g.defence && g.benchShare > 0 }, 30)
+	writeGaps("### B4. Défense, les plus coûteuses", byIMP, func(g *gapStat) bool { return g.defence >= g.opener && g.benchShare > 0 }, 30)
+	writeGaps("### B5. Mains de 12 H et plus en moyenne", byN, func(g *gapStat) bool { return g.hcp >= 12*g.n }, 50)
+	writeGaps("### B6. Juste après un forcing du partenaire", byN, func(g *gapStat) bool { return g.forced > 0 }, 50)
 
 	// C
 	type kv struct {

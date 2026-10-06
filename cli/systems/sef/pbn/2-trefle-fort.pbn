@@ -60,15 +60,15 @@
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AK73.KQ4.AJ.KQ92 T98642.J32.T94.3 QJ5.T987.K632.J5 .A65.Q875.AT8764"]
+[Deal "N:5.J965.J9.Q98762 9862.82.AQ76.T54 AKQJ74.KQ.85.AK3 T3.AT743.KT432.J"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3C {Stayman : au moins une majeure 4e et de quoi jouer la manche. | Stayman: at least one 4-card major and enough for game.} Pass
-3S {4 cartes a Pique, pas 4 Coeurs. | 4 spades, not 4 hearts.} Pass 3NT {Pas de fit Coeur : manche a Sans-Atout. | No heart fit: game in no-trump.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 22H (23 HL), 6-2-2-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 22 HCP (23 HL), 6-2-2-3.} Pass 2D {Relais obligatoire. Ici 4H (4 HL), 1-4-2-6. | Compulsory relay. Here 4 HCP (4 HL), 1-4-2-6.} Pass
+2NT {22-23 HL (semi-)regulier, majeure 5e possible (suites comme sur 2SA). Ici 22H (23 HL), 6-2-2-3. | 22-23 HL (semi-)balanced, possibly a 5-card major (continuations as over 2NT). Here 22 HCP (23 HL), 6-2-2-3.} Pass 3C {Stayman 4 reponses. Ici 4H (4 HL), 1-4-2-6. | 4-response Stayman. Here 4 HCP (4 HL), 1-4-2-6.} Pass
+3S {4 piques. Ici 22H (23 HL), 6-2-2-3. | 4 spades. Here 22 HCP (23 HL), 6-2-2-3.} Pass 3NT {Pas de fit. Ici 4H (4 HL), 1-4-2-6. | No fit. Here 4 HCP (4 HL), 1-4-2-6.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 5"]
@@ -193,15 +193,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AK4.AK.QJ93.KQ84 T76.96532.742.65 82.QT874.K65.J72 QJ953.J.AT8.AT93"]
+[Deal "N:KT65.A8542.J96.4 Q7.KJT9.T432.JT6 AJ2.Q3.AKQ5.AQ73 9843.76.87.K9852"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici main reguliere de 22H. | Strong catch-all 2C, here a balanced hand with 22 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-2NT {22-23 HL regulier, non forcing : les suites sont celles de l'ouverture de 2SA. | 22-23 HL balanced, non-forcing: continuations as over a 2NT opening.} Pass 3D {Texas Coeur : 5 cartes, 6H. | Transfer to hearts: 5 cards, 6 HCP.} Pass
-3NT {Doubleton Coeur : pas de fit. | Doubleton heart: no fit.} Pass Pass {Seulement 5 Coeurs : on reste a 3SA. | Only 5 hearts: stay in 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 22H (22 HL), 3-2-4-4. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 22 HCP (22 HL), 3-2-4-4.} Pass 2D {Relais obligatoire. Ici 8H (8 HL), 4-5-3-1. | Compulsory relay. Here 8 HCP (8 HL), 4-5-3-1.} Pass
+2NT {22-23 HL (semi-)regulier, majeure 5e possible (suites comme sur 2SA). Ici 22H (22 HL), 3-2-4-4. | 22-23 HL (semi-)balanced, possibly a 5-card major (continuations as over 2NT). Here 22 HCP (22 HL), 3-2-4-4.} Pass 3D {Texas ♥ : l'ouvreur rectifie s'il est fitte, sinon 3SA. Ici 8H (8 HL), 4-5-3-1. | Texas ♥: opener corrects with a fit, otherwise 3NT. Here 8 HCP (8 HL), 4-5-3-1.} Pass
+3NT {Sans fit : 3SA, le palier le plus bas. Ici 22H (22 HL), 3-2-4-4. | No fit: 3NT, the lowest level. Here 22 HCP (22 HL), 3-2-4-4.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 12"]
 [Board "12"]
@@ -338,14 +338,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:A5.AKQJT4.KJ3.72 J4.853.Q976.KQT9 9762.92.T854.J63 KQT83.76.A2.A854"]
+[Deal "N:QT987654.6.7.987 .A852.QJT983.543 AK.KQJ974.AK65.J J32.T3.42.AKQT62"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass Pass {1H et doubleton Coeur : passe. | 1 HCP and a doubleton heart: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 2-6-4-1. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 2-6-4-1.} Pass 2D {Relais obligatoire. Ici 2H (2 HL), 8-1-1-3. | Compulsory relay. Here 2 HCP (2 HL), 8-1-1-3.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 2-6-4-1. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 2-6-4-1.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 20"]
 [Board "20"]
@@ -355,14 +355,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJT5.AKQ6.84.82 Q64.T84.AKJT5.K6 8.J953.Q9762.J53 9732.72.3.AQT974"]
+[Deal "N:42.62.KT87.J9862 T9.A54.Q5432.753 AKQJ73.KQT7.AJ6. 865.J983.9.AKQT4"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "2S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 5 cartes a Pique, 17H (18 HL). | Strong catch-all 2C, here 5 spades, 17 HCP (18 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 18 HL). | 18-21 HL, 5/6 spades, non-forcing (18 HL here).} Pass Pass {4H, singleton Pique : passe. | 4 HCP, singleton spade: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (22 HL), 6-4-3-0. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (22 HL), 6-4-3-0.} Pass 2D {Relais obligatoire. Ici 4H (4 HL), 2-2-4-5. | Compulsory relay. Here 4 HCP (4 HL), 2-2-4-5.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (22 HL), 6-4-3-0. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (22 HL), 6-4-3-0.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 21"]
 [Board "21"]
@@ -372,14 +372,16 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:KQ.AKJ963.AQ5.43 T.Q84.T964.KQ876 J9853.T2.J87.952 A7642.75.K32.AJT"]
+[Deal "N:AQJT9862.64.9.K2 5.32.AQT652.J985 7.AKQJ87.K.AT743 K43.T95.J8743.Q6"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "2H"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass Pass {2H et doubleton Coeur : passe. | 2 HCP and a doubleton heart: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 17H (18 HL), 1-6-1-5. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 17 HCP (18 HL), 1-6-1-5.} Pass 2D {Relais obligatoire. Ici 10H (14 HL), 8-2-1-2. | Compulsory relay. Here 10 HCP (14 HL), 8-2-1-2.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 17H (18 HL), 1-6-1-5. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 17 HCP (18 HL), 1-6-1-5.} Pass 2NT {Forcing, 5+ H. Ici 10H (14 HL), 8-2-1-2. | Forcing, 5+ HCP. Here 10 HCP (14 HL), 8-2-1-2.} Pass
+3H {6 cartes. Ici 17H (18 HL), 1-6-1-5. | 6 cards. Here 17 HCP (18 HL), 1-6-1-5.} Pass 4H {Fit. Ici 10H (14 HL), 8-2-1-2. | Fit. Here 10 HCP (14 HL), 8-2-1-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 22"]
 [Board "22"]
@@ -389,14 +391,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AQJ94.A.AKJ6.T52 KT73.KJ83.92.Q84 86.97542.Q83.763 52.QT6.T754.AKJ9"]
+[Deal "N:62.K7532.KJ.A973 Q753.T984.73.542 AKJ84.AJ6.A64.K6 T9.Q.QT9852.QJT8"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "2S"]
+[Declarer "N"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass Pass {2H et doubleton Pique : passe. | 2 HCP and a doubleton spade: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 5-3-3-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 5-3-3-2.} Pass 2D {Relais obligatoire. Ici 11H (10 HL), 2-5-2-4. | Compulsory relay. Here 11 HCP (10 HL), 2-5-2-4.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 5-3-3-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 5-3-3-2.} Pass 2NT {Forcing, 5+ H. Ici 11H (10 HL), 2-5-2-4. | Forcing, 5+ HCP. Here 11 HCP (10 HL), 2-5-2-4.} Pass
+3NT {5 cartes, main reguliere. Ici 20H (21 HL), 5-3-3-2. | 5 cards, balanced. Here 20 HCP (21 HL), 5-3-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 23"]
 [Board "23"]
@@ -406,15 +409,16 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQ864.KQ5.A7.83 JT9.A9742.J6.A97 752.J863.Q94.T64 3.T.KT8532.KQJ52"]
+[Deal "N:T985.Q5.KJ642.QT A74.T98.Q3.J9852 KQJ32.KJ.A95.AK7 6.A76432.T87.643"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "4S"]
+[Contract "5S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Pique, 18H (20 HL). | Strong catch-all 2C, here 6 spades, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3S {Fit Pique (3 cartes), main faible : propose la manche. | Spade fit (3 cards), weak hand: invites game.} Pass
-4S {Maximum (20 HL) : accepte. | Maximum (20 HL): accepts.} Pass Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 5-2-3-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 5-2-3-3.} Pass 2D {Relais obligatoire. Ici 8H (9 HL), 4-2-5-2. | Compulsory relay. Here 8 HCP (9 HL), 4-2-5-2.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 5-2-3-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 5-2-3-3.} Pass 3S {Soutien au palier de 3 : espoir de chelem. Ici 8H (9 HL), 4-2-5-2. | Raise to the three level: slam interest. Here 8 HCP (9 HL), 4-2-5-2.} Pass
+4NT {Blackwood. Ici 21H (21 HL), 5-2-3-3. | Blackwood. Here 21 HCP (21 HL), 5-2-3-3.} Pass 5C {3 ou 0 cle. Ici 8H (9 HL), 4-2-5-2. | 3 or 0 keycards. Here 8 HCP (9 HL), 4-2-5-2.} Pass
+5S {Deux cles manquent : on s'arrete a 5. Ici 21H (21 HL), 5-2-3-3. | Two keycards missing: stop at 5. Here 21 HCP (21 HL), 5-2-3-3.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 24"]
 [Board "24"]
@@ -424,15 +428,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJ74.AQ3.K6.J52 T9.KJ4.AQJ97.AQ6 Q85.T976.832.974 632.852.T54.KT83"]
+[Deal "N:753.AT.Q3.AKJ953 T62.Q32.JT4.T762 AKQ984.K9.A9765. J.J87654.K82.Q84"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3S"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 5 cartes a Pique, 18H (19 HL). | Strong catch-all 2C, here 5 spades, 18 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 3S {Fit par 3 cartes, 2H : soutien faible. | 3-card fit, 2 HCP: weak raise.} Pass
-Pass {19 HL seulement : refuse. | Only 19 HL: declines.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 16H (18 HL), 6-2-5-0. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 16 HCP (18 HL), 6-2-5-0.} Pass 2D {Relais obligatoire. Ici 14H (16 HL), 3-2-2-6. | Compulsory relay. Here 14 HCP (16 HL), 3-2-2-6.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 16H (18 HL), 6-2-5-0. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 16 HCP (18 HL), 6-2-5-0.} Pass 3S {Soutien au palier de 3 : espoir de chelem. Ici 14H (16 HL), 3-2-2-6. | Raise to the three level: slam interest. Here 14 HCP (16 HL), 3-2-2-6.} Pass
+4S {Pas d'interet pour le chelem. Ici 16H (18 HL), 6-2-5-0. | No slam interest. Here 16 HCP (18 HL), 6-2-5-0.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 25"]
 [Board "25"]
@@ -442,15 +446,15 @@ Pass {19 HL seulement : refuse. | Only 19 HL: declines.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:A7.AKJ953.KQ4.76 KQJ8.T76.T8.AK93 9654.Q82.J53.T84 T32.4.A9762.QJ52"]
+[Deal "N:7.KQ73.J8743.K94 94.T6.952.AJT632 AKQJ5.J98542.A6. T8632.A.KQT.Q875"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3H"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 17H (19 HL). | Strong catch-all 2C, here 6 hearts, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 19 HL). | 18-21 HL, 5/6 hearts, non-forcing (19 HL here).} Pass 3H {Fit Coeur par 3 cartes, 3H : soutien faible. | 3-card heart fit, 3 HCP: weak raise.} Pass
-Pass {19 HL : refuse la manche. | 19 HL: declines game.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 15H (16 HL), 5-6-2-0. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 15 HCP (16 HL), 5-6-2-0.} Pass 2D {Relais obligatoire. Ici 9H (9 HL), 1-4-5-3. | Compulsory relay. Here 9 HCP (9 HL), 1-4-5-3.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 15H (16 HL), 5-6-2-0. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 15 HCP (16 HL), 5-6-2-0.} Pass 3H {Soutien au palier de 3 : espoir de chelem. Ici 9H (9 HL), 1-4-5-3. | Raise to the three level: slam interest. Here 9 HCP (9 HL), 1-4-5-3.} Pass
+4H {Pas d'interet pour le chelem. Ici 15H (16 HL), 5-6-2-0. | No slam interest. Here 15 HCP (16 HL), 5-6-2-0.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 26"]
 [Board "26"]
@@ -460,15 +464,16 @@ Pass {19 HL : refuse la manche. | 19 HL: declines game.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:5.AKQJ74.AQ5.K83 Q4.3.KJT743.A965 J8763.T95.862.Q7 AKT92.862.9.JT42"]
+[Deal "N:T7.A8.Q654.JT732 AQ864.7.732.Q985 K.KQJT32.A98.AK4 J9532.9654.KJT.6"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3H {Fit Coeur, 3H : soutien faible. | Heart fit, 3 HCP: weak raise.} Pass
-4H {Maximum (21 HL) : manche. | Maximum (21 HL): game.} Pass Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 1-6-3-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 1-6-3-3.} Pass 2D {Relais obligatoire. Ici 7H (7 HL), 2-2-4-5. | Compulsory relay. Here 7 HCP (7 HL), 2-2-4-5.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 1-6-3-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 1-6-3-3.} Pass 2NT {Forcing, 5+ H. Ici 7H (7 HL), 2-2-4-5. | Forcing, 5+ HCP. Here 7 HCP (7 HL), 2-2-4-5.} Pass
+3H {6 cartes. Ici 20H (21 HL), 1-6-3-3. | 6 cards. Here 20 HCP (21 HL), 1-6-3-3.} Pass 4H {Fit. Ici 7H (7 HL), 2-2-4-5. | Fit. Here 7 HCP (7 HL), 2-2-4-5.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 27"]
 [Board "27"]
@@ -478,15 +483,15 @@ Pass {19 HL : refuse la manche. | 19 HL: declines game.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AKQT5.KQJ4.A3.92 4.96.KQT52.J7653 863.8752.J96.QT4 J972.AT3.874.AK8"]
+[Deal "N:T86.87543.AT4.J8 9752.QJ92.J973.T AKQJ4.A.K6.KQ932 3.KT6.Q852.A7654"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3S {Fit Pique par 3 cartes, 3H. | 3-card spade fit, 3 HCP.} Pass
-4S {20 HL : accepte. | 20 HL: accepts.} Pass Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 22H (23 HL), 5-1-2-5. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 22 HCP (23 HL), 5-1-2-5.} Pass 2D {Relais obligatoire. Ici 5H (5 HL), 3-5-3-2. | Compulsory relay. Here 5 HCP (5 HL), 3-5-3-2.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 22H (23 HL), 5-1-2-5. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 22 HCP (23 HL), 5-1-2-5.} Pass 4S {Fit, saut a la manche : conclusion. Ici 5H (5 HL), 3-5-3-2. | Fit, jump to game: sign-off. Here 5 HCP (5 HL), 3-5-3-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 28"]
 [Board "28"]
@@ -496,14 +501,14 @@ Pass {19 HL : refuse la manche. | 19 HL: declines game.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJ862.A5.KQ4.72 54.JT6.J9832.QJ4 Q73.9842.A65.T83 T9.KQ73.T7.AK965"]
+[Deal "N:AT942.8543.Q6.82 .KJ92.T8743.AQJ4 KJ876.AQ.AKJ2.KT Q53.T76.95.97653"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 4S {Fit Pique et 6H : la manche directement. | Spade fit and 6 HCP: straight to game.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 5-2-4-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 5-2-4-2.} Pass 2D {Relais obligatoire. Ici 6H (6 HL), 5-4-2-2. | Compulsory relay. Here 6 HCP (6 HL), 5-4-2-2.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 5-2-4-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 5-2-4-2.} Pass 4S {Fit, saut a la manche : conclusion. Ici 6H (6 HL), 5-4-2-2. | Fit, jump to game: sign-off. Here 6 HCP (6 HL), 5-4-2-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 29"]
@@ -514,14 +519,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q4.AKQ987.AK6.85 AKT96.T2.T87.AQ3 853.J63.QJ92.K74 J72.54.543.JT962"]
+[Deal "N:AJ5.QT73.43.T753 KQT8632.J8.KQT.6 .AK9542.AJ862.A4 974.6.975.KQJ982"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass 4H {Fit Coeur et 7H : manche. | Heart fit and 7 HCP: game.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 16H (19 HL), 0-6-5-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 16 HCP (19 HL), 0-6-5-2.} Pass 2D {Relais obligatoire. Ici 7H (7 HL), 3-4-2-4. | Compulsory relay. Here 7 HCP (7 HL), 3-4-2-4.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 16H (19 HL), 0-6-5-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 16 HCP (19 HL), 0-6-5-2.} Pass 4H {Fit, saut a la manche : conclusion. Ici 7H (7 HL), 3-4-2-4. | Fit, jump to game: sign-off. Here 7 HCP (7 HL), 3-4-2-4.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 30"]
@@ -532,15 +537,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:AKQJ6.A5.AJ74.83 832.J7642.62.J97 9754.K83.Q93.T52 T.QT9.KT85.AKQ64"]
+[Deal "N:T9754.AT7542.T4. 6.83.532.AQT8743 AKQ82.KJ6.AQ6.J5 J3.Q9.KJ987.K962"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 5 cartes a Pique, 19H (20 HL). | Strong catch-all 2C, here 5 spades, 19 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 5H. | Compulsory relay, whatever the strength: 5 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 4S {4 atouts et 5H : manche. | 4 trumps and 5 HCP: game.} Pass
-Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 5-3-3-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 5-3-3-2.} Pass 2D {Relais obligatoire. Ici 4H (4 HL), 5-6-2-0. | Compulsory relay. Here 4 HCP (4 HL), 5-6-2-0.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 5-3-3-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 5-3-3-2.} Pass 4C {Splinter : singleton ou chicane, 4+ atouts, un controle d'honneur au plus. Ici 4H (4 HL), 5-6-2-0. | Splinter: singleton or void, 4+ trumps, at most one honour control. Here 4 HCP (4 HL), 5-6-2-0.} Pass
+4S {Conclusion. Ici 20H (21 HL), 5-3-3-2. | Sign-off. Here 20 HCP (21 HL), 5-3-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 31"]
 [Board "31"]
@@ -550,15 +555,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:AK5.KQT973.A.J52 Q983.8.KQJT942.K J72.AJ64.8753.94 T64.52.6.AQT8763"]
+[Deal "N:.98763.T53.KQT83 43.J.KQJ984.J652 KJT5.AKQT4.A.A94 AQ98762.52.762.7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 17H (19 HL). | Strong catch-all 2C, here 6 hearts, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 19 HL). | 18-21 HL, 5/6 hearts, non-forcing (19 HL here).} Pass 4H {4 atouts dont l'As et 6H : manche. | 4 trumps including the ace, 6 HCP: game.} Pass
-Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 4-5-1-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 4-5-1-3.} Pass 2D {Relais obligatoire. Ici 5H (6 HL), 0-5-3-5. | Compulsory relay. Here 5 HCP (6 HL), 0-5-3-5.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 4-5-1-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 4-5-1-3.} Pass 3S {Splinter : singleton ou chicane, 4+ atouts, un controle d'honneur au plus. Ici 5H (6 HL), 0-5-3-5. | Splinter: singleton or void, 4+ trumps, at most one honour control. Here 5 HCP (6 HL), 0-5-3-5.} Pass
+4H {Conclusion. Ici 21H (21 HL), 4-5-1-3. | Sign-off. Here 21 HCP (21 HL), 4-5-1-3.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 32"]
 [Board "32"]
@@ -568,15 +573,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKQ985.AK7.82.Q4 T4.T64.A93.KT965 7.QJ93.KJ65.J873 J632.852.QT74.A2"]
+[Deal "N:87.JT762.A65.KQ5 96.AK54.J9743.92 AKQ43.Q93.KQT.AT JT52.8.82.J87643"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Pique, 18H (20 HL). | Strong catch-all 2C, here 6 spades, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 20 HL). | 18-21 HL, 5/6 spades, non-forcing (20 HL here).} Pass 3NT {Singleton Pique, 8H et des arrets : 3SA. | Singleton spade, 8 HCP and stoppers: 3NT.} Pass
-Pass {Pas de raison de corriger. | No reason to correct.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 5-3-3-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 5-3-3-2.} Pass 2D {Relais obligatoire. Ici 10H (10 HL), 2-5-3-3. | Compulsory relay. Here 10 HCP (10 HL), 2-5-3-3.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 5-3-3-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 5-3-3-2.} Pass 2NT {Forcing, 5+ H. Ici 10H (10 HL), 2-5-3-3. | Forcing, 5+ HCP. Here 10 HCP (10 HL), 2-5-3-3.} Pass
+3NT {5 cartes, main reguliere. Ici 20H (21 HL), 5-3-3-2. | 5 cards, balanced. Here 20 HCP (21 HL), 5-3-3-2.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 33"]
 [Board "33"]
@@ -586,15 +591,16 @@ Pass {Pas de raison de corriger. | No reason to correct.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AK7.AQJ863.KQ5.4 T94.T9754.T.AJ85 QJ5.2.J874.KQT62 8632.K.A9632.973"]
+[Deal "N:K754.53.92.AQJT7 T986.A.Q65.98654 A.KQT974.AK873.2 QJ32.J862.JT4.K3"]
 [Scoring "MP"]
-[Declarer "N"]
-[Contract "3NT"]
+[Declarer "S"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 9H. | Compulsory relay, whatever the strength: 9 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Singleton Coeur, 9H, Trefles tenus : 3SA. | Singleton heart, 9 HCP, clubs held: 3NT.} Pass
-Pass {Accepte 3SA. | Accepts 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 16H (18 HL), 1-6-5-1. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 16 HCP (18 HL), 1-6-5-1.} Pass 2D {Relais obligatoire. Ici 10H (11 HL), 4-2-2-5. | Compulsory relay. Here 10 HCP (11 HL), 4-2-2-5.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 16H (18 HL), 1-6-5-1. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 16 HCP (18 HL), 1-6-5-1.} Pass 3C {Nouvelle couleur : cinq cartes correctes, 7+ H. Ici 10H (11 HL), 4-2-2-5. | New suit: five decent cards, 7+ HCP. Here 10 HCP (11 HL), 4-2-2-5.} Pass
+3H {6 cartes. Ici 16H (18 HL), 1-6-5-1. | 6 cards. Here 16 HCP (18 HL), 1-6-5-1.} Pass 4H {Fit. Ici 10H (11 HL), 4-2-2-5. | Fit. Here 10 HCP (11 HL), 4-2-2-5.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 34"]
 [Board "34"]
@@ -604,15 +610,15 @@ Pass {Accepte 3SA. | Accepts 3NT.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQJT74.AK.A93.65 A93.T96.JT754.AK 5.J8742.KQ8.T843 862.Q53.62.QJ972"]
+[Deal "N:4.975.AK9743.842 QT7653.T.852.QJ6 AKJ92.AKJ6.Q.KT7 8.Q8432.JT6.A953"]
 [Scoring "MP"]
-[Declarer "N"]
+[Declarer "S"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 3NT {Singleton Pique, 6H : 3SA. | Singleton spade, 6 HCP: 3NT.} Pass
-Pass {Accepte 3SA. | Accepts 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 5-4-1-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 5-4-1-3.} Pass 2D {Relais obligatoire. Ici 7H (9 HL), 1-3-6-3. | Compulsory relay. Here 7 HCP (9 HL), 1-3-6-3.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 5-4-1-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 5-4-1-3.} Pass 3D {Nouvelle couleur : cinq cartes correctes, 7+ H. Ici 7H (9 HL), 1-3-6-3. | New suit: five decent cards, 7+ HCP. Here 7 HCP (9 HL), 1-3-6-3.} Pass
+3NT {Pas de fit. Ici 21H (21 HL), 5-4-1-3. | No fit. Here 21 HCP (21 HL), 5-4-1-3.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 35"]
 [Board "35"]
@@ -622,15 +628,16 @@ Pass {Accepte 3SA. | Accepts 3NT.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:A4.AKQ652.KJ7.Q3 QT92.74.T8.AK965 KJ863.83.Q94.J72 75.JT9.A6532.T84"]
+[Deal "N:972..AJ9876.Q543 84.A9642.T32.KJ7 AKJT.KQJT5.Q5.A8 Q653.873.K4.T962"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Doubleton Coeur, 7H et 5 Piques : 3SA. | Doubleton heart, 7 HCP and 5 spades: 3NT.} Pass
-Pass {Accepte 3SA. | Accepts 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 4-5-2-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 4-5-2-2.} Pass 2D {Relais obligatoire. Ici 7H (9 HL), 3-0-6-4. | Compulsory relay. Here 7 HCP (9 HL), 3-0-6-4.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 4-5-2-2. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 4-5-2-2.} Pass 2NT {Forcing, 5+ H. Ici 7H (9 HL), 3-0-6-4. | Forcing, 5+ HCP. Here 7 HCP (9 HL), 3-0-6-4.} Pass
+3S {4+ cartes. Ici 20H (21 HL), 4-5-2-2. | 4+ cards. Here 20 HCP (21 HL), 4-5-2-2.} Pass 3NT {Manche a SA. Ici 7H (9 HL), 3-0-6-4. | Game in NT. Here 7 HCP (9 HL), 3-0-6-4.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 36"]
 [Board "36"]
@@ -640,16 +647,16 @@ Pass {Accepte 3SA. | Accepts 3NT.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKJ975.A84.KQ6.5 T.QJT932.JT7.T87 Q86.K7.A853.K942 432.65.942.AQJ63"]
+[Deal "N:J73.J854.9.KQJT3 9.Q2.AQJ754.8654 AKQ54.AKT.63.A92 T862.9763.KT82.7"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "6S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Pique, 17H (19 HL). | Strong catch-all 2C, here 6 spades, 17 HCP (19 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 12H. | Compulsory relay, whatever the strength: 12 HCP here.} Pass
-2S {18-21 HL, 5/6 cartes a Pique, non forcing (ici 19 HL). | 18-21 HL, 5/6 spades, non-forcing (19 HL here).} Pass 4NT {Fit Pique et 12 HL face a 18-21 : Blackwood. | Spade fit and 12 HL opposite 18-21: Blackwood.} Pass
-5C {3 cles (As et Roi de Pique, As de Coeur). | 3 key cards (ace and king of spades, ace of hearts).} Pass 6S {4 cles sur 5 et la Dame d'atout : petit chelem. | 4 key cards out of 5 and the trump queen: small slam.} Pass
-Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 5-3-2-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 5-3-2-3.} Pass 2D {Relais obligatoire. Ici 8H (9 HL), 3-4-1-5. | Compulsory relay. Here 8 HCP (9 HL), 3-4-1-5.} Pass
+2S {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 5-3-2-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 5-3-2-3.} Pass 3S {Soutien au palier de 3 : espoir de chelem. Ici 8H (9 HL), 3-4-1-5. | Raise to the three level: slam interest. Here 8 HCP (9 HL), 3-4-1-5.} Pass
+4NT {Blackwood. Ici 20H (21 HL), 5-3-2-3. | Blackwood. Here 20 HCP (21 HL), 5-3-2-3.} Pass 5C {3 ou 0 cle. Ici 8H (9 HL), 3-4-1-5. | 3 or 0 keycards. Here 8 HCP (9 HL), 3-4-1-5.} Pass
+6S {Reponse 0 ou 3 cles : au plus une cle manque, petit chelem. Ici 20H (21 HL), 5-3-2-3. | Answer 0 or 3 keycards: at most one keycard missing, small slam. Here 20 HCP (21 HL), 5-3-2-3.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 37"]
 [Board "37"]
@@ -659,16 +666,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AQ.AKJ874.K93.Q2 3.5.JT76.KJT9865 K75.Q962.AQ84.73 JT98642.T3.52.A4"]
+[Deal "N:983.QJ9862.5.QT4 A65.T.Q9832.J763 K7.AK754.K4.AK98 QJT42.3.AJT76.52"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "6H"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 11H. | Compulsory relay, whatever the strength: 11 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 4NT {Fit Coeur et 11 HL : Blackwood. | Heart fit and 11 HL: Blackwood.} Pass
-5C {3 cles (As de Pique, As et Roi de Coeur). | 3 key cards (ace of spades, ace and king of hearts).} Pass 6H {Il manque une seule cle : petit chelem. | Only one key card missing: small slam.} Pass
-Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (21 HL), 2-5-2-4. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (21 HL), 2-5-2-4.} Pass 2D {Relais obligatoire. Ici 5H (7 HL), 3-6-1-3. | Compulsory relay. Here 5 HCP (7 HL), 3-6-1-3.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 20H (21 HL), 2-5-2-4. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 20 HCP (21 HL), 2-5-2-4.} Pass 4D {Splinter : singleton ou chicane, 4+ atouts, un controle d'honneur au plus. Ici 5H (7 HL), 3-6-1-3. | Splinter: singleton or void, 4+ trumps, at most one honour control. Here 5 HCP (7 HL), 3-6-1-3.} Pass
+4H {Conclusion. Ici 20H (21 HL), 2-5-2-4. | Sign-off. Here 20 HCP (21 HL), 2-5-2-4.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 38"]
 [Board "38"]
@@ -678,15 +684,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:8.AKQJ85.AK4.Q72 KT6.T9762.87.965 QJ74.3.Q9652.K83 A9532.4.JT3.AJT4"]
+[Deal "N:Q87.T9.AQT9.KQT5 J962.832.8.96432 AK.AQJ74.K62.A87 T543.K65.J7543.J"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 19H (21 HL). | Strong catch-all 2C, here 6 hearts, 19 HCP (21 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 21 HL). | 18-21 HL, 5/6 hearts, non-forcing (21 HL here).} Pass 3NT {Singleton Coeur, 8H et des arrets : 3SA. | Singleton heart, 8 HCP and stoppers: 3NT.} Pass
-Pass {Accepte 3SA. | Accepts 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (21 HL), 2-5-3-3. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (21 HL), 2-5-3-3.} Pass 2D {Relais obligatoire. Ici 13H (13 HL), 3-2-4-4. | Compulsory relay. Here 13 HCP (13 HL), 3-2-4-4.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 21H (21 HL), 2-5-3-3. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 21 HCP (21 HL), 2-5-3-3.} Pass 2NT {Forcing, 5+ H. Ici 13H (13 HL), 3-2-4-4. | Forcing, 5+ HCP. Here 13 HCP (13 HL), 3-2-4-4.} Pass
+3NT {5 cartes, main reguliere. Ici 21H (21 HL), 2-5-3-3. | 5 cards, balanced. Here 21 HCP (21 HL), 2-5-3-3.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 39"]
 [Board "39"]
@@ -696,14 +702,14 @@ Pass {Accepte 3SA. | Accepts 3NT.} Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:A.KQJT92.AK5.J84 J932.73.JT94.K75 754.A65.Q87.9632 KQT86.84.632.AQT"]
+[Deal "N:963.T984.KQ4.975 5.5.AJT98753.A62 AT.AKQ63.2.KQJ84 KQJ8742.J72.6.T3"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 6 cartes a Coeur, 18H (20 HL). | Strong catch-all 2C, here 6 hearts, 18 HCP (20 HL).} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-2H {18-21 HL, 5/6 cartes a Coeur, non forcing (ici 20 HL). | 18-21 HL, 5/6 hearts, non-forcing (20 HL here).} Pass 4H {Fit Coeur avec l'As, 6H : manche. | Heart fit with the ace, 6 HCP: game.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 19H (21 HL), 2-5-1-5. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 19 HCP (21 HL), 2-5-1-5.} Pass 2D {Relais obligatoire. Ici 5H (5 HL), 3-4-3-3. | Compulsory relay. Here 5 HCP (5 HL), 3-4-3-3.} Pass
+2H {6 cartes et 8-8,5 levees de jeu (2 levees de defense), ou 5 cartes et 21-23 HL (5-4 possible). Ici 19H (21 HL), 2-5-1-5. | 6 cards and 8-8.5 playing tricks (2 defensive tricks), or 5 cards and 21-23 HL (5-4 possible). Here 19 HCP (21 HL), 2-5-1-5.} Pass 4H {Fit, saut a la manche : conclusion. Ici 5H (5 HL), 3-4-3-3. | Fit, jump to game: sign-off. Here 5 HCP (5 HL), 3-4-3-3.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 40"]
@@ -714,14 +720,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:85.A4.AKQJ863.Q2 A962.JT73.T72.A9 KJ7.Q962.54.J843 QT43.K85.9.KT765"]
+[Deal "N:QJ98753.T9.65.K7 AT64.AQ83.T.T982 .K742.AKQJ984.A3 K2.J65.732.QJ654"]
 [Scoring "MP"]
 [Declarer "N"]
 [Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Carreau, 16H. | Strong catch-all 2C, here 7 diamonds, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {7H et les majeures tenues : 3SA sur la longue Carreau. | 7 HCP and the majors held: 3NT on the long diamonds.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 17H (20 HL), 0-4-7-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 17 HCP (20 HL), 0-4-7-2.} Pass 2D {Relais obligatoire. Ici 6H (9 HL), 7-2-2-2. | Compulsory relay. Here 6 HCP (9 HL), 7-2-2-2.} Pass
+3D {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 17H (20 HL), 0-4-7-2. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 17 HCP (20 HL), 0-4-7-2.} Pass 3NT {Manche a SA. Ici 6H (9 HL), 7-2-2-2. | Game in NT. Here 6 HCP (9 HL), 7-2-2-2.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 41"]
@@ -732,14 +738,14 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:Q4.A3.92.AKQJ752 T.8742.AKQT65.T9 8632.J965.J874.3 AKJ975.KQT.3.864"]
+[Deal "N:T.K98654.J976.T9 AK653.AT3.AQ.763 Q..K8543.AKQJ842 J98742.QJ72.T2.5"]
 [Scoring "MP"]
 [Declarer "S"]
 [Contract "3C"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Trefle, 16H. | Strong catch-all 2C, here 7 clubs, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
-3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {2H : passe. | 2 HCP: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 15H (17 HL), 1-0-5-7. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 15 HCP (17 HL), 1-0-5-7.} Pass 2D {Relais obligatoire. Ici 4H (4 HL), 1-6-4-2. | Compulsory relay. Here 4 HCP (4 HL), 1-6-4-2.} Pass
+3C {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 15H (17 HL), 1-0-5-7. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 15 HCP (17 HL), 1-0-5-7.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 42"]
 [Board "42"]
@@ -749,14 +755,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:A2.73.AKJT952.K4 74.KT98.76.QT986 9853.QJ6.Q84.J72 KQJT6.A542.3.A53"]
+[Deal "N:K863.KJ5.6.JT873 AQT74.T64.954.65 .A97.AKQJT832.K4 J952.Q832.7.AQ92"]
 [Scoring "MP"]
 [Declarer "N"]
-[Contract "3NT"]
+[Contract "5D"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Carreau, 15H. | Strong catch-all 2C, here 7 diamonds, 15 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 6H. | Compulsory relay, whatever the strength: 6 HCP here.} Pass
-3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {6H dont la Dame de Carreau : la couleur est affranchie, 3SA. | 6 HCP including the diamond queen: the suit runs, 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 17H (21 HL), 0-3-8-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 17 HCP (21 HL), 0-3-8-2.} Pass 2D {Relais obligatoire. Ici 8H (8 HL), 4-3-1-5. | Compulsory relay. Here 8 HCP (8 HL), 4-3-1-5.} Pass
+3D {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 17H (21 HL), 0-3-8-2. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 17 HCP (21 HL), 0-3-8-2.} Pass 3H {Force dans la couleur, pas forcement de longueur. Ici 8H (8 HL), 4-3-1-5. | Values in the suit, not necessarily length. Here 8 HCP (8 HL), 4-3-1-5.} Pass
+4D {Pas d'arret pour 3SA. Ici 17H (21 HL), 0-3-8-2. | No stopper for 3NT. Here 17 HCP (21 HL), 0-3-8-2.} Pass 5D {Manche. Ici 8H (8 HL), 4-3-1-5. | Game. Here 8 HCP (8 HL), 4-3-1-5.} Pass
 Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 43"]
@@ -767,14 +774,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "EW"]
-[Deal "S:7.AQ5.83.AKQT984 AKT4.932.AT2.J32 J9532.T86.J974.5 Q86.KJ74.KQ65.76"]
+[Deal "N:J9.KT654.Q873.J3 T5432.J972.KJ.A9 AK6.A.A4.KQ87652 Q87.Q83.T9652.T4"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3C"]
+[Declarer "N"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Trefle, 15H. | Strong catch-all 2C, here 7 clubs, 15 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 2H. | Compulsory relay, whatever the strength: 2 HCP here.} Pass
-3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {2H : passe. | 2 HCP: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 20H (22 HL), 3-1-2-7. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 20 HCP (22 HL), 3-1-2-7.} Pass 2D {Relais obligatoire. Ici 7H (7 HL), 2-5-4-2. | Compulsory relay. Here 7 HCP (7 HL), 2-5-4-2.} Pass
+3C {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 20H (22 HL), 3-1-2-7. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 20 HCP (22 HL), 3-1-2-7.} Pass 3NT {Manche a SA. Ici 7H (7 HL), 2-5-4-2. | Game in NT. Here 7 HCP (7 HL), 2-5-4-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 44"]
 [Board "44"]
@@ -784,14 +792,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "All"]
-[Deal "S:AKQ9852.K4.A63.7 6.QT2.K9852.AQ54 T7.J853.QJ74.932 J43.A976.T.KJT86"]
+[Deal "N:T7.J853.QJ74.932 J43.A976.T.KJT86 AKQ9852.K4.A63.7 6.QT2.K9852.AQ54"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3S"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Pique, 16H. | Strong catch-all 2C, here 7 spades, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 4H. | Compulsory relay, whatever the strength: 4 HCP here.} Pass
-3S {7 cartes a Pique, 15-16 H, non forcing. | 7 spades, 15-16 HCP, non-forcing.} Pass Pass {4H et doubleton Pique : passe. | 4 HCP and doubleton spade: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 16H (19 HL), 7-2-3-1. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 16 HCP (19 HL), 7-2-3-1.} Pass 2D {Relais obligatoire. Ici 4H (4 HL), 2-4-4-3. | Compulsory relay. Here 4 HCP (4 HL), 2-4-4-3.} Pass
+3S {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 16H (19 HL), 7-2-3-1. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 16 HCP (19 HL), 7-2-3-1.} Pass 4S {Fit au palier de 4 : conclusion. Ici 4H (4 HL), 2-4-4-3. | Raise to the four level: sign-off. Here 4 HCP (4 HL), 2-4-4-3.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 45"]
 [Board "45"]
@@ -801,15 +810,16 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:K3.A7.AKQ9752.83 T74.QT9854..AQ75 QJ5.KJ62.84.J964 A9862.3.JT63.KT2"]
+[Deal "N:J742.A32.Q97.KT3 96.Q6.643.AQ9864 AKQ.K.AKJT852.J2 T853.JT98754..75"]
 [Scoring "MP"]
 [Declarer "N"]
-[Contract "3NT"]
+[Contract "6D"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Carreau, 16H. | Strong catch-all 2C, here 7 diamonds, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 8H. | Compulsory relay, whatever the strength: 8 HCP here.} Pass
-3D {7 cartes a Carreau, 15-16 H, non forcing. | 7 diamonds, 15-16 HCP, non-forcing.} Pass 3NT {8H, Piques et Coeurs tenus : 3SA. | 8 HCP, spades and hearts held: 3NT.} Pass
-Pass Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 21H (23 HL), 3-1-7-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 21 HCP (23 HL), 3-1-7-2.} Pass 2D {Relais obligatoire. Ici 10H (10 HL), 4-3-3-3. | Compulsory relay. Here 10 HCP (10 HL), 4-3-3-3.} Pass
+3D {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 21H (23 HL), 3-1-7-2. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 21 HCP (23 HL), 3-1-7-2.} Pass 4D {Fit au palier de 4 : espoir de chelem. Ici 10H (10 HL), 4-3-3-3. | Raise to the four level: slam interest. Here 10 HCP (10 HL), 4-3-3-3.} Pass
+4NT {Blackwood. Ici 21H (23 HL), 3-1-7-2. | Blackwood. Here 21 HCP (23 HL), 3-1-7-2.} Pass 5D {4 ou 1 cle. Ici 10H (10 HL), 4-3-3-3. | 4 or 1 keycard. Here 10 HCP (10 HL), 4-3-3-3.} Pass
+6D {Reponse 1 ou 4 cles : au plus une cle manque, petit chelem. Ici 21H (23 HL), 3-1-7-2. | Answer 1 or 4 keycards: at most one keycard missing, small slam. Here 21 HCP (23 HL), 3-1-7-2.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 46"]
 [Board "46"]
@@ -819,14 +829,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:6.A5.Q74.AKQJ962 K73.QJ76.KT962.7 T9854.9832.J5.T5 AQJ2.KT4.A83.843"]
+[Deal "N:AT932.K4.974.JT4 KJ75.T972.Q85.52 86.A3.AT.AKQ8763 Q4.QJ865.KJ632.9"]
 [Scoring "MP"]
 [Declarer "S"]
-[Contract "3C"]
+[Contract "3NT"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici 7 cartes a Trefle, 16H. | Strong catch-all 2C, here 7 clubs, 16 HCP.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 1H. | Compulsory relay, whatever the strength: 1 HCP here.} Pass
-3C {7 cartes a Trefle, 15-16 H, non forcing. | 7 clubs, 15-16 HCP, non-forcing.} Pass Pass {1H : passe. | 1 HCP: pass.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 17H (20 HL), 2-2-2-7. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 17 HCP (20 HL), 2-2-2-7.} Pass 2D {Relais obligatoire. Ici 8H (8 HL), 5-2-3-3. | Compulsory relay. Here 8 HCP (8 HL), 5-2-3-3.} Pass
+3C {7 tres belles cartes : 8-8,5 levees de jeu en majeure, 8,5-9,5 en mineure. Ici 17H (20 HL), 2-2-2-7. | 7 very good cards: 8-8.5 playing tricks in a major, 8.5-9.5 in a minor. Here 17 HCP (20 HL), 2-2-2-7.} Pass 3S {Force dans la couleur, pas forcement de longueur. Ici 8H (8 HL), 5-2-3-3. | Values in the suit, not necessarily length. Here 8 HCP (8 HL), 5-2-3-3.} Pass
+3NT {Arrets dans les deux autres couleurs : 3SA. Ici 17H (20 HL), 2-2-2-7. | Stoppers in the other two suits: 3NT. Here 17 HCP (20 HL), 2-2-2-7.} Pass Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 47"]
 [Board "47"]
@@ -872,14 +883,15 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "None"]
-[Deal "S:AKQT6.KQJ93.A5.4 J87542.A72.T6.A7 93.T6.J9874.Q532 .854.KQ32.KJT986"]
+[Deal "N:T5.T6.AJT6542.73 864.A32.K7.AQT52 AKQ97.KQJ754..94 J32.98.Q983.KJ86"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4H"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici bicolore majeur 5-5, 19H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 19 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 3H. | Compulsory relay, whatever the strength: 3 HCP here.} Pass
-3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass Pass {Doubleton dans les deux majeures : reste a 3SA. | Doubleton in both majors: stays in 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 15H (18 HL), 5-6-0-2. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 15 HCP (18 HL), 5-6-0-2.} Pass 2D {Relais obligatoire. Ici 5H (8 HL), 2-2-7-2. | Compulsory relay. Here 5 HCP (8 HL), 2-2-7-2.} Pass
+4C {6♥-5♠, bicolore de 3 perdantes. Ici 15H (18 HL), 5-6-0-2. | 6♥-5♠, two-suiter with 3 losers. Here 15 HCP (18 HL), 5-6-0-2.} Pass 4H {Preference ♥. Ici 5H (8 HL), 2-2-7-2. | Heart preference. Here 5 HCP (8 HL), 2-2-7-2.} Pass
+Pass Pass
 
 [Event "Entrainement 2 Trefle fort indetermine - Donne 50"]
 [Board "50"]
@@ -889,11 +901,13 @@ Pass Pass
 [South "-"]
 [Dealer "S"]
 [Vulnerable "NS"]
-[Deal "S:KQJ74.AKQ85.A.73 T63.63.T987.AKJ8 98.J7.KJ642.QT94 A52.T942.Q53.652"]
+[Deal "N:62.J42.T872.AQ95 J874.A.KJ643.J86 AKT953.KQ876.A.7 Q.T953.Q95.KT432"]
 [Scoring "MP"]
-[Declarer "S"]
-[Contract "3NT"]
+[Declarer "N"]
+[Contract "4S"]
 [Result ""]
 [Auction "S"]
-2C {2T fort indetermine, ici bicolore majeur 5-5, 19H, 3 perdantes. | Strong catch-all 2C, here 5-5 in the majors, 19 HCP, 3 losers.} Pass 2D {Relais obligatoire, quelle que soit la force : ici 7H. | Compulsory relay, whatever the strength: 7 HCP here.} Pass
-3NT {5 Coeurs et 5 Piques, 3 a 3,5 perdantes : le partenaire choisit. | 5 hearts and 5 spades, 3 to 3.5 losers: partner chooses.} Pass Pass {2-2 en majeures, mineures tenues : 3SA. | 2-2 in the majors, minors held: 3NT.} Pass
+2C {Fort indetermine : majeure 6e (8-8,5 levees de jeu, 2 levees de defense) ou 5e (21-23 HL), 7 belles cartes, bicolore majeur de 3 perdantes, ou 22-23 HL (semi-)regulier. Ici 16H (18 HL), 6-5-1-1. | Strong, undefined: 6-card major (8-8.5 playing tricks, 2 defensive tricks) or 5-card major (21-23 HL), 7 good cards, major two-suiter with 3 losers, or (semi-)balanced 22-23 HL. Here 16 HCP (18 HL), 6-5-1-1.} Pass 2D {Relais obligatoire. Ici 7H (7 HL), 2-3-4-4. | Compulsory relay. Here 7 HCP (7 HL), 2-3-4-4.} Pass
+4D {6♠-5♥, bicolore de 3 perdantes. Ici 16H (18 HL), 6-5-1-1. | 6♠-5♥, two-suiter with 3 losers. Here 16 HCP (18 HL), 6-5-1-1.} Pass 4S {Preference ♠. Ici 7H (7 HL), 2-3-4-4. | Spade preference. Here 7 HCP (7 HL), 2-3-4-4.} Pass
+Pass Pass
+

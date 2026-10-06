@@ -3212,11 +3212,10 @@ function pbnCallToken(bid, lang) {
 
 // Les tags d'une enchère calculée — [Declarer], [Contract] et la section
 // [Auction], quatre appels par ligne —, à ajouter au texte PBN. Rien si aucune
-// enchère n'est affichée, si le texte porte déjà la sienne, ou s'il contient
-// plusieurs donnes : ajoutée en fin de fichier, l'enchère irait à la dernière.
+// enchère n'est affichée, ou si le texte porte déjà la sienne.
 function pbnAuctionTags(text) {
   const r = shownResult;
-  if (!r || !r.auction || /\[Auction\s/i.test(text) || splitPbnGames(text).length > 1) return "";
+  if (!r || !r.auction || /\[Auction\s/i.test(text)) return "";
   const calls = r.auction.map((a) => pbnCallToken(a.bid, r.lang));
   const lines = [];
   for (let i = 0; i < calls.length; i += 4) lines.push(calls.slice(i, i + 4).join(" "));

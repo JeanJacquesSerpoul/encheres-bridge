@@ -4468,7 +4468,7 @@
 - id: "sw.1C.1D.1S"
   seq: "(1C) P (1D)"
   call: "1S"
-  cond: "S >= 5 and S >= H and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  cond: "S >= 5 and S >= H and hcp_in('S') >= 4 and hcp >= 9 and 11 <= hl <= 17"
   forcing: NF
   meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
   meaning_en: "Sandwich overcall: 5+ cards, good suit"
@@ -4476,7 +4476,7 @@
 - id: "sw.1C.1D.1H"
   seq: "(1C) P (1D)"
   call: "1H"
-  cond: "H >= 5 and H >= S and hcp_in('H') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  cond: "H >= 5 and H >= S and hcp_in('H') >= 4 and hcp >= 9 and 11 <= hl <= 17"
   forcing: NF
   meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
   meaning_en: "Sandwich overcall: 5+ cards, good suit"
@@ -4484,7 +4484,7 @@
 - id: "sw.1C.1H.1S"
   seq: "(1C) P (1H)"
   call: "1S"
-  cond: "S >= 5 and S >= D and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  cond: "S >= 5 and S >= D and hcp_in('S') >= 4 and hcp >= 9 and 11 <= hl <= 17"
   forcing: NF
   meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
   meaning_en: "Sandwich overcall: 5+ cards, good suit"
@@ -4492,7 +4492,7 @@
 - id: "sw.1D.1H.1S"
   seq: "(1D) P (1H)"
   call: "1S"
-  cond: "S >= 5 and S >= C and hcp_in('S') >= 6 and hcp >= 9 and 14 <= hl <= 17"
+  cond: "S >= 5 and S >= C and hcp_in('S') >= 4 and hcp >= 9 and 11 <= hl <= 17"
   forcing: NF
   meaning: "Intervention en sandwich : 5+ cartes, belle couleur"
   meaning_en: "Sandwich overcall: 5+ cards, good suit"
